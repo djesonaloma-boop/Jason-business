@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07111f">
+<title>Support client | JASON BUSINESS</title>
+<style>
+:root{
+  --bg:#07111f; --gold:#d8aa45; --gold2:#f5d68b; --text:#f5f7fb; --muted:#91a0b6; --line:rgba(216,170,69,.25); --panel:#102139;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; padding:18px 13px 35px; font-family:Arial,sans-serif; color:var(--text);
+  background: radial-gradient(ellipse at top left,#1b3452,transparent 45%), radial-gradient(ellipse at bottom right,#302311,transparent 40%), var(--bg);
+}
+button,input,textarea{font:inherit} button{ -webkit-tap-highlight-color:transparent } a{color:var(--gold);text-decoration:none} a:hover{text-decoration:underline}
+.container{ max-width:1000px; width:100%; margin:auto; animation:show.5s ease; }
+@keyframes show{ from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+.topbar{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:22px; }
+.brand{ display:flex; align-items:center; gap:11px; }
+.logo{ width:46px; height:46px; display:grid; place-items:center; border:1px solid var(--gold); border-radius:14px; background:linear-gradient(145deg,#203955,#081321); color:var(--gold2); font-size:17px; font-weight:900; }
+.brand-name{ font-size:15px; font-weight:900; letter-spacing:1px; }.brand-name span{color:var(--gold)}.brand-sub{ margin-top:5px; color:var(--muted); font-size:10px; }
+.back{ padding:10px 13px; border:1px solid var(--line); border-radius:10px; background:#102139; font-size:12px; }
+.hero{ padding:26px; margin-bottom:20px; border:1px solid var(--line); border-radius:22px; background:linear-gradient(120deg,#132c46,#0b1828); position:relative; overflow:hidden; }
+.hero::after{ content:"?"; position:absolute; right:22px; bottom:-45px; font-size:160px; font-weight:900; color:#d8aa450b; pointer-events:none; }
+.eyebrow{ color:var(--gold); font-size:11px; font-weight:900; letter-spacing:1.5px; margin-bottom:10px; }.hero h1{ margin:0 0 10px; font-size:28px; }.hero p{ max-width:580px; margin:0; color:var(--muted); font-size:13px; line-height:1.8; }
+.grid{ display:grid; grid-template-columns:.85fr 1.15fr; gap:18px; align-items:stretch; }
+.card{ min-width:0; padding:22px; border:1px solid var(--line); border-radius:20px; background:linear-gradient(145deg,#102139f5,#091422fa); box-shadow:0 15px 40px #0003; }
+.card-title{ font-size:17px; font-weight:900; margin-bottom:8px; }.card-desc{ color:var(--muted); font-size:12px; line-height:1.7; margin:0 0 20px; }
+.contact-item{ display:flex; align-items:center; gap:13px; padding:15px 0; border-bottom:1px solid #ffffff0d; }
+.contact-icon{ width:43px; height:43px; flex-shrink:0; display:grid; place-items:center; border:1px solid var(--line); border-radius:13px; background:#07111f; font-size:20px; }
+.contact-info{min-width:0;flex:1}.contact-info strong{ display:block; font-size:13px; margin-bottom:5px; }.contact-info span{ color:var(--muted); font-size:11px; line-height:1.6; overflow-wrap:anywhere; }
+.btn{ display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:14px; border:0; border-radius:12px; font-size:12px; font-weight:900; cursor:pointer; transition:transform.2s,opacity.2s; }.btn:active{transform:scale(.98)}
+.btn-gold{ background:linear-gradient(100deg,#b98627,#f5d68b,#c99a39); color:#101827; box-shadow:0 8px 22px #d8aa4518; }
+.btn-whatsapp{ margin-top:18px; background:#159b62; color:white; box-shadow:0 8px 24px #159b6220; }
+.btn-outline{ border:1px solid var(--line); color:var(--gold2); background:#0b192a; }
+.quick-title{ color:var(--muted); font-size:11px; margin:22px 0 10px; }.quick-buttons{ display:flex; flex-wrap:wrap; gap:8px; }
+.quick-btn{ padding:9px 11px; border:1px solid var(--line); border-radius:20px; background:#071523; color:#e7edf6; font-size:11px; cursor:pointer; }.quick-btn:hover{ border-color:var(--gold); color:var(--gold2); }
+.chat-card{ display:flex; flex-direction:column; min-height:550px; overflow:hidden; }
+.chat-header{ display:flex; align-items:center; gap:12px; padding-bottom:17px; border-bottom:1px solid var(--line); }
+.bot-avatar{ width:47px; height:47px; display:grid; place-items:center; flex-shrink:0; border:1px solid var(--gold); border-radius:15px; background:linear-gradient(145deg,#203955,#081321); font-size:23px; }
+.bot-info{flex:1;min-width:0}.bot-info strong{ display:block; font-size:14px; }.bot-info p{ color:var(--muted); font-size:11px; margin:5px 0 0; }
+.online{ display:inline-block; width:7px; height:7px; margin-right:4px; background:#35d58a; border-radius:50%; box-shadow:0 0 8px #35d58a77; }
+.chat-tools{ display:flex; gap:6px; }.tool-btn{ width:34px; height:34px; border:1px solid var(--line); border-radius:10px; background:#071523; color:var(--gold2); cursor:pointer; }
+.chat-messages{ display:flex; flex:1; flex-direction:column; gap:13px; min-height:300px; max-height:470px; overflow-y:auto; padding:18px 2px; scroll-behavior:smooth; }
+.message-row{ display:flex; flex-direction:column; max-width:90%; gap:5px; animation:messageIn.2s ease; }
+@keyframes messageIn{ from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:translateY(0)} }
+.message-row.user{ align-self:flex-end; align-items:flex-end; }.message-row.bot{ align-self:flex-start; align-items:flex-start; }
+.bubble{ padding:12px 14px; border-radius:14px; font-size:13px; line-height:1.75; overflow-wrap:anywhere; white-space:pre-wrap; }
+.user.bubble{ color:#17120a; background:linear-gradient(120deg,#d8aa45,#f5d68b); border-bottom-right-radius:4px; }
+.bot.bubble{ color:#e8edf5; background:#15283d; border:1px solid #ffffff0d; border-bottom-left-radius:4px; }
+.message-time{ color:#718097; font-size:10px; padding:0 4px; }
+.typing{ display:inline-flex; gap:4px; align-items:center; padding:12px 15px; border-radius:12px; background:#15283d; border:1px solid #ffffff0d; }
+.typing span{ width:5px; height:5px; border-radius:50%; background:var(--gold); animation:bounce.8s infinite alternate; }
+.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+@keyframes bounce{ to{opacity:.3;transform:translateY(-4px)} }
+.composer{ padding-top:14px; border-top:1px solid var(--line); }
+.input-area{ display:flex; align-items:flex-end; gap:8px; padding:8px; border:1px solid #2a3e56; border-radius:14px; background:#07111f; }
+.input-area:focus-within{border-color:var(--gold)}
+#chatInput{ min-width:0; flex:1; min-height:42px; max-height:120px; padding:11px 7px; resize:none; border:0; outline:none; background:transparent; color:white; font-size:13px; line-height:1.5; }
+#chatInput::placeholder{color:#718097}
+.send-btn{ width:43px; height:43px; flex-shrink:0; border:0; border-radius:11px; background:linear-gradient(135deg,#b98627,#f5d68b); color:#111827; font-size:19px; font-weight:900; cursor:pointer; }
+.send-btn:disabled{opacity:.5;cursor:wait}
+.chat-note{ color:#718097; font-size:10px; line-height:1.7; margin:10px 2px 0; }
+.footer{ text-align:center; margin-top:24px; color:#718097; font-size:11px; line-height:1.9; }.footer strong{color:var(--gold)}
+.whatsapp-float{ position:fixed; z-index:20; right:17px; bottom:18px; width:57px; height:57px; display:grid; place-items:center; border-radius:50%; background:#159b62; color:white; font-size:26px; box-shadow:0 7px 28px #0007; border:2px solid #ffffff30; transition:transform.2s; }
+.whatsapp-float:hover{ transform:translateY(-4px) scale(1.04); text-decoration:none; }
+@media(max-width:720px){.grid{grid-template-columns:1fr}.chat-card{min-height:510px}.hero{padding:22px}.hero h1{font-size:24px}.card{padding:18px} }
+@media(prefers-reduced-motion:reduce){ *,*::before,*::after{ animation:none!important; transition:none!important; } }
+</style>
+</head>
+<body>
+<main class="container">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">JB</div>
+      <div><div class="brand-name">JASON <span>BUSINESS</span></div><div class="brand-sub" id="backendStatus">Assistance et service client • Backend connecté</div></div>
+    </div>
+    <a class="back" href="Dashboard.html">← Tableau de bord</a>
+  </header>
+  <section class="hero">
+    <div class="eyebrow">CENTRE D'ASSISTANCE</div>
+    <h1>Comment pouvons-nous t'aider?</h1>
+    <p> Besoin d'aide avec ton compte, nos services ou une difficulté technique? Contacte notre support WhatsApp ou discute avec l'assistant intelligent JASON BOT. Backend connecté à api/index.js + backend/firebase.js </p>
+  </section>
+  <div class="grid">
+    <section class="card">
+      <div class="card-title">Contacter le support</div>
+      <p class="card-desc"> Choisis le moyen qui te convient pour obtenir de l'aide. Minimum dépôt/retrait 2000 FC </p>
+      <div class="contact-item">
+        <div class="contact-icon">🟢</div>
+        <div class="contact-info"><strong>Support WhatsApp</strong><span>0847500590</span></div>
+      </div>
+      <a class="btn btn-whatsapp" href="https://wa.me/243847500590?text=Bonjour%20JASON%20BUSINESS%2C%20j%27ai%20besoin%20d%27aide." target="_blank" rel="noopener noreferrer"><span>☏</span> CONTACTER SUR WHATSAPP</a>
+      <div class="contact-item" style="margin-top:12px">
+        <div class="contact-icon">🤖</div>
+        <div class="contact-info"><strong>Assistant JASON BOT</strong><span>Pose une question à notre assistant IA. Backend connecté</span></div>
+      </div>
+      <button class="btn btn-outline" id="openChatBtn" type="button">💬 DISCUTER AVEC JASON BOT</button>
+      <div class="quick-title">QUESTIONS FRÉQUENTES</div>
+      <div class="quick-buttons">
+        <button class="quick-btn" data-question="Comment créer un compte sur JASON BUSINESS?">Créer un compte</button>
+        <button class="quick-btn" data-question="Comment me connecter à mon compte?">Connexion</button>
+        <button class="quick-btn" data-question="Comment contacter le support pour un paiement? Minimum 2000 FC">Paiement</button>
+        <button class="quick-btn" data-question="Comment utiliser mon code de parrainage?">Parrainage</button>
+        <button class="quick-btn" data-question="J'ai un problème technique sur JASON BUSINESS. Aide-moi.">Problème technique</button>
+      </div>
+    </section>
+    <section class="card chat-card" id="assistant">
+      <div class="chat-header">
+        <div class="bot-avatar">🤖</div>
+        <div class="bot-info"><strong>JASON BOT</strong><p><span class="online"></span>Assistant IA de JASON BUSINESS • Backend connecté</p></div>
+        <div class="chat-tools"><button class="tool-btn" id="clearChatBtn" type="button" title="Nouvelle conversation" aria-label="Nouvelle conversation">↻</button></div>
+      </div>
+      <div class="chat-messages" id="chatMessages" aria-live="polite">
+        <div class="message-row bot"><div class="bubble">Bonjour et bienvenue sur JASON BUSINESS 🇨🇩!
+
+Je suis JASON BOT, ton assistant IA. 🤖
+
+Je peux t'aider à comprendre les services, utiliser ton compte et trouver des solutions aux problèmes courants. Backend connecté à api/index.js + backend/firebase.js
+
+Comment puis-je t'aider aujourd'hui?</div><div class="message-time">JASON BOT</div></div>
+      </div>
+      <form class="composer" id="chatForm">
+        <div class="input-area"><textarea id="chatInput" placeholder="Écris ta question ici... Min 2000 FC" rows="1" maxlength="2000" required></textarea><button class="send-btn" id="sendBtn" type="submit" aria-label="Envoyer">➤</button></div>
+        <p class="chat-note" id="chatNote"> JASON BOT utilise l'API de chatbot configurée pour ce projet + backend JASON BUSINESS. Ne partage jamais ton mot de passe. </p>
+      </form>
+    </section>
+  </div>
+  <footer class="footer"> © <span id="year"></span> <strong>JASON BUSINESS</strong><br> Créé par Jason Aloma, développeur congolais 🇨🇩<br> Kinshasa · République démocratique du Congo • Backend connecté </footer>
+</main>
+<a class="whatsapp-float" href="https://wa.me/243847500590?text=Bonjour%20JASON%20BUSINESS%2C%20j%27ai%20besoin%20d%27aide." target="_blank" rel="noopener noreferrer" aria-label="Contacter le support WhatsApp" title="Support WhatsApp">☏</a>
+<script>
+"use strict";
+function getToken(){ return localStorage.getItem("jason_business_token") || sessionStorage.getItem("jason_business_token") || ""; }
+const CHAT_API = "https://davbot-api-xw6y.vercel.app/api/ask";
+const BOT_RULES = `
+Tu es JASON BOT, l'assistant IA officiel de JASON BUSINESS.
+Le créateur de JASON BUSINESS est Jason Aloma, développeur congolais 🇨🇩.
+Réponds en français, avec politesse, clarté et des explications faciles à suivre.
+Aide les clients concernant les comptes, la navigation, les services,
+le support technique et les questions générales.
+Ne prétends jamais avoir accès aux comptes, paiements ou données privées.
+Ne confirme jamais un paiement ou une récompense sans preuve vérifiable.
+Si une information précise sur les services n'est pas disponible,
+invite le client à contacter le support WhatsApp au 0847500590.
+Ne demande jamais de mot de passe, de code PIN Mobile Money ou de code OTP.
+N'invente ni prix, ni paiement confirmé, ni fonctionnalité non vérifiée.
+Le dépôt minimum est 2000 FC. Le retrait minimum est 2000 FC.
+Backend: api/index.js + backend/firebase.js connectés.
+`;
+const $ = id => document.getElementById(id);
+const chatMessages = $("chatMessages");
+const chatInput = $("chatInput");
+const chatForm = $("chatForm");
+const sendBtn = $("sendBtn");
+$("year").textContent = new Date().getFullYear();
+let chatHistory = [];
+let isSending = false;
+
+async function checkBackend(){
+  try{
+    const res=await fetch("/api/health");
+    const data=await res.json();
+    if(data.status==="ok"){
+      $("backendStatus").textContent="Assistance et service client • Backend "+data.mode+" • Min 2000 FC";
+      $("chatNote").textContent="JASON BOT • Backend "+data.mode+" connecté • Ne partage jamais ton mot de passe • Min dépôt 2000 FC";
+    }
+  }catch{}
+}
+checkBackend();
+
+function getTime(){ return new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}); }
+function addMessage(text, who="bot"){
+  const row=document.createElement("div"); row.className="message-row "+who;
+  const bubble=document.createElement("div"); bubble.className="bubble"; bubble.textContent=text;
+  const time=document.createElement("div"); time.className="message-time"; time.textContent=who==="user"? getTime() : "JASON BOT · "+getTime();
+  row.appendChild(bubble); row.appendChild(time); chatMessages.appendChild(row); chatMessages.scrollTop=chatMessages.scrollHeight; return row;
+}
+function showTyping(){
+  const row=document.createElement("div"); row.className="message-row bot"; row.id="typingIndicator";
+  const typing=document.createElement("div"); typing.className="typing"; for(let i=0;i<3;i++) typing.appendChild(document.createElement("span"));
+  row.appendChild(typing); chatMessages.appendChild(row); chatMessages.scrollTop=chatMessages.scrollHeight;
+}
+function hideTyping(){ const t=$("typingIndicator"); if(t) t.remove(); }
+function extractAnswer(data){
+  if(typeof data==="string") return data;
+  if(!data||typeof data!=="object") return "";
+  const candidates=[data.answer,data.response,data.reply,data.output,data.result,data.text,data.message];
+  for(const item of candidates){
+    if(typeof item==="string"&&item.trim()) return item.trim();
+    if(item&&typeof item==="object"){ if(typeof item.text==="string") return item.text; if(typeof item.content==="string") return item.content; }
+  }
+  if(data.choices&&data.choices[0]){
+    const c=data.choices[0]; if(c.message&&typeof c.message.content==="string") return c.message.content; if(typeof c.text==="string") return c.text;
+  }
+  return "";
+}
+async function askJasonBot(question){
+  const messageText=question.trim(); if(!messageText||isSending) return;
+  isSending=true; sendBtn.disabled=true; chatInput.disabled=true;
+  addMessage(messageText,"user"); chatInput.value=""; chatInput.style.height="42px";
+  chatHistory.push({role:"user",content:messageText}); if(chatHistory.length>12) chatHistory=chatHistory.slice(-12);
+  showTyping();
+  // Sauvegarde aussi dans backend support logs si connecté
+  try{
+    const token=getToken();
+    fetch("/api/support/message",{
+      method:"POST", headers:{ "Content-Type":"application/json",...(token? {"Authorization":"Bearer "+token}:{}) },
+      body:JSON.stringify({ message: messageText, source:"support.html" })
+    }).catch(()=>{});
+  }catch{}
+
+  try{
+    const response=await fetch(CHAT_API,{
+      method:"POST", headers:{ "Content-Type":"application/json","Accept":"application/json" },
+      body:JSON.stringify({ message:BOT_RULES+"\n\nQuestion du client : "+messageText, history:chatHistory.slice(-10) })
+    });
+    const raw=await response.text(); let data; try{ data=JSON.parse(raw); }catch{ data=raw; }
+    hideTyping();
+    if(!response.ok) throw new Error("Le serveur a répondu avec une erreur.");
+    const answer=extractAnswer(data);
+    if(!answer){ addMessage("Je n'ai pas pu lire la réponse du serveur. Réessaie ou contacte notre support WhatsApp au 0847500590.","bot"); }
+    else{
+      addMessage(answer,"bot"); chatHistory.push({role:"assistant",content:answer}); if(chatHistory.length>12) chatHistory=chatHistory.slice(-12);
+    }
+  }catch(error){
+    hideTyping(); console.error("Erreur JASON BOT :", error);
+    addMessage("Désolé, je n'arrive pas à contacter le service IA pour le moment. Vérifie ta connexion Internet ou contacte le support WhatsApp au 0847500590.","bot");
+  }finally{ isSending=false; sendBtn.disabled=false; chatInput.disabled=false; chatInput.focus(); }
+}
+chatForm.addEventListener("submit", e=>{ e.preventDefault(); askJasonBot(chatInput.value); });
+chatInput.addEventListener("input", ()=>{ chatInput.style.height="42px"; chatInput.style.height=Math.min(chatInput.scrollHeight,120)+"px"; });
+chatInput.addEventListener("keydown", e=>{ if(e.key==="Enter"&&!e.shiftKey){ e.preventDefault(); chatForm.requestSubmit(); } });
+document.querySelectorAll("[data-question]").forEach(b=>{ b.addEventListener("click", ()=>{ $("assistant").scrollIntoView({behavior:"smooth",block:"start"}); askJasonBot(b.dataset.question); }); });
+$("openChatBtn").addEventListener("click", ()=>{ $("assistant").scrollIntoView({behavior:"smooth",block:"start"}); setTimeout(()=>chatInput.focus(),350); });
+$("clearChatBtn").addEventListener("click", ()=>{ chatHistory=[]; chatMessages.replaceChildren(); addMessage("Bonjour! Je suis JASON BOT. Comment puis-je t'aider aujourd'hui?","bot"); });
+</script>
+</body>
+</html>

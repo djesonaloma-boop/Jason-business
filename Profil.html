@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07111f">
+<title>Mon profil | JASON BUSINESS</title>
+<style>
+:root{--bg:#07111f;--gold:#d8aa45;--gold2:#f5d68b;--text:#f5f7fb;--muted:#91a0b6;--line:rgba(216,170,69,.25);--panel:#102139}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:22px 14px 35px;font-family:Arial,sans-serif;color:var(--text);background:radial-gradient(ellipse at top left,#1b3452,transparent 45%),radial-gradient(ellipse at bottom right,#302311,transparent 40%),var(--bg)}
+a{color:var(--gold);text-decoration:none}a:hover{text-decoration:underline}
+.container{width:100%;max-width:900px;margin:auto;animation:show.6s ease}
+@keyframes show{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{width:45px;height:45px;display:grid;place-items:center;border:1px solid var(--gold);border-radius:14px;background:linear-gradient(145deg,#203955,#081321);color:var(--gold2);font-weight:900;font-size:17px}
+.brand-name{font-weight:900;letter-spacing:1px;font-size:15px}.brand-name span{color:var(--gold)}.brand-sub{color:var(--muted);font-size:10px;margin-top:5px}
+.top-link{border:1px solid var(--line);padding:10px 13px;border-radius:10px;background:#102139;font-size:12px}
+.hero{position:relative;overflow:hidden;padding:25px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(120deg,#132c46,#0b1828);margin-bottom:18px}
+.hero::after{content:"JB";position:absolute;right:15px;bottom:-30px;font-size:115px;font-weight:900;color:#d8aa4509;pointer-events:none}
+.eyebrow{color:var(--gold);font-size:11px;font-weight:800;letter-spacing:1.5px;margin-bottom:10px}
+.hero h1{font-size:27px;margin:0 0 9px}.hero p{max-width:520px;margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.card{min-width:0;padding:22px;border:1px solid var(--line);border-radius:19px;background:linear-gradient(145deg,#102139f5,#091422fa);box-shadow:0 15px 40px #0003}
+.card-title{font-size:16px;font-weight:800;margin-bottom:7px}.card-description{color:var(--muted);font-size:12px;line-height:1.6;margin-bottom:19px}
+.avatar-area{display:flex;align-items:center;gap:15px;margin-bottom:22px}
+.avatar{width:75px;height:75px;flex-shrink:0;border:2px solid var(--gold);border-radius:22px;background:linear-gradient(145deg,#203955,#081321);display:grid;place-items:center;overflow:hidden;color:var(--gold2);font-size:25px;font-weight:900}
+.avatar img{width:100%;height:100%;object-fit:cover}.avatar-info{color:var(--muted);font-size:11px;line-height:1.7}
+.upload{display:inline-block;margin-top:6px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;color:var(--gold2);cursor:pointer;font-size:11px}.upload input{display:none}
+.field{margin-bottom:15px}.field label{display:block;margin-bottom:8px;color:#dce5f1;font-size:12px;font-weight:700}
+.field input,.field textarea{width:100%;padding:13px;border:1px solid #2a3e56;border-radius:11px;background:#07111f;color:white;outline:none;font:inherit;font-size:13px;transition:.2s}
+.field input:focus,.field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px #d8aa4515}
+.field input::placeholder,.field textarea::placeholder{color:#718097}.field textarea{min-height:85px;resize:vertical;line-height:1.6}.field input[readonly]{color:var(--muted);background:#0b1725}
+.btn{width:100%;border:0;border-radius:11px;padding:13px;font-size:12px;font-weight:900;cursor:pointer;transition:.2s}.btn:active{transform:scale(.98)}
+.btn-gold{background:linear-gradient(100deg,#b98627,#f5d68b,#c99a39);color:#101827;box-shadow:0 7px 20px #d8aa4518}
+.btn-outline{background:#0b192a;color:var(--gold2);border:1px solid var(--line)}.btn-danger{background:#341923;border:1px solid #6a2d3b;color:#ffc7cf}
+.btn-row{display:flex;gap:10px;margin-top:7px}.btn-row.btn{flex:1}
+.referral-card{grid-column:1/-1;background:radial-gradient(ellipse at top right,#47351a55,transparent 55%),linear-gradient(145deg,#102139f5,#091422fa)}
+.referral-code{display:flex;align-items:center;gap:10px;margin:15px 0}.referral-code input{min-width:0;flex:1;padding:14px 12px;border:1px dashed var(--gold);border-radius:12px;background:#07111f;color:var(--gold2);font-size:16px;font-weight:900;letter-spacing:1px;text-align:center;outline:none}
+.copy-btn{width:auto;white-space:nowrap;padding:14px}.referral-note{color:var(--muted);font-size:12px;line-height:1.8}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.stat{padding:14px 8px;border:1px solid var(--line);border-radius:12px;background:#07111f77;text-align:center}.stat strong{display:block;color:var(--gold2);font-size:19px}.stat span{display:block;color:var(--muted);font-size:10px;margin-top:6px}
+.message{display:none;padding:12px;border-radius:10px;margin-bottom:15px;font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+.message.success{display:block;color:#b6f5d9;background:#123b30}.message.error{display:block;color:#ffc7cf;background:#4a1c27}
+.footer{text-align:center;color:#718097;font-size:11px;line-height:1.8;margin-top:23px}.footer strong{color:var(--gold)}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.referral-card{grid-column:auto}.hero{padding:21px}.hero h1{font-size:23px}.card{padding:19px}}
+@media(max-width:370px){.referral-code{flex-direction:column}.copy-btn{width:100%}.stats{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="container">
+  <header class="topbar">
+    <div class="brand"><div class="logo">JB</div><div><div class="brand-name">JASON <span>BUSINESS</span></div><div class="brand-sub" id="backendStatus">Espace personnel</div></div></div>
+    <a class="top-link" href="dashboard.html">← Tableau de bord</a>
+  </header>
+  <section class="hero">
+    <div class="eyebrow">MON ESPACE PERSONNEL</div>
+    <h1>Mon profil 👤</h1>
+    <p>Gère tes informations, personnalise ton profil et partage ton code de parrainage avec les personnes que tu invites.</p>
+  </section>
+  <div id="message" class="message" role="status" aria-live="polite"></div>
+  <div class="grid">
+    <section class="card">
+      <div class="card-title">Informations personnelles</div>
+      <p class="card-description">Consulte et modifie les informations de ton compte connecté au backend.</p>
+      <div class="avatar-area">
+        <div class="avatar" id="avatar">JB</div>
+        <div class="avatar-info"><strong id="displayName">Mon compte</strong><br>Photo de profil facultative.<br><label class="upload">Choisir une photo<input id="photoInput" type="file" accept="image/png,image/jpeg,image/webp"></label></div>
+      </div>
+      <form id="profileForm">
+        <div class="field"><label for="name">Nom complet</label><input id="name" type="text" maxlength="80" placeholder="Ton nom complet" required></div>
+        <div class="field"><label for="email">Adresse e-mail</label><input id="email" type="email" readonly></div>
+        <div class="field"><label for="phone">Téléphone</label><input id="phone" type="tel" maxlength="25" placeholder="+243..."></div>
+        <div class="field"><label for="city">Ville</label><input id="city" type="text" maxlength="60" placeholder="Kinshasa"></div>
+        <div class="field"><label for="bio">À propos de moi</label><textarea id="bio" maxlength="300" placeholder="Présente-toi en quelques mots..."></textarea></div>
+        <button class="btn btn-gold" type="submit">ENREGISTRER MES MODIFICATIONS</button>
+      </form>
+    </section>
+    <section class="card">
+      <div class="card-title">Mon compte</div>
+      <p class="card-description">Les informations essentielles de ton espace personnel.</p>
+      <div class="field"><label>Statut du compte</label><input id="statusField" value="Vérification..." readonly></div>
+      <div class="field"><label>Date de création</label><input id="createdAt" value="Non disponible" readonly></div>
+      <div class="field"><label>Identifiant du compte</label><input id="accountId" value="Non disponible" readonly></div>
+      <div class="field"><label>Code de parrainage personnel</label><input id="personalCode" readonly></div>
+      <div class="btn-row"><button class="btn btn-outline" id="exportBtn" type="button">EXPORTER</button><button class="btn btn-danger" id="logoutBtn" type="button">DÉCONNEXION</button></div>
+    </section>
+    <section class="card referral-card">
+      <div class="card-title">🎁 Mon parrainage</div>
+      <p class="card-description">Partage ton code avec tes amis pour leur permettre de l'indiquer lors de leur inscription.</p>
+      <label for="referralCode">Ton code personnel</label>
+      <div class="referral-code"><input id="referralCode" readonly><button class="btn btn-gold copy-btn" id="copyCodeBtn" type="button">COPIER LE CODE</button></div>
+      <p class="referral-note"><strong style="color:var(--gold2)">Comment ça marche?</strong><br>1. Copie ton code de parrainage.<br>2. Envoie-le à la personne que tu invites.<br>3. Elle pourra le saisir dans le formulaire d'inscription.<br><br><strong>Backend:</strong> code synchronisé avec api/index.js + backend/firebase.js</p>
+      <div class="stats">
+        <div class="stat"><strong id="referralCount">0</strong><span>Invitations suivies</span></div>
+        <div class="stat"><strong id="referralStatus">Local</strong><span>Mode de suivi</span></div>
+        <div class="stat"><strong id="rewardCount">—</strong><span>Récompenses</span></div>
+      </div>
+    </section>
+  </div>
+  <footer class="footer">© <span id="year"></span> <strong>JASON BUSINESS</strong><br>Créé par Jason Aloma 🇨🇩<br>Kinshasa · République démocratique du Congo</footer>
+</main>
+
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+$("year").textContent = new Date().getFullYear();
+
+function showMessage(text, type="success"){
+  const box=$("message");
+  box.textContent=text;
+  box.className="message "+type;
+  box.scrollIntoView({behavior:"smooth", block:"nearest"});
+}
+
+function getToken(){
+  return localStorage.getItem("jason_business_token") || sessionStorage.getItem("jason_business_token") || "";
+}
+function getSession(){
+  try{
+    const raw = localStorage.getItem("jason_business_session") || sessionStorage.getItem("jason_business_session");
+    return raw? JSON.parse(raw) : null;
+  }catch{ return null; }
+}
+
+function makeReferralCode(email){
+  let hash=0;
+  const value=email.toLowerCase();
+  for(let i=0;i<value.length;i++){ hash=(hash*31+value.charCodeAt(i))>>>0; }
+  return "JAS-"+hash.toString(36).toUpperCase().padStart(6,"0");
+}
+
+let currentEmail="";
+let currentPhoto="";
+let currentProfile={};
+
+function renderAvatar(){
+  const avatar=$("avatar");
+  if(currentPhoto){
+    const img=document.createElement("img");
+    img.src=currentPhoto;
+    img.alt="Photo de profil";
+    avatar.replaceChildren(img);
+  }else{
+    const initials=($("name").value||"JB").trim().split(/\s+/).slice(0,2).map(p=>p.charAt(0).toUpperCase()).join("");
+    avatar.textContent=initials||"JB";
+  }
+}
+
+// --- CONNECTÉ AU BACKEND api/index.js ---
+async function loadProfileFromBackend(){
+  const token=getToken();
+  const session=getSession();
+  const backendStatus=$("backendStatus");
+
+  if(!token){
+    showMessage("Non connecté. Redirection vers connexion...", "error");
+    setTimeout(()=> window.location.href="Connexion.html", 1000);
+    return;
+  }
+
+  if(session) currentEmail=session.email||"";
+
+  try{
+    backendStatus.textContent="Connexion au backend...";
+    // Vérifie backend health (backend/firebase.js)
+    const healthRes=await fetch("/api/health");
+    const health=await healthRes.json();
+    if(health.status==="ok"){
+      backendStatus.textContent="✓ Backend "+(health.mode==="local-memory"?"local":"Firebase")+" connecté";
+      backendStatus.style.color="#45d6a0";
+      $("statusField").value="Compte actif - Mode "+health.mode;
+    }
+
+    // Récupère profil depuis backend
+    const meRes=await fetch("/api/auth/me", { headers:{ "Authorization":"Bearer "+token } });
+    if(!meRes.ok) throw new Error("Session expirée");
+
+    const meData=await meRes.json();
+    const user=meData.user||meData;
+
+    currentEmail=user.email||currentEmail;
+    $("name").value=user.name||session?.name||"";
+    $("email").value=user.email||currentEmail;
+    $("phone").value=user.phone||"";
+    $("city").value=user.city||"";
+    $("bio").value=user.bio||"";
+    $("createdAt").value=user.createdAt? new Date(user.createdAt).toLocaleDateString("fr-FR") : "Non disponible";
+    $("accountId").value=user.id||"JB-"+makeReferralCode(currentEmail).slice(4);
+
+    const referralCode=user.referralCode||makeReferralCode(currentEmail);
+    $("referralCode").value=referralCode;
+    $("personalCode").value=referralCode;
+
+    $("displayName").textContent=user.name||"Mon compte";
+
+    // Charge aussi local pour photo
+    try{
+      const photoKey="jason_business_photo_"+currentEmail.toLowerCase();
+      currentPhoto=localStorage.getItem(photoKey)||"";
+    }catch{}
+    renderAvatar();
+
+    // Stats parrainage depuis backend
+    const refRes=await fetch("/api/referrals/stats", { headers:{ "Authorization":"Bearer "+token } }).catch(()=>null);
+    if(refRes && refRes.ok){
+      const refData=await refRes.json();
+      $("referralCount").textContent=refData.count??0;
+      $("referralStatus").textContent=refData.mode||"Backend";
+      $("rewardCount").textContent=refData.rewards??"—";
+    } else {
+      // Fallback local
+      const accountsRaw=localStorage.getItem("jason_business_accounts");
+      const accounts=accountsRaw?JSON.parse(accountsRaw):[];
+      const count=accounts.filter(a=>String(a.referralCode||"").toUpperCase()===referralCode.toUpperCase() && String(a.email||"").toLowerCase()!==currentEmail.toLowerCase()).length;
+      $("referralCount").textContent=count;
+      $("referralStatus").textContent="Local";
+    }
+
+    showMessage("Profil chargé depuis backend JASON BUSINESS", "success");
+
+  }catch(err){
+    console.warn("Backend offline, fallback local", err);
+    $("backendStatus").textContent="⚠ Mode local";
+    $("statusField").value="Compte local (offline)";
+    // Fallback local ancien système
+    const ACCOUNTS_KEY="jason_business_accounts";
+    const PROFILE_PREFIX="jason_business_profile_";
+    try{
+      const accounts=JSON.parse(localStorage.getItem(ACCOUNTS_KEY)||"[]");
+      const acc=accounts.find(a=>String(a.email||"").toLowerCase()===currentEmail.toLowerCase());
+      if(acc){
+        const prof=JSON.parse(localStorage.getItem(PROFILE_PREFIX+currentEmail.toLowerCase())||"{}");
+        $("name").value=prof.name||acc.name||"";
+        $("email").value=currentEmail;
+        $("phone").value=prof.phone||"";
+        $("city").value=prof.city||"";
+        $("bio").value=prof.bio||"";
+        $("referralCode").value=prof.referralCode||acc.personalReferralCode||makeReferralCode(currentEmail);
+        $("personalCode").value=$("referralCode").value;
+        $("accountId").value=prof.accountId||"JB-"+makeReferralCode(currentEmail).slice(4);
+        $("createdAt").value=acc.createdAt? new Date(acc.createdAt).toLocaleDateString("fr-FR") : "Non disponible";
+        $("displayName").textContent=prof.name||acc.name||"Mon compte";
+        currentPhoto=localStorage.getItem("jason_business_photo_"+currentEmail.toLowerCase())||"";
+        renderAvatar();
+      }
+    }catch{}
+  }
+}
+
+// Enregistrer profil vers backend + local
+$("profileForm").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const name=$("name").value.trim();
+  if(name.length<2){ showMessage("Entre un nom valide", "error"); return; }
+
+  const token=getToken();
+  const payload={
+    name,
+    phone:$("phone").value.trim(),
+    city:$("city").value.trim(),
+    bio:$("bio").value.trim()
+  };
+
+  try{
+    const res=await fetch("/api/profile/update", {
+      method:"POST",
+      headers:{ "Content-Type":"application/json", "Authorization":"Bearer "+token },
+      body:JSON.stringify(payload)
+    });
+    const data=await res.json();
+    if(!res.ok) throw new Error(data.message||"Erreur backend");
+
+    showMessage("Profil mis à jour via backend ✓", "success");
+    $("displayName").textContent=name;
+    renderAvatar();
+    // Sync local aussi
+    try{
+      const key="jason_business_profile_"+currentEmail.toLowerCase();
+      localStorage.setItem(key, JSON.stringify({...payload, referralCode:$("referralCode").value, accountId:$("accountId").value, updatedAt:new Date().toISOString() }));
+    }catch{}
+  }catch(err){
+    // Fallback local
+    try{
+      const key="jason_business_profile_"+currentEmail.toLowerCase();
+      localStorage.setItem(key, JSON.stringify({...payload, referralCode:$("referralCode").value, accountId:$("accountId").value, updatedAt:new Date().toISOString() }));
+      showMessage("Profil enregistré en local (backend offline)", "success");
+      $("displayName").textContent=name;
+      renderAvatar();
+    }catch{
+      showMessage(err.message||"Erreur enregistrement", "error");
+    }
+  }
+});
+
+$("photoInput").addEventListener("change", e=>{
+  const file=e.target.files[0];
+  if(!file) return;
+  if(!["image/jpeg","image/png","image/webp"].includes(file.type)){ showMessage("JPG/PNG/WEBP seulement", "error"); e.target.value=""; return; }
+  if(file.size>1024*1024){ showMessage("1 Mo max", "error"); e.target.value=""; return; }
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      currentPhoto=reader.result;
+      localStorage.setItem("jason_business_photo_"+currentEmail.toLowerCase(), currentPhoto);
+      renderAvatar();
+      showMessage("Photo mise à jour", "success");
+    }catch{ showMessage("Stockage plein", "error"); }
+  };
+  reader.readAsDataURL(file);
+});
+
+$("copyCodeBtn").addEventListener("click", async ()=>{
+  const code=$("referralCode").value;
+  if(!code){ showMessage("Aucun code", "error"); return; }
+  try{ await navigator.clipboard.writeText(code); showMessage("Code copié: "+code, "success"); }
+  catch{ $("referralCode").focus(); $("referralCode").select(); document.execCommand("copy"); showMessage("Code copié: "+code, "success"); }
+});
+
+$("exportBtn").addEventListener("click", ()=>{
+  const data={ name:$("name").value, email:currentEmail, phone:$("phone").value, city:$("city").value, bio:$("bio").value, referralCode:$("referralCode").value, exportedAt:new Date().toISOString() };
+  const blob=new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a"); a.href=url; a.download="jason-business-profil.json"; a.click(); URL.revokeObjectURL(url);
+  showMessage("Export préparé", "success");
+});
+
+$("logoutBtn").addEventListener("click", ()=>{
+  localStorage.removeItem("jason_business_token");
+  localStorage.removeItem("jason_business_session");
+  sessionStorage.removeItem("jason_business_token");
+  sessionStorage.removeItem("jason_business_session");
+  localStorage.removeItem("jason_business_session");
+  window.location.href="Connexion.html";
+});
+
+loadProfileFromBackend();
+</script>
+</body>
+</html>

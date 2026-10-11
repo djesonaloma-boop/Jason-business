@@ -1,0 +1,53 @@
+{
+  "clients": [
+    {
+      "id": "client_demo",
+      "name": "Client Demo",
+      "email": "demo@jasonbusiness.cd",
+      "phone": "0847500590",
+      "password": "demo123",
+      "balance": 0,
+      "status": "active",
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    }
+  ],
+  "deposits": [],
+  "withdrawals": [],
+  "vip_users": {},
+  "prices": [
+    { "service": "chatbot", "amount": 5000, "currency": "FC", "category": "api" },
+    { "service": "image", "amount": 3000, "currency": "FC", "category": "api" },
+    { "service": "facebook_followers", "amount": 5000, "currency": "FC", "category": "smm" },
+    { "service": "facebook_likes", "amount": 2500, "currency": "FC", "category": "smm" },
+    { "service": "facebook_views", "amount": 3000, "currency": "FC", "category": "smm" },
+    { "service": "youtube_subscribers", "amount": 8000, "currency": "FC", "category": "smm" },
+    { "service": "youtube_views", "amount": 5000, "currency": "FC", "category": "smm" },
+    { "service": "tiktok_followers", "amount": 5000, "currency": "FC", "category": "smm" },
+    { "service": "tiktok_likes", "amount": 2500, "currency": "FC", "category": "smm" },
+    { "service": "instagram_followers", "amount": 5000, "currency": "FC", "category": "smm" },
+    { "service": "bronze", "amount": 5000, "currency": "FC", "category": "vip" },
+    { "service": "argent", "amount": 10000, "currency": "FC", "category": "vip" },
+    { "service": "diamant", "amount": 40000, "currency": "FC", "category": "vip" },
+    { "service": "mega", "amount": 75000, "currency": "FC", "category": "vip" },
+    { "service": "giga", "amount": 100000, "currency": "FC", "category": "vip" }
+  ],
+  "smm_orders": [],
+  "support_messages": [],
+  "api_access": [],
+  "depositNumbers": [
+    { "id": "1", "operator": "M-Pesa", "number": "0847500590", "name": "Jason Aloma", "instructions": "Envoyez avec référence JB", "status": "active", "createdAt": "2026-01-01T00:00:00.000Z" },
+    { "id": "2", "operator": "Airtel Money", "number": "0990000000", "name": "Jason Aloma", "instructions": "Référence JB", "status": "active", "createdAt": "2026-01-01T00:00:00.000Z" },
+    { "id": "3", "operator": "Orange Money", "number": "0890000000", "name": "Jason Aloma", "instructions": "Référence JB", "status": "active", "createdAt": "2026-01-01T00:00:00.000Z" }
+  ],
+  "logs": [
+    { "createdAt": "2026-01-01T00:00:00.000Z", "action": "INIT", "admin": "System", "details": "Database créée - Admin code 10092007 - Min 2000 FC" }
+  ],
+  "settings": {
+    "siteName": "JASON BUSINESS",
+    "currency": "FC",
+    "minDeposit": 2000,
+    "minWithdrawal": 2000,
+    "maintenance": false,
+    "adminCode": "10092007"
+  }
+}

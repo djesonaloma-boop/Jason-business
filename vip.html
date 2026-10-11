@@ -1,0 +1,138 @@
+<!DOCTYPE html> <html lang="fr"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <meta name="theme-color" content="#07111f"> <title>VIP | JASON BUSINESS</title> <style> :root { --bg:#07111f; --card:#0d1b2d; --gold:#d8aa45; --light:#f4d58a; --text:#f5f7fb; --muted:#9aabc0; --green:#36d399; --red:#ff6b6b; --border:rgba(216,170,69,.25); } * { box-sizing:border-box; } body { margin:0; background:radial-gradient(circle at top,#142943,var(--bg) 55%); color:var(--text); font-family:Arial,sans-serif; min-height:100vh; } button { cursor:pointer; font-family:inherit; } header { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:14px; position:sticky; top:0; z-index:5; background:#07111ff5; border-bottom:1px solid var(--border); }.brand { display:flex;align-items:center;gap:10px; }.logo { width:43px;height:43px; display:grid;place-items:center; border-radius:13px; background:linear-gradient(135deg,var(--light),var(--gold)); color:#07111f;font-weight:900; }.brand h1 { font-size:16px;margin:0; }.brand small { display:block;color:var(--muted);margin-top:4px; }.back { background:var(--card); border:1px solid var(--border); color:var(--light); border-radius:10px; padding:10px 12px; } main { max-width:1050px;margin:auto;padding:18px 13px 35px; }.hero { text-align:center; padding:25px 17px; border:1px solid var(--border); border-radius:22px; background:linear-gradient(140deg,#172c45,#0b1728); }.crown { font-size:43px; }.hero h2 { font-size:27px;margin:8px 0; }.hero p { color:var(--muted);line-height:1.6;margin:0; }.gold { color:var(--light); }.stats { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:16px; }.stat { padding:14px 12px; border:1px solid var(--border); border-radius:14px; background:#091625; min-width:0; }.stat small { display:block;color:var(--muted);margin-bottom:8px; }.stat strong { font-size:17px;overflow-wrap:anywhere; } h3 { margin:26px 0 7px;font-size:21px; }.subtitle { color:var(--muted);font-size:13px;line-height:1.6; }.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,225px),1fr)); gap:14px; margin-top:16px; }.vip-card { padding:18px; border:1px solid var(--border); border-radius:19px; background:linear-gradient(155deg,#12243a,#0a1626); transition:.2s; }.vip-card.active { border-color:var(--green); box-shadow:0 0 0 1px #36d39922; }.vip-card.locked{opacity:.85;border-color:#ff6b6b33}.vip-head { display:flex;align-items:center;gap:12px; }.vip-icon { width:51px;height:51px; display:grid;place-items:center; border-radius:15px; background:#ffffff0a; font-size:28px; }.vip-name { font-size:20px;font-weight:bold; }.vip-tag { color:var(--muted);font-size:12px;margin-top:5px; }.price { font-size:24px;font-weight:900;color:var(--light);margin:19px 0 5px; }.price small { color:var(--muted);font-size:11px;font-weight:normal; }.description { color:var(--muted);font-size:13px;line-height:1.6; }.perks { list-style:none;padding:0;margin:15px 0;font-size:13px;line-height:2; }.perks li:before { content:"✓ ";color:var(--green);font-weight:bold; }.activate { width:100%; border:0; border-radius:12px; padding:14px 8px; background:linear-gradient(135deg,var(--light),var(--gold)); color:#111827; font-weight:900; font-size:14px; transition:transform.15s; }.activate:active { transform:scale(.97); }.activate:disabled{opacity:.6;cursor:not-allowed}.activate.active-button { background:#153b31; color:#8bf0c8; border:1px solid var(--green); }.activate.locked-button{background:#2a1a1a;color:#ff9999;border:1px solid #ff6b6b}.active-label { display:none; text-align:center; margin-top:11px; padding:8px; background:#153b31; color:#8bf0c8; border-radius:9px; font-size:12px; }.vip-card.active.active-label { display:block; }.progress-box { margin-top:23px; padding:17px; border:1px solid var(--border); border-radius:16px; background:var(--card); }.progress-head { display:flex;justify-content:space-between;gap:10px;font-size:13px; }.track { height:8px;background:#26374b;border-radius:99px;margin:14px 0;overflow:hidden; }.fill { height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--light));transition:width.3s; }.history-item { display:flex;justify-content:space-between;gap:10px; padding:13px 0;border-bottom:1px solid #ffffff10;font-size:13px; }.history-item small { display:block;color:var(--muted);margin-top:5px; }.notice { margin-top:22px;padding:14px;border-radius:12px; border:1px solid #31445b;background:#152338; color:#c4d1df;font-size:12px;line-height:1.7; } footer { text-align:center;padding:25px 12px;color:var(--muted);font-size:12px;line-height:1.8; }.toast { position:fixed;left:50%;bottom:20px; transform:translate(-50%,150%);opacity:0; width:calc(100% - 30px);max-width:400px; padding:14px;border-radius:12px;text-align:center; background:#17362f;border:1px solid var(--green); color:#caffeb;z-index:10;transition:.25s; }.toast.show { transform:translate(-50%,0);opacity:1; }.toast.error{background:#3a1a1a;border-color:var(--red);color:#ffcccc}
+@media(min-width:650px) {.stats { grid-template-columns:repeat(4,minmax(0,1fr)); } main { padding-top:28px; } } </style> </head> <body> <header> <div class="brand"> <div class="logo">JB</div> <div> <h1>JASON BUSINESS</h1> <small id="backendStatus">Programme VIP • Dépôt requis avant activité</small> </div> </div> <button class="back" onclick="goBack()">← Retour</button> </header> <main> <section class="hero"> <div class="crown">👑</div> <h2>Programme <span class="gold">VIP</span></h2> <p id="heroText">Avant d'activer, tu dois faire un dépôt minimum <strong class="gold">2000 FC</strong>. Le prix est affiché, mais si ton solde n'a pas ce prix, ça ne va pas s'activer.</p> </section> <section class="stats"> <div class="stat"><small>Mon niveau</small><strong id="currentTier">Chargement...</strong></div> <div class="stat"><small>Solde disponible</small><strong id="balance">— FC</strong></div> <div class="stat"><small>Réduction proposée</small><strong id="discount">—</strong></div> <div class="stat"><small>Expiration</small><strong id="expiry">--</strong></div> </section> <div class="notice" id="depositNotice" style="display:none;background:#2a1a1a;border-color:#ff6b6b;color:#ffcccc"> <strong>⚠️ Dépôt requis avant activité</strong><br> Ton solde est insuffisant. Fais un dépôt minimum de 2000 FC avant d'activer un VIP. Le prix est affiché mais bloqué tant que tu n'as pas le solde. <br><br><a href="depot.html" style="color:var(--light);text-decoration:underline;font-weight:bold">→ Faire un dépôt maintenant (min 2000 FC)</a> </div> <h3>Choisis ton VIP</h3> <p class="subtitle">Prix affiché • Si solde n'a pas ce prix, activation bloquée • Vérifié depuis backend/firebase.js</p> <section class="grid" id="vipGrid"></section> <section class="progress-box"> <div class="progress-head"> <strong>Progression des points</strong> <span id="progressLabel">—</span> </div> <div class="track"><div class="fill" id="progressFill"></div></div> <p class="subtitle" id="nextTierText">Dépôt requis pour activer</p> </section> <h3>Historique VIP (Backend)</h3> <div id="historyList"><p class="subtitle">Chargement depuis backend...</p></div> <div class="notice"> <strong>⚠️ Règle JASON BUSINESS :</strong> Le prix est affiché sur chaque carte VIP. Si ton solde n'a pas ce prix, le bouton affiche <code>🔒 SOLDE INSUFFISANT</code> et ne s'active pas. Dépôt minimum 2000 FC obligatoire. Vérification dans <code>api/index.js</code> → <code>DB.deposits</code>. </div> </main> <footer> JASON BUSINESS<br> Créé par Jason Aloma 🇨🇩 · Kinshasa • Prix affiché, activation bloquée si solde insuffisant • Min 2000 FC </footer> <div class="toast" id="toast" role="status"></div>
+<script>
+const STORAGE_KEY = "jason_business_vip_v3";
+const TIERS = [
+ {id:"bronze",name:"Bronze",icon:"🥉",min:0,discount:2,price:5000, description:"Découvre les avantages du programme VIP.", perks:["Réduction proposée : 2 %","Avantages Bronze","Validité : 30 jours"]},
+ {id:"argent",name:"Argent",icon:"🥈",min:100,discount:5,price:10000, description:"Passe au niveau Argent.", perks:["Réduction proposée : 5 %","Avantages Argent","Validité : 30 jours"]},
+ {id:"diamant",name:"Diamant",icon:"💎",min:700,discount:12,price:40000, description:"Profite des avantages Diamant.", perks:["Réduction proposée : 12 %","Avantages Diamant","Validité : 30 jours"]},
+ {id:"mega",name:"Méga VIP",icon:"👑",min:1500,discount:15,price:75000, description:"Le niveau premium du programme.", perks:["Réduction proposée : 15 %","Avantages Méga VIP","Validité : 30 jours"]},
+ {id:"giga",name:"Giga VIP",icon:"🌟",min:3000,discount:20,price:100000, description:"Le niveau le plus élevé du programme.", perks:["Réduction proposée : 20 %","Avantages Giga VIP","Validité : 30 jours"]}
+];
+let state = { tierId:null, points:0, expiresAt:null, history:[], balance:0 };
+
+function getToken(){ return localStorage.getItem("jason_business_token") || sessionStorage.getItem("jason_business_token") || ""; }
+function loadLocal() { try { const saved = localStorage.getItem(STORAGE_KEY); if (saved) state = {...state,...JSON.parse(saved)}; } catch(e) {} }
+function saveLocal() { try { localStorage.setItem(STORAGE_KEY,JSON.stringify(state)); } catch(e) {} }
+function formatFC(amount) { return new Intl.NumberFormat("fr-FR").format(amount) + " FC"; }
+function formatDate(value) { if (!value) return "--"; const date = new Date(value); if (Number.isNaN(date.getTime())) return "--"; return date.toLocaleDateString("fr-FR"); }
+function getActiveTier() { if (!state.tierId ||!state.expiresAt) return null; if (Date.now() >= new Date(state.expiresAt).getTime()) return null; return TIERS.find(t => t.id === state.tierId) || null; }
+
+function renderCards() {
+  const active = getActiveTier();
+  const hasDeposit = state.balance >= 2000;
+  document.getElementById("vipGrid").innerHTML = TIERS.map(tier => {
+    const selected = active && active.id === tier.id;
+    const canAfford = state.balance >= tier.price;
+    const locked =!hasDeposit ||!canAfford;
+    return `
+    <article class="vip-card ${selected? "active" : ""} ${locked &&!selected? "locked":""}">
+      <div class="vip-head">
+        <div class="vip-icon">${tier.icon}</div>
+        <div>
+          <div class="vip-name">${tier.name}</div>
+          <div class="vip-tag">${tier.min.toLocaleString("fr-FR")} points • Prix: ${formatFC(tier.price)}</div>
+        </div>
+      </div>
+      <div class="price">${formatFC(tier.price)} <small>/ 30 jours</small></div>
+      <p class="description">${tier.description}</p>
+      <ul class="perks">${tier.perks.map(item => `<li>${item}</li>`).join("")}</ul>
+      <button class="activate ${selected? "active-button" : ""} ${locked &&!selected? "locked-button":""}" id="btn-${tier.id}" onclick="activateVip('${tier.id}')">
+        ${selected? "✓ VIP ACTIVÉ - "+formatFC(tier.price) : locked? "🔒 SOLDE INSUFFISANT - "+formatFC(tier.price) : "ACTIVER "+tier.name.toUpperCase()+" - "+formatFC(tier.price)}
+      </button>
+      ${!hasDeposit? `<div style="text-align:center;margin-top:8px;font-size:11px;color:#ff9999">Dépôt min 2000 FC requis • Solde: ${formatFC(state.balance||0)} • Prix affiché mais bloqué</div>` :!canAfford &&!selected? `<div style="text-align:center;margin-top:8px;font-size:11px;color:#ff9999">Solde insuffisant • Il faut ${formatFC(tier.price)} • Tu as ${formatFC(state.balance)} • Prix affiché mais bloqué</div>` : `<div style="text-align:center;margin-top:8px;font-size:11px;color:#36d399">✓ Solde OK pour activer</div>`}
+      <div class="active-label" style="display:${selected? "block":"none"}">✓ Actif jusqu'au ${formatDate(state.expiresAt)} • ${formatFC(tier.price)} payé</div>
+    </article>`;
+  }).join("");
+}
+
+function renderDashboard() {
+  const active = getActiveTier();
+  document.getElementById("currentTier").textContent = active? active.name : "Aucun VIP";
+  document.getElementById("balance").textContent = formatFC(state.balance||0);
+  document.getElementById("discount").textContent = active? active.discount + " %" : "0 %";
+  document.getElementById("expiry").textContent = active? formatDate(state.expiresAt) : "--";
+  const hasDeposit = state.balance >= 2000;
+  const depositNotice = document.getElementById("depositNotice");
+  const heroText = document.getElementById("heroText");
+  if(!hasDeposit){
+    depositNotice.style.display="block";
+    heroText.innerHTML=`⚠️ Solde insuffisant <span style="color:#ff9999">(${formatFC(state.balance||0)})</span> — Prix affiché mais bloqué. Fais un dépôt min <strong class="gold">2000 FC</strong> avant activité.<br><a href="depot.html" style="color:var(--light);text-decoration:underline">→ Déposer maintenant</a>`;
+  }else{
+    depositNotice.style.display="none";
+    heroText.innerHTML=`✅ Solde <strong class="gold">${formatFC(state.balance)}</strong> — Prix affiché, tu peux activer si solde a le prix du VIP. Dépôt min 2000 FC respecté.`;
+  }
+  const points = Number(state.points || 0);
+  const next = TIERS.find(t => points < t.min);
+  if (next) {
+    const previous = TIERS.filter(t => t.min < next.min).reduce((max,t) => Math.max(max,t.min),0);
+    const progress = next.min > previous? Math.max(0,Math.min(100,((points-previous)/(next.min-previous))*100)) : 0;
+    document.getElementById("progressFill").style.width = progress + "%";
+    document.getElementById("progressLabel").textContent = points.toLocaleString("fr-FR") + " / " + next.min.toLocaleString("fr-FR") + " points";
+    document.getElementById("nextTierText").textContent = hasDeposit? "Prochain seuil : " + next.name + " • Prix affiché" : "Dépôt requis, prix affiché mais bloqué";
+  } else {
+    document.getElementById("progressFill").style.width = "100%";
+    document.getElementById("progressLabel").textContent = "Maximum atteint";
+    document.getElementById("nextTierText").textContent = hasDeposit? "Maximum atteint • Solde OK" : "Dépôt requis";
+  }
+  const historyList = document.getElementById("historyList");
+  const entries = Array.isArray(state.history)? state.history : [];
+  historyList.innerHTML = entries.length? entries.slice().reverse().map(item => `<div class="history-item"><div><strong>${item.name}</strong><small>${item.date}</small></div><div style="text-align:right"><strong>${item.action}</strong><small>Expire : ${item.expiry}</small></div></div>`).join("") : '<p class="subtitle">Aucune activation. Prix affiché, mais dépôt min 2000 FC requis d\'abord.</p>';
+  renderCards();
+}
+function showToast(message, isError=false) { const toast = document.getElementById("toast"); toast.textContent = message; toast.className="toast show"+(isError?" error":""); clearTimeout(showToast.timer); showToast.timer = setTimeout(() => toast.classList.remove("show"),4000); }
+
+async function loadRealStatus(){
+  try{
+    const token=getToken();
+    const headers=token? {"Authorization":"Bearer "+token} : {};
+    const health=await fetch("/api/health").then(r=>r.json()).catch(()=>null);
+    if(health && health.status==="ok"){ document.getElementById("backendStatus").textContent="Programme VIP • Backend "+health.mode+" • Prix affiché, dépôt min 2000 FC"; }
+    const [balRes, vipRes] = await Promise.all([
+      fetch("/api/client/balance", { headers }).catch(()=>null),
+      fetch("/api/vip/status", { headers, cache:"no-store" }).catch(()=>null)
+    ]);
+    if(balRes && balRes.ok){ const balData=await balRes.json(); state.balance=balData.balance||0; }
+    if(vipRes && vipRes.ok){ const result=await vipRes.json(); state.tierId = result.active? result.tierId : null; state.points = Number(result.points || state.points || 0); state.expiresAt = result.expiresAt || null; state.history = Array.isArray(result.history)? result.history : state.history; }
+    saveLocal(); renderDashboard();
+  }catch{ loadLocal(); if (state.expiresAt && Date.now() >= new Date(state.expiresAt).getTime()) { state.tierId = null; state.expiresAt = null; saveLocal(); } renderDashboard(); }
+}
+
+async function activateVip(tierId) {
+  const tier = TIERS.find(item => item.id === tierId); if (!tier) return;
+  // RÈGLE: prix affiché, si solde n'a pas ce prix ça va pas s'activer
+  if(state.balance < 2000){
+    showToast("⚠️ Dépôt requis avant activité! Solde "+formatFC(state.balance||0)+" < 2000 FC. Prix "+formatFC(tier.price)+" affiché mais bloqué.", true);
+    setTimeout(()=>{ window.location.href="depot.html"; }, 2000);
+    return;
+  }
+  if(state.balance < tier.price){
+    showToast("❌ Solde insuffisant! Prix affiché "+formatFC(tier.price)+" mais tu as seulement "+formatFC(state.balance)+". Ça ne va pas s'activer tant que tu n'as pas le prix.", true);
+    return;
+  }
+  const btn=document.getElementById("btn-"+tierId);
+  btn.disabled=true; btn.textContent="⏳ Vérification solde "+formatFC(tier.price)+"...";
+  try{
+    const token=getToken();
+    const res=await fetch("/api/vip/activate", {
+      method:"POST",
+      headers:{ "Content-Type":"application/json",...(token? {"Authorization":"Bearer "+token}:{}) },
+      body:JSON.stringify({tierId:tier.id})
+    });
+    const result=await res.json();
+    if(!res.ok) throw new Error(result.message||"Solde insuffisant - prix affiché mais bloqué");
+    state.tierId=result.tierId||tier.id;
+    state.expiresAt=result.expiresAt|| new Date(Date.now()+30*24*60*60*1000).toISOString();
+    state.points=result.points??state.points;
+    state.balance=result.balance??(state.balance - tier.price);
+    state.history=Array.isArray(result.history)? result.history : state.history;
+    if(!Array.isArray(result.history)){ state.history.push({ name:tier.name, date:new Date().toLocaleString("fr-FR"), expiry:formatDate(state.expiresAt), action:"Activé "+formatFC(tier.price)+" - Dépôt vérifié" }); }
+    saveLocal(); renderDashboard();
+    showToast("✅ "+tier.name+" activé pour "+formatFC(tier.price)+"! Reste "+formatFC(state.balance));
+  }catch(err){ showToast("❌ "+(err.message||"Prix affiché mais solde insuffisant, ne s'active pas"), true); loadRealStatus(); }
+}
+function goBack() { if (history.length > 1) history.back(); else window.location.href = "Dashboard.html"; }
+loadLocal(); loadRealStatus();
+</script>
+</body>
+</html>

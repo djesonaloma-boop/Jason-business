@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<title>JASON BUSINESS — Admin</title>
+<style>
+:root{--bg:#07111f;--panel:#0d1b2d;--panel2:#11243a;--gold:#d8aa45;--gold2:#f4d58a;--text:#f4f7fc;--muted:#9aabc0;--border:rgba(216,170,69,.25);--green:#45d6a0;--red:#ff647c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.topbar{height:68px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;padding:0 15px;position:sticky;top:0;z-index:20}
+.logo{width:43px;height:43px;border-radius:13px;background:linear-gradient(135deg,var(--gold2),var(--gold));display:grid;place-items:center;color:#07111f;font-weight:900}
+.brand{font-size:15px;font-weight:900}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.spacer{flex:1}.btn{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:11px 13px}
+.btn.gold{background:var(--gold);color:#07111f;font-weight:800}.btn.red{color:var(--red)}.btn.green{color:var(--green)}.btn.small{padding:7px 9px;font-size:12px;margin:2px}
+.layout{display:flex;min-height:calc(100vh - 68px)}.sidebar{width:240px;flex-shrink:0;background:#091626;border-right:1px solid var(--border);padding:13px;overflow-y:auto}
+.side-title{font-size:10px;color:var(--muted);letter-spacing:1px;margin:18px 8px 9px}.nav{width:100%;padding:12px;border:0;border-radius:10px;background:transparent;color:#bdc9d8;text-align:left;margin-bottom:4px;display:flex;gap:8px;align-items:center}
+.nav:hover,.nav.active{background:#172b41;color:var(--gold2)}.main{flex:1;min-width:0;max-width:1500px;width:100%;margin:auto;padding:22px}
+.section{display:none}.section.active{display:block}h1{font-size:25px;margin:0 0 7px}h2{font-size:17px;margin:0 0 15px}.muted{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:22px 0}.card,.stat{background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:16px;margin-bottom:15px}
+.stat-label{color:var(--muted);font-size:12px}.stat-number{font-size:26px;font-weight:900;margin:12px 0}.gold-text{color:var(--gold2)}
+.content-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.field{margin-bottom:14px}
+.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}.field input,.field select,.field textarea,.search{width:100%;padding:12px;background:#071423;color:var(--text);border:1px solid var(--border);border-radius:10px;outline:none}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:700px}
+th,td{padding:12px 9px;text-align:left;border-bottom:1px solid #203148;font-size:12px}th{color:var(--muted)}.tag{display:inline-block;padding:5px 8px;border-radius:20px;background:#1a2d42;font-size:11px}
+.tag.ok{color:var(--green)}.tag.no{color:var(--red)}.tag.pending{color:var(--gold2)}.notice{background:#0b1929;border:1px solid var(--border);padding:13px;border-radius:10px;color:var(--muted);font-size:12px;line-height:1.6;margin:14px 0}
+.login-wrap{min-height:100vh;display:grid;place-items:center;padding:20px}.login-card{width:100%;max-width:440px;background:var(--panel);padding:25px;border:1px solid var(--border);border-radius:20px}
+.login-head{display:flex;align-items:center;gap:12px;margin-bottom:22px}.toast{position:fixed;z-index:100;bottom:20px;left:50%;transform:translateX(-50%);padding:13px 17px;background:#1a2d42;border:1px solid var(--border);border-radius:12px;max-width:90%;font-size:13px}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:12px}
+@media(max-width:900px){.sidebar{width:70px;padding:8px 5px}.nav{font-size:0;justify-content:center}.nav.txt{display:none}.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.content-grid{grid-template-columns:1fr}.main{padding:11px}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<section id="loginScreen" class="login-wrap">
+<div class="login-card">
+<div class="login-head"><div class="logo">JB</div><div><h1>JASON BUSINESS</h1><div class="muted">Admin • Contrôle total • Code 10092007</div></div></div>
+<div class="notice">Backend: <code>api/index.js</code> + <code>backend/firebase.js</code><br>Contrôle: dépôts, retraits, prix, mots de passe, numéros dépôt, VIP, SMM, logs.<br>Min dépôt/retrait 2000 FC partout.</div>
+<form id="loginForm">
+<div class="field"><label>Identifiant admin</label><input id="username" required placeholder="jason_admin"></div>
+<div class="field"><label>Code secret (10092007)</label><input id="secret" type="password" required placeholder="10092007"></div>
+<button class="btn gold" style="width:100%" id="loginBtn">Se connecter → Accès total</button>
+<p id="loginError" class="muted" style="margin-top:10px;color:var(--red)"></p>
+</form>
+<p class="muted" style="margin-top:15px">Test API: <a href="/api/health" target="_blank" style="color:var(--gold2)">/api/health</a> • <a href="/api/admin/overview" style="color:var(--gold2)">overview</a></p>
+<p class="muted">Créé par Jason Aloma 🇨🇩 • Kinshasa • Contrôle total backend</p>
+</div>
+</section>
+
+<!-- APP -->
+<div id="adminApp" class="hidden">
+<header class="topbar">
+<div class="logo">JB</div><div class="brand">JASON BUSINESS<small id="modeText">Admin Total • Min 2000 FC</small></div>
+<div class="spacer"></div>
+<span class="tag pending" id="serverStatus">Non connecté</span>
+<button class="btn small" id="refreshBtn">↻ Actualiser</button>
+<button class="btn small red" id="logoutBtn">Quitter</button>
+</header>
+
+<div class="layout">
+<aside class="sidebar">
+<div class="side-title">TABLEAU DE BORD</div>
+<button class="nav active" data-page="overview">▦ <span class="txt">Accueil</span></button>
+<button class="nav" data-page="deposits">＋ <span class="txt">Dépôts (2000 FC min)</span></button>
+<button class="nav" data-page="withdrawals">↗ <span class="txt">Retraits (2000 FC min)</span></button>
+<button class="nav" data-page="clients">♙ <span class="txt">Clients + Reset Pass</span></button>
+<button class="nav" data-page="vip">♛ <span class="txt">VIP + Prix</span></button>
+<div class="side-title">SERVICES & CONTRÔLE</div>
+<button class="nav" data-page="smm">📱 <span class="txt">SMM Panel</span></button>
+<button class="nav" data-page="api">⌘ <span class="txt">API Center</span></button>
+<button class="nav" data-page="prices">＄ <span class="txt">Tarifs Tous Services</span></button>
+<button class="nav" data-page="depositNumbers">📞 <span class="txt">Numéros Dépôt</span></button>
+<button class="nav" data-page="settings">⚙ <span class="txt">Paramètres + Solde</span></button>
+<button class="nav" data-page="logs">▤ <span class="txt">Journal + Support</span></button>
+</aside>
+
+<main class="main">
+<section id="overview" class="section active">
+<h1>Tableau de bord Admin Total</h1><p class="muted">Contrôle total JASON BUSINESS • api/index.js + backend/firebase.js • Code admin 10092007</p>
+<div class="grid">
+<div class="stat"><div class="stat-label">Clients</div><div class="stat-number" id="countClients">—</div><div class="muted">Comptes inscrits</div></div>
+<div class="stat"><div class="stat-label">Dépôts en attente</div><div class="stat-number gold-text" id="countDeposits">—</div><div class="muted">Min 2000 FC • À valider</div></div>
+<div class="stat"><div class="stat-label">Retraits en attente</div><div class="stat-number" id="countWithdrawals">—</div><div class="muted">Min 2000 FC • À valider</div></div>
+<div class="stat"><div class="stat-label">Membres VIP</div><div class="stat-number gold-text" id="countVip">—</div><div class="muted">Dépôt vérifié avant activation</div></div>
+</div>
+<div class="content-grid">
+<div class="card"><h2>Actions rapides</h2><div class="row"><button class="btn" data-go="deposits">Voir Dépôts</button><button class="btn" data-go="withdrawals">Voir Retraits</button></div><div class="row" style="margin-top:10px"><button class="btn" data-go="clients">Gérer Clients</button><button class="btn" data-go="depositNumbers">Numéros Dépôt</button></div><div class="row" style="margin-top:10px"><button class="btn gold" data-go="prices">Modifier Prix</button><button class="btn gold" data-go="smm">Commandes SMM</button></div></div>
+<div class="card"><h2>État du système</h2><p id="connectionText" class="muted">En attente...</p><button class="btn gold" id="testBtn">Tester /api/health + Backend</button><p class="muted" style="margin-top:10px">Backend: Express + Firebase mode: <span id="backendMode" class="gold-text">—</span><br>Min dépôt/retrait: 2000 FC partout • VIP: dépôt requis avant activité • Prix affiché mais bloqué si solde insuffisant</p></div>
+</div>
+<div class="card"><h2>Ajout rapide solde client (pour test)</h2><form id="quickDepositForm"><div class="row"><div class="field"><label>ID Client (email ou id)</label><input id="quickClientId" required placeholder="client@example.com"></div><div class="field"><label>Montant FC (min 2000)</label><input id="quickAmount" type="number" min="2000" value="5000" required></div></div><button class="btn gold">💰 Ajouter dépôt approuvé</button></form></div>
+</section>
+
+<section id="deposits" class="section"><h1>Dépôts • Min 2000 FC</h1><div class="card"><input class="search" id="searchDeposits" placeholder="Rechercher client, montant, référence..."><div class="table-wrap"><table><thead><tr><th>Client</th><th>Montant</th><th>Moyen</th><th>Référence</th><th>Date</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="depositsRows"><tr><td colspan="7">Chargement...</td></tr></tbody></table></div></div></section>
+
+<section id="withdrawals" class="section"><h1>Retraits • Min 2000 FC</h1><div class="card"><input class="search" id="searchWithdrawals" placeholder="Rechercher..."><div class="table-wrap"><table><thead><tr><th>Client</th><th>Montant</th><th>Moyen</th><th>Compte / Numéro</th><th>Date</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsRows"><tr><td colspan="7">Chargement...</td></tr></tbody></table></div></div></section>
+
+<section id="clients" class="section"><h1>Clients • Reset mot de passe</h1><div class="card"><input class="search" id="searchClients" placeholder="Rechercher nom, email, id..."><div class="table-wrap"><table><thead><tr><th>ID</th><th>Nom</th><th>E-mail</th><th>Solde FC</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="clientsRows"><tr><td colspan="6">Chargement...</td></tr></tbody></table></div></div>
+<div class="content-grid"><div class="card"><h2>🔑 Réinitialiser mot de passe client</h2><form id="resetPassForm"><div class="field"><label>ID Client / Email</label><input id="resetClientId" required placeholder="client id ou email"></div><div class="field"><label>Nouveau mot de passe</label><input id="resetNewPass" type="text" required value="JasonBusiness2026" placeholder="Nouveau pass"></div><button class="btn gold">Réinitialiser mot de passe</button></form><p class="muted">Le client pourra se connecter avec le nouveau pass.</p></div><div class="card"><h2>🚫 Suspendre / Réactiver</h2><p class="muted">Utilise les boutons dans la liste clients pour suspendre ou réactiver un compte. Tout est logué dans backend/firebase.js</p></div></div>
+</section>
+
+<section id="vip" class="section"><h1>VIP • Prix affiché, dépôt requis avant activation</h1><div class="content-grid"><div class="card"><h2>Modifier VIP client</h2><form id="vipForm"><div class="field"><label>ID Client</label><input id="vipClient" required placeholder="email ou id"></div><div class="field"><label>Niveau</label><select id="vipLevel"><option value="bronze">Bronze - 5000 FC</option><option value="argent">Argent - 10000 FC</option><option value="diamant">Diamant - 40000 FC</option><option value="mega">Méga VIP - 75000 FC</option><option value="giga">Giga VIP - 100000 FC</option></select></div><div class="field"><label>Durée jours</label><input id="vipDuration" type="number" value="30" required></div><button class="btn gold">Enregistrer VIP (dépôt vérifié côté backend)</button></form><p class="muted">Backend vérifie solde min 2000 FC + prix VIP affiché. Si solde n'a pas le prix, ça ne va pas s'activer.</p></div><div class="card"><h2>Liste VIP active</h2><div class="table-wrap"><table><thead><tr><th>Client</th><th>Niveau</th><th>Prix payé</th><th>Expiration</th><th>Action</th></tr></thead><tbody id="vipRows"><tr><td colspan="5">Chargement VIP...</td></tr></tbody></table></div></div></div></section>
+
+<section id="smm" class="section"><h1>SMM Panel • Commandes</h1><div class="card"><input class="search" id="searchSmm" placeholder="Rechercher plateforme, service..."><div class="table-wrap"><table><thead><tr><th>Réf</th><th>Client</th><th>Plateforme</th><th>Service</th><th>Quantité</th><th>Prix</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="smmRows"><tr><td colspan="8">Chargement SMM...</td></tr></tbody></table></div></div></section>
+
+<section id="api" class="section"><h1>API Center</h1><div class="card"><form id="apiForm"><div class="field"><label>ID Client</label><input id="apiClient" required placeholder="client id"></div><div class="field"><label>Service</label><select id="apiService"><option value="chatbot">Chatbot</option><option value="image">Images</option><option value="music">Musique</option><option value="video">Vidéo</option><option value="all">Tous</option></select></div><div class="field"><label>Accès</label><select id="apiEnabled"><option value="true">Activer</option><option value="false">Désactiver</option></select></div><button class="btn gold">Appliquer accès API</button></form></div><div class="card" style="margin-top:15px"><h2>Accès existants</h2><div class="table-wrap"><table><thead><tr><th>Client</th><th>Service</th><th>Statut</th><th>Action</th></tr></thead><tbody id="apiRows"><tr><td colspan="4">Chargement...</td></tr></tbody></table></div></div></section>
+
+<section id="prices" class="section"><h1>Tarifs • Modifier prix de tous les services</h1><div class="content-grid"><div class="card"><h2>Modifier prix SMM / API / VIP</h2><form id="priceForm"><div class="field"><label>Service / Plateforme</label><select id="priceService"><option value="chatbot">Chatbot API</option><option value="image">Images API</option><option value="website">Sites web</option><option value="facebook_followers">Facebook Followers /100</option><option value="facebook_likes">Facebook Likes /100</option><option value="youtube_views">YouTube Vues /100</option><option value="tiktok_followers">TikTok Followers /100</option><option value="instagram_followers">Instagram Followers /100</option><option value="bronze">VIP Bronze</option><option value="argent">VIP Argent</option><option value="diamant">VIP Diamant</option><option value="mega">VIP Mega</option><option value="giga">VIP Giga</option></select></div><div class="field"><label>Prix FC (sera affiché, mais bloqué si solde insuffisant)</label><input id="priceAmount" type="number" min="0" step="100" required placeholder="5000"></div><div class="field"><label>Devise</label><select id="priceCurrency"><option value="FC">FC</option><option value="USD">USD</option></select></div><button class="btn gold">💾 Enregistrer prix dans backend/firebase.js</button></form><p class="muted">Le prix sera affiché dans VIP.html et SMM.html, mais si solde n'a pas ce prix, ça ne va pas s'activer.</p></div><div class="card"><h2>Tarifs actuels (depuis backend)</h2><div class="table-wrap"><table><thead><tr><th>Service</th><th>Prix</th><th>Devise</th><th>Action</th></tr></thead><tbody id="pricesRows"><tr><td colspan="4">Chargement...</td></tr></tbody></table></div></div></div></section>
+
+<section id="depositNumbers" class="section"><h1>Numéros de dépôt • Ajouter ce qui manque</h1><div class="content-grid"><div class="card"><h2>➕ Ajouter / Modifier numéro dépôt</h2><form id="depositNumberForm"><div class="field"><label>Opérateur</label><select id="depOperator" required><option value="M-Pesa">M-Pesa</option><option value="Airtel Money">Airtel Money</option><option value="Orange Money">Orange Money</option><option value="Africell Money">Africell Money</option><option value="Bank">Banque</option></select></div><div class="field"><label>Numéro / Compte</label><input id="depNumber" required placeholder="0847500590"></div><div class="field"><label>Nom titulaire</label><input id="depName" required placeholder="Jason Aloma"></div><div class="field"><label>Instructions</label><textarea id="depInstructions" rows="3" placeholder="Envoyez avec référence..."></textarea></div><button class="btn gold">Enregistrer numéro dépôt</button></form></div><div class="card"><h2>Numéros actuels</h2><div class="table-wrap"><table><thead><tr><th>Opérateur</th><th>Numéro</th><th>Nom</th><th>Statut</th><th>Action</th></tr></thead><tbody id="depositNumbersRows"><tr><td colspan="5">Chargement...</td></tr></tbody></table></div><p class="muted">Ces numéros s'affichent dans depot.html pour les clients.</p></div></div></section>
+
+<section id="settings" class="section"><h1>Paramètres + Solde + Site</h1><div class="content-grid"><div class="card"><h2>Paramètres site</h2><form id="settingsForm"><div class="field"><label>Nom site</label><input id="siteName" value="JASON BUSINESS" required></div><div class="field"><label>Devise</label><select id="currency"><option value="FC">FC</option><option value="USD">USD</option></select></div><div class="field"><label>Dépôt minimum (FC)</label><input id="minDeposit" type="number" value="2000" required></div><div class="field"><label>Retrait minimum (FC)</label><input id="minWithdrawal" type="number" value="2000" required></div><div class="field"><label>Maintenance</label><select id="maintenance"><option value="false">Site ouvert</option><option value="true">Maintenance active</option></select></div><button class="btn gold">Enregistrer paramètres</button></form></div><div class="card"><h2>Logs & Backend info</h2><p class="muted">Backend: api/index.js<br>DB: backend/firebase.js<br>Min 2000 FC partout<br>VIP: dépôt requis avant activité<br>Prix affiché mais bloqué si solde insuffisant</p><button class="btn" id="clearLogsBtn">Effacer logs (backend)</button></div></div></section>
+
+<section id="logs" class="section"><h1>Journal + Messages Support</h1><div class="content-grid"><div class="card"><h2>Journal admin</h2><div class="table-wrap"><table><thead><tr><th>Date</th><th>Admin</th><th>Action</th><th>Détail</th></tr></thead><tbody id="logsRows"><tr><td colspan="4">Chargement...</td></tr></tbody></table></div></div><div class="card"><h2>Messages Support (depuis Support.html)</h2><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Message</th></tr></thead><tbody id="supportRows"><tr><td colspan="3">Chargement support...</td></tr></tbody></table></div></div></div></section>
+
+<footer>JASON BUSINESS • Admin Total • Sans Firebase • Code 10092007 • Créé par Jason Aloma 🇨🇩 • Min 2000 FC partout</footer>
+</main>
+</div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script>
+"use strict";
+const API_BASE = "/api/admin";
+let token = sessionStorage.getItem("jason_admin_token") || "";
+const $ = id => document.getElementById(id);
+function toast(m){$("toast").textContent=m;$("toast").classList.remove("hidden");setTimeout(()=>$("toast").classList.add("hidden"),4000);}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));}
+async function api(path,opts={}){
+  const res=await fetch(API_BASE+path,{...opts,headers:{"Content-Type":"application/json",...(token?{Authorization:"Bearer "+token}:{}),...(opts.headers||{})}});
+  const data=await res.json().catch(()=>({}));
+  if(res.status===401||res.status===403){logout(false);throw new Error("Session expirée - Code 10092007 incorrect");}
+  if(!res.ok)throw new Error(data.message||data.error||"Erreur "+res.status);
+  return data;
+}
+const post=(p,b)=>api(p,{method:"POST",body:JSON.stringify(b)});
+function showAdmin(){$("loginScreen").classList.add("hidden");$("adminApp").classList.remove("hidden");loadAll();}
+function logout(show=true){token="";sessionStorage.removeItem("jason_admin_token");$("adminApp").classList.add("hidden");$("loginScreen").classList.remove("hidden");if(show)toast("Déconnecté");}
+$("loginForm").addEventListener("submit",async e=>{
+  e.preventDefault();$("loginBtn").disabled=true;$("loginError").textContent="Connexion avec code 10092007...";
+  try{
+    const res=await fetch(API_BASE+"/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:$("username").value.trim(),secret:$("secret").value})});
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok||!data.token)throw new Error(data.message||"Refusé - vérifie code 10092007");
+    token=data.token;sessionStorage.setItem("jason_admin_token",token);$("loginError").textContent="";showAdmin();toast("✅ Connecté Admin Total");
+  }catch(err){$("loginError").textContent=err.message;}finally{$("loginBtn").disabled=false;}
+});
+$("logoutBtn").addEventListener("click",()=>logout());
+function go(p){document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===p));document.querySelectorAll(".nav").forEach(b=>b.classList.toggle("active",b.dataset.page===p));}
+document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.go)));
+function arr(d,k){if(Array.isArray(d))return d;return Array.isArray(d?.[k])?d[k]:[];}
+function tag(s){let v=String(s||"inconnu"),c="pending";if(["approved","active","enabled","completed","paid","ok"].includes(v.toLowerCase()))c="ok";if(["rejected","disabled","blocked","suspended","failed","no"].includes(v.toLowerCase()))c="no";return `<span class="tag ${c}">${esc(v)}</span>`;}
+function render(id,rows,cols,empty="Aucune donnée"){$(id).innerHTML=rows.length?rows.join(""):`<tr><td colspan="${cols}">${empty}</td></tr>`;}
+
+async function loadOverview(){
+  try{
+    const health=await fetch("/api/health").then(r=>r.json());
+    $("backendMode").textContent=health.mode||"memory";
+    $("modeText").textContent="Admin Total • Backend "+(health.mode||"memory")+" • Min 2000 FC • Code OK";
+  }catch{}
+  const d=await api("/overview");
+  $("countClients").textContent=d.clients??0;
+  $("countDeposits").textContent=d.pendingDeposits??0;
+  $("countWithdrawals").textContent=d.pendingWithdrawals??0;
+  $("countVip").textContent=d.vipClients??0;
+  $("serverStatus").textContent="Connecté • Code 10092007 OK";
+  $("serverStatus").className="tag ok";
+  $("connectionText").textContent="Backend OK sans Firebase - "+new Date().toLocaleString("fr-FR")+" - Min 2000 FC, VIP dépôt requis, prix affiché bloqué si solde insuffisant";
+}
+
+async function loadDeposits(){
+  const d=await api("/deposits");
+  const list=arr(d,"deposits");
+  render("depositsRows",list.map(x=>`<tr><td>${esc(x.clientName||x.clientId||"—")}</td><td><strong>${esc(x.amount||"—")} ${esc(x.currency||"FC")}</strong><br><small>Min 2000 FC</small></td><td>${esc(x.method||x.operator||"—")}</td><td>${esc(x.reference||"—")}</td><td>${esc((x.createdAt||"").slice(0,19))}</td><td>${tag(x.status||"pending")}</td><td><button class="btn small green" data-action="deposit-approve" data-id="${esc(x.id)}">✅ Valider</button> <button class="btn small red" data-action="deposit-reject" data-id="${esc(x.id)}">❌ Refuser</button></td></tr>`),7,"Aucun dépôt en attente");
+}
+
+async function loadWithdrawals(){
+  const d=await api("/withdrawals");
+  const list=arr(d,"withdrawals");
+  render("withdrawalsRows",list.map(x=>`<tr><td>${esc(x.clientName||x.clientId||"—")}</td><td><strong>${esc(x.amount||"—")} ${esc(x.currency||"FC")}</strong></td><td>${esc(x.method||"—")}</td><td>${esc(x.accountMasked||x.phone||x.account||"Masqué")}</td><td>${esc((x.createdAt||"").slice(0,19))}</td><td>${tag(x.status||"pending")}</td><td><button class="btn small green" data-action="withdraw-approve" data-id="${esc(x.id)}">✅ Confirmer</button> <button class="btn small red" data-action="withdraw-reject" data-id="${esc(x.id)}">❌ Annuler</button></td></tr>`),7,"Aucun retrait");
+}
+
+async function loadClients(){
+  const d=await api("/clients");
+  const list=arr(d,"clients");
+  render("clientsRows",list.map(x=>`<tr><td>${esc(x.id)}</td><td>${esc(x.name||x.username||"—")}</td><td>${esc(x.email||"—")}</td><td><strong>${esc(x.balance||0)} FC</strong></td><td>${tag(x.status||"active")}</td><td><button class="btn small" data-action="client-reset" data-id="${esc(x.id)}">🔑 Reset Pass</button> <button class="btn small green" data-action="client-activate" data-id="${esc(x.id)}">✅ Activer</button> <button class="btn small red" data-action="client-suspend" data-id="${esc(x.id)}">🚫 Suspendre</button></td></tr>`),6,"Aucun client");
+}
+
+async function loadVip(){
+  const d=await api("/vip");
+  const list=arr(d,"clients");
+  render("vipRows",list.map(x=>`<tr><td>${esc(x.clientName||x.clientId)}</td><td>${esc(x.level)}</td><td>${esc(x.price||"—")} FC</td><td>${esc(x.expiresAt||"—")}</td><td><button class="btn small red" data-action="vip-remove" data-id="${esc(x.clientId||x.clientName)}">Supprimer</button></td></tr>`),5,"Aucun VIP - Dépôt requis avant activation");
+}
+
+async function loadSmm(){
+  try{
+    const d=await api("/smm-orders");
+    const list=arr(d,"orders");
+    render("smmRows",list.map(x=>`<tr><td>${esc(x.reference||x.id)}</td><td>${esc(x.clientId||"—")}</td><td>${esc(x.platform||"—")}</td><td>${esc(x.service||"—")}</td><td>${esc(x.quantity||0)}</td><td>${esc(x.totalPrice||x.estimatedPrice||0)} FC</td><td>${tag(x.status||"pending")}</td><td><button class="btn small green" data-action="smm-approve" data-id="${esc(x.id)}">✅ Traiter</button> <button class="btn small red" data-action="smm-reject" data-id="${esc(x.id)}">❌ Annuler</button></td></tr>`),8,"Aucune commande SMM");
+  }catch{
+    $("smmRows").innerHTML=`<tr><td colspan="8">Pas de route SMM, utilise /api/smm/orders</td></tr>`;
+  }
+}
+
+async function loadApiAccess(){
+  const d=await api("/api-access");
+  render("apiRows",arr(d,"access").map(x=>`<tr><td>${esc(x.clientId)}</td><td>${esc(x.service)}</td><td>${tag(x.enabled?"enabled":"disabled")}</td><td><button class="btn small red" data-action="api-revoke" data-id="${esc(x.clientId+"|"+x.service)}">Révoquer</button></td></tr>`),4,"Aucun accès");
+}
+
+async function loadPrices(){
+  const d=await api("/prices");
+  const list=arr(d,"prices");
+  render("pricesRows",list.map(x=>`<tr><td>${esc(x.service)}</td><td><strong>${esc(x.amount)} FC</strong><br><small>Prix affiché mais bloqué si solde insuffisant</small></td><td>${esc(x.currency||"FC")}</td><td><button class="btn small red" data-action="price-delete" data-id="${esc(x.service)}">Supprimer</button></td></tr>`),4,"Aucun tarif - Ajoute tes prix");
+}
+
+async function loadDepositNumbers(){
+  try{
+    const d=await api("/deposit-numbers");
+    const list=arr(d,"numbers");
+    render("depositNumbersRows",list.map(x=>`<tr><td>${esc(x.operator)}</td><td><strong>${esc(x.number)}</strong></td><td>${esc(x.name||"—")}</td><td>${tag(x.status||"active")}</td><td><button class="btn small red" data-action="depnum-delete" data-id="${esc(x.id||x.number)}">Supprimer</button></td></tr>`),5,"Aucun numéro dépôt configuré");
+  }catch{
+    $("depositNumbersRows").innerHTML=`<tr><td colspan="5">Route /deposit-numbers à créer dans api/index.js - Ajoute DB.depositNumbers</td></tr>`;
+  }
+}
+
+async function loadLogs(){
+  const d=await api("/audit");
+  render("logsRows",arr(d,"logs").map(x=>`<tr><td>${esc((x.createdAt||"").slice(0,19))}</td><td>${esc(x.admin||"Admin 10092007")}</td><td>${esc(x.action)}</td><td>${esc(x.details||"—")}</td></tr>`),4,"Aucun log");
+  try{
+    const sup=await api("/support-messages");
+    const list=arr(sup,"messages");
+    render("supportRows",list.map(x=>`<tr><td>${esc((x.createdAt||"").slice(0,19))}</td><td>${esc(x.clientId||"Anonyme")}</td><td>${esc(x.message||"—")}</td></tr>`),3,"Aucun message support");
+  }catch{
+    $("supportRows").innerHTML=`<tr><td colspan="3">Pas de messages support</td></tr>`;
+  }
+}
+
+async function loadAll(){
+  $("serverStatus").textContent="Connexion backend...";
+  try{
+    await loadOverview();
+    await Promise.all([loadDeposits(),loadWithdrawals(),loadClients(),loadVip(),loadSmm(),loadApiAccess(),loadPrices(),loadDepositNumbers(),loadLogs()]);
+    toast("✅ Données actualisées • Backend connecté");
+  }catch(err){
+    $("serverStatus").textContent="Erreur";
+    $("serverStatus").className="tag no";
+    $("connectionText").textContent=err.message;
+    toast("❌ "+err.message);
+  }
+}
+
+$("refreshBtn").addEventListener("click",loadAll);
+$("testBtn").addEventListener("click",async()=>{
+  try{
+    const r=await fetch("/api/health"); const d=await r.json();
+    toast("API OK: "+d.status+" mode "+d.mode);
+    $("connectionText").textContent=JSON.stringify(d,null,2);
+  }catch(e){ toast("API HS: "+e.message); }
+});
+
+document.addEventListener("click",async e=>{
+  const b=e.target.closest("[data-action]"); if(!b) return;
+  const id=b.dataset.id, action=b.dataset.action;
+  if(!confirm("Confirmer action "+action+" pour "+id+"? Code admin 10092007")) return;
+  const routes={
+    "deposit-approve":()=>post("/deposits/"+encodeURIComponent(id)+"/approve",{}),
+    "deposit-reject":()=>post("/deposits/"+encodeURIComponent(id)+"/reject",{}),
+    "withdraw-approve":()=>post("/withdrawals/"+encodeURIComponent(id)+"/approve",{}),
+    "withdraw-reject":()=>post("/withdrawals/"+encodeURIComponent(id)+"/reject",{}),
+    "client-activate":()=>post("/clients/"+encodeURIComponent(id)+"/activate",{}),
+    "client-suspend":()=>post("/clients/"+encodeURIComponent(id)+"/suspend",{}),
+    "client-reset":()=>{ const np=prompt("Nouveau mot de passe pour "+id+"?", "JasonBusiness2026"); if(!np) return Promise.reject(new Error("Annulé")); return post("/clients/"+encodeURIComponent(id)+"/reset-password",{newPassword:np}); },
+    "vip-remove":()=>post("/vip/remove",{clientId:id}),
+    "smm-approve":()=>post("/smm-orders/"+encodeURIComponent(id)+"/approve",{}),
+    "smm-reject":()=>post("/smm-orders/"+encodeURIComponent(id)+"/reject",{}),
+    "api-revoke":()=>{ const [cid,svc]=id.split("|"); return post("/api-access/revoke",{clientId:cid,service:svc}); },
+    "price-delete":()=>post("/prices/delete",{service:id}),
+    "depnum-delete":()=>post("/deposit-numbers/delete",{id}),
+  };
+  if(!routes[action]) return;
+  try{ await routes[action](); toast("✅ "+action+" OK"); await loadAll(); }catch(err){ toast("❌ "+err.message); }
+});
+
+$("vipForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  try{
+    await post("/vip/set",{clientId:$("vipClient").value.trim(),level:$("vipLevel").value,durationDays:Number($("vipDuration").value)});
+    toast("✅ VIP enregistré - dépôt vérifié côté backend");
+    await loadAll();
+  }catch(err){ toast("❌ "+err.message); }
+});
+
+$("apiForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  try{
+    await post("/api-access/set",{clientId:$("apiClient").value.trim(),service:$("apiService").value,enabled:$("apiEnabled").value==="true"});
+    toast("✅ Accès API modifié"); await loadAll();
+  }catch(err){ toast("❌ "+err.message); }
+});
+
+$("priceForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  try{
+    await post("/prices/set",{service:$("priceService").value,amount:Number($("priceAmount").value),currency:$("priceCurrency").value});
+    toast("✅ Prix enregistré - affiché mais bloqué si solde insuffisant"); await loadAll();
+  }catch(err){ toast("❌ "+err.message); }
+});
+
+$("depositNumberForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  try{
+    await post("/deposit-numbers/set",{operator:$("depOperator").value,number:$("depNumber").value.trim(),name:$("depName").value.trim(),instructions:$("depInstructions").value.trim()});
+    toast("✅ Numéro dépôt enregistré"); $("depNumber").value=""; $("depName").value=""; $("depInstructions").value=""; await loadAll();
+  }catch(err){ toast("❌ "+err.message); }
+});
+
+$("quickDepositForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  try{
+    await post("/deposits/quick-approve",{clientId:$("quickClientId").value.trim(),amount:Number($("quickAmount").value),currency:"FC",method:"Admin Quick"});
+    toast("✅ Dépôt approuvé "+$("quickAmount").value+" FC pour "+$("quickClientId").value); await loadAll();
+  }catch(err){ toast("❌ "+err.message); }
+});
+
+$("resetPassForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  try{
+    await post("/clients/"+encodeURIComponent($("resetClientId").value.trim())+"/reset-password",{newPassword:$("resetNewPass").value});
+    toast("✅ Mot de passe réinitialisé pour "+$("resetClientId").value); await loadAll();
+  }catch(err){ toast("❌ "+err.message); }
+});
+
+$("settingsForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  try{
+    await post("/settings/update",{siteName:$("siteName").value.trim(),currency:$("currency").value,minDeposit:Number($("minDeposit").value),minWithdrawal:Number($("minWithdrawal").value),maintenance:$("maintenance").value==="true"});
+    toast("✅ Paramètres enregistrés - Min 2000 FC");
+  }catch(err){ toast("❌ "+err.message); }
+});
+
+$("clearLogsBtn").addEventListener("click",async()=>{
+  if(!confirm("Effacer tous les logs backend?")) return;
+  try{ await post("/audit/clear",{}); toast("✅ Logs effacés"); await loadAll(); }catch(err){ toast("❌ "+err.message); }
+});
+
+[["searchDeposits","depositsRows"],["searchWithdrawals","withdrawalsRows"],["searchClients","clientsRows"],["searchSmm","smmRows"]].forEach(([i,b])=>{
+  const el=$(i); if(!el) return;
+  el.addEventListener("input",()=>{ const q=el.value.toLowerCase(); $(b).querySelectorAll("tr").forEach(r=>{ r.style.display=r.textContent.toLowerCase().includes(q)?"":"none"; }); });
+});
+
+if(token) showAdmin();
+</script>
+</body>
+</html>

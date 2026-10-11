@@ -1,0 +1,153 @@
+<!DOCTYPE html> <html lang="fr"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <meta name="theme-color" content="#07111f"> <title>JASON BUSINESS — Mon portefeuille</title> <style> :root{ --bg:#07111f; --panel:#0d1b2d; --panel2:#11243a; --gold:#d8aa45; --gold2:#f4d58a; --text:#f4f7fb; --muted:#9eafc3; --line:#26384e; --green:#35d49a; --red:#ff7070; } *{box-sizing:border-box} body{ margin:0; font-family:Arial,Helvetica,sans-serif; color:var(--text); background:radial-gradient(circle at top,#152943,var(--bg) 65%); min-height:100vh; } button,a{font:inherit} button{cursor:pointer} header{ padding:15px; position:sticky;top:0;z-index:5; background:#081321ed; backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }.header-inner{ max-width:850px;margin:auto; display:flex;align-items:center;gap:12px; }.back{ text-decoration:none;color:var(--gold2); padding:10px 12px;border:1px solid var(--line); border-radius:11px;font-weight:bold; }.logo{ width:43px;height:43px;border-radius:13px; display:grid;place-items:center; background:linear-gradient(135deg,var(--gold2),#a87420); color:#111827;font-weight:1000;font-size:19px; }.brand{font-weight:900;letter-spacing:1px}.brand small{ display:block;color:var(--muted); font-size:11px;margin-top:4px; } main{max-width:850px;margin:auto;padding:23px 15px 45px}.heading{margin-bottom:20px} h1{font-size:27px;margin:0 0 8px}.muted{color:var(--muted);font-size:13px;line-height:1.6}.gold{color:var(--gold2)}.card{ background:linear-gradient(145deg,#102139,#0b1727); border:1px solid var(--line);border-radius:19px; padding:19px;margin-bottom:16px; box-shadow:0 12px 30px #0002; }.wallet{ position:relative;overflow:hidden; background:linear-gradient(135deg,#172d47,#0b1727 70%); border:1px solid #6d5b32;border-radius:22px; padding:23px;margin-bottom:17px; }.wallet:after{ content:"";position:absolute;width:180px;height:180px; border:1px solid #d8aa4526;border-radius:50%; right:-65px;top:-70px; box-shadow:0 0 0 22px #d8aa4508,0 0 0 45px #d8aa4505; }.wallet-top{ display:flex;justify-content:space-between; align-items:center;gap:10px; }.wallet-label{font-size:13px;color:#c4d0df}.wallet-icon{ width:43px;height:43px;border-radius:13px; display:grid;place-items:center; background:#d8aa451b;font-size:22px; }.balance{ font-size:32px;font-weight:900; color:var(--gold2);margin:20px 0 7px; overflow-wrap:anywhere; }.currency{font-size:14px;color:#d6dfeb}.wallet-bottom{ display:flex;justify-content:space-between; gap:10px;align-items:center;margin-top:20px; font-size:12px;color:var(--muted); }.pill{ border:1px solid #6d5b32;color:var(--gold2); padding:6px 9px;border-radius:20px; }.actions{ display:grid;grid-template-columns:repeat(3,1fr); gap:10px;margin:17px 0; }.action{ border:1px solid var(--line);border-radius:15px; background:#102139;color:white;text-decoration:none; display:flex;flex-direction:column;align-items:center; gap:9px;padding:15px 5px;text-align:center; transition:.2s; }.action:hover{border-color:var(--gold);transform:translateY(-2px)}.action-icon{ width:40px;height:40px;border-radius:13px; display:grid;place-items:center; background:#d8aa4518;color:var(--gold2);font-size:21px; }.action strong{font-size:12px}.stats{ display:grid;grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }.stat{ background:#091525;border:1px solid var(--line); padding:16px;border-radius:15px;min-width:0; }.stat-icon{font-size:19px;margin-bottom:10px}.stat-label{font-size:12px;color:var(--muted)}.stat-value{ font-size:18px;font-weight:800;margin-top:7px; overflow-wrap:anywhere; }.section-title{ display:flex;align-items:center;justify-content:space-between; gap:10px;font-size:16px;font-weight:800;margin:0 0 15px; }.refresh{ border:1px solid var(--line);border-radius:10px; background:#102139;color:var(--gold2); padding:8px 10px;font-size:12px; }.transaction{ display:flex;align-items:center;gap:12px; padding:13px 0;border-bottom:1px solid var(--line); }.transaction:last-child{border-bottom:0}.tx-icon{ width:42px;height:42px;border-radius:13px; display:grid;place-items:center;background:#152941; font-size:19px;flex-shrink:0; }.tx-info{flex:1;min-width:0}.tx-info strong{display:block;font-size:13px}.tx-info small{display:block;color:var(--muted);font-size:11px;margin-top:5px}.tx-amount{text-align:right;font-weight:800;font-size:13px}.tx-status{font-size:10px;color:var(--gold2);margin-top:5px}.empty{text-align:center;padding:23px 5px;color:var(--muted);font-size:13px}.notice{ border:1px solid #6d5b32;background:#d8aa450b; padding:14px;border-radius:13px; color:var(--muted);font-size:12px;line-height:1.7; } footer{text-align:center;color:var(--muted);font-size:12px;padding:22px} footer strong{color:var(--gold2)} @media(min-width:600px){ main{padding-top:30px}.wallet{padding:27px}.balance{font-size:38px}.stats{grid-template-columns:repeat(4,minmax(0,1fr))} } </style> </head> <body> <header> <div class="header-inner"> <a href="Dashboard.html" class="back">← Retour</a> <div class="logo">JB</div> <div class="brand"> JASON BUSINESS <small id="backendStatus">MON PORTEFEUILLE • MIN 2000 FC</small> </div> </div> </header> <main> <section class="heading"> <h1>Mon <span class="gold">portefeuille</span></h1> <div class="muted" id="welcomeMsg"> Consulte ton solde, tes dépôts et tes retraits depuis ton backend. </div> </section> <section class="wallet"> <div class="wallet-top"> <div class="wallet-label">Solde disponible</div> <div class="wallet-icon">💳</div> </div> <div class="balance" id="balance">Chargement...</div> <div class="currency">Franc congolais (FC) • Minimum dépôt 2000 FC</div> <div class="wallet-bottom"> <span id="accountId">Compte : chargement...</span> <span class="pill" id="walletStatus">Connexion backend...</span> </div> </section> <section class="actions"> <a class="action" href="depot.html"> <span class="action-icon">＋</span> <strong>Déposer</strong> </a> <a class="action" href="Retrait.html"> <span class="action-icon">↗</span> <strong>Retirer</strong> </a> <button class="action" type="button" onclick="refreshWallet()"> <span class="action-icon">↻</span> <strong>Actualiser</strong> </button> </section> <section class="card"> <h2 class="section-title">Résumé du portefeuille</h2> <div class="stats"> <div class="stat"> <div class="stat-icon">📥</div> <div class="stat-label">Dépôts validés</div> <div class="stat-value gold" id="totalDeposits">— FC</div> </div> <div class="stat"> <div class="stat-icon">📤</div> <div class="stat-label">Retraits validés</div> <div class="stat-value" id="totalWithdrawals">— FC</div> </div> <div class="stat"> <div class="stat-icon">⌛</div> <div class="stat-label">Dépôts en attente</div> <div class="stat-value" id="pendingDeposits">—</div> </div> <div class="stat"> <div class="stat-icon">🧾</div> <div class="stat-label">Retraits en attente</div> <div class="stat-value" id="pendingWithdrawals">—</div> </div> </div> </section> <section class="card"> <h2 class="section-title"> Dernières opérations <button class="refresh" onclick="refreshWallet()">Actualiser ↻</button> </h2> <div id="transactions"> <div class="empty"> Chargement depuis backend JASON BUSINESS... </div> </div> </section> <div class="notice"> <strong class="gold">Connecté à ton backend</strong><br> Cette page est maintenant connectée à <code>api/index.js</code> + <code>backend/firebase.js</code>. Ton solde réel vient du serveur. Les demandes de dépôt (minimum 2000 FC) et de retrait sont enregistrées dans DB.deposits / DB.withdrawals et attendent validation admin. </div> </main> <footer> <strong>JASON BUSINESS</strong><br> Créé par Jason Aloma 🇨🇩<br> Backend connecté • Minimum 2000 FC </footer>
+<script>
+const DEPOSIT_KEY = "jason_business_deposit_requests_v1";
+const WITHDRAW_KEY = "jason_business_withdraw_requests_v1";
+
+function getToken(){ return localStorage.getItem("jason_business_token") || sessionStorage.getItem("jason_business_token") || ""; }
+function getSession(){
+  try{
+    const raw = localStorage.getItem("jason_business_session") || sessionStorage.getItem("jason_business_session");
+    return raw? JSON.parse(raw) : null;
+  }catch{ return null; }
+}
+function readLocalList(key){
+  try{ const v=JSON.parse(localStorage.getItem(key)||"[]"); return Array.isArray(v)? v : []; }catch{ return []; }
+}
+function money(v){ return Number(v||0).toLocaleString("fr-FR") + " FC"; }
+function escapeHTML(v){ return String(v).replace(/[&<>"']/g, c=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function isApproved(item){
+  const s=String(item.status||"").toLowerCase();
+  return ["approved","confirmed","validated","validé","valide","approuvé","approuve"].includes(s);
+}
+
+async function refreshWallet(){
+  const token=getToken();
+  const session=getSession();
+  const balanceEl=document.getElementById("balance");
+  const accountEl=document.getElementById("accountId");
+  const statusEl=document.getElementById("walletStatus");
+  const backendStatus=document.getElementById("backendStatus");
+  const welcomeMsg=document.getElementById("welcomeMsg");
+
+  if(session){
+    accountEl.textContent="Compte : "+(session.email||"connecté");
+    welcomeMsg.textContent="Bienvenue "+(session.name||session.email)+" • Solde synchronisé avec backend JASON BUSINESS";
+  }
+
+  // Vérifie backend health
+  try{
+    const hRes=await fetch("/api/health");
+    const hData=await hRes.json();
+    if(hData.status==="ok"){
+      backendStatus.textContent="MON PORTEFEUILLE • Backend "+hData.mode+" • MIN 2000 FC";
+      backendStatus.style.color="#35d49a";
+    }
+  }catch{}
+
+  try{
+    // Essaie de récupérer depuis backend
+    const headers={};
+    if(token) headers["Authorization"]="Bearer "+token;
+
+    const [balRes, depRes, witRes] = await Promise.all([
+      fetch("/api/client/balance", { headers }).catch(()=>null),
+      fetch("/api/deposits/my", { headers }).catch(()=>null),
+      fetch("/api/withdrawals/my", { headers }).catch(()=>null)
+    ]);
+
+    if(balRes && balRes.ok){
+      const balData=await balRes.json();
+      const balance=balData.balance??0;
+      balanceEl.textContent=money(balance);
+      statusEl.textContent="✓ Connecté au serveur";
+      statusEl.style.color="#35d49a";
+      document.getElementById("totalDeposits").textContent=money(balData.totalDeposits||0);
+      document.getElementById("totalWithdrawals").textContent=money(balData.totalWithdrawals||0);
+      document.getElementById("pendingDeposits").textContent=balData.pendingDeposits??0;
+      document.getElementById("pendingWithdrawals").textContent=balData.pendingWithdrawals??0;
+
+      // Transactions depuis backend
+      let transactions=[];
+      if(depRes && depRes.ok){
+        const d=await depRes.json();
+        transactions=transactions.concat((d.deposits||[]).map(x=>({...x,kind:"deposit"})));
+      }
+      if(witRes && witRes.ok){
+        const w=await witRes.json();
+        transactions=transactions.concat((w.withdrawals||[]).map(x=>({...x,kind:"withdraw"})));
+      }
+      if(transactions.length){
+        renderTransactionsFromBackend(transactions);
+        return;
+      }
+    }
+    throw new Error("Backend offline ou pas de data");
+
+  }catch(err){
+    console.warn("Fallback local", err);
+    // Fallback local
+    statusEl.textContent="⚠ Mode local (backend offline)";
+    statusEl.style.color="#ff7070";
+    balanceEl.textContent="0 FC (local)";
+    const deposits=readLocalList(DEPOSIT_KEY);
+    const withdrawals=readLocalList(WITHDRAW_KEY);
+    const approvedDeposits=deposits.filter(isApproved);
+    const approvedWithdrawals=withdrawals.filter(isApproved);
+    const totalDeposits=approvedDeposits.reduce((s,i)=>s+Math.max(0,Number(i.amount)||0),0);
+    const totalWithdrawals=approvedWithdrawals.reduce((s,i)=>s+Math.max(0,Number(i.amount)||0),0);
+    document.getElementById("totalDeposits").textContent=money(totalDeposits);
+    document.getElementById("totalWithdrawals").textContent=money(totalWithdrawals);
+    document.getElementById("pendingDeposits").textContent=deposits.filter(i=>!isApproved(i)).length;
+    document.getElementById("pendingWithdrawals").textContent=withdrawals.filter(i=>!isApproved(i)).length;
+    renderTransactionsLocal(deposits, withdrawals);
+  }
+}
+
+function renderTransactionsFromBackend(list){
+  const box=document.getElementById("transactions");
+  if(!list.length){
+    box.innerHTML='<div class="empty">Aucune opération dans ton backend.</div>';
+    return;
+  }
+  list.sort((a,b)=> new Date(b.createdAt||b.date) - new Date(a.createdAt||a.date));
+  box.innerHTML=list.slice(0,10).map(item=>{
+    const deposit=item.kind==="deposit";
+    const icon=deposit?"📥":"📤";
+    const title=deposit?"Dépôt":"Retrait";
+    const sign=deposit?"+":"−";
+    const approved=isApproved(item);
+    return `<div class="transaction">
+      <div class="tx-icon">${icon}</div>
+      <div class="tx-info">
+        <strong>${title} ${approved?"✓":"⏳"}</strong>
+        <small>${escapeHTML(item.method||"Portefeuille mobile")}</small>
+        <small>${escapeHTML(item.createdAt? new Date(item.createdAt).toLocaleString("fr-FR") : item.date||"")}</small>
+        <div class="tx-status">${approved?"Validé":"En attente de vérification (min 2000 FC)"}</div>
+      </div>
+      <div class="tx-amount">${sign}${money(item.amount)}</div>
+    </div>`;
+  }).join("");
+}
+
+function renderTransactionsLocal(deposits, withdrawals){
+  const list=[...deposits.map(i=>({...i,kind:"deposit"})),...withdrawals.map(i=>({...i,kind:"withdraw"}))].sort((a,b)=> (Date.parse(b.date||"")||0)-(Date.parse(a.date||"")||0));
+  const box=document.getElementById("transactions");
+  if(!list.length){ box.innerHTML='<div class="empty">Aucune demande locale. Minimum dépôt 2000 FC.</div>'; return; }
+  box.innerHTML=list.slice(0,10).map(item=>{
+    const deposit=item.kind==="deposit";
+    return `<div class="transaction">
+      <div class="tx-icon">${deposit?"📥":"📤"}</div>
+      <div class="tx-info">
+        <strong>${deposit?"Demande de dépôt":"Demande de retrait"}</strong>
+        <small>${escapeHTML(item.method||"Portefeuille mobile")}</small>
+        <small>${escapeHTML(item.date||"")}</small>
+        <div class="tx-status">${isApproved(item)?"Validé (local)":"En attente (local - min 2000 FC)"}</div>
+      </div>
+      <div class="tx-amount">${deposit?"+":"−"}${money(item.amount)}</div>
+    </div>`;
+  }).join("");
+}
+
+// Auto load
+refreshWallet();
+</script> </body> </html>

@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/index.js", "use": "@vercel/node" },
+    { "src": "public/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/index.js" },
+    { "src": "/public/(.*)", "dest": "/public/$1" },
+    { "src": "/Admin.html", "dest": "/public/Admin.html" },
+    { "src": "/Smm.html", "dest": "/public/Smm.html" },
+    { "src": "/VIP.html", "dest": "/public/VIP.html" },
+    { "src": "/Support.html", "dest": "/public/Support.html" },
+    { "src": "/Dashboard.html", "dest": "/public/Dashboard.html" },
+    { "src": "/(.*)", "dest": "/public/$1" }
+  ],
+  "env": {
+    "ADMIN_CODE": "10092007"
+  }
+}

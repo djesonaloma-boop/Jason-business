@@ -1,0 +1,266 @@
+<!DOCTYPE html> <html lang="fr"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width,initial-scale=1"> <meta name="theme-color" content="#07111f"> <title>JASON BUSINESS — SMM PANEL</title> <style> :root{ --bg:#07111f; --panel:#0d1b2d; --panel2:#142740; --gold:#d8aa45; --gold2:#f4d58a; --text:#f4f7fc; --muted:#9aabc0; --border:rgba(216,170,69,.24); --green:#37d69a; } *{box-sizing:border-box} body{ margin:0;background:var(--bg);color:var(--text); font-family:Arial,Helvetica,sans-serif; } button,input,select{font:inherit} button,a{cursor:pointer} a{color:inherit;text-decoration:none} button:focus-visible,input:focus-visible,select:focus-visible{ outline:2px solid var(--gold2);outline-offset:2px; }.header{ position:sticky;top:0;z-index:20; display:flex;align-items:center;gap:11px; padding:12px;background:#07111ff5; border-bottom:1px solid var(--border); backdrop-filter:blur(14px); }.back{ width:41px;height:41px;display:grid;place-items:center; border:1px solid var(--border);border-radius:12px; background:var(--panel2);color:var(--gold2);font-size:22px; }.brand-logo{ width:42px;height:42px;display:grid;place-items:center; border:1px solid var(--gold);border-radius:13px; color:var(--gold2);font-weight:900; background:linear-gradient(135deg,#172d47,#07111f); }.brand{flex:1;min-width:0}.brand h1{margin:0;font-size:14px}.brand p{margin:5px 0 0;font-size:10px;color:var(--muted)}.container{max-width:1000px;margin:auto;padding:16px 13px 35px}.hero{ padding:24px 18px;border:1px solid var(--border); border-radius:22px;position:relative;overflow:hidden; background:linear-gradient(135deg,#183552,#0d1b2d 78%); }.hero:after{ content:"SMM";position:absolute;right:-5px;bottom:-10px; font-size:76px;font-weight:900;color:var(--gold);opacity:.07; }.eyebrow{font-size:10px;letter-spacing:1.5px;color:var(--gold2);font-weight:bold}.hero h2{font-size:28px;line-height:1.25;margin:15px 0 9px}.hero p{font-size:12px;line-height:1.8;color:var(--muted);max-width:520px}.creator{font-size:11px;color:var(--gold2);margin-top:13px}.section-title{ display:flex;align-items:center;justify-content:space-between; gap:10px;margin:24px 1px 13px; }.section-title h3{font-size:16px;margin:0}.section-title small{font-size:10px;color:var(--muted)}.search{ width:100%;padding:14px;border:1px solid var(--border); border-radius:13px;background:var(--panel);color:var(--text); }.platform-grid{ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px; }.platform{ min-width:0;min-height:103px;padding:12px 4px; display:flex;flex-direction:column;align-items:center; justify-content:center;gap:8px; border:1px solid var(--border);border-radius:15px; background:linear-gradient(145deg,#11243a,#0b1828); color:var(--text);transition:.2s; }.platform:active{transform:scale(.96)}.platform.active{ border-color:var(--gold); background:linear-gradient(145deg,#24364d,#122239); box-shadow:inset 0 0 0 1px #d8aa4530; }.platform img{width:32px;height:32px;object-fit:contain}.platform strong{font-size:11px;text-align:center}.platform.mark{font-size:9px;min-height:10px;color:var(--gold2)}.panel{ display:none;margin-top:19px;padding:16px 13px; border:1px solid var(--border);border-radius:19px; background:linear-gradient(145deg,#11243a,#0b1727); animation:appear.22s ease; }.panel.show{display:block}.panel-heading{ display:flex;align-items:center;gap:12px; padding-bottom:15px;border-bottom:1px solid var(--border); }.panel-heading img{width:42px;height:42px;object-fit:contain}.panel-heading h3{font-size:17px;margin:0}.panel-heading p{font-size:10px;color:var(--muted);margin:5px 0 0}.close{ margin-left:auto;padding:9px 11px;border:1px solid var(--border); border-radius:10px;background:var(--panel);color:var(--gold2); }.form-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:17px}.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:8px}.field input,.field select{ width:100%;padding:13px 12px;border:1px solid var(--border); border-radius:11px;background:#07111f;color:var(--text); font-size:13px; }.field select option{background:#0d1b2d}.hint{font-size:10px;line-height:1.7;color:var(--muted);margin-top:7px}.quantity-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.price-card{ margin-top:17px;padding:15px;border:1px solid var(--border); border-radius:14px;background:#07111f; }.price-line{display:flex;justify-content:space-between;gap:10px;margin:10px 0}.price-line span{font-size:11px;color:var(--muted)}.price-line strong{font-size:12px;text-align:right;overflow-wrap:anywhere}.total-line{padding-top:13px;margin-top:13px;border-top:1px solid var(--border)}.total-line span{color:var(--gold2);font-weight:bold}.total-line strong{font-size:23px;color:var(--gold2)}.submit{ width:100%;padding:14px;margin-top:15px;border:0; border-radius:12px;background:linear-gradient(135deg,#f4d58a,#d8aa45); color:#07111f;font-weight:900;font-size:13px; }.submit:disabled{opacity:.6;cursor:wait}.secondary{ width:100%;padding:12px;margin-top:9px; border:1px solid var(--border);border-radius:11px; background:transparent;color:var(--muted);font-size:12px; }.history-item{padding:13px 0;border-bottom:1px solid var(--border)}.history-item:last-child{border-bottom:0}.history-item strong{font-size:12px}.history-item p{font-size:10px;line-height:1.6;color:var(--muted);overflow-wrap:anywhere}.status{color:var(--gold2);font-size:10px}.info{ margin-top:19px;padding:14px;border:1px solid var(--border); border-radius:14px;background:var(--panel); color:var(--muted);font-size:11px;line-height:1.8; }.info strong{color:var(--gold2)}.footer{text-align:center;padding:25px 5px;color:var(--muted);font-size:10px;line-height:1.9}.toast{ position:fixed;bottom:20px;left:50%;transform:translateX(-50%); display:none;z-index:100;width:max-content;max-width:90%; padding:13px 16px;border-radius:12px; background:#172d47;border:1px solid var(--border); color:white;font-size:12px;text-align:center; }.toast.show{display:block} @keyframes appear{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}} @media(min-width:600px){.container{padding:25px}.hero{padding:32px}.hero h2{font-size:34px}.platform-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.form-grid{grid-template-columns:1fr 1fr}.field.full{grid-column:1/-1} } @media(min-width:850px){.platform-grid{grid-template-columns:repeat(6,minmax(0,1fr))} } @media(max-width:340px){.platform-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.quantity-row{grid-template-columns:1fr} } @media(prefers-reduced-motion:reduce){ *,*:before,*:after{animation:none!important;transition:none!important} } </style> </head> <body> <header class="header"> <a href="Dashboard.html" class="back" aria-label="Retour">←</a> <div class="brand-logo">JB</div> <div class="brand"> <h1>JASON BUSINESS</h1> <p id="backendStatus">Panel marketing des réseaux sociaux</p> </div> </header> <main class="container"> <section class="hero"> <div class="eyebrow">✦ JASON BUSINESS SMM</div> <h2>Développe ta<br>présence sociale.</h2> <p> Choisis un réseau, sélectionne ton service, colle le lien de ta publication et saisis la quantité. Le prix estimé se calcule automatiquement depuis ton backend <code>api/index.js</code> + <code>backend/firebase.js</code>. </p> <div class="creator" id="balanceInfo">Créé par Jason Aloma 🇨🇩 · Chargement solde...</div> </section> <div class="section-title"> <h3>🔎 Rechercher un réseau</h3> <small id="platformCount"></small> </div> <input class="search" id="searchPlatform" type="search" placeholder="Facebook, TikTok, YouTube..." autocomplete="off"> <div class="section-title"> <h3>📱 Choisis une plateforme</h3> <small>Appuie sur un logo</small> </div> <section class="platform-grid" id="platformGrid"></section> <section class="panel" id="orderPanel"> <div class="panel-heading"> <img id="panelLogo" alt=""> <div> <h3 id="panelPlatform">Plateforme</h3> <p>Configure ta demande (backend connecté)</p> </div> <button class="close" onclick="closePanel()">✕</button> </div> <div class="form-grid"> <div class="field full"> <label for="serviceSelect">1. Type de service (prix depuis backend)</label> <select id="serviceSelect"></select> </div> <div class="field full"> <label for="targetLink">2. Lien du profil ou de la publication</label> <input id="targetLink" type="url" placeholder="https://..."> <div class="hint">Colle le lien public exact. Ne partage jamais ton mot de passe.</div> </div> <div class="field full"> <label for="quantity">3. Quantité à commander</label> <div class="quantity-row"> <input id="quantity" type="number" min="100" max="1000000" step="1" value="100" inputmode="numeric"> <select id="quickQuantity" aria-label="Choisir une quantité rapide"> <option value="100">100 unités</option> <option value="250">250 unités</option> <option value="500">500 unités</option> <option value="1000">1 000 unités</option> <option value="2500">2 500 unités</option> <option value="5000">5 000 unités</option> <option value="10000">10 000 unités</option> </select> </div> <div class="hint">Quantité minimale : 100. Maximum : 1 000 000.</div> </div> </div> <div class="price-card"> <div class="price-line"> <span>Service</span><strong id="priceService">—</strong> </div> <div class="price-line"> <span>Tarif pour 100 unités</span><strong id="priceRate">—</strong> </div> <div class="price-line"> <span>Quantité</span><strong id="priceQuantity">100</strong> </div> <div class="price-line total-line"> <span>PRIX ESTIMÉ</span><strong id="priceTotal">—</strong> </div> <div class="hint" id="priceHint">Prix depuis ton backend api/index.js • Solde vérifié avant commande</div> </div> <button class="submit" id="submitOrder" onclick="prepareOrder()">Préparer ma commande →</button> <button class="secondary" onclick="closePanel()">Annuler</button> </section> <div class="section-title"> <h3>📋 Mes demandes</h3> <small id="historyCount">0 demande</small> </div> <section class="panel show" id="historyPanel"> <div id="historyList"><p class="hint">Chargement depuis backend...</p></div> <button class="secondary" onclick="clearHistory()">Effacer l'historique local</button> </section> <section class="info"> <strong>À savoir • Connecté à backend/firebase.js</strong><br> Les logos sont chargés depuis Simple Icons. Les prix viennent de ton backend <code>/api/public/prices</code> ou <code>/api/admin/prices</code>. Les commandes sont enregistrées dans <code>DB.smm_orders</code> dans <code>api/index.js</code>. Ton solde est vérifié côté serveur avant validation. </section> <footer class="footer"> <strong style="color:#f4d58a">JASON BUSINESS 🇨🇩</strong><br> Créé par Jason Aloma · Kinshasa<br> © <span id="year"></span> Tous droits réservés. • Backend connecté </footer> </main> <div class="toast" id="toast"></div>
+<script>
+"use strict";
+function getToken(){ return localStorage.getItem("jason_business_token") || sessionStorage.getItem("jason_business_token") || ""; }
+const platforms=[
+ {id:"facebook",name:"Facebook",icon:"https://cdn.simpleicons.org/facebook/0866FF"},
+ {id:"youtube",name:"YouTube",icon:"https://cdn.simpleicons.org/youtube/FF0000"},
+ {id:"tiktok",name:"TikTok",icon:"https://cdn.simpleicons.org/tiktok/FFFFFF"},
+ {id:"whatsapp",name:"WhatsApp",icon:"https://cdn.simpleicons.org/whatsapp/25D366"},
+ {id:"instagram",name:"Instagram",icon:"https://cdn.simpleicons.org/instagram/E4405F"},
+ {id:"telegram",name:"Telegram",icon:"https://cdn.simpleicons.org/telegram/26A5E4"},
+ {id:"x",name:"X / Twitter",icon:"https://cdn.simpleicons.org/x/FFFFFF"},
+ {id:"snapchat",name:"Snapchat",icon:"https://cdn.simpleicons.org/snapchat/FFFC00"},
+ {id:"linkedin",name:"LinkedIn",icon:"https://cdn.simpleicons.org/linkedin/0A66C2"},
+ {id:"pinterest",name:"Pinterest",icon:"https://cdn.simpleicons.org/pinterest/BD081C"},
+ {id:"twitch",name:"Twitch",icon:"https://cdn.simpleicons.org/twitch/9146FF"},
+ {id:"reddit",name:"Reddit",icon:"https://cdn.simpleicons.org/reddit/FF4500"},
+ {id:"discord",name:"Discord",icon:"https://cdn.simpleicons.org/discord/5865F2"},
+ {id:"threads",name:"Threads",icon:"https://cdn.simpleicons.org/threads/FFFFFF"},
+ {id:"spotify",name:"Spotify",icon:"https://cdn.simpleicons.org/spotify/1DB954"},
+ {id:"soundcloud",name:"SoundCloud",icon:"https://cdn.simpleicons.org/soundcloud/FF5500"}
+];
+const localFallbackServices=[
+ {p:"facebook",name:"Abonnés / followers",rate:5000},
+ {p:"facebook",name:"Likes de publications",rate:2500},
+ {p:"facebook",name:"Vues de vidéos",rate:3000},
+ {p:"facebook",name:"Commentaires",rate:4000},
+ {p:"facebook",name:"Partages",rate:3500},
+ {p:"youtube",name:"Abonnés de chaîne",rate:8000},
+ {p:"youtube",name:"Vues de vidéos",rate:5000},
+ {p:"tiktok",name:"Abonnés",rate:5000},
+ {p:"tiktok",name:"Likes de vidéos",rate:2500},
+ {p:"instagram",name:"Abonnés",rate:5000},
+ {p:"instagram",name:"Likes de publications",rate:2500},
+ {p:"telegram",name:"Abonnés de chaîne",rate:4500},
+ {p:"x",name:"Abonnés",rate:5500},
+ {p:"whatsapp",name:"Promotion de chaîne",rate:4000}
+];
+let services=localFallbackServices;
+let selectedPlatform=null;
+let selectedService=null;
+const platformMap=Object.fromEntries(platforms.map(p=>[p.id,p]));
+const money=n=>new Intl.NumberFormat("fr-FR",{maximumFractionDigits:0}).format(n)+" FC";
+
+// --- CHARGE PRIX ET SOLDE DEPUIS BACKEND api/index.js + backend/firebase.js ---
+async function loadBackendData(){
+  const backendStatus=document.getElementById("backendStatus");
+  const balanceInfo=document.getElementById("balanceInfo");
+  const priceHint=document.getElementById("priceHint");
+  try{
+    const healthRes=await fetch("/api/health");
+    const health=await healthRes.json();
+    if(health.status==="ok"){
+      backendStatus.textContent="Panel SMM • Backend "+health.mode+" connecté • Min 100";
+      // Charge prix depuis backend
+      try{
+        const token=getToken();
+        const priceRes=await fetch("/api/public/prices", { headers: token? {"Authorization":"Bearer "+token}:{} });
+        if(priceRes.ok){
+          const priceData=await priceRes.json();
+          if(Array.isArray(priceData.prices) && priceData.prices.length){
+            // Convertit format backend {platform, name, rate} ou {service}
+            services=priceData.prices.map(pr=>({
+              p:(pr.platform||pr.p||"facebook").toLowerCase(),
+              name: pr.name||pr.service||"Service",
+              rate: Number(pr.rate||pr.price||5000)
+            }));
+            priceHint.textContent="Prix depuis backend/api/index.js • "+services.length+" services • Backend "+health.mode;
+          }
+        }
+      }catch{}
+
+      // Charge solde
+      try{
+        const token=getToken();
+        if(token){
+          const balRes=await fetch("/api/client/balance", { headers: {"Authorization":"Bearer "+token} });
+          if(balRes.ok){
+            const balData=await balRes.json();
+            balanceInfo.textContent="Solde: "+money(balData.balance||0)+" • Créé par Jason Aloma 🇨🇩 • Min commande 100";
+          }
+        }
+      }catch{}
+
+      // Charge historique backend
+      loadHistoryFromBackend();
+    }
+  }catch(err){
+    console.warn("Backend offline, fallback local", err);
+    backendStatus.textContent="Panel SMM • Mode local (backend offline)";
+    priceHint.textContent="Prix locaux (backend offline) • Seront sync avec api/index.js";
+    loadHistoryFromBackend();
+  }
+}
+
+function renderPlatforms(){
+  const grid=document.getElementById("platformGrid");
+  const query=document.getElementById("searchPlatform").value.trim().toLowerCase();
+  grid.replaceChildren();
+  const visible=platforms.filter(p=>p.name.toLowerCase().includes(query));
+  document.getElementById("platformCount").textContent=visible.length+" réseaux • Backend connecté";
+  visible.forEach(p=>{
+    const button=document.createElement("button");
+    button.type="button";
+    button.className="platform"+(selectedPlatform===p.id?" active":"");
+    button.setAttribute("aria-label","Ouvrir le panel "+p.name);
+    const img=document.createElement("img"); img.src=p.icon; img.alt=p.name; img.loading="lazy";
+    img.onerror=()=>{img.style.display="none"; emoji.textContent="🌐"};
+    const emoji=document.createElement("span"); emoji.style.display="none"; emoji.textContent="🌐";
+    const name=document.createElement("strong"); name.textContent=p.name;
+    const mark=document.createElement("span"); mark.className="mark"; mark.textContent=selectedPlatform===p.id?"● Sélectionné":"Ouvrir";
+    button.append(img,emoji,name,mark);
+    button.onclick=()=>openPlatform(p.id);
+    grid.appendChild(button);
+  });
+}
+function openPlatform(id){
+  selectedPlatform=id;
+  const p=platformMap[id];
+  document.getElementById("panelLogo").src=p.icon;
+  document.getElementById("panelPlatform").textContent=p.name+" — Panel SMM";
+  document.getElementById("orderPanel").classList.add("show");
+  renderPlatforms();
+  renderServiceOptions();
+  document.getElementById("quantity").value="100";
+  updatePrice();
+  document.getElementById("orderPanel").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function renderServiceOptions(){
+  const select=document.getElementById("serviceSelect");
+  select.replaceChildren();
+  const options=services.filter(s=>s.p===selectedPlatform);
+  options.forEach((s,index)=>{
+    const option=document.createElement("option");
+    option.value=String(index);
+    option.textContent=s.name+" — "+money(s.rate)+"/100";
+    select.appendChild(option);
+  });
+  if(!options.length){
+    const option=document.createElement("option"); option.value=""; option.textContent="Aucun service configuré pour cette plateforme dans backend"; select.appendChild(option); selectedService=null;
+  }else{ selectedService=options[0]; }
+  select.onchange=()=>{ selectedService=options[Number(select.value)]; updatePrice(); };
+}
+function closePanel(){ document.getElementById("orderPanel").classList.remove("show"); }
+function updatePrice(){
+  const raw=Number(document.getElementById("quantity").value);
+  const quantity=Number.isFinite(raw)?Math.max(100,Math.min(1000000,Math.floor(raw))):100;
+  document.getElementById("priceQuantity").textContent=new Intl.NumberFormat("fr-FR").format(quantity);
+  if(!selectedService){
+    document.getElementById("priceService").textContent="—"; document.getElementById("priceRate").textContent="—"; document.getElementById("priceTotal").textContent="—"; return;
+  }
+  document.getElementById("priceService").textContent=selectedService.name;
+  document.getElementById("priceRate").textContent=money(selectedService.rate);
+  document.getElementById("priceTotal").textContent=money(selectedService.rate*quantity/100);
+}
+document.getElementById("quantity").addEventListener("input",updatePrice);
+document.getElementById("quickQuantity").addEventListener("change",function(){ document.getElementById("quantity").value=this.value; updatePrice(); });
+document.getElementById("searchPlatform").addEventListener("input",renderPlatforms);
+function showToast(m){ const toast=document.getElementById("toast"); toast.textContent=m; toast.classList.add("show"); clearTimeout(window.toastTimer); window.toastTimer=setTimeout(()=>toast.classList.remove("show"),3500); }
+function getLocalHistory(){ try{ const data=JSON.parse(localStorage.getItem("jason_business_smm_requests_v2")||"[]"); return Array.isArray(data)?data:[]; }catch(e){return []} }
+function saveLocalHistory(data){ localStorage.setItem("jason_business_smm_requests_v2",JSON.stringify(data)); }
+
+async function prepareOrder(){
+  if(!selectedService||!selectedPlatform){ showToast("Choisis d'abord un réseau et un service."); return; }
+  const url=document.getElementById("targetLink").value.trim();
+  const quantity=Number(document.getElementById("quantity").value);
+  if(!/^https?:\/\/\S+$/i.test(url)){ showToast("Entre un lien public valide commençant par https://"); return; }
+  if(!Number.isInteger(quantity)||quantity<100||quantity>1000000){ showToast("Quantité entre 100 et 1 000 000."); return; }
+
+  const submitBtn=document.getElementById("submitOrder");
+  submitBtn.disabled=true;
+  submitBtn.textContent="⏳ Enregistrement dans backend...";
+
+  const requestPayload={
+    reference:"JB-SMM-"+Date.now(),
+    platform:platformMap[selectedPlatform].name,
+    platformId:selectedPlatform,
+    service:selectedService.name,
+    url:url,
+    quantity:quantity,
+    estimatedPrice:selectedService.rate*quantity/100,
+    rate:selectedService.rate,
+    currency:"FC",
+    status:"pending",
+    createdAt:new Date().toISOString()
+  };
+
+  try{
+    const token=getToken();
+    const res=await fetch("/api/smm/order", {
+      method:"POST",
+      headers:{ "Content-Type":"application/json",...(token? {"Authorization":"Bearer "+token}:{}) },
+      body:JSON.stringify(requestPayload)
+    });
+    const data=await res.json();
+    if(!res.ok) throw new Error(data.message||"Erreur backend");
+
+    showToast("✅ Commande enregistrée dans backend JASON BUSINESS • En attente admin");
+    // Sauvegarde locale aussi
+    const history=getLocalHistory(); history.unshift(requestPayload); saveLocalHistory(history);
+
+  }catch(err){
+    console.warn("Backend offline, fallback local", err);
+    const history=getLocalHistory(); history.unshift(requestPayload); saveLocalHistory(history);
+    showToast("✅ Commande enregistrée en local (backend offline) • Sera sync");
+  }
+
+  renderHistory();
+  closePanel();
+  submitBtn.disabled=false;
+  submitBtn.textContent="Préparer ma commande →";
+  document.getElementById("targetLink").value="";
+}
+
+async function loadHistoryFromBackend(){
+  const list=document.getElementById("historyList");
+  try{
+    const token=getToken();
+    const res=await fetch("/api/smm/my-orders", { headers: token? {"Authorization":"Bearer "+token}:{} });
+    if(res.ok){
+      const data=await res.json();
+      const backendOrders=data.orders||[];
+      if(backendOrders.length){
+        renderHistoryList(backendOrders);
+        document.getElementById("historyCount").textContent=backendOrders.length+" commandes (backend)";
+        return;
+      }
+    }
+    throw new Error();
+  }catch{
+    renderHistory();
+  }
+}
+
+function renderHistoryList(orders){
+  const list=document.getElementById("historyList");
+  list.replaceChildren();
+  if(!orders.length){
+    const p=document.createElement("p"); p.className="hint"; p.textContent="Aucune commande dans backend."; list.appendChild(p); return;
+  }
+  orders.slice().reverse().slice(0,20).forEach(item=>{
+    const card=document.createElement("div"); card.className="history-item";
+    const title=document.createElement("strong"); title.textContent=(item.platform||"")+" — "+(item.service||"");
+    const details=document.createElement("p");
+    details.textContent="Réf: "+(item.reference||item.id||"")+"\nQuantité: "+item.quantity+"\nPrix: "+money(item.estimatedPrice||item.totalPrice||0)+"\nLien: "+(item.url||"")+"\nDate: "+(item.createdAt? new Date(item.createdAt).toLocaleString("fr-FR"):"");
+    details.style.whiteSpace="pre-line";
+    const status=document.createElement("div"); status.className="status"; status.textContent="● "+(item.status||"pending");
+    card.append(title,details,status); list.appendChild(card);
+  });
+}
+
+function renderHistory(){
+  const local=getLocalHistory();
+  document.getElementById("historyCount").textContent=local.length+" demande"+(local.length===1?"":"s")+" (local)";
+  renderHistoryList(local);
+}
+function clearHistory(){
+  if(!confirm("Effacer l'historique local?")) return;
+  try{ localStorage.removeItem("jason_business_smm_requests_v2"); renderHistory(); showToast("Historique local effacé."); }catch{ showToast("Impossible d'effacer"); }
+}
+document.getElementById("year").textContent=new Date().getFullYear();
+renderPlatforms();
+loadBackendData();
+</script>
+</body>
+</html>
