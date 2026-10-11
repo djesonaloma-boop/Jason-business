@@ -1,24 +1,17 @@
 {
   "name": "jason-business",
   "version": "1.0.0",
-  "description": "JASON BUSINESS - SMM Panel + VIP + API Center - Kinshasa RDC - Admin 10092007 - Min 2000 FC",
+  "description": "Jason Business - Plateforme VIP SMM",
   "main": "api/index.js",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
-    "start": "node api/index.js",
-    "dev": "nodemon api/index.js",
-    "vercel-build": "echo 'Build JASON BUSINESS'"
+    "start": "node api/index.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.1"
-  },
-  "engines": {
-    "node": "18.x"
-  },
-  "keywords": ["smm", "jason-business", "congo", "vip", "api"],
-  "author": "Jason Aloma 🇨🇩",
-  "license": "MIT"
+    "express": "^4.19.2",
+    "cors": "^2.8.5",
+    "fs-extra": "^11.2.0"
+  }
 }
