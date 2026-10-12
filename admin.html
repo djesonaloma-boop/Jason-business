@@ -3,443 +3,966 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#050914">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#050a14">
 <title>JASON BUSINESS — Administration</title>
 
 <style>
 :root{
- --bg:#050914;--panel:#0b1220;--border:rgba(255,255,255,.08);
- --text:#f5f7fb;--muted:#8e9aad;--blue:#3b82f6;
- --green:#22c55e;--red:#ef4444;--orange:#f97316;--purple:#a855f7;
+  --bg:#050a14;
+  --panel:#0a1424;
+  --panel2:#0e1c30;
+  --blue:#00cfff;
+  --gold:#d8aa45;
+  --text:#f1f5fc;
+  --muted:#91a2b9;
+  --border:#1b3048;
+  --green:#35d39a;
+  --red:#ff647c;
+  --orange:#ffbf69;
 }
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Inter,sans-serif}
-body{min-height:100vh;background:radial-gradient(circle at top,#101d35,var(--bg) 48%,#02040a);color:var(--text)}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+}
 button,input,select{font:inherit}
 button{cursor:pointer}
-#login{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;background:#030711}
-.login-box{width:100%;max-width:390px;background:var(--panel);padding:28px;border:1px solid var(--border);border-radius:22px}
-.logo{text-align:center;font-size:25px;font-weight:900;margin-bottom:8px}
-.logo span{color:#4da3ff}
-.subtitle{text-align:center;color:var(--muted);font-size:12px;margin-bottom:24px}
-.input{width:100%;background:#070d18;border:1px solid var(--border);border-radius:12px;color:white;padding:13px;margin-bottom:12px;outline:none}
-.input:focus{border-color:var(--blue)}
-.primary{width:100%;padding:14px;background:var(--blue);border:0;border-radius:12px;color:white;font-weight:bold}
-.error{font-size:12px;color:#ff7777;text-align:center;margin-top:10px}
-#app{display:none}
-.header{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:15px 18px;background:#050914f2;border-bottom:1px solid var(--border)}
-.brand{font-weight:900;font-size:18px}.brand span{color:#4da3ff}
-.header-right{display:flex;gap:10px;align-items:center}
-.logout{padding:9px 12px;color:#ff7777;background:#ef444414;border:1px solid #ef44444a;border-radius:10px}
-.layout{display:flex;min-height:calc(100vh - 65px)}
-.sidebar{width:235px;flex-shrink:0;padding:13px;background:#070c17;border-right:1px solid var(--border)}
-.menu{display:block;width:100%;text-align:left;border:0;border-radius:11px;background:transparent;color:#a8b3c5;padding:13px;margin-bottom:5px;font-size:13px;font-weight:bold}
-.menu.active{background:#3b82f626;color:white}
-.content{flex:1;min-width:0;padding:20px}
-.page{display:none}.page.active{display:block}
-.title{font-size:25px;font-weight:900;margin-bottom:7px}
-.desc{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px}
-.stat,.panel,.price-card{background:linear-gradient(145deg,#101a2bf5,#080e1af5);border:1px solid var(--border);border-radius:16px}
-.stat{padding:17px;min-height:100px}
-.stat-label{font-size:11px;color:var(--muted)}
-.stat-value{font-size:22px;font-weight:900;margin-top:10px;overflow-wrap:anywhere}
-.panel{overflow:hidden;margin-bottom:18px}
-.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:15px;border-bottom:1px solid var(--border)}
+.hidden{display:none!important}
+.muted{color:var(--muted)}
+.small{font-size:12px}
+.gold{color:var(--gold)}
+.blue{color:var(--blue)}
+.danger{color:var(--red)}
+.success{color:var(--green)}
+button:disabled{opacity:.5;cursor:not-allowed}
+input,select{
+  width:100%;padding:13px;border-radius:10px;
+  color:var(--text);background:#07111f;
+  border:1px solid var(--border);outline:none;
+}
+input:focus,select:focus{border-color:var(--blue)}
+button{
+  border:0;border-radius:10px;padding:12px 15px;
+  color:white;background:var(--panel2);font-weight:700;
+}
+button.primary{
+  background:linear-gradient(135deg,#008fbd,#00cfff);
+  color:#00111a;
+}
+button.goldbtn{
+  background:linear-gradient(135deg,#b78528,#f0cc73);
+  color:#201400;
+}
+button.dangerbtn{
+  background:#351522;color:#ff9aac;
+  border:1px solid #63283a;
+}
+button.ghost{border:1px solid var(--border);background:transparent}
+button:hover{filter:brightness(1.1)}
+#loginScreen{
+  min-height:100vh;display:flex;align-items:center;
+  justify-content:center;padding:20px;
+  background:
+    radial-gradient(ellipse at top,#102b46 0,transparent 55%),
+    var(--bg);
+}
+.login-card{
+  width:100%;max-width:410px;background:rgba(10,20,36,.97);
+  border:1px solid #24405b;border-radius:22px;
+  padding:27px;box-shadow:0 20px 70px #0008;
+}
+.logo{
+  width:60px;height:60px;border-radius:18px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,#007ca5,#00d4ff);
+  color:#00121c;font-weight:900;font-size:23px;
+  margin-bottom:18px;
+}
+.login-card h1{font-size:22px;margin:0 0 7px}
+.login-card p{line-height:1.6}
+.field{margin:18px 0}
+.field label{display:block;margin-bottom:8px;font-size:13px;color:#bdc9d9}
+.full{width:100%}
+.error{
+  color:#ff9eae;background:#311421;border:1px solid #663044;
+  border-radius:10px;padding:12px;margin-top:14px;
+  font-size:13px;line-height:1.5;
+}
+#app{min-height:100vh}
+.topbar{
+  height:67px;display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:0 20px;background:#081322;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:20;
+}
+.brand{display:flex;align-items:center;gap:11px;font-weight:900}
+.brand-icon{
+  width:39px;height:39px;border-radius:12px;
+  display:grid;place-items:center;background:#092b40;
+  border:1px solid #12617d;color:var(--blue);
+}
+.brand small{display:block;font-size:10px;color:var(--muted);margin-top:4px}
+.top-actions{display:flex;align-items:center;gap:8px}
+.layout{display:flex;min-height:calc(100vh - 67px)}
+.sidebar{
+  width:235px;flex-shrink:0;padding:18px 12px;
+  border-right:1px solid var(--border);background:#07111e;
+}
+.side-label{
+  color:#647993;font-size:10px;font-weight:800;
+  letter-spacing:1.5px;padding:15px 10px 9px;
+}
+.nav{
+  display:flex;align-items:center;gap:10px;width:100%;
+  padding:12px;border-radius:10px;text-align:left;
+  background:transparent;color:#b9c8dc;margin-bottom:4px;
+}
+.nav.active{
+  color:var(--blue);background:#0b2739;
+  border:1px solid #12435d;
+}
+.nav .ico{width:22px;text-align:center}
+.main{flex:1;min-width:0;padding:25px;overflow:hidden}
+.pagehead{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;margin-bottom:23px;
+}
+.pagehead h1{font-size:24px;margin:0 0 7px}
+.pagehead p{margin:0;font-size:13px;color:var(--muted)}
+.grid{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;margin-bottom:22px;
+}
+.stat,.card{
+  background:linear-gradient(145deg,#0c192a,#091321);
+  border:1px solid var(--border);border-radius:15px;padding:18px;
+}
+.stat-top{display:flex;justify-content:space-between;gap:8px}
+.stat-icon{
+  width:37px;height:37px;border-radius:11px;
+  display:grid;place-items:center;background:#10283b;
+}
+.stat h3{font-size:12px;color:var(--muted);font-weight:500;margin:16px 0 8px}
+.stat strong{font-size:25px;overflow-wrap:anywhere}
+.card{margin-bottom:17px}
+.card-title{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;flex-wrap:wrap;margin-bottom:15px;
+}
+.card-title h2{font-size:16px;margin:0}
+.badge{
+  display:inline-block;border-radius:20px;padding:5px 9px;
+  font-size:11px;background:#10263b;color:#9bdfff;
+}
 .table-wrap{width:100%;overflow-x:auto}
-table{width:100%;min-width:650px;border-collapse:collapse}
-th{text-align:left;color:#8e9aad;text-transform:uppercase;font-size:10px;padding:13px;border-bottom:1px solid var(--border)}
-td{font-size:12px;padding:13px;border-bottom:1px solid #ffffff0b;vertical-align:middle}
-.btn{border:0;border-radius:8px;color:white;padding:8px 10px;font-size:11px;font-weight:bold;margin:2px}
-.blue{background:var(--blue)}.green{background:var(--green)}.red{background:var(--red)}.purple{background:var(--purple)}.orange{background:var(--orange)}
-.badge{display:inline-block;border-radius:20px;padding:5px 8px;font-size:10px;font-weight:bold}
-.ok{color:#54e889;background:#22c55e20}.pending{color:#ffc95a;background:#f59e0b20}.no{color:#ff7777;background:#ef444420}
-.toolbar{max-width:290px;width:100%;background:#070d18;border:1px solid var(--border);color:white;border-radius:10px;padding:11px;outline:none}
-.price-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;padding:15px}
-.price-card{padding:16px;background:#070d18}
-.price-card h3{font-size:14px;margin-bottom:7px}
-.price-card p{font-size:11px;line-height:1.5;color:var(--muted);margin-bottom:14px}
-.price-line{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.price-line label{font-size:12px;color:var(--muted)}
-.price-line input{width:125px;max-width:55%;background:#101a2b;color:white;border:1px solid var(--border);padding:11px;border-radius:10px;outline:none}
-.price-line input:focus{border-color:var(--blue)}
-.note{font-size:12px;color:var(--muted);line-height:1.7;padding:15px}
-.actions{display:flex;flex-wrap:wrap;gap:8px;padding:0 15px 15px}
-.actions .btn{padding:11px 14px}
-#toast{position:fixed;top:75px;right:12px;z-index:2000;max-width:320px;padding:13px 16px;background:#111b2d;border:1px solid var(--border);border-radius:12px;display:none;font-size:12px}
-.empty{padding:22px;text-align:center;color:var(--muted)}
-@media(max-width:800px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.price-grid{grid-template-columns:1fr}}
-@media(max-width:700px){.layout{display:block}.sidebar{display:flex;width:100%;overflow-x:auto;padding:8px;border-right:0;border-bottom:1px solid var(--border)}.menu{width:auto;flex-shrink:0;white-space:nowrap;padding:11px}.content{padding:13px}.title{font-size:22px}.header{padding:12px}}
+table{width:100%;border-collapse:collapse;min-width:540px}
+th,td{
+  padding:13px 10px;border-bottom:1px solid #192b40;
+  text-align:left;font-size:12px;vertical-align:middle;
+}
+th{color:#8398b2;font-weight:600}
+td{color:#dce5f1}
+.empty{text-align:center;color:var(--muted);padding:28px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px}
+.toolbar input{flex:1;min-width:170px}
+.toolbar select{width:auto;min-width:120px}
+.form-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;
+}
+.form-field label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}
+.form-field.fullrow{grid-column:1/-1}
+.price-row{
+  display:grid;grid-template-columns:1fr 150px;gap:12px;
+  align-items:center;padding:12px 0;border-bottom:1px solid var(--border);
+}
+.price-row:last-child{border-bottom:0}
+.statusline{
+  display:flex;align-items:center;gap:8px;
+  font-size:12px;color:var(--muted);
+}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
+#toast{
+  position:fixed;z-index:100;bottom:20px;left:50%;
+  transform:translateX(-50%);width:max-content;max-width:90%;
+  background:#13263b;border:1px solid #2c4c68;
+  color:white;padding:13px 17px;border-radius:12px;
+  box-shadow:0 8px 30px #0008;font-size:13px;
+}
+#menuBtn{display:none}
+.mobile-overlay{display:none}
+.footer-note{color:#667c96;font-size:11px;line-height:1.6;margin-top:20px}
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sidebar{width:210px}
+  .main{padding:19px}
+}
+@media(max-width:650px){
+  #menuBtn{display:block}
+  .topbar{padding:0 12px;height:61px}
+  .brand{gap:7px;font-size:13px}
+  .brand-icon{width:34px;height:34px}
+  .top-actions button{padding:10px;font-size:12px}
+  .layout{min-height:calc(100vh - 61px)}
+  .sidebar{
+    position:fixed;z-index:40;top:61px;bottom:0;left:0;
+    width:260px;transform:translateX(-105%);
+    transition:transform .2s ease;overflow-y:auto;
+  }
+  .sidebar.open{transform:translateX(0)}
+  .mobile-overlay.show{
+    display:block;position:fixed;inset:61px 0 0;z-index:30;
+    background:#0009;
+  }
+  .main{padding:16px 12px}
+  .pagehead h1{font-size:21px}
+  .grid{gap:9px}
+  .stat{padding:13px}
+  .stat strong{font-size:21px}
+  .stat h3{font-size:11px}
+  .form-grid{grid-template-columns:1fr}
+  .form-field.fullrow{grid-column:auto}
+  .price-row{grid-template-columns:1fr 110px}
+  .card{padding:14px}
+}
 </style>
 </head>
 
 <body>
-<div id="login">
- <div class="login-box">
-  <div class="logo">JASON <span>BUSINESS</span></div>
-  <div class="subtitle">🔐 PANNEAU D'ADMINISTRATION</div>
-  <input class="input" id="password" type="password" placeholder="Code secret administrateur" autocomplete="current-password">
-  <button class="primary" id="loginButton">🔓 Ouvrir l'administration</button>
-  <div class="error" id="loginError"></div>
- </div>
-</div>
 
-<div id="app">
- <header class="header">
-  <div class="brand">JASON <span>BUSINESS</span></div>
-  <div class="header-right"><span style="font-size:11px;color:#9ca9bc">● Administration</span><button class="logout" id="logout">Déconnexion</button></div>
- </header>
+<!-- CONNEXION -->
+<section id="loginScreen">
+  <div class="login-card">
+    <div class="logo">JB</div>
+    <div class="badge">ESPACE SÉCURISÉ</div>
+    <h1 style="margin-top:16px">JASON BUSINESS</h1>
+    <p class="muted">🔐 PANNEAU D'ADMINISTRATION</p>
 
- <div class="layout">
-  <aside class="sidebar">
-   <button class="menu active" data-page="dashboard">📊 Dashboard</button>
-   <button class="menu" data-page="users">👥 Utilisateurs</button>
-   <button class="menu" data-page="commands">🛒 Commandes</button>
-   <button class="menu" data-page="recharges">💳 Recharges</button>
-   <button class="menu" data-page="withdrawals">💸 Retraits</button>
-   <button class="menu" data-page="vip">👑 VIP</button>
-   <button class="menu" data-page="prices">🔌 API et tarifs</button>
-  </aside>
+    <form id="loginForm">
+      <div class="field">
+        <label for="adminPassword">Code administrateur</label>
+        <input id="adminPassword" type="password"
+          placeholder="Saisis ton code secret"
+          autocomplete="current-password" required>
+      </div>
+      <button class="primary full" id="loginBtn" type="submit">
+        🔓 Ouvrir l'administration
+      </button>
+      <div id="loginError" class="error hidden"></div>
+    </form>
+    <p class="small muted" style="margin-top:20px">
+      Créé par Jason Aloma 🇨🇩
+    </p>
+  </div>
+</section>
 
-  <main class="content">
-   <section class="page active" id="page-dashboard">
-    <div class="title">📊 Dashboard</div>
-    <div class="desc">Vue générale de ta plateforme.</div>
-    <div class="stats">
-     <div class="stat"><div class="stat-label">Utilisateurs</div><div class="stat-value" id="countUsers">0</div></div>
-     <div class="stat"><div class="stat-label">Solde total</div><div class="stat-value" id="balance">0 FC</div></div>
-     <div class="stat"><div class="stat-label">Commandes en attente</div><div class="stat-value" id="countCommands">0</div></div>
-     <div class="stat"><div class="stat-label">Recharges en attente</div><div class="stat-value" id="countRecharges">0</div></div>
-     <div class="stat"><div class="stat-label">Retraits en attente</div><div class="stat-value" id="countWithdrawals">0</div></div>
-     <div class="stat"><div class="stat-label">Membres VIP</div><div class="stat-value" id="countVip">0</div></div>
+<!-- APPLICATION -->
+<section id="app" class="hidden">
+  <header class="topbar">
+    <div class="brand">
+      <button id="menuBtn" class="ghost" aria-label="Ouvrir le menu">☰</button>
+      <div class="brand-icon">JB</div>
+      <div>JASON BUSINESS
+        <small>ADMINISTRATION • JASON ALOMA 🇨🇩</small>
+      </div>
     </div>
-    <div class="panel"><div class="panel-head"><strong>Configuration des tarifs</strong></div><div class="note">Ouvre « API et tarifs » pour modifier les prix. Les prix enregistrés dans Firebase doivent aussi être lus par tes pages client pour s'y appliquer.</div></div>
-   </section>
-
-   <section class="page" id="page-users">
-    <div class="title">👥 Utilisateurs</div><div class="desc">Liste des comptes clients.</div>
-    <div class="panel">
-     <div class="panel-head"><strong>Comptes</strong><input id="searchUsers" class="toolbar" placeholder="Rechercher un numéro ou un nom"></div>
-     <div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>VIP</th><th>Action</th></tr></thead><tbody id="usersTable"></tbody></table></div>
+    <div class="top-actions">
+      <span class="statusline"><span class="dot"></span><span id="connectionText">Connecté</span></span>
+      <button id="refreshBtn" class="ghost" title="Actualiser">↻</button>
+      <button id="logoutBtn" class="dangerbtn">Quitter</button>
     </div>
-   </section>
+  </header>
 
-   <section class="page" id="page-commands">
-    <div class="title">🛒 Commandes</div><div class="desc">Validation des commandes des clients.</div>
-    <div class="panel"><div class="table-wrap"><table><thead><tr><th>Client</th><th>Service</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div></div>
-   </section>
+  <div class="mobile-overlay" id="overlay"></div>
 
-   <section class="page" id="page-recharges">
-    <div class="title">💳 Recharges</div><div class="desc">Validation des dépôts reçus.</div>
-    <div class="panel"><div class="table-wrap"><table><thead><tr><th>Client</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="rechargesTable"></tbody></table></div></div>
-   </section>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="side-label">PRINCIPAL</div>
+      <button class="nav active" data-page="dashboard"><span class="ico">▦</span> Tableau de bord</button>
+      <button class="nav" data-page="users"><span class="ico">♙</span> Clients</button>
+      <button class="nav" data-page="commands"><span class="ico">▤</span> Commandes</button>
 
-   <section class="page" id="page-withdrawals">
-    <div class="title">💸 Retraits</div><div class="desc">Suivi des retraits clients.</div>
-    <div class="panel"><div class="table-wrap"><table><thead><tr><th>Client</th><th>Montant</th><th>Méthode</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsTable"></tbody></table></div></div>
-   </section>
+      <div class="side-label">FINANCES</div>
+      <button class="nav" data-page="deposits"><span class="ico">＋</span> Dépôts</button>
+      <button class="nav" data-page="withdrawals"><span class="ico">↗</span> Retraits</button>
 
-   <section class="page" id="page-vip">
-    <div class="title">👑 Gestion VIP</div><div class="desc">Active un niveau VIP pour un utilisateur.</div>
-    <div class="panel"><div class="panel-head"><strong>Membres VIP</strong><input id="searchVip" class="toolbar" placeholder="Rechercher un client"></div>
-     <div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Niveau</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="vipTable"></tbody></table></div>
-     <div class="note">Niveaux disponibles : Aucun, Bronze, Silver, Gold, Platinum et Diamond.</div>
-    </div>
-   </section>
+      <div class="side-label">SERVICES</div>
+      <button class="nav" data-page="vip"><span class="ico">♛</span> Gestion VIP</button>
+      <button class="nav" data-page="prices"><span class="ico">◆</span> Tarifs API</button>
 
-   <section class="page" id="page-prices">
-    <div class="title">🔌 API et tarifs</div>
-    <div class="desc">Modifie le prix de chaque service, puis enregistre les changements.</div>
-    <div class="panel">
-     <div class="panel-head"><strong>Modifier les prix</strong><span class="badge" style="color:#70a9ff;background:#3b82f621">Devise : FC</span></div>
-     <div class="note">Saisis le nouveau montant dans chaque champ. Les valeurs sont sauvegardées dans <code>jasonBusiness/config/apiPrices</code>.</div>
-     <div class="price-grid" id="priceGrid"></div>
-     <div class="actions">
-      <button class="btn blue" id="savePrices">💾 Enregistrer les prix</button>
-      <button class="btn purple" id="reloadPrices">↻ Recharger Firebase</button>
-     </div>
-     <div class="note" id="priceMessage">En attente de connexion.</div>
-    </div>
-   </section>
-  </main>
- </div>
-</div>
+      <div class="side-label">SYSTÈME</div>
+      <button class="nav" data-page="security"><span class="ico">⚙</span> Sécurité</button>
 
-<div id="toast"></div>
+      <div class="footer-note">
+        JASON BUSINESS<br>
+        Créé par Jason Aloma 🇨🇩<br>
+        Kinshasa, RDC
+      </div>
+    </aside>
 
-<script type="module">
-import {initializeApp,getApps} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {getDatabase,ref,onValue,get,set,update,remove,runTransaction} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    <main class="main">
+      <!-- DASHBOARD -->
+      <section class="page" id="page-dashboard">
+        <div class="pagehead">
+          <div>
+            <h1>Tableau de bord</h1>
+            <p>Vue générale de ton activité.</p>
+          </div>
+          <button class="primary" onclick="loadPage('dashboard')">↻ Actualiser</button>
+        </div>
 
-const firebaseConfig={
- apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
- authDomain:"starlink-investit.firebaseapp.com",
- databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
- projectId:"starlink-investit",
- storageBucket:"starlink-investit.firebasestorage.app",
- messagingSenderId:"807081599583",
- appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
+        <div class="grid">
+          <div class="stat">
+            <div class="stat-top"><span class="muted">Clients</span><span class="stat-icon">♙</span></div>
+            <h3>Utilisateurs enregistrés</h3><strong id="statUsers">—</strong>
+          </div>
+          <div class="stat">
+            <div class="stat-top"><span class="muted">Commandes</span><span class="stat-icon">▤</span></div>
+            <h3>Commandes enregistrées</h3><strong id="statCommands">—</strong>
+          </div>
+          <div class="stat">
+            <div class="stat-top"><span class="muted">Dépôts en attente</span><span class="stat-icon">＋</span></div>
+            <h3>À traiter</h3><strong id="statDeposits">—</strong>
+          </div>
+          <div class="stat">
+            <div class="stat-top"><span class="muted">Retraits en attente</span><span class="stat-icon">↗</span></div>
+            <h3>À vérifier</h3><strong id="statWithdrawals">—</strong>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <h2>État du système</h2><span class="badge">BACKEND</span>
+          </div>
+          <p id="healthMessage" class="muted">Vérification du backend…</p>
+          <p class="small muted">Les données financières ne doivent être modifiées que par des routes sécurisées côté serveur.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><h2>Accès rapide</h2></div>
+          <div class="toolbar">
+            <button class="ghost" onclick="showPage('users')">♙ Clients</button>
+            <button class="ghost" onclick="showPage('deposits')">＋ Dépôts</button>
+            <button class="ghost" onclick="showPage('withdrawals')">↗ Retraits</button>
+            <button class="goldbtn" onclick="showPage('prices')">◆ Modifier les tarifs</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLIENTS -->
+      <section class="page hidden" id="page-users">
+        <div class="pagehead">
+          <div><h1>Gestion des clients</h1><p>Recherche et consultation des comptes.</p></div>
+          <button class="primary" onclick="loadPage('users')">↻ Actualiser</button>
+        </div>
+        <div class="card">
+          <div class="toolbar">
+            <input id="userSearch" placeholder="Rechercher un client…" oninput="filterTable('usersTable',this.value)">
+          </div>
+          <div class="table-wrap"><table id="usersTable">
+            <thead><tr><th>UID</th><th>Nom</th><th>Solde</th><th>VIP</th><th>Actions</th></tr></thead>
+            <tbody><tr><td colspan="5" class="empty">Charge les données depuis le backend.</td></tr></tbody>
+          </table></div>
+          <p id="usersMessage" class="small muted"></p>
+        </div>
+      </section>
+
+      <!-- COMMANDES -->
+      <section class="page hidden" id="page-commands">
+        <div class="pagehead">
+          <div><h1>Commandes</h1><p>Suivi des commandes clients.</p></div>
+          <button class="primary" onclick="loadPage('commands')">↻ Actualiser</button>
+        </div>
+        <div class="card"><div class="table-wrap"><table id="commandsTable">
+          <thead><tr><th>Référence</th><th>Client</th><th>Service</th><th>Montant</th><th>Statut</th><th>Action</th></tr></thead>
+          <tbody><tr><td colspan="6" class="empty">Données non chargées.</td></tr></tbody>
+        </table></div><p id="commandsMessage" class="small muted"></p></div>
+      </section>
+
+      <!-- DEPOTS -->
+      <section class="page hidden" id="page-deposits">
+        <div class="pagehead">
+          <div><h1>Dépôts</h1><p>Demandes de recharge à vérifier.</p></div>
+          <button class="primary" onclick="loadPage('deposits')">↻ Actualiser</button>
+        </div>
+        <div class="card"><div class="table-wrap"><table id="depositsTable">
+          <thead><tr><th>Référence</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Statut</th><th>Actions</th></tr></thead>
+          <tbody><tr><td colspan="6" class="empty">Données non chargées.</td></tr></tbody>
+        </table></div><p id="depositsMessage" class="small muted"></p></div>
+      </section>
+
+      <!-- RETRAITS -->
+      <section class="page hidden" id="page-withdrawals">
+        <div class="pagehead">
+          <div><h1>Retraits</h1><p>Demandes de retrait à vérifier.</p></div>
+          <button class="primary" onclick="loadPage('withdrawals')">↻ Actualiser</button>
+        </div>
+        <div class="card"><div class="table-wrap"><table id="withdrawalsTable">
+          <thead><tr><th>Référence</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Statut</th><th>Actions</th></tr></thead>
+          <tbody><tr><td colspan="6" class="empty">Données non chargées.</td></tr></tbody>
+        </table></div><p id="withdrawalsMessage" class="small muted"></p></div>
+      </section>
+
+      <!-- VIP -->
+      <section class="page hidden" id="page-vip">
+        <div class="pagehead">
+          <div><h1>Gestion VIP</h1><p>Modifier le statut VIP via le backend sécurisé.</p></div>
+          <button class="primary" onclick="loadPage('vip')">↻ Actualiser</button>
+        </div>
+        <div class="card">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="vipUid">UID du client</label>
+              <input id="vipUid" placeholder="Identifiant Firebase du client">
+            </div>
+            <div class="form-field">
+              <label for="vipLevel">Niveau VIP</label>
+              <select id="vipLevel">
+                <option value="none">Aucun VIP</option>
+                <option value="Bronze">Bronze</option>
+                <option value="Silver">Silver</option>
+                <option value="Gold">Gold</option>
+                <option value="Platinum">Platinum</option>
+                <option value="Diamond">Diamond</option>
+              </select>
+            </div>
+          </div>
+          <button class="goldbtn" style="margin-top:16px" onclick="saveVip()">Enregistrer le VIP</button>
+          <p id="vipMessage" class="small muted"></p>
+        </div>
+        <div class="card">
+          <h2 style="font-size:15px">Clients VIP</h2>
+          <div class="table-wrap"><table id="vipTable">
+            <thead><tr><th>UID</th><th>Nom</th><th>Niveau</th><th>Statut</th></tr></thead>
+            <tbody><tr><td colspan="4" class="empty">Charge les données depuis le backend.</td></tr></tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <!-- TARIFS -->
+      <section class="page hidden" id="page-prices">
+        <div class="pagehead">
+          <div><h1>Tarifs des services API</h1><p>Prix en FC. Les modifications sont enregistrées côté serveur.</p></div>
+          <button class="ghost" onclick="loadPage('prices')">↻ Recharger</button>
+        </div>
+        <div class="card">
+          <div class="card-title"><h2>Tarifs configurables</h2><span class="badge">FC</span></div>
+          <div id="pricesForm">
+            <div class="price-row"><span>Boosting / SMM</span><input type="number" min="0" id="price-boosting" value="5000"></div>
+            <div class="price-row"><span>Chatbot IA</span><input type="number" min="0" id="price-chatbot" value="10000"></div>
+            <div class="price-row"><span>Traduction</span><input type="number" min="0" id="price-translation" value="2000"></div>
+            <div class="price-row"><span>Génération d'image</span><input type="number" min="0" id="price-image" value="5000"></div>
+            <div class="price-row"><span>Génération musicale</span><input type="number" min="0" id="price-music" value="10000"></div>
+            <div class="price-row"><span>Génération vidéo</span><input type="number" min="0" id="price-video" value="15000"></div>
+            <div class="price-row"><span>VIP Bronze</span><input type="number" min="0" id="price-vipBronze" value="10000"></div>
+            <div class="price-row"><span>VIP Silver</span><input type="number" min="0" id="price-vipSilver" value="25000"></div>
+            <div class="price-row"><span>VIP Gold</span><input type="number" min="0" id="price-vipGold" value="50000"></div>
+            <div class="price-row"><span>VIP Platinum</span><input type="number" min="0" id="price-vipPlatinum" value="100000"></div>
+            <div class="price-row"><span>VIP Diamond</span><input type="number" min="0" id="price-vipDiamond" value="200000"></div>
+          </div>
+          <button class="goldbtn" style="margin-top:18px" onclick="savePrices()">💾 Enregistrer les tarifs</button>
+          <button class="ghost" style="margin-top:18px" onclick="loadPage('prices')">Annuler / Recharger</button>
+          <p id="pricesMessage" class="small muted"></p>
+        </div>
+        <div class="card">
+          <strong class="orange">À savoir</strong>
+          <p class="muted small">Le backend doit valider les prix et enregistrer la configuration dans Firebase. Les pages client doivent ensuite lire les tarifs depuis cette configuration. Modifier uniquement cet écran ne change pas les prix utilisés par les clients.</p>
+        </div>
+      </section>
+
+      <!-- SECURITE -->
+      <section class="page hidden" id="page-security">
+        <div class="pagehead"><div><h1>Sécurité</h1><p>État de la session administrateur.</p></div></div>
+        <div class="card">
+          <div class="statusline"><span class="dot"></span>Session administrateur active</div>
+          <p class="muted small">Le mot de passe est vérifié par le serveur. Le jeton de session est conservé dans le navigateur pour éviter de demander le code à chaque changement de page.</p>
+          <button class="dangerbtn" onclick="logout()">Fermer la session</button>
+        </div>
+        <div class="card">
+          <h2 style="font-size:15px">Routes actuellement attendues</h2>
+          <p class="small muted">Connexion : POST /api/admin/login</p>
+          <p class="small muted">Session : GET /api/admin/session</p>
+          <p class="small muted">Statistiques : GET /api/admin/stats</p>
+          <p class="small muted">Les routes de gestion des clients, dépôts, retraits, VIP et tarifs doivent également être implémentées et protégées côté serveur avant leur utilisation.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+</section>
+
+<div id="toast" class="hidden"></div>
+
+<script>
+"use strict";
+
+/*
+  JASON BUSINESS — ADMINISTRATION
+  API sur le même domaine que le site.
+  Aucune clé Firebase privée dans ce fichier.
+*/
+
+const TOKEN_KEY = "jasonBusinessAdminToken";
+const API = "/api";
+
+const pageNames = {
+  dashboard:"Tableau de bord",
+  users:"Clients",
+  commands:"Commandes",
+  deposits:"Dépôts",
+  withdrawals:"Retraits",
+  vip:"Gestion VIP",
+  prices:"Tarifs API",
+  security:"Sécurité"
 };
-const app= getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
-const db=getDatabase(app);
-const ROOT="jasonBusiness";
-const PATH={
- users:`${ROOT}/users`,
- commands:`${ROOT}/demandes_commandes`,
- recharges:`${ROOT}/demandes_recharges`,
- withdrawals:`${ROOT}/demandes_retraits`,
- prices:`${ROOT}/config/apiPrices`
-};
 
-const defaultPrices={
- boosting:{label:"Boosting réseaux sociaux",price:5000,description:"Prix de base du service de boosting."},
- chatbot:{label:"API Chatbot IA",price:10000,description:"Prix du service chatbot intelligent."},
- translation:{label:"Traduction IA",price:2000,description:"Prix du service de traduction."},
- image:{label:"Génération d'images",price:5000,description:"Prix du service de génération d'images."},
- music:{label:"Génération musicale",price:10000,description:"Prix de création musicale."},
- video:{label:"Génération vidéo",price:15000,description:"Prix de génération vidéo."},
- vipBronze:{label:"Abonnement VIP Bronze",price:10000,description:"Prix de l'abonnement Bronze."},
- vipSilver:{label:"Abonnement VIP Silver",price:25000,description:"Prix de l'abonnement Silver."},
- vipGold:{label:"Abonnement VIP Gold",price:50000,description:"Prix de l'abonnement Gold."},
- vipPlatinum:{label:"Abonnement VIP Platinum",price:100000,description:"Prix de l'abonnement Platinum."},
- vipDiamond:{label:"Abonnement VIP Diamond",price:200000,description:"Prix de l'abonnement Diamond."}
-};
+let currentPage = "dashboard";
+let toastTimer = null;
 
-let users={},commands={},recharges={},withdrawals={},prices={};
-let started=false,working=false;
+const $ = id => document.getElementById(id);
 
-const $=id=>document.getElementById(id);
-const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const money=n=>Math.floor(Number(n)||0).toLocaleString("fr-FR");
-const phoneOf=d=>d.telephone||d.phone||d.numero||"";
-const nameOf=d=>d.nom||d.name||"Utilisateur";
-const balanceOf=d=>Number(d.solde_principal??d.solde??d.balance??0)||0;
-const statusOf=d=>d.statut||d.status||"En attente";
-const pending=s=>String(s).toLowerCase().includes("attente");
-const vipOf=d=>d.vip===true||d.isVip===true||["actif","active","vip","true"].includes(String(d.vipStatus||"").toLowerCase());
-const levelOf=d=>d.vipLevel||d.niveauVip||"Aucun";
-
-function toast(message){
- $("toast").textContent=message;
- $("toast").style.display="block";
- clearTimeout(toast.timer);
- toast.timer=setTimeout(()=>$("toast").style.display="none",3500);
-}
-function busy(v){working=v;}
-function showPage(p){
- document.querySelectorAll(".menu").forEach(b=>b.classList.toggle("active",b.dataset.page===p));
- document.querySelectorAll(".page").forEach(s=>s.classList.toggle("active",s.id==="page-"+p));
-}
-document.querySelectorAll(".menu").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
-
-function badge(s){
- const x=String(s).toLowerCase();
- if(x.includes("valid")||x.includes("pay")||x==="actif")return `<span class="badge ok">✓ ${esc(s)}</span>`;
- if(x.includes("refus")||x==="inactif")return `<span class="badge no">✕ ${esc(s)}</span>`;
- return `<span class="badge pending">⏳ ${esc(s)}</span>`;
+function showToast(message) {
+  const toast = $("toast");
+  toast.textContent = message;
+  toast.classList.remove("hidden");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.add("hidden"), 3500);
 }
 
-async function login(){
- const pass=$("password").value;
- $("loginError").textContent="";
- if(!pass){$("loginError").textContent="Saisis le code secret.";return;}
- try{
-  const r=await fetch("/api/admin-login",{
-   method:"POST",headers:{"Content-Type":"application/json"},
-   body:JSON.stringify({password:pass})
-  });
-  const data=await r.json().catch(()=>({}));
-  if(!r.ok||!data.token){$("loginError").textContent="Accès refusé. Vérifie le code et le backend.";return;}
-  localStorage.setItem("jasonBusinessAdminToken",data.token);
-  $("login").style.display="none";$("app").style.display="block";start();
- }catch(e){$("loginError").textContent="Serveur indisponible : vérifie Vercel.";}
-}
-$("loginButton").addEventListener("click",login);
-$("password").addEventListener("keydown",e=>{if(e.key==="Enter")login();});
-$("logout").addEventListener("click",()=>{localStorage.removeItem("jasonBusinessAdminToken");location.reload();});
-
-async function checkSession(){
- const token=localStorage.getItem("jasonBusinessAdminToken");
- if(!token)return;
- try{
-  const r=await fetch("/api/admin-session",{headers:{Authorization:`Bearer ${token}`}});
-  if(r.ok){$("login").style.display="none";$("app").style.display="block";start();}
-  else localStorage.removeItem("jasonBusinessAdminToken");
- }catch(e){localStorage.removeItem("jasonBusinessAdminToken");}
+function getToken() {
+  return localStorage.getItem(TOKEN_KEY) || "";
 }
 
-function start(){
- if(started)return;started=true;
- onValue(ref(db,PATH.users),s=>{
-  users={};s.forEach(c=>users[c.key]=c.val()||{});
-  $("countUsers").textContent=Object.keys(users).length;
-  $("balance").textContent=money(Object.values(users).reduce((a,d)=>a+balanceOf(d),0))+" FC";
-  $("countVip").textContent=Object.values(users).filter(vipOf).length;
-  renderUsers();renderVip();
- });
- onValue(ref(db,PATH.commands),s=>{commands={};s.forEach(c=>commands[c.key]=c.val()||{});renderRequests("commands");});
- onValue(ref(db,PATH.recharges),s=>{recharges={};s.forEach(c=>recharges[c.key]=c.val()||{});renderRequests("recharges");});
- onValue(ref(db,PATH.withdrawals),s=>{withdrawals={};s.forEach(c=>withdrawals[c.key]=c.val()||{});renderRequests("withdrawals");});
- onValue(ref(db,PATH.prices),s=>{
-  prices=s.val()||{};renderPrices();
-  $("priceMessage").textContent=s.exists()?"Tarifs chargés depuis Firebase.":"Aucun tarif personnalisé : valeurs initiales proposées.";
- });
+function setToken(token) {
+  localStorage.setItem(TOKEN_KEY, token);
 }
 
-function renderUsers(){
- const body=$("usersTable");body.innerHTML="";
- Object.entries(users).forEach(([phone,d])=>{
-  const tr=document.createElement("tr");
-  tr.dataset.search=(phone+" "+nameOf(d)).toLowerCase();
-  tr.innerHTML=`<td>${esc(phone)}</td><td>${esc(nameOf(d))}</td><td>${money(balanceOf(d))} FC</td>
-  <td>${vipOf(d)?badge("Actif"):"Standard"}</td>
-  <td><button class="btn purple" data-vip="${esc(phone)}">👑 VIP</button></td>`;
-  body.appendChild(tr);
- });
- if(!body.children.length)body.innerHTML='<tr><td colspan="5" class="empty">Aucun utilisateur.</td></tr>';
- filterRows("searchUsers","usersTable");
-}
-function renderVip(){
- const body=$("vipTable");body.innerHTML="";
- Object.entries(users).forEach(([phone,d])=>{
-  const tr=document.createElement("tr");
-  tr.dataset.search=(phone+" "+nameOf(d)).toLowerCase();
-  tr.innerHTML=`<td>${esc(phone)}</td><td>${esc(nameOf(d))}</td><td>
-  <select class="toolbar" style="max-width:145px" data-level="${esc(phone)}">
-  ${["Aucun","Bronze","Silver","Gold","Platinum","Diamond"].map(l=>`<option ${levelOf(d)===l?"selected":""}>${l}</option>`).join("")}
-  </select></td><td>${vipOf(d)?badge("Actif"):badge("Inactif")}</td>
-  <td><button class="btn blue" data-save-vip="${esc(phone)}">💾 Enregistrer</button>
-  <button class="btn ${vipOf(d)?"red":"green"}" data-toggle-vip="${esc(phone)}">${vipOf(d)?"Désactiver":"Activer"}</button></td>`;
-  body.appendChild(tr);
- });
- if(!body.children.length)body.innerHTML='<tr><td colspan="5" class="empty">Aucun utilisateur.</td></tr>';
- filterRows("searchVip","vipTable");
+function clearToken() {
+  localStorage.removeItem(TOKEN_KEY);
 }
 
-$("usersTable").addEventListener("click",e=>{
- const b=e.target.closest("[data-vip]");
- if(b){showPage("vip");$("searchVip").value=b.dataset.vip;filterRows("searchVip","vipTable");}
-});
-$("vipTable").addEventListener("click",async e=>{
- const save=e.target.closest("[data-save-vip]");
- const toggle=e.target.closest("[data-toggle-vip]");
- const phone=(save||toggle)?.dataset.saveVip||(save||toggle)?.dataset.toggleVip;
- if(!phone)return;
- try{
-  const old=users[phone]||{};
-  if(save){
-   const level=$("vipTable").querySelector(`[data-level="${CSS.escape(phone)}"]`).value;
-   const active=level!=="Aucun";
-   await update(ref(db,`${PATH.users}/${phone}`),{vipLevel:level,vipStatus:active?"Actif":"Inactif",vip:active,isVip:active});
-   toast("Niveau VIP enregistré.");
-  }else{
-   const active=!vipOf(old),level=active?(levelOf(old)==="Aucun"?"Bronze":levelOf(old)):"Aucun";
-   await update(ref(db,`${PATH.users}/${phone}`),{vipLevel:level,vipStatus:active?"Actif":"Inactif",vip:active,isVip:active});
-   toast(active?"VIP activé.":"VIP désactivé.");
+async function apiFetch(path, options = {}) {
+  const headers = { ...(options.headers || {}) };
+  if (getToken()) headers.Authorization = "Bearer " + getToken();
+  if (options.body && !headers["Content-Type"]) {
+    headers["Content-Type"] = "application/json";
   }
- }catch(e){toast("Modification VIP refusée par Firebase.");}
-});
 
-function renderRequests(type){
- const data=type==="commands"?commands:type==="recharges"?recharges:withdrawals;
- const body=$(type==="commands"?"commandsTable":type==="recharges"?"rechargesTable":"withdrawalsTable");
- body.innerHTML="";let n=0;
- Object.entries(data).forEach(([id,d])=>{
-  const p=pending(statusOf(d));if(p)n++;
-  const method=esc(d.methode||d.method||d.operateur||"—");
-  let cells=type==="commands"
-   ?`<td>${esc(phoneOf(d))}</td><td>${esc(d.service||"Service")}</td><td>${money(d.montant)} FC</td><td>${badge(statusOf(d))}</td>`
-   :type==="recharges"
-   ?`<td>${esc(phoneOf(d))}</td><td>${money(d.montant)} FC</td><td>${badge(statusOf(d))}</td>`
-   :`<td>${esc(phoneOf(d))}</td><td>${money(d.montant)} FC</td><td>${method}</td><td>${badge(statusOf(d))}</td>`;
-  const buttons=p?`<button class="btn green" data-action="approve" data-type="${type}" data-id="${esc(id)}">✓ Valider</button><button class="btn red" data-action="reject" data-type="${type}" data-id="${esc(id)}">✕ Refuser</button>`:"Traité";
-  const tr=document.createElement("tr");tr.innerHTML=cells+`<td>${buttons}</td>`;body.appendChild(tr);
- });
- const cols=type==="commands"?5:type==="recharges"?4:5;
- if(!body.children.length)body.innerHTML=`<tr><td colspan="${cols}" class="empty">Aucune demande.</td></tr>`;
- const countId=type==="commands"?"countCommands":type==="recharges"?"countRecharges":"countWithdrawals";
- $(countId).textContent=n;
+  let response;
+  try {
+    response = await fetch(API + path, { ...options, headers });
+  } catch {
+    throw new Error("Serveur inaccessible. Vérifie le déploiement Vercel et ta connexion.");
+  }
+
+  const raw = await response.text();
+  let data = {};
+  try { data = raw ? JSON.parse(raw) : {}; }
+  catch { data = { error: raw || "Réponse serveur illisible." }; }
+
+  if (response.status === 401) {
+    clearToken();
+    showLogin("Ta session est expirée. Connecte-toi à nouveau.");
+    throw new Error(data.error || "Session expirée.");
+  }
+
+  if (!response.ok) {
+    throw new Error(data.error || ("Erreur HTTP " + response.status));
+  }
+  return data;
 }
 
-async function credit(phone,amount){
- if(!phone||!Number.isFinite(amount)||amount<=0)throw Error("Montant ou numéro invalide.");
- const r=await runTransaction(ref(db,`${PATH.users}/${phone}/solde_principal`),v=>(Number(v)||0)+amount);
- if(!r.committed)throw Error("Transaction échouée.");
+function showLogin(error = "") {
+  $("app").classList.add("hidden");
+  $("loginScreen").classList.remove("hidden");
+  $("loginError").textContent = error;
+  $("loginError").classList.toggle("hidden", !error);
 }
-document.querySelectorAll("#commandsTable,#rechargesTable,#withdrawalsTable").forEach(table=>{
- table.addEventListener("click",async e=>{
-  const b=e.target.closest("[data-action]");if(!b||working)return;
-  const type=b.dataset.type,id=b.dataset.id,action=b.dataset.action;
-  const data=type==="commands"?commands:type==="recharges"?recharges:withdrawals;
-  const d=data[id];if(!d)return;
-  if(!pending(statusOf(d)))return toast("Cette demande a déjà été traitée.");
-  if(action==="approve"&&type==="recharges"&&!confirm("As-tu réellement reçu ce paiement ? Le solde sera crédité."))return;
-  if(action==="approve"&&type==="withdrawals"&&!confirm("As-tu réellement envoyé l'argent au client ?"))return;
-  if(action==="reject"&&!confirm("Confirmer le refus ?"))return;
-  working=true;
-  try{
-   const path=type==="commands"?PATH.commands:type==="recharges"?PATH.recharges:PATH.withdrawals;
-   const phone=phoneOf(d),amount=Number(d.montant||0);
-   if(action==="approve"){
-    if(type==="recharges")await credit(phone,amount);
-    await update(ref(db,`${path}/${id}`),{statut:type==="withdrawals"?"Payé":"Validée"});
-    toast(type==="withdrawals"?"Retrait marqué payé.":"Demande validée.");
-   }else{
-    if(type==="withdrawals"&&phone&&amount>0)await credit(phone,amount);
-    await update(ref(db,`${path}/${id}`),{statut:"Refusée"});
-    toast("Demande refusée.");
-   }
-  }catch(err){console.error(err);toast("Erreur. Vérifie les données et les règles Firebase.");}
-  finally{working=false;}
- });
+
+function showApp() {
+  $("loginScreen").classList.add("hidden");
+  $("app").classList.remove("hidden");
+}
+
+$("loginForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  const btn = $("loginBtn");
+  const password = $("adminPassword").value;
+  const error = $("loginError");
+
+  if (!password) return;
+  btn.disabled = true;
+  btn.textContent = "Vérification…";
+  error.classList.add("hidden");
+
+  try {
+    const data = await apiFetch("/admin/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password })
+    });
+
+    if (!data.token) throw new Error("Le backend n'a pas fourni de jeton.");
+    setToken(data.token);
+    $("adminPassword").value = "";
+    showApp();
+    showToast("Connexion administrateur réussie.");
+    await initializeApp();
+  } catch (e) {
+    error.textContent = e.message || "Accès refusé. Vérifie le code et le backend.";
+    error.classList.remove("hidden");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "🔓 Ouvrir l'administration";
+  }
 });
 
-function renderPrices(){
- const grid=$("priceGrid");grid.innerHTML="";
- Object.entries(defaultPrices).forEach(([key,fallback])=>{
-  const saved=prices[key]||{};
-  const card=document.createElement("div");card.className="price-card";
-  card.innerHTML=`<h3>${esc(saved.label||fallback.label)}</h3>
-  <p>${esc(saved.description||fallback.description)}</p>
-  <div class="price-line"><label for="price-${key}">Prix en FC</label>
-  <input type="number" min="0" step="1" id="price-${key}" data-price="${key}" value="${Number(saved.price??fallback.price)}"></div>`;
-  grid.appendChild(card);
- });
+async function validateSession() {
+  if (!getToken()) return false;
+  try {
+    await apiFetch("/admin/session");
+    return true;
+  } catch {
+    clearToken();
+    return false;
+  }
 }
-$("savePrices").addEventListener("click",async()=>{
- if(working)return;
- const token=localStorage.getItem("jasonBusinessAdminToken");
- if(!token)return toast("Reconnecte-toi.");
- const next={};
- for(const [key,fallback] of Object.entries(defaultPrices)){
-  const value=Number(document.querySelector(`[data-price="${key}"]`).value);
-  if(!Number.isFinite(value)||value<0)return toast("Un prix est invalide.");
-  next[key]={label:prices[key]?.label||fallback.label,description:prices[key]?.description||fallback.description,price:Math.floor(value),updatedAt:Date.now()};
- }
- if(!confirm("Enregistrer ces tarifs dans Firebase ?"))return;
- working=true;
- try{
-  await set(ref(db,PATH.prices),next);
-  prices=next;toast("Prix enregistrés dans Firebase.");
-  $("priceMessage").textContent="Tarifs sauvegardés. Vérifie que les pages clients lisent ce chemin Firebase.";
- }catch(e){console.error(e);toast("Enregistrement refusé. Vérifie les règles Firebase.");}
- finally{working=false;}
-});
-$("reloadPrices").addEventListener("click",async()=>{
- try{const s=await get(ref(db,PATH.prices));prices=s.val()||{};renderPrices();toast("Tarifs rechargés.");}
- catch(e){toast("Impossible de recharger les tarifs.");}
+
+async function initializeApp() {
+  showApp();
+  $("connectionText").textContent = "Connecté";
+  await checkHealth();
+  showPage("dashboard");
+  await loadPage("dashboard");
+}
+
+async function checkHealth() {
+  try {
+    const result = await fetch(API + "/health");
+    if (!result.ok) throw new Error();
+    const data = await result.json();
+    $("healthMessage").textContent =
+      "Backend disponible : " + (data.service || "Jason backend");
+    $("healthMessage").className = "success";
+  } catch {
+    $("healthMessage").textContent =
+      "Le backend ne répond pas. Vérifie le déploiement et le routage Vercel.";
+    $("healthMessage").className = "danger";
+  }
+}
+
+function showPage(page) {
+  if (!pageNames[page]) return;
+  currentPage = page;
+
+  document.querySelectorAll(".page").forEach(el => el.classList.add("hidden"));
+  $("page-" + page).classList.remove("hidden");
+
+  document.querySelectorAll(".nav").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.page === page);
+  });
+
+  closeMenu();
+}
+
+document.querySelectorAll(".nav").forEach(btn => {
+  btn.addEventListener("click", async () => {
+    showPage(btn.dataset.page);
+    await loadPage(btn.dataset.page);
+  });
 });
 
-function filterRows(searchId,tableId){
- const query=$(searchId).value.toLowerCase();
- document.querySelectorAll(`#${tableId} tr`).forEach(tr=>{
-  tr.style.display=(tr.dataset.search||tr.innerText).toLowerCase().includes(query)?"":"none";
- });
-}
-$("searchUsers").addEventListener("input",()=>filterRows("searchUsers","usersTable"));
-$("searchVip").addEventListener("input",()=>filterRows("searchVip","vipTable"));
+async function loadPage(page) {
+  if (!getToken()) return showLogin();
+  if (page !== currentPage) showPage(page);
 
-checkSession();
+  try {
+    if (page === "dashboard") await loadStats();
+    if (page === "users") await loadUsers();
+    if (page === "commands") await loadTableData("commands");
+    if (page === "deposits") await loadTableData("deposits");
+    if (page === "withdrawals") await loadTableData("withdrawals");
+    if (page === "vip") await loadVip();
+    if (page === "prices") await loadPrices();
+  } catch (e) {
+    const messageId = {
+      users:"usersMessage",
+      commands:"commandsMessage",
+      deposits:"depositsMessage",
+      withdrawals:"withdrawalsMessage",
+      vip:"vipMessage",
+      prices:"pricesMessage"
+    }[page];
+    if (messageId) $(messageId).textContent = e.message;
+    else showToast(e.message);
+  }
+}
+
+async function loadStats() {
+  const data = await apiFetch("/admin/stats");
+  $("statUsers").textContent = number(data.users);
+  $("statCommands").textContent = number(data.commands);
+  $("statDeposits").textContent =
+    data.pendingDeposits == null ? "—" : number(data.pendingDeposits);
+  $("statWithdrawals").textContent =
+    data.pendingWithdrawals == null ? "—" : number(data.pendingWithdrawals);
+}
+
+function number(value) {
+  return Number(value || 0).toLocaleString("fr-FR");
+}
+
+function safe(value) {
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[ch]));
+}
+
+function findArray(data) {
+  if (Array.isArray(data)) return data;
+  if (Array.isArray(data.items)) return data.items;
+  if (Array.isArray(data.users)) return data.users;
+  if (Array.isArray(data.records)) return data.records;
+  return [];
+}
+
+function renderEmpty(tableId, colspan, message) {
+  const body = $(tableId).querySelector("tbody");
+  body.innerHTML = '<tr><td colspan="' + colspan +
+    '" class="empty">' + safe(message) + '</td></tr>';
+}
+
+async function loadUsers() {
+  const data = await apiFetch("/admin/users");
+  const users = findArray(data);
+  const body = $("usersTable").querySelector("tbody");
+
+  if (!users.length) {
+    renderEmpty("usersTable", 5, "Aucun client ou liste vide.");
+    $("usersMessage").textContent = "Les données proviennent du backend.";
+    return;
+  }
+
+  body.innerHTML = users.map(user => {
+    const uid = user.uid || user.id || user.key || "";
+    const name = user.name || user.displayName || user.username || user.email || "Client";
+    const balance = user.balance ?? user.solde ?? 0;
+    const vip = user.vipLevel || user.vip || "Aucun";
+    return '<tr>' +
+      '<td>' + safe(uid) + '</td>' +
+      '<td>' + safe(name) + '</td>' +
+      '<td>' + safe(number(balance)) + ' FC</td>' +
+      '<td>' + safe(vip) + '</td>' +
+      '<td><button class="ghost" onclick="prefillVip(\'' +
+        safe(uid).replace(/'/g, "\\'") + '\',\'' +
+        safe(vip).replace(/'/g, "\\'") + '\')">Gérer VIP</button></td>' +
+      '</tr>';
+  }).join("");
+  $("usersMessage").textContent = users.length + " client(s).";
+}
+
+function prefillVip(uid, level) {
+  $("vipUid").value = uid;
+  const options = [...$("vipLevel").options];
+  const found = options.find(o => o.value.toLowerCase() === String(level).toLowerCase());
+  $("vipLevel").value = found ? found.value : "none";
+  showPage("vip");
+  loadPage("vip").catch(() => {});
+}
+
+async function loadTableData(kind) {
+  const routes = {
+    commands:"/admin/commands",
+    deposits:"/admin/deposits",
+    withdrawals:"/admin/withdrawals"
+  };
+  const tableIds = {
+    commands:"commandsTable",
+    deposits:"depositsTable",
+    withdrawals:"withdrawalsTable"
+  };
+  const messageIds = {
+    commands:"commandsMessage",
+    deposits:"depositsMessage",
+    withdrawals:"withdrawalsMessage"
+  };
+  const cols = {
+    commands:6,deposits:6,withdrawals:6
+  };
+
+  const data = await apiFetch(routes[kind]);
+  const rows = findArray(data);
+  const body = $(tableIds[kind]).querySelector("tbody");
+
+  if (!rows.length) {
+    renderEmpty(tableIds[kind], cols[kind], "Aucune donnée disponible.");
+    $(messageIds[kind]).textContent = "";
+    return;
+  }
+
+  body.innerHTML = rows.map(item => {
+    const id = item.id || item.uid || item.key || item.reference || "";
+    const owner = item.userName || item.name || item.email || item.uid || "—";
+    const service = item.service || item.type || item.method || "—";
+    const amount = number(item.amount ?? item.montant ?? 0);
+    const status = item.status || item.statut || "En attente";
+    const kindLabel = kind === "commands" ? safe(service) : safe(item.method || item.network || "—");
+    const action = kind === "commands"
+      ? '<button class="ghost" onclick="updateRecord(\'commands\',\'' + safe(id) + '\',\'completed\')">Terminer</button>'
+      : '<button class="goldbtn" onclick="updateRecord(\'' + kind + '\',\'' + safe(id) + '\',\'approved\')">Approuver</button> ' +
+        '<button class="dangerbtn" onclick="updateRecord(\'' + kind + '\',\'' + safe(id) + '\',\'rejected\')">Refuser</button>';
+
+    return '<tr>' +
+      '<td>' + safe(id) + '</td>' +
+      '<td>' + safe(owner) + '</td>' +
+      '<td>' + kindLabel + '</td>' +
+      '<td>' + amount + ' FC</td>' +
+      '<td>' + safe(status) + '</td>' +
+      '<td>' + action + '</td>' +
+      '</tr>';
+  }).join("");
+
+  $(messageIds[kind]).textContent = rows.length + " élément(s).";
+}
+
+async function updateRecord(kind, id, status) {
+  if (!id) return showToast("Identifiant manquant.");
+  const question = status === "rejected" ? "Refuser cette demande ?" :
+    status === "approved" ? "Approuver cette demande ?" :
+    "Marquer cette commande comme terminée ?";
+  if (!confirm(question)) return;
+
+  try {
+    await apiFetch("/admin/" + kind + "/" + encodeURIComponent(id) + "/status", {
+      method:"PATCH",
+      body:JSON.stringify({ status })
+    });
+    showToast("Statut mis à jour.");
+    await loadPage(kind);
+    await loadStats();
+  } catch (e) {
+    showToast(e.message);
+  }
+}
+
+async function loadVip() {
+  const data = await apiFetch("/admin/vip");
+  const rows = findArray(data);
+  const body = $("vipTable").querySelector("tbody");
+
+  if (!rows.length) {
+    renderEmpty("vipTable", 4, "Aucun client VIP ou liste vide.");
+    return;
+  }
+
+  body.innerHTML = rows.map(user =>
+    '<tr><td>' + safe(user.uid || user.id || "") + '</td>' +
+    '<td>' + safe(user.name || user.email || "Client") + '</td>' +
+    '<td>' + safe(user.vipLevel || user.level || "—") + '</td>' +
+    '<td>' + safe(user.vipStatus || user.status || "—") + '</td></tr>'
+  ).join("");
+}
+
+async function saveVip() {
+  const uid = $("vipUid").value.trim();
+  const level = $("vipLevel").value;
+  if (!uid) return showToast("Saisis l'UID du client.");
+
+  const message = $("vipMessage");
+  try {
+    await apiFetch("/admin/vip/" + encodeURIComponent(uid), {
+      method:"PATCH",
+      body:JSON.stringify({ level })
+    });
+    message.textContent = "Niveau VIP enregistré.";
+    message.className = "success small";
+    showToast("VIP mis à jour.");
+    await loadVip();
+  } catch (e) {
+    message.textContent = e.message;
+    message.className = "danger small";
+  }
+}
+
+const priceKeys = [
+  "boosting","chatbot","translation","image","music","video",
+  "vipBronze","vipSilver","vipGold","vipPlatinum","vipDiamond"
+];
+
+async function loadPrices() {
+  const data = await apiFetch("/admin/prices");
+  const prices = data.prices || data;
+  for (const key of priceKeys) {
+    const input = $("price-" + key);
+    if (input && prices[key] != null) input.value = prices[key];
+  }
+  $("pricesMessage").textContent = "Tarifs chargés depuis le backend.";
+  $("pricesMessage").className = "success small";
+}
+
+async function savePrices() {
+  const prices = {};
+  for (const key of priceKeys) {
+    const input = $("price-" + key);
+    const value = Number(input.value);
+    if (!Number.isFinite(value) || value < 0) {
+      return showToast("Vérifie le prix : valeur invalide.");
+    }
+    prices[key] = value;
+  }
+
+  const message = $("pricesMessage");
+  try {
+    await apiFetch("/admin/prices", {
+      method:"PUT",
+      body:JSON.stringify({ prices })
+    });
+    message.textContent = "Tarifs enregistrés côté serveur.";
+    message.className = "success small";
+    showToast("Tarifs enregistrés.");
+  } catch (e) {
+    message.textContent = e.message;
+    message.className = "danger small";
+  }
+}
+
+function filterTable(tableId, query) {
+  const q = query.toLowerCase().trim();
+  $(tableId).querySelectorAll("tbody tr").forEach(row => {
+    row.style.display = row.textContent.toLowerCase().includes(q) ? "" : "none";
+  });
+}
+
+function closeMenu() {
+  $("sidebar").classList.remove("open");
+  $("overlay").classList.remove("show");
+}
+$("menuBtn").addEventListener("click", () => {
+  $("sidebar").classList.toggle("open");
+  $("overlay").classList.toggle("show");
+});
+$("overlay").addEventListener("click", closeMenu);
+
+function logout() {
+  clearToken();
+  showLogin();
+  showToast("Session fermée.");
+}
+$("logoutBtn").addEventListener("click", logout);
+
+$("refreshBtn").addEventListener("click", async () => {
+  await checkHealth();
+  await loadPage(currentPage);
+  showToast("Actualisation terminée.");
+});
+
+(async function boot() {
+  if (await validateSession()) {
+    showApp();
+    await initializeApp();
+  } else {
+    showLogin();
+  }
+})();
 </script>
 </body>
 </html>
