@@ -1,202 +1,472 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#030812">
-<meta name="description" content="JASON BUSINESS — Connexion à votre espace personnel">
-<title>JASON Business — Connexion</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#050914">
+<meta name="description" content="JASON BUSINESS — Une vision congolaise de l'intelligence numérique, créée par Jason Aloma.">
+<title>JASON BUSINESS 🇨🇩 — Bienvenue</title>
+
 <style>
-:root{--blue:#00d2ff;--blue2:#0077ff;--dark:#050a14;--card:rgba(0,0,0,.86);--red:#ff4757;--green:#00e676;--yellow:#ffeb3b}
-*{box-sizing:border-box}
-html{min-height:100%}
-body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;background:linear-gradient(rgba(3,8,18,.65),rgba(3,8,18,.90)),url("IMG_0870.jpeg") center/cover fixed;color:white;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
-.overlay-login{position:fixed;inset:0;background:radial-gradient(circle at center,rgba(0,210,255,.08),transparent 45%);pointer-events:none}
-.card{width:100%;max-width:390px;padding:30px 24px;background:var(--card);border:1px solid rgba(0,210,255,.55);border-radius:25px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 0 35px rgba(0,210,255,.20);position:relative;z-index:2}
-.logo{width:75px;height:75px;margin:0 auto 15px;border-radius:22px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#001018;font-size:27px;font-weight:900;box-shadow:0 0 30px rgba(0,210,255,.45)}
-h1{color:var(--blue);letter-spacing:3px;margin:0 0 6px;font-size:24px}
-.subtitle{margin:0 0 25px;font-size:13px;opacity:.65;letter-spacing:1px}
-.input-group{text-align:left;margin-top:14px}
-.input-group label{display:block;margin-bottom:7px;font-size:12px;opacity:.65}
-.input-box{position:relative}
-.input-box > span:first-child{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;opacity:.7;pointer-events:none}
-input{width:100%;padding:15px 45px;border-radius:12px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.055);color:white;outline:none;font-size:15px;transition:.25s}
-input::placeholder{color:rgba(255,255,255,.40)}
-input:focus{border-color:var(--blue);box-shadow:0 0 12px rgba(0,210,255,.15)}
-.password-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:17px;opacity:.6;user-select:none;z-index:3}
-button{width:100%;padding:15px;margin-top:22px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--blue),#00a8ff);color:#001018;font-size:15px;font-weight:900;letter-spacing:.5px;cursor:pointer;transition:.25s}
-button:hover{box-shadow:0 0 20px rgba(0,210,255,.35)} button:active{transform:scale(.97)} button:disabled{opacity:.55;cursor:not-allowed}
-.status{min-height:22px;margin-top:15px;font-size:13px;color:var(--yellow);font-weight:bold;line-height:1.5}
-.register{margin-top:22px;font-size:13px;line-height:1.6;opacity:.75} .register strong{color:white} .register a{color:var(--blue);text-decoration:none;font-weight:bold} .register a:hover{text-decoration:underline}
-.security{margin-top:20px;padding:10px;border-radius:10px;background:rgba(0,230,118,.05);border:1px solid rgba(0,230,118,.12);color:var(--green);font-size:10px}
-@media(max-width:380px){body{padding:12px} .card{padding:25px 18px} h1{font-size:21px} .logo{width:68px;height:68px;font-size:24px}}
+:root{
+  --bg:#050914;
+  --gold:#e5b84f;
+  --gold2:#fff0bd;
+  --white:#f7f8fc;
+  --muted:#9aa9c0;
+  --blue:#00cfff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;min-height:100%;scroll-behavior:smooth}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:radial-gradient(ellipse at 50% 35%,#132440 0%,#080f1d 45%,#030711 100%);
+  color:var(--white);
+  min-height:100vh;
+  min-height:100svh;
+  overflow:hidden;
+}
+button,a{-webkit-tap-highlight-color:transparent}
+#particles{
+  position:fixed;inset:0;width:100%;height:100%;
+  pointer-events:none;z-index:0
+}
+.glow{
+  position:fixed;width:300px;height:300px;border-radius:50%;
+  filter:blur(100px);pointer-events:none;z-index:0;
+  animation:glowMove 10s ease-in-out infinite alternate
+}
+.glow1{top:-120px;left:-110px;background:#d8aa452b}
+.glow2{bottom:-140px;right:-110px;background:#1c5eb32c;animation-delay:-4s}
+.glow3{
+  top:45%;left:45%;width:200px;height:200px;
+  background:#00cfff0b;animation-delay:-7s
+}
+.page{
+  position:relative;z-index:1;
+  min-height:100vh;min-height:100svh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:space-between;
+  padding:25px 20px 20px
+}
+header{
+  width:100%;max-width:1100px;
+  display:flex;justify-content:space-between;
+  align-items:center;gap:12px;
+  animation:fadeDown 1s ease both
+}
+.brand{
+  display:flex;align-items:center;gap:11px;
+  color:inherit;text-decoration:none
+}
+.logo{
+  width:46px;height:46px;display:grid;place-items:center;
+  flex-shrink:0;border-radius:14px;
+  background:linear-gradient(135deg,#fff0b7,#d19a30);
+  color:#101521;font-size:19px;font-weight:1000;
+  box-shadow:0 0 30px #e5b84f28;
+  animation:logoPulse 3s infinite
+}
+.brand h2{font-size:15px;letter-spacing:1px}
+.brand h2 span{color:var(--gold)}
+.brand p{color:var(--muted);font-size:10px;margin-top:5px}
+.status{
+  display:flex;align-items:center;gap:7px;
+  color:#b6c5d9;font-size:10px;
+  border:1px solid #ffffff12;background:#ffffff06;
+  padding:9px 11px;border-radius:30px
+}
+.dot{
+  width:7px;height:7px;background:#43e49a;
+  border-radius:50%;box-shadow:0 0 12px #43e49a;
+  animation:blink 1.5s infinite
+}
+main{
+  width:100%;max-width:700px;text-align:center;
+  padding:35px 0;animation:fadeUp 1.1s ease both
+}
+.emblem{
+  width:150px;height:150px;position:relative;
+  margin:0 auto 30px;display:grid;place-items:center
+}
+.ring{
+  position:absolute;inset:0;
+  border:1px solid #e5b84f65;border-radius:50%;
+  animation:rotate 12s linear infinite
+}
+.ring:before{
+  content:"";position:absolute;top:12px;left:17px;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--gold2);box-shadow:0 0 18px var(--gold)
+}
+.ring2{
+  position:absolute;inset:12px;
+  border:1px dashed #e5b84f48;border-radius:50%;
+  animation:rotateReverse 18s linear infinite
+}
+.ring2:before{
+  content:"";position:absolute;bottom:10px;right:15px;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--blue);box-shadow:0 0 15px var(--blue)
+}
+.ring3{
+  position:absolute;inset:23px;
+  border:1px solid #e5b84f20;border-radius:50%
+}
+.emblem-inner{
+  width:95px;height:95px;display:grid;place-items:center;
+  border-radius:27px;
+  background:linear-gradient(145deg,#fff0bd,#d7a33a,#b77b23);
+  color:#101521;font-size:35px;font-weight:1000;
+  box-shadow:0 0 35px #e5b84f36,inset 0 1px 1px #ffffffaa;
+  animation:float 4s ease-in-out infinite,innerPulse 4s infinite
+}
+.tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 15px;border:1px solid #e5b84f35;
+  background:#e5b84f0b;border-radius:30px;
+  color:var(--gold2);font-size:10px;font-weight:bold;
+  letter-spacing:2px;margin-bottom:25px
+}
+h1{
+  font-size:clamp(38px,8vw,67px);
+  line-height:1.08;letter-spacing:-2px;
+  font-weight:900;margin-bottom:20px
+}
+h1 span{
+  display:block;color:transparent;
+  background:linear-gradient(90deg,#fff0bd,#e5b84f,#fff0bd,#e5b84f);
+  background-size:250% auto;background-clip:text;
+  -webkit-background-clip:text;
+  animation:textFlow 5s linear infinite
+}
+.description{
+  max-width:490px;margin:0 auto;
+  color:var(--muted);font-size:14px;line-height:1.9
+}
+.creator{margin-top:20px;font-size:12px;color:#bdc7d7;line-height:1.8}
+.creator strong{color:var(--gold2)}
+.continue-wrap{margin-top:35px}
+.continue{
+  width:min(100%,310px);min-height:58px;
+  display:inline-flex;justify-content:center;align-items:center;
+  gap:15px;position:relative;overflow:hidden;
+  padding:0 25px;border:1px solid #ffe8a5;border-radius:15px;
+  background:linear-gradient(110deg,#ffe9a6,#d5a13a,#f8d879);
+  background-size:200% auto;color:#111521;
+  font-size:14px;font-weight:900;letter-spacing:1.5px;
+  text-decoration:none;box-shadow:0 0 25px #e5b84f20;
+  animation:buttonFlow 4s linear infinite,buttonAppear 1.4s ease both;
+  transition:transform .25s,box-shadow .25s
+}
+.continue:hover{
+  transform:translateY(-4px);
+  box-shadow:0 0 40px #e5b84f55
+}
+.continue:active{transform:scale(.97)}
+.continue .arrow{font-size:21px;transition:transform .3s}
+.continue:hover .arrow{transform:translateX(6px)}
+.continue:before{
+  content:"";position:absolute;width:40%;height:200%;
+  top:-50%;left:-70%;transform:rotate(25deg);
+  background:linear-gradient(90deg,transparent,#ffffff90,transparent);
+  animation:shine 3.5s infinite
+}
+.continue span{position:relative;z-index:1}
+.hint{margin-top:15px;color:#718199;font-size:10px;letter-spacing:.5px}
+.features{
+  display:flex;justify-content:center;flex-wrap:wrap;
+  gap:9px;margin-top:26px
+}
+.feature{
+  padding:8px 11px;border:1px solid #ffffff12;
+  background:#ffffff05;border-radius:30px;
+  font-size:10px;color:#bac7d9
+}
+.feature span{color:var(--gold);margin-right:5px}
+footer{
+  width:100%;max-width:1100px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:15px;padding-top:18px;
+  border-top:1px solid #e5b84f1c;
+  animation:fadeUp 1.5s ease both
+}
+footer p{color:#8291a8;font-size:10px;line-height:1.8}
+footer strong{color:var(--gold2)}
+.footer-right{text-align:right}
+#transition{
+  position:fixed;inset:0;z-index:99;
+  background:radial-gradient(circle,#162b45,#030711 75%);
+  display:grid;place-items:center;
+  opacity:0;visibility:hidden;
+  transition:opacity .6s,visibility .6s
+}
+#transition.active{opacity:1;visibility:visible}
+.transition-content{text-align:center;animation:fadeUp .6s ease both}
+.transition-logo{
+  width:75px;height:75px;margin:0 auto 20px;
+  display:grid;place-items:center;border-radius:22px;
+  color:#101521;font-size:27px;font-weight:1000;
+  background:linear-gradient(135deg,#fff0bd,#d7a33a);
+  box-shadow:0 0 45px #e5b84f55;
+  animation:float 1.5s infinite
+}
+.transition-content p{color:var(--gold2);font-size:12px;letter-spacing:2px}
+.loader{
+  width:130px;height:3px;background:#ffffff12;
+  border-radius:10px;overflow:hidden;margin:20px auto
+}
+.loader:after{
+  content:"";display:block;width:40%;height:100%;
+  background:var(--gold);animation:loading 1s ease-in-out infinite
+}
+@keyframes rotate{to{transform:rotate(360deg)}}
+@keyframes rotateReverse{to{transform:rotate(-360deg)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 15px #e5b84f20}50%{box-shadow:0 0 30px #e5b84f50}}
+@keyframes innerPulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.08)}}
+@keyframes blink{50%{opacity:.35}}
+@keyframes textFlow{to{background-position:250% center}}
+@keyframes buttonFlow{to{background-position:200% center}}
+@keyframes shine{0%,45%{left:-70%}75%,100%{left:140%}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes buttonAppear{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glowMove{to{transform:translate(90px,65px) scale(1.2)}}
+@keyframes loading{from{transform:translateX(-100%)}to{transform:translateX(350%)}}
+@media(max-width:500px){
+  .page{padding:20px 17px 15px}
+  header{align-items:flex-start}
+  .brand h2{font-size:13px}
+  .brand p{font-size:9px}
+  .logo{width:41px;height:41px}
+  .status{font-size:9px;padding:8px}
+  main{padding:30px 0}
+  .emblem{width:125px;height:125px;margin-bottom:27px}
+  .emblem-inner{width:80px;height:80px;font-size:30px;border-radius:24px}
+  h1{font-size:42px;letter-spacing:-1.5px}
+  .description{font-size:13px}
+  .continue{min-height:55px;font-size:13px}
+  footer{flex-direction:column;align-items:center;text-align:center}
+  .footer-right{text-align:center}
+  .features{gap:7px}
+}
+@media(max-height:700px){
+  .page{padding-top:14px;padding-bottom:12px}
+  .emblem{width:105px;height:105px;margin-bottom:20px}
+  .emblem-inner{width:70px;height:70px;font-size:27px}
+  main{padding:18px 0}
+  h1{font-size:clamp(32px,7vw,50px)}
+  .continue-wrap{margin-top:23px}
+  .features{margin-top:15px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
 </style>
 </head>
+
 <body>
-<div class="overlay-login"></div>
-<div class="card">
+
+<canvas id="particles" aria-hidden="true"></canvas>
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+<div class="glow glow3"></div>
+
+<div class="page">
+
+<header>
+  <a href="index.html" class="brand" aria-label="Accueil JASON BUSINESS">
     <div class="logo">JB</div>
-    <h1>JASON BUSINESS</h1>
-    <p class="subtitle">ACCÈS À VOTRE ESPACE</p>
-    <div class="input-group">
-        <label>NUMÉRO DE TÉLÉPHONE</label>
-        <div class="input-box">
-            <span>📱</span>
-            <input type="tel" id="jasonLoginPhone" placeholder="Ex : 243XXXXXXXXX" autocomplete="tel" inputmode="tel">
-        </div>
+    <div>
+      <h2>JASON <span>BUSINESS</span></h2>
+      <p>Intelligence numérique 🇨🇩</p>
     </div>
-    <div class="input-group">
-        <label>MOT DE PASSE</label>
-        <div class="input-box">
-            <span>🔐</span>
-            <input type="password" id="jasonLoginPassword" placeholder="Votre mot de passe" autocomplete="current-password">
-            <span class="password-toggle" id="jasonPasswordToggle" title="Afficher le mot de passe">👁️</span>
-        </div>
-    </div>
-    <button id="jasonLoginButton" type="button">🚀 SE CONNECTER</button>
-    <div id="jasonLoginStatus" class="status" aria-live="polite"></div>
-    <div class="register">Nouveau sur <strong>Jason Business</strong> ?<br><a href="register.html">Créer un compte</a></div>
-    <div class="security">🔒 Connexion sécurisée à votre espace Jason Business</div>
+  </a>
+
+  <div class="status">
+    <span class="dot"></span>
+    Bienvenue
+  </div>
+</header>
+
+<main>
+  <div class="emblem">
+    <div class="ring"></div>
+    <div class="ring2"></div>
+    <div class="ring3"></div>
+    <div class="emblem-inner">JB</div>
+  </div>
+
+  <div class="tag">
+    <span class="dot"></span>
+    BIENVENUE DANS TON UNIVERS
+  </div>
+
+  <h1>
+    Bienvenue chez
+    <span>JASON BUSINESS</span>
+  </h1>
+
+  <p class="description">
+    Découvre une nouvelle expérience numérique.
+    Explore tes services, développe tes projets et profite
+    d'un espace pensé pour l'innovation et l'ambition congolaise.
+  </p>
+
+  <p class="creator">
+    Une vision congolaise créée par<br>
+    <strong>Jason Aloma 🇨🇩</strong>
+  </p>
+
+  <div class="features">
+    <div class="feature"><span>✦</span>Innovation</div>
+    <div class="feature"><span>◆</span>Services numériques</div>
+    <div class="feature"><span>●</span>JASON BUSINESS</div>
+  </div>
+
+  <div class="continue-wrap">
+    <a class="continue" id="continueButton" href="Connexion.html">
+      <span>CONTINUER</span>
+      <span class="arrow">→</span>
+    </a>
+    <p class="hint">APPUIE POUR ACCÉDER À TON ESPACE</p>
+  </div>
+</main>
+
+<footer>
+  <p>
+    <strong>JASON BUSINESS 🇨🇩</strong><br>
+    Créé par Jason Aloma
+  </p>
+
+  <p class="footer-right">
+    Kinshasa · RDC<br>
+    © <span id="year"></span> Tous droits réservés
+  </p>
+</footer>
+
 </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+<!-- TRANSITION AVANT LA CONNEXION -->
+<div id="transition" aria-hidden="true">
+  <div class="transition-content">
+    <div class="transition-logo">JB</div>
+    <p>PRÉPARATION DE TON ESPACE</p>
+    <div class="loader"></div>
+    <p style="font-size:10px;color:#91a2b9;letter-spacing:1px">
+      JASON BUSINESS 🇨🇩
+    </p>
+  </div>
+</div>
 
-const firebaseConfig = {
-    apiKey: "AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
-    authDomain: "starlink-investit.firebaseapp.com",
-    databaseURL: "https://starlink-investit-default-rtdb.firebaseio.com",
-    projectId: "starlink-investit",
-    storageBucket: "starlink-investit.firebasestorage.app",
-    messagingSenderId: "807081599583",
-    appId: "1:807081599583:web:e00ec3959bc4acdae031ea"
-};
+<script>
+"use strict";
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+/* Année automatique */
+document.getElementById("year").textContent =
+  new Date().getFullYear();
 
-const JASON_USERS_PATH = "Jasonuser";
-const JASON_SESSION_KEY = "jasonBusinessUserPhone";
-const JASON_LOGGED_KEY = "jasonBusinessLogged";
-const JASON_LOGIN_TIME_KEY = "jasonBusinessLoginTime";
+/* Transition animée vers la connexion */
+const continueButton = document.getElementById("continueButton");
+const transitionScreen = document.getElementById("transition");
 
-// 🔐 TON CODE SECRET ADMIN - NE CHANGE PAS
-const ADMIN_SECRET_CODE = "10092007";
-const ADMIN_USER = "jason_admin";
+continueButton.addEventListener("click", function(event) {
+  const destination = continueButton.getAttribute("href");
 
-const loginPhoneInput = document.getElementById("jasonLoginPhone");
-const loginPasswordInput = document.getElementById("jasonLoginPassword");
-const loginButton = document.getElementById("jasonLoginButton");
-const loginStatus = document.getElementById("jasonLoginStatus");
-const passwordToggle = document.getElementById("jasonPasswordToggle");
+  // Navigation normale si le navigateur ouvre un autre onglet.
+  if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) {
+    return;
+  }
 
-const existingSession = localStorage.getItem(JASON_SESSION_KEY);
-if(existingSession){
-    // Si c'est l'admin, il reste sur admin
-    if(existingSession === ADMIN_USER || existingSession === ADMIN_SECRET_CODE){
-        window.location.replace("admin.html");
-    } else {
-        window.location.replace("dashboard.html");
-    }
-}
+  event.preventDefault();
+  transitionScreen.classList.add("active");
+  transitionScreen.setAttribute("aria-hidden", "false");
 
-passwordToggle.addEventListener("click", () => {
-    if(loginPasswordInput.type === "password"){
-        loginPasswordInput.type = "text";
-        passwordToggle.innerText = "🙈";
-    } else {
-        loginPasswordInput.type = "password";
-        passwordToggle.innerText = "👁️";
-    }
+  setTimeout(function() {
+    window.location.href = destination;
+  }, 850);
 });
 
-function cleanJasonPhone(phone){
-    return String(phone||"").trim().replace(/\s+/g,"").replace(/-/g,"").replace(/\(/g,"").replace(/\)/g,"");
+/* Particules dorées animées */
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+let width = 0;
+let height = 0;
+let particles = [];
+let animationFrame = 0;
+
+const reduceMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+function resizeCanvas() {
+  const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+
+  width = window.innerWidth;
+  height = window.innerHeight;
+
+  canvas.width = Math.round(width * ratio);
+  canvas.height = Math.round(height * ratio);
+
+  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+  const count = Math.min(
+    65,
+    Math.max(20, Math.floor(width / 6))
+  );
+
+  particles = Array.from({length: count}, function() {
+    return {
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 1.7 + 0.4,
+      speed: Math.random() * 0.35 + 0.10,
+      alpha: Math.random() * 0.55 + 0.12,
+      drift: (Math.random() - 0.5) * 0.25
+    };
+  });
 }
-function showJasonStatus(message, type="warning"){
-    loginStatus.innerText = message;
-    loginStatus.style.color = type==="success" ? "#00e676" : type==="error" ? "#ff4757" : "#ffeb3b";
-}
-function resetLoginButton(){
-    loginButton.disabled = false;
-    loginButton.innerText = "🚀 SE CONNECTER";
-}
 
-async function loginJasonBusiness(){
-    const phoneRaw = loginPhoneInput.value.trim();
-    const phone = cleanJasonPhone(phoneRaw);
-    const password = loginPasswordInput.value.trim();
+function drawParticles() {
+  ctx.clearRect(0, 0, width, height);
 
-    if(!phone){ showJasonStatus("❌ Entrez votre numéro de téléphone.", "error"); return; }
-    if(!password){ showJasonStatus("❌ Entrez votre mot de passe.", "error"); return; }
+  particles.forEach(function(p) {
+    if (!reduceMotion) {
+      p.y -= p.speed;
+      p.x += p.drift;
 
-    // 🔐 VERIFICATION CODE SECRET ADMIN - GARDE APPARENCE
-    const isAdminLogin = (phone === ADMIN_SECRET_CODE || phoneRaw.toLowerCase() === ADMIN_USER || password === ADMIN_SECRET_CODE || phone === ADMIN_USER);
+      if (p.y < -5) {
+        p.y = height + 5;
+        p.x = Math.random() * width;
+      }
 
-    if(isAdminLogin){
-        // Vérifie que le code admin est bien 10092007
-        if(phone === ADMIN_SECRET_CODE || password === ADMIN_SECRET_CODE || phoneRaw.toLowerCase() === ADMIN_USER){
-            loginButton.disabled = true;
-            loginButton.innerText = "⏳ ACCÈS ADMIN...";
-            showJasonStatus("🔐 Accès Admin autorisé...", "success");
-
-            localStorage.setItem(JASON_SESSION_KEY, ADMIN_USER);
-            localStorage.setItem(JASON_LOGGED_KEY, "true");
-            localStorage.setItem(JASON_LOGIN_TIME_KEY, Date.now().toString());
-            localStorage.setItem("jasonBusinessUserName", "Admin JB");
-            localStorage.setItem("jasonIsAdmin", "true");
-
-            setTimeout(()=> window.location.replace("admin.html"), 600);
-            return;
-        }
+      if (p.x < -5) p.x = width + 5;
+      if (p.x > width + 5) p.x = -5;
     }
 
-    // --- LOGIN NORMAL CLIENT ---
-    loginButton.disabled = true;
-    loginButton.innerText = "⏳ AUTHENTIFICATION...";
-    showJasonStatus("Connexion à Jason Business...", "warning");
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(229,184,79," + p.alpha + ")";
+    ctx.fill();
+  });
 
-    try{
-        const userRef = ref(db, JASON_USERS_PATH + "/" + phone);
-        const snapshot = await get(userRef);
-
-        if(!snapshot.exists()){
-            showJasonStatus("❌ Aucun compte Jason Business trouvé pour ce numéro.", "error");
-            resetLoginButton(); return;
-        }
-
-        const userData = snapshot.val() || {};
-        if(userData.disabled === true || userData.bloque === true || userData.active === false){
-            showJasonStatus("🚫 Ce compte a été désactivé.", "error");
-            resetLoginButton(); return;
-        }
-
-        const savedPassword = String(userData.password ?? "");
-        if(savedPassword !== String(password)){
-            showJasonStatus("❌ Mot de passe incorrect.", "error");
-            resetLoginButton(); return;
-        }
-
-        localStorage.setItem(JASON_SESSION_KEY, phone);
-        localStorage.setItem(JASON_LOGGED_KEY, "true");
-        localStorage.setItem(JASON_LOGIN_TIME_KEY, Date.now().toString());
-        localStorage.setItem("jasonBusinessUserName", String(userData.nom || userData.name || userData.username || "Utilisateur"));
-
-        showJasonStatus("✅ Accès autorisé. Bienvenue !", "success");
-        loginButton.innerText = "✅ CONNEXION RÉUSSIE";
-        setTimeout(()=> window.location.replace("dashboard.html"), 700);
-
-    }catch(error){
-        console.error("LOGIN ERROR:", error);
-        showJasonStatus("⚠️ Impossible de contacter Firebase.", "error");
-        resetLoginButton();
-    }
+  if (!reduceMotion) {
+    animationFrame = requestAnimationFrame(drawParticles);
+  }
 }
 
-loginButton.addEventListener("click", loginJasonBusiness);
-loginPhoneInput.addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); loginJasonBusiness(); }});
-loginPasswordInput.addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); loginJasonBusiness(); }});
+resizeCanvas();
+drawParticles();
+
+window.addEventListener("resize", function() {
+  cancelAnimationFrame(animationFrame);
+  resizeCanvas();
+  drawParticles();
+});
 </script>
+
 </body>
 </html>
