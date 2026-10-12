@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#050a14">
+<title>JASON BUSINESS — API Center</title>
+
+<style>
+:root{
+  --bg:#050a14;
+  --panel:#0a1627;
+  --panel2:#0d1c30;
+  --blue:#00d2ff;
+  --blue2:#0077ff;
+  --gold:#ffd700;
+  --green:#00e676;
+  --red:#ff5964;
+  --text:#f4f8ff;
+  --muted:#91a4ba;
+  --border:#1b354d;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  padding-bottom:95px;
+}
+button,input,select,textarea{font:inherit}
+button,a{cursor:pointer}
+a{color:inherit;text-decoration:none}
+button{transition:.2s}
+button:active{transform:scale(.98)}
+.header{
+  position:sticky;top:0;z-index:30;
+  padding:17px 16px;
+  background:rgba(5,10,20,.96);
+  border-bottom:1px solid #16405a;
+  backdrop-filter:blur(18px);
+}
+.header-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{font-size:18px;font-weight:900;letter-spacing:1px;color:var(--blue)}
+.online{font-size:9px;color:var(--green)}
+.subbrand{margin-top:7px;color:var(--muted);font-size:10px}
+.container{max-width:1000px;margin:auto;padding:15px}
+.hero{
+  padding:21px;border-radius:21px;
+  background:linear-gradient(135deg,#0c2840,#07111f 75%);
+  border:1px solid #17435d;
+  box-shadow:0 14px 40px #0004;
+}
+.hero h1{font-size:24px;margin:0 0 10px}
+.hero p{font-size:12px;color:#b4c3d6;line-height:1.8;margin:0}
+.hero-label{
+  display:inline-block;margin-bottom:12px;padding:6px 10px;
+  border-radius:30px;background:#06283a;color:var(--blue);
+  font-size:9px;font-weight:bold;border:1px solid #15516a;
+}
+.balance{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:15px;margin-top:17px;border-radius:15px;
+  background:#06101d;border:1px solid #19364c;
+}
+.balance small{display:block;font-size:10px;color:var(--muted);margin-bottom:6px}
+.balance strong{font-size:21px;color:var(--blue)}
+.btn{
+  border:0;border-radius:10px;padding:12px 14px;
+  font-size:11px;font-weight:900;display:inline-flex;
+  align-items:center;justify-content:center;gap:6px;
+}
+.btn-blue{background:linear-gradient(135deg,var(--blue),#008cff);color:#001018}
+.btn-dark{background:#11253a;color:#d7e7f8;border:1px solid #27435b}
+.btn-gold{background:linear-gradient(135deg,#ffe57b,#d6a526);color:#231700}
+.btn-red{background:#30161d;color:#ffb0b5;border:1px solid #612b34}
+.section-head{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;margin:25px 0 13px;
+}
+.section-head h2{font-size:16px;margin:0}
+.section-head small{font-size:10px;color:var(--muted)}
+.search{
+  width:100%;background:var(--panel);color:white;
+  border:1px solid var(--border);border-radius:12px;
+  padding:13px;outline:none;margin-bottom:12px;
+}
+.search:focus{border-color:var(--blue)}
+.filters{display:flex;gap:7px;overflow-x:auto;padding-bottom:10px}
+.filter{
+  flex-shrink:0;background:var(--panel);color:#a9bbd0;
+  border:1px solid var(--border);border-radius:30px;
+  padding:9px 13px;font-size:10px;
+}
+.filter.active{color:var(--blue);border-color:var(--blue);background:#06263a}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.api-card{
+  min-width:0;display:flex;flex-direction:column;gap:10px;
+  padding:13px;border-radius:17px;
+  background:linear-gradient(145deg,#0d1c30,#08111e);
+  border:1px solid #1b354d;
+}
+.api-icon{
+  width:43px;height:43px;display:grid;place-items:center;
+  font-size:22px;border-radius:13px;background:#06253a;
+  border:1px solid #17455f;
+}
+.api-name{font-size:13px;font-weight:900;line-height:1.4}
+.api-desc{font-size:10px;color:var(--muted);line-height:1.7;flex:1}
+.api-price{font-size:17px;font-weight:900;color:var(--blue)}
+.api-price small{font-size:9px;color:var(--muted);font-weight:normal}
+.card-status{font-size:9px;color:var(--gold)}
+.card-buttons{display:grid;gap:7px}
+.card-buttons button{width:100%}
+.notice{
+  padding:14px;margin-top:15px;border-radius:13px;
+  border:1px solid #34422f;background:#151c1d;
+  color:#b9c8d8;font-size:10px;line-height:1.9;
+}
+.notice strong{color:var(--gold)}
+.message{
+  display:none;padding:12px;border-radius:10px;
+  margin:12px 0;font-size:11px;line-height:1.7;
+}
+.message.show{display:block}
+.message.error{background:#30151b;color:#ffb0b5}
+.message.success{background:#08271e;color:#a5ffd2}
+.message.info{background:#08243a;color:#9fe8ff}
+.item{
+  padding:13px;margin-bottom:9px;border-radius:12px;
+  border:1px solid var(--border);background:var(--panel);
+  display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
+}
+.item-name{font-size:12px;font-weight:bold}
+.item-meta{font-size:10px;color:var(--muted);line-height:1.8;margin-top:5px}
+.badge{display:inline-block;padding:5px 8px;border-radius:20px;font-size:9px;white-space:nowrap}
+.pending{background:#302714;color:#ffe18b}
+.approved{background:#092d21;color:#91ffd0}
+.rejected{background:#35181e;color:#ffb2b8}
+.empty{text-align:center;padding:20px;color:var(--muted);font-size:11px}
+.loading-screen{
+  position:fixed;inset:0;z-index:100;background:var(--bg);
+  display:grid;place-items:center;color:var(--blue);font-size:12px;
+}
+.spinner{
+  width:30px;height:30px;border:3px solid #1b3044;
+  border-top-color:var(--blue);border-radius:50%;
+  animation:spin .8s linear infinite;margin:0 auto 12px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.modal{
+  display:none;position:fixed;inset:0;z-index:70;
+  padding:15px;background:#000c;align-items:center;justify-content:center;
+}
+.modal.show{display:flex}
+.modal-box{
+  width:100%;max-width:600px;max-height:90vh;overflow:auto;
+  background:#091626;border:1px solid #244861;
+  border-radius:19px;padding:18px;
+}
+.modal-top{display:flex;align-items:center;gap:11px}
+.modal-top h2{font-size:17px;margin:0}
+.modal-top p{font-size:10px;color:var(--muted);margin:5px 0 0}
+.close{
+  margin-left:auto;flex-shrink:0;background:#162b40;color:white;
+  border:1px solid #2b4359;border-radius:9px;padding:8px 11px;
+}
+.price-big{font-size:25px;font-weight:900;color:var(--blue);margin:17px 0 7px}
+.endpoint{
+  padding:10px;border-radius:9px;background:#040b13;
+  color:#9ceaff;font-size:10px;overflow-wrap:anywhere;line-height:1.7;
+}
+.tabs{display:flex;gap:7px;overflow-x:auto;margin:16px 0 10px}
+.tab{
+  flex-shrink:0;background:#102238;border:1px solid #263f56;
+  color:#b8c9dc;padding:9px 12px;border-radius:9px;font-size:10px;
+}
+.tab.active{color:var(--blue);border-color:var(--blue)}
+.codebox{
+  background:#02070d;border:1px solid #1b3045;border-radius:12px;
+  overflow:hidden;margin-top:10px;
+}
+.code-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px;background:#0c1a2b;color:#9db2c9;font-size:10px;
+}
+.codebox pre{
+  margin:0;padding:13px;overflow:auto;max-height:290px;
+  white-space:pre-wrap;overflow-wrap:anywhere;
+  color:#b8f2d9;font:10px/1.7 monospace;
+}
+.modal-actions{display:grid;gap:8px;margin-top:14px}
+.modal-actions button{width:100%}
+.doc-note{font-size:10px;color:#aabbd0;line-height:1.8;margin-top:12px}
+.navbar{
+  position:fixed;bottom:0;left:0;width:100%;z-index:40;
+  display:flex;align-items:center;justify-content:space-around;
+  background:rgba(5,10,20,.98);border-top:1px solid #16405a;
+  padding:9px 2px calc(9px + env(safe-area-inset-bottom));
+  backdrop-filter:blur(18px);
+}
+.nav-link{
+  flex:1;min-width:0;text-align:center;color:#8b9bb0;
+  font-size:9px;font-weight:bold;padding:3px 0;opacity:.8;
+}
+.nav-icon{font-size:18px;margin-bottom:4px}
+.nav-link.active{color:var(--blue);opacity:1}
+.nav-link.vip{color:var(--gold);opacity:1}
+@media(min-width:620px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:360px){
+ .container{padding:11px}.grid{gap:8px}.api-card{padding:10px}
+ .api-name{font-size:12px}.api-price{font-size:14px}
+ .nav-link{font-size:8px}.hero h1{font-size:21px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="loading-screen" id="loading">
+ <div style="text-align:center">
+  <div class="spinner"></div>
+  JASON BUSINESS
+ </div>
+</div>
+
+<header class="header">
+ <div class="header-row">
+  <div class="brand">JASON BUSINESS</div>
+  <div class="online">● API CENTER</div>
+ </div>
+ <div class="subbrand">Créé par Jason Aloma 🇨🇩 • Kinshasa</div>
+</header>
+
+<main class="container">
+
+<section class="hero">
+ <span class="hero-label">⚡ SERVICES PROFESSIONNELS</span>
+ <h1>Centre des API 🤖</h1>
+ <p>
+  Découvrez les API disponibles, consultez leur documentation technique
+  et demandez un accès payant. Chaque service possède son tarif et ses
+  exemples de code. L'accès est accordé après validation de votre achat.
+ </p>
+ <div class="balance">
+  <div>
+   <small>MON SOLDE DISPONIBLE</small>
+   <strong id="balanceValue">— FC</strong>
+  </div>
+  <a class="btn btn-blue" href="recharge.html">＋ Recharger</a>
+ </div>
+ <div class="subbrand" id="accountMessage">Connexion au compte...</div>
+</section>
+
+<div id="message" class="message"></div>
+
+<div class="section-head">
+ <h2>🧩 Catalogue des API</h2>
+ <small id="catalogCount">12 services</small>
+</div>
+
+<input class="search" id="search" placeholder="🔎 Rechercher une API..." autocomplete="off">
+
+<div class="filters">
+ <button class="filter active" data-filter="all">Toutes</button>
+ <button class="filter" data-filter="ia">Intelligence IA</button>
+ <button class="filter" data-filter="media">Images / Vidéo / Musique</button>
+ <button class="filter" data-filter="tools">Outils</button>
+</div>
+
+<div class="grid" id="apiGrid"></div>
+
+<div class="notice">
+ <strong>💳 Fonctionnement des achats</strong><br>
+ 1. Rechargez votre compte.<br>
+ 2. Choisissez une API et consultez son prix.<br>
+ 3. Envoyez votre demande d'achat.<br>
+ 4. Attendez la vérification du paiement par l'administrateur.<br>
+ 5. Après validation, votre accès doit être activé côté serveur.<br><br>
+ Les tarifs affichés ci-dessous sont des <strong>prix de départ</strong>.
+ Ils peuvent être remplacés par les tarifs définis dans Firebase.
+ L'envoi d'une demande ne débite pas automatiquement votre solde.
+</div>
+
+<div class="section-head">
+ <h2>🧾 Mes demandes d'achat</h2>
+ <small>Statut en temps réel</small>
+</div>
+<div id="purchaseHistory"><div class="empty">Chargement...</div></div>
+
+<div class="section-head">
+ <h2>🔓 Mes API activées</h2>
+</div>
+<div id="accessList"><div class="empty">Chargement...</div></div>
+
+<div class="section-head">
+ <h2>📘 Documentation technique</h2>
+</div>
+<div class="notice">
+ Ouvre une API dans le catalogue, puis sélectionne JavaScript, Python
+ ou cURL pour consulter les exemples complets. Les routes qui n'ont pas
+ encore de format de requête documenté sont signalées dans leur fiche :
+ vérifie leur contrat côté serveur avant de les intégrer.
+</div>
+
+</main>
+
+<!-- FENÊTRE API -->
+<div class="modal" id="apiModal">
+ <div class="modal-box">
+  <div class="modal-top">
+   <div class="api-icon" id="modalIcon">🤖</div>
+   <div>
+    <h2 id="modalName">API</h2>
+    <p id="modalDescription"></p>
+   </div>
+   <button class="close" id="closeModal">✕</button>
+  </div>
+
+  <div class="price-big" id="modalPrice">— FC</div>
+  <div class="endpoint" id="modalEndpoint"></div>
+
+  <div class="section-head">
+   <h2>📘 Exemple de requête</h2>
+  </div>
+  <div class="tabs">
+   <button class="tab active" data-language="js">JavaScript</button>
+   <button class="tab" data-language="python">Python</button>
+   <button class="tab" data-language="curl">cURL</button>
+  </div>
+
+  <div class="codebox">
+   <div class="code-head">
+    <span id="codeLanguage">JavaScript</span>
+    <button class="btn btn-dark" id="copyCode">Copier le code</button>
+   </div>
+   <pre id="codeOutput"></pre>
+  </div>
+
+  <div class="doc-note" id="docNote"></div>
+  <div class="modal-actions">
+   <button class="btn btn-blue" id="buyButton">🛒 Demander l'achat</button>
+   <a class="btn btn-dark" href="recharge.html">📥 Recharger mon compte</a>
+   <button class="btn btn-dark" id="closeModalBottom">Fermer</button>
+  </div>
+ </div>
+</div>
+
+<nav class="navbar">
+ <a class="nav-link" href="dashboard.html"><div class="nav-icon">📊</div>Dashboard</a>
+ <a class="nav-link" href="shop.html"><div class="nav-icon">🛍️</div>Boutique</a>
+ <a class="nav-link" href="equipe.html"><div class="nav-icon">👥</div>Équipe</a>
+ <a class="nav-link active" href="api.html"><div class="nav-icon">🤖</div>API</a>
+ <a class="nav-link vip" href="vip.html"><div class="nav-icon">👑</div>VIP</a>
+ <a class="nav-link" href="profil.html"><div class="nav-icon">👤</div>Profil</a>
+</nav>
+
+<script type="module">
+import { initializeApp }
+ from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+import {
+ getDatabase, ref, onValue, get, push
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+/* ======================================================
+   1. FIREBASE — PROJET STARLINK-INVESTIT
+   Conserve la configuration utilisée dans ton projet.
+====================================================== */
+const firebaseConfig = {
+ apiKey: "AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
+ authDomain: "starlink-investit.firebaseapp.com",
+ databaseURL: "https://starlink-investit-default-rtdb.firebaseio.com",
+ projectId: "starlink-investit",
+ storageBucket: "starlink-investit.firebasestorage.app",
+ messagingSenderId: "807081599583",
+ appId: "1:807081599583:web:e00ec3959bc4acdae031ea"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+/* ======================================================
+   2. SESSION UTILISATEUR
+====================================================== */
+const phone =
+ localStorage.getItem("jasonBusinessUserPhone") ||
+ localStorage.getItem("userPhone");
+
+if (!phone) {
+ location.replace("login.html");
+ throw new Error("Utilisateur non connecté");
+}
+
+const safePhone = String(phone).replace(/[.#$\[\]/]/g, "_");
+const userRef = ref(db, "jasonBusiness/users/" + safePhone);
+const pricesRef = ref(db, "jasonBusiness/config/apiPrices");
+const purchasesRef = ref(db, "jasonBusiness/apiPurchases/" + safePhone);
+const accessRef = ref(db, "jasonBusiness/apiAccess/" + safePhone);
+
+const API_BASE = "https://davbot-outils.vercel.app";
+
+/* ======================================================
+   3. CATALOGUE — 12 ROUTES FOURNIES
+   Les prix sont des exemples de départ.
+====================================================== */
+const catalog = [
+ {
+  id:"ai",name:"IA conversationnelle",icon:"🧠",category:"ia",
+  description:"Assistant conversationnel avec historique de messages.",
+  endpoint:"/api/intelligence-artificielle/ai",price:5000,
+  body:{message:"Bonjour, présente-toi.",history:[]},
+  note:"Exemple de requête communiqué. La réponse dépend du serveur."
+ },
+ {
+  id:"ask",name:"IA Ask & Vision",icon:"🤖",category:"ia",
+  description:"Assistant IA avec paramètres image, connaissance et règles.",
+  endpoint:"/api/intelligence-artificielle/ask",price:7000,
+  body:{
+   message:"Analyse cette image.",
+   image:"data:image/jpeg;base64,...",
+   knowledge:"Ma connaissance personnalisée.",
+   rules:"Réponds clairement.",
+   history:[]
+  },
+  note:"Pour analyser une image, remplace le texte base64 d'exemple par une vraie image encodée en Data URL."
+ },
+ {
+  id:"translate",name:"Traduction IA",icon:"🌍",category:"ia",
+  description:"Traduit un texte d'une langue source vers une langue cible.",
+  endpoint:"/api/intelligence-artificielle/translate",price:3000,
+  body:{text:"Bonjour tout le monde",source:"fr",target:"en"},
+  note:"Les codes fr et en correspondent au français et à l'anglais."
+ },
+ {
+  id:"generate",name:"Générateur d'images",icon:"🎨",category:"media",
+  description:"Génération d'images à partir d'une description textuelle.",
+  endpoint:"/api/genere-image/generate",price:8000,
+  body:{prompt:"Une ville futuriste à Kinshasa",size:"1024x1024",n:1},
+  note:"Le serveur doit retourner un résultat exploitable, par exemple une URL ou des données image."
+ },
+ {
+  id:"image",name:"API Image",icon:"🖼️",category:"media",
+  description:"Route image pour les opérations de génération ou traitement prévues par ton serveur.",
+  endpoint:"/api/genere-image/image",price:8000,
+  body:{prompt:"Transformer cette image en affiche futuriste",size:"1024x1024",n:1},
+  note:"Le format fourni est celui de ton exemple. Vérifie si le backend exige aussi un champ image."
+ },
+ {
+  id:"ads",name:"Publicité",icon:"📢",category:"tools",
+  description:"Route publicitaire de ton service API.",
+  endpoint:"/api/publicite/ads",price:4000,
+  body:{},
+  note:"Le document fourni ne précise pas le corps JSON ni les champs obligatoires pour cette route. Vérifie le contrat du backend."
+ },
+ {
+  id:"data",name:"API Data",icon:"🗄️",category:"tools",
+  description:"Route de données de la plateforme.",
+  endpoint:"/api/data",price:3000,
+  body:{},
+  note:"Le document fourni ne précise pas les actions disponibles ni le corps JSON. Vérifie le contrat du backend."
+ },
+ {
+  id:"storage",name:"API Storage",icon:"💾",category:"tools",
+  description:"Route de stockage de la plateforme.",
+  endpoint:"/api/storage",price:4000,
+  body:{},
+  note:"Le format des opérations de stockage n'est pas précisé dans le document reçu."
+ },
+ {
+  id:"adminAuth",name:"Authentification admin",icon:"🔐",category:"tools",
+  description:"Route d'authentification administrateur.",
+  endpoint:"/api/admin-auth",price:5000,
+  body:{},
+  note:"Route sensible : n'expose pas de mot de passe administrateur dans le navigateur. Vérifie les méthodes et paramètres exacts côté serveur."
+ },
+ {
+  id:"video",name:"Génération vidéo",icon:"🎬",category:"media",
+  description:"Demande de création vidéo à partir d'un prompt.",
+  endpoint:"/api/media/video",price:12000,
+  body:{prompt:"Une ville futuriste de Kinshasa la nuit",duration:6},
+  note:"La disponibilité, le délai et le format de la vidéo dépendent du backend."
+ },
+ {
+  id:"music",name:"Génération musicale",icon:"🎵",category:"media",
+  description:"Demande de création musicale à partir d'un prompt.",
+  endpoint:"/api/media/music",price:10000,
+  body:{prompt:"Afrobeat énergique et mélodique",duration:15},
+  note:"La disponibilité et le format audio dépendent du backend."
+ },
+ {
+  id:"hub",name:"API Hub",icon:"🧭",category:"tools",
+  description:"Route centrale du catalogue de services.",
+  endpoint:"/api/hub",price:3000,
+  body:{action:"catalog"},
+  note:"L'action catalog est celle indiquée dans ton document."
+ }
+];
+
+let currentUser = null;
+let currentBalance = 0;
+let currentApi = null;
+let currentLanguage = "js";
+let activeFilter = "all";
+let priceConfig = {};
+let purchaseData = {};
+let accessData = {};
+
+/* ======================================================
+   4. OUTILS D'AFFICHAGE
+====================================================== */
+const $ = id => document.getElementById(id);
+
+function showMessage(text, type="info") {
+ const box = $("message");
+ box.className = "message show " + type;
+ box.textContent = text;
+ box.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+
+function hideMessage() {
+ $("message").className = "message";
+ $("message").textContent = "";
+}
+
+function formatFC(value) {
+ const n = Number(value);
+ return (Number.isFinite(n) ? n : 0).toLocaleString("fr-FR") + " FC";
+}
+
+function getPrice(api) {
+ const value = priceConfig[api.id];
+ if (typeof value === "number" && Number.isFinite(value)) return value;
+ if (value && typeof value === "object" && Number.isFinite(Number(value.price))) {
+  return Number(value.price);
+ }
+ return api.price;
+}
+
+function getStatusLabel(status) {
+ const s = String(status || "pending").toLowerCase();
+ if (["approved","active","activated","paid","confirmed"].includes(s)) {
+  return {label:"Validée",className:"approved"};
+ }
+ if (["rejected","refused","cancelled","canceled"].includes(s)) {
+  return {label:"Refusée",className:"rejected"};
+ }
+ return {label:"En attente",className:"pending"};
+}
+
+/* ======================================================
+   5. AFFICHAGE DU CATALOGUE
+====================================================== */
+function renderCatalog() {
+ const query = $("search").value.trim().toLowerCase();
+ const filtered = catalog.filter(api => {
+  const matchesFilter = activeFilter === "all" || api.category === activeFilter;
+  const matchesSearch = (
+   api.name + " " + api.description + " " + api.endpoint
+  ).toLowerCase().includes(query);
+  return matchesFilter && matchesSearch;
+ });
+
+ $("catalogCount").textContent = filtered.length + " service(s)";
+ $("apiGrid").innerHTML = "";
+
+ if (!filtered.length) {
+  $("apiGrid").innerHTML = '<div class="empty" style="grid-column:1/-1">Aucune API trouvée.</div>';
+  return;
+ }
+
+ filtered.forEach(api => {
+  const price = getPrice(api);
+  const access = accessData[api.id];
+  const isActive = access === true ||
+   (access && typeof access === "object" &&
+    ["active","approved","activated"].includes(String(access.status || "").toLowerCase()));
+
+  const card = document.createElement("article");
+  card.className = "api-card";
+  card.innerHTML = `
+   <div class="api-icon">${api.icon}</div>
+   <div class="api-name">${escapeHTML(api.name)}</div>
+   <div class="api-desc">${escapeHTML(api.description)}</div>
+   <div class="api-price">${formatFC(price)} <small>/ accès</small></div>
+   <div class="card-status">${isActive ? "✓ Accès activé" : "● Accès payant"}</div>
+   <div class="card-buttons">
+    <button class="btn btn-dark details-btn">📘 Documentation</button>
+    <button class="btn btn-blue buy-btn">${isActive ? "Voir l'accès" : "Acheter l'accès"}</button>
+   </div>
+  `;
+  card.querySelector(".details-btn").addEventListener("click", () => openApi(api));
+  card.querySelector(".buy-btn").addEventListener("click", () => openApi(api));
+  $("apiGrid").appendChild(card);
+ });
+}
+
+function escapeHTML(value) {
+ return String(value ?? "").replace(/[&<>"']/g, c => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
+}
+
+/* ======================================================
+   6. DOCUMENTATION JAVASCRIPT / PYTHON / CURL
+====================================================== */
+function makeCode(api, language) {
+ const url = API_BASE + api.endpoint;
+ const json = JSON.stringify(api.body, null, 2);
+
+ if (language === "js") {
+  return `const response = await fetch(${JSON.stringify(url)}, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  body: JSON.stringify(${json.replace(/\n/g,"\n  ")})
+});
+
+const data = await response.json();
+console.log(data);`;
+ }
+
+ if (language === "python") {
+  return `import requests
+
+url = ${JSON.stringify(url)}
+
+data = ${json}
+
+response = requests.post(
+    url,
+    json=data,
+    headers={"Accept": "application/json"}
+)
+
+print(response.status_code)
+print(response.json())`;
+ }
+
+ const escaped = JSON.stringify(api.body).replace(/'/g, "'\\''");
+ return `curl -X POST '${url}' \\
+  -H 'Content-Type: application/json' \\
+  -H 'Accept: application/json' \\
+  -d '${escaped}'`;
+}
+
+function updateCode() {
+ if (!currentApi) return;
+ $("codeOutput").textContent = makeCode(currentApi,currentLanguage);
+ $("codeLanguage").textContent =
+  currentLanguage === "js" ? "JavaScript" :
+  currentLanguage === "python" ? "Python" : "cURL";
+ document.querySelectorAll("[data-language]").forEach(button => {
+  button.classList.toggle("active",button.dataset.language === currentLanguage);
+ });
+}
+
+function openApi(api) {
+ currentApi = api;
+ $("modalIcon").textContent = api.icon;
+ $("modalName").textContent = api.name;
+ $("modalDescription").textContent = api.description;
+ $("modalPrice").textContent = formatFC(getPrice(api)) + " / accès";
+ $("modalEndpoint").textContent = "POST " + API_BASE + api.endpoint;
+ $("modalBalance").textContent = "";
+ $("docNote").textContent = api.note;
+ currentLanguage = "js";
+ updateCode();
+ const access = accessData[api.id];
+ const active = access === true ||
+  (access && typeof access === "object" &&
+   ["active","approved","activated"].includes(String(access.status || "").toLowerCase()));
+
+ $("buyButton").textContent = active ? "✓ Accès déjà activé" : "🛒 Demander l'achat";
+ $("buyButton").disabled = !!active;
+ $("apiModal").classList.add("show");
+}
+
+function closeModal() {
+ $("apiModal").classList.remove("show");
+}
+
+document.querySelectorAll("[data-language]").forEach(button => {
+ button.addEventListener("click", () => {
+  currentLanguage = button.dataset.language;
+  updateCode();
+ });
+});
+
+$("copyCode").addEventListener("click", async () => {
+ try {
+  await navigator.clipboard.writeText($("codeOutput").textContent);
+  showMessage("Code copié. Tu peux le coller dans ton éditeur.", "success");
+ } catch {
+  const area = document.createElement("textarea");
+  area.value = $("codeOutput").textContent;
+  document.body.appendChild(area);
+  area.select();
+  const ok = document.execCommand("copy");
+  area.remove();
+  showMessage(ok ? "Code copié." : "Copie impossible : sélectionne le code manuellement.", ok ? "success" : "error");
+ }
+});
+
+$("closeModal").addEventListener("click", closeModal);
+$("closeModalBottom").addEventListener("click", closeModal);
+$("apiModal").addEventListener("click", event => {
+ if (event.target === $("apiModal")) closeModal();
+});
+
+/* ======================================================
+   7. DEMANDE D'ACHAT
+   Important : cette page crée une demande uniquement.
+   Elle ne débite PAS le solde et ne donne PAS d'accès.
+   Un backend sécurisé doit vérifier et finaliser l'achat.
+====================================================== */
+$("buyButton").addEventListener("click", async () => {
+ if (!currentApi) return;
+
+ const price = getPrice(currentApi);
+ if (!Number.isFinite(price) || price <= 0) {
+  showMessage("Le tarif de cette API n'est pas configuré correctement.", "error");
+  return;
+ }
+
+ if (currentBalance < price) {
+  $("modalBalance").textContent =
+   "Solde insuffisant. Solde : " + formatFC(currentBalance) +
+   " • Prix : " + formatFC(price) + ". Recharge ton compte avant l'achat.";
+  showMessage("Solde insuffisant pour cette API. Recharge ton compte.", "error");
+  return;
+ }
+
+ const alreadyPending = Object.values(purchaseData).some(item =>
+  item && item.apiId === currentApi.id &&
+  String(item.status || "pending").toLowerCase() === "pending"
+ );
+
+ if (alreadyPending) {
+  showMessage("Tu as déjà une demande en attente pour cette API.", "info");
+  return;
+ }
+
+ const confirmed = confirm(
+  "Demander l'achat de " + currentApi.name + " pour " +
+  formatFC(price) + " ?\n\nAucun débit automatique n'est effectué par cette page."
+ );
+ if (!confirmed) return;
+
+ $("buyButton").disabled = true;
+ $("buyButton").textContent = "Envoi...";
+
+ try {
+  await push(purchasesRef, {
+   apiId: currentApi.id,
+   apiName: currentApi.name,
+   priceFC: price,
+   userPhone: phone,
+   status: "pending",
+   createdAt: Date.now(),
+   endpoint: currentApi.endpoint
+  });
+
+  closeModal();
+  showMessage(
+   "Demande envoyée. Attends la validation de l'administrateur. Aucun débit n'a été effectué par cette page.",
+   "success"
+  );
+ } catch (error) {
+  console.error(error);
+  showMessage(
+   "Impossible d'envoyer la demande. Vérifie la connexion Firebase et les règles d'accès.",
+   "error"
+  );
+ } finally {
+  $("buyButton").disabled = false;
+  $("buyButton").textContent = "🛒 Demander l'achat";
+ }
+});
+
+/* ======================================================
+   8. HISTORIQUE DES DEMANDES
+====================================================== */
+function renderPurchases() {
+ const entries = Object.entries(purchaseData).sort((a,b) =>
+  Number(b[1]?.createdAt || 0) - Number(a[1]?.createdAt || 0)
+ );
+
+ const box = $("purchaseHistory");
+ box.innerHTML = "";
+
+ if (!entries.length) {
+  box.innerHTML = '<div class="empty">Tu n’as encore aucune demande d’achat.</div>';
+  return;
+ }
+
+ entries.forEach(([key,item]) => {
+  const status = getStatusLabel(item.status);
+  const date = item.createdAt
+   ? new Date(Number(item.createdAt)).toLocaleString("fr-FR")
+   : "Date non disponible";
+
+  const row = document.createElement("div");
+  row.className = "item";
+  row.innerHTML = `
+   <div>
+    <div class="item-name">${escapeHTML(item.apiName || item.apiId || "API")}</div>
+    <div class="item-meta">${formatFC(item.priceFC)}<br>${escapeHTML(date)}</div>
+   </div>
+   <span class="badge ${status.className}">${status.label}</span>
+  `;
+  box.appendChild(row);
+ });
+}
+
+/* ======================================================
+   9. API ACTIVÉES
+====================================================== */
+function renderAccess() {
+ const box = $("accessList");
+ box.innerHTML = "";
+
+ const entries = Object.entries(accessData).filter(([id,value]) => {
+  if (value === true) return true;
+  if (!value || typeof value !== "object") return false;
+  return ["active","approved","activated"].includes(
+   String(value.status || "").toLowerCase()
+  );
+ });
+
+ if (!entries.length) {
+  box.innerHTML = '<div class="empty">Aucun accès API activé pour le moment.</div>';
+  return;
+ }
+
+ entries.forEach(([id,value]) => {
+  const api = catalog.find(item => item.id === id);
+  const name = api ? api.name : id;
+  const endpoint = api ? api.endpoint : "";
+  const row = document.createElement("div");
+  row.className = "item";
+  row.innerHTML = `
+   <div>
+    <div class="item-name">🔓 ${escapeHTML(name)}</div>
+    <div class="item-meta">${escapeHTML(endpoint)}</div>
+   </div>
+   <span class="badge approved">Activée</span>
+  `;
+  box.appendChild(row);
+ });
+}
+
+/* ======================================================
+   10. RECHERCHE ET FILTRES
+====================================================== */
+$("search").addEventListener("input",renderCatalog);
+
+document.querySelectorAll("[data-filter]").forEach(button => {
+ button.addEventListener("click", () => {
+  activeFilter = button.dataset.filter;
+  document.querySelectorAll("[data-filter]").forEach(b =>
+   b.classList.toggle("active",b === button)
+  );
+  renderCatalog();
+ });
+});
+
+/* ======================================================
+   11. ÉCOUTE FIREBASE
+====================================================== */
+onValue(userRef, snapshot => {
+ currentUser = snapshot.val() || {};
+ currentBalance = Number(
+  currentUser.solde_principal ??
+  currentUser.balance ??
+  currentUser.solde ??
+  0
+ );
+
+ $("balanceValue").textContent = formatFC(currentBalance);
+ $("accountMessage").textContent =
+  "Compte : " + String(phone) + " • Solde actualisé";
+ $("loading").style.display = "none";
+}, error => {
+ console.error("Erreur lecture utilisateur :",error);
+ $("accountMessage").textContent = "Impossible de lire le compte Firebase.";
+ $("loading").style.display = "none";
+ showMessage("Lecture du compte impossible. Vérifie les règles Firebase.", "error");
+});
+
+onValue(pricesRef, snapshot => {
+ priceConfig = snapshot.val() || {};
+ renderCatalog();
+});
+
+onValue(purchasesRef, snapshot => {
+ purchaseData = snapshot.val() || {};
+ renderPurchases();
+});
+
+onValue(accessRef, snapshot => {
+ accessData = snapshot.val() || {};
+ renderAccess();
+ renderCatalog();
+});
+
+/* ======================================================
+   12. INITIALISATION
+====================================================== */
+renderCatalog();
+renderPurchases();
+renderAccess();
+</script>
+
+</body>
+</html>
