@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#050914">
-<title>JASON BUSINESS — ADMIN</title>
+<title>JASON BUSINESS — Administration</title>
 
 <style>
 :root{
@@ -13,217 +13,165 @@
  --text:#f5f7fb;--muted:#8e9aad;--blue:#3b82f6;
  --green:#22c55e;--red:#ef4444;--orange:#f97316;--purple:#a855f7;
 }
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,sans-serif}
-body{background:radial-gradient(circle at top,#101d35 0,var(--bg) 45%,#02040a 100%);color:var(--text);min-height:100vh}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Inter,sans-serif}
+body{min-height:100vh;background:radial-gradient(circle at top,#101d35,var(--bg) 48%,#02040a);color:var(--text)}
 button,input,select{font:inherit}
 button{cursor:pointer}
-#adminLogin{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at top,#172744,#030711 70%);z-index:9999}
-.login-box{width:100%;max-width:400px;background:rgba(11,18,32,.96);border:1px solid var(--border);border-radius:24px;padding:30px;box-shadow:0 25px 80px #0009}
-.login-logo{text-align:center;font-size:25px;font-weight:900;letter-spacing:1px;margin-bottom:7px}
-.login-subtitle{text-align:center;color:var(--muted);font-size:12px;margin-bottom:25px}
-.input{width:100%;background:#070d18;border:1px solid var(--border);color:white;border-radius:13px;padding:14px;outline:none;margin-bottom:12px}
+#login{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;background:#030711}
+.login-box{width:100%;max-width:390px;background:var(--panel);padding:28px;border:1px solid var(--border);border-radius:22px}
+.logo{text-align:center;font-size:25px;font-weight:900;margin-bottom:8px}
+.logo span{color:#4da3ff}
+.subtitle{text-align:center;color:var(--muted);font-size:12px;margin-bottom:24px}
+.input{width:100%;background:#070d18;border:1px solid var(--border);border-radius:12px;color:white;padding:13px;margin-bottom:12px;outline:none}
 .input:focus{border-color:var(--blue)}
-.login-btn{width:100%;border:0;border-radius:13px;padding:14px;background:var(--blue);color:white;font-weight:800}
-.login-error{color:#ff6b6b;text-align:center;font-size:12px;min-height:18px;margin-top:12px}
-#adminPanel{display:none;min-height:100vh}
-.header{position:sticky;top:0;z-index:100;min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:rgba(5,9,20,.94);backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
-.brand{font-size:18px;font-weight:900}.brand span{color:#4da3ff}
-.header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.admin-status{display:flex;align-items:center;gap:7px;font-size:11px;color:#9ca9bc}
-.online-dot{width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 10px var(--green)}
-.logout{border:1px solid #ef44444d;background:#ef444414;color:#ff6b6b;border-radius:10px;padding:9px 12px;font-weight:700}
-.layout{display:flex;min-height:calc(100vh - 68px)}
-.sidebar{width:235px;flex-shrink:0;background:#070c17f0;border-right:1px solid var(--border);padding:15px 12px}
-.menu-btn{width:100%;border:0;background:transparent;color:#a8b3c5;padding:13px 12px;margin-bottom:5px;border-radius:12px;text-align:left;display:flex;align-items:center;gap:10px;font-weight:700;font-size:13px;white-space:nowrap}
-.menu-btn.active{background:#3b82f626;color:#fff}
-.menu-count{margin-left:auto;min-width:21px;height:21px;display:flex;align-items:center;justify-content:center;border-radius:20px;background:var(--red);color:white;font-size:10px}
+.primary{width:100%;padding:14px;background:var(--blue);border:0;border-radius:12px;color:white;font-weight:bold}
+.error{font-size:12px;color:#ff7777;text-align:center;margin-top:10px}
+#app{display:none}
+.header{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:15px 18px;background:#050914f2;border-bottom:1px solid var(--border)}
+.brand{font-weight:900;font-size:18px}.brand span{color:#4da3ff}
+.header-right{display:flex;gap:10px;align-items:center}
+.logout{padding:9px 12px;color:#ff7777;background:#ef444414;border:1px solid #ef44444a;border-radius:10px}
+.layout{display:flex;min-height:calc(100vh - 65px)}
+.sidebar{width:235px;flex-shrink:0;padding:13px;background:#070c17;border-right:1px solid var(--border)}
+.menu{display:block;width:100%;text-align:left;border:0;border-radius:11px;background:transparent;color:#a8b3c5;padding:13px;margin-bottom:5px;font-size:13px;font-weight:bold}
+.menu.active{background:#3b82f626;color:white}
 .content{flex:1;min-width:0;padding:20px}
 .page{display:none}.page.active{display:block}
-.page-title{font-size:25px;font-weight:900;margin-bottom:5px}
-.page-subtitle{color:var(--muted);font-size:12px;margin-bottom:20px}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:20px}
-.stat-card{background:linear-gradient(145deg,#101a2bf5,#080e1af5);border:1px solid var(--border);border-radius:18px;padding:18px;min-height:110px}
-.stat-icon{font-size:22px;margin-bottom:10px}.stat-label{color:var(--muted);font-size:11px}
-.stat-value{font-size:22px;font-weight:900;margin-top:5px;overflow-wrap:anywhere}
-.panel{background:#0b1220e6;border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:18px}
-.panel-head{padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--border)}
+.title{font-size:25px;font-weight:900;margin-bottom:7px}
+.desc{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px}
+.stat,.panel,.price-card{background:linear-gradient(145deg,#101a2bf5,#080e1af5);border:1px solid var(--border);border-radius:16px}
+.stat{padding:17px;min-height:100px}
+.stat-label{font-size:11px;color:var(--muted)}
+.stat-value{font-size:22px;font-weight:900;margin-top:10px;overflow-wrap:anywhere}
+.panel{overflow:hidden;margin-bottom:18px}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:15px;border-bottom:1px solid var(--border)}
 .table-wrap{width:100%;overflow-x:auto}
-table{width:100%;min-width:760px;border-collapse:collapse}
-th{color:#7f8da2;font-size:10px;text-transform:uppercase;text-align:left;padding:13px;border-bottom:1px solid var(--border)}
-td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:middle}
-.btn{border:0;border-radius:8px;padding:8px 10px;color:white;font-size:10px;font-weight:800;margin:2px}
-.btn-blue{background:var(--blue)}.btn-green{background:var(--green)}
-.btn-red{background:var(--red)}.btn-orange{background:var(--orange)}
-.btn-purple{background:var(--purple)}
-.badge{display:inline-flex;border-radius:20px;padding:5px 8px;font-size:10px;font-weight:800}
-.badge-success{color:#54e889;background:#22c55e1f}
-.badge-danger{color:#ff7777;background:#ef44441f}
-.badge-pending{color:#ffc95a;background:#f59e0b1f}
-.badge-blue{color:#70a9ff;background:#3b82f621}
-.toolbar-input,.price-input,.small-select{background:#070d18;border:1px solid var(--border);border-radius:10px;color:white;padding:10px;outline:none}
-.price-input{width:100%;min-width:100px}
-.small-select{max-width:160px}
-.section-note{color:var(--muted);font-size:12px;line-height:1.7;padding:15px}
-.price-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:16px}
-.price-card{background:#070d18;border:1px solid var(--border);border-radius:15px;padding:16px}
+table{width:100%;min-width:650px;border-collapse:collapse}
+th{text-align:left;color:#8e9aad;text-transform:uppercase;font-size:10px;padding:13px;border-bottom:1px solid var(--border)}
+td{font-size:12px;padding:13px;border-bottom:1px solid #ffffff0b;vertical-align:middle}
+.btn{border:0;border-radius:8px;color:white;padding:8px 10px;font-size:11px;font-weight:bold;margin:2px}
+.blue{background:var(--blue)}.green{background:var(--green)}.red{background:var(--red)}.purple{background:var(--purple)}.orange{background:var(--orange)}
+.badge{display:inline-block;border-radius:20px;padding:5px 8px;font-size:10px;font-weight:bold}
+.ok{color:#54e889;background:#22c55e20}.pending{color:#ffc95a;background:#f59e0b20}.no{color:#ff7777;background:#ef444420}
+.toolbar{max-width:290px;width:100%;background:#070d18;border:1px solid var(--border);color:white;border-radius:10px;padding:11px;outline:none}
+.price-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;padding:15px}
+.price-card{padding:16px;background:#070d18}
 .price-card h3{font-size:14px;margin-bottom:7px}
-.price-card p{color:var(--muted);font-size:11px;margin-bottom:13px;line-height:1.5}
-.price-row{display:flex;align-items:center;gap:9px}
-.price-row label{font-size:11px;color:var(--muted);flex:1}
-.price-row input{width:125px;max-width:55%}
-.action-row{display:flex;gap:8px;flex-wrap:wrap;padding:0 16px 16px}
-#toastContainer{position:fixed;top:78px;right:15px;z-index:10000;display:flex;flex-direction:column;gap:8px;width:min(330px,calc(100% - 30px))}
-.toast{padding:13px 15px;border-radius:12px;background:#111b2d;border:1px solid var(--border);font-size:12px}
-.empty{text-align:center;color:var(--muted);padding:25px}
-@media(max-width:900px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.price-grid{grid-template-columns:1fr}}
-@media(max-width:700px){
- .layout{display:block}.sidebar{width:100%;display:flex;overflow-x:auto;border-right:0;border-bottom:1px solid var(--border);padding:8px}
- .menu-btn{width:auto;flex-shrink:0}.content{padding:14px}.page-title{font-size:22px}
- .header{padding:12px}.admin-status{display:none}
-}
+.price-card p{font-size:11px;line-height:1.5;color:var(--muted);margin-bottom:14px}
+.price-line{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.price-line label{font-size:12px;color:var(--muted)}
+.price-line input{width:125px;max-width:55%;background:#101a2b;color:white;border:1px solid var(--border);padding:11px;border-radius:10px;outline:none}
+.price-line input:focus{border-color:var(--blue)}
+.note{font-size:12px;color:var(--muted);line-height:1.7;padding:15px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;padding:0 15px 15px}
+.actions .btn{padding:11px 14px}
+#toast{position:fixed;top:75px;right:12px;z-index:2000;max-width:320px;padding:13px 16px;background:#111b2d;border:1px solid var(--border);border-radius:12px;display:none;font-size:12px}
+.empty{padding:22px;text-align:center;color:var(--muted)}
+@media(max-width:800px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.price-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.layout{display:block}.sidebar{display:flex;width:100%;overflow-x:auto;padding:8px;border-right:0;border-bottom:1px solid var(--border)}.menu{width:auto;flex-shrink:0;white-space:nowrap;padding:11px}.content{padding:13px}.title{font-size:22px}.header{padding:12px}}
 </style>
 </head>
 
 <body>
-
-<div id="adminLogin">
+<div id="login">
  <div class="login-box">
-  <div class="login-logo">JASON BUSINESS</div>
-  <div class="login-subtitle">🔐 PANNEAU D'ADMINISTRATION</div>
-  <input type="password" id="adminPassword" class="input"
-   placeholder="Mot de passe administrateur" autocomplete="current-password">
-  <button id="loginAdmin" class="login-btn" type="button">🔓 Ouvrir l'administration</button>
-  <div id="loginError" class="login-error"></div>
+  <div class="logo">JASON <span>BUSINESS</span></div>
+  <div class="subtitle">🔐 PANNEAU D'ADMINISTRATION</div>
+  <input class="input" id="password" type="password" placeholder="Code secret administrateur" autocomplete="current-password">
+  <button class="primary" id="loginButton">🔓 Ouvrir l'administration</button>
+  <div class="error" id="loginError"></div>
  </div>
 </div>
 
-<div id="adminPanel">
+<div id="app">
  <header class="header">
   <div class="brand">JASON <span>BUSINESS</span></div>
-  <div class="header-right">
-   <div class="admin-status"><span class="online-dot"></span>Session administrateur</div>
-   <button class="logout" id="adminLogout" type="button">Déconnexion</button>
-  </div>
+  <div class="header-right"><span style="font-size:11px;color:#9ca9bc">● Administration</span><button class="logout" id="logout">Déconnexion</button></div>
  </header>
 
  <div class="layout">
   <aside class="sidebar">
-   <button class="menu-btn active" data-page="dashboard">📊 Dashboard</button>
-   <button class="menu-btn" data-page="users">👥 Utilisateurs</button>
-   <button class="menu-btn" data-page="commands">🛒 Commandes <span class="menu-count" id="menuCommands">0</span></button>
-   <button class="menu-btn" data-page="recharges">💳 Recharges <span class="menu-count" id="menuRecharges">0</span></button>
-   <button class="menu-btn" data-page="withdrawals">💸 Retraits <span class="menu-count" id="menuWithdrawals">0</span></button>
-   <button class="menu-btn" data-page="vip">👑 VIP <span class="menu-count" id="menuVip">0</span></button>
-   <button class="menu-btn" data-page="api">🔌 API et tarifs</button>
+   <button class="menu active" data-page="dashboard">📊 Dashboard</button>
+   <button class="menu" data-page="users">👥 Utilisateurs</button>
+   <button class="menu" data-page="commands">🛒 Commandes</button>
+   <button class="menu" data-page="recharges">💳 Recharges</button>
+   <button class="menu" data-page="withdrawals">💸 Retraits</button>
+   <button class="menu" data-page="vip">👑 VIP</button>
+   <button class="menu" data-page="prices">🔌 API et tarifs</button>
   </aside>
 
   <main class="content">
-
    <section class="page active" id="page-dashboard">
-    <div class="page-title">📊 Dashboard</div>
-    <div class="page-subtitle">Vue générale de JASON BUSINESS</div>
+    <div class="title">📊 Dashboard</div>
+    <div class="desc">Vue générale de ta plateforme.</div>
     <div class="stats">
-     <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-label">Utilisateurs</div><div class="stat-value" id="statUsers">0</div></div>
-     <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-label">Solde total</div><div class="stat-value" id="totalBalance">0 FC</div></div>
-     <div class="stat-card"><div class="stat-icon">🛒</div><div class="stat-label">Commandes en attente</div><div class="stat-value" id="statCommands">0</div></div>
-     <div class="stat-card"><div class="stat-icon">💳</div><div class="stat-label">Recharges en attente</div><div class="stat-value" id="statRecharges">0</div></div>
-     <div class="stat-card"><div class="stat-icon">💸</div><div class="stat-label">Retraits en attente</div><div class="stat-value" id="statWithdrawals">0</div></div>
-     <div class="stat-card"><div class="stat-icon">👑</div><div class="stat-label">Membres VIP actifs</div><div class="stat-value" id="statVip">0</div></div>
+     <div class="stat"><div class="stat-label">Utilisateurs</div><div class="stat-value" id="countUsers">0</div></div>
+     <div class="stat"><div class="stat-label">Solde total</div><div class="stat-value" id="balance">0 FC</div></div>
+     <div class="stat"><div class="stat-label">Commandes en attente</div><div class="stat-value" id="countCommands">0</div></div>
+     <div class="stat"><div class="stat-label">Recharges en attente</div><div class="stat-value" id="countRecharges">0</div></div>
+     <div class="stat"><div class="stat-label">Retraits en attente</div><div class="stat-value" id="countWithdrawals">0</div></div>
+     <div class="stat"><div class="stat-label">Membres VIP</div><div class="stat-value" id="countVip">0</div></div>
     </div>
+    <div class="panel"><div class="panel-head"><strong>Configuration des tarifs</strong></div><div class="note">Ouvre « API et tarifs » pour modifier les prix. Les prix enregistrés dans Firebase doivent aussi être lus par tes pages client pour s'y appliquer.</div></div>
    </section>
 
    <section class="page" id="page-users">
-    <div class="page-title">👥 Utilisateurs</div>
-    <div class="page-subtitle">Consulte et gère les comptes clients.</div>
+    <div class="title">👥 Utilisateurs</div><div class="desc">Liste des comptes clients.</div>
     <div class="panel">
-     <div class="panel-head"><strong>Liste des clients</strong>
-      <input id="userSearch" class="toolbar-input" placeholder="🔎 Rechercher..." style="width:100%;max-width:300px">
-     </div>
-     <div class="table-wrap"><table>
-      <thead><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>VIP</th><th>Actions</th></tr></thead>
-      <tbody id="usersTable"><tr><td colspan="5" class="empty">Chargement…</td></tr></tbody>
-     </table></div>
+     <div class="panel-head"><strong>Comptes</strong><input id="searchUsers" class="toolbar" placeholder="Rechercher un numéro ou un nom"></div>
+     <div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>VIP</th><th>Action</th></tr></thead><tbody id="usersTable"></tbody></table></div>
     </div>
    </section>
 
    <section class="page" id="page-commands">
-    <div class="page-title">🛒 Commandes</div>
-    <div class="page-subtitle">Valide ou refuse les demandes de commande.</div>
-    <div class="panel"><div class="table-wrap"><table>
-     <thead><tr><th>Client</th><th>Service</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead>
-     <tbody id="commandsTable"></tbody>
-    </table></div></div>
+    <div class="title">🛒 Commandes</div><div class="desc">Validation des commandes des clients.</div>
+    <div class="panel"><div class="table-wrap"><table><thead><tr><th>Client</th><th>Service</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div></div>
    </section>
 
    <section class="page" id="page-recharges">
-    <div class="page-title">💳 Recharges</div>
-    <div class="page-subtitle">Validation des dépôts des clients.</div>
-    <div class="panel"><div class="table-wrap"><table>
-     <thead><tr><th>Client</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead>
-     <tbody id="rechargesTable"></tbody>
-    </table></div></div>
+    <div class="title">💳 Recharges</div><div class="desc">Validation des dépôts reçus.</div>
+    <div class="panel"><div class="table-wrap"><table><thead><tr><th>Client</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="rechargesTable"></tbody></table></div></div>
    </section>
 
    <section class="page" id="page-withdrawals">
-    <div class="page-title">💸 Retraits</div>
-    <div class="page-subtitle">Suivi des demandes de retrait.</div>
-    <div class="panel"><div class="table-wrap"><table>
-     <thead><tr><th>Client</th><th>Montant</th><th>Méthode</th><th>Statut</th><th>Actions</th></tr></thead>
-     <tbody id="withdrawalsTable"></tbody>
-    </table></div></div>
+    <div class="title">💸 Retraits</div><div class="desc">Suivi des retraits clients.</div>
+    <div class="panel"><div class="table-wrap"><table><thead><tr><th>Client</th><th>Montant</th><th>Méthode</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsTable"></tbody></table></div></div>
    </section>
 
    <section class="page" id="page-vip">
-    <div class="page-title">👑 Gestion VIP</div>
-    <div class="page-subtitle">Attribue un niveau VIP ou désactive le statut d'un membre.</div>
-    <div class="panel">
-     <div class="panel-head"><strong>Clients VIP</strong>
-      <input id="vipSearch" class="toolbar-input" placeholder="🔎 Rechercher un client" style="width:100%;max-width:280px">
-     </div>
-     <div class="table-wrap"><table>
-      <thead><tr><th>Numéro</th><th>Nom</th><th>Niveau</th><th>Statut</th><th>Actions</th></tr></thead>
-      <tbody id="vipTable"></tbody>
-     </table></div>
-     <div class="section-note">Les modifications sont enregistrées dans le profil du client sous <code>vipLevel</code> et <code>vipStatus</code>.</div>
+    <div class="title">👑 Gestion VIP</div><div class="desc">Active un niveau VIP pour un utilisateur.</div>
+    <div class="panel"><div class="panel-head"><strong>Membres VIP</strong><input id="searchVip" class="toolbar" placeholder="Rechercher un client"></div>
+     <div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Niveau</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="vipTable"></tbody></table></div>
+     <div class="note">Niveaux disponibles : Aucun, Bronze, Silver, Gold, Platinum et Diamond.</div>
     </div>
    </section>
 
-   <section class="page" id="page-api">
-    <div class="page-title">🔌 API et tarifs</div>
-    <div class="page-subtitle">Modifie les prix des services et enregistre-les dans Firebase.</div>
+   <section class="page" id="page-prices">
+    <div class="title">🔌 API et tarifs</div>
+    <div class="desc">Modifie le prix de chaque service, puis enregistre les changements.</div>
     <div class="panel">
-     <div class="panel-head"><strong>Tarification des services</strong><span class="badge badge-blue">Prix en FC</span></div>
-     <div class="section-note">
-      Ces tarifs sont stockés dans <code>jasonBusiness/config/apiPrices</code>.
-      Ton site client doit lire ce même chemin pour afficher les nouveaux prix.
+     <div class="panel-head"><strong>Modifier les prix</strong><span class="badge" style="color:#70a9ff;background:#3b82f621">Devise : FC</span></div>
+     <div class="note">Saisis le nouveau montant dans chaque champ. Les valeurs sont sauvegardées dans <code>jasonBusiness/config/apiPrices</code>.</div>
+     <div class="price-grid" id="priceGrid"></div>
+     <div class="actions">
+      <button class="btn blue" id="savePrices">💾 Enregistrer les prix</button>
+      <button class="btn purple" id="reloadPrices">↻ Recharger Firebase</button>
      </div>
-     <div class="price-grid" id="priceGrid">
-      <div class="empty">Chargement des tarifs…</div>
-     </div>
-     <div class="action-row">
-      <button class="btn btn-blue" id="savePrices">💾 Enregistrer les tarifs</button>
-      <button class="btn btn-purple" id="reloadPrices">↻ Recharger depuis Firebase</button>
-     </div>
-    </div>
-    <div class="panel">
-     <div class="panel-head"><strong>État de la configuration</strong></div>
-     <div class="section-note" id="apiInfo">En attente de connexion à Firebase.</div>
+     <div class="note" id="priceMessage">En attente de connexion.</div>
     </div>
    </section>
-
   </main>
  </div>
 </div>
 
-<div id="toastContainer"></div>
+<div id="toast"></div>
 
 <script type="module">
-import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
- getDatabase, ref, onValue, update, remove, runTransaction, get, set
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import {initializeApp,getApps} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {getDatabase,ref,onValue,get,set,update,remove,runTransaction} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-const firebaseConfig = {
+const firebaseConfig={
  apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
  authDomain:"starlink-investit.firebaseapp.com",
  databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
@@ -232,503 +180,266 @@ const firebaseConfig = {
  messagingSenderId:"807081599583",
  appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
 };
-
-const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-const ROOT = "jasonBusiness";
-const USERS_PATH = `${ROOT}/users`;
-const COMMANDS_PATH = `${ROOT}/demandes_commandes`;
-const RECHARGES_PATH = `${ROOT}/demandes_recharges`;
-const WITHDRAWALS_PATH = `${ROOT}/demandes_retraits`;
-const VIP_PATH = `${ROOT}/users`;
-const PRICES_PATH = `${ROOT}/config/apiPrices`;
-
-const defaultPrices = {
- boosting:{label:"Boosting / réseaux sociaux",price:5000,description:"Tarif de base du service de boosting."},
- chatbot:{label:"API Chatbot IA",price:10000,description:"Accès ou utilisation du service chatbot."},
- translation:{label:"Traduction IA",price:2000,description:"Tarif de base de traduction."},
- image:{label:"Génération d’images",price:5000,description:"Tarif de génération d’images."},
- music:{label:"Génération musicale",price:10000,description:"Tarif de création musicale."},
- video:{label:"Génération vidéo",price:15000,description:"Tarif de génération vidéo."}
+const app= getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+const db=getDatabase(app);
+const ROOT="jasonBusiness";
+const PATH={
+ users:`${ROOT}/users`,
+ commands:`${ROOT}/demandes_commandes`,
+ recharges:`${ROOT}/demandes_recharges`,
+ withdrawals:`${ROOT}/demandes_retraits`,
+ prices:`${ROOT}/config/apiPrices`
 };
 
-let usersCache = {};
-let commandsCache = {};
-let rechargesCache = {};
-let withdrawalsCache = {};
-let pricesCache = {};
-let listenersStarted = false;
-let busy = false;
+const defaultPrices={
+ boosting:{label:"Boosting réseaux sociaux",price:5000,description:"Prix de base du service de boosting."},
+ chatbot:{label:"API Chatbot IA",price:10000,description:"Prix du service chatbot intelligent."},
+ translation:{label:"Traduction IA",price:2000,description:"Prix du service de traduction."},
+ image:{label:"Génération d'images",price:5000,description:"Prix du service de génération d'images."},
+ music:{label:"Génération musicale",price:10000,description:"Prix de création musicale."},
+ video:{label:"Génération vidéo",price:15000,description:"Prix de génération vidéo."},
+ vipBronze:{label:"Abonnement VIP Bronze",price:10000,description:"Prix de l'abonnement Bronze."},
+ vipSilver:{label:"Abonnement VIP Silver",price:25000,description:"Prix de l'abonnement Silver."},
+ vipGold:{label:"Abonnement VIP Gold",price:50000,description:"Prix de l'abonnement Gold."},
+ vipPlatinum:{label:"Abonnement VIP Platinum",price:100000,description:"Prix de l'abonnement Platinum."},
+ vipDiamond:{label:"Abonnement VIP Diamond",price:200000,description:"Prix de l'abonnement Diamond."}
+};
 
-const $ = id => document.getElementById(id);
+let users={},commands={},recharges={},withdrawals={},prices={};
+let started=false,working=false;
 
-function money(v){
- return Math.floor(Number(v)||0).toLocaleString("fr-FR");
-}
-function escapeHTML(v){
- return String(v??"").replace(/[&<>"']/g, c => ({
-  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
- }[c]));
-}
-function getPhone(d){return d.telephone||d.phone||d.numero||"";}
-function getName(d){return d.nom||d.name||"Utilisateur";}
-function getBalance(d){
- return Number(d.solde_principal ?? d.solde ?? d.balance ?? 0)||0;
-}
-function getStatus(d){return d.statut||d.status||"En attente";}
-function isPending(s){return String(s||"").toLowerCase().includes("attente");}
-function isVip(d){
- const s=String(d.vipStatus??d.statutVip??"").toLowerCase();
- return d.vip===true || d.isVip===true ||
-  (s==="actif"||s==="active"||s==="vip"||s==="true");
-}
-function vipLevel(d){return d.vipLevel||d.niveauVip||d.vipTier||"Aucun";}
-function statusBadge(s){
- const l=String(s||"").toLowerCase();
- if(l.includes("valid")||l.includes("pay")||l==="actif")
-  return `<span class="badge badge-success">✓ ${escapeHTML(s)}</span>`;
- if(l.includes("refus")||l==="inactif")
-  return `<span class="badge badge-danger">✕ ${escapeHTML(s)}</span>`;
- return `<span class="badge badge-pending">⏳ ${escapeHTML(s)}</span>`;
-}
-function showToast(message){
- const d=document.createElement("div");
- d.className="toast"; d.textContent=message;
- $("toastContainer").appendChild(d);
- setTimeout(()=>d.remove(),3500);
-}
-function openPage(page){
- document.querySelectorAll(".menu-btn").forEach(b =>
-  b.classList.toggle("active",b.dataset.page===page));
- document.querySelectorAll(".page").forEach(p =>
-  p.classList.toggle("active",p.id===`page-${page}`));
-}
-document.querySelectorAll(".menu-btn").forEach(b =>
- b.addEventListener("click",()=>openPage(b.dataset.page)));
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const money=n=>Math.floor(Number(n)||0).toLocaleString("fr-FR");
+const phoneOf=d=>d.telephone||d.phone||d.numero||"";
+const nameOf=d=>d.nom||d.name||"Utilisateur";
+const balanceOf=d=>Number(d.solde_principal??d.solde??d.balance??0)||0;
+const statusOf=d=>d.statut||d.status||"En attente";
+const pending=s=>String(s).toLowerCase().includes("attente");
+const vipOf=d=>d.vip===true||d.isVip===true||["actif","active","vip","true"].includes(String(d.vipStatus||"").toLowerCase());
+const levelOf=d=>d.vipLevel||d.niveauVip||"Aucun";
 
-function setBusy(value){busy=value;}
-function ensureNotBusy(){if(busy){showToast("Une opération est déjà en cours.");return false;}return true;}
+function toast(message){
+ $("toast").textContent=message;
+ $("toast").style.display="block";
+ clearTimeout(toast.timer);
+ toast.timer=setTimeout(()=>$("toast").style.display="none",3500);
+}
+function busy(v){working=v;}
+function showPage(p){
+ document.querySelectorAll(".menu").forEach(b=>b.classList.toggle("active",b.dataset.page===p));
+ document.querySelectorAll(".page").forEach(s=>s.classList.toggle("active",s.id==="page-"+p));
+}
+document.querySelectorAll(".menu").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
 
-function loginError(message){$("loginError").textContent=message;}
+function badge(s){
+ const x=String(s).toLowerCase();
+ if(x.includes("valid")||x.includes("pay")||x==="actif")return `<span class="badge ok">✓ ${esc(s)}</span>`;
+ if(x.includes("refus")||x==="inactif")return `<span class="badge no">✕ ${esc(s)}</span>`;
+ return `<span class="badge pending">⏳ ${esc(s)}</span>`;
+}
 
-async function loginAdmin(){
- if(busy)return;
- const password=$("adminPassword").value;
- loginError("");
- if(!password){loginError("Entrez le mot de passe.");return;}
- setBusy(true);
+async function login(){
+ const pass=$("password").value;
+ $("loginError").textContent="";
+ if(!pass){$("loginError").textContent="Saisis le code secret.";return;}
  try{
   const r=await fetch("/api/admin-login",{
-   method:"POST",
-   headers:{"Content-Type":"application/json"},
-   body:JSON.stringify({password})
+   method:"POST",headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({password:pass})
   });
-  const d=await r.json().catch(()=>({}));
-  if(!r.ok||!d.token){
-   loginError("❌ Mot de passe incorrect ou accès refusé.");
-   return;
-  }
-  localStorage.setItem("jasonBusinessAdminToken",d.token);
-  $("adminLogin").style.display="none";
-  $("adminPanel").style.display="block";
-  startListeners();
- }catch(e){
-  loginError("❌ Serveur indisponible. Vérifie le backend Vercel.");
- }finally{setBusy(false);}
+  const data=await r.json().catch(()=>({}));
+  if(!r.ok||!data.token){$("loginError").textContent="Accès refusé. Vérifie le code et le backend.";return;}
+  localStorage.setItem("jasonBusinessAdminToken",data.token);
+  $("login").style.display="none";$("app").style.display="block";start();
+ }catch(e){$("loginError").textContent="Serveur indisponible : vérifie Vercel.";}
 }
-$("loginAdmin").addEventListener("click",loginAdmin);
-$("adminPassword").addEventListener("keydown",e=>{
- if(e.key==="Enter")loginAdmin();
-});
-$("adminLogout").addEventListener("click",()=>{
- localStorage.removeItem("jasonBusinessAdminToken");
- location.reload();
-});
+$("loginButton").addEventListener("click",login);
+$("password").addEventListener("keydown",e=>{if(e.key==="Enter")login();});
+$("logout").addEventListener("click",()=>{localStorage.removeItem("jasonBusinessAdminToken");location.reload();});
 
-async function checkSavedSession(){
+async function checkSession(){
  const token=localStorage.getItem("jasonBusinessAdminToken");
  if(!token)return;
  try{
-  const r=await fetch("/api/admin-session",{
-   headers:{Authorization:`Bearer ${token}`}
-  });
-  if(r.ok){
-   $("adminLogin").style.display="none";
-   $("adminPanel").style.display="block";
-   startListeners();
-  }else{
-   localStorage.removeItem("jasonBusinessAdminToken");
-  }
- }catch(e){
-  localStorage.removeItem("jasonBusinessAdminToken");
- }
+  const r=await fetch("/api/admin-session",{headers:{Authorization:`Bearer ${token}`}});
+  if(r.ok){$("login").style.display="none";$("app").style.display="block";start();}
+  else localStorage.removeItem("jasonBusinessAdminToken");
+ }catch(e){localStorage.removeItem("jasonBusinessAdminToken");}
 }
 
-function startListeners(){
- if(listenersStarted)return;
- listenersStarted=true;
-
- onValue(ref(db,USERS_PATH),snap=>{
-  usersCache={};
-  let total=0,balance=0,vipCount=0;
-  snap.forEach(ch=>{
-   const d=ch.val()||{};
-   usersCache[ch.key]=d;
-   total++;
-   balance+=getBalance(d);
-   if(isVip(d))vipCount++;
-  });
-  $("statUsers").textContent=total;
-  $("totalBalance").textContent=money(balance)+" FC";
-  $("statVip").textContent=vipCount;
-  $("menuVip").textContent=vipCount;
-  renderUsers();
-  renderVip();
+function start(){
+ if(started)return;started=true;
+ onValue(ref(db,PATH.users),s=>{
+  users={};s.forEach(c=>users[c.key]=c.val()||{});
+  $("countUsers").textContent=Object.keys(users).length;
+  $("balance").textContent=money(Object.values(users).reduce((a,d)=>a+balanceOf(d),0))+" FC";
+  $("countVip").textContent=Object.values(users).filter(vipOf).length;
+  renderUsers();renderVip();
  });
-
- onValue(ref(db,COMMANDS_PATH),snap=>{
-  commandsCache={};
-  snap.forEach(ch=>commandsCache[ch.key]=ch.val()||{});
-  renderCommands();
- });
- onValue(ref(db,RECHARGES_PATH),snap=>{
-  rechargesCache={};
-  snap.forEach(ch=>rechargesCache[ch.key]=ch.val()||{});
-  renderRecharges();
- });
- onValue(ref(db,WITHDRAWALS_PATH),snap=>{
-  withdrawalsCache={};
-  snap.forEach(ch=>withdrawalsCache[ch.key]=ch.val()||{});
-  renderWithdrawals();
- });
- onValue(ref(db,PRICES_PATH),snap=>{
-  pricesCache=snap.val()||{};
-  renderPrices();
-  $("apiInfo").textContent=snap.exists()
-   ?"Tarifs chargés depuis Firebase. Dernière mise à jour synchronisée en direct."
-   :"Aucun tarif enregistré. Les valeurs proposées sont des exemples à personnaliser.";
+ onValue(ref(db,PATH.commands),s=>{commands={};s.forEach(c=>commands[c.key]=c.val()||{});renderRequests("commands");});
+ onValue(ref(db,PATH.recharges),s=>{recharges={};s.forEach(c=>recharges[c.key]=c.val()||{});renderRequests("recharges");});
+ onValue(ref(db,PATH.withdrawals),s=>{withdrawals={};s.forEach(c=>withdrawals[c.key]=c.val()||{});renderRequests("withdrawals");});
+ onValue(ref(db,PATH.prices),s=>{
+  prices=s.val()||{};renderPrices();
+  $("priceMessage").textContent=s.exists()?"Tarifs chargés depuis Firebase.":"Aucun tarif personnalisé : valeurs initiales proposées.";
  });
 }
 
 function renderUsers(){
- const tbody=$("usersTable");
- tbody.innerHTML="";
- Object.entries(usersCache).forEach(([phone,d])=>{
-  const vip=isVip(d);
+ const body=$("usersTable");body.innerHTML="";
+ Object.entries(users).forEach(([phone,d])=>{
   const tr=document.createElement("tr");
-  tr.dataset.search=(phone+" "+getName(d)).toLowerCase();
-  tr.innerHTML=`
-   <td>${escapeHTML(phone)}</td>
-   <td>${escapeHTML(getName(d))}</td>
-   <td>${money(getBalance(d))} FC</td>
-   <td>${vip?'<span class="badge badge-success">👑 '+escapeHTML(vipLevel(d))+'</span>':'<span class="badge badge-blue">Standard</span>'}</td>
-   <td>
-    <button class="btn btn-purple" data-action="vip" data-phone="${escapeHTML(phone)}">👑 VIP</button>
-    <button class="btn btn-red" data-action="delete" data-phone="${escapeHTML(phone)}">🗑 Supprimer</button>
-   </td>`;
-  tbody.appendChild(tr);
+  tr.dataset.search=(phone+" "+nameOf(d)).toLowerCase();
+  tr.innerHTML=`<td>${esc(phone)}</td><td>${esc(nameOf(d))}</td><td>${money(balanceOf(d))} FC</td>
+  <td>${vipOf(d)?badge("Actif"):"Standard"}</td>
+  <td><button class="btn purple" data-vip="${esc(phone)}">👑 VIP</button></td>`;
+  body.appendChild(tr);
  });
- if(!tbody.children.length)tbody.innerHTML='<tr><td colspan="5" class="empty">Aucun utilisateur.</td></tr>';
- applyUserSearch();
+ if(!body.children.length)body.innerHTML='<tr><td colspan="5" class="empty">Aucun utilisateur.</td></tr>';
+ filterRows("searchUsers","usersTable");
 }
-
 function renderVip(){
- const tbody=$("vipTable");
- tbody.innerHTML="";
- Object.entries(usersCache).forEach(([phone,d])=>{
-  const active=isVip(d);
+ const body=$("vipTable");body.innerHTML="";
+ Object.entries(users).forEach(([phone,d])=>{
   const tr=document.createElement("tr");
-  tr.dataset.search=(phone+" "+getName(d)).toLowerCase();
-  tr.innerHTML=`
-   <td>${escapeHTML(phone)}</td>
-   <td>${escapeHTML(getName(d))}</td>
-   <td>
-    <select class="small-select" data-level="${escapeHTML(phone)}">
-     ${["Aucun","Bronze","Silver","Gold","Platinum","Diamond"].map(l=>
-      `<option value="${l}" ${vipLevel(d)===l?"selected":""}>${l}</option>`
-     ).join("")}
-    </select>
-   </td>
-   <td>${active?'<span class="badge badge-success">Actif</span>':'<span class="badge badge-danger">Inactif</span>'}</td>
-   <td>
-    <button class="btn btn-purple" data-action="save-vip" data-phone="${escapeHTML(phone)}">💾 Enregistrer</button>
-    <button class="btn ${active?"btn-red":"btn-green"}" data-action="toggle-vip" data-phone="${escapeHTML(phone)}">${active?"Désactiver":"Activer"}</button>
-   </td>`;
-  tbody.appendChild(tr);
+  tr.dataset.search=(phone+" "+nameOf(d)).toLowerCase();
+  tr.innerHTML=`<td>${esc(phone)}</td><td>${esc(nameOf(d))}</td><td>
+  <select class="toolbar" style="max-width:145px" data-level="${esc(phone)}">
+  ${["Aucun","Bronze","Silver","Gold","Platinum","Diamond"].map(l=>`<option ${levelOf(d)===l?"selected":""}>${l}</option>`).join("")}
+  </select></td><td>${vipOf(d)?badge("Actif"):badge("Inactif")}</td>
+  <td><button class="btn blue" data-save-vip="${esc(phone)}">💾 Enregistrer</button>
+  <button class="btn ${vipOf(d)?"red":"green"}" data-toggle-vip="${esc(phone)}">${vipOf(d)?"Désactiver":"Activer"}</button></td>`;
+  body.appendChild(tr);
  });
- if(!tbody.children.length)tbody.innerHTML='<tr><td colspan="5" class="empty">Aucun client trouvé.</td></tr>';
- applyVipSearch();
+ if(!body.children.length)body.innerHTML='<tr><td colspan="5" class="empty">Aucun utilisateur.</td></tr>';
+ filterRows("searchVip","vipTable");
 }
 
-$("usersTable").addEventListener("click",async e=>{
- const b=e.target.closest("button[data-action]");
- if(!b)return;
- const phone=b.dataset.phone;
- if(b.dataset.action==="delete"){
-  if(!confirm("Supprimer définitivement le compte "+phone+" ?"))return;
-  try{
-   await remove(ref(db,`${USERS_PATH}/${phone}`));
-   showToast("Compte supprimé.");
-  }catch(err){showToast("Erreur : opération refusée.");}
- }
- if(b.dataset.action==="vip"){
-  openPage("vip");
-  $("vipSearch").value=phone;
-  applyVipSearch();
- }
+$("usersTable").addEventListener("click",e=>{
+ const b=e.target.closest("[data-vip]");
+ if(b){showPage("vip");$("searchVip").value=b.dataset.vip;filterRows("searchVip","vipTable");}
 });
-
 $("vipTable").addEventListener("click",async e=>{
- const b=e.target.closest("button[data-action]");
- if(!b)return;
- const phone=b.dataset.phone;
- const userRef=ref(db,`${VIP_PATH}/${phone}`);
+ const save=e.target.closest("[data-save-vip]");
+ const toggle=e.target.closest("[data-toggle-vip]");
+ const phone=(save||toggle)?.dataset.saveVip||(save||toggle)?.dataset.toggleVip;
+ if(!phone)return;
  try{
-  if(b.dataset.action==="save-vip"){
-   const select=$("vipTable").querySelector(`[data-level="${CSS.escape(phone)}"]`);
-   const level=select?.value||"Aucun";
+  const old=users[phone]||{};
+  if(save){
+   const level=$("vipTable").querySelector(`[data-level="${CSS.escape(phone)}"]`).value;
    const active=level!=="Aucun";
-   await update(userRef,{
-    vipLevel:level,
-    vipStatus:active?"Actif":"Inactif",
-    vip:active,
-    isVip:active
-   });
-   showToast("Niveau VIP enregistré.");
+   await update(ref(db,`${PATH.users}/${phone}`),{vipLevel:level,vipStatus:active?"Actif":"Inactif",vip:active,isVip:active});
+   toast("Niveau VIP enregistré.");
+  }else{
+   const active=!vipOf(old),level=active?(levelOf(old)==="Aucun"?"Bronze":levelOf(old)):"Aucun";
+   await update(ref(db,`${PATH.users}/${phone}`),{vipLevel:level,vipStatus:active?"Actif":"Inactif",vip:active,isVip:active});
+   toast(active?"VIP activé.":"VIP désactivé.");
   }
-  if(b.dataset.action==="toggle-vip"){
-   const d=usersCache[phone]||{};
-   const active=!isVip(d);
-   const level=active?(vipLevel(d)==="Aucun"?"Bronze":vipLevel(d)):"Aucun";
-   await update(userRef,{
-    vip:active,isVip:active,
-    vipStatus:active?"Actif":"Inactif",
-    vipLevel:level
-   });
-   showToast(active?"VIP activé.":"VIP désactivé.");
-  }
- }catch(err){showToast("Erreur Firebase : modification refusée.");}
+ }catch(e){toast("Modification VIP refusée par Firebase.");}
 });
 
-function renderCommands(){
- const tbody=$("commandsTable");tbody.innerHTML="";
- let pending=0;
- Object.entries(commandsCache).forEach(([id,d])=>{
-  const p=isPending(getStatus(d));if(p)pending++;
-  const tr=document.createElement("tr");
-  tr.innerHTML=`
-   <td>${escapeHTML(getPhone(d))}</td>
-   <td>${escapeHTML(d.service||"Service")}</td>
-   <td>${money(d.montant||0)} FC</td>
-   <td>${statusBadge(getStatus(d))}</td>
-   <td>${p?`
-    <button class="btn btn-green" data-action="validate-command" data-id="${escapeHTML(id)}">✓ Valider</button>
-    <button class="btn btn-red" data-action="refuse-command" data-id="${escapeHTML(id)}">✕ Refuser</button>`
-    :"Traité"}</td>`;
-  tbody.appendChild(tr);
+function renderRequests(type){
+ const data=type==="commands"?commands:type==="recharges"?recharges:withdrawals;
+ const body=$(type==="commands"?"commandsTable":type==="recharges"?"rechargesTable":"withdrawalsTable");
+ body.innerHTML="";let n=0;
+ Object.entries(data).forEach(([id,d])=>{
+  const p=pending(statusOf(d));if(p)n++;
+  const method=esc(d.methode||d.method||d.operateur||"—");
+  let cells=type==="commands"
+   ?`<td>${esc(phoneOf(d))}</td><td>${esc(d.service||"Service")}</td><td>${money(d.montant)} FC</td><td>${badge(statusOf(d))}</td>`
+   :type==="recharges"
+   ?`<td>${esc(phoneOf(d))}</td><td>${money(d.montant)} FC</td><td>${badge(statusOf(d))}</td>`
+   :`<td>${esc(phoneOf(d))}</td><td>${money(d.montant)} FC</td><td>${method}</td><td>${badge(statusOf(d))}</td>`;
+  const buttons=p?`<button class="btn green" data-action="approve" data-type="${type}" data-id="${esc(id)}">✓ Valider</button><button class="btn red" data-action="reject" data-type="${type}" data-id="${esc(id)}">✕ Refuser</button>`:"Traité";
+  const tr=document.createElement("tr");tr.innerHTML=cells+`<td>${buttons}</td>`;body.appendChild(tr);
  });
- if(!tbody.children.length)tbody.innerHTML='<tr><td colspan="5" class="empty">Aucune commande.</td></tr>';
- $("statCommands").textContent=pending;
- $("menuCommands").textContent=pending;
+ const cols=type==="commands"?5:type==="recharges"?4:5;
+ if(!body.children.length)body.innerHTML=`<tr><td colspan="${cols}" class="empty">Aucune demande.</td></tr>`;
+ const countId=type==="commands"?"countCommands":type==="recharges"?"countRecharges":"countWithdrawals";
+ $(countId).textContent=n;
 }
 
-function renderRecharges(){
- const tbody=$("rechargesTable");tbody.innerHTML="";
- let pending=0;
- Object.entries(rechargesCache).forEach(([id,d])=>{
-  const p=isPending(getStatus(d));if(p)pending++;
-  const tr=document.createElement("tr");
-  tr.innerHTML=`
-   <td>${escapeHTML(getPhone(d))}</td>
-   <td>${money(d.montant||0)} FC</td>
-   <td>${statusBadge(getStatus(d))}</td>
-   <td>${p?`
-    <button class="btn btn-green" data-action="validate-recharge" data-id="${escapeHTML(id)}">✓ Valider</button>
-    <button class="btn btn-red" data-action="refuse-recharge" data-id="${escapeHTML(id)}">✕ Refuser</button>`
-    :"Traité"}</td>`;
-  tbody.appendChild(tr);
+async function credit(phone,amount){
+ if(!phone||!Number.isFinite(amount)||amount<=0)throw Error("Montant ou numéro invalide.");
+ const r=await runTransaction(ref(db,`${PATH.users}/${phone}/solde_principal`),v=>(Number(v)||0)+amount);
+ if(!r.committed)throw Error("Transaction échouée.");
+}
+document.querySelectorAll("#commandsTable,#rechargesTable,#withdrawalsTable").forEach(table=>{
+ table.addEventListener("click",async e=>{
+  const b=e.target.closest("[data-action]");if(!b||working)return;
+  const type=b.dataset.type,id=b.dataset.id,action=b.dataset.action;
+  const data=type==="commands"?commands:type==="recharges"?recharges:withdrawals;
+  const d=data[id];if(!d)return;
+  if(!pending(statusOf(d)))return toast("Cette demande a déjà été traitée.");
+  if(action==="approve"&&type==="recharges"&&!confirm("As-tu réellement reçu ce paiement ? Le solde sera crédité."))return;
+  if(action==="approve"&&type==="withdrawals"&&!confirm("As-tu réellement envoyé l'argent au client ?"))return;
+  if(action==="reject"&&!confirm("Confirmer le refus ?"))return;
+  working=true;
+  try{
+   const path=type==="commands"?PATH.commands:type==="recharges"?PATH.recharges:PATH.withdrawals;
+   const phone=phoneOf(d),amount=Number(d.montant||0);
+   if(action==="approve"){
+    if(type==="recharges")await credit(phone,amount);
+    await update(ref(db,`${path}/${id}`),{statut:type==="withdrawals"?"Payé":"Validée"});
+    toast(type==="withdrawals"?"Retrait marqué payé.":"Demande validée.");
+   }else{
+    if(type==="withdrawals"&&phone&&amount>0)await credit(phone,amount);
+    await update(ref(db,`${path}/${id}`),{statut:"Refusée"});
+    toast("Demande refusée.");
+   }
+  }catch(err){console.error(err);toast("Erreur. Vérifie les données et les règles Firebase.");}
+  finally{working=false;}
  });
- if(!tbody.children.length)tbody.innerHTML='<tr><td colspan="4" class="empty">Aucune recharge.</td></tr>';
- $("statRecharges").textContent=pending;
- $("menuRecharges").textContent=pending;
-}
-
-function renderWithdrawals(){
- const tbody=$("withdrawalsTable");tbody.innerHTML="";
- let pending=0;
- Object.entries(withdrawalsCache).forEach(([id,d])=>{
-  const p=isPending(getStatus(d));if(p)pending++;
-  const tr=document.createElement("tr");
-  tr.innerHTML=`
-   <td>${escapeHTML(getPhone(d))}</td>
-   <td>${money(d.montant||0)} FC</td>
-   <td>${escapeHTML(d.methode||d.method||d.operateur||"—")}</td>
-   <td>${statusBadge(getStatus(d))}</td>
-   <td>${p?`
-    <button class="btn btn-green" data-action="validate-withdrawal" data-id="${escapeHTML(id)}">✓ Payé</button>
-    <button class="btn btn-red" data-action="refuse-withdrawal" data-id="${escapeHTML(id)}">✕ Refuser</button>`
-    :"Traité"}</td>`;
-  tbody.appendChild(tr);
- });
- if(!tbody.children.length)tbody.innerHTML='<tr><td colspan="5" class="empty">Aucun retrait.</td></tr>';
- $("statWithdrawals").textContent=pending;
- $("menuWithdrawals").textContent=pending;
-}
-
-async function creditClient(phone,amount){
- if(!phone||!Number.isFinite(amount)||amount<=0)throw new Error("Données invalides");
- const result=await runTransaction(
-  ref(db,`${USERS_PATH}/${phone}/solde_principal`),
-  current=>(Number(current)||0)+amount
- );
- if(!result.committed)throw new Error("Transaction non effectuée");
-}
-
-async function handleRequestAction(action,id){
- if(!ensureNotBusy())return;
- setBusy(true);
- try{
-  if(action==="validate-command"){
-   await update(ref(db,`${COMMANDS_PATH}/${id}`),{statut:"Validée"});
-   showToast("Commande validée.");
-  }
-  if(action==="refuse-command"){
-   const d=commandsCache[id]||{};
-   if(!confirm("Refuser cette commande et rembourser le montant au client ?"))return;
-   await update(ref(db,`${COMMANDS_PATH}/${id}`),{statut:"Refusée"});
-   const phone=getPhone(d),amount=Number(d.montant||0);
-   if(phone&&amount>0)await creditClient(phone,amount);
-   showToast("Commande refusée.");
-  }
-  if(action==="validate-recharge"){
-   const d=rechargesCache[id]||{};
-   if(!isPending(getStatus(d)))return showToast("Cette recharge est déjà traitée.");
-   const phone=getPhone(d),amount=Number(d.montant||0);
-   if(!phone||amount<=0)throw new Error("Données de recharge invalides");
-   if(!confirm("Confirmer la réception réelle du paiement avant de créditer le client ?"))return;
-   await creditClient(phone,amount);
-   await update(ref(db,`${RECHARGES_PATH}/${id}`),{statut:"Validée"});
-   showToast("Recharge validée et créditée.");
-  }
-  if(action==="refuse-recharge"){
-   if(!confirm("Refuser cette recharge ?"))return;
-   await update(ref(db,`${RECHARGES_PATH}/${id}`),{statut:"Refusée"});
-   showToast("Recharge refusée.");
-  }
-  if(action==="validate-withdrawal"){
-   if(!confirm("As-tu réellement envoyé l'argent au client ? Confirmer uniquement après paiement."))return;
-   await update(ref(db,`${WITHDRAWALS_PATH}/${id}`),{statut:"Payé"});
-   showToast("Retrait marqué comme payé.");
-  }
-  if(action==="refuse-withdrawal"){
-   const d=withdrawalsCache[id]||{};
-   if(!confirm("Refuser le retrait et rembourser le montant au solde du client ?"))return;
-   const phone=getPhone(d),amount=Number(d.montant||0);
-   if(!phone||amount<=0)throw new Error("Données de retrait invalides");
-   await creditClient(phone,amount);
-   await update(ref(db,`${WITHDRAWALS_PATH}/${id}`),{statut:"Refusée",remboursementEffectue:true});
-   showToast("Retrait refusé et remboursement effectué.");
-  }
- }catch(err){
-  console.error(err);
-  showToast("Échec de l'opération. Vérifie les données et les règles Firebase.");
- }finally{setBusy(false);}
-}
-
-$("commandsTable").addEventListener("click",e=>{
- const b=e.target.closest("button[data-action]");
- if(b)handleRequestAction(b.dataset.action,b.dataset.id);
-});
-$("rechargesTable").addEventListener("click",e=>{
- const b=e.target.closest("button[data-action]");
- if(b)handleRequestAction(b.dataset.action,b.dataset.id);
-});
-$("withdrawalsTable").addEventListener("click",e=>{
- const b=e.target.closest("button[data-action]");
- if(b)handleRequestAction(b.dataset.action,b.dataset.id);
 });
 
 function renderPrices(){
- const grid=$("priceGrid");
- const keys=Object.keys(defaultPrices);
- grid.innerHTML="";
- keys.forEach(key=>{
-  const stored=pricesCache[key]||{};
-  const fallback=defaultPrices[key];
-  const label=stored.label||fallback.label;
-  const price=stored.price??fallback.price;
-  const description=stored.description||fallback.description;
-  const card=document.createElement("div");
-  card.className="price-card";
-  card.innerHTML=`
-   <h3>${escapeHTML(label)}</h3>
-   <p>${escapeHTML(description)}</p>
-   <div class="price-row">
-    <label for="price-${key}">Prix en FC</label>
-    <input class="price-input" id="price-${key}" type="number"
-     min="0" step="1" value="${Number(price)||0}" data-price-key="${key}">
-   </div>`;
+ const grid=$("priceGrid");grid.innerHTML="";
+ Object.entries(defaultPrices).forEach(([key,fallback])=>{
+  const saved=prices[key]||{};
+  const card=document.createElement("div");card.className="price-card";
+  card.innerHTML=`<h3>${esc(saved.label||fallback.label)}</h3>
+  <p>${esc(saved.description||fallback.description)}</p>
+  <div class="price-line"><label for="price-${key}">Prix en FC</label>
+  <input type="number" min="0" step="1" id="price-${key}" data-price="${key}" value="${Number(saved.price??fallback.price)}"></div>`;
   grid.appendChild(card);
  });
 }
-
 $("savePrices").addEventListener("click",async()=>{
- if(!ensureNotBusy())return;
+ if(working)return;
  const token=localStorage.getItem("jasonBusinessAdminToken");
- if(!token){showToast("Reconnecte-toi à l'administration.");return;}
+ if(!token)return toast("Reconnecte-toi.");
  const next={};
  for(const [key,fallback] of Object.entries(defaultPrices)){
-  const input=document.querySelector(`[data-price-key="${key}"]`);
-  const price=Number(input?.value);
-  if(!Number.isFinite(price)||price<0){
-   showToast("Un prix est invalide.");return;
-  }
-  next[key]={
-   label:(pricesCache[key]?.label||fallback.label),
-   description:(pricesCache[key]?.description||fallback.description),
-   price:Math.floor(price),
-   updatedAt:Date.now()
-  };
+  const value=Number(document.querySelector(`[data-price="${key}"]`).value);
+  if(!Number.isFinite(value)||value<0)return toast("Un prix est invalide.");
+  next[key]={label:prices[key]?.label||fallback.label,description:prices[key]?.description||fallback.description,price:Math.floor(value),updatedAt:Date.now()};
  }
- if(!confirm("Enregistrer les nouveaux prix dans Firebase ?"))return;
- setBusy(true);
+ if(!confirm("Enregistrer ces tarifs dans Firebase ?"))return;
+ working=true;
  try{
-  await set(ref(db,PRICES_PATH),next);
-  pricesCache=next;
-  showToast("Tarifs enregistrés dans Firebase.");
-  $("apiInfo").textContent="Tarifs sauvegardés. Les sites clients doivent lire jasonBusiness/config/apiPrices.";
- }catch(err){
-  console.error(err);
-  showToast("Impossible d'enregistrer les tarifs.");
- }finally{setBusy(false);}
+  await set(ref(db,PATH.prices),next);
+  prices=next;toast("Prix enregistrés dans Firebase.");
+  $("priceMessage").textContent="Tarifs sauvegardés. Vérifie que les pages clients lisent ce chemin Firebase.";
+ }catch(e){console.error(e);toast("Enregistrement refusé. Vérifie les règles Firebase.");}
+ finally{working=false;}
 });
-
 $("reloadPrices").addEventListener("click",async()=>{
- try{
-  const snap=await get(ref(db,PRICES_PATH));
-  pricesCache=snap.val()||{};
-  renderPrices();
-  showToast("Tarifs rechargés.");
- }catch(err){showToast("Impossible de charger les tarifs.");}
+ try{const s=await get(ref(db,PATH.prices));prices=s.val()||{};renderPrices();toast("Tarifs rechargés.");}
+ catch(e){toast("Impossible de recharger les tarifs.");}
 });
 
-function applyUserSearch(){
- const s=($("userSearch").value||"").toLowerCase();
- document.querySelectorAll("#usersTable tr").forEach(tr=>{
-  tr.style.display=tr.dataset.search?.includes(s)?"":"none";
+function filterRows(searchId,tableId){
+ const query=$(searchId).value.toLowerCase();
+ document.querySelectorAll(`#${tableId} tr`).forEach(tr=>{
+  tr.style.display=(tr.dataset.search||tr.innerText).toLowerCase().includes(query)?"":"none";
  });
 }
-function applyVipSearch(){
- const s=($("vipSearch").value||"").toLowerCase();
- document.querySelectorAll("#vipTable tr").forEach(tr=>{
-  tr.style.display=tr.dataset.search?.includes(s)?"":"none";
- });
-}
-$("userSearch").addEventListener("input",applyUserSearch);
-$("vipSearch").addEventListener("input",applyVipSearch);
+$("searchUsers").addEventListener("input",()=>filterRows("searchUsers","usersTable"));
+$("searchVip").addEventListener("input",()=>filterRows("searchVip","vipTable"));
 
-checkSavedSession();
+checkSession();
 </script>
 </body>
 </html>
