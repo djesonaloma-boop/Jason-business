@@ -5,9 +5,16 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>JASON BUSINESS — ADMIN</title>
 <style>
-:root{--bg:#050914;--panel:#0b1220;--border:rgba(255,255,255,.08);--text:#f5f7fb;--muted:#8e9aad;--blue:#3b82f6;--green:#22c55e;--red:#ef4444;--purple:#a855f7;--orange:#f59e0b}
+:root{--bg:#050914;--panel:#0b1220;--border:rgba(255,255,255,.08);--text:#f5f7fb;--muted:#8e9aad;--blue:#3b82f6;--green:#22c55e;--red:#ef4444}
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,sans-serif}
 body{background:radial-gradient(circle at top,#101d35 0,var(--bg) 45%,#02040a 100%);color:var(--text);min-height:100vh}
+#adminLogin{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at top,#172744,#030711 70%);z-index:9999}
+.login-box{width:100%;max-width:400px;background:rgba(11,18,32,.96);border:1px solid var(--border);border-radius:24px;padding:30px;box-shadow:0 25px 80px rgba(0,0,0,.55)}
+.login-logo{text-align:center;font-size:25px;font-weight:900;letter-spacing:1px;margin-bottom:7px}.login-subtitle{text-align:center;color:var(--muted);font-size:12px;margin-bottom:25px}
+.input{width:100%;background:#070d18;border:1px solid var(--border);color:white;border-radius:13px;padding:14px;outline:none;margin-bottom:12px}.input:focus{border-color:var(--blue)}
+.login-btn{width:100%;border:0;border-radius:13px;padding:14px;background:var(--blue);color:white;font-weight:800;cursor:pointer}
+.login-error{color:#ff6b6b;text-align:center;font-size:12px;min-height:18px;margin-top:12px}
+#adminPanel{display:none;min-height:100vh}
 .header{position:sticky;top:0;z-index:100;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:rgba(5,9,20,.94);backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
 .brand{font-size:18px;font-weight:900}.brand span{color:#4da3ff}
 .header-right{display:flex;align-items:center;gap:10px}.admin-status{display:flex;align-items:center;gap:7px;font-size:11px;color:#9ca9bc}.online-dot{width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 10px var(--green)}
@@ -19,18 +26,27 @@ body{background:radial-gradient(circle at top,#101d35 0,var(--bg) 45%,#02040a 10
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:20px}.stat-card{background:linear-gradient(145deg,rgba(16,26,43,.96),rgba(8,14,26,.96));border:1px solid var(--border);border-radius:18px;padding:18px;min-height:110px}
 .stat-icon{font-size:22px;margin-bottom:10px}.stat-label{color:var(--muted);font-size:11px}.stat-value{font-size:22px;font-weight:900;margin-top:5px}
 .panel{background:rgba(11,18,32,.9);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:18px}.panel-head{padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--border)}
-.table-wrap{width:100%;overflow-x:auto}table{width:100%;min-width:900px;border-collapse:collapse}th{color:#7f8da2;font-size:10px;text-transform:uppercase;text-align:left;padding:13px;border-bottom:1px solid var(--border)}td{padding:13px;border-bottom:1px solid rgba(255,255,255,.045);font-size:12px}
+.table-wrap{width:100%;overflow-x:auto}table{width:100%;min-width:850px;border-collapse:collapse}th{color:#7f8da2;font-size:10px;text-transform:uppercase;text-align:left;padding:13px;border-bottom:1px solid var(--border)}td{padding:13px;border-bottom:1px solid rgba(255,255,255,.045);font-size:12px}
 .btn{border:0;border-radius:8px;padding:7px 9px;color:white;font-size:10px;font-weight:800;cursor:pointer;margin:2px}.btn-blue{background:var(--blue)}.btn-green{background:var(--green)}.btn-red{background:var(--red)}.btn-orange{background:var(--orange)}.btn-purple{background:var(--purple)}
-.badge{display:inline-flex;border-radius:20px;padding:5px 8px;font-size:10px;font-weight:800}.badge-success{color:#54e889;background:rgba(34,197,94,.12)}.badge-danger{color:#ff7777;background:rgba(239,68,68,.12)}.badge-pending{color:#ffc95a;background:rgba(245,158,11,.12)}.badge-purple{color:#d39aff;background:rgba(168,85,247,.14)}.badge-blue{color:#70a9ff;background:rgba(59,130,246,.13)}
-.muted{color:var(--muted)}.empty{padding:35px;text-align:center;color:var(--muted)}
+.badge{display:inline-flex;border-radius:20px;padding:5px 8px;font-size:10px;font-weight:800}.badge-success{color:#54e889;background:rgba(34,197,94,.12)}.badge-danger{color:#ff7777;background:rgba(239,68,68,.12)}.badge-pending{color:#ffc95a;background:rgba(245,158,11,.12)}.badge-blue{color:#70a9ff;background:rgba(59,130,246,.13)}
 #toastContainer{position:fixed;top:78px;right:15px;z-index:10000;display:flex;flex-direction:column;gap:8px;width:min(330px,calc(100% - 30px))}.toast{padding:13px 15px;border-radius:12px;background:#111b2d;border:1px solid var(--border);font-size:12px}
 @media(max-width:700px){.layout{display:block}.sidebar{width:100%;display:flex;overflow-x:auto;border-right:0;border-bottom:1px solid var(--border);padding:8px}.menu-btn{width:auto;flex-shrink:0}.content{padding:14px}.stats{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
 
-<header class="header"><div class="brand">JASON <span>BUSINESS</span></div><div class="header-right"><div class="admin-status"><span class="online-dot"></span>Admin 10092007 • Firebase connecté</div><button class="logout" onclick="localStorage.clear();location.href='index.html'">Quitter</button></div></header>
+<div id="adminLogin">
+    <div class="login-box">
+        <div class="login-logo">JASON BUSINESS</div>
+        <div class="login-subtitle">🔐 PANNEAU D'ADMINISTRATION</div>
+        <input type="password" id="adminPassword" class="input" placeholder="Mot de passe administrateur" autocomplete="current-password">
+        <button id="loginAdmin" class="login-btn" type="button">🔓 Ouvrir l'administration</button>
+        <div id="loginError" class="login-error"></div>
+    </div>
+</div>
 
+<div id="adminPanel">
+<header class="header"><div class="brand">JASON <span>BUSINESS</span></div><div class="header-right"><div class="admin-status"><span class="online-dot"></span>Firebase connecté</div><button class="logout" id="adminLogout" type="button">Déconnexion</button></div></header>
 <div class="layout">
 <aside class="sidebar">
     <button class="menu-btn active" data-page="dashboard" type="button">📊 Dashboard</button>
@@ -39,30 +55,14 @@ body{background:radial-gradient(circle at top,#101d35 0,var(--bg) 45%,#02040a 10
     <button class="menu-btn" data-page="recharges" type="button">💳 Recharges <span class="menu-count" id="menuRecharges">0</span></button>
     <button class="menu-btn" data-page="withdrawals" type="button">💸 Retraits <span class="menu-count" id="menuWithdrawals">0</span></button>
 </aside>
-
 <main class="content">
-<section class="page active" id="page-dashboard">
-    <div class="page-title">📊 Dashboard</div><div class="page-subtitle">Code admin 10092007 actif</div>
-    <div class="stats">
-        <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-label">Utilisateurs</div><div class="stat-value" id="statUsers">0</div></div>
-        <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-label">Solde total</div><div class="stat-value" id="totalBalance">0 FC</div></div>
-        <div class="stat-card"><div class="stat-icon">🛒</div><div class="stat-label">Commandes</div><div class="stat-value" id="statCommands">0</div></div>
-        <div class="stat-card"><div class="stat-icon">💳</div><div class="stat-label">Recharges</div><div class="stat-value" id="statRecharges">0</div></div>
-        <div class="stat-card"><div class="stat-icon">💸</div><div class="stat-label">Retraits</div><div class="stat-value" id="statWithdrawals">0</div></div>
-    </div>
-</section>
-
-<section class="page" id="page-users">
-    <div class="page-title">👥 Utilisateurs</div>
-    <div class="page-subtitle">Réinitialiser les codes clients</div>
-    <div class="panel"><div class="panel-head"><div>Liste des comptes</div><input id="userSearch" style="background:#070d18;border:1px solid rgba(255,255,255,.08);border-radius:11px;color:white;padding:11px 13px;outline:none" placeholder="🔎 Rechercher..."></div>
-    <div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>Code Parrainage</th><th>Actions</th></tr></thead><tbody id="usersTable"></tbody></table></div></div>
-</section>
-
+<section class="page active" id="page-dashboard"><div class="page-title">📊 Dashboard</div><div class="stats"><div class="stat-card"><div class="stat-icon">👥</div><div class="stat-label">Utilisateurs</div><div class="stat-value" id="statUsers">0</div></div><div class="stat-card"><div class="stat-icon">💰</div><div class="stat-label">Solde total</div><div class="stat-value" id="totalBalance">0 FC</div></div><div class="stat-card"><div class="stat-icon">🛒</div><div class="stat-label">Commandes</div><div class="stat-value" id="statCommands">0</div></div><div class="stat-card"><div class="stat-icon">💳</div><div class="stat-label">Recharges</div><div class="stat-value" id="statRecharges">0</div></div></div></section>
+<section class="page" id="page-users"><div class="page-title">👥 Utilisateurs</div><div class="panel"><div class="panel-head"><div>Liste</div><input id="userSearch" style="background:#070d18;border:1px solid rgba(255,255,255,.08);border-radius:11px;color:white;padding:11px 13px;outline:none;max-width:300px;width:100%" placeholder="🔎 Rechercher..."></div><div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>Code Secret</th><th>Actions</th></tr></thead><tbody id="usersTable"></tbody></table></div></div></section>
 <section class="page" id="page-commands"><div class="page-title">🛒 Commandes</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Client</th><th>Service</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div></div></section>
 <section class="page" id="page-recharges"><div class="page-title">💳 Recharges</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Client</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="rechargesTable"></tbody></table></div></div></section>
 <section class="page" id="page-withdrawals"><div class="page-title">💸 Retraits</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Client</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsTable"></tbody></table></div></div></section>
 </main>
+</div>
 </div>
 
 <div id="toastContainer"></div>
@@ -75,38 +75,37 @@ const firebaseConfig = {apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDom
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-/* === CODE ADMIN 10092007 VERIFICATION SERVEUR === */
-const ADMIN_TOKEN_KEY="jasonBusinessAdminToken";
-const ADMIN_CODE="10092007"; // utilisé seulement pour vérification initiale, pas affiché
+const loginBox=document.getElementById("adminLogin");
+const adminPanel=document.getElementById("adminPanel");
+function showAdmin(){loginBox.style.display="none";adminPanel.style.display="block";}
+function hideAdmin(){loginBox.style.display="flex";adminPanel.style.display="none";}
 
-// Si pas encore authentifié, on demande une seule fois via API sécurisée
-async function ensureAdmin(){
-    const saved=localStorage.getItem(ADMIN_TOKEN_KEY);
-    if(saved){
-        try{
-            const r=await fetch("/api/admin-session",{headers:{Authorization:`Bearer ${saved}`}});
-            if(r.ok) return true;
-        }catch(e){}
-        localStorage.removeItem(ADMIN_TOKEN_KEY);
-    }
-    // Vérification automatique si tu viens de index.html avec code
-    const phone=localStorage.getItem("jasonBusinessUserPhone");
-    if(phone===ADMIN_CODE || localStorage.getItem("jasonIsAdmin")==="true"){
-        try{
-            const r=await fetch("/api/admin-login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:ADMIN_CODE})});
-            const d=await r.json();
-            if(d.token){localStorage.setItem(ADMIN_TOKEN_KEY,d.token); return true;}
-        }catch(e){}
-    }
-    // Accès direct autorisé pour toi - on crée un token local pour affichage
-    localStorage.setItem("jasonIsAdmin","true");
-    return true;
+// LOGIN SECURISE - AUCUN CODE EN DUR
+async function loginAdmin(){
+    const password=document.getElementById("adminPassword").value;
+    const error=document.getElementById("loginError");
+    error.textContent="";
+    if(!password){error.textContent="Entrez le mot de passe";return;}
+    try{
+        const r=await fetch("/api/admin-login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password})});
+        const d=await r.json();
+        if(!r.ok || !d.token){error.textContent="❌ Mot de passe incorrect.";return;}
+        localStorage.setItem("jasonBusinessAdminToken", d.token);
+        showAdmin();
+    }catch(e){error.textContent="❌ Serveur indisponible.";}
 }
-ensureAdmin();
+document.getElementById("loginAdmin").addEventListener("click", loginAdmin);
+document.getElementById("adminPassword").addEventListener("keydown", e=>{if(e.key==="Enter") loginAdmin();});
+document.getElementById("adminLogout").addEventListener("click", ()=>{localStorage.removeItem("jasonBusinessAdminToken"); location.reload();});
+
+// Session persistante
+const saved=localStorage.getItem("jasonBusinessAdminToken");
+if(saved){
+    fetch("/api/admin-session",{headers:{Authorization:`Bearer ${saved}`}}).then(r=>{if(r.ok) showAdmin(); else localStorage.removeItem("jasonBusinessAdminToken");}).catch(()=>localStorage.removeItem("jasonBusinessAdminToken"));
+}
 
 const ROOT="jasonBusiness";
 const USERS_PATH=`${ROOT}/users`, COMMANDS_PATH=`${ROOT}/demandes_commandes`, RECHARGES_PATH=`${ROOT}/demandes_recharges`, WITHDRAWALS_PATH=`${ROOT}/demandes_retraits`;
-
 function money(v){return Math.floor(Number(v)||0).toLocaleString("fr-FR");}
 function escapeHTML(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 function getPhone(d){return d.telephone||d.phone||d.numero||"";}
@@ -119,75 +118,45 @@ function showToast(m){const c=document.getElementById("toastContainer");const d=
 function openPage(p){document.querySelectorAll(".menu-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===p)); document.querySelectorAll(".page").forEach(s=>s.classList.toggle("active",s.id===`page-${p}`));}
 document.querySelectorAll(".menu-btn").forEach(b=>b.addEventListener("click",()=>openPage(b.dataset.page)));
 
-// GENERER NOUVEAU CODE CLIENT
-function generateClientCode(){
-    const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-    let code="JB-";
-    for(let i=0;i<6;i++){code+=chars[Math.floor(Math.random()*chars.length)];}
-    return code;
-}
-
 onValue(ref(db,USERS_PATH), snap=>{
     const tbody=document.getElementById("usersTable"); tbody.innerHTML=""; let c=0, tot=0;
-    snap.forEach(ch=>{
-        const phone=ch.key; const d=ch.val()||{}; c++; tot+=getBalance(d);
-        const code = d.inviteCode || d.referralCode || d.codeParrainage || "—";
-        tbody.innerHTML+=`<tr>
-            <td>${escapeHTML(phone)}</td>
-            <td>${escapeHTML(getName(d))}</td>
-            <td>${money(getBalance(d))} FC</td>
-            <td><span class="badge badge-blue">${escapeHTML(code)}</span></td>
-            <td>
-                <button class="btn btn-green" onclick="addMoney('${encodeURIComponent(phone)}')">+1000</button>
-                <button class="btn btn-purple" onclick="resetClientCode('${encodeURIComponent(phone)}')">🔄 Code</button>
-                <button class="btn btn-red" onclick="deleteUser('${encodeURIComponent(phone)}')">🗑</button>
-            </td>
-        </tr>`;
+    snap.forEach(ch=>{const phone=ch.key; const d=ch.val()||{}; c++; tot+=getBalance(d);
+        const secret=d.password||d.motDePasse||d.codeSecret||"—";
+        tbody.innerHTML+=`<tr><td>${escapeHTML(phone)}</td><td>${escapeHTML(getName(d))}</td><td>${money(getBalance(d))} FC</td><td><span class="badge badge-blue">🔑 ${escapeHTML(secret)}</span></td><td><button class="btn btn-orange" onclick="resetCode('${encodeURIComponent(phone)}')">🔑 Reset code</button> <button class="btn btn-red" onclick="deleteUser('${encodeURIComponent(phone)}')">🗑</button></td></tr>`;
     });
     document.getElementById("statUsers").textContent=c; document.getElementById("totalBalance").textContent=money(tot)+" FC";
 });
-
-window.addMoney=async(enc)=>{const p=decodeURIComponent(enc); await runTransaction(ref(db,`${USERS_PATH}/${p}/solde_principal`),x=>(Number(x)||0)+1000); showToast("✅ +1000 FC");};
-window.deleteUser=async(enc)=>{if(!confirm("Supprimer ce client ?")) return; await remove(ref(db,`${USERS_PATH}/${decodeURIComponent(enc)}`)); showToast("Client supprimé");};
-
-// REINITIALISER CODE CLIENT - NOUVEAU
-window.resetClientCode=async(enc)=>{
+window.deleteUser=async(enc)=>{if(!confirm("Supprimer?")) return; await remove(ref(db,`${USERS_PATH}/${decodeURIComponent(enc)}`)); showToast("Supprimé");};
+window.resetCode=async(enc)=>{
     const phone=decodeURIComponent(enc);
-    const newCode=generateClientCode();
-    if(!confirm(`Réinitialiser le code de ${phone} ?\nNouveau code: ${newCode}`)) return;
-    try{
-        await update(ref(db,`${USERS_PATH}/${phone}`),{
-            inviteCode:newCode,
-            referralCode:newCode,
-            codeParrainage:newCode,
-            codeResetAt:new Date().toISOString()
-        });
-        showToast(`✅ Code réinitialisé: ${newCode}`);
-    }catch(e){console.error(e); showToast("❌ Erreur réinitialisation");}
+    const newCode=Math.floor(100000+Math.random()*900000).toString();
+    if(!confirm(`Réinitialiser le code secret de ${phone} en ${newCode} ?`)) return;
+    await update(ref(db,`${USERS_PATH}/${phone}`),{password:newCode,motDePasse:newCode,codeSecret:newCode,code:newCode,pin:newCode});
+    showToast(`✅ Nouveau code: ${newCode}`);
 };
 
 onValue(ref(db,COMMANDS_PATH), snap=>{
     const tbody=document.getElementById("commandsTable"); tbody.innerHTML=""; let pend=0;
-    snap.forEach(ch=>{const id=ch.key; const d=ch.val()||{}; if(isPending(getStatus(d))) pend++; tbody.innerHTML+=`<tr><td>${escapeHTML(getPhone(d))}</td><td>${escapeHTML(d.service||"Service")}</td><td>${money(d.montant||0)} FC</td><td>${statusBadge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateCommand('${encodeURIComponent(id)}')">✓ Valider</button><button class="btn btn-red" onclick="refuseCommand('${encodeURIComponent(id)}')">✕ Refuser</button>`:`Traité`}</td></tr>`;});
+    snap.forEach(ch=>{const id=ch.key; const d=ch.val()||{}; if(isPending(getStatus(d))) pend++; tbody.innerHTML+=`<tr><td>${escapeHTML(getPhone(d))}</td><td>${escapeHTML(d.service||"Service")}</td><td>${money(d.montant||0)} FC</td><td>${statusBadge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateCommand('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseCommand('${encodeURIComponent(id)}')">✕</button>`:`Traité`}</td></tr>`;});
     document.getElementById("statCommands").textContent=pend; document.getElementById("menuCommands").textContent=pend;
 });
-window.validateCommand=async(id)=>{await update(ref(db,`${COMMANDS_PATH}/${decodeURIComponent(id)}`),{statut:"Validée"}); showToast("✅ Commande validée");};
+window.validateCommand=async(id)=>{await update(ref(db,`${COMMANDS_PATH}/${decodeURIComponent(id)}`),{statut:"Validée"}); showToast("Validée");};
 window.refuseCommand=async(id)=>{id=decodeURIComponent(id); const s=await get(ref(db,`${COMMANDS_PATH}/${id}`)); const d=s.val()||{}; const phone=getPhone(d); const amt=Number(d.montant||0); await update(ref(db,`${COMMANDS_PATH}/${id}`),{statut:"Refusée"}); if(phone&&amt>0) await runTransaction(ref(db,`${USERS_PATH}/${phone}/solde_principal`),x=>(Number(x)||0)+amt); showToast("Refusée + remboursée");};
 
 onValue(ref(db,RECHARGES_PATH), snap=>{
     const tbody=document.getElementById("rechargesTable"); tbody.innerHTML=""; let pend=0;
-    snap.forEach(ch=>{const id=ch.key; const d=ch.val()||{}; if(isPending(getStatus(d))) pend++; tbody.innerHTML+=`<tr><td>${escapeHTML(getPhone(d))}</td><td>${money(d.montant||0)} FC</td><td>${statusBadge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateRecharge('${encodeURIComponent(id)}')">✓ Valider</button><button class="btn btn-red" onclick="refuseRecharge('${encodeURIComponent(id)}')">✕ Refuser</button>`:`Traité`}</td></tr>`;});
+    snap.forEach(ch=>{const id=ch.key; const d=ch.val()||{}; if(isPending(getStatus(d))) pend++; tbody.innerHTML+=`<tr><td>${escapeHTML(getPhone(d))}</td><td>${money(d.montant||0)} FC</td><td>${statusBadge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateRecharge('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseRecharge('${encodeURIComponent(id)}')">✕</button>`:`Traité`}</td></tr>`;});
     document.getElementById("statRecharges").textContent=pend; document.getElementById("menuRecharges").textContent=pend;
 });
-window.validateRecharge=async(id)=>{id=decodeURIComponent(id); const s=await get(ref(db,`${RECHARGES_PATH}/${id}`)); const d=s.val()||{}; await update(ref(db,`${RECHARGES_PATH}/${id}`),{statut:"Validée"}); await runTransaction(ref(db,`${USERS_PATH}/${getPhone(d)}/solde_principal`),x=>(Number(x)||0)+Number(d.montant||0)); showToast("✅ Recharge validée");};
-window.refuseRecharge=async(id)=>{await update(ref(db,`${RECHARGES_PATH}/${decodeURIComponent(id)}`),{statut:"Refusée"}); showToast("Recharge refusée");};
+window.validateRecharge=async(id)=>{id=decodeURIComponent(id); const s=await get(ref(db,`${RECHARGES_PATH}/${id}`)); const d=s.val()||{}; await update(ref(db,`${RECHARGES_PATH}/${id}`),{statut:"Validée"}); await runTransaction(ref(db,`${USERS_PATH}/${getPhone(d)}/solde_principal`),x=>(Number(x)||0)+Number(d.montant||0)); showToast("Validée");};
+window.refuseRecharge=async(id)=>{await update(ref(db,`${RECHARGES_PATH}/${decodeURIComponent(id)}`),{statut:"Refusée"}); showToast("Refusée");};
 
 onValue(ref(db,WITHDRAWALS_PATH), snap=>{
     const tbody=document.getElementById("withdrawalsTable"); tbody.innerHTML=""; let pend=0;
-    snap.forEach(ch=>{const id=ch.key; const d=ch.val()||{}; if(isPending(getStatus(d))) pend++; tbody.innerHTML+=`<tr><td>${escapeHTML(getPhone(d))}</td><td>${money(d.montant||0)} FC</td><td>${statusBadge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateWithdrawal('${encodeURIComponent(id)}')">✓ Payer</button><button class="btn btn-red" onclick="refuseWithdrawal('${encodeURIComponent(id)}')">✕ Refuser</button>`:`Traité`}</td></tr>`;});
+    snap.forEach(ch=>{const id=ch.key; const d=ch.val()||{}; if(isPending(getStatus(d))) pend++; tbody.innerHTML+=`<tr><td>${escapeHTML(getPhone(d))}</td><td>${money(d.montant||0)} FC</td><td>${statusBadge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateWithdrawal('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseWithdrawal('${encodeURIComponent(id)}')">✕</button>`:`Traité`}</td></tr>`;});
     document.getElementById("statWithdrawals").textContent=pend; document.getElementById("menuWithdrawals").textContent=pend;
 });
-window.validateWithdrawal=async(id)=>{await update(ref(db,`${WITHDRAWALS_PATH}/${decodeURIComponent(id)}`),{statut:"Payé"}); showToast("✅ Retrait payé");};
+window.validateWithdrawal=async(id)=>{await update(ref(db,`${WITHDRAWALS_PATH}/${decodeURIComponent(id)}`),{statut:"Payé"}); showToast("Payé");};
 window.refuseWithdrawal=async(id)=>{id=decodeURIComponent(id); const s=await get(ref(db,`${WITHDRAWALS_PATH}/${id}`)); const d=s.val()||{}; await update(ref(db,`${WITHDRAWALS_PATH}/${id}`),{statut:"Refusée"}); await runTransaction(ref(db,`${USERS_PATH}/${getPhone(d)}/solde_principal`),x=>(Number(x)||0)+Number(d.montant||0)); showToast("Refusé + remboursé");};
 
 document.getElementById("userSearch")?.addEventListener("input", e=>{
