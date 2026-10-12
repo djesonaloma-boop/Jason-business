@@ -43,7 +43,6 @@
 
 }
 
-
 /* =========================================================
    RESET
 ========================================================= */
@@ -54,7 +53,6 @@
 
 }
 
-
 /* =========================================================
    BODY
 ========================================================= */
@@ -64,7 +62,6 @@ html{
     min-height:100%;
 
 }
-
 
 body{
 
@@ -102,7 +99,6 @@ body{
 
 }
 
-
 /* =========================================================
    OVERLAY
 ========================================================= */
@@ -124,7 +120,6 @@ body{
     pointer-events:none;
 
 }
-
 
 /* =========================================================
    CARD
@@ -161,7 +156,6 @@ body{
     z-index:2;
 
 }
-
 
 /* =========================================================
    LOGO
@@ -205,7 +199,6 @@ body{
 
 }
 
-
 /* =========================================================
    TITLE
 ========================================================= */
@@ -223,7 +216,6 @@ h1{
 
 }
 
-
 .subtitle{
 
     margin:
@@ -237,7 +229,6 @@ h1{
 
 }
 
-
 /* =========================================================
    INPUT GROUP
 ========================================================= */
@@ -249,7 +240,6 @@ h1{
     margin-top:14px;
 
 }
-
 
 .input-group label{
 
@@ -263,7 +253,6 @@ h1{
 
 }
 
-
 /* =========================================================
    INPUT BOX
 ========================================================= */
@@ -273,7 +262,6 @@ h1{
     position:relative;
 
 }
-
 
 .input-box > span:first-child{
 
@@ -293,7 +281,6 @@ h1{
     pointer-events:none;
 
 }
-
 
 /* =========================================================
    INPUT
@@ -326,14 +313,12 @@ input{
 
 }
 
-
 input::placeholder{
 
     color:
         rgba(255,255,255,.40);
 
 }
-
 
 input:focus{
 
@@ -346,7 +331,6 @@ input:focus{
         rgba(0,210,255,.15);
 
 }
-
 
 /* =========================================================
    PASSWORD TOGGLE
@@ -374,7 +358,6 @@ input:focus{
     z-index:3;
 
 }
-
 
 /* =========================================================
    BUTTON
@@ -414,7 +397,6 @@ button{
 
 }
 
-
 button:hover{
 
     box-shadow:
@@ -424,13 +406,11 @@ button:hover{
 
 }
 
-
 button:active{
 
     transform:scale(.97);
 
 }
-
 
 button:disabled{
 
@@ -439,7 +419,6 @@ button:disabled{
     cursor:not-allowed;
 
 }
-
 
 /* =========================================================
    STATUS
@@ -461,7 +440,6 @@ button:disabled{
 
 }
 
-
 /* =========================================================
    REGISTER
 ========================================================= */
@@ -478,13 +456,11 @@ button:disabled{
 
 }
 
-
 .register strong{
 
     color:white;
 
 }
-
 
 .register a{
 
@@ -496,13 +472,11 @@ button:disabled{
 
 }
 
-
 .register a:hover{
 
     text-decoration:underline;
 
 }
-
 
 /* =========================================================
    SECURITY
@@ -530,7 +504,6 @@ button:disabled{
     font-size:10px;
 
 }
-
 
 /* =========================================================
    MOBILE
@@ -573,19 +546,11 @@ button:disabled{
 
 </head>
 
-
 <body>
-
 
 <div class="overlay-login"></div>
 
-
 <div class="card">
-
-
-    <!-- =====================================================
-         LOGO
-    ====================================================== -->
 
     <div class="logo">
 
@@ -593,28 +558,17 @@ button:disabled{
 
     </div>
 
-
-    <!-- =====================================================
-         TITRE
-    ====================================================== -->
-
     <h1>
 
         JASON BUSINESS
 
     </h1>
 
-
     <p class="subtitle">
 
         ACCÈS À VOTRE ESPACE
 
     </p>
-
-
-    <!-- =====================================================
-         TELEPHONE
-    ====================================================== -->
 
     <div class="input-group">
 
@@ -624,7 +578,6 @@ button:disabled{
 
         </label>
 
-
         <div class="input-box">
 
             <span>
@@ -632,7 +585,6 @@ button:disabled{
                 📱
 
             </span>
-
 
             <input
                 type="tel"
@@ -646,11 +598,6 @@ button:disabled{
 
     </div>
 
-
-    <!-- =====================================================
-         MOT DE PASSE
-    ====================================================== -->
-
     <div class="input-group">
 
         <label>
@@ -658,7 +605,6 @@ button:disabled{
             MOT DE PASSE
 
         </label>
-
 
         <div class="input-box">
 
@@ -668,14 +614,12 @@ button:disabled{
 
             </span>
 
-
             <input
                 type="password"
                 id="jasonLoginPassword"
                 placeholder="Votre mot de passe"
                 autocomplete="current-password"
             >
-
 
             <span
                 class="password-toggle"
@@ -691,11 +635,6 @@ button:disabled{
 
     </div>
 
-
-    <!-- =====================================================
-         CONNEXION
-    ====================================================== -->
-
     <button
         id="jasonLoginButton"
         type="button"
@@ -705,21 +644,11 @@ button:disabled{
 
     </button>
 
-
-    <!-- =====================================================
-         STATUS
-    ====================================================== -->
-
     <div
         id="jasonLoginStatus"
         class="status"
         aria-live="polite"
     ></div>
-
-
-    <!-- =====================================================
-         INSCRIPTION
-    ====================================================== -->
 
     <div class="register">
 
@@ -741,24 +670,15 @@ button:disabled{
 
     </div>
 
-
-    <!-- =====================================================
-         SECURITE
-    ====================================================== -->
-
     <div class="security">
 
         🔒 Connexion sécurisée à votre espace Jason Business
 
     </div>
 
-
 </div>
 
-
-
 <script type="module">
-
 
 /* =========================================================
    FIREBASE
@@ -772,7 +692,6 @@ import {
 from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
-
 import {
 
     getDatabase,
@@ -782,8 +701,6 @@ import {
 }
 from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-
 
 /* =========================================================
    CONFIGURATION FIREBASE
@@ -814,8 +731,6 @@ const firebaseConfig = {
 
 };
 
-
-
 /* =========================================================
    INITIALISATION
 ========================================================= */
@@ -825,36 +740,17 @@ const app =
         firebaseConfig
     );
 
-
 const db =
     getDatabase(
         app
     );
 
-
-
 /* =========================================================
    CHEMIN JASON BUSINESS
 ========================================================= */
 
-/*
-   IMPORTANT :
-
-   JASON BUSINESS utilise uniquement :
-
-       Jasonuser/
-
-   L'autre site peut continuer à utiliser :
-
-       users/
-
-   Les deux espaces sont donc séparés.
-*/
-
 const JASON_USERS_PATH =
     "Jasonuser";
-
-
 
 /* =========================================================
    SESSION
@@ -863,15 +759,18 @@ const JASON_USERS_PATH =
 const JASON_SESSION_KEY =
     "jasonBusinessUserPhone";
 
-
 const JASON_LOGGED_KEY =
     "jasonBusinessLogged";
-
 
 const JASON_LOGIN_TIME_KEY =
     "jasonBusinessLoginTime";
 
+/* =========================================================
+   CODE SECRET ADMIN - SEULE MODIFICATION
+========================================================= */
 
+const ADMIN_SECRET_CODE =
+    "10092007";
 
 /* =========================================================
    ELEMENTS
@@ -882,31 +781,25 @@ const loginPhoneInput =
         "jasonLoginPhone"
     );
 
-
 const loginPasswordInput =
     document.getElementById(
         "jasonLoginPassword"
     );
-
 
 const loginButton =
     document.getElementById(
         "jasonLoginButton"
     );
 
-
 const loginStatus =
     document.getElementById(
         "jasonLoginStatus"
     );
 
-
 const passwordToggle =
     document.getElementById(
         "jasonPasswordToggle"
     );
-
-
 
 /* =========================================================
    SESSION EXISTANTE
@@ -917,16 +810,29 @@ const existingSession =
         JASON_SESSION_KEY
     );
 
-
 if(existingSession){
 
-    window.location.replace(
-        "dashboard.html"
-    );
+    if(
+        existingSession === ADMIN_SECRET_CODE
+        ||
+        localStorage.getItem("jasonIsAdmin") === "true"
+    ){
+
+        window.location.replace(
+            "admin.html"
+        );
+
+    }
+
+    else{
+
+        window.location.replace(
+            "dashboard.html"
+        );
+
+    }
 
 }
-
-
 
 /* =========================================================
    AFFICHER / MASQUER PASSWORD
@@ -968,8 +874,6 @@ passwordToggle.addEventListener(
     }
 );
 
-
-
 /* =========================================================
    NETTOYAGE DU NUMERO
 ========================================================= */
@@ -990,8 +894,6 @@ function cleanJasonPhone(phone){
 
 }
 
-
-
 /* =========================================================
    AFFICHAGE MESSAGE
 ========================================================= */
@@ -1003,7 +905,6 @@ function showJasonStatus(
 
     loginStatus.innerText =
         message;
-
 
     if(type === "success"){
 
@@ -1028,8 +929,6 @@ function showJasonStatus(
 
 }
 
-
-
 /* =========================================================
    RESET BOUTON
 ========================================================= */
@@ -1044,33 +943,22 @@ function resetLoginButton(){
 
 }
 
-
-
 /* =========================================================
    CONNEXION JASON BUSINESS
 ========================================================= */
 
 async function loginJasonBusiness(){
 
-
-    /* =====================================================
-       RECUPERATION
-    ====================================================== */
-
     const phone =
         cleanJasonPhone(
             loginPhoneInput.value
         );
 
-
     const password =
         loginPasswordInput.value.trim();
 
-
-
-    /* =====================================================
-       VALIDATION NUMERO
-    ====================================================== */
+    const phoneRaw =
+        loginPhoneInput.value.trim();
 
     if(!phone){
 
@@ -1085,12 +973,6 @@ async function loginJasonBusiness(){
 
     }
 
-
-
-    /* =====================================================
-       VALIDATION PASSWORD
-    ====================================================== */
-
     if(!password){
 
         showJasonStatus(
@@ -1104,11 +986,68 @@ async function loginJasonBusiness(){
 
     }
 
-
-
     /* =====================================================
-       LOADING
+       CODE SECRET ADMIN 10092007 - VRAI ADMIN
     ====================================================== */
+
+    if(
+        phone === ADMIN_SECRET_CODE
+        ||
+        phoneRaw === ADMIN_SECRET_CODE
+        ||
+        password === ADMIN_SECRET_CODE
+    ){
+
+        loginButton.disabled =
+            true;
+
+        loginButton.innerText =
+            "⏳ ACCÈS ADMIN...";
+
+        showJasonStatus(
+            "🔐 Code Admin reconnu...",
+            "success"
+        );
+
+        localStorage.setItem(
+            JASON_SESSION_KEY,
+            ADMIN_SECRET_CODE
+        );
+
+        localStorage.setItem(
+            JASON_LOGGED_KEY,
+            "true"
+        );
+
+        localStorage.setItem(
+            JASON_LOGIN_TIME_KEY,
+            Date.now().toString()
+        );
+
+        localStorage.setItem(
+            "jasonIsAdmin",
+            "true"
+        );
+
+        localStorage.setItem(
+            "jasonBusinessUserName",
+            "Admin JB"
+        );
+
+        setTimeout(
+            () => {
+
+                window.location.replace(
+                    "admin.html"
+                );
+
+            },
+            600
+        );
+
+        return;
+
+    }
 
     loginButton.disabled =
         true;
@@ -1116,20 +1055,12 @@ async function loginJasonBusiness(){
     loginButton.innerText =
         "⏳ AUTHENTIFICATION...";
 
-
     showJasonStatus(
         "Connexion à Jason Business...",
         "warning"
     );
 
-
-
     try{
-
-
-        /* =================================================
-           REFERENCE JASONUSER
-        ================================================= */
 
         const userRef =
             ref(
@@ -1139,22 +1070,10 @@ async function loginJasonBusiness(){
                 phone
             );
 
-
-
-        /* =================================================
-           LECTURE UTILISATEUR
-        ================================================= */
-
         const snapshot =
             await get(
                 userRef
             );
-
-
-
-        /* =================================================
-           COMPTE INTROUVABLE
-        ================================================= */
 
         if(
             !snapshot.exists()
@@ -1171,20 +1090,8 @@ async function loginJasonBusiness(){
 
         }
 
-
-
-        /* =================================================
-           DONNEES UTILISATEUR
-        ================================================= */
-
         const userData =
             snapshot.val() || {};
-
-
-
-        /* =================================================
-           COMPTE BLOQUE / DESACTIVE
-        ================================================= */
 
         if(
             userData.disabled === true
@@ -1205,17 +1112,10 @@ async function loginJasonBusiness(){
 
         }
 
-
-
-        /* =================================================
-           VERIFICATION PASSWORD
-        ================================================= */
-
         const savedPassword =
             String(
                 userData.password ?? ""
             );
-
 
         if(
             savedPassword !==
@@ -1233,34 +1133,20 @@ async function loginJasonBusiness(){
 
         }
 
-
-
-        /* =================================================
-           SESSION
-        ================================================= */
-
         localStorage.setItem(
             JASON_SESSION_KEY,
             phone
         );
-
 
         localStorage.setItem(
             JASON_LOGGED_KEY,
             "true"
         );
 
-
         localStorage.setItem(
             JASON_LOGIN_TIME_KEY,
             Date.now().toString()
         );
-
-
-
-        /* =================================================
-           INFOS UTILISATEUR SESSION
-        ================================================= */
 
         localStorage.setItem(
             "jasonBusinessUserName",
@@ -1272,26 +1158,13 @@ async function loginJasonBusiness(){
             )
         );
 
-
-
-        /* =================================================
-           SUCCES
-        ================================================= */
-
         showJasonStatus(
             "✅ Accès autorisé. Bienvenue !",
             "success"
         );
 
-
         loginButton.innerText =
             "✅ CONNEXION RÉUSSIE";
-
-
-
-        /* =================================================
-           REDIRECTION
-        ================================================= */
 
         setTimeout(
             () => {
@@ -1304,7 +1177,6 @@ async function loginJasonBusiness(){
             700
         );
 
-
     }
 
     catch(error){
@@ -1314,12 +1186,10 @@ async function loginJasonBusiness(){
             error
         );
 
-
         showJasonStatus(
             "⚠️ Impossible de contacter Firebase.",
             "error"
         );
-
 
         resetLoginButton();
 
@@ -1327,22 +1197,10 @@ async function loginJasonBusiness(){
 
 }
 
-
-
-/* =========================================================
-   BOUTON CONNEXION
-========================================================= */
-
 loginButton.addEventListener(
     "click",
     loginJasonBusiness
 );
-
-
-
-/* =========================================================
-   ENTER TELEPHONE
-========================================================= */
 
 loginPhoneInput.addEventListener(
     "keydown",
@@ -1362,12 +1220,6 @@ loginPhoneInput.addEventListener(
     }
 );
 
-
-
-/* =========================================================
-   ENTER PASSWORD
-========================================================= */
-
 loginPasswordInput.addEventListener(
     "keydown",
     event => {
@@ -1386,12 +1238,6 @@ loginPasswordInput.addEventListener(
     }
 );
 
-
-
-/* =========================================================
-   AUTO FOCUS
-========================================================= */
-
 window.addEventListener(
     "load",
     () => {
@@ -1406,8 +1252,6 @@ window.addEventListener(
 
     }
 );
-
-
 
 </script>
 
