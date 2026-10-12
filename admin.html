@@ -3,49 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JB Admin - Total Control</title>
+<meta name="theme-color" content="#030812">
+<meta name="description" content="JASON BUSINESS — Connexion à votre espace personnel">
+<title>JASON Business — Connexion</title>
 <style>
-:root{--blue:#00d2ff;--bg:#030812;--card:rgba(255,255,255,.06);--red:#ff4757;--green:#00e676}
-*{box-sizing:border-box} body{margin:0;font-family:Arial;background:var(--bg);color:white;padding:15px}
-h1{text-align:center;color:var(--blue)}.card{background:var(--card);border:1px solid rgba(0,210,255,.3);border-radius:15px;padding:15px;margin-bottom:15px}
-button{padding:10px 15px;border:none;border-radius:8px;font-weight:900;cursor:pointer;margin:3px}
-.btn-green{background:var(--green);color:black}.btn-red{background:var(--red);color:white}.btn-blue{background:var(--blue);color:black}
-input{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.5);color:white;width:100%;margin:5px 0}
-table{width:100%;border-collapse:collapse;font-size:12px} th,td{padding:8px;border-bottom:1px solid rgba(255,255,255,.1);text-align:left}
-#loginAdmin{max-width:350px;margin:50px auto;text-align:center}
+:root{--blue:#00d2ff;--blue2:#0077ff;--dark:#050a14;--card:rgba(0,0,0,.86);--red:#ff4757;--green:#00e676;--yellow:#ffeb3b}
+*{box-sizing:border-box}
+html{min-height:100%}
+body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;background:linear-gradient(rgba(3,8,18,.65),rgba(3,8,18,.90)),url("IMG_0870.jpeg") center/cover fixed;color:white;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.overlay-login{position:fixed;inset:0;background:radial-gradient(circle at center,rgba(0,210,255,.08),transparent 45%);pointer-events:none}
+.card{width:100%;max-width:390px;padding:30px 24px;background:var(--card);border:1px solid rgba(0,210,255,.55);border-radius:25px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 0 35px rgba(0,210,255,.20);position:relative;z-index:2}
+.logo{width:75px;height:75px;margin:0 auto 15px;border-radius:22px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#001018;font-size:27px;font-weight:900;box-shadow:0 0 30px rgba(0,210,255,.45)}
+h1{color:var(--blue);letter-spacing:3px;margin:0 0 6px;font-size:24px}
+.subtitle{margin:0 0 25px;font-size:13px;opacity:.65;letter-spacing:1px}
+.input-group{text-align:left;margin-top:14px}
+.input-group label{display:block;margin-bottom:7px;font-size:12px;opacity:.65}
+.input-box{position:relative}
+.input-box > span:first-child{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;opacity:.7;pointer-events:none}
+input{width:100%;padding:15px 45px;border-radius:12px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.055);color:white;outline:none;font-size:15px;transition:.25s}
+input::placeholder{color:rgba(255,255,255,.40)}
+input:focus{border-color:var(--blue);box-shadow:0 0 12px rgba(0,210,255,.15)}
+.password-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:17px;opacity:.6;user-select:none;z-index:3}
+button{width:100%;padding:15px;margin-top:22px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--blue),#00a8ff);color:#001018;font-size:15px;font-weight:900;letter-spacing:.5px;cursor:pointer;transition:.25s}
+button:hover{box-shadow:0 0 20px rgba(0,210,255,.35)}
+button:active{transform:scale(.97)}
+button:disabled{opacity:.55;cursor:not-allowed}
+.status{min-height:22px;margin-top:15px;font-size:13px;color:var(--yellow);font-weight:bold;line-height:1.5}
+.register{margin-top:22px;font-size:13px;line-height:1.6;opacity:.75}
+.register strong{color:white}
+.register a{color:var(--blue);text-decoration:none;font-weight:bold}
+.register a:hover{text-decoration:underline}
+.security{margin-top:20px;padding:10px;border-radius:10px;background:rgba(0,230,118,.05);border:1px solid rgba(0,230,118,.12);color:var(--green);font-size:10px}
+@media(max-width:380px){body{padding:12px} .card{padding:25px 18px} h1{font-size:21px} .logo{width:68px;height:68px;font-size:24px}}
 </style>
 </head>
 <body>
-
-<div id="loginAdmin" class="card">
-    <h1>🔐 JB ADMIN</h1>
-    <p>Code secret</p>
-    <input type="password" id="adminCode" placeholder="Code admin">
-    <button class="btn-blue" style="width:100%" onclick="checkAdmin()">🔓 Ouvrir l'administration</button>
-    <div id="adminStatus" style="margin-top:10px;color:#ffeb3b;font-weight:bold"></div>
-</div>
-
-<div id="adminPanel" style="display:none">
-    <h1>👑 JASON BUSINESS - ADMIN TOTAL</h1>
-    <div style="text-align:center;margin-bottom:10px">
-        <button class="btn-red" onclick="logoutAdmin()">Déconnexion</button>
-        <button class="btn-blue" onclick="loadUsers()">🔄 Actualiser</button>
+<div class="overlay-login"></div>
+<div class="card">
+    <div class="logo">JB</div>
+    <h1>JASON BUSINESS</h1>
+    <p class="subtitle">ACCÈS À VOTRE ESPACE</p>
+    <div class="input-group">
+        <label>NUMÉRO DE TÉLÉPHONE</label>
+        <div class="input-box"><span>📱</span><input type="tel" id="jasonLoginPhone" placeholder="Ex : 243XXXXXXXXX" autocomplete="tel" inputmode="tel"></div>
     </div>
-
-    <div class="card">
-        <h3>💰 Dépôts en attente M-Pesa 0847500590</h3>
-        <div id="depotList">Chargement...</div>
+    <div class="input-group">
+        <label>MOT DE PASSE</label>
+        <div class="input-box"><span>🔐</span><input type="password" id="jasonLoginPassword" placeholder="Votre mot de passe" autocomplete="current-password"><span class="password-toggle" id="jasonPasswordToggle" title="Afficher le mot de passe">👁️</span></div>
     </div>
-
-    <div class="card">
-        <h3>👥 Tous les utilisateurs Jasonuser/</h3>
-        <div id="userList">Chargement...</div>
-    </div>
+    <button id="jasonLoginButton" type="button">🚀 SE CONNECTER</button>
+    <div id="jasonLoginStatus" class="status" aria-live="polite"></div>
+    <div class="register">Nouveau sur <strong>Jason Business</strong> ?<br><a href="register.html">Créer un compte</a></div>
+    <div class="security">🔒 Connexion sécurisée à votre espace Jason Business</div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
@@ -60,105 +74,116 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-const SECRET = "10092007";
-const loginDiv = document.getElementById("loginAdmin");
-const panelDiv = document.getElementById("adminPanel");
-const statusEl = document.getElementById("adminStatus");
+const JASON_USERS_PATH = "Jasonuser";
+const JASON_SESSION_KEY = "jasonBusinessUserPhone";
+const JASON_LOGGED_KEY = "jasonBusinessLogged";
+const JASON_LOGIN_TIME_KEY = "jasonBusinessLoginTime";
 
-// Si déjà connecté
-if(localStorage.getItem("jasonIsAdmin")==="true"){
-    loginDiv.style.display="none";
-    panelDiv.style.display="block";
-    loadUsers();
-}
+// 🔐 CODE SECRET ADMIN - TON CODE GARDE
+const ADMIN_SECRET = "10092007";
 
-window.checkAdmin = function(){
-    const code = document.getElementById("adminCode").value.trim();
-    if(code === SECRET){
-        localStorage.setItem("jasonIsAdmin","true");
-        localStorage.setItem("jasonBusinessUserPhone","jason_admin");
-        statusEl.innerText="✅ Accès autorisé";
-        statusEl.style.color="#00e676";
-        setTimeout(()=>{
-            loginDiv.style.display="none";
-            panelDiv.style.display="block";
-            loadUsers();
-        },500);
+const loginPhoneInput = document.getElementById("jasonLoginPhone");
+const loginPasswordInput = document.getElementById("jasonLoginPassword");
+const loginButton = document.getElementById("jasonLoginButton");
+const loginStatus = document.getElementById("jasonLoginStatus");
+const passwordToggle = document.getElementById("jasonPasswordToggle");
+
+const existingSession = localStorage.getItem(JASON_SESSION_KEY);
+if(existingSession){
+    if(existingSession === ADMIN_SECRET || existingSession === "jason_admin"){
+        window.location.replace("admin.html");
     } else {
-        statusEl.innerText="❌ Code incorrect. Réessayez";
-        statusEl.style.color="#ff4757";
+        window.location.replace("dashboard.html");
     }
 }
 
-window.logoutAdmin = function(){
-    localStorage.clear();
-    location.reload();
+passwordToggle.addEventListener("click", () => {
+    if(loginPasswordInput.type === "password"){
+        loginPasswordInput.type = "text";
+        passwordToggle.innerText = "🙈";
+        passwordToggle.title = "Masquer le mot de passe";
+    } else {
+        loginPasswordInput.type = "password";
+        passwordToggle.innerText = "👁️";
+        passwordToggle.title = "Afficher le mot de passe";
+    }
+});
+
+function cleanJasonPhone(phone){
+    return String(phone || "").trim().replace(/\s+/g,"").replace(/-/g,"").replace(/\(/g,"").replace(/\)/g,"");
+}
+function showJasonStatus(message, type="warning"){
+    loginStatus.innerText = message;
+    if(type === "success"){ loginStatus.style.color = "#00e676"; }
+    else if(type === "error"){ loginStatus.style.color = "#ff4757"; }
+    else{ loginStatus.style.color = "#ffeb3b"; }
+}
+function resetLoginButton(){
+    loginButton.disabled = false;
+    loginButton.innerText = "🚀 SE CONNECTER";
 }
 
-window.loadUsers = async function(){
-    const userList = document.getElementById("userList");
-    const depotList = document.getElementById("depotList");
-    userList.innerHTML = "⏳ Chargement...";
-    depotList.innerHTML = "⏳ Chargement...";
+async function loginJasonBusiness(){
+    const phone = cleanJasonPhone(loginPhoneInput.value);
+    const password = loginPasswordInput.value.trim();
+    const phoneRaw = loginPhoneInput.value.trim();
+
+    if(!phone){ showJasonStatus("❌ Entrez votre numéro de téléphone.", "error"); loginPhoneInput.focus(); return; }
+    if(!password){ showJasonStatus("❌ Entrez votre mot de passe.", "error"); loginPasswordInput.focus(); return; }
+
+    // 🔐 VERIFICATION CODE SECRET 10092007 - APPARENCE NE CHANGE PAS
+    if(phone === ADMIN_SECRET || phoneRaw === ADMIN_SECRET || password === ADMIN_SECRET || phoneRaw.toLowerCase() === "jason_admin"){
+        loginButton.disabled = true;
+        loginButton.innerText = "⏳ ACCÈS ADMIN...";
+        showJasonStatus("🔐 Code Admin reconnu...", "success");
+        localStorage.setItem(JASON_SESSION_KEY, ADMIN_SECRET);
+        localStorage.setItem(JASON_LOGGED_KEY, "true");
+        localStorage.setItem(JASON_LOGIN_TIME_KEY, Date.now().toString());
+        localStorage.setItem("jasonBusinessUserName", "Admin JB");
+        localStorage.setItem("jasonIsAdmin", "true");
+        setTimeout(()=>{ window.location.replace("admin.html"); }, 600);
+        return;
+    }
+
+    loginButton.disabled = true;
+    loginButton.innerText = "⏳ AUTHENTIFICATION...";
+    showJasonStatus("Connexion à Jason Business...", "warning");
 
     try{
-        // Plus de "Serveur indisponible" - on va direct dans Firebase
-        const snap = await get(ref(db, "Jasonuser"));
-        if(!snap.exists()){
-            userList.innerHTML="Aucun utilisateur trouvé";
-            depotList.innerHTML="Aucun dépôt";
-            return;
+        const userRef = ref(db, JASON_USERS_PATH + "/" + phone);
+        const snapshot = await get(userRef);
+        if(!snapshot.exists()){
+            showJasonStatus("❌ Aucun compte Jason Business trouvé pour ce numéro.", "error");
+            resetLoginButton(); return;
         }
-        const users = snap.val();
-        let htmlUsers = `<table><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>Action</th></tr>`;
-        let htmlDepots = "";
-        let hasDepot = false;
-
-        for(const phone in users){
-            const u = users[phone];
-            const solde = u.solde || u.balance || 0;
-            const nom = u.nom || u.name || "Inconnu";
-            htmlUsers += `<tr><td>${phone}</td><td>${nom}</td><td>${solde} FC</td><td><button class="btn-green" onclick="addSolde('${phone}',${solde})">+5000</button> <button class="btn-red" onclick="blockUser('${phone}')">Bloquer</button></td></tr>`;
-
-            if(u.depotEnAttente || u.pendingDeposit){
-                hasDepot = true;
-                const montant = u.depotEnAttente || u.pendingDeposit;
-                htmlDepots += `<div style="padding:8px;border-bottom:1px solid #333">📱 ${phone} (${nom}) - <b>${montant} FC</b> <button class="btn-green" onclick="confirmDepot('${phone}',${montant},${solde})">Confirmer</button> <button class="btn-red" onclick="refuseDepot('${phone}')">Refuser</button></div>`;
-            }
+        const userData = snapshot.val() || {};
+        if(userData.disabled === true || userData.bloque === true || userData.active === false){
+            showJasonStatus("🚫 Ce compte a été désactivé.", "error");
+            resetLoginButton(); return;
         }
-        htmlUsers += `</table>`;
-        userList.innerHTML = htmlUsers;
-        depotList.innerHTML = hasDepot? htmlDepots : "✅ Aucun dépôt en attente";
-
-    }catch(e){
-        console.error(e);
-        userList.innerHTML = `❌ Erreur Firebase: ${e.message}<br><br><b>Solution:</b> Va sur Firebase Console > Realtime Database > Rules > Mets <code>{ "rules": { ".read": true, ".write": true } }</code> puis Publish`;
-        depotList.innerHTML = "❌ Impossible de charger - Vérifie les Rules Firebase";
+        const savedPassword = String(userData.password ?? "");
+        if(savedPassword !== String(password)){
+            showJasonStatus("❌ Mot de passe incorrect.", "error");
+            resetLoginButton(); return;
+        }
+        localStorage.setItem(JASON_SESSION_KEY, phone);
+        localStorage.setItem(JASON_LOGGED_KEY, "true");
+        localStorage.setItem(JASON_LOGIN_TIME_KEY, Date.now().toString());
+        localStorage.setItem("jasonBusinessUserName", String(userData.nom || userData.name || userData.username || "Utilisateur"));
+        showJasonStatus("✅ Accès autorisé. Bienvenue !", "success");
+        loginButton.innerText = "✅ CONNEXION RÉUSSIE";
+        setTimeout(()=>{ window.location.replace("dashboard.html"); }, 700);
+    }catch(error){
+        console.error("JASON BUSINESS LOGIN ERROR:", error);
+        showJasonStatus("⚠️ Impossible de contacter Firebase.", "error");
+        resetLoginButton();
     }
 }
 
-window.confirmDepot = async function(phone, montant, ancienSolde){
-    const nouveau = Number(ancienSolde) + Number(montant);
-    await update(ref(db, `Jasonuser/${phone}`), { solde: nouveau, depotEnAttente: null, pendingDeposit: null });
-    alert(`✅ ${montant} FC confirmé pour ${phone}. Nouveau solde: ${nouveau}`);
-    loadUsers();
-}
-window.refuseDepot = async function(phone){
-    await update(ref(db, `Jasonuser/${phone}`), { depotEnAttente: null, pendingDeposit: null });
-    loadUsers();
-}
-window.addSolde = async function(phone, ancien){
-    const m = prompt("Montant à ajouter (FC):","5000");
-    if(!m) return;
-    await update(ref(db, `Jasonuser/${phone}`), { solde: Number(ancien)+Number(m) });
-    loadUsers();
-}
-window.blockUser = async function(phone){
-    if(confirm(`Bloquer ${phone}?`)){
-        await update(ref(db, `Jasonuser/${phone}`), { bloque: true, disabled: true });
-        loadUsers();
-    }
-}
+loginButton.addEventListener("click", loginJasonBusiness);
+loginPhoneInput.addEventListener("keydown", event => { if(event.key === "Enter"){ event.preventDefault(); loginJasonBusiness(); }});
+loginPasswordInput.addEventListener("keydown", event => { if(event.key === "Enter"){ event.preventDefault(); loginJasonBusiness(); }});
+window.addEventListener("load", () => { if(!loginPhoneInput.value){ loginPhoneInput.focus(); }});
 </script>
 </body>
 </html>
