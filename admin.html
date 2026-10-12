@@ -1,950 +1,5280 @@
-
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="theme-color" content="#050a14">
-<title>JASON BUSINESS — Administration</title>
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+<meta name="theme-color" content="#050914">
+
+<meta name="description"
+content="JASON Business — Administration">
+
+<title>JASON BUSINESS — ADMIN</title>
 
 <style>
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
 :root{
-  --bg:#050a14;
-  --panel:#0a1424;
-  --panel2:#0e1c30;
-  --blue:#00d2ff;
-  --gold:#d8aa45;
-  --text:#f1f5fc;
-  --muted:#91a2b9;
-  --border:#1b3048;
-  --green:#35d39a;
-  --red:#ff647c;
-  --orange:#ffbf69;
+    --bg:#050914;
+    --panel:#0b1220;
+    --panel2:#101a2b;
+    --border:rgba(255,255,255,.08);
+    --text:#f5f7fb;
+    --muted:#8e9aad;
+
+    --blue:#3b82f6;
+    --green:#22c55e;
+    --red:#ef4444;
+    --orange:#f59e0b;
+    --purple:#a855f7;
+    --cyan:#06b6d4;
 }
-*{box-sizing:border-box}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:
+        Inter,
+        Segoe UI,
+        Arial,
+        sans-serif;
+}
+
 body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
-}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-button:disabled{opacity:.5}
-.hidden{display:none!important}
-.muted{color:var(--muted)}
-.small{font-size:12px}
-.gold{color:var(--gold)}
-.blue{color:var(--blue)}
-.success{color:var(--green)}
-.danger{color:var(--red)}
-input,select,textarea{
-  width:100%;padding:12px;border-radius:10px;
-  color:var(--text);background:#07111f;
-  border:1px solid var(--border);outline:none;
-}
-input:focus,select:focus,textarea:focus{border-color:var(--blue)}
-button{
-  border:0;border-radius:10px;padding:11px 14px;
-  color:white;background:var(--panel2);font-weight:700;
-}
-button:hover{filter:brightness(1.12)}
-.primary{
-  background:linear-gradient(135deg,#008fbd,#00d2ff);
-  color:#00111a;
-}
-.goldbtn{
-  background:linear-gradient(135deg,#b78528,#f0cc73);
-  color:#201400;
-}
-.dangerbtn{
-  background:#351522;color:#ff9aac;
-  border:1px solid #63283a;
-}
-.ghost{border:1px solid var(--border);background:transparent}
-.full{width:100%}
+    background:
+        radial-gradient(
+            circle at top,
+            #101d35 0,
+            var(--bg) 45%,
+            #02040a 100%
+        );
 
-#loginScreen{
-  min-height:100vh;display:flex;align-items:center;
-  justify-content:center;padding:20px;
-  background:radial-gradient(ellipse at top,#102b46,transparent 60%),var(--bg);
-}
-.login-card{
-  width:100%;max-width:410px;background:var(--panel);
-  border:1px solid #24405b;border-radius:22px;
-  padding:27px;box-shadow:0 20px 70px #0008;
-}
-.logo{
-  width:60px;height:60px;border-radius:18px;
-  display:grid;place-items:center;
-  background:linear-gradient(135deg,#007ca5,#00d4ff);
-  color:#00121c;font-weight:900;font-size:23px;
-  margin-bottom:18px;
-}
-.login-card h1{font-size:23px;margin:0 0 8px}
-.login-card p{line-height:1.6}
-.field{margin:18px 0}
-.field label,.form-field label{
-  display:block;margin-bottom:8px;font-size:13px;color:#bdc9d9;
-}
-#loginError{
-  color:#ff9eae;background:#311421;border:1px solid #663044;
-  border-radius:10px;padding:12px;margin-top:14px;
-  font-size:13px;
+    color:var(--text);
+    min-height:100vh;
 }
 
-.topbar{
-  height:67px;display:flex;align-items:center;
-  justify-content:space-between;gap:12px;padding:0 18px;
-  background:#081322;border-bottom:1px solid var(--border);
-  position:sticky;top:0;z-index:20;
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+#adminLogin{
+    position:fixed;
+    inset:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #172744,
+            #030711 70%
+        );
+
+    z-index:9999;
 }
-.brand{display:flex;align-items:center;gap:10px;font-weight:900}
-.brand-icon{
-  width:39px;height:39px;border-radius:12px;
-  display:grid;place-items:center;background:#092b40;
-  border:1px solid #12617d;color:var(--blue);
+
+.login-box{
+    width:100%;
+    max-width:400px;
+
+    background:
+        rgba(11,18,32,.96);
+
+    border:1px solid var(--border);
+
+    border-radius:24px;
+
+    padding:30px;
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.55);
 }
-.brand small{display:block;font-size:10px;color:var(--muted);margin-top:4px}
-.top-actions{display:flex;align-items:center;gap:8px}
-.layout{display:flex;min-height:calc(100vh - 67px)}
+
+.login-logo{
+    text-align:center;
+
+    font-size:25px;
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    margin-bottom:7px;
+}
+
+.login-subtitle{
+    text-align:center;
+    color:var(--muted);
+
+    font-size:12px;
+
+    margin-bottom:25px;
+}
+
+.input{
+    width:100%;
+
+    background:#070d18;
+
+    border:1px solid var(--border);
+
+    color:white;
+
+    border-radius:13px;
+
+    padding:14px;
+
+    outline:none;
+
+    margin-bottom:12px;
+}
+
+.input:focus{
+    border-color:var(--blue);
+}
+
+.login-btn{
+    width:100%;
+
+    border:0;
+
+    border-radius:13px;
+
+    padding:14px;
+
+    background:var(--blue);
+
+    color:white;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.login-error{
+    color:#ff6b6b;
+
+    text-align:center;
+
+    font-size:12px;
+
+    min-height:18px;
+
+    margin-top:12px;
+}
+
+
+/* =========================================================
+   ADMIN PANEL
+========================================================= */
+
+#adminPanel{
+    display:none;
+
+    min-height:100vh;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:100;
+
+    height:68px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 18px;
+
+    background:
+        rgba(5,9,20,.94);
+
+    backdrop-filter:blur(15px);
+
+    border-bottom:1px solid var(--border);
+}
+
+.brand{
+    font-size:18px;
+    font-weight:900;
+}
+
+.brand span{
+    color:#4da3ff;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.admin-status{
+    display:flex;
+    align-items:center;
+    gap:7px;
+
+    font-size:11px;
+
+    color:#9ca9bc;
+}
+
+.online-dot{
+    width:8px;
+    height:8px;
+
+    background:var(--green);
+
+    border-radius:50%;
+
+    box-shadow:
+        0 0 10px var(--green);
+}
+
+.logout{
+    border:1px solid rgba(239,68,68,.3);
+
+    background:rgba(239,68,68,.08);
+
+    color:#ff6b6b;
+
+    border-radius:10px;
+
+    padding:9px 12px;
+
+    cursor:pointer;
+
+    font-weight:700;
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.layout{
+    display:flex;
+
+    min-height:calc(100vh - 68px);
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
 .sidebar{
-  width:235px;flex-shrink:0;padding:18px 12px;
-  border-right:1px solid var(--border);background:#07111e;
+    width:235px;
+
+    flex-shrink:0;
+
+    background:
+        rgba(7,12,23,.94);
+
+    border-right:1px solid var(--border);
+
+    padding:15px 12px;
 }
-.side-label{
-  color:#647993;font-size:10px;font-weight:800;
-  letter-spacing:1.5px;padding:15px 10px 9px;
+
+.menu-btn{
+    width:100%;
+
+    border:0;
+
+    background:transparent;
+
+    color:#a8b3c5;
+
+    padding:13px 12px;
+
+    margin-bottom:5px;
+
+    border-radius:12px;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-weight:700;
+
+    font-size:13px;
 }
-.nav{
-  display:flex;align-items:center;gap:10px;width:100%;
-  padding:12px;border-radius:10px;text-align:left;
-  background:transparent;color:#b9c8dc;margin-bottom:4px;
+
+.menu-btn:hover{
+    background:rgba(255,255,255,.04);
 }
-.nav.active{color:var(--blue);background:#0b2739;border:1px solid #12435d}
-.nav .ico{width:22px;text-align:center}
-.main{flex:1;min-width:0;padding:25px;overflow:hidden}
-.pagehead{
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:12px;margin-bottom:23px;
+
+.menu-btn.active{
+    background:
+        rgba(59,130,246,.15);
+
+    color:#fff;
 }
-.pagehead h1{font-size:24px;margin:0 0 7px}
-.pagehead p{margin:0;font-size:13px;color:var(--muted)}
-.grid{
-  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:14px;margin-bottom:22px;
+
+.menu-count{
+    margin-left:auto;
+
+    min-width:21px;
+    height:21px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:20px;
+
+    background:var(--red);
+
+    color:white;
+
+    font-size:10px;
 }
-.stat,.card{
-  background:linear-gradient(145deg,#0c192a,#091321);
-  border:1px solid var(--border);border-radius:15px;padding:18px;
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+    flex:1;
+
+    min-width:0;
+
+    padding:20px;
 }
-.stat-top{display:flex;justify-content:space-between;gap:8px}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.page-title{
+    font-size:25px;
+    font-weight:900;
+
+    margin-bottom:5px;
+}
+
+.page-subtitle{
+    color:var(--muted);
+
+    font-size:12px;
+
+    margin-bottom:20px;
+}
+
+
+/* =========================================================
+   DASHBOARD CARDS
+========================================================= */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:13px;
+
+    margin-bottom:20px;
+}
+
+.stat-card{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16,26,43,.96),
+            rgba(8,14,26,.96)
+        );
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:18px;
+
+    min-height:110px;
+}
+
 .stat-icon{
-  width:37px;height:37px;border-radius:11px;
-  display:grid;place-items:center;background:#10283b;
+    font-size:22px;
+
+    margin-bottom:10px;
 }
-.stat h3{font-size:12px;color:var(--muted);font-weight:500;margin:16px 0 8px}
-.stat strong{font-size:25px;overflow-wrap:anywhere}
-.card{margin-bottom:17px}
-.card-title{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:10px;flex-wrap:wrap;margin-bottom:15px;
+
+.stat-label{
+    color:var(--muted);
+
+    font-size:11px;
 }
-.card-title h2{font-size:16px;margin:0}
+
+.stat-value{
+    font-size:22px;
+
+    font-weight:900;
+
+    margin-top:5px;
+}
+
+
+/* =========================================================
+   QUICK CARDS
+========================================================= */
+
+.quick-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:13px;
+}
+
+.quick-card{
+    background:var(--panel);
+
+    border:1px solid var(--border);
+
+    border-radius:17px;
+
+    padding:18px;
+
+    cursor:pointer;
+}
+
+.quick-card:hover{
+    border-color:
+        rgba(59,130,246,.4);
+}
+
+.quick-card b{
+    display:block;
+
+    margin-bottom:5px;
+}
+
+.quick-card span{
+    color:var(--muted);
+
+    font-size:11px;
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.panel{
+    background:
+        rgba(11,18,32,.9);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    margin-bottom:18px;
+}
+
+.panel-head{
+    padding:16px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:12px;
+
+    border-bottom:1px solid var(--border);
+}
+
+.panel-title{
+    font-weight:900;
+}
+
+.panel-description{
+    color:var(--muted);
+
+    font-size:11px;
+
+    margin-top:4px;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search{
+    width:100%;
+    max-width:380px;
+
+    background:#070d18;
+
+    border:1px solid var(--border);
+
+    border-radius:11px;
+
+    color:white;
+
+    padding:11px 13px;
+
+    outline:none;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrap{
+    width:100%;
+
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+
+    min-width:850px;
+
+    border-collapse:collapse;
+}
+
+th{
+    color:#7f8da2;
+
+    font-size:10px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+    text-align:left;
+
+    padding:13px;
+
+    border-bottom:1px solid var(--border);
+
+    white-space:nowrap;
+}
+
+td{
+    padding:13px;
+
+    border-bottom:1px solid
+        rgba(255,255,255,.045);
+
+    font-size:12px;
+
+    vertical-align:middle;
+}
+
+tr:hover td{
+    background:
+        rgba(255,255,255,.018);
+}
+
+.user-name{
+    font-weight:700;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+    border:0;
+
+    border-radius:8px;
+
+    padding:7px 9px;
+
+    color:white;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    margin:2px;
+
+    white-space:nowrap;
+}
+
+.btn-blue{
+    background:var(--blue);
+}
+
+.btn-green{
+    background:var(--green);
+}
+
+.btn-red{
+    background:var(--red);
+}
+
+.btn-orange{
+    background:var(--orange);
+}
+
+.btn-purple{
+    background:var(--purple);
+}
+
+.btn-dark{
+    background:#263246;
+}
+
+.btn-cyan{
+    background:var(--cyan);
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
 .badge{
-  display:inline-block;border-radius:20px;padding:5px 9px;
-  font-size:11px;background:#10263b;color:#9bdfff;
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:4px;
+
+    border-radius:20px;
+
+    padding:5px 8px;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    white-space:nowrap;
 }
-.table-wrap{width:100%;overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:540px}
-th,td{
-  padding:13px 10px;border-bottom:1px solid #192b40;
-  text-align:left;font-size:12px;vertical-align:middle;
+
+.badge-success{
+    color:#54e889;
+
+    background:
+        rgba(34,197,94,.12);
 }
-th{color:#8398b2;font-weight:600}
-td{color:#dce5f1}
-.empty{text-align:center;color:var(--muted);padding:25px}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px}
-.toolbar input{flex:1;min-width:150px}
-.toolbar select{width:auto;min-width:120px}
-.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
-.price-row{
-  display:grid;grid-template-columns:1fr 140px;gap:12px;
-  align-items:center;padding:12px 0;border-bottom:1px solid var(--border);
+
+.badge-danger{
+    color:#ff7777;
+
+    background:
+        rgba(239,68,68,.12);
 }
-.price-row:last-child{border-bottom:0}
-.form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-.footer-note{color:#667c96;font-size:11px;line-height:1.7;margin-top:20px}
-.statusline{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
-#toast{
-  position:fixed;z-index:100;bottom:20px;left:50%;
-  transform:translateX(-50%);width:max-content;max-width:90%;
-  background:#13263b;border:1px solid #2c4c68;
-  color:white;padding:13px 17px;border-radius:12px;
-  box-shadow:0 8px 30px #0008;font-size:13px;
+
+.badge-pending{
+    color:#ffc95a;
+
+    background:
+        rgba(245,158,11,.12);
 }
-#menuBtn{display:none}
-#overlay{display:none}
-.note{
-  border-left:3px solid var(--gold);padding:10px 13px;
-  background:#151b25;border-radius:5px;color:#c5d0df;
-  font-size:12px;line-height:1.6;
+
+.badge-purple{
+    color:#d39aff;
+
+    background:
+        rgba(168,85,247,.14);
 }
-@media(max-width:900px){
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .sidebar{width:210px}
-  .main{padding:19px}
+
+.badge-blue{
+    color:#70a9ff;
+
+    background:
+        rgba(59,130,246,.13);
 }
-@media(max-width:650px){
-  #menuBtn{display:block}
-  .topbar{padding:0 10px;height:61px}
-  .brand{gap:7px;font-size:12px}
-  .brand-icon{width:34px;height:34px}
-  .top-actions button{padding:9px;font-size:11px}
-  .layout{min-height:calc(100vh - 61px)}
-  .sidebar{
-    position:fixed;z-index:40;top:61px;bottom:0;left:0;
-    width:260px;transform:translateX(-105%);
-    transition:transform .2s ease;overflow-y:auto;
-  }
-  .sidebar.open{transform:translateX(0)}
-  #overlay.show{
-    display:block;position:fixed;inset:61px 0 0;z-index:30;
-    background:#0009;
-  }
-  .main{padding:15px 11px}
-  .pagehead h1{font-size:21px}
-  .grid{gap:9px}
-  .stat{padding:12px}
-  .stat strong{font-size:20px}
-  .stat h3{font-size:11px}
-  .form-grid{grid-template-columns:1fr}
-  .price-row{grid-template-columns:1fr 105px}
-  .card{padding:13px}
+
+.muted{
+    color:var(--muted);
 }
+
+
+/* =========================================================
+   DETAIL GRID
+========================================================= */
+
+.detail-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap:10px;
+}
+
+.detail-item{
+    background:
+        rgba(255,255,255,.035);
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    padding:12px;
+}
+
+.detail-item small{
+    display:block;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    margin-bottom:6px;
+}
+
+.detail-item strong{
+    display:block;
+
+    font-size:13px;
+
+    word-break:break-word;
+}
+
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.message-card{
+    padding:16px;
+
+    border-bottom:1px solid var(--border);
+}
+
+.message-card:last-child{
+    border-bottom:0;
+}
+
+.message-head{
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:12px;
+
+    margin-bottom:10px;
+}
+
+.message-body{
+    color:#dce3ed;
+
+    font-size:13px;
+
+    line-height:1.55;
+
+    white-space:pre-wrap;
+
+    word-break:break-word;
+}
+
+.file-box{
+    margin-top:12px;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    background:
+        rgba(59,130,246,.07);
+
+    border:1px solid
+        rgba(59,130,246,.18);
+}
+
+
+/* =========================================================
+   SEND
+========================================================= */
+
+.form{
+    padding:18px;
+}
+
+.label{
+    display:block;
+
+    font-size:11px;
+
+    color:#9ba7b9;
+
+    margin-bottom:6px;
+
+    font-weight:700;
+}
+
+.textarea{
+    width:100%;
+
+    min-height:150px;
+
+    resize:vertical;
+
+    background:#070d18;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    color:white;
+
+    padding:13px;
+
+    outline:none;
+}
+
+.textarea:focus{
+    border-color:var(--blue);
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+    padding:35px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:13px;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:18px;
+
+    background:
+        rgba(0,0,0,.72);
+
+    backdrop-filter:blur(7px);
+
+    z-index:5000;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+
+    max-width:650px;
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+    background:
+        #0b1220;
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.7);
+}
+
+.modal-header{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    padding:17px;
+
+    border-bottom:1px solid var(--border);
+}
+
+.modal-title{
+    font-weight:900;
+
+    font-size:16px;
+}
+
+.close{
+    width:34px;
+    height:34px;
+
+    border:0;
+
+    border-radius:10px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+}
+
+.modal-content{
+    padding:18px;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+#toastContainer{
+    position:fixed;
+
+    top:78px;
+    right:15px;
+
+    z-index:10000;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    width:min(330px,calc(100% - 30px));
+}
+
+.toast{
+    padding:13px 15px;
+
+    border-radius:12px;
+
+    background:#111b2d;
+
+    border:1px solid var(--border);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.35);
+
+    font-size:12px;
+
+    animation:
+        toastIn .25s ease;
+}
+
+.toast.success{
+    border-color:
+        rgba(34,197,94,.35);
+}
+
+.toast.error{
+    border-color:
+        rgba(239,68,68,.35);
+}
+
+@keyframes toastIn{
+    from{
+        opacity:0;
+        transform:translateY(-8px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1000px){
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .quick-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    .header{
+        padding:0 12px;
+    }
+
+    .admin-status{
+        display:none;
+    }
+
+    .brand{
+        font-size:15px;
+    }
+
+    .layout{
+        display:block;
+    }
+
+    .sidebar{
+        width:100%;
+
+        display:flex;
+
+        overflow-x:auto;
+
+        border-right:0;
+
+        border-bottom:1px solid var(--border);
+
+        padding:8px;
+    }
+
+    .menu-btn{
+        width:auto;
+
+        flex-shrink:0;
+
+        margin:0;
+
+        padding:10px 12px;
+
+        font-size:11px;
+    }
+
+    .menu-count{
+        display:none;
+    }
+
+    .content{
+        padding:14px;
+    }
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap:9px;
+    }
+
+    .stat-card{
+        padding:14px;
+        min-height:95px;
+    }
+
+    .stat-value{
+        font-size:17px;
+    }
+
+    .quick-grid{
+        grid-template-columns:
+            1fr 1fr;
+
+        gap:9px;
+    }
+
+    .quick-card{
+        padding:14px;
+    }
+
+    .page-title{
+        font-size:21px;
+    }
+
+    .panel-head{
+        align-items:flex-start;
+
+        flex-direction:column;
+    }
+
+    .search{
+        max-width:none;
+    }
+
+    .detail-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:420px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .quick-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- CONNEXION LOCALE DE DEMONSTRATION -->
-<section id="loginScreen">
-  <div class="login-card">
-    <div class="logo">JB</div>
-    <span class="badge">ESPACE ADMINISTRATEUR</span>
-    <h1 style="margin-top:16px">JASON BUSINESS</h1>
-    <p class="muted">🔐 PANNEAU D'ADMINISTRATION</p>
 
-    <form id="loginForm">
-      <div class="field">
-        <label for="adminPassword">Code d'accès local</label>
-        <input id="adminPassword" type="password"
-          placeholder="Saisis ton code" required autocomplete="off">
-      </div>
-      <button class="primary full" id="loginBtn" type="submit">
-        🔓 Ouvrir l'administration
-      </button>
-      <div id="loginError" class="hidden"></div>
-    </form>
+<!-- =======================================================
+     LOGIN
+======================================================== -->
 
-    <p class="small muted" style="margin-top:20px">
-      Créé par Jason Aloma 🇨🇩
-    </p>
-    <p class="small muted">
-      Mode local : aucune connexion serveur.
-    </p>
-  </div>
-</section>
+<div id="adminLogin">
 
-<section id="app" class="hidden">
-<header class="topbar">
-  <div class="brand">
-    <button id="menuBtn" class="ghost">☰</button>
-    <div class="brand-icon">JB</div>
-    <div>JASON BUSINESS
-      <small>ADMINISTRATION • JASON ALOMA 🇨🇩</small>
+    <div class="login-box">
+
+        <div class="login-logo">
+            JASON BUSINESS
+        </div>
+
+        <div class="login-subtitle">
+            🔐 PANNEAU D'ADMINISTRATION
+        </div>
+
+        <input
+            type="password"
+            id="adminPassword"
+            class="input"
+            placeholder="Mot de passe administrateur"
+            autocomplete="current-password"
+        >
+
+        <button
+            id="loginAdmin"
+            class="login-btn"
+            type="button"
+        >
+            🔓 Ouvrir l'administration
+        </button>
+
+        <div
+            id="loginError"
+            class="login-error"
+        ></div>
+
     </div>
-  </div>
-  <div class="top-actions">
-    <span class="statusline"><span class="dot"></span>Mode local</span>
-    <button id="refreshBtn" class="ghost" title="Actualiser">↻</button>
-    <button id="logoutBtn" class="dangerbtn">Quitter</button>
-  </div>
+
+</div>
+
+
+<!-- =======================================================
+     ADMIN
+======================================================== -->
+
+<div id="adminPanel">
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+    <div class="brand">
+        JASON <span>BUSINESS</span>
+    </div>
+
+    <div class="header-right">
+
+        <div class="admin-status">
+
+            <span class="online-dot"></span>
+
+            Firebase connecté
+
+        </div>
+
+        <button
+            class="logout"
+            id="adminLogout"
+            type="button"
+        >
+            Déconnexion
+        </button>
+
+    </div>
+
 </header>
 
-<div id="overlay"></div>
 
 <div class="layout">
-<aside class="sidebar" id="sidebar">
-  <div class="side-label">PRINCIPAL</div>
-  <button class="nav active" data-page="dashboard"><span class="ico">▦</span> Tableau de bord</button>
-  <button class="nav" data-page="users"><span class="ico">♙</span> Clients</button>
-  <button class="nav" data-page="commands"><span class="ico">▤</span> Commandes</button>
 
-  <div class="side-label">FINANCES</div>
-  <button class="nav" data-page="deposits"><span class="ico">＋</span> Dépôts</button>
-  <button class="nav" data-page="withdrawals"><span class="ico">↗</span> Retraits</button>
 
-  <div class="side-label">SERVICES</div>
-  <button class="nav" data-page="vip"><span class="ico">♛</span> Gestion VIP</button>
-  <button class="nav" data-page="prices"><span class="ico">◆</span> Tarifs API</button>
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
 
-  <div class="side-label">OUTILS</div>
-  <button class="nav" data-page="settings"><span class="ico">⚙</span> Paramètres locaux</button>
+<aside class="sidebar">
 
-  <div class="footer-note">
-    JASON BUSINESS<br>
-    Créé par Jason Aloma 🇨🇩<br>
-    Kinshasa, RDC<br>
-    <span class="gold">Version locale</span>
-  </div>
+    <button
+        class="menu-btn active"
+        data-page="dashboard"
+        type="button"
+    >
+        📊 Dashboard
+    </button>
+
+    <button
+        class="menu-btn"
+        data-page="users"
+        type="button"
+    >
+        👥 Utilisateurs
+    </button>
+
+    <button
+        class="menu-btn"
+        data-page="commands"
+        type="button"
+    >
+        🛒 Commandes
+
+        <span
+            class="menu-count"
+            id="menuCommands"
+        >
+            0
+        </span>
+
+    </button>
+
+    <button
+        class="menu-btn"
+        data-page="recharges"
+        type="button"
+    >
+        💳 Recharges
+
+        <span
+            class="menu-count"
+            id="menuRecharges"
+        >
+            0
+        </span>
+
+    </button>
+
+    <button
+        class="menu-btn"
+        data-page="withdrawals"
+        type="button"
+    >
+        💸 Retraits
+
+        <span
+            class="menu-count"
+            id="menuWithdrawals"
+        >
+            0
+        </span>
+
+    </button>
+
+    <button
+        class="menu-btn"
+        data-page="messages"
+        type="button"
+    >
+        💬 Messages
+    </button>
+
+    <button
+        class="menu-btn"
+        data-page="send"
+        type="button"
+    >
+        📤 Envoyer
+    </button>
+
 </aside>
 
-<main class="main">
 
-<!-- DASHBOARD -->
-<section class="page" id="page-dashboard">
-  <div class="pagehead">
-    <div><h1>Tableau de bord</h1><p>Vue générale de ton espace de démonstration.</p></div>
-    <button class="primary" onclick="renderAll()">↻ Actualiser</button>
-  </div>
+<!-- =====================================================
+     CONTENT
+===================================================== -->
 
-  <div class="grid">
-    <div class="stat">
-      <div class="stat-top"><span class="muted">Clients</span><span class="stat-icon">♙</span></div>
-      <h3>Clients enregistrés</h3><strong id="statUsers">0</strong>
-    </div>
-    <div class="stat">
-      <div class="stat-top"><span class="muted">Commandes</span><span class="stat-icon">▤</span></div>
-      <h3>Total des commandes</h3><strong id="statCommands">0</strong>
-    </div>
-    <div class="stat">
-      <div class="stat-top"><span class="muted">Dépôts en attente</span><span class="stat-icon">＋</span></div>
-      <h3>À traiter</h3><strong id="statDeposits">0</strong>
-    </div>
-    <div class="stat">
-      <div class="stat-top"><span class="muted">Retraits en attente</span><span class="stat-icon">↗</span></div>
-      <h3>À vérifier</h3><strong id="statWithdrawals">0</strong>
-    </div>
-  </div>
+<main class="content">
 
-  <div class="card">
-    <div class="card-title"><h2>Résumé de l'espace</h2><span class="badge">LOCAL</span></div>
-    <div class="grid" style="margin:0">
-      <div><p class="muted small">Solde total de démonstration</p><strong id="statBalance">0 FC</strong></div>
-      <div><p class="muted small">Clients VIP</p><strong id="statVip">0</strong></div>
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section
+    class="page active"
+    id="page-dashboard"
+>
+
+    <div class="page-title">
+        📊 Dashboard
     </div>
-  </div>
 
-  <div class="card">
-    <div class="card-title"><h2>Actions rapides</h2></div>
-    <div class="toolbar">
-      <button class="ghost" onclick="showPage('users')">♙ Clients</button>
-      <button class="ghost" onclick="showPage('deposits')">＋ Dépôts</button>
-      <button class="ghost" onclick="showPage('withdrawals')">↗ Retraits</button>
-      <button class="goldbtn" onclick="showPage('prices')">◆ Tarifs API</button>
+    <div class="page-subtitle">
+        Vue générale de JASON Business
     </div>
-    <div class="note">Les modifications sont enregistrées dans le stockage local de ce navigateur. Elles ne changent aucun compte réel et ne se synchronisent pas avec d'autres appareils.</div>
-  </div>
-</section>
 
-<!-- CLIENTS -->
-<section class="page hidden" id="page-users">
-  <div class="pagehead">
-    <div><h1>Gestion des clients</h1><p>Ajouter, modifier et supprimer les données de démonstration.</p></div>
-    <button class="primary" onclick="openUserForm()">＋ Ajouter</button>
-  </div>
 
-  <div class="card hidden" id="userFormCard">
-    <div class="card-title"><h2 id="userFormTitle">Nouveau client</h2></div>
-    <form id="userForm">
-      <input id="editUserId" type="hidden">
-      <div class="form-grid">
-        <div class="form-field"><label for="userName">Nom</label><input id="userName" required placeholder="Nom du client"></div>
-        <div class="form-field"><label for="userEmail">E-mail ou téléphone</label><input id="userEmail" placeholder="Contact"></div>
-        <div class="form-field"><label for="userBalance">Solde fictif (FC)</label><input id="userBalance" type="number" min="0" value="0" required></div>
-        <div class="form-field"><label for="userVip">Niveau VIP</label>
-          <select id="userVip">
-            <option value="Aucun">Aucun</option><option>Bronze</option>
-            <option>Silver</option><option>Gold</option><option>Platinum</option><option>Diamond</option>
-          </select>
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                👥
+            </div>
+
+            <div class="stat-label">
+                Utilisateurs
+            </div>
+
+            <div
+                class="stat-value"
+                id="statUsers"
+            >
+                0
+            </div>
+
         </div>
-      </div>
-      <div class="form-actions">
-        <button class="goldbtn" type="submit">Enregistrer</button>
-        <button class="ghost" type="button" onclick="closeUserForm()">Annuler</button>
-      </div>
-    </form>
-  </div>
 
-  <div class="card">
-    <div class="toolbar">
-      <input id="userSearch" placeholder="Rechercher un client…" oninput="renderUsers()">
-    </div>
-    <div class="table-wrap"><table>
-      <thead><tr><th>Identifiant</th><th>Nom</th><th>Contact</th><th>Solde fictif</th><th>VIP</th><th>Actions</th></tr></thead>
-      <tbody id="usersBody"></tbody>
-    </table></div>
-  </div>
-</section>
 
-<!-- COMMANDES -->
-<section class="page hidden" id="page-commands">
-  <div class="pagehead">
-    <div><h1>Commandes</h1><p>Suivi fictif des commandes.</p></div>
-    <button class="primary" onclick="openRecordForm('commands')">＋ Nouvelle commande</button>
-  </div>
-  <div class="card">
-    <div class="table-wrap"><table>
-      <thead><tr><th>Référence</th><th>Client</th><th>Service</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead>
-      <tbody id="commandsBody"></tbody>
-    </table></div>
-  </div>
-</section>
+        <div class="stat-card">
 
-<!-- DEPOTS -->
-<section class="page hidden" id="page-deposits">
-  <div class="pagehead">
-    <div><h1>Dépôts</h1><p>Demandes fictives de recharge.</p></div>
-    <button class="primary" onclick="openRecordForm('deposits')">＋ Nouveau dépôt</button>
-  </div>
-  <div class="card">
-    <div class="table-wrap"><table>
-      <thead><tr><th>Référence</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Statut</th><th>Actions</th></tr></thead>
-      <tbody id="depositsBody"></tbody>
-    </table></div>
-  </div>
-</section>
+            <div class="stat-icon">
+                💰
+            </div>
 
-<!-- RETRAITS -->
-<section class="page hidden" id="page-withdrawals">
-  <div class="pagehead">
-    <div><h1>Retraits</h1><p>Demandes fictives de retrait.</p></div>
-    <button class="primary" onclick="openRecordForm('withdrawals')">＋ Nouveau retrait</button>
-  </div>
-  <div class="card">
-    <div class="table-wrap"><table>
-      <thead><tr><th>Référence</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Statut</th><th>Actions</th></tr></thead>
-      <tbody id="withdrawalsBody"></tbody>
-    </table></div>
-  </div>
-</section>
+            <div class="stat-label">
+                Solde utilisateurs
+            </div>
 
-<!-- FORMULAIRE TRANSACTION -->
-<section class="page hidden" id="page-recordForm">
-  <div class="pagehead"><div><h1 id="recordTitle">Nouvel enregistrement</h1><p>Données fictives uniquement.</p></div></div>
-  <div class="card">
-    <form id="recordForm">
-      <input type="hidden" id="recordType">
-      <div class="form-grid">
-        <div class="form-field"><label for="recordClient">Client</label><input id="recordClient" required placeholder="Nom du client"></div>
-        <div class="form-field"><label for="recordAmount">Montant fictif (FC)</label><input id="recordAmount" type="number" min="0" required></div>
-        <div class="form-field"><label for="recordService">Service / méthode</label><input id="recordService" required placeholder="Ex. Mobile Money, Image…"></div>
-        <div class="form-field"><label for="recordStatus">Statut</label>
-          <select id="recordStatus"><option>En attente</option><option>Approuvé</option><option>Refusé</option><option>Terminé</option></select>
+            <div
+                class="stat-value"
+                id="totalBalance"
+            >
+                0 FC
+            </div>
+
         </div>
-      </div>
-      <div class="form-actions">
-        <button class="goldbtn" type="submit">Enregistrer localement</button>
-        <button class="ghost" type="button" onclick="showPage(recordReturnPage)">Annuler</button>
-      </div>
-    </form>
-  </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🛒
+            </div>
+
+            <div class="stat-label">
+                Commandes en attente
+            </div>
+
+            <div
+                class="stat-value"
+                id="statCommands"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                💳
+            </div>
+
+            <div class="stat-label">
+                Recharges en attente
+            </div>
+
+            <div
+                class="stat-value"
+                id="statRecharges"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                💸
+            </div>
+
+            <div class="stat-label">
+                Retraits en attente
+            </div>
+
+            <div
+                class="stat-value"
+                id="statWithdrawals"
+            >
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="quick-grid">
+
+        <div
+            class="quick-card"
+            data-open-page="users"
+        >
+            <b>👥 Utilisateurs</b>
+            <span>
+                Gérer les comptes et les soldes
+            </span>
+        </div>
+
+
+        <div
+            class="quick-card"
+            data-open-page="commands"
+        >
+            <b>🛒 Commandes</b>
+            <span>
+                Valider ou refuser les commandes
+            </span>
+        </div>
+
+
+        <div
+            class="quick-card"
+            data-open-page="recharges"
+        >
+            <b>💳 Recharges</b>
+            <span>
+                Vérifier les paiements clients
+            </span>
+        </div>
+
+
+        <div
+            class="quick-card"
+            data-open-page="withdrawals"
+        >
+            <b>💸 Retraits</b>
+            <span>
+                Gérer les demandes de retrait
+            </span>
+        </div>
+
+    </div>
+
 </section>
 
-<!-- VIP -->
-<section class="page hidden" id="page-vip">
-  <div class="pagehead"><div><h1>Gestion VIP</h1><p>Attribuer un niveau VIP aux clients fictifs.</p></div></div>
-  <div class="card">
-    <div class="form-grid">
-      <div class="form-field"><label for="vipClient">Client</label><select id="vipClient"></select></div>
-      <div class="form-field"><label for="vipLevel">Niveau VIP</label>
-        <select id="vipLevel">
-          <option value="Aucun">Aucun VIP</option><option>Bronze</option>
-          <option>Silver</option><option>Gold</option><option>Platinum</option><option>Diamond</option>
-        </select>
-      </div>
+
+<!-- =====================================================
+     USERS
+===================================================== -->
+
+<section
+    class="page"
+    id="page-users"
+>
+
+    <div class="page-title">
+        👥 Utilisateurs
     </div>
-    <div class="form-actions"><button class="goldbtn" onclick="saveVip()">Enregistrer le VIP</button></div>
-  </div>
-  <div class="card">
-    <div class="card-title"><h2>Liste VIP</h2></div>
-    <div class="table-wrap"><table>
-      <thead><tr><th>Client</th><th>Contact</th><th>Niveau</th><th>Action</th></tr></thead>
-      <tbody id="vipBody"></tbody>
-    </table></div>
-  </div>
+
+    <div class="page-subtitle">
+        Gestion des comptes JASON Business
+    </div>
+
+
+    <div class="panel">
+
+        <div class="panel-head">
+
+            <div>
+                <div class="panel-title">
+                    Liste des utilisateurs
+                </div>
+
+                <div class="panel-description">
+                    Solde, gains, commissions et VIP
+                </div>
+            </div>
+
+            <input
+                id="userSearch"
+                class="search"
+                placeholder="🔎 Rechercher..."
+            >
+
+        </div>
+
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Numéro
+                        </th>
+
+                        <th>
+                            Nom
+                        </th>
+
+                        <th>
+                            Solde
+                        </th>
+
+                        <th>
+                            Gains
+                        </th>
+
+                        <th>
+                            Commissions
+                        </th>
+
+                        <th>
+                            Points
+                        </th>
+
+                        <th>
+                            VIP
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="usersTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
 </section>
 
-<!-- TARIFS -->
-<section class="page hidden" id="page-prices">
-  <div class="pagehead"><div><h1>Tarifs API</h1><p>Prix modifiables pour cette démonstration locale.</p></div></div>
-  <div class="card">
-    <div class="card-title"><h2>Catalogue des services</h2><span class="badge">FC</span></div>
-    <div class="price-row"><span>Boosting / SMM</span><input type="number" min="0" id="price-boosting"></div>
-    <div class="price-row"><span>Chatbot IA</span><input type="number" min="0" id="price-chatbot"></div>
-    <div class="price-row"><span>Traduction</span><input type="number" min="0" id="price-translation"></div>
-    <div class="price-row"><span>Génération d'image</span><input type="number" min="0" id="price-image"></div>
-    <div class="price-row"><span>Génération musicale</span><input type="number" min="0" id="price-music"></div>
-    <div class="price-row"><span>Génération vidéo</span><input type="number" min="0" id="price-video"></div>
-    <div class="price-row"><span>VIP Bronze</span><input type="number" min="0" id="price-vipBronze"></div>
-    <div class="price-row"><span>VIP Silver</span><input type="number" min="0" id="price-vipSilver"></div>
-    <div class="price-row"><span>VIP Gold</span><input type="number" min="0" id="price-vipGold"></div>
-    <div class="price-row"><span>VIP Platinum</span><input type="number" min="0" id="price-vipPlatinum"></div>
-    <div class="price-row"><span>VIP Diamond</span><input type="number" min="0" id="price-vipDiamond"></div>
-    <div class="form-actions">
-      <button class="goldbtn" onclick="savePrices()">💾 Enregistrer les tarifs</button>
-      <button class="ghost" onclick="resetPrices()">Réinitialiser</button>
+
+<!-- =====================================================
+     COMMANDES
+===================================================== -->
+
+<section
+    class="page"
+    id="page-commands"
+>
+
+    <div class="page-title">
+        🛒 Commandes
     </div>
-    <p id="pricesMessage" class="small muted"></p>
-  </div>
-  <div class="note">Ces prix ne sont pas appliqués automatiquement aux pages client. Ils sont enregistrés uniquement dans le navigateur.</div>
+
+    <div class="page-subtitle">
+        Commandes envoyées depuis la boutique
+    </div>
+
+
+    <div class="panel">
+
+        <div class="panel-head">
+
+            <div>
+
+                <div class="panel-title">
+                    Demandes de commandes
+                </div>
+
+                <div class="panel-description">
+                    Données synchronisées avec Firebase
+                </div>
+
+            </div>
+
+            <input
+                id="commandSearch"
+                class="search"
+                placeholder="🔎 Rechercher une commande..."
+            >
+
+        </div>
+
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Date</th>
+                        <th>Client</th>
+                        <th>Service</th>
+                        <th>Montant</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="commandsTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
 </section>
 
-<!-- PARAMETRES -->
-<section class="page hidden" id="page-settings">
-  <div class="pagehead"><div><h1>Paramètres locaux</h1><p>Gestion du stockage de démonstration.</p></div></div>
-  <div class="card">
-    <div class="card-title"><h2>Stockage du navigateur</h2><span class="badge">LOCAL</span></div>
-    <p class="muted small">Les clients, commandes, dépôts, retraits et tarifs de démonstration sont conservés dans le stockage local du navigateur.</p>
-    <div class="form-actions">
-      <button class="ghost" onclick="exportData()">Exporter les données JSON</button>
-      <button class="ghost" onclick="resetDemo()">Recharger les données d'exemple</button>
-      <button class="dangerbtn" onclick="clearAllData()">Effacer toutes les données</button>
+
+<!-- =====================================================
+     RECHARGES
+===================================================== -->
+
+<section
+    class="page"
+    id="page-recharges"
+>
+
+    <div class="page-title">
+        💳 Recharges
     </div>
-  </div>
-  <div class="card">
-    <h2 style="font-size:16px">Sécurité</h2>
-    <p class="muted small">La connexion locale et les données du navigateur ne constituent pas une protection pour une administration en ligne. Ne mets pas de données financières ou personnelles réelles dans cette version.</p>
-    <p class="muted small">Créé par Jason Aloma 🇨🇩</p>
-  </div>
+
+    <div class="page-subtitle">
+        Validation des dépôts clients
+    </div>
+
+
+    <div class="panel">
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Date</th>
+                        <th>Client</th>
+                        <th>Montant</th>
+                        <th>Méthode</th>
+                        <th>Transaction</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="rechargesTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
 </section>
+
+
+<!-- =====================================================
+     RETRAITS
+===================================================== -->
+
+<section
+    class="page"
+    id="page-withdrawals"
+>
+
+    <div class="page-title">
+        💸 Retraits
+    </div>
+
+    <div class="page-subtitle">
+        Gestion des demandes de retrait
+    </div>
+
+
+    <div class="panel">
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Date</th>
+                        <th>Client</th>
+                        <th>Montant</th>
+                        <th>Méthode</th>
+                        <th>Numéro</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="withdrawalsTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MESSAGES
+===================================================== -->
+
+<section
+    class="page"
+    id="page-messages"
+>
+
+    <div class="page-title">
+        💬 Messages
+    </div>
+
+    <div class="page-subtitle">
+        Messages reçus des utilisateurs
+    </div>
+
+
+    <div
+        class="panel"
+        id="messagesList"
+    >
+
+        <div class="empty">
+            ⏳ Chargement...
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SEND MESSAGE
+===================================================== -->
+
+<section
+    class="page"
+    id="page-send"
+>
+
+    <div class="page-title">
+        📤 Envoyer un message
+    </div>
+
+    <div class="page-subtitle">
+        Envoyer directement un message à un utilisateur
+    </div>
+
+
+    <div class="panel">
+
+        <div class="form">
+
+            <label class="label">
+                Numéro du destinataire
+            </label>
+
+            <input
+                id="messageTo"
+                class="input"
+                placeholder="Ex : 0990000000"
+            >
+
+
+            <label class="label">
+                Message
+            </label>
+
+            <textarea
+                id="messageText"
+                class="textarea"
+                placeholder="Écrire votre message..."
+            ></textarea>
+
+
+            <br>
+
+            <button
+                id="sendMessageBtn"
+                class="btn btn-blue"
+                type="button"
+                style="
+                    padding:12px 18px;
+                    font-size:12px;
+                "
+            >
+                📤 Envoyer le message
+            </button>
+
+
+            <div
+                id="sendStatus"
+                style="margin-top:12px;"
+            ></div>
+
+        </div>
+
+    </div>
+
+</section>
+
 
 </main>
+
 </div>
-</section>
 
-<div id="toast" class="hidden"></div>
+</div>
 
-<script>
-"use strict";
 
-/*
-  JASON BUSINESS — MODE LOCAL
-  AUCUN backend, AUCUN Firebase, AUCUNE API.
-  Le code de démonstration n'est pas une authentification sécurisée.
-*/
+<!-- =======================================================
+     USER MODAL
+======================================================== -->
 
-const LOCAL_DEMO_CODE = "10092007";
-const STORAGE_KEY = "jason_business_admin_demo_v1";
+<div
+    class="modal"
+    id="userModal"
+>
 
-const DEFAULT_PRICES = {
-  boosting:5000,
-  chatbot:10000,
-  translation:2000,
-  image:5000,
-  music:10000,
-  video:15000,
-  vipBronze:10000,
-  vipSilver:25000,
-  vipGold:50000,
-  vipPlatinum:100000,
-  vipDiamond:200000
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <div class="modal-title">
+                👤 Utilisateur
+            </div>
+
+            <button
+                class="close"
+                type="button"
+                onclick="closeModal('userModal')"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div
+            class="modal-content"
+            id="userDetails"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- =======================================================
+     COMMAND MODAL
+======================================================== -->
+
+<div
+    class="modal"
+    id="commandModal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <div class="modal-title">
+                🛒 Détails de la commande
+            </div>
+
+            <button
+                class="close"
+                type="button"
+                onclick="closeModal('commandModal')"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div
+            class="modal-content"
+            id="commandDetails"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- =======================================================
+     TOAST
+======================================================== -->
+
+<div id="toastContainer"></div>
+
+
+<!-- =======================================================
+     FIREBASE
+======================================================== -->
+
+<script type="module">
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+import {
+    getDatabase,
+    ref,
+    onValue,
+    update,
+    remove,
+    push,
+    set,
+    runTransaction
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
+
+    authDomain:
+        "starlink-investit.firebaseapp.com",
+
+    databaseURL:
+        "https://starlink-investit-default-rtdb.firebaseio.com",
+
+    projectId:
+        "starlink-investit",
+
+    storageBucket:
+        "starlink-investit.firebasestorage.app",
+
+    messagingSenderId:
+        "807081599583",
+
+    appId:
+        "1:807081599583:web:e00ec3959bc4acdae031ea"
+
 };
 
-function seedData(){
-  return {
-    users:[
-      {id:"JB-1001",name:"Client Démo 1",contact:"client1@example.com",balance:50000,vip:"Gold"},
-      {id:"JB-1002",name:"Client Démo 2",contact:"client2@example.com",balance:25000,vip:"Bronze"},
-      {id:"JB-1003",name:"Client Démo 3",contact:"client3@example.com",balance:10000,vip:"Aucun"}
-    ],
-    commands:[
-      {id:"CMD-1001",client:"Client Démo 1",service:"Chatbot IA",amount:10000,status:"En attente"},
-      {id:"CMD-1002",client:"Client Démo 2",service:"Génération image",amount:5000,status:"Terminé"}
-    ],
-    deposits:[
-      {id:"DEP-1001",client:"Client Démo 1",amount:20000,method:"Mobile Money",status:"En attente"}
-    ],
-    withdrawals:[
-      {id:"RET-1001",client:"Client Démo 2",amount:10000,method:"Mobile Money",status:"En attente"}
-    ],
-    prices:{...DEFAULT_PRICES}
-  };
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getDatabase(app);
+
+
+/* =========================================================
+   PATHS
+========================================================= */
+
+const ROOT =
+    "jasonBusiness";
+
+const USERS_PATH =
+    `${ROOT}/users`;
+
+const COMMANDS_PATH =
+    `${ROOT}/demandes_commandes`;
+
+const RECHARGES_PATH =
+    `${ROOT}/demandes_recharges`;
+
+const WITHDRAWALS_PATH =
+    `${ROOT}/demandes_retraits`;
+
+const MESSAGES_PATH =
+    `${ROOT}/messages`;
+
+
+/* =========================================================
+   ADMIN LOGIN
+========================================================= */
+
+const loginBox =
+    document.getElementById("adminLogin");
+
+const adminPanel =
+    document.getElementById("adminPanel");
+
+
+function showAdmin(){
+
+    loginBox.style.display =
+        "none";
+
+    adminPanel.style.display =
+        "block";
+
 }
 
-function loadData(){
-  try{
-    const raw=localStorage.getItem(STORAGE_KEY);
-    if(raw){
-      const parsed=JSON.parse(raw);
-      if(parsed && Array.isArray(parsed.users) &&
-         Array.isArray(parsed.commands) &&
-         Array.isArray(parsed.deposits) &&
-         Array.isArray(parsed.withdrawals) &&
-         parsed.prices){
-        return parsed;
-      }
+
+function hideAdmin(){
+
+    loginBox.style.display =
+        "flex";
+
+    adminPanel.style.display =
+        "none";
+
+}
+
+
+async function loginAdmin(){
+
+    const password =
+        document
+        .getElementById("adminPassword")
+        .value;
+
+    const error =
+        document
+        .getElementById("loginError");
+
+    error.textContent = "";
+
+
+    try {
+        const response = await fetch("/api/admin/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ password })
+        });
+        const result = await response.json();
+        if (!response.ok || !result.token) {
+            error.textContent = "❌ Mot de passe incorrect.";
+            return;
+        }
+        localStorage.setItem("jasonBusinessAdminToken", result.token);
+        showAdmin();
+        showToast("🔓 Administration ouverte.");
+    } catch (e) {
+        error.textContent = "❌ Serveur indisponible. Réessayez.";
     }
-  }catch(e){}
-  const data=seedData();
-  saveData(data);
-  return data;
+
 }
 
-let data=loadData();
-let currentPage="dashboard";
-let recordReturnPage="commands";
-let toastTimer;
 
-function saveData(next=data){
-  try{
-    localStorage.setItem(STORAGE_KEY,JSON.stringify(next));
-    data=next;
-    return true;
-  }catch(e){
-    showToast("Impossible d'enregistrer dans ce navigateur.");
-    return false;
-  }
+document
+.getElementById("loginAdmin")
+.addEventListener(
+    "click",
+    loginAdmin
+);
+
+
+document
+.getElementById("adminPassword")
+.addEventListener(
+    "keydown",
+    e => {
+
+        if(
+            e.key === "Enter"
+        ){
+
+            loginAdmin();
+
+        }
+
+    }
+);
+
+
+document
+.getElementById("adminLogout")
+.addEventListener(
+    "click",
+    () => {
+
+        localStorage.removeItem("jasonBusinessAdminToken");
+
+        location.reload();
+
+    }
+);
+
+
+const savedAdminToken = localStorage.getItem("jasonBusinessAdminToken");
+if (savedAdminToken) {
+    fetch("/api/admin/session", {
+        headers: { Authorization: `Bearer ${savedAdminToken}` }
+    }).then(response => {
+        if (response.ok) showAdmin();
+        else localStorage.removeItem("jasonBusinessAdminToken");
+    }).catch(() => localStorage.removeItem("jasonBusinessAdminToken"));
 }
 
-function $(id){return document.getElementById(id)}
-function fmt(value){return Number(value||0).toLocaleString("fr-FR")}
+
+/* =========================================================
+   UTILS
+========================================================= */
+
+function money(value){
+
+    return Math.floor(
+        Number(value) || 0
+    ).toLocaleString("fr-FR");
+
+}
+
+
 function escapeHTML(value){
-  return String(value??"").replace(/[&<>"']/g,c=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  }[c]));
-}
-function uid(prefix){
-  return prefix+"-"+Date.now().toString(36).toUpperCase()+"-"+Math.random().toString(36).slice(2,6).toUpperCase();
-}
-function showToast(message){
-  const el=$("toast");
-  el.textContent=message;
-  el.classList.remove("hidden");
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>el.classList.add("hidden"),3000);
+
+    return String(
+        value ?? ""
+    )
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
 }
 
-/* CONNEXION LOCALE */
-$("loginForm").addEventListener("submit",event=>{
-  event.preventDefault();
-  const password=$("adminPassword").value;
-  if(password!==LOCAL_DEMO_CODE){
-    $("loginError").textContent="Accès refusé. Vérifie le code.";
-    $("loginError").classList.remove("hidden");
-    return;
-  }
-  sessionStorage.setItem("jasonBusinessDemoSession","yes");
-  $("loginError").classList.add("hidden");
-  $("loginScreen").classList.add("hidden");
-  $("app").classList.remove("hidden");
-  $("adminPassword").value="";
-  renderAll();
-  showToast("Bienvenue dans l'administration locale.");
-});
 
-function logout(){
-  sessionStorage.removeItem("jasonBusinessDemoSession");
-  $("app").classList.add("hidden");
-  $("loginScreen").classList.remove("hidden");
-  showToast("Session locale fermée.");
-}
-$("logoutBtn").addEventListener("click",logout);
+function getPhone(data){
 
-/* NAVIGATION */
-function showPage(page){
-  if(page==="recordForm") return;
-  currentPage=page;
-  document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));
-  const target=$("page-"+page);
-  if(target)target.classList.remove("hidden");
-  document.querySelectorAll(".nav").forEach(b=>{
-    b.classList.toggle("active",b.dataset.page===page);
-  });
-  closeMenu();
-  if(page==="dashboard")renderDashboard();
-  if(page==="users")renderUsers();
-  if(page==="commands")renderRecords("commands");
-  if(page==="deposits")renderRecords("deposits");
-  if(page==="withdrawals")renderRecords("withdrawals");
-  if(page==="vip")renderVip();
-  if(page==="prices")loadPricesIntoForm();
-}
-document.querySelectorAll(".nav").forEach(button=>{
-  button.addEventListener("click",()=>showPage(button.dataset.page));
-});
+    return (
+        data.telephone ??
+        data.userPhone ??
+        data.phone ??
+        data.numero ??
+        data.user ??
+        data.client ??
+        data.from ??
+        ""
+    );
 
-$("menuBtn").addEventListener("click",()=>{
-  $("sidebar").classList.toggle("open");
-  $("overlay").classList.toggle("show");
-});
-$("overlay").addEventListener("click",closeMenu);
-function closeMenu(){
-  $("sidebar").classList.remove("open");
-  $("overlay").classList.remove("show");
-}
-$("refreshBtn").addEventListener("click",()=>{
-  renderAll();
-  showToast("Données locales actualisées.");
-});
-
-function renderAll(){
-  renderDashboard();
-  renderUsers();
-  renderRecords("commands");
-  renderRecords("deposits");
-  renderRecords("withdrawals");
-  renderVip();
-  loadPricesIntoForm();
 }
 
-function renderDashboard(){
-  $("statUsers").textContent=fmt(data.users.length);
-  $("statCommands").textContent=fmt(data.commands.length);
-  $("statDeposits").textContent=fmt(data.deposits.filter(x=>x.status==="En attente").length);
-  $("statWithdrawals").textContent=fmt(data.withdrawals.filter(x=>x.status==="En attente").length);
-  $("statBalance").textContent=fmt(data.users.reduce((s,u)=>s+Number(u.balance||0),0))+" FC";
-  $("statVip").textContent=fmt(data.users.filter(u=>u.vip&&u.vip!=="Aucun").length);
+
+function getName(data){
+
+    return (
+        data.nom ??
+        data.name ??
+        data.username ??
+        data.fullName ??
+        "Utilisateur"
+    );
+
 }
 
-/* CLIENTS */
-function openUserForm(user=null){
-  $("userFormCard").classList.remove("hidden");
-  $("userFormTitle").textContent=user?"Modifier le client":"Nouveau client";
-  $("editUserId").value=user?user.id:"";
-  $("userName").value=user?user.name:"";
-  $("userEmail").value=user?user.contact:"";
-  $("userBalance").value=user?user.balance:0;
-  $("userVip").value=user?user.vip:"Aucun";
-  $("userFormCard").scrollIntoView({behavior:"smooth",block:"start"});
-}
-function closeUserForm(){$("userFormCard").classList.add("hidden")}
-$("userForm").addEventListener("submit",event=>{
-  event.preventDefault();
-  const id=$("editUserId").value;
-  const user={
-    id:id||uid("JB"),
-    name:$("userName").value.trim(),
-    contact:$("userEmail").value.trim(),
-    balance:Number($("userBalance").value),
-    vip:$("userVip").value
-  };
-  if(!user.name||!Number.isFinite(user.balance)||user.balance<0){
-    return showToast("Vérifie les informations saisies.");
-  }
-  if(id){
-    const index=data.users.findIndex(u=>u.id===id);
-    if(index>=0)data.users[index]=user;
-  }else data.users.unshift(user);
-  saveData();
-  closeUserForm();
-  renderAll();
-  showToast("Client enregistré localement.");
-});
 
-function renderUsers(){
-  const q=($("userSearch")?.value||"").toLowerCase().trim();
-  const users=data.users.filter(u=>
-    [u.id,u.name,u.contact,u.vip].join(" ").toLowerCase().includes(q)
-  );
-  $("usersBody").innerHTML=users.length?users.map(u=>`
-    <tr>
-      <td>${escapeHTML(u.id)}</td>
-      <td>${escapeHTML(u.name)}</td>
-      <td>${escapeHTML(u.contact||"—")}</td>
-      <td>${fmt(u.balance)} FC</td>
-      <td><span class="badge">${escapeHTML(u.vip||"Aucun")}</span></td>
-      <td>
-        <button class="ghost" onclick="editUser('${u.id}')">Modifier</button>
-        <button class="dangerbtn" onclick="deleteUser('${u.id}')">Supprimer</button>
-      </td>
-    </tr>`).join(""):'<tr><td colspan="6" class="empty">Aucun client.</td></tr>';
-  updateVipSelector();
-}
-function editUser(id){
-  const user=data.users.find(u=>u.id===id);
-  if(user)openUserForm(user);
-}
-function deleteUser(id){
-  const user=data.users.find(u=>u.id===id);
-  if(!user)return;
-  if(!confirm("Supprimer le client de démonstration "+user.name+" ?"))return;
-  data.users=data.users.filter(u=>u.id!==id);
-  saveData();
-  renderAll();
-  showToast("Client supprimé localement.");
+function getBalance(data){
+
+    return Number(
+        data.solde_principal ??
+        data.solde ??
+        data.balance ??
+        0
+    ) || 0;
+
 }
 
-/* COMMANDES, DEPOTS, RETRAITS */
-function openRecordForm(type){
-  recordReturnPage=currentPage;
-  $("recordType").value=type;
-  $("recordTitle").textContent=type==="commands"?"Nouvelle commande":type==="deposits"?"Nouveau dépôt":"Nouveau retrait";
-  $("recordForm").reset();
-  $("recordStatus").value="En attente";
-  document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));
-  $("page-recordForm").classList.remove("hidden");
-  closeMenu();
-}
-$("recordForm").addEventListener("submit",event=>{
-  event.preventDefault();
-  const type=$("recordType").value;
-  if(!["commands","deposits","withdrawals"].includes(type))return;
-  const amount=Number($("recordAmount").value);
-  if(!Number.isFinite(amount)||amount<0)return showToast("Montant invalide.");
-  const item={
-    id:uid(type==="commands"?"CMD":type==="deposits"?"DEP":"RET"),
-    client:$("recordClient").value.trim(),
-    amount,
-    status:$("recordStatus").value
-  };
-  if(type==="commands")item.service=$("recordService").value.trim();
-  else item.method=$("recordService").value.trim();
-  data[type].unshift(item);
-  saveData();
-  showPage(type);
-  renderAll();
-  showToast("Enregistrement local créé.");
-});
 
-function renderRecords(type){
-  const body=$(type+"Body");
-  const rows=data[type]||[];
-  if(!rows.length){
-    body.innerHTML='<tr><td colspan="6" class="empty">Aucun enregistrement.</td></tr>';
-    return;
-  }
-  body.innerHTML=rows.map(item=>{
-    const service=type==="commands"?item.service:item.method;
-    return `<tr>
-      <td>${escapeHTML(item.id)}</td>
-      <td>${escapeHTML(item.client)}</td>
-      <td>${escapeHTML(service||"—")}</td>
-      <td>${fmt(item.amount)} FC</td>
-      <td><span class="badge">${escapeHTML(item.status)}</span></td>
-      <td>
-        <button class="goldbtn" onclick="setRecordStatus('${type}','${item.id}','Approuvé')">Approuver</button>
-        <button class="ghost" onclick="setRecordStatus('${type}','${item.id}','Terminé')">Terminer</button>
-        <button class="dangerbtn" onclick="deleteRecord('${type}','${item.id}')">Supprimer</button>
-      </td>
-    </tr>`;
-  }).join("");
-}
-function setRecordStatus(type,id,status){
-  const item=data[type].find(x=>x.id===id);
-  if(!item)return;
-  item.status=status;
-  saveData();
-  renderAll();
-  showToast("Statut de démonstration mis à jour.");
-}
-function deleteRecord(type,id){
-  if(!confirm("Supprimer cet enregistrement local ?"))return;
-  data[type]=data[type].filter(x=>x.id!==id);
-  saveData();
-  renderAll();
-  showToast("Enregistrement supprimé.");
+function getGains(data){
+
+    return Number(
+        data.solde_gains ??
+        data.gains ??
+        data.revenus ??
+        0
+    ) || 0;
+
 }
 
-/* VIP */
-function updateVipSelector(){
-  const select=$("vipClient");
-  if(!select)return;
-  const previous=select.value;
-  select.innerHTML=data.users.length?data.users.map(u=>
-    `<option value="${escapeHTML(u.id)}">${escapeHTML(u.name)} — ${escapeHTML(u.id)}</option>`
-  ).join(""):'<option value="">Aucun client</option>';
-  if(data.users.some(u=>u.id===previous))select.value=previous;
-}
-function renderVip(){
-  updateVipSelector();
-  const vipUsers=data.users.filter(u=>u.vip&&u.vip!=="Aucun");
-  $("vipBody").innerHTML=vipUsers.length?vipUsers.map(u=>`
-    <tr>
-      <td>${escapeHTML(u.name)}</td>
-      <td>${escapeHTML(u.contact||"—")}</td>
-      <td><span class="badge">${escapeHTML(u.vip)}</span></td>
-      <td><button class="ghost" onclick="chooseVip('${u.id}')">Modifier</button></td>
-    </tr>`).join(""):'<tr><td colspan="4" class="empty">Aucun client VIP.</td></tr>';
-}
-function chooseVip(id){
-  $("vipClient").value=id;
-  const user=data.users.find(u=>u.id===id);
-  if(user)$("vipLevel").value=user.vip||"Aucun";
-}
-function saveVip(){
-  const id=$("vipClient").value;
-  const user=data.users.find(u=>u.id===id);
-  if(!user)return showToast("Ajoute d'abord un client.");
-  user.vip=$("vipLevel").value;
-  saveData();
-  renderAll();
-  showToast("VIP modifié localement.");
+
+function getCommissions(data){
+
+    return Number(
+        data.solde_commissions ??
+        data.commissions ??
+        0
+    ) || 0;
+
 }
 
-/* TARIFS */
-function loadPricesIntoForm(){
-  Object.keys(DEFAULT_PRICES).forEach(key=>{
-    const input=$("price-"+key);
-    if(input)input.value=data.prices[key]??DEFAULT_PRICES[key];
-  });
+
+function getPoints(data){
+
+    return Number(
+        data.points_fidelite ??
+        data.points ??
+        data.loyaltyPoints ??
+        0
+    ) || 0;
+
 }
-function savePrices(){
-  const prices={};
-  for(const key of Object.keys(DEFAULT_PRICES)){
-    const value=Number($("price-"+key).value);
-    if(!Number.isFinite(value)||value<0){
-      return showToast("Vérifie le prix de "+key+".");
+
+
+function getStatus(data){
+
+    return (
+        data.statut ??
+        data.status ??
+        "En attente"
+    );
+
+}
+
+
+function isPending(status){
+
+    return String(
+        status || ""
+    )
+    .toLowerCase()
+    .includes("attente");
+
+}
+
+
+function statusBadge(status){
+
+    const value =
+        String(
+            status ||
+            "En attente"
+        );
+
+    const low =
+        value.toLowerCase();
+
+
+    if(
+        low.includes("valid")
+        ||
+        low.includes("pay")
+        ||
+        low.includes("termin")
+        ||
+        low.includes("accept")
+    ){
+
+        return `
+            <span class="badge badge-success">
+                ✓ ${escapeHTML(value)}
+            </span>
+        `;
+
     }
-    prices[key]=value;
-  }
-  data.prices=prices;
-  saveData();
-  $("pricesMessage").textContent="Tarifs enregistrés dans le navigateur.";
-  $("pricesMessage").className="success small";
-  showToast("Tarifs locaux enregistrés.");
-}
-function resetPrices(){
-  if(!confirm("Restaurer les prix de démonstration ?"))return;
-  data.prices={...DEFAULT_PRICES};
-  saveData();
-  loadPricesIntoForm();
-  showToast("Prix par défaut restaurés.");
+
+
+    if(
+        low.includes("refus")
+        ||
+        low.includes("annul")
+    ){
+
+        return `
+            <span class="badge badge-danger">
+                ✕ ${escapeHTML(value)}
+            </span>
+        `;
+
+    }
+
+
+    return `
+        <span class="badge badge-pending">
+            ⏳ ${escapeHTML(value)}
+        </span>
+    `;
+
 }
 
-/* EXPORT ET REINITIALISATION */
-function exportData(){
-  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
-  const url=URL.createObjectURL(blob);
-  const link=document.createElement("a");
-  link.href=url;
-  link.download="jason-business-demo.json";
-  link.click();
-  URL.revokeObjectURL(url);
-  showToast("Export préparé.");
-}
-function resetDemo(){
-  if(!confirm("Remplacer les données locales par les exemples ?"))return;
-  data=seedData();
-  saveData();
-  renderAll();
-  showPage("dashboard");
-  showToast("Données d'exemple restaurées.");
-}
-function clearAllData(){
-  if(!confirm("Effacer tous les clients, commandes, dépôts, retraits et tarifs locaux ?"))return;
-  data={users:[],commands:[],deposits:[],withdrawals:[],prices:{...DEFAULT_PRICES}};
-  saveData();
-  renderAll();
-  showToast("Données locales effacées.");
+
+function showToast(
+    message,
+    type="success"
+){
+
+    const container =
+        document.getElementById(
+            "toastContainer"
+        );
+
+    const toast =
+        document.createElement("div");
+
+    toast.className =
+        `toast ${type}`;
+
+    toast.textContent =
+        message;
+
+    container.appendChild(toast);
+
+    setTimeout(
+        () => toast.remove(),
+        3500
+    );
+
 }
 
-/* DEMARRAGE */
-if(sessionStorage.getItem("jasonBusinessDemoSession")==="yes"){
-  $("loginScreen").classList.add("hidden");
-  $("app").classList.remove("hidden");
+
+/* =========================================================
+   CACHE
+========================================================= */
+
+let usersCache = {};
+let commandsCache = {};
+let rechargeCache = {};
+let withdrawalCache = {};
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function openPage(page){
+
+    document
+    .querySelectorAll(".menu-btn")
+    .forEach(btn => {
+
+        btn.classList.toggle(
+            "active",
+            btn.dataset.page === page
+        );
+
+    });
+
+
+    document
+    .querySelectorAll(".page")
+    .forEach(section => {
+
+        section.classList.toggle(
+            "active",
+            section.id === `page-${page}`
+        );
+
+    });
+
 }
-renderAll();
+
+
+document
+.querySelectorAll(".menu-btn")
+.forEach(btn => {
+
+    btn.addEventListener(
+        "click",
+        () => openPage(
+            btn.dataset.page
+        )
+    );
+
+});
+
+
+document
+.querySelectorAll(".quick-card")
+.forEach(card => {
+
+    card.addEventListener(
+        "click",
+        () => openPage(
+            card.dataset.openPage
+        )
+    );
+
+});
+
+
+/* =========================================================
+   USERS
+========================================================= */
+
+onValue(
+    ref(db,USERS_PATH),
+
+    snapshot => {
+
+        usersCache = {};
+
+        const tbody =
+            document.getElementById(
+                "usersTable"
+            );
+
+        tbody.innerHTML = "";
+
+        let count = 0;
+        let totalBalance = 0;
+
+
+        snapshot.forEach(child => {
+
+            const phone =
+                child.key;
+
+            const data =
+                child.val() || {};
+
+            usersCache[phone] =
+                data;
+
+            count++;
+
+
+            const balance =
+                getBalance(data);
+
+            totalBalance +=
+                balance;
+
+
+            const vip =
+                Boolean(
+                    data.vipActif ??
+                    data.vip ??
+                    data.vip_active ??
+                    false
+                );
+
+
+            const encoded =
+                encodeURIComponent(
+                    phone
+                );
+
+
+            const tr =
+                document.createElement("tr");
+
+
+            tr.innerHTML = `
+
+                <td>
+                    ${escapeHTML(phone)}
+                </td>
+
+                <td class="user-name">
+                    ${escapeHTML(
+                        getName(data)
+                    )}
+                </td>
+
+                <td>
+                    ${money(balance)} FC
+                </td>
+
+                <td>
+                    ${money(
+                        getGains(data)
+                    )} FC
+                </td>
+
+                <td>
+                    ${money(
+                        getCommissions(data)
+                    )} FC
+                </td>
+
+                <td>
+                    ⭐ ${money(
+                        getPoints(data)
+                    )}
+                </td>
+
+                <td>
+
+                    ${
+                        vip
+                        ?
+                        `<span class="badge badge-purple">
+                            👑 VIP
+                        </span>`
+                        :
+                        `<span class="badge badge-blue">
+                            Normal
+                        </span>`
+                    }
+
+                </td>
+
+                <td>
+
+                    <button
+                        class="btn btn-blue"
+                        onclick="viewUser('${encoded}')"
+                    >
+                        👁
+                    </button>
+
+                    <button
+                        class="btn btn-green"
+                        onclick="addMoney('${encoded}')"
+                    >
+                        +1000
+                    </button>
+
+                    <button
+                        class="btn btn-orange"
+                        onclick="removeMoney('${encoded}')"
+                    >
+                        -1000
+                    </button>
+
+                    <button
+                        class="btn btn-red"
+                        onclick="deleteUser('${encoded}')"
+                    >
+                        🗑
+                    </button>
+
+                </td>
+            `;
+
+
+            tbody.appendChild(tr);
+
+        });
+
+
+        document.getElementById(
+            "statUsers"
+        ).textContent = count;
+
+
+        document.getElementById(
+            "totalBalance"
+        ).textContent =
+            money(totalBalance) + " FC";
+
+
+        if(!count){
+
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="8">
+                        <div class="empty">
+                            👥 Aucun utilisateur.
+                        </div>
+                    </td>
+                </tr>
+            `;
+
+        }
+
+    },
+
+    error => {
+
+        console.error(
+            "Firebase users:",
+            error
+        );
+
+        showToast(
+            "❌ Impossible de charger les utilisateurs.",
+            "error"
+        );
+
+    }
+
+);
+
+
+/* =========================================================
+   USER SEARCH
+========================================================= */
+
+document
+.getElementById("userSearch")
+.addEventListener(
+    "input",
+    e => {
+
+        const search =
+            e.target.value
+            .toLowerCase()
+            .trim();
+
+
+        document
+        .querySelectorAll("#usersTable tr")
+        .forEach(row => {
+
+            row.style.display =
+                row.innerText
+                .toLowerCase()
+                .includes(search)
+                ? ""
+                : "none";
+
+        });
+
+    }
+);
+
+
+/* =========================================================
+   VIEW USER
+========================================================= */
+
+window.viewUser =
+function(encodedPhone){
+
+    const phone =
+        decodeURIComponent(
+            encodedPhone
+        );
+
+    const data =
+        usersCache[phone] || {};
+
+
+    const vip =
+        Boolean(
+            data.vipActif ??
+            data.vip ??
+            data.vip_active ??
+            false
+        );
+
+
+    document
+    .getElementById("userDetails")
+    .innerHTML = `
+
+        <div class="detail-grid">
+
+            <div class="detail-item">
+                <small>📱 Numéro</small>
+                <strong>
+                    ${escapeHTML(phone)}
+                </strong>
+            </div>
+
+            <div class="detail-item">
+                <small>👤 Nom</small>
+                <strong>
+                    ${escapeHTML(
+                        getName(data)
+                    )}
+                </strong>
+            </div>
+
+            <div class="detail-item">
+                <small>💰 Solde</small>
+                <strong>
+                    ${money(
+                        getBalance(data)
+                    )} FC
+                </strong>
+            </div>
+
+            <div class="detail-item">
+                <small>📈 Gains</small>
+                <strong>
+                    ${money(
+                        getGains(data)
+                    )} FC
+                </strong>
+            </div>
+
+            <div class="detail-item">
+                <small>👥 Commissions</small>
+                <strong>
+                    ${money(
+                        getCommissions(data)
+                    )} FC
+                </strong>
+            </div>
+
+            <div class="detail-item">
+                <small>⭐ Points</small>
+                <strong>
+                    ${money(
+                        getPoints(data)
+                    )}
+                </strong>
+            </div>
+
+            <div class="detail-item">
+                <small>🎁 Parrain</small>
+                <strong>
+                    ${escapeHTML(
+                        data.referredBy ??
+                        data.parrain ??
+                        "DIRECT"
+                    )}
+                </strong>
+            </div>
+
+            <div class="detail-item">
+                <small>🔑 Code parrainage</small>
+                <strong>
+                    ${escapeHTML(
+                        data.inviteCode ??
+                        data.referralCode ??
+                        "—"
+                    )}
+                </strong>
+            </div>
+
+            <div class="detail-item">
+                <small>👑 VIP</small>
+                <strong>
+                    ${
+                        vip
+                        ? "ACTIF"
+                        : "NON ACTIF"
+                    }
+                </strong>
+            </div>
+
+        </div>
+
+
+        <hr style="
+            margin:18px 0;
+            border:0;
+            border-top:1px solid rgba(255,255,255,.08);
+        ">
+
+
+        <button
+            class="btn btn-green"
+            onclick="addMoney('${encodeURIComponent(phone)}')"
+        >
+            +1000 FC
+        </button>
+
+
+        <button
+            class="btn btn-orange"
+            onclick="removeMoney('${encodeURIComponent(phone)}')"
+        >
+            -1000 FC
+        </button>
+
+
+        <button
+            class="btn btn-blue"
+            onclick="addPoints('${encodeURIComponent(phone)}')"
+        >
+            ⭐ Points
+        </button>
+
+
+        <button
+            class="btn btn-dark"
+            onclick="editUser('${encodeURIComponent(phone)}')"
+        >
+            ✏️ Modifier
+        </button>
+
+
+        <button
+            class="btn btn-purple"
+            onclick="toggleVIP('${encodeURIComponent(phone)}')"
+        >
+            👑 VIP
+        </button>
+
+
+        <button
+            class="btn btn-blue"
+            onclick="resetPassword('${encodeURIComponent(phone)}')"
+        >
+            🔑 Mot de passe
+        </button>
+
+
+        <button
+            class="btn btn-red"
+            onclick="deleteUser('${encodeURIComponent(phone)}')"
+        >
+            🗑 Supprimer
+        </button>
+
+
+        <details style="margin-top:18px">
+
+            <summary>
+                📋 Données Firebase
+            </summary>
+
+            <pre style="
+                margin-top:10px;
+                white-space:pre-wrap;
+                overflow-wrap:anywhere;
+                font-size:10px;
+                color:#8794a8;
+            ">${escapeHTML(
+                JSON.stringify(
+                    data,
+                    null,
+                    2
+                )
+            )}</pre>
+
+        </details>
+    `;
+
+
+    openModal("userModal");
+
+};
+
+
+/* =========================================================
+   ADD MONEY
+========================================================= */
+
+window.addMoney =
+async function(encodedPhone){
+
+    const phone =
+        decodeURIComponent(
+            encodedPhone
+        );
+
+
+    if(!confirm(
+        `Ajouter 1000 FC à ${phone} ?`
+    )) return;
+
+
+    try{
+
+        await runTransaction(
+
+            ref(
+                db,
+                `${USERS_PATH}/${phone}/solde_principal`
+            ),
+
+            current =>
+                (Number(current) || 0) + 1000
+
+        );
+
+
+        showToast(
+            "✅ 1000 FC ajouté."
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Erreur.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   REMOVE MONEY
+========================================================= */
+
+window.removeMoney =
+async function(encodedPhone){
+
+    const phone =
+        decodeURIComponent(
+            encodedPhone
+        );
+
+
+    if(!confirm(
+        `Retirer 1000 FC de ${phone} ?`
+    )) return;
+
+
+    try{
+
+        const result =
+            await runTransaction(
+
+                ref(
+                    db,
+                    `${USERS_PATH}/${phone}/solde_principal`
+                ),
+
+                current => {
+
+                    const value =
+                        Number(current) || 0;
+
+                    if(value < 1000)
+                        return;
+
+                    return value - 1000;
+
+                }
+
+            );
+
+
+        if(!result.committed){
+
+            showToast(
+                "❌ Solde insuffisant.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        showToast(
+            "✅ 1000 FC retiré."
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Erreur.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   ADD POINTS
+========================================================= */
+
+window.addPoints =
+async function(encodedPhone){
+
+    const phone =
+        decodeURIComponent(
+            encodedPhone
+        );
+
+
+    const amount =
+        Number(
+            prompt(
+                "Nombre de points à ajouter :",
+                "100"
+            )
+        );
+
+
+    if(
+        !Number.isFinite(amount)
+        ||
+        amount <= 0
+    ) return;
+
+
+    try{
+
+        await runTransaction(
+
+            ref(
+                db,
+                `${USERS_PATH}/${phone}/points_fidelite`
+            ),
+
+            current =>
+                (Number(current) || 0) + amount
+
+        );
+
+
+        showToast(
+            `⭐ ${amount} points ajoutés.`
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Erreur.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   VIP
+========================================================= */
+
+window.toggleVIP =
+async function(encodedPhone){
+
+    const phone =
+        decodeURIComponent(
+            encodedPhone
+        );
+
+    const data =
+        usersCache[phone] || {};
+
+
+    const current =
+        Boolean(
+            data.vipActif ??
+            data.vip ??
+            data.vip_active ??
+            false
+        );
+
+
+    const next =
+        !current;
+
+
+    if(!confirm(
+        next
+        ? `Activer le VIP pour ${phone} ?`
+        : `Désactiver le VIP pour ${phone} ?`
+    )) return;
+
+
+    try{
+
+        await update(
+
+            ref(
+                db,
+                `${USERS_PATH}/${phone}`
+            ),
+
+            {
+                vipActif:next,
+                vip:next
+            }
+
+        );
+
+
+        showToast(
+            next
+            ? "👑 VIP activé."
+            : "VIP désactivé."
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Impossible de modifier le VIP.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   EDIT USER
+========================================================= */
+
+window.editUser =
+async function(encodedPhone){
+
+    const phone =
+        decodeURIComponent(
+            encodedPhone
+        );
+
+    const data =
+        usersCache[phone] || {};
+
+
+    const name =
+        prompt(
+            "Nom de l'utilisateur :",
+            getName(data)
+        );
+
+
+    if(name === null) return;
+
+
+    const code =
+        prompt(
+            "Code de parrainage :",
+            data.inviteCode ??
+            data.referralCode ??
+            ""
+        );
+
+
+    if(code === null) return;
+
+
+    try{
+
+        await update(
+
+            ref(
+                db,
+                `${USERS_PATH}/${phone}`
+            ),
+
+            {
+                nom:name.trim(),
+                inviteCode:code.trim()
+            }
+
+        );
+
+
+        showToast(
+            "✅ Utilisateur modifié."
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Modification impossible.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   DELETE USER
+========================================================= */
+
+window.deleteUser =
+async function(encodedPhone){
+
+    const phone =
+        decodeURIComponent(
+            encodedPhone
+        );
+
+
+    if(!confirm(
+        `⚠️ Supprimer ${phone} ?`
+    )) return;
+
+
+    if(!confirm(
+        "⚠️ DERNIÈRE CONFIRMATION\n\n"+
+        "Toutes les données du compte seront supprimées."
+    )) return;
+
+
+    try{
+
+        await remove(
+            ref(
+                db,
+                `${USERS_PATH}/${phone}`
+            )
+        );
+
+
+        closeModal("userModal");
+
+        showToast(
+            "✅ Utilisateur supprimé."
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Suppression impossible.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   RESET PASSWORD
+========================================================= */
+
+window.resetPassword =
+async function(encodedPhone){
+
+    const phone =
+        decodeURIComponent(
+            encodedPhone
+        );
+
+
+    const password =
+        prompt(
+            `Nouveau mot de passe pour ${phone} :`
+        );
+
+
+    if(
+        password === null ||
+        !password.trim()
+    ) return;
+
+
+    if(password.length < 4){
+
+        showToast(
+            "❌ Minimum 4 caractères.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        await update(
+
+            ref(
+                db,
+                `${USERS_PATH}/${phone}`
+            ),
+
+            {
+                password:
+                    password.trim()
+            }
+
+        );
+
+
+        showToast(
+            "✅ Mot de passe modifié."
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Erreur.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   COMMANDES — IMPORTANT
+========================================================= */
+
+onValue(
+    ref(db,COMMANDS_PATH),
+
+    snapshot => {
+
+        commandsCache = {};
+
+        const tbody =
+            document.getElementById(
+                "commandsTable"
+            );
+
+        tbody.innerHTML = "";
+
+        let count = 0;
+        let pending = 0;
+
+
+        snapshot.forEach(child => {
+
+            const id =
+                child.key;
+
+            const data =
+                child.val() || {};
+
+
+            commandsCache[id] =
+                data;
+
+            count++;
+
+
+            const phone =
+                getPhone(data) || "—";
+
+
+            const service =
+                data.service ??
+                data.nom ??
+                data.produit ??
+                data.serviceName ??
+                data.serviceNom ??
+                "Service";
+
+
+            const amount =
+                Number(
+                    data.montant ??
+                    data.prix ??
+                    data.amount ??
+                    data.price ??
+                    0
+                ) || 0;
+
+
+            const status =
+                getStatus(data);
+
+
+            if(isPending(status))
+                pending++;
+
+
+            const tr =
+                document.createElement("tr");
+
+
+            tr.innerHTML = `
+
+                <td>
+                    ${escapeHTML(
+                        data.date ??
+                        data.createdAt ??
+                        data.timestamp ??
+                        "—"
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHTML(phone)}
+                </td>
+
+                <td>
+                    ${escapeHTML(service)}
+                </td>
+
+                <td>
+                    ${money(amount)} FC
+                </td>
+
+                <td>
+                    ${statusBadge(status)}
+                </td>
+
+                <td>
+
+                    <button
+                        class="btn btn-blue"
+                        onclick="viewCommand('${encodeURIComponent(id)}')"
+                    >
+                        👁 Voir
+                    </button>
+
+                    ${
+                        isPending(status)
+
+                        ?
+
+                        `
+
+                        <button
+                            class="btn btn-green"
+                            onclick="validateCommand('${encodeURIComponent(id)}')"
+                        >
+                            ✓ Valider
+                        </button>
+
+                        <button
+                            class="btn btn-red"
+                            onclick="refuseCommand('${encodeURIComponent(id)}')"
+                        >
+                            ✕ Refuser
+                        </button>
+
+                        `
+
+                        :
+
+                        `<span class="muted">
+                            Traité
+                        </span>`
+
+                    }
+
+                </td>
+            `;
+
+
+            tbody.appendChild(tr);
+
+        });
+
+
+        document.getElementById(
+            "statCommands"
+        ).textContent = pending;
+
+
+        document.getElementById(
+            "menuCommands"
+        ).textContent = pending;
+
+
+        if(!count){
+
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="6">
+                        <div class="empty">
+                            🛒 Aucune commande.
+                        </div>
+                    </td>
+                </tr>
+            `;
+
+        }
+
+    },
+
+    error => {
+
+        console.error(
+            "COMMANDES FIREBASE:",
+            error
+        );
+
+        showToast(
+            "❌ Erreur de lecture des commandes.",
+            "error"
+        );
+
+    }
+
+);
+
+
+/* =========================================================
+   COMMAND SEARCH
+========================================================= */
+
+document
+.getElementById("commandSearch")
+.addEventListener(
+    "input",
+    e => {
+
+        const search =
+            e.target.value
+            .toLowerCase()
+            .trim();
+
+
+        document
+        .querySelectorAll("#commandsTable tr")
+        .forEach(row => {
+
+            row.style.display =
+                row.innerText
+                .toLowerCase()
+                .includes(search)
+                ? ""
+                : "none";
+
+        });
+
+    }
+);
+
+
+/* =========================================================
+   VIEW COMMAND
+========================================================= */
+
+window.viewCommand =
+function(encodedId){
+
+    const id =
+        decodeURIComponent(
+            encodedId
+        );
+
+    const data =
+        commandsCache[id] || {};
+
+
+    document
+    .getElementById("commandDetails")
+    .innerHTML = `
+
+        <div class="detail-grid">
+
+            <div class="detail-item">
+                <small>📱 Client</small>
+                <strong>
+                    ${escapeHTML(
+                        getPhone(data) || "—"
+                    )}
+                </strong>
+            </div>
+
+            <div class="detail-item">
+                <small>🛒 Service</small>
+                <strong>
+                    ${escapeHTML(
+                        data.service ??
+                        data.nom ??
+                        data.produit ??
+                        data.serviceName ??
+                        "—"
+                    )}
+                </strong>
+            </div>
+
+            <div class="detail-item">
+                <small>💰 Montant</small>
+                <strong>
+                    ${money(
+                        data.montant ??
+                        data.prix ??
+                        data.amount ??
+                        0
+                    )} FC
+                </strong>
+            </div>
+
+            <div class="detail-item">
+                <small>📌 Statut</small>
+                <strong>
+                    ${statusBadge(
+                        getStatus(data)
+                    )}
+                </strong>
+            </div>
+
+            <div class="detail-item">
+                <small>📅 Date</small>
+                <strong>
+                    ${escapeHTML(
+                        data.date ??
+                        data.createdAt ??
+                        data.timestamp ??
+                        "—"
+                    )}
+                </strong>
+            </div>
+
+        </div>
+
+
+        <hr style="
+            margin:18px 0;
+            border:0;
+            border-top:1px solid rgba(255,255,255,.08);
+        ">
+
+
+        <pre style="
+            white-space:pre-wrap;
+            overflow-wrap:anywhere;
+            font-size:10px;
+            color:#8794a8;
+        ">${escapeHTML(
+            JSON.stringify(
+                data,
+                null,
+                2
+            )
+        )}</pre>
+
+    `;
+
+
+    openModal("commandModal");
+
+};
+
+
+/* =========================================================
+   VALIDATE COMMAND
+========================================================= */
+
+window.validateCommand =
+async function(encodedId){
+
+    const id =
+        decodeURIComponent(
+            encodedId
+        );
+
+    const data =
+        commandsCache[id] || {};
+
+
+    if(!isPending(
+        getStatus(data)
+    )){
+
+        showToast(
+            "⚠️ Commande déjà traitée.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!confirm(
+        "Valider cette commande ?"
+    )) return;
+
+
+    try{
+
+        const result =
+            await runTransaction(
+
+                ref(
+                    db,
+                    `${COMMANDS_PATH}/${id}`
+                ),
+
+                current => {
+
+                    if(!current)
+                        return;
+
+                    if(
+                        !isPending(
+                            getStatus(current)
+                        )
+                    )
+                        return;
+
+                    return {
+
+                        ...current,
+
+                        statut:
+                            "Validée",
+
+                        dateValidation:
+                            new Date()
+                            .toISOString()
+
+                    };
+
+                }
+
+            );
+
+
+        if(!result.committed){
+
+            showToast(
+                "⚠️ Commande déjà traitée.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        showToast(
+            "✅ Commande validée."
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Erreur de validation.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   REFUSE COMMAND + REFUND
+========================================================= */
+
+window.refuseCommand =
+async function(encodedId){
+
+    const id =
+        decodeURIComponent(
+            encodedId
+        );
+
+    const data =
+        commandsCache[id] || {};
+
+
+    const phone =
+        getPhone(data);
+
+
+    const amount =
+        Number(
+            data.montant ??
+            data.prix ??
+            data.amount ??
+            0
+        ) || 0;
+
+
+    if(
+        !phone ||
+        amount <= 0
+    ){
+
+        showToast(
+            "❌ Informations de remboursement invalides.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!confirm(
+        "Refuser la commande et rembourser "+
+        money(amount)+
+        " FC ?"
+    )) return;
+
+
+    try{
+
+        const result =
+            await runTransaction(
+
+                ref(
+                    db,
+                    `${COMMANDS_PATH}/${id}`
+                ),
+
+                current => {
+
+                    if(!current)
+                        return;
+
+                    if(
+                        !isPending(
+                            getStatus(current)
+                        )
+                    )
+                        return;
+
+                    return {
+
+                        ...current,
+
+                        statut:
+                            "Refusée — Remboursée",
+
+                        dateRefus:
+                            new Date()
+                            .toISOString(),
+
+                        remboursement:
+                            amount
+
+                    };
+
+                }
+
+            );
+
+
+        if(!result.committed){
+
+            showToast(
+                "⚠️ Commande déjà traitée.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        await runTransaction(
+
+            ref(
+                db,
+                `${USERS_PATH}/${phone}/solde_principal`
+            ),
+
+            current =>
+                (Number(current) || 0) + amount
+
+        );
+
+
+        showToast(
+            `✅ ${money(amount)} FC remboursés.`
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Erreur de remboursement.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   RECHARGES
+========================================================= */
+
+onValue(
+    ref(db,RECHARGES_PATH),
+
+    snapshot => {
+
+        rechargeCache = {};
+
+        const tbody =
+            document.getElementById(
+                "rechargesTable"
+            );
+
+        tbody.innerHTML = "";
+
+        let count = 0;
+        let pending = 0;
+
+
+        snapshot.forEach(child => {
+
+            const id =
+                child.key;
+
+            const data =
+                child.val() || {};
+
+
+            rechargeCache[id] =
+                data;
+
+            count++;
+
+
+            const status =
+                getStatus(data);
+
+
+            if(isPending(status))
+                pending++;
+
+
+            const phone =
+                getPhone(data) || "—";
+
+
+            const amount =
+                Number(
+                    data.montant ??
+                    data.amount ??
+                    0
+                ) || 0;
+
+
+            const method =
+                data.methode ??
+                data.method ??
+                data.modePaiement ??
+                "—";
+
+
+            const transaction =
+                data.transactionId ??
+                data.transaction ??
+                data.reference ??
+                "—";
+
+
+            const tr =
+                document.createElement("tr");
+
+
+            tr.innerHTML = `
+
+                <td>
+                    ${escapeHTML(
+                        data.date ??
+                        data.createdAt ??
+                        "—"
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHTML(phone)}
+                </td>
+
+                <td>
+                    ${money(amount)} FC
+                </td>
+
+                <td>
+                    ${escapeHTML(method)}
+                </td>
+
+                <td>
+                    ${escapeHTML(transaction)}
+                </td>
+
+                <td>
+                    ${statusBadge(status)}
+                </td>
+
+                <td>
+
+                    ${
+                        isPending(status)
+
+                        ?
+
+                        `
+
+                        <button
+                            class="btn btn-green"
+                            onclick="validateRecharge('${encodeURIComponent(id)}')"
+                        >
+                            ✓ Valider
+                        </button>
+
+                        <button
+                            class="btn btn-red"
+                            onclick="refuseRecharge('${encodeURIComponent(id)}')"
+                        >
+                            ✕ Refuser
+                        </button>
+
+                        `
+
+                        :
+
+                        `<span class="muted">
+                            Traité
+                        </span>`
+
+                    }
+
+                </td>
+            `;
+
+
+            tbody.appendChild(tr);
+
+        });
+
+
+        document.getElementById(
+            "statRecharges"
+        ).textContent = pending;
+
+
+        document.getElementById(
+            "menuRecharges"
+        ).textContent = pending;
+
+
+        if(!count){
+
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="7">
+                        <div class="empty">
+                            💳 Aucune recharge.
+                        </div>
+                    </td>
+                </tr>
+            `;
+
+        }
+
+    },
+
+    error => {
+
+        console.error(
+            "RECHARGES:",
+            error
+        );
+
+    }
+
+);
+
+
+/* =========================================================
+   VALIDATE RECHARGE
+========================================================= */
+
+window.validateRecharge =
+async function(encodedId){
+
+    const id =
+        decodeURIComponent(
+            encodedId
+        );
+
+    const data =
+        rechargeCache[id] || {};
+
+
+    const phone =
+        getPhone(data);
+
+
+    const amount =
+        Number(
+            data.montant ??
+            data.amount ??
+            0
+        ) || 0;
+
+
+    if(
+        !phone ||
+        amount <= 0
+    ){
+
+        showToast(
+            "❌ Recharge invalide.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!confirm(
+        "Créditer "+
+        money(amount)+
+        " FC à "+
+        phone+
+        " ?"
+    )) return;
+
+
+    try{
+
+        const result =
+            await runTransaction(
+
+                ref(
+                    db,
+                    `${RECHARGES_PATH}/${id}`
+                ),
+
+                current => {
+
+                    if(!current)
+                        return;
+
+                    if(
+                        !isPending(
+                            getStatus(current)
+                        )
+                    )
+                        return;
+
+                    return {
+
+                        ...current,
+
+                        statut:
+                            "Validée",
+
+                        dateValidation:
+                            new Date()
+                            .toISOString(),
+
+                        creditAmount:
+                            amount
+
+                    };
+
+                }
+
+            );
+
+
+        if(!result.committed){
+
+            showToast(
+                "⚠️ Recharge déjà traitée.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        await runTransaction(
+
+            ref(
+                db,
+                `${USERS_PATH}/${phone}/solde_principal`
+            ),
+
+            current =>
+                (Number(current) || 0) + amount
+
+        );
+
+
+        showToast(
+            `✅ ${money(amount)} FC crédités.`
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Erreur de recharge.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   REFUSE RECHARGE
+========================================================= */
+
+window.refuseRecharge =
+async function(encodedId){
+
+    const id =
+        decodeURIComponent(
+            encodedId
+        );
+
+
+    if(!confirm(
+        "Refuser cette recharge ?"
+    )) return;
+
+
+    try{
+
+        const result =
+            await runTransaction(
+
+                ref(
+                    db,
+                    `${RECHARGES_PATH}/${id}`
+                ),
+
+                current => {
+
+                    if(!current)
+                        return;
+
+                    if(
+                        !isPending(
+                            getStatus(current)
+                        )
+                    )
+                        return;
+
+                    return {
+
+                        ...current,
+
+                        statut:
+                            "Refusée",
+
+                        dateRefus:
+                            new Date()
+                            .toISOString()
+
+                    };
+
+                }
+
+            );
+
+
+        if(!result.committed){
+
+            showToast(
+                "⚠️ Recharge déjà traitée.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        showToast(
+            "✅ Recharge refusée."
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Erreur.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   RETRAITS
+========================================================= */
+
+onValue(
+    ref(db,WITHDRAWALS_PATH),
+
+    snapshot => {
+
+        withdrawalCache = {};
+
+        const tbody =
+            document.getElementById(
+                "withdrawalsTable"
+            );
+
+        tbody.innerHTML = "";
+
+        let count = 0;
+        let pending = 0;
+
+
+        snapshot.forEach(child => {
+
+            const id =
+                child.key;
+
+            const data =
+                child.val() || {};
+
+
+            withdrawalCache[id] =
+                data;
+
+            count++;
+
+
+            const status =
+                getStatus(data);
+
+
+            if(isPending(status))
+                pending++;
+
+
+            const phone =
+                getPhone(data) || "—";
+
+
+            const amount =
+                Number(
+                    data.montant ??
+                    data.amount ??
+                    0
+                ) || 0;
+
+
+            const method =
+                data.methode ??
+                data.method ??
+                "—";
+
+
+            const receiver =
+                data.numero_reception ??
+                data.numeroReception ??
+                data.numero ??
+                data.receiver ??
+                "—";
+
+
+            const tr =
+                document.createElement("tr");
+
+
+            tr.innerHTML = `
+
+                <td>
+                    ${escapeHTML(
+                        data.date ??
+                        data.createdAt ??
+                        "—"
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHTML(phone)}
+                </td>
+
+                <td>
+                    ${money(amount)} FC
+                </td>
+
+                <td>
+                    ${escapeHTML(method)}
+                </td>
+
+                <td>
+                    ${escapeHTML(receiver)}
+                </td>
+
+                <td>
+                    ${statusBadge(status)}
+                </td>
+
+                <td>
+
+                    ${
+                        isPending(status)
+
+                        ?
+
+                        `
+
+                        <button
+                            class="btn btn-green"
+                            onclick="validateWithdrawal('${encodeURIComponent(id)}')"
+                        >
+                            ✓ Payé
+                        </button>
+
+                        <button
+                            class="btn btn-red"
+                            onclick="refuseWithdrawal('${encodeURIComponent(id)}')"
+                        >
+                            ✕ Refuser
+                        </button>
+
+                        `
+
+                        :
+
+                        `<span class="muted">
+                            Traité
+                        </span>`
+
+                    }
+
+                </td>
+            `;
+
+
+            tbody.appendChild(tr);
+
+        });
+
+
+        document.getElementById(
+            "statWithdrawals"
+        ).textContent = pending;
+
+
+        document.getElementById(
+            "menuWithdrawals"
+        ).textContent = pending;
+
+
+        if(!count){
+
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="7">
+                        <div class="empty">
+                            💸 Aucun retrait.
+                        </div>
+                    </td>
+                </tr>
+            `;
+
+        }
+
+    },
+
+    error => {
+
+        console.error(
+            "WITHDRAWALS:",
+            error
+        );
+
+    }
+
+);
+
+
+/* =========================================================
+   VALIDATE WITHDRAWAL
+========================================================= */
+
+window.validateWithdrawal =
+async function(encodedId){
+
+    const id =
+        decodeURIComponent(
+            encodedId
+        );
+
+
+    if(!confirm(
+        "Confirmer que le paiement a été effectué ?"
+    )) return;
+
+
+    try{
+
+        const result =
+            await runTransaction(
+
+                ref(
+                    db,
+                    `${WITHDRAWALS_PATH}/${id}`
+                ),
+
+                current => {
+
+                    if(!current)
+                        return;
+
+                    if(
+                        !isPending(
+                            getStatus(current)
+                        )
+                    )
+                        return;
+
+                    return {
+
+                        ...current,
+
+                        statut:
+                            "Payé",
+
+                        datePaiement:
+                            new Date()
+                            .toISOString()
+
+                    };
+
+                }
+
+            );
+
+
+        if(!result.committed){
+
+            showToast(
+                "⚠️ Retrait déjà traité.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        showToast(
+            "✅ Retrait marqué comme payé."
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Erreur.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   REFUSE WITHDRAWAL + REFUND
+========================================================= */
+
+window.refuseWithdrawal =
+async function(encodedId){
+
+    const id =
+        decodeURIComponent(
+            encodedId
+        );
+
+    const data =
+        withdrawalCache[id] || {};
+
+
+    const phone =
+        getPhone(data);
+
+
+    const amount =
+        Number(
+            data.montant ??
+            data.amount ??
+            0
+        ) || 0;
+
+
+    if(
+        !phone ||
+        amount <= 0
+    ){
+
+        showToast(
+            "❌ Informations invalides.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!confirm(
+        "Refuser le retrait et rembourser "+
+        money(amount)+
+        " FC ?"
+    )) return;
+
+
+    try{
+
+        const result =
+            await runTransaction(
+
+                ref(
+                    db,
+                    `${WITHDRAWALS_PATH}/${id}`
+                ),
+
+                current => {
+
+                    if(!current)
+                        return;
+
+                    if(
+                        !isPending(
+                            getStatus(current)
+                        )
+                    )
+                        return;
+
+                    return {
+
+                        ...current,
+
+                        statut:
+                            "Refusé — Remboursé",
+
+                        dateRefus:
+                            new Date()
+                            .toISOString(),
+
+                        remboursement:
+                            amount
+
+                    };
+
+                }
+
+            );
+
+
+        if(!result.committed){
+
+            showToast(
+                "⚠️ Retrait déjà traité.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        await runTransaction(
+
+            ref(
+                db,
+                `${USERS_PATH}/${phone}/solde_principal`
+            ),
+
+            current =>
+                (Number(current) || 0) + amount
+
+        );
+
+
+        showToast(
+            `✅ ${money(amount)} FC remboursés.`
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Erreur de remboursement.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+onValue(
+    ref(db,MESSAGES_PATH),
+
+    snapshot => {
+
+        const container =
+            document.getElementById(
+                "messagesList"
+            );
+
+
+        container.innerHTML = "";
+
+        let count = 0;
+
+
+        snapshot.forEach(child => {
+
+            count++;
+
+
+            const id =
+                child.key;
+
+            const data =
+                child.val() || {};
+
+
+            const phone =
+                data.from ??
+                data.telephone ??
+                data.userPhone ??
+                data.phone ??
+                "Utilisateur";
+
+
+            const text =
+                data.message ??
+                data.text ??
+                "";
+
+
+            const date =
+                data.date ??
+                data.timestamp ??
+                "—";
+
+
+            const file =
+                data.file ??
+                data.fichier ??
+                data.fileData;
+
+
+            let fileHTML = "";
+
+
+            if(file){
+
+                fileHTML = `
+
+                    <div class="file-box">
+
+                        📎 Fichier reçu
+
+                        <br><br>
+
+                        <a
+                            href="${escapeHTML(file)}"
+                            target="_blank"
+                            rel="noopener"
+                            class="btn btn-blue"
+                        >
+                            ⬇️ Ouvrir
+                        </a>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            const card =
+                document.createElement("div");
+
+
+            card.className =
+                "message-card";
+
+
+            card.innerHTML = `
+
+                <div class="message-head">
+
+                    <strong>
+                        📱 ${escapeHTML(phone)}
+                    </strong>
+
+                    <small class="muted">
+                        ${escapeHTML(date)}
+                    </small>
+
+                </div>
+
+                <div class="message-body">
+                    ${escapeHTML(text)}
+                </div>
+
+                ${fileHTML}
+
+                <div style="margin-top:12px">
+
+                    <button
+                        class="btn btn-blue"
+                        onclick="replyUser('${encodeURIComponent(phone)}')"
+                    >
+                        ↩️ Répondre
+                    </button>
+
+                    <button
+                        class="btn btn-red"
+                        onclick="deleteMessage('${encodeURIComponent(id)}')"
+                    >
+                        🗑 Supprimer
+                    </button>
+
+                </div>
+            `;
+
+
+            container.prepend(card);
+
+        });
+
+
+        if(!count){
+
+            container.innerHTML = `
+                <div class="empty">
+                    💬 Aucun message reçu.
+                </div>
+            `;
+
+        }
+
+    },
+
+    error => {
+
+        console.error(
+            "MESSAGES:",
+            error
+        );
+
+    }
+
+);
+
+
+/* =========================================================
+   REPLY
+========================================================= */
+
+window.replyUser =
+function(encodedPhone){
+
+    const phone =
+        decodeURIComponent(
+            encodedPhone
+        );
+
+
+    document.getElementById(
+        "messageTo"
+    ).value = phone;
+
+
+    openPage("send");
+
+
+    document.getElementById(
+        "messageText"
+    ).focus();
+
+};
+
+
+/* =========================================================
+   DELETE MESSAGE
+========================================================= */
+
+window.deleteMessage =
+async function(encodedId){
+
+    const id =
+        decodeURIComponent(
+            encodedId
+        );
+
+
+    if(!confirm(
+        "Supprimer ce message ?"
+    )) return;
+
+
+    try{
+
+        await remove(
+
+            ref(
+                db,
+                `${MESSAGES_PATH}/${id}`
+            )
+
+        );
+
+
+        showToast(
+            "✅ Message supprimé."
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "❌ Suppression impossible.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   SEND ADMIN MESSAGE
+========================================================= */
+
+window.sendAdminMessage =
+async function(){
+
+    const phone =
+        document
+        .getElementById("messageTo")
+        .value
+        .trim();
+
+
+    const text =
+        document
+        .getElementById("messageText")
+        .value
+        .trim();
+
+
+    const status =
+        document.getElementById(
+            "sendStatus"
+        );
+
+
+    status.innerHTML = "";
+
+
+    if(!phone){
+
+        status.innerHTML = `
+            <p style="color:#ff6666;font-size:12px">
+                ❌ Numéro obligatoire.
+            </p>
+        `;
+
+        return;
+
+    }
+
+
+    if(!text){
+
+        status.innerHTML = `
+            <p style="color:#ff6666;font-size:12px">
+                ❌ Message obligatoire.
+            </p>
+        `;
+
+        return;
+
+    }
+
+
+    try{
+
+        const now =
+            Date.now();
+
+
+        const date =
+            new Date()
+            .toLocaleString("fr-FR");
+
+
+        const messageRef =
+            push(
+                ref(
+                    db,
+                    MESSAGES_PATH
+                )
+            );
+
+
+        await set(
+            messageRef,
+            {
+
+                from:"ADMIN",
+
+                to:phone,
+
+                telephone:phone,
+
+                message:text,
+
+                date:date,
+
+                timestamp:now,
+
+                lu:false,
+
+                type:"admin"
+
+            }
+        );
+
+
+        const userMessageRef =
+            push(
+                ref(
+                    db,
+                    `${USERS_PATH}/${phone}/messages`
+                )
+            );
+
+
+        await set(
+            userMessageRef,
+            {
+
+                from:"ADMIN",
+
+                to:phone,
+
+                message:text,
+
+                date:date,
+
+                timestamp:now,
+
+                lu:false,
+
+                type:"admin"
+
+            }
+        );
+
+
+        document.getElementById(
+            "messageText"
+        ).value = "";
+
+
+        status.innerHTML = `
+            <p style="color:#42df79;font-size:12px">
+                ✅ Message envoyé à
+                ${escapeHTML(phone)}
+            </p>
+        `;
+
+
+        showToast(
+            "📤 Message envoyé."
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        status.innerHTML = `
+            <p style="color:#ff6666;font-size:12px">
+                ❌ Erreur lors de l'envoi.
+            </p>
+        `;
+
+    }
+
+};
+
+
+document
+.getElementById("sendMessageBtn")
+.addEventListener(
+    "click",
+    sendAdminMessage
+);
+
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+window.openModal =
+function(id){
+
+    const modal =
+        document.getElementById(id);
+
+    if(modal)
+        modal.classList.add("show");
+
+};
+
+
+window.closeModal =
+function(id){
+
+    const modal =
+        document.getElementById(id);
+
+    if(modal)
+        modal.classList.remove("show");
+
+};
+
+
+document
+.querySelectorAll(".modal")
+.forEach(modal => {
+
+    modal.addEventListener(
+        "click",
+        e => {
+
+            if(
+                e.target === modal
+            ){
+
+                modal.classList.remove(
+                    "show"
+                );
+
+            }
+
+        }
+    );
+
+});
+
+
+document.addEventListener(
+    "keydown",
+    e => {
+
+        if(e.key === "Escape"){
+
+            document
+            .querySelectorAll(
+                ".modal.show"
+            )
+            .forEach(modal => {
+
+                modal.classList.remove(
+                    "show"
+                );
+
+            });
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   FIN
+========================================================= */
+
+console.log(
+    "JASON BUSINESS ADMIN chargé."
+);
+
+console.log(
+    "Commandes Firebase:",
+    COMMANDS_PATH
+);
+
 </script>
+
 </body>
 </html>
