@@ -1,3 +1,11 @@
-// Fonction serverless Vercel : routes /api/*
+
+/**
+ * JASON BUSINESS — ROUTES API VERCEL
+ * Fichier : api/[...path].js
+ */
+
 const app = require("../backend/app");
-module.exports = (req, res) => app(req, res);
+
+module.exports = (req, res) => {
+    return app(req, res);
+};
