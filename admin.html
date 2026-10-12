@@ -12,7 +12,7 @@
   --bg:#050a14;
   --panel:#0a1424;
   --panel2:#0e1c30;
-  --blue:#00cfff;
+  --blue:#00d2ff;
   --gold:#d8aa45;
   --text:#f1f5fc;
   --muted:#91a2b9;
@@ -26,49 +26,49 @@ body{
   margin:0;background:var(--bg);color:var(--text);
   font-family:Arial,Helvetica,sans-serif;
 }
-button,input,select{font:inherit}
+button,input,select,textarea{font:inherit}
 button{cursor:pointer}
+button:disabled{opacity:.5}
 .hidden{display:none!important}
 .muted{color:var(--muted)}
 .small{font-size:12px}
 .gold{color:var(--gold)}
 .blue{color:var(--blue)}
-.danger{color:var(--red)}
 .success{color:var(--green)}
-button:disabled{opacity:.5;cursor:not-allowed}
-input,select{
-  width:100%;padding:13px;border-radius:10px;
+.danger{color:var(--red)}
+input,select,textarea{
+  width:100%;padding:12px;border-radius:10px;
   color:var(--text);background:#07111f;
   border:1px solid var(--border);outline:none;
 }
-input:focus,select:focus{border-color:var(--blue)}
+input:focus,select:focus,textarea:focus{border-color:var(--blue)}
 button{
-  border:0;border-radius:10px;padding:12px 15px;
+  border:0;border-radius:10px;padding:11px 14px;
   color:white;background:var(--panel2);font-weight:700;
 }
-button.primary{
-  background:linear-gradient(135deg,#008fbd,#00cfff);
+button:hover{filter:brightness(1.12)}
+.primary{
+  background:linear-gradient(135deg,#008fbd,#00d2ff);
   color:#00111a;
 }
-button.goldbtn{
+.goldbtn{
   background:linear-gradient(135deg,#b78528,#f0cc73);
   color:#201400;
 }
-button.dangerbtn{
+.dangerbtn{
   background:#351522;color:#ff9aac;
   border:1px solid #63283a;
 }
-button.ghost{border:1px solid var(--border);background:transparent}
-button:hover{filter:brightness(1.1)}
+.ghost{border:1px solid var(--border);background:transparent}
+.full{width:100%}
+
 #loginScreen{
   min-height:100vh;display:flex;align-items:center;
   justify-content:center;padding:20px;
-  background:
-    radial-gradient(ellipse at top,#102b46 0,transparent 55%),
-    var(--bg);
+  background:radial-gradient(ellipse at top,#102b46,transparent 60%),var(--bg);
 }
 .login-card{
-  width:100%;max-width:410px;background:rgba(10,20,36,.97);
+  width:100%;max-width:410px;background:var(--panel);
   border:1px solid #24405b;border-radius:22px;
   padding:27px;box-shadow:0 20px 70px #0008;
 }
@@ -79,24 +79,25 @@ button:hover{filter:brightness(1.1)}
   color:#00121c;font-weight:900;font-size:23px;
   margin-bottom:18px;
 }
-.login-card h1{font-size:22px;margin:0 0 7px}
+.login-card h1{font-size:23px;margin:0 0 8px}
 .login-card p{line-height:1.6}
 .field{margin:18px 0}
-.field label{display:block;margin-bottom:8px;font-size:13px;color:#bdc9d9}
-.full{width:100%}
-.error{
+.field label,.form-field label{
+  display:block;margin-bottom:8px;font-size:13px;color:#bdc9d9;
+}
+#loginError{
   color:#ff9eae;background:#311421;border:1px solid #663044;
   border-radius:10px;padding:12px;margin-top:14px;
-  font-size:13px;line-height:1.5;
+  font-size:13px;
 }
-#app{min-height:100vh}
+
 .topbar{
-  height:67px;display:flex;align-items:center;justify-content:space-between;
-  gap:12px;padding:0 20px;background:#081322;
-  border-bottom:1px solid var(--border);
+  height:67px;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;padding:0 18px;
+  background:#081322;border-bottom:1px solid var(--border);
   position:sticky;top:0;z-index:20;
 }
-.brand{display:flex;align-items:center;gap:11px;font-weight:900}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900}
 .brand-icon{
   width:39px;height:39px;border-radius:12px;
   display:grid;place-items:center;background:#092b40;
@@ -118,10 +119,7 @@ button:hover{filter:brightness(1.1)}
   padding:12px;border-radius:10px;text-align:left;
   background:transparent;color:#b9c8dc;margin-bottom:4px;
 }
-.nav.active{
-  color:var(--blue);background:#0b2739;
-  border:1px solid #12435d;
-}
+.nav.active{color:var(--blue);background:#0b2739;border:1px solid #12435d}
 .nav .ico{width:22px;text-align:center}
 .main{flex:1;min-width:0;padding:25px;overflow:hidden}
 .pagehead{
@@ -163,24 +161,19 @@ th,td{
 }
 th{color:#8398b2;font-weight:600}
 td{color:#dce5f1}
-.empty{text-align:center;color:var(--muted);padding:28px}
+.empty{text-align:center;color:var(--muted);padding:25px}
 .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px}
-.toolbar input{flex:1;min-width:170px}
+.toolbar input{flex:1;min-width:150px}
 .toolbar select{width:auto;min-width:120px}
-.form-grid{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;
-}
-.form-field label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}
-.form-field.fullrow{grid-column:1/-1}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
 .price-row{
-  display:grid;grid-template-columns:1fr 150px;gap:12px;
+  display:grid;grid-template-columns:1fr 140px;gap:12px;
   align-items:center;padding:12px 0;border-bottom:1px solid var(--border);
 }
 .price-row:last-child{border-bottom:0}
-.statusline{
-  display:flex;align-items:center;gap:8px;
-  font-size:12px;color:var(--muted);
-}
+.form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.footer-note{color:#667c96;font-size:11px;line-height:1.7;margin-top:20px}
+.statusline{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
 #toast{
   position:fixed;z-index:100;bottom:20px;left:50%;
@@ -190,8 +183,12 @@ td{color:#dce5f1}
   box-shadow:0 8px 30px #0008;font-size:13px;
 }
 #menuBtn{display:none}
-.mobile-overlay{display:none}
-.footer-note{color:#667c96;font-size:11px;line-height:1.6;margin-top:20px}
+#overlay{display:none}
+.note{
+  border-left:3px solid var(--gold);padding:10px 13px;
+  background:#151b25;border-radius:5px;color:#c5d0df;
+  font-size:12px;line-height:1.6;
+}
 @media(max-width:900px){
   .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .sidebar{width:210px}
@@ -199,10 +196,10 @@ td{color:#dce5f1}
 }
 @media(max-width:650px){
   #menuBtn{display:block}
-  .topbar{padding:0 12px;height:61px}
-  .brand{gap:7px;font-size:13px}
+  .topbar{padding:0 10px;height:61px}
+  .brand{gap:7px;font-size:12px}
   .brand-icon{width:34px;height:34px}
-  .top-actions button{padding:10px;font-size:12px}
+  .top-actions button{padding:9px;font-size:11px}
   .layout{min-height:calc(100vh - 61px)}
   .sidebar{
     position:fixed;z-index:40;top:61px;bottom:0;left:0;
@@ -210,284 +207,320 @@ td{color:#dce5f1}
     transition:transform .2s ease;overflow-y:auto;
   }
   .sidebar.open{transform:translateX(0)}
-  .mobile-overlay.show{
+  #overlay.show{
     display:block;position:fixed;inset:61px 0 0;z-index:30;
     background:#0009;
   }
-  .main{padding:16px 12px}
+  .main{padding:15px 11px}
   .pagehead h1{font-size:21px}
   .grid{gap:9px}
-  .stat{padding:13px}
-  .stat strong{font-size:21px}
+  .stat{padding:12px}
+  .stat strong{font-size:20px}
   .stat h3{font-size:11px}
   .form-grid{grid-template-columns:1fr}
-  .form-field.fullrow{grid-column:auto}
-  .price-row{grid-template-columns:1fr 110px}
-  .card{padding:14px}
+  .price-row{grid-template-columns:1fr 105px}
+  .card{padding:13px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- CONNEXION -->
+<!-- CONNEXION LOCALE DE DEMONSTRATION -->
 <section id="loginScreen">
   <div class="login-card">
     <div class="logo">JB</div>
-    <div class="badge">ESPACE SÉCURISÉ</div>
+    <span class="badge">ESPACE ADMINISTRATEUR</span>
     <h1 style="margin-top:16px">JASON BUSINESS</h1>
     <p class="muted">🔐 PANNEAU D'ADMINISTRATION</p>
 
     <form id="loginForm">
       <div class="field">
-        <label for="adminPassword">Code administrateur</label>
+        <label for="adminPassword">Code d'accès local</label>
         <input id="adminPassword" type="password"
-          placeholder="Saisis ton code secret"
-          autocomplete="current-password" required>
+          placeholder="Saisis ton code" required autocomplete="off">
       </div>
       <button class="primary full" id="loginBtn" type="submit">
         🔓 Ouvrir l'administration
       </button>
-      <div id="loginError" class="error hidden"></div>
+      <div id="loginError" class="hidden"></div>
     </form>
+
     <p class="small muted" style="margin-top:20px">
       Créé par Jason Aloma 🇨🇩
+    </p>
+    <p class="small muted">
+      Mode local : aucune connexion serveur.
     </p>
   </div>
 </section>
 
-<!-- APPLICATION -->
 <section id="app" class="hidden">
-  <header class="topbar">
-    <div class="brand">
-      <button id="menuBtn" class="ghost" aria-label="Ouvrir le menu">☰</button>
-      <div class="brand-icon">JB</div>
-      <div>JASON BUSINESS
-        <small>ADMINISTRATION • JASON ALOMA 🇨🇩</small>
-      </div>
+<header class="topbar">
+  <div class="brand">
+    <button id="menuBtn" class="ghost">☰</button>
+    <div class="brand-icon">JB</div>
+    <div>JASON BUSINESS
+      <small>ADMINISTRATION • JASON ALOMA 🇨🇩</small>
     </div>
-    <div class="top-actions">
-      <span class="statusline"><span class="dot"></span><span id="connectionText">Connecté</span></span>
-      <button id="refreshBtn" class="ghost" title="Actualiser">↻</button>
-      <button id="logoutBtn" class="dangerbtn">Quitter</button>
-    </div>
-  </header>
-
-  <div class="mobile-overlay" id="overlay"></div>
-
-  <div class="layout">
-    <aside class="sidebar" id="sidebar">
-      <div class="side-label">PRINCIPAL</div>
-      <button class="nav active" data-page="dashboard"><span class="ico">▦</span> Tableau de bord</button>
-      <button class="nav" data-page="users"><span class="ico">♙</span> Clients</button>
-      <button class="nav" data-page="commands"><span class="ico">▤</span> Commandes</button>
-
-      <div class="side-label">FINANCES</div>
-      <button class="nav" data-page="deposits"><span class="ico">＋</span> Dépôts</button>
-      <button class="nav" data-page="withdrawals"><span class="ico">↗</span> Retraits</button>
-
-      <div class="side-label">SERVICES</div>
-      <button class="nav" data-page="vip"><span class="ico">♛</span> Gestion VIP</button>
-      <button class="nav" data-page="prices"><span class="ico">◆</span> Tarifs API</button>
-
-      <div class="side-label">SYSTÈME</div>
-      <button class="nav" data-page="security"><span class="ico">⚙</span> Sécurité</button>
-
-      <div class="footer-note">
-        JASON BUSINESS<br>
-        Créé par Jason Aloma 🇨🇩<br>
-        Kinshasa, RDC
-      </div>
-    </aside>
-
-    <main class="main">
-      <!-- DASHBOARD -->
-      <section class="page" id="page-dashboard">
-        <div class="pagehead">
-          <div>
-            <h1>Tableau de bord</h1>
-            <p>Vue générale de ton activité.</p>
-          </div>
-          <button class="primary" onclick="loadPage('dashboard')">↻ Actualiser</button>
-        </div>
-
-        <div class="grid">
-          <div class="stat">
-            <div class="stat-top"><span class="muted">Clients</span><span class="stat-icon">♙</span></div>
-            <h3>Utilisateurs enregistrés</h3><strong id="statUsers">—</strong>
-          </div>
-          <div class="stat">
-            <div class="stat-top"><span class="muted">Commandes</span><span class="stat-icon">▤</span></div>
-            <h3>Commandes enregistrées</h3><strong id="statCommands">—</strong>
-          </div>
-          <div class="stat">
-            <div class="stat-top"><span class="muted">Dépôts en attente</span><span class="stat-icon">＋</span></div>
-            <h3>À traiter</h3><strong id="statDeposits">—</strong>
-          </div>
-          <div class="stat">
-            <div class="stat-top"><span class="muted">Retraits en attente</span><span class="stat-icon">↗</span></div>
-            <h3>À vérifier</h3><strong id="statWithdrawals">—</strong>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-title">
-            <h2>État du système</h2><span class="badge">BACKEND</span>
-          </div>
-          <p id="healthMessage" class="muted">Vérification du backend…</p>
-          <p class="small muted">Les données financières ne doivent être modifiées que par des routes sécurisées côté serveur.</p>
-        </div>
-
-        <div class="card">
-          <div class="card-title"><h2>Accès rapide</h2></div>
-          <div class="toolbar">
-            <button class="ghost" onclick="showPage('users')">♙ Clients</button>
-            <button class="ghost" onclick="showPage('deposits')">＋ Dépôts</button>
-            <button class="ghost" onclick="showPage('withdrawals')">↗ Retraits</button>
-            <button class="goldbtn" onclick="showPage('prices')">◆ Modifier les tarifs</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- CLIENTS -->
-      <section class="page hidden" id="page-users">
-        <div class="pagehead">
-          <div><h1>Gestion des clients</h1><p>Recherche et consultation des comptes.</p></div>
-          <button class="primary" onclick="loadPage('users')">↻ Actualiser</button>
-        </div>
-        <div class="card">
-          <div class="toolbar">
-            <input id="userSearch" placeholder="Rechercher un client…" oninput="filterTable('usersTable',this.value)">
-          </div>
-          <div class="table-wrap"><table id="usersTable">
-            <thead><tr><th>UID</th><th>Nom</th><th>Solde</th><th>VIP</th><th>Actions</th></tr></thead>
-            <tbody><tr><td colspan="5" class="empty">Charge les données depuis le backend.</td></tr></tbody>
-          </table></div>
-          <p id="usersMessage" class="small muted"></p>
-        </div>
-      </section>
-
-      <!-- COMMANDES -->
-      <section class="page hidden" id="page-commands">
-        <div class="pagehead">
-          <div><h1>Commandes</h1><p>Suivi des commandes clients.</p></div>
-          <button class="primary" onclick="loadPage('commands')">↻ Actualiser</button>
-        </div>
-        <div class="card"><div class="table-wrap"><table id="commandsTable">
-          <thead><tr><th>Référence</th><th>Client</th><th>Service</th><th>Montant</th><th>Statut</th><th>Action</th></tr></thead>
-          <tbody><tr><td colspan="6" class="empty">Données non chargées.</td></tr></tbody>
-        </table></div><p id="commandsMessage" class="small muted"></p></div>
-      </section>
-
-      <!-- DEPOTS -->
-      <section class="page hidden" id="page-deposits">
-        <div class="pagehead">
-          <div><h1>Dépôts</h1><p>Demandes de recharge à vérifier.</p></div>
-          <button class="primary" onclick="loadPage('deposits')">↻ Actualiser</button>
-        </div>
-        <div class="card"><div class="table-wrap"><table id="depositsTable">
-          <thead><tr><th>Référence</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Statut</th><th>Actions</th></tr></thead>
-          <tbody><tr><td colspan="6" class="empty">Données non chargées.</td></tr></tbody>
-        </table></div><p id="depositsMessage" class="small muted"></p></div>
-      </section>
-
-      <!-- RETRAITS -->
-      <section class="page hidden" id="page-withdrawals">
-        <div class="pagehead">
-          <div><h1>Retraits</h1><p>Demandes de retrait à vérifier.</p></div>
-          <button class="primary" onclick="loadPage('withdrawals')">↻ Actualiser</button>
-        </div>
-        <div class="card"><div class="table-wrap"><table id="withdrawalsTable">
-          <thead><tr><th>Référence</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Statut</th><th>Actions</th></tr></thead>
-          <tbody><tr><td colspan="6" class="empty">Données non chargées.</td></tr></tbody>
-        </table></div><p id="withdrawalsMessage" class="small muted"></p></div>
-      </section>
-
-      <!-- VIP -->
-      <section class="page hidden" id="page-vip">
-        <div class="pagehead">
-          <div><h1>Gestion VIP</h1><p>Modifier le statut VIP via le backend sécurisé.</p></div>
-          <button class="primary" onclick="loadPage('vip')">↻ Actualiser</button>
-        </div>
-        <div class="card">
-          <div class="form-grid">
-            <div class="form-field">
-              <label for="vipUid">UID du client</label>
-              <input id="vipUid" placeholder="Identifiant Firebase du client">
-            </div>
-            <div class="form-field">
-              <label for="vipLevel">Niveau VIP</label>
-              <select id="vipLevel">
-                <option value="none">Aucun VIP</option>
-                <option value="Bronze">Bronze</option>
-                <option value="Silver">Silver</option>
-                <option value="Gold">Gold</option>
-                <option value="Platinum">Platinum</option>
-                <option value="Diamond">Diamond</option>
-              </select>
-            </div>
-          </div>
-          <button class="goldbtn" style="margin-top:16px" onclick="saveVip()">Enregistrer le VIP</button>
-          <p id="vipMessage" class="small muted"></p>
-        </div>
-        <div class="card">
-          <h2 style="font-size:15px">Clients VIP</h2>
-          <div class="table-wrap"><table id="vipTable">
-            <thead><tr><th>UID</th><th>Nom</th><th>Niveau</th><th>Statut</th></tr></thead>
-            <tbody><tr><td colspan="4" class="empty">Charge les données depuis le backend.</td></tr></tbody>
-          </table></div>
-        </div>
-      </section>
-
-      <!-- TARIFS -->
-      <section class="page hidden" id="page-prices">
-        <div class="pagehead">
-          <div><h1>Tarifs des services API</h1><p>Prix en FC. Les modifications sont enregistrées côté serveur.</p></div>
-          <button class="ghost" onclick="loadPage('prices')">↻ Recharger</button>
-        </div>
-        <div class="card">
-          <div class="card-title"><h2>Tarifs configurables</h2><span class="badge">FC</span></div>
-          <div id="pricesForm">
-            <div class="price-row"><span>Boosting / SMM</span><input type="number" min="0" id="price-boosting" value="5000"></div>
-            <div class="price-row"><span>Chatbot IA</span><input type="number" min="0" id="price-chatbot" value="10000"></div>
-            <div class="price-row"><span>Traduction</span><input type="number" min="0" id="price-translation" value="2000"></div>
-            <div class="price-row"><span>Génération d'image</span><input type="number" min="0" id="price-image" value="5000"></div>
-            <div class="price-row"><span>Génération musicale</span><input type="number" min="0" id="price-music" value="10000"></div>
-            <div class="price-row"><span>Génération vidéo</span><input type="number" min="0" id="price-video" value="15000"></div>
-            <div class="price-row"><span>VIP Bronze</span><input type="number" min="0" id="price-vipBronze" value="10000"></div>
-            <div class="price-row"><span>VIP Silver</span><input type="number" min="0" id="price-vipSilver" value="25000"></div>
-            <div class="price-row"><span>VIP Gold</span><input type="number" min="0" id="price-vipGold" value="50000"></div>
-            <div class="price-row"><span>VIP Platinum</span><input type="number" min="0" id="price-vipPlatinum" value="100000"></div>
-            <div class="price-row"><span>VIP Diamond</span><input type="number" min="0" id="price-vipDiamond" value="200000"></div>
-          </div>
-          <button class="goldbtn" style="margin-top:18px" onclick="savePrices()">💾 Enregistrer les tarifs</button>
-          <button class="ghost" style="margin-top:18px" onclick="loadPage('prices')">Annuler / Recharger</button>
-          <p id="pricesMessage" class="small muted"></p>
-        </div>
-        <div class="card">
-          <strong class="orange">À savoir</strong>
-          <p class="muted small">Le backend doit valider les prix et enregistrer la configuration dans Firebase. Les pages client doivent ensuite lire les tarifs depuis cette configuration. Modifier uniquement cet écran ne change pas les prix utilisés par les clients.</p>
-        </div>
-      </section>
-
-      <!-- SECURITE -->
-      <section class="page hidden" id="page-security">
-        <div class="pagehead"><div><h1>Sécurité</h1><p>État de la session administrateur.</p></div></div>
-        <div class="card">
-          <div class="statusline"><span class="dot"></span>Session administrateur active</div>
-          <p class="muted small">Le mot de passe est vérifié par le serveur. Le jeton de session est conservé dans le navigateur pour éviter de demander le code à chaque changement de page.</p>
-          <button class="dangerbtn" onclick="logout()">Fermer la session</button>
-        </div>
-        <div class="card">
-          <h2 style="font-size:15px">Routes actuellement attendues</h2>
-          <p class="small muted">Connexion : POST /api/admin/login</p>
-          <p class="small muted">Session : GET /api/admin/session</p>
-          <p class="small muted">Statistiques : GET /api/admin/stats</p>
-          <p class="small muted">Les routes de gestion des clients, dépôts, retraits, VIP et tarifs doivent également être implémentées et protégées côté serveur avant leur utilisation.</p>
-        </div>
-      </section>
-    </main>
   </div>
+  <div class="top-actions">
+    <span class="statusline"><span class="dot"></span>Mode local</span>
+    <button id="refreshBtn" class="ghost" title="Actualiser">↻</button>
+    <button id="logoutBtn" class="dangerbtn">Quitter</button>
+  </div>
+</header>
+
+<div id="overlay"></div>
+
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="side-label">PRINCIPAL</div>
+  <button class="nav active" data-page="dashboard"><span class="ico">▦</span> Tableau de bord</button>
+  <button class="nav" data-page="users"><span class="ico">♙</span> Clients</button>
+  <button class="nav" data-page="commands"><span class="ico">▤</span> Commandes</button>
+
+  <div class="side-label">FINANCES</div>
+  <button class="nav" data-page="deposits"><span class="ico">＋</span> Dépôts</button>
+  <button class="nav" data-page="withdrawals"><span class="ico">↗</span> Retraits</button>
+
+  <div class="side-label">SERVICES</div>
+  <button class="nav" data-page="vip"><span class="ico">♛</span> Gestion VIP</button>
+  <button class="nav" data-page="prices"><span class="ico">◆</span> Tarifs API</button>
+
+  <div class="side-label">OUTILS</div>
+  <button class="nav" data-page="settings"><span class="ico">⚙</span> Paramètres locaux</button>
+
+  <div class="footer-note">
+    JASON BUSINESS<br>
+    Créé par Jason Aloma 🇨🇩<br>
+    Kinshasa, RDC<br>
+    <span class="gold">Version locale</span>
+  </div>
+</aside>
+
+<main class="main">
+
+<!-- DASHBOARD -->
+<section class="page" id="page-dashboard">
+  <div class="pagehead">
+    <div><h1>Tableau de bord</h1><p>Vue générale de ton espace de démonstration.</p></div>
+    <button class="primary" onclick="renderAll()">↻ Actualiser</button>
+  </div>
+
+  <div class="grid">
+    <div class="stat">
+      <div class="stat-top"><span class="muted">Clients</span><span class="stat-icon">♙</span></div>
+      <h3>Clients enregistrés</h3><strong id="statUsers">0</strong>
+    </div>
+    <div class="stat">
+      <div class="stat-top"><span class="muted">Commandes</span><span class="stat-icon">▤</span></div>
+      <h3>Total des commandes</h3><strong id="statCommands">0</strong>
+    </div>
+    <div class="stat">
+      <div class="stat-top"><span class="muted">Dépôts en attente</span><span class="stat-icon">＋</span></div>
+      <h3>À traiter</h3><strong id="statDeposits">0</strong>
+    </div>
+    <div class="stat">
+      <div class="stat-top"><span class="muted">Retraits en attente</span><span class="stat-icon">↗</span></div>
+      <h3>À vérifier</h3><strong id="statWithdrawals">0</strong>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><h2>Résumé de l'espace</h2><span class="badge">LOCAL</span></div>
+    <div class="grid" style="margin:0">
+      <div><p class="muted small">Solde total de démonstration</p><strong id="statBalance">0 FC</strong></div>
+      <div><p class="muted small">Clients VIP</p><strong id="statVip">0</strong></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><h2>Actions rapides</h2></div>
+    <div class="toolbar">
+      <button class="ghost" onclick="showPage('users')">♙ Clients</button>
+      <button class="ghost" onclick="showPage('deposits')">＋ Dépôts</button>
+      <button class="ghost" onclick="showPage('withdrawals')">↗ Retraits</button>
+      <button class="goldbtn" onclick="showPage('prices')">◆ Tarifs API</button>
+    </div>
+    <div class="note">Les modifications sont enregistrées dans le stockage local de ce navigateur. Elles ne changent aucun compte réel et ne se synchronisent pas avec d'autres appareils.</div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="page hidden" id="page-users">
+  <div class="pagehead">
+    <div><h1>Gestion des clients</h1><p>Ajouter, modifier et supprimer les données de démonstration.</p></div>
+    <button class="primary" onclick="openUserForm()">＋ Ajouter</button>
+  </div>
+
+  <div class="card hidden" id="userFormCard">
+    <div class="card-title"><h2 id="userFormTitle">Nouveau client</h2></div>
+    <form id="userForm">
+      <input id="editUserId" type="hidden">
+      <div class="form-grid">
+        <div class="form-field"><label for="userName">Nom</label><input id="userName" required placeholder="Nom du client"></div>
+        <div class="form-field"><label for="userEmail">E-mail ou téléphone</label><input id="userEmail" placeholder="Contact"></div>
+        <div class="form-field"><label for="userBalance">Solde fictif (FC)</label><input id="userBalance" type="number" min="0" value="0" required></div>
+        <div class="form-field"><label for="userVip">Niveau VIP</label>
+          <select id="userVip">
+            <option value="Aucun">Aucun</option><option>Bronze</option>
+            <option>Silver</option><option>Gold</option><option>Platinum</option><option>Diamond</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="goldbtn" type="submit">Enregistrer</button>
+        <button class="ghost" type="button" onclick="closeUserForm()">Annuler</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card">
+    <div class="toolbar">
+      <input id="userSearch" placeholder="Rechercher un client…" oninput="renderUsers()">
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Identifiant</th><th>Nom</th><th>Contact</th><th>Solde fictif</th><th>VIP</th><th>Actions</th></tr></thead>
+      <tbody id="usersBody"></tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- COMMANDES -->
+<section class="page hidden" id="page-commands">
+  <div class="pagehead">
+    <div><h1>Commandes</h1><p>Suivi fictif des commandes.</p></div>
+    <button class="primary" onclick="openRecordForm('commands')">＋ Nouvelle commande</button>
+  </div>
+  <div class="card">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Référence</th><th>Client</th><th>Service</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead>
+      <tbody id="commandsBody"></tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- DEPOTS -->
+<section class="page hidden" id="page-deposits">
+  <div class="pagehead">
+    <div><h1>Dépôts</h1><p>Demandes fictives de recharge.</p></div>
+    <button class="primary" onclick="openRecordForm('deposits')">＋ Nouveau dépôt</button>
+  </div>
+  <div class="card">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Référence</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Statut</th><th>Actions</th></tr></thead>
+      <tbody id="depositsBody"></tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- RETRAITS -->
+<section class="page hidden" id="page-withdrawals">
+  <div class="pagehead">
+    <div><h1>Retraits</h1><p>Demandes fictives de retrait.</p></div>
+    <button class="primary" onclick="openRecordForm('withdrawals')">＋ Nouveau retrait</button>
+  </div>
+  <div class="card">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Référence</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Statut</th><th>Actions</th></tr></thead>
+      <tbody id="withdrawalsBody"></tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- FORMULAIRE TRANSACTION -->
+<section class="page hidden" id="page-recordForm">
+  <div class="pagehead"><div><h1 id="recordTitle">Nouvel enregistrement</h1><p>Données fictives uniquement.</p></div></div>
+  <div class="card">
+    <form id="recordForm">
+      <input type="hidden" id="recordType">
+      <div class="form-grid">
+        <div class="form-field"><label for="recordClient">Client</label><input id="recordClient" required placeholder="Nom du client"></div>
+        <div class="form-field"><label for="recordAmount">Montant fictif (FC)</label><input id="recordAmount" type="number" min="0" required></div>
+        <div class="form-field"><label for="recordService">Service / méthode</label><input id="recordService" required placeholder="Ex. Mobile Money, Image…"></div>
+        <div class="form-field"><label for="recordStatus">Statut</label>
+          <select id="recordStatus"><option>En attente</option><option>Approuvé</option><option>Refusé</option><option>Terminé</option></select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="goldbtn" type="submit">Enregistrer localement</button>
+        <button class="ghost" type="button" onclick="showPage(recordReturnPage)">Annuler</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- VIP -->
+<section class="page hidden" id="page-vip">
+  <div class="pagehead"><div><h1>Gestion VIP</h1><p>Attribuer un niveau VIP aux clients fictifs.</p></div></div>
+  <div class="card">
+    <div class="form-grid">
+      <div class="form-field"><label for="vipClient">Client</label><select id="vipClient"></select></div>
+      <div class="form-field"><label for="vipLevel">Niveau VIP</label>
+        <select id="vipLevel">
+          <option value="Aucun">Aucun VIP</option><option>Bronze</option>
+          <option>Silver</option><option>Gold</option><option>Platinum</option><option>Diamond</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-actions"><button class="goldbtn" onclick="saveVip()">Enregistrer le VIP</button></div>
+  </div>
+  <div class="card">
+    <div class="card-title"><h2>Liste VIP</h2></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Client</th><th>Contact</th><th>Niveau</th><th>Action</th></tr></thead>
+      <tbody id="vipBody"></tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- TARIFS -->
+<section class="page hidden" id="page-prices">
+  <div class="pagehead"><div><h1>Tarifs API</h1><p>Prix modifiables pour cette démonstration locale.</p></div></div>
+  <div class="card">
+    <div class="card-title"><h2>Catalogue des services</h2><span class="badge">FC</span></div>
+    <div class="price-row"><span>Boosting / SMM</span><input type="number" min="0" id="price-boosting"></div>
+    <div class="price-row"><span>Chatbot IA</span><input type="number" min="0" id="price-chatbot"></div>
+    <div class="price-row"><span>Traduction</span><input type="number" min="0" id="price-translation"></div>
+    <div class="price-row"><span>Génération d'image</span><input type="number" min="0" id="price-image"></div>
+    <div class="price-row"><span>Génération musicale</span><input type="number" min="0" id="price-music"></div>
+    <div class="price-row"><span>Génération vidéo</span><input type="number" min="0" id="price-video"></div>
+    <div class="price-row"><span>VIP Bronze</span><input type="number" min="0" id="price-vipBronze"></div>
+    <div class="price-row"><span>VIP Silver</span><input type="number" min="0" id="price-vipSilver"></div>
+    <div class="price-row"><span>VIP Gold</span><input type="number" min="0" id="price-vipGold"></div>
+    <div class="price-row"><span>VIP Platinum</span><input type="number" min="0" id="price-vipPlatinum"></div>
+    <div class="price-row"><span>VIP Diamond</span><input type="number" min="0" id="price-vipDiamond"></div>
+    <div class="form-actions">
+      <button class="goldbtn" onclick="savePrices()">💾 Enregistrer les tarifs</button>
+      <button class="ghost" onclick="resetPrices()">Réinitialiser</button>
+    </div>
+    <p id="pricesMessage" class="small muted"></p>
+  </div>
+  <div class="note">Ces prix ne sont pas appliqués automatiquement aux pages client. Ils sont enregistrés uniquement dans le navigateur.</div>
+</section>
+
+<!-- PARAMETRES -->
+<section class="page hidden" id="page-settings">
+  <div class="pagehead"><div><h1>Paramètres locaux</h1><p>Gestion du stockage de démonstration.</p></div></div>
+  <div class="card">
+    <div class="card-title"><h2>Stockage du navigateur</h2><span class="badge">LOCAL</span></div>
+    <p class="muted small">Les clients, commandes, dépôts, retraits et tarifs de démonstration sont conservés dans le stockage local du navigateur.</p>
+    <div class="form-actions">
+      <button class="ghost" onclick="exportData()">Exporter les données JSON</button>
+      <button class="ghost" onclick="resetDemo()">Recharger les données d'exemple</button>
+      <button class="dangerbtn" onclick="clearAllData()">Effacer toutes les données</button>
+    </div>
+  </div>
+  <div class="card">
+    <h2 style="font-size:16px">Sécurité</h2>
+    <p class="muted small">La connexion locale et les données du navigateur ne constituent pas une protection pour une administration en ligne. Ne mets pas de données financières ou personnelles réelles dans cette version.</p>
+    <p class="muted small">Créé par Jason Aloma 🇨🇩</p>
+  </div>
+</section>
+
+</main>
+</div>
 </section>
 
 <div id="toast" class="hidden"></div>
@@ -496,473 +529,422 @@ td{color:#dce5f1}
 "use strict";
 
 /*
-  JASON BUSINESS — ADMINISTRATION
-  API sur le même domaine que le site.
-  Aucune clé Firebase privée dans ce fichier.
+  JASON BUSINESS — MODE LOCAL
+  AUCUN backend, AUCUN Firebase, AUCUNE API.
+  Le code de démonstration n'est pas une authentification sécurisée.
 */
 
-const TOKEN_KEY = "jasonBusinessAdminToken";
-const API = "/api";
+const LOCAL_DEMO_CODE = "10092007";
+const STORAGE_KEY = "jason_business_admin_demo_v1";
 
-const pageNames = {
-  dashboard:"Tableau de bord",
-  users:"Clients",
-  commands:"Commandes",
-  deposits:"Dépôts",
-  withdrawals:"Retraits",
-  vip:"Gestion VIP",
-  prices:"Tarifs API",
-  security:"Sécurité"
+const DEFAULT_PRICES = {
+  boosting:5000,
+  chatbot:10000,
+  translation:2000,
+  image:5000,
+  music:10000,
+  video:15000,
+  vipBronze:10000,
+  vipSilver:25000,
+  vipGold:50000,
+  vipPlatinum:100000,
+  vipDiamond:200000
 };
 
-let currentPage = "dashboard";
-let toastTimer = null;
-
-const $ = id => document.getElementById(id);
-
-function showToast(message) {
-  const toast = $("toast");
-  toast.textContent = message;
-  toast.classList.remove("hidden");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.add("hidden"), 3500);
+function seedData(){
+  return {
+    users:[
+      {id:"JB-1001",name:"Client Démo 1",contact:"client1@example.com",balance:50000,vip:"Gold"},
+      {id:"JB-1002",name:"Client Démo 2",contact:"client2@example.com",balance:25000,vip:"Bronze"},
+      {id:"JB-1003",name:"Client Démo 3",contact:"client3@example.com",balance:10000,vip:"Aucun"}
+    ],
+    commands:[
+      {id:"CMD-1001",client:"Client Démo 1",service:"Chatbot IA",amount:10000,status:"En attente"},
+      {id:"CMD-1002",client:"Client Démo 2",service:"Génération image",amount:5000,status:"Terminé"}
+    ],
+    deposits:[
+      {id:"DEP-1001",client:"Client Démo 1",amount:20000,method:"Mobile Money",status:"En attente"}
+    ],
+    withdrawals:[
+      {id:"RET-1001",client:"Client Démo 2",amount:10000,method:"Mobile Money",status:"En attente"}
+    ],
+    prices:{...DEFAULT_PRICES}
+  };
 }
 
-function getToken() {
-  return localStorage.getItem(TOKEN_KEY) || "";
-}
-
-function setToken(token) {
-  localStorage.setItem(TOKEN_KEY, token);
-}
-
-function clearToken() {
-  localStorage.removeItem(TOKEN_KEY);
-}
-
-async function apiFetch(path, options = {}) {
-  const headers = { ...(options.headers || {}) };
-  if (getToken()) headers.Authorization = "Bearer " + getToken();
-  if (options.body && !headers["Content-Type"]) {
-    headers["Content-Type"] = "application/json";
-  }
-
-  let response;
-  try {
-    response = await fetch(API + path, { ...options, headers });
-  } catch {
-    throw new Error("Serveur inaccessible. Vérifie le déploiement Vercel et ta connexion.");
-  }
-
-  const raw = await response.text();
-  let data = {};
-  try { data = raw ? JSON.parse(raw) : {}; }
-  catch { data = { error: raw || "Réponse serveur illisible." }; }
-
-  if (response.status === 401) {
-    clearToken();
-    showLogin("Ta session est expirée. Connecte-toi à nouveau.");
-    throw new Error(data.error || "Session expirée.");
-  }
-
-  if (!response.ok) {
-    throw new Error(data.error || ("Erreur HTTP " + response.status));
-  }
+function loadData(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed=JSON.parse(raw);
+      if(parsed && Array.isArray(parsed.users) &&
+         Array.isArray(parsed.commands) &&
+         Array.isArray(parsed.deposits) &&
+         Array.isArray(parsed.withdrawals) &&
+         parsed.prices){
+        return parsed;
+      }
+    }
+  }catch(e){}
+  const data=seedData();
+  saveData(data);
   return data;
 }
 
-function showLogin(error = "") {
-  $("app").classList.add("hidden");
-  $("loginScreen").classList.remove("hidden");
-  $("loginError").textContent = error;
-  $("loginError").classList.toggle("hidden", !error);
-}
+let data=loadData();
+let currentPage="dashboard";
+let recordReturnPage="commands";
+let toastTimer;
 
-function showApp() {
-  $("loginScreen").classList.add("hidden");
-  $("app").classList.remove("hidden");
-}
-
-$("loginForm").addEventListener("submit", async event => {
-  event.preventDefault();
-  const btn = $("loginBtn");
-  const password = $("adminPassword").value;
-  const error = $("loginError");
-
-  if (!password) return;
-  btn.disabled = true;
-  btn.textContent = "Vérification…";
-  error.classList.add("hidden");
-
-  try {
-    const data = await apiFetch("/admin/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password })
-    });
-
-    if (!data.token) throw new Error("Le backend n'a pas fourni de jeton.");
-    setToken(data.token);
-    $("adminPassword").value = "";
-    showApp();
-    showToast("Connexion administrateur réussie.");
-    await initializeApp();
-  } catch (e) {
-    error.textContent = e.message || "Accès refusé. Vérifie le code et le backend.";
-    error.classList.remove("hidden");
-  } finally {
-    btn.disabled = false;
-    btn.textContent = "🔓 Ouvrir l'administration";
-  }
-});
-
-async function validateSession() {
-  if (!getToken()) return false;
-  try {
-    await apiFetch("/admin/session");
+function saveData(next=data){
+  try{
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(next));
+    data=next;
     return true;
-  } catch {
-    clearToken();
+  }catch(e){
+    showToast("Impossible d'enregistrer dans ce navigateur.");
     return false;
   }
 }
 
-async function initializeApp() {
-  showApp();
-  $("connectionText").textContent = "Connecté";
-  await checkHealth();
-  showPage("dashboard");
-  await loadPage("dashboard");
+function $(id){return document.getElementById(id)}
+function fmt(value){return Number(value||0).toLocaleString("fr-FR")}
+function escapeHTML(value){
+  return String(value??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+function uid(prefix){
+  return prefix+"-"+Date.now().toString(36).toUpperCase()+"-"+Math.random().toString(36).slice(2,6).toUpperCase();
+}
+function showToast(message){
+  const el=$("toast");
+  el.textContent=message;
+  el.classList.remove("hidden");
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>el.classList.add("hidden"),3000);
 }
 
-async function checkHealth() {
-  try {
-    const result = await fetch(API + "/health");
-    if (!result.ok) throw new Error();
-    const data = await result.json();
-    $("healthMessage").textContent =
-      "Backend disponible : " + (data.service || "Jason backend");
-    $("healthMessage").className = "success";
-  } catch {
-    $("healthMessage").textContent =
-      "Le backend ne répond pas. Vérifie le déploiement et le routage Vercel.";
-    $("healthMessage").className = "danger";
+/* CONNEXION LOCALE */
+$("loginForm").addEventListener("submit",event=>{
+  event.preventDefault();
+  const password=$("adminPassword").value;
+  if(password!==LOCAL_DEMO_CODE){
+    $("loginError").textContent="Accès refusé. Vérifie le code.";
+    $("loginError").classList.remove("hidden");
+    return;
   }
-}
-
-function showPage(page) {
-  if (!pageNames[page]) return;
-  currentPage = page;
-
-  document.querySelectorAll(".page").forEach(el => el.classList.add("hidden"));
-  $("page-" + page).classList.remove("hidden");
-
-  document.querySelectorAll(".nav").forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.page === page);
-  });
-
-  closeMenu();
-}
-
-document.querySelectorAll(".nav").forEach(btn => {
-  btn.addEventListener("click", async () => {
-    showPage(btn.dataset.page);
-    await loadPage(btn.dataset.page);
-  });
+  sessionStorage.setItem("jasonBusinessDemoSession","yes");
+  $("loginError").classList.add("hidden");
+  $("loginScreen").classList.add("hidden");
+  $("app").classList.remove("hidden");
+  $("adminPassword").value="";
+  renderAll();
+  showToast("Bienvenue dans l'administration locale.");
 });
 
-async function loadPage(page) {
-  if (!getToken()) return showLogin();
-  if (page !== currentPage) showPage(page);
-
-  try {
-    if (page === "dashboard") await loadStats();
-    if (page === "users") await loadUsers();
-    if (page === "commands") await loadTableData("commands");
-    if (page === "deposits") await loadTableData("deposits");
-    if (page === "withdrawals") await loadTableData("withdrawals");
-    if (page === "vip") await loadVip();
-    if (page === "prices") await loadPrices();
-  } catch (e) {
-    const messageId = {
-      users:"usersMessage",
-      commands:"commandsMessage",
-      deposits:"depositsMessage",
-      withdrawals:"withdrawalsMessage",
-      vip:"vipMessage",
-      prices:"pricesMessage"
-    }[page];
-    if (messageId) $(messageId).textContent = e.message;
-    else showToast(e.message);
-  }
+function logout(){
+  sessionStorage.removeItem("jasonBusinessDemoSession");
+  $("app").classList.add("hidden");
+  $("loginScreen").classList.remove("hidden");
+  showToast("Session locale fermée.");
 }
+$("logoutBtn").addEventListener("click",logout);
 
-async function loadStats() {
-  const data = await apiFetch("/admin/stats");
-  $("statUsers").textContent = number(data.users);
-  $("statCommands").textContent = number(data.commands);
-  $("statDeposits").textContent =
-    data.pendingDeposits == null ? "—" : number(data.pendingDeposits);
-  $("statWithdrawals").textContent =
-    data.pendingWithdrawals == null ? "—" : number(data.pendingWithdrawals);
-}
-
-function number(value) {
-  return Number(value || 0).toLocaleString("fr-FR");
-}
-
-function safe(value) {
-  return String(value ?? "").replace(/[&<>"']/g, ch => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  }[ch]));
-}
-
-function findArray(data) {
-  if (Array.isArray(data)) return data;
-  if (Array.isArray(data.items)) return data.items;
-  if (Array.isArray(data.users)) return data.users;
-  if (Array.isArray(data.records)) return data.records;
-  return [];
-}
-
-function renderEmpty(tableId, colspan, message) {
-  const body = $(tableId).querySelector("tbody");
-  body.innerHTML = '<tr><td colspan="' + colspan +
-    '" class="empty">' + safe(message) + '</td></tr>';
-}
-
-async function loadUsers() {
-  const data = await apiFetch("/admin/users");
-  const users = findArray(data);
-  const body = $("usersTable").querySelector("tbody");
-
-  if (!users.length) {
-    renderEmpty("usersTable", 5, "Aucun client ou liste vide.");
-    $("usersMessage").textContent = "Les données proviennent du backend.";
-    return;
-  }
-
-  body.innerHTML = users.map(user => {
-    const uid = user.uid || user.id || user.key || "";
-    const name = user.name || user.displayName || user.username || user.email || "Client";
-    const balance = user.balance ?? user.solde ?? 0;
-    const vip = user.vipLevel || user.vip || "Aucun";
-    return '<tr>' +
-      '<td>' + safe(uid) + '</td>' +
-      '<td>' + safe(name) + '</td>' +
-      '<td>' + safe(number(balance)) + ' FC</td>' +
-      '<td>' + safe(vip) + '</td>' +
-      '<td><button class="ghost" onclick="prefillVip(\'' +
-        safe(uid).replace(/'/g, "\\'") + '\',\'' +
-        safe(vip).replace(/'/g, "\\'") + '\')">Gérer VIP</button></td>' +
-      '</tr>';
-  }).join("");
-  $("usersMessage").textContent = users.length + " client(s).";
-}
-
-function prefillVip(uid, level) {
-  $("vipUid").value = uid;
-  const options = [...$("vipLevel").options];
-  const found = options.find(o => o.value.toLowerCase() === String(level).toLowerCase());
-  $("vipLevel").value = found ? found.value : "none";
-  showPage("vip");
-  loadPage("vip").catch(() => {});
-}
-
-async function loadTableData(kind) {
-  const routes = {
-    commands:"/admin/commands",
-    deposits:"/admin/deposits",
-    withdrawals:"/admin/withdrawals"
-  };
-  const tableIds = {
-    commands:"commandsTable",
-    deposits:"depositsTable",
-    withdrawals:"withdrawalsTable"
-  };
-  const messageIds = {
-    commands:"commandsMessage",
-    deposits:"depositsMessage",
-    withdrawals:"withdrawalsMessage"
-  };
-  const cols = {
-    commands:6,deposits:6,withdrawals:6
-  };
-
-  const data = await apiFetch(routes[kind]);
-  const rows = findArray(data);
-  const body = $(tableIds[kind]).querySelector("tbody");
-
-  if (!rows.length) {
-    renderEmpty(tableIds[kind], cols[kind], "Aucune donnée disponible.");
-    $(messageIds[kind]).textContent = "";
-    return;
-  }
-
-  body.innerHTML = rows.map(item => {
-    const id = item.id || item.uid || item.key || item.reference || "";
-    const owner = item.userName || item.name || item.email || item.uid || "—";
-    const service = item.service || item.type || item.method || "—";
-    const amount = number(item.amount ?? item.montant ?? 0);
-    const status = item.status || item.statut || "En attente";
-    const kindLabel = kind === "commands" ? safe(service) : safe(item.method || item.network || "—");
-    const action = kind === "commands"
-      ? '<button class="ghost" onclick="updateRecord(\'commands\',\'' + safe(id) + '\',\'completed\')">Terminer</button>'
-      : '<button class="goldbtn" onclick="updateRecord(\'' + kind + '\',\'' + safe(id) + '\',\'approved\')">Approuver</button> ' +
-        '<button class="dangerbtn" onclick="updateRecord(\'' + kind + '\',\'' + safe(id) + '\',\'rejected\')">Refuser</button>';
-
-    return '<tr>' +
-      '<td>' + safe(id) + '</td>' +
-      '<td>' + safe(owner) + '</td>' +
-      '<td>' + kindLabel + '</td>' +
-      '<td>' + amount + ' FC</td>' +
-      '<td>' + safe(status) + '</td>' +
-      '<td>' + action + '</td>' +
-      '</tr>';
-  }).join("");
-
-  $(messageIds[kind]).textContent = rows.length + " élément(s).";
-}
-
-async function updateRecord(kind, id, status) {
-  if (!id) return showToast("Identifiant manquant.");
-  const question = status === "rejected" ? "Refuser cette demande ?" :
-    status === "approved" ? "Approuver cette demande ?" :
-    "Marquer cette commande comme terminée ?";
-  if (!confirm(question)) return;
-
-  try {
-    await apiFetch("/admin/" + kind + "/" + encodeURIComponent(id) + "/status", {
-      method:"PATCH",
-      body:JSON.stringify({ status })
-    });
-    showToast("Statut mis à jour.");
-    await loadPage(kind);
-    await loadStats();
-  } catch (e) {
-    showToast(e.message);
-  }
-}
-
-async function loadVip() {
-  const data = await apiFetch("/admin/vip");
-  const rows = findArray(data);
-  const body = $("vipTable").querySelector("tbody");
-
-  if (!rows.length) {
-    renderEmpty("vipTable", 4, "Aucun client VIP ou liste vide.");
-    return;
-  }
-
-  body.innerHTML = rows.map(user =>
-    '<tr><td>' + safe(user.uid || user.id || "") + '</td>' +
-    '<td>' + safe(user.name || user.email || "Client") + '</td>' +
-    '<td>' + safe(user.vipLevel || user.level || "—") + '</td>' +
-    '<td>' + safe(user.vipStatus || user.status || "—") + '</td></tr>'
-  ).join("");
-}
-
-async function saveVip() {
-  const uid = $("vipUid").value.trim();
-  const level = $("vipLevel").value;
-  if (!uid) return showToast("Saisis l'UID du client.");
-
-  const message = $("vipMessage");
-  try {
-    await apiFetch("/admin/vip/" + encodeURIComponent(uid), {
-      method:"PATCH",
-      body:JSON.stringify({ level })
-    });
-    message.textContent = "Niveau VIP enregistré.";
-    message.className = "success small";
-    showToast("VIP mis à jour.");
-    await loadVip();
-  } catch (e) {
-    message.textContent = e.message;
-    message.className = "danger small";
-  }
-}
-
-const priceKeys = [
-  "boosting","chatbot","translation","image","music","video",
-  "vipBronze","vipSilver","vipGold","vipPlatinum","vipDiamond"
-];
-
-async function loadPrices() {
-  const data = await apiFetch("/admin/prices");
-  const prices = data.prices || data;
-  for (const key of priceKeys) {
-    const input = $("price-" + key);
-    if (input && prices[key] != null) input.value = prices[key];
-  }
-  $("pricesMessage").textContent = "Tarifs chargés depuis le backend.";
-  $("pricesMessage").className = "success small";
-}
-
-async function savePrices() {
-  const prices = {};
-  for (const key of priceKeys) {
-    const input = $("price-" + key);
-    const value = Number(input.value);
-    if (!Number.isFinite(value) || value < 0) {
-      return showToast("Vérifie le prix : valeur invalide.");
-    }
-    prices[key] = value;
-  }
-
-  const message = $("pricesMessage");
-  try {
-    await apiFetch("/admin/prices", {
-      method:"PUT",
-      body:JSON.stringify({ prices })
-    });
-    message.textContent = "Tarifs enregistrés côté serveur.";
-    message.className = "success small";
-    showToast("Tarifs enregistrés.");
-  } catch (e) {
-    message.textContent = e.message;
-    message.className = "danger small";
-  }
-}
-
-function filterTable(tableId, query) {
-  const q = query.toLowerCase().trim();
-  $(tableId).querySelectorAll("tbody tr").forEach(row => {
-    row.style.display = row.textContent.toLowerCase().includes(q) ? "" : "none";
+/* NAVIGATION */
+function showPage(page){
+  if(page==="recordForm") return;
+  currentPage=page;
+  document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));
+  const target=$("page-"+page);
+  if(target)target.classList.remove("hidden");
+  document.querySelectorAll(".nav").forEach(b=>{
+    b.classList.toggle("active",b.dataset.page===page);
   });
+  closeMenu();
+  if(page==="dashboard")renderDashboard();
+  if(page==="users")renderUsers();
+  if(page==="commands")renderRecords("commands");
+  if(page==="deposits")renderRecords("deposits");
+  if(page==="withdrawals")renderRecords("withdrawals");
+  if(page==="vip")renderVip();
+  if(page==="prices")loadPricesIntoForm();
 }
+document.querySelectorAll(".nav").forEach(button=>{
+  button.addEventListener("click",()=>showPage(button.dataset.page));
+});
 
-function closeMenu() {
-  $("sidebar").classList.remove("open");
-  $("overlay").classList.remove("show");
-}
-$("menuBtn").addEventListener("click", () => {
+$("menuBtn").addEventListener("click",()=>{
   $("sidebar").classList.toggle("open");
   $("overlay").classList.toggle("show");
 });
-$("overlay").addEventListener("click", closeMenu);
-
-function logout() {
-  clearToken();
-  showLogin();
-  showToast("Session fermée.");
+$("overlay").addEventListener("click",closeMenu);
+function closeMenu(){
+  $("sidebar").classList.remove("open");
+  $("overlay").classList.remove("show");
 }
-$("logoutBtn").addEventListener("click", logout);
-
-$("refreshBtn").addEventListener("click", async () => {
-  await checkHealth();
-  await loadPage(currentPage);
-  showToast("Actualisation terminée.");
+$("refreshBtn").addEventListener("click",()=>{
+  renderAll();
+  showToast("Données locales actualisées.");
 });
 
-(async function boot() {
-  if (await validateSession()) {
-    showApp();
-    await initializeApp();
-  } else {
-    showLogin();
+function renderAll(){
+  renderDashboard();
+  renderUsers();
+  renderRecords("commands");
+  renderRecords("deposits");
+  renderRecords("withdrawals");
+  renderVip();
+  loadPricesIntoForm();
+}
+
+function renderDashboard(){
+  $("statUsers").textContent=fmt(data.users.length);
+  $("statCommands").textContent=fmt(data.commands.length);
+  $("statDeposits").textContent=fmt(data.deposits.filter(x=>x.status==="En attente").length);
+  $("statWithdrawals").textContent=fmt(data.withdrawals.filter(x=>x.status==="En attente").length);
+  $("statBalance").textContent=fmt(data.users.reduce((s,u)=>s+Number(u.balance||0),0))+" FC";
+  $("statVip").textContent=fmt(data.users.filter(u=>u.vip&&u.vip!=="Aucun").length);
+}
+
+/* CLIENTS */
+function openUserForm(user=null){
+  $("userFormCard").classList.remove("hidden");
+  $("userFormTitle").textContent=user?"Modifier le client":"Nouveau client";
+  $("editUserId").value=user?user.id:"";
+  $("userName").value=user?user.name:"";
+  $("userEmail").value=user?user.contact:"";
+  $("userBalance").value=user?user.balance:0;
+  $("userVip").value=user?user.vip:"Aucun";
+  $("userFormCard").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function closeUserForm(){$("userFormCard").classList.add("hidden")}
+$("userForm").addEventListener("submit",event=>{
+  event.preventDefault();
+  const id=$("editUserId").value;
+  const user={
+    id:id||uid("JB"),
+    name:$("userName").value.trim(),
+    contact:$("userEmail").value.trim(),
+    balance:Number($("userBalance").value),
+    vip:$("userVip").value
+  };
+  if(!user.name||!Number.isFinite(user.balance)||user.balance<0){
+    return showToast("Vérifie les informations saisies.");
   }
-})();
+  if(id){
+    const index=data.users.findIndex(u=>u.id===id);
+    if(index>=0)data.users[index]=user;
+  }else data.users.unshift(user);
+  saveData();
+  closeUserForm();
+  renderAll();
+  showToast("Client enregistré localement.");
+});
+
+function renderUsers(){
+  const q=($("userSearch")?.value||"").toLowerCase().trim();
+  const users=data.users.filter(u=>
+    [u.id,u.name,u.contact,u.vip].join(" ").toLowerCase().includes(q)
+  );
+  $("usersBody").innerHTML=users.length?users.map(u=>`
+    <tr>
+      <td>${escapeHTML(u.id)}</td>
+      <td>${escapeHTML(u.name)}</td>
+      <td>${escapeHTML(u.contact||"—")}</td>
+      <td>${fmt(u.balance)} FC</td>
+      <td><span class="badge">${escapeHTML(u.vip||"Aucun")}</span></td>
+      <td>
+        <button class="ghost" onclick="editUser('${u.id}')">Modifier</button>
+        <button class="dangerbtn" onclick="deleteUser('${u.id}')">Supprimer</button>
+      </td>
+    </tr>`).join(""):'<tr><td colspan="6" class="empty">Aucun client.</td></tr>';
+  updateVipSelector();
+}
+function editUser(id){
+  const user=data.users.find(u=>u.id===id);
+  if(user)openUserForm(user);
+}
+function deleteUser(id){
+  const user=data.users.find(u=>u.id===id);
+  if(!user)return;
+  if(!confirm("Supprimer le client de démonstration "+user.name+" ?"))return;
+  data.users=data.users.filter(u=>u.id!==id);
+  saveData();
+  renderAll();
+  showToast("Client supprimé localement.");
+}
+
+/* COMMANDES, DEPOTS, RETRAITS */
+function openRecordForm(type){
+  recordReturnPage=currentPage;
+  $("recordType").value=type;
+  $("recordTitle").textContent=type==="commands"?"Nouvelle commande":type==="deposits"?"Nouveau dépôt":"Nouveau retrait";
+  $("recordForm").reset();
+  $("recordStatus").value="En attente";
+  document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));
+  $("page-recordForm").classList.remove("hidden");
+  closeMenu();
+}
+$("recordForm").addEventListener("submit",event=>{
+  event.preventDefault();
+  const type=$("recordType").value;
+  if(!["commands","deposits","withdrawals"].includes(type))return;
+  const amount=Number($("recordAmount").value);
+  if(!Number.isFinite(amount)||amount<0)return showToast("Montant invalide.");
+  const item={
+    id:uid(type==="commands"?"CMD":type==="deposits"?"DEP":"RET"),
+    client:$("recordClient").value.trim(),
+    amount,
+    status:$("recordStatus").value
+  };
+  if(type==="commands")item.service=$("recordService").value.trim();
+  else item.method=$("recordService").value.trim();
+  data[type].unshift(item);
+  saveData();
+  showPage(type);
+  renderAll();
+  showToast("Enregistrement local créé.");
+});
+
+function renderRecords(type){
+  const body=$(type+"Body");
+  const rows=data[type]||[];
+  if(!rows.length){
+    body.innerHTML='<tr><td colspan="6" class="empty">Aucun enregistrement.</td></tr>';
+    return;
+  }
+  body.innerHTML=rows.map(item=>{
+    const service=type==="commands"?item.service:item.method;
+    return `<tr>
+      <td>${escapeHTML(item.id)}</td>
+      <td>${escapeHTML(item.client)}</td>
+      <td>${escapeHTML(service||"—")}</td>
+      <td>${fmt(item.amount)} FC</td>
+      <td><span class="badge">${escapeHTML(item.status)}</span></td>
+      <td>
+        <button class="goldbtn" onclick="setRecordStatus('${type}','${item.id}','Approuvé')">Approuver</button>
+        <button class="ghost" onclick="setRecordStatus('${type}','${item.id}','Terminé')">Terminer</button>
+        <button class="dangerbtn" onclick="deleteRecord('${type}','${item.id}')">Supprimer</button>
+      </td>
+    </tr>`;
+  }).join("");
+}
+function setRecordStatus(type,id,status){
+  const item=data[type].find(x=>x.id===id);
+  if(!item)return;
+  item.status=status;
+  saveData();
+  renderAll();
+  showToast("Statut de démonstration mis à jour.");
+}
+function deleteRecord(type,id){
+  if(!confirm("Supprimer cet enregistrement local ?"))return;
+  data[type]=data[type].filter(x=>x.id!==id);
+  saveData();
+  renderAll();
+  showToast("Enregistrement supprimé.");
+}
+
+/* VIP */
+function updateVipSelector(){
+  const select=$("vipClient");
+  if(!select)return;
+  const previous=select.value;
+  select.innerHTML=data.users.length?data.users.map(u=>
+    `<option value="${escapeHTML(u.id)}">${escapeHTML(u.name)} — ${escapeHTML(u.id)}</option>`
+  ).join(""):'<option value="">Aucun client</option>';
+  if(data.users.some(u=>u.id===previous))select.value=previous;
+}
+function renderVip(){
+  updateVipSelector();
+  const vipUsers=data.users.filter(u=>u.vip&&u.vip!=="Aucun");
+  $("vipBody").innerHTML=vipUsers.length?vipUsers.map(u=>`
+    <tr>
+      <td>${escapeHTML(u.name)}</td>
+      <td>${escapeHTML(u.contact||"—")}</td>
+      <td><span class="badge">${escapeHTML(u.vip)}</span></td>
+      <td><button class="ghost" onclick="chooseVip('${u.id}')">Modifier</button></td>
+    </tr>`).join(""):'<tr><td colspan="4" class="empty">Aucun client VIP.</td></tr>';
+}
+function chooseVip(id){
+  $("vipClient").value=id;
+  const user=data.users.find(u=>u.id===id);
+  if(user)$("vipLevel").value=user.vip||"Aucun";
+}
+function saveVip(){
+  const id=$("vipClient").value;
+  const user=data.users.find(u=>u.id===id);
+  if(!user)return showToast("Ajoute d'abord un client.");
+  user.vip=$("vipLevel").value;
+  saveData();
+  renderAll();
+  showToast("VIP modifié localement.");
+}
+
+/* TARIFS */
+function loadPricesIntoForm(){
+  Object.keys(DEFAULT_PRICES).forEach(key=>{
+    const input=$("price-"+key);
+    if(input)input.value=data.prices[key]??DEFAULT_PRICES[key];
+  });
+}
+function savePrices(){
+  const prices={};
+  for(const key of Object.keys(DEFAULT_PRICES)){
+    const value=Number($("price-"+key).value);
+    if(!Number.isFinite(value)||value<0){
+      return showToast("Vérifie le prix de "+key+".");
+    }
+    prices[key]=value;
+  }
+  data.prices=prices;
+  saveData();
+  $("pricesMessage").textContent="Tarifs enregistrés dans le navigateur.";
+  $("pricesMessage").className="success small";
+  showToast("Tarifs locaux enregistrés.");
+}
+function resetPrices(){
+  if(!confirm("Restaurer les prix de démonstration ?"))return;
+  data.prices={...DEFAULT_PRICES};
+  saveData();
+  loadPricesIntoForm();
+  showToast("Prix par défaut restaurés.");
+}
+
+/* EXPORT ET REINITIALISATION */
+function exportData(){
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement("a");
+  link.href=url;
+  link.download="jason-business-demo.json";
+  link.click();
+  URL.revokeObjectURL(url);
+  showToast("Export préparé.");
+}
+function resetDemo(){
+  if(!confirm("Remplacer les données locales par les exemples ?"))return;
+  data=seedData();
+  saveData();
+  renderAll();
+  showPage("dashboard");
+  showToast("Données d'exemple restaurées.");
+}
+function clearAllData(){
+  if(!confirm("Effacer tous les clients, commandes, dépôts, retraits et tarifs locaux ?"))return;
+  data={users:[],commands:[],deposits:[],withdrawals:[],prices:{...DEFAULT_PRICES}};
+  saveData();
+  renderAll();
+  showToast("Données locales effacées.");
+}
+
+/* DEMARRAGE */
+if(sessionStorage.getItem("jasonBusinessDemoSession")==="yes"){
+  $("loginScreen").classList.add("hidden");
+  $("app").classList.remove("hidden");
+}
+renderAll();
 </script>
 </body>
 </html>
