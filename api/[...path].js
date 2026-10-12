@@ -1,2 +1,3 @@
 // Fonction serverless Vercel : routes /api/*
-module.exports = require("../backend/app");
+const app = require("../backend/app");
+module.exports = (req, res) => app(req, res);
