@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050a14">
+<title>JASON BUSINESS — VIP</title>
+
+<style>
+:root{
+ --bg:#050a14;
+ --panel:#0a1627;
+ --blue:#00d2ff;
+ --gold:#ffd700;
+ --green:#00e676;
+ --muted:#91a4ba;
+ --border:#1b354d;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+ margin:0;background:var(--bg);color:#f4f8ff;
+ font-family:Arial,Helvetica,sans-serif;padding-bottom:90px;
+}
+button,a{font:inherit;cursor:pointer}
+a{text-decoration:none;color:inherit}
+button{transition:.2s}
+button:active{transform:scale(.98)}
+.header{
+ position:sticky;top:0;z-index:20;padding:16px;
+ background:rgba(5,10,20,.97);
+ border-bottom:1px solid #16405a;
+ backdrop-filter:blur(16px);
+}
+.header-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{font-size:18px;font-weight:900;letter-spacing:1px;color:var(--blue)}
+.online{font-size:9px;color:var(--green)}
+.subbrand{margin-top:7px;color:var(--muted);font-size:10px}
+.container{max-width:850px;margin:auto;padding:15px}
+.hero{
+ padding:22px;border-radius:22px;
+ background:linear-gradient(135deg,#172c40,#07111f 75%);
+ border:1px solid #24445a;box-shadow:0 12px 35px #0005;
+}
+.hero-label{
+ display:inline-block;padding:6px 10px;border-radius:20px;
+ color:var(--gold);background:#302817;border:1px solid #655025;
+ font-size:9px;font-weight:bold;margin-bottom:12px;
+}
+.hero h1{font-size:25px;margin:0 0 10px}
+.hero p{font-size:12px;color:#b2c3d5;line-height:1.8;margin:0}
+.balance{
+ margin-top:17px;padding:15px;border-radius:15px;
+ background:#06101d;border:1px solid #19364c;
+ display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.balance small{display:block;font-size:10px;color:var(--muted);margin-bottom:6px}
+.balance strong{font-size:21px;color:var(--blue)}
+.btn{
+ border:0;border-radius:10px;padding:12px 14px;
+ font-size:11px;font-weight:900;
+ display:inline-flex;align-items:center;justify-content:center;gap:6px;
+}
+.btn-blue{background:linear-gradient(135deg,#00d2ff,#008cff);color:#001018}
+.btn-dark{background:#11253a;color:#d7e7f8;border:1px solid #27435b}
+.btn-gold{background:linear-gradient(135deg,#ffe57b,#d6a526);color:#231700}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.section-head{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:10px;margin:25px 0 13px;
+}
+.section-head h2{font-size:16px;margin:0}
+.section-head small{font-size:10px;color:var(--muted)}
+.current-vip{
+ margin-top:15px;padding:17px;border-radius:16px;
+ border:1px solid #1b354d;background:#0a1627;
+ display:flex;align-items:center;gap:13px;
+}
+.current-icon{
+ width:54px;height:54px;border-radius:16px;
+ display:grid;place-items:center;font-size:27px;
+ background:#112238;flex-shrink:0;
+}
+.current-vip strong{font-size:14px}
+.current-vip p{font-size:10px;color:var(--muted);margin:6px 0 0;line-height:1.6}
+.vip-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.vip-card{
+ position:relative;overflow:hidden;padding:16px 13px;border-radius:18px;
+ background:linear-gradient(150deg,#0d1c30,#08111e);
+ border:1px solid #20364c;display:flex;flex-direction:column;gap:11px;
+}
+.vip-card::before{
+ content:"";position:absolute;top:-42px;right:-42px;
+ width:90px;height:90px;border-radius:50%;
+ background:var(--glow,#00d2ff);opacity:.08;filter:blur(12px);
+}
+.vip-icon{
+ width:49px;height:49px;border-radius:15px;
+ display:grid;place-items:center;font-size:26px;
+ background:var(--iconbg,#102238);border:1px solid var(--color,#28475c);
+}
+.vip-name{font-size:15px;font-weight:900;color:var(--color,#00d2ff)}
+.vip-desc{font-size:10px;color:var(--muted);line-height:1.7;min-height:44px}
+.vip-price{font-size:19px;font-weight:900;color:#fff}
+.vip-price small{font-size:9px;font-weight:normal;color:var(--muted)}
+.vip-benefits{padding:0;margin:0;list-style:none;flex:1}
+.vip-benefits li{font-size:10px;color:#c0cfdf;margin:8px 0;line-height:1.5}
+.vip-benefits li::before{content:"✓ ";color:var(--green);font-weight:bold}
+.vip-button{width:100%;margin-top:4px}
+.bronze{--color:#d9a074;--iconbg:#302016;--glow:#d9a074}
+.argent{--color:#c8d4e2;--iconbg:#202a37;--glow:#c8d4e2}
+.or{--color:#ffd700;--iconbg:#302813;--glow:#ffd700}
+.diamant{--color:#8de8ff;--iconbg:#092c3d;--glow:#8de8ff}
+.mega{--color:#d7a5ff;--iconbg:#281638;--glow:#d7a5ff}
+.badge{
+ display:inline-block;padding:5px 8px;border-radius:20px;
+ font-size:9px;background:#18283b;color:var(--muted);
+ white-space:nowrap;
+}
+.badge.active{background:#092d21;color:#91ffd0}
+.badge.pending{background:#302714;color:#ffe18b}
+.badge.rejected{background:#35181e;color:#ffb2b8}
+.notice{
+ padding:14px;margin-top:15px;border-radius:13px;
+ border:1px solid #35432e;background:#141c1c;
+ color:#bac9d8;font-size:10px;line-height:1.9;
+}
+.notice strong{color:var(--gold)}
+.message{
+ display:none;padding:12px;border-radius:10px;
+ margin:12px 0;font-size:11px;line-height:1.7;
+}
+.message.show{display:block}
+.message.error{background:#30151b;color:#ffb0b5}
+.message.success{background:#08271e;color:#a5ffd2}
+.message.info{background:#08243a;color:#9fe8ff}
+.item{
+ padding:13px;margin-bottom:9px;border-radius:12px;
+ border:1px solid var(--border);background:var(--panel);
+ display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
+}
+.item-name{font-size:12px;font-weight:bold}
+.item-meta{font-size:10px;color:var(--muted);line-height:1.8;margin-top:5px}
+.empty{text-align:center;padding:20px;color:var(--muted);font-size:11px}
+.modal{
+ display:none;position:fixed;inset:0;z-index:70;
+ padding:15px;background:#000c;align-items:center;justify-content:center;
+}
+.modal.show{display:flex}
+.modal-box{
+ width:100%;max-width:420px;max-height:88vh;overflow:auto;
+ padding:20px;border-radius:20px;background:#091626;border:1px solid #244861;
+}
+.modal-top{display:flex;align-items:center;gap:10px}
+.modal-top h2{font-size:18px;margin:0}
+.modal-top p{font-size:10px;color:var(--muted);line-height:1.7}
+.close{
+ margin-left:auto;background:#15263a;color:white;
+ border:1px solid #30445a;border-radius:9px;padding:8px 11px;
+}
+.summary{
+ padding:14px;border-radius:12px;background:#06101d;
+ border:1px solid #1b354d;margin:15px 0;
+}
+.summary-row{display:flex;justify-content:space-between;gap:10px;margin:9px 0;font-size:11px}
+.summary-row span{color:var(--muted)}
+.summary-row strong{color:#fff}
+.field-label{display:block;font-size:11px;color:#c5d4e4;margin:14px 0 7px}
+.field{
+ width:100%;padding:12px;border-radius:10px;
+ background:#06101d;color:white;border:1px solid #29435a;outline:none;
+}
+.field:focus{border-color:var(--blue)}
+.modal-actions{display:flex;gap:9px;margin-top:15px}
+.modal-actions button{flex:1}
+.bottom-nav{
+ position:fixed;bottom:0;left:0;right:0;z-index:30;
+ display:flex;justify-content:space-around;gap:2px;
+ background:#07111f;border-top:1px solid #1c354c;
+ padding:10px 3px calc(10px + env(safe-area-inset-bottom));
+}
+.nav-link{
+ flex:1;text-align:center;color:#8da2b9;font-size:9px;padding:4px 0;
+}
+.nav-link span{display:block;font-size:18px;margin-bottom:5px}
+.nav-link.active{color:var(--blue)}
+@media(min-width:600px){.vip-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:350px){
+ .vip-grid{grid-template-columns:1fr}
+ .hero h1{font-size:22px}
+ .balance strong{font-size:17px}
+}
+</style>
+</head>
+
+<body>
+<header class="header">
+ <div class="header-row">
+  <div>
+   <div class="brand">JASON BUSINESS</div>
+   <div class="subbrand">Espace VIP • Jason Aloma 🇨🇩</div>
+  </div>
+  <div class="online">● EN LIGNE</div>
+ </div>
+</header>
+
+<main class="container">
+ <section class="hero">
+  <div class="hero-label">✦ PROGRAMME PRIVILÈGE</div>
+  <h1>Choisis ton niveau VIP</h1>
+  <p>
+   Active un niveau pour profiter de réductions sur les services
+   éligibles de JASON BUSINESS. Chaque abonnement dure 30 jours.
+  </p>
+
+  <div class="balance">
+   <div>
+    <small>Mon solde disponible</small>
+    <strong id="balance">— FC</strong>
+   </div>
+   <a class="btn btn-dark" href="recharge.html">＋ Recharger</a>
+  </div>
+ </section>
+
+ <div id="message" class="message"></div>
+
+ <section class="current-vip">
+  <div class="current-icon" id="currentIcon">👑</div>
+  <div style="flex:1">
+   <strong id="currentName">Mon niveau VIP</strong>
+   <p id="currentInfo">Chargement de votre abonnement...</p>
+  </div>
+  <span class="badge" id="currentStatus">En attente</span>
+ </section>
+
+ <div class="section-head">
+  <h2>Les abonnements VIP</h2>
+  <small>Validité : 30 jours</small>
+ </div>
+
+ <section class="vip-grid" id="vipGrid">
+  <div class="empty">Chargement des offres VIP...</div>
+ </section>
+
+ <section class="notice">
+  <strong>À savoir</strong><br>
+  • Les prix sont affichés en francs congolais (FC).<br>
+  • L'abonnement dure 30 jours à partir de son activation effective.<br>
+  • La réduction s'applique aux achats de services éligibles, et non
+  directement au solde du compte.<br>
+  • Une demande en attente ne signifie pas que le VIP est déjà actif.
+  L'activation et le débit doivent être confirmés par le serveur.
+ </section>
+
+ <div class="section-head">
+  <h2>Mes demandes VIP</h2>
+  <small>Historique</small>
+ </div>
+ <div id="requestList"><div class="empty">Aucune demande chargée.</div></div>
+</main>
+
+<nav class="bottom-nav">
+ <a class="nav-link" href="dashboard.html"><span>⌂</span>Accueil</a>
+ <a class="nav-link" href="shop.html"><span>▦</span>Boutique</a>
+ <a class="nav-link active" href="vip.html"><span>♛</span>VIP</a>
+ <a class="nav-link" href="equipe.html"><span>♧</span>Équipe</a>
+ <a class="nav-link" href="profil.html"><span>◎</span>Profil</a>
+</nav>
+
+<div class="modal" id="activationModal">
+ <div class="modal-box">
+  <div class="modal-top">
+   <div>
+    <h2 id="modalTitle">Activer un VIP</h2>
+    <p>Vérifie les détails avant de continuer.</p>
+   </div>
+   <button class="close" id="closeModal" type="button">✕</button>
+  </div>
+
+  <div class="summary">
+   <div class="summary-row"><span>Niveau choisi</span><strong id="sumName">—</strong></div>
+   <div class="summary-row"><span>Prix d'activation</span><strong id="sumPrice">—</strong></div>
+   <div class="summary-row"><span>Réduction sur services éligibles</span><strong id="sumDiscount">—</strong></div>
+   <div class="summary-row"><span>Durée</span><strong>30 jours</strong></div>
+  </div>
+
+  <label class="field-label" for="phone">Numéro du compte</label>
+  <input class="field" id="phone" type="tel" placeholder="Numéro utilisé sur JASON BUSINESS" autocomplete="tel">
+
+  <div id="modalMessage" class="message"></div>
+
+  <div class="modal-actions">
+   <button class="btn btn-dark" id="cancelBtn" type="button">Annuler</button>
+   <button class="btn btn-blue" id="confirmBtn" type="button">Envoyer la demande</button>
+  </div>
+  <p style="font-size:10px;color:#91a4ba;line-height:1.8;margin-top:13px">
+   La demande sera envoyée à l'administration. Aucun débit n'est effectué
+   par cette page non sécurisée.
+  </p>
+ </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+"use strict";
+
+/* CONFIGURATION FIREBASE */
+const firebaseConfig = {
+ apiKey: "AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
+ authDomain: "starlink-investit.firebaseapp.com",
+ databaseURL: "https://starlink-investit-default-rtdb.firebaseio.com",
+ projectId: "starlink-investit",
+ storageBucket: "starlink-investit.firebasestorage.app",
+ messagingSenderId: "807081599583",
+ appId: "1:807081599583:web:e00ec3959bc4acdae031ea"
+};
+
+/*
+ * Les chemins de données ci-dessous doivent correspondre
+ * aux chemins déjà utilisés par ton projet JASON BUSINESS.
+ */
+const ROOT = "jasonBusiness";
+const DEFAULT_PLANS = [
+ {
+  id:"bronze",name:"Bronze",icon:"🥉",price:5000,discount:5,
+  desc:"Pour commencer à profiter des avantages VIP.",
+  benefits:["5 % de réduction sur les services éligibles","VIP valable 30 jours"]
+ },
+ {
+  id:"argent",name:"Argent",icon:"🥈",price:10000,discount:10,
+  desc:"Un niveau supérieur pour tes achats.",
+  benefits:["10 % de réduction sur les services éligibles","VIP valable 30 jours"]
+ },
+ {
+  id:"or",name:"Or",icon:"🥇",price:20000,discount:15,
+  desc:"Plus d'avantages pour les membres réguliers.",
+  benefits:["15 % de réduction sur les services éligibles","VIP valable 30 jours"]
+ },
+ {
+  id:"diamant",name:"Diamant",icon:"💎",price:50000,discount:20,
+  desc:"Des privilèges pour les utilisateurs premium.",
+  benefits:["20 % de réduction sur les services éligibles","VIP valable 30 jours"]
+ },
+ {
+  id:"mega",name:"Méga VIP",icon:"👑",price:100000,discount:30,
+  desc:"Le niveau VIP le plus élevé.",
+  benefits:["30 % de réduction sur les services éligibles","VIP valable 30 jours"]
+ }
+];
+
+let db = null;
+let currentPhone = "";
+let currentBalance = 0;
+let selectedPlan = null;
+let plans = DEFAULT_PLANS.map(p => ({...p}));
+let userListener = null;
+let vipListener = null;
+let requestsListener = null;
+
+const $ = id => document.getElementById(id);
+const formatFC = value =>
+ Number(value || 0).toLocaleString("fr-FR") + " FC";
+
+function safeKey(value){
+ // Firebase Realtime Database interdit . # $ [ ] et /
+ return String(value).replace(/[.#$[\]/]/g,"_");
+}
+
+function showMessage(text,type="info",target="message"){
+ const box = $(target);
+ box.className = "message show " + type;
+ box.textContent = text;
+}
+
+function hideMessage(target="message"){
+ const box = $(target);
+ box.className = "message";
+ box.textContent = "";
+}
+
+function getStoredPhone(){
+ return localStorage.getItem("jasonBusinessUserPhone")
+  || localStorage.getItem("userPhone")
+  || "";
+}
+
+function renderPlans(){
+ const grid = $("vipGrid");
+ grid.innerHTML = "";
+
+ plans.forEach(plan => {
+  const cssClass = plan.id === "bronze" ? "bronze"
+   : plan.id === "argent" ? "argent"
+   : plan.id === "or" ? "or"
+   : plan.id === "diamant" ? "diamant" : "mega";
+
+  const card = document.createElement("article");
+  card.className = "vip-card " + cssClass;
+
+  const icon = document.createElement("div");
+  icon.className = "vip-icon";
+  icon.textContent = plan.icon;
+
+  const name = document.createElement("div");
+  name.className = "vip-name";
+  name.textContent = "VIP " + plan.name;
+
+  const desc = document.createElement("div");
+  desc.className = "vip-desc";
+  desc.textContent = plan.desc;
+
+  const price = document.createElement("div");
+  price.className = "vip-price";
+  price.textContent = formatFC(plan.price);
+
+  const priceSmall = document.createElement("small");
+  priceSmall.textContent = " / 30 jours";
+  price.appendChild(priceSmall);
+
+  const discount = document.createElement("div");
+  discount.className = "badge";
+  discount.textContent = plan.discount + " % de réduction";
+
+  const benefits = document.createElement("ul");
+  benefits.className = "vip-benefits";
+  plan.benefits.forEach(text => {
+   const li = document.createElement("li");
+   li.textContent = text;
+   benefits.appendChild(li);
+  });
+
+  const button = document.createElement("button");
+  button.className = "btn vip-button " +
+   (plan.id === "or" || plan.id === "mega" ? "btn-gold" : "btn-blue");
+  button.type = "button";
+  button.textContent = "Activer →";
+  button.addEventListener("click",() => openActivation(plan));
+
+  card.append(icon,name,desc,price,discount,benefits,button);
+  grid.appendChild(card);
+ });
+}
+
+function openActivation(plan){
+ if(!currentPhone){
+  showMessage("Connecte-toi à ton compte JASON BUSINESS avant de demander un VIP.","error");
+  return;
+ }
+ selectedPlan = plan;
+ $("modalTitle").textContent = "Activer VIP " + plan.name;
+ $("sumName").textContent = plan.name;
+ $("sumPrice").textContent = formatFC(plan.price);
+ $("sumDiscount").textContent = plan.discount + " %";
+ $("phone").value = currentPhone;
+ $("confirmBtn").disabled = false;
+ $("confirmBtn").textContent = "Envoyer la demande";
+ hideMessage("modalMessage");
+ $("activationModal").classList.add("show");
+}
+
+function closeModal(){
+ $("activationModal").classList.remove("show");
+ selectedPlan = null;
+}
+$("closeModal").addEventListener("click",closeModal);
+$("cancelBtn").addEventListener("click",closeModal);
+$("activationModal").addEventListener("click",e=>{
+ if(e.target === $("activationModal")) closeModal();
+});
+
+function renderCurrentVip(data){
+ const status = data && data.status ? String(data.status).toLowerCase() : "";
+ const expires = data && data.expiresAt ? Number(data.expiresAt) : 0;
+ const isActive = (status === "active" || status === "approved" || status === "activated")
+  && expires > Date.now();
+
+ if(isActive){
+  $("currentIcon").textContent = data.icon || "👑";
+  $("currentName").textContent = "VIP " + (data.planName || data.level || "Actif");
+  $("currentInfo").textContent = "Réduction : " + Number(data.discount || 0) +
+   " % • Expire le " + new Date(expires).toLocaleDateString("fr-FR");
+  $("currentStatus").textContent = "Actif";
+  $("currentStatus").className = "badge active";
+ }else if(data && status === "pending"){
+  $("currentIcon").textContent = "⏳";
+  $("currentName").textContent = "Demande VIP en cours";
+  $("currentInfo").textContent = "L'administration doit confirmer la demande.";
+  $("currentStatus").textContent = "En attente";
+  $("currentStatus").className = "badge pending";
+ }else{
+  $("currentIcon").textContent = "👑";
+  $("currentName").textContent = "Aucun VIP actif";
+  $("currentInfo").textContent = "Choisis un niveau pour demander ton abonnement de 30 jours.";
+  $("currentStatus").textContent = "Inactif";
+  $("currentStatus").className = "badge";
+ }
+}
+
+function renderRequests(data){
+ const box = $("requestList");
+ box.innerHTML = "";
+ const entries = data ? Object.entries(data).sort((a,b)=>{
+  return Number(b[1].createdAt || 0) - Number(a[1].createdAt || 0);
+ }) : [];
+
+ if(!entries.length){
+  box.innerHTML = '<div class="empty">Aucune demande VIP pour le moment.</div>';
+  return;
+ }
+
+ entries.forEach(([key,request])=>{
+  const row = document.createElement("div");
+  row.className = "item";
+
+  const left = document.createElement("div");
+  left.style.flex = "1";
+
+  const name = document.createElement("div");
+  name.className = "item-name";
+  name.textContent = "VIP " + (request.planName || request.planId || "—");
+
+  const meta = document.createElement("div");
+  meta.className = "item-meta";
+  const date = request.createdAt
+   ? new Date(Number(request.createdAt)).toLocaleString("fr-FR")
+   : "Date non disponible";
+  meta.textContent = formatFC(request.priceFC) + " • " + date;
+
+  const status = String(request.status || "pending").toLowerCase();
+  const badge = document.createElement("span");
+  badge.className = "badge";
+  badge.textContent = status === "active" || status === "approved"
+   ? "Approuvée" : status === "rejected" ? "Refusée" : "En attente";
+
+  if(status === "active" || status === "approved") badge.classList.add("active");
+  else if(status === "rejected") badge.classList.add("rejected");
+  else badge.classList.add("pending");
+
+  left.append(name,meta);
+  row.append(left,badge);
+  box.appendChild(row);
+ });
+}
+
+function stopListeners(){
+ if(!db || !currentPhone) return;
+ const key = safeKey(currentPhone);
+ const userRef = db.ref(ROOT + "/users/" + key);
+ const vipRef = db.ref(ROOT + "/vip/" + key);
+ const requestsRef = db.ref(ROOT + "/vipRequests/" + key);
+
+ if(userListener) userRef.off("value",userListener);
+ if(vipListener) vipRef.off("value",vipListener);
+ if(requestsListener) requestsRef.off("value",requestsListener);
+}
+
+function startListeners(phone){
+ if(!db) return;
+ stopListeners();
+ currentPhone = phone;
+ const key = safeKey(phone);
+
+ const userRef = db.ref(ROOT + "/users/" + key);
+ userListener = snapshot=>{
+  const user = snapshot.val() || {};
+  currentBalance = Number(user.solde_principal ?? user.balance ?? user.solde ?? 0);
+  $("balance").textContent = formatFC(currentBalance);
+ };
+ userRef.on("value",userListener,error=>{
+  showMessage("Impossible de lire le compte : " + error.message,"error");
+ });
+
+ const vipRef = db.ref(ROOT + "/vip/" + key);
+ vipListener = snapshot=>renderCurrentVip(snapshot.val());
+ vipRef.on("value",vipListener,error=>{
+  showMessage("Impossible de lire le statut VIP : " + error.message,"error");
+ });
+
+ const requestsRef = db.ref(ROOT + "/vipRequests/" + key);
+ requestsListener = snapshot=>renderRequests(snapshot.val());
+ requestsRef.on("value",requestsListener,error=>{
+  showMessage("Impossible de lire l'historique VIP : " + error.message,"error");
+ });
+}
+
+async function loadPlans(){
+ if(!db) return;
+ try{
+  const snapshot = await db.ref(ROOT + "/config/vipPlans").get();
+  const remote = snapshot.val();
+  if(!remote) return;
+
+  plans = DEFAULT_PLANS.map(defaultPlan=>{
+   const override = remote[defaultPlan.id];
+   if(!override || typeof override !== "object") return {...defaultPlan};
+   return {
+    ...defaultPlan,
+    price: Number.isFinite(Number(override.price)) && Number(override.price) >= 0
+     ? Number(override.price) : defaultPlan.price,
+    discount: Number.isFinite(Number(override.discount)) &&
+      Number(override.discount) >= 0 && Number(override.discount) <= 100
+     ? Number(override.discount) : defaultPlan.discount,
+    desc: typeof override.desc === "string" ? override.desc : defaultPlan.desc
+   };
+  });
+  renderPlans();
+ }catch(error){
+  console.warn("Les prix par défaut seront utilisés.",error);
+ }
+}
+
+async function submitActivation(){
+ if(!selectedPlan) return;
+ if(!db){
+  showMessage("Firebase n'est pas connecté.","error","modalMessage");
+  return;
+ }
+
+ const phone = $("phone").value.trim();
+ if(!phone){
+  showMessage("Saisis le numéro de téléphone de ton compte.","error","modalMessage");
+  return;
+ }
+
+ if(phone !== currentPhone){
+  showMessage("Le numéro doit correspondre au compte connecté.","error","modalMessage");
+  return;
+ }
+
+ if(currentBalance < selectedPlan.price){
+  showMessage("Solde insuffisant. Prix : " + formatFC(selectedPlan.price) +
+   ". Solde : " + formatFC(currentBalance) + ".","error","modalMessage");
+  return;
+ }
+
+ $("confirmBtn").disabled = true;
+ $("confirmBtn").textContent = "Envoi...";
+
+ try{
+  const key = safeKey(currentPhone);
+  const requestRef = db.ref(ROOT + "/vipRequests/" + key);
+  const existing = await requestRef.orderByChild("status").equalTo("pending").get();
+
+  if(existing.exists()){
+   const already = Object.values(existing.val()).some(item=>
+    item && item.status === "pending"
+   );
+   if(already){
+    showMessage("Tu as déjà une demande VIP en attente. Attends sa validation.","info","modalMessage");
+    $("confirmBtn").disabled = false;
+    $("confirmBtn").textContent = "Envoyer la demande";
+    return;
+   }
+  }
+
+  const request = {
+   planId:selectedPlan.id,
+   planName:selectedPlan.name,
+   priceFC:Number(selectedPlan.price),
+   discount:Number(selectedPlan.discount),
+   durationDays:30,
+   userPhone:currentPhone,
+   status:"pending",
+   createdAt:Date.now(),
+   currency:"FC",
+   note:"À valider par le backend sécurisé avant tout débit ou activation."
+  };
+
+  await requestRef.push(request);
+
+  showMessage("Demande envoyée. Le VIP sera activé après validation sécurisée par l'administration.","success","modalMessage");
+  $("confirmBtn").textContent = "Demande envoyée";
+  setTimeout(closeModal,1800);
+ }catch(error){
+  showMessage("Erreur lors de l'envoi : " + error.message,"error","modalMessage");
+  $("confirmBtn").disabled = false;
+  $("confirmBtn").textContent = "Réessayer";
+ }
+}
+
+$("confirmBtn").addEventListener("click",submitActivation);
+
+async function init(){
+ renderPlans();
+
+ const phone = getStoredPhone();
+ if(!phone){
+  $("balance").textContent = "Connexion requise";
+  $("currentInfo").textContent = "Connecte-toi pour consulter ton solde et demander un VIP.";
+  showMessage("Aucun compte détecté. Connecte-toi d'abord à JASON BUSINESS.","info");
+  return;
+ }
+
+ try{
+  if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  db = firebase.database();
+  startListeners(phone);
+  await loadPlans();
+ }catch(error){
+  showMessage("Erreur Firebase : " + error.message,"error");
+ }
+}
+
+init();
+</script>
+</body>
+</html>
