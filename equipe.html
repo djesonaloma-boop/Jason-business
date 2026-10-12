@@ -1,0 +1,3552 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<meta name="theme-color" content="#050a14">
+
+<title>JASON BUSINESS - Mon Réseau</title>
+
+<style>
+
+:root{
+    --blue:#00d2ff;
+    --dark:#050a14;
+    --gold:#ffd700;
+    --green:#00e676;
+    --red:#ff4757;
+    --glass:rgba(255,255,255,.05);
+}
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    margin:0;
+
+    font-family:
+        'Segoe UI',
+        Arial,
+        sans-serif;
+
+    background:
+        var(--dark)
+        url('IMG_0870.jpeg')
+        no-repeat
+        center center fixed;
+
+    background-size:cover;
+
+    color:white;
+
+    padding-bottom:95px;
+
+}
+
+button,
+input{
+    font-family:inherit;
+}
+
+button{
+    -webkit-user-select:none;
+    user-select:none;
+}
+
+.overlay{
+
+    min-height:100vh;
+
+    background:
+        rgba(5,10,20,.93);
+
+    padding:20px;
+
+}
+
+.container{
+
+    width:100%;
+
+    max-width:650px;
+
+    margin:auto;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.top-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.brand{
+
+    color:var(--blue);
+
+    font-size:15px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+}
+
+.online{
+
+    font-size:10px;
+
+    color:var(--green);
+
+    padding:6px 10px;
+
+    border-radius:20px;
+
+    background:
+        rgba(0,230,118,.08);
+
+    border:
+        1px solid
+        rgba(0,230,118,.25);
+
+}
+
+
+/* =====================================================
+   TITRE
+===================================================== */
+
+.page-title{
+
+    text-align:center;
+
+    font-size:23px;
+
+    letter-spacing:2px;
+
+    margin:10px 0 7px;
+
+}
+
+.page-title span{
+
+    display:block;
+
+    color:var(--blue);
+
+    font-size:12px;
+
+    letter-spacing:3px;
+
+    margin-top:7px;
+
+}
+
+.subtitle{
+
+    text-align:center;
+
+    font-size:11px;
+
+    opacity:.5;
+
+    margin-bottom:25px;
+
+}
+
+
+/* =====================================================
+   INVITATION
+===================================================== */
+
+.invite-card{
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,210,255,.14),
+            rgba(0,0,0,.65)
+        );
+
+    border:
+        1px solid
+        rgba(0,210,255,.5);
+
+    border-radius:25px;
+
+    padding:25px 20px;
+
+    text-align:center;
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.35);
+
+}
+
+.code-label{
+
+    margin:0;
+
+    font-size:11px;
+
+    opacity:.6;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+}
+
+.code-display{
+
+    margin:14px 0 18px;
+
+    color:var(--blue);
+
+    font-size:27px;
+
+    font-weight:900;
+
+    letter-spacing:3px;
+
+    word-break:break-all;
+
+    text-shadow:
+        0 0 15px
+        rgba(0,210,255,.45);
+
+}
+
+.btn-share{
+
+    width:100%;
+
+    border:0;
+
+    border-radius:14px;
+
+    padding:15px;
+
+    background:var(--blue);
+
+    color:#001018;
+
+    font-size:14px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+}
+
+.btn-share:active{
+
+    transform:scale(.97);
+
+}
+
+.copy-status{
+
+    display:none;
+
+    color:var(--green);
+
+    font-size:11px;
+
+    margin:10px 0 0;
+
+    font-weight:bold;
+
+}
+
+
+/* =====================================================
+   REGLE
+===================================================== */
+
+.rule-card{
+
+    margin-top:18px;
+
+    padding:17px;
+
+    border-radius:18px;
+
+    background:
+        rgba(0,230,118,.055);
+
+    border:
+        1px solid
+        rgba(0,230,118,.20);
+
+}
+
+.rule-title{
+
+    color:var(--green);
+
+    font-size:14px;
+
+    font-weight:900;
+
+    margin-bottom:8px;
+
+}
+
+.rule-text{
+
+    font-size:11px;
+
+    line-height:1.7;
+
+    opacity:.7;
+
+}
+
+.rule-text b{
+
+    color:var(--gold);
+
+}
+
+
+/* =====================================================
+   STATISTIQUES RAPIDES
+===================================================== */
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:10px;
+
+    margin-top:18px;
+
+}
+
+.stat-box{
+
+    padding:17px 10px;
+
+    border-radius:17px;
+
+    text-align:center;
+
+    background:
+        var(--glass);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+}
+
+.stat-icon{
+
+    font-size:21px;
+
+}
+
+.stat-number{
+
+    margin-top:6px;
+
+    color:var(--blue);
+
+    font-size:22px;
+
+    font-weight:900;
+
+}
+
+.stat-label{
+
+    margin-top:3px;
+
+    font-size:9px;
+
+    opacity:.55;
+
+    text-transform:uppercase;
+
+}
+
+
+/* =====================================================
+   NIVEAUX
+===================================================== */
+
+.section-title{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin:25px 0 12px;
+
+}
+
+.section-title h3{
+
+    margin:0;
+
+    font-size:16px;
+
+}
+
+.section-title span{
+
+    color:var(--blue);
+
+    font-size:10px;
+
+    opacity:.7;
+
+}
+
+.level-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:10px;
+
+}
+
+.level-box{
+
+    position:relative;
+
+    padding:17px 6px;
+
+    border-radius:17px;
+
+    text-align:center;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+}
+
+.level-tag{
+
+    display:inline-block;
+
+    background:var(--blue);
+
+    color:#000;
+
+    padding:4px 7px;
+
+    border-radius:6px;
+
+    font-size:9px;
+
+    font-weight:900;
+
+}
+
+.level-box small{
+
+    display:block;
+
+    margin-top:8px;
+
+    font-size:9px;
+
+    opacity:.55;
+
+    text-transform:uppercase;
+
+}
+
+.level-box b{
+
+    display:block;
+
+    color:var(--blue);
+
+    font-size:24px;
+
+    margin-top:5px;
+
+}
+
+
+/* =====================================================
+   RESEAU
+===================================================== */
+
+.network-card{
+
+    padding:18px;
+
+    border-radius:20px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    border-left:
+        4px solid
+        var(--blue);
+
+}
+
+.network-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:12px 0;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
+
+}
+
+.network-row:last-child{
+
+    border-bottom:0;
+
+}
+
+.network-row span:first-child{
+
+    font-size:12px;
+
+    opacity:.7;
+
+}
+
+.network-value{
+
+    color:var(--blue);
+
+    font-size:13px;
+
+    font-weight:900;
+
+    text-align:right;
+
+}
+
+
+/* =====================================================
+   POINTS
+===================================================== */
+
+.points-card{
+
+    margin-top:20px;
+
+    padding:20px;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,215,0,.09),
+            rgba(0,0,0,.60)
+        );
+
+    border:
+        1px solid
+        rgba(255,215,0,.3);
+
+}
+
+.points-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.points-title{
+
+    color:var(--gold);
+
+    font-size:16px;
+
+    font-weight:900;
+
+}
+
+.points-rate{
+
+    color:var(--gold);
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    text-align:right;
+
+}
+
+.points-balance{
+
+    margin-top:15px;
+
+    padding:20px;
+
+    text-align:center;
+
+    border-radius:15px;
+
+    background:
+        rgba(255,215,0,.06);
+
+    border:
+        1px dashed
+        rgba(255,215,0,.3);
+
+}
+
+.points-label{
+
+    font-size:9px;
+
+    opacity:.55;
+
+}
+
+.points-number{
+
+    color:var(--gold);
+
+    font-size:32px;
+
+    font-weight:900;
+
+    margin-top:4px;
+
+}
+
+.points-value{
+
+    margin-top:4px;
+
+    font-size:11px;
+
+    opacity:.65;
+
+}
+
+.points-value b{
+
+    color:var(--gold);
+
+}
+
+
+/* =====================================================
+   CONVERSION
+===================================================== */
+
+.convert-form{
+
+    margin-top:18px;
+
+}
+
+.convert-form label{
+
+    display:block;
+
+    font-size:11px;
+
+    opacity:.65;
+
+    margin-bottom:7px;
+
+}
+
+.convert-form input{
+
+    width:100%;
+
+    padding:15px;
+
+    border-radius:13px;
+
+    outline:none;
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    background:#070b12;
+
+    color:white;
+
+    font-size:15px;
+
+}
+
+.convert-form input:focus{
+
+    border-color:var(--gold);
+
+}
+
+.conversion-result{
+
+    margin-top:10px;
+
+    padding:12px;
+
+    border-radius:11px;
+
+    background:
+        rgba(0,210,255,.06);
+
+    text-align:center;
+
+    font-size:12px;
+
+}
+
+.conversion-result b{
+
+    color:var(--green);
+
+}
+
+.btn-convert{
+
+    width:100%;
+
+    margin-top:11px;
+
+    padding:15px;
+
+    border:0;
+
+    border-radius:13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd700,
+            #ffb300
+        );
+
+    color:#111;
+
+    font-size:14px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+}
+
+.btn-convert:active{
+
+    transform:scale(.97);
+
+}
+
+.btn-convert:disabled{
+
+    opacity:.5;
+
+    cursor:not-allowed;
+
+}
+
+.convert-status{
+
+    min-height:18px;
+
+    margin-top:10px;
+
+    text-align:center;
+
+    font-size:11px;
+
+}
+
+.success{
+
+    color:var(--green);
+
+}
+
+.error{
+
+    color:var(--red);
+
+}
+
+
+/* =====================================================
+   HISTORIQUE
+===================================================== */
+
+.history-card{
+
+    margin-top:20px;
+
+    padding:18px;
+
+    border-radius:20px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+}
+
+.history-item{
+
+    padding:13px 0;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
+
+}
+
+.history-item:last-child{
+
+    border-bottom:0;
+
+}
+
+.history-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+}
+
+.history-points{
+
+    color:var(--gold);
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+.history-amount{
+
+    color:var(--green);
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+.history-date{
+
+    margin-top:5px;
+
+    font-size:9px;
+
+    opacity:.45;
+
+}
+
+.empty{
+
+    text-align:center;
+
+    padding:22px 10px;
+
+    font-size:11px;
+
+    opacity:.55;
+
+}
+
+
+/* =====================================================
+   MEMBRES
+===================================================== */
+
+.members-card{
+
+    margin-top:20px;
+
+    padding:18px;
+
+    border-radius:20px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+}
+
+.member{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px 0;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
+
+}
+
+.member:last-child{
+
+    border-bottom:0;
+
+}
+
+.member-avatar{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+        rgba(0,210,255,.1);
+
+    border:
+        1px solid
+        rgba(0,210,255,.25);
+
+}
+
+.member-info{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+.member-name{
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+}
+
+.member-date{
+
+    margin-top:3px;
+
+    font-size:9px;
+
+    opacity:.45;
+
+}
+
+.member-level{
+
+    font-size:9px;
+
+    color:var(--blue);
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+#jb_status{
+
+    text-align:center;
+
+    min-height:18px;
+
+    margin:15px 0;
+
+    font-size:10px;
+
+    color:#ffeb3b;
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.navbar{
+
+    position:fixed;
+
+    z-index:1000;
+
+    bottom:0;
+
+    left:0;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    padding:12px 0;
+
+    background:
+        rgba(5,10,20,.98);
+
+    border-top:
+        1px solid
+        rgba(0,210,255,.28);
+
+    backdrop-filter:blur(15px);
+
+}
+
+.nav-link{
+
+    min-width:60px;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    color:white;
+
+    opacity:.4;
+
+    font-size:10px;
+
+}
+
+.nav-link.active{
+
+    color:var(--blue);
+
+    opacity:1;
+
+    font-weight:bold;
+
+}
+
+.nav-icon{
+
+    font-size:19px;
+
+    margin-bottom:3px;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:380px){
+
+    .level-grid{
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+    .points-header{
+
+        align-items:flex-start;
+
+    }
+
+    .points-rate{
+
+        font-size:9px;
+
+    }
+
+    .code-display{
+
+        font-size:22px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="overlay">
+
+<div class="container">
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<div class="top-header">
+
+    <div class="brand">
+        JASON BUSINESS
+    </div>
+
+    <div class="online">
+        ● EN LIGNE
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     TITRE
+===================================================== -->
+
+<h1 class="page-title">
+
+    MON RÉSEAU
+
+    <span>
+        JASON BUSINESS
+    </span>
+
+</h1>
+
+<div class="subtitle">
+
+    Développez votre réseau et gagnez des points
+
+</div>
+
+
+<!-- =====================================================
+     INVITATION
+===================================================== -->
+
+<div class="invite-card">
+
+    <p class="code-label">
+        Votre code de parrainage
+    </p>
+
+    <div
+        id="jb_myCode"
+        class="code-display">
+
+        ...
+
+    </div>
+
+    <button
+        id="jb_btnCopy"
+        class="btn-share">
+
+        📋 COPIER LE LIEN D'INVITATION
+
+    </button>
+
+    <p
+        id="jb_copyStatus"
+        class="copy-status">
+
+        ✅ Lien d'invitation copié !
+
+    </p>
+
+</div>
+
+
+<!-- =====================================================
+     REGLE
+===================================================== -->
+
+<div class="rule-card">
+
+    <div class="rule-title">
+        🎁 SYSTÈME DE FIDÉLITÉ
+    </div>
+
+    <div class="rule-text">
+
+        Chaque nouveau membre directement invité
+        vous rapporte <b>5 points</b>.
+
+        <br>
+
+        Lorsque vous atteignez <b>100 points</b>,
+        vous pouvez convertir vos points en argent.
+
+        <br>
+
+        <b>100 points = 1 000 FC</b>
+
+        <br>
+
+        Soit <b>1 point = 10 FC</b>.
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     STATISTIQUES RAPIDES
+===================================================== -->
+
+<div class="stats-grid">
+
+    <div class="stat-box">
+
+        <div class="stat-icon">
+            👥
+        </div>
+
+        <div
+            class="stat-number"
+            id="jb_totalTeam">
+
+            0
+
+        </div>
+
+        <div class="stat-label">
+            Membres totaux
+        </div>
+
+    </div>
+
+
+    <div class="stat-box">
+
+        <div class="stat-icon">
+            ⭐
+        </div>
+
+        <div
+            class="stat-number"
+            id="jb_teamPoints">
+
+            0
+
+        </div>
+
+        <div class="stat-label">
+            Points réseau
+        </div>
+
+    </div>
+
+
+    <div class="stat-box">
+
+        <div class="stat-icon">
+            💰
+        </div>
+
+        <div
+            class="stat-number"
+            id="jb_totalGains">
+
+            0
+
+        </div>
+
+        <div class="stat-label">
+            Commissions FC
+        </div>
+
+    </div>
+
+
+    <div class="stat-box">
+
+        <div class="stat-icon">
+            💎
+        </div>
+
+        <div
+            class="stat-number"
+            id="jb_mainBalance">
+
+            0
+
+        </div>
+
+        <div class="stat-label">
+            Solde FC
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     NIVEAUX
+===================================================== -->
+
+<div class="section-title">
+
+    <h3>
+        📊 Niveaux du réseau
+    </h3>
+
+    <span>
+        Structure 3 niveaux
+    </span>
+
+</div>
+
+
+<div class="level-grid">
+
+
+    <div class="level-box">
+
+        <span class="level-tag">
+            25%
+        </span>
+
+        <small>
+            Niveau 1
+        </small>
+
+        <b id="jb_lvl1Count">
+            0
+        </b>
+
+    </div>
+
+
+    <div class="level-box">
+
+        <span class="level-tag">
+            3%
+        </span>
+
+        <small>
+            Niveau 2
+        </small>
+
+        <b id="jb_lvl2Count">
+            0
+        </b>
+
+    </div>
+
+
+    <div class="level-box">
+
+        <span class="level-tag">
+            1%
+        </span>
+
+        <small>
+            Niveau 3
+        </small>
+
+        <b id="jb_lvl3Count">
+            0
+        </b>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     DETAIL RESEAU
+===================================================== -->
+
+<div class="section-title">
+
+    <h3>
+        📈 Statistiques
+    </h3>
+
+</div>
+
+
+<div class="network-card">
+
+
+    <div class="network-row">
+
+        <span>
+            Membres directs
+        </span>
+
+        <span
+            class="network-value"
+            id="jb_directMembers">
+
+            0
+
+        </span>
+
+    </div>
+
+
+    <div class="network-row">
+
+        <span>
+            Membres niveau 2
+        </span>
+
+        <span
+            class="network-value"
+            id="jb_secondMembers">
+
+            0
+
+        </span>
+
+    </div>
+
+
+    <div class="network-row">
+
+        <span>
+            Membres niveau 3
+        </span>
+
+        <span
+            class="network-value"
+            id="jb_thirdMembers">
+
+            0
+
+        </span>
+
+    </div>
+
+
+    <div class="network-row">
+
+        <span>
+            Points disponibles
+        </span>
+
+        <span
+            class="network-value"
+            id="jb_pointsDisplay">
+
+            0
+
+        </span>
+
+    </div>
+
+
+    <div class="network-row">
+
+        <span>
+            Valeur des points
+        </span>
+
+        <span
+            class="network-value"
+            id="jb_pointsValue">
+
+            0 FC
+
+        </span>
+
+    </div>
+
+
+    <div class="network-row">
+
+        <span>
+            Statut
+        </span>
+
+        <span
+            class="network-value"
+            style="color:#00e676;">
+
+            Actif 🛰️
+
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     POINTS
+===================================================== -->
+
+<div class="points-card">
+
+
+    <div class="points-header">
+
+        <div class="points-title">
+
+            ⭐ Points de fidélité
+
+        </div>
+
+        <div class="points-rate">
+
+            100 POINTS = 1 000 FC
+
+        </div>
+
+    </div>
+
+
+    <div class="points-balance">
+
+        <div class="points-label">
+
+            POINTS DISPONIBLES
+
+        </div>
+
+        <div
+            class="points-number"
+            id="jb_pointsBig">
+
+            0
+
+        </div>
+
+        <div class="points-value">
+
+            Valeur actuelle :
+
+            <b id="jb_pointsValueBig">
+                0 FC
+            </b>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         FORMULAIRE CONVERSION
+    ================================================= -->
+
+    <div class="convert-form">
+
+        <label
+            for="jb_pointsInput">
+
+            Nombre de points à convertir
+
+        </label>
+
+        <input
+            type="number"
+            id="jb_pointsInput"
+            min="100"
+            step="100"
+            inputmode="numeric"
+            placeholder="Exemple : 100">
+
+
+        <div
+            class="conversion-result"
+            id="jb_conversionResult">
+
+            100 points =
+
+            <b>
+                1 000 FC
+            </b>
+
+        </div>
+
+
+        <button
+            id="jb_btnConvert"
+            class="btn-convert">
+
+            ⭐ CONVERTIR MES POINTS
+
+        </button>
+
+
+        <div
+            id="jb_convertStatus"
+            class="convert-status">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     HISTORIQUE CONVERSION
+===================================================== -->
+
+<div class="section-title">
+
+    <h3>
+        🧾 Historique des conversions
+    </h3>
+
+</div>
+
+
+<div class="history-card">
+
+    <div id="jb_history">
+
+        <div class="empty">
+
+            Chargement de l'historique...
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MEMBRES DIRECTS
+===================================================== -->
+
+<div class="section-title">
+
+    <h3>
+        👥 Mes membres directs
+    </h3>
+
+    <span>
+        Niveau 1
+    </span>
+
+</div>
+
+
+<div class="members-card">
+
+    <div id="jb_members">
+
+        <div class="empty">
+
+            Chargement des membres...
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="jb_status"></div>
+
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+
+<a
+    href="dashboard.html"
+    class="nav-link">
+
+    <div class="nav-icon">
+        📊
+    </div>
+
+    Dash
+
+</a>
+
+
+<a
+    href="shop.html"
+    class="nav-link">
+
+    <div class="nav-icon">
+        🛒
+    </div>
+
+    Shop
+
+</a>
+
+
+<a
+    href="equipe.html"
+    class="nav-link active">
+
+    <div class="nav-icon">
+        👥
+    </div>
+
+    Équipe
+
+</a>
+
+
+<a
+    href="profil.html"
+    class="nav-link">
+
+    <div class="nav-icon">
+        👤
+    </div>
+
+    Profil
+
+</a>
+
+
+</nav>
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script type="module">
+
+
+import {
+
+    initializeApp
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+import {
+
+    getDatabase,
+    ref,
+    onValue,
+    get,
+    runTransaction
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+/* =====================================================
+   CONFIGURATION
+===================================================== */
+
+const jbFirebaseConfig = {
+
+    apiKey:
+    "AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
+
+    authDomain:
+    "starlink-investit.firebaseapp.com",
+
+    databaseURL:
+    "https://starlink-investit-default-rtdb.firebaseio.com",
+
+    projectId:
+    "starlink-investit",
+
+    storageBucket:
+    "starlink-investit.firebasestorage.app",
+
+    messagingSenderId:
+    "807081599583",
+
+    appId:
+    "1:807081599583:web:e00ec3959bc4acdae031ea"
+
+};
+
+
+/* =====================================================
+   INITIALISATION
+===================================================== */
+
+const jbApp =
+initializeApp(
+    jbFirebaseConfig
+);
+
+
+const jbDB =
+getDatabase(
+    jbApp
+);
+
+
+/* =====================================================
+   SESSION
+===================================================== */
+
+const jbUserPhone =
+localStorage.getItem(
+    "userPhone"
+);
+
+
+if(!jbUserPhone){
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* =====================================================
+   REFERENCES
+===================================================== */
+
+const jbUserRef =
+ref(
+    jbDB,
+    "users/" + jbUserPhone
+);
+
+
+const jbUsersRef =
+ref(
+    jbDB,
+    "users"
+);
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let jbCurrentPoints = 0;
+
+let jbUserData = null;
+
+let jbDirectMembers = [];
+
+
+/* =====================================================
+   FORMAT NOMBRE
+===================================================== */
+
+function jbFormatNumber(
+    value
+){
+
+    return Math.floor(
+        Number(value) || 0
+    ).toLocaleString(
+        "fr-FR"
+    );
+
+}
+
+
+/* =====================================================
+   ECHAPPER HTML
+===================================================== */
+
+function jbEscapeHTML(
+    value
+){
+
+    return String(
+        value ?? ""
+    )
+
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+function jbFormatDate(
+    value
+){
+
+    if(!value)
+        return "Date inconnue";
+
+
+    const date =
+        new Date(value);
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "Date inconnue";
+
+    }
+
+
+    return date.toLocaleDateString(
+        "fr-FR",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   CHARGEMENT UTILISATEUR
+===================================================== */
+
+onValue(
+
+    jbUserRef,
+
+    async (
+        jbSnapshot
+    )=>{
+
+        if(
+            !jbSnapshot.exists()
+        ){
+
+            localStorage.removeItem(
+                "userPhone"
+            );
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        jbUserData =
+            jbSnapshot.val();
+
+
+        /* =============================================
+           CODE
+        ============================================= */
+
+        const jbCode =
+
+            jbUserData.inviteCode ||
+
+            jbUserData.referralCode ||
+
+            jbUserData.codeParrainage ||
+
+            (
+                "JASON-" +
+                String(
+                    jbUserPhone
+                ).replace(
+                    /\D/g,
+                    ""
+                ).slice(-6)
+            );
+
+
+        document.getElementById(
+            "jb_myCode"
+        ).innerText =
+            jbCode;
+
+
+        /* =============================================
+           SOLDES
+        ============================================= */
+
+        const jbPrincipal =
+
+            Number(
+                jbUserData.solde_principal
+            ) || 0;
+
+
+        const jbCommissions =
+
+            Number(
+                jbUserData.solde_commissions
+            ) || 0;
+
+
+        document.getElementById(
+            "jb_mainBalance"
+        ).innerText =
+            jbFormatNumber(
+                jbPrincipal
+            );
+
+
+        document.getElementById(
+            "jb_totalGains"
+        ).innerText =
+            jbFormatNumber(
+                jbCommissions
+            );
+
+
+        /* =============================================
+           NIVEAUX STOCKES
+        ============================================= */
+
+        let jbLevel1 =
+
+            Number(
+                jbUserData.count_lvl1
+            ) || 0;
+
+
+        let jbLevel2 =
+
+            Number(
+                jbUserData.count_lvl2
+            ) || 0;
+
+
+        let jbLevel3 =
+
+            Number(
+                jbUserData.count_lvl3
+            ) || 0;
+
+
+        /*
+         * Si les compteurs sont absents,
+         * on tente de reconstruire le réseau
+         * depuis users.
+         */
+
+        if(
+            jbLevel1 === 0 &&
+            jbLevel2 === 0 &&
+            jbLevel3 === 0
+        ){
+
+            try{
+
+                const jbUsersSnapshot =
+                    await get(
+                        jbUsersRef
+                    );
+
+
+                if(
+                    jbUsersSnapshot.exists()
+                ){
+
+                    const jbUsers =
+                        jbUsersSnapshot.val();
+
+
+                    const jbNetwork =
+                        jbCalculateNetwork(
+                            jbUsers,
+                            jbUserPhone,
+                            jbCode
+                        );
+
+
+                    jbLevel1 =
+                        jbNetwork.level1.length;
+
+
+                    jbLevel2 =
+                        jbNetwork.level2.length;
+
+
+                    jbLevel3 =
+                        jbNetwork.level3.length;
+
+
+                    jbDirectMembers =
+                        jbNetwork.level1;
+
+                }
+
+            }catch(
+                jbNetworkError
+            ){
+
+                console.error(
+                    "Erreur réseau:",
+                    jbNetworkError
+                );
+
+            }
+
+        }
+
+
+        /* =============================================
+           AFFICHAGE NIVEAUX
+        ============================================= */
+
+        document.getElementById(
+            "jb_lvl1Count"
+        ).innerText =
+            jbFormatNumber(
+                jbLevel1
+            );
+
+
+        document.getElementById(
+            "jb_lvl2Count"
+        ).innerText =
+            jbFormatNumber(
+                jbLevel2
+            );
+
+
+        document.getElementById(
+            "jb_lvl3Count"
+        ).innerText =
+            jbFormatNumber(
+                jbLevel3
+            );
+
+
+        const jbTotalTeam =
+
+            jbLevel1 +
+            jbLevel2 +
+            jbLevel3;
+
+
+        document.getElementById(
+            "jb_totalTeam"
+        ).innerText =
+            jbFormatNumber(
+                jbTotalTeam
+            );
+
+
+        document.getElementById(
+            "jb_directMembers"
+        ).innerText =
+            jbFormatNumber(
+                jbLevel1
+            );
+
+
+        document.getElementById(
+            "jb_secondMembers"
+        ).innerText =
+            jbFormatNumber(
+                jbLevel2
+            );
+
+
+        document.getElementById(
+            "jb_thirdMembers"
+        ).innerText =
+            jbFormatNumber(
+                jbLevel3
+            );
+
+
+        /* =============================================
+           POINTS
+        ============================================= */
+
+        jbCurrentPoints =
+
+            Number(
+                jbUserData.points_fidelite ??
+                jbUserData.points ??
+                jbUserData.loyaltyPoints ??
+                0
+            );
+
+
+        const jbPointsValue =
+            jbCurrentPoints * 10;
+
+
+        document.getElementById(
+            "jb_teamPoints"
+        ).innerText =
+            jbFormatNumber(
+                jbTotalTeam * 5
+            );
+
+
+        document.getElementById(
+            "jb_pointsDisplay"
+        ).innerText =
+            jbFormatNumber(
+                jbCurrentPoints
+            );
+
+
+        document.getElementById(
+            "jb_pointsBig"
+        ).innerText =
+            jbFormatNumber(
+                jbCurrentPoints
+            );
+
+
+        document.getElementById(
+            "jb_pointsValue"
+        ).innerText =
+            jbFormatNumber(
+                jbPointsValue
+            ) + " FC";
+
+
+        document.getElementById(
+            "jb_pointsValueBig"
+        ).innerText =
+            jbFormatNumber(
+                jbPointsValue
+            ) + " FC";
+
+
+        /* =============================================
+           HISTORIQUE
+        ============================================= */
+
+        jbRenderHistory(
+            jbUserData.points_conversion
+        );
+
+
+        /* =============================================
+           MEMBRES
+        ============================================= */
+
+        if(
+            jbDirectMembers.length === 0
+        ){
+
+            try{
+
+                const jbUsersSnapshot =
+                    await get(
+                        jbUsersRef
+                    );
+
+
+                if(
+                    jbUsersSnapshot.exists()
+                ){
+
+                    const jbUsers =
+                        jbUsersSnapshot.val();
+
+
+                    jbDirectMembers =
+                        jbFindDirectMembers(
+                            jbUsers,
+                            jbCode
+                        );
+
+                }
+
+            }catch(
+                jbMemberError
+            ){
+
+                console.error(
+                    "Membres:",
+                    jbMemberError
+                );
+
+            }
+
+        }
+
+
+        jbRenderMembers(
+            jbDirectMembers
+        );
+
+    },
+
+    (
+        jbError
+    )=>{
+
+        console.error(
+            "Firebase:",
+            jbError
+        );
+
+        document.getElementById(
+            "jb_status"
+        ).innerText =
+            "⚠️ Erreur de connexion Firebase.";
+
+    }
+
+);
+
+
+/* =====================================================
+   RECHERCHE DIRECTS
+===================================================== */
+
+function jbFindDirectMembers(
+    jbUsers,
+    jbCode
+){
+
+    const result = [];
+
+
+    Object.entries(
+        jbUsers || {}
+    ).forEach(
+        ([
+            jbPhone,
+            jbUser
+        ])=>{
+
+            if(
+                jbPhone === jbUserPhone
+            )
+                return;
+
+
+            if(
+                !jbUser ||
+                typeof jbUser !== "object"
+            )
+                return;
+
+
+            const jbParent =
+
+                jbUser.inviteCodeParent ||
+
+                jbUser.parrainCode ||
+
+                jbUser.referralCodeUsed ||
+
+                jbUser.invitedBy ||
+
+                jbUser.sponsorCode ||
+
+                jbUser.codeParrainage;
+
+
+            if(
+                String(
+                    jbParent || ""
+                ).toLowerCase()
+                ===
+                String(
+                    jbCode
+                ).toLowerCase()
+            ){
+
+                result.push({
+
+                    phone:
+                        jbPhone,
+
+                    data:
+                        jbUser
+
+                });
+
+            }
+
+        }
+    );
+
+
+    return result;
+
+}
+
+
+/* =====================================================
+   CALCUL RESEAU 3 NIVEAUX
+===================================================== */
+
+function jbCalculateNetwork(
+    jbUsers,
+    jbPhone,
+    jbCode
+){
+
+    const level1 = [];
+
+    const level2 = [];
+
+    const level3 = [];
+
+
+    const allUsers =
+        jbUsers || {};
+
+
+    /* =============================================
+       NIVEAU 1
+    ============================================= */
+
+    Object.entries(
+        allUsers
+    ).forEach(
+        ([
+            jbPhoneKey,
+            jbUser
+        ])=>{
+
+            if(
+                jbPhoneKey === jbPhone
+            )
+                return;
+
+
+            if(
+                !jbUser ||
+                typeof jbUser !== "object"
+            )
+                return;
+
+
+            const jbParent =
+
+                jbUser.inviteCodeParent ||
+
+                jbUser.parrainCode ||
+
+                jbUser.referralCodeUsed ||
+
+                jbUser.invitedBy ||
+
+                jbUser.sponsorCode ||
+
+                jbUser.codeParrainage;
+
+
+            if(
+                String(
+                    jbParent || ""
+                ).toLowerCase()
+                ===
+                String(
+                    jbCode
+                ).toLowerCase()
+            ){
+
+                level1.push({
+
+                    phone:
+                        jbPhoneKey,
+
+                    data:
+                        jbUser
+
+                });
+
+            }
+
+        }
+    );
+
+
+    /* =============================================
+       CODES NIVEAU 1
+    ============================================= */
+
+    const level1Codes =
+        level1.map(
+            jbMember =>
+
+                jbMember.data.inviteCode ||
+
+                jbMember.data.referralCode ||
+
+                jbMember.data.codeParrainage ||
+
+                ""
+
+        );
+
+
+    /* =============================================
+       NIVEAU 2
+    ============================================= */
+
+    Object.entries(
+        allUsers
+    ).forEach(
+        ([
+            jbPhoneKey,
+            jbUser
+        ])=>{
+
+            if(
+                jbPhoneKey === jbPhone
+            )
+                return;
+
+
+            if(
+                !jbUser ||
+                typeof jbUser !== "object"
+            )
+                return;
+
+
+            const jbParent =
+
+                jbUser.inviteCodeParent ||
+
+                jbUser.parrainCode ||
+
+                jbUser.referralCodeUsed ||
+
+                jbUser.invitedBy ||
+
+                jbUser.sponsorCode ||
+
+                jbUser.codeParrainage;
+
+
+            if(
+                level1Codes.includes(
+                    jbParent
+                )
+            ){
+
+                level2.push({
+
+                    phone:
+                        jbPhoneKey,
+
+                    data:
+                        jbUser
+
+                });
+
+            }
+
+        }
+    );
+
+
+    /* =============================================
+       CODES NIVEAU 2
+    ============================================= */
+
+    const level2Codes =
+        level2.map(
+            jbMember =>
+
+                jbMember.data.inviteCode ||
+
+                jbMember.data.referralCode ||
+
+                jbMember.data.codeParrainage ||
+
+                ""
+
+        );
+
+
+    /* =============================================
+       NIVEAU 3
+    ============================================= */
+
+    Object.entries(
+        allUsers
+    ).forEach(
+        ([
+            jbPhoneKey,
+            jbUser
+        ])=>{
+
+            if(
+                jbPhoneKey === jbPhone
+            )
+                return;
+
+
+            if(
+                !jbUser ||
+                typeof jbUser !== "object"
+            )
+                return;
+
+
+            const jbParent =
+
+                jbUser.inviteCodeParent ||
+
+                jbUser.parrainCode ||
+
+                jbUser.referralCodeUsed ||
+
+                jbUser.invitedBy ||
+
+                jbUser.sponsorCode ||
+
+                jbUser.codeParrainage;
+
+
+            if(
+                level2Codes.includes(
+                    jbParent
+                )
+            ){
+
+                level3.push({
+
+                    phone:
+                        jbPhoneKey,
+
+                    data:
+                        jbUser
+
+                });
+
+            }
+
+        }
+    );
+
+
+    return {
+
+        level1,
+        level2,
+        level3
+
+    };
+
+}
+
+
+/* =====================================================
+   AFFICHER MEMBRES
+===================================================== */
+
+function jbRenderMembers(
+    jbMembers
+){
+
+    const jbContainer =
+        document.getElementById(
+            "jb_members"
+        );
+
+
+    jbContainer.innerHTML =
+        "";
+
+
+    if(
+        !jbMembers ||
+        jbMembers.length === 0
+    ){
+
+        jbContainer.innerHTML = `
+
+            <div class="empty">
+
+                👥 Aucun membre direct pour le moment.
+
+                <br><br>
+
+                Partagez votre lien
+                pour développer votre réseau.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    jbMembers.forEach(
+        jbMember =>{
+
+            const jbData =
+                jbMember.data || {};
+
+
+            const jbName =
+
+                jbData.nom ||
+
+                jbData.name ||
+
+                jbData.username ||
+
+                jbData.telephone ||
+
+                jbMember.phone;
+
+
+            const jbDate =
+
+                jbData.createdAt ||
+
+                jbData.dateInscription ||
+
+                jbData.dateCreation;
+
+
+            const jbElement =
+                document.createElement(
+                    "div"
+                );
+
+
+            jbElement.className =
+                "member";
+
+
+            jbElement.innerHTML = `
+
+                <div class="member-avatar">
+                    👤
+                </div>
+
+                <div class="member-info">
+
+                    <div class="member-name">
+
+                        ${jbEscapeHTML(
+                            jbName
+                        )}
+
+                    </div>
+
+                    <div class="member-date">
+
+                        Inscrit le
+                        ${jbEscapeHTML(
+                            jbFormatDate(
+                                jbDate
+                            )
+                        )}
+
+                    </div>
+
+                </div>
+
+                <div class="member-level">
+
+                    NIVEAU 1
+
+                </div>
+
+            `;
+
+
+            jbContainer.appendChild(
+                jbElement
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   HISTORIQUE
+===================================================== */
+
+function jbRenderHistory(
+    jbHistory
+){
+
+    const jbContainer =
+        document.getElementById(
+            "jb_history"
+        );
+
+
+    jbContainer.innerHTML =
+        "";
+
+
+    if(
+        !jbHistory ||
+        Object.keys(
+            jbHistory
+        ).length === 0
+    ){
+
+        jbContainer.innerHTML = `
+
+            <div class="empty">
+
+                🧾 Aucune conversion effectuée.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const jbItems =
+
+        Object.entries(
+            jbHistory
+        )
+
+        .sort(
+            (
+                [,jbA],
+                [,jbB]
+            )=>{
+
+                return String(
+                    jbB.date || ""
+                ).localeCompare(
+                    String(
+                        jbA.date || ""
+                    )
+                );
+
+            }
+        );
+
+
+    jbItems.forEach(
+        ([
+            jbId,
+            jbItem
+        ])=>{
+
+            const jbElement =
+                document.createElement(
+                    "div"
+                );
+
+
+            jbElement.className =
+                "history-item";
+
+
+            jbElement.innerHTML = `
+
+                <div class="history-top">
+
+                    <div class="history-points">
+
+                        ⭐
+                        ${jbFormatNumber(
+                            jbItem.points
+                        )}
+                        points
+
+                    </div>
+
+                    <div class="history-amount">
+
+                        +
+                        ${jbFormatNumber(
+                            jbItem.montant
+                        )}
+                        FC
+
+                    </div>
+
+                </div>
+
+                <div class="history-date">
+
+                    ${jbEscapeHTML(
+                        jbFormatDate(
+                            jbItem.date
+                        )
+                    )}
+
+                    •
+
+                    ${jbEscapeHTML(
+                        jbItem.statut ||
+                        "VALIDEE"
+                    )}
+
+                </div>
+
+            `;
+
+
+            jbContainer.appendChild(
+                jbElement
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   CALCUL AUTOMATIQUE
+===================================================== */
+
+const jbPointsInput =
+    document.getElementById(
+        "jb_pointsInput"
+    );
+
+
+const jbConversionResult =
+    document.getElementById(
+        "jb_conversionResult"
+    );
+
+
+jbPointsInput.addEventListener(
+    "input",
+    ()=>{
+
+        const jbPoints =
+            Number(
+                jbPointsInput.value
+            ) || 0;
+
+
+        if(
+            jbPoints <= 0
+        ){
+
+            jbConversionResult.innerHTML =
+
+                `100 points =
+                <b>1 000 FC</b>`;
+
+            return;
+
+        }
+
+
+        const jbAmount =
+            jbPoints * 10;
+
+
+        jbConversionResult.innerHTML =
+
+            `${jbFormatNumber(
+                jbPoints
+            )} points =
+
+            <b>
+                ${jbFormatNumber(
+                    jbAmount
+                )} FC
+            </b>`;
+
+    }
+);
+
+
+/* =====================================================
+   CONVERSION
+===================================================== */
+
+document.getElementById(
+    "jb_btnConvert"
+).addEventListener(
+    "click",
+    async()=>{
+
+        const jbButton =
+            document.getElementById(
+                "jb_btnConvert"
+            );
+
+
+        const jbStatus =
+            document.getElementById(
+                "jb_convertStatus"
+            );
+
+
+        const jbPoints =
+            Number(
+                jbPointsInput.value
+            );
+
+
+        /* =============================================
+           VALIDATION
+        ============================================= */
+
+        if(
+            !Number.isFinite(
+                jbPoints
+            )
+            ||
+            jbPoints < 100
+        ){
+
+            jbStatus.className =
+                "convert-status error";
+
+
+            jbStatus.innerText =
+                "❌ Minimum : 100 points.";
+
+            return;
+
+        }
+
+
+        if(
+            jbPoints % 100 !== 0
+        ){
+
+            jbStatus.className =
+                "convert-status error";
+
+
+            jbStatus.innerText =
+                "❌ Utilisez un multiple de 100 points.";
+
+            return;
+
+        }
+
+
+        if(
+            jbPoints >
+            jbCurrentPoints
+        ){
+
+            jbStatus.className =
+                "convert-status error";
+
+
+            jbStatus.innerText =
+                "❌ Vous n'avez pas assez de points.";
+
+            return;
+
+        }
+
+
+        const jbAmount =
+            jbPoints * 10;
+
+
+        const jbConfirm =
+            confirm(
+
+                "Convertir " +
+
+                jbFormatNumber(
+                    jbPoints
+                ) +
+
+                " points en " +
+
+                jbFormatNumber(
+                    jbAmount
+                ) +
+
+                " FC ?"
+
+            );
+
+
+        if(
+            !jbConfirm
+        )
+            return;
+
+
+        jbButton.disabled =
+            true;
+
+
+        jbButton.innerText =
+            "⏳ CONVERSION...";
+
+
+        jbStatus.className =
+            "convert-status";
+
+
+        jbStatus.innerText =
+            "Traitement de la conversion...";
+
+
+        try{
+
+
+            const jbResult =
+                await runTransaction(
+
+                    jbUserRef,
+
+                    jbData =>{
+
+                        if(
+                            jbData === null
+                        ){
+
+                            return;
+
+                        }
+
+
+                        const jbAvailablePoints =
+
+                            Number(
+                                jbData.points_fidelite ??
+                                jbData.points ??
+                                jbData.loyaltyPoints ??
+                                0
+                            );
+
+
+                        if(
+                            jbAvailablePoints
+                            <
+                            jbPoints
+                        ){
+
+                            return;
+
+                        }
+
+
+                        const jbBalance =
+
+                            Number(
+                                jbData.solde_principal
+                            ) || 0;
+
+
+                        /* =================================
+                           POINTS
+                        ================================= */
+
+                        jbData.points_fidelite =
+
+                            jbAvailablePoints
+                            -
+                            jbPoints;
+
+
+                        /* =================================
+                           SOLDE
+                        ================================= */
+
+                        jbData.solde_principal =
+
+                            jbBalance
+                            +
+                            jbAmount;
+
+
+                        /* =================================
+                           HISTORIQUE
+                        ================================= */
+
+                        if(
+                            !jbData.points_conversion
+                        ){
+
+                            jbData.points_conversion = {};
+
+                        }
+
+
+                        const jbConversionId =
+
+                            "JB-CONV-" +
+                            Date.now() +
+                            "-" +
+                            Math.floor(
+                                Math.random() * 1000
+                            );
+
+
+                        jbData.points_conversion[
+                            jbConversionId
+                        ] = {
+
+                            points:
+                                jbPoints,
+
+                            montant:
+                                jbAmount,
+
+                            date:
+                                new Date()
+                                .toISOString(),
+
+                            statut:
+                                "VALIDEE"
+
+                        };
+
+
+                        return jbData;
+
+                    }
+
+                );
+
+
+            if(
+                !jbResult.committed
+            ){
+
+                throw new Error(
+                    "CONVERSION_REFUSED"
+                );
+
+            }
+
+
+            jbCurrentPoints -=
+                jbPoints;
+
+
+            jbStatus.className =
+                "convert-status success";
+
+
+            jbStatus.innerText =
+
+                "✅ Conversion réussie : +" +
+
+                jbFormatNumber(
+                    jbAmount
+                ) +
+
+                " FC";
+
+
+            jbPointsInput.value =
+                "";
+
+
+            jbConversionResult.innerHTML =
+
+                "✅ Conversion effectuée avec succès.";
+
+
+        }
+
+        catch(
+            jbError
+        ){
+
+            console.error(
+                "Conversion:",
+                jbError
+            );
+
+
+            jbStatus.className =
+                "convert-status error";
+
+
+            if(
+                jbError.message ===
+                "CONVERSION_REFUSED"
+            ){
+
+                jbStatus.innerText =
+                    "❌ Conversion refusée : points insuffisants.";
+
+            }
+
+            else{
+
+                jbStatus.innerText =
+                    "⚠️ Une erreur est survenue.";
+
+            }
+
+        }
+
+        finally{
+
+            jbButton.disabled =
+                false;
+
+
+            jbButton.innerText =
+                "⭐ CONVERTIR MES POINTS";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   COPIER / PARTAGER
+===================================================== */
+
+document.getElementById(
+    "jb_btnCopy"
+).addEventListener(
+    "click",
+    async()=>{
+
+        const jbCode =
+            document.getElementById(
+                "jb_myCode"
+            ).innerText;
+
+
+        if(
+            !jbCode ||
+            jbCode === "..."
+        ){
+
+            alert(
+                "⏳ Votre code n'est pas encore chargé."
+            );
+
+            return;
+
+        }
+
+
+        const jbLink =
+
+            "https://jason-v7.vercel.app/register.html?inviteCode="
+
+            +
+
+            encodeURIComponent(
+                jbCode
+            );
+
+
+        const jbMessage =
+
+            "🚀 Rejoins JASON BUSINESS !\n\n" +
+
+            "Utilise mon lien d'inscription :\n" +
+
+            jbLink;
+
+
+        try{
+
+
+            if(
+                navigator.share
+            ){
+
+                await navigator.share({
+
+                    title:
+                        "JASON BUSINESS",
+
+                    text:
+                        jbMessage
+
+                });
+
+
+                return;
+
+            }
+
+
+            await navigator.clipboard.writeText(
+                jbLink
+            );
+
+
+            const jbStatus =
+                document.getElementById(
+                    "jb_copyStatus"
+                );
+
+
+            jbStatus.style.display =
+                "block";
+
+
+            setTimeout(
+                ()=>{
+
+                    jbStatus.style.display =
+                        "none";
+
+                },
+                3000
+            );
+
+
+        }
+
+        catch(
+            jbError
+        ){
+
+            try{
+
+                await navigator.clipboard.writeText(
+                    jbLink
+                );
+
+                alert(
+                    "✅ Lien d'invitation copié !"
+                );
+
+            }
+
+            catch(
+                jbCopyError
+            ){
+
+                alert(
+
+                    "Votre lien d'invitation :\n\n" +
+
+                    jbLink
+
+                );
+
+            }
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
