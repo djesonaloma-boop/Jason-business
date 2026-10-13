@@ -4,70 +4,44 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta name="theme-color" content="#030812">
-<meta name="description" content="JASON Business — Services digitaux">
 <title>JASON Business — Boutique</title>
 <style>
-:root{
-    --blue:#00d2ff;--blue2:#0077ff;--dark:#030812;--dark2:#07111f;
-    --card:#091525;--card2:#0d192b;--border:rgba(0,210,255,.18);
-    --green:#00e676;--red:#ff4757;--orange:#ff9800;--yellow:#ffd740;--purple:#9b59ff;
-    --white:#fff;--muted:rgba(255,255,255,.58);
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+:root{--blue:#00d2ff;--blue2:#0077ff;--dark:#030812;--card:#091525;--border:rgba(0,210,255,.18);--green:#00e676;--red:#ff4757;--yellow:#ffd740;--muted:rgba(255,255,255,.58)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
 body{min-height:100vh;padding-bottom:85px;font-family:"Segoe UI",Arial,sans-serif;color:white;background:radial-gradient(circle at top right,rgba(0,119,255,.12),transparent 35%),radial-gradient(circle at bottom left,rgba(0,210,255,.07),transparent 30%),var(--dark)}
-.header{padding:30px 18px 20px;text-align:center}
-.logo{font-size:25px;font-weight:900;letter-spacing:3px;color:var(--blue);text-shadow:0 0 20px rgba(0,210,255,.20)}
-.subtitle{margin-top:7px;color:var(--muted);font-size:11px;letter-spacing:1.5px}
-.balance{display:inline-flex;align-items:center;gap:7px;margin-top:20px;padding:11px 17px;border-radius:14px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.18);color:#fff;font-size:13px}
-.balance strong,#balance{color:var(--green);font-weight:900}
-.container{width:100%;max-width:1000px;margin:auto;padding:0 15px}
-.section-title{font-size:22px;margin-top:5px}
-.section-description{margin-top:7px;color:var(--muted);font-size:12px;line-height:1.6}
-.section-label{margin:26px 0 14px;font-size:14px;font-weight:900;color:var(--yellow);display:flex;align-items:center;gap:8px}
-.section-label::before{content:"";width:3px;height:18px;background:var(--yellow);border-radius:2px;display:block}
+.header{padding:30px 18px 20px;text-align:center}.logo{font-size:25px;font-weight:900;letter-spacing:3px;color:var(--blue);text-shadow:0 0 20px rgba(0,210,255,.20)}.subtitle{margin-top:7px;color:var(--muted);font-size:11px;letter-spacing:1.5px}
+.balance{display:inline-flex;align-items:center;gap:7px;margin-top:20px;padding:11px 17px;border-radius:14px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.18);color:#fff;font-size:13px}.balance strong,#balance{color:var(--green);font-weight:900}
+.container{width:100%;max-width:1000px;margin:auto;padding:0 15px}.section-title{font-size:22px;margin-top:5px}.section-description{margin-top:7px;color:var(--muted);font-size:12px;line-height:1.6}
+.section-label{margin:26px 0 14px;font-size:14px;font-weight:900;color:var(--yellow);display:flex;align-items:center;gap:8px}.section-label::before{content:"";width:3px;height:18px;background:var(--yellow);border-radius:2px;display:block}
 .services{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:10px}
-.service-card{position:relative;overflow:hidden;padding:19px;min-height:230px;display:flex;flex-direction:column;border-radius:19px;background:linear-gradient(145deg,rgba(10,23,40,.98),rgba(5,13,25,.98));border:1px solid rgba(255,255,255,.07);transition:transform.2s,border-color.2s,box-shadow.2s}
-.service-card::after{content:"";position:absolute;width:110px;height:110px;right:-45px;bottom:-45px;border-radius:50%;background:rgba(0,210,255,.05)}
+.service-card{position:relative;overflow:hidden;padding:19px;min-height:230px;display:flex;flex-direction:column;border-radius:19px;background:linear-gradient(145deg,rgba(10,23,40,.98),rgba(5,13,25,.98));border:1px solid rgba(255,255,255,.07);transition:.2s}
 .service-card:hover{transform:translateY(-3px);border-color:rgba(0,210,255,.28);box-shadow:0 10px 35px rgba(0,0,0,.22)}
 .service-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
 .service-icon{width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:15px;background:rgba(0,210,255,.09);border:1px solid var(--border);font-size:25px}
-.service-badge{font-size:8px;font-weight:900;padding:5px 8px;border-radius:20px;border:1px solid rgba(255,215,0,.3);background:rgba(255,215,0,.08);color:var(--yellow);letter-spacing:.5px}
-.service-badge.free{background:rgba(0,230,118,.10);border-color:rgba(0,230,118,.25);color:var(--green)}
-.service-name{margin-top:14px;font-size:16px;font-weight:900}
-.service-description{margin-top:7px;color:var(--muted);font-size:11px;line-height:1.55;flex:1}
-.service-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:15px}
-.service-price{color:var(--green);font-size:14px;font-weight:900}
-.service-price.free{color:var(--green)}
-.order-btn{border:0;padding:10px 13px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#001018;font-weight:900;font-size:11px;cursor:pointer}
-.order-btn.free{background:linear-gradient(135deg,#2a3a5a,#3a5a8a);color:#fff;border:1px solid rgba(255,255,255,.15)}
-.order-btn:active{transform:scale(.96)}
+.service-badge{font-size:8px;font-weight:900;padding:5px 8px;border-radius:20px;border:1px solid rgba(255,215,0,.3);background:rgba(255,215,0,.08);color:var(--yellow)}.service-badge.free{background:rgba(0,230,118,.10);border-color:rgba(0,230,118,.25);color:var(--green)}
+.service-name{margin-top:14px;font-size:16px;font-weight:900}.service-description{margin-top:7px;color:var(--muted);font-size:11px;line-height:1.55;flex:1}
+.service-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:15px}.service-price{color:var(--green);font-size:14px;font-weight:900}.order-btn{border:0;padding:10px 13px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#001018;font-weight:900;font-size:11px;cursor:pointer}.order-btn.free{background:linear-gradient(135deg,#2a3a5a,#3a5a8a);color:#fff;border:1px solid rgba(255,255,255,.15)}.order-btn:active{transform:scale(.96)}
 .info-box{margin-top:18px;padding:16px;border-radius:15px;background:rgba(0,210,255,.045);border:1px solid var(--border);color:var(--muted);font-size:11px;line-height:1.8}
-.loading{grid-column:1 / -1;padding:45px 20px;text-align:center;color:var(--muted)}
-.modal{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(0,0,0,.80);backdrop-filter:blur(7px)}
-.modal.show{display:flex}
-.modal-box{width:100%;max-width:570px;max-height:92vh;overflow-y:auto;padding:20px;border-radius:21px;background:#081322;border:1px solid var(--border);box-shadow:0 20px 70px rgba(0,0,0,.5)}
-.modal-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:17px}
-.modal-title{font-size:19px;font-weight:900;color:var(--blue)}
-.close{width:34px;height:34px;border:0;border-radius:10px;background:rgba(255,255,255,.07);color:white;font-size:20px;cursor:pointer}
+.modal{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(0,0,0,.85);backdrop-filter:blur(7px)}.modal.show{display:flex}
+.modal-box{width:100%;max-width:650px;max-height:92vh;overflow-y:auto;padding:20px;border-radius:21px;background:#081322;border:1px solid var(--border);box-shadow:0 20px 70px rgba(0,0,0,.5)}
+.modal-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:17px}.modal-title{font-size:19px;font-weight:900;color:var(--blue)}.close{width:34px;height:34px;border:0;border-radius:10px;background:rgba(255,255,255,.07);color:white;font-size:20px;cursor:pointer}
+.api-tabs{display:flex;gap:8px;margin-bottom:16px}.api-tab{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:var(--muted);font-size:11px;font-weight:900;cursor:pointer;text-align:center}.api-tab.active{background:var(--blue);color:#001018;border-color:var(--blue)}
+.doc-box{padding:14px;border-radius:12px;background:#050d18;border:1px solid rgba(255,255,255,.06);margin-bottom:12px}.doc-box h4{font-size:12px;color:var(--yellow);margin-bottom:8px}.doc-box code{display:block;padding:10px;border-radius:8px;background:#000;font-size:10px;color:#00e676;overflow-x:auto;white-space:pre-wrap;word-break:break-all;margin-top:8px;border:1px solid #1a3a2a}
 .order-summary{padding:14px;margin-bottom:16px;border-radius:14px;background:#050d18;border:1px solid rgba(255,255,255,.06)}
-.summary-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;font-size:12px}
-.summary-row span:first-child{color:var(--muted)}.summary-row strong{text-align:right}.summary-balance{color:var(--green)}
+.summary-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;font-size:12px}.summary-row span:first-child{color:var(--muted)}.summary-balance{color:var(--green)}
 .form-group{margin-bottom:14px}.form-label{display:block;margin-bottom:6px;color:var(--muted);font-size:11px;font-weight:700}
 .form-input,.form-textarea,.form-select{width:100%;padding:13px;border-radius:11px;border:1px solid #263247;background:#050d18;color:white;outline:none;font-family:inherit}
 .form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,210,255,.05)}
-.form-textarea{min-height:120px;resize:vertical}.field-help{margin-top:5px;color:rgba(255,255,255,.4);font-size:9px}.required{color:var(--red)}
+.form-textarea{min-height:90px;resize:vertical}.required{color:var(--red)}
 .submit-order{width:100%;padding:15px;border:0;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#001018;font-size:12px;font-weight:900;cursor:pointer}
-.submit-order:disabled{opacity:.5;cursor:not-allowed}.status{min-height:20px;margin-top:12px;text-align:center;font-size:12px;line-height:1.5}
+.submit-order:disabled{opacity:.5}.status{min-height:20px;margin-top:12px;text-align:center;font-size:12px;line-height:1.5}
+.test-result{margin-top:12px;padding:12px;border-radius:10px;background:#000;border:1px solid #1a3a5a;max-height:300px;overflow-y:auto;font-size:11px;white-space:pre-wrap;word-break:break-all}
+.test-btn{width:100%;padding:13px;border:0;border-radius:10px;background:var(--yellow);color:#000;font-weight:900;font-size:12px;cursor:pointer;margin-top:10px}
 .bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:300;height:68px;display:flex;align-items:center;justify-content:space-around;background:rgba(3,8,18,.96);border-top:1px solid var(--border);backdrop-filter:blur(20px)}
-.nav-link{min-width:70px;padding:7px;display:flex;flex-direction:column;align-items:center;gap:4px;color:rgba(255,255,255,.5);text-decoration:none;font-size:9px;font-weight:700}
-.nav-link span{font-size:19px}.nav-link.active{color:var(--blue)}
-#toastContainer{position:fixed;top:15px;left:15px;right:15px;z-index:1000;display:flex;flex-direction:column;gap:8px;pointer-events:none}
-.toast{width:100%;max-width:430px;margin-left:auto;padding:13px 15px;border-radius:12px;background:#0b1728;border:1px solid var(--border);box-shadow:0 10px 30px rgba(0,0,0,.35);font-size:12px;animation:toastIn.2s ease}
-.toast.success{border-color:rgba(0,230,118,.3)}.toast.error{border-color:rgba(255,71,87,.3)}
+.nav-link{min-width:70px;padding:7px;display:flex;flex-direction:column;align-items:center;gap:4px;color:rgba(255,255,255,.5);text-decoration:none;font-size:9px;font-weight:700}.nav-link span{font-size:19px}.nav-link.active{color:var(--blue)}
+#toastContainer{position:fixed;top:15px;left:15px;right:15px;z-index:1000;display:flex;flex-direction:column;gap:8px;pointer-events:none}.toast{width:100%;max-width:430px;margin-left:auto;padding:13px 15px;border-radius:12px;background:#0b1728;border:1px solid var(--border);box-shadow:0 10px 30px rgba(0,0,0,.35);font-size:12px;animation:toastIn .2s ease}.toast.success{border-color:rgba(0,230,118,.3)}.toast.error{border-color:rgba(255,71,87,.3)}
 @keyframes toastIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:850px){.services{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:550px){.header{padding-top:25px}.logo{font-size:21px}.services{grid-template-columns:1fr;gap:11px}.service-card{min-height:190px}.container{padding:0 12px}.modal-box{padding:16px}}
+@media(max-width:850px){.services{grid-template-columns:repeat(2,1fr)}}@media(max-width:550px){.services{grid-template-columns:1fr;gap:11px}.container{padding:0 12px}}
 </style>
 </head>
 <body>
@@ -79,20 +53,18 @@ body{min-height:100vh;padding-bottom:85px;font-family:"Segoe UI",Arial,sans-seri
 </header>
 
 <main class="container">
-    <h2 class="section-title">🛍️ Nos services</h2>
-    <p class="section-description">Choisissez un service, remplissez les informations demandées puis envoyez votre commande. Les API DAVBOT sont gratuites (0 FC).</p>
+    <h2 class="section-title">🛍️ Boutique</h2>
+    <p class="section-description">Services Premium payants et Services API gratuits (0 FC) avec testeur intégré comme DAVBOT.</p>
 
     <div class="section-label">⭐ Services Premium</div>
     <div class="services" id="servicesPremium"></div>
 
-    <div class="section-label">🎁 Services Gratuits — API DAVBOT (0 FC)</div>
+    <div class="section-label">🎁 Centre API DAVBOT — 0 FC + Docs + Test</div>
     <div class="services" id="servicesFree"></div>
 
     <div class="info-box">
-        🔐 Les commandes sont enregistrées dans votre compte JASON Business.<br>
-        💰 Services Premium déduits du solde principal. Services API = 0 FC (gratuit).<br>
-        📩 Une fois envoyée, votre commande est transmise à l'administration.<br>
-        ⚠️ Vérifiez attentivement les informations avant de confirmer.
+        🔐 Premium = déduit du solde. API = 0 FC avec documentation et testeur direct vers https://davbot-outils.vercel.app<br>
+        🧪 Clique sur un bouton API pour voir les docs, exemples curl/python/js et tester.
     </div>
 </main>
 
@@ -102,16 +74,40 @@ body{min-height:100vh;padding-bottom:85px;font-family:"Segoe UI",Arial,sans-seri
             <div class="modal-title" id="modalTitle">Commander</div>
             <button class="close" id="closeModal" type="button">×</button>
         </div>
-        <div class="order-summary">
-            <div class="summary-row"><span>Service</span><strong id="summaryService">-</strong></div>
-            <div class="summary-row"><span>Prix</span><strong><span id="summaryPrice">0</span> FC</strong></div>
-            <div class="summary-row"><span>Votre solde</span><strong id="summaryBalance" class="summary-balance">0 FC</strong></div>
+
+        <div id="apiSection" style="display:none">
+            <div class="api-tabs">
+                <button class="api-tab active" id="tabDocs" onclick="switchTab('docs')">📄 Documentation</button>
+                <button class="api-tab" id="tabTest" onclick="switchTab('test')">🧪 Tester</button>
+            </div>
+
+            <div id="docsContent">
+                <div class="doc-box"><h4>🌐 Endpoint</h4><code id="docEndpoint">-</code></div>
+                <div class="doc-box"><h4>📖 Description</h4><div id="docDesc" style="font-size:11px;color:var(--muted);line-height:1.6">-</div></div>
+                <div class="doc-box"><h4>💻 Exemple JavaScript</h4><code id="docJS">-</code></div>
+                <div class="doc-box"><h4>🐍 Exemple Python</h4><code id="docPython">-</code></div>
+                <div class="doc-box"><h4>🔧 Exemple cURL</h4><code id="docCurl">-</code></div>
+            </div>
+
+            <div id="testContent" style="display:none">
+                <div id="dynamicFieldsTest"></div>
+                <button class="test-btn" id="testApiBtn" onclick="testApi()">🚀 TESTER L'API MAINTENANT</button>
+                <div id="testResult" class="test-result" style="display:none"></div>
+            </div>
         </div>
-        <form id="orderForm">
-            <div id="dynamicFields"></div>
-            <button type="submit" class="submit-order" id="submitOrder">🛒 CONFIRMER LA COMMANDE</button>
-            <div id="orderStatus" class="status"></div>
-        </form>
+
+        <div id="normalSection">
+            <div class="order-summary">
+                <div class="summary-row"><span>Service</span><strong id="summaryService">-</strong></div>
+                <div class="summary-row"><span>Prix</span><strong><span id="summaryPrice">0</span> FC</strong></div>
+                <div class="summary-row"><span>Votre solde</span><strong id="summaryBalance" class="summary-balance">0 FC</strong></div>
+            </div>
+            <form id="orderForm">
+                <div id="dynamicFields"></div>
+                <button type="submit" class="submit-order" id="submitOrder">🛒 CONFIRMER LA COMMANDE</button>
+                <div id="orderStatus" class="status"></div>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -149,6 +145,7 @@ const servicesFree = document.getElementById("servicesFree");
 const orderModal = document.getElementById("orderModal");
 const orderForm = document.getElementById("orderForm");
 const dynamicFields = document.getElementById("dynamicFields");
+const dynamicFieldsTest = document.getElementById("dynamicFieldsTest");
 const orderStatus = document.getElementById("orderStatus");
 const submitOrder = document.getElementById("submitOrder");
 
@@ -156,275 +153,212 @@ let currentUserPhone = "";
 let currentUserData = {};
 let selectedService = null;
 
+const API_BASE = "https://davbot-outils.vercel.app";
+
 const SERVICES = [
-    {id:"application",nom:"Application",description:"Création d'applications mobiles modernes et adaptées à votre projet.",icon:"📱",prix:10000,fields:[
-        {name:"nomProjet",label:"Nom de l'application",type:"text",placeholder:"Ex : Mon Application",required:true},
-        {name:"typeApplication",label:"Type d'application",type:"select",required:true,options:["Application Android","Application Web","Application Mobile","Application Business","Autre"]},
-        {name:"description",label:"Décrivez votre projet",type:"textarea",placeholder:"Expliquez les fonctionnalités souhaitées...",required:true},
-        {name:"contact",label:"Contact WhatsApp / téléphone",type:"text",placeholder:"Votre numéro",required:true}
+    {id:"application",nom:"Application",description:"Création d'applications mobiles modernes.",icon:"📱",prix:10000,fields:[
+        {name:"nomProjet",label:"Nom de l'application",type:"text",required:true},
+        {name:"typeApplication",label:"Type",type:"select",required:true,options:["Android","Web","Business","Autre"]},
+        {name:"description",label:"Description",type:"textarea",required:true},
+        {name:"contact",label:"Contact",type:"text",required:true}
     ]},
-    {id:"site-web",nom:"Site web",description:"Création de sites web professionnels, modernes, rapides et adaptés aux mobiles.",icon:"🌐",prix:15000,fields:[
-        {name:"nomProjet",label:"Nom du site",type:"text",placeholder:"Ex : Boutique en ligne",required:true},
-        {name:"typeSite",label:"Type de site",type:"select",required:true,options:["Site vitrine","Boutique en ligne","Portfolio","Blog","Site Business","Plateforme","Autre"]},
-        {name:"description",label:"Description du site",type:"textarea",placeholder:"Expliquez les pages et fonctionnalités souhaitées...",required:true},
-        {name:"contact",label:"Contact",type:"text",placeholder:"WhatsApp / téléphone",required:true}
+    {id:"site-web",nom:"Site web",description:"Sites web pros, rapides, responsive.",icon:"🌐",prix:15000,fields:[
+        {name:"nomProjet",label:"Nom du site",type:"text",required:true},
+        {name:"typeSite",label:"Type",type:"select",required:true,options:["Vitrine","Boutique","Portfolio","Business"]},
+        {name:"description",label:"Description",type:"textarea",required:true},
+        {name:"contact",label:"Contact",type:"text",required:true}
     ]},
-    {id:"chanson",nom:"Chanson",description:"Création de chansons personnalisées pour vos événements, projets ou réseaux sociaux.",icon:"🎵",prix:5000,fields:[
-        {name:"titre",label:"Titre de la chanson",type:"text",placeholder:"Ex : Joyeux anniversaire",required:true},
-        {name:"style",label:"Style musical",type:"select",required:true,options:["Afrobeat","Rap","R&B","Gospel","Drill","Amapiano","Romantique","Autre"]},
-        {name:"description",label:"Détails de la chanson",type:"textarea",placeholder:"Expliquez le thème, les paroles ou le message...",required:true},
-        {name:"contact",label:"Contact",type:"text",placeholder:"WhatsApp / téléphone",required:true}
+    {id:"logo",nom:"Logo",description:"Logos pros pour marques.",icon:"🎨",prix:3000,fields:[
+        {name:"nomMarque",label:"Nom marque",type:"text",required:true},
+        {name:"description",label:"Description logo",type:"textarea",required:true},
+        {name:"contact",label:"Contact",type:"text",required:true}
     ]},
-    {id:"logo",nom:"Logo",description:"Création de logos professionnels pour entreprises, marques, boutiques et projets.",icon:"🎨",prix:3000,fields:[
-        {name:"nomMarque",label:"Nom de la marque",type:"text",placeholder:"Ex : JASON BUSINESS",required:true},
-        {name:"style",label:"Style souhaité",type:"select",required:true,options:["Moderne","Minimaliste","Professionnel","Luxe","Gaming","Technologique","Autre"]},
-        {name:"description",label:"Description du logo",type:"textarea",placeholder:"Couleurs, symbole, texte, style...",required:true},
-        {name:"contact",label:"Contact",type:"text",placeholder:"WhatsApp / téléphone",required:true}
+    {id:"video",nom:"Vidéo",description:"Montage vidéo pro.",icon:"🎬",prix:8000,fields:[
+        {name:"typeVideo",label:"Type",type:"select",required:true,options:["Publicité","TikTok","YouTube"]},
+        {name:"description",label:"Description",type:"textarea",required:true},
+        {name:"contact",label:"Contact",type:"text",required:true}
     ]},
-    {id:"affiche",nom:"Affiche",description:"Création d'affiches publicitaires, événements, promotions et communication digitale.",icon:"🖼️",prix:3000,fields:[
-        {name:"titre",label:"Titre de l'affiche",type:"text",placeholder:"Ex : Grande promotion",required:true},
-        {name:"typeAffiche",label:"Type d'affiche",type:"select",required:true,options:["Publicité","Événement","Promotion","Anniversaire","Business","Réseaux sociaux","Autre"]},
-        {name:"description",label:"Informations à afficher",type:"textarea",placeholder:"Texte, prix, date, lieu, contact, couleurs...",required:true},
-        {name:"contact",label:"Contact",type:"text",placeholder:"WhatsApp / téléphone",required:true}
+    // API DAVBOT 0 FC
+    {id:"davbot-ai",nom:"DAVBOT IA Chat",description:"Chat intelligent IA.",icon:"🤖",prix:0,api:`${API_BASE}/api/intelligence-artificielle/ai`,method:"POST",doc:"Chat IA conversationnel",example:{message:"Bonjour DAVBOT, présente-toi.",history:[]},fields:[
+        {name:"message",label:"Message",type:"textarea",required:true,placeholder:"Bonjour DAVBOT, présente-toi."},
+        {name:"history",label:"History JSON",type:"textarea",required:false,placeholder:"[]"}
     ]},
-    {id:"video",nom:"Vidéo",description:"Montage et création de vidéos professionnelles pour réseaux sociaux, publicité et événements.",icon:"🎬",prix:8000,fields:[
-        {name:"typeVideo",label:"Type de vidéo",type:"select",required:true,options:["Publicité","TikTok","YouTube","Facebook","Instagram","Clip musical","Présentation","Autre"]},
-        {name:"duree",label:"Durée approximative",type:"text",placeholder:"Ex : 30 secondes / 2 minutes",required:true},
-        {name:"description",label:"Description du montage",type:"textarea",placeholder:"Expliquez le contenu, style, texte, musique...",required:true},
-        {name:"contact",label:"Contact",type:"text",placeholder:"WhatsApp / téléphone",required:true}
+    {id:"davbot-ask",nom:"DAVBOT Vision",description:"Analyse d'images par IA.",icon:"👁️",prix:0,api:`${API_BASE}/api/intelligence-artificielle/ask`,method:"POST",doc:"Analyse image + knowledge + rules",example:{message:"Analyse cette image.",image:"data:image/jpeg;base64,...",knowledge:"",rules:"",history:[]},fields:[
+        {name:"message",label:"Message",type:"textarea",required:true},
+        {name:"image",label:"Image base64",type:"textarea",required:true},
+        {name:"knowledge",label:"Knowledge",type:"text",required:false}
     ]},
-    {id:"chatbot",nom:"Chatbot",description:"Création de chatbots intelligents pour sites web, WhatsApp et services digitaux.",icon:"🤖",prix:7000,fields:[
-        {name:"nomBot",label:"Nom du chatbot",type:"text",placeholder:"Ex : Assistant JASON",required:true},
-        {name:"plateforme",label:"Plateforme",type:"select",required:true,options:["Site web","WhatsApp","Telegram","Facebook","Application","Autre"]},
-        {name:"fonctionnalites",label:"Fonctionnalités souhaitées",type:"textarea",placeholder:"Ex : répondre aux clients, présenter les services, prendre des commandes...",required:true},
-        {name:"contact",label:"Contact",type:"text",placeholder:"WhatsApp / téléphone",required:true}
+    {id:"davbot-translate",nom:"Traduction IA",description:"Traduction multilingue.",icon:"🌍",prix:0,api:`${API_BASE}/api/intelligence-artificielle/translate`,method:"POST",doc:"Traduction IA",example:{text:"Bonjour tout le monde",source:"fr",target:"en"},fields:[
+        {name:"text",label:"Texte",type:"textarea",required:true},
+        {name:"source",label:"Source (fr)",type:"text",required:true,placeholder:"fr"},
+        {name:"target",label:"Cible (en)",type:"text",required:true,placeholder:"en"}
     ]},
-    {id:"cv",nom:"CV",description:"Création de CV professionnels, modernes et adaptés à votre profil.",icon:"📄",prix:3000,fields:[
-        {name:"nomComplet",label:"Nom complet",type:"text",placeholder:"Votre nom complet",required:true},
-        {name:"domaine",label:"Domaine professionnel",type:"text",placeholder:"Ex : Développeur web",required:true},
-        {name:"description",label:"Informations du CV",type:"textarea",placeholder:"Expérience, études, compétences, langues...",required:true},
-        {name:"contact",label:"Contact",type:"text",placeholder:"WhatsApp / téléphone",required:true}
-    ]},
-    // SERVICES GRATUITS API DAVBOT 0 FC
-    {id:"davbot-ai",nom:"DAVBOT IA Chat",description:"API intelligence artificielle - Chat intelligent. Endpoint: /api/intelligence-artificielle/ai",icon:"🤖",prix:0,api:"https://davbot-outils.vercel.app/api/intelligence-artificielle/ai",fields:[
-        {name:"message",label:"Votre message",type:"textarea",placeholder:"Ex : Bonjour DAVBOT, présente-toi.",required:true},
-        {name:"history",label:"Historique (optionnel)",type:"textarea",placeholder:"[]",required:false}
-    ]},
-    {id:"davbot-ask",nom:"DAVBOT Vision IA",description:"Analyse d'images par IA. Endpoint: /api/intelligence-artificielle/ask",icon:"👁️",prix:0,api:"https://davbot-outils.vercel.app/api/intelligence-artificielle/ask",fields:[
-        {name:"message",label:"Message",type:"textarea",placeholder:"Analyse cette image.",required:true},
-        {name:"image",label:"Image base64",type:"textarea",placeholder:"data:image/jpeg;base64,...",required:true},
-        {name:"knowledge",label:"Connaissance personnalisée",type:"text",placeholder:"Optionnel",required:false}
-    ]},
-    {id:"davbot-translate",nom:"Traduction IA",description:"Traduction multilingue IA. Endpoint: /api/intelligence-artificielle/translate",icon:"🌍",prix:0,api:"https://davbot-outils.vercel.app/api/intelligence-artificielle/translate",fields:[
-        {name:"text",label:"Texte à traduire",type:"textarea",placeholder:"Bonjour tout le monde",required:true},
-        {name:"source",label:"Langue source (fr)",type:"text",placeholder:"fr",required:true},
-        {name:"target",label:"Langue cible (en)",type:"text",placeholder:"en",required:true}
-    ]},
-    {id:"davbot-generate",nom:"Générateur d'Images",description:"Génération d'images par prompt IA. Endpoint: /api/genere-image/generate",icon:"🎨",prix:0,api:"https://davbot-outils.vercel.app/api/genere-image/generate",fields:[
-        {name:"prompt",label:"Prompt",type:"textarea",placeholder:"Une ville futuriste à Kinshasa",required:true},
+    {id:"davbot-generate",nom:"Générateur Images",description:"Génère images par prompt.",icon:"🎨",prix:0,api:`${API_BASE}/api/genere-image/generate`,method:"POST",doc:"Génération d'images",example:{prompt:"Une ville futuriste à Kinshasa",size:"1024x1024",n:1},fields:[
+        {name:"prompt",label:"Prompt",type:"textarea",required:true},
         {name:"size",label:"Taille",type:"select",required:true,options:["1024x1024","512x512","1792x1024"]},
-        {name:"n",label:"Nombre d'images",type:"text",placeholder:"1",required:false}
+        {name:"n",label:"Nombre",type:"text",required:false,placeholder:"1"}
     ]},
-    {id:"davbot-image",nom:"Transformation Image",description:"Transformer image en affiche futuriste. Endpoint: /api/genere-image/image",icon:"🖼️",prix:0,api:"https://davbot-outils.vercel.app/api/genere-image/image",fields:[
-        {name:"prompt",label:"Prompt de transformation",type:"textarea",placeholder:"Transformer cette image en affiche futuriste",required:true},
+    {id:"davbot-image",nom:"Transformation Image",description:"Transforme image en affiche.",icon:"🖼️",prix:0,api:`${API_BASE}/api/genere-image/image`,method:"POST",doc:"Transformation d'image",example:{prompt:"Transformer en affiche futuriste",size:"1024x1024"},fields:[
+        {name:"prompt",label:"Prompt",type:"textarea",required:true},
         {name:"size",label:"Taille",type:"select",required:true,options:["1024x1024","512x512"]}
     ]},
-    {id:"davbot-video",nom:"Générateur Vidéo",description:"Création de vidéos par IA. Endpoint: /api/media/video",icon:"🎬",prix:0,api:"https://davbot-outils.vercel.app/api/media/video",fields:[
-        {name:"prompt",label:"Prompt vidéo",type:"textarea",placeholder:"Une ville futuriste de Kinshasa la nuit",required:true},
-        {name:"duration",label:"Durée (secondes)",type:"text",placeholder:"6",required:true}
+    {id:"davbot-video",nom:"Générateur Vidéo",description:"Crée vidéos par IA.",icon:"🎬",prix:0,api:`${API_BASE}/api/media/video`,method:"POST",doc:"Génération vidéo",example:{prompt:"Une ville futuriste de Kinshasa la nuit",duration:6},fields:[
+        {name:"prompt",label:"Prompt vidéo",type:"textarea",required:true},
+        {name:"duration",label:"Durée",type:"text",required:true,placeholder:"6"}
     ]},
-    {id:"davbot-music",nom:"Générateur Musique",description:"Création de musique IA. Endpoint: /api/media/music",icon:"🎵",prix:0,api:"https://davbot-outils.vercel.app/api/media/music",fields:[
-        {name:"prompt",label:"Prompt musical",type:"textarea",placeholder:"Afrobeat énergique et mélodique",required:true},
-        {name:"duration",label:"Durée",type:"text",placeholder:"15",required:true}
+    {id:"davbot-music",nom:"Générateur Musique",description:"Crée musiques par IA.",icon:"🎵",prix:0,api:`${API_BASE}/api/media/music`,method:"POST",doc:"Génération musique",example:{prompt:"Afrobeat énergique",duration:15},fields:[
+        {name:"prompt",label:"Prompt musique",type:"textarea",required:true},
+        {name:"duration",label:"Durée",type:"text",required:true,placeholder:"15"}
     ]},
-    {id:"davbot-ads",nom:"DAVBOT Publicité",description:"Gestion publicitaire. Endpoint: /api/publicite/ads",icon:"📢",prix:0,api:"https://davbot-outils.vercel.app/api/publicite/ads",fields:[
-        {name:"action",label:"Action",type:"select",required:true,options:["list","create","catalog"]},
-        {name:"description",label:"Description",type:"textarea",placeholder:"Détails...",required:false}
+    {id:"davbot-ads",nom:"DAVBOT Publicité",description:"API publicité.",icon:"📢",prix:0,api:`${API_BASE}/api/publicite/ads`,method:"POST",doc:"Publicité",example:{action:"catalog"},fields:[
+        {name:"action",label:"Action",type:"select",required:true,options:["catalog","list","create"]}
     ]},
-    {id:"davbot-hub",nom:"DAVBOT Hub",description:"Catalogue central de tous les services. Endpoint: /api/hub",icon:"🗄️",prix:0,api:"https://davbot-outils.vercel.app/api/hub",fields:[
+    {id:"davbot-hub",nom:"DAVBOT Hub",description:"Catalogue central.",icon:"🗄️",prix:0,api:`${API_BASE}/api/hub`,method:"POST",doc:"Hub central",example:{action:"catalog"},fields:[
         {name:"action",label:"Action",type:"select",required:true,options:["catalog","list"]}
     ]},
-    {id:"davbot-data",nom:"DAVBOT Data",description:"Accès aux données. Endpoint: /api/data",icon:"💾",prix:0,api:"https://davbot-outils.vercel.app/api/data",fields:[
-        {name:"action",label:"Action",type:"text",placeholder:"catalog",required:false}
+    {id:"davbot-data",nom:"DAVBOT Data",description:"API Data.",icon:"💾",prix:0,api:`${API_BASE}/api/data`,method:"POST",doc:"Data API",example:{action:"catalog"},fields:[
+        {name:"action",label:"Action",type:"text",required:false,placeholder:"catalog"}
     ]},
-    {id:"davbot-storage",nom:"DAVBOT Storage",description:"Stockage cloud. Endpoint: /api/storage",icon:"☁️",prix:0,api:"https://davbot-outils.vercel.app/api/storage",fields:[
-        {name:"action",label:"Action",type:"text",placeholder:"list",required:false}
+    {id:"davbot-storage",nom:"DAVBOT Storage",description:"Stockage cloud.",icon:"☁️",prix:0,api:`${API_BASE}/api/storage`,method:"POST",doc:"Storage API",example:{action:"list"},fields:[
+        {name:"action",label:"Action",type:"text",required:false,placeholder:"list"}
     ]},
-    {id:"davbot-store",nom:"DAVBOT Store",description:"Télécharger et publier des applications. Gratuit.",icon:"🏪",prix:0,fields:[
-        {name:"appName",label:"Nom de l'app",type:"text",placeholder:"Mon app",required:true},
-        {name:"description",label:"Description",type:"textarea",placeholder:"Description de l'app",required:true}
+    {id:"davbot-admin",nom:"DAVBOT Admin Auth",description:"Auth admin.",icon:"🔐",prix:0,api:`${API_BASE}/api/admin-auth`,method:"POST",doc:"Auth admin",example:{action:"login"},fields:[
+        {name:"action",label:"Action",type:"text",required:true,placeholder:"login"}
     ]}
 ];
 
 function money(v){return Math.floor(Number(v)||0).toLocaleString("fr-FR")}
 function escapeHTML(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
-function showToast(message,type="success"){
-    const container=document.getElementById("toastContainer");
-    const toast=document.createElement("div");
-    toast.className=`toast ${type}`;
-    toast.textContent=message;
-    container.appendChild(toast);
-    setTimeout(()=>toast.remove(),3500);
-}
-function detectUserPhone(){
-    const possibleKeys=["jasonBusinessPhone","jasonBusinessUser","userPhone","telephone","phone","numero","currentUserPhone","loggedUser","jasonUser"];
-    for(const key of possibleKeys){
-        const value=localStorage.getItem(key);
-        if(value && value!=="null" && value!=="undefined"){
-            try{
-                const parsed=JSON.parse(value);
-                if(typeof parsed==="object" && parsed!==null){
-                    const phone=parsed.telephone??parsed.phone??parsed.numero??parsed.userPhone;
-                    if(phone){return String(phone)}
-                }
-            }catch(e){}
-            return value.trim();
-        }
-    }
-    return "";
-}
-function loadCurrentUser(){
-    currentUserPhone=detectUserPhone();
-    if(!currentUserPhone){balanceElement.textContent="0";showToast("⚠️ Connectez-vous d'abord à votre compte.","error");return}
-    onValue(ref(db,`${USERS_PATH}/${currentUserPhone}`),snapshot=>{
-        if(!snapshot.exists()){currentUserData={};balanceElement.textContent="0";showToast("⚠️ Compte utilisateur introuvable.","error");return}
-        currentUserData=snapshot.val()||{};
-        updateBalance();
-    },error=>{console.error("USER:",error);showToast("❌ Impossible de charger votre compte.","error")});
-}
-function getBalance(){return Number(currentUserData.solde_principal??currentUserData.solde??currentUserData.balance??0)||0}
-function updateBalance(){
-    const value=getBalance();
-    balanceElement.textContent=money(value);
-    if(selectedService){
-        document.getElementById("summaryBalance").textContent=money(value)+" FC";
-    }
-}
+function showToast(m,t="success"){const c=document.getElementById("toastContainer");const d=document.createElement("div");d.className=`toast ${t}`;d.textContent=m;c.appendChild(d);setTimeout(()=>d.remove(),3500)}
+function detectUserPhone(){const k=["jasonBusinessPhone","jasonBusinessUser","userPhone","telephone","phone"];for(const key of k){const v=localStorage.getItem(key);if(v && v!=="null"){try{const p=JSON.parse(v);if(p.telephone) return String(p.telephone)}catch(e){}return v.trim()}}return""}
+function loadCurrentUser(){currentUserPhone=detectUserPhone();if(!currentUserPhone){balanceElement.textContent="0";return}onValue(ref(db,`${USERS_PATH}/${currentUserPhone}`),s=>{if(!s.exists()){currentUserData={};balanceElement.textContent="0";return}currentUserData=s.val()||{};updateBalance()})}
+function getBalance(){return Number(currentUserData.solde_principal??currentUserData.solde??0)||0}
+function updateBalance(){balanceElement.textContent=money(getBalance());const b=document.getElementById("summaryBalance");if(b) b.textContent=money(getBalance())+" FC"}
+
 function renderServices(){
     servicesPremium.innerHTML="";servicesFree.innerHTML="";
     SERVICES.forEach(service=>{
         const isFree=service.prix===0;
-        const card=document.createElement("article");
-        card.className="service-card";
-        card.innerHTML=`
-            <div class="service-top">
-                <div class="service-icon">${service.icon}</div>
-                <div class="service-badge ${isFree?'free':''}">${isFree?'GRATUIT':'VIP PREMIUM'}</div>
-            </div>
-            <div class="service-name">${escapeHTML(service.nom)}</div>
-            <div class="service-description">${escapeHTML(service.description)}</div>
-            <div class="service-bottom">
-                <div class="service-price ${isFree?'free':''}">${isFree?'0 FC':money(service.prix)+' FC'}</div>
-                <button class="order-btn ${isFree?'free':''}" type="button">${isFree?'Ouvrir':'Commander'}</button>
-            </div>
-        `;
+        const card=document.createElement("article");card.className="service-card";
+        card.innerHTML=`<div class="service-top"><div class="service-icon">${service.icon}</div><div class="service-badge ${isFree?'free':''}">${isFree?'GRATUIT 0 FC':'VIP PREMIUM'}</div></div><div class="service-name">${escapeHTML(service.nom)}</div><div class="service-description">${escapeHTML(service.description)}<br><small style="color:var(--blue)">${service.api?escapeHTML(service.api):''}</small></div><div class="service-bottom"><div class="service-price">${isFree?'0 FC':money(service.prix)+' FC'}</div><button class="order-btn ${isFree?'free':''}" type="button">${isFree?'API + Tester':'Commander'}</button></div>`;
         card.querySelector(".order-btn").addEventListener("click",()=>openOrder(service));
-        if(isFree){servicesFree.appendChild(card)}else{servicesPremium.appendChild(card)}
+        if(isFree) servicesFree.appendChild(card); else servicesPremium.appendChild(card);
     });
 }
-function createField(field){
-    const group=document.createElement("div");group.className="form-group";
-    const label=document.createElement("label");label.className="form-label";
-    label.innerHTML=escapeHTML(field.label)+(field.required?' <span class="required">*</span>':'');
-    group.appendChild(label);
+
+function createField(field,target){
+    const g=document.createElement("div");g.className="form-group";
+    const l=document.createElement("label");l.className="form-label";l.innerHTML=escapeHTML(field.label)+(field.required?' <span class="required">*</span>':'');
+    g.appendChild(l);
     let input;
     if(field.type==="textarea"){input=document.createElement("textarea");input.className="form-textarea"}
-    else if(field.type==="select"){
-        input=document.createElement("select");input.className="form-select";
-        const first=document.createElement("option");first.value="";first.textContent="Sélectionner...";input.appendChild(first);
-        (field.options||[]).forEach(option=>{const opt=document.createElement("option");opt.value=option;opt.textContent=option;input.appendChild(opt)});
-    }else{input=document.createElement("input");input.className="form-input";input.type=field.type||"text"}
-    input.name=field.name;input.required=Boolean(field.required);input.placeholder=field.placeholder||"";
-    group.appendChild(input);
-    if(field.help){const help=document.createElement("div");help.className="field-help";help.textContent=field.help;group.appendChild(help)}
-    return group;
+    else if(field.type==="select"){input=document.createElement("select");input.className="form-select";const f=document.createElement("option");f.value="";f.textContent="Sélectionner...";input.appendChild(f);(field.options||[]).forEach(o=>{const opt=document.createElement("option");opt.value=o;opt.textContent=o;input.appendChild(opt)})}
+    else{input=document.createElement("input");input.className="form-input";input.type=field.type||"text"}
+    input.name=field.name;input.required=Boolean(field.required);input.placeholder=field.placeholder||"";if(field.value) input.value=field.value;
+    g.appendChild(input);
+    if(target) target.appendChild(g);
+    return g;
 }
+
+window.switchTab=function(type){
+    document.getElementById("tabDocs").classList.toggle("active",type==="docs");
+    document.getElementById("tabTest").classList.toggle("active",type==="test");
+    document.getElementById("docsContent").style.display=type==="docs"?"block":"none";
+    document.getElementById("testContent").style.display=type==="test"?"block":"none";
+}
+
 function openOrder(service){
-    if(!currentUserPhone){showToast("⚠️ Connectez-vous avant de commander.","error");return}
     selectedService=service;
-    document.getElementById("modalTitle").textContent="Commander — "+service.nom;
-    document.getElementById("summaryService").textContent=service.nom;
-    document.getElementById("summaryPrice").textContent=money(service.prix);
-    document.getElementById("summaryBalance").textContent=money(getBalance())+" FC";
-    dynamicFields.innerHTML="";
-    service.fields.forEach(field=>{dynamicFields.appendChild(createField(field))});
-    orderStatus.innerHTML="";submitOrder.disabled=false;
+    document.getElementById("modalTitle").textContent=service.nom;
+    const isApi=service.prix===0 && service.api;
+    document.getElementById("apiSection").style.display=isApi?"block":"none";
+    document.getElementById("normalSection").style.display=isApi?"none":"block";
+
+    if(isApi){
+        document.getElementById("docEndpoint").textContent=service.api;
+        document.getElementById("docDesc").textContent=service.doc||service.description;
+        const example=JSON.stringify(service.example||{},null,2);
+        document.getElementById("docJS").textContent=`const response = await fetch("${service.api}", {\n  method: "${service.method||'POST'}",\n  headers: {"Content-Type":"application/json","Accept":"application/json"},\n  body: JSON.stringify(${example})\n});\nconst data = await response.json();\nconsole.log(data);`;
+        document.getElementById("docPython").textContent=`import requests\nurl = "${service.api}"\ndata = ${example}\nr = requests.post(url, json=data, headers={"Accept":"application/json"})\nprint(r.json())`;
+        document.getElementById("docCurl").textContent=`curl -X POST "${service.api}" -H "Content-Type: application/json" -H "Accept: application/json" -d '${JSON.stringify(service.example||{})}'`;
+        dynamicFieldsTest.innerHTML="";
+        service.fields.forEach(f=>createField(f,dynamicFieldsTest));
+        document.getElementById("testResult").style.display="none";
+        switchTab('docs');
+    }else{
+        document.getElementById("summaryService").textContent=service.nom;
+        document.getElementById("summaryPrice").textContent=money(service.prix);
+        document.getElementById("summaryBalance").textContent=money(getBalance())+" FC";
+        dynamicFields.innerHTML="";
+        service.fields.forEach(f=>createField(f,dynamicFields));
+        orderStatus.innerHTML="";submitOrder.disabled=false;
+    }
     orderModal.classList.add("show");
 }
+
+window.testApi=async function(){
+    if(!selectedService||!selectedService.api) return;
+    const resultEl=document.getElementById("testResult");
+    const btn=document.getElementById("testApiBtn");
+    btn.disabled=true;btn.textContent="⏳ TEST EN COURS...";
+    resultEl.style.display="block";resultEl.textContent="Envoi de la requête à "+selectedService.api+"...";
+    try{
+        const formData=new FormData();
+        const inputs=dynamicFieldsTest.querySelectorAll("input, textarea, select");
+        const payload={};
+        inputs.forEach(inp=>{
+            let val=inp.value.trim();
+            if(!val) return;
+            try{const j=JSON.parse(val);if(typeof j==="object") payload[inp.name]=j; else payload[inp.name]=val}catch(e){
+                if(inp.name==="history" && val==="[]") payload[inp.name]=[];
+                else if(!isNaN(val) && inp.name!=="message" && inp.name!=="prompt" && inp.name!=="text") payload[inp.name]=Number(val);
+                else payload[inp.name]=val;
+            }
+        });
+        // Si vide, utilise example
+        const finalPayload=Object.keys(payload).length?payload:selectedService.example;
+        const response=await fetch(selectedService.api,{
+            method:selectedService.method||"POST",
+            headers:{"Content-Type":"application/json","Accept":"application/json"},
+            body:JSON.stringify(finalPayload)
+        });
+        const data=await response.json().catch(async()=>{return {text:await response.text()}});
+        resultEl.textContent=`✅ Status: ${response.status}\n\n📦 Réponse:\n${JSON.stringify(data,null,2)}`;
+        showToast("✅ API testée avec succès");
+    }catch(e){
+        console.error(e);
+        resultEl.textContent=`❌ Erreur:\n${e.message}\n\nVérifie que l'API ${selectedService.api} autorise CORS.`;
+        showToast("❌ Erreur API","error");
+    }
+    btn.disabled=false;btn.textContent="🚀 TESTER L'API MAINTENANT";
+}
+
 function closeOrder(){orderModal.classList.remove("show");selectedService=null}
 document.getElementById("closeModal").addEventListener("click",closeOrder);
-orderModal.addEventListener("click",event=>{if(event.target===orderModal){closeOrder()}});
-document.addEventListener("keydown",event=>{if(event.key==="Escape"){closeOrder()}});
-function collectFormData(){
-    const formData=new FormData(orderForm);const result={};
-    for(const [key,value] of formData.entries()){result[key]=String(value).trim()}
-    return result;
-}
-orderForm.addEventListener("submit",async event=>{
-    event.preventDefault();
-    if(!selectedService){return}
-    if(!currentUserPhone){showToast("❌ Utilisateur non connecté.","error");return}
-    const amount=Number(selectedService.prix);
-    const currentBalance=getBalance();
-    if(currentBalance<amount){
-        orderStatus.innerHTML=`<span style="color:var(--red)">❌ Solde insuffisant. Solde disponible : ${money(currentBalance)} FC</span>`;
-        return;
-    }
-    const fields=collectFormData();
-    submitOrder.disabled=true;
-    orderStatus.innerHTML=`<span style="color:var(--blue)">⏳ Vérification du solde et création de la commande...</span>`;
+orderModal.addEventListener("click",e=>{if(e.target===orderModal) closeOrder()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape") closeOrder()});
+function collectFormData(){const fd=new FormData(orderForm);const r={};for(const [k,v] of fd.entries()) r[k]=String(v).trim();return r}
+orderForm.addEventListener("submit",async e=>{
+    e.preventDefault();if(!selectedService) return;
+    const amount=Number(selectedService.prix);const bal=getBalance();
+    if(bal<amount){orderStatus.innerHTML=`<span style="color:var(--red)">❌ Solde insuffisant ${money(bal)} FC</span>`;return}
+    const fields=collectFormData();submitOrder.disabled=true;orderStatus.innerHTML=`<span style="color:var(--blue)">⏳ Envoi...</span>`;
     try{
         let balanceRef=null;
-        let balanceTransaction=null;
         if(amount>0){
             balanceRef=ref(db,`${USERS_PATH}/${currentUserPhone}/solde_principal`);
-            balanceTransaction=await runTransaction(balanceRef,current=>{
-                const balance=Number(current)||0;
-                if(balance<amount){return}
-                return balance-amount;
-            });
-            if(!balanceTransaction.committed){
-                orderStatus.innerHTML=`<span style="color:var(--red)">❌ Solde insuffisant.</span>`;
-                submitOrder.disabled=false;
-                return;
-            }
+            const tr=await runTransaction(balanceRef,c=>{const b=Number(c)||0;if(b<amount) return;return b-amount});
+            if(!tr.committed){orderStatus.innerHTML=`<span style="color:var(--red)">❌ Solde insuffisant</span>`;submitOrder.disabled=false;return}
         }
         const commandRef=push(ref(db,COMMANDS_PATH));
-        const now=Date.now();
-        const date=new Date(now).toLocaleString("fr-FR");
-        const command={
-            telephone:currentUserPhone,userPhone:currentUserPhone,phone:currentUserPhone,
-            nom:currentUserData.nom??currentUserData.name??currentUserData.username??"Utilisateur",
-            service:selectedService.nom,serviceId:selectedService.id,serviceName:selectedService.nom,produit:selectedService.nom,
-            montant:amount,prix:amount,amount:amount,
-            statut:"En attente",status:"En attente",
-            date:date,createdAt:now,timestamp:now,
-            details:fields,...fields,
-            api:selectedService.api||"",
-            source:"shop",plateforme:"JASON BUSINESS"
-        };
+        const now=Date.now();const date=new Date(now).toLocaleString("fr-FR");
         const {set} = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
-        await set(commandRef,command);
-        orderStatus.innerHTML=`<span style="color:var(--green)">✅ Commande envoyée avec succès!<br>Votre commande est maintenant en attente de traitement.</span>`;
-        showToast("🛒 Commande envoyée à l'administration.");
-        orderForm.reset();submitOrder.disabled=true;
-        setTimeout(()=>{closeOrder()},1800);
-    }catch(error){
-        console.error("ORDER ERROR:",error);
-        try{
-            if(amount>0){
-                const balanceRef=ref(db,`${USERS_PATH}/${currentUserPhone}/solde_principal`);
-                await runTransaction(balanceRef,current=>{return (Number(current)||0)+amount});
-            }
-        }catch(refundError){console.error("REFUND ERROR:",refundError)}
-        orderStatus.innerHTML=`<span style="color:var(--red)">❌ Impossible d'envoyer la commande. Votre solde a été restauré.</span>`;
-        showToast("❌ Erreur lors de la commande.","error");
-        submitOrder.disabled=false;
-    }
+        await set(commandRef,{telephone:currentUserPhone,userPhone:currentUserPhone,service:selectedService.nom,serviceId:selectedService.id,serviceName:selectedService.nom,montant:amount,prix:amount,statut:"En attente",status:"En attente",date,createdAt:now,details:fields,...fields,api:selectedService.api||"",source:"shop",plateforme:"JASON BUSINESS"});
+        orderStatus.innerHTML=`<span style="color:var(--green)">✅ Commande envoyée!</span>`;
+        showToast("🛒 Commande envoyée");orderForm.reset();submitOrder.disabled=true;setTimeout(()=>closeOrder(),1500);
+    }catch(err){console.error(err);orderStatus.innerHTML=`<span style="color:var(--red)">❌ Erreur</span>`;showToast("❌ Erreur","error");submitOrder.disabled=false}
 });
-renderServices();
-loadCurrentUser();
-window.addEventListener("error",event=>{console.error("JASON SHOP:",event.error)});
+renderServices();loadCurrentUser();
 </script>
 </body>
 </html>
