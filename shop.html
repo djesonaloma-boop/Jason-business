@@ -3,327 +3,292 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#07111f">
-<title>JASON BUSINESS — Réseaux sociaux</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#030812">
+<meta name="description" content="JASON Business — Boutique et services digitaux">
+<title>JASON Business — Boutique</title>
 
 <style>
-:root {
-  --bg: #050b15;
-  --panel: #0b192b;
-  --panel2: #10243b;
-  --blue: #168cff;
-  --blue2: #43b6ff;
-  --gold: #d8aa45;
-  --text: #f4f7fb;
-  --muted: #9bacc2;
-  --border: rgba(80,155,255,.18);
+:root{
+ --blue:#00d2ff;
+ --blue2:#0077ff;
+ --dark:#030812;
+ --dark2:#07111f;
+ --card:#091525;
+ --card2:#0d192b;
+ --border:rgba(0,210,255,.18);
+ --green:#00e676;
+ --red:#ff4757;
+ --orange:#ff9800;
+ --yellow:#ffd740;
+ --purple:#9b59ff;
+ --white:#fff;
+ --muted:rgba(255,255,255,.58);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+ min-height:100vh;
+ padding-bottom:85px;
+ font-family:"Segoe UI",Arial,sans-serif;
+ color:#fff;
+ background:
+ radial-gradient(circle at top right,rgba(0,119,255,.12),transparent 35%),
+ radial-gradient(circle at bottom left,rgba(0,210,255,.07),transparent 30%),
+ var(--dark);
 }
 
-body {
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
-  color: var(--text);
-  background:
-    radial-gradient(circle at top right, #10294b 0, transparent 35%),
-    var(--bg);
+.header{
+ padding:30px 18px 20px;
+ text-align:center;
 }
 
-button, input {
-  font: inherit;
+.logo{
+ font-size:25px;
+ font-weight:900;
+ letter-spacing:3px;
+ color:var(--blue);
+ text-shadow:0 0 20px rgba(0,210,255,.2);
 }
 
-button {
-  cursor: pointer;
+.subtitle{
+ margin-top:7px;
+ color:var(--muted);
+ font-size:11px;
+ letter-spacing:1.5px;
 }
 
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 15px;
-  background: rgba(5,11,21,.94);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(15px);
+.balance{
+ display:inline-flex;
+ align-items:center;
+ gap:7px;
+ margin-top:20px;
+ padding:11px 17px;
+ border-radius:14px;
+ background:rgba(0,230,118,.08);
+ border:1px solid rgba(0,230,118,.18);
+ font-size:13px;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.balance strong,#balance{
+ color:var(--green);
+ font-weight:900;
 }
 
-.logo {
-  width: 43px;
-  height: 43px;
-  display: grid;
-  place-items: center;
-  border-radius: 14px;
-  background: linear-gradient(135deg, var(--blue), #0751a3);
-  box-shadow: 0 5px 20px rgba(22,140,255,.25);
-  font-weight: 900;
-  font-size: 19px;
+.container{
+ width:100%;
+ max-width:1000px;
+ margin:auto;
+ padding:0 15px;
 }
 
-.brand h1 {
-  font-size: 17px;
-  letter-spacing: .5px;
+.section-title{
+ font-size:22px;
+ margin-top:5px;
 }
 
-.brand p {
-  color: var(--muted);
-  font-size: 11px;
-  margin-top: 4px;
+.section-description{
+ margin-top:7px;
+ color:var(--muted);
+ font-size:12px;
+ line-height:1.6;
 }
 
-.back-button {
-  border: 1px solid var(--border);
-  color: white;
-  background: var(--panel);
-  padding: 10px 13px;
-  border-radius: 11px;
+.services{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:14px;
+ margin-top:20px;
 }
 
-main {
-  width: min(1100px, 100%);
-  padding: 20px 15px 100px;
-  margin: auto;
+.service-card{
+ position:relative;
+ overflow:hidden;
+ padding:19px;
+ min-height:210px;
+ display:flex;
+ flex-direction:column;
+ border-radius:19px;
+ background:linear-gradient(145deg,rgba(10,23,40,.98),rgba(5,13,25,.98));
+ border:1px solid rgba(255,255,255,.07);
+ transition:transform .2s,border-color .2s,box-shadow .2s;
+ animation:cardIn .35s ease both;
 }
 
-.hero {
-  padding: 25px 20px;
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  background: linear-gradient(135deg, #102a48, #091525 75%);
-  margin-bottom: 25px;
-  position: relative;
-  overflow: hidden;
-  animation: appear .5s ease;
+.service-card::after{
+ content:"";
+ position:absolute;
+ width:110px;
+ height:110px;
+ right:-45px;
+ bottom:-45px;
+ border-radius:50%;
+ background:rgba(0,210,255,.05);
+ pointer-events:none;
 }
 
-.hero::after {
-  content: "JB";
-  position: absolute;
-  right: -5px;
-  bottom: -32px;
-  font-size: 110px;
-  font-weight: 900;
-  color: rgba(255,255,255,.035);
+.service-card:hover{
+ transform:translateY(-3px);
+ border-color:rgba(0,210,255,.28);
+ box-shadow:0 10px 35px rgba(0,0,0,.22);
 }
 
-.tag {
-  display: inline-block;
-  color: var(--gold);
-  border: 1px solid rgba(216,170,69,.3);
-  background: rgba(216,170,69,.08);
-  border-radius: 30px;
-  padding: 7px 11px;
-  font-size: 11px;
-  margin-bottom: 13px;
+@keyframes cardIn{
+ from{opacity:0;transform:translateY(10px)}
+ to{opacity:1;transform:translateY(0)}
 }
 
-.hero h2 {
-  font-size: clamp(23px, 5vw, 34px);
-  line-height: 1.2;
-  margin-bottom: 10px;
+.service-icon{
+ width:50px;
+ height:50px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ border-radius:15px;
+ background:rgba(0,210,255,.09);
+ border:1px solid var(--border);
+ font-size:25px;
 }
 
-.hero h2 span {
-  color: var(--blue2);
+.service-name{
+ margin-top:14px;
+ font-size:16px;
+ font-weight:900;
 }
 
-.hero p {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.7;
-  max-width: 540px;
+.service-description{
+ margin-top:7px;
+ color:var(--muted);
+ font-size:11px;
+ line-height:1.55;
+ flex:1;
 }
 
-.section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin: 27px 0 15px;
+.service-bottom{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:8px;
+ margin-top:15px;
 }
 
-.section-heading h2 {
-  font-size: 20px;
+.service-price{
+ color:var(--green);
+ font-size:14px;
+ font-weight:900;
 }
 
-.counter {
-  color: var(--muted);
-  font-size: 12px;
+.order-btn{
+ border:0;
+ padding:10px 16px;
+ border-radius:10px;
+ background:linear-gradient(135deg,var(--blue),var(--blue2));
+ color:#001018;
+ font-weight:900;
+ font-size:12px;
+ cursor:pointer;
+ position:relative;
+ z-index:1;
+ transition:transform .2s,filter .2s;
 }
 
-.search-box {
-  margin-bottom: 18px;
+.order-btn:hover{filter:brightness(1.12)}
+.order-btn:active{transform:scale(.96)}
+
+.info-box{
+ margin-top:22px;
+ padding:16px;
+ border-radius:15px;
+ background:rgba(0,210,255,.045);
+ border:1px solid var(--border);
+ color:var(--muted);
+ font-size:11px;
+ line-height:1.9;
 }
 
-.search-box input {
-  width: 100%;
-  color: white;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 13px;
-  padding: 14px 15px;
-  outline: none;
+.loading{
+ grid-column:1/-1;
+ padding:45px 20px;
+ text-align:center;
+ color:var(--muted);
 }
 
-.search-box input:focus {
-  border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(22,140,255,.1);
+.bottom-nav{
+ position:fixed;
+ left:0;
+ right:0;
+ bottom:0;
+ z-index:300;
+ height:68px;
+ display:flex;
+ align-items:center;
+ justify-content:space-around;
+ background:rgba(3,8,18,.96);
+ border-top:1px solid var(--border);
+ backdrop-filter:blur(20px);
 }
 
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 13px;
+.nav-link{
+ min-width:70px;
+ padding:7px;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ gap:4px;
+ color:rgba(255,255,255,.5);
+ text-decoration:none;
+ font-size:9px;
+ font-weight:700;
 }
 
-.service-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-width: 0;
-  padding: 17px 14px;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: linear-gradient(145deg, var(--panel2), var(--panel));
-  transition: transform .25s, border-color .25s, box-shadow .25s;
-  animation: appear .4s ease both;
+.nav-link span{font-size:19px}
+.nav-link.active{color:var(--blue)}
+
+#toastContainer{
+ position:fixed;
+ top:15px;
+ left:15px;
+ right:15px;
+ z-index:1000;
+ display:flex;
+ flex-direction:column;
+ gap:8px;
+ pointer-events:none;
 }
 
-.service-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(22,140,255,.65);
-  box-shadow: 0 10px 25px rgba(0,0,0,.2);
+.toast{
+ width:100%;
+ max-width:430px;
+ margin-left:auto;
+ padding:13px 15px;
+ border-radius:12px;
+ background:#0b1728;
+ border:1px solid var(--border);
+ box-shadow:0 10px 30px rgba(0,0,0,.35);
+ font-size:12px;
+ animation:toastIn .2s ease;
 }
 
-.service-icon {
-  width: 51px;
-  height: 51px;
-  display: grid;
-  place-items: center;
-  font-size: 26px;
-  border-radius: 15px;
-  background: rgba(22,140,255,.12);
-  border: 1px solid rgba(22,140,255,.17);
-  margin-bottom: 14px;
+.toast.success{border-color:rgba(0,230,118,.3)}
+.toast.error{border-color:rgba(255,71,87,.3)}
+
+@keyframes toastIn{
+ from{opacity:0;transform:translateY(-8px)}
+ to{opacity:1;transform:translateY(0)}
 }
 
-.service-card h3 {
-  font-size: 16px;
-  margin-bottom: 7px;
+@media(max-width:850px){
+ .services{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
-.service-card p {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.5;
-  min-height: 36px;
-  margin-bottom: 15px;
-}
-
-.create-button {
-  width: 100%;
-  margin-top: auto;
-  padding: 11px;
-  color: white;
-  border: none;
-  border-radius: 11px;
-  background: linear-gradient(135deg, #168cff, #0861c5);
-  font-weight: 700;
-  transition: transform .2s, filter .2s;
-}
-
-.create-button:active {
-  transform: scale(.97);
-}
-
-.create-button:hover {
-  filter: brightness(1.12);
-}
-
-.empty {
-  display: none;
-  text-align: center;
-  padding: 30px 10px;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-.footer {
-  text-align: center;
-  padding: 24px 10px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.8;
-}
-
-.footer strong {
-  color: var(--gold);
-}
-
-.bottom-bar {
-  position: fixed;
-  z-index: 20;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 12px 15px calc(12px + env(safe-area-inset-bottom));
-  background: rgba(5,11,21,.96);
-  border-top: 1px solid var(--border);
-  text-align: center;
-  backdrop-filter: blur(12px);
-}
-
-.bottom-bar button {
-  width: min(450px, 100%);
-  border: 1px solid rgba(216,170,69,.3);
-  background: rgba(216,170,69,.08);
-  color: var(--gold);
-  padding: 12px;
-  border-radius: 12px;
-  font-weight: 700;
-}
-
-@keyframes appear {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@media (min-width: 650px) {
-  main { padding-top: 28px; }
-  .services-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 17px;
-  }
-  .service-card { padding: 20px; }
-}
-
-@media (min-width: 900px) {
-  .services-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 350px) {
-  .brand h1 { font-size: 14px; }
-  .brand p { font-size: 10px; }
-  .back-button { padding: 9px; font-size: 12px; }
-  .service-card { padding: 12px 10px; }
+@media(max-width:550px){
+ .header{padding-top:25px}
+ .logo{font-size:21px}
+ .services{grid-template-columns:1fr;gap:11px}
+ .service-card{min-height:190px}
+ .container{padding:0 12px}
 }
 </style>
 </head>
@@ -331,181 +296,433 @@ main {
 <body>
 
 <header class="header">
-  <div class="brand">
-    <div class="logo">JB</div>
-    <div>
-      <h1>JASON BUSINESS</h1>
-      <p>Réseaux sociaux · Créé par Jason Aloma 🇨🇩</p>
-    </div>
-  </div>
+ <div class="logo">JASON BUSINESS</div>
+ <div class="subtitle">WEB • DESIGN • DIGITAL • IA</div>
 
-  <button class="back-button" onclick="retourAccueil()">
-    ← Retour
-  </button>
+ <div class="balance">
+  💰 Solde :
+  <span id="balance">0</span>
+  FC
+ </div>
 </header>
 
-<main>
-  <section class="hero">
-    <span class="tag">🚀 ESPACE RÉSEAUX SOCIAUX</span>
-    <h2>Développe ta <span>visibilité</span></h2>
-    <p>
-      Choisis ton réseau social, puis appuie sur Créer pour
-      accéder à l'espace correspondant sur JASON BUSINESS.
-    </p>
-  </section>
+<main class="container">
 
-  <div class="section-heading">
-    <h2>🌐 Réseaux sociaux</h2>
-    <span class="counter" id="counter">10 réseaux</span>
+ <section>
+  <h2 class="section-title">🛍️ Nos services</h2>
+
+  <p class="section-description">
+   Choisissez un service pour ouvrir son espace dédié et commencer à créer votre projet.
+  </p>
+
+  <div class="services" id="servicesContainer">
+   <div class="loading">⏳ Chargement des services...</div>
   </div>
+ </section>
 
-  <div class="search-box">
-    <input
-      id="searchInput"
-      type="search"
-      placeholder="🔎 Rechercher un réseau social..."
-      autocomplete="off"
-      aria-label="Rechercher un réseau social"
-    >
-  </div>
+ <div class="info-box">
+  ✨ Chaque bouton « Créer » ouvre la page dédiée au service sélectionné.
+  <br>
+  🔐 Connectez-vous à votre compte JASON Business pour accéder aux fonctions liées à votre compte.
+  <br>
+  📁 Les pages API, site web, CV et les autres services sont configurées séparément.
+  <br>
+  ⚠️ Cette boutique n'enregistre pas de commande et ne débite pas votre solde lorsque vous cliquez sur « Créer ».
+ </div>
 
-  <section class="services-grid" id="servicesGrid">
-
-    <article class="service-card" data-name="tiktok">
-      <div class="service-icon">🎵</div>
-      <h3>TikTok</h3>
-      <p>Vues, likes et visibilité de ton profil.</p>
-      <button class="create-button" onclick="ouvrirReseau('TikTok')">Créer</button>
-    </article>
-
-    <article class="service-card" data-name="youtube">
-      <div class="service-icon">▶️</div>
-      <h3>YouTube</h3>
-      <p>Visibilité pour tes vidéos et ta chaîne.</p>
-      <button class="create-button" onclick="ouvrirReseau('YouTube')">Créer</button>
-    </article>
-
-    <article class="service-card" data-name="instagram">
-      <div class="service-icon">📸</div>
-      <h3>Instagram</h3>
-      <p>Visibilité de ton profil et de tes publications.</p>
-      <button class="create-button" onclick="ouvrirReseau('Instagram')">Créer</button>
-    </article>
-
-    <article class="service-card" data-name="telegram">
-      <div class="service-icon">✈️</div>
-      <h3>Telegram</h3>
-      <p>Développe ta chaîne ou ta communauté.</p>
-      <button class="create-button" onclick="ouvrirReseau('Telegram')">Créer</button>
-    </article>
-
-    <article class="service-card" data-name="spotify">
-      <div class="service-icon">🎧</div>
-      <h3>Spotify</h3>
-      <p>Musique et visibilité de tes créations.</p>
-      <button class="create-button" onclick="ouvrirReseau('Spotify')">Créer</button>
-    </article>
-
-    <article class="service-card" data-name="linkedin">
-      <div class="service-icon">💼</div>
-      <h3>LinkedIn</h3>
-      <p>Présence et visibilité professionnelle.</p>
-      <button class="create-button" onclick="ouvrirReseau('LinkedIn')">Créer</button>
-    </article>
-
-    <article class="service-card" data-name="twitch">
-      <div class="service-icon">🎮</div>
-      <h3>Twitch</h3>
-      <p>Visibilité de tes diffusions et de ta chaîne.</p>
-      <button class="create-button" onclick="ouvrirReseau('Twitch')">Créer</button>
-    </article>
-
-    <article class="service-card" data-name="snapchat">
-      <div class="service-icon">👻</div>
-      <h3>Snapchat</h3>
-      <p>Développe la visibilité de ton profil.</p>
-      <button class="create-button" onclick="ouvrirReseau('Snapchat')">Créer</button>
-    </article>
-
-    <article class="service-card" data-name="whatsapp">
-      <div class="service-icon">💬</div>
-      <h3>WhatsApp</h3>
-      <p>Visibilité de ton profil et de ta communauté.</p>
-      <button class="create-button" onclick="ouvrirReseau('WhatsApp')">Créer</button>
-    </article>
-
-    <article class="service-card" data-name="threads">
-      <div class="service-icon">🧵</div>
-      <h3>Threads</h3>
-      <p>Visibilité de tes publications et interactions.</p>
-      <button class="create-button" onclick="ouvrirReseau('Threads')">Créer</button>
-    </article>
-
-  </section>
-
-  <div class="empty" id="emptyMessage">
-    Aucun réseau social trouvé.<br>
-    Essaie un autre nom.
-  </div>
-
-  <footer class="footer">
-    <strong>JASON BUSINESS</strong><br>
-    Créé par Jason Aloma 🇨🇩<br>
-    Kinshasa · République démocratique du Congo
-  </footer>
 </main>
 
-<div class="bottom-bar">
-  <button onclick="retourAccueil()">← Retour à l'accueil</button>
-</div>
+<nav class="bottom-nav">
+ <a href="dashboard.html" class="nav-link">
+  <span>📊</span>Dash
+ </a>
 
-<script>
-"use strict";
+ <a href="shop.html" class="nav-link active">
+  <span>🛒</span>Boutique
+ </a>
 
-/* Navigation vers la page du réseau choisi */
-function ouvrirReseau(plateforme) {
-  const url = "boostage.html?plateforme=" +
-    encodeURIComponent(plateforme);
+ <a href="equipe.html" class="nav-link">
+  <span>👥</span>Équipe
+ </a>
 
-  window.location.href = url;
+ <a href="profil.html" class="nav-link">
+  <span>👤</span>Profil
+ </a>
+</nav>
+
+<div id="toastContainer"></div>
+
+<script type="module">
+import {
+ initializeApp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+import {
+ getDatabase,
+ ref,
+ onValue
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+/* ======================================================
+   CONFIGURATION FIREBASE
+====================================================== */
+
+const firebaseConfig = {
+ apiKey: "AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
+ authDomain: "starlink-investit.firebaseapp.com",
+ databaseURL: "https://starlink-investit-default-rtdb.firebaseio.com",
+ projectId: "starlink-investit",
+ storageBucket: "starlink-investit.firebasestorage.app",
+ messagingSenderId: "807081599583",
+ appId: "1:807081599583:web:e00ec3959bc4acdae031ea"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const ROOT = "jasonBusiness";
+const USERS_PATH = `${ROOT}/users`;
+
+
+/* ======================================================
+   ÉLÉMENTS
+====================================================== */
+
+const balanceElement = document.getElementById("balance");
+const servicesContainer = document.getElementById("servicesContainer");
+
+
+/* ======================================================
+   NOTIFICATIONS
+====================================================== */
+
+function showToast(message,type="success"){
+ const container = document.getElementById("toastContainer");
+ const toast = document.createElement("div");
+
+ toast.className = `toast ${type}`;
+ toast.textContent = message;
+
+ container.appendChild(toast);
+
+ setTimeout(()=>{
+  toast.remove();
+ },3500);
 }
 
-/* Retour au tableau de bord */
-function retourAccueil() {
-  window.location.href = "dashboard.html";
+
+/* ======================================================
+   DÉTECTION DU COMPTE
+====================================================== */
+
+let currentUserPhone = "";
+let currentUserData = {};
+
+function detectUserPhone(){
+
+ const keys = [
+  "jasonBusinessPhone",
+  "jasonBusinessUser",
+  "userPhone",
+  "telephone",
+  "phone",
+  "numero",
+  "currentUserPhone",
+  "loggedUser",
+  "jasonUser"
+ ];
+
+ for(const key of keys){
+
+  const value = localStorage.getItem(key);
+
+  if(!value || value==="null" || value==="undefined"){
+   continue;
+  }
+
+  try{
+   const parsed = JSON.parse(value);
+
+   if(parsed && typeof parsed==="object"){
+
+    const phone =
+     parsed.telephone ??
+     parsed.phone ??
+     parsed.numero ??
+     parsed.userPhone;
+
+    if(phone){
+     return String(phone).trim();
+    }
+   }
+  }catch(error){}
+
+  return value.trim();
+ }
+
+ return "";
 }
 
-/* Recherche parmi les réseaux sociaux */
-const searchInput = document.getElementById("searchInput");
-const cards = Array.from(
-  document.querySelectorAll(".service-card")
-);
-const counter = document.getElementById("counter");
-const emptyMessage = document.getElementById("emptyMessage");
 
-searchInput.addEventListener("input", function () {
-  const recherche = this.value
-    .trim()
-    .toLocaleLowerCase("fr");
+function money(value){
+ return Math.floor(Number(value)||0).toLocaleString("fr-FR");
+}
 
-  let visibles = 0;
 
-  cards.forEach(function (card) {
-    const nom = card.dataset.name || "";
-    const texte = card.textContent.toLocaleLowerCase("fr");
-    const correspond = nom.includes(recherche) ||
-      texte.includes(recherche);
+function getBalance(){
 
-    card.style.display = correspond ? "flex" : "none";
+ return Number(
+  currentUserData.solde_principal ??
+  currentUserData.solde ??
+  currentUserData.balance ??
+  0
+ ) || 0;
+}
 
-    if (correspond) visibles++;
+
+function loadCurrentUser(){
+
+ currentUserPhone = detectUserPhone();
+
+ if(!currentUserPhone){
+
+  currentUserData = {};
+  balanceElement.textContent = "0";
+
+  showToast(
+   "Connectez-vous pour afficher votre solde.",
+   "error"
+  );
+
+  return;
+ }
+
+ onValue(
+  ref(db,`${USERS_PATH}/${currentUserPhone}`),
+
+  snapshot=>{
+
+   if(!snapshot.exists()){
+
+    currentUserData = {};
+    balanceElement.textContent = "0";
+
+    showToast(
+     "Compte utilisateur introuvable. Vérifiez votre session.",
+     "error"
+    );
+
+    return;
+   }
+
+   currentUserData = snapshot.val() || {};
+   balanceElement.textContent = money(getBalance());
+  },
+
+  error=>{
+
+   console.error("FIREBASE USER ERROR:",error);
+
+   showToast(
+    "Impossible de charger le solde depuis Firebase.",
+    "error"
+   );
+  }
+ );
+}
+
+
+/* ======================================================
+   SERVICES DISPONIBLES
+====================================================== */
+
+const SERVICES = [
+ {
+  id:"application",
+  nom:"Application",
+  description:"Préparez votre projet d'application mobile ou web.",
+  icon:"📱",
+  prix:10000
+ },
+ {
+  id:"site-web",
+  nom:"Site web",
+  description:"Accédez à l'espace de création de votre site professionnel.",
+  icon:"🌐",
+  prix:15000
+ },
+ {
+  id:"chanson",
+  nom:"Chanson",
+  description:"Préparez une chanson personnalisée selon vos idées.",
+  icon:"🎵",
+  prix:5000
+ },
+ {
+  id:"logo",
+  nom:"Logo",
+  description:"Préparez votre logo pour une marque ou une entreprise.",
+  icon:"🎨",
+  prix:3000
+ },
+ {
+  id:"affiche",
+  nom:"Affiche",
+  description:"Préparez une affiche publicitaire ou événementielle.",
+  icon:"🖼️",
+  prix:3000
+ },
+ {
+  id:"video",
+  nom:"Vidéo",
+  description:"Préparez votre projet vidéo.",
+  icon:"🎬",
+  prix:8000
+ },
+ {
+  id:"chatbot",
+  nom:"Chatbot",
+  description:"Configurez votre projet d'assistant intelligent.",
+  icon:"🤖",
+  prix:7000
+ },
+ {
+  id:"api",
+  nom:"API",
+  description:"Accédez à l'espace dédié à la création de votre API.",
+  icon:"🔌",
+  prix:10000
+ },
+ {
+  id:"cv",
+  nom:"CV",
+  description:"Préparez les informations de votre CV professionnel.",
+  icon:"📄",
+  prix:3000
+ },
+ {
+  id:"redaction",
+  nom:"Rédaction",
+  description:"Préparez un texte, une lettre ou un document professionnel.",
+  icon:"✍️",
+  prix:2000
+ },
+ {
+  id:"traduction",
+  nom:"Traduction",
+  description:"Accédez à l'espace dédié à la traduction de vos textes.",
+  icon:"🌍",
+  prix:2000
+ },
+ {
+  id:"correction",
+  nom:"Correction",
+  description:"Préparez le texte que vous souhaitez faire corriger.",
+  icon:"🛠️",
+  prix:5000
+ }
+];
+
+
+/* ======================================================
+   PAGES DES SERVICES
+====================================================== */
+
+const CREATION_PAGES = {
+ application:"application.html",
+ "site-web":"site-web.html",
+ chanson:"chanson.html",
+ logo:"logo.html",
+ affiche:"affiche.html",
+ video:"video.html",
+ chatbot:"chatbot.html",
+ api:"api.html",
+ cv:"cv.html",
+ redaction:"redaction.html",
+ traduction:"traduction.html",
+ correction:"correction.html"
+};
+
+
+function openCreationPage(serviceId){
+
+ const page = CREATION_PAGES[serviceId];
+
+ if(!page){
+
+  showToast(
+   "La page de ce service n'est pas configurée.",
+   "error"
+  );
+
+  return;
+ }
+
+ window.location.href = page;
+}
+
+
+/* ======================================================
+   AFFICHAGE DES CARTES
+====================================================== */
+
+function renderServices(){
+
+ servicesContainer.innerHTML = "";
+
+ SERVICES.forEach((service,index)=>{
+
+  const card = document.createElement("article");
+  card.className = "service-card";
+  card.style.animationDelay = `${index*35}ms`;
+
+  const icon = document.createElement("div");
+  icon.className = "service-icon";
+  icon.textContent = service.icon;
+
+  const name = document.createElement("div");
+  name.className = "service-name";
+  name.textContent = service.nom;
+
+  const description = document.createElement("div");
+  description.className = "service-description";
+  description.textContent = service.description;
+
+  const bottom = document.createElement("div");
+  bottom.className = "service-bottom";
+
+  const price = document.createElement("div");
+  price.className = "service-price";
+  price.textContent = money(service.prix)+" FC";
+
+  const button = document.createElement("button");
+  button.className = "order-btn";
+  button.type = "button";
+  button.textContent = "Créer";
+
+  button.addEventListener("click",()=>{
+   openCreationPage(service.id);
   });
 
-  counter.textContent = visibles +
-    (visibles > 1 ? " réseaux" : " réseau");
+  bottom.append(price,button);
+  card.append(icon,name,description,bottom);
 
-  emptyMessage.style.display =
-    visibles === 0 ? "block" : "none";
+  servicesContainer.appendChild(card);
+
+ });
+}
+
+
+/* ======================================================
+   NAVIGATION
+====================================================== */
+
+renderServices();
+loadCurrentUser();
+
+window.addEventListener("error",event=>{
+ console.error("JASON BUSINESS SHOP:",event.error);
 });
 </script>
 
