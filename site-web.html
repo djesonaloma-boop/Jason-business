@@ -1,0 +1,483 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071426">
+<title>JASON BUSINESS — Création de sites web</title>
+
+<style>
+:root{
+  --bg:#050b16;--panel:#0c1a2e;--panel2:#112641;
+  --blue:#168cff;--gold:#e0b451;--text:#f4f7ff;
+  --muted:#9eafc8;--border:rgba(255,255,255,.1);
+  --green:#36d6a0;--red:#ff7485;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;color:var(--text);font-family:Arial,sans-serif;
+  background:radial-gradient(circle at top right,#122d50,transparent 36%),var(--bg)
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+header{
+  position:sticky;top:0;z-index:10;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;padding:13px 4%;
+  background:#050b16ed;backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border)
+}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{
+  width:43px;height:43px;border-radius:13px;display:grid;
+  place-items:center;font-weight:900;
+  background:linear-gradient(135deg,var(--blue),#17315b)
+}
+.brand h1{font-size:16px;margin:0}
+.brand small{display:block;font-size:10px;color:var(--gold);margin-top:4px}
+button{
+  border:0;border-radius:11px;padding:12px 15px;
+  color:white;font-weight:bold;background:linear-gradient(135deg,var(--blue),#2452b3)
+}
+.secondary{background:var(--panel2);border:1px solid var(--border)}
+.gold{background:linear-gradient(135deg,#f2d27d,#b07a20);color:#111827}
+button:disabled{opacity:.55;cursor:not-allowed}
+main{max-width:1100px;margin:auto;padding:22px 14px 50px}
+.hero{
+  padding:27px 21px;border-radius:22px;border:1px solid var(--border);
+  background:linear-gradient(125deg,#122d4c,#091426)
+}
+.eyebrow{font-size:11px;color:var(--gold);letter-spacing:2px;font-weight:bold}
+.hero h2{font-size:clamp(27px,5vw,41px);margin:12px 0}
+.hero p{color:var(--muted);line-height:1.7;max-width:720px}
+.creator{color:var(--gold);font-size:12px}
+.types{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px}
+.type-card{
+  padding:17px 12px;border:1px solid var(--border);border-radius:15px;
+  background:var(--panel);text-align:left;cursor:pointer;transition:.2s
+}
+.type-card:hover{transform:translateY(-2px);border-color:var(--blue)}
+.type-card.active{border-color:var(--gold);background:#d9ad4610;box-shadow:0 0 0 1px #e0b45133}
+.type-card .emoji{font-size:26px}
+.type-card strong{display:block;margin:10px 0 6px;font-size:14px}
+.type-card small{color:var(--muted);font-size:11px;line-height:1.5;display:block}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:16px;margin-top:18px}
+.panel{padding:19px;border:1px solid var(--border);border-radius:17px;background:var(--panel);min-width:0}
+.panel h3{font-size:19px;margin:0 0 8px}
+.hint{font-size:12px;color:var(--muted);line-height:1.6;margin:0 0 18px}
+.field{margin-bottom:14px}
+label{display:block;font-size:12px;margin-bottom:7px;color:#e0eafa}
+input,textarea,select{
+  width:100%;padding:12px;background:#071426;color:var(--text);
+  border:1px solid var(--border);border-radius:10px;outline:none
+}
+input:focus,textarea:focus,select:focus{border-color:var(--blue)}
+textarea{min-height:150px;resize:vertical;line-height:1.6}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.price{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:14px;border-radius:12px;border:1px solid #e0b45140;
+  background:#e0b4510b;margin:16px 0
+}
+.price strong{color:var(--gold)}
+.note{
+  padding:12px;border:1px solid #e0b45140;background:#e0b4510a;
+  border-radius:11px;color:#dfcda4;font-size:12px;line-height:1.7
+}
+.preview{
+  border:1px solid var(--border);background:#071426;
+  border-radius:14px;padding:18px;margin-bottom:12px
+}
+.preview-icon{font-size:32px;margin-bottom:10px}
+.preview h4{margin:0 0 8px;font-size:17px;overflow-wrap:anywhere}
+.preview p{font-size:12px;color:var(--muted);line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}
+.preview-tag{display:inline-block;border-radius:20px;padding:6px 9px;background:#168cff1a;color:#8bc5ff;font-size:11px}
+.info{
+  padding:13px;background:#ffffff05;border:1px solid var(--border);
+  border-radius:12px;margin-bottom:10px
+}
+.info strong{font-size:12px;display:block;margin-bottom:6px}
+.info p{font-size:12px;line-height:1.6;color:var(--muted);margin:0;overflow-wrap:anywhere}
+.status{margin-top:13px;font-size:12px;line-height:1.6;white-space:pre-wrap;color:var(--muted)}
+.status.error{color:var(--red)}
+.status.success{color:var(--green)}
+.full{width:100%}
+footer{text-align:center;color:var(--muted);font-size:11px;padding:20px}
+@media(max-width:780px){.layout{grid-template-columns:1fr}}
+@media(max-width:500px){
+  .types{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .two{grid-template-columns:1fr}
+  .panel{padding:15px}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="brand">
+    <div class="logo">JB</div>
+    <div>
+      <h1>JASON BUSINESS</h1>
+      <small>COMMANDE DE SITE WEB</small>
+    </div>
+  </div>
+  <button class="secondary" onclick="retour()">← Retour</button>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">TON PROJET • TON IDENTITÉ • TON SITE</div>
+    <h2>Commandez votre site web</h2>
+    <p>
+      Choisis le type de site que tu souhaites et décris ton projet.
+      Pas besoin de fournir le lien d'un site existant. Ta demande sera
+      enregistrée dans la base de données pour consultation dans l'administration.
+    </p>
+    <div class="creator">Créé par Jason Aloma 🇨🇩 • Kinshasa</div>
+  </section>
+
+  <div class="types" id="siteTypes">
+    <button type="button" class="type-card active" data-type="Site vitrine" onclick="chooseType(this)">
+      <span class="emoji">🏢</span>
+      <strong>Site vitrine</strong>
+      <small>Présenter une entreprise, une activité ou un service.</small>
+    </button>
+    <button type="button" class="type-card" data-type="Portfolio" onclick="chooseType(this)">
+      <span class="emoji">🎨</span>
+      <strong>Portfolio</strong>
+      <small>Présenter ses travaux, ses compétences et ses projets.</small>
+    </button>
+    <button type="button" class="type-card" data-type="Boutique en ligne" onclick="chooseType(this)">
+      <span class="emoji">🛍️</span>
+      <strong>Boutique en ligne</strong>
+      <small>Présenter des produits et recevoir des commandes.</small>
+    </button>
+    <button type="button" class="type-card" data-type="Blog / Actualités" onclick="chooseType(this)">
+      <span class="emoji">📰</span>
+      <strong>Blog / Actualités</strong>
+      <small>Publier des articles, informations et nouvelles.</small>
+    </button>
+    <button type="button" class="type-card" data-type="Site d'entreprise" onclick="chooseType(this)">
+      <span class="emoji">🏗️</span>
+      <strong>Site d'entreprise</strong>
+      <small>Présenter une société et ses activités.</small>
+    </button>
+    <button type="button" class="type-card" data-type="Autre type de site" onclick="chooseType(this)">
+      <span class="emoji">💡</span>
+      <strong>Autre projet</strong>
+      <small>Décris librement le site dont tu as besoin.</small>
+    </button>
+  </div>
+
+  <div class="layout">
+    <section class="panel">
+      <h3>Formulaire de commande</h3>
+      <p class="hint">Décris ton projet avec précision. Les champs avec * sont obligatoires.</p>
+
+      <form id="orderForm">
+        <div class="field">
+          <label for="clientName">Nom complet du client *</label>
+          <input id="clientName" maxlength="100" required placeholder="Ton nom complet" autocomplete="name">
+        </div>
+
+        <div class="two">
+          <div class="field">
+            <label for="clientEmail">Adresse e-mail</label>
+            <input id="clientEmail" type="email" maxlength="160" placeholder="nom@email.com" autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="clientPhone">Téléphone</label>
+            <input id="clientPhone" type="tel" maxlength="30" placeholder="+243...">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="siteName">Nom du site ou du projet *</label>
+          <input id="siteName" maxlength="120" required placeholder="Ex. : JASON STORE">
+        </div>
+
+        <div class="field">
+          <label for="description">Description complète du site souhaité *</label>
+          <textarea id="description" minlength="20" maxlength="6000" required
+            placeholder="Explique le but du site, les pages souhaitées, les couleurs, le public ciblé, les fonctionnalités et tout ce que le développeur doit savoir..."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="pages">Pages ou sections souhaitées</label>
+          <textarea id="pages" maxlength="2000"
+            placeholder="Ex. : Accueil, À propos, Services, Produits, Contact, Connexion..."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="features">Fonctionnalités nécessaires</label>
+          <textarea id="features" maxlength="3000"
+            placeholder="Ex. : formulaire de contact, espace client, paiement, catalogue, recherche, administration..."></textarea>
+        </div>
+
+        <div class="two">
+          <div class="field">
+            <label for="design">Style souhaité</label>
+            <select id="design">
+              <option value="Au choix du développeur">Au choix du développeur</option>
+              <option value="Bleu nuit et or">Bleu nuit et or</option>
+              <option value="Noir et or">Noir et or</option>
+              <option value="Bleu et blanc">Bleu et blanc</option>
+              <option value="Vert et blanc">Vert et blanc</option>
+              <option value="Style minimaliste">Style minimaliste</option>
+              <option value="Autre style décrit">Autre style décrit dans la description</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="budget">Budget prévu</label>
+            <select id="budget">
+              <option value="Devis demandé">Je souhaite un devis</option>
+              <option value="Moins de 20 000 FC">Moins de 20 000 FC</option>
+              <option value="20 000 à 50 000 FC">20 000 à 50 000 FC</option>
+              <option value="50 000 à 100 000 FC">50 000 à 100 000 FC</option>
+              <option value="Plus de 100 000 FC">Plus de 100 000 FC</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="deadline">Délai souhaité</label>
+          <select id="deadline">
+            <option value="À discuter">À discuter</option>
+            <option value="Urgent">Urgent</option>
+            <option value="Une semaine">Une semaine</option>
+            <option value="Deux semaines">Deux semaines</option>
+            <option value="Un mois ou plus">Un mois ou plus</option>
+          </select>
+        </div>
+
+        <div class="price">
+          <div>
+            <strong>Prix du site web</strong>
+            <div style="font-size:11px;color:var(--muted);margin-top:5px">Montant à confirmer après étude</div>
+          </div>
+          <strong>Sur devis</strong>
+        </div>
+
+        <div class="note">
+          La commande est une demande de devis, pas un paiement.
+          Le prix final, les délais et les conditions seront confirmés par
+          l'administrateur. Ne saisis aucun mot de passe ni secret bancaire dans la description.
+        </div>
+
+        <button class="full" style="margin-top:15px" id="submitButton" type="submit">
+          Envoyer ma commande
+        </button>
+        <div id="status" class="status" role="status"></div>
+      </form>
+    </section>
+
+    <aside class="panel">
+      <h3>Récapitulatif</h3>
+      <p class="hint">Voici un aperçu des informations de ta commande.</p>
+
+      <div class="preview">
+        <div class="preview-icon">🌐</div>
+        <span class="preview-tag" id="previewType">Site vitrine</span>
+        <h4 id="previewName">Nom de ton projet</h4>
+        <p id="previewDescription">La description de ton site apparaîtra ici.</p>
+      </div>
+
+      <div class="info">
+        <strong>📄 Pages souhaitées</strong>
+        <p id="previewPages">À définir</p>
+      </div>
+      <div class="info">
+        <strong>⚙️ Fonctionnalités</strong>
+        <p id="previewFeatures">À définir</p>
+      </div>
+      <div class="info">
+        <strong>🎨 Design</strong>
+        <p id="previewDesign">Au choix du développeur</p>
+      </div>
+      <div class="info">
+        <strong>💰 Budget</strong>
+        <p id="previewBudget">Devis demandé</p>
+      </div>
+
+      <div class="note">
+        Après l'envoi, la commande doit être visible dans ton espace
+        administrateur si Firebase accepte l'enregistrement et si ta page
+        admin lit le chemin <strong>siteWebOrders</strong>.
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer>JASON BUSINESS • Créé par Jason Aloma 🇨🇩</footer>
+
+<!-- Firebase SDK compatible -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+/* ==========================================================
+   FIREBASE
+   Vérifie que ce projet correspond à celui utilisé par ta page admin.
+========================================================== */
+const firebaseConfig = {
+  apiKey: "AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
+  authDomain: "starlink-investit.firebaseapp.com",
+  databaseURL: "https://starlink-investit-default-rtdb.firebaseio.com",
+  projectId: "starlink-investit",
+  storageBucket: "starlink-investit.firebasestorage.app",
+  messagingSenderId: "807081599583",
+  appId: "1:807081599583:web:e00ec3959bc4acdae031ea"
+};
+
+/*
+  Chemin partagé avec la page admin :
+  siteWebOrders
+*/
+const ORDERS_PATH = "siteWebOrders";
+
+let selectedType = "Site vitrine";
+let database = null;
+let firebaseReady = false;
+
+try {
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  database = firebase.database();
+  firebaseReady = true;
+} catch (error) {
+  console.error("Erreur Firebase :", error);
+}
+
+const $ = id => document.getElementById(id);
+
+function status(message, type = "") {
+  $("status").textContent = message;
+  $("status").className = "status " + type;
+}
+
+function chooseType(button) {
+  document.querySelectorAll(".type-card").forEach(card => {
+    card.classList.toggle("active", card === button);
+  });
+  selectedType = button.dataset.type;
+  $("previewType").textContent = selectedType;
+}
+
+function updatePreview() {
+  $("previewName").textContent =
+    $("siteName").value.trim() || "Nom de ton projet";
+
+  $("previewDescription").textContent =
+    $("description").value.trim() || "La description de ton site apparaîtra ici.";
+
+  $("previewPages").textContent =
+    $("pages").value.trim() || "À définir";
+
+  $("previewFeatures").textContent =
+    $("features").value.trim() || "À définir";
+
+  $("previewDesign").textContent = $("design").value;
+  $("previewBudget").textContent = $("budget").value;
+}
+
+[
+  "siteName","description","pages","features","design","budget"
+].forEach(id => {
+  $(id).addEventListener("input", updatePreview);
+  $(id).addEventListener("change", updatePreview);
+});
+
+function getOrder() {
+  return {
+    clientName: $("clientName").value.trim(),
+    clientEmail: $("clientEmail").value.trim(),
+    clientPhone: $("clientPhone").value.trim(),
+    siteName: $("siteName").value.trim(),
+    siteType: selectedType,
+    description: $("description").value.trim(),
+    pages: $("pages").value.trim(),
+    features: $("features").value.trim(),
+    design: $("design").value,
+    budget: $("budget").value,
+    deadline: $("deadline").value,
+    status: "en_attente",
+    createdAt: firebase.database.ServerValue.TIMESTAMP
+  };
+}
+
+$("orderForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  if (!firebaseReady || !database) {
+    status(
+      "Firebase n'est pas disponible. Vérifie la configuration et ta connexion Internet.",
+      "error"
+    );
+    return;
+  }
+
+  const order = getOrder();
+
+  if (!order.clientName || !order.siteName || order.description.length < 20) {
+    status("Complète le nom du client, le nom du projet et une description d'au moins 20 caractères.", "error");
+    return;
+  }
+
+  const button = $("submitButton");
+  button.disabled = true;
+  button.textContent = "Enregistrement en cours...";
+
+  try {
+    const result = await database.ref(ORDERS_PATH).push(order);
+
+    if (!result || !result.key) {
+      throw new Error("Firebase n'a pas confirmé l'enregistrement.");
+    }
+
+    status(
+      "Commande enregistrée avec succès. Référence : " + result.key +
+      ". Le statut est « en_attente ». Tu peux consulter la commande dans l'administration si celle-ci lit le chemin siteWebOrders.",
+      "success"
+    );
+
+    $("orderForm").reset();
+    selectedType = "Site vitrine";
+    document.querySelectorAll(".type-card").forEach(card => {
+      card.classList.toggle("active", card.dataset.type === selectedType);
+    });
+    updatePreview();
+
+  } catch (error) {
+    console.error("Enregistrement de la commande impossible :", error);
+
+    if (error && error.code === "PERMISSION_DENIED") {
+      status(
+        "Firebase a refusé l'enregistrement (PERMISSION_DENIED). Les règles de la base ou l'authentification doivent être configurées côté serveur de façon sécurisée. Ne rends pas toute la base publique pour corriger cette erreur.",
+        "error"
+      );
+    } else {
+      status(
+        "Impossible d'enregistrer la commande. Vérifie Internet, la configuration Firebase et les règles de sécurité. Détail : " +
+        (error.message || "erreur inconnue"),
+        "error"
+      );
+    }
+  } finally {
+    button.disabled = false;
+    button.textContent = "Envoyer ma commande";
+  }
+});
+
+function retour() {
+  if (history.length > 1) {
+    history.back();
+  } else {
+    window.location.href = "index.html";
+  }
+}
+
+updatePreview();
+</script>
+</body>
+</html>
