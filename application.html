@@ -1,0 +1,549 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071426">
+<title>JASON BUSINESS — Commande d'application</title>
+
+<style>
+:root{
+  --bg:#050b16;
+  --panel:#0c1a2e;
+  --panel2:#112641;
+  --blue:#168cff;
+  --cyan:#00d4ff;
+  --gold:#e0b451;
+  --text:#f4f7ff;
+  --muted:#9eafc8;
+  --border:rgba(255,255,255,.1);
+  --green:#27d99a;
+  --red:#ff697b;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  color:var(--text);
+  background:radial-gradient(circle at top right,#112d50,transparent 35%),var(--bg);
+  font-family:Arial,Helvetica,sans-serif;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+header{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:13px 4%;
+  background:#050b16ed;backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{
+  width:44px;height:44px;border-radius:14px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--blue),#17315b);
+  font-weight:900;box-shadow:0 0 24px #168cff35;
+}
+.brand h1{font-size:16px;margin:0}
+.brand small{display:block;color:var(--gold);font-size:10px;margin-top:4px}
+.btn{
+  display:inline-flex;justify-content:center;align-items:center;gap:7px;
+  padding:12px 15px;border:0;border-radius:11px;
+  color:white;font-weight:bold;
+  background:linear-gradient(135deg,var(--blue),#2452b3);
+}
+.btn.gold{background:linear-gradient(135deg,#f2d27d,#b07a20);color:#111827}
+.btn.secondary{background:var(--panel2);border:1px solid var(--border)}
+main{max-width:1000px;margin:auto;padding:20px 14px 50px}
+.hero{
+  padding:26px 21px;border-radius:22px;border:1px solid var(--border);
+  background:linear-gradient(125deg,#122d4c,#091426);
+}
+.eyebrow{color:var(--gold);font-weight:bold;font-size:11px;letter-spacing:2px}
+.hero h2{font-size:clamp(27px,5vw,40px);margin:13px 0}
+.hero p{color:var(--muted);line-height:1.7;margin-bottom:0}
+.creator{font-size:12px;color:var(--gold);margin-top:15px}
+.layout{display:grid;grid-template-columns:1fr .8fr;gap:16px;margin-top:18px}
+.panel{
+  background:var(--panel);border:1px solid var(--border);
+  border-radius:17px;padding:18px;min-width:0;
+}
+.panel h3{margin:0 0 8px;font-size:19px}
+.hint{color:var(--muted);font-size:12px;line-height:1.6;margin:0 0 17px}
+.field{margin-bottom:14px}
+label{display:block;font-size:12px;margin-bottom:7px;color:#e1eafa}
+input,textarea,select{
+  width:100%;padding:12px;background:#071426;color:var(--text);
+  border:1px solid var(--border);border-radius:10px;outline:none;
+}
+input:focus,textarea:focus,select:focus{border-color:var(--blue)}
+textarea{min-height:115px;resize:vertical;line-height:1.6}
+input[type=file]{padding:10px;font-size:12px}
+.small{font-size:11px;color:var(--muted);line-height:1.6}
+.preview{
+  min-height:170px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:20px;border:1px dashed #55708f;border-radius:15px;
+  background:#071426;margin-bottom:15px;
+}
+.preview img{
+  width:90px;height:90px;object-fit:cover;border-radius:22px;
+  border:1px solid var(--border);background:#14233a;
+}
+.preview .placeholder{
+  width:90px;height:90px;border-radius:22px;
+  display:grid;place-items:center;font-size:35px;
+  background:#14233a;margin-bottom:10px;
+}
+.preview h4{margin:12px 0 5px;overflow-wrap:anywhere}
+.preview p{font-size:12px;color:var(--muted);margin:0;overflow-wrap:anywhere}
+.info-card{
+  padding:14px;border:1px solid var(--border);
+  border-radius:12px;background:#ffffff05;margin-bottom:10px;
+}
+.info-card strong{display:block;font-size:13px;margin-bottom:6px}
+.info-card p{font-size:12px;color:var(--muted);line-height:1.6;margin:0}
+.price{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;padding:14px;border-radius:12px;
+  border:1px solid #e0b45140;background:#e0b4510c;margin:16px 0;
+}
+.price strong{color:var(--gold)}
+.notice{
+  background:#e0b4510c;border:1px solid #e0b45140;
+  color:#decda5;padding:12px;border-radius:11px;
+  font-size:12px;line-height:1.7;
+}
+.status{font-size:12px;line-height:1.6;color:var(--muted);margin-top:12px;white-space:pre-wrap}
+.status.error{color:#ff8795}
+.status.success{color:#51e3b0}
+.full{width:100%}
+footer{text-align:center;color:var(--muted);font-size:11px;padding:20px}
+@media(max-width:760px){.layout{grid-template-columns:1fr}}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="brand">
+    <div class="logo">JB</div>
+    <div>
+      <h1>JASON BUSINESS</h1>
+      <small>COMMANDE D'APPLICATION</small>
+    </div>
+  </div>
+  <button class="btn secondary" onclick="goBack()">← Retour</button>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">TON PROJET • NOTRE CRÉATIVITÉ</div>
+    <h2>Commande ton application</h2>
+    <p>
+      Décris l'application que tu veux créer. Envoie son nom, son icône,
+      le lien de ton site web si tu en possèdes un et les fonctionnalités
+      que tu souhaites. Nous préparerons une demande complète pour le développeur.
+    </p>
+    <div class="creator">Créé par Jason Aloma 🇨🇩 • Kinshasa</div>
+  </section>
+
+  <div class="layout">
+    <section class="panel">
+      <h3>Informations de la commande</h3>
+      <p class="hint">Les champs marqués d'un * sont obligatoires.</p>
+
+      <form id="orderForm">
+        <div class="field">
+          <label for="clientName">Nom du client *</label>
+          <input id="clientName" name="clientName" required
+                 maxlength="100" placeholder="Ton nom complet">
+        </div>
+
+        <div class="field">
+          <label for="clientPhone">Ton numéro WhatsApp *</label>
+          <input id="clientPhone" name="clientPhone" required
+                 type="tel" maxlength="30" placeholder="+243...">
+        </div>
+
+        <div class="field">
+          <label for="appName">Nom de l'application *</label>
+          <input id="appName" name="appName" required
+                 maxlength="100" placeholder="Ex. : Mon Application">
+        </div>
+
+        <div class="field">
+          <label for="appIcon">Icône de l'application *</label>
+          <input id="appIcon" name="appIcon" type="file" required
+                 accept="image/png,image/jpeg,image/webp,image/svg+xml">
+          <div class="small">Formats acceptés : PNG, JPG, WEBP ou SVG. Taille maximale : 5 Mo.</div>
+        </div>
+
+        <div class="field">
+          <label for="website">Lien du site web</label>
+          <input id="website" name="website" type="url" maxlength="500"
+                 placeholder="https://monsite.com">
+          <div class="small">Facultatif si tu n'as pas encore de site web.</div>
+        </div>
+
+        <div class="field">
+          <label for="appType">Type d'application *</label>
+          <select id="appType" name="appType" required>
+            <option value="">Choisir un type</option>
+            <option>Application Android</option>
+            <option>Application iPhone (iOS)</option>
+            <option>Application web</option>
+            <option>Application Android et web</option>
+            <option>Application de commerce</option>
+            <option>Application avec intelligence artificielle</option>
+            <option>Autre type</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="description">Description détaillée de l'application *</label>
+          <textarea id="description" name="description" required
+            minlength="20" maxlength="5000"
+            placeholder="À quoi servira l'application ? Quelles pages, fonctions, couleurs et fonctionnalités doit-elle avoir ?"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="features">Fonctionnalités souhaitées</label>
+          <textarea id="features" name="features" maxlength="3000"
+            placeholder="Ex. : connexion, inscription, paiement, tableau de bord, notifications..."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="budget">Budget prévu</label>
+          <select id="budget" name="budget">
+            <option value="">Je souhaite un devis</option>
+            <option>Moins de 20 000 FC</option>
+            <option>20 000 à 50 000 FC</option>
+            <option>50 000 à 100 000 FC</option>
+            <option>Plus de 100 000 FC</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="deadline">Délai souhaité</label>
+          <select id="deadline" name="deadline">
+            <option value="">À discuter</option>
+            <option>Urgent</option>
+            <option>Dans une semaine</option>
+            <option>Dans deux semaines</option>
+            <option>Dans un mois ou plus</option>
+          </select>
+        </div>
+
+        <div class="price">
+          <div>
+            <strong>Création d'application</strong>
+            <div class="small">Prix confirmé après étude du projet</div>
+          </div>
+          <strong>Sur devis</strong>
+        </div>
+
+        <div class="notice">
+          L'envoi de la demande ne signifie pas que l'application est déjà créée.
+          Le prix définitif, les délais et les modalités de paiement doivent être
+          confirmés avant le début du travail.
+        </div>
+
+        <button class="btn full" style="margin-top:15px" type="submit">
+          Envoyer ma commande sur WhatsApp
+        </button>
+        <button class="btn secondary full" style="margin-top:9px" type="button"
+                onclick="saveDraft()">
+          Enregistrer le brouillon sur cet appareil
+        </button>
+
+        <div id="status" class="status" role="status"></div>
+      </form>
+    </section>
+
+    <aside class="panel">
+      <h3>Aperçu du projet</h3>
+      <p class="hint">Vérifie le nom et l'icône avant d'envoyer ta commande.</p>
+
+      <div class="preview">
+        <div id="iconPlaceholder" class="placeholder">📱</div>
+        <img id="iconPreview" alt="Icône de l'application" hidden>
+        <h4 id="previewName">Nom de ton application</h4>
+        <p id="previewType">Type d'application</p>
+      </div>
+
+      <div class="info-card">
+        <strong>🌐 Site web</strong>
+        <p id="previewWebsite">Aucun lien indiqué.</p>
+      </div>
+
+      <div class="info-card">
+        <strong>📝 Description</strong>
+        <p id="previewDescription">Ta description apparaîtra ici.</p>
+      </div>
+
+      <div class="info-card">
+        <strong>⚙️ Fonctionnalités</strong>
+        <p id="previewFeatures">À définir avec le développeur.</p>
+      </div>
+
+      <div class="info-card">
+        <strong>🛡️ Protection de tes informations</strong>
+        <p>
+          Le brouillon reste sur cet appareil. Lorsque tu envoies ta demande
+          sur WhatsApp, le texte de la commande et les informations que tu y
+          inclus sont transmis à ce service.
+        </p>
+      </div>
+
+      <button class="btn gold full" type="button" onclick="window.print()">
+        Imprimer le récapitulatif
+      </button>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  JASON BUSINESS • Créé par Jason Aloma 🇨🇩
+</footer>
+
+<script>
+/* =========================================================
+   CONFIGURATION À PERSONNALISER
+========================================================= */
+
+// Remplace par le numéro WhatsApp officiel qui reçoit les commandes.
+// Format international, chiffres uniquement, sans + ni espaces.
+const WHATSAPP_NUMBER = "243XXXXXXXXX";
+
+const MAX_ICON_SIZE = 5 * 1024 * 1024;
+let selectedIconData = "";
+let selectedIconName = "";
+
+const $ = id => document.getElementById(id);
+
+function setStatus(message, type=""){
+  $("status").textContent = message;
+  $("status").className = "status " + type;
+}
+
+function normalizeURL(value){
+  const text = value.trim();
+  if(!text) return "";
+
+  try{
+    const url = new URL(text);
+    if(url.protocol !== "https:" && url.protocol !== "http:"){
+      throw new Error("Protocole non autorisé");
+    }
+    return url.href;
+  }catch{
+    return null;
+  }
+}
+
+function updatePreview(){
+  $("previewName").textContent =
+    $("appName").value.trim() || "Nom de ton application";
+
+  $("previewType").textContent =
+    $("appType").value || "Type d'application";
+
+  $("previewWebsite").textContent =
+    $("website").value.trim() || "Aucun lien indiqué.";
+
+  $("previewDescription").textContent =
+    $("description").value.trim() || "Ta description apparaîtra ici.";
+
+  $("previewFeatures").textContent =
+    $("features").value.trim() || "À définir avec le développeur.";
+}
+
+["appName","appType","website","description","features"].forEach(id=>{
+  $(id).addEventListener("input",updatePreview);
+  $(id).addEventListener("change",updatePreview);
+});
+
+$("appIcon").addEventListener("change",function(){
+  const file = this.files && this.files[0];
+  selectedIconData = "";
+  selectedIconName = "";
+
+  if(!file){
+    $("iconPreview").hidden = true;
+    $("iconPlaceholder").hidden = false;
+    return;
+  }
+
+  const allowed = [
+    "image/png","image/jpeg","image/webp","image/svg+xml"
+  ];
+
+  if(!allowed.includes(file.type)){
+    this.value = "";
+    setStatus("Format d'image non accepté. Choisis PNG, JPG, WEBP ou SVG.","error");
+    return;
+  }
+
+  if(file.size > MAX_ICON_SIZE){
+    this.value = "";
+    setStatus("L'icône dépasse la limite de 5 Mo.","error");
+    return;
+  }
+
+  selectedIconName = file.name;
+
+  const reader = new FileReader();
+  reader.onload = function(event){
+    selectedIconData = String(event.target.result || "");
+    $("iconPreview").src = selectedIconData;
+    $("iconPreview").hidden = false;
+    $("iconPlaceholder").hidden = true;
+    setStatus("Icône chargée. Elle sera jointe à la commande si WhatsApp permet l'envoi manuel du fichier.","success");
+  };
+  reader.onerror = function(){
+    setStatus("Impossible de lire ce fichier.","error");
+  };
+  reader.readAsDataURL(file);
+});
+
+function collectOrder(){
+  return {
+    clientName:$("clientName").value.trim(),
+    clientPhone:$("clientPhone").value.trim(),
+    appName:$("appName").value.trim(),
+    website:$("website").value.trim(),
+    appType:$("appType").value,
+    description:$("description").value.trim(),
+    features:$("features").value.trim(),
+    budget:$("budget").value,
+    deadline:$("deadline").value,
+    iconName:selectedIconName
+  };
+}
+
+function buildWhatsAppMessage(order){
+  return [
+    "📱 *NOUVELLE COMMANDE D'APPLICATION*",
+    "",
+    "🏢 *JASON BUSINESS*",
+    "👤 Client : "+order.clientName,
+    "📞 Téléphone : "+order.clientPhone,
+    "",
+    "📲 *Nom de l'application :*",
+    order.appName,
+    "",
+    "🎨 *Nom du fichier icône :*",
+    order.iconName || "Non indiqué",
+    "",
+    "🌐 *Lien du site web :*",
+    order.website || "Aucun",
+    "",
+    "📦 *Type d'application :*",
+    order.appType,
+    "",
+    "📝 *Description :*",
+    order.description,
+    "",
+    "⚙️ *Fonctionnalités :*",
+    order.features || "À définir",
+    "",
+    "💰 *Budget prévu :*",
+    order.budget || "Devis demandé",
+    "",
+    "📅 *Délai souhaité :*",
+    order.deadline || "À discuter",
+    "",
+    "Merci de confirmer la réception de cette demande et de communiquer le devis."
+  ].join("\n");
+}
+
+$("orderForm").addEventListener("submit",function(event){
+  event.preventDefault();
+
+  const order = collectOrder();
+
+  if(!order.clientName || !order.clientPhone || !order.appName ||
+     !order.appType || order.description.length < 20){
+    setStatus("Complète tous les champs obligatoires. La description doit contenir au moins 20 caractères.","error");
+    return;
+  }
+
+  if(!$("appIcon").files || !$("appIcon").files[0]){
+    setStatus("Ajoute l'icône de l'application avant d'envoyer la commande.","error");
+    return;
+  }
+
+  const normalized = normalizeURL(order.website);
+  if(order.website && normalized === null){
+    setStatus("Le lien du site web n'est pas valide. Exemple : https://monsite.com","error");
+    return;
+  }
+
+  if(normalized) order.website = normalized;
+
+  if(!/^\d{8,15}$/.test(WHATSAPP_NUMBER)){
+    setStatus("Configure d'abord WHATSAPP_NUMBER dans le code avec ton vrai numéro international, chiffres uniquement.","error");
+    return;
+  }
+
+  const message = buildWhatsAppMessage(order);
+  const url = "https://wa.me/" + WHATSAPP_NUMBER +
+    "?text=" + encodeURIComponent(message);
+
+  setStatus(
+    "Ouverture de WhatsApp. Après l'ouverture, vérifie la commande et joins manuellement le fichier de l'icône dans la conversation avant d'envoyer.",
+    "success"
+  );
+
+  window.open(url,"_blank","noopener");
+});
+
+function saveDraft(){
+  const order = collectOrder();
+
+  try{
+    localStorage.setItem("jason_business_app_order_draft",JSON.stringify(order));
+    setStatus("Brouillon enregistré sur cet appareil. L'icône n'est pas incluse dans ce brouillon.","success");
+  }catch(error){
+    setStatus("Impossible d'enregistrer le brouillon sur cet appareil.","error");
+  }
+}
+
+function loadDraft(){
+  try{
+    const raw = localStorage.getItem("jason_business_app_order_draft");
+    if(!raw) return;
+    const order = JSON.parse(raw);
+
+    const map = {
+      clientName:"clientName",
+      clientPhone:"clientPhone",
+      appName:"appName",
+      website:"website",
+      appType:"appType",
+      description:"description",
+      features:"features",
+      budget:"budget",
+      deadline:"deadline"
+    };
+
+    Object.entries(map).forEach(([key,id])=>{
+      if(typeof order[key] === "string") $(id).value = order[key];
+    });
+
+    updatePreview();
+  }catch(error){
+    console.warn("Brouillon indisponible",error);
+  }
+}
+
+function goBack(){
+  if(history.length > 1) history.back();
+  else window.location.href = "index.html";
+}
+
+loadDraft();
+updatePreview();
+</script>
+</body>
+</html>
