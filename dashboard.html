@@ -25,12 +25,11 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 .jb-balance-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:20px}
 .jb-money-box{padding:13px 5px;text-align:center;border-radius:15px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}
 .jb-icon{font-size:20px}.jb-money-box small{display:block;margin-top:5px;font-size:8px;opacity:.55;text-transform:uppercase}.jb-money-box b{display:block;margin-top:4px;font-size:11px}
-.jb-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:20px}
-.jb-action{padding:16px 6px;border-radius:15px;text-align:center;text-decoration:none;font-size:11px;font-weight:900;transition:.2s}
+.jb-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px}
+.jb-action{padding:16px 10px;border-radius:15px;text-align:center;text-decoration:none;font-size:12px;font-weight:900;transition:.2s}
 .jb-action:active{transform:scale(.96)}
 .jb-recharge{color:#001018;background:linear-gradient(135deg,var(--blue),#00a8ff)}
 .jb-withdraw{color:#ff6b61;background:rgba(255,71,87,.08);border:1px solid rgba(255,71,87,.30)}
-.jb-jeux{color:#000;background:linear-gradient(135deg,var(--gold),#ffcc33);box-shadow:0 0 20px rgba(255,215,0,.25)}
 .jb-points-card{margin:20px;padding:20px;border-radius:20px;background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.22)}
 .jb-points-top{display:flex;justify-content:space-between;align-items:center;gap:15px}.jb-points-title{color:var(--gold);font-size:12px;font-weight:bold}.jb-points-value{margin-top:7px;font-size:10px;opacity:.60}.jb-points-value b{color:var(--gold)}.jb-points-number{color:var(--gold);font-size:25px;font-weight:900}
 #jbConvertPoints{width:100%;margin-top:15px;padding:13px;border:0;border-radius:12px;background:var(--gold);color:#000;font-weight:900;cursor:pointer}#jbConvertPoints:active{transform:scale(.97)}#jbConvertPoints:disabled{opacity:.40;cursor:not-allowed}
@@ -45,7 +44,7 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 .jb-nav-link{min-width:65px;color:white;opacity:.45;text-decoration:none;text-align:center;font-size:10px}.jb-nav-link.active{color:var(--blue);opacity:1;font-weight:bold}.jb-nav-icon{margin-bottom:3px;font-size:19px}
 .jb-loading{position:fixed;z-index:9999;inset:0;display:flex;align-items:center;justify-content:center;background:#050a14}.jb-loading-box{text-align:center}.jb-loader{width:38px;height:38px;margin:auto;border-radius:50%;border:3px solid rgba(255,255,255,.10);border-top-color:var(--blue);animation:jbSpin .8s linear infinite}.jb-loading-text{margin-top:12px;font-size:11px;color:var(--blue)}
 @keyframes jbSpin{to{transform:rotate(360deg)}}
-@media(max-width:380px){.jb-brand{font-size:17px}.jb-balance{font-size:30px}.jb-balance-card{margin:15px;padding:20px}.jb-actions{margin:15px;gap:8px}.jb-action{font-size:10px;padding:14px 4px}.jb-section{padding:0 15px}.jb-service-price{font-size:10px}}
+@media(max-width:360px){.jb-brand{font-size:17px}.jb-balance{font-size:30px}.jb-balance-card{margin:15px;padding:20px}.jb-actions{margin:15px}.jb-section{padding:0 15px}.jb-service-price{font-size:10px}}
 </style>
 </head>
 <body>
@@ -66,7 +65,6 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 
 <div class="jb-actions">
 <a href="recharge.html" class="jb-action jb-recharge">📥 RECHARGER</a>
-<a href="jeux.html" class="jb-action jb-jeux">🎮 JEUX</a>
 <a href="retrait.html" class="jb-action jb-withdraw">📤 RETIRER</a>
 </div>
 
