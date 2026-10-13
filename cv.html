@@ -1,1 +1,600 @@
 
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071426">
+<title>JASON BUSINESS — Créateur de CV</title>
+
+<style>
+:root{
+  --bg:#050b16;
+  --panel:#0d1b30;
+  --panel2:#122742;
+  --blue:#168cff;
+  --cyan:#00d4ff;
+  --gold:#e0b451;
+  --text:#f4f7ff;
+  --muted:#a3b2c8;
+  --border:rgba(255,255,255,.1);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:radial-gradient(circle at top right,#102a4b,transparent 35%),var(--bg);
+  color:var(--text);font-family:Arial,sans-serif
+}
+button,input,textarea,select{font:inherit}
+button{
+  border:0;border-radius:10px;padding:12px 15px;
+  background:linear-gradient(135deg,var(--blue),#2450ae);
+  color:white;font-weight:bold;cursor:pointer
+}
+button:disabled{opacity:.5;cursor:not-allowed}
+header{
+  position:sticky;top:0;z-index:5;display:flex;align-items:center;
+  justify-content:space-between;gap:10px;padding:13px 4%;
+  background:#050b16ed;backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border)
+}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{
+  width:42px;height:42px;display:grid;place-items:center;
+  border-radius:13px;background:linear-gradient(135deg,var(--blue),#17345e);
+  font-weight:900
+}
+.brand h1{font-size:16px;margin:0}
+.brand small{font-size:10px;color:var(--gold)}
+.secondary{background:var(--panel2);border:1px solid var(--border)}
+.gold{background:linear-gradient(135deg,#f1d17c,#b07b24);color:#111827}
+main{max-width:1200px;margin:auto;padding:20px 14px 55px}
+.hero{
+  border:1px solid var(--border);border-radius:21px;padding:25px 20px;
+  background:linear-gradient(125deg,#122d4d,#0a1527)
+}
+.eyebrow{font-size:11px;color:var(--gold);font-weight:bold;letter-spacing:2px}
+.hero h2{font-size:clamp(27px,5vw,40px);margin:12px 0}
+.hero p{color:var(--muted);line-height:1.7;margin-bottom:0}
+.creator{color:var(--gold);font-size:12px;margin-top:14px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:20px}
+.panel{
+  border:1px solid var(--border);background:var(--panel);
+  border-radius:17px;padding:18px;min-width:0
+}
+.panel h3{margin:0 0 7px;font-size:19px}
+.description{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:18px}
+.field{margin-bottom:13px}
+.field label{display:block;font-size:12px;color:#dbe7fa;margin-bottom:7px}
+input,textarea,select{
+  width:100%;padding:12px;background:#071426;color:var(--text);
+  border:1px solid var(--border);border-radius:10px;outline:none
+}
+input:focus,textarea:focus,select:focus{border-color:var(--blue)}
+textarea{resize:vertical;min-height:85px;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.full{width:100%}
+.price{
+  display:flex;justify-content:space-between;gap:10px;align-items:center;
+  background:#ffffff07;border:1px solid var(--border);padding:13px;
+  border-radius:11px;margin:15px 0
+}
+.price strong{color:var(--gold)}
+.status{font-size:12px;color:var(--muted);margin:12px 0;white-space:pre-wrap;line-height:1.6}
+.status.error{color:#ff8c99}
+.status.success{color:#5ee2b1}
+.templates{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 18px}
+.template{
+  border:1px solid var(--border);border-radius:11px;padding:12px 7px;
+  text-align:center;background:#071426;cursor:pointer;font-size:12px
+}
+.template.active{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.template span{display:block;font-size:21px;margin-bottom:6px}
+.preview-wrap{margin-top:18px}
+.preview-toolbar{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+#cvPreview{
+  background:white;color:#252b35;min-height:400px;padding:25px;
+  border-radius:4px;overflow-wrap:anywhere;box-shadow:0 12px 35px #0005
+}
+.cv-head{border-bottom:3px solid #168cff;padding-bottom:15px;margin-bottom:17px}
+.cv-head h1{margin:0 0 7px;font-size:27px;color:#14253c}
+.cv-contact{font-size:11px;color:#586578;line-height:1.8}
+.cv-section{margin-top:18px}
+.cv-section h2{
+  color:#1765a7;font-size:13px;letter-spacing:1px;
+  border-bottom:1px solid #dbe3ed;padding-bottom:6px
+}
+.cv-section p,.cv-section li{font-size:12px;line-height:1.7;white-space:pre-wrap}
+.cv-section ul{padding-left:18px}
+#cvPreview.classic .cv-head{border-color:#333}
+#cvPreview.classic .cv-section h2{color:#303030}
+#cvPreview.modern .cv-head{background:#122742;color:white;padding:17px;border:0}
+#cvPreview.modern .cv-head h1{color:white}
+#cvPreview.modern .cv-contact{color:#d6e6fa}
+#cvPreview.modern .cv-section h2{color:#b07b24}
+#cvPreview.simple .cv-head{border-color:#b07b24}
+#cvPreview.simple .cv-section h2{color:#9a6c19}
+.note{
+  border:1px solid #d6a84a45;background:#d6a84a0d;
+  color:#d9c99f;border-radius:11px;padding:12px;font-size:12px;line-height:1.6
+}
+footer{text-align:center;color:var(--muted);font-size:11px;padding:20px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+@media(max-width:420px){.two{grid-template-columns:1fr}.panel{padding:14px}#cvPreview{padding:17px}}
+@media print{
+  body{background:white!important;color:black!important}
+  header,.hero,.form-panel,.preview-toolbar,.preview-title,footer,.no-print{display:none!important}
+  main{padding:0!important;margin:0!important;max-width:none!important}
+  .layout{display:block!important;margin:0!important}
+  .preview-panel{border:0!important;padding:0!important;background:white!important}
+  .preview-wrap{margin:0!important}
+  #cvPreview{box-shadow:none!important;border-radius:0!important;padding:15mm!important;min-height:0!important}
+  @page{size:A4;margin:0}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="brand">
+    <div class="logo">JB</div>
+    <div>
+      <h1>JASON BUSINESS</h1>
+      <small>GÉNÉRATEUR DE CV IA</small>
+    </div>
+  </div>
+  <button class="secondary" onclick="window.location.href='index.html'">← Accueil</button>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">CARRIÈRE • PROFESSIONNALISME • IA</div>
+    <h2>Crée ton CV professionnel</h2>
+    <p>
+      Remplis tes informations, choisis un modèle et utilise l'intelligence
+      artificielle pour organiser tes compétences et rédiger ton CV.
+      Prévisualise le résultat puis imprime-le ou enregistre-le en PDF.
+    </p>
+    <div class="creator">Créé par Jason Aloma 🇨🇩 • Kinshasa</div>
+  </section>
+
+  <div class="layout">
+    <section class="panel form-panel">
+      <h3>1. Tes informations</h3>
+      <div class="description">Renseigne les informations exactes à afficher sur ton CV.</div>
+
+      <div class="field">
+        <label for="fullName">Nom complet *</label>
+        <input id="fullName" placeholder="Ex. : Djeson Aloma" autocomplete="name">
+      </div>
+
+      <div class="two">
+        <div class="field">
+          <label for="job">Poste recherché *</label>
+          <input id="job" placeholder="Ex. : Développeur web">
+        </div>
+        <div class="field">
+          <label for="city">Ville / Pays</label>
+          <input id="city" placeholder="Ex. : Kinshasa, RDC">
+        </div>
+      </div>
+
+      <div class="two">
+        <div class="field">
+          <label for="email">Adresse e-mail</label>
+          <input id="email" type="email" placeholder="nom@email.com" autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="phone">Téléphone</label>
+          <input id="phone" type="tel" placeholder="+243 ...">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="summary">Profil professionnel</label>
+        <textarea id="summary" placeholder="Présente-toi, ton objectif et tes points forts..."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="education">Études et formations</label>
+        <textarea id="education" placeholder="École, diplôme, formation, année..."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="experience">Expériences professionnelles</label>
+        <textarea id="experience" placeholder="Poste, entreprise, dates et missions..."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="skills">Compétences</label>
+        <textarea id="skills" placeholder="Informatique, langues, organisation, communication..."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="languages">Langues</label>
+        <input id="languages" placeholder="Français, anglais...">
+      </div>
+
+      <div class="field">
+        <label for="projects">Projets ou réalisations</label>
+        <textarea id="projects" placeholder="Projets personnels, bénévolat, réalisations..."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="extra">Informations supplémentaires</label>
+        <textarea id="extra" placeholder="Certifications, permis, disponibilité..."></textarea>
+      </div>
+
+      <h3>2. Choisis ton modèle</h3>
+      <div class="templates">
+        <div class="template active" data-template="modern" onclick="chooseTemplate('modern')">
+          <span>▰</span>Moderne
+        </div>
+        <div class="template" data-template="classic" onclick="chooseTemplate('classic')">
+          <span>▤</span>Classique
+        </div>
+        <div class="template" data-template="simple" onclick="chooseTemplate('simple')">
+          <span>✦</span>Élégant
+        </div>
+      </div>
+
+      <div class="price">
+        <div>
+          <strong>CV assisté par IA</strong><br>
+          <small style="color:var(--muted)">Tarif indicatif à configurer</small>
+        </div>
+        <strong id="priceLabel">5 000 FC</strong>
+      </div>
+
+      <div class="note">
+        Le bouton IA envoie les informations du CV au service externe.
+        Vérifie les données avant l'envoi. Le tarif affiché n'est pas un paiement
+        et cette page ne prélève aucun argent.
+      </div>
+
+      <button class="full" style="margin-top:14px" id="aiButton" onclick="generateWithAI()">
+        ✨ Rédiger mon CV avec l'IA
+      </button>
+      <button class="full secondary" style="margin-top:9px" onclick="updatePreview()">
+        Actualiser l'aperçu
+      </button>
+      <div id="status" class="status" role="status"></div>
+    </section>
+
+    <section class="panel preview-panel">
+      <div class="preview-toolbar">
+        <div>
+          <h3 class="preview-title" style="margin:0">3. Aperçu du CV</h3>
+          <div class="description" style="margin:5px 0 0">Le document s'actualise avec tes informations.</div>
+        </div>
+        <button class="gold" onclick="printCV()">Imprimer / PDF</button>
+      </div>
+
+      <div class="preview-wrap">
+        <article id="cvPreview" class="modern">
+          <div class="cv-head">
+            <h1 id="pName">TON NOM COMPLET</h1>
+            <div id="pJob" style="font-weight:bold;margin-bottom:7px">Poste recherché</div>
+            <div class="cv-contact" id="pContact">Ville • Téléphone • E-mail</div>
+          </div>
+          <div id="pSections"></div>
+        </article>
+      </div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px" class="no-print">
+        <button onclick="downloadText()" class="secondary">Exporter en texte</button>
+        <button onclick="clearForm()" class="secondary">Effacer le formulaire</button>
+      </div>
+      <p class="description" style="margin-top:15px">
+        Conseil : vérifie l'orthographe, les dates, les coordonnées et les diplômes
+        avant d'envoyer ton CV à un employeur.
+      </p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  JASON BUSINESS • Créé par Jason Aloma 🇨🇩 • CV assisté par intelligence artificielle
+</footer>
+
+<script>
+/* =========================================================
+   CONFIGURATION
+   Route chatbot fournie pour ton projet.
+========================================================= */
+const CHATBOT_URL =
+  "https://davbot-outils.vercel.app/api/intelligence-artificielle/ask";
+
+/* Tarif indicatif modifiable. Ce montant ne déclenche pas de paiement. */
+const CV_PRICE_FC = 5000;
+document.getElementById("priceLabel").textContent =
+  CV_PRICE_FC.toLocaleString("fr-FR") + " FC";
+
+let currentTemplate = "modern";
+let aiDraft = "";
+
+const fields = [
+  "fullName","job","city","email","phone","summary",
+  "education","experience","skills","languages","projects","extra"
+];
+
+function value(id){
+  return document.getElementById(id).value.trim();
+}
+
+function escapeHTML(str){
+  return String(str ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[char]);
+}
+
+function setStatus(message, type=""){
+  const el = document.getElementById("status");
+  el.textContent = message;
+  el.className = "status " + type;
+}
+
+function chooseTemplate(template){
+  currentTemplate = template;
+  document.querySelectorAll(".template").forEach(el=>{
+    el.classList.toggle("active",el.dataset.template===template);
+  });
+  document.getElementById("cvPreview").className = template;
+  updatePreview();
+}
+
+function section(title, content, list=false){
+  if(!content) return "";
+  let safe = escapeHTML(content);
+  if(list){
+    const items = content.split(/\n|,|;/).map(x=>x.trim()).filter(Boolean);
+    safe = "<ul>" + items.map(x=>"<li>"+escapeHTML(x)+"</li>").join("") + "</ul>";
+  } else {
+    safe = "<p>"+safe.replace(/\n/g,"<br>")+"</p>";
+  }
+  return '<section class="cv-section"><h2>'+escapeHTML(title.toUpperCase())+
+    '</h2>'+safe+'</section>';
+}
+
+function updatePreview(){
+  document.getElementById("pName").textContent = value("fullName") || "TON NOM COMPLET";
+  document.getElementById("pJob").textContent = value("job") || "Poste recherché";
+
+  const contacts = [value("city"),value("phone"),value("email")].filter(Boolean);
+  document.getElementById("pContact").textContent =
+    contacts.join(" • ") || "Ville • Téléphone • E-mail";
+
+  const sections =
+    section("Profil professionnel",value("summary"))+
+    section("Expériences professionnelles",value("experience"))+
+    section("Études et formations",value("education"))+
+    section("Compétences",value("skills"),true)+
+    section("Langues",value("languages"),true)+
+    section("Projets et réalisations",value("projects"))+
+    section("Informations supplémentaires",value("extra"));
+
+  document.getElementById("pSections").innerHTML =
+    sections || '<p style="color:#68788c">Remplis le formulaire pour voir ton CV ici.</p>';
+
+  document.getElementById("cvPreview").className = currentTemplate;
+}
+
+fields.forEach(id=>{
+  document.getElementById(id).addEventListener("input",updatePreview);
+});
+
+function collectCV(){
+  return {
+    nom:value("fullName"),
+    poste_recherche:value("job"),
+    ville_pays:value("city"),
+    email:value("email"),
+    telephone:value("phone"),
+    profil:value("summary"),
+    formations:value("education"),
+    experiences:value("experience"),
+    competences:value("skills"),
+    langues:value("languages"),
+    projets:value("projects"),
+    informations_supplementaires:value("extra"),
+    modele:currentTemplate
+  };
+}
+
+/* Réponse IA : les API peuvent utiliser des formats différents. */
+function extractAnswer(data){
+  if(typeof data === "string") return data;
+  if(!data || typeof data !== "object") return "";
+  const candidates = [
+    data.answer,data.response,data.message,data.result,
+    data.text,data.content,data.output
+  ];
+  for(const item of candidates){
+    if(typeof item === "string" && item.trim()) return item;
+  }
+  if(data.data && typeof data.data === "object"){
+    return extractAnswer(data.data);
+  }
+  return JSON.stringify(data,null,2);
+}
+
+async function generateWithAI(){
+  const cv = collectCV();
+
+  if(!cv.nom || !cv.poste_recherche){
+    setStatus("Remplis au minimum le nom complet et le poste recherché.","error");
+    return;
+  }
+
+  const button = document.getElementById("aiButton");
+  button.disabled = true;
+  button.textContent = "⏳ Rédaction du CV...";
+  setStatus("Connexion au chatbot IA...");
+
+  const prompt = `
+Tu es un assistant professionnel spécialisé dans la rédaction de CV.
+Rédige un CV en français clair, professionnel et adapté au poste demandé.
+Organise les informations avec les rubriques Profil, Expériences, Formation,
+Compétences, Langues et Projets si les données existent.
+Corrige les fautes de français sans inventer de diplôme, d'expérience,
+de compétence, d'entreprise, de date ou de coordonnées.
+Si une information manque, ne l'invente pas.
+Réponds avec un JSON valide uniquement, dans cette forme :
+{
+ "profil":"...",
+ "experiences":"...",
+ "formations":"...",
+ "competences":"...",
+ "langues":"...",
+ "projets":"...",
+ "informations_supplementaires":"..."
+}
+Pour les listes, sépare les éléments par des retours à la ligne.
+Données du candidat :
+${JSON.stringify(cv,null,2)}
+`;
+
+  try{
+    const response = await fetch(CHATBOT_URL,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "Accept":"application/json"
+      },
+      body:JSON.stringify({
+        message:prompt,
+        knowledge:"Rédaction de CV professionnels, sans invention de données.",
+        rules:"Répondre en français. Ne jamais inventer d'informations. Retourner le JSON demandé.",
+        history:[]
+      })
+    });
+
+    const raw = await response.text();
+    let data;
+    try{data=JSON.parse(raw)}catch{data={response:raw}}
+
+    if(!response.ok){
+      throw new Error("Le serveur IA a répondu HTTP "+response.status+
+        ". "+extractAnswer(data).slice(0,300));
+    }
+
+    const answer = extractAnswer(data);
+    if(!answer) throw new Error("Le serveur n'a retourné aucun contenu.");
+
+    let parsed = null;
+    const cleaned = answer.replace(/^```(?:json)?\s*/i,"").replace(/\s*```$/,"").trim();
+    try{
+      parsed = JSON.parse(cleaned);
+    }catch{
+      const start = cleaned.indexOf("{");
+      const end = cleaned.lastIndexOf("}");
+      if(start>=0 && end>start){
+        try{parsed=JSON.parse(cleaned.slice(start,end+1))}catch{}
+      }
+    }
+
+    if(parsed && typeof parsed === "object"){
+      const mapping = {
+        summary:"profil",
+        experience:"experiences",
+        education:"formations",
+        skills:"competences",
+        languages:"langues",
+        projects:"projets",
+        extra:"informations_supplementaires"
+      };
+
+      for(const [field,key] of Object.entries(mapping)){
+        if(typeof parsed[key] === "string" && parsed[key].trim()){
+          document.getElementById(field).value = parsed[key].trim();
+        }
+      }
+      aiDraft = answer;
+      updatePreview();
+      setStatus("CV rédigé par l'IA. Vérifie toutes les informations avant de l'utiliser.","success");
+    }else{
+      aiDraft = answer;
+      setStatus("Réponse IA reçue, mais le format n'est pas JSON. Le contenu est disponible pour consultation ci-dessous.","success");
+      showAIDraft(answer);
+    }
+  }catch(error){
+    console.error(error);
+    let message = "Impossible de contacter le chatbot.";
+    if(error instanceof TypeError){
+      message += " Vérifie ta connexion et si le serveur autorise les requêtes depuis ce site (CORS).";
+    }else{
+      message += " "+error.message;
+    }
+    setStatus(message,"error");
+  }finally{
+    button.disabled = false;
+    button.textContent = "✨ Rédiger mon CV avec l'IA";
+  }
+}
+
+function showAIDraft(text){
+  const existing = document.getElementById("aiDraft");
+  if(existing) existing.remove();
+
+  const box = document.createElement("section");
+  box.id = "aiDraft";
+  box.className = "note";
+  box.style.marginTop = "15px";
+  box.style.whiteSpace = "pre-wrap";
+  box.textContent = "Réponse du chatbot :\n\n" + text;
+
+  document.querySelector(".preview-panel").appendChild(box);
+}
+
+function printCV(){
+  updatePreview();
+  window.print();
+}
+
+function downloadText(){
+  const cv = collectCV();
+  const textContent = [
+    cv.nom.toUpperCase(),
+    cv.poste_recherche,
+    [cv.ville_pays,cv.telephone,cv.email].filter(Boolean).join(" | "),
+    "",
+    "PROFIL PROFESSIONNEL",cv.profil,
+    "",
+    "EXPÉRIENCES PROFESSIONNELLES",cv.experiences,
+    "",
+    "ÉTUDES ET FORMATIONS",cv.formations,
+    "",
+    "COMPÉTENCES",cv.competences,
+    "",
+    "LANGUES",cv.langues,
+    "",
+    "PROJETS",cv.projets,
+    "",
+    "INFORMATIONS SUPPLÉMENTAIRES",cv.extra
+  ].join("\n");
+
+  const blob = new Blob([textContent],{type:"text/plain;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "CV-"+(cv.nom || "JASON-BUSINESS").replace(/[^a-z0-9_-]/gi,"-")+".txt";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function clearForm(){
+  if(!confirm("Effacer toutes les informations saisies ?")) return;
+  fields.forEach(id=>document.getElementById(id).value="");
+  const draft = document.getElementById("aiDraft");
+  if(draft) draft.remove();
+  aiDraft="";
+  updatePreview();
+  setStatus("Formulaire effacé.");
+}
+
+updatePreview();
+</script>
+</body>
+</html>
