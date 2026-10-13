@@ -1,0 +1,2422 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
+
+<meta name="theme-color" content="#050a14">
+
+<meta
+    name="description"
+    content="JASON BUSINESS — Tableau de bord"
+>
+
+<title>JASON BUSINESS — Dashboard</title>
+
+<style>
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+:root{
+
+    --blue:#00d2ff;
+    --blue2:#0077ff;
+
+    --dark:#050a14;
+
+    --green:#00e676;
+    --red:#ff4757;
+
+    --gold:#ffd700;
+
+    --glass:rgba(255,255,255,.055);
+
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+
+    box-sizing:border-box;
+
+    -webkit-tap-highlight-color:transparent;
+
+}
+
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+body{
+
+    margin:0;
+
+    min-height:100vh;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color:white;
+
+    background:
+
+        linear-gradient(
+            rgba(3,8,18,.78),
+            rgba(3,8,18,.95)
+        ),
+
+        url("IMG_0870.jpeg")
+        center/cover
+        fixed;
+
+    padding-bottom:90px;
+
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.jb-overlay{
+
+    min-height:100vh;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(0,210,255,.08),
+            transparent 40%
+        );
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.jb-header{
+
+    padding:
+        24px
+        20px
+        20px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,210,255,.10),
+            rgba(0,0,0,.35)
+        );
+
+    border-bottom:
+        1px solid
+        rgba(0,210,255,.30);
+
+    backdrop-filter:
+        blur(18px);
+
+}
+
+
+.jb-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+
+.jb-brand{
+
+    font-size:20px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    color:var(--blue);
+
+}
+
+
+.jb-status{
+
+    font-size:10px;
+
+    color:var(--green);
+
+    padding:
+        6px
+        10px;
+
+    border-radius:20px;
+
+    background:
+        rgba(0,230,118,.10);
+
+    border:
+        1px solid
+        rgba(0,230,118,.25);
+
+    white-space:nowrap;
+
+}
+
+
+.jb-user-box{
+
+    margin-top:20px;
+
+}
+
+
+.jb-user-box small{
+
+    font-size:10px;
+
+    opacity:.55;
+
+}
+
+
+.jb-user-box h2{
+
+    margin:
+        5px
+        0
+        0;
+
+    font-size:20px;
+
+    word-break:break-all;
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+#jbDashboardStatus{
+
+    text-align:center;
+
+    min-height:20px;
+
+    padding:
+        10px
+        20px;
+
+    font-size:11px;
+
+    color:#ffeb3b;
+
+}
+
+
+/* =====================================================
+   BALANCE CARD
+===================================================== */
+
+.jb-balance-card{
+
+    margin:20px;
+
+    padding:24px;
+
+    border-radius:25px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(0,210,255,.15),
+            rgba(0,0,0,.60)
+        );
+
+    border:
+        1px solid
+        rgba(0,210,255,.40);
+
+    box-shadow:
+
+        0 15px 40px
+        rgba(0,0,0,.40),
+
+        0 0 30px
+        rgba(0,210,255,.08);
+
+    backdrop-filter:
+        blur(18px);
+
+}
+
+
+.jb-balance-title{
+
+    font-size:11px;
+
+    opacity:.60;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+}
+
+
+.jb-balance{
+
+    margin:
+        7px
+        0;
+
+    font-size:36px;
+
+    font-weight:900;
+
+    color:var(--blue);
+
+    text-shadow:
+        0 0 15px
+        rgba(0,210,255,.40);
+
+}
+
+
+.jb-currency{
+
+    font-size:13px;
+
+    opacity:.65;
+
+}
+
+
+.jb-balance-description{
+
+    font-size:10px;
+
+    opacity:.45;
+
+}
+
+
+/* =====================================================
+   MONEY GRID
+===================================================== */
+
+.jb-balance-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:8px;
+
+    margin-top:20px;
+
+}
+
+
+.jb-money-box{
+
+    padding:
+        13px
+        5px;
+
+    text-align:center;
+
+    border-radius:15px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+}
+
+
+.jb-icon{
+
+    font-size:20px;
+
+}
+
+
+.jb-money-box small{
+
+    display:block;
+
+    margin-top:5px;
+
+    font-size:8px;
+
+    opacity:.55;
+
+    text-transform:uppercase;
+
+}
+
+
+.jb-money-box b{
+
+    display:block;
+
+    margin-top:4px;
+
+    font-size:11px;
+
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.jb-actions{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:12px;
+
+    margin:
+        20px;
+
+}
+
+
+.jb-action{
+
+    padding:16px 10px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    transition:.2s;
+
+}
+
+
+.jb-action:active{
+
+    transform:scale(.96);
+
+}
+
+
+.jb-recharge{
+
+    color:#001018;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--blue),
+            #00a8ff
+        );
+
+}
+
+
+.jb-withdraw{
+
+    color:#ff6b61;
+
+    background:
+        rgba(255,71,87,.08);
+
+    border:
+        1px solid
+        rgba(255,71,87,.30);
+
+}
+
+
+/* =====================================================
+   POINTS
+===================================================== */
+
+.jb-points-card{
+
+    margin:20px;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    background:
+        rgba(255,215,0,.06);
+
+    border:
+        1px solid
+        rgba(255,215,0,.22);
+
+}
+
+
+.jb-points-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+
+.jb-points-title{
+
+    color:var(--gold);
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+
+.jb-points-value{
+
+    margin-top:7px;
+
+    font-size:10px;
+
+    opacity:.60;
+
+}
+
+
+.jb-points-value b{
+
+    color:var(--gold);
+
+}
+
+
+.jb-points-number{
+
+    color:var(--gold);
+
+    font-size:25px;
+
+    font-weight:900;
+
+}
+
+
+#jbConvertPoints{
+
+    width:100%;
+
+    margin-top:15px;
+
+    padding:13px;
+
+    border:0;
+
+    border-radius:12px;
+
+    background:var(--gold);
+
+    color:#000;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+}
+
+
+#jbConvertPoints:active{
+
+    transform:scale(.97);
+
+}
+
+
+#jbConvertPoints:disabled{
+
+    opacity:.40;
+
+    cursor:not-allowed;
+
+}
+
+
+/* =====================================================
+   SECTIONS
+===================================================== */
+
+.jb-section{
+
+    padding:
+        0
+        20px;
+
+}
+
+
+.jb-section-title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin:
+        27px
+        0
+        15px;
+
+}
+
+
+.jb-section-title h3{
+
+    margin:0;
+
+    font-size:16px;
+
+}
+
+
+.jb-section-title a{
+
+    color:var(--blue);
+
+    font-size:10px;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+}
+
+
+/* =====================================================
+   SERVICES
+===================================================== */
+
+.jb-service-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    margin-bottom:10px;
+
+    padding:14px;
+
+    border-radius:17px;
+
+    background:var(--glass);
+
+    border:
+        1px solid
+        rgba(0,210,255,.12);
+
+    backdrop-filter:
+        blur(12px);
+
+}
+
+
+.jb-service-icon{
+
+    width:46px;
+
+    height:46px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:13px;
+
+    font-size:22px;
+
+    background:
+        rgba(0,210,255,.08);
+
+    border:
+        1px solid
+        rgba(0,210,255,.20);
+
+}
+
+
+.jb-service-info{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+
+.jb-service-name{
+
+    font-size:13px;
+
+    font-weight:bold;
+
+}
+
+
+.jb-service-desc{
+
+    margin-top:4px;
+
+    font-size:9px;
+
+    opacity:.50;
+
+}
+
+
+.jb-service-price{
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    color:var(--blue);
+
+    white-space:nowrap;
+
+}
+
+
+/* =====================================================
+   ACTIVITÉS
+===================================================== */
+
+.jb-invest-card{
+
+    margin-bottom:10px;
+
+    padding:15px;
+
+    border-radius:16px;
+
+    background:
+        rgba(0,230,118,.05);
+
+    border:
+        1px solid
+        rgba(0,230,118,.15);
+
+}
+
+
+.jb-invest-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+
+.jb-invest-name{
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+
+.jb-invest-gain{
+
+    color:var(--green);
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    white-space:nowrap;
+
+}
+
+
+.jb-invest-date{
+
+    margin-top:7px;
+
+    font-size:9px;
+
+    opacity:.45;
+
+}
+
+
+.jb-invest-status{
+
+    margin-top:6px;
+
+    font-size:9px;
+
+    color:var(--green);
+
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.jb-empty{
+
+    padding:25px 15px;
+
+    text-align:center;
+
+    border-radius:15px;
+
+    background:
+        rgba(255,255,255,.03);
+
+    font-size:11px;
+
+    opacity:.55;
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.jb-navbar{
+
+    position:fixed;
+
+    z-index:1000;
+
+    bottom:0;
+
+    left:0;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    padding:
+        11px
+        0
+        calc(11px + env(safe-area-inset-bottom));
+
+    background:
+        rgba(5,10,20,.97);
+
+    border-top:
+        1px solid
+        rgba(0,210,255,.25);
+
+    backdrop-filter:
+        blur(18px);
+
+}
+
+
+.jb-nav-link{
+
+    min-width:65px;
+
+    color:white;
+
+    opacity:.45;
+
+    text-decoration:none;
+
+    text-align:center;
+
+    font-size:10px;
+
+}
+
+
+.jb-nav-link.active{
+
+    color:var(--blue);
+
+    opacity:1;
+
+    font-weight:bold;
+
+}
+
+
+.jb-nav-icon{
+
+    margin-bottom:3px;
+
+    font-size:19px;
+
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.jb-loading{
+
+    position:fixed;
+
+    z-index:9999;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        #050a14;
+
+}
+
+
+.jb-loading-box{
+
+    text-align:center;
+
+}
+
+
+.jb-loader{
+
+    width:38px;
+
+    height:38px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    border:
+        3px solid
+        rgba(255,255,255,.10);
+
+    border-top-color:
+        var(--blue);
+
+    animation:
+        jbSpin .8s linear infinite;
+
+}
+
+
+.jb-loading-text{
+
+    margin-top:12px;
+
+    font-size:11px;
+
+    color:var(--blue);
+
+}
+
+
+@keyframes jbSpin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:360px){
+
+    .jb-brand{
+
+        font-size:17px;
+
+    }
+
+    .jb-balance{
+
+        font-size:30px;
+
+    }
+
+    .jb-balance-card{
+
+        margin:15px;
+
+        padding:20px;
+
+    }
+
+    .jb-actions{
+
+        margin:15px;
+
+    }
+
+    .jb-section{
+
+        padding:
+            0
+            15px;
+
+    }
+
+    .jb-service-price{
+
+        font-size:10px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOADING
+===================================================== -->
+
+<div
+    id="jbLoading"
+    class="jb-loading"
+>
+
+    <div class="jb-loading-box">
+
+        <div class="jb-loader"></div>
+
+        <div class="jb-loading-text">
+
+            JASON BUSINESS
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="jb-overlay">
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="jb-header">
+
+    <div class="jb-top">
+
+        <div class="jb-brand">
+
+            JASON BUSINESS
+
+        </div>
+
+        <div class="jb-status">
+
+            ● EN LIGNE
+
+        </div>
+
+    </div>
+
+
+    <div class="jb-user-box">
+
+        <small>
+
+            BIENVENUE SUR VOTRE ESPACE
+
+        </small>
+
+        <h2 id="jbUserPhone">
+
+            Chargement...
+
+        </h2>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     STATUS
+===================================================== -->
+
+<div id="jbDashboardStatus"></div>
+
+
+<!-- =====================================================
+     BALANCE
+===================================================== -->
+
+<section class="jb-balance-card">
+
+    <div class="jb-balance-title">
+
+        Solde principal
+
+    </div>
+
+
+    <div class="jb-balance">
+
+        <span id="jbMainBalance">
+            0
+        </span>
+
+        <span class="jb-currency">
+            FC
+        </span>
+
+    </div>
+
+
+    <div class="jb-balance-description">
+
+        Disponible pour vos commandes
+
+    </div>
+
+
+    <div class="jb-balance-grid">
+
+
+        <div class="jb-money-box">
+
+            <div class="jb-icon">
+                💰
+            </div>
+
+            <small>
+                Commissions
+            </small>
+
+            <b id="jbCommissionBalance">
+                0 FC
+            </b>
+
+        </div>
+
+
+        <div class="jb-money-box">
+
+            <div class="jb-icon">
+                📈
+            </div>
+
+            <small>
+                Gains
+            </small>
+
+            <b id="jbGainBalance">
+                0 FC
+            </b>
+
+        </div>
+
+
+        <div class="jb-money-box">
+
+            <div class="jb-icon">
+                💎
+            </div>
+
+            <small>
+                Total
+            </small>
+
+            <b id="jbTotalBalance">
+                0 FC
+            </b>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ACTIONS
+===================================================== -->
+
+<div class="jb-actions">
+
+    <a
+        href="recharge.html"
+        class="jb-action jb-recharge"
+    >
+
+        📥 RECHARGER
+
+    </a>
+
+
+    <a
+        href="retrait.html"
+        class="jb-action jb-withdraw"
+    >
+
+        📤 RETIRER
+
+    </a>
+
+</div>
+
+
+<!-- =====================================================
+     POINTS
+===================================================== -->
+
+<section class="jb-points-card">
+
+    <div class="jb-points-top">
+
+        <div>
+
+            <div class="jb-points-title">
+
+                ⭐ POINTS DE FIDÉLITÉ
+
+            </div>
+
+            <div class="jb-points-value">
+
+                100 points =
+                <b>50 FC</b>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="jbLoyaltyPoints"
+            class="jb-points-number"
+        >
+
+            0
+
+        </div>
+
+    </div>
+
+
+    <button
+        id="jbConvertPoints"
+        disabled
+    >
+
+        💱 CONVERTIR MES POINTS
+
+    </button>
+
+</section>
+
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section class="jb-section">
+
+
+    <div class="jb-section-title">
+
+        <h3>
+
+            🛍️ Nos services
+
+        </h3>
+
+        <a href="shop.html">
+
+            VOIR TOUT →
+
+        </a>
+
+    </div>
+
+
+    <div class="jb-service-card">
+
+        <div class="jb-service-icon">
+            📱
+        </div>
+
+        <div class="jb-service-info">
+
+            <div class="jb-service-name">
+                Application
+            </div>
+
+            <div class="jb-service-desc">
+                Création d'application mobile
+            </div>
+
+        </div>
+
+        <div class="jb-service-price">
+            10 000 FC
+        </div>
+
+    </div>
+
+
+    <div class="jb-service-card">
+
+        <div class="jb-service-icon">
+            🌐
+        </div>
+
+        <div class="jb-service-info">
+
+            <div class="jb-service-name">
+                Site web
+            </div>
+
+            <div class="jb-service-desc">
+                Site moderne et professionnel
+            </div>
+
+        </div>
+
+        <div class="jb-service-price">
+            15 000 FC
+        </div>
+
+    </div>
+
+
+    <div class="jb-service-card">
+
+        <div class="jb-service-icon">
+            🎵
+        </div>
+
+        <div class="jb-service-info">
+
+            <div class="jb-service-name">
+                Chanson
+            </div>
+
+            <div class="jb-service-desc">
+                Création musicale personnalisée
+            </div>
+
+        </div>
+
+        <div class="jb-service-price">
+            5 000 FC
+        </div>
+
+    </div>
+
+
+    <div class="jb-service-card">
+
+        <div class="jb-service-icon">
+            🎨
+        </div>
+
+        <div class="jb-service-info">
+
+            <div class="jb-service-name">
+                Logo
+            </div>
+
+            <div class="jb-service-desc">
+                Création de votre identité visuelle
+            </div>
+
+        </div>
+
+        <div class="jb-service-price">
+            3 000 FC
+        </div>
+
+    </div>
+
+
+    <div class="jb-service-card">
+
+        <div class="jb-service-icon">
+            🤖
+        </div>
+
+        <div class="jb-service-info">
+
+            <div class="jb-service-name">
+                Chatbot
+            </div>
+
+            <div class="jb-service-desc">
+                Assistant et automatisation intelligente
+            </div>
+
+        </div>
+
+        <div class="jb-service-price">
+            7 000 FC
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ACTIVITÉS
+===================================================== -->
+
+<section class="jb-section">
+
+
+    <div class="jb-section-title">
+
+        <h3>
+
+            ⚡ Mes activités
+
+        </h3>
+
+        <a href="shop.html">
+
+            COMMANDER →
+
+        </a>
+
+    </div>
+
+
+    <div id="jbInvestments">
+
+        <div class="jb-empty">
+
+            Chargement...
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</div>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="jb-navbar">
+
+
+    <a
+        href="dashboard.html"
+        class="jb-nav-link active"
+    >
+
+        <div class="jb-nav-icon">
+            📊
+        </div>
+
+        Dashboard
+
+    </a>
+
+
+    <a
+        href="shop.html"
+        class="jb-nav-link"
+    >
+
+        <div class="jb-nav-icon">
+            🛍️
+        </div>
+
+        Boutique
+
+    </a>
+
+
+    <a
+        href="equipe.html"
+        class="jb-nav-link"
+    >
+
+        <div class="jb-nav-icon">
+            👥
+        </div>
+
+        Équipe
+
+    </a>
+
+
+    <a
+        href="profil.html"
+        class="jb-nav-link"
+    >
+
+        <div class="jb-nav-icon">
+            👤
+        </div>
+
+        Profil
+
+    </a>
+
+</nav>
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script type="module">
+
+
+import {
+
+    initializeApp
+
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+import {
+
+    getDatabase,
+    ref,
+    onValue,
+    runTransaction
+
+}
+from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+/* =====================================================
+   CONFIGURATION
+===================================================== */
+
+const jbFirebaseConfig = {
+
+    apiKey:
+        "AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
+
+    authDomain:
+        "starlink-investit.firebaseapp.com",
+
+    databaseURL:
+        "https://starlink-investit-default-rtdb.firebaseio.com",
+
+    projectId:
+        "starlink-investit",
+
+    storageBucket:
+        "starlink-investit.firebasestorage.app",
+
+    messagingSenderId:
+        "807081599583",
+
+    appId:
+        "1:807081599583:web:e00ec3959bc4acdae031ea"
+
+};
+
+
+/* =====================================================
+   INITIALISATION
+===================================================== */
+
+const jbApp =
+    initializeApp(
+        jbFirebaseConfig
+    );
+
+
+const jbDatabase =
+    getDatabase(
+        jbApp
+    );
+
+
+/* =====================================================
+   SESSION
+=====================================================
+
+   IMPORTANT :
+
+   register.html utilise :
+
+   jasonBusinessUserPhone
+
+===================================================== */
+
+const jbCurrentUser =
+    localStorage.getItem(
+        "jasonBusinessUserPhone"
+    );
+
+
+/* =====================================================
+   COMPATIBILITÉ ANCIENNE SESSION
+===================================================== */
+
+const jbOldUser =
+    localStorage.getItem(
+        "userPhone"
+    );
+
+
+const jbPhone =
+    jbCurrentUser ||
+    jbOldUser;
+
+
+/* =====================================================
+   VÉRIFICATION SESSION
+===================================================== */
+
+if(!jbPhone){
+
+    window.location.replace(
+        "login.html"
+    );
+
+    throw new Error(
+        "Session JASON BUSINESS introuvable."
+    );
+
+}
+
+
+/* =====================================================
+   SAUVEGARDE SESSION
+===================================================== */
+
+localStorage.setItem(
+    "jasonBusinessUserPhone",
+    jbPhone
+);
+
+localStorage.setItem(
+    "userPhone",
+    jbPhone
+);
+
+localStorage.setItem(
+    "jasonBusinessLogged",
+    "true"
+);
+
+
+/* =====================================================
+   RÉFÉRENCE UTILISATEUR
+=====================================================
+
+   IMPORTANT :
+
+   Même chemin que register.html
+
+===================================================== */
+
+const jbUserReference =
+    ref(
+        jbDatabase,
+        "jasonBusiness/users/" +
+        jbPhone
+    );
+
+
+/* =====================================================
+   FORMAT FC
+===================================================== */
+
+function jbFormatFC(
+    value
+){
+
+    return Math.floor(
+        Number(value) || 0
+    ).toLocaleString(
+        "fr-FR"
+    );
+
+}
+
+
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+
+function jbFormatDate(
+    value
+){
+
+    if(!value){
+
+        return "Date inconnue";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "Date inconnue";
+
+    }
+
+
+    return date.toLocaleDateString(
+        "fr-FR",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ÉCHAPPEMENT HTML
+===================================================== */
+
+function jbEscapeHTML(
+    value
+){
+
+    return String(
+        value ?? ""
+    )
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   AFFICHER ACTIVITÉS
+===================================================== */
+
+function jbRenderInvestments(
+    investments
+){
+
+    const container =
+        document.getElementById(
+            "jbInvestments"
+        );
+
+
+    container.innerHTML =
+        "";
+
+
+    if(
+        !investments ||
+        typeof investments !== "object" ||
+        Object.keys(
+            investments
+        ).length === 0
+    ){
+
+        container.innerHTML = `
+
+            <div class="jb-empty">
+
+                📦 Aucune activité pour le moment.
+
+                <br><br>
+
+                Découvrez nos services
+                dans la boutique.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    Object.entries(
+        investments
+    )
+    .reverse()
+    .forEach(
+        ([id,item])=>{
+
+            if(
+                !item ||
+                typeof item !== "object"
+            ){
+
+                return;
+
+            }
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "jb-invest-card";
+
+
+            const name =
+                item.nom ||
+                item.service ||
+                item.name ||
+                "Service";
+
+
+            const gain =
+                Number(
+                    item.gainJournalier ??
+                    item.gain ??
+                    0
+                );
+
+
+            const date =
+                item.dateAchat ||
+                item.date ||
+                item.createdAt;
+
+
+            const status =
+                item.statut ||
+                item.status ||
+                "actif";
+
+
+            card.innerHTML = `
+
+                <div class="jb-invest-row">
+
+                    <div class="jb-invest-name">
+
+                        ⚡
+                        ${jbEscapeHTML(name)}
+
+                    </div>
+
+                    <div class="jb-invest-gain">
+
+                        ${jbFormatFC(gain)}
+                        FC
+
+                    </div>
+
+                </div>
+
+
+                <div class="jb-invest-date">
+
+                    Activé le
+                    ${jbEscapeHTML(
+                        jbFormatDate(date)
+                    )}
+
+                </div>
+
+
+                <div class="jb-invest-status">
+
+                    ●
+                    ${jbEscapeHTML(status)}
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   CHARGEMENT FIREBASE TEMPS RÉEL
+===================================================== */
+
+onValue(
+
+    jbUserReference,
+
+    snapshot => {
+
+
+        document.getElementById(
+            "jbLoading"
+        ).style.display =
+            "none";
+
+
+        if(
+            !snapshot.exists()
+        ){
+
+            localStorage.removeItem(
+                "jasonBusinessUserPhone"
+            );
+
+            localStorage.removeItem(
+                "userPhone"
+            );
+
+            localStorage.removeItem(
+                "jasonBusinessLogged"
+            );
+
+
+            window.location.replace(
+                "login.html"
+            );
+
+            return;
+
+        }
+
+
+        const user =
+            snapshot.val() || {};
+
+
+        /* =========================================
+           UTILISATEUR
+        ========================================= */
+
+        document.getElementById(
+            "jbUserPhone"
+        ).textContent =
+            user.telephone ||
+            jbPhone;
+
+
+        /* =========================================
+           SOLDES
+        ========================================= */
+
+        const principal =
+            Number(
+                user.solde_principal || 0
+            );
+
+
+        const commissions =
+            Number(
+                user.solde_commissions || 0
+            );
+
+
+        const gains =
+            Number(
+                user.solde_gains || 0
+            );
+
+
+        const total =
+            principal +
+            commissions +
+            gains;
+
+
+        document.getElementById(
+            "jbMainBalance"
+        ).textContent =
+            jbFormatFC(
+                principal
+            );
+
+
+        document.getElementById(
+            "jbCommissionBalance"
+        ).textContent =
+            jbFormatFC(
+                commissions
+            ) +
+            " FC";
+
+
+        document.getElementById(
+            "jbGainBalance"
+        ).textContent =
+            jbFormatFC(
+                gains
+            ) +
+            " FC";
+
+
+        document.getElementById(
+            "jbTotalBalance"
+        ).textContent =
+            jbFormatFC(
+                total
+            ) +
+            " FC";
+
+
+        /* =========================================
+           POINTS
+        ========================================= */
+
+        const points =
+            Number(
+                user.points_fidelite ??
+                user.points ??
+                user.loyaltyPoints ??
+                0
+            );
+
+
+        document.getElementById(
+            "jbLoyaltyPoints"
+        ).textContent =
+            jbFormatFC(
+                points
+            );
+
+
+        const convertButton =
+            document.getElementById(
+                "jbConvertPoints"
+            );
+
+
+        convertButton.disabled =
+            points < 100;
+
+
+        /* =========================================
+           ACTIVITÉS
+        ========================================= */
+
+        jbRenderInvestments(
+            user.mes_investissements
+        );
+
+
+        /* =========================================
+           STATUT COMPTE
+        ========================================= */
+
+        if(
+            user.disabled === true ||
+            user.bloque === true ||
+            user.statut === "bloque"
+        ){
+
+            document.getElementById(
+                "jbDashboardStatus"
+            ).textContent =
+                "🔒 Votre compte est actuellement bloqué.";
+
+        }else{
+
+            document.getElementById(
+                "jbDashboardStatus"
+            ).textContent =
+                "";
+
+        }
+
+    },
+
+
+    error => {
+
+        console.error(
+            "JASON BUSINESS Firebase:",
+            error
+        );
+
+
+        document.getElementById(
+            "jbLoading"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "jbDashboardStatus"
+        ).textContent =
+            "⚠️ Impossible de charger votre compte.";
+
+    }
+
+);
+
+
+/* =====================================================
+   CONVERSION DES POINTS
+=====================================================
+
+   100 points = 50 FC
+
+===================================================== */
+
+document.getElementById(
+    "jbConvertPoints"
+)
+.addEventListener(
+    "click",
+    async()=>{
+
+
+        const button =
+            document.getElementById(
+                "jbConvertPoints"
+            );
+
+
+        button.disabled =
+            true;
+
+
+        try{
+
+
+            const snapshot =
+                await new Promise(
+                    (
+                        resolve,
+                        reject
+                    )=>{
+
+                        onValue(
+
+                            jbUserReference,
+
+                            resolve,
+
+                            {
+                                onlyOnce:true
+                            }
+
+                        );
+
+                    }
+                );
+
+
+            if(
+                !snapshot.exists()
+            ){
+
+                alert(
+                    "❌ Compte introuvable."
+                );
+
+                return;
+
+            }
+
+
+            const user =
+                snapshot.val() || {};
+
+
+            const currentPoints =
+                Number(
+                    user.points_fidelite ??
+                    user.points ??
+                    user.loyaltyPoints ??
+                    0
+                );
+
+
+            if(
+                currentPoints < 100
+            ){
+
+                alert(
+                    "❌ Il faut au minimum 100 points."
+                );
+
+                return;
+
+            }
+
+
+            /* =====================================
+               POINTS CONVERTIBLES
+            ===================================== */
+
+            const convertiblePoints =
+                Math.floor(
+                    currentPoints / 100
+                ) *
+                100;
+
+
+            const amount =
+                (
+                    convertiblePoints /
+                    100
+                ) *
+                50;
+
+
+            const confirmed =
+                window.confirm(
+
+                    "Convertir " +
+
+                    jbFormatFC(
+                        convertiblePoints
+                    ) +
+
+                    " points en " +
+
+                    jbFormatFC(
+                        amount
+                    ) +
+
+                    " FC ?"
+
+                );
+
+
+            if(!confirmed){
+
+                return;
+
+            }
+
+
+            /* =====================================
+               TRANSACTION ATOMIQUE
+            ===================================== */
+
+            const transaction =
+                await runTransaction(
+
+                    jbUserReference,
+
+                    currentData => {
+
+
+                        if(!currentData){
+
+                            return;
+
+                        }
+
+
+                        const freshPoints =
+                            Number(
+                                currentData.points_fidelite ??
+                                currentData.points ??
+                                currentData.loyaltyPoints ??
+                                0
+                            );
+
+
+                        if(
+                            freshPoints <
+                            convertiblePoints
+                        ){
+
+                            return;
+
+                        }
+
+
+                        const currentBalance =
+                            Number(
+                                currentData.solde_principal ||
+                                0
+                            );
+
+
+                        currentData.points_fidelite =
+                            freshPoints -
+                            convertiblePoints;
+
+
+                        currentData.solde_principal =
+                            currentBalance +
+                            amount;
+
+
+                        return currentData;
+
+                    }
+
+                );
+
+
+            if(
+                !transaction.committed
+            ){
+
+                alert(
+                    "❌ La conversion n'a pas été effectuée."
+                );
+
+                return;
+
+            }
+
+
+            alert(
+
+                "✅ Conversion réussie !\n\n" +
+
+                jbFormatFC(
+                    convertiblePoints
+                ) +
+
+                " points → " +
+
+                jbFormatFC(
+                    amount
+                ) +
+
+                " FC"
+
+            );
+
+
+        }catch(error){
+
+            console.error(
+                "JASON BUSINESS Points:",
+                error
+            );
+
+
+            alert(
+                "⚠️ Une erreur est survenue pendant la conversion."
+            );
+
+        }
+
+
+        button.disabled =
+            false;
+
+    }
+
+);
+
+</script>
+
+</body>
+
+</html>

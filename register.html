@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="theme-color"
+    content="#050a14"
+>
+
+<meta
+    name="description"
+    content="JASON Business — Création de compte"
+>
+
+<title>JASON Business — Inscription</title>
+
+<style>
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root{
+
+    --blue:#00d2ff;
+    --blue2:#0077ff;
+
+    --dark:#050a14;
+
+    --green:#00e676;
+    --red:#ff4757;
+    --yellow:#ffeb3b;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+
+    box-sizing:border-box;
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body{
+
+    margin:0;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:
+
+        linear-gradient(
+            rgba(3,8,18,.68),
+            rgba(3,8,18,.94)
+        ),
+
+        url("IMG_0870.jpeg")
+        center/cover
+        fixed;
+
+    color:white;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:20px;
+
+}
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.overlay-reg{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            rgba(0,210,255,.10),
+            transparent 45%
+        );
+
+    pointer-events:none;
+
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card{
+
+    width:100%;
+
+    max-width:410px;
+
+    padding:30px 24px;
+
+    background:
+        rgba(0,0,0,.88);
+
+    border-radius:26px;
+
+    border:
+        1px solid
+        rgba(0,210,255,.55);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+
+        0 0 35px
+        rgba(0,210,255,.20);
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo{
+
+    width:72px;
+
+    height:72px;
+
+    margin:
+        0 auto 15px;
+
+    border-radius:21px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--blue),
+            var(--blue2)
+        );
+
+    color:#001018;
+
+    font-size:25px;
+
+    font-weight:900;
+
+    box-shadow:
+
+        0 0 30px
+        rgba(0,210,255,.40);
+
+}
+
+
+/* =========================================================
+   TITRE
+========================================================= */
+
+h1{
+
+    margin:
+        0 0 5px;
+
+    color:
+        var(--blue);
+
+    letter-spacing:
+        3px;
+
+    font-size:
+        24px;
+
+}
+
+.subtitle{
+
+    margin:
+        0 0 25px;
+
+    font-size:
+        13px;
+
+    opacity:
+        .65;
+
+    letter-spacing:
+        1px;
+
+}
+
+
+/* =========================================================
+   INPUT GROUP
+========================================================= */
+
+.input-group{
+
+    text-align:left;
+
+    margin-top:
+        14px;
+
+}
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:
+        7px;
+
+    font-size:
+        11px;
+
+    font-weight:
+        bold;
+
+    opacity:
+        .65;
+
+}
+
+
+/* =========================================================
+   INPUT BOX
+========================================================= */
+
+.input-box{
+
+    position:relative;
+
+}
+
+
+/* =========================================================
+   INPUT ICON
+========================================================= */
+
+.input-icon{
+
+    position:absolute;
+
+    left:14px;
+
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    font-size:
+        18px;
+
+    opacity:
+        .7;
+
+    pointer-events:none;
+
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+input{
+
+    width:100%;
+
+    padding:
+        15px
+        15px
+        15px
+        45px;
+
+    border-radius:
+        12px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    background:
+        rgba(255,255,255,.055);
+
+    color:white;
+
+    outline:none;
+
+    font-size:
+        15px;
+
+    transition:
+        .25s;
+
+}
+
+input:focus{
+
+    border-color:
+        var(--blue);
+
+    box-shadow:
+
+        0 0 12px
+        rgba(0,210,255,.15);
+
+}
+
+input::placeholder{
+
+    color:
+        rgba(255,255,255,.40);
+
+}
+
+input:read-only{
+
+    opacity:.8;
+
+}
+
+
+/* =========================================================
+   PARRAINAGE INFO
+========================================================= */
+
+.ref-info{
+
+    margin-top:
+        7px;
+
+    font-size:
+        10px;
+
+    opacity:
+        .5;
+
+    line-height:
+        1.4;
+
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+button{
+
+    width:100%;
+
+    padding:
+        15px;
+
+    margin-top:
+        22px;
+
+    border:none;
+
+    border-radius:
+        12px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--blue),
+            #00a8ff
+        );
+
+    color:
+        #001018;
+
+    font-size:
+        15px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        .4px;
+
+    cursor:pointer;
+
+    transition:
+        .25s;
+
+}
+
+button:hover{
+
+    box-shadow:
+
+        0 0 20px
+        rgba(0,210,255,.35);
+
+}
+
+button:active{
+
+    transform:
+        scale(.97);
+
+}
+
+button:disabled{
+
+    opacity:
+        .55;
+
+    cursor:
+        not-allowed;
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status{
+
+    min-height:
+        22px;
+
+    margin-top:
+        15px;
+
+    font-size:
+        13px;
+
+    font-weight:
+        bold;
+
+    color:
+        var(--yellow);
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.login-link{
+
+    margin-top:
+        22px;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.6;
+
+    opacity:
+        .75;
+
+}
+
+.login-link a{
+
+    color:
+        var(--blue);
+
+    text-decoration:
+        none;
+
+    font-weight:
+        bold;
+
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.info{
+
+    margin-top:
+        18px;
+
+    padding:
+        11px;
+
+    border-radius:
+        11px;
+
+    background:
+
+        rgba(0,210,255,.05);
+
+    border:
+
+        1px solid
+        rgba(0,210,255,.10);
+
+    font-size:
+        10px;
+
+    opacity:
+        .7;
+
+    line-height:
+        1.5;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:380px){
+
+    body{
+
+        padding:
+            12px;
+
+    }
+
+    .card{
+
+        padding:
+            25px 18px;
+
+        border-radius:
+            22px;
+
+    }
+
+    h1{
+
+        font-size:
+            21px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="overlay-reg"></div>
+
+
+<div class="card">
+
+
+    <!-- =====================================================
+         LOGO
+    ====================================================== -->
+
+    <div class="logo">
+
+        JB
+
+    </div>
+
+
+    <!-- =====================================================
+         TITRE
+    ====================================================== -->
+
+    <h1>
+
+        JASON BUSINESS
+
+    </h1>
+
+
+    <p class="subtitle">
+
+        CRÉER VOTRE COMPTE
+
+    </p>
+
+
+    <!-- =====================================================
+         TELEPHONE
+    ====================================================== -->
+
+    <div class="input-group">
+
+        <label>
+
+            NUMÉRO DE TÉLÉPHONE
+
+        </label>
+
+
+        <div class="input-box">
+
+            <span class="input-icon">
+
+                📱
+
+            </span>
+
+
+            <input
+                type="tel"
+                id="jasonRegisterPhone"
+                placeholder="Ex : 243XXXXXXXXX"
+                autocomplete="tel"
+                inputmode="tel"
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MOT DE PASSE
+    ====================================================== -->
+
+    <div class="input-group">
+
+        <label>
+
+            MOT DE PASSE
+
+        </label>
+
+
+        <div class="input-box">
+
+            <span class="input-icon">
+
+                🔐
+
+            </span>
+
+
+            <input
+                type="password"
+                id="jasonRegisterPassword"
+                placeholder="Minimum 6 caractères"
+                autocomplete="new-password"
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CONFIRMATION
+    ====================================================== -->
+
+    <div class="input-group">
+
+        <label>
+
+            CONFIRMER LE MOT DE PASSE
+
+        </label>
+
+
+        <div class="input-box">
+
+            <span class="input-icon">
+
+                🔒
+
+            </span>
+
+
+            <input
+                type="password"
+                id="jasonRegisterPasswordConfirm"
+                placeholder="Répéter le mot de passe"
+                autocomplete="new-password"
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PARRAINAGE
+    ====================================================== -->
+
+    <div class="input-group">
+
+        <label>
+
+            CODE D'INVITATION — OPTIONNEL
+
+        </label>
+
+
+        <div class="input-box">
+
+            <span class="input-icon">
+
+                🎁
+
+            </span>
+
+
+            <input
+                type="text"
+                id="jasonRegisterReferral"
+                placeholder="Ex : JASON-1234"
+                autocomplete="off"
+                autocapitalize="characters"
+            >
+
+        </div>
+
+
+        <div class="ref-info">
+
+            Le code d'invitation permet
+            d'associer votre compte à votre parrain.
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         BOUTON
+    ====================================================== -->
+
+    <button
+        id="jasonRegisterButton"
+        type="button"
+    >
+
+        🚀 CRÉER MON COMPTE
+
+    </button>
+
+
+    <!-- =====================================================
+         STATUS
+    ====================================================== -->
+
+    <div
+        id="jasonRegisterStatus"
+        class="status"
+    ></div>
+
+
+    <!-- =====================================================
+         LOGIN
+    ====================================================== -->
+
+    <div class="login-link">
+
+        Vous avez déjà un compte ?
+
+        <br>
+
+        <a href="login.html">
+
+            Se connecter
+
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         INFO
+    ====================================================== -->
+
+    <div class="info">
+
+        🔒 Vos données sont enregistrées
+        uniquement dans l'espace Jason Business.
+
+        <br>
+
+        ⭐ Votre compte commence avec
+        <strong>0 FC</strong> et
+        <strong>0 point</strong>.
+
+    </div>
+
+
+</div>
+
+
+<script type="module">
+
+
+/* =========================================================
+   FIREBASE SDK
+========================================================= */
+
+import {
+
+    initializeApp
+
+} from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+
+import {
+
+    getDatabase,
+    ref,
+    get,
+    set,
+    runTransaction
+
+} from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+/* =========================================================
+   CONFIGURATION FIREBASE
+========================================================= */
+
+const jasonBusinessFirebaseConfig = {
+
+    apiKey:
+        "AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
+
+    authDomain:
+        "starlink-investit.firebaseapp.com",
+
+    databaseURL:
+        "https://starlink-investit-default-rtdb.firebaseio.com",
+
+    projectId:
+        "starlink-investit",
+
+    storageBucket:
+        "starlink-investit.firebasestorage.app",
+
+    messagingSenderId:
+        "807081599583",
+
+    appId:
+        "1:807081599583:web:e00ec3959bc4acdae031ea"
+
+};
+
+
+/* =========================================================
+   INITIALISATION APPLICATION
+========================================================= */
+
+const jasonBusinessApp =
+
+    initializeApp(
+        jasonBusinessFirebaseConfig
+    );
+
+
+const jasonBusinessDB =
+
+    getDatabase(
+        jasonBusinessApp
+    );
+
+
+/* =========================================================
+   CHEMIN FIREBASE JASON BUSINESS
+========================================================= */
+
+/*
+
+    IMPORTANT :
+
+    Jason Business utilise UNIQUEMENT :
+
+        jasonBusiness/users/
+
+    Il ne lit PAS :
+
+        users/
+
+    Il ne crée PAS :
+
+        users/
+
+    Les utilisateurs de l'autre site
+    restent donc séparés.
+
+*/
+
+const JASON_ROOT_PATH =
+    "jasonBusiness";
+
+
+const JASON_USERS_PATH =
+    "jasonBusiness/users";
+
+
+const JASON_SESSION_KEY =
+    "jasonBusinessUserPhone";
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const phoneInput =
+    document.getElementById(
+        "jasonRegisterPhone"
+    );
+
+
+const passwordInput =
+    document.getElementById(
+        "jasonRegisterPassword"
+    );
+
+
+const passwordConfirmInput =
+    document.getElementById(
+        "jasonRegisterPasswordConfirm"
+    );
+
+
+const referralInput =
+    document.getElementById(
+        "jasonRegisterReferral"
+    );
+
+
+const registerButton =
+    document.getElementById(
+        "jasonRegisterButton"
+    );
+
+
+const status =
+    document.getElementById(
+        "jasonRegisterStatus"
+    );
+
+
+/* =========================================================
+   MESSAGE STATUS
+========================================================= */
+
+function showStatus(
+    message,
+    type = "warning"
+){
+
+    status.innerText =
+        message;
+
+
+    if(type === "success"){
+
+        status.style.color =
+            "#00e676";
+
+    }
+
+    else if(type === "error"){
+
+        status.style.color =
+            "#ff4757";
+
+    }
+
+    else{
+
+        status.style.color =
+            "#ffeb3b";
+
+    }
+
+}
+
+
+/* =========================================================
+   RESET BOUTON
+========================================================= */
+
+function resetRegisterButton(){
+
+    registerButton.disabled =
+        false;
+
+    registerButton.innerText =
+        "🚀 CRÉER MON COMPTE";
+
+}
+
+
+/* =========================================================
+   NETTOYAGE TELEPHONE
+========================================================= */
+
+function cleanPhone(phone){
+
+    return String(phone || "")
+        .trim()
+        .replace(/\s+/g,"")
+        .replace(/-/g,"")
+        .replace(/\(/g,"")
+        .replace(/\)/g,"");
+
+}
+
+
+/* =========================================================
+   NORMALISATION CODE
+========================================================= */
+
+function cleanInviteCode(code){
+
+    return String(code || "")
+        .trim()
+        .toUpperCase();
+
+}
+
+
+/* =========================================================
+   GENERATION CODE INVITATION
+========================================================= */
+
+function generateInviteCode(){
+
+    const number =
+
+        Math.floor(
+            1000 +
+            Math.random() * 9000
+        );
+
+
+    return "JASON-" + number;
+
+}
+
+
+/* =========================================================
+   VERIFIER SI CODE EXISTE
+========================================================= */
+
+async function inviteCodeExists(code){
+
+    const usersSnapshot =
+
+        await get(
+            ref(
+                jasonBusinessDB,
+                JASON_USERS_PATH
+            )
+        );
+
+
+    if(!usersSnapshot.exists()){
+
+        return false;
+
+    }
+
+
+    const users =
+        usersSnapshot.val();
+
+
+    for(
+        const phone in users
+    ){
+
+        const user =
+            users[phone];
+
+
+        if(
+            user &&
+            String(
+                user.inviteCode || ""
+            ).toUpperCase() === code
+        ){
+
+            return true;
+
+        }
+
+    }
+
+
+    return false;
+
+}
+
+
+/* =========================================================
+   GENERER CODE UNIQUE
+========================================================= */
+
+async function generateUniqueInviteCode(){
+
+    let code;
+
+    let exists = true;
+
+
+    let attempts = 0;
+
+
+    while(
+        exists &&
+        attempts < 100
+    ){
+
+        attempts++;
+
+
+        code =
+            generateInviteCode();
+
+
+        exists =
+            await inviteCodeExists(
+                code
+            );
+
+    }
+
+
+    if(exists){
+
+        throw new Error(
+            "Impossible de générer un code unique."
+        );
+
+    }
+
+
+    return code;
+
+}
+
+
+/* =========================================================
+   TROUVER LE PARRAIN
+========================================================= */
+
+async function findSponsor(
+    sponsorCode
+){
+
+    const code =
+        cleanInviteCode(
+            sponsorCode
+        );
+
+
+    if(!code){
+
+        return null;
+
+    }
+
+
+    const usersSnapshot =
+
+        await get(
+            ref(
+                jasonBusinessDB,
+                JASON_USERS_PATH
+            )
+        );
+
+
+    if(!usersSnapshot.exists()){
+
+        return null;
+
+    }
+
+
+    const users =
+        usersSnapshot.val();
+
+
+    for(
+        const phone in users
+    ){
+
+        const user =
+            users[phone];
+
+
+        if(!user){
+
+            continue;
+
+        }
+
+
+        const userInviteCode =
+
+            String(
+                user.inviteCode ||
+                user.referralCode ||
+                ""
+            )
+            .trim()
+            .toUpperCase();
+
+
+        if(
+            userInviteCode === code
+        ){
+
+            return phone;
+
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+/* =========================================================
+   RECUPERER UTILISATEUR
+========================================================= */
+
+async function getJasonUser(phone){
+
+    const userRef =
+
+        ref(
+            jasonBusinessDB,
+            JASON_USERS_PATH +
+            "/" +
+            phone
+        );
+
+
+    const snapshot =
+        await get(userRef);
+
+
+    if(!snapshot.exists()){
+
+        return null;
+
+    }
+
+
+    return snapshot.val();
+
+}
+
+
+/* =========================================================
+   URL INVITATION
+========================================================= */
+
+const urlParams =
+
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const urlInviteCode =
+
+    urlParams.get(
+        "inviteCode"
+    );
+
+
+if(urlInviteCode){
+
+    const cleanCode =
+        cleanInviteCode(
+            urlInviteCode
+        );
+
+
+    referralInput.value =
+        cleanCode;
+
+
+    referralInput.readOnly =
+        true;
+
+
+    referralInput.style.borderColor =
+        "rgba(0,210,255,.5)";
+
+}
+
+
+/* =========================================================
+   INSCRIPTION
+========================================================= */
+
+async function registerJasonBusiness(){
+
+    const phone =
+
+        cleanPhone(
+            phoneInput.value
+        );
+
+
+    const password =
+
+        passwordInput.value;
+
+
+    const passwordConfirm =
+
+        passwordConfirmInput.value;
+
+
+    const sponsorCode =
+
+        cleanInviteCode(
+            referralInput.value
+        );
+
+
+    /* =====================================================
+       VALIDATION TELEPHONE
+    ====================================================== */
+
+    if(!phone){
+
+        showStatus(
+            "❌ Entrez votre numéro de téléphone.",
+            "error"
+        );
+
+        phoneInput.focus();
+
+        return;
+
+    }
+
+
+    if(!/^[0-9]+$/.test(phone)){
+
+        showStatus(
+            "❌ Le numéro doit contenir uniquement des chiffres.",
+            "error"
+        );
+
+        phoneInput.focus();
+
+        return;
+
+    }
+
+
+    if(phone.length < 10){
+
+        showStatus(
+            "❌ Numéro de téléphone invalide.",
+            "error"
+        );
+
+        phoneInput.focus();
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       VALIDATION PASSWORD
+    ====================================================== */
+
+    if(password.length < 6){
+
+        showStatus(
+            "❌ Le mot de passe doit contenir au moins 6 caractères.",
+            "error"
+        );
+
+        passwordInput.focus();
+
+        return;
+
+    }
+
+
+    if(password !== passwordConfirm){
+
+        showStatus(
+            "❌ Les mots de passe ne correspondent pas.",
+            "error"
+        );
+
+        passwordConfirmInput.focus();
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       LOADING
+    ====================================================== */
+
+    registerButton.disabled =
+        true;
+
+
+    registerButton.innerText =
+        "⏳ CRÉATION DU COMPTE...";
+
+
+    showStatus(
+        "⏳ Création de votre espace Jason Business..."
+    );
+
+
+    try{
+
+
+        /* =================================================
+           REFERENCE UTILISATEUR
+
+           JASON UNIQUEMENT
+        ================================================= */
+
+        const userRef =
+
+            ref(
+                jasonBusinessDB,
+                JASON_USERS_PATH +
+                "/" +
+                phone
+            );
+
+
+        /* =================================================
+           VERIFICATION COMPTE EXISTANT
+        ================================================= */
+
+        const existingUser =
+
+            await get(
+                userRef
+            );
+
+
+        if(existingUser.exists()){
+
+            showStatus(
+                "❌ Ce numéro est déjà enregistré sur Jason Business.",
+                "error"
+            );
+
+            resetRegisterButton();
+
+            return;
+
+        }
+
+
+        /* =================================================
+           PARRAIN
+        ================================================= */
+
+        let sponsorPhone =
+            null;
+
+
+        if(sponsorCode){
+
+            showStatus(
+                "🔎 Vérification du code d'invitation..."
+            );
+
+
+            sponsorPhone =
+
+                await findSponsor(
+                    sponsorCode
+                );
+
+
+            if(!sponsorPhone){
+
+                showStatus(
+                    "❌ Code d'invitation introuvable.",
+                    "error"
+                );
+
+                resetRegisterButton();
+
+                return;
+
+            }
+
+
+            if(
+                sponsorPhone ===
+                phone
+            ){
+
+                showStatus(
+                    "❌ Vous ne pouvez pas vous parrainer vous-même.",
+                    "error"
+                );
+
+                resetRegisterButton();
+
+                return;
+
+            }
+
+        }
+
+
+        /* =================================================
+           GENERATION CODE PERSONNEL
+        ================================================= */
+
+        showStatus(
+            "🔐 Génération de votre code personnel..."
+        );
+
+
+        const myInviteCode =
+
+            await generateUniqueInviteCode();
+
+
+        /* =================================================
+           DONNEES UTILISATEUR
+        ================================================= */
+
+        const userData = {
+
+
+            /* ---------------------------------------------
+               IDENTITE
+            --------------------------------------------- */
+
+            telephone:
+                phone,
+
+
+            phone:
+                phone,
+
+
+            /* ---------------------------------------------
+               AUTHENTIFICATION
+
+               Compatible avec le login Jason actuel.
+            --------------------------------------------- */
+
+            password:
+                password,
+
+
+            /* ---------------------------------------------
+               CODE PERSONNEL
+            --------------------------------------------- */
+
+            inviteCode:
+                myInviteCode,
+
+
+            referralCode:
+                myInviteCode,
+
+
+            /* ---------------------------------------------
+               PARRAIN
+            --------------------------------------------- */
+
+            referredBy:
+
+                sponsorPhone ||
+                "DIRECT",
+
+
+            sponsor:
+
+                sponsorPhone ||
+                null,
+
+
+            /* ---------------------------------------------
+               SOLDES
+            --------------------------------------------- */
+
+            solde_principal:
+                0,
+
+
+            solde_gains:
+                0,
+
+
+            solde_commissions:
+                0,
+
+
+            solde:
+                0,
+
+
+            balance:
+                0,
+
+
+            /* ---------------------------------------------
+               POINTS
+            --------------------------------------------- */
+
+            points_fidelite:
+                0,
+
+
+            points:
+                0,
+
+
+            loyaltyPoints:
+                0,
+
+
+            /* ---------------------------------------------
+               EQUIPE
+            --------------------------------------------- */
+
+            count_lvl1:
+                0,
+
+
+            count_lvl2:
+                0,
+
+
+            count_lvl3:
+                0,
+
+
+            /* ---------------------------------------------
+               STATUT
+            --------------------------------------------- */
+
+            statut:
+                "actif",
+
+
+            status:
+                "actif",
+
+
+            disabled:
+                false,
+
+
+            bloque:
+                false,
+
+
+            /* ---------------------------------------------
+               DATE
+            --------------------------------------------- */
+
+            date_inscription:
+                new Date().toISOString(),
+
+
+            createdAt:
+                Date.now()
+
+        };
+
+
+        /* =================================================
+           CREATION COMPTE
+
+           IMPORTANT :
+
+           Ecriture uniquement :
+
+           jasonBusiness/users/PHONE
+        ================================================= */
+
+        await set(
+            userRef,
+            userData
+        );
+
+
+        /* =================================================
+           VERIFICATION APRES ECRITURE
+        ================================================= */
+
+        const verifyUser =
+
+            await get(
+                userRef
+            );
+
+
+        if(!verifyUser.exists()){
+
+            throw new Error(
+                "Le compte n'a pas pu être confirmé."
+            );
+
+        }
+
+
+        /* =================================================
+           AJOUT AU RESEAU DU PARRAIN
+        ================================================= */
+
+        if(sponsorPhone){
+
+            const sponsorLevel1Ref =
+
+                ref(
+                    jasonBusinessDB,
+
+                    JASON_USERS_PATH +
+                    "/" +
+                    sponsorPhone +
+                    "/count_lvl1"
+                );
+
+
+            await runTransaction(
+                sponsorLevel1Ref,
+
+                current => {
+
+                    return (
+
+                        Number(current) ||
+                        0
+
+                    ) + 1;
+
+                }
+
+            );
+
+        }
+
+
+        /* =================================================
+           SESSION
+        ================================================= */
+
+        localStorage.setItem(
+            JASON_SESSION_KEY,
+            phone
+        );
+
+
+        localStorage.setItem(
+            "jasonBusinessLogged",
+            "true"
+        );
+
+
+        localStorage.setItem(
+            "jasonBusinessLoginTime",
+            Date.now().toString()
+        );
+
+
+        /* =================================================
+           INFORMATIONS SESSION
+        ================================================= */
+
+        localStorage.setItem(
+            "jasonBusinessInviteCode",
+            myInviteCode
+        );
+
+
+        /* =================================================
+           SUCCES
+        ================================================= */
+
+        showStatus(
+            "✅ Compte créé avec succès !",
+            "success"
+        );
+
+
+        registerButton.innerText =
+            "✅ COMPTE CRÉÉ";
+
+
+        /* =================================================
+           REDIRECTION
+        ================================================= */
+
+        setTimeout(
+
+            () => {
+
+                window.location.href =
+                    "dashboard.html";
+
+            },
+
+            1000
+
+        );
+
+
+    }
+
+    catch(error){
+
+        console.error(
+            "JASON BUSINESS REGISTER ERROR:",
+            error
+        );
+
+
+        let message =
+            "⚠️ Impossible de créer le compte.";
+
+
+        if(
+            error &&
+            error.code ===
+            "PERMISSION_DENIED"
+        ){
+
+            message =
+                "🚫 Accès Firebase refusé. Vérifiez les règles Realtime Database.";
+
+        }
+
+        else if(
+            error &&
+            error.message
+        ){
+
+            console.error(
+                error.message
+            );
+
+        }
+
+
+        showStatus(
+            message,
+            "error"
+        );
+
+
+        resetRegisterButton();
+
+    }
+
+}
+
+
+/* =========================================================
+   CLICK
+========================================================= */
+
+registerButton.addEventListener(
+
+    "click",
+
+    registerJasonBusiness
+
+);
+
+
+/* =========================================================
+   ENTER TELEPHONE
+========================================================= */
+
+phoneInput.addEventListener(
+
+    "keydown",
+
+    event => {
+
+        if(event.key === "Enter"){
+
+            event.preventDefault();
+
+            passwordInput.focus();
+
+        }
+
+    }
+
+);
+
+
+/* =========================================================
+   ENTER PASSWORD
+========================================================= */
+
+passwordInput.addEventListener(
+
+    "keydown",
+
+    event => {
+
+        if(event.key === "Enter"){
+
+            event.preventDefault();
+
+            passwordConfirmInput.focus();
+
+        }
+
+    }
+
+);
+
+
+/* =========================================================
+   ENTER CONFIRMATION
+========================================================= */
+
+passwordConfirmInput.addEventListener(
+
+    "keydown",
+
+    event => {
+
+        if(event.key === "Enter"){
+
+            event.preventDefault();
+
+            referralInput.focus();
+
+        }
+
+    }
+
+);
+
+
+/* =========================================================
+   ENTER PARRAINAGE
+========================================================= */
+
+referralInput.addEventListener(
+
+    "keydown",
+
+    event => {
+
+        if(event.key === "Enter"){
+
+            event.preventDefault();
+
+            registerJasonBusiness();
+
+        }
+
+    }
+
+);
+
+
+/* =========================================================
+   AUTO FOCUS
+========================================================= */
+
+window.addEventListener(
+
+    "load",
+
+    () => {
+
+        phoneInput.focus();
+
+    }
+
+);
+
+</script>
+
+</body>
+
+</html>
