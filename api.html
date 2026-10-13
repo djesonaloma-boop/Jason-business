@@ -1,0 +1,1020 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#030812">
+<meta name="description" content="JASON BUSINESS — Boutique API et assistant de création d'API">
+<title>JASON BUSINESS — API Center</title>
+
+<style>
+:root{
+ --blue:#00d2ff;
+ --blue2:#0077ff;
+ --dark:#030812;
+ --card:#091525;
+ --card2:#0d192b;
+ --border:rgba(0,210,255,.2);
+ --green:#00e676;
+ --gold:#d8aa45;
+ --red:#ff4757;
+ --muted:rgba(255,255,255,.62);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+ background:radial-gradient(circle at top right,#0c2442,transparent 36%),var(--dark);
+ color:white;font-family:"Segoe UI",Arial,sans-serif;
+ min-height:100vh;padding-bottom:85px
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.header{
+ padding:20px 16px;display:flex;align-items:center;
+ justify-content:space-between;gap:12px;
+ border-bottom:1px solid var(--border);
+ background:rgba(3,8,18,.94);position:sticky;top:0;z-index:50;
+ backdrop-filter:blur(18px)
+}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{
+ width:43px;height:43px;border-radius:13px;
+ display:grid;place-items:center;font-weight:900;
+ background:linear-gradient(135deg,var(--blue),var(--blue2));
+ color:#001018
+}
+.brand h1{font-size:16px;letter-spacing:1px}
+.brand p{font-size:10px;color:var(--muted);margin-top:4px}
+.header-btn,.secondary-btn{
+ background:var(--card);color:white;border:1px solid var(--border);
+ border-radius:11px;padding:10px 12px
+}
+.container{max-width:1100px;margin:auto;padding:20px 14px}
+.hero{
+ padding:23px 20px;border-radius:22px;
+ border:1px solid var(--border);
+ background:linear-gradient(135deg,#102b49,#07111f 80%);
+ margin-bottom:22px;overflow:hidden;position:relative
+}
+.badge{
+ display:inline-block;color:var(--blue);font-size:10px;
+ letter-spacing:1px;padding:7px 10px;border-radius:30px;
+ border:1px solid var(--border);background:#00d2ff0b;margin-bottom:13px
+}
+.hero h2{font-size:clamp(25px,5vw,36px);line-height:1.2}
+.hero h2 span{color:var(--blue)}
+.hero p{font-size:13px;line-height:1.8;color:var(--muted);margin-top:11px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:18px}
+.stat{padding:12px 8px;border:1px solid var(--border);background:#03081255;border-radius:13px}
+.stat strong{display:block;color:var(--blue);font-size:18px}
+.stat span{display:block;color:var(--muted);font-size:10px;margin-top:5px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:3px 0 12px;margin-bottom:13px}
+.tab{
+ flex-shrink:0;padding:11px 14px;border-radius:11px;
+ color:var(--muted);background:var(--card);
+ border:1px solid var(--border);font-weight:700;font-size:12px
+}
+.tab.active{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#001018}
+.section-title{font-size:21px;margin:7px 0}
+.section-desc{font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:17px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.card{
+ background:linear-gradient(145deg,var(--card2),var(--card));
+ border:1px solid #ffffff12;border-radius:17px;padding:16px;
+ display:flex;flex-direction:column;min-width:0;
+ transition:transform .2s,border-color .2s;animation:appear .3s ease both
+}
+.card:hover{transform:translateY(-3px);border-color:var(--border)}
+.card-icon{
+ width:45px;height:45px;border-radius:13px;
+ display:grid;place-items:center;background:#00d2ff12;
+ border:1px solid var(--border);font-size:23px
+}
+.card h3{font-size:15px;margin-top:13px}
+.card p{font-size:11px;color:var(--muted);line-height:1.7;margin-top:8px;flex:1}
+.price{font-size:17px;font-weight:900;color:var(--green);margin:15px 0 4px}
+.price small{font-size:10px;color:var(--muted);font-weight:400}
+.endpoint{
+ font-size:10px;word-break:break-all;color:var(--blue);
+ padding:8px;background:#030812;border-radius:8px;margin-top:10px
+}
+.btn{
+ width:100%;padding:11px 12px;border:0;border-radius:10px;
+ background:linear-gradient(135deg,var(--blue),var(--blue2));
+ color:#001018;font-weight:900;font-size:12px;margin-top:12px
+}
+.btn.secondary{background:#11263c;color:white;border:1px solid var(--border)}
+.btn.gold{background:linear-gradient(135deg,#f0c76a,var(--gold));color:#171000}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.panel{
+ border:1px solid var(--border);border-radius:17px;
+ padding:17px;background:var(--card);margin-top:17px
+}
+.panel h3{font-size:16px;margin-bottom:10px}
+.field{margin-top:13px}
+.field label{display:block;color:var(--muted);font-size:11px;margin-bottom:7px}
+.field input,.field textarea,.field select{
+ width:100%;padding:12px;border-radius:10px;
+ color:white;background:#030812;border:1px solid var(--border);outline:none
+}
+.field textarea{min-height:110px;resize:vertical;line-height:1.6}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--blue)}
+.field select option{background:#091525}
+.notice{
+ padding:12px;border-radius:11px;background:#00d2ff09;
+ border:1px solid var(--border);color:var(--muted);
+ font-size:11px;line-height:1.8;margin-top:13px
+}
+.notice.warning{background:#d8aa450d;border-color:#d8aa4544}
+.result{
+ margin-top:14px;background:#030812;border:1px solid var(--border);
+ border-radius:12px;padding:13px;white-space:pre-wrap;
+ overflow-wrap:anywhere;font-size:12px;line-height:1.7;
+ max-height:430px;overflow:auto
+}
+.hidden{display:none!important}
+.api-doc{margin-top:13px;border-top:1px solid var(--border);padding-top:13px}
+.api-doc h4{font-size:12px;color:var(--blue);margin:13px 0 7px}
+.api-doc p,.api-doc li{font-size:11px;color:var(--muted);line-height:1.8}
+.api-doc ul{padding-left:18px}
+pre{
+ white-space:pre-wrap;overflow-wrap:anywhere;
+ background:#02060c;color:#b8eaff;padding:12px;
+ border:1px solid #ffffff10;border-radius:10px;
+ font-size:10px;line-height:1.7;overflow:auto;margin-top:8px
+}
+.doc-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.doc-actions button{flex:1;min-width:100px}
+.modal{
+ position:fixed;inset:0;background:#000b;z-index:200;
+ display:none;align-items:center;justify-content:center;padding:15px
+}
+.modal.show{display:flex}
+.modal-box{
+ width:100%;max-width:480px;max-height:90vh;overflow:auto;
+ background:#091525;border:1px solid var(--border);
+ border-radius:19px;padding:20px
+}
+.modal-box h3{font-size:19px;margin-bottom:12px}
+.modal-box p{font-size:12px;color:var(--muted);line-height:1.8}
+.modal-actions{display:flex;gap:9px;margin-top:17px}
+.modal-actions button{flex:1}
+.checkline{display:flex;align-items:flex-start;gap:9px;font-size:11px;line-height:1.6;color:var(--muted);margin-top:14px}
+.checkline input{margin-top:3px}
+#toastContainer{position:fixed;top:12px;left:12px;right:12px;z-index:500}
+.toast{padding:13px;background:#10243b;border:1px solid var(--border);border-radius:11px;margin-bottom:8px;font-size:12px}
+.toast.error{border-color:#ff475766}
+.toast.success{border-color:#00e67666}
+.bottom-nav{
+ position:fixed;bottom:0;left:0;right:0;height:66px;z-index:80;
+ display:flex;justify-content:space-around;align-items:center;
+ background:#030812f5;border-top:1px solid var(--border)
+}
+.nav-link{color:var(--muted);text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:9px;font-weight:700}
+.nav-link span{font-size:19px}
+.nav-link.active{color:var(--blue)}
+.footer{text-align:center;color:var(--muted);font-size:10px;line-height:1.8;padding:26px 10px}
+.footer strong{color:var(--blue)}
+@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){
+ .header{padding:13px 11px}.brand h1{font-size:13px}.brand p{font-size:9px}
+ .header-btn{font-size:10px;padding:9px}
+ .container{padding:15px 11px}
+ .grid{grid-template-columns:1fr}
+ .card{min-height:0}
+ .stats{gap:6px}.stat strong{font-size:16px}.stat span{font-size:9px}
+ .hero{padding:20px 16px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+ <div class="brand">
+  <div class="logo">JB</div>
+  <div>
+   <h1>JASON BUSINESS</h1>
+   <p>API CENTER • CRÉÉ PAR JASON ALOMA 🇨🇩</p>
+  </div>
+ </div>
+ <button class="header-btn" onclick="location.href='dashboard.html'">← Retour</button>
+</header>
+
+<main class="container">
+
+ <section class="hero">
+  <span class="badge">DÉVELOPPEMENT • API • INTELLIGENCE ARTIFICIELLE</span>
+  <h2>Bienvenue dans <span>API Center</span></h2>
+  <p>
+   Découvre les API disponibles, consulte leur documentation et utilise
+   JASON API BOT pour préparer la conception de ta propre API.
+  </p>
+  <div class="stats">
+   <div class="stat"><strong id="apiCount">12</strong><span>Endpoints référencés</span></div>
+   <div class="stat"><strong>API BOT</strong><span>Assistant de conception</span></div>
+   <div class="stat"><strong>FC</strong><span>Tarifs configurables</span></div>
+  </div>
+ </section>
+
+ <nav class="tabs">
+  <button class="tab active" data-tab="catalog">🛒 Boutique API</button>
+  <button class="tab" data-tab="bot">🤖 JASON API BOT</button>
+  <button class="tab" data-tab="docs">📚 Documentation</button>
+ </nav>
+
+ <!-- BOUTIQUE API -->
+ <section id="catalogSection">
+  <h2 class="section-title">🛒 Boutique d'API</h2>
+  <p class="section-desc">
+   Consulte les services, leurs tarifs et leur documentation. Les prix sont
+   des tarifs de départ configurables par le propriétaire de JASON BUSINESS.
+  </p>
+
+  <div class="grid" id="apiGrid"></div>
+
+  <div class="notice warning">
+   <strong>Important :</strong> payer un accès nécessite un système de paiement
+   et une validation côté serveur. Cette page ne débite pas Firebase et ne
+   confirme pas automatiquement un paiement.
+  </div>
+ </section>
+
+ <!-- API BOT -->
+ <section id="botSection" class="hidden">
+  <h2 class="section-title">🤖 JASON API BOT</h2>
+  <p class="section-desc">
+   Décris ton idée. L'assistant peut t'aider à préparer les endpoints,
+   les paramètres, les réponses JSON, la documentation et un exemple de code.
+  </p>
+
+  <div class="panel">
+   <h3>1. Décris ton projet d'API</h3>
+
+   <div class="field">
+    <label for="projectName">Nom du projet</label>
+    <input id="projectName" placeholder="Ex. : JASON PAYMENT API">
+   </div>
+
+   <div class="field">
+    <label for="apiType">Type d'API</label>
+    <select id="apiType">
+     <option value="API REST">API REST générale</option>
+     <option value="API de paiement">API de paiement</option>
+     <option value="API de gestion des utilisateurs">API utilisateurs</option>
+     <option value="API e-commerce">API e-commerce</option>
+     <option value="API IA">API d'intelligence artificielle</option>
+     <option value="API de stockage">API de stockage de fichiers</option>
+     <option value="API de notifications">API de notifications</option>
+     <option value="Autre">Autre type</option>
+    </select>
+   </div>
+
+   <div class="field">
+    <label for="apiDescription">Fonctions attendues</label>
+    <textarea id="apiDescription" placeholder="Ex. : créer un compte, se connecter, enregistrer les transactions, protéger les données et renvoyer des réponses JSON..."></textarea>
+   </div>
+
+   <div class="field">
+    <label for="apiLanguage">Technologie souhaitée</label>
+    <select id="apiLanguage">
+     <option value="Node.js et Express">Node.js + Express</option>
+     <option value="JavaScript côté serveur">JavaScript</option>
+     <option value="Python et Flask">Python + Flask</option>
+     <option value="PHP">PHP</option>
+     <option value="Technologie à choisir">Choisir pour moi</option>
+    </select>
+   </div>
+
+   <div class="field">
+    <label for="apiSecurity">Sécurité souhaitée</label>
+    <select id="apiSecurity">
+     <option value="Authentification sécurisée, validation des entrées et limitation des requêtes">Authentification et protections courantes</option>
+     <option value="API publique avec limitation des requêtes">API publique limitée</option>
+     <option value="Authentification par clé API conservée côté serveur">Clé API côté serveur</option>
+    </select>
+   </div>
+
+   <div class="notice">
+    Le tarif estimé pour la conception est affiché avant l'envoi à l'assistant.
+    La génération ne constitue pas automatiquement un déploiement en ligne.
+   </div>
+
+   <div class="panel">
+    <h3>Frais de conception</h3>
+    <div class="price" id="botPrice">5 000 FC <small>/ demande</small></div>
+    <p id="botPriceDescription" style="font-size:11px;color:var(--muted);line-height:1.7">
+     Tarif de départ configurable. Il doit être confirmé et payé par le moyen
+     de paiement que l'administrateur aura configuré.
+    </p>
+   </div>
+
+   <label class="checkline">
+    <input type="checkbox" id="confirmBotFee">
+    <span>J'ai lu le tarif affiché et je souhaite continuer vers la demande payante.</span>
+   </label>
+
+   <button class="btn gold" id="generateBtn" type="button">
+    💳 Continuer vers la demande
+   </button>
+
+   <div id="botStatus" class="notice hidden"></div>
+   <div id="botResult" class="result hidden"></div>
+
+   <div class="doc-actions">
+    <button class="btn secondary" id="copyBotResult" type="button">📋 Copier le résultat</button>
+   </div>
+  </div>
+ </section>
+
+ <!-- DOCUMENTATION -->
+ <section id="docsSection" class="hidden">
+  <h2 class="section-title">📚 Documentation des API</h2>
+  <p class="section-desc">
+   Sélectionne un endpoint pour consulter son adresse, son usage et un exemple
+   de requête. Les méthodes et paramètres exacts doivent être vérifiés avec
+   le serveur qui héberge chaque API.
+  </p>
+
+  <div class="field">
+   <label for="docSelect">Choisir une API</label>
+   <select id="docSelect"></select>
+  </div>
+
+  <div class="panel" id="docPanel"></div>
+ </section>
+
+ <footer class="footer">
+  <strong>JASON BUSINESS — API CENTER</strong><br>
+  Créé par Jason Aloma 🇨🇩 · Kinshasa, RDC<br>
+  Les accès payants et les frais nécessitent une validation réelle côté serveur.
+ </footer>
+
+</main>
+
+<nav class="bottom-nav">
+ <a href="dashboard.html" class="nav-link"><span>📊</span>Dash</a>
+ <a href="shop.html" class="nav-link"><span>🛒</span>Boutique</a>
+ <a href="api.html" class="nav-link active"><span>🔌</span>API</a>
+ <a href="profil.html" class="nav-link"><span>👤</span>Profil</a>
+</nav>
+
+<div id="toastContainer"></div>
+
+<!-- MODAL DEMANDE PAYANTE -->
+<div class="modal" id="paymentModal">
+ <div class="modal-box">
+  <h3>💳 Demande d'accès payant</h3>
+  <p id="paymentMessage"></p>
+  <div class="notice warning">
+   Le paiement n'est pas encore intégré à cette page. Aucun montant ne sera
+   prélevé ici et aucun accès ne sera déclaré actif sans validation réelle.
+  </div>
+  <div class="field">
+   <label for="paymentContact">Ton contact (facultatif)</label>
+   <input id="paymentContact" placeholder="Numéro de téléphone ou e-mail">
+  </div>
+  <label class="checkline">
+   <input type="checkbox" id="paymentAccepted">
+   <span>Je confirme vouloir préparer cette demande au tarif indiqué.</span>
+  </label>
+  <div class="modal-actions">
+   <button class="btn secondary" id="cancelPayment" type="button">Annuler</button>
+   <button class="btn gold" id="confirmPayment" type="button">Confirmer la demande</button>
+  </div>
+  <div id="paymentResult" class="notice hidden"></div>
+ </div>
+</div>
+
+<script>
+"use strict";
+
+/* ======================================================
+   CONFIGURATION — TARIFS EN FC
+   Modifie les montants ci-dessous selon tes tarifs.
+====================================================== */
+
+const BOT_CREATION_PRICE = 5000;
+
+const API_BASE = "https://davbot-outils.vercel.app";
+
+const API_LIST = [
+ {
+  id:"ai",
+  name:"Intelligence artificielle — AI",
+  icon:"🤖",
+  price:5000,
+  endpoint:"/api/intelligence-artificielle/ai",
+  method:"POST",
+  description:"Envoie un message à l'assistant IA et peut transmettre un historique de conversation.",
+  request:{message:"Bonjour, présente-toi.",history:[]},
+  response:"La réponse JSON exacte dépend du serveur et du modèle configuré.",
+  example:true
+ },
+ {
+  id:"ask",
+  name:"IA — Ask et analyse",
+  icon:"🧠",
+  price:7000,
+  endpoint:"/api/intelligence-artificielle/ask",
+  method:"POST",
+  description:"Assistant IA avec paramètres facultatifs pour une image, des connaissances personnalisées, des règles et l'historique.",
+  request:{
+   message:"Analyse cette image.",
+   image:"data:image/jpeg;base64,...",
+   knowledge:"Ma connaissance personnalisée.",
+   rules:"Réponds clairement.",
+   history:[]
+  },
+  response:"L'image doit être transmise dans un format accepté par le serveur. Le résultat exact dépend de l'API."
+ },
+ {
+  id:"translate",
+  name:"API de traduction",
+  icon:"🌍",
+  price:3000,
+  endpoint:"/api/intelligence-artificielle/translate",
+  method:"POST",
+  description:"Soumet un texte avec une langue source et une langue cible.",
+  request:{text:"Bonjour tout le monde",source:"fr",target:"en"},
+  response:"Le serveur doit renvoyer la traduction dans sa réponse JSON."
+ },
+ {
+  id:"image-generate",
+  name:"Génération d'images",
+  icon:"🎨",
+  price:10000,
+  endpoint:"/api/genere-image/generate",
+  method:"POST",
+  description:"Soumet une description pour demander la génération d'une image.",
+  request:{prompt:"Une ville futuriste à Kinshasa",size:"1024x1024",n:1},
+  response:"Le serveur peut renvoyer des données ou des liens d'image selon son implémentation."
+ },
+ {
+  id:"image-edit",
+  name:"Image — création ou transformation",
+  icon:"🖼️",
+  price:10000,
+  endpoint:"/api/genere-image/image",
+  method:"POST",
+  description:"Endpoint de création ou transformation d'image selon les fonctions activées sur le serveur.",
+  request:{prompt:"Transformer cette image en affiche futuriste",size:"1024x1024",n:1},
+  response:"Vérifie le format d'image requis par le serveur pour les transformations."
+ },
+ {
+  id:"ads",
+  name:"API Publicité",
+  icon:"📢",
+  price:5000,
+  endpoint:"/api/publicite/ads",
+  method:"À vérifier",
+  description:"Endpoint lié aux fonctions de publicité. La méthode, les paramètres et les réponses doivent être confirmés dans la documentation du serveur.",
+  request:null,
+  response:"Schéma de réponse à obtenir auprès du serveur."
+ },
+ {
+  id:"data",
+  name:"API Data",
+  icon:"🗄️",
+  price:5000,
+  endpoint:"/api/data",
+  method:"À vérifier",
+  description:"Endpoint de données. Les actions disponibles dépendent de la configuration du backend.",
+  request:null,
+  response:"Schéma de réponse à obtenir auprès du serveur."
+ },
+ {
+  id:"storage",
+  name:"API Storage",
+  icon:"📁",
+  price:5000,
+  endpoint:"/api/storage",
+  method:"À vérifier",
+  description:"Endpoint de stockage. Les exigences d'authentification et les formats de fichiers doivent être vérifiés.",
+  request:null,
+  response:"Schéma de réponse à obtenir auprès du serveur."
+ },
+ {
+  id:"admin-auth",
+  name:"Authentification administrateur",
+  icon:"🔐",
+  price:8000,
+  endpoint:"/api/admin-auth",
+  method:"À vérifier",
+  description:"Endpoint d'authentification administrateur. Ne transmets pas de mots de passe ou de secrets à une API sans vérifier sa sécurité.",
+  request:null,
+  response:"Schéma de réponse à obtenir auprès du serveur."
+ },
+ {
+  id:"video",
+  name:"Génération vidéo",
+  icon:"🎬",
+  price:15000,
+  endpoint:"/api/media/video",
+  method:"POST",
+  description:"Soumet une description et une durée pour demander une vidéo.",
+  request:{prompt:"Une ville futuriste de Kinshasa la nuit",duration:6},
+  response:"Le serveur peut traiter la génération de manière asynchrone. Vérifie son format de résultat."
+ },
+ {
+  id:"music",
+  name:"Génération musicale",
+  icon:"🎵",
+  price:10000,
+  endpoint:"/api/media/music",
+  method:"POST",
+  description:"Soumet une description musicale et une durée souhaitée.",
+  request:{prompt:"Afrobeat énergique et mélodique",duration:15},
+  response:"Le serveur peut renvoyer un statut de tâche ou une URL audio selon son fonctionnement."
+ },
+ {
+  id:"hub",
+  name:"API Hub — catalogue",
+  icon:"🧩",
+  price:3000,
+  endpoint:"/api/hub",
+  method:"POST",
+  description:"Exemple fourni pour demander le catalogue du hub avec l'action catalog.",
+  request:{action:"catalog"},
+  response:"La structure réelle du catalogue dépend de la réponse du serveur."
+ }
+];
+
+
+/* ======================================================
+   INTERFACE ET NAVIGATION
+====================================================== */
+
+const $ = id => document.getElementById(id);
+let pendingPurchase = null;
+let lastBotResult = "";
+
+function showToast(message,type="success"){
+ const toast = document.createElement("div");
+ toast.className = "toast "+type;
+ toast.textContent = message;
+ $("toastContainer").appendChild(toast);
+ setTimeout(()=>toast.remove(),4000);
+}
+
+function escapeHtml(value){
+ return String(value).replace(/[&<>"']/g,char=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[char]));
+}
+
+function money(value){
+ return Number(value).toLocaleString("fr-FR")+" FC";
+}
+
+function setTab(name){
+ document.querySelectorAll(".tab").forEach(button=>{
+  button.classList.toggle("active",button.dataset.tab===name);
+ });
+
+ $("catalogSection").classList.toggle("hidden",name!=="catalog");
+ $("botSection").classList.toggle("hidden",name!=="bot");
+ $("docsSection").classList.toggle("hidden",name!=="docs");
+
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+document.querySelectorAll(".tab").forEach(button=>{
+ button.addEventListener("click",()=>setTab(button.dataset.tab));
+});
+
+
+/* ======================================================
+   CATALOGUE
+====================================================== */
+
+function renderCatalog(){
+ $("apiCount").textContent = API_LIST.length;
+ $("apiGrid").innerHTML = "";
+
+ API_LIST.forEach((api,index)=>{
+  const card = document.createElement("article");
+  card.className = "card";
+  card.style.animationDelay = (index*25)+"ms";
+
+  const icon = document.createElement("div");
+  icon.className = "card-icon";
+  icon.textContent = api.icon;
+
+  const title = document.createElement("h3");
+  title.textContent = api.name;
+
+  const description = document.createElement("p");
+  description.textContent = api.description;
+
+  const endpoint = document.createElement("div");
+  endpoint.className = "endpoint";
+  endpoint.textContent = api.method+" · "+api.endpoint;
+
+  const price = document.createElement("div");
+  price.className = "price";
+  price.textContent = money(api.price);
+
+  const note = document.createElement("div");
+  note.style.cssText = "font-size:10px;color:var(--muted)";
+  note.textContent = "Tarif de départ · accès à valider";
+
+  const docButton = document.createElement("button");
+  docButton.className = "btn secondary";
+  docButton.textContent = "📚 Documentation";
+  docButton.addEventListener("click",()=>{
+   $("docSelect").value = api.id;
+   renderDocumentation(api.id);
+   setTab("docs");
+  });
+
+  const buyButton = document.createElement("button");
+  buyButton.className = "btn gold";
+  buyButton.textContent = "💳 Demander l'accès";
+  buyButton.addEventListener("click",()=>openPurchase(api));
+
+  card.append(icon,title,description,endpoint,price,note,docButton,buyButton);
+  $("apiGrid").appendChild(card);
+ });
+}
+
+function openPurchase(api){
+ pendingPurchase = {type:"api",item:api};
+ $("paymentMessage").textContent =
+  "Tu souhaites demander l'accès à « "+api.name+
+  " » au tarif de "+money(api.price)+
+  ". La demande ne devient pas un accès actif tant que le paiement n'a pas été validé côté serveur.";
+ $("paymentContact").value = "";
+ $("paymentAccepted").checked = false;
+ $("paymentResult").classList.add("hidden");
+ $("paymentModal").classList.add("show");
+}
+
+
+/* ======================================================
+   DOCUMENTATION
+====================================================== */
+
+function renderDocSelect(){
+ $("docSelect").innerHTML = "";
+
+ API_LIST.forEach(api=>{
+  const option = document.createElement("option");
+  option.value = api.id;
+  option.textContent = api.name;
+  $("docSelect").appendChild(option);
+ });
+
+ renderDocumentation(API_LIST[0].id);
+}
+
+function renderDocumentation(id){
+ const api = API_LIST.find(item=>item.id===id);
+ if(!api) return;
+
+ const endpoint = API_BASE+api.endpoint;
+ const exampleBody = api.request
+  ? JSON.stringify(api.request,null,2)
+  : "{\n  // Paramètres à confirmer avec le serveur\n}";
+
+ const fetchExample = api.request
+  ? `const response = await fetch("${endpoint}", {
+  method: "${api.method}",
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  body: JSON.stringify(${JSON.stringify(api.request)})
+});
+
+const data = await response.json();
+console.log(data);`
+  : `// Méthode et paramètres à vérifier avant utilisation.
+// Endpoint : ${endpoint}`;
+
+ const panel = $("docPanel");
+ panel.innerHTML = `
+  <div class="card-icon">${escapeHtml(api.icon)}</div>
+  <h3 style="margin-top:13px">${escapeHtml(api.name)}</h3>
+  <p style="font-size:12px;color:var(--muted);line-height:1.8;margin-top:8px">${escapeHtml(api.description)}</p>
+
+  <div class="api-doc">
+   <h4>1. Adresse de l'API</h4>
+   <pre id="docEndpoint">${escapeHtml(endpoint)}</pre>
+
+   <h4>2. Méthode HTTP</h4>
+   <p>${escapeHtml(api.method)}</p>
+
+   <h4>3. En-têtes suggérés pour les requêtes JSON</h4>
+   <pre>Content-Type: application/json
+Accept: application/json</pre>
+
+   <h4>4. Exemple de corps JSON</h4>
+   <pre>${escapeHtml(exampleBody)}</pre>
+
+   <h4>5. Exemple JavaScript</h4>
+   <pre>${escapeHtml(fetchExample)}</pre>
+
+   <h4>6. Réponse attendue</h4>
+   <p>${escapeHtml(api.response)}</p>
+
+   <div class="notice warning">
+    Cette documentation décrit les exemples disponibles, pas une garantie de
+    fonctionnement. Vérifie la méthode HTTP, les paramètres, les permissions,
+    les limites et la structure réelle de la réponse auprès du backend.
+   </div>
+
+   <div class="doc-actions">
+    <button class="btn secondary" id="copyEndpoint" type="button">📋 Copier l'URL</button>
+    <button class="btn secondary" id="copyExample" type="button">📋 Copier l'exemple</button>
+   </div>
+  </div>
+ `;
+
+ $("copyEndpoint").addEventListener("click",()=>{
+  copyText(endpoint);
+ });
+
+ $("copyExample").addEventListener("click",()=>{
+  copyText(fetchExample);
+ });
+
+}
+
+$("docSelect").addEventListener("change",()=>{
+ renderDocumentation($("docSelect").value);
+});
+
+
+/* ======================================================
+   DEMANDE D'ACCÈS
+   Aucun paiement réel n'est effectué ici.
+====================================================== */
+
+$("cancelPayment").addEventListener("click",()=>{
+ $("paymentModal").classList.remove("show");
+});
+
+$("paymentModal").addEventListener("click",event=>{
+ if(event.target===$("paymentModal")){
+  $("paymentModal").classList.remove("show");
+ }
+});
+
+$("confirmPayment").addEventListener("click",()=>{
+ if(!$("paymentAccepted").checked){
+  showToast("Confirme d'abord que tu as lu le tarif.","error");
+  return;
+ }
+
+ if(!pendingPurchase) return;
+
+ const api = pendingPurchase.item;
+ const contact = $("paymentContact").value.trim();
+
+ const request = {
+  type:pendingPurchase.type,
+  apiId:api.id,
+  apiName:api.name,
+  priceFC:api.price,
+  contact:contact,
+  status:"pending_payment_integration",
+  createdAt:new Date().toISOString()
+ };
+
+ /*
+  * Ce code ne déclare pas le paiement effectué.
+  * Connecte ici un backend sécurisé pour créer la demande,
+  * recevoir la confirmation du prestataire de paiement et
+  * activer l'accès uniquement après vérification serveur.
+  */
+
+ $("paymentResult").classList.remove("hidden");
+ $("paymentResult").textContent =
+  "Demande préparée pour "+request.apiName+
+  " — "+money(request.priceFC)+". Aucun paiement n'a été effectué. "+
+  "Configure le backend et le moyen de paiement pour enregistrer "+
+  "la demande et vérifier le règlement.";
+
+ showToast("La demande est préparée, mais le paiement reste à configurer.","error");
+});
+
+
+/* ======================================================
+   JASON API BOT
+====================================================== */
+
+function setBotStatus(message,isError=false){
+ $("botStatus").classList.remove("hidden");
+ $("botStatus").textContent = message;
+ $("botStatus").style.borderColor = isError ? "#ff475766" : "var(--border)";
+}
+
+$("generateBtn").addEventListener("click",()=>{
+ if(!$("confirmBotFee").checked){
+  showToast("Lis et confirme d'abord les frais de conception.","error");
+  return;
+ }
+
+ const name = $("projectName").value.trim();
+ const description = $("apiDescription").value.trim();
+
+ if(!name || !description){
+  showToast("Indique le nom et les fonctions de ton API.","error");
+  return;
+ }
+
+ pendingPurchase = {
+  type:"bot",
+  item:{
+   id:"api-bot",
+   name:"Conception d'API — "+name,
+   price:BOT_CREATION_PRICE,
+   projectName:name,
+   description:description,
+   apiType:$("apiType").value,
+   language:$("apiLanguage").value,
+   security:$("apiSecurity").value
+  }
+ };
+
+ $("paymentMessage").textContent =
+  "Tu demandes la conception de « "+name+
+  " » pour "+money(BOT_CREATION_PRICE)+
+  ". Confirme la demande. Le paiement doit être validé par un système externe avant que le service payant soit considéré comme réglé.";
+
+ $("paymentContact").value = "";
+ $("paymentAccepted").checked = false;
+ $("paymentResult").classList.add("hidden");
+ $("paymentModal").classList.add("show");
+});
+
+/*
+ * Appelé séparément après la validation du paiement par le backend.
+ * Cette page seule ne peut pas prouver qu'un paiement a été fait.
+ */
+async function generateApiDesignAfterPayment(){
+ const name = $("projectName").value.trim();
+ const description = $("apiDescription").value.trim();
+
+ const prompt = `
+Tu es un assistant technique qui aide à concevoir des API.
+Prépare un dossier de conception clair pour le projet suivant.
+
+Nom : ${name}
+Type : ${$("apiType").value}
+Fonctions demandées : ${description}
+Technologie : ${$("apiLanguage").value}
+Sécurité souhaitée : ${$("apiSecurity").value}
+
+Réponds en français avec :
+1. Résumé du projet
+2. Liste des endpoints et méthodes HTTP
+3. Paramètres et exemples JSON
+4. Exemples de réponses JSON
+5. Structure des fichiers du backend
+6. Code de départ cohérent avec la technologie choisie
+7. Instructions de test et de déploiement
+8. Risques de sécurité et variables d'environnement à configurer
+
+Ne prétends pas que l'API est déployée ou testée.
+N'inclus aucune clé secrète réelle.
+`;
+
+ $("generateBtn").disabled = true;
+ $("generateBtn").textContent = "⏳ Préparation en cours...";
+ setBotStatus("Contact de l'assistant IA en cours…");
+
+ try{
+  const response = await fetch(
+   API_BASE+"/api/intelligence-artificielle/ask",
+   {
+    method:"POST",
+    headers:{
+     "Content-Type":"application/json",
+     "Accept":"application/json"
+    },
+    body:JSON.stringify({
+     message:prompt,
+     knowledge:"Assistant technique JASON BUSINESS",
+     rules:"Réponds en français, fournis des exemples prudents et indique les étapes restant à réaliser.",
+     history:[]
+    })
+   }
+  );
+
+  const raw = await response.text();
+  let data;
+
+  try{
+   data = JSON.parse(raw);
+  }catch(error){
+   throw new Error("Le serveur a renvoyé une réponse qui n'est pas du JSON.");
+  }
+
+  if(!response.ok){
+   throw new Error(data.message || data.error || "Erreur HTTP "+response.status);
+  }
+
+  lastBotResult = extractResponseText(data);
+
+  if(!lastBotResult){
+   lastBotResult = JSON.stringify(data,null,2);
+  }
+
+  $("botResult").textContent = lastBotResult;
+  $("botResult").classList.remove("hidden");
+  setBotStatus("Réponse reçue. Il s'agit d'une proposition de conception, pas d'une API automatiquement déployée.");
+
+ }catch(error){
+  console.error(error);
+  setBotStatus(
+   "Impossible de contacter l'assistant : "+error.message+
+   ". Vérifie le réseau, la disponibilité de l'API et ses règles CORS.",
+   true
+  );
+ }finally{
+  $("generateBtn").disabled = false;
+  $("generateBtn").textContent = "💳 Continuer vers la demande";
+ }
+}
+
+function extractResponseText(data){
+ if(typeof data==="string") return data;
+
+ const candidates = [
+  data.answer,
+  data.response,
+  data.message,
+  data.text,
+  data.result,
+  data.content,
+  data.data?.answer,
+  data.data?.response,
+  data.data?.text,
+  data.choices?.[0]?.message?.content
+ ];
+
+ for(const value of candidates){
+  if(typeof value==="string" && value.trim()) return value;
+ }
+
+ return "";
+}
+
+/*
+ * Important :
+ * La génération ne doit être déclenchée qu'après validation du paiement
+ * par un backend fiable. Le code ci-dessus expose la fonction technique,
+ * mais le bouton public ne l'appelle pas directement.
+ */
+
+
+/* ======================================================
+   COPIE
+====================================================== */
+
+async function copyText(text){
+ try{
+  await navigator.clipboard.writeText(text);
+  showToast("Texte copié.");
+ }catch(error){
+  const area = document.createElement("textarea");
+  area.value = text;
+  area.style.position = "fixed";
+  area.style.opacity = "0";
+  document.body.appendChild(area);
+  area.select();
+
+  try{
+   document.execCommand("copy");
+   showToast("Texte copié.");
+  }catch(copyError){
+   showToast("Copie impossible sur cet appareil.","error");
+  }
+
+  area.remove();
+ }
+}
+
+$("copyBotResult").addEventListener("click",()=>{
+ if(!lastBotResult){
+  showToast("Aucun résultat à copier.","error");
+  return;
+ }
+ copyText(lastBotResult);
+});
+
+
+/* ======================================================
+   INITIALISATION
+====================================================== */
+
+renderCatalog();
+renderDocSelect();
+</script>
+
+</body>
+</html>
