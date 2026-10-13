@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,7 +6,7 @@
 <meta name="theme-color" content="#050a14">
 <title>JASON BUSINESS — Casino Jeux</title>
 <style>
-:root{--blue:#00d2ff;--blue2:#0077ff;--dark:#050a14;--green:#00e676;--red:#ff4757;--gold:#ffd700;--purple:#a855f7;--card:rgba(8,15,28,.94);--border:rgba(0,210,255,.25)}
+:root{--blue:#00d2ff;--blue2:#0077ff;--dark:#050a14;--green:#00e676;--red:#ff4757;--gold:#ffd700;--card:rgba(8,15,28,.94);--border:rgba(0,210,255,.25)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html{scroll-behavior:smooth}
 body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:white;background:linear-gradient(rgba(3,8,18,.85),rgba(3,8,18,.98)),url("IMG_0870.jpeg") center/cover fixed;padding-bottom:90px}
 .header{padding:18px 16px;text-align:center;background:rgba(0,0,0,.6);border-bottom:1px solid var(--border);backdrop-filter:blur(18px);position:sticky;top:0;z-index:50}
@@ -20,28 +19,27 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 .container{max-width:650px;margin:auto;padding:0 16px}
 .game-panel{display:none}.game-panel.active{display:block}
 .card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:16px;margin-bottom:14px;backdrop-filter:blur(18px)}
-.game-area{position:relative;width:100%;height:280px;background:radial-gradient(circle at 30% 20%,#0f2040,#050a14 70%);border-radius:16px;border:1px solid var(--border);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.game-area{position:relative;width:100%;height:300px;background:radial-gradient(circle at 30% 20%,#101e3a,#050a14 70%);border-radius:16px;border:1px solid var(--border);overflow:hidden}
 #aviatorCanvas,#jetxCanvas{position:absolute;inset:0;width:100%;height:100%}
-.multiplier{position:absolute;z-index:2;font-size:42px;font-weight:900;color:white;text-shadow:0 0 20px var(--blue);transition:.1s}
-.multiplier.crashed{color:var(--red);text-shadow:0 0 20px var(--red)}
-.plane{position:absolute;z-index:3;font-size:32px;transition:transform .1s linear;filter:drop-shadow(0 0 10px var(--blue))}
-.jet{position:absolute;z-index:3;font-size:34px;transition:transform .1s linear;filter:drop-shadow(0 0 12px var(--gold))}
-.crash-text{position:absolute;z-index:4;font-size:18px;font-weight:900;color:var(--red);background:rgba(0,0,0,.7);padding:8px 14px;border-radius:10px;display:none}
+.multiplier{position:absolute;z-index:5;left:50%;top:45%;transform:translate(-50%,-50%);font-size:48px;font-weight:900;color:white;text-shadow:0 0 25px var(--blue);transition:.1s}
+.multiplier.crashed{color:var(--red);text-shadow:0 0 25px var(--red)}
+.plane{position:absolute;z-index:4;font-size:34px;filter:drop-shadow(0 0 12px var(--blue));left:5%;bottom:15%}
+.jet{position:absolute;z-index:4;font-size:36px;filter:drop-shadow(0 0 14px var(--gold));left:5%;bottom:15%}
+.crash-text{position:absolute;z-index:6;left:50%;top:65%;transform:translateX(-50%);font-size:18px;font-weight:900;color:var(--red);background:rgba(0,0,0,.8);padding:8px 16px;border-radius:12px;display:none;border:1px solid var(--red)}
+.waiting{position:absolute;z-index:6;left:50%;top:20%;transform:translateX(-50%);font-size:11px;font-weight:800;color:var(--gold);background:rgba(255,215,0,.12);padding:6px 12px;border-radius:20px;border:1px solid rgba(255,215,0,.3);display:none}
 .controls{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .input-group label{font-size:10px;opacity:.6;display:block;margin-bottom:6px}
 .jb-input{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.5);color:white;font-size:13px;outline:none}
 .jb-input:focus{border-color:var(--blue)}
 .btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:900;font-size:12px;cursor:pointer;transition:.2s}
 .btn:active{transform:scale(.97)}
-.btn-bet{background:var(--green);color:#001a0a}.btn-bet:disabled{background:#333;opacity:.5}
+.btn-bet{background:var(--green);color:#001a0a}.btn-bet:disabled{background:#333;color:#777;opacity:.6}
 .btn-cash{background:var(--gold);color:#000}.btn-cash:disabled{background:#333;color:#777}
 .btn-auto{margin-top:8px;padding:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:white;font-size:10px;border-radius:8px;cursor:pointer}
 .btn-auto.active{background:var(--blue);color:#001018}
-.history{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.history{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;min-height:22px}
 .hist{padding:5px 8px;border-radius:20px;font-size:10px;font-weight:800}
 .hist.green{background:rgba(0,230,118,.15);color:var(--green)}.hist.red{background:rgba(255,71,87,.15);color:var(--red)}.hist.gold{background:rgba(255,215,0,.15);color:var(--gold)}
-
-/* PENALTY */
 .penalty-field{position:relative;width:100%;height:300px;background:linear-gradient(180deg,#1a4d1a 0,#0f2f0f 100%);border-radius:16px;border:2px solid rgba(255,255,255,.15);overflow:hidden}
 .goal{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:70%;height:55%;border:4px solid white;border-bottom:none;background:rgba(255,255,255,.08);border-radius:4px 4px 0 0}
 .goal-net{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 18px,rgba(255,255,255,.15) 18px,rgba(255,255,255,.15) 19px),repeating-linear-gradient(90deg,transparent,transparent 18px,rgba(255,255,255,.15) 18px,rgba(255,255,255,.15) 19px)}
@@ -49,20 +47,17 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 .ball{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:26px;transition:all .6s cubic-bezier(.25,.46,.45,.94);z-index:3}
 .shoot-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}
 .shoot-btn{padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:white;font-weight:900;cursor:pointer}
-.shoot-btn:hover{border-color:var(--gold)}
-
 .navbar{position:fixed;bottom:0;left:0;right:0;height:72px;display:flex;justify-content:space-around;align-items:center;background:rgba(4,10,20,.98);border-top:1px solid var(--border);backdrop-filter:blur(18px);z-index:100}
 .nav{text-decoration:none;color:white;opacity:.5;text-align:center;font-size:11px;min-width:60px}.nav span{display:block;font-size:21px;margin-bottom:3px}.nav.active{color:var(--blue);opacity:1;font-weight:bold}
-.status{margin-top:10px;text-align:center;font-size:11px;min-height:18px}
-.success{color:var(--green)}.error{color:var(--red)}.loading{color:var(--gold)}
+.status{margin-top:10px;text-align:center;font-size:11px;min-height:20px}.success{color:var(--green)}.error{color:var(--red)}.loading{color:var(--gold)}
 </style>
 </head>
 <body>
 <header class="header"><h1>JASON <span>CASINO</span> 🎰</h1></header>
 <div class="balance-bar"><div><small>SOLDE PRINCIPAL</small><b id="jbBalance">0 FC</b></div><div style="text-align:right"><small>GAINS JEUX</small><b id="jbGains" style="color:var(--green)">0 FC</b></div></div>
 <div class="tabs"><button class="tab active" data-game="aviator">✈️ AVIATOR</button><button class="tab" data-game="jetx">🚀 JETX</button><button class="tab" data-game="penalty">⚽ PENALTY</button></div>
-
 <div class="container">
+
 <!-- AVIATOR -->
 <div class="game-panel active" id="panel-aviator">
 <div class="card">
@@ -70,6 +65,7 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 <canvas id="aviatorCanvas"></canvas>
 <div class="plane" id="aviatorPlane">✈️</div>
 <div class="multiplier" id="aviatorMult">1.00x</div>
+<div class="waiting" id="aviatorWait">⏳ En attente du crash...</div>
 <div class="crash-text" id="aviatorCrash">💥 CRASHED</div>
 </div>
 <div class="history" id="aviatorHistory"></div>
@@ -78,8 +74,8 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 <div class="input-group"><label>🎯 Auto Cashout</label><input type="number" class="jb-input" id="aviatorAuto" value="2.00" min="1.10" step="0.10"></div>
 </div>
 <div style="display:flex;gap:8px;margin-top:10px"><button class="btn-auto" id="aviatorAutoBet">🤖 Mise Auto: OFF</button><button class="btn-auto" id="aviatorAutoCash">💸 Cash Auto: OFF</button></div>
-<button class="btn btn-bet" id="aviatorBetBtn" style="margin-top:12px">✈️ MISER - Décollage dans <span id="aviatorTimer">5</span>s</button>
-<button class="btn btn-cash" id="aviatorCashBtn" style="margin-top:10px;display:none">💰 ENCAISSER <span id="aviatorCashMult">1.00x</span></button>
+<button class="btn btn-bet" id="aviatorBetBtn" style="margin-top:12px">✈️ MISER - Décollage dans <span id="aviatorTimer">8</span>s</button>
+<button class="btn btn-cash" id="aviatorCashBtn" style="margin-top:10px;display:none">💰 ENCAISSER <span id="aviatorCashMult">1.00x</span> — <span id="aviatorCashWin">0 FC</span></button>
 <div class="status" id="aviatorStatus"></div>
 </div>
 </div>
@@ -87,10 +83,11 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 <!-- JETX -->
 <div class="game-panel" id="panel-jetx">
 <div class="card">
-<div class="game-area" id="jetxArea">
+<div class="game-area">
 <canvas id="jetxCanvas"></canvas>
 <div class="jet" id="jetxJet">🚀</div>
 <div class="multiplier" id="jetxMult">1.00x</div>
+<div class="waiting" id="jetxWait">⏳ En attente explosion...</div>
 <div class="crash-text" id="jetxCrash">💥 EXPLOSION</div>
 </div>
 <div class="history" id="jetxHistory"></div>
@@ -99,7 +96,7 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 <div class="input-group"><label>🎯 Auto Cashout</label><input type="number" class="jb-input" id="jetxAuto" value="2.50" min="1.10" step="0.10"></div>
 </div>
 <div style="display:flex;gap:8px;margin-top:10px"><button class="btn-auto" id="jetxAutoBet">🤖 Mise Auto: OFF</button><button class="btn-auto" id="jetxAutoCash">💸 Cash Auto: OFF</button></div>
-<button class="btn btn-bet" id="jetxBetBtn" style="margin-top:12px">🚀 MISER JETX</button>
+<button class="btn btn-bet" id="jetxBetBtn" style="margin-top:12px">🚀 MISER JETX - <span id="jetxTimer">8</span>s</button>
 <button class="btn btn-cash" id="jetxCashBtn" style="margin-top:10px;display:none">💰 ENCAISSER <span id="jetxCashMult">1.00x</span></button>
 <div class="status" id="jetxStatus"></div>
 </div>
@@ -108,157 +105,100 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 <!-- PENALTY -->
 <div class="game-panel" id="panel-penalty">
 <div class="card">
-<div class="penalty-field" id="penaltyField">
-<div class="goal"><div class="goal-net"></div></div>
-<div class="keeper" id="keeper">🧤</div>
-<div class="ball" id="ball">⚽</div>
-</div>
-<div class="controls">
-<div class="input-group"><label>💰 Mise (FC)</label><input type="number" class="jb-input" id="penaltyBet" value="500" min="100" step="100"></div>
-<div class="input-group"><label>💵 Gain potentiel x3</label><input type="text" class="jb-input" id="penaltyPotential" value="1500 FC" disabled></div>
-</div>
-<div class="shoot-btns">
-<button class="shoot-btn" data-dir="left">⬅️ GAUCHE</button>
-<button class="shoot-btn" data-dir="center">⬆️ CENTRE</button>
-<button class="shoot-btn" data-dir="right">➡️ DROITE</button>
-</div>
-<div class="status" id="penaltyStatus">Choisis ta mise et tire ! Gardien aléatoire.</div>
+<div class="penalty-field"><div class="goal"><div class="goal-net"></div></div><div class="keeper" id="keeper">🧤</div><div class="ball" id="ball">⚽</div></div>
+<div class="controls"><div class="input-group"><label>💰 Mise</label><input type="number" class="jb-input" id="penaltyBet" value="500" min="100" step="100"></div><div class="input-group"><label>💵 Gain x2.8</label><input type="text" class="jb-input" id="penaltyPotential" value="1400 FC" disabled></div></div>
+<div class="shoot-btns"><button class="shoot-btn" data-dir="left">⬅️ GAUCHE</button><button class="shoot-btn" data-dir="center">⬆️ CENTRE</button><button class="shoot-btn" data-dir="right">➡️ DROITE</button></div>
+<div class="status" id="penaltyStatus">Choisis ta mise et tire !</div>
 <div class="history" id="penaltyHistory"></div>
 </div>
 </div>
-</div>
 
+</div>
 <nav class="navbar">
 <a href="dashboard.html" class="nav"><span>📊</span>Dash</a>
-<a href="shop.html" class="nav"><span>🛒</span>Boutique</a>
+<a href="shop.html" class="nav"><span>🛒</span>Shop</a>
 <a href="jeux.html" class="nav active"><span>🎮</span>Jeux</a>
 <a href="profil.html" class="nav"><span>👤</span>Profil</a>
 </nav>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, onValue, runTransaction, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-const firebaseConfig = {
- apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
- authDomain:"starlink-investit.firebaseapp.com",
- databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
- projectId:"starlink-investit",
- storageBucket:"starlink-investit.firebasestorage.app",
- messagingSenderId:"807081599583",
- appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
-};
-const app=initializeApp(firebaseConfig);
-const db=getDatabase(app);
+import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+const firebaseConfig = { apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U", authDomain:"starlink-investit.firebaseapp.com", databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com", projectId:"starlink-investit", storageBucket:"starlink-investit.firebasestorage.app", messagingSenderId:"807081599583", appId:"1:807081599583:web:e00ec3959bc4acdae031ea" };
+const app=initializeApp(firebaseConfig); const db=getDatabase(app);
 const phone=localStorage.getItem("userPhone")||localStorage.getItem("jasonPhone")||localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("phone");
-if(!phone){location.replace("login.html");}
+if(!phone) location.replace("login.html");
 const userRef=ref(db,"jasonBusiness/users/"+phone);
 let currentBalance=0, currentGains=0;
-
 function fmt(n){return Math.floor(n).toLocaleString("fr-FR");}
-function getPrincipal(d){return Number(d.solde_principal??d.solde??d.balance??0)||0;}
-function getGains(d){return Number(d.solde_gains??d.gains??0)||0;}
-
-onValue(userRef,snap=>{
- if(!snap.exists()) return;
- const d=snap.val();
- currentBalance=getPrincipal(d);
- currentGains=getGains(d);
- document.getElementById("jbBalance").textContent=fmt(currentBalance)+" FC";
- document.getElementById("jbGains").textContent=fmt(currentGains)+" FC";
-});
-
+function getPrincipal(d){return Number(d.solde_principal??d.solde??0)||0;}
+function getGains(d){return Number(d.solde_gains??0)||0;}
+onValue(userRef,snap=>{ if(!snap.exists()) return; const d=snap.val(); currentBalance=getPrincipal(d); currentGains=getGains(d); document.getElementById("jbBalance").textContent=fmt(currentBalance)+" FC"; document.getElementById("jbGains").textContent=fmt(currentGains)+" FC"; });
 async function deduct(amount){
- if(amount>currentBalance) throw new Error("Solde insuffisant");
- const res=await runTransaction(userRef,c=>{
-  if(!c) return;
-  const bal=Number(c.solde_principal??c.solde??0)||0;
-  if(bal<amount) return;
-  c.solde_principal=bal-amount;
-  if(c.solde!==undefined) c.solde=c.solde_principal;
-  return c;
- });
+ if(amount>currentBalance) throw new Error("Solde insuffisant: "+fmt(currentBalance)+" FC");
+ const res=await runTransaction(userRef,c=>{ if(!c) return; const bal=Number(c.solde_principal??c.solde??0)||0; if(bal<amount) return; c.solde_principal=bal-amount; if(c.solde!==undefined) c.solde=c.solde_principal; return c; });
  if(!res.committed) throw new Error("Solde insuffisant");
- return true;
 }
 async function addWin(amount){
- await runTransaction(userRef,c=>{
-  if(!c) return;
-  c.solde_gains=(Number(c.solde_gains??0)||0)+amount;
-  return c;
- });
+ await runTransaction(userRef,c=>{ if(!c) return; c.solde_gains=(Number(c.solde_gains??0)||0)+amount; return c; });
 }
-
-// TABS
 document.querySelectorAll(".tab").forEach(t=>{
- t.addEventListener("click",()=>{
-  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
-  document.querySelectorAll(".game-panel").forEach(x=>x.classList.remove("active"));
-  t.classList.add("active");
-  document.getElementById("panel-"+t.dataset.game).classList.add("active");
- });
+ t.addEventListener("click",()=>{ document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active")); document.querySelectorAll(".game-panel").forEach(x=>x.classList.remove("active")); t.classList.add("active"); document.getElementById("panel-"+t.dataset.game).classList.add("active"); });
 });
 
-// ===== AVIATOR LOGIC =====
-let avRunning=false, avMult=1.0, avCrash=0, avBet=0, avInterval=null, avTimer=5, avAutoBet=false, avAutoCash=false, avHasBet=false;
+// ============ AVIATOR LENT + ATTENTE CRASH ============
+let avRunning=false, avMult=1.0, avCrash=0, avBet=0, avInterval=null, avTimer=8, avAutoBet=false, avAutoCash=false, avHasBet=false, avCashed=false;
 const avCanvas=document.getElementById("aviatorCanvas"), avCtx=avCanvas.getContext("2d");
-function resizeAv(){avCanvas.width=avCanvas.offsetWidth*2; avCanvas.height=avCanvas.offsetHeight*2;}
-resizeAv(); window.addEventListener("resize",resizeAv);
-function genCrash(){
- // Distribution réaliste aviator: 5% crash <1.1, 95% >1.1, max 100x
- const r=Math.random();
- if(r<0.05) return 1+Math.random()*0.1;
- if(r<0.5) return 1.1+Math.random()*1.9;
- if(r<0.85) return 3+Math.random()*7;
- return 10+Math.random()*90;
-}
-function drawAvTrail(progress){
+function resizeAv(){ avCanvas.width=avCanvas.offsetWidth*2; avCanvas.height=avCanvas.offsetHeight*2; } resizeAv();
+function genCrash(){ const r=Math.random(); if(r<0.08) return 1+Math.random()*0.25; if(r<0.45) return 1.25+Math.random()*1.75; if(r<0.80) return 3+Math.random()*5; return 8+Math.random()*42; }
+function drawAvTrail(p){
  avCtx.clearRect(0,0,avCanvas.width,avCanvas.height);
- avCtx.beginPath();
- avCtx.strokeStyle="#00d2ff"; avCtx.lineWidth=4; avCtx.shadowColor="#00d2ff"; avCtx.shadowBlur=10;
+ avCtx.beginPath(); avCtx.strokeStyle="#00d2ff"; avCtx.lineWidth=4; avCtx.shadowColor="#00d2ff"; avCtx.shadowBlur=12;
  avCtx.moveTo(0,avCanvas.height);
- for(let i=0;i<=progress*100;i++){
-  const x=(i/100)*avCanvas.width*0.85;
-  const y=avCanvas.height - Math.pow(i/100,1.6)*avCanvas.height*0.8 - (i/100)*20;
-  avCtx.lineTo(x,y);
- }
+ for(let i=0;i<=p*100;i++){ const x=(i/100)*avCanvas.width*0.85; const y=avCanvas.height-Math.pow(i/100,1.5)*avCanvas.height*0.78 - (i/100)*10; avCtx.lineTo(x,y); }
  avCtx.stroke(); avCtx.shadowBlur=0;
 }
+function addHist(id,val,win){
+ const c=document.getElementById(id); const d=document.createElement("span");
+ d.className="hist "+(win?"green": val<2?"red": val<4?"green":"gold"); d.textContent=val.toFixed(2)+"x"; c.prepend(d); if(c.children.length>14) c.lastChild.remove();
+}
 function startAviatorRound(){
- avRunning=false; avMult=1.0; avCrash=genCrash();
- document.getElementById("aviatorPlane").style.display="block";
- document.getElementById("aviatorCrash").style.display="none";
- document.getElementById("aviatorMult").classList.remove("crashed");
- document.getElementById("aviatorMult").textContent="1.00x";
- avTimer=5;
- document.getElementById("aviatorBetBtn").style.display="block";
- document.getElementById("aviatorCashBtn").style.display="none";
- document.getElementById("aviatorBetBtn").disabled=false;
+ avRunning=false; avMult=1.0; avCashed=false; avCrash=genCrash();
+ document.getElementById("aviatorPlane").style.display="block"; document.getElementById("aviatorPlane").style.left="5%"; document.getElementById("aviatorPlane").style.bottom="15%"; document.getElementById("aviatorPlane").style.transform="rotate(0deg)";
+ document.getElementById("aviatorCrash").style.display="none"; document.getElementById("aviatorWait").style.display="none";
+ document.getElementById("aviatorMult").classList.remove("crashed"); document.getElementById("aviatorMult").textContent="1.00x";
+ document.getElementById("aviatorBetBtn").style.display="block"; document.getElementById("aviatorCashBtn").style.display="none"; document.getElementById("aviatorBetBtn").disabled=false;
+ avTimer=8;
  document.getElementById("aviatorBetBtn").innerHTML=`✈️ MISER - Décollage dans <span id="aviatorTimer">${avTimer}</span>s`;
- const tInterval=setInterval(()=>{
+ avHasBet=false;
+ document.getElementById("aviatorStatus").textContent=avAutoBet?"🤖 Mise auto activée - mise automatique au prochain tour":"";
+ let tInt=setInterval(()=>{
   avTimer--; const el=document.getElementById("aviatorTimer"); if(el) el.textContent=avTimer;
-  if(avTimer<=0){ clearInterval(tInterval); runAviator(); }
+  if(avTimer<=0){ clearInterval(tInt); if(avAutoBet && !avHasBet) autoBetAviator().then(()=>runAviator()); else runAviator(); }
  },1000);
 }
 function runAviator(){
  avRunning=true;
- document.getElementById("aviatorBetBtn").style.display="none";
- if(avHasBet){ document.getElementById("aviatorCashBtn").style.display="block"; document.getElementById("aviatorCashBtn").disabled=false; }
- document.getElementById("aviatorStatus").textContent="✈️ En vol...";
+ if(avHasBet && !avCashed){ document.getElementById("aviatorBetBtn").style.display="none"; document.getElementById("aviatorCashBtn").style.display="block"; document.getElementById("aviatorCashBtn").disabled=false; }
+ else if(avCashed){ document.getElementById("aviatorBetBtn").style.display="none"; document.getElementById("aviatorWait").style.display="block"; }
+ else { document.getElementById("aviatorBetBtn").textContent="🚫 Trop tard - attente prochain tour"; document.getElementById("aviatorBetBtn").disabled=true; }
  let start=Date.now();
  avInterval=setInterval(()=>{
   const elapsed=(Date.now()-start)/1000;
-  avMult=1+elapsed*0.6+Math.pow(elapsed,1.8)*0.08;
+  // BEAUCOUP PLUS LENT: 0.18 + 0.02
+  avMult=1 + elapsed*0.18 + Math.pow(elapsed,1.9)*0.02;
   if(avMult>=avCrash){ crashAviator(); return; }
   document.getElementById("aviatorMult").textContent=avMult.toFixed(2)+"x";
   document.getElementById("aviatorCashMult").textContent=avMult.toFixed(2)+"x";
-  const prog=Math.min(elapsed/15,1);
-  document.getElementById("aviatorPlane").style.left=(prog*75)+"%";
-  document.getElementById("aviatorPlane").style.bottom=(20+prog*65)+"%";
-  document.getElementById("aviatorPlane").style.transform=`rotate(${prog*25}deg)`;
+  document.getElementById("aviatorCashWin").textContent=fmt(Math.floor(avBet*avMult))+" FC";
+  const prog=Math.min(elapsed/30,1); // 30 sec pour traverser ecran
+  document.getElementById("aviatorPlane").style.left=(5+prog*70)+"%";
+  document.getElementById("aviatorPlane").style.bottom=(15+prog*60)+"%";
+  document.getElementById("aviatorPlane").style.transform=`rotate(${prog*18}deg)`;
   drawAvTrail(prog);
   const autoVal=parseFloat(document.getElementById("aviatorAuto").value)||2;
-  if(avAutoCash && avHasBet && avMult>=autoVal){ cashAviator(); }
- },50);
+  if(avAutoCash && avHasBet && !avCashed && avMult>=autoVal){ cashAviator(); }
+ },100);
 }
 function crashAviator(){
  clearInterval(avInterval); avRunning=false;
@@ -266,169 +206,115 @@ function crashAviator(){
  document.getElementById("aviatorMult").textContent=avCrash.toFixed(2)+"x";
  document.getElementById("aviatorCrash").style.display="block";
  document.getElementById("aviatorPlane").style.display="none";
+ document.getElementById("aviatorWait").style.display="none";
  document.getElementById("aviatorCashBtn").style.display="none";
- if(avHasBet){
-  document.getElementById("aviatorStatus").textContent="💥 Crash! Tu as perdu "+fmt(avBet)+" FC";
+ if(avHasBet && !avCashed){
+  document.getElementById("aviatorStatus").innerHTML=`<span class="error">💥 Crash à ${avCrash.toFixed(2)}x ! Perdu ${fmt(avBet)} FC</span>`;
   addHist("aviatorHistory",avCrash,false);
-  avHasBet=false;
- }else{
+ }else if(!avCashed){
   addHist("aviatorHistory",avCrash,false);
  }
- setTimeout(()=>{
-  if(avAutoBet){ autoBetAviator(); }
-  startAviatorRound();
- },3000);
+ avHasBet=false; avCashed=false;
+ setTimeout(startAviatorRound,3500);
 }
 async function cashAviator(){
- if(!avHasBet||!avRunning) return;
- clearInterval(avInterval); avRunning=false;
+ if(!avHasBet||!avRunning||avCashed) return;
+ avCashed=true;
  const win=Math.floor(avBet*avMult);
  await addWin(win);
- document.getElementById("aviatorStatus").innerHTML=`<span class="success">✅ Encaissé ${fmt(win)} FC à ${avMult.toFixed(2)}x</span>`;
+ document.getElementById("aviatorStatus").innerHTML=`<span class="success">✅ Encaissé ${fmt(win)} FC à ${avMult.toFixed(2)}x - Attends le crash...</span>`;
  document.getElementById("aviatorCashBtn").style.display="none";
+ document.getElementById("aviatorWait").style.display="block";
  addHist("aviatorHistory",avMult,true);
- avHasBet=false;
- setTimeout(()=>{ startAviatorRound(); if(avAutoBet) autoBetAviator(); },2000);
-}
-function addHist(id,val,win){
- const c=document.getElementById(id); const d=document.createElement("span");
- d.className="hist "+(win?"green": val<2?"red": val<5?"green":"gold");
- d.textContent=val.toFixed(2)+"x"; c.prepend(d);
- if(c.children.length>12) c.lastChild.remove();
+ // NE PAS REDEMARRER - on laisse l'avion continuer jusqu'au crash
 }
 async function autoBetAviator(){
  const bet=parseInt(document.getElementById("aviatorBet").value)||500;
- try{ await deduct(bet); avBet=bet; avHasBet=true; document.getElementById("aviatorStatus").textContent=`🤖 Mise auto ${fmt(bet)} FC placée`; }catch(e){ document.getElementById("aviatorStatus").textContent="❌ Solde insuffisant pour mise auto"; avAutoBet=false; document.getElementById("aviatorAutoBet").textContent="🤖 Mise Auto: OFF"; document.getElementById("aviatorAutoBet").classList.remove("active"); }
+ try{ await deduct(bet); avBet=bet; avHasBet=true; avCashed=false; document.getElementById("aviatorStatus").textContent=`🤖 Pari auto ${fmt(bet)} FC placé`; }catch(e){ document.getElementById("aviatorStatus").textContent="❌ "+e.message; avAutoBet=false; document.getElementById("aviatorAutoBet").textContent="🤖 Mise Auto: OFF"; document.getElementById("aviatorAutoBet").classList.remove("active"); }
 }
 document.getElementById("aviatorBetBtn").addEventListener("click",async()=>{
  const bet=parseInt(document.getElementById("aviatorBet").value)||500;
- if(bet<100){document.getElementById("aviatorStatus").textContent="❌ Minimum 100 FC"; return;}
- try{ await deduct(bet); avBet=bet; avHasBet=true; document.getElementById("aviatorBetBtn").disabled=true; document.getElementById("aviatorBetBtn").innerHTML="✅ Pari placé - En attente décollage"; document.getElementById("aviatorStatus").textContent=`✅ Pari ${fmt(bet)} FC placé`; }catch(e){ document.getElementById("aviatorStatus").textContent="❌ "+e.message; }
+ if(bet<100){document.getElementById("aviatorStatus").textContent="❌ Min 100 FC"; return;}
+ try{ await deduct(bet); avBet=bet; avHasBet=true; avCashed=false; document.getElementById("aviatorBetBtn").disabled=true; document.getElementById("aviatorBetBtn").innerHTML="✅ Pari placé - En vol..."; document.getElementById("aviatorStatus").textContent=`✅ Pari ${fmt(bet)} FC`; if(avRunning){ document.getElementById("aviatorBetBtn").style.display="none"; document.getElementById("aviatorCashBtn").style.display="block"; } }catch(e){ document.getElementById("aviatorStatus").textContent="❌ "+e.message; }
 });
 document.getElementById("aviatorCashBtn").addEventListener("click",cashAviator);
 document.getElementById("aviatorAutoBet").addEventListener("click",function(){ avAutoBet=!avAutoBet; this.textContent="🤖 Mise Auto: "+(avAutoBet?"ON":"OFF"); this.classList.toggle("active",avAutoBet); });
 document.getElementById("aviatorAutoCash").addEventListener("click",function(){ avAutoCash=!avAutoCash; this.textContent="💸 Cash Auto: "+(avAutoCash?"ON":"OFF"); this.classList.toggle("active",avAutoCash); });
 
-// JETX - meme logique avec skin different
-let jxRunning=false, jxMult=1.0, jxCrash=0, jxBet=0, jxInterval=null, jxHasBet=false, jxAutoBet=false, jxAutoCash=false;
+// JETX - meme logique lente
+let jxRunning=false, jxMult=1, jxCrash=0, jxBet=0, jxInterval=null, jxHasBet=false, jxCashed=false, jxAutoBet=false, jxAutoCash=false, jxTimer=8;
 const jxCanvas=document.getElementById("jetxCanvas"), jxCtx=jxCanvas.getContext("2d");
-function resizeJx(){jxCanvas.width=jxCanvas.offsetWidth*2; jxCanvas.height=jxCanvas.offsetHeight*2;}
-resizeJx();
-function genJxCrash(){ const r=Math.random(); if(r<0.07) return 1+Math.random()*0.2; if(r<0.6) return 1.2+Math.random()*2.5; return 3.5+Math.random()*20; }
-function drawJxTrail(p){
- jxCtx.clearRect(0,0,jxCanvas.width,jxCanvas.height);
- jxCtx.beginPath(); jxCtx.strokeStyle="#ffd700"; jxCtx.lineWidth=4; jxCtx.shadowColor="#ffd700"; jxCtx.shadowBlur=12;
- jxCtx.moveTo(0,jxCanvas.height);
- for(let i=0;i<=p*100;i++){ const x=(i/100)*jxCanvas.width*0.8; const y=jxCanvas.height-Math.pow(i/100,1.5)*jxCanvas.height*0.75; jxCtx.lineTo(x,y); }
- jxCtx.stroke(); jxCtx.shadowBlur=0;
-}
+function resizeJx(){ jxCanvas.width=jxCanvas.offsetWidth*2; jxCanvas.height=jxCanvas.offsetHeight*2; } resizeJx();
+function genJxCrash(){ const r=Math.random(); if(r<0.1) return 1+Math.random()*0.3; if(r<0.55) return 1.3+Math.random()*1.7; return 3+Math.random()*12; }
+function drawJxTrail(p){ jxCtx.clearRect(0,0,jxCanvas.width,jxCanvas.height); jxCtx.beginPath(); jxCtx.strokeStyle="#ffd700"; jxCtx.lineWidth=4; jxCtx.shadowColor="#ffd700"; jxCtx.shadowBlur=12; jxCtx.moveTo(0,jxCanvas.height); for(let i=0;i<=p*100;i++){ const x=(i/100)*jxCanvas.width*0.8; const y=jxCanvas.height-Math.pow(i/100,1.4)*jxCanvas.height*0.75; jxCtx.lineTo(x,y); } jxCtx.stroke(); jxCtx.shadowBlur=0; }
 function startJetxRound(){
- jxRunning=false; jxMult=1.0; jxCrash=genJxCrash();
- document.getElementById("jetxJet").style.display="block"; document.getElementById("jetxCrash").style.display="none";
+ jxRunning=false; jxMult=1; jxCashed=false; jxCrash=genJxCrash();
+ document.getElementById("jetxJet").style.display="block"; document.getElementById("jetxJet").style.left="5%"; document.getElementById("jetxJet").style.bottom="15%"; document.getElementById("jetxJet").style.transform="rotate(0deg)";
+ document.getElementById("jetxCrash").style.display="none"; document.getElementById("jetxWait").style.display="none";
  document.getElementById("jetxMult").classList.remove("crashed"); document.getElementById("jetxMult").textContent="1.00x";
- document.getElementById("jetxBetBtn").disabled=false; document.getElementById("jetxBetBtn").style.display="block"; document.getElementById("jetxBetBtn").textContent="🚀 MISER JETX";
- document.getElementById("jetxCashBtn").style.display="none";
- setTimeout(runJetx,2000);
+ document.getElementById("jetxBetBtn").style.display="block"; document.getElementById("jetxCashBtn").style.display="none"; document.getElementById("jetxBetBtn").disabled=false; jxTimer=8;
+ document.getElementById("jetxBetBtn").innerHTML=`🚀 MISER JETX - <span id="jetxTimer">8</span>s`; jxHasBet=false;
+ let tInt=setInterval(()=>{ jxTimer--; const el=document.getElementById("jetxTimer"); if(el) el.textContent=jxTimer; if(jxTimer<=0){ clearInterval(tInt); if(jxAutoBet && !jxHasBet) autoBetJetx().then(()=>runJetx()); else runJetx(); } },1000);
 }
 function runJetx(){
  jxRunning=true;
- if(jxHasBet){ document.getElementById("jetxBetBtn").style.display="none"; document.getElementById("jetxCashBtn").style.display="block"; document.getElementById("jetxCashBtn").disabled=false; }
+ if(jxHasBet && !jxCashed){ document.getElementById("jetxBetBtn").style.display="none"; document.getElementById("jetxCashBtn").style.display="block"; document.getElementById("jetxCashBtn").disabled=false; }
+ else if(jxCashed){ document.getElementById("jetxBetBtn").style.display="none"; document.getElementById("jetxWait").style.display="block"; }
+ else { document.getElementById("jetxBetBtn").textContent="🚫 Trop tard"; document.getElementById("jetxBetBtn").disabled=true; }
  let start=Date.now();
  jxInterval=setInterval(()=>{
   const elapsed=(Date.now()-start)/1000;
-  jxMult=1+elapsed*0.7+Math.pow(elapsed,1.7)*0.09;
+  jxMult=1+elapsed*0.20+Math.pow(elapsed,1.85)*0.025;
   if(jxMult>=jxCrash){ crashJetx(); return; }
   document.getElementById("jetxMult").textContent=jxMult.toFixed(2)+"x";
   document.getElementById("jetxCashMult").textContent=jxMult.toFixed(2)+"x";
-  const prog=Math.min(elapsed/12,1);
-  document.getElementById("jetxJet").style.left=(prog*70)+"%";
-  document.getElementById("jetxJet").style.bottom=(15+prog*70)+"%";
-  document.getElementById("jetxJet").style.transform=`rotate(${prog*30}deg)`;
+  const prog=Math.min(elapsed/28,1);
+  document.getElementById("jetxJet").style.left=(5+prog*70)+"%"; document.getElementById("jetxJet").style.bottom=(15+prog*65)+"%"; document.getElementById("jetxJet").style.transform=`rotate(${prog*20}deg)`;
   drawJxTrail(prog);
   const autoVal=parseFloat(document.getElementById("jetxAuto").value)||2.5;
-  if(jxAutoCash && jxHasBet && jxMult>=autoVal){ cashJetx(); }
- },50);
+  if(jxAutoCash && jxHasBet && !jxCashed && jxMult>=autoVal) cashJetx();
+ },100);
 }
 function crashJetx(){
  clearInterval(jxInterval); jxRunning=false;
- document.getElementById("jetxMult").classList.add("crashed");
- document.getElementById("jetxMult").textContent=jxCrash.toFixed(2)+"x";
- document.getElementById("jetxCrash").style.display="block";
- document.getElementById("jetxJet").style.display="none";
- document.getElementById("jetxCashBtn").style.display="none";
- if(jxHasBet){ document.getElementById("jetxStatus").textContent="💥 Explosion! Perdu "+fmt(jxBet)+" FC"; addHist("jetxHistory",jxCrash,false); jxHasBet=false; }else{ addHist("jetxHistory",jxCrash,false); }
- setTimeout(()=>{ if(jxAutoBet) autoBetJetx(); startJetxRound(); },3000);
+ document.getElementById("jetxMult").classList.add("crashed"); document.getElementById("jetxMult").textContent=jxCrash.toFixed(2)+"x";
+ document.getElementById("jetxCrash").style.display="block"; document.getElementById("jetxJet").style.display="none"; document.getElementById("jetxWait").style.display="none"; document.getElementById("jetxCashBtn").style.display="none";
+ if(jxHasBet && !jxCashed){ document.getElementById("jetxStatus").innerHTML=`<span class="error">💥 Explosion à ${jxCrash.toFixed(2)}x ! Perdu ${fmt(jxBet)} FC</span>`; addHist("jetxHistory",jxCrash,false); }else if(!jxCashed){ addHist("jetxHistory",jxCrash,false); }
+ jxHasBet=false; jxCashed=false; setTimeout(startJetxRound,3500);
 }
 async function cashJetx(){
- if(!jxHasBet||!jxRunning) return;
- clearInterval(jxInterval); jxRunning=false;
- const win=Math.floor(jxBet*jxMult);
- await addWin(win);
- document.getElementById("jetxStatus").innerHTML=`<span class="success">✅ ${fmt(win)} FC à ${jxMult.toFixed(2)}x</span>`;
- document.getElementById("jetxCashBtn").style.display="none";
- addHist("jetxHistory",jxMult,true); jxHasBet=false;
- setTimeout(()=>{ startJetxRound(); if(jxAutoBet) autoBetJetx(); },2000);
+ if(!jxHasBet||!jxRunning||jxCashed) return; jxCashed=true;
+ const win=Math.floor(jxBet*jxMult); await addWin(win);
+ document.getElementById("jetxStatus").innerHTML=`<span class="success">✅ ${fmt(win)} FC à ${jxMult.toFixed(2)}x - Attends explosion...</span>`;
+ document.getElementById("jetxCashBtn").style.display="none"; document.getElementById("jetxWait").style.display="block";
+ addHist("jetxHistory",jxMult,true);
 }
-async function autoBetJetx(){
- const bet=parseInt(document.getElementById("jetxBet").value)||500;
- try{ await deduct(bet); jxBet=bet; jxHasBet=true; }catch(e){ jxAutoBet=false; document.getElementById("jetxAutoBet").textContent="🤖 Mise Auto: OFF"; document.getElementById("jetxAutoBet").classList.remove("active"); }
-}
-document.getElementById("jetxBetBtn").addEventListener("click",async()=>{
- const bet=parseInt(document.getElementById("jetxBet").value)||500;
- try{ await deduct(bet); jxBet=bet; jxHasBet=true; document.getElementById("jetxBetBtn").disabled=true; document.getElementById("jetxBetBtn").textContent="✅ Pari placé"; if(jxRunning){ document.getElementById("jetxBetBtn").style.display="none"; document.getElementById("jetxCashBtn").style.display="block"; } }catch(e){ document.getElementById("jetxStatus").textContent="❌ "+e.message; }
-});
+async function autoBetJetx(){ const bet=parseInt(document.getElementById("jetxBet").value)||500; try{ await deduct(bet); jxBet=bet; jxHasBet=true; jxCashed=false; }catch(e){ jxAutoBet=false; document.getElementById("jetxAutoBet").textContent="🤖 Mise Auto: OFF"; document.getElementById("jetxAutoBet").classList.remove("active"); } }
+document.getElementById("jetxBetBtn").addEventListener("click",async()=>{ const bet=parseInt(document.getElementById("jetxBet").value)||500; try{ await deduct(bet); jxBet=bet; jxHasBet=true; jxCashed=false; document.getElementById("jetxBetBtn").disabled=true; document.getElementById("jetxBetBtn").innerHTML="✅ Pari placé"; if(jxRunning){ document.getElementById("jetxBetBtn").style.display="none"; document.getElementById("jetxCashBtn").style.display="block"; } }catch(e){ document.getElementById("jetxStatus").textContent="❌ "+e.message; } });
 document.getElementById("jetxCashBtn").addEventListener("click",cashJetx);
 document.getElementById("jetxAutoBet").addEventListener("click",function(){ jxAutoBet=!jxAutoBet; this.textContent="🤖 Mise Auto: "+(jxAutoBet?"ON":"OFF"); this.classList.toggle("active",jxAutoBet); });
 document.getElementById("jetxAutoCash").addEventListener("click",function(){ jxAutoCash=!jxAutoCash; this.textContent="💸 Cash Auto: "+(jxAutoCash?"ON":"OFF"); this.classList.toggle("active",jxAutoCash); });
 
 // PENALTY
-document.getElementById("penaltyBet").addEventListener("input",function(){
- const bet=parseInt(this.value)||0; document.getElementById("penaltyPotential").value=fmt(bet*2.8)+" FC";
-});
+document.getElementById("penaltyBet").addEventListener("input",function(){ const bet=parseInt(this.value)||0; document.getElementById("penaltyPotential").value=fmt(Math.floor(bet*2.8))+" FC"; });
 document.querySelectorAll(".shoot-btn").forEach(btn=>{
  btn.addEventListener("click",async()=>{
-  const dir=btn.dataset.dir;
-  const bet=parseInt(document.getElementById("penaltyBet").value)||500;
-  if(bet<100){ document.getElementById("penaltyStatus").textContent="❌ Minimum 100 FC"; return; }
+  const dir=btn.dataset.dir; const bet=parseInt(document.getElementById("penaltyBet").value)||500;
   if(bet>currentBalance){ document.getElementById("penaltyStatus").textContent="❌ Solde insuffisant"; return; }
   try{ await deduct(bet); }catch(e){ document.getElementById("penaltyStatus").textContent="❌ "+e.message; return; }
-
   const keeperDir=["left","center","right"][Math.floor(Math.random()*3)];
-  const keeperEl=document.getElementById("keeper");
-  const ballEl=document.getElementById("ball");
-  // move keeper
-  if(keeperDir==="left") keeperEl.style.left="25%";
-  if(keeperDir==="center") keeperEl.style.left="50%";
-  if(keeperDir==="right") keeperEl.style.left="75%";
-
-  document.getElementById("penaltyStatus").textContent="⚽ Tir en cours...";
-  // move ball
-  setTimeout(()=>{
-   if(dir==="left"){ ballEl.style.left="30%"; ballEl.style.bottom="65%"; }
-   if(dir==="center"){ ballEl.style.left="50%"; ballEl.style.bottom="68%"; }
-   if(dir==="right"){ ballEl.style.left="70%"; ballEl.style.bottom="65%"; }
-  },200);
-
+  const keeperEl=document.getElementById("keeper"); const ballEl=document.getElementById("ball");
+  if(keeperDir==="left") keeperEl.style.left="25%"; if(keeperDir==="center") keeperEl.style.left="50%"; if(keeperDir==="right") keeperEl.style.left="75%";
+  document.getElementById("penaltyStatus").textContent="⚽ Tir...";
+  setTimeout(()=>{ if(dir==="left") ballEl.style.left="30%",ballEl.style.bottom="65%"; if(dir==="center") ballEl.style.left="50%",ballEl.style.bottom="68%"; if(dir==="right") ballEl.style.left="70%",ballEl.style.bottom="65%"; },200);
   setTimeout(async()=>{
-   if(dir===keeperDir){
-    // gardien arrete
-    document.getElementById("penaltyStatus").innerHTML=`<span class="error">🧤 Arrêté par le gardien ! Perdu ${fmt(bet)} FC (gardien: ${keeperDir})</span>`;
-    addHist("penaltyHistory",0,false);
-   }else{
-    const win=Math.floor(bet*2.8);
-    await addWin(win);
-    document.getElementById("penaltyStatus").innerHTML=`<span class="success">⚽ BUT ! Gagné ${fmt(win)} FC x2.8 (gardien: ${keeperDir})</span>`;
-    addHist("penaltyHistory",2.8,true);
-   }
-   setTimeout(()=>{
-    ballEl.style.left="50%"; ballEl.style.bottom="20px"; keeperEl.style.left="50%";
-   },1200);
+   if(dir===keeperDir){ document.getElementById("penaltyStatus").innerHTML=`<span class="error">🧤 Arrêté ! Perdu ${fmt(bet)} FC (gardien ${keeperDir})</span>`; addHist("penaltyHistory",0,false); }
+   else{ const win=Math.floor(bet*2.8); await addWin(win); document.getElementById("penaltyStatus").innerHTML=`<span class="success">⚽ BUT ! +${fmt(win)} FC x2.8</span>`; addHist("penaltyHistory",2.8,true); }
+   setTimeout(()=>{ ballEl.style.left="50%"; ballEl.style.bottom="20px"; keeperEl.style.left="50%"; },1200);
   },800);
  });
 });
-
-startAviatorRound();
-startJetxRound();
+startAviatorRound(); startJetxRound();
 </script>
 </body>
 </html>
