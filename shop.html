@@ -1,320 +1,329 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<meta name="theme-color" content="#030812">
-<meta name="description" content="JASON Business — Boutique et services digitaux">
-<title>JASON Business — Boutique</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07111f">
+<title>JASON BUSINESS — Réseaux sociaux</title>
 
 <style>
-:root{
- --blue:#00d2ff;
- --blue2:#0077ff;
- --dark:#030812;
- --dark2:#07111f;
- --card:#091525;
- --card2:#0d192b;
- --border:rgba(0,210,255,.18);
- --green:#00e676;
- --red:#ff4757;
- --orange:#ff9800;
- --yellow:#ffd740;
- --purple:#9b59ff;
- --white:#fff;
- --muted:rgba(255,255,255,.58);
+:root {
+  --bg: #050b15;
+  --panel: #0b192b;
+  --panel2: #10243b;
+  --blue: #168cff;
+  --blue2: #43b6ff;
+  --gold: #d8aa45;
+  --text: #f4f7fb;
+  --muted: #9bacc2;
+  --border: rgba(80,155,255,.18);
 }
 
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-
-body{
- min-height:100vh;
- padding-bottom:85px;
- font-family:"Segoe UI",Arial,sans-serif;
- color:#fff;
- background:
- radial-gradient(circle at top right,rgba(0,119,255,.12),transparent 35%),
- radial-gradient(circle at bottom left,rgba(0,210,255,.07),transparent 30%),
- var(--dark);
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.header{
- padding:30px 18px 20px;
- text-align:center;
+body {
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top right, #10294b 0, transparent 35%),
+    var(--bg);
 }
 
-.logo{
- font-size:25px;
- font-weight:900;
- letter-spacing:3px;
- color:var(--blue);
- text-shadow:0 0 20px rgba(0,210,255,.2);
+button, input {
+  font: inherit;
 }
 
-.subtitle{
- margin-top:7px;
- color:var(--muted);
- font-size:11px;
- letter-spacing:1.5px;
+button {
+  cursor: pointer;
 }
 
-.balance{
- display:inline-flex;
- align-items:center;
- gap:7px;
- margin-top:20px;
- padding:11px 17px;
- border-radius:14px;
- background:rgba(0,230,118,.08);
- border:1px solid rgba(0,230,118,.18);
- font-size:13px;
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px;
+  background: rgba(5,11,21,.94);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(15px);
 }
 
-.balance strong,#balance{
- color:var(--green);
- font-weight:900;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.container{
- width:100%;
- max-width:1000px;
- margin:auto;
- padding:0 15px;
+.logo {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--blue), #0751a3);
+  box-shadow: 0 5px 20px rgba(22,140,255,.25);
+  font-weight: 900;
+  font-size: 19px;
 }
 
-.section-title{
- font-size:22px;
- margin-top:5px;
+.brand h1 {
+  font-size: 17px;
+  letter-spacing: .5px;
 }
 
-.section-description{
- margin-top:7px;
- color:var(--muted);
- font-size:12px;
- line-height:1.6;
+.brand p {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 4px;
 }
 
-.services{
- display:grid;
- grid-template-columns:repeat(3,minmax(0,1fr));
- gap:14px;
- margin-top:20px;
+.back-button {
+  border: 1px solid var(--border);
+  color: white;
+  background: var(--panel);
+  padding: 10px 13px;
+  border-radius: 11px;
 }
 
-.service-card{
- position:relative;
- overflow:hidden;
- padding:19px;
- min-height:210px;
- display:flex;
- flex-direction:column;
- border-radius:19px;
- background:linear-gradient(145deg,rgba(10,23,40,.98),rgba(5,13,25,.98));
- border:1px solid rgba(255,255,255,.07);
- transition:transform .2s,border-color .2s,box-shadow .2s;
- animation:cardIn .35s ease both;
+main {
+  width: min(1100px, 100%);
+  padding: 20px 15px 100px;
+  margin: auto;
 }
 
-.service-card::after{
- content:"";
- position:absolute;
- width:110px;
- height:110px;
- right:-45px;
- bottom:-45px;
- border-radius:50%;
- background:rgba(0,210,255,.05);
- pointer-events:none;
+.hero {
+  padding: 25px 20px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: linear-gradient(135deg, #102a48, #091525 75%);
+  margin-bottom: 25px;
+  position: relative;
+  overflow: hidden;
+  animation: appear .5s ease;
 }
 
-.service-card:hover{
- transform:translateY(-3px);
- border-color:rgba(0,210,255,.28);
- box-shadow:0 10px 35px rgba(0,0,0,.22);
+.hero::after {
+  content: "JB";
+  position: absolute;
+  right: -5px;
+  bottom: -32px;
+  font-size: 110px;
+  font-weight: 900;
+  color: rgba(255,255,255,.035);
 }
 
-@keyframes cardIn{
- from{opacity:0;transform:translateY(10px)}
- to{opacity:1;transform:translateY(0)}
+.tag {
+  display: inline-block;
+  color: var(--gold);
+  border: 1px solid rgba(216,170,69,.3);
+  background: rgba(216,170,69,.08);
+  border-radius: 30px;
+  padding: 7px 11px;
+  font-size: 11px;
+  margin-bottom: 13px;
 }
 
-.service-icon{
- width:50px;
- height:50px;
- display:flex;
- align-items:center;
- justify-content:center;
- border-radius:15px;
- background:rgba(0,210,255,.09);
- border:1px solid var(--border);
- font-size:25px;
+.hero h2 {
+  font-size: clamp(23px, 5vw, 34px);
+  line-height: 1.2;
+  margin-bottom: 10px;
 }
 
-.service-name{
- margin-top:14px;
- font-size:16px;
- font-weight:900;
+.hero h2 span {
+  color: var(--blue2);
 }
 
-.service-description{
- margin-top:7px;
- color:var(--muted);
- font-size:11px;
- line-height:1.55;
- flex:1;
+.hero p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 540px;
 }
 
-.service-bottom{
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:8px;
- margin-top:15px;
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 27px 0 15px;
 }
 
-.service-price{
- color:var(--green);
- font-size:14px;
- font-weight:900;
+.section-heading h2 {
+  font-size: 20px;
 }
 
-.order-btn{
- border:0;
- padding:10px 16px;
- border-radius:10px;
- background:linear-gradient(135deg,var(--blue),var(--blue2));
- color:#001018;
- font-weight:900;
- font-size:12px;
- cursor:pointer;
- position:relative;
- z-index:1;
- transition:transform .2s,filter .2s;
+.counter {
+  color: var(--muted);
+  font-size: 12px;
 }
 
-.order-btn:hover{filter:brightness(1.12)}
-.order-btn:active{transform:scale(.96)}
-
-.info-box{
- margin-top:22px;
- padding:16px;
- border-radius:15px;
- background:rgba(0,210,255,.045);
- border:1px solid var(--border);
- color:var(--muted);
- font-size:11px;
- line-height:1.9;
+.search-box {
+  margin-bottom: 18px;
 }
 
-.loading{
- grid-column:1/-1;
- padding:45px 20px;
- text-align:center;
- color:var(--muted);
+.search-box input {
+  width: 100%;
+  color: white;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 14px 15px;
+  outline: none;
 }
 
-.boost-section{margin-top:30px}
-
-.boost-logo{
- width:48px;
- height:48px;
- padding:10px;
- object-fit:contain;
- border-radius:15px;
- background:rgba(255,255,255,.06);
- border:1px solid rgba(255,255,255,.10);
+.search-box input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(22,140,255,.1);
 }
 
-.boost-card{
- border-top:2px solid var(--platform-color,var(--blue));
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
 }
 
-.boost-card .order-btn{
- background:var(--platform-color,var(--blue));
- color:#030812;
+.service-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 17px 14px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: linear-gradient(145deg, var(--panel2), var(--panel));
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+  animation: appear .4s ease both;
 }
 
-.boost-price-label{
- color:var(--green);
- font-size:11px;
- font-weight:800;
+.service-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(22,140,255,.65);
+  box-shadow: 0 10px 25px rgba(0,0,0,.2);
 }
 
-.bottom-nav{
- position:fixed;
- left:0;
- right:0;
- bottom:0;
- z-index:300;
- height:68px;
- display:flex;
- align-items:center;
- justify-content:space-around;
- background:rgba(3,8,18,.96);
- border-top:1px solid var(--border);
- backdrop-filter:blur(20px);
+.service-icon {
+  width: 51px;
+  height: 51px;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  border-radius: 15px;
+  background: rgba(22,140,255,.12);
+  border: 1px solid rgba(22,140,255,.17);
+  margin-bottom: 14px;
 }
 
-.nav-link{
- min-width:70px;
- padding:7px;
- display:flex;
- flex-direction:column;
- align-items:center;
- gap:4px;
- color:rgba(255,255,255,.5);
- text-decoration:none;
- font-size:9px;
- font-weight:700;
+.service-card h3 {
+  font-size: 16px;
+  margin-bottom: 7px;
 }
 
-.nav-link span{font-size:19px}
-.nav-link.active{color:var(--blue)}
-
-#toastContainer{
- position:fixed;
- top:15px;
- left:15px;
- right:15px;
- z-index:1000;
- display:flex;
- flex-direction:column;
- gap:8px;
- pointer-events:none;
+.service-card p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+  min-height: 36px;
+  margin-bottom: 15px;
 }
 
-.toast{
- width:100%;
- max-width:430px;
- margin-left:auto;
- padding:13px 15px;
- border-radius:12px;
- background:#0b1728;
- border:1px solid var(--border);
- box-shadow:0 10px 30px rgba(0,0,0,.35);
- font-size:12px;
- animation:toastIn .2s ease;
+.create-button {
+  width: 100%;
+  margin-top: auto;
+  padding: 11px;
+  color: white;
+  border: none;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #168cff, #0861c5);
+  font-weight: 700;
+  transition: transform .2s, filter .2s;
 }
 
-.toast.success{border-color:rgba(0,230,118,.3)}
-.toast.error{border-color:rgba(255,71,87,.3)}
-
-@keyframes toastIn{
- from{opacity:0;transform:translateY(-8px)}
- to{opacity:1;transform:translateY(0)}
+.create-button:active {
+  transform: scale(.97);
 }
 
-@media(max-width:850px){
- .services{grid-template-columns:repeat(2,minmax(0,1fr))}
+.create-button:hover {
+  filter: brightness(1.12);
 }
 
-@media(max-width:550px){
- .header{padding-top:25px}
- .logo{font-size:21px}
- .services{grid-template-columns:1fr;gap:11px}
- .service-card{min-height:190px}
- .container{padding:0 12px}
+.empty {
+  display: none;
+  text-align: center;
+  padding: 30px 10px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.footer {
+  text-align: center;
+  padding: 24px 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.footer strong {
+  color: var(--gold);
+}
+
+.bottom-bar {
+  position: fixed;
+  z-index: 20;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 15px calc(12px + env(safe-area-inset-bottom));
+  background: rgba(5,11,21,.96);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  backdrop-filter: blur(12px);
+}
+
+.bottom-bar button {
+  width: min(450px, 100%);
+  border: 1px solid rgba(216,170,69,.3);
+  background: rgba(216,170,69,.08);
+  color: var(--gold);
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (min-width: 650px) {
+  main { padding-top: 28px; }
+  .services-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px;
+  }
+  .service-card { padding: 20px; }
+}
+
+@media (min-width: 900px) {
+  .services-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 350px) {
+  .brand h1 { font-size: 14px; }
+  .brand p { font-size: 10px; }
+  .back-button { padding: 9px; font-size: 12px; }
+  .service-card { padding: 12px 10px; }
 }
 </style>
 </head>
@@ -322,638 +331,183 @@ body{
 <body>
 
 <header class="header">
- <div class="logo">JASON BUSINESS</div>
- <div class="subtitle">WEB • DESIGN • DIGITAL • IA</div>
+  <div class="brand">
+    <div class="logo">JB</div>
+    <div>
+      <h1>JASON BUSINESS</h1>
+      <p>Réseaux sociaux · Créé par Jason Aloma 🇨🇩</p>
+    </div>
+  </div>
 
- <div class="balance">
-  💰 Solde :
-  <span id="balance">0</span>
-  FC
- </div>
+  <button class="back-button" onclick="retourAccueil()">
+    ← Retour
+  </button>
 </header>
 
-<main class="container">
+<main>
+  <section class="hero">
+    <span class="tag">🚀 ESPACE RÉSEAUX SOCIAUX</span>
+    <h2>Développe ta <span>visibilité</span></h2>
+    <p>
+      Choisis ton réseau social, puis appuie sur Créer pour
+      accéder à l'espace correspondant sur JASON BUSINESS.
+    </p>
+  </section>
 
- <section>
-  <h2 class="section-title">🚀 Boostage réseaux sociaux</h2>
-
-  <p class="section-description">
-   Choisissez une plateforme pour accéder à son espace dédié.
-  </p>
-
-  <div class="services" id="boostContainer">
-   <div class="loading">⏳ Chargement des plateformes...</div>
+  <div class="section-heading">
+    <h2>🌐 Réseaux sociaux</h2>
+    <span class="counter" id="counter">10 réseaux</span>
   </div>
- </section>
 
- <section class="boost-section">
-  <h2 class="section-title">🛍️ Nos autres services</h2>
-
-  <p class="section-description">
-   Sélectionnez un service pour ouvrir sa page et commencer à créer votre projet.
-  </p>
-
-  <div class="services" id="servicesContainer">
-   <div class="loading">⏳ Chargement des services...</div>
+  <div class="search-box">
+    <input
+      id="searchInput"
+      type="search"
+      placeholder="🔎 Rechercher un réseau social..."
+      autocomplete="off"
+      aria-label="Rechercher un réseau social"
+    >
   </div>
- </section>
 
- <div class="info-box">
-  ✨ Les boutons « Créer » ouvrent les pages dédiées aux différents services.
-  <br>
-  🔐 Connectez-vous à votre compte JASON Business pour accéder aux fonctions liées à votre compte.
-  <br>
-  📁 Les pages API, site web, CV et autres seront créées séparément.
-  <br>
-  ⚠️ Cette boutique ne crée pas de commande et ne débite pas votre solde lorsque vous cliquez sur « Créer ».
- </div>
+  <section class="services-grid" id="servicesGrid">
 
+    <article class="service-card" data-name="tiktok">
+      <div class="service-icon">🎵</div>
+      <h3>TikTok</h3>
+      <p>Vues, likes et visibilité de ton profil.</p>
+      <button class="create-button" onclick="ouvrirReseau('TikTok')">Créer</button>
+    </article>
+
+    <article class="service-card" data-name="youtube">
+      <div class="service-icon">▶️</div>
+      <h3>YouTube</h3>
+      <p>Visibilité pour tes vidéos et ta chaîne.</p>
+      <button class="create-button" onclick="ouvrirReseau('YouTube')">Créer</button>
+    </article>
+
+    <article class="service-card" data-name="instagram">
+      <div class="service-icon">📸</div>
+      <h3>Instagram</h3>
+      <p>Visibilité de ton profil et de tes publications.</p>
+      <button class="create-button" onclick="ouvrirReseau('Instagram')">Créer</button>
+    </article>
+
+    <article class="service-card" data-name="telegram">
+      <div class="service-icon">✈️</div>
+      <h3>Telegram</h3>
+      <p>Développe ta chaîne ou ta communauté.</p>
+      <button class="create-button" onclick="ouvrirReseau('Telegram')">Créer</button>
+    </article>
+
+    <article class="service-card" data-name="spotify">
+      <div class="service-icon">🎧</div>
+      <h3>Spotify</h3>
+      <p>Musique et visibilité de tes créations.</p>
+      <button class="create-button" onclick="ouvrirReseau('Spotify')">Créer</button>
+    </article>
+
+    <article class="service-card" data-name="linkedin">
+      <div class="service-icon">💼</div>
+      <h3>LinkedIn</h3>
+      <p>Présence et visibilité professionnelle.</p>
+      <button class="create-button" onclick="ouvrirReseau('LinkedIn')">Créer</button>
+    </article>
+
+    <article class="service-card" data-name="twitch">
+      <div class="service-icon">🎮</div>
+      <h3>Twitch</h3>
+      <p>Visibilité de tes diffusions et de ta chaîne.</p>
+      <button class="create-button" onclick="ouvrirReseau('Twitch')">Créer</button>
+    </article>
+
+    <article class="service-card" data-name="snapchat">
+      <div class="service-icon">👻</div>
+      <h3>Snapchat</h3>
+      <p>Développe la visibilité de ton profil.</p>
+      <button class="create-button" onclick="ouvrirReseau('Snapchat')">Créer</button>
+    </article>
+
+    <article class="service-card" data-name="whatsapp">
+      <div class="service-icon">💬</div>
+      <h3>WhatsApp</h3>
+      <p>Visibilité de ton profil et de ta communauté.</p>
+      <button class="create-button" onclick="ouvrirReseau('WhatsApp')">Créer</button>
+    </article>
+
+    <article class="service-card" data-name="threads">
+      <div class="service-icon">🧵</div>
+      <h3>Threads</h3>
+      <p>Visibilité de tes publications et interactions.</p>
+      <button class="create-button" onclick="ouvrirReseau('Threads')">Créer</button>
+    </article>
+
+  </section>
+
+  <div class="empty" id="emptyMessage">
+    Aucun réseau social trouvé.<br>
+    Essaie un autre nom.
+  </div>
+
+  <footer class="footer">
+    <strong>JASON BUSINESS</strong><br>
+    Créé par Jason Aloma 🇨🇩<br>
+    Kinshasa · République démocratique du Congo
+  </footer>
 </main>
 
-<nav class="bottom-nav">
- <a href="dashboard.html" class="nav-link">
-  <span>📊</span>Dash
- </a>
+<div class="bottom-bar">
+  <button onclick="retourAccueil()">← Retour à l'accueil</button>
+</div>
 
- <a href="shop.html" class="nav-link active">
-  <span>🛒</span>Boutique
- </a>
+<script>
+"use strict";
 
- <a href="equipe.html" class="nav-link">
-  <span>👥</span>Équipe
- </a>
+/* Navigation vers la page du réseau choisi */
+function ouvrirReseau(plateforme) {
+  const url = "boostage.html?plateforme=" +
+    encodeURIComponent(plateforme);
 
- <a href="profil.html" class="nav-link">
-  <span>👤</span>Profil
- </a>
-</nav>
-
-<div id="toastContainer"></div>
-
-<script type="module">
-
-import {
- initializeApp
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-
-import {
- getDatabase,
- ref,
- onValue
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-
-/* ======================================================
-   CONFIGURATION FIREBASE
-====================================================== */
-
-const firebaseConfig = {
- apiKey: "AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
- authDomain: "starlink-investit.firebaseapp.com",
- databaseURL: "https://starlink-investit-default-rtdb.firebaseio.com",
- projectId: "starlink-investit",
- storageBucket: "starlink-investit.firebasestorage.app",
- messagingSenderId: "807081599583",
- appId: "1:807081599583:web:e00ec3959bc4acdae031ea"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-const ROOT = "jasonBusiness";
-const USERS_PATH = `${ROOT}/users`;
-
-
-/* ======================================================
-   ÉLÉMENTS
-====================================================== */
-
-const balanceElement = document.getElementById("balance");
-const servicesContainer = document.getElementById("servicesContainer");
-const boostContainer = document.getElementById("boostContainer");
-
-
-/* ======================================================
-   UTILISATEUR CONNECTÉ
-====================================================== */
-
-let currentUserPhone = "";
-let currentUserData = {};
-let userListenerStarted = false;
-
-
-function showToast(message,type="success"){
- const container = document.getElementById("toastContainer");
- const toast = document.createElement("div");
-
- toast.className = `toast ${type}`;
- toast.textContent = message;
-
- container.appendChild(toast);
-
- setTimeout(() => {
-  toast.remove();
- },3500);
+  window.location.href = url;
 }
 
-
-function detectUserPhone(){
-
- const keys = [
-  "jasonBusinessPhone",
-  "jasonBusinessUser",
-  "userPhone",
-  "telephone",
-  "phone",
-  "numero",
-  "currentUserPhone",
-  "loggedUser",
-  "jasonUser"
- ];
-
- for(const key of keys){
-
-  const value = localStorage.getItem(key);
-
-  if(!value || value === "null" || value === "undefined"){
-   continue;
-  }
-
-  try{
-   const parsed = JSON.parse(value);
-
-   if(parsed && typeof parsed === "object"){
-
-    const phone =
-     parsed.telephone ??
-     parsed.phone ??
-     parsed.numero ??
-     parsed.userPhone;
-
-    if(phone){
-     return String(phone).trim();
-    }
-   }
-  }catch(error){}
-
-  return value.trim();
- }
-
- return "";
+/* Retour au tableau de bord */
+function retourAccueil() {
+  window.location.href = "dashboard.html";
 }
 
-
-function money(value){
- return Math.floor(Number(value)||0).toLocaleString("fr-FR");
-}
-
-
-function loadCurrentUser(){
-
- currentUserPhone = detectUserPhone();
-
- if(!currentUserPhone){
-  currentUserData = {};
-  balanceElement.textContent = "0";
-
-  showToast(
-   "Connectez-vous à votre compte pour afficher votre solde.",
-   "error"
-  );
-
-  return;
- }
-
- if(userListenerStarted) return;
-
- userListenerStarted = true;
-
- onValue(
-  ref(db,`${USERS_PATH}/${currentUserPhone}`),
-
-  snapshot => {
-
-   if(!snapshot.exists()){
-
-    currentUserData = {};
-    balanceElement.textContent = "0";
-
-    showToast(
-     "Compte utilisateur introuvable. Vérifiez votre session.",
-     "error"
-    );
-
-    return;
-   }
-
-   currentUserData = snapshot.val() || {};
-
-   updateBalance();
-  },
-
-  error => {
-
-   console.error("FIREBASE USER ERROR:",error);
-
-   showToast(
-    "Impossible de charger votre compte Firebase.",
-    "error"
-   );
-  }
- );
-}
-
-
-function getBalance(){
-
- return Number(
-  currentUserData.solde_principal ??
-  currentUserData.solde ??
-  currentUserData.balance ??
-  0
- ) || 0;
-}
-
-
-function updateBalance(){
- balanceElement.textContent = money(getBalance());
-}
-
-
-/* ======================================================
-   SERVICES DE CRÉATION
-====================================================== */
-
-const SERVICES = [
-
- {
-  id:"application",
-  nom:"Application",
-  description:"Préparez votre projet d'application mobile ou web.",
-  icon:"📱",
-  prix:10000
- },
-
- {
-  id:"site-web",
-  nom:"Site web",
-  description:"Accédez à l'espace de création de votre site professionnel.",
-  icon:"🌐",
-  prix:15000
- },
-
- {
-  id:"chanson",
-  nom:"Chanson",
-  description:"Préparez une chanson personnalisée selon vos idées.",
-  icon:"🎵",
-  prix:5000
- },
-
- {
-  id:"logo",
-  nom:"Logo",
-  description:"Préparez votre logo pour une marque ou une entreprise.",
-  icon:"🎨",
-  prix:3000
- },
-
- {
-  id:"affiche",
-  nom:"Affiche",
-  description:"Préparez une affiche publicitaire ou événementielle.",
-  icon:"🖼️",
-  prix:3000
- },
-
- {
-  id:"video",
-  nom:"Vidéo",
-  description:"Préparez votre projet vidéo pour les réseaux sociaux.",
-  icon:"🎬",
-  prix:8000
- },
-
- {
-  id:"chatbot",
-  nom:"Chatbot",
-  description:"Configurez votre projet d'assistant intelligent.",
-  icon:"🤖",
-  prix:7000
- },
-
- {
-  id:"api",
-  nom:"API",
-  description:"Accédez à l'espace dédié à la création de votre API.",
-  icon:"🔌",
-  prix:10000
- },
-
- {
-  id:"cv",
-  nom:"CV",
-  description:"Préparez les informations de votre CV professionnel.",
-  icon:"📄",
-  prix:3000
- },
-
- {
-  id:"redaction",
-  nom:"Rédaction",
-  description:"Préparez un texte, une lettre ou un document professionnel.",
-  icon:"✍️",
-  prix:2000
- },
-
- {
-  id:"traduction",
-  nom:"Traduction",
-  description:"Accédez à l'espace dédié à la traduction de vos textes.",
-  icon:"🌍",
-  prix:2000
- },
-
- {
-  id:"correction",
-  nom:"Correction",
-  description:"Préparez le texte que vous souhaitez faire corriger.",
-  icon:"🛠️",
-  prix:5000
- }
-
-];
-
-
-/* ======================================================
-   PLATEFORMES DE RÉSEAUX SOCIAUX
-====================================================== */
-
-const BOOST_PLATFORMS = [
-
- {
-  id:"tiktok",
-  nom:"TikTok",
-  logo:"https://cdn.simpleicons.org/tiktok/ffffff",
-  couleur:"#ff0050"
- },
-
- {
-  id:"youtube",
-  nom:"YouTube",
-  logo:"https://cdn.simpleicons.org/youtube/ff0033",
-  couleur:"#ff0033"
- },
-
- {
-  id:"instagram",
-  nom:"Instagram",
-  logo:"https://cdn.simpleicons.org/instagram/e4405f",
-  couleur:"#e4405f"
- },
-
- {
-  id:"telegram",
-  nom:"Telegram",
-  logo:"https://cdn.simpleicons.org/telegram/26a5e4",
-  couleur:"#26a5e4"
- },
-
- {
-  id:"x",
-  nom:"X (Twitter)",
-  logo:"https://cdn.simpleicons.org/x/ffffff",
-  couleur:"#ffffff"
- },
-
- {
-  id:"spotify",
-  nom:"Spotify",
-  logo:"https://cdn.simpleicons.org/spotify/1ed760",
-  couleur:"#1ed760"
- },
-
- {
-  id:"facebook",
-  nom:"Facebook",
-  logo:"https://cdn.simpleicons.org/facebook/0866ff",
-  couleur:"#0866ff"
- },
-
- {
-  id:"threads",
-  nom:"Threads",
-  logo:"https://cdn.simpleicons.org/threads/ffffff",
-  couleur:"#ffffff"
- },
-
- {
-  id:"linkedin",
-  nom:"LinkedIn",
-  logo:"https://cdn.simpleicons.org/linkedin/0a66c2",
-  couleur:"#0a66c2"
- },
-
- {
-  id:"twitch",
-  nom:"Twitch",
-  logo:"https://cdn.simpleicons.org/twitch/9146ff",
-  couleur:"#9146ff"
- },
-
- {
-  id:"snapchat",
-  nom:"Snapchat",
-  logo:"https://cdn.simpleicons.org/snapchat/fffc00",
-  couleur:"#fffc00"
- },
-
- {
-  id:"whatsapp",
-  nom:"WhatsApp",
-  logo:"https://cdn.simpleicons.org/whatsapp/25d366",
-  couleur:"#25d366"
- }
-
-];
-
-
-/* ======================================================
-   PAGES DE CRÉATION
-====================================================== */
-
-const CREATION_PAGES = {
-
- application:"application.html",
- "site-web":"site-web.html",
- chanson:"chanson.html",
- logo:"logo.html",
- affiche:"affiche.html",
- video:"video.html",
- chatbot:"chatbot.html",
- api:"api.html",
- cv:"cv.html",
- redaction:"redaction.html",
- traduction:"traduction.html",
- correction:"correction.html"
-
-};
-
-
-function openCreationPage(serviceId){
-
- const page = CREATION_PAGES[serviceId];
-
- if(!page){
-
-  showToast(
-   "Cette page de création n'est pas encore configurée.",
-   "error"
-  );
-
-  return;
- }
-
- window.location.href = page;
-}
-
-
-function openBoostCreationPage(platformId){
-
- window.location.href =
-  "boostage.html?plateforme=" +
-  encodeURIComponent(platformId);
-}
-
-
-/* ======================================================
-   AFFICHAGE DES SERVICES
-====================================================== */
-
-function renderServices(){
-
- servicesContainer.innerHTML = "";
-
- SERVICES.forEach((service,index)=>{
-
-  const card = document.createElement("article");
-  card.className = "service-card";
-  card.style.animationDelay = `${index*35}ms`;
-
-  const icon = document.createElement("div");
-  icon.className = "service-icon";
-  icon.textContent = service.icon;
-
-  const name = document.createElement("div");
-  name.className = "service-name";
-  name.textContent = service.nom;
-
-  const description = document.createElement("div");
-  description.className = "service-description";
-  description.textContent = service.description;
-
-  const bottom = document.createElement("div");
-  bottom.className = "service-bottom";
-
-  const price = document.createElement("div");
-  price.className = "service-price";
-  price.textContent = money(service.prix)+" FC";
-
-  const button = document.createElement("button");
-  button.className = "order-btn";
-  button.type = "button";
-  button.textContent = "Créer";
-
-  button.addEventListener("click",()=>{
-   openCreationPage(service.id);
+/* Recherche parmi les réseaux sociaux */
+const searchInput = document.getElementById("searchInput");
+const cards = Array.from(
+  document.querySelectorAll(".service-card")
+);
+const counter = document.getElementById("counter");
+const emptyMessage = document.getElementById("emptyMessage");
+
+searchInput.addEventListener("input", function () {
+  const recherche = this.value
+    .trim()
+    .toLocaleLowerCase("fr");
+
+  let visibles = 0;
+
+  cards.forEach(function (card) {
+    const nom = card.dataset.name || "";
+    const texte = card.textContent.toLocaleLowerCase("fr");
+    const correspond = nom.includes(recherche) ||
+      texte.includes(recherche);
+
+    card.style.display = correspond ? "flex" : "none";
+
+    if (correspond) visibles++;
   });
 
-  bottom.append(price,button);
-  card.append(icon,name,description,bottom);
+  counter.textContent = visibles +
+    (visibles > 1 ? " réseaux" : " réseau");
 
-  servicesContainer.appendChild(card);
-
- });
-}
-
-
-/* ======================================================
-   AFFICHAGE DES PLATEFORMES
-====================================================== */
-
-function renderBoostPlatforms(){
-
- boostContainer.innerHTML = "";
-
- BOOST_PLATFORMS.forEach((platform,index)=>{
-
-  const card = document.createElement("article");
-  card.className = "service-card boost-card";
-  card.style.setProperty("--platform-color",platform.couleur);
-  card.style.animationDelay = `${index*30}ms`;
-
-  const logo = document.createElement("img");
-  logo.className = "boost-logo";
-  logo.src = platform.logo;
-  logo.alt = "Logo "+platform.nom;
-  logo.loading = "lazy";
-
-  logo.onerror = ()=>{
-
-   const fallback = document.createElement("div");
-
-   fallback.className = "service-icon";
-   fallback.textContent = platform.nom.slice(0,2).toUpperCase();
-
-   logo.replaceWith(fallback);
-  };
-
-  const name = document.createElement("div");
-  name.className = "service-name";
-  name.textContent = platform.nom;
-
-  const description = document.createElement("div");
-  description.className = "service-description";
-  description.textContent =
-   "Ouvrez l'espace dédié à cette plateforme.";
-
-  const bottom = document.createElement("div");
-  bottom.className = "service-bottom";
-
-  const label = document.createElement("div");
-  label.className = "boost-price-label";
-  label.textContent = "Espace de création";
-
-  const button = document.createElement("button");
-  button.className = "order-btn";
-  button.type = "button";
-  button.textContent = "Créer";
-
-  button.addEventListener("click",()=>{
-   openBoostCreationPage(platform.id);
-  });
-
-  bottom.append(label,button);
-  card.append(logo,name,description,bottom);
-
-  boostContainer.appendChild(card);
-
- });
-}
-
-
-/* ======================================================
-   DÉMARRAGE
-====================================================== */
-
-renderServices();
-renderBoostPlatforms();
-loadCurrentUser();
-
-window.addEventListener("error",event=>{
- console.error("JASON BUSINESS SHOP:",event.error);
+  emptyMessage.style.display =
+    visibles === 0 ? "block" : "none";
 });
-
 </script>
+
 </body>
 </html>
