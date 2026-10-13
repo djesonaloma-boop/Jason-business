@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#050a14">
+<title>JASON BUSINESS - Support IA</title>
+<style>
+:root{--blue:#00d2ff;--dark:#050a14;--gold:#ffd700;--green:#00e676;--red:#ff4757}
+*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--dark) url('IMG_0870.jpeg') no-repeat center center fixed;background-size:cover;color:white;padding-bottom:95px}
+.overlay{min-height:100vh;background:rgba(5,10,20,.93);padding:20px}.container{width:100%;max-width:650px;margin:auto}
+.top-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.brand{color:var(--blue);font-size:15px;font-weight:900;letter-spacing:2px}.online{font-size:10px;color:var(--green);padding:6px 10px;border-radius:20px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.25)}
+.card{padding:20px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);margin-top:16px}
+#chatbotBtn{position:fixed;bottom:85px;right:16px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--blue),#0090ff);border:0;color:#001018;font-size:28px;box-shadow:0 8px 25px rgba(0,210,255,.45);z-index:2000;cursor:pointer}
+#chatbotBox{position:fixed;bottom:150px;right:16px;left:16px;max-width:400px;margin-left:auto;background:#0b1220;border:1px solid rgba(255,255,255,.12);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.6);z-index:2000;display:none;flex-direction:column;overflow:hidden;max-height:75vh}
+#chatbotBox.show{display:flex}
+.chat-head{padding:14px 16px;background:rgba(0,210,255,.08);border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center}
+.chat-messages{padding:12px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:8px;max-height:380px}
+.msg{padding:10px 12px;border-radius:14px;font-size:12px;line-height:1.5;max-width:85%;word-break:break-word}
+.msg.bot{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);align-self:flex-start}
+.msg.user{background:var(--blue);color:#001018;align-self:flex-end;font-weight:600}
+.msg.quick{background:transparent;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.quick-btn{padding:7px 10px;border-radius:20px;border:1px solid rgba(0,210,255,.3);background:rgba(0,210,255,.08);color:var(--blue);font-size:10px;font-weight:800;cursor:pointer}
+.chat-input-area{display:flex;gap:8px;padding:10px;border-top:1px solid rgba(255,255,255,.08);background:#070d18}
+.chat-input-area input{flex:1;padding:11px 12px;border-radius:11px;border:1px solid rgba(255,255,255,.12);background:#0b1220;color:white;outline:none;font-size:12px}
+.chat-send{width:42px;height:42px;border-radius:11px;border:0;background:var(--blue);color:#001018;font-weight:900;cursor:pointer}
+.typing{opacity:.6;font-size:11px;font-style:italic}
+.navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:12px 0;background:rgba(5,10,20,.98);border-top:1px solid rgba(0,210,255,.28)}
+.nav-link{min-width:60px;text-align:center;text-decoration:none;color:white;opacity:.4;font-size:10px}.nav-link.active{color:var(--blue);opacity:1;font-weight:bold}.nav-icon{font-size:19px;margin-bottom:3px}
+</style>
+</head>
+<body>
+<div class="overlay"><div class="container">
+<div class="top-header"><div class="brand">JASON BUSINESS</div><div class="online">● IA + HUMAIN 24H/24</div></div>
+<div class="card">
+<h3 style="margin:0 0 8px">🤖 Support Intelligent</h3>
+<p style="font-size:11px;opacity:.7;line-height:1.6">Je suis connecté à ton API Davbot. Je connais ton dashboard, dépôts, retraits, points. Clique sur le bouton bleu.</p>
+<a href="https://wa.me/243847500590?text=Bonjour%20JASON%20BUSINESS" target="_blank" style="display:block;text-align:center;margin-top:12px;padding:12px;background:rgba(0,230,118,.12);border:1px solid rgba(0,230,118,.3);border-radius:12px;color:white;text-decoration:none;font-weight:800">💬 WhatsApp: 243847500590</a>
+</div>
+</div></div>
+
+<button id="chatbotBtn" onclick="toggleBot()">💬</button>
+
+<div id="chatbotBox">
+<div class="chat-head"><div><b>🤖 Assistant JASON IA</b><br><small style="opacity:.6">Propulsé par davbot-outils.vercel.app</small></div><button onclick="toggleBot()" style="width:30px;height:30px;border-radius:8px;border:0;background:rgba(255,255,255,.08);color:white">✕</button></div>
+<div id="chatMessages" class="chat-messages">
+<div class="msg bot">Salut 👋 Je suis l'IA de JASON BUSINESS.<br><br>Pose-moi n'importe quelle question sur :<br>💰 solde / dashboard<br>💳 dépôt<br>💸 retrait<br>⭐ points / équipe<br>🛒 commandes<br><br>Je réponds en direct via ton API.</div>
+<div class="msg quick"><button class="quick-btn" onclick="askIA('Mon solde dashboard')">💰 Solde</button><button class="quick-btn" onclick="askIA('Comment faire un dépôt')">💳 Dépôt</button><button class="quick-btn" onclick="askIA('Mon retrait est bloqué')">💸 Retrait</button></div>
+</div>
+<div class="chat-input-area"><input id="chatInput" placeholder="Pose ta question..." onkeydown="if(event.key==='Enter') sendChat()"><button class="chat-send" onclick="sendChat()">➤</button></div>
+</div>
+
+<nav class="navbar">
+<a href="dashboard.html" class="nav-link"><div class="nav-icon">📊</div>Dash</a>
+<a href="shop.html" class="nav-link"><div class="nav-icon">🛒</div>Shop</a>
+<a href="equipe.html" class="nav-link"><div class="nav-icon">👥</div>Équipe</a>
+<a href="support.html" class="nav-link active"><div class="nav-icon">💬</div>Support</a>
+</nav>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+const WHATSAPP = "243847500590";
+const API_URL = "https://davbot-outils.vercel.app/api/intelligence-artificielle/ask";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
+  authDomain: "starlink-investit.firebaseapp.com",
+  databaseURL: "https://starlink-investit-default-rtdb.firebaseio.com",
+  projectId: "starlink-investit",
+  storageBucket: "starlink-investit.firebasestorage.app",
+  messagingSenderId: "807081599583",
+  appId: "1:807081599583:web:e00ec3959bc4acdae031ea"
+};
+const fbApp = initializeApp(firebaseConfig);
+const db = getDatabase(fbApp);
+const phone = localStorage.getItem("userPhone") || localStorage.getItem("jasonPhone") || "";
+
+let userBalance = null;
+if(phone){
+  get(ref(db, `jasonBusiness/users/${phone}`)).then(s=>{
+    if(s.exists()){
+      const d=s.val();
+      userBalance = Number(d.solde_principal||d.solde||0);
+    }
+  });
+}
+
+window.toggleBot = ()=> document.getElementById("chatbotBox").classList.toggle("show");
+
+const chatEl = document.getElementById("chatMessages");
+function addMsg(html, who="bot"){
+  const d=document.createElement("div"); d.className=`msg ${who}`; d.innerHTML=html;
+  chatEl.appendChild(d); chatEl.scrollTop = chatEl.scrollHeight; return d;
+}
+function addTyping(){
+  const d=document.createElement("div"); d.className="msg bot typing"; d.id="typing"; d.innerText="🤖 L'IA réfléchit...";
+  chatEl.appendChild(d); chatEl.scrollTop = chatEl.scrollHeight;
+}
+function removeTyping(){ document.getElementById("typing")?.remove(); }
+
+async function callDavbotAPI(question){
+  // Contexte JASON BUSINESS pour ton IA
+  const context = `Tu es l'assistant officiel de JASON BUSINESS. 
+  Service: plateforme e-commerce Congo avec dashboard, dépôt Mobile Money, retrait 5000 FC minimum 2-24h, commandes, parrainage 5 points par filleul, 100 points = 1000 FC, solde principal dans jasonBusiness/users. 
+  Numéro support WhatsApp: ${WHATSAPP}. 
+  Utilisateur actuel: ${phone||'visiteur'} solde ${userBalance||0} FC.
+  Réponds en français, court, utile, avec actions concrètes.
+  Question utilisateur: ${question}`;
+
+  try{
+    // Essai POST
+    let res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type":"application/json" },
+      body: JSON.stringify({ question: question, prompt: context, message: context, q: question })
+    });
+    if(!res.ok){
+      // Essai GET fallback
+      res = await fetch(`${API_URL}?q=${encodeURIComponent(context)}`);
+    }
+    const data = await res.json();
+    // Ton API peut renvoyer {answer} ou {response} ou {result} ou texte direct
+    return data.answer || data.response || data.result || data.message || data.text || JSON.stringify(data);
+  }catch(e){
+    console.error("API Error", e);
+    return null;
+  }
+}
+
+window.askIA = (q)=>{ 
+  document.getElementById("chatbotBox").classList.add("show");
+  botChat(q);
+}
+window.sendChat = ()=>{
+  const input = document.getElementById("chatInput");
+  const q = input.value.trim();
+  if(!q) return;
+  input.value="";
+  botChat(q);
+}
+
+async function botChat(question){
+  addMsg(question, "user");
+  addTyping();
+
+  let iaAnswer = await callDavbotAPI(question);
+
+  removeTyping();
+
+  if(!iaAnswer){
+    // Fallback local si API down
+    iaAnswer = `⚠️ Mon API est momentanément indisponible.<br><br>Pour <b>${question}</b> :<br>• Vérifie ton Dashboard<br>• Si dépôt/retrait bloqué, envoie capture sur WhatsApp<br><br><a href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Bonjour, problème: '+question+' - Mon numéro: '+phone)}" target="_blank" style="color:#00d2ff;font-weight:900">👉 Contacter agent WhatsApp +${WHATSAPP}</a>`;
+  } else {
+    // Ajoute bouton WhatsApp si IA détecte blocage
+    if(String(iaAnswer).toLowerCase().includes("whatsapp") || question.toLowerCase().includes("bloqué") || question.toLowerCase().includes("attente")){
+      iaAnswer += `<br><br><a href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Bonjour JASON BUSINESS, '+question+' Mon num: '+phone)}" target="_blank" style="display:inline-block;margin-top:8px;padding:8px 12px;background:rgba(0,230,118,.12);border:1px solid rgba(0,230,118,.3);border-radius:20px;color:#00e676;text-decoration:none;font-weight:800">💬 Parler à un humain sur WhatsApp</a>`;
+    }
+  }
+
+  addMsg(iaAnswer, "bot");
+}
+
+// Auto ouvre si ?q=
+const urlQ = new URLSearchParams(window.location.search).get("q");
+if(urlQ) setTimeout(()=>botChat(urlQ), 800);
+</script>
+</body>
+</html>
