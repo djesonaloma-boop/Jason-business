@@ -4,453 +4,213 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#07101f">
-<meta name="description" content="JASON BUSINESS — Services numériques, intelligence artificielle, sites web et API.">
-<title>JASON BUSINESS — Services Pro</title>
+<meta name="theme-color" content="#060b16">
+<title>JASON BUSINESS — Services</title>
 
 <style>
 :root{
-  --bg:#050a14;
-  --panel:#0b1526;
-  --card:#101e33;
-  --blue:#168cff;
-  --cyan:#28c8ff;
-  --gold:#e6bd67;
-  --green:#29d99a;
-  --red:#ff6676;
-  --text:#f4f7ff;
-  --muted:#91a1b9;
-  --border:rgba(164,190,230,.13);
-  --radius:20px;
+ --bg:#060b16;--panel:#0d1729;--card:#111f35;
+ --blue:#168cff;--cyan:#24d1ff;--gold:#e6bd67;
+ --green:#28d99a;--red:#ff6478;--muted:#94a5bd;
+ --border:rgba(255,255,255,.09);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:Inter,"Segoe UI",Arial,sans-serif;
-  background:
-    radial-gradient(ellipse at 50% -15%,#14335c 0,transparent 45%),
-    var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  padding-bottom:100px;
-}
+body{font-family:Arial, sans-serif;background:var(--bg);color:#fff;padding-bottom:90px}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
-button:focus-visible,a:focus-visible,input:focus-visible,
-textarea:focus-visible,select:focus-visible{
-  outline:2px solid var(--cyan);outline-offset:3px
-}
-.topbar{
-  position:sticky;top:0;z-index:50;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 18px;
-  background:rgba(5,10,20,.92);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--border)
-}
+button:disabled{opacity:.55;cursor:not-allowed}
+.topbar{position:sticky;top:0;z-index:50;background:#060b16ed;backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:13px 16px;display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:11px}
-.logo{
-  display:grid;place-items:center;width:43px;height:43px;
-  border-radius:14px;font-weight:1000;font-size:16px;
-  color:#07101f;background:linear-gradient(135deg,var(--gold),#fff0bd);
-  box-shadow:0 5px 22px #e6bd6725
-}
-.brand-name{font-size:12px;font-weight:900;letter-spacing:1px}
-.brand-sub{font-size:10px;color:var(--muted);margin-top:4px}
-.top-actions{display:flex;gap:8px}
-.icon-btn{
-  width:39px;height:39px;border-radius:12px;
-  border:1px solid var(--border);background:var(--panel);
-  color:white;font-size:17px
-}
-.container{max-width:1100px;margin:auto;padding:0 16px}
-.hero{
-  position:relative;overflow:hidden;
-  margin:22px 0;padding:26px 20px;
-  border:1px solid #e6bd6734;border-radius:26px;
-  background:linear-gradient(135deg,#132d4b,#0a1425 65%,#191b28);
-  text-align:center
-}
-.hero:before{
-  content:"";position:absolute;width:180px;height:180px;
-  right:-80px;top:-90px;border-radius:50%;
-  background:#238cff18;filter:blur(8px)
-}
-.eyebrow{
-  color:var(--gold);font-size:10px;letter-spacing:2px;
-  font-weight:900;text-transform:uppercase
-}
-.hero h1{font-size:clamp(24px,6vw,38px);margin:12px 0 8px;font-weight:1000}
+.logo{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold),#fff0b7);color:#101521;font-weight:1000}
+.brand b{font-size:12px;letter-spacing:1px}
+.brand small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+.iconbtn{width:38px;height:38px;border:1px solid var(--border);background:var(--panel);color:white;border-radius:12px}
+.container{max-width:1050px;margin:auto;padding:0 15px}
+.hero{margin:20px 0;padding:25px 17px;border-radius:24px;text-align:center;background:radial-gradient(circle at 50% 0,#16416c 0,transparent 60%),linear-gradient(140deg,#122440,#0a1120);border:1px solid #e6bd6733}
+.eyebrow{font-size:10px;color:var(--gold);letter-spacing:2px;font-weight:900}
+.hero h1{font-size:clamp(25px,6vw,37px);margin:12px 0}
 .hero h1 span{color:var(--gold)}
-.hero p{font-size:12px;color:#afbed2;line-height:1.8;max-width:480px;margin:auto}
-.balance{
-  display:inline-flex;align-items:center;gap:12px;
-  margin-top:20px;padding:12px 17px;border-radius:15px;
-  background:#07101f90;border:1px solid #29d99a35
-}
-.balance small{display:block;font-size:9px;color:var(--muted);text-align:left}
-.balance strong{display:block;color:var(--green);font-size:18px;margin-top:3px}
-.pill{
-  display:inline-block;padding:6px 10px;border-radius:30px;
-  background:#e6bd6714;border:1px solid #e6bd6730;
-  color:var(--gold);font-size:9px;font-weight:800
-}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0 24px}
-.stat{
-  padding:15px 7px;text-align:center;
-  background:linear-gradient(145deg,#101e33,#0b1526);
-  border:1px solid var(--border);border-radius:17px
-}
-.stat b{display:block;font-size:21px}
-.stat span{display:block;margin-top:5px;color:var(--muted);font-size:9px}
-.toolbar{display:flex;gap:9px;margin:18px 0}
-.search{
-  flex:1;min-width:0;display:flex;align-items:center;gap:10px;
-  padding:13px 14px;border:1px solid var(--border);
-  background:#0b1526;border-radius:14px
-}
-.search input{width:100%;min-width:0;background:transparent;border:0;color:white;outline:none;font-size:12px}
-.search input::placeholder{color:#74839a}
-.filter{
-  background:#0b1526;color:white;border:1px solid var(--border);
-  border-radius:14px;padding:0 12px;font-size:11px
-}
-.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:27px 0 14px}
-.section-head h2{font-size:14px}
+.hero p{font-size:11px;color:#b5c3d7;line-height:1.8;max-width:450px;margin:auto}
+.balance{display:inline-flex;align-items:center;gap:12px;margin-top:17px;padding:12px 17px;background:#050b16;border:1px solid #28d99a33;border-radius:15px}
+.balance small{display:block;color:var(--muted);font-size:9px;text-align:left}
+.balance strong{display:block;color:var(--green);font-size:17px;margin-top:4px}
+.search{display:flex;align-items:center;gap:10px;padding:13px;background:var(--panel);border:1px solid var(--border);border-radius:14px;margin:18px 0}
+.search input{flex:1;min-width:0;border:0;outline:none;background:transparent;color:white;font-size:12px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:25px 0 13px}
+.section-head h2{font-size:15px}
 .section-head p{font-size:10px;color:var(--muted);margin-top:5px}
-.section-head .pill{white-space:nowrap}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.service{
-  min-width:0;display:flex;flex-direction:column;
-  padding:15px;border-radius:19px;
-  background:linear-gradient(145deg,#12223a,#0b1526);
-  border:1px solid var(--border);
-  transition:transform .2s,border-color .2s,box-shadow .2s;
-  animation:appear .35s ease both
-}
-.service:hover{transform:translateY(-3px);border-color:#28c8ff50;box-shadow:0 10px 28px #0002}
-@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.service-top{display:flex;align-items:center;justify-content:space-between;gap:7px}
-.service-icon{
-  display:grid;place-items:center;width:43px;height:43px;
-  flex-shrink:0;border-radius:14px;font-size:21px;
-  background:#168cff14;border:1px solid #168cff2c
-}
-.price{
-  color:var(--gold);background:#e6bd6710;
-  border:1px solid #e6bd672a;border-radius:30px;
-  padding:6px 8px;font-size:9px;font-weight:900
-}
-.price.free{color:var(--green);background:#29d99a10;border-color:#29d99a30}
-.service h3{font-size:13px;margin-top:13px;line-height:1.5}
-.service p{font-size:10px;line-height:1.7;color:var(--muted);margin-top:6px;flex:1;overflow-wrap:anywhere}
-.service .endpoint{color:var(--cyan);font-size:9px;margin-top:7px;overflow-wrap:anywhere}
-.btn{
-  display:flex;align-items:center;justify-content:center;gap:7px;
-  width:100%;margin-top:13px;padding:12px 9px;
-  border:0;border-radius:12px;font-size:10px;font-weight:900;
-  transition:filter .2s,transform .2s
-}
-.btn:hover{filter:brightness(1.12)}
-.btn:active{transform:scale(.98)}
-.btn-primary{background:linear-gradient(110deg,#168cff,#28c8ff);color:#04101e}
-.btn-gold{background:linear-gradient(110deg,#d4a447,#f4d995);color:#171006}
-.btn-secondary{background:#192b46;color:#dceaff;border:1px solid var(--border)}
-.btn:disabled{opacity:.55;cursor:not-allowed}
-.empty{grid-column:1/-1;padding:30px 12px;text-align:center;color:var(--muted);font-size:12px}
-.bottom-nav{
-  position:fixed;bottom:0;left:0;right:0;z-index:80;
-  display:flex;justify-content:space-around;
-  padding:10px 4px calc(10px + env(safe-area-inset-bottom));
-  background:#070e1df5;backdrop-filter:blur(18px);
-  border-top:1px solid var(--border)
-}
-.nav-item{
-  display:flex;flex-direction:column;align-items:center;gap:5px;
-  padding:5px 7px;color:var(--muted);text-decoration:none;
-  background:none;border:0;font-size:9px;min-width:48px
-}
-.nav-item span{font-size:18px}
-.nav-item.active{color:var(--gold)}
-.modal{
-  display:none;position:fixed;inset:0;z-index:200;
-  background:#030812;overflow-y:auto;
-  padding-bottom:calc(24px + env(safe-area-inset-bottom))
-}
-.modal.show{display:block;animation:modalIn .2s ease}
-@keyframes modalIn{from{opacity:0}to{opacity:1}}
-.modal-header{
-  position:sticky;top:0;z-index:10;
-  display:flex;align-items:center;gap:12px;
-  padding:14px 16px;background:#07101ff5;
-  backdrop-filter:blur(16px);border-bottom:1px solid var(--border)
-}
-.back{
-  width:38px;height:38px;border-radius:12px;
-  background:#14223a;color:white;border:1px solid var(--border);font-size:22px
-}
-.modal-title{font-size:13px;font-weight:900}
-.modal-subtitle{font-size:10px;color:var(--muted);margin-top:4px}
-.modal-body{max-width:760px;margin:auto;padding:18px 16px}
-.summary{
-  padding:15px;border-radius:16px;background:#0c192b;
-  border:1px solid var(--border);margin-bottom:17px
-}
-.summary-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;font-size:11px}
-.summary-row span{color:var(--muted)}
-.form-group{margin-bottom:15px}
-.label{display:block;font-size:11px;color:#c7d3e5;margin-bottom:7px}
-.input,.select,.textarea{
-  display:block;width:100%;min-width:0;padding:13px;
-  border-radius:12px;background:#070f1d;color:white;
-  border:1px solid #25344b;font-size:12px;outline:none
-}
+.tag{font-size:9px;padding:7px 9px;border:1px solid #e6bd6735;border-radius:30px;color:var(--gold);white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.card{min-width:0;display:flex;flex-direction:column;padding:14px;background:linear-gradient(145deg,#12213a,#0b1425);border:1px solid var(--border);border-radius:18px;animation:appear .25s ease}
+@keyframes appear{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.card-icon{width:43px;height:43px;display:grid;place-items:center;border-radius:13px;background:#168cff16;border:1px solid #168cff2c;font-size:22px;flex-shrink:0}
+.card h3{font-size:13px;margin-top:12px;line-height:1.5}
+.card p{font-size:10px;line-height:1.7;color:var(--muted);margin-top:6px;flex:1}
+.price{font-size:9px;font-weight:900;color:var(--gold);padding:6px 8px;background:#e6bd6710;border:1px solid #e6bd672b;border-radius:30px;white-space:nowrap}
+.price.green{color:var(--green);border-color:#28d99a35}
+.btn{width:100%;padding:12px 8px;margin-top:13px;border:0;border-radius:11px;font-size:10px;font-weight:900}
+.primary{background:linear-gradient(110deg,#168cff,#24d1ff);color:#04101d}
+.gold{background:linear-gradient(110deg,#d1a346,#f3d991);color:#191205}
+.secondary{background:#1b2d48;color:white;border:1px solid var(--border)}
+.platform-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.platform{min-width:0;padding:13px 5px;text-align:center;border-radius:15px;background:var(--panel);border:1px solid var(--border);color:white}
+.platform.active{border-color:var(--gold);background:#e6bd6710}
+.platform img{width:30px;height:30px;object-fit:contain;margin-bottom:8px}
+.platform b{display:block;font-size:10px;overflow-wrap:anywhere}
+.platform small{display:block;color:var(--muted);font-size:9px;margin-top:5px}
+.modal{display:none;position:fixed;inset:0;z-index:150;background:#060b16;overflow-y:auto;padding-bottom:25px}
+.modal.show{display:block}
+.modalhead{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;padding:13px 15px;background:#07101ff5;border-bottom:1px solid var(--border);backdrop-filter:blur(15px)}
+.back{width:38px;height:38px;border-radius:12px;background:var(--card);border:1px solid var(--border);color:white;font-size:22px}
+.modalhead b{font-size:13px}
+.modalhead small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+.modalbody{max-width:720px;margin:auto;padding:17px 15px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;color:#c8d5e7;margin-bottom:7px}
+.input,.select,.textarea{display:block;width:100%;padding:13px;border-radius:11px;background:#080f1d;border:1px solid #293950;color:white;outline:none;font-size:12px}
+.textarea{min-height:100px;resize:vertical;line-height:1.6}
 .input:focus,.select:focus,.textarea:focus{border-color:var(--cyan)}
-.textarea{min-height:105px;resize:vertical;line-height:1.6}
-.input[type=file]{padding:10px;font-size:10px}
-.help{font-size:10px;color:var(--muted);line-height:1.7;margin-top:7px}
-.result{
-  white-space:pre-wrap;overflow-wrap:anywhere;
-  padding:13px;border-radius:13px;background:#030811;
-  border:1px solid var(--border);font-size:11px;
-  line-height:1.7;margin-top:13px;max-height:450px;overflow:auto
-}
-.api-card{padding:15px;background:var(--panel);border:1px solid var(--border);border-radius:17px;margin-bottom:12px}
-.api-card h3{font-size:12px}
-.api-url{font-size:10px;color:var(--cyan);overflow-wrap:anywhere;margin-top:8px}
-.api-card textarea{margin-top:12px}
-.toast-wrap{position:fixed;top:12px;left:12px;right:12px;z-index:500;pointer-events:none;display:flex;flex-direction:column;gap:8px;align-items:flex-end}
-.toast{max-width:400px;width:100%;padding:13px 15px;border-radius:13px;background:#12213a;border:1px solid var(--border);font-size:12px;box-shadow:0 8px 30px #0006}
-.toast.error{border-color:#ff667660}
-.toast.success{border-color:#29d99a60}
-.notice{padding:13px;border-radius:13px;background:#e6bd670b;border:1px solid #e6bd6725;color:#c9d5e7;font-size:10px;line-height:1.8;margin-bottom:14px}
-.hidden{display:none!important}
-@media(min-width:650px){
- .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
- .hero{padding:38px}
- .service{padding:18px}
- .modal{background:#030812eF}
-}
-@media(min-width:950px){
- .grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-}
-@media(max-width:350px){
- .container{padding:0 11px}
- .grid{gap:8px}
- .service{padding:11px}
- .service h3{font-size:12px}
- .price{font-size:8px;padding:5px 6px}
- .stats{gap:7px}
-}
+.note{font-size:10px;color:var(--muted);line-height:1.8;padding:12px;border:1px solid var(--border);background:#0c1728;border-radius:12px;margin-bottom:13px}
+.summary{padding:14px;border-radius:14px;background:var(--panel);border:1px solid var(--border);margin-bottom:16px}
+.row{display:flex;justify-content:space-between;gap:10px;padding:7px 0;font-size:11px}
+.row span{color:var(--muted)}
+.result{white-space:pre-wrap;overflow-wrap:anywhere;max-height:420px;overflow:auto;padding:12px;background:#030710;border:1px solid var(--border);border-radius:12px;font-size:11px;line-height:1.7;margin-top:12px}
+.api-item{padding:14px;border:1px solid var(--border);border-radius:15px;background:var(--panel);margin-bottom:12px}
+.api-item h3{font-size:12px}
+.api-item .endpoint{font-size:10px;color:var(--cyan);overflow-wrap:anywhere;margin:7px 0}
+.api-item textarea{min-height:115px}
+.empty{grid-column:1/-1;text-align:center;padding:30px;color:var(--muted);font-size:12px}
+.bottom{position:fixed;bottom:0;left:0;right:0;z-index:60;display:grid;grid-template-columns:repeat(5,1fr);padding:9px 2px calc(9px + env(safe-area-inset-bottom));background:#060b16f7;border-top:1px solid var(--border)}
+.navbtn{border:0;background:transparent;color:var(--muted);font-size:9px;display:flex;flex-direction:column;align-items:center;gap:5px}
+.navbtn span{font-size:19px}
+.navbtn.active{color:var(--gold)}
+#toasts{position:fixed;top:12px;left:12px;right:12px;z-index:300;display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none}
+.toast{width:100%;max-width:390px;background:#14223a;border:1px solid var(--border);border-radius:12px;padding:13px;font-size:12px}
+.toast.error{border-color:#ff6478}
+.toast.success{border-color:#28d99a}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.platform-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.hero{padding:38px}}
+@media(min-width:950px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 </style>
 </head>
-<body>
 
+<body>
 <header class="topbar">
-  <div class="brand">
-    <div class="logo">JB</div>
-    <div>
-      <div class="brand-name">JASON BUSINESS</div>
-      <div class="brand-sub">Services numériques</div>
-    </div>
-  </div>
-  <div class="top-actions">
-    <button class="icon-btn" onclick="showToast('Consulte la rubrique API et services.')" aria-label="Notifications">♧</button>
-    <button class="icon-btn" onclick="openProfile()" aria-label="Profil">♙</button>
-  </div>
+ <div class="brand">
+  <div class="logo">JB</div>
+  <div><b>JASON BUSINESS</b><small>Services numériques</small></div>
+ </div>
+ <button class="iconbtn" onclick="openProfile()" aria-label="Mon profil">♙</button>
 </header>
 
 <main class="container">
-  <section class="hero">
-    <div class="eyebrow">Votre partenaire digital</div>
-    <h1>JASON <span>SERVICES</span></h1>
-    <p>Applications, sites web, intelligence artificielle, musique et outils numériques réunis sur une seule plateforme.</p>
-    <div class="balance">
-      <div style="font-size:23px">◈</div>
-      <div>
-        <small>MON SOLDE PRINCIPAL</small>
-        <strong><span id="balance">—</span> FC</strong>
-      </div>
-    </div>
-    <div style="margin-top:15px"><span class="pill" id="accountStatus">Connexion en vérification</span></div>
-  </section>
-
-  <section class="stats">
-    <div class="stat"><b id="premiumCount">6</b><span>Services premium</span></div>
-    <div class="stat"><b id="freeCount">13</b><span>Outils disponibles</span></div>
-    <div class="stat"><b>24/7</b><span>Accès au catalogue</span></div>
-  </section>
-
-  <div class="toolbar">
-    <label class="search">⌕ <input id="search" placeholder="Rechercher un service ou une API…" autocomplete="off"></label>
-    <select class="filter" id="filter" aria-label="Filtrer les services">
-      <option value="all">Tout</option>
-      <option value="premium">Premium</option>
-      <option value="free">Gratuit</option>
-    </select>
+ <section class="hero">
+  <div class="eyebrow">VOTRE PARTENAIRE DIGITAL</div>
+  <h1>JASON <span>BUSINESS</span></h1>
+  <p>Musique, publicité, promotion digitale et solutions technologiques réunies dans une seule boutique.</p>
+  <div class="balance">
+   <span style="font-size:23px">◈</span>
+   <div><small>SOLDE PRINCIPAL</small><strong><span id="balance">—</span> FC</strong></div>
   </div>
+  <p id="accountStatus" style="margin-top:12px">Vérification du compte…</p>
+ </section>
 
-  <section id="premiumSection">
-    <div class="section-head">
-      <div><h2>✦ Services premium</h2><p>Des services à commander</p></div>
-      <span class="pill">PREMIUM</span>
-    </div>
-    <div class="grid" id="premium"></div>
-  </section>
+ <label class="search">⌕ <input id="search" placeholder="Rechercher musique, publicité, TikTok…" autocomplete="off"></label>
 
-  <section id="freeSection">
-    <div class="section-head">
-      <div><h2>⌘ API & outils</h2><p>Ouvrir, consulter et tester les outils</p></div>
-      <span class="pill">CATALOGUE</span>
-    </div>
-    <div class="grid" id="free"></div>
-  </section>
+ <section>
+  <div class="section-head"><div><h2>✨ Services créatifs</h2><p>Crée et commande tes projets</p></div><span class="tag">JASON STUDIO</span></div>
+  <div class="grid" id="creativeGrid"></div>
+ </section>
+
+ <section>
+  <div class="section-head"><div><h2>📈 Panel SMM</h2><p>Services de promotion sur les réseaux sociaux</p></div><span class="tag">SOCIAL MEDIA</span></div>
+  <div class="note">Choisis une plateforme, puis un service. Les tarifs ci-dessous sont des exemples. Une commande reste en attente tant qu'aucun fournisseur compatible n'est connecté. Utilise des méthodes de promotion conformes aux règles de chaque plateforme.</div>
+  <div class="platform-grid" id="platformGrid"></div>
+  <div class="section-head"><div><h2>Services disponibles</h2><p id="platformCaption">Sélectionne un réseau social</p></div></div>
+  <div class="grid" id="smmGrid"><div class="empty">Sélectionne une plateforme ci-dessus.</div></div>
+ </section>
 </main>
 
-<!-- COMMANDES -->
-<section class="modal" id="orderModal" aria-label="Commande">
-  <header class="modal-header">
-    <button class="back" onclick="closeAll()" aria-label="Retour">‹</button>
-    <div><div class="modal-title" id="orderTitle">Nouvelle commande</div><div class="modal-subtitle">JASON BUSINESS · Commande sécurisée</div></div>
-  </header>
-  <div class="modal-body">
-    <div class="summary">
-      <div class="summary-row"><span>Service</span><strong id="summaryService">—</strong></div>
-      <div class="summary-row"><span>Prix</span><strong id="summaryPrice">0 FC</strong></div>
-      <div class="summary-row"><span>Solde actuel</span><strong id="summaryBalance" style="color:var(--green)">—</strong></div>
-    </div>
-    <div class="notice">Vérifie tes informations avant de confirmer. Les fichiers sélectionnés dans ce formulaire ne sont pas automatiquement téléversés vers un serveur.</div>
-    <form id="orderForm">
-      <div id="dynamicFields"></div>
-      <button class="btn btn-primary" id="submitOrder" type="submit">CONFIRMER LA COMMANDE</button>
-      <div id="orderStatus" class="help" role="status" aria-live="polite"></div>
-    </form>
+<!-- COMMANDE GENERALE -->
+<section class="modal" id="orderModal">
+ <header class="modalhead"><button class="back" onclick="closeAll()">‹</button><div><b id="orderTitle">Commande</b><small>JASON BUSINESS</small></div></header>
+ <div class="modalbody">
+  <div class="summary">
+   <div class="row"><span>Service</span><b id="sumService">—</b></div>
+   <div class="row"><span>Montant</span><b id="sumPrice">0 FC</b></div>
+   <div class="row"><span>Solde</span><b id="sumBalance" style="color:var(--green)">—</b></div>
   </div>
+  <div class="note">Vérifie les détails avant de confirmer. Une commande est enregistrée comme « En attente » et ne prouve pas que la livraison est terminée.</div>
+  <form id="orderForm"><div id="orderFields"></div><button class="btn primary" id="orderSubmit" type="submit">CONFIRMER LA COMMANDE</button><div id="orderStatus" class="note" style="margin-top:12px" aria-live="polite"></div></form>
+ </div>
 </section>
 
-<!-- CHANSON -->
+<!-- MUSIQUE -->
 <section class="modal" id="musicModal">
-  <header class="modal-header">
-    <button class="back" onclick="closeAll()">‹</button>
-    <div><div class="modal-title">JASON MUSIC</div><div class="modal-subtitle">Assistant de création musicale</div></div>
-  </header>
-  <div class="modal-body">
-    <div class="form-group"><label class="label" for="musicTitle">Titre de la chanson</label><input class="input" id="musicTitle" placeholder="Ex. Le rêve de Kinshasa"></div>
-    <div class="form-group"><label class="label" for="musicMode">Mode de création</label><select class="select" id="musicMode"><option value="full">Paroles fournies</option><option value="idea">Développer une idée</option></select></div>
-    <div class="form-group"><label class="label" for="musicContent">Paroles ou idée</label><textarea class="textarea" id="musicContent" placeholder="Décris ton idée ou écris tes paroles…"></textarea></div>
-    <div class="form-group"><label class="label" for="musicStyle">Style musical</label><select class="select" id="musicStyle"><option>Afrobeat</option><option>Rap</option><option>R&B</option><option>Gospel</option><option>Rumba</option><option>Amapiano</option></select></div>
-    <div class="form-group"><label class="label" for="musicDuration">Durée demandée (secondes)</label><input class="input" id="musicDuration" type="number" min="1" max="300" value="15"></div>
-    <button class="btn btn-secondary" id="testMusic" onclick="testMusicAPI()">TESTER L'API</button>
-    <div id="musicResult" aria-live="polite"></div>
-    <button class="btn btn-gold" onclick="orderMusic()">COMMANDER · 5 000 FC</button>
-  </div>
+ <header class="modalhead"><button class="back" onclick="closeAll()">‹</button><div><b>🎵 JASON MUSIC</b><small>Création musicale</small></div></header>
+ <div class="modalbody">
+  <div class="field"><label for="musicTitle">Titre de la chanson</label><input class="input" id="musicTitle" placeholder="Ex. Mon rêve"></div>
+  <div class="field"><label for="musicStyle">Style musical</label><select class="select" id="musicStyle"><option>Afrobeat</option><option>Rap</option><option>R&B</option><option>Gospel</option><option>Rumba</option><option>Amapiano</option><option>Afro-pop</option><option>Drill</option><option>Reggae</option></select></div>
+  <div class="field"><label for="musicMode">Type de création</label><select class="select" id="musicMode"><option value="idea">Créer depuis une idée</option><option value="lyrics">J'ai déjà mes paroles</option></select></div>
+  <div class="field"><label for="musicContent">Ton idée ou tes paroles</label><textarea class="textarea" id="musicContent" placeholder="Raconte l'histoire, indique le thème et les personnes à citer…"></textarea></div>
+  <div class="field"><label for="musicDuration">Durée demandée en secondes</label><input class="input" id="musicDuration" type="number" min="1" max="300" value="30"></div>
+  <button class="btn secondary" id="musicTest" onclick="testMusic()">🎧 TESTER LA CRÉATION</button>
+  <div id="musicResult"></div>
+  <button class="btn gold" onclick="orderMusic()">COMMANDER LA CHANSON · 5 000 FC</button>
+ </div>
 </section>
 
-<!-- CHATBOT -->
-<section class="modal" id="chatbotModal">
-  <header class="modal-header">
-    <button class="back" onclick="closeAll()">‹</button>
-    <div><div class="modal-title">CHATBOT IA</div><div class="modal-subtitle">Préparation de ton assistant</div></div>
-  </header>
-  <div class="modal-body">
-    <div class="form-group"><label class="label" for="chatbotName">Nom du chatbot</label><input class="input" id="chatbotName" placeholder="Assistant JASON"></div>
-    <div class="form-group"><label class="label" for="chatbotPlatform">Plateforme prévue</label><select class="select" id="chatbotPlatform"><option>Site web</option><option>WhatsApp</option><option>Telegram</option><option>Facebook</option><option>Application</option></select></div>
-    <div class="form-group"><label class="label" for="chatbotMessage">Message de test</label><textarea class="textarea" id="chatbotMessage" placeholder="Bonjour, présente-toi."></textarea></div>
-    <div class="form-group"><label class="label" for="chatbotKnowledge">Connaissances personnalisées</label><textarea class="textarea" id="chatbotKnowledge" placeholder="Informations que le chatbot doit connaître (facultatif)"></textarea></div>
-    <button class="btn btn-secondary" onclick="testChatbotAPI()">TESTER LE CHATBOT</button>
-    <div id="chatbotResult" aria-live="polite"></div>
-    <button class="btn btn-gold" onclick="orderChatbot()">COMMANDER · 7 000 FC</button>
-  </div>
-</section>
-
-<!-- PUBLICITÉ -->
+<!-- PUBLICITE -->
 <section class="modal" id="adsModal">
-  <header class="modal-header">
-    <button class="back" onclick="closeAll()">‹</button>
-    <div><div class="modal-title">PUBLICITÉ DIGITALE</div><div class="modal-subtitle">Prépare ta campagne</div></div>
-  </header>
-  <div class="modal-body">
-    <div class="form-group"><label class="label" for="adTitle">Titre</label><input class="input" id="adTitle" placeholder="Nom de ta campagne"></div>
-    <div class="form-group"><label class="label" for="adDesc">Description</label><textarea class="textarea" id="adDesc" placeholder="Présente ton activité"></textarea></div>
-    <div class="form-group"><label class="label" for="adLink">Lien de destination</label><input class="input" id="adLink" placeholder="https://..."></div>
-    <div class="form-group"><label class="label" for="adBudget">Budget indicatif en FC</label><input class="input" id="adBudget" type="number" min="1000" value="1000"></div>
-    <div class="form-group"><label class="label" for="adImage">Image (facultative)</label><input class="input" id="adImage" type="file" accept="image/*"><p class="help">La sélection locale ne téléverse pas encore l'image.</p></div>
-    <div class="notice">Le budget indiqué est un budget de campagne, pas un prix garanti de l'API. La publication réelle dépend du fonctionnement du serveur.</div>
-    <button class="btn btn-secondary" onclick="testAdsAPI()">VÉRIFIER L'API ADS</button>
-    <div id="adResult" aria-live="polite"></div>
-    <button class="btn btn-primary" onclick="createAd()">ENVOYER LA DEMANDE</button>
-  </div>
+ <header class="modalhead"><button class="back" onclick="closeAll()">‹</button><div><b>📢 JASON ADS</b><small>Création de campagne publicitaire</small></div></header>
+ <div class="modalbody">
+  <div class="field"><label for="adTitle">Titre de la publicité</label><input class="input" id="adTitle" placeholder="Ex. Découvrez mon entreprise"></div>
+  <div class="field"><label for="adDesc">Description</label><textarea class="textarea" id="adDesc" placeholder="Décris le produit, le service ou l'événement…"></textarea></div>
+  <div class="field"><label for="adLink">Lien de destination</label><input class="input" id="adLink" placeholder="https://..."></div>
+  <div class="field"><label for="adPlatform">Plateforme publicitaire</label><select class="select" id="adPlatform"><option>Facebook</option><option>Instagram</option><option>TikTok</option><option>YouTube</option><option>WhatsApp</option><option>Autre</option></select></div>
+  <div class="field"><label for="adBudget">Budget publicitaire (FC)</label><input class="input" id="adBudget" type="number" min="1000" value="1000"></div>
+  <div class="note">Le budget publicitaire n'est pas le prix de création de la publicité. La diffusion réelle nécessite un compte publicitaire et une intégration autorisée.</div>
+  <button class="btn secondary" onclick="testAds()">VÉRIFIER L'API PUBLICITÉ</button>
+  <div id="adResult"></div>
+  <button class="btn primary" onclick="submitAd()">ENVOYER LA CAMPAGNE</button>
+ </div>
 </section>
 
-<!-- CATALOGUE API -->
+<!-- CATALOGUE API : ACCESSIBLE PAR UN SEUL BOUTON -->
 <section class="modal" id="apiModal">
-  <header class="modal-header">
-    <button class="back" onclick="closeAll()">‹</button>
-    <div><div class="modal-title">CATALOGUE API</div><div class="modal-subtitle">JASON BUSINESS · Documentation</div></div>
-  </header>
-  <div class="modal-body">
-    <div class="notice">Les exemples ci-dessous décrivent les requêtes attendues par cette interface. Chaque endpoint doit être vérifié sur le serveur. Ne place jamais une clé secrète dans le code HTML public.</div>
-    <div id="apiBody"></div>
-  </div>
-</section>
-
-<!-- QR CODE -->
-<section class="modal" id="qrModal">
-  <header class="modal-header"><button class="back" onclick="closeAll()">‹</button><div><div class="modal-title">GÉNÉRATEUR QR</div><div class="modal-subtitle">Créer un code à partager</div></div></header>
-  <div class="modal-body">
-    <div class="form-group"><label class="label" for="qrText">Texte ou URL</label><input class="input" id="qrText" placeholder="https://..."></div>
-    <button class="btn btn-primary" onclick="genQR()">GÉNÉRER LE QR CODE</button>
-    <div id="qrResult" style="text-align:center;margin-top:20px"></div>
-  </div>
-</section>
-
-<!-- HÉBERGEMENT -->
-<section class="modal" id="hostModal">
-  <header class="modal-header"><button class="back" onclick="closeAll()">‹</button><div><div class="modal-title">HÉBERGEMENT WEB</div><div class="modal-subtitle">GitHub et Vercel</div></div></header>
-  <div class="modal-body">
-    <div class="notice">Cette page prépare ton déploiement, mais elle ne peut pas publier directement sur ton compte sans autorisation GitHub ou Vercel.</div>
-    <div class="form-group"><label class="label" for="siteName">Nom du projet</label><input class="input" id="siteName" placeholder="mon-site"></div>
-    <div class="form-group"><label class="label" for="fileHtml">Fichier HTML</label><input class="input" type="file" id="fileHtml" accept=".html"></div>
-    <div class="form-group"><label class="label" for="fileCss">Fichier CSS (facultatif)</label><input class="input" type="file" id="fileCss" accept=".css"></div>
-    <div class="form-group"><label class="label" for="fileJs">Fichier JavaScript (facultatif)</label><input class="input" type="file" id="fileJs" accept=".js"></div>
-    <div class="form-group"><label class="label" for="gitRepo">URL du dépôt GitHub (facultatif)</label><input class="input" id="gitRepo" placeholder="https://github.com/compte/projet"></div>
-    <button class="btn btn-primary" onclick="uploadHosting()">VÉRIFIER LES FICHIERS</button>
-    <button class="btn btn-gold" onclick="connectVercel()">OUVRIR VERCEL</button>
-    <div id="hostResult" class="help" aria-live="polite"></div>
-  </div>
+ <header class="modalhead"><button class="back" onclick="closeAll()">‹</button><div><b>🔌 CATALOGUE API</b><small>Documentation technique</small></div></header>
+ <div class="modalbody">
+  <div class="note">Toutes les API sont regroupées ici. Leur présence dans ce catalogue ne garantit ni leur disponibilité ni leur gratuité. N'inscris jamais une clé secrète dans une page publique.</div>
+  <div id="apiList"></div>
+ </div>
 </section>
 
 <!-- PROFIL -->
 <section class="modal" id="profileModal">
-  <header class="modal-header"><button class="back" onclick="closeAll()">‹</button><div><div class="modal-title">MON COMPTE</div><div class="modal-subtitle">JASON BUSINESS</div></div></header>
-  <div class="modal-body">
-    <div class="summary">
-      <div class="summary-row"><span>Téléphone du compte</span><strong id="profilePhone">Non détecté</strong></div>
-      <div class="summary-row"><span>Solde principal</span><strong id="profileBalance">—</strong></div>
-      <div class="summary-row"><span>Statut</span><strong id="profileStatus">Vérification</strong></div>
-    </div>
-    <div class="notice">Le compte utilise la session locale et le chemin Firebase configurés dans le code. Une authentification Firebase réelle est préférable pour protéger les données du client.</div>
-    <button class="btn btn-secondary" onclick="closeAll()">FERMER</button>
+ <header class="modalhead"><button class="back" onclick="closeAll()">‹</button><div><b>MON PROFIL</b><small>JASON BUSINESS</small></div></header>
+ <div class="modalbody">
+  <div class="summary">
+   <div class="row"><span>Téléphone</span><b id="profilePhone">Non détecté</b></div>
+   <div class="row"><span>Solde principal</span><b id="profileBalance">—</b></div>
+   <div class="row"><span>Statut</span><b id="profileState">—</b></div>
   </div>
+  <div class="note">Pour une sécurité réelle, les autorisations, débits et commandes doivent être contrôlés côté serveur.</div>
+ </div>
 </section>
 
-<nav class="bottom-nav">
-  <button class="nav-item" onclick="goHome()"><span>⌂</span>Accueil</button>
-  <button class="nav-item" onclick="openApi()"><span>⌘</span>API</button>
-  <button class="nav-item active" onclick="goHome()"><span>▦</span>Services</button>
-  <button class="nav-item" onclick="openProfile()"><span>♙</span>Profil</button>
+<nav class="bottom">
+ <button class="navbtn active" onclick="goHome()"><span>⌂</span>Accueil</button>
+ <button class="navbtn" onclick="openMusic()"><span>♫</span>Musique</button>
+ <button class="navbtn" onclick="openSmm()"><span>↗</span>Panel SMM</button>
+ <button class="navbtn" onclick="openApi()"><span>⌘</span>API</button>
+ <button class="navbtn" onclick="openProfile()"><span>♙</span>Profil</button>
 </nav>
-
-<div class="toast-wrap" id="toastContainer" aria-live="polite"></div>
+<div id="toasts"></div>
 
 <script type="module">
 import {initializeApp,getApps} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
- getDatabase,ref,onValue,push,runTransaction,set
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import {getDatabase,ref,onValue,push,runTransaction,set} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-/* CONFIGURATION FIREBASE
-   Vérifie que le projet et les règles RTDB correspondent
-   réellement à ton application JASON BUSINESS. */
 const firebaseConfig={
  apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
  authDomain:"starlink-investit.firebaseapp.com",
@@ -467,195 +227,136 @@ const USERS_PATH=ROOT+"/users";
 const COMMANDS_PATH=ROOT+"/demandes_commandes";
 
 let db=null;
-let currentUserPhone="";
-let currentUserData={};
-let selectedService=null;
-let musicOrderData=null;
-let chatbotOrderData=null;
-let busy=false;
-let userListenerStarted=false;
-
-const PREMIUM=[
- {id:"application",nom:"Application",icon:"📱",prix:10000,desc:"Demande de création d'une application.",fields:[
-  {name:"nomApp",label:"Nom de l'application",required:true},
-  {name:"iconApp",label:"Icône (fichier)",type:"file",required:false},
-  {name:"lienApp",label:"Lien souhaité",required:false},
-  {name:"description",label:"Description du projet",type:"textarea",required:true},
-  {name:"contact",label:"Contact",required:true}
- ]},
- {id:"site-web",nom:"Site Web Pro",icon:"🌐",prix:15000,desc:"Site vitrine, portfolio, boutique ou plateforme.",fields:[
-  {name:"nomSite",label:"Nom du site",required:true},
-  {name:"typeSite",label:"Type de site",type:"select",options:["Site vitrine","Portfolio","Boutique en ligne","Blog","Business","Plateforme","Autre"],required:true},
-  {name:"description",label:"Description du projet",type:"textarea",required:true},
-  {name:"contact",label:"Contact",required:true}
- ]},
- {id:"vpn",nom:"VPN Premium",icon:"🛡️",prix:8000,desc:"Demande de configuration ou de service VPN.",fields:[
-  {name:"typeVpn",label:"Type",type:"select",options:["Mobile","PC","Routeur","Business"],required:true},
-  {name:"description",label:"Usage souhaité",type:"textarea",required:true},
-  {name:"contact",label:"Contact",required:true}
- ]},
- {id:"chanson",nom:"Création musicale",icon:"🎵",prix:5000,desc:"Prépare une demande de création de chanson.",action:"music"},
- {id:"chatbot",nom:"Chatbot IA",icon:"🤖",prix:7000,desc:"Demande de création d'un assistant personnalisé.",action:"chatbot"},
- {id:"ads",nom:"Publicité digitale",icon:"📢",prix:0,desc:"Prépare et envoie une demande publicitaire.",action:"ads"}
-];
-
-const FREE=[
- {id:"ai",nom:"Chatbot IA",icon:"🤖",desc:"Endpoint conversationnel.",url:"/api/intelligence-artificielle/ai"},
- {id:"ask",nom:"Vision IA",icon:"👁️",desc:"Endpoint d'analyse multimodale.",url:"/api/intelligence-artificielle/ask"},
- {id:"translate",nom:"Traduction IA",icon:"🌍",desc:"Endpoint de traduction.",url:"/api/intelligence-artificielle/translate"},
- {id:"gen-image",nom:"Génération d'image",icon:"🎨",desc:"Endpoint de génération d'image.",url:"/api/genere-image/generate"},
- {id:"trans-image",nom:"Transformation d'image",icon:"🖼️",desc:"Endpoint de transformation visuelle.",url:"/api/genere-image/image"},
- {id:"video",nom:"Vidéo IA",icon:"🎬",desc:"Endpoint de génération vidéo.",url:"/api/media/video"},
- {id:"music-api",nom:"Musique IA",icon:"🎵",desc:"Endpoint musical.",url:"/api/media/music"},
- {id:"data",nom:"Data",icon:"💾",desc:"Endpoint de données.",url:"/api/data"},
- {id:"storage",nom:"Storage",icon:"☁️",desc:"Endpoint de stockage.",url:"/api/storage"},
- {id:"admin",nom:"Admin Auth",icon:"🔐",desc:"Endpoint d'authentification admin.",url:"/api/admin-auth"},
- {id:"hub",nom:"API Hub",icon:"🗄️",desc:"Catalogue central des outils.",url:"/api/hub"},
- {id:"qr",nom:"Générateur QR",icon:"▦",desc:"Génère un QR Code depuis un texte.",action:"qr"},
- {id:"host",nom:"Hébergement web",icon:"☁️",desc:"Prépare le déploiement GitHub et Vercel.",action:"host"}
-];
-
-const API_DOCS=[
- {url:"/api/intelligence-artificielle/ai",name:"Chatbot IA",body:{message:"Bonjour, présente-toi.",history:[]}},
- {url:"/api/intelligence-artificielle/ask",name:"Vision IA",body:{message:"Analyse cette image.",image:"",knowledge:"",rules:"",history:[]}},
- {url:"/api/intelligence-artificielle/translate",name:"Traduction",body:{text:"Bonjour tout le monde",source:"fr",target:"en"}},
- {url:"/api/genere-image/generate",name:"Génération d'image",body:{prompt:"Une ville futuriste à Kinshasa",size:"1024x1024",n:1}},
- {url:"/api/genere-image/image",name:"Transformation d'image",body:{prompt:"Créer une affiche futuriste",size:"1024x1024",n:1}},
- {url:"/api/publicite/ads",name:"Publicité",body:{action:"catalog"}},
- {url:"/api/data",name:"Data",body:{action:"catalog"}},
- {url:"/api/storage",name:"Storage",body:{action:"list"}},
- {url:"/api/admin-auth",name:"Admin Auth",body:{action:"login"}},
- {url:"/api/media/video",name:"Vidéo",body:{prompt:"Une ville futuriste",duration:6}},
- {url:"/api/media/music",name:"Musique",body:{prompt:"Afrobeat mélodique",duration:15}},
- {url:"/api/hub",name:"Hub",body:{action:"catalog"}}
-];
+let phone="";
+let userData={};
+let selectedOrder=null;
+let selectedPlatform="tiktok";
+let submitting=false;
 
 const $=id=>document.getElementById(id);
 const money=v=>Math.floor(Number(v)||0).toLocaleString("fr-FR");
-const escapeHTML=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-function showToast(message,type=""){
+const creative=[
+ {id:"music",name:"Création musicale",icon:"🎵",price:5000,desc:"Crée une chanson selon ton thème, tes paroles et ton style.",action:"music"},
+ {id:"ads",name:"Publicité digitale",icon:"📢",price:0,desc:"Prépare une campagne et envoie ta demande publicitaire.",action:"ads"},
+ {id:"website",name:"Site Web Pro",icon:"🌐",price:15000,desc:"Site vitrine, portfolio, boutique ou plateforme.",fields:[
+  {name:"nomSite",label:"Nom du site",required:true},
+  {name:"typeSite",label:"Type de site",type:"select",options:["Site vitrine","Portfolio","Boutique en ligne","Blog","Business","Plateforme"],required:true},
+  {name:"description",label:"Description",type:"textarea",required:true},
+  {name:"contact",label:"Contact",required:true}
+ ]},
+ {id:"app",name:"Application mobile",icon:"📱",price:10000,desc:"Soumets ton projet d'application mobile.",fields:[
+  {name:"nomApp",label:"Nom de l'application",required:true},
+  {name:"description",label:"Fonctions souhaitées",type:"textarea",required:true},
+  {name:"contact",label:"Contact",required:true}
+ ]},
+ {id:"chatbot",name:"Chatbot personnalisé",icon:"🤖",price:7000,desc:"Prépare une demande de chatbot pour ton activité.",fields:[
+  {name:"nomBot",label:"Nom du chatbot",required:true},
+  {name:"plateforme",label:"Plateforme",type:"select",options:["Site web","WhatsApp","Telegram","Facebook","Application"],required:true},
+  {name:"description",label:"Fonctions souhaitées",type:"textarea",required:true}
+ ]}
+];
+
+/* Les noms et logos sont chargés depuis Simple Icons.
+   Une panne de réseau peut empêcher l'affichage des logos. */
+const platforms=[
+ {id:"tiktok",name:"TikTok",icon:"tiktok",services:["Vues","Abonnés","Likes","Partages"]},
+ {id:"youtube",name:"YouTube",icon:"youtube",services:["Vues","Abonnés","Likes"]},
+ {id:"instagram",name:"Instagram",icon:"instagram",services:["Abonnés","Likes","Vues","Commentaires"]},
+ {id:"telegram",name:"Telegram",icon:"telegram",services:["Membres","Vues","Réactions"]},
+ {id:"x",name:"X / Twitter",icon:"x",services:["Abonnés","Likes","Vues","Reposts"]},
+ {id:"facebook",name:"Facebook",icon:"facebook",services:["Abonnés","Likes","Vues","Partages"]},
+ {id:"snapchat",name:"Snapchat",icon:"snapchat",services:["Abonnés","Vues"]},
+ {id:"spotify",name:"Spotify",icon:"spotify",services:["Écoutes","Abonnés au profil"]},
+ {id:"whatsapp",name:"WhatsApp",icon:"whatsapp",services:["Membres de communauté","Promotion de lien"]}
+];
+
+/* Exemples de catalogue : les tarifs et quantités doivent être
+   remplacés par les données vérifiées d'un fournisseur réel. */
+const smmCatalog={
+ "Abonnés":{qty:100,price:1000},
+ "Likes":{qty:100,price:500},
+ "Vues":{qty:1000,price:700},
+ "Partages":{qty:100,price:900},
+ "Commentaires":{qty:50,price:1500},
+ "Membres":{qty:100,price:1500},
+ "Réactions":{qty:100,price:700},
+ "Reposts":{qty:100,price:900},
+ "Écoutes":{qty:1000,price:1200},
+ "Abonnés au profil":{qty:100,price:1500},
+ "Membres de communauté":{qty:100,price:1500},
+ "Promotion de lien":{qty:1,price:1000}
+};
+
+const apiDocs=[
+ {name:"Assistant IA",path:"/api/intelligence-artificielle/ai",body:{message:"Bonjour, présente-toi.",history:[]}},
+ {name:"Analyse image",path:"/api/intelligence-artificielle/ask",body:{message:"Analyse cette image.",image:"",history:[]}},
+ {name:"Traduction",path:"/api/intelligence-artificielle/translate",body:{text:"Bonjour",source:"fr",target:"en"}},
+ {name:"Génération image",path:"/api/genere-image/generate",body:{prompt:"Ville futuriste à Kinshasa",size:"1024x1024",n:1}},
+ {name:"Transformation image",path:"/api/genere-image/image",body:{prompt:"Créer une affiche moderne",size:"1024x1024",n:1}},
+ {name:"Publicité",path:"/api/publicite/ads",body:{action:"catalog"}},
+ {name:"Données",path:"/api/data",body:{action:"catalog"}},
+ {name:"Stockage",path:"/api/storage",body:{action:"list"}},
+ {name:"Authentification admin",path:"/api/admin-auth",body:{action:"login"}},
+ {name:"Vidéo",path:"/api/media/video",body:{prompt:"Ville futuriste de nuit",duration:6}},
+ {name:"Musique",path:"/api/media/music",body:{prompt:"Afrobeat mélodique",duration:15}},
+ {name:"Hub",path:"/api/hub",body:{action:"catalog"}}
+];
+
+function toast(msg,type=""){
  const el=document.createElement("div");
  el.className="toast "+type;
- el.textContent=message;
- $("toastContainer").appendChild(el);
+ el.textContent=msg;
+ $("toasts").appendChild(el);
  setTimeout(()=>el.remove(),3500);
 }
-
-function safeShowResult(id,value){
- $(id).replaceChildren();
+function result(id,data){
+ const el=$(id);
+ el.replaceChildren();
  const pre=document.createElement("pre");
  pre.className="result";
- pre.textContent=typeof value==="string"?value:JSON.stringify(value,null,2);
- $(id).appendChild(pre);
+ pre.textContent=typeof data==="string"?data:JSON.stringify(data,null,2);
+ el.appendChild(pre);
 }
-
-function detectPhone(){
+function getPhone(){
  for(const key of ["jasonBusinessPhone","userPhone","telephone","phone"]){
-  const raw=localStorage.getItem(key);
-  if(!raw||raw==="null")continue;
+  const value=localStorage.getItem(key);
+  if(!value||value==="null")continue;
   try{
-   const parsed=JSON.parse(raw);
-   if(parsed&&typeof parsed==="object"&&parsed.telephone)return String(parsed.telephone).trim();
+   const parsed=JSON.parse(value);
+   if(parsed&&parsed.telephone)return String(parsed.telephone).trim();
   }catch{}
-  return raw.trim();
+  return value.trim();
  }
  return "";
 }
-
-function getBalance(){
- return Number(currentUserData.solde_principal??currentUserData.solde??0)||0;
-}
+function balance(){return Number(userData.solde_principal??userData.solde??0)||0}
 function updateBalance(){
- $("balance").textContent=money(getBalance());
- $("summaryBalance").textContent=money(getBalance())+" FC";
- $("profileBalance").textContent=money(getBalance())+" FC";
+ $("balance").textContent=money(balance());
+ $("sumBalance").textContent=money(balance())+" FC";
+ $("profileBalance").textContent=money(balance())+" FC";
 }
 function loadUser(){
- currentUserPhone=detectPhone();
- $("profilePhone").textContent=currentUserPhone||"Non détecté";
- if(!currentUserPhone){
+ phone=getPhone();
+ $("profilePhone").textContent=phone||"Non détecté";
+ if(!phone){
   $("balance").textContent="0";
-  $("accountStatus").textContent="Session non détectée";
-  $("profileStatus").textContent="Non connecté";
+  $("accountStatus").textContent="Session client non détectée";
+  $("profileState").textContent="Non connecté";
   return;
  }
- try{
-  onValue(ref(db,`${USERS_PATH}/${currentUserPhone}`),snap=>{
-   if(!snap.exists()){
-    currentUserData={};
-    $("accountStatus").textContent="Compte introuvable";
-    $("profileStatus").textContent="À vérifier";
-    updateBalance();
-    return;
-   }
-   currentUserData=snap.val()||{};
-   $("accountStatus").textContent="Compte détecté";
-   $("profileStatus").textContent="Connecté à la base";
-   updateBalance();
-  },err=>{
-   console.error(err);
-   $("accountStatus").textContent="Erreur Firebase";
-   showToast("Impossible de lire le compte Firebase.","error");
-  });
- }catch(err){
+ onValue(ref(db,`${USERS_PATH}/${phone}`),snap=>{
+  userData=snap.exists()?snap.val()||{}:{};
+  $("accountStatus").textContent=snap.exists()?"Compte détecté":"Compte introuvable";
+  $("profileState").textContent=snap.exists()?"Connecté à Firebase":"À vérifier";
+  updateBalance();
+ },err=>{
   console.error(err);
-  $("accountStatus").textContent="Erreur de configuration";
- }
+  $("accountStatus").textContent="Erreur de connexion";
+  toast("Impossible de lire le compte Firebase.","error");
+ });
 }
-
-function renderCards(){
- const query=$("search").value.trim().toLowerCase();
- const filter=$("filter").value;
- const renderList=(items,target,kind)=>{
-  const list=items.filter(s=>(filter==="all"||filter===kind)&&
-   (s.nom+" "+s.desc+" "+(s.url||"")).toLowerCase().includes(query));
-  $(target).replaceChildren();
-  if(!list.length){
-   const empty=document.createElement("div");
-   empty.className="empty";
-   empty.textContent="Aucun résultat. Essaie une autre recherche.";
-   $(target).appendChild(empty);
-   return;
-  }
-  list.forEach(s=>{
-   const card=document.createElement("article");
-   card.className="service";
-   const top=document.createElement("div");
-   top.className="service-top";
-   const icon=document.createElement("div");
-   icon.className="service-icon";
-   icon.textContent=s.icon;
-   const price=document.createElement("span");
-   price.className="price "+(kind==="free"||s.prix===0?"free":"");
-   price.textContent=kind==="free"||s.prix===0?"GRATUIT":money(s.prix)+" FC";
-   top.append(icon,price);
-   const title=document.createElement("h3");
-   title.textContent=s.nom;
-   const desc=document.createElement("p");
-   desc.textContent=s.desc;
-   card.append(top,title,desc);
-   if(s.url){
-    const ep=document.createElement("div");
-    ep.className="endpoint";
-    ep.textContent=s.url;
-    card.appendChild(ep);
-   }
-   const button=document.createElement("button");
-   button.className="btn "+(kind==="free"||s.prix===0?"btn-secondary":"btn-primary");
-   button.textContent=kind==="free"?"OUVRIR L'OUTIL":s.prix===0?"OUVRIR":"COMMANDER";
-   button.addEventListener("click",()=>handleClick(s.id));
-   card.appendChild(button);
-   $(target).appendChild(card);
-  });
- };
- renderList(PREMIUM,"premium","premium");
- renderList(FREE,"free","free");
- $("premiumCount").textContent=PREMIUM.length;
- $("freeCount").textContent=FREE.length;
-}
-
-function openModal(id){
+function showModal(id){
  closeAll();
  $(id).classList.add("show");
  document.body.style.overflow="hidden";
@@ -669,153 +370,258 @@ window.goHome=()=>{
  closeAll();
  window.scrollTo({top:0,behavior:"smooth"});
 };
+window.openMusic=()=>showModal("musicModal");
 window.openProfile=()=>{
- $("profilePhone").textContent=currentUserPhone||"Non détecté";
  updateBalance();
- openModal("profileModal");
+ showModal("profileModal");
+};
+window.openSmm=()=>{
+ $("platformGrid").scrollIntoView({behavior:"smooth",block:"center"});
 };
 window.openApi=()=>{
- loadApis();
- openModal("apiModal");
-};
-window.handleClick=id=>{
- const s=[...PREMIUM,...FREE].find(x=>x.id===id);
- if(!s)return;
- if(s.action==="music")openModal("musicModal");
- else if(s.action==="chatbot")openModal("chatbotModal");
- else if(s.action==="ads")openModal("adsModal");
- else if(s.action==="qr")openModal("qrModal");
- else if(s.action==="host")openModal("hostModal");
- else if(s.url){
-  loadApis(s.url);
-  openModal("apiModal");
- }else openOrder(s);
+ renderApis();
+ showModal("apiModal");
 };
 
-$("search").addEventListener("input",renderCards);
-$("filter").addEventListener("change",renderCards);
-
-function createField(f){
- const group=document.createElement("div");
- group.className="form-group";
- const label=document.createElement("label");
- label.className="label";
- label.textContent=f.label+(f.required?" *":"");
- group.appendChild(label);
- let input;
- if(f.type==="textarea"){
-  input=document.createElement("textarea");
-  input.className="textarea";
- }else if(f.type==="select"){
-  input=document.createElement("select");
-  input.className="select";
-  const empty=document.createElement("option");
-  empty.value="";
-  empty.textContent="Choisir une option";
-  input.appendChild(empty);
-  (f.options||[]).forEach(v=>{
-   const option=document.createElement("option");
-   option.value=v;option.textContent=v;input.appendChild(option);
-  });
- }else{
-  input=document.createElement("input");
-  input.className="input";
-  input.type=f.type==="file"?"file":"text";
-  if(f.type==="file")input.accept="image/*";
-  else input.placeholder=f.label;
+function renderCreative(){
+ const q=$("search").value.toLowerCase().trim();
+ const items=creative.filter(s=>(s.name+" "+s.desc).toLowerCase().includes(q));
+ $("creativeGrid").replaceChildren();
+ if(!items.length){
+  $("creativeGrid").innerHTML='<div class="empty">Aucun service trouvé.</div>';
+  return;
  }
- input.name=f.name;
- if(f.required)input.required=true;
- group.appendChild(input);
- return group;
+ items.forEach(s=>{
+  const card=document.createElement("article");
+  card.className="card";
+  const top=document.createElement("div");
+  top.className="card-top";
+  const icon=document.createElement("div");
+  icon.className="card-icon";
+  icon.textContent=s.icon;
+  const price=document.createElement("span");
+  price.className="price "+(!s.price?"green":"");
+  price.textContent=s.price?money(s.price)+" FC":"Sur devis";
+  top.append(icon,price);
+  const title=document.createElement("h3");
+  title.textContent=s.name;
+  const desc=document.createElement("p");
+  desc.textContent=s.desc;
+  const btn=document.createElement("button");
+  btn.className="btn primary";
+  btn.textContent="OUVRIR";
+  btn.onclick=()=>handleCreative(s.id);
+  card.append(top,title,desc,btn);
+  $("creativeGrid").appendChild(card);
+ });
+}
+window.handleCreative=id=>{
+ const s=creative.find(x=>x.id===id);
+ if(!s)return;
+ if(s.action==="music")return showModal("musicModal");
+ if(s.action==="ads")return showModal("adsModal");
+ openOrder(s);
+};
+
+function renderPlatforms(){
+ $("platformGrid").replaceChildren();
+ platforms.forEach(p=>{
+  const btn=document.createElement("button");
+  btn.className="platform"+(p.id===selectedPlatform?" active":"");
+  const img=document.createElement("img");
+  img.src="https://cdn.simpleicons.org/"+p.icon;
+  img.alt=p.name;
+  img.onerror=()=>{img.style.display="none";};
+  const name=document.createElement("b");
+  name.textContent=p.name;
+  const count=document.createElement("small");
+  count.textContent=p.services.length+" services";
+  btn.append(img,name,count);
+  btn.onclick=()=>{
+   selectedPlatform=p.id;
+   renderPlatforms();
+   renderSmm();
+  };
+  $("platformGrid").appendChild(btn);
+ });
+}
+function renderSmm(){
+ const p=platforms.find(x=>x.id===selectedPlatform);
+ if(!p)return;
+ $("platformCaption").textContent=p.name+" · services";
+ $("smmGrid").replaceChildren();
+ p.services.forEach(service=>{
+  const info=smmCatalog[service];
+  const card=document.createElement("article");
+  card.className="card";
+  const top=document.createElement("div");
+  top.className="card-top";
+  const icon=document.createElement("div");
+  icon.className="card-icon";
+  icon.textContent=service==="Vues"?"▶":service==="Likes"?"♥":service.includes("Abonnés")?"♙":service==="Écoutes"?"♫":"↗";
+  const price=document.createElement("span");
+  price.className="price";
+  price.textContent=money(info.price)+" FC";
+  top.append(icon,price);
+  const title=document.createElement("h3");
+  title.textContent=service+" "+p.name;
+  const desc=document.createElement("p");
+  desc.textContent="Quantité indicative : "+money(info.qty)+". Prix d'exemple, à confirmer auprès du fournisseur.";
+  const btn=document.createElement("button");
+  btn.className="btn primary";
+  btn.textContent="COMMANDER";
+  btn.onclick=()=>openSmmOrder(p,service,info);
+  card.append(top,title,desc,btn);
+  $("smmGrid").appendChild(card);
+ });
 }
 
+function addField(container,f){
+ const wrap=document.createElement("div");
+ wrap.className="field";
+ const label=document.createElement("label");
+ label.textContent=f.label+(f.required?" *":"");
+ const el=f.type==="textarea"?document.createElement("textarea"):f.type==="select"?document.createElement("select"):document.createElement("input");
+ el.className=f.type==="textarea"?"textarea":f.type==="select"?"select":"input";
+ if(f.type==="select"){
+  const blank=document.createElement("option");
+  blank.value="";
+  blank.textContent="Choisir";
+  el.appendChild(blank);
+  (f.options||[]).forEach(v=>{
+   const op=document.createElement("option");
+   op.value=v;op.textContent=v;el.appendChild(op);
+  });
+ }
+ el.name=f.name;
+ if(f.required)el.required=true;
+ if(f.placeholder)el.placeholder=f.placeholder;
+ wrap.append(label,el);
+ container.appendChild(wrap);
+}
 function openOrder(service){
- selectedService=service;
- $("orderTitle").textContent="Commander · "+service.nom;
- $("summaryService").textContent=service.nom;
- $("summaryPrice").textContent=money(service.prix)+" FC";
+ selectedOrder={...service,kind:"service"};
+ $("orderTitle").textContent="Commander · "+service.name;
+ $("sumService").textContent=service.name;
+ $("sumPrice").textContent=money(service.price||0)+" FC";
+ $("orderFields").replaceChildren();
+ (service.fields||[]).forEach(f=>addField($("orderFields"),f));
  $("orderStatus").textContent="";
- $("submitOrder").disabled=false;
- $("submitOrder").textContent="CONFIRMER LA COMMANDE";
- $("dynamicFields").replaceChildren();
- (service.fields||[]).forEach(f=>$("dynamicFields").appendChild(createField(f)));
- openModal("orderModal");
+ $("orderSubmit").disabled=false;
+ showModal("orderModal");
  updateBalance();
 }
-window.openOrder=openOrder;
-
-function extraFieldsFromData(data){
- const result={};
- Object.entries(data).forEach(([k,v])=>{
-  if(v instanceof File)result[k]=v.name?`Fichier sélectionné : ${v.name}`:"";
-  else result[k]=String(v??"").trim();
- });
- return result;
+function openSmmOrder(platform,service,info){
+ const price=info.price;
+ selectedOrder={
+  id:"smm-"+platform.id+"-"+service.toLowerCase().replace(/\s+/g,"-"),
+  name:service+" · "+platform.name,
+  price,kind:"smm",quantity:info.qty
+ };
+ $("orderTitle").textContent="Commande SMM";
+ $("sumService").textContent=selectedOrder.name;
+ $("sumPrice").textContent=money(price)+" FC";
+ $("orderFields").replaceChildren();
+ addField($("orderFields"),{name:"url",label:"Lien du profil, post ou vidéo",required:true,placeholder:"https://..."});
+ addField($("orderFields"),{name:"quantity",label:"Quantité demandée",required:true,placeholder:String(info.qty)});
+ addField($("orderFields"),{name:"notes",label:"Notes (facultatif)",type:"textarea"});
+ const quantity=$("orderFields").querySelector('[name="quantity"]');
+ quantity.type="number";
+ quantity.min="1";
+ quantity.value=info.qty;
+ const infoNote=document.createElement("div");
+ infoNote.className="note";
+ infoNote.textContent="Le tarif affiché est indicatif. Cette commande sera enregistrée en attente. Aucun boost n'est exécuté tant qu'un fournisseur n'est connecté.";
+ $("orderFields").appendChild(infoNote);
+ $("orderStatus").textContent="";
+ $("orderSubmit").disabled=false;
+ showModal("orderModal");
+ updateBalance();
 }
 
 $("orderForm").addEventListener("submit",async e=>{
  e.preventDefault();
- if(busy||!selectedService)return;
- if(!currentUserPhone){
+ if(submitting||!selectedOrder)return;
+ if(!phone){
   $("orderStatus").textContent="Connecte-toi à ton compte avant de commander.";
-  showToast("Compte client non détecté.","error");
   return;
  }
- const amount=Number(selectedService.prix)||0;
- const fields=extraFieldsFromData(new FormData(e.target));
- if(getBalance()<amount){
-  $("orderStatus").textContent="Solde insuffisant. Recharge ton compte avant de commander.";
-  return;
+ const form=new FormData(e.target);
+ const fields={};
+ for(const [key,value] of form.entries()){
+  fields[key]=String(value).trim();
  }
- busy=true;
- $("submitOrder").disabled=true;
- $("orderStatus").textContent="Vérification du solde et envoi…";
- let deducted=false;
- try{
-  const balanceRef=ref(db,`${USERS_PATH}/${currentUserPhone}/solde_principal`);
-  const transaction=await runTransaction(balanceRef,current=>{
-   const balance=Number(current)||0;
-   if(balance<amount)return;
-   return balance-amount;
-  });
-  if(!transaction.committed){
-   $("orderStatus").textContent="Solde insuffisant ou solde modifié. Réessaie.";
+ if(selectedOrder.kind==="smm"){
+  try{
+   const u=new URL(fields.url);
+   if(!["http:","https:"].includes(u.protocol))throw Error();
+  }catch{
+   $("orderStatus").textContent="Entre un lien HTTP ou HTTPS valide.";
    return;
   }
-  deducted=true;
-  const cmd=push(ref(db,COMMANDS_PATH));
-  await set(cmd,{
-   telephone:currentUserPhone,
-   service:selectedService.nom,
-   serviceId:selectedService.id,
+  const quantity=Number(fields.quantity);
+  if(!Number.isInteger(quantity)||quantity<1||quantity>10000000){
+   $("orderStatus").textContent="Quantité invalide.";
+   return;
+  }
+  fields.quantity=quantity;
+ }
+ const amount=Number(selectedOrder.price)||0;
+ if(balance()<amount){
+  $("orderStatus").textContent="Solde insuffisant. Recharge ton compte.";
+  return;
+ }
+ submitting=true;
+ $("orderSubmit").disabled=true;
+ $("orderStatus").textContent="Enregistrement de la commande…";
+ let deducted=false;
+ try{
+  if(amount>0){
+   const balanceRef=ref(db,`${USERS_PATH}/${phone}/solde_principal`);
+   const tr=await runTransaction(balanceRef,current=>{
+    const b=Number(current)||0;
+    if(b<amount)return;
+    return b-amount;
+   });
+   if(!tr.committed){
+    $("orderStatus").textContent="Solde insuffisant ou modifié.";
+    return;
+   }
+   deducted=true;
+  }
+  const command=push(ref(db,COMMANDS_PATH));
+  await set(command,{
+   telephone:phone,
+   service:selectedOrder.name,
+   serviceId:selectedOrder.id,
+   categorie:selectedOrder.kind||"service",
    montant:amount,
    prix:amount,
    statut:"En attente",
+   details:fields,
+   plateforme:selectedOrder.kind==="smm"?selectedPlatform:"",
+   quantite:selectedOrder.kind==="smm"?Number(fields.quantity)||0:0,
+   fournisseurConnecte:false,
    date:new Date().toISOString(),
    createdAt:Date.now(),
-   details:fields,
-   source:"shop"
+   source:"services"
   });
-  $("orderStatus").textContent="Commande enregistrée. Attends la confirmation du service.";
-  showToast("Commande enregistrée.","success");
-  setTimeout(()=>closeAll(),1600);
+  $("orderStatus").textContent="Commande enregistrée. Statut : En attente.";
+  toast("Commande enregistrée.","success");
+  setTimeout(()=>closeAll(),1500);
  }catch(err){
   console.error(err);
-  if(deducted){
-   $("orderStatus").textContent="Le débit a été effectué mais l'enregistrement a échoué. Contacte le support avant de recommencer.";
-   showToast("Erreur après débit : vérification nécessaire.","error");
-  }else{
-   $("orderStatus").textContent="Erreur Firebase. Vérifie ta connexion et les règles de la base.";
-   showToast("Commande non confirmée.","error");
-  }
+  $("orderStatus").textContent=deducted
+   ?"Erreur après débit. Contacte le support avant de recommencer."
+   :"Erreur Firebase. Vérifie les règles et la connexion.";
+  toast("Échec de l'enregistrement.","error");
  }finally{
-  busy=false;
-  $("submitOrder").disabled=false;
+  submitting=false;
+  $("orderSubmit").disabled=false;
  }
 });
 
-async function postAPI(path,payload){
+async function postApi(path,payload){
  const response=await fetch(API_BASE+path,{
   method:"POST",
   headers:{"Content-Type":"application/json"},
@@ -824,217 +630,128 @@ async function postAPI(path,payload){
  const raw=await response.text();
  let data;
  try{data=JSON.parse(raw)}catch{data={response:raw}}
- if(!response.ok)throw new Error(data.message||data.error||`HTTP ${response.status}`);
+ if(!response.ok)throw Error(data.message||data.error||"HTTP "+response.status);
  return data;
 }
 
-window.testMusicAPI=async()=>{
+window.testMusic=async()=>{
+ const content=$("musicContent").value.trim();
+ if(!content){toast("Écris une idée ou des paroles.","error");return}
+ $("musicResult").textContent="Génération en cours…";
+ $("musicTest").disabled=true;
+ try{
+  const title=$("musicTitle").value.trim()||"Sans titre";
+  const prompt=$("musicMode").value==="idea"
+   ?`Crée une chanson originale. Titre : ${title}. Style : ${$("musicStyle").value}. Idée : ${content}`
+   :`Titre : ${title}. Style : ${$("musicStyle").value}. Paroles fournies : ${content}`;
+  const data=await postApi("/api/media/music",{
+   prompt,duration:Math.min(300,Math.max(1,Number($("musicDuration").value)||30))
+  });
+  result("musicResult",data);
+ }catch(err){result("musicResult","Erreur : "+err.message)}
+ finally{$("musicTest").disabled=false}
+};
+window.orderMusic=()=>{
  const title=$("musicTitle").value.trim();
  const content=$("musicContent").value.trim();
- if(!content){showToast("Ajoute des paroles ou une idée.","error");return}
- $("musicResult").textContent="Test de l'API en cours…";
- try{
-  const mode=$("musicMode").value;
-  const prompt=mode==="full"
-   ?`Titre : ${title||"Sans titre"}. Style : ${$("musicStyle").value}. Paroles fournies : ${content}`
-   :`Crée une chanson originale. Titre : ${title||"Sans titre"}. Style : ${$("musicStyle").value}. Idée : ${content}`;
-  const result=await postAPI("/api/media/music",{
-   prompt,duration:Math.max(1,Math.min(300,Number($("musicDuration").value)||15))
-  });
-  safeShowResult("musicResult",result);
- }catch(err){safeShowResult("musicResult","Erreur : "+err.message)}
-};
-
-window.orderMusic=()=>{
- musicOrderData={
-  titre:$("musicTitle").value.trim(),
-  mode:$("musicMode").value,
-  style:$("musicStyle").value,
-  paroles:$("musicContent").value.trim()
- };
- if(!musicOrderData.titre||!musicOrderData.paroles){
-  showToast("Renseigne le titre et le contenu.","error");return;
- }
- openOrder({id:"chanson",nom:"Création musicale : "+musicOrderData.titre,prix:5000,fields:[
-  {name:"titre",label:"Titre",required:true},
-  {name:"style",label:"Style",required:true},
-  {name:"paroles",label:"Paroles ou idée",type:"textarea",required:true}
- ]});
- $("dynamicFields").querySelector('[name="titre"]').value=musicOrderData.titre;
- $("dynamicFields").querySelector('[name="style"]').value=musicOrderData.style;
- $("dynamicFields").querySelector('[name="paroles"]').value=musicOrderData.paroles;
-};
-
-window.testChatbotAPI=async()=>{
- const msg=$("chatbotMessage").value.trim();
- if(!msg){showToast("Entre un message de test.","error");return}
- $("chatbotResult").textContent="Test du chatbot en cours…";
- try{
-  const result=await postAPI("/api/intelligence-artificielle/ai",{
-   message:msg,history:[],knowledge:$("chatbotKnowledge").value.trim()
-  });
-  safeShowResult("chatbotResult",result);
- }catch(err){safeShowResult("chatbotResult","Erreur : "+err.message)}
-};
-
-window.orderChatbot=()=>{
- const name=$("chatbotName").value.trim();
- if(!name){showToast("Donne un nom à ton chatbot.","error");return}
- chatbotOrderData={
-  nomBot:name,
-  plateforme:$("chatbotPlatform").value,
-  messageTest:$("chatbotMessage").value.trim(),
-  connaissances:$("chatbotKnowledge").value.trim()
- };
- openOrder({id:"chatbot",nom:"Chatbot IA : "+name,prix:7000,fields:[
-  {name:"nomBot",label:"Nom du chatbot",required:true},
-  {name:"plateforme",label:"Plateforme",required:true},
-  {name:"messageTest",label:"Message de test",type:"textarea"},
-  {name:"connaissances",label:"Connaissances",type:"textarea"}
- ]});
- Object.entries(chatbotOrderData).forEach(([k,v])=>{
-  const el=$("dynamicFields").querySelector(`[name="${k}"]`);
+ if(!title||!content){toast("Complète le titre et le contenu.","error");return}
+ openOrder({
+  id:"music",name:"Chanson · "+title,price:5000,
+  fields:[
+   {name:"titre",label:"Titre",required:true},
+   {name:"style",label:"Style musical",required:true},
+   {name:"mode",label:"Mode",required:true},
+   {name:"paroles",label:"Paroles ou idée",type:"textarea",required:true}
+  ]
+ });
+ const vals={titre:title,style:$("musicStyle").value,mode:$("musicMode").value,paroles:content};
+ Object.entries(vals).forEach(([k,v])=>{
+  const el=$("orderFields").querySelector(`[name="${k}"]`);
   if(el)el.value=v;
  });
 };
 
-window.testAdsAPI=async()=>{
+window.testAds=async()=>{
  $("adResult").textContent="Vérification de l'API…";
  try{
-  const result=await postAPI("/api/publicite/ads",{action:"catalog"});
-  safeShowResult("adResult",result);
- }catch(err){safeShowResult("adResult","Erreur : "+err.message)}
+  const data=await postApi("/api/publicite/ads",{action:"catalog"});
+  result("adResult",data);
+ }catch(err){result("adResult","Erreur : "+err.message)}
 };
-
-window.createAd=async()=>{
+window.submitAd=async()=>{
  const title=$("adTitle").value.trim();
  const description=$("adDesc").value.trim();
  const link=$("adLink").value.trim();
  const budget=Number($("adBudget").value);
  if(!title||!description||!Number.isFinite(budget)||budget<1000){
-  showToast("Renseigne le titre, la description et un budget minimum de 1 000 FC.","error");return;
+  toast("Complète le titre, la description et le budget minimum.","error");return;
  }
  if(link){
   try{const u=new URL(link);if(!["http:","https:"].includes(u.protocol))throw Error()}
-  catch{showToast("Le lien doit être une URL HTTP ou HTTPS valide.","error");return}
+  catch{toast("Le lien doit commencer par https:// ou http://","error");return}
  }
  $("adResult").textContent="Envoi de la demande…";
  try{
-  const result=await postAPI("/api/publicite/ads",{
-   action:"create",title,description,link,budget,createdAt:Date.now()
+  const data=await postApi("/api/publicite/ads",{
+   action:"create",title,description,link,budget,
+   platform:$("adPlatform").value,createdAt:Date.now()
   });
-  safeShowResult("adResult",result);
- }catch(err){safeShowResult("adResult","Erreur : "+err.message)}
+  result("adResult",data);
+ }catch(err){result("adResult","Erreur : "+err.message)}
 };
 
-function loadApis(focusUrl){
- $("apiBody").replaceChildren();
- API_DOCS.forEach((api,index)=>{
-  const card=document.createElement("article");
-  card.className="api-card";
-  if(api.url===focusUrl)card.style.borderColor="var(--gold)";
+function renderApis(){
+ $("apiList").replaceChildren();
+ apiDocs.forEach((api,index)=>{
+  const box=document.createElement("article");
+  box.className="api-item";
   const title=document.createElement("h3");
   title.textContent=api.name;
   const endpoint=document.createElement("div");
-  endpoint.className="api-url";
-  endpoint.textContent="POST "+API_BASE+api.url;
+  endpoint.className="endpoint";
+  endpoint.textContent="POST "+API_BASE+api.path;
   const input=document.createElement("textarea");
   input.className="textarea";
-  input.setAttribute("aria-label","Corps JSON pour "+api.name);
   input.value=JSON.stringify(api.body,null,2);
-  const button=document.createElement("button");
-  button.className="btn btn-secondary";
-  button.textContent="TESTER CETTE API";
-  const result=document.createElement("div");
-  result.id="apiResult"+index;
-  button.addEventListener("click",async()=>{
-   button.disabled=true;
-   result.textContent="Requête en cours…";
+  input.setAttribute("aria-label","JSON de "+api.name);
+  const btn=document.createElement("button");
+  btn.className="btn secondary";
+  btn.textContent="TESTER L'API";
+  const res=document.createElement("div");
+  res.id="apiRes"+index;
+  btn.onclick=async()=>{
+   btn.disabled=true;
+   res.textContent="Requête en cours…";
    try{
     const payload=JSON.parse(input.value);
-    const data=await postAPI(api.url,payload);
-    safeShowResult(result.id,data);
-   }catch(err){
-    safeShowResult(result.id,"Erreur : "+err.message);
-   }finally{button.disabled=false}
-  });
-  card.append(title,endpoint,input,button,result);
-  $("apiBody").appendChild(card);
+    const data=await postApi(api.path,payload);
+    result(res.id,data);
+   }catch(err){result(res.id,"Erreur : "+err.message)}
+   finally{btn.disabled=false}
+  };
+  box.append(title,endpoint,input,btn,res);
+  $("apiList").appendChild(box);
  });
 }
-window.testApi=async(url,id)=>{
- try{
-  const payload=JSON.parse($("api-"+id).value);
-  const data=await postAPI(url,payload);
-  safeShowResult("res-"+id,data);
- }catch(err){showToast("Erreur API : "+err.message,"error")}
-};
 
-window.genQR=()=>{
- const value=$("qrText").value.trim();
- if(!value){showToast("Entre un texte ou un lien.","error");return}
- const img=document.createElement("img");
- img.alt="QR Code généré";
- img.width=250;
- img.height=250;
- img.style.cssText="max-width:100%;background:white;padding:10px;border-radius:15px";
- img.src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="+encodeURIComponent(value);
- const result=$("qrResult");
- result.replaceChildren(img);
- const info=document.createElement("p");
- info.className="help";
- info.textContent="Le QR Code est fourni par un service externe. Une connexion Internet est nécessaire.";
- result.appendChild(info);
-};
-
-window.uploadHosting=async()=>{
- const file=$("fileHtml").files[0];
- if(!file){showToast("Sélectionne un fichier HTML.","error");return}
- if(file.size>5*1024*1024){showToast("Le fichier HTML dépasse 5 Mo.","error");return}
- try{
-  const content=await file.text();
-  $("hostResult").textContent=
-   `Fichier vérifié : ${file.name} (${file.size} octets). `+
-   `Nom du projet : ${$("siteName").value.trim()||"mon-site"}. `+
-   `Pour publier : crée un dépôt GitHub, envoie tes fichiers puis importe le dépôt dans Vercel.`;
-  if(!content.trim())showToast("Attention : le fichier HTML semble vide.","error");
-  else showToast("Fichier HTML lu avec succès.","success");
- }catch(err){
-  $("hostResult").textContent="Impossible de lire le fichier : "+err.message;
- }
-};
-
-window.connectVercel=()=>{
- let repo=$("gitRepo").value.trim();
- if(repo){
-  try{
-   const u=new URL(repo);
-   if(u.hostname!=="github.com"||u.protocol!=="https:")throw Error();
-   if(u.pathname.split("/").filter(Boolean).length<2)throw Error();
-  }catch{
-   showToast("Entre une URL de dépôt GitHub valide.","error");return;
-  }
-  window.open("https://vercel.com/new/import?s="+encodeURIComponent(repo)," _blank");
- }else{
-  window.open("https://vercel.com/new","_blank");
- }
-};
-
-document.addEventListener("keydown",e=>{
- if(e.key==="Escape")closeAll();
-});
+$("search").addEventListener("input",renderCreative);
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAll()});
 
 try{
  const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
  db=getDatabase(app);
- renderCards();
+ renderCreative();
+ renderPlatforms();
+ renderSmm();
  loadUser();
 }catch(err){
  console.error(err);
- renderCards();
+ renderCreative();
+ renderPlatforms();
+ renderSmm();
  $("balance").textContent="—";
- $("accountStatus").textContent="Firebase à configurer";
- showToast("Vérifie la configuration Firebase.","error");
+ $("accountStatus").textContent="Firebase non disponible";
+ toast("Vérifie la configuration Firebase.","error");
 }
 </script>
 </body>
