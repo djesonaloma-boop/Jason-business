@@ -18,38 +18,31 @@
   --text:#f5f7ff;
   --muted:#9caec7;
   --border:rgba(230,189,103,.22);
-  --danger:#ff647c;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0;background:
-  radial-gradient(circle at top right,#10264a 0,transparent 34%),
-  var(--bg);
-  color:var(--text);font-family:Arial,Helvetica,sans-serif;
+  margin:0;
+  background:radial-gradient(circle at top right,#10264a 0,transparent 34%),var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
   min-height:100vh;
 }
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-button:disabled{opacity:.5;cursor:not-allowed}
 .container{max-width:1000px;margin:auto;padding:16px 14px 100px}
-header{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:12px;padding:14px 0 22px;
-}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0 22px}
 .brand{display:flex;align-items:center;gap:10px}
 .logo{
-  width:46px;height:46px;border-radius:15px;
-  display:grid;place-items:center;font-weight:900;font-size:20px;
-  color:#07101e;background:linear-gradient(135deg,#ffe5a0,var(--gold));
+  width:46px;height:46px;border-radius:15px;display:grid;place-items:center;
+  font-weight:900;font-size:20px;color:#07101e;
+  background:linear-gradient(135deg,#ffe5a0,var(--gold));
   box-shadow:0 0 25px #e6bd6730;
 }
 .brand h1{font-size:17px;margin:0;letter-spacing:1px}
 .brand p{font-size:11px;color:var(--muted);margin:5px 0 0}
-.status{
-  color:var(--green);font-size:11px;border:1px solid #28d99a45;
-  padding:7px 10px;border-radius:20px;white-space:nowrap;
-}
+.gold{color:var(--gold)}
+.status{color:var(--green);font-size:11px;border:1px solid #28d99a45;padding:7px 10px;border-radius:20px;white-space:nowrap}
 .hero{
   padding:25px 20px;border:1px solid var(--border);border-radius:24px;
   background:linear-gradient(135deg,#142746,#0d1729 65%,#182238);
@@ -57,15 +50,14 @@ header{
 }
 .hero:after{
   content:"";position:absolute;width:180px;height:180px;border-radius:50%;
-  right:-70px;top:-70px;background:#168cff1b;filter:blur(8px);
+  right:-70px;top:-70px;background:#168cff1b;filter:blur(8px);pointer-events:none;
 }
 .eyebrow{font-size:11px;letter-spacing:2px;color:var(--gold);font-weight:bold}
 .hero h2{font-size:clamp(25px,6vw,37px);line-height:1.16;margin:12px 0}
 .hero p{color:var(--muted);line-height:1.65;font-size:13px;max-width:570px}
-.gold{color:var(--gold)}
 .balance{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:10px;margin-top:20px;padding:14px;background:#07101c88;
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  margin-top:20px;padding:14px;background:#07101c88;
   border:1px solid #ffffff12;border-radius:16px;
 }
 .balance small{color:var(--muted);font-size:11px}
@@ -77,8 +69,8 @@ header{
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .card{
   background:linear-gradient(145deg,#12213a,#0c1627);
-  border:1px solid var(--border);border-radius:18px;padding:16px;
-  min-width:0;transition:.2s;
+  border:1px solid var(--border);border-radius:18px;padding:16px;min-width:0;
+  transition:transform .2s,border-color .2s;
 }
 .card:active{transform:scale(.985)}
 .card h4{font-size:14px;margin:11px 0 7px}
@@ -88,38 +80,31 @@ header{
   font-size:22px;background:#168cff19;border:1px solid #168cff40;
 }
 .btn{
-  border:0;border-radius:12px;padding:12px 14px;font-weight:bold;
-  color:#fff;background:linear-gradient(100deg,#147be8,#168cff);
+  border:0;border-radius:12px;padding:12px 14px;font-weight:bold;color:#fff;
+  background:linear-gradient(100deg,#147be8,#168cff);
   box-shadow:0 6px 18px #168cff20;
 }
 .btn-gold{background:linear-gradient(100deg,#c08a2c,#f1d48b);color:#12100a}
 .btn-dark{background:#182943;border:1px solid #ffffff16;color:#e8efff}
 .btn-block{width:100%}
 .small-btn{padding:9px 11px;font-size:12px}
-.full{grid-column:1/-1}
 .note{font-size:11px;color:var(--muted);line-height:1.6}
-.search{
-  width:100%;background:#091323;border:1px solid #ffffff1c;color:white;
-  border-radius:12px;padding:13px;margin-bottom:12px;outline:none;
+.search,.field input,.field select,.field textarea{
+  width:100%;background:#081222;border:1px solid #ffffff1b;color:white;
+  border-radius:12px;padding:13px;outline:none;
 }
-input:focus,select:focus,textarea:focus{border-color:var(--blue)!important}
+.search{margin-bottom:12px}
 .field{margin-bottom:14px}
 .field label{display:block;font-size:12px;color:#c5d2e5;margin-bottom:7px}
-.field input,.field select,.field textarea{
-  width:100%;padding:13px;border:1px solid #ffffff1b;border-radius:12px;
-  color:white;background:#081222;outline:none;
-}
 .field select option{background:#0d1729}
 .field textarea{min-height:75px;resize:vertical}
-.price-box{
-  padding:14px;border-radius:14px;background:#07101d;
-  border:1px solid var(--border);margin:12px 0;
-}
+input:focus,select:focus,textarea:focus{border-color:var(--blue)}
+.price-box{padding:14px;border-radius:14px;background:#07101d;border:1px solid var(--border);margin:12px 0}
 .price-box div{display:flex;justify-content:space-between;gap:10px;margin:7px 0;font-size:12px}
 .price-box strong{color:var(--gold)}
 .overlay{
-  display:none;position:fixed;inset:0;background:#02050be8;
-  z-index:1000;padding:16px;overflow-y:auto;align-items:center;justify-content:center;
+  display:none;position:fixed;inset:0;background:#02050be8;z-index:1000;
+  padding:16px;overflow-y:auto;align-items:center;justify-content:center;
 }
 .overlay.show{display:flex}
 .modal{
@@ -130,21 +115,19 @@ input:focus,select:focus,textarea:focus{border-color:var(--blue)!important}
 }
 .modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
 .modal-head h3{font-size:18px;margin:0}
-.close{
-  width:35px;height:35px;border-radius:11px;border:1px solid #ffffff1c;
-  background:#17253b;color:white;font-size:20px;
-}
+.close{width:35px;height:35px;border-radius:11px;border:1px solid #ffffff1c;background:#17253b;color:white;font-size:20px}
 .platform-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .platform{
   background:#0a1424;border:1px solid #ffffff18;border-radius:15px;
   padding:13px 6px;text-align:center;color:white;min-width:0;
+  transition:.2s;
 }
 .platform:active{transform:scale(.96)}
 .platform img{width:34px;height:34px;object-fit:contain;display:block;margin:0 auto 9px}
 .platform span{display:block;font-size:11px;overflow-wrap:anywhere}
 .platform:hover{border-color:var(--gold)}
-.platform.selected{border-color:var(--gold);background:#e6bd6712}
 .empty{padding:20px;text-align:center;color:var(--muted);font-size:13px}
+.hidden{display:none!important}
 .toast{
   position:fixed;left:50%;bottom:86px;transform:translate(-50%,20px);
   opacity:0;pointer-events:none;z-index:3000;background:#12213a;
@@ -158,15 +141,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--blue)!important}
   background:#07101df2;backdrop-filter:blur(16px);
   border-top:1px solid #ffffff14;padding:9px 4px calc(9px + env(safe-area-inset-bottom));
 }
-.bottom-nav button{
-  flex:1;background:transparent;border:0;color:var(--muted);
-  font-size:10px;padding:6px 2px;
-}
+.bottom-nav button{flex:1;background:transparent;border:0;color:var(--muted);font-size:10px;padding:6px 2px}
 .bottom-nav button span{display:block;font-size:19px;margin-bottom:4px}
 .bottom-nav button.active{color:var(--gold)}
-.hidden{display:none!important}
-hr{border:0;border-top:1px solid #ffffff12;margin:18px 0}
 footer{text-align:center;padding:25px 8px;color:var(--muted);font-size:11px;line-height:1.7}
+hr{border:0;border-top:1px solid #ffffff12;margin:18px 0}
 @media(min-width:650px){
  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
  .hero{padding:34px}
@@ -191,119 +170,99 @@ footer{text-align:center;padding:25px 8px;color:var(--muted);font-size:11px;line
 <section class="hero">
   <div class="eyebrow">VOTRE UNIVERS DIGITAL</div>
   <h2>Développez vos projets avec <span class="gold">JASON BUSINESS</span></h2>
-  <p>Commandez des services numériques, développez votre présence en ligne et découvrez nos solutions digitales depuis votre téléphone.</p>
+  <p>Commandez vos services numériques directement depuis votre téléphone.</p>
   <div class="balance">
-    <div>
-      <small>Solde principal</small>
-      <strong id="balanceValue">0 FC</strong>
-    </div>
+    <div><small>Solde principal</small><strong id="balanceValue">0 FC</strong></div>
     <button class="btn btn-gold small-btn" id="refreshBalance">Actualiser</button>
   </div>
-  <p class="note" id="accountMessage">Connexion au compte en cours…</p>
+  <p class="note" id="accountMessage">Connexion au compte…</p>
 </section>
 
-<!-- ACCUEIL : LES PLATEFORMES SOCIALES NE SONT PAS AFFICHÉES ICI -->
+<!-- ACCUEIL : AUCUN LOGO SOCIAL N'EST AFFICHÉ ICI -->
 <section class="section" id="homeSection">
-  <div class="section-title">
-    <h3>Nos services</h3>
-    <span>Choisissez un service</span>
-  </div>
-
+  <div class="section-title"><h3>Nos services</h3><span>Choisissez un service</span></div>
   <div class="grid">
     <article class="card">
       <div class="card-icon">🌐</div>
       <h4>Réseaux sociaux</h4>
-      <p>Choisissez une plateforme et consultez les services disponibles.</p>
+      <p>Créez votre commande de boost en choisissant vous-même le réseau et le service.</p>
       <button class="btn btn-gold btn-block" id="openSocialButton">RÉSEAUX SOCIAUX</button>
     </article>
-
     <article class="card">
       <div class="card-icon">🎵</div>
       <h4>Création musicale</h4>
-      <p>Demandez une chanson personnalisée pour votre projet ou votre événement.</p>
+      <p>Demandez une chanson personnalisée pour votre projet ou événement.</p>
       <button class="btn btn-block" id="openMusicButton">Commander</button>
     </article>
-
     <article class="card">
       <div class="card-icon">📢</div>
       <h4>Publicité digitale</h4>
       <p>Préparez une demande de publicité et de promotion.</p>
       <button class="btn btn-block" id="openAdsButton">Découvrir</button>
     </article>
-
     <article class="card">
       <div class="card-icon">💻</div>
       <h4>Site web</h4>
-      <p>Création de site vitrine, site professionnel ou boutique en ligne.</p>
+      <p>Site vitrine, site professionnel ou boutique en ligne.</p>
       <button class="btn btn-block creative-button" data-service="Site web">Commander</button>
     </article>
-
     <article class="card">
       <div class="card-icon">📱</div>
       <h4>Application mobile</h4>
-      <p>Présentez votre idée d'application et demandez une création.</p>
+      <p>Présentez votre idée d'application mobile.</p>
       <button class="btn btn-block creative-button" data-service="Application mobile">Commander</button>
     </article>
-
     <article class="card">
       <div class="card-icon">🤖</div>
       <h4>Création de chatbot</h4>
-      <p>Assistant conversationnel pour votre activité ou votre entreprise.</p>
+      <p>Assistant conversationnel pour votre entreprise.</p>
       <button class="btn btn-block creative-button" data-service="Chatbot">Commander</button>
     </article>
-
     <article class="card">
       <div class="card-icon">🔌</div>
       <h4>Catalogue API</h4>
-      <p>Découvrez les API disponibles pour vos projets numériques.</p>
+      <p>Demandez un accès aux API de vos projets.</p>
       <button class="btn btn-block" id="openApiButton">Voir les API</button>
     </article>
   </div>
 </section>
 
-<section class="section" id="ordersSection">
+<section class="section">
   <div class="section-title">
     <h3>Mes commandes</h3>
     <button class="btn btn-dark small-btn" id="refreshOrders">Actualiser</button>
   </div>
-  <div id="ordersList" class="card">
-    <div class="empty">Les commandes apparaîtront ici.</div>
-  </div>
+  <div id="ordersList" class="card"><div class="empty">Les commandes apparaîtront ici.</div></div>
 </section>
 
-<footer>
-  <strong class="gold">JASON BUSINESS</strong><br>
-  Web • Design • Digital • IA<br>
-  Créé par Jason Aloma 🇨🇩
-</footer>
+<footer><strong class="gold">JASON BUSINESS</strong><br>Web • Design • Digital • IA<br>Créé par Jason Aloma 🇨🇩</footer>
 </div>
 
-<!-- FENÊTRE DES PLATEFORMES : VISIBLE UNIQUEMENT APRÈS UN CLIC -->
+<!-- LES PLATEFORMES N'APPARAISSENT QUE DANS CETTE FENÊTRE -->
 <div class="overlay" id="smmModal">
   <div class="modal">
     <div class="modal-head">
-      <h3 id="smmTitle">Réseaux sociaux</h3>
-      <button class="close" data-close="smmModal" aria-label="Fermer">×</button>
+      <h3 id="smmTitle">Choisir un réseau social</h3>
+      <button class="close" data-close="smmModal">×</button>
     </div>
 
     <div id="platformChooser">
-      <p class="note">Sélectionnez une plateforme pour afficher les services disponibles.</p>
-      <input class="search" id="platformSearch" placeholder="Rechercher une plateforme…">
+      <p class="note">Choisissez une plateforme pour créer votre commande vous-même.</p>
+      <input class="search" id="platformSearch" placeholder="Rechercher Facebook, TikTok, Spotify…">
       <div class="platform-grid" id="platformGrid"></div>
     </div>
 
     <div id="platformServices" class="hidden">
-      <button class="btn btn-dark small-btn" id="backToPlatforms">← Toutes les plateformes</button>
+      <button class="btn btn-dark small-btn" id="backToPlatforms">← Retour aux réseaux</button>
       <hr>
       <div id="selectedPlatformInfo"></div>
-
       <form id="smmForm">
         <div class="field">
-          <label for="smmService">Service souhaité</label>
+          <label for="smmService">Type de boost</label>
           <select id="smmService" required></select>
         </div>
         <div class="field">
-          <label for="smmLink">Lien du profil, de la publication ou du contenu</label>
+          <label for="smmLink">Lien public du profil ou du contenu</label>
           <input id="smmLink" type="url" placeholder="https://…" required>
         </div>
         <div class="field">
@@ -311,134 +270,86 @@ footer{text-align:center;padding:25px 8px;color:var(--muted);font-size:11px;line
           <input id="smmQuantity" type="number" min="10" step="1" value="10" required>
         </div>
         <div class="field">
-          <label for="smmNotes">Informations supplémentaires (facultatif)</label>
-          <textarea id="smmNotes" placeholder="Précisions concernant votre commande…"></textarea>
+          <label for="smmNotes">Instructions facultatives</label>
+          <textarea id="smmNotes" placeholder="Précisions utiles…"></textarea>
         </div>
         <div class="price-box">
           <div><span>Prix estimé</span><strong id="smmPrice">0 FC</strong></div>
-          <div><span>Votre solde</span><strong id="smmBalance">0 FC</strong></div>
-          <p class="note">Le prix affiché est une estimation basée sur le tarif de référence configuré dans cette page.</p>
+          <div><span>Solde disponible</span><strong id="smmBalance">0 FC</strong></div>
+          <p class="note">Le tarif est indicatif jusqu'à la configuration d'un véritable fournisseur.</p>
         </div>
-        <button class="btn btn-gold btn-block" type="submit" id="submitSmm">Envoyer la commande</button>
+        <button class="btn btn-gold btn-block" type="submit" id="submitSmm">Confirmer ma commande</button>
       </form>
     </div>
   </div>
 </div>
 
-<!-- MODALE MUSIQUE -->
 <div class="overlay" id="musicModal">
   <div class="modal">
-    <div class="modal-head">
-      <h3>🎵 Création musicale</h3>
-      <button class="close" data-close="musicModal">×</button>
-    </div>
+    <div class="modal-head"><h3>🎵 Création musicale</h3><button class="close" data-close="musicModal">×</button></div>
     <form id="musicForm">
-      <div class="field">
-        <label for="musicTitle">Titre de la chanson</label>
-        <input id="musicTitle" required placeholder="Titre souhaité">
-      </div>
-      <div class="field">
-        <label for="musicStyle">Style musical</label>
+      <div class="field"><label for="musicTitle">Titre</label><input id="musicTitle" required></div>
+      <div class="field"><label for="musicStyle">Style musical</label>
         <select id="musicStyle" required>
           <option value="">Choisir un style</option>
           <option>Gospel</option><option>Afrobeat</option><option>Rap</option>
-          <option>Rumba congolaise</option><option>Amour</option>
-          <option>Anniversaire</option><option>Mariage</option>
-          <option>Hommage</option><option>Ambiance</option>
+          <option>Rumba congolaise</option><option>Amour</option><option>Anniversaire</option>
+          <option>Mariage</option><option>Hommage</option><option>Ambiance</option>
         </select>
       </div>
-      <div class="field">
-        <label for="musicLyrics">Paroles ou idée de la chanson</label>
-        <textarea id="musicLyrics" required placeholder="Décrivez votre chanson…"></textarea>
-      </div>
-      <div class="price-box">
-        <div><span>Prix de référence</span><strong>5 000 FC</strong></div>
-      </div>
+      <div class="field"><label for="musicLyrics">Paroles ou idée</label><textarea id="musicLyrics" required></textarea></div>
+      <div class="price-box"><div><span>Prix de référence</span><strong>5 000 FC</strong></div></div>
       <button class="btn btn-gold btn-block" type="submit">Envoyer la demande</button>
     </form>
   </div>
 </div>
 
-<!-- MODALE PUBLICITÉ -->
 <div class="overlay" id="adsModal">
   <div class="modal">
-    <div class="modal-head">
-      <h3>📢 Publicité digitale</h3>
-      <button class="close" data-close="adsModal">×</button>
-    </div>
+    <div class="modal-head"><h3>📢 Publicité digitale</h3><button class="close" data-close="adsModal">×</button></div>
     <form id="adsForm">
-      <div class="field">
-        <label for="adsType">Type de publicité</label>
+      <div class="field"><label for="adsType">Type de publicité</label>
         <select id="adsType" required>
-          <option value="">Choisir</option>
-          <option>Promotion d'une entreprise</option>
-          <option>Promotion d'un produit</option>
-          <option>Promotion d'une page</option>
+          <option value="">Choisir</option><option>Promotion d'une entreprise</option>
+          <option>Promotion d'un produit</option><option>Promotion d'une page</option>
           <option>Campagne personnalisée</option>
         </select>
       </div>
-      <div class="field">
-        <label for="adsLink">Lien à promouvoir (facultatif)</label>
-        <input id="adsLink" type="url" placeholder="https://…">
-      </div>
-      <div class="field">
-        <label for="adsDescription">Description de votre besoin</label>
-        <textarea id="adsDescription" required placeholder="Décrivez votre objectif et votre public…"></textarea>
-      </div>
-      <p class="note">Le tarif sera confirmé après examen de votre demande.</p>
+      <div class="field"><label for="adsLink">Lien à promouvoir (facultatif)</label><input id="adsLink" type="url" placeholder="https://…"></div>
+      <div class="field"><label for="adsDescription">Description</label><textarea id="adsDescription" required></textarea></div>
+      <p class="note">Le tarif sera confirmé après examen de la demande.</p>
       <button class="btn btn-gold btn-block" type="submit">Envoyer la demande</button>
     </form>
   </div>
 </div>
 
-<!-- MODALE SERVICES CRÉATIFS -->
 <div class="overlay" id="orderModal">
   <div class="modal">
-    <div class="modal-head">
-      <h3 id="creativeTitle">Commander un service</h3>
-      <button class="close" data-close="orderModal">×</button>
-    </div>
+    <div class="modal-head"><h3 id="creativeTitle">Commander un service</h3><button class="close" data-close="orderModal">×</button></div>
     <form id="creativeForm">
       <input type="hidden" id="creativeService">
-      <div class="field">
-        <label for="creativeDescription">Décrivez votre projet</label>
-        <textarea id="creativeDescription" required placeholder="Expliquez ce que vous souhaitez…"></textarea>
-      </div>
-      <div class="price-box">
-        <div><span>Prix de référence</span><strong id="creativePrice">Sur devis</strong></div>
-      </div>
+      <div class="field"><label for="creativeDescription">Description du projet</label><textarea id="creativeDescription" required></textarea></div>
+      <div class="price-box"><div><span>Prix de référence</span><strong id="creativePrice">Sur devis</strong></div></div>
       <button class="btn btn-gold btn-block" type="submit">Envoyer la demande</button>
     </form>
   </div>
 </div>
 
-<!-- MODALE API -->
 <div class="overlay" id="apiModal">
   <div class="modal">
-    <div class="modal-head">
-      <h3>🔌 Catalogue API</h3>
-      <button class="close" data-close="apiModal">×</button>
-    </div>
-    <p class="note">Sélectionnez une API pour demander des informations ou un accès. La disponibilité réelle dépend du serveur fournisseur.</p>
+    <div class="modal-head"><h3>🔌 Catalogue API</h3><button class="close" data-close="apiModal">×</button></div>
+    <p class="note">Choisissez une API pour demander un accès. Les routes affichées ne garantissent pas que le service soit disponible.</p>
     <div class="grid" id="apiGrid"></div>
   </div>
 </div>
 
-<!-- MODALE PROFIL -->
 <div class="overlay" id="profileModal">
   <div class="modal">
-    <div class="modal-head">
-      <h3>👤 Mon compte</h3>
-      <button class="close" data-close="profileModal">×</button>
-    </div>
+    <div class="modal-head"><h3>👤 Mon compte</h3><button class="close" data-close="profileModal">×</button></div>
     <div class="card">
-      <p class="note">Téléphone associé à cette session</p>
-      <strong id="profilePhone">Non identifié</strong>
-      <hr>
-      <p class="note">Solde disponible</p>
-      <strong id="profileBalance" class="gold">0 FC</strong>
+      <p class="note">Téléphone de session</p><strong id="profilePhone">Non identifié</strong>
+      <hr><p class="note">Solde disponible</p><strong id="profileBalance" class="gold">0 FC</strong>
     </div>
-    <p class="note">Pour les dépôts, retraits ou corrections de compte, utilisez les fonctions de votre espace client connecté.</p>
   </div>
 </div>
 
@@ -453,615 +364,410 @@ footer{text-align:center;padding:25px 8px;color:var(--muted);font-size:11px;line
 </nav>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
-  getDatabase, ref, get, set, push, runTransaction
+  getDatabase,ref,get,set,push,runTransaction
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
-  authDomain: "starlink-investit.firebaseapp.com",
-  databaseURL: "https://starlink-investit-default-rtdb.firebaseio.com",
-  projectId: "starlink-investit",
-  storageBucket: "starlink-investit.firebasestorage.app",
-  messagingSenderId: "807081599583",
-  appId: "1:807081599583:web:e00ec3959bc4acdae031ea"
+const firebaseConfig={
+  apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
+  authDomain:"starlink-investit.firebaseapp.com",
+  databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
+  projectId:"starlink-investit",
+  storageBucket:"starlink-investit.firebasestorage.app",
+  messagingSenderId:"807081599583",
+  appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
 };
 
-const API_BASE = "https://davbot-outils.vercel.app";
-const USERS_PATH = "jasonBusiness/users";
-const COMMANDS_PATH = "jasonBusiness/demandes_commandes";
+const USERS_PATH="jasonBusiness/users";
+const COMMANDS_PATH="jasonBusiness/demandes_commandes";
+const $=id=>document.getElementById(id);
+const money=n=>Math.max(0,Number(n)||0).toLocaleString("fr-FR")+" FC";
 
-const $ = id => document.getElementById(id);
-let db = null;
-let currentPhone = "";
-let currentUser = {};
-let selectedPlatform = null;
-let currentSmmPrice = 0;
-let busy = false;
+let db=null,currentPhone="",currentUser={},selectedPlatform=null,busy=false;
 
-const money = value =>
-  Math.max(0, Number(value) || 0).toLocaleString("fr-FR") + " FC";
-
-function toast(message) {
-  const el = $("toast");
-  el.textContent = message;
-  el.classList.add("show");
+function toast(message){
+  const el=$("toast");el.textContent=message;el.classList.add("show");
   clearTimeout(toast.timer);
-  toast.timer = setTimeout(() => el.classList.remove("show"), 3000);
+  toast.timer=setTimeout(()=>el.classList.remove("show"),3000);
 }
+function openModal(id){$(id).classList.add("show")}
+function closeModal(id){$(id).classList.remove("show")}
+function closeAllModals(){document.querySelectorAll(".overlay").forEach(x=>x.classList.remove("show"))}
 
-function openModal(id) {
-  $(id).classList.add("show");
+document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>closeModal(b.dataset.close)));
+document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)o.classList.remove("show")}));
+
+function escapeHTML(v){
+  return String(v??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
 }
-
-function closeModal(id) {
-  $(id).classList.remove("show");
+function getPhone(){
+  return (localStorage.getItem("jasonBusinessPhone")||
+    localStorage.getItem("userPhone")||
+    localStorage.getItem("telephone")||
+    localStorage.getItem("phone")||"").trim();
 }
-
-document.querySelectorAll("[data-close]").forEach(button => {
-  button.addEventListener("click", () => closeModal(button.dataset.close));
-});
-
-document.querySelectorAll(".overlay").forEach(overlay => {
-  overlay.addEventListener("click", event => {
-    if (event.target === overlay) overlay.classList.remove("show");
-  });
-});
-
-function getPhone() {
-  return (
-    localStorage.getItem("jasonBusinessPhone") ||
-    localStorage.getItem("userPhone") ||
-    localStorage.getItem("telephone") ||
-    localStorage.getItem("phone") ||
-    ""
-  ).trim();
+function getBalance(user){
+  return Number(user?.solde_principal??user?.solde??0)||0;
 }
-
-function getBalance(user) {
-  return Number(user?.solde_principal ?? user?.solde ?? 0) || 0;
+function updateBalanceUI(){
+  $("balanceValue").textContent=money(getBalance(currentUser));
+  $("smmBalance").textContent=money(getBalance(currentUser));
+  $("profileBalance").textContent=money(getBalance(currentUser));
+  $("profilePhone").textContent=currentPhone||"Non identifié";
 }
-
-function updateBalanceUI() {
-  const balance = getBalance(currentUser);
-  $("balanceValue").textContent = money(balance);
-  $("smmBalance").textContent = money(balance);
-  $("profileBalance").textContent = money(balance);
-  $("profilePhone").textContent = currentPhone || "Non identifié";
-}
-
-async function initFirebase() {
-  try {
-    const app = initializeApp(firebaseConfig);
-    db = getDatabase(app);
-    currentPhone = getPhone();
-
-    if (!currentPhone) {
-      $("accountMessage").textContent =
-        "Aucun téléphone de session trouvé. Connectez-vous depuis votre espace client.";
-      updateBalanceUI();
-      return;
+async function initFirebase(){
+  try{
+    db=getDatabase(initializeApp(firebaseConfig));
+    currentPhone=getPhone();
+    if(!currentPhone){
+      $("accountMessage").textContent="Connectez-vous depuis votre espace client pour utiliser votre solde.";
+      updateBalanceUI();return;
     }
-
-    $("accountMessage").textContent = "Compte : " + currentPhone;
-    await loadUser();
-    await loadOrders();
-  } catch (error) {
-    console.error(error);
-    $("accountMessage").textContent =
-      "Connexion à Firebase impossible. Vérifiez la configuration et les règles de la base.";
-    toast("Erreur de connexion à la base de données.");
+    $("accountMessage").textContent="Compte : "+currentPhone;
+    await loadUser();await loadOrders();
+  }catch(e){
+    console.error(e);
+    $("accountMessage").textContent="Connexion Firebase impossible. Vérifiez la configuration.";
+    toast("Erreur de connexion Firebase.");
   }
 }
-
-async function loadUser() {
-  if (!db || !currentPhone) return;
-  try {
-    const snapshot = await get(ref(db, `${USERS_PATH}/${currentPhone}`));
-    currentUser = snapshot.exists() ? snapshot.val() : {};
+async function loadUser(){
+  if(!db||!currentPhone)return;
+  try{
+    const s=await get(ref(db,`${USERS_PATH}/${currentPhone}`));
+    currentUser=s.exists()?s.val():{};
     updateBalanceUI();
-  } catch (error) {
-    console.error(error);
-    toast("Impossible de lire le compte.");
-  }
+  }catch(e){console.error(e);toast("Impossible de lire le compte.")}
 }
-
-async function loadOrders() {
-  if (!db || !currentPhone) return;
-  try {
-    const snapshot = await get(ref(db, COMMANDS_PATH));
-    const data = snapshot.exists() ? snapshot.val() : {};
-    const orders = Object.entries(data)
-      .filter(([key, order]) =>
-        order && String(order.telephone || order.phone || "") === currentPhone
-      )
-      .map(([id, order]) => ({ id, ...order }))
-      .sort((a, b) => (Number(b.createdAt) || 0) - (Number(a.createdAt) || 0))
-      .slice(0, 15);
-
-    const container = $("ordersList");
-    if (!orders.length) {
-      container.innerHTML = '<div class="empty">Aucune commande trouvée.</div>';
-      return;
-    }
-
-    container.innerHTML = orders.map(order => `
+async function loadOrders(){
+  if(!db||!currentPhone)return;
+  try{
+    const s=await get(ref(db,COMMANDS_PATH));
+    const data=s.exists()?s.val():{};
+    const orders=Object.entries(data)
+      .filter(([id,o])=>o&&String(o.telephone||o.phone||"")===currentPhone)
+      .map(([id,o])=>({id,...o}))
+      .sort((a,b)=>(Number(b.createdAt)||0)-(Number(a.createdAt)||0)).slice(0,15);
+    $("ordersList").innerHTML=orders.length?orders.map(o=>`
       <div style="padding:10px 0;border-bottom:1px solid #ffffff12">
-        <strong>${escapeHTML(order.service || order.categorie || "Commande")}</strong>
-        <p class="note">${escapeHTML(order.statut || "En attente")} · ${money(order.prix || order.montant || 0)}</p>
-      </div>
-    `).join("");
-  } catch (error) {
-    console.error(error);
-    $("ordersList").innerHTML =
-      '<div class="empty">Impossible de charger les commandes.</div>';
-  }
+        <strong>${escapeHTML(o.service||o.categorie||"Commande")}</strong>
+        <p class="note">${escapeHTML(o.statut||"En attente")} · ${money(o.prix||o.montant||0)}</p>
+      </div>`).join(""):'<div class="empty">Aucune commande trouvée.</div>';
+  }catch(e){console.error(e);$("ordersList").innerHTML='<div class="empty">Chargement impossible.</div>'}
+}
+async function saveOrder(order){
+  if(!db)return toast("Firebase n'est pas connecté."),false;
+  if(!currentPhone)return toast("Connectez-vous avant de commander."),false;
+  try{
+    const orderRef=push(ref(db,COMMANDS_PATH));
+    await set(orderRef,{...order,telephone:currentPhone,statut:"En attente",createdAt:Date.now()});
+    await loadOrders();return true;
+  }catch(e){console.error(e);toast("Impossible d'enregistrer la commande.");return false}
 }
 
-function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, char => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;",
-    '"': "&quot;", "'": "&#39;"
-  }[char]));
-}
-
-async function saveOrder(order) {
-  if (!db) {
-    toast("Firebase n'est pas connecté.");
-    return false;
-  }
-  if (!currentPhone) {
-    toast("Connectez-vous à votre compte avant de commander.");
-    return false;
-  }
-  try {
-    const orderRef = push(ref(db, COMMANDS_PATH));
-    await set(orderRef, {
-      ...order,
-      telephone: currentPhone,
-      statut: "En attente",
-      createdAt: Date.now()
-    });
-    await loadOrders();
-    return true;
-  } catch (error) {
-    console.error(error);
-    toast("Impossible d'enregistrer la commande.");
-    return false;
-  }
-}
-
-/*
-  PLATEFORMES :
-  Les logos sont chargés sous forme de SVG depuis Simple Icons.
-  Ils sont créés dans la fenêtre uniquement, jamais sur l'accueil.
-*/
-const platforms = [
-  {id:"facebook",name:"Facebook",slug:"facebook",color:"1877F2"},
-  {id:"youtube",name:"YouTube",slug:"youtube",color:"FF0000"},
-  {id:"x",name:"X",slug:"x",color:"FFFFFF"},
-  {id:"whatsapp",name:"WhatsApp",slug:"whatsapp",color:"25D366"},
-  {id:"snapchat",name:"Snapchat",slug:"snapchat",color:"FFFC00"},
-  {id:"spotify",name:"Spotify",slug:"spotify",color:"1DB954"},
-  {id:"tiktok",name:"TikTok",slug:"tiktok",color:"FFFFFF"},
-  {id:"instagram",name:"Instagram",slug:"instagram",color:"E4405F"},
-  {id:"telegram",name:"Telegram",slug:"telegram",color:"26A5E4"},
-  {id:"messenger",name:"Messenger",slug:"messenger",color:"0866FF"},
-  {id:"threads",name:"Threads",slug:"threads",color:"FFFFFF"},
-  {id:"pinterest",name:"Pinterest",slug:"pinterest",color:"BD081C"},
-  {id:"linkedin",name:"LinkedIn",slug:"linkedin",color:"0A66C2"},
-  {id:"twitch",name:"Twitch",slug:"twitch",color:"9146FF"},
-  {id:"discord",name:"Discord",slug:"discord",color:"5865F2"},
-  {id:"reddit",name:"Reddit",slug:"reddit",color:"FF4500"},
-  {id:"soundcloud",name:"SoundCloud",slug:"soundcloud",color:"FF5500"},
-  {id:"viber",name:"Viber",slug:"viber",color:"7360F2"},
-  {id:"line",name:"LINE",slug:"line",color:"06C755"},
-  {id:"vk",name:"VK",slug:"vk",color:"0077FF"}
+/* Réseaux : les logos sont rendus uniquement dans la fenêtre de sélection. */
+const platforms=[
+ {id:"facebook",name:"Facebook",slug:"facebook",color:"1877F2"},
+ {id:"youtube",name:"YouTube",slug:"youtube",color:"FF0000"},
+ {id:"x",name:"X",slug:"x",color:"FFFFFF"},
+ {id:"whatsapp",name:"WhatsApp",slug:"whatsapp",color:"25D366"},
+ {id:"snapchat",name:"Snapchat",slug:"snapchat",color:"FFFC00"},
+ {id:"spotify",name:"Spotify",slug:"spotify",color:"1DB954"},
+ {id:"tiktok",name:"TikTok",slug:"tiktok",color:"FFFFFF"},
+ {id:"instagram",name:"Instagram",slug:"instagram",color:"E4405F"},
+ {id:"telegram",name:"Telegram",slug:"telegram",color:"26A5E4"},
+ {id:"messenger",name:"Messenger",slug:"messenger",color:"0866FF"},
+ {id:"threads",name:"Threads",slug:"threads",color:"FFFFFF"},
+ {id:"pinterest",name:"Pinterest",slug:"pinterest",color:"BD081C"},
+ {id:"linkedin",name:"LinkedIn",slug:"linkedin",color:"0A66C2"},
+ {id:"twitch",name:"Twitch",slug:"twitch",color:"9146FF"},
+ {id:"discord",name:"Discord",slug:"discord",color:"5865F2"},
+ {id:"reddit",name:"Reddit",slug:"reddit",color:"FF4500"},
+ {id:"soundcloud",name:"SoundCloud",slug:"soundcloud",color:"FF5500"},
+ {id:"viber",name:"Viber",slug:"viber",color:"7360F2"},
+ {id:"line",name:"LINE",slug:"line",color:"06C755"},
+ {id:"vk",name:"VK",slug:"vk",color:"0077FF"}
 ];
 
-const servicesByPlatform = {
-  facebook:["Abonnés","Likes","Vues","Commentaires","Partages","Réactions"],
-  youtube:["Abonnés","Likes","Vues","Commentaires","Partages"],
-  x:["Abonnés","Likes","Vues","Commentaires","Reposts"],
-  whatsapp:["Membres de communauté","Promotion de lien"],
-  snapchat:["Abonnés","Vues"],
-  spotify:["Écoutes","Abonnés au profil"],
-  tiktok:["Abonnés","Likes","Vues","Commentaires","Partages"],
-  instagram:["Abonnés","Likes","Vues","Commentaires","Partages"],
-  telegram:["Membres","Vues","Réactions","Partages"],
-  messenger:["Promotion de lien"],
-  threads:["Abonnés","Likes","Vues","Commentaires","Partages"],
-  pinterest:["Abonnés","Vues","Enregistrements"],
-  linkedin:["Abonnés","Réactions","Vues"],
-  twitch:["Abonnés","Vues"],
-  discord:["Membres"],
-  reddit:["Vues","Réactions"],
-  soundcloud:["Écoutes","Likes","Abonnés au profil"],
-  viber:["Membres"],
-  line:["Abonnés"],
-  vk:["Abonnés","Likes","Vues","Partages"]
+const servicesByPlatform={
+ facebook:["Abonnés","Likes","Vues","Commentaires","Partages","Réactions"],
+ youtube:["Abonnés","Likes","Vues","Commentaires","Partages"],
+ x:["Abonnés","Likes","Vues","Commentaires","Reposts"],
+ whatsapp:["Membres de communauté","Promotion de lien"],
+ snapchat:["Abonnés","Vues"],
+ spotify:["Écoutes","Abonnés au profil"],
+ tiktok:["Abonnés","Likes","Vues","Commentaires","Partages"],
+ instagram:["Abonnés","Likes","Vues","Commentaires","Partages"],
+ telegram:["Membres","Vues","Réactions","Partages"],
+ messenger:["Promotion de lien"],
+ threads:["Abonnés","Likes","Vues","Commentaires","Partages"],
+ pinterest:["Abonnés","Vues","Enregistrements"],
+ linkedin:["Abonnés","Réactions","Vues"],
+ twitch:["Abonnés","Vues"],
+ discord:["Membres"],
+ reddit:["Vues","Réactions"],
+ soundcloud:["Écoutes","Likes","Abonnés au profil"],
+ viber:["Membres"],line:["Abonnés"],
+ vk:["Abonnés","Likes","Vues","Partages"]
 };
 
-/* Prix de référence modifiables selon le fournisseur réel. */
-const smmCatalog = {
-  "Abonnés":{qty:100,price:1000},
-  "Likes":{qty:100,price:500},
-  "Vues":{qty:1000,price:700},
-  "Partages":{qty:100,price:900},
-  "Commentaires":{qty:50,price:1500},
-  "Membres":{qty:100,price:1500},
-  "Réactions":{qty:100,price:700},
-  "Reposts":{qty:100,price:900},
-  "Écoutes":{qty:1000,price:1200},
-  "Abonnés au profil":{qty:100,price:1500},
-  "Membres de communauté":{qty:100,price:1500},
-  "Promotion de lien":{qty:1,price:1000},
-  "Enregistrements":{qty:100,price:700}
+/* Tarifs d'exemple : adapte-les aux tarifs de ton fournisseur. */
+const smmCatalog={
+ "Abonnés":{qty:100,price:1000},
+ "Likes":{qty:100,price:500},
+ "Vues":{qty:1000,price:700},
+ "Partages":{qty:100,price:900},
+ "Commentaires":{qty:50,price:1500},
+ "Membres":{qty:100,price:1500},
+ "Réactions":{qty:100,price:700},
+ "Reposts":{qty:100,price:900},
+ "Écoutes":{qty:1000,price:1200},
+ "Abonnés au profil":{qty:100,price:1500},
+ "Membres de communauté":{qty:100,price:1500},
+ "Promotion de lien":{qty:1,price:1000},
+ "Enregistrements":{qty:100,price:700}
 };
 
-function logoURL(platform) {
-  return `https://cdn.simpleicons.org/${platform.slug}/${platform.color}`;
-}
-
-function showSmmPlatformChooser() {
+function logoURL(p){return `https://cdn.simpleicons.org/${p.slug}/${p.color}`}
+function showSmmPlatformChooser(){
   $("platformChooser").classList.remove("hidden");
   $("platformServices").classList.add("hidden");
-  $("smmTitle").textContent = "Réseaux sociaux";
-  $("platformSearch").value = "";
+  $("smmTitle").textContent="Choisir un réseau social";
+  $("platformSearch").value="";
   renderPlatforms();
   openModal("smmModal");
 }
+function renderPlatforms(filter=""){
+  const term=filter.trim().toLowerCase();
+  const list=platforms.filter(p=>p.name.toLowerCase().includes(term));
+  $("platformGrid").innerHTML=list.length?list.map(p=>`
+    <button type="button" class="platform" data-platform="${p.id}">
+      <img src="${logoURL(p)}" alt="${escapeHTML(p.name)}" loading="lazy"
+        onerror="this.onerror=null;this.src='https://cdn.simpleicons.org/${p.slug}'">
+      <span>${escapeHTML(p.name)}</span>
+    </button>`).join(""):'<div class="empty">Aucune plateforme trouvée.</div>';
 
-function renderPlatforms(filter = "") {
-  const grid = $("platformGrid");
-  const term = filter.trim().toLowerCase();
-  const list = platforms.filter(platform =>
-    platform.name.toLowerCase().includes(term)
+  $("platformGrid").querySelectorAll("[data-platform]").forEach(b=>
+    b.addEventListener("click",()=>openPlatform(b.dataset.platform))
   );
-
-  if (!list.length) {
-    grid.innerHTML = '<div class="empty full">Aucune plateforme trouvée.</div>';
-    return;
-  }
-
-  grid.innerHTML = list.map(platform => `
-    <button type="button" class="platform" data-platform="${platform.id}">
-      <img src="${logoURL(platform)}"
-           alt="${escapeHTML(platform.name)}"
-           loading="lazy"
-           onerror="this.onerror=null;this.src='https://cdn.simpleicons.org/${platform.slug}'">
-      <span>${escapeHTML(platform.name)}</span>
-    </button>
-  `).join("");
-
-  grid.querySelectorAll("[data-platform]").forEach(button => {
-    button.addEventListener("click", () => openPlatform(button.dataset.platform));
-  });
 }
-
-function openPlatform(id) {
-  selectedPlatform = platforms.find(platform => platform.id === id);
-  if (!selectedPlatform) return;
-
+function openPlatform(id){
+  selectedPlatform=platforms.find(p=>p.id===id);
+  if(!selectedPlatform)return;
   $("platformChooser").classList.add("hidden");
   $("platformServices").classList.remove("hidden");
-  $("smmTitle").textContent = selectedPlatform.name;
-
-  $("selectedPlatformInfo").innerHTML = `
+  $("smmTitle").textContent=selectedPlatform.name;
+  $("selectedPlatformInfo").innerHTML=`
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
-      <img src="${logoURL(selectedPlatform)}"
-           alt="${escapeHTML(selectedPlatform.name)}"
-           style="width:42px;height:42px;object-fit:contain"
-           onerror="this.onerror=null;this.src='https://cdn.simpleicons.org/${selectedPlatform.slug}'">
-      <div>
-        <strong>${escapeHTML(selectedPlatform.name)}</strong>
-        <p class="note" style="margin:5px 0 0">Choisissez votre service</p>
-      </div>
-    </div>
-  `;
-
-  const services = servicesByPlatform[id] || [];
-  $("smmService").innerHTML = services.map(service =>
-    `<option value="${escapeHTML(service)}">${escapeHTML(service)}</option>`
-  ).join("");
-
-  $("smmQuantity").value = "10";
-  $("smmLink").value = "";
-  $("smmNotes").value = "";
+      <img src="${logoURL(selectedPlatform)}" alt="${escapeHTML(selectedPlatform.name)}"
+       style="width:42px;height:42px;object-fit:contain"
+       onerror="this.onerror=null;this.src='https://cdn.simpleicons.org/${selectedPlatform.slug}'">
+      <div><strong>${escapeHTML(selectedPlatform.name)}</strong>
+      <p class="note" style="margin:5px 0 0">Créez votre commande</p></div>
+    </div>`;
+  $("smmService").innerHTML=(servicesByPlatform[id]||[]).map(s=>
+    `<option value="${escapeHTML(s)}">${escapeHTML(s)}</option>`).join("");
+  $("smmQuantity").value="10";$("smmLink").value="";$("smmNotes").value="";
   updateSmmPrice();
 }
-
-function calculateSmmPrice(service, quantity) {
-  const item = smmCatalog[service];
-  if (!item || !Number.isFinite(quantity) || quantity < 10) return 0;
-  return Math.ceil((quantity / item.qty) * item.price);
+function calculatePrice(service,qty){
+  const item=smmCatalog[service];
+  if(!item||!Number.isInteger(qty)||qty<10)return 0;
+  return Math.ceil(qty/item.qty*item.price);
 }
-
-function updateSmmPrice() {
-  const quantity = Number($("smmQuantity").value);
-  const service = $("smmService").value;
-  currentSmmPrice = calculateSmmPrice(service, quantity);
-  $("smmPrice").textContent = money(currentSmmPrice);
-  $("smmBalance").textContent = money(getBalance(currentUser));
+function updateSmmPrice(){
+  const qty=Number($("smmQuantity").value);
+  $("smmPrice").textContent=money(calculatePrice($("smmService").value,qty));
+  $("smmBalance").textContent=money(getBalance(currentUser));
 }
-
-$("platformSearch").addEventListener("input", event =>
-  renderPlatforms(event.target.value)
-);
-$("backToPlatforms").addEventListener("click", () => {
+$("platformSearch").addEventListener("input",e=>renderPlatforms(e.target.value));
+$("backToPlatforms").addEventListener("click",()=>{
   $("platformChooser").classList.remove("hidden");
   $("platformServices").classList.add("hidden");
-  $("smmTitle").textContent = "Réseaux sociaux";
+  $("smmTitle").textContent="Choisir un réseau social";
 });
-$("smmService").addEventListener("change", updateSmmPrice);
-$("smmQuantity").addEventListener("input", updateSmmPrice);
+$("smmService").addEventListener("change",updateSmmPrice);
+$("smmQuantity").addEventListener("input",updateSmmPrice);
+$("openSocialButton").addEventListener("click",showSmmPlatformChooser);
 
-$("openSocialButton").addEventListener("click", showSmmPlatformChooser);
+/*
+  En mode préparation, les commandes sont enregistrées en attente.
+  Un véritable fournisseur SMM doit être connecté au backend pour lancer
+  automatiquement les boosts. Ne pas ajouter de clé API secrète ici.
+*/
+$("smmForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(busy)return;
+  if(!db||!currentPhone)return toast("Connectez-vous à votre compte.");
+  if(!selectedPlatform)return toast("Choisissez un réseau social.");
 
-$("smmForm").addEventListener("submit", async event => {
-  event.preventDefault();
-  if (busy) return;
+  const service=$("smmService").value;
+  const link=$("smmLink").value.trim();
+  const qty=Number($("smmQuantity").value);
+  const notes=$("smmNotes").value.trim();
+  const price=calculatePrice(service,qty);
 
-  const service = $("smmService").value;
-  const link = $("smmLink").value.trim();
-  const quantity = Number($("smmQuantity").value);
-  const notes = $("smmNotes").value.trim();
-  const price = calculateSmmPrice(service, quantity);
+  if(!/^https?:\/\/\S+/i.test(link))return toast("Entrez un lien valide commençant par https://.");
+  if(!Number.isInteger(qty)||qty<10)return toast("La quantité minimale est de 10.");
+  if(price<=0)return toast("Tarif indisponible pour ce service.");
 
-  if (!selectedPlatform) {
-    toast("Sélectionnez d'abord une plateforme.");
-    return;
-  }
-  if (!currentPhone) {
-    toast("Connectez-vous à votre compte avant de commander.");
-    return;
-  }
-  if (!/^https?:\/\/\S+/i.test(link)) {
-    toast("Entrez un lien valide commençant par http:// ou https://.");
-    return;
-  }
-  if (!Number.isInteger(quantity) || quantity < 10) {
-    toast("La quantité minimale est de 10.");
-    return;
-  }
-  if (price <= 0) {
-    toast("Le prix n'est pas disponible pour ce service.");
-    return;
-  }
-
-  busy = true;
-  $("submitSmm").disabled = true;
-  $("submitSmm").textContent = "Traitement…";
-
-  try {
+  busy=true;$("submitSmm").disabled=true;$("submitSmm").textContent="Enregistrement…";
+  try{
     /*
-      Le solde est débité via transaction Firebase.
-      Si l'enregistrement de la commande échoue, le débit est annulé.
-      Les règles de sécurité Firebase doivent protéger les données
-      et vérifier les opérations côté serveur pour une vraie production.
+      Vérification et débit atomique du solde. En production, protège cette
+      opération avec un backend fiable et des règles Firebase strictes.
     */
-    const balanceRef = ref(db, `${USERS_PATH}/${currentPhone}/solde_principal`);
-    const transaction = await runTransaction(balanceRef, currentBalance => {
-      const available = Number(currentBalance ?? currentUser.solde ?? 0) || 0;
-      if (available < price) return;
-      return available - price;
+    const userRef=ref(db,`${USERS_PATH}/${currentPhone}`);
+    const tx=await runTransaction(userRef,user=>{
+      if(!user)return;
+      const balance=Number(user.solde_principal??user.solde??0)||0;
+      if(balance<price)return;
+      if(user.solde_principal!==undefined)user.solde_principal=balance-price;
+      else user.solde=balance-price;
+      return user;
     });
 
-    if (!transaction.committed) {
-      toast("Solde insuffisant ou transaction refusée.");
+    if(!tx.committed){
       await loadUser();
+      toast("Solde insuffisant ou opération refusée.");
       return;
     }
 
-    const previousBalance = getBalance(currentUser);
-    const newBalance = Number(transaction.snapshot.val()) || 0;
-    currentUser.solde_principal = newBalance;
+    const oldUser=currentUser;
+    currentUser=tx.snapshot.val()||{};
     updateBalanceUI();
 
-    const saved = await saveOrder({
-      categorie: "smm",
-      service: `${selectedPlatform.name} — ${service}`,
-      plateforme: selectedPlatform.name,
-      type_service: service,
-      lien: link,
-      quantite: quantity,
+    const saved=await saveOrder({
+      categorie:"smm",
+      service:selectedPlatform.name+" — "+service,
+      plateforme:selectedPlatform.name,
+      type_service:service,
+      lien:link,
+      quantite:qty,
       notes,
-      prix: price,
-      fournisseurConnecte: false
+      prix:price,
+      fournisseurConnecte:false
     });
 
-    if (!saved) {
-      await runTransaction(balanceRef, value => {
-        const current = Number(value) || 0;
-        return current + price;
+    if(!saved){
+      /*
+        Remboursement compensatoire si l'enregistrement de la commande échoue.
+        Une implémentation de production doit gérer cette étape côté serveur.
+      */
+      await runTransaction(userRef,user=>{
+        if(!user)return user;
+        if(user.solde_principal!==undefined)user.solde_principal=(Number(user.solde_principal)||0)+price;
+        else user.solde=(Number(user.solde)||0)+price;
+        return user;
       });
-      currentUser.solde_principal = previousBalance;
-      updateBalanceUI();
-      toast("Commande non enregistrée : débit annulé.");
+      currentUser=oldUser;await loadUser();
+      toast("Commande non enregistrée. Vérifiez votre solde.");
       return;
     }
 
-    toast("Commande enregistrée. Elle est en attente de traitement.");
+    toast("Commande enregistrée : en attente du fournisseur.");
     $("smmForm").reset();
     closeModal("smmModal");
     await loadUser();
-  } catch (error) {
-    console.error(error);
-    toast("Erreur pendant la commande. Vérifiez votre connexion.");
+  }catch(err){
+    console.error(err);toast("Erreur de commande. Réessayez.");
     await loadUser();
-  } finally {
-    busy = false;
-    $("submitSmm").disabled = false;
-    $("submitSmm").textContent = "Envoyer la commande";
+  }finally{
+    busy=false;$("submitSmm").disabled=false;
+    $("submitSmm").textContent="Confirmer ma commande";
   }
 });
 
-/* Tarifs indicatifs des services créatifs. */
-const creativePrices = {
-  "Site web":15000,
-  "Application mobile":10000,
-  "Chatbot":7000
-};
-
-document.querySelectorAll(".creative-button").forEach(button => {
-  button.addEventListener("click", () => {
-    const service = button.dataset.service;
-    $("creativeService").value = service;
-    $("creativeTitle").textContent = service;
-    $("creativePrice").textContent = money(creativePrices[service] || 0);
-    $("creativeDescription").value = "";
-    openModal("orderModal");
-  });
-});
-
-$("creativeForm").addEventListener("submit", async event => {
-  event.preventDefault();
-  const service = $("creativeService").value;
-  const description = $("creativeDescription").value.trim();
-  const price = creativePrices[service] || 0;
-
-  if (!description) return toast("Décrivez votre projet.");
-  if (!currentPhone) return toast("Connectez-vous avant de commander.");
-
-  const saved = await saveOrder({
-    categorie:"creation",
-    service,
-    description,
-    prix:price
-  });
-
-  if (saved) {
-    toast("Demande enregistrée.");
-    closeModal("orderModal");
+/* Services créatifs */
+const creativePrices={"Site web":15000,"Application mobile":10000,"Chatbot":7000};
+document.querySelectorAll(".creative-button").forEach(b=>b.addEventListener("click",()=>{
+  const s=b.dataset.service;
+  $("creativeService").value=s;$("creativeTitle").textContent=s;
+  $("creativePrice").textContent=money(creativePrices[s]||0);
+  $("creativeDescription").value="";openModal("orderModal");
+}));
+$("creativeForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const service=$("creativeService").value;
+  const description=$("creativeDescription").value.trim();
+  if(!description)return toast("Décrivez votre projet.");
+  if(!currentPhone)return toast("Connectez-vous avant de commander.");
+  if(await saveOrder({categorie:"creation",service,description,prix:creativePrices[service]||0})){
+    toast("Demande enregistrée.");closeModal("orderModal");
   }
 });
 
-/* Demande de chanson */
-$("openMusicButton").addEventListener("click", () => openModal("musicModal"));
-
-$("musicForm").addEventListener("submit", async event => {
-  event.preventDefault();
-  if (!currentPhone) return toast("Connectez-vous avant de commander.");
-
-  const saved = await saveOrder({
-    categorie:"musique",
-    service:"Création musicale",
-    titre:$("musicTitle").value.trim(),
-    style:$("musicStyle").value,
-    paroles:$("musicLyrics").value.trim(),
-    prix:5000
+/* Musique */
+$("openMusicButton").addEventListener("click",()=>openModal("musicModal"));
+$("musicForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(!currentPhone)return toast("Connectez-vous avant de commander.");
+  const saved=await saveOrder({
+    categorie:"musique",service:"Création musicale",
+    titre:$("musicTitle").value.trim(),style:$("musicStyle").value,
+    paroles:$("musicLyrics").value.trim(),prix:5000
   });
-
-  if (saved) {
-    toast("Demande musicale enregistrée.");
-    $("musicForm").reset();
-    closeModal("musicModal");
-  }
+  if(saved){toast("Demande musicale enregistrée.");$("musicForm").reset();closeModal("musicModal")}
 });
 
-/* Demande publicitaire */
-$("openAdsButton").addEventListener("click", () => openModal("adsModal"));
-
-$("adsForm").addEventListener("submit", async event => {
-  event.preventDefault();
-  if (!currentPhone) return toast("Connectez-vous avant d'envoyer une demande.");
-
-  const saved = await saveOrder({
-    categorie:"publicite",
-    service:"Publicité digitale",
-    type_publicite:$("adsType").value,
-    lien:$("adsLink").value.trim(),
-    description:$("adsDescription").value.trim(),
-    prix:0
+/* Publicité */
+$("openAdsButton").addEventListener("click",()=>openModal("adsModal"));
+$("adsForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(!currentPhone)return toast("Connectez-vous avant d'envoyer la demande.");
+  const saved=await saveOrder({
+    categorie:"publicite",service:"Publicité digitale",
+    type_publicite:$("adsType").value,lien:$("adsLink").value.trim(),
+    description:$("adsDescription").value.trim(),prix:0
   });
-
-  if (saved) {
-    toast("Demande envoyée. Le tarif sera confirmé.");
-    $("adsForm").reset();
-    closeModal("adsModal");
-  }
+  if(saved){toast("Demande envoyée. Tarif à confirmer.");$("adsForm").reset();closeModal("adsModal")}
 });
 
 /* Catalogue API */
-const apiCatalog = [
-  {name:"Assistant IA",path:"/api/intelligence-artificielle/ai"},
-  {name:"Questions IA",path:"/api/intelligence-artificielle/ask"},
-  {name:"Traduction",path:"/translate"},
-  {name:"Génération d'image",path:"/genere-image/generate"},
-  {name:"Image",path:"/genere-image/image"},
-  {name:"Publicité",path:"/publicite/ads"},
-  {name:"Données API",path:"/api/data"},
-  {name:"Stockage",path:"/storage"},
-  {name:"Authentification admin",path:"/admin-auth"},
-  {name:"Média vidéo",path:"/media/video"},
-  {name:"Média musical",path:"/media/music"},
-  {name:"Hub API",path:"/hub"}
+const apiCatalog=[
+ {name:"Assistant IA",path:"/api/intelligence-artificielle/ai"},
+ {name:"Questions IA",path:"/api/intelligence-artificielle/ask"},
+ {name:"Traduction",path:"/translate"},
+ {name:"Génération d'image",path:"/genere-image/generate"},
+ {name:"Image",path:"/genere-image/image"},
+ {name:"Publicité",path:"/publicite/ads"},
+ {name:"Données API",path:"/api/data"},
+ {name:"Stockage",path:"/storage"},
+ {name:"Authentification admin",path:"/admin-auth"},
+ {name:"Média vidéo",path:"/media/video"},
+ {name:"Média musical",path:"/media/music"},
+ {name:"Hub API",path:"/hub"}
 ];
+$("apiGrid").innerHTML=apiCatalog.map((a,i)=>`
+  <article class="card"><div class="card-icon">🔌</div>
+  <h4>${escapeHTML(a.name)}</h4><p style="overflow-wrap:anywhere">${escapeHTML(a.path)}</p>
+  <button class="btn btn-block small-btn" data-api="${i}">Demander un accès</button></article>
+`).join("");
+$("apiGrid").querySelectorAll("[data-api]").forEach(b=>b.addEventListener("click",async()=>{
+  const api=apiCatalog[Number(b.dataset.api)];
+  if(!currentPhone)return toast("Connectez-vous pour demander un accès.");
+  if(await saveOrder({categorie:"api",service:"Demande d'accès API — "+api.name,api:api.path,prix:0}))
+    toast("Demande d'accès enregistrée.");
+}));
+$("openApiButton").addEventListener("click",()=>openModal("apiModal"));
 
-function renderApiCatalog() {
-  $("apiGrid").innerHTML = apiCatalog.map((api, index) => `
-    <article class="card">
-      <div class="card-icon">🔌</div>
-      <h4>${escapeHTML(api.name)}</h4>
-      <p style="overflow-wrap:anywhere">${escapeHTML(api.path)}</p>
-      <button class="btn btn-block small-btn" data-api="${index}">Demander un accès</button>
-    </article>
-  `).join("");
-
-  $("apiGrid").querySelectorAll("[data-api]").forEach(button => {
-    button.addEventListener("click", async () => {
-      const api = apiCatalog[Number(button.dataset.api)];
-      if (!currentPhone) return toast("Connectez-vous pour demander un accès.");
-
-      const saved = await saveOrder({
-        categorie:"api",
-        service:"Demande d'accès API — " + api.name,
-        api:api.path,
-        prix:0
-      });
-      if (saved) toast("Demande d'accès enregistrée.");
-    });
-  });
-}
-
-$("openApiButton").addEventListener("click", () => openModal("apiModal"));
-renderApiCatalog();
-
-/* Navigation mobile */
-document.querySelectorAll("[data-nav]").forEach(button => {
-  button.addEventListener("click", () => {
-    document.querySelectorAll("[data-nav]").forEach(item => item.classList.remove("active"));
-    button.classList.add("active");
-
-    switch (button.dataset.nav) {
-      case "home":
-        closeAllModals();
-        window.scrollTo({top:0,behavior:"smooth"});
-        break;
-      case "social":
-        showSmmPlatformChooser();
-        break;
-      case "music":
-        openModal("musicModal");
-        break;
-      case "api":
-        openModal("apiModal");
-        break;
-      case "profile":
-        updateBalanceUI();
-        openModal("profileModal");
-        break;
-    }
-  });
-});
-
-function closeAllModals() {
-  document.querySelectorAll(".overlay").forEach(el => el.classList.remove("show"));
-}
-
-$("refreshBalance").addEventListener("click", loadUser);
-$("refreshOrders").addEventListener("click", loadOrders);
+/* Navigation */
+document.querySelectorAll("[data-nav]").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll("[data-nav]").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active");
+  switch(b.dataset.nav){
+    case "home":closeAllModals();window.scrollTo({top:0,behavior:"smooth"});break;
+    case "social":showSmmPlatformChooser();break;
+    case "music":openModal("musicModal");break;
+    case "api":openModal("apiModal");break;
+    case "profile":updateBalanceUI();openModal("profileModal");break;
+  }
+}));
+$("refreshBalance").addEventListener("click",loadUser);
+$("refreshOrders").addEventListener("click",loadOrders);
 
 initFirebase();
 </script>
