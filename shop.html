@@ -3,77 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta name="theme-color" content="#050914">
-<title>JASON BUSINESS — Services</title>
+<title>JASON BUSINESS — Boutique</title>
 <style>
-:root{--bg:#050914;--panel:#0b1220;--border:rgba(255,255,255,.08);--text:#f5f7fb;--muted:#8e9aad;--blue:#00d4ff;--blue2:#3b82f6;--gold:#d8aa45;--green:#22c55e;--red:#ef4444}
+:root{--bg:#050914;--text:#f5f7fb;--muted:#8e9aad;--blue:#00d4ff;--gold:#d8aa45}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#101d35 0,var(--bg) 45%,#02040a 100%);color:var(--text);font-family:Arial,Helvetica,sans-serif;min-height:100vh}
-button,input,select,textarea{font:inherit}button{cursor:pointer}
-.container{max-width:1000px;margin:auto;padding:16px 14px 90px}
-.header-top{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-.brand{font-size:18px;font-weight:900;letter-spacing:1px;color:var(--blue)}.brand span{color:var(--blue)}
-.status{font-size:10px;border:1px solid rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:var(--green);padding:7px 12px;border-radius:20px;font-weight:700}
-.welcome{padding:10px 0 16px}.welcome small{color:var(--muted);font-size:11px;letter-spacing:.5px}.welcome strong{display:block;margin-top:6px;font-size:22px;font-weight:900}
-.balance-card{padding:20px;border:1px solid rgba(0,212,255,.22);border-radius:24px;background:linear-gradient(145deg,rgba(16,26,43,.96),rgba(8,14,26,.96));margin-bottom:14px}
-.balance-card small{color:var(--muted);font-size:11px;letter-spacing:1px}.balance-card h2{margin:8px 0 6px;font-size:32px;font-weight:900;color:var(--blue)}.balance-card h2 span{font-size:14px}.balance-card p{color:var(--muted);font-size:11px;margin:0}
-.stats3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
-.mini-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:12px;text-align:center}
-.mini-card.icon{font-size:20px;margin-bottom:6px}.mini-card small{font-size:9px;color:var(--muted);display:block}.mini-card b{font-size:12px;display:block;margin-top:4px}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
-.btn{border:0;border-radius:14px;padding:14px;font-weight:900;cursor:pointer}
-.btn-blue{background:linear-gradient(100deg,#00c6ff,#0072ff);color:white;box-shadow:0 8px 20px rgba(0,114,255,.25)}
-.btn-red{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.18);color:#ff6b6b}
-.btn-gold{background:linear-gradient(100deg,#c08a2c,#f1d48b);color:#111}.btn-dark{background:#182943;border:1px solid #ffffff16;color:#e8efff}.btn-block{width:100%}
-.points-card{padding:16px;border-radius:18px;background:linear-gradient(145deg,rgba(16,26,43,.96),rgba(8,14,26,.96));border:1px solid rgba(230,189,103,.18);margin-bottom:20px}
-.points-head{display:flex;justify-content:space-between;align-items:center}.points-head b{color:var(--gold);font-size:13px}.points-head strong{font-size:22px;color:var(--gold)}
-.section{margin-top:22px}.section-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.section-title h3{margin:0;font-size:16px}.section-title a{font-size:11px;color:var(--blue);text-decoration:none}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.container{max-width:1000px;margin:auto;padding:16px 14px 90px}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .card{background:linear-gradient(145deg,#12213a,#0c1627);border:1px solid rgba(230,189,103,.22);border-radius:18px;padding:16px}
-.card h4{font-size:14px;margin:11px 0 7px}.card p{font-size:11px;line-height:1.5;color:var(--muted);margin:0 0 12px}
+.card h4{font-size:14px;margin:11px 0 7px}.card p{font-size:11px;color:var(--muted);margin:0 0 12px}
 .card-icon{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:#168cff19;border:1px solid #168cff40}
+.btn{border:0;border-radius:12px;padding:12px 14px;font-weight:900;cursor:pointer}.btn-gold{background:linear-gradient(100deg,#c08a2c,#f1d48b);color:#111}.btn-dark{background:#182943;border:1px solid #ffffff16;color:#e8efff}.btn-block{width:100%}
 .note{font-size:11px;color:var(--muted)}.search,.field input,.field select,.field textarea{width:100%;background:#081222;border:1px solid #ffffff1b;color:white;border-radius:12px;padding:13px;outline:none}.field{margin-bottom:12px}.field label{display:block;font-size:11px;color:#c5d2e5;margin-bottom:6px}.field textarea{min-height:70px}
 .price-box{padding:14px;border-radius:14px;background:#07101d;border:1px solid rgba(230,189,103,.22);margin:12px 0}.price-box div{display:flex;justify-content:space-between;font-size:12px;margin:6px 0}.price-box strong{color:var(--gold)}
 .overlay{display:none;position:fixed;inset:0;background:#02050be8;z-index:1000;padding:16px;overflow-y:auto;align-items:center;justify-content:center}.overlay.show{display:flex}
 .modal{width:100%;max-width:570px;max-height:92vh;overflow-y:auto;background:linear-gradient(145deg,#12213a,#091321);border:1px solid rgba(230,189,103,.22);border-radius:22px;padding:19px}
-.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.modal-head h3{font-size:17px;margin:0}.close{width:34px;height:34px;border-radius:10px;border:1px solid #ffffff1c;background:#17253b;color:white;font-size:20px}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.close{width:34px;height:34px;border-radius:10px;border:1px solid #ffffff1c;background:#17253b;color:white;font-size:20px}
 .platform-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.platform{background:#0a1424;border:1px solid #ffffff18;border-radius:15px;padding:13px 6px;text-align:center;color:white}.platform img{width:32px;height:32px;margin:0 auto 8px;display:block}.platform span{font-size:11px}
 .empty{padding:20px;text-align:center;color:var(--muted);font-size:13px}.hidden{display:none!important}
 .toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:3000;background:#12213a;border:1px solid rgba(230,189,103,.22);padding:12px 16px;border-radius:12px;max-width:90%;font-size:12px;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
-/* BOTTOM NAV COMME TA CAPTURE */
-.bottom-nav{position:fixed;z-index:500;bottom:0;left:0;right:0;display:flex;justify-content:space-around;gap:2px;background:rgba(5,9,20,.98);backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.08);padding:8px 4px calc(8px + env(safe-area-inset-bottom))}
-.bottom-nav button{flex:1;background:transparent;border:0;color:#6b7a90;font-size:10px;font-weight:700;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:4px}
-.bottom-nav button span.icon{font-size:20px}.bottom-nav button.active{color:var(--blue)}.bottom-nav button.active span.icon{filter:drop-shadow(0 0 8px var(--blue))}
-footer{text-align:center;padding:20px 8px;color:var(--muted);font-size:11px}
+/* BOTTOM NAV COMME TA CAPTURE - AVEC VRAIS LIENS */
+.bottom-nav{position:fixed;z-index:500;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:rgba(5,9,20,.98);backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.08);padding:8px 4px calc(8px + env(safe-area-inset-bottom))}
+.bottom-nav a{flex:1;text-decoration:none;color:#6b7a90;font-size:10px;font-weight:700;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bottom-nav a span.icon{font-size:20px}.bottom-nav a.active{color:var(--blue)}.bottom-nav a.active span.icon{filter:drop-shadow(0 0 8px var(--blue))}
 </style>
 </head>
 <body>
 <div class="container">
-<div class="header-top"><div class="brand">JASON BUSINESS</div><div class="status">● EN LIGNE</div></div>
-<div class="welcome"><small>BIENVENUE SUR VOTRE ESPACE</small><strong id="welcomePhone">0856421499</strong></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 0"><div style="font-size:18px;font-weight:900;letter-spacing:1px;color:var(--blue)">JASON BUSINESS</div><div style="font-size:10px;border:1px solid rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#22c55e;padding:7px 12px;border-radius:20px">● EN LIGNE</div></div>
+<div style="padding:10px 0 8px"><small style="color:var(--muted);font-size:11px">BIENVENUE SUR VOTRE ESPACE</small><strong id="welcomePhone" style="display:block;margin-top:6px;font-size:20px;font-weight:900">0856421499</strong><div class="note" id="accountMessage" style="margin-top:6px">Solde: <span id="balanceValue" style="color:var(--gold);font-weight:900">0 FC</span></div></div>
 
-<div class="balance-card">
-<small>SOLDE PRINCIPAL</small><h2 id="balanceValue">61 000 <span>FC</span></h2>
-<p>Disponible pour vos commandes</p>
-<div class="stats3">
-<div class="mini-card"><div class="icon">💰</div><small>COMMISSIONS</small><b id="commValue">0 FC</b></div>
-<div class="mini-card"><div class="icon">📈</div><small>GAINS</small><b id="gainsValue">8 823 FC</b></div>
-<div class="mini-card"><div class="icon">💎</div><small>TOTAL</small><b id="totalValue">69 823 FC</b></div>
-</div>
-<div class="actions">
-<button class="btn btn-blue" id="btnRecharge">📤 RECHARGER</button>
-<button class="btn btn-red" id="btnRetirer">📥 RETIRER</button>
-</div>
-</div>
-
-<div class="points-card">
-<div class="points-head"><div><b>⭐ POINTS DE FIDÉLITÉ</b><div class="note" style="margin-top:4px">100 points = <span style="color:var(--gold)">50 FC</span></div></div><strong id="pointsValue">0</strong></div>
-<button class="btn btn-gold btn-block" style="margin-top:14px;opacity:.9" id="btnConvert">💱 CONVERTIR MES POINTS</button>
-</div>
-
-<button class="btn btn-dark btn-block" id="openChatButton" style="margin-bottom:18px">💬 Contacter l'Admin</button>
-
-<section class="section">
-<div class="section-title"><h3>Nos services</h3><a href="#" id="voirTout">VOIR TOUT →</a></div>
+<section style="margin-top:22px"><div style="display:flex;justify-content:space-between;margin-bottom:12px"><h3 style="margin:0;font-size:16px">Nos services</h3><a href="#" style="font-size:11px;color:var(--blue);text-decoration:none">VOIR TOUT →</a></div>
 <div class="grid">
 <article class="card"><div class="card-icon">🌐</div><h4>Réseaux sociaux</h4><p>Choisis réseau + service + quantité min 100, prix auto.</p><button class="btn btn-gold btn-block" id="openSocialButton">RÉSEAUX SOCIAUX</button></article>
 <article class="card"><div class="card-icon">🎵</div><h4>Création musicale</h4><p>Via /api/media/music</p><button class="btn btn-block btn-dark" id="openMusicButton">Commander</button></article>
@@ -81,17 +40,14 @@ footer{text-align:center;padding:20px 8px;color:var(--muted);font-size:11px}
 <article class="card"><div class="card-icon">💻</div><h4>Site web</h4><p>Vitrine, Portfolio, Boutique</p><button class="btn btn-block btn-dark creative-button" data-service="Site web">Commander</button></article>
 <article class="card"><div class="card-icon">📱</div><h4>Application mobile</h4><p>Nom + Icône + Lien + Description</p><button class="btn btn-block btn-dark creative-button" data-service="Application mobile">Commander</button></article>
 <article class="card"><div class="card-icon">🤖</div><h4>Chatbot IA</h4><p>Via /api/intelligence-artificielle/ai</p><button class="btn btn-block btn-dark creative-button" data-service="Chatbot">Commander</button></article>
-</div>
-</section>
-
-<section class="section"><div class="section-title"><h3>Mes commandes</h3><button class="btn btn-dark small-btn" id="refreshOrders" style="padding:8px 10px;font-size:11px">Actualiser</button></div><div id="ordersList" class="card"><div class="empty">Chargement…</div></div></section>
-<footer><strong style="color:var(--gold)">JASON BUSINESS</strong><br>Créé par Jason Aloma 🇨🇩</footer>
+</div></section>
+<section style="margin-top:22px"><div style="display:flex;justify-content:space-between;margin-bottom:12px"><h3 style="margin:0;font-size:16px">Mes commandes</h3><button class="btn btn-dark" id="refreshOrders" style="padding:8px 10px;font-size:11px">Actualiser</button></div><div id="ordersList" class="card"><div class="empty">Chargement…</div></div></section>
 </div>
 
-<!-- MODALS (même que avant) -->
+<!-- MODALS -->
 <div class="overlay" id="smmModal"><div class="modal"><div class="modal-head"><h3 id="smmTitle">Choisir un réseau social</h3><button class="close" data-close="smmModal">×</button></div>
 <div id="platformChooser"><input class="search" id="platformSearch" placeholder="Rechercher Facebook, TikTok…"><div class="platform-grid" id="platformGrid"></div></div>
-<div id="platformServices" class="hidden"><button class="btn btn-dark small-btn" id="backToPlatforms">← Retour</button><hr style="margin:12px 0;border-color:#ffffff12"><div id="selectedPlatformInfo"></div>
+<div id="platformServices" class="hidden"><button class="btn btn-dark" id="backToPlatforms" style="padding:8px 10px;font-size:11px">← Retour</button><hr style="margin:12px 0;border-color:#ffffff12"><div id="selectedPlatformInfo"></div>
 <form id="smmForm">
 <div class="field"><label>Type de boost</label><select id="smmService" required></select></div>
 <div class="field"><label>Lien public</label><input id="smmLink" type="url" placeholder="https://..." required></div>
@@ -107,21 +63,18 @@ footer{text-align:center;padding:20px 8px;color:var(--muted);font-size:11px}
 
 <div class="overlay" id="musicModal"><div class="modal"><div class="modal-head"><h3>🎵 Musique</h3><button class="close" data-close="musicModal">×</button></div>
 <form id="musicForm"><div class="field"><label>Titre</label><input id="musicTitle" required></div><div class="field"><label>Style</label><select id="musicStyle"><option>Gospel</option><option>Afrobeat</option><option>Rap</option><option>Rumba</option></select></div><div class="field"><label>Paroles</label><textarea id="musicLyrics" required></textarea></div><button class="btn btn-gold btn-block" type="submit">Envoyer</button></form></div></div>
-
 <div class="overlay" id="adsModal"><div class="modal"><div class="modal-head"><h3>📢 Publicité</h3><button class="close" data-close="adsModal">×</button></div>
 <form id="adsForm"><div class="field"><label>Type</label><select id="adsType"><option>Promotion entreprise</option><option>Promotion produit</option></select></div><div class="field"><label>Lien</label><input id="adsLink" type="url"></div><div class="field"><label>Description</label><textarea id="adsDescription" required></textarea></div><button class="btn btn-gold btn-block" type="submit">Envoyer</button></form></div></div>
-
 <div class="overlay" id="orderModal"><div class="modal"><div class="modal-head"><h3 id="creativeTitle">Commander</h3><button class="close" data-close="orderModal">×</button></div>
 <form id="creativeForm"><input type="hidden" id="creativeService"><div id="creativeFields"></div><button class="btn btn-gold btn-block" type="submit">Envoyer demande</button></form></div></div>
-
 <div class="toast" id="toast"></div>
 
-<!-- BOTTOM NAV COMME TA 2ème CAPTURE -->
+<!-- BOTTOM NAV AVEC VRAIS LIENS VERS TES FICHIERS -->
 <nav class="bottom-nav">
-<button class="active" data-nav="dashboard"><span class="icon">📊</span>Dashboard</button>
-<button data-nav="boutique"><span class="icon">🛍️</span>Boutique</button>
-<button data-nav="equipe"><span class="icon">👥</span>Équipe</button>
-<button data-nav="profil"><span class="icon">👤</span>Profil</button>
+  <a href="dashboard.html"><span class="icon">📊</span>Dashboard</a>
+  <a href="shop.html" class="active"><span class="icon">🛍️</span>Boutique</a>
+  <a href="equipe.html"><span class="icon">👥</span>Équipe</a>
+  <a href="profil.html"><span class="icon">👤</span>Profil</a>
 </nav>
 
 <script type="module">
@@ -138,18 +91,10 @@ document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{
 function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function getPhone(){return (localStorage.getItem("jasonBusinessPhone")||localStorage.getItem("userPhone")||localStorage.getItem("telephone")||localStorage.getItem("phone")||"").trim()}
 function getBalance(user){return Number(user?.solde_principal??user?.solde??0)||0}
-function updateBalanceUI(){
-$("balanceValue").innerHTML=money(getBalance(currentUser)).replace(" FC",` <span style="font-size:14px">FC</span>`);
-$("welcomePhone").textContent=currentPhone||"0856421499";
-$("commValue").textContent=money(Number(currentUser?.commissions??0)||0)+" FC";
-$("gainsValue").textContent=money(Number(currentUser?.solde_gains??8823)||0)+" FC";
-$("totalValue").textContent=money(getBalance(currentUser)+(Number(currentUser?.solde_gains??8823)||0))+" FC";
-$("pointsValue").textContent=Number(currentUser?.points_fidelite??0)||0;
-}
+function updateBalanceUI(){$("balanceValue").textContent=money(getBalance(currentUser));$("welcomePhone").textContent=currentPhone||"0856421499";}
 async function initFirebase(){
 db=getDatabase(initializeApp(firebaseConfig));
-currentPhone=getPhone();
-if(!currentPhone){$("welcomePhone").textContent="0856421499";updateBalanceUI();return}
+currentPhone=getPhone();if(!currentPhone){updateBalanceUI();return}
 await loadUser();await loadOrders();await loadMyMessages();
 }
 async function loadUser(){if(!db||!currentPhone)return;try{const s=await get(ref(db,`${USERS_PATH}/${currentPhone}`));currentUser=s.exists()?s.val():{};updateBalanceUI();}catch{}}
@@ -239,7 +184,6 @@ await set(push(ref(db,`${ROOT}/messages_admin/${currentPhone}`)),{from:currentPh
 $("chatStatus").textContent="✅ Message envoyé";$("clientMessage").value="";toast("✅ Envoyé");await loadMyMessages();
 }catch(e){$("chatStatus").textContent="❌ "+e.message}
 });
-$("openChatButton").addEventListener("click",()=>{openModal("chatModal");loadMyMessages();});
 $("openMusicButton").addEventListener("click",()=>openModal("musicModal"));
 $("musicForm").addEventListener("submit",async e=>{e.preventDefault();if(await saveOrder({categorie:"musique",service:"Musique - "+$("musicTitle").value,titre:$("musicTitle").value,style:$("musicStyle").value,paroles:$("musicLyrics").value,prix:5000})){toast("Demande envoyée");closeModal("musicModal")}});
 $("openAdsButton").addEventListener("click",()=>openModal("adsModal"));
@@ -251,25 +195,7 @@ return `<div class="field"><label>Nom chatbot *</label><input id="chatbotName" r
 }
 document.querySelectorAll(".creative-button").forEach(b=>b.addEventListener("click",()=>{const s=b.dataset.service;$("creativeService").value=s;$("creativeTitle").textContent=s;$("creativeFields").innerHTML=getCreativeFields(s);openModal("orderModal");}));
 $("creativeForm").addEventListener("submit",async e=>{e.preventDefault();const service=$("creativeService").value;let order={categorie:"creation",service,prix:{"Site web":15000,"Application mobile":10000,"Chatbot":7000}[service]||0};if(service==="Application mobile"){order={...order,nomApp:$("appName").value,lienApp:$("appLink").value,description:$("appDesc").value,contact:$("appContact").value}}if(service==="Site web"){order={...order,nomSite:$("siteWebName").value,typeSite:$("siteWebType").value,description:$("siteWebDesc").value,contact:$("siteWebContact").value}}if(service==="Chatbot"){order={...order,nomBot:$("chatbotName").value,plateforme:$("chatbotPlatform").value,message:$("chatbotMessage").value,contact:$("chatbotContact").value}}if(await saveOrder(order)){toast("Demande enregistrée");closeModal("orderModal")}});
-
-// BOTTOM NAV NOUVEAU
-document.querySelectorAll(".bottom-nav button").forEach(btn=>{
-btn.addEventListener("click",()=>{
-document.querySelectorAll(".bottom-nav button").forEach(b=>b.classList.remove("active"));
-btn.classList.add("active");
-const nav=btn.dataset.nav;
-if(nav==="dashboard") window.scrollTo({top:0,behavior:"smooth"});
-if(nav==="boutique") document.getElementById("openSocialButton").scrollIntoView({behavior:"smooth"});
-if(nav==="equipe") {openModal("chatModal");loadMyMessages();}
-if(nav==="profil") toast("Profil: "+currentPhone);
-});
-});
-
-$("btnRecharge")?.addEventListener("click",()=>toast("Redirection recharge..."));
-$("btnRetirer")?.addEventListener("click",()=>toast("Redirection retrait..."));
-$("btnConvert")?.addEventListener("click",()=>toast("Conversion points bientôt"));
-$("voirTout")?.addEventListener("click",(e)=>{e.preventDefault();document.querySelector(".grid").scrollIntoView({behavior:"smooth"})});
-
+$("refreshOrders")?.addEventListener("click",loadOrders);
 initFirebase();
 </script>
 </body>
