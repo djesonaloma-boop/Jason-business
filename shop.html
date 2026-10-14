@@ -39,35 +39,32 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
 .bottom-nav{position:fixed;z-index:500;bottom:0;left:0;right:0;display:flex;justify-content:space-around;gap:4px;background:#07101df2;backdrop-filter:blur(16px);border-top:1px solid #ffffff14;padding:9px 4px calc(9px + env(safe-area-inset-bottom))}
 .bottom-nav button{flex:1;background:transparent;border:0;color:var(--muted);font-size:10px;padding:6px 2px}.bottom-nav button span{display:block;font-size:19px;margin-bottom:4px}.bottom-nav button.active{color:var(--gold)}
 footer{text-align:center;padding:25px 8px;color:var(--muted);font-size:11px;line-height:1.7}hr{border:0;border-top:1px solid #ffffff12;margin:18px 0}
-.radio-group{display:flex;gap:8px;margin-top:10px}.radio{flex:1;padding:10px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid #ffffff18;font-size:10px;text-align:center}.radio.active{background:var(--gold);color:#12100a;font-weight:900}
-.file-box{margin-top:10px;padding:12px;border-radius:10px;background:rgba(0,210,255,.05);border:1px dashed var(--blue);text-align:center;font-size:11px}
 .doc-code{margin-top:8px;padding:10px;border-radius:8px;background:#000;border:1px solid #1a3a2a;color:#00e676;font-size:9px;white-space:pre-wrap;word-break:break-all}
 @media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{padding:34px}.platform-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 </style>
 </head>
 <body>
 <div class="container">
-<header><div class="brand"><div class="logo">JB</div><div><h1>JASON <span class="gold">BUSINESS</span></h1><p>Services • Digital • Intelligence artificielle</p></div></div><div class="status">● En ligne</div></header>
+<header><div class="brand"><div class="logo">JB</div><div><h1>JASON <span class="gold">BUSINESS</span></h1><p>Services • Digital • IA</p></div></div><div class="status">● En ligne</div></header>
 
 <section class="hero">
 <div class="eyebrow">VOTRE UNIVERS DIGITAL</div>
 <h2>Développez vos projets avec <span class="gold">JASON BUSINESS</span></h2>
-<p>Commandez vos services numériques directement depuis votre téléphone. Le boost est automatique, le client commande lui-même.</p>
+<p>Le client commande lui-même, boost automatique, prix calculé auto min 100.</p>
 <div class="balance"><div><small>Solde principal</small><strong id="balanceValue">0 FC</strong></div><button class="btn btn-gold small-btn" id="refreshBalance">Actualiser</button></div>
 <p class="note" id="accountMessage">Connexion au compte…</p>
 </section>
 
-<section class="section" id="homeSection">
+<section class="section">
 <div class="section-title"><h3>Nos services</h3><span>Client self-service</span></div>
 <div class="grid">
-<article class="card"><div class="card-icon">🌐</div><h4>Réseaux sociaux</h4><p>Client choisit lui-même réseau + service + quantité min 100, prix calcul auto.</p><button class="btn btn-gold btn-block" id="openSocialButton">RÉSEAUX SOCIAUX</button></article>
-<article class="card"><div class="card-icon">🎵</div><h4>Création musicale</h4><p>Chanson complète OU petite note, IA génère via /api/media/music</p><button class="btn btn-block" id="openMusicButton">Commander</button></article>
-<article class="card"><div class="card-icon">📢</div><h4>Publicité digitale</h4><p>Client crée sa pub business via /api/publicite/ads</p><button class="btn btn-block" id="openAdsButton">Découvrir</button></article>
-<article class="card"><div class="card-icon">💻</div><h4>Site web</h4><p>Vitrine, Portfolio, Boutique, Blog, Business, Autre + nom site</p><button class="btn btn-block creative-button" data-service="Site web">Commander</button></article>
+<article class="card"><div class="card-icon">🌐</div><h4>Réseaux sociaux</h4><p>Client choisit réseau + service + quantité min 100, prix auto.</p><button class="btn btn-gold btn-block" id="openSocialButton">RÉSEAUX SOCIAUX</button></article>
+<article class="card"><div class="card-icon">🎵</div><h4>Création musicale</h4><p>Chanson complète OU petite note via /api/media/music</p><button class="btn btn-block" id="openMusicButton">Commander</button></article>
+<article class="card"><div class="card-icon">📢</div><h4>Publicité digitale</h4><p>Client crée sa pub via /api/publicite/ads</p><button class="btn btn-block" id="openAdsButton">Découvrir</button></article>
+<article class="card"><div class="card-icon">💻</div><h4>Site web</h4><p>Vitrine, Portfolio, Boutique, Blog, Business, Autre</p><button class="btn btn-block creative-button" data-service="Site web">Commander</button></article>
 <article class="card"><div class="card-icon">📱</div><h4>Application mobile</h4><p>Nom + Icône + Lien + Description</p><button class="btn btn-block creative-button" data-service="Application mobile">Commander</button></article>
-<article class="card"><div class="card-icon">🤖</div><h4>Création de chatbot</h4><p>Chatbot IA via /api/intelligence-artificielle/ai</p><button class="btn btn-block creative-button" data-service="Chatbot">Commander</button></article>
-<article class="card"><div class="card-icon">🔌</div><h4>Catalogue API</h4><p>12 API DAVBOT avec testeur intégré</p><button class="btn btn-block" id="openApiButton">Voir les API</button></article>
-<article class="card"><div class="card-icon">☁️</div><h4>Hébergement</h4><p>Upload HTML/CSS/JS → GitHub → Vercel auto</p><button class="btn btn-block" id="openHostButton">Héberger</button></article>
+<article class="card"><div class="card-icon">🤖</div><h4>Chatbot IA</h4><p>Via /api/intelligence-artificielle/ai</p><button class="btn btn-block creative-button" data-service="Chatbot">Commander</button></article>
+<article class="card"><div class="card-icon">🔌</div><h4>Catalogue API</h4><p>12 API DAVBOT avec testeur</p><button class="btn btn-block" id="openApiButton">Voir les API</button></article>
 </div>
 </section>
 
@@ -76,78 +73,41 @@ footer{text-align:center;padding:25px 8px;color:var(--muted);font-size:11px;line
 <footer><strong class="gold">JASON BUSINESS</strong><br>Web • Design • Digital • IA<br>Créé par Jason Aloma 🇨🇩</footer>
 </div>
 
-<!-- SMM MODAL - CLIENT SELF-BOOST -->
+<!-- SMM MODAL SANS INSTRUCTION FACULTATIVE -->
 <div class="overlay" id="smmModal"><div class="modal">
 <div class="modal-head"><h3 id="smmTitle">Choisir un réseau social</h3><button class="close" data-close="smmModal">×</button></div>
-<div id="platformChooser"><p class="note">Le client choisit lui-même, boost automatique, prix calculé.</p><input class="search" id="platformSearch" placeholder="Rechercher Facebook, TikTok, Spotify…"><div class="platform-grid" id="platformGrid"></div></div>
+<div id="platformChooser"><p class="note">Le client choisit lui-même, boost automatique.</p><input class="search" id="platformSearch" placeholder="Rechercher Facebook, TikTok, Spotify…"><div class="platform-grid" id="platformGrid"></div></div>
 <div id="platformServices" class="hidden"><button class="btn btn-dark small-btn" id="backToPlatforms">← Retour</button><hr><div id="selectedPlatformInfo"></div>
 <form id="smmForm">
 <div class="field"><label>Type de boost</label><select id="smmService" required></select></div>
-<div class="field"><label>Lien public</label><input id="smmLink" type="url" placeholder="https://…" required></div>
+<div class="field"><label>Lien public du profil ou contenu</label><input id="smmLink" type="url" placeholder="https://..." required></div>
 <div class="field"><label>Quantité (minimum 100)</label><input id="smmQuantity" type="number" min="100" step="10" value="100" required></div>
-<div class="field"><label>Instructions facultatives</label><textarea id="smmNotes" placeholder="Précisions…"></textarea></div>
-<div class="price-box"><div><span>Prix calcul auto</span><strong id="smmPrice">0 FC</strong></div><div><span>Solde disponible</span><strong id="smmBalance">0 FC</strong></div><div><span id="smmDetail" class="note"></span></div><p class="note">Client commande lui-même, débit auto solde, en attente fournisseur.</p></div>
+<div class="price-box"><div><span>Prix calcul auto</span><strong id="smmPrice">0 FC</strong></div><div><span>Solde disponible</span><strong id="smmBalance">0 FC</strong></div><div><span id="smmDetail" class="note"></span></div><p class="note">Débit auto du solde, en attente fournisseur.</p></div>
 <button class="btn btn-gold btn-block" type="submit" id="submitSmm">Confirmer ma commande (SELF-BOOST)</button>
 </form></div>
 </div></div>
 
-<!-- MUSIC MODAL WITH CHANSON API -->
-<div class="overlay" id="musicModal"><div class="modal">
-<div class="modal-head"><h3>🎵 Création musicale - API Chanson</h3><button class="close" data-close="musicModal">×</button></div>
+<div class="overlay" id="musicModal"><div class="modal"><div class="modal-head"><h3>🎵 Création musicale</h3><button class="close" data-close="musicModal">×</button></div>
 <form id="musicForm">
-<div class="field"><label>Titre chanson</label><input id="musicTitle" required placeholder="Ex: Kinshasa la belle"></div>
-<div class="radio-group"><div class="radio active" id="radioFull" onclick="setMusicMode('full')">📝 Chanson complète</div><div class="radio" id="radioNote" onclick="setMusicMode('note')">💡 Petite note + IA</div></div>
-<div class="field"><label>Style</label><select id="musicStyle" required><option>Gospel</option><option>Afrobeat</option><option>Rap</option><option>Rumba congolaise</option><option>Amour</option><option>Anniversaire</option><option>Mariage</option><option>Hommage</option><option>Amapiano</option></select></div>
-<div class="field"><label>Paroles ou idée (pour API /api/media/music)</label><textarea id="musicLyrics" required placeholder="Si chanson complète: paroles complètes. Si petite note: Ex: Chanson d'amour pour Sarah, style afrobeat"></textarea></div>
-<div class="field"><label>Durée sec</label><input id="musicDuration" type="number" value="15"></div>
-<button class="btn btn-dark btn-block" type="button" onclick="testMusicAPI()">🧪 TESTER API CHANSON</button>
-<div id="musicApiResult" class="doc-code" style="display:none"></div>
-<div class="price-box"><div><span>Prix référence</span><strong>5 000 FC</strong></div><div><span>Endpoint</span><strong>https://davbot-outils.vercel.app/api/media/music</strong></div></div>
-<button class="btn btn-gold btn-block" type="submit">Envoyer demande chanson</button>
-</form>
-</div></div>
+<div class="field"><label>Titre</label><input id="musicTitle" required></div>
+<div class="field"><label>Style</label><select id="musicStyle" required><option>Gospel</option><option>Afrobeat</option><option>Rap</option><option>Rumba congolaise</option><option>Amour</option><option>Anniversaire</option><option>Mariage</option><option>Hommage</option><option>Ambiance</option></select></div>
+<div class="field"><label>Paroles ou idée</label><textarea id="musicLyrics" required></textarea></div>
+<div class="price-box"><div><span>Prix référence</span><strong>5 000 FC</strong></div></div>
+<button class="btn btn-gold btn-block" type="submit">Envoyer demande</button>
+</form></div></div>
 
-<!-- ADS MODAL -->
-<div class="overlay" id="adsModal"><div class="modal">
-<div class="modal-head"><h3>📢 Publicité - API ADS</h3><button class="close" data-close="adsModal">×</button></div>
+<div class="overlay" id="adsModal"><div class="modal"><div class="modal-head"><h3>📢 Publicité digitale</h3><button class="close" data-close="adsModal">×</button></div>
 <form id="adsForm">
 <div class="field"><label>Type publicité</label><select id="adsType" required><option>Promotion entreprise</option><option>Promotion produit</option><option>Promotion page</option><option>Campagne personnalisée</option></select></div>
-<div class="field"><label>Titre pub business</label><input id="adsTitle" required placeholder="Ex: Vente chaussures"></div>
 <div class="field"><label>Lien à promouvoir</label><input id="adsLink" type="url" placeholder="https://…"></div>
-<div class="field"><label>Description business</label><textarea id="adsDescription" required></textarea></div>
-<div class="field"><label>Budget FC</label><input id="adsBudget" type="number" min="1000" value="1000"></div>
-<div class="file-box">📷 Icône pub business<input type="file" id="adsImage" accept="image/*"></div>
-<button class="btn btn-dark btn-block" type="button" onclick="testAdsAPI()">🧪 TESTER API /publicite/ads</button>
-<div id="adsApiResult" class="doc-code" style="display:none"></div>
-<button class="btn btn-gold btn-block" type="submit">Publier ma pub (SELF)</button>
-</form>
-</div></div>
+<div class="field"><label>Description</label><textarea id="adsDescription" required></textarea></div>
+<button class="btn btn-gold btn-block" type="submit">Envoyer demande</button>
+</form></div></div>
 
-<!-- APP / SITE / CHATBOT DETAILED MODAL -->
-<div class="overlay" id="orderModal"><div class="modal">
-<div class="modal-head"><h3 id="creativeTitle">Commander</h3><button class="close" data-close="orderModal">×</button></div>
-<form id="creativeForm">
-<input type="hidden" id="creativeService">
-<div id="creativeFields"></div>
-<button class="btn btn-gold btn-block" type="submit">Envoyer demande - COMMANDER</button>
-</form>
-</div></div>
+<div class="overlay" id="orderModal"><div class="modal"><div class="modal-head"><h3 id="creativeTitle">Commander</h3><button class="close" data-close="orderModal">×</button></div>
+<form id="creativeForm"><input type="hidden" id="creativeService"><div id="creativeFields"></div><button class="btn btn-gold btn-block" type="submit">Envoyer demande</button></form></div></div>
 
-<!-- HOST MODAL -->
-<div class="overlay" id="hostModal"><div class="modal">
-<div class="modal-head"><h3>☁️ Hébergement GitHub → Vercel</h3><button class="close" data-close="hostModal">×</button></div>
-<div class="field"><label>Nom site</label><input id="siteName" placeholder="mon-site"></div>
-<div class="file-box">📄 HTML (index.html)<input type="file" id="fileHtml" accept=".html,.htm"></div>
-<div class="file-box">🎨 CSS<input type="file" id="fileCss" accept=".css"></div>
-<div class="file-box">⚙️ JS<input type="file" id="fileJs" accept=".js"></div>
-<div class="field"><label>Repo GitHub (optionnel)</label><input id="gitRepo" placeholder="https://github.com/user/repo"></div>
-<button class="btn btn-dark btn-block" type="button" onclick="uploadHosting()">📤 LIRE FICHIERS</button>
-<button class="btn btn-gold btn-block" type="button" onclick="connectVercel()">🔗 CONNECTER GITHUB → VERCEL</button>
-<div id="hostResult" class="note" style="margin-top:12px"></div>
-</div></div>
-
-<!-- API MODAL -->
-<div class="overlay" id="apiModal"><div class="modal"><div class="modal-head"><h3>🔌 12 API DAVBOT</h3><button class="close" data-close="apiModal">×</button></div><p class="note">Toutes tes API avec testeur. Chanson, Ads, Chatbot inclus.</p><div class="grid" id="apiGrid"></div></div></div>
+<div class="overlay" id="apiModal"><div class="modal"><div class="modal-head"><h3>🔌 Catalogue API</h3><button class="close" data-close="apiModal">×</button></div><div class="grid" id="apiGrid"></div></div></div>
 
 <div class="overlay" id="profileModal"><div class="modal"><div class="modal-head"><h3>👤 Mon compte</h3><button class="close" data-close="profileModal">×</button></div><div class="card"><p class="note">Téléphone</p><strong id="profilePhone">Non identifié</strong><hr><p class="note">Solde</p><strong id="profileBalance" class="gold">0 FC</strong></div></div></div>
 
@@ -163,13 +123,11 @@ footer{text-align:center;padding:25px 8px;color:var(--muted);font-size:11px;line
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {getDatabase,ref,get,set,push,runTransaction} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import {getDatabase,ref,get,set,push} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
 const USERS_PATH="jasonBusiness/users";const COMMANDS_PATH="jasonBusiness/demandes_commandes";
 const $=id=>document.getElementById(id);const money=n=>Math.max(0,Number(n)||0).toLocaleString("fr-FR")+" FC";
 let db=null,currentPhone="",currentUser={},selectedPlatform=null,busy=false;
-const API_BASE="https://davbot-outils.vercel.app";
-
 function toast(m){const el=$("toast");el.textContent=m;el.classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove("show"),3000)}
 function openModal(id){$(id).classList.add("show")}function closeModal(id){$(id).classList.remove("show")}function closeAllModals(){document.querySelectorAll(".overlay").forEach(x=>x.classList.remove("show"))}
 document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>closeModal(b.dataset.close)));
@@ -178,19 +136,18 @@ function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;",
 function getPhone(){return (localStorage.getItem("jasonBusinessPhone")||localStorage.getItem("userPhone")||localStorage.getItem("telephone")||localStorage.getItem("phone")||"").trim()}
 function getBalance(user){return Number(user?.solde_principal??user?.solde??0)||0}
 function updateBalanceUI(){$("balanceValue").textContent=money(getBalance(currentUser));$("smmBalance").textContent=money(getBalance(currentUser));$("profileBalance").textContent=money(getBalance(currentUser));$("profilePhone").textContent=currentPhone||"Non identifié"}
-
 async function initFirebase(){
 try{
 db=getDatabase(initializeApp(firebaseConfig));
 currentPhone=getPhone();
-if(!currentPhone){$("accountMessage").textContent="Connectez-vous depuis espace client pour utiliser solde.";updateBalanceUI();return}
+if(!currentPhone){$("accountMessage").textContent="Connectez-vous depuis espace client";updateBalanceUI();return}
 $("accountMessage").textContent="Compte : "+currentPhone;
 await loadUser();await loadOrders();
-}catch(e){$("accountMessage").textContent="Connexion Firebase impossible";toast("Erreur Firebase")}
+}catch(e){$("accountMessage").textContent="Erreur Firebase";toast("Erreur Firebase")}
 }
 async function loadUser(){
 if(!db||!currentPhone)return;
-try{const s=await get(ref(db,`${USERS_PATH}/${currentPhone}`));currentUser=s.exists()?s.val():{};updateBalanceUI();}catch(e){toast("Impossible lire compte")}
+try{const s=await get(ref(db,`${USERS_PATH}/${currentPhone}`));currentUser=s.exists()?s.val():{};updateBalanceUI();}catch(e){toast("Lecture compte impossible")}
 }
 async function loadOrders(){
 if(!db||!currentPhone)return;
@@ -203,9 +160,8 @@ $("ordersList").innerHTML=orders.length?orders.map(o=>`<div style="padding:10px 
 async function saveOrder(order){
 if(!db)return toast("Firebase non connecté"),false;
 if(!currentPhone)return toast("Connectez-vous"),false;
-try{const orderRef=push(ref(db,COMMANDS_PATH));await set(orderRef,{...order,telephone:currentPhone,statut:"En attente",createdAt:Date.now()});await loadOrders();return true}catch(e){toast("Impossible enregistrer");return false}
+try{const orderRef=push(ref(db,COMMANDS_PATH));await set(orderRef,{...order,telephone:currentPhone,statut:"En attente",createdAt:Date.now()});await loadOrders();return true}catch(e){toast("Enregistrement impossible");return false}
 }
-
 const platforms=[
 {id:"facebook",name:"Facebook",slug:"facebook",color:"1877F2"},{id:"youtube",name:"YouTube",slug:"youtube",color:"FF0000"},
 {id:"x",name:"X",slug:"x",color:"FFFFFF"},{id:"whatsapp",name:"WhatsApp",slug:"whatsapp",color:"25D366"},
@@ -238,7 +194,7 @@ function showSmmPlatformChooser(){$("platformChooser").classList.remove("hidden"
 function renderPlatforms(filter=""){
 const term=filter.trim().toLowerCase();
 const list=platforms.filter(p=>p.name.toLowerCase().includes(term));
-$("platformGrid").innerHTML=list.length?list.map(p=>`<button type="button" class="platform" data-platform="${p.id}"><img src="${logoURL(p)}" alt="${escapeHTML(p.name)}" loading="lazy"><span>${escapeHTML(p.name)}</span></button>`).join(""):'<div class="empty">Aucune plateforme</div>';
+$("platformGrid").innerHTML=list.length?list.map(p=>`<button type="button" class="platform" data-platform="${p.id}"><img src="${logoURL(p)}" alt="${escapeHTML(p.name)}"><span>${escapeHTML(p.name)}</span></button>`).join(""):'<div class="empty">Aucune plateforme</div>';
 $("platformGrid").querySelectorAll("[data-platform]").forEach(b=>b.addEventListener("click",()=>openPlatform(b.dataset.platform)));
 }
 function openPlatform(id){
@@ -246,7 +202,7 @@ selectedPlatform=platforms.find(p=>p.id===id);if(!selectedPlatform)return;
 $("platformChooser").classList.add("hidden");$("platformServices").classList.remove("hidden");$("smmTitle").textContent=selectedPlatform.name;
 $("selectedPlatformInfo").innerHTML=`<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px"><img src="${logoURL(selectedPlatform)}" style="width:42px;height:42px"><div><strong>${escapeHTML(selectedPlatform.name)}</strong><p class="note" style="margin:5px 0 0">Client commande lui-même</p></div></div>`;
 $("smmService").innerHTML=(servicesByPlatform[id]||[]).map(s=>`<option value="${escapeHTML(s)}">${escapeHTML(s)}</option>`).join("");
-$("smmQuantity").value="100";$("smmLink").value="";$("smmNotes").value="";updateSmmPrice();
+$("smmQuantity").value="100";$("smmLink").value="";updateSmmPrice();
 }
 function calculatePrice(service,qty){
 const item=smmCatalog[service];if(!item||!Number.isInteger(qty)||qty<100)return 0;return Math.ceil(qty/item.qty*item.price);
@@ -260,82 +216,64 @@ $("platformSearch").addEventListener("input",e=>renderPlatforms(e.target.value))
 $("backToPlatforms").addEventListener("click",()=>{$("platformChooser").classList.remove("hidden");$("platformServices").classList.add("hidden");$("smmTitle").textContent="Choisir un réseau social"});
 $("smmService").addEventListener("change",updateSmmPrice);$("smmQuantity").addEventListener("input",updateSmmPrice);
 $("openSocialButton").addEventListener("click",showSmmPlatformChooser);
+
+// SANS INSTRUCTION FACULTATIVE - SELF BOOST FIXÉ
 $("smmForm").addEventListener("submit",async e=>{
 e.preventDefault();if(busy)return;if(!db||!currentPhone)return toast("Connectez-vous");if(!selectedPlatform)return toast("Choisissez réseau");
-const service=$("smmService").value,link=$("smmLink").value.trim(),qty=Number($("smmQuantity").value),notes=$("smmNotes").value.trim(),price=calculatePrice(service,qty);
+const service=$("smmService").value,link=$("smmLink").value.trim(),qty=Number($("smmQuantity").value),price=calculatePrice(service,qty);
 if(!/^https?:\/\/\S+/i.test(link))return toast("Lien https:// invalide");if(!Number.isInteger(qty)||qty<100)return toast("Min 100");if(price<=0)return toast("Tarif indisponible");
-busy=true;$("submitSmm").disabled=true;$("submitSmm").textContent="Enregistrement…";
+busy=true;$("submitSmm").disabled=true;$("submitSmm").textContent="⏳ Traitement...";
 try{
 const userRef=ref(db,`${USERS_PATH}/${currentPhone}`);
-const tx=await runTransaction(userRef,user=>{
-if(!user)return;const balance=Number(user.solde_principal??user.solde??0)||0;if(balance<price)return;
-if(user.solde_principal!==undefined)user.solde_principal=balance-price;else user.solde=balance-price;return user;
-});
-if(!tx.committed){await loadUser();toast("Solde insuffisant");return}
-const oldUser=currentUser;currentUser=tx.snapshot.val()||{};updateBalanceUI();
-const saved=await saveOrder({categorie:"smm",service:selectedPlatform.name+" — "+service,plateforme:selectedPlatform.name,type_service:service,lien:link,quantite:qty,notes,prix:price,fournisseurConnecte:false,selfBoost:true});
-if(!saved){
-await runTransaction(userRef,user=>{if(!user)return user;if(user.solde_principal!==undefined)user.solde_principal=(Number(user.solde_principal)||0)+price;else user.solde=(Number(user.solde)||0)+price;return user});
-currentUser=oldUser;await loadUser();toast("Commande non enregistrée");return}
-toast("✅ Commande self-boost enregistrée");$("smmForm").reset();closeModal("smmModal");await loadUser();
-}catch(err){console.error(err);toast("Erreur commande");await loadUser()}finally{busy=false;$("submitSmm").disabled=false;$("submitSmm").textContent="Confirmer ma commande (SELF-BOOST)"}
+const snap=await get(userRef);
+let user=snap.exists()?snap.val():{};
+let bal=Number(user.solde_principal??user.solde??0);
+if(bal<price){await loadUser();toast(`Solde insuffisant: ${money(bal)} < ${money(price)}`);return}
+let newBal=bal-price;
+if(user.solde_principal!==undefined||user.solde===undefined){user.solde_principal=newBal}else{user.solde=newBal}
+await set(userRef,user);
+currentUser=user;updateBalanceUI();
+const saved=await saveOrder({categorie:"smm",service:selectedPlatform.name+" — "+service,plateforme:selectedPlatform.name,type_service:service,lien:link,quantite:qty,prix:price,selfBoost:true});
+if(!saved){user.solde_principal!==undefined?user.solde_principal+=price:user.solde+=price;await set(userRef,user);currentUser=user;await loadUser();toast("Erreur enregistrement");return}
+toast(`✅ ${service} ${qty} commandé - ${money(price)} débité`);
+$("smmForm").reset();closeModal("smmModal");await loadUser();await loadOrders();
+}catch(err){console.error(err);toast("Erreur: "+err.message);await loadUser()}finally{busy=false;$("submitSmm").disabled=false;$("submitSmm").textContent="Confirmer ma commande (SELF-BOOST)"}
 });
 
-/* MUSIC */
-let musicMode="full";
-window.setMusicMode=function(m){musicMode=m;$("radioFull").classList.toggle("active",m==="full");$("radioNote").classList.toggle("active",m==="note");$("musicLyrics").placeholder=m==="full"?"Écris paroles complètes ici...":"Petite idée: Ex: Chanson d'amour pour Sarah, afrobeat romantique..."}
-window.testMusicAPI=async function(){
-let title=$("musicTitle").value,content=$("musicLyrics").value,style=$("musicStyle").value,dur=$("musicDuration").value;
-if(!content) return toast("Entre paroles ou idée");
-$("musicApiResult").style.display="block";$("musicApiResult").textContent="⏳ Appel https://davbot-outils.vercel.app/api/media/music...";
-let prompt=musicMode==="full"?`Chanson ${title} style ${style}: ${content}`:`Crée chanson ${title} style ${style} idée: ${content}`;
-try{let r=await fetch(API_BASE+"/api/media/music",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,duration:Number(dur)||15})});let d=await r.json();$("musicApiResult").textContent=JSON.stringify(d,null,2)}catch(e){$("musicApiResult").textContent="Erreur: "+e.message}
-}
 $("openMusicButton").addEventListener("click",()=>openModal("musicModal"));
 $("musicForm").addEventListener("submit",async e=>{
 e.preventDefault();if(!currentPhone)return toast("Connectez-vous");
-const saved=await saveOrder({categorie:"musique",service:"Création musicale - "+$("musicTitle").value.trim(),titre:$("musicTitle").value.trim(),style:$("musicStyle").value,paroles:$("musicLyrics").value.trim(),mode:musicMode,prompt:`Chanson ${$("musicTitle").value} style ${$("musicStyle").value}: ${$("musicLyrics").value}`,prix:5000,api:"/api/media/music"});
+const saved=await saveOrder({categorie:"musique",service:"Création musicale",titre:$("musicTitle").value.trim(),style:$("musicStyle").value,paroles:$("musicLyrics").value.trim(),prix:5000});
 if(saved){toast("Demande musicale envoyée");$("musicForm").reset();closeModal("musicModal")}
 });
-
-/* ADS */
-window.testAdsAPI=async function(){
-$("adsApiResult").style.display="block";$("adsApiResult").textContent="⏳ Appel /api/publicite/ads catalog...";
-try{let r=await fetch(API_BASE+"/api/publicite/ads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"catalog"})});let d=await r.json();$("adsApiResult").textContent=JSON.stringify(d,null,2)}catch(e){$("adsApiResult").textContent=e.message}
-}
 $("openAdsButton").addEventListener("click",()=>openModal("adsModal"));
 $("adsForm").addEventListener("submit",async e=>{
 e.preventDefault();if(!currentPhone)return toast("Connectez-vous");
-const saved=await saveOrder({categorie:"publicite",service:"Publicité digitale - "+$("adsTitle").value,type_publicite:$("adsType").value,titre:$("adsTitle").value,lien:$("adsLink").value.trim(),description:$("adsDescription").value.trim(),budget:Number($("adsBudget").value)||1000,prix:Number($("adsBudget").value)||0,api:"/api/publicite/ads",selfBoost:true});
-if(saved){toast("Pub créée, tarif à confirmer");$("adsForm").reset();closeModal("adsModal")}
+const saved=await saveOrder({categorie:"publicite",service:"Publicité digitale",type_publicite:$("adsType").value,lien:$("adsLink").value.trim(),description:$("adsDescription").value.trim(),prix:0});
+if(saved){toast("Demande envoyée");$("adsForm").reset();closeModal("adsModal")}
 });
 
-/* APP / SITE / CHATBOT DETAILED */
 function getCreativeFields(service){
 if(service==="Application mobile"){
-return `<div class="field"><label>Nom de l'application *</label><input id="appName" required placeholder="Ex: Ma Boutique"></div>
-<div class="field"><label>Icône de l'app (upload) *</label><input id="appIcon" type="file" accept="image/*" required></div>
-<div class="field"><label>Lien du projet / Play Store</label><input id="appLink" placeholder="https://..."></div>
-<div class="field"><label>Description complète *</label><textarea id="appDesc" required placeholder="Fonctionnalités..."></textarea></div>
-<div class="field"><label>Contact WhatsApp *</label><input id="appContact" required></div>`;
+return `<div class="field"><label>Nom app *</label><input id="appName" required></div>
+<div class="field"><label>Icône (upload) *</label><input id="appIcon" type="file" accept="image/*" required></div>
+<div class="field"><label>Lien projet</label><input id="appLink" placeholder="https://..."></div>
+<div class="field"><label>Description *</label><textarea id="appDesc" required></textarea></div>
+<div class="field"><label>Contact *</label><input id="appContact" required></div>`;
 }
 if(service==="Site web"){
-return `<div class="field"><label>Nom du site *</label><input id="siteWebName" required placeholder="Ex: Boutique Kinshasa"></div>
-<div class="field"><label>Type de site *</label><select id="siteWebType" required><option value="">Choisir</option><option>Site vitrine</option><option>Portfolio</option><option>Boutique en ligne</option><option>Blog</option><option>Site Business</option><option>Plateforme</option><option>Autre</option></select></div>
-<div class="field"><label>Si Autre, précise</label><input id="siteWebAutre" placeholder="Ex: Site école"></div>
-<div class="field"><label>Description + pages *</label><textarea id="siteWebDesc" required placeholder="Accueil, A propos, Contact..."></textarea></div>
+return `<div class="field"><label>Nom site *</label><input id="siteWebName" required></div>
+<div class="field"><label>Type *</label><select id="siteWebType" required><option value="">Choisir</option><option>Site vitrine</option><option>Portfolio</option><option>Boutique en ligne</option><option>Blog</option><option>Business</option><option>Autre</option></select></div>
+<div class="field"><label>Description *</label><textarea id="siteWebDesc" required></textarea></div>
 <div class="field"><label>Contact *</label><input id="siteWebContact" required></div>`;
 }
 if(service==="Chatbot"){
-return `<div class="field"><label>Nom chatbot *</label><input id="chatbotName" required placeholder="Ex: Assistant JASON"></div>
-<div class="field"><label>Plateforme *</label><select id="chatbotPlatform" required><option>Site web</option><option>WhatsApp</option><option>Telegram</option><option>Facebook</option><option>Application</option></select></div>
-<div class="field"><label>Message test (pour API /ai) *</label><textarea id="chatbotMessage" required placeholder="Bonjour DAVBOT, présente-toi."></textarea></div>
-<div class="field"><label>Knowledge personnalisée</label><textarea id="chatbotKnowledge" placeholder="Instructions IA..."></textarea></div>
-<div class="field"><label>Contact *</label><input id="chatbotContact" required></div>
-<button class="btn btn-dark btn-block" type="button" onclick="testChatbotFromForm()">🧪 TESTER API CHATBOT</button>
-<div id="chatbotTestResult" class="doc-code" style="display:none"></div>`;
+return `<div class="field"><label>Nom chatbot *</label><input id="chatbotName" required></div>
+<div class="field"><label>Plateforme *</label><select id="chatbotPlatform" required><option>Site web</option><option>WhatsApp</option><option>Telegram</option><option>Facebook</option></select></div>
+<div class="field"><label>Message test *</label><textarea id="chatbotMessage" required></textarea></div>
+<div class="field"><label>Contact *</label><input id="chatbotContact" required></div>`;
 }
-return `<div class="field"><label>Description projet *</label><textarea id="creativeDescription" required></textarea></div>`;
+return `<div class="field"><label>Description *</label><textarea id="creativeDescription" required></textarea></div>`;
 }
 document.querySelectorAll(".creative-button").forEach(b=>b.addEventListener("click",()=>{
 const s=b.dataset.service;
@@ -343,69 +281,28 @@ $("creativeService").value=s;$("creativeTitle").textContent=s;
 $("creativeFields").innerHTML=getCreativeFields(s);
 openModal("orderModal");
 }));
-window.testChatbotFromForm=async function(){
-let msg=$("chatbotMessage").value,know=$("chatbotKnowledge").value;
-if(!msg) return toast("Entre message");
-$("chatbotTestResult").style.display="block";$("chatbotTestResult").textContent="⏳ Appel /api/intelligence-artificielle/ai...";
-try{let r=await fetch(API_BASE+"/api/intelligence-artificielle/ai",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:msg,history:[],knowledge:know})});let d=await r.json();$("chatbotTestResult").textContent=JSON.stringify(d,null,2)}catch(e){$("chatbotTestResult").textContent=e.message}
-}
 $("creativeForm").addEventListener("submit",async e=>{
-e.preventDefault();
-const service=$("creativeService").value;
-if(!currentPhone)return toast("Connectez-vous");
+e.preventDefault();const service=$("creativeService").value;if(!currentPhone)return toast("Connectez-vous");
 let order={categorie:"creation",service,prix:{"Site web":15000,"Application mobile":10000,"Chatbot":7000}[service]||0};
-if(service==="Application mobile"){
-order={...order,nomApp:$("appName").value,lienApp:$("appLink").value,description:$("appDesc").value,contact:$("appContact").value,icon:($("appIcon").files[0]?.name||"")};
-}
-if(service==="Site web"){
-order={...order,nomSite:$("siteWebName").value,typeSite:$("siteWebType").value,autreSite:$("siteWebAutre").value,description:$("siteWebDesc").value,contact:$("siteWebContact").value};
-}
-if(service==="Chatbot"){
-order={...order,nomBot:$("chatbotName").value,plateforme:$("chatbotPlatform").value,message:$("chatbotMessage").value,knowledge:$("chatbotKnowledge").value,contact:$("chatbotContact").value,api:"/api/intelligence-artificielle/ai"};
-}
-if(!order.description &&!order.nomApp &&!order.nomSite &&!order.nomBot){
-let desc=$("creativeDescription")?.value?.trim();if(!desc)return toast("Décrivez projet");order.description=desc;
-}
+if(service==="Application mobile"){order={...order,nomApp:$("appName").value,lienApp:$("appLink").value,description:$("appDesc").value,contact:$("appContact").value}}
+if(service==="Site web"){order={...order,nomSite:$("siteWebName").value,typeSite:$("siteWebType").value,description:$("siteWebDesc").value,contact:$("siteWebContact").value}}
+if(service==="Chatbot"){order={...order,nomBot:$("chatbotName").value,plateforme:$("chatbotPlatform").value,message:$("chatbotMessage").value,contact:$("chatbotContact").value}}
 if(await saveOrder(order)){toast("Demande enregistrée");closeModal("orderModal")}
 });
 
-/* HOSTING */
-$("openHostButton").addEventListener("click",()=>openModal("hostModal"));
-window.uploadHosting=async function(){
-let htmlFile=$("fileHtml").files[0];
-if(!htmlFile) return toast("Upload index.html");
-let content=await htmlFile.text();
-$("hostResult").innerHTML=`✅ Fichiers lus: ${htmlFile.name} (${htmlFile.size} bytes)<br>➡️ Va sur github.com/new crée repo ${$("siteName").value||"mon-site"}<br>➡️ Upload fichiers puis CONNECTER VERCEL<br><br>Contenu HTML détecté: ${content.slice(0,100)}...`;
-}
-window.connectVercel=function(){
-let repo=$("gitRepo").value||"https://github.com/"+($("siteName").value||"mon-site");
-let u=`https://vercel.com/new/clone?repository-url=${encodeURIComponent(repo)}`;window.open(u,"_blank");
-$("hostResult").innerHTML+=`<br><br><a href="${u}" target="_blank" style="color:var(--blue)">${u}</a>`;
-}
-
-/* API CATALOG */
 const apiCatalog=[
-{name:"Assistant IA - Chatbot",path:"/api/intelligence-artificielle/ai",full:"https://davbot-outils.vercel.app/api/intelligence-artificielle/ai",ex:{message:"Bonjour DAVBOT",history:[]}},
-{name:"Questions IA - Vision",path:"/api/intelligence-artificielle/ask",full:"https://davbot-outils.vercel.app/api/intelligence-artificielle/ask",ex:{message:"Analyse image",image:"data:image/jpeg;base64,...",knowledge:"",rules:"",history:[]}},
-{name:"Traduction IA",path:"/api/intelligence-artificielle/translate",full:"https://davbot-outils.vercel.app/api/intelligence-artificielle/translate",ex:{text:"Bonjour tout le monde",source:"fr",target:"en"}},
-{name:"Génération image",path:"/api/genere-image/generate",full:"https://davbot-outils.vercel.app/api/genere-image/generate",ex:{prompt:"Ville futuriste Kinshasa",size:"1024x1024",n:1}},
-{name:"Transformation image",path:"/api/genere-image/image",full:"https://davbot-outils.vercel.app/api/genere-image/image",ex:{prompt:"Affiche futuriste",size:"1024x1024"}},
-{name:"Publicité ADS",path:"/api/publicite/ads",full:"https://davbot-outils.vercel.app/api/publicite/ads",ex:{action:"catalog"}},
-{name:"Données Data",path:"/api/data",full:"https://davbot-outils.vercel.app/api/data",ex:{action:"catalog"}},
-{name:"Stockage Storage",path:"/api/storage",full:"https://davbot-outils.vercel.app/api/storage",ex:{action:"list"}},
-{name:"Admin Auth",path:"/api/admin-auth",full:"https://davbot-outils.vercel.app/api/admin-auth",ex:{action:"login"}},
-{name:"Média Vidéo",path:"/api/media/video",full:"https://davbot-outils.vercel.app/api/media/video",ex:{prompt:"Kinshasa nuit",duration:6}},
-{name:"Média Musique - Chanson",path:"/api/media/music",full:"https://davbot-outils.vercel.app/api/media/music",ex:{prompt:"Afrobeat énergique",duration:15}},
-{name:"Hub",path:"/api/hub",full:"https://davbot-outils.vercel.app/api/hub",ex:{action:"catalog"}}
+{name:"Assistant IA",path:"/api/intelligence-artificielle/ai"},{name:"Questions IA",path:"/api/intelligence-artificielle/ask"},
+{name:"Traduction",path:"/translate"},{name:"Génération image",path:"/genere-image/generate"},
+{name:"Image",path:"/genere-image/image"},{name:"Publicité",path:"/publicite/ads"},
+{name:"Données API",path:"/api/data"},{name:"Stockage",path:"/storage"},
+{name:"Auth admin",path:"/admin-auth"},{name:"Média vidéo",path:"/media/video"},
+{name:"Média musical",path:"/media/music"},{name:"Hub API",path:"/hub"}
 ];
-$("apiGrid").innerHTML=apiCatalog.map((a,i)=>`<article class="card"><div class="card-icon">🔌</div><h4>${escapeHTML(a.name)}</h4><p style="overflow-wrap:anywhere">${escapeHTML(a.path)}<br><small style="color:var(--blue)">${escapeHTML(a.full)}</small></p><div class="doc-code">${escapeHTML(JSON.stringify(a.ex,null,2))}</div><button class="btn btn-block small-btn" data-api="${i}">Tester API</button><div id="apiRes-${i}" class="doc-code" style="display:none;margin-top:8px"></div></article>`).join("");
+$("apiGrid").innerHTML=apiCatalog.map((a,i)=>`<article class="card"><div class="card-icon">🔌</div><h4>${escapeHTML(a.name)}</h4><p>${escapeHTML(a.path)}</p><button class="btn btn-block small-btn" data-api="${i}">Demander accès</button></article>`).join("");
 $("apiGrid").querySelectorAll("[data-api]").forEach(b=>b.addEventListener("click",async()=>{
-const api=apiCatalog[Number(b.dataset.api)];const resEl=$("apiRes-"+b.dataset.api);resEl.style.display="block";resEl.textContent="⏳ Test "+api.full+"...";
-try{let r=await fetch(api.full,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(api.ex)});let d=await r.json();resEl.textContent=JSON.stringify(d,null,2)}catch(e){resEl.textContent="Erreur: "+e.message+" - Vérifie CORS"}
-if(!currentPhone)return;await saveOrder({categorie:"api",service:"Demande API — "+api.name,api:api.path,full:api.full,prix:0})
+const api=apiCatalog[Number(b.dataset.api)];if(!currentPhone)return toast("Connectez-vous");if(await saveOrder({categorie:"api",service:"Demande API — "+api.name,api:api.path,prix:0}))toast("Demande enregistrée")
 }));
 $("openApiButton").addEventListener("click",()=>openModal("apiModal"));
-
 document.querySelectorAll("[data-nav]").forEach(b=>b.addEventListener("click",()=>{
 document.querySelectorAll("[data-nav]").forEach(x=>x.classList.remove("active"));b.classList.add("active");
 switch(b.dataset.nav){
@@ -418,7 +315,6 @@ case "profile":updateBalanceUI();openModal("profileModal");break;
 }));
 $("refreshBalance").addEventListener("click",loadUser);
 $("refreshOrders").addEventListener("click",loadOrders);
-
 initFirebase();
 </script>
 </body>
