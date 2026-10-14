@@ -1,548 +1,1069 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#060b16">
-<meta name="description" content="JASON BUSINESS — Réseaux sociaux, création digitale et intelligence artificielle">
-<title>JASON BUSINESS — Réseaux & Services</title>
+<title>JASON BUSINESS — Services</title>
+
 <style>
-:root{--bg:#060b16;--panel:#0d1729;--card:#111f35;--blue:#168cff;--cyan:#24d1ff;--gold:#e6bd67;--green:#28d99a;--red:#ff6478;--muted:#94a5bd;--border:rgba(255,255,255,.09)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:#fff;font-family:Arial,Helvetica,sans-serif;padding-bottom:90px}
-button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.55;cursor:not-allowed}
-.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:13px 15px;background:#060b16ed;backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
+:root{
+  --bg:#060b16;
+  --panel:#0d1729;
+  --card:#111f35;
+  --blue:#168cff;
+  --cyan:#24d1ff;
+  --gold:#e6bd67;
+  --green:#28d99a;
+  --text:#f5f7ff;
+  --muted:#9caec7;
+  --border:rgba(230,189,103,.22);
+  --danger:#ff647c;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+  radial-gradient(circle at top right,#10264a 0,transparent 34%),
+  var(--bg);
+  color:var(--text);font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+.container{max-width:1000px;margin:auto;padding:16px 14px 100px}
+header{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:14px 0 22px;
+}
 .brand{display:flex;align-items:center;gap:10px}
-.logo{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;color:#111827;font-weight:1000;font-size:16px;background:linear-gradient(135deg,#d2a345,#fff0b7)}
-.brand b{font-size:12px;letter-spacing:1px}.brand small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
-.iconbtn{width:40px;height:40px;border-radius:12px;color:white;background:var(--panel);border:1px solid var(--border)}
-.container{max-width:1100px;margin:auto;padding:0 15px}
-.hero{margin:20px 0;padding:26px 17px;text-align:center;border:1px solid #e6bd6733;border-radius:24px;background:radial-gradient(circle at 50% 0,#16416c,transparent 65%),linear-gradient(145deg,#122440,#0a1120)}
-.eyebrow{font-size:10px;color:var(--gold);letter-spacing:2px;font-weight:900}
-.hero h1{font-size:clamp(26px,7vw,39px);margin:12px 0}.hero h1 span{color:var(--gold)}
-.hero p{font-size:11px;color:#b5c3d7;line-height:1.8;max-width:490px;margin:auto}
-.balance{display:inline-flex;align-items:center;gap:12px;margin-top:18px;padding:12px 17px;background:#050b16;border:1px solid #28d99a33;border-radius:15px}
-.balance small{display:block;text-align:left;color:var(--muted);font-size:9px}.balance strong{display:block;text-align:left;color:var(--green);font-size:17px;margin-top:4px}
-.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:25px 0 13px}
-.section-head h2{font-size:15px}.section-head p{font-size:10px;color:var(--muted);margin-top:5px;line-height:1.6}
-.tag{flex-shrink:0;font-size:9px;color:var(--gold);border:1px solid #e6bd6735;border-radius:30px;padding:7px 9px}
-.search{display:flex;gap:10px;align-items:center;padding:13px;margin:18px 0;background:var(--panel);border:1px solid var(--border);border-radius:13px}
-.search input{width:100%;background:transparent;color:#fff;border:0;outline:none;font-size:12px}
-.btn{display:block;width:100%;padding:13px 10px;margin-top:12px;border:0;border-radius:11px;font-size:10px;font-weight:900}
-.primary{background:linear-gradient(110deg,#168cff,#24d1ff);color:#04101d}
-.gold{background:linear-gradient(110deg,#d1a346,#f3d991);color:#191205}
-.secondary{background:#1b2d48;color:#fff;border:1px solid var(--border)}
-.greenbtn{background:linear-gradient(110deg,#13b981,#5af0ba);color:#052318}
-.social-main{display:block;width:100%;padding:19px 12px;margin:18px 0;border:0;border-radius:16px;background:linear-gradient(110deg,#168cff,#24d1ff);color:#04101d;font-size:12px;font-weight:900;box-shadow:0 8px 28px #168cff25}
-.social-main .big-icon{display:block;font-size:27px;margin-bottom:8px}.social-main small{display:block;margin-top:7px;font-size:10px;font-weight:normal}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.social-card{min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center;padding:13px 6px;border:1px solid var(--border);border-radius:17px;background:linear-gradient(145deg,#12213a,#0b1425);transition:transform .2s,border-color .2s}
-.social-card:active{transform:scale(.97)}.social-card:hover{border-color:#e6bd6766}
-.social-logo{width:43px;height:43px;object-fit:contain;padding:9px;border-radius:14px;background:#ffffff0b;border:1px solid #ffffff0d}
-.social-name{font-size:10px;font-weight:800;margin-top:10px;line-height:1.4}.social-kind{font-size:9px;color:var(--muted);margin-top:4px}
-.social-card button{width:100%;margin-top:11px;padding:9px 4px;border:1px solid #e6bd6733;border-radius:9px;color:var(--gold);background:#e6bd6710;font-size:9px;font-weight:900}
-.service-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
-.service-card{padding:15px;border:1px solid var(--border);border-radius:17px;background:linear-gradient(145deg,#12213a,#0b1425)}
-.service-icon{width:43px;height:43px;border-radius:13px;display:grid;place-items:center;font-size:22px;background:#168cff16;border:1px solid #168cff2c}
-.service-card h3{font-size:12px;margin-top:12px}.service-card p{font-size:10px;color:var(--muted);line-height:1.7;margin-top:7px}.price{font-size:10px;color:var(--gold);font-weight:900;margin-top:9px}
-.modal{display:none;position:fixed;inset:0;z-index:150;overflow-y:auto;background:var(--bg);padding-bottom:25px}
-.modal.show{display:block}
-.modalhead{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;padding:13px 15px;background:#07101ff5;backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
-.back{width:39px;height:39px;border-radius:12px;background:var(--card);border:1px solid var(--border);color:#fff;font-size:23px}
-.modalhead b{font-size:13px}.modalhead small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
-.modalbody{max-width:740px;margin:auto;padding:17px 15px}
-.field{margin-bottom:14px}.field label{display:block;font-size:11px;color:#c8d5e7;margin-bottom:7px}
-.input,.select,.textarea{display:block;width:100%;padding:13px;border-radius:11px;background:#080f1d;border:1px solid #293950;color:#fff;outline:none;font-size:12px}
-.input:focus,.select:focus,.textarea:focus{border-color:var(--cyan)}.textarea{min-height:100px;resize:vertical;line-height:1.6}
-.note{padding:12px;margin-bottom:13px;border:1px solid var(--border);border-radius:12px;background:#0c1728;color:var(--muted);font-size:10px;line-height:1.8}
-.summary{padding:14px;border:1px solid var(--border);border-radius:14px;background:var(--panel);margin-bottom:15px}
-.row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;font-size:11px}.row span{color:var(--muted)}
-.result{white-space:pre-wrap;overflow-wrap:anywhere;max-height:400px;overflow:auto;padding:12px;margin-top:12px;border:1px solid var(--border);border-radius:12px;background:#030710;font-size:11px;line-height:1.7}
-.api-item{padding:14px;margin-bottom:12px;border:1px solid var(--border);border-radius:15px;background:var(--panel)}
-.api-item h3{font-size:12px}.endpoint{font-size:10px;color:var(--cyan);overflow-wrap:anywhere;margin:8px 0}
-.empty{grid-column:1/-1;text-align:center;padding:25px;color:var(--muted);font-size:12px}
-.bottom{position:fixed;bottom:0;left:0;right:0;z-index:60;display:grid;grid-template-columns:repeat(5,1fr);padding:9px 2px calc(9px + env(safe-area-inset-bottom));background:#060b16f7;border-top:1px solid var(--border)}
-.navbtn{border:0;background:transparent;color:var(--muted);font-size:9px;display:flex;flex-direction:column;align-items:center;gap:5px}.navbtn span{font-size:19px}.navbtn.active{color:var(--gold)}
-#toasts{position:fixed;top:12px;left:12px;right:12px;z-index:300;display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none}
-.toast{width:100%;max-width:390px;background:#14223a;border:1px solid var(--border);border-radius:12px;padding:13px;font-size:12px}
-.toast.error{border-color:var(--red)}.toast.success{border-color:var(--green)}
-@media(min-width:520px){.grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.social-card{padding:17px 10px}.social-logo{width:49px;height:49px}.service-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(min-width:850px){.grid{grid-template-columns:repeat(5,minmax(0,1fr))}.service-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.logo{
+  width:46px;height:46px;border-radius:15px;
+  display:grid;place-items:center;font-weight:900;font-size:20px;
+  color:#07101e;background:linear-gradient(135deg,#ffe5a0,var(--gold));
+  box-shadow:0 0 25px #e6bd6730;
+}
+.brand h1{font-size:17px;margin:0;letter-spacing:1px}
+.brand p{font-size:11px;color:var(--muted);margin:5px 0 0}
+.status{
+  color:var(--green);font-size:11px;border:1px solid #28d99a45;
+  padding:7px 10px;border-radius:20px;white-space:nowrap;
+}
+.hero{
+  padding:25px 20px;border:1px solid var(--border);border-radius:24px;
+  background:linear-gradient(135deg,#142746,#0d1729 65%,#182238);
+  position:relative;overflow:hidden;margin-bottom:17px;
+}
+.hero:after{
+  content:"";position:absolute;width:180px;height:180px;border-radius:50%;
+  right:-70px;top:-70px;background:#168cff1b;filter:blur(8px);
+}
+.eyebrow{font-size:11px;letter-spacing:2px;color:var(--gold);font-weight:bold}
+.hero h2{font-size:clamp(25px,6vw,37px);line-height:1.16;margin:12px 0}
+.hero p{color:var(--muted);line-height:1.65;font-size:13px;max-width:570px}
+.gold{color:var(--gold)}
+.balance{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:10px;margin-top:20px;padding:14px;background:#07101c88;
+  border:1px solid #ffffff12;border-radius:16px;
+}
+.balance small{color:var(--muted);font-size:11px}
+.balance strong{display:block;margin-top:5px;font-size:20px;color:var(--gold)}
+.section{margin-top:25px}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}
+.section-title h3{margin:0;font-size:17px}
+.section-title span{font-size:11px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{
+  background:linear-gradient(145deg,#12213a,#0c1627);
+  border:1px solid var(--border);border-radius:18px;padding:16px;
+  min-width:0;transition:.2s;
+}
+.card:active{transform:scale(.985)}
+.card h4{font-size:14px;margin:11px 0 7px}
+.card p{font-size:12px;line-height:1.5;color:var(--muted);margin:0 0 13px}
+.card-icon{
+  width:43px;height:43px;border-radius:14px;display:grid;place-items:center;
+  font-size:22px;background:#168cff19;border:1px solid #168cff40;
+}
+.btn{
+  border:0;border-radius:12px;padding:12px 14px;font-weight:bold;
+  color:#fff;background:linear-gradient(100deg,#147be8,#168cff);
+  box-shadow:0 6px 18px #168cff20;
+}
+.btn-gold{background:linear-gradient(100deg,#c08a2c,#f1d48b);color:#12100a}
+.btn-dark{background:#182943;border:1px solid #ffffff16;color:#e8efff}
+.btn-block{width:100%}
+.small-btn{padding:9px 11px;font-size:12px}
+.full{grid-column:1/-1}
+.note{font-size:11px;color:var(--muted);line-height:1.6}
+.search{
+  width:100%;background:#091323;border:1px solid #ffffff1c;color:white;
+  border-radius:12px;padding:13px;margin-bottom:12px;outline:none;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--blue)!important}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12px;color:#c5d2e5;margin-bottom:7px}
+.field input,.field select,.field textarea{
+  width:100%;padding:13px;border:1px solid #ffffff1b;border-radius:12px;
+  color:white;background:#081222;outline:none;
+}
+.field select option{background:#0d1729}
+.field textarea{min-height:75px;resize:vertical}
+.price-box{
+  padding:14px;border-radius:14px;background:#07101d;
+  border:1px solid var(--border);margin:12px 0;
+}
+.price-box div{display:flex;justify-content:space-between;gap:10px;margin:7px 0;font-size:12px}
+.price-box strong{color:var(--gold)}
+.overlay{
+  display:none;position:fixed;inset:0;background:#02050be8;
+  z-index:1000;padding:16px;overflow-y:auto;align-items:center;justify-content:center;
+}
+.overlay.show{display:flex}
+.modal{
+  width:100%;max-width:570px;max-height:92vh;overflow-y:auto;
+  background:linear-gradient(145deg,#12213a,#091321);
+  border:1px solid var(--border);border-radius:22px;padding:19px;
+  box-shadow:0 20px 80px #0009;
+}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.modal-head h3{font-size:18px;margin:0}
+.close{
+  width:35px;height:35px;border-radius:11px;border:1px solid #ffffff1c;
+  background:#17253b;color:white;font-size:20px;
+}
+.platform-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.platform{
+  background:#0a1424;border:1px solid #ffffff18;border-radius:15px;
+  padding:13px 6px;text-align:center;color:white;min-width:0;
+}
+.platform:active{transform:scale(.96)}
+.platform img{width:34px;height:34px;object-fit:contain;display:block;margin:0 auto 9px}
+.platform span{display:block;font-size:11px;overflow-wrap:anywhere}
+.platform:hover{border-color:var(--gold)}
+.platform.selected{border-color:var(--gold);background:#e6bd6712}
+.empty{padding:20px;text-align:center;color:var(--muted);font-size:13px}
+.toast{
+  position:fixed;left:50%;bottom:86px;transform:translate(-50%,20px);
+  opacity:0;pointer-events:none;z-index:3000;background:#12213a;
+  border:1px solid var(--border);padding:12px 16px;border-radius:12px;
+  max-width:90%;font-size:12px;transition:.25s;box-shadow:0 8px 30px #0008;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.bottom-nav{
+  position:fixed;z-index:500;bottom:0;left:0;right:0;
+  display:flex;justify-content:space-around;gap:4px;
+  background:#07101df2;backdrop-filter:blur(16px);
+  border-top:1px solid #ffffff14;padding:9px 4px calc(9px + env(safe-area-inset-bottom));
+}
+.bottom-nav button{
+  flex:1;background:transparent;border:0;color:var(--muted);
+  font-size:10px;padding:6px 2px;
+}
+.bottom-nav button span{display:block;font-size:19px;margin-bottom:4px}
+.bottom-nav button.active{color:var(--gold)}
+.hidden{display:none!important}
+hr{border:0;border-top:1px solid #ffffff12;margin:18px 0}
+footer{text-align:center;padding:25px 8px;color:var(--muted);font-size:11px;line-height:1.7}
+@media(min-width:650px){
+ .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .hero{padding:34px}
+ .platform-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
 </style>
 </head>
+
 <body>
-<header class="topbar">
- <div class="brand"><div class="logo">JB</div><div><b>JASON BUSINESS</b><small>Digital · Création · Promotion</small></div></div>
- <button class="iconbtn" onclick="openProfile()" aria-label="Profil">♙</button>
+<div class="container">
+<header>
+  <div class="brand">
+    <div class="logo">JB</div>
+    <div>
+      <h1>JASON <span class="gold">BUSINESS</span></h1>
+      <p>Services • Digital • Intelligence artificielle</p>
+    </div>
+  </div>
+  <div class="status">● En ligne</div>
 </header>
 
-<main class="container">
- <section class="hero">
-  <div class="eyebrow">LA TECHNOLOGIE À VOTRE SERVICE</div>
-  <h1>JASON <span>BUSINESS</span></h1>
-  <p>Réseaux sociaux, musique, publicité, sites web, applications et intelligence artificielle.</p>
-  <div class="balance"><span style="font-size:23px">◈</span><div><small>SOLDE PRINCIPAL</small><strong><span id="balance">—</span> FC</strong></div></div>
-  <p id="accountStatus" style="margin-top:12px">Vérification du compte…</p>
- </section>
-
- <button class="social-main" id="openSocialButton" type="button">
-  <span class="big-icon">🌐</span>RÉSEAUX SOCIAUX
-  <small>Facebook · Snapchat · Spotify · TikTok · YouTube · Instagram et plus</small>
- </button>
-
- <label class="search">⌕ <input id="search" placeholder="Rechercher un réseau social…" autocomplete="off"></label>
-
- <section id="socialSection">
-  <div class="section-head"><div><h2>🌐 Réseaux sociaux</h2><p>Choisis un réseau pour ouvrir ses services</p></div><span class="tag">20 PLATEFORMES</span></div>
-  <div class="grid" id="socialGrid"></div>
- </section>
-
- <section>
-  <div class="section-head"><div><h2>✨ Services créatifs</h2><p>Commandes numériques</p></div><span class="tag">JASON STUDIO</span></div>
-  <div class="service-grid" id="creativeGrid"></div>
- </section>
-
- <section>
-  <div class="section-head"><div><h2>🔌 Catalogue API</h2><p>Consulte et teste les endpoints configurés</p></div><span class="tag">API</span></div>
-  <div class="service-card"><div class="service-icon">⌘</div><h3>Catalogue des API</h3><p>Accède aux endpoints de l'assistant IA, de la musique, de la vidéo et des autres outils.</p><button class="btn secondary" onclick="openApi()">OUVRIR LE CATALOGUE API</button></div>
- </section>
-</main>
-
-<section class="modal" id="smmModal">
- <header class="modalhead"><button class="back" onclick="closeAll()">‹</button><div><b id="smmTitle">PANEL SMM</b><small id="smmSubtitle">Sélectionne ton service</small></div></header>
- <div class="modalbody" id="smmBody"></div>
+<section class="hero">
+  <div class="eyebrow">VOTRE UNIVERS DIGITAL</div>
+  <h2>Développez vos projets avec <span class="gold">JASON BUSINESS</span></h2>
+  <p>Commandez des services numériques, développez votre présence en ligne et découvrez nos solutions digitales depuis votre téléphone.</p>
+  <div class="balance">
+    <div>
+      <small>Solde principal</small>
+      <strong id="balanceValue">0 FC</strong>
+    </div>
+    <button class="btn btn-gold small-btn" id="refreshBalance">Actualiser</button>
+  </div>
+  <p class="note" id="accountMessage">Connexion au compte en cours…</p>
 </section>
 
-<section class="modal" id="orderModal">
- <header class="modalhead"><button class="back" onclick="closeAll()">‹</button><div><b id="orderTitle">Commander un service</b><small>JASON BUSINESS</small></div></header>
- <div class="modalbody">
-  <div class="summary"><div class="row"><span>Service</span><b id="orderServiceName">—</b></div><div class="row"><span>Prix</span><b id="orderPrice">— FC</b></div></div>
-  <form id="orderForm"><div id="orderFields"></div><button class="btn primary" type="submit" id="orderSubmit">ENREGISTRER LA COMMANDE</button><div id="orderStatus" class="note" style="margin-top:12px"></div></form>
- </div>
+<!-- ACCUEIL : LES PLATEFORMES SOCIALES NE SONT PAS AFFICHÉES ICI -->
+<section class="section" id="homeSection">
+  <div class="section-title">
+    <h3>Nos services</h3>
+    <span>Choisissez un service</span>
+  </div>
+
+  <div class="grid">
+    <article class="card">
+      <div class="card-icon">🌐</div>
+      <h4>Réseaux sociaux</h4>
+      <p>Choisissez une plateforme et consultez les services disponibles.</p>
+      <button class="btn btn-gold btn-block" id="openSocialButton">RÉSEAUX SOCIAUX</button>
+    </article>
+
+    <article class="card">
+      <div class="card-icon">🎵</div>
+      <h4>Création musicale</h4>
+      <p>Demandez une chanson personnalisée pour votre projet ou votre événement.</p>
+      <button class="btn btn-block" id="openMusicButton">Commander</button>
+    </article>
+
+    <article class="card">
+      <div class="card-icon">📢</div>
+      <h4>Publicité digitale</h4>
+      <p>Préparez une demande de publicité et de promotion.</p>
+      <button class="btn btn-block" id="openAdsButton">Découvrir</button>
+    </article>
+
+    <article class="card">
+      <div class="card-icon">💻</div>
+      <h4>Site web</h4>
+      <p>Création de site vitrine, site professionnel ou boutique en ligne.</p>
+      <button class="btn btn-block creative-button" data-service="Site web">Commander</button>
+    </article>
+
+    <article class="card">
+      <div class="card-icon">📱</div>
+      <h4>Application mobile</h4>
+      <p>Présentez votre idée d'application et demandez une création.</p>
+      <button class="btn btn-block creative-button" data-service="Application mobile">Commander</button>
+    </article>
+
+    <article class="card">
+      <div class="card-icon">🤖</div>
+      <h4>Création de chatbot</h4>
+      <p>Assistant conversationnel pour votre activité ou votre entreprise.</p>
+      <button class="btn btn-block creative-button" data-service="Chatbot">Commander</button>
+    </article>
+
+    <article class="card">
+      <div class="card-icon">🔌</div>
+      <h4>Catalogue API</h4>
+      <p>Découvrez les API disponibles pour vos projets numériques.</p>
+      <button class="btn btn-block" id="openApiButton">Voir les API</button>
+    </article>
+  </div>
 </section>
 
-<section class="modal" id="musicModal">
- <header class="modalhead"><button class="back" onclick="closeAll()">‹</button><div><b>🎵 JASON MUSIC</b><small>Création musicale</small></div></header>
- <div class="modalbody">
-  <div class="field"><label for="musicTitle">Titre</label><input class="input" id="musicTitle" placeholder="Titre de la chanson"></div>
-  <div class="field"><label for="musicStyle">Style musical</label><select class="select" id="musicStyle"><option>Afrobeat</option><option>Rap</option><option>R&B</option><option>Gospel</option><option>Rumba</option><option>Amapiano</option><option>Afro-pop</option><option>Drill</option><option>Reggae</option></select></div>
-  <div class="field"><label for="musicContent">Idée ou paroles</label><textarea class="textarea" id="musicContent" placeholder="Décris le thème de ta chanson…"></textarea></div>
-  <button class="btn secondary" id="musicTest" onclick="testMusic()">TESTER L'API MUSIQUE</button><div id="musicResult"></div><button class="btn gold" onclick="orderMusic()">COMMANDER · 5 000 FC</button>
- </div>
+<section class="section" id="ordersSection">
+  <div class="section-title">
+    <h3>Mes commandes</h3>
+    <button class="btn btn-dark small-btn" id="refreshOrders">Actualiser</button>
+  </div>
+  <div id="ordersList" class="card">
+    <div class="empty">Les commandes apparaîtront ici.</div>
+  </div>
 </section>
 
-<section class="modal" id="adsModal">
- <header class="modalhead"><button class="back" onclick="closeAll()">‹</button><div><b>📢 JASON ADS</b><small>Demande publicitaire</small></div></header>
- <div class="modalbody">
-  <div class="field"><label for="adTitle">Titre</label><input class="input" id="adTitle" placeholder="Titre de la publicité"></div>
-  <div class="field"><label for="adDesc">Description</label><textarea class="textarea" id="adDesc" placeholder="Décris ton produit ou ton service"></textarea></div>
-  <div class="field"><label for="adLink">Lien (facultatif)</label><input class="input" id="adLink" type="url" placeholder="https://..."></div>
-  <div class="field"><label for="adPlatform">Plateforme</label><select class="select" id="adPlatform"><option>Facebook</option><option>Instagram</option><option>TikTok</option><option>YouTube</option><option>WhatsApp</option><option>Autre</option></select></div>
-  <div class="field"><label for="adBudget">Budget publicitaire en FC</label><input class="input" id="adBudget" type="number" min="1000" value="1000"></div>
-  <div class="note">Le budget publicitaire ne représente pas automatiquement les frais de création ni les frais de diffusion.</div>
-  <button class="btn secondary" onclick="testAds()">VÉRIFIER L'API PUBLICITÉ</button><div id="adResult"></div><button class="btn primary" onclick="submitAd()">ENVOYER LA DEMANDE</button>
- </div>
-</section>
+<footer>
+  <strong class="gold">JASON BUSINESS</strong><br>
+  Web • Design • Digital • IA<br>
+  Créé par Jason Aloma 🇨🇩
+</footer>
+</div>
 
-<section class="modal" id="apiModal">
- <header class="modalhead"><button class="back" onclick="closeAll()">‹</button><div><b>🔌 CATALOGUE API</b><small>Documentation et tests</small></div></header>
- <div class="modalbody"><div class="note">Les endpoints doivent être disponibles sur ton serveur. N'insère jamais de clé secrète dans cette page publique.</div><div id="apiList"></div></div>
-</section>
+<!-- FENÊTRE DES PLATEFORMES : VISIBLE UNIQUEMENT APRÈS UN CLIC -->
+<div class="overlay" id="smmModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="smmTitle">Réseaux sociaux</h3>
+      <button class="close" data-close="smmModal" aria-label="Fermer">×</button>
+    </div>
 
-<section class="modal" id="profileModal">
- <header class="modalhead"><button class="back" onclick="closeAll()">‹</button><div><b>MON PROFIL</b><small>JASON BUSINESS</small></div></header>
- <div class="modalbody"><div class="summary"><div class="row"><span>Téléphone</span><b id="profilePhone">—</b></div><div class="row"><span>Solde</span><b id="profileBalance">—</b></div><div class="row"><span>Compte</span><b id="profileState">—</b></div></div><div class="note">Pour sécuriser les commandes, les montants et les débits doivent être contrôlés par un backend de confiance.</div></div>
-</section>
+    <div id="platformChooser">
+      <p class="note">Sélectionnez une plateforme pour afficher les services disponibles.</p>
+      <input class="search" id="platformSearch" placeholder="Rechercher une plateforme…">
+      <div class="platform-grid" id="platformGrid"></div>
+    </div>
 
-<nav class="bottom">
- <button class="navbtn active" onclick="goHome()"><span>⌂</span>Accueil</button>
- <button class="navbtn" onclick="openSmm()"><span>↗</span>Réseaux</button>
- <button class="navbtn" onclick="openMusic()"><span>♫</span>Musique</button>
- <button class="navbtn" onclick="openApi()"><span>⌘</span>API</button>
- <button class="navbtn" onclick="openProfile()"><span>♙</span>Profil</button>
+    <div id="platformServices" class="hidden">
+      <button class="btn btn-dark small-btn" id="backToPlatforms">← Toutes les plateformes</button>
+      <hr>
+      <div id="selectedPlatformInfo"></div>
+
+      <form id="smmForm">
+        <div class="field">
+          <label for="smmService">Service souhaité</label>
+          <select id="smmService" required></select>
+        </div>
+        <div class="field">
+          <label for="smmLink">Lien du profil, de la publication ou du contenu</label>
+          <input id="smmLink" type="url" placeholder="https://…" required>
+        </div>
+        <div class="field">
+          <label for="smmQuantity">Quantité (minimum 10)</label>
+          <input id="smmQuantity" type="number" min="10" step="1" value="10" required>
+        </div>
+        <div class="field">
+          <label for="smmNotes">Informations supplémentaires (facultatif)</label>
+          <textarea id="smmNotes" placeholder="Précisions concernant votre commande…"></textarea>
+        </div>
+        <div class="price-box">
+          <div><span>Prix estimé</span><strong id="smmPrice">0 FC</strong></div>
+          <div><span>Votre solde</span><strong id="smmBalance">0 FC</strong></div>
+          <p class="note">Le prix affiché est une estimation basée sur le tarif de référence configuré dans cette page.</p>
+        </div>
+        <button class="btn btn-gold btn-block" type="submit" id="submitSmm">Envoyer la commande</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- MODALE MUSIQUE -->
+<div class="overlay" id="musicModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>🎵 Création musicale</h3>
+      <button class="close" data-close="musicModal">×</button>
+    </div>
+    <form id="musicForm">
+      <div class="field">
+        <label for="musicTitle">Titre de la chanson</label>
+        <input id="musicTitle" required placeholder="Titre souhaité">
+      </div>
+      <div class="field">
+        <label for="musicStyle">Style musical</label>
+        <select id="musicStyle" required>
+          <option value="">Choisir un style</option>
+          <option>Gospel</option><option>Afrobeat</option><option>Rap</option>
+          <option>Rumba congolaise</option><option>Amour</option>
+          <option>Anniversaire</option><option>Mariage</option>
+          <option>Hommage</option><option>Ambiance</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="musicLyrics">Paroles ou idée de la chanson</label>
+        <textarea id="musicLyrics" required placeholder="Décrivez votre chanson…"></textarea>
+      </div>
+      <div class="price-box">
+        <div><span>Prix de référence</span><strong>5 000 FC</strong></div>
+      </div>
+      <button class="btn btn-gold btn-block" type="submit">Envoyer la demande</button>
+    </form>
+  </div>
+</div>
+
+<!-- MODALE PUBLICITÉ -->
+<div class="overlay" id="adsModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>📢 Publicité digitale</h3>
+      <button class="close" data-close="adsModal">×</button>
+    </div>
+    <form id="adsForm">
+      <div class="field">
+        <label for="adsType">Type de publicité</label>
+        <select id="adsType" required>
+          <option value="">Choisir</option>
+          <option>Promotion d'une entreprise</option>
+          <option>Promotion d'un produit</option>
+          <option>Promotion d'une page</option>
+          <option>Campagne personnalisée</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="adsLink">Lien à promouvoir (facultatif)</label>
+        <input id="adsLink" type="url" placeholder="https://…">
+      </div>
+      <div class="field">
+        <label for="adsDescription">Description de votre besoin</label>
+        <textarea id="adsDescription" required placeholder="Décrivez votre objectif et votre public…"></textarea>
+      </div>
+      <p class="note">Le tarif sera confirmé après examen de votre demande.</p>
+      <button class="btn btn-gold btn-block" type="submit">Envoyer la demande</button>
+    </form>
+  </div>
+</div>
+
+<!-- MODALE SERVICES CRÉATIFS -->
+<div class="overlay" id="orderModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="creativeTitle">Commander un service</h3>
+      <button class="close" data-close="orderModal">×</button>
+    </div>
+    <form id="creativeForm">
+      <input type="hidden" id="creativeService">
+      <div class="field">
+        <label for="creativeDescription">Décrivez votre projet</label>
+        <textarea id="creativeDescription" required placeholder="Expliquez ce que vous souhaitez…"></textarea>
+      </div>
+      <div class="price-box">
+        <div><span>Prix de référence</span><strong id="creativePrice">Sur devis</strong></div>
+      </div>
+      <button class="btn btn-gold btn-block" type="submit">Envoyer la demande</button>
+    </form>
+  </div>
+</div>
+
+<!-- MODALE API -->
+<div class="overlay" id="apiModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>🔌 Catalogue API</h3>
+      <button class="close" data-close="apiModal">×</button>
+    </div>
+    <p class="note">Sélectionnez une API pour demander des informations ou un accès. La disponibilité réelle dépend du serveur fournisseur.</p>
+    <div class="grid" id="apiGrid"></div>
+  </div>
+</div>
+
+<!-- MODALE PROFIL -->
+<div class="overlay" id="profileModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>👤 Mon compte</h3>
+      <button class="close" data-close="profileModal">×</button>
+    </div>
+    <div class="card">
+      <p class="note">Téléphone associé à cette session</p>
+      <strong id="profilePhone">Non identifié</strong>
+      <hr>
+      <p class="note">Solde disponible</p>
+      <strong id="profileBalance" class="gold">0 FC</strong>
+    </div>
+    <p class="note">Pour les dépôts, retraits ou corrections de compte, utilisez les fonctions de votre espace client connecté.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<nav class="bottom-nav">
+  <button class="active" data-nav="home"><span>⌂</span>Accueil</button>
+  <button data-nav="social"><span>◎</span>Réseaux</button>
+  <button data-nav="music"><span>♫</span>Musique</button>
+  <button data-nav="api"><span>⌘</span>API</button>
+  <button data-nav="profile"><span>♙</span>Profil</button>
 </nav>
-<div id="toasts"></div>
 
 <script type="module">
-import {initializeApp,getApps} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {getDatabase,ref,onValue,push,runTransaction,set} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getDatabase, ref, get, set, push, runTransaction
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-const firebaseConfig={
- apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
- authDomain:"starlink-investit.firebaseapp.com",
- databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
- projectId:"starlink-investit",
- storageBucket:"starlink-investit.firebasestorage.app",
- messagingSenderId:"807081599583",
- appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
-};
-const API_BASE="https://davbot-outils.vercel.app";
-const USERS_PATH="jasonBusiness/users";
-const COMMANDS_PATH="jasonBusiness/demandes_commandes";
-let db=null,phone="",userData={},activePlatform=null,selectedOrder=null,orderBusy=false,smmBusy=false;
-const $=id=>document.getElementById(id);
-const money=n=>Math.floor(Number(n)||0).toLocaleString("fr-FR");
-
-const platforms=[
- {id:"facebook",name:"Facebook",slug:"facebook",color:"0866FF",kind:"Social"},
- {id:"youtube",name:"YouTube",slug:"youtube",color:"FF0033",kind:"Vidéos"},
- {id:"x",name:"X / Twitter",slug:"x",color:"FFFFFF",kind:"Social"},
- {id:"whatsapp",name:"WhatsApp",slug:"whatsapp",color:"25D366",kind:"Messagerie"},
- {id:"snapchat",name:"Snapchat",slug:"snapchat",color:"FFFC00",kind:"Social"},
- {id:"spotify",name:"Spotify",slug:"spotify",color:"1ED760",kind:"Musique"},
- {id:"tiktok",name:"TikTok",slug:"tiktok",color:"FFFFFF",kind:"Vidéos"},
- {id:"instagram",name:"Instagram",slug:"instagram",color:"E4405F",kind:"Social"},
- {id:"telegram",name:"Telegram",slug:"telegram",color:"26A5E4",kind:"Messagerie"},
- {id:"messenger",name:"Messenger",slug:"messenger",color:"0866FF",kind:"Messagerie"},
- {id:"threads",name:"Threads",slug:"threads",color:"FFFFFF",kind:"Social"},
- {id:"pinterest",name:"Pinterest",slug:"pinterest",color:"BD081C",kind:"Images"},
- {id:"linkedin",name:"LinkedIn",slug:"linkedin",color:"0A66C2",kind:"Professionnel"},
- {id:"twitch",name:"Twitch",slug:"twitch",color:"9146FF",kind:"Streaming"},
- {id:"discord",name:"Discord",slug:"discord",color:"5865F2",kind:"Communauté"},
- {id:"reddit",name:"Reddit",slug:"reddit",color:"FF4500",kind:"Communauté"},
- {id:"soundcloud",name:"SoundCloud",slug:"soundcloud",color:"FF5500",kind:"Musique"},
- {id:"viber",name:"Viber",slug:"viber",color:"7360F2",kind:"Messagerie"},
- {id:"line",name:"LINE",slug:"line",color:"06C755",kind:"Messagerie"},
- {id:"vk",name:"VK",slug:"vk",color:"0077FF",kind:"Social"}
-];
-
-const servicesByPlatform={
- facebook:["Abonnés","Likes","Vues","Commentaires","Partages","Réactions"],
- youtube:["Abonnés","Likes","Vues","Commentaires","Partages"],
- x:["Abonnés","Likes","Vues","Commentaires","Reposts"],
- whatsapp:["Membres de communauté","Promotion de lien"],
- snapchat:["Abonnés","Vues"],
- spotify:["Écoutes","Abonnés au profil"],
- tiktok:["Abonnés","Likes","Vues","Commentaires","Partages"],
- instagram:["Abonnés","Likes","Vues","Commentaires","Partages"],
- telegram:["Membres","Vues","Réactions","Partages"],
- messenger:["Promotion de lien"],
- threads:["Abonnés","Likes","Vues","Commentaires","Partages"],
- pinterest:["Abonnés","Vues","Enregistrements"],
- linkedin:["Abonnés","Réactions","Vues"],
- twitch:["Abonnés","Vues"],
- discord:["Membres"],
- reddit:["Vues","Réactions"],
- soundcloud:["Écoutes","Likes","Abonnés au profil"],
- viber:["Membres"],
- line:["Abonnés"],
- vk:["Abonnés","Likes","Vues","Partages"]
+const firebaseConfig = {
+  apiKey: "AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
+  authDomain: "starlink-investit.firebaseapp.com",
+  databaseURL: "https://starlink-investit-default-rtdb.firebaseio.com",
+  projectId: "starlink-investit",
+  storageBucket: "starlink-investit.firebasestorage.app",
+  messagingSenderId: "807081599583",
+  appId: "1:807081599583:web:e00ec3959bc4acdae031ea"
 };
 
-/* Tarifs indicatifs à adapter à tes tarifs réels */
-const smmCatalog={
- "Abonnés":{qty:100,price:1000},
- "Likes":{qty:100,price:500},
- "Vues":{qty:1000,price:700},
- "Partages":{qty:100,price:900},
- "Commentaires":{qty:50,price:1500},
- "Membres":{qty:100,price:1500},
- "Réactions":{qty:100,price:700},
- "Reposts":{qty:100,price:900},
- "Écoutes":{qty:1000,price:1200},
- "Abonnés au profil":{qty:100,price:1500},
- "Membres de communauté":{qty:100,price:1500},
- "Promotion de lien":{qty:1,price:1000},
- "Enregistrements":{qty:100,price:700}
-};
+const API_BASE = "https://davbot-outils.vercel.app";
+const USERS_PATH = "jasonBusiness/users";
+const COMMANDS_PATH = "jasonBusiness/demandes_commandes";
 
-const creative=[
- {id:"music",name:"Création musicale",icon:"🎵",price:5000,desc:"Une chanson adaptée à ton thème."},
- {id:"ads",name:"Publicité digitale",icon:"📢",price:0,desc:"Prépare une demande de campagne publicitaire."},
- {id:"website",name:"Site Web Pro",icon:"🌐",price:15000,desc:"Site vitrine, portfolio ou boutique.",fields:[
-  {name:"nom",label:"Nom du site",required:true},
-  {name:"type",label:"Type de site",type:"select",options:["Site vitrine","Portfolio","Boutique en ligne","Blog","Plateforme"],required:true},
-  {name:"description",label:"Description du projet",type:"textarea",required:true},
-  {name:"contact",label:"Contact",required:true}]},
- {id:"app",name:"Application mobile",icon:"📱",price:10000,desc:"Décris les fonctions de ton application.",fields:[
-  {name:"nom",label:"Nom de l'application",required:true},
-  {name:"description",label:"Fonctions souhaitées",type:"textarea",required:true},
-  {name:"contact",label:"Contact",required:true}]},
- {id:"chatbot",name:"Chatbot personnalisé",icon:"🤖",price:7000,desc:"Un chatbot pour ton activité.",fields:[
-  {name:"nom",label:"Nom du chatbot",required:true},
-  {name:"plateforme",label:"Plateforme",type:"select",options:["Site web","WhatsApp","Telegram","Facebook","Application"],required:true},
-  {name:"description",label:"Fonctions souhaitées",type:"textarea",required:true}]}
-];
+const $ = id => document.getElementById(id);
+let db = null;
+let currentPhone = "";
+let currentUser = {};
+let selectedPlatform = null;
+let currentSmmPrice = 0;
+let busy = false;
 
-const apiDocs=[
- {name:"Assistant IA",path:"/api/intelligence-artificielle/ai",body:{message:"Bonjour",history:[]}},
- {name:"IA — Ask",path:"/api/intelligence-artificielle/ask",body:{message:"Bonjour",history:[]}},
- {name:"Traduction",path:"/api/intelligence-artificielle/translate",body:{text:"Bonjour",source:"fr",target:"en"}},
- {name:"Génération d'image",path:"/api/genere-image/generate",body:{prompt:"Ville futuriste",size:"1024x1024",n:1}},
- {name:"Image",path:"/api/genere-image/image",body:{prompt:"Créer une affiche",size:"1024x1024",n:1}},
- {name:"Publicité",path:"/api/publicite/ads",body:{action:"catalog"}},
- {name:"Données",path:"/api/data",body:{action:"catalog"}},
- {name:"Stockage",path:"/api/storage",body:{action:"list"}},
- {name:"Authentification admin",path:"/api/admin-auth",body:{action:"login"}},
- {name:"Vidéo",path:"/api/media/video",body:{prompt:"Ville de nuit",duration:6}},
- {name:"Musique",path:"/api/media/music",body:{prompt:"Afrobeat mélodique",duration:15}},
- {name:"Hub",path:"/api/hub",body:{action:"catalog"}}
-];
+const money = value =>
+  Math.max(0, Number(value) || 0).toLocaleString("fr-FR") + " FC";
 
-function toast(message,type=""){
- const el=document.createElement("div");el.className="toast "+type;el.textContent=message;$("toasts").appendChild(el);setTimeout(()=>el.remove(),3500);
-}
-function showResult(container,data){
- container.replaceChildren();const pre=document.createElement("pre");pre.className="result";pre.textContent=typeof data==="string"?data:JSON.stringify(data,null,2);container.appendChild(pre);
-}
-function getPhone(){
- for(const key of ["jasonBusinessPhone","userPhone","telephone","phone"]){
-  const value=localStorage.getItem(key);if(!value||value==="null")continue;
-  try{const parsed=JSON.parse(value);if(parsed&&parsed.telephone)return String(parsed.telephone).trim()}catch{}
-  return value.trim();
- }
- return "";
-}
-function balance(){return Number(userData.solde_principal??userData.solde??0)||0}
-function balanceKey(){return Object.prototype.hasOwnProperty.call(userData,"solde_principal")?"solde_principal":"solde"}
-function updateBalance(){
- $("balance").textContent=money(balance());
- $("profileBalance").textContent=money(balance())+" FC";
- const el=$("smmBalance");if(el)el.textContent=money(balance())+" FC";
-}
-function loadUser(){
- phone=getPhone();$("profilePhone").textContent=phone||"Non détecté";
- if(!phone){$("balance").textContent="0";$("accountStatus").textContent="Session client non détectée";$("profileState").textContent="Non connecté";return}
- onValue(ref(db,`${USERS_PATH}/${phone}`),snap=>{
-  userData=snap.exists()?snap.val()||{}:{};
-  $("accountStatus").textContent=snap.exists()?"Compte Firebase détecté":"Compte introuvable";
-  $("profileState").textContent=snap.exists()?"Connecté":"À vérifier";updateBalance();
- },err=>{console.error(err);$("accountStatus").textContent="Erreur Firebase";toast("Impossible de lire le compte Firebase.","error")});
+function toast(message) {
+  const el = $("toast");
+  el.textContent = message;
+  el.classList.add("show");
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => el.classList.remove("show"), 3000);
 }
 
-window.closeAll=()=>{document.querySelectorAll(".modal").forEach(m=>m.classList.remove("show"));document.body.style.overflow=""};
-function showModal(id){closeAll();$(id).classList.add("show");document.body.style.overflow="hidden";$(id).scrollTop=0}
-window.goHome=()=>{closeAll();window.scrollTo({top:0,behavior:"smooth"})};
-window.openProfile=()=>{updateBalance();showModal("profileModal")};
-window.openApi=()=>{renderApis();showModal("apiModal")};
-window.openMusic=()=>showModal("musicModal");
-window.openSmm=()=>showSmmPlatformChooser();
-
-function logoUrl(platform){
- return `https://cdn.simpleicons.org/${platform.slug}/${platform.color}`;
-}
-function createLogo(platform){
- const img=document.createElement("img");
- img.className="social-logo";img.alt="Logo officiel de "+platform.name;
- img.loading="lazy";img.src=logoUrl(platform);
- img.onerror=()=>{
-  img.onerror=null;
-  img.src=`https://cdn.simpleicons.org/${platform.slug}`;
-  img.onerror=()=>{img.style.display="none";};
- };
- return img;
-}
-function renderSocials(){
- const q=$("search").value.toLowerCase().trim(),grid=$("socialGrid");grid.replaceChildren();
- const list=platforms.filter(p=>(p.name+" "+p.kind).toLowerCase().includes(q));
- if(!list.length){const empty=document.createElement("div");empty.className="empty";empty.textContent="Aucun réseau trouvé.";grid.appendChild(empty);return}
- list.forEach(p=>{
-  const card=document.createElement("article");card.className="social-card";
-  const img=createLogo(p),name=document.createElement("div"),kind=document.createElement("div"),btn=document.createElement("button");
-  name.className="social-name";name.textContent=p.name;kind.className="social-kind";kind.textContent=p.kind;
-  btn.type="button";btn.textContent="OUVRIR";btn.onclick=()=>openPlatform(p.id);
-  card.append(img,name,kind,btn);card.onclick=e=>{if(e.target!==btn)openPlatform(p.id)};grid.appendChild(card);
- });
-}
-function showSmmPlatformChooser(){
- showModal("smmModal");$("smmTitle").textContent="PANEL SMM";$("smmSubtitle").textContent="Choisis un réseau social";
- const body=$("smmBody");body.replaceChildren();
- const title=document.createElement("div");title.className="section-head";
- title.innerHTML="<div><h2>Choisis une plateforme</h2><p>20 réseaux sociaux disponibles</p></div>";
- body.appendChild(title);
- const grid=document.createElement("div");grid.className="grid";
- platforms.forEach(p=>{
-  const card=document.createElement("article");card.className="social-card";
-  const name=document.createElement("div");name.className="social-name";name.textContent=p.name;
-  const kind=document.createElement("div");kind.className="social-kind";kind.textContent=p.kind;
-  const btn=document.createElement("button");btn.type="button";btn.textContent="SÉLECTIONNER";btn.onclick=()=>openPlatform(p.id);
-  card.append(createLogo(p),name,kind,btn);card.onclick=e=>{if(e.target!==btn)openPlatform(p.id)};grid.appendChild(card);
- });
- body.appendChild(grid);
-}
-function openPlatform(id){
- activePlatform=platforms.find(p=>p.id===id);if(!activePlatform)return;
- $("smmTitle").textContent=activePlatform.name;$("smmSubtitle").textContent="Configure ta commande";
- const body=$("smmBody");
- body.innerHTML=`
-  <button class="btn secondary" type="button" id="changePlatform">← CHANGER DE RÉSEAU</button>
-  <div class="summary" style="margin-top:14px">
-   <div class="row"><span>Réseau</span><b id="smmPlatformName"></b></div>
-   <div class="row"><span>Service</span><b id="smmServiceName"></b></div>
-  </div>
-  <form id="smmForm">
-   <div class="field"><label for="smmService">1. Type de service</label><select class="select" id="smmService" required></select></div>
-   <div class="field"><label for="smmUrl">2. Lien du profil ou de la publication</label><input class="input" id="smmUrl" type="url" placeholder="https://..." required></div>
-   <div class="field"><label for="smmQuantity">3. Quantité (minimum 10)</label><input class="input" id="smmQuantity" type="number" min="10" max="10000000" value="10" step="1" required><small style="display:block;color:var(--muted);margin-top:6px;font-size:10px">Quantité minimale : 10.</small></div>
-   <div class="field"><label for="smmNotes">Instructions (facultatif)</label><textarea class="textarea" id="smmNotes" placeholder="Instructions supplémentaires…"></textarea></div>
-   <div class="summary">
-    <div class="row"><span>Tarif de référence</span><b id="smmRate">—</b></div>
-    <div class="row"><span>Prix total estimé</span><b id="smmPrice" style="color:var(--gold);font-size:17px">— FC</b></div>
-    <div class="row"><span>Solde disponible</span><b id="smmBalance" style="color:var(--green)">— FC</b></div>
-   </div>
-   <div class="note">Tarifs indicatifs. Le traitement automatique nécessite une API de fournisseur SMM. Sans fournisseur connecté, la commande est enregistrée en attente.</div>
-   <button class="btn primary" id="smmSubmit" type="submit">CONFIRMER LA COMMANDE</button>
-   <div id="smmStatus" class="note" style="margin-top:12px" aria-live="polite"></div>
-  </form>`;
- $("changePlatform").onclick=showSmmPlatformChooser;
- $("smmPlatformName").textContent=activePlatform.name;
- const sel=$("smmService");
- (servicesByPlatform[id]||["Promotion de lien"]).forEach(service=>{const option=document.createElement("option");option.value=service;option.textContent=service;sel.appendChild(option)});
- sel.onchange=refreshSmmPrice;$("smmQuantity").oninput=refreshSmmPrice;
- $("smmForm").addEventListener("submit",submitSmm);refreshSmmPrice();
-}
-function refreshSmmPrice(){
- if(!activePlatform||!$("smmService"))return;
- const service=$("smmService").value,info=smmCatalog[service]||{qty:100,price:1000};
- const raw=Number($("smmQuantity").value),quantity=Number.isFinite(raw)?Math.max(10,Math.floor(raw)):10;
- const total=Math.ceil(quantity/info.qty*info.price);
- $("smmPlatformName").textContent=activePlatform.name;$("smmServiceName").textContent=service;
- $("smmRate").textContent=money(info.price)+" FC / "+money(info.qty);
- $("smmPrice").textContent=money(total)+" FC";$("smmBalance").textContent=money(balance())+" FC";
-}
-function validUrl(value){try{const u=new URL(value);return u.protocol==="https:"||u.protocol==="http:"}catch{return false}}
-
-async function submitSmm(e){
- e.preventDefault();if(smmBusy)return;
- if(!phone){$("smmStatus").textContent="Connecte-toi avant de commander.";return}
- const url=$("smmUrl").value.trim(),quantity=Number($("smmQuantity").value);
- if(!validUrl(url)){$("smmStatus").textContent="Entre un lien valide commençant par http:// ou https://.";return}
- if(!Number.isInteger(quantity)||quantity<10||quantity>10000000){$("smmStatus").textContent="La quantité doit être comprise entre 10 et 10 000 000.";return}
- const service=$("smmService").value,info=smmCatalog[service]||{qty:100,price:1000};
- const amount=Math.ceil(quantity/info.qty*info.price);
- if(balance()<amount){$("smmStatus").textContent="Solde insuffisant. Prix : "+money(amount)+" FC.";return}
- smmBusy=true;$("smmSubmit").disabled=true;$("smmStatus").textContent="Enregistrement de la commande…";
- let deducted=false;
- try{
-  const field=balanceKey();
-  const transaction=await runTransaction(ref(db,`${USERS_PATH}/${phone}/${field}`),current=>{
-   const available=Number(current)||0;if(available<amount)return;return available-amount;
-  });
-  if(!transaction.committed){$("smmStatus").textContent="Solde insuffisant ou modifié. Actualise ton compte.";return}
-  deducted=true;
-  const command=push(ref(db,COMMANDS_PATH));
-  try{
-   await set(command,{
-    telephone:phone,categorie:"smm",service:service+" · "+activePlatform.name,
-    serviceId:"smm-"+activePlatform.id+"-"+service.toLowerCase().replace(/\s+/g,"-"),
-    plateforme:activePlatform.id,quantite:quantity,montant:amount,prix:amount,
-    statut:"En attente",
-    details:{url,quantity,notes:$("smmNotes").value.trim(),tarifReference:info.price,quantiteReference:info.qty},
-    fournisseurConnecte:false,source:"panel-smm",date:new Date().toISOString(),createdAt:Date.now()
-   });
-  }catch(saveError){
-   await runTransaction(ref(db,`${USERS_PATH}/${phone}/${field}`),current=>(Number(current)||0)+amount);
-   deducted=false;throw saveError;
-  }
-  $("smmStatus").textContent="Commande enregistrée. Statut : En attente.";
-  toast("Commande enregistrée.","success");$("smmUrl").value="";$("smmQuantity").value=10;$("smmNotes").value="";refreshSmmPrice();
- }catch(err){
-  console.error(err);$("smmStatus").textContent=deducted?"Erreur après débit. Contacte le support avant de recommencer.":"Erreur Firebase. Vérifie les règles de la base.";toast("Échec de la commande.","error");
- }finally{smmBusy=false;if($("smmSubmit"))$("smmSubmit").disabled=false}
+function openModal(id) {
+  $(id).classList.add("show");
 }
 
-function renderCreative(){
- const grid=$("creativeGrid");grid.replaceChildren();
- creative.forEach(s=>{
-  const card=document.createElement("article");card.className="service-card";
-  const icon=document.createElement("div");icon.className="service-icon";icon.textContent=s.icon;
-  const title=document.createElement("h3");title.textContent=s.name;
-  const desc=document.createElement("p");desc.textContent=s.desc;
-  const price=document.createElement("div");price.className="price";price.textContent=s.price?money(s.price)+" FC":"Sur devis";
-  const btn=document.createElement("button");btn.className="btn primary";btn.textContent="OUVRIR";
-  btn.onclick=()=>{if(s.id==="music"){showModal("musicModal");return}if(s.id==="ads"){showModal("adsModal");return}openOrder(s)};
-  card.append(icon,title,desc,price,btn);grid.appendChild(card);
- });
+function closeModal(id) {
+  $(id).classList.remove("show");
 }
-function openOrder(service){
- selectedOrder=service;$("orderTitle").textContent=service.name;$("orderServiceName").textContent=service.name;
- $("orderPrice").textContent=money(service.price)+" FC";$("orderFields").replaceChildren();
- (service.fields||[]).forEach(f=>{
-  const wrap=document.createElement("div");wrap.className="field";const label=document.createElement("label");label.textContent=f.label+(f.required?" *":"");
-  let el;if(f.type==="textarea")el=document.createElement("textarea");else if(f.type==="select"){el=document.createElement("select");(f.options||[]).forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;el.appendChild(o)})}else el=document.createElement("input");
-  el.className=f.type==="textarea"?"textarea":f.type==="select"?"select":"input";el.name=f.name;if(f.required)el.required=true;
-  wrap.append(label,el);$("orderFields").appendChild(wrap);
- });
- $("orderStatus").textContent="";showModal("orderModal");
-}
-$("orderForm").addEventListener("submit",async e=>{
- e.preventDefault();if(orderBusy||!selectedOrder)return;
- if(!phone){$("orderStatus").textContent="Connecte-toi avant de commander.";return}
- const details={};new FormData(e.target).forEach((v,k)=>details[k]=String(v).trim());
- const amount=Number(selectedOrder.price)||0;
- if(balance()<amount){$("orderStatus").textContent="Solde insuffisant.";return}
- orderBusy=true;$("orderSubmit").disabled=true;$("orderStatus").textContent="Enregistrement…";let deducted=false;
- try{
-  if(amount>0){
-   const transaction=await runTransaction(ref(db,`${USERS_PATH}/${phone}/${balanceKey()}`),current=>{const b=Number(current)||0;if(b<amount)return;return b-amount});
-   if(!transaction.committed){$("orderStatus").textContent="Solde insuffisant.";return}deducted=true;
-  }
-  const command=push(ref(db,COMMANDS_PATH));
-  try{await set(command,{telephone:phone,categorie:"service",service:selectedOrder.name,serviceId:selectedOrder.id,montant:amount,prix:amount,statut:"En attente",details,date:new Date().toISOString(),createdAt:Date.now(),source:"services"})}
-  catch(err){if(deducted)await runTransaction(ref(db,`${USERS_PATH}/${phone}/${balanceKey()}`),current=>(Number(current)||0)+amount);throw err}
-  $("orderStatus").textContent="Commande enregistrée en attente.";toast("Commande enregistrée.","success");
- }catch(err){console.error(err);$("orderStatus").textContent="Impossible d'enregistrer la commande. Vérifie Firebase."}
- finally{orderBusy=false;$("orderSubmit").disabled=false}
+
+document.querySelectorAll("[data-close]").forEach(button => {
+  button.addEventListener("click", () => closeModal(button.dataset.close));
 });
 
-async function postApi(path,payload){
- const response=await fetch(API_BASE+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
- const raw=await response.text();let data;try{data=JSON.parse(raw)}catch{data={response:raw}}
- if(!response.ok)throw Error(data.message||data.error||"HTTP "+response.status);return data;
-}
-window.testMusic=async()=>{
- const content=$("musicContent").value.trim();if(!content){toast("Écris une idée ou des paroles.","error");return}
- $("musicResult").textContent="Requête en cours…";$("musicTest").disabled=true;
- try{const data=await postApi("/api/media/music",{prompt:`Titre: ${$("musicTitle").value.trim()||"Sans titre"}. Style: ${$("musicStyle").value}. Contenu: ${content}`,duration:30});showResult($("musicResult"),data)}
- catch(err){showResult($("musicResult"),"Erreur : "+err.message)}
- finally{$("musicTest").disabled=false}
-};
-window.orderMusic=()=>{
- const title=$("musicTitle").value.trim(),content=$("musicContent").value.trim();
- if(!title||!content){toast("Complète le titre et les paroles ou l'idée.","error");return}
- openOrder({id:"music",name:"Création musicale · "+title,price:5000,fields:[
-  {name:"titre",label:"Titre",required:true},{name:"style",label:"Style musical",required:true},{name:"contenu",label:"Idée ou paroles",type:"textarea",required:true}]});
- const vals={titre:title,style:$("musicStyle").value,contenu:content};
- Object.entries(vals).forEach(([k,v])=>{const el=$("orderFields").querySelector(`[name="${k}"]`);if(el)el.value=v});
-};
-window.testAds=async()=>{
- $("adResult").textContent="Vérification de l'API…";
- try{showResult($("adResult"),await postApi("/api/publicite/ads",{action:"catalog"}))}
- catch(err){showResult($("adResult"),"Erreur : "+err.message)}
-};
-window.submitAd=async()=>{
- const title=$("adTitle").value.trim(),description=$("adDesc").value.trim(),link=$("adLink").value.trim(),budget=Number($("adBudget").value);
- if(!title||!description||!Number.isFinite(budget)||budget<1000){toast("Complète le titre, la description et le budget minimum de 1 000 FC.","error");return}
- if(link&&!validUrl(link)){toast("Lien invalide.","error");return}
- $("adResult").textContent="Envoi en cours…";
- try{showResult($("adResult"),await postApi("/api/publicite/ads",{action:"create",title,description,link,budget,platform:$("adPlatform").value,createdAt:Date.now()}))}
- catch(err){showResult($("adResult"),"Erreur : "+err.message)}
-};
-function renderApis(){
- $("apiList").replaceChildren();
- apiDocs.forEach(api=>{
-  const box=document.createElement("article");box.className="api-item";
-  const title=document.createElement("h3");title.textContent=api.name;
-  const endpoint=document.createElement("div");endpoint.className="endpoint";endpoint.textContent="POST "+API_BASE+api.path;
-  const input=document.createElement("textarea");input.className="textarea";input.value=JSON.stringify(api.body,null,2);
-  const btn=document.createElement("button");btn.className="btn secondary";btn.textContent="TESTER L'API";const res=document.createElement("div");
-  btn.onclick=async()=>{btn.disabled=true;res.textContent="Requête en cours…";try{showResult(res,await postApi(api.path,JSON.parse(input.value)))}catch(err){showResult(res,"Erreur : "+err.message)}finally{btn.disabled=false}};
-  box.append(title,endpoint,input,btn,res);$("apiList").appendChild(box);
- });
+document.querySelectorAll(".overlay").forEach(overlay => {
+  overlay.addEventListener("click", event => {
+    if (event.target === overlay) overlay.classList.remove("show");
+  });
+});
+
+function getPhone() {
+  return (
+    localStorage.getItem("jasonBusinessPhone") ||
+    localStorage.getItem("userPhone") ||
+    localStorage.getItem("telephone") ||
+    localStorage.getItem("phone") ||
+    ""
+  ).trim();
 }
 
-/* Bouton principal : ouvre immédiatement la liste des plateformes et leurs logos */
-$("openSocialButton").addEventListener("click",openSmm);
-$("search").addEventListener("input",renderSocials);
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAll()});
-
-try{
- const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
- db=getDatabase(app);renderSocials();renderCreative();loadUser();
-}catch(err){
- console.error(err);renderSocials();renderCreative();$("balance").textContent="—";$("accountStatus").textContent="Firebase non disponible";toast("Vérifie la configuration Firebase.","error");
+function getBalance(user) {
+  return Number(user?.solde_principal ?? user?.solde ?? 0) || 0;
 }
+
+function updateBalanceUI() {
+  const balance = getBalance(currentUser);
+  $("balanceValue").textContent = money(balance);
+  $("smmBalance").textContent = money(balance);
+  $("profileBalance").textContent = money(balance);
+  $("profilePhone").textContent = currentPhone || "Non identifié";
+}
+
+async function initFirebase() {
+  try {
+    const app = initializeApp(firebaseConfig);
+    db = getDatabase(app);
+    currentPhone = getPhone();
+
+    if (!currentPhone) {
+      $("accountMessage").textContent =
+        "Aucun téléphone de session trouvé. Connectez-vous depuis votre espace client.";
+      updateBalanceUI();
+      return;
+    }
+
+    $("accountMessage").textContent = "Compte : " + currentPhone;
+    await loadUser();
+    await loadOrders();
+  } catch (error) {
+    console.error(error);
+    $("accountMessage").textContent =
+      "Connexion à Firebase impossible. Vérifiez la configuration et les règles de la base.";
+    toast("Erreur de connexion à la base de données.");
+  }
+}
+
+async function loadUser() {
+  if (!db || !currentPhone) return;
+  try {
+    const snapshot = await get(ref(db, `${USERS_PATH}/${currentPhone}`));
+    currentUser = snapshot.exists() ? snapshot.val() : {};
+    updateBalanceUI();
+  } catch (error) {
+    console.error(error);
+    toast("Impossible de lire le compte.");
+  }
+}
+
+async function loadOrders() {
+  if (!db || !currentPhone) return;
+  try {
+    const snapshot = await get(ref(db, COMMANDS_PATH));
+    const data = snapshot.exists() ? snapshot.val() : {};
+    const orders = Object.entries(data)
+      .filter(([key, order]) =>
+        order && String(order.telephone || order.phone || "") === currentPhone
+      )
+      .map(([id, order]) => ({ id, ...order }))
+      .sort((a, b) => (Number(b.createdAt) || 0) - (Number(a.createdAt) || 0))
+      .slice(0, 15);
+
+    const container = $("ordersList");
+    if (!orders.length) {
+      container.innerHTML = '<div class="empty">Aucune commande trouvée.</div>';
+      return;
+    }
+
+    container.innerHTML = orders.map(order => `
+      <div style="padding:10px 0;border-bottom:1px solid #ffffff12">
+        <strong>${escapeHTML(order.service || order.categorie || "Commande")}</strong>
+        <p class="note">${escapeHTML(order.statut || "En attente")} · ${money(order.prix || order.montant || 0)}</p>
+      </div>
+    `).join("");
+  } catch (error) {
+    console.error(error);
+    $("ordersList").innerHTML =
+      '<div class="empty">Impossible de charger les commandes.</div>';
+  }
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;",
+    '"': "&quot;", "'": "&#39;"
+  }[char]));
+}
+
+async function saveOrder(order) {
+  if (!db) {
+    toast("Firebase n'est pas connecté.");
+    return false;
+  }
+  if (!currentPhone) {
+    toast("Connectez-vous à votre compte avant de commander.");
+    return false;
+  }
+  try {
+    const orderRef = push(ref(db, COMMANDS_PATH));
+    await set(orderRef, {
+      ...order,
+      telephone: currentPhone,
+      statut: "En attente",
+      createdAt: Date.now()
+    });
+    await loadOrders();
+    return true;
+  } catch (error) {
+    console.error(error);
+    toast("Impossible d'enregistrer la commande.");
+    return false;
+  }
+}
+
+/*
+  PLATEFORMES :
+  Les logos sont chargés sous forme de SVG depuis Simple Icons.
+  Ils sont créés dans la fenêtre uniquement, jamais sur l'accueil.
+*/
+const platforms = [
+  {id:"facebook",name:"Facebook",slug:"facebook",color:"1877F2"},
+  {id:"youtube",name:"YouTube",slug:"youtube",color:"FF0000"},
+  {id:"x",name:"X",slug:"x",color:"FFFFFF"},
+  {id:"whatsapp",name:"WhatsApp",slug:"whatsapp",color:"25D366"},
+  {id:"snapchat",name:"Snapchat",slug:"snapchat",color:"FFFC00"},
+  {id:"spotify",name:"Spotify",slug:"spotify",color:"1DB954"},
+  {id:"tiktok",name:"TikTok",slug:"tiktok",color:"FFFFFF"},
+  {id:"instagram",name:"Instagram",slug:"instagram",color:"E4405F"},
+  {id:"telegram",name:"Telegram",slug:"telegram",color:"26A5E4"},
+  {id:"messenger",name:"Messenger",slug:"messenger",color:"0866FF"},
+  {id:"threads",name:"Threads",slug:"threads",color:"FFFFFF"},
+  {id:"pinterest",name:"Pinterest",slug:"pinterest",color:"BD081C"},
+  {id:"linkedin",name:"LinkedIn",slug:"linkedin",color:"0A66C2"},
+  {id:"twitch",name:"Twitch",slug:"twitch",color:"9146FF"},
+  {id:"discord",name:"Discord",slug:"discord",color:"5865F2"},
+  {id:"reddit",name:"Reddit",slug:"reddit",color:"FF4500"},
+  {id:"soundcloud",name:"SoundCloud",slug:"soundcloud",color:"FF5500"},
+  {id:"viber",name:"Viber",slug:"viber",color:"7360F2"},
+  {id:"line",name:"LINE",slug:"line",color:"06C755"},
+  {id:"vk",name:"VK",slug:"vk",color:"0077FF"}
+];
+
+const servicesByPlatform = {
+  facebook:["Abonnés","Likes","Vues","Commentaires","Partages","Réactions"],
+  youtube:["Abonnés","Likes","Vues","Commentaires","Partages"],
+  x:["Abonnés","Likes","Vues","Commentaires","Reposts"],
+  whatsapp:["Membres de communauté","Promotion de lien"],
+  snapchat:["Abonnés","Vues"],
+  spotify:["Écoutes","Abonnés au profil"],
+  tiktok:["Abonnés","Likes","Vues","Commentaires","Partages"],
+  instagram:["Abonnés","Likes","Vues","Commentaires","Partages"],
+  telegram:["Membres","Vues","Réactions","Partages"],
+  messenger:["Promotion de lien"],
+  threads:["Abonnés","Likes","Vues","Commentaires","Partages"],
+  pinterest:["Abonnés","Vues","Enregistrements"],
+  linkedin:["Abonnés","Réactions","Vues"],
+  twitch:["Abonnés","Vues"],
+  discord:["Membres"],
+  reddit:["Vues","Réactions"],
+  soundcloud:["Écoutes","Likes","Abonnés au profil"],
+  viber:["Membres"],
+  line:["Abonnés"],
+  vk:["Abonnés","Likes","Vues","Partages"]
+};
+
+/* Prix de référence modifiables selon le fournisseur réel. */
+const smmCatalog = {
+  "Abonnés":{qty:100,price:1000},
+  "Likes":{qty:100,price:500},
+  "Vues":{qty:1000,price:700},
+  "Partages":{qty:100,price:900},
+  "Commentaires":{qty:50,price:1500},
+  "Membres":{qty:100,price:1500},
+  "Réactions":{qty:100,price:700},
+  "Reposts":{qty:100,price:900},
+  "Écoutes":{qty:1000,price:1200},
+  "Abonnés au profil":{qty:100,price:1500},
+  "Membres de communauté":{qty:100,price:1500},
+  "Promotion de lien":{qty:1,price:1000},
+  "Enregistrements":{qty:100,price:700}
+};
+
+function logoURL(platform) {
+  return `https://cdn.simpleicons.org/${platform.slug}/${platform.color}`;
+}
+
+function showSmmPlatformChooser() {
+  $("platformChooser").classList.remove("hidden");
+  $("platformServices").classList.add("hidden");
+  $("smmTitle").textContent = "Réseaux sociaux";
+  $("platformSearch").value = "";
+  renderPlatforms();
+  openModal("smmModal");
+}
+
+function renderPlatforms(filter = "") {
+  const grid = $("platformGrid");
+  const term = filter.trim().toLowerCase();
+  const list = platforms.filter(platform =>
+    platform.name.toLowerCase().includes(term)
+  );
+
+  if (!list.length) {
+    grid.innerHTML = '<div class="empty full">Aucune plateforme trouvée.</div>';
+    return;
+  }
+
+  grid.innerHTML = list.map(platform => `
+    <button type="button" class="platform" data-platform="${platform.id}">
+      <img src="${logoURL(platform)}"
+           alt="${escapeHTML(platform.name)}"
+           loading="lazy"
+           onerror="this.onerror=null;this.src='https://cdn.simpleicons.org/${platform.slug}'">
+      <span>${escapeHTML(platform.name)}</span>
+    </button>
+  `).join("");
+
+  grid.querySelectorAll("[data-platform]").forEach(button => {
+    button.addEventListener("click", () => openPlatform(button.dataset.platform));
+  });
+}
+
+function openPlatform(id) {
+  selectedPlatform = platforms.find(platform => platform.id === id);
+  if (!selectedPlatform) return;
+
+  $("platformChooser").classList.add("hidden");
+  $("platformServices").classList.remove("hidden");
+  $("smmTitle").textContent = selectedPlatform.name;
+
+  $("selectedPlatformInfo").innerHTML = `
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
+      <img src="${logoURL(selectedPlatform)}"
+           alt="${escapeHTML(selectedPlatform.name)}"
+           style="width:42px;height:42px;object-fit:contain"
+           onerror="this.onerror=null;this.src='https://cdn.simpleicons.org/${selectedPlatform.slug}'">
+      <div>
+        <strong>${escapeHTML(selectedPlatform.name)}</strong>
+        <p class="note" style="margin:5px 0 0">Choisissez votre service</p>
+      </div>
+    </div>
+  `;
+
+  const services = servicesByPlatform[id] || [];
+  $("smmService").innerHTML = services.map(service =>
+    `<option value="${escapeHTML(service)}">${escapeHTML(service)}</option>`
+  ).join("");
+
+  $("smmQuantity").value = "10";
+  $("smmLink").value = "";
+  $("smmNotes").value = "";
+  updateSmmPrice();
+}
+
+function calculateSmmPrice(service, quantity) {
+  const item = smmCatalog[service];
+  if (!item || !Number.isFinite(quantity) || quantity < 10) return 0;
+  return Math.ceil((quantity / item.qty) * item.price);
+}
+
+function updateSmmPrice() {
+  const quantity = Number($("smmQuantity").value);
+  const service = $("smmService").value;
+  currentSmmPrice = calculateSmmPrice(service, quantity);
+  $("smmPrice").textContent = money(currentSmmPrice);
+  $("smmBalance").textContent = money(getBalance(currentUser));
+}
+
+$("platformSearch").addEventListener("input", event =>
+  renderPlatforms(event.target.value)
+);
+$("backToPlatforms").addEventListener("click", () => {
+  $("platformChooser").classList.remove("hidden");
+  $("platformServices").classList.add("hidden");
+  $("smmTitle").textContent = "Réseaux sociaux";
+});
+$("smmService").addEventListener("change", updateSmmPrice);
+$("smmQuantity").addEventListener("input", updateSmmPrice);
+
+$("openSocialButton").addEventListener("click", showSmmPlatformChooser);
+
+$("smmForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  if (busy) return;
+
+  const service = $("smmService").value;
+  const link = $("smmLink").value.trim();
+  const quantity = Number($("smmQuantity").value);
+  const notes = $("smmNotes").value.trim();
+  const price = calculateSmmPrice(service, quantity);
+
+  if (!selectedPlatform) {
+    toast("Sélectionnez d'abord une plateforme.");
+    return;
+  }
+  if (!currentPhone) {
+    toast("Connectez-vous à votre compte avant de commander.");
+    return;
+  }
+  if (!/^https?:\/\/\S+/i.test(link)) {
+    toast("Entrez un lien valide commençant par http:// ou https://.");
+    return;
+  }
+  if (!Number.isInteger(quantity) || quantity < 10) {
+    toast("La quantité minimale est de 10.");
+    return;
+  }
+  if (price <= 0) {
+    toast("Le prix n'est pas disponible pour ce service.");
+    return;
+  }
+
+  busy = true;
+  $("submitSmm").disabled = true;
+  $("submitSmm").textContent = "Traitement…";
+
+  try {
+    /*
+      Le solde est débité via transaction Firebase.
+      Si l'enregistrement de la commande échoue, le débit est annulé.
+      Les règles de sécurité Firebase doivent protéger les données
+      et vérifier les opérations côté serveur pour une vraie production.
+    */
+    const balanceRef = ref(db, `${USERS_PATH}/${currentPhone}/solde_principal`);
+    const transaction = await runTransaction(balanceRef, currentBalance => {
+      const available = Number(currentBalance ?? currentUser.solde ?? 0) || 0;
+      if (available < price) return;
+      return available - price;
+    });
+
+    if (!transaction.committed) {
+      toast("Solde insuffisant ou transaction refusée.");
+      await loadUser();
+      return;
+    }
+
+    const previousBalance = getBalance(currentUser);
+    const newBalance = Number(transaction.snapshot.val()) || 0;
+    currentUser.solde_principal = newBalance;
+    updateBalanceUI();
+
+    const saved = await saveOrder({
+      categorie: "smm",
+      service: `${selectedPlatform.name} — ${service}`,
+      plateforme: selectedPlatform.name,
+      type_service: service,
+      lien: link,
+      quantite: quantity,
+      notes,
+      prix: price,
+      fournisseurConnecte: false
+    });
+
+    if (!saved) {
+      await runTransaction(balanceRef, value => {
+        const current = Number(value) || 0;
+        return current + price;
+      });
+      currentUser.solde_principal = previousBalance;
+      updateBalanceUI();
+      toast("Commande non enregistrée : débit annulé.");
+      return;
+    }
+
+    toast("Commande enregistrée. Elle est en attente de traitement.");
+    $("smmForm").reset();
+    closeModal("smmModal");
+    await loadUser();
+  } catch (error) {
+    console.error(error);
+    toast("Erreur pendant la commande. Vérifiez votre connexion.");
+    await loadUser();
+  } finally {
+    busy = false;
+    $("submitSmm").disabled = false;
+    $("submitSmm").textContent = "Envoyer la commande";
+  }
+});
+
+/* Tarifs indicatifs des services créatifs. */
+const creativePrices = {
+  "Site web":15000,
+  "Application mobile":10000,
+  "Chatbot":7000
+};
+
+document.querySelectorAll(".creative-button").forEach(button => {
+  button.addEventListener("click", () => {
+    const service = button.dataset.service;
+    $("creativeService").value = service;
+    $("creativeTitle").textContent = service;
+    $("creativePrice").textContent = money(creativePrices[service] || 0);
+    $("creativeDescription").value = "";
+    openModal("orderModal");
+  });
+});
+
+$("creativeForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  const service = $("creativeService").value;
+  const description = $("creativeDescription").value.trim();
+  const price = creativePrices[service] || 0;
+
+  if (!description) return toast("Décrivez votre projet.");
+  if (!currentPhone) return toast("Connectez-vous avant de commander.");
+
+  const saved = await saveOrder({
+    categorie:"creation",
+    service,
+    description,
+    prix:price
+  });
+
+  if (saved) {
+    toast("Demande enregistrée.");
+    closeModal("orderModal");
+  }
+});
+
+/* Demande de chanson */
+$("openMusicButton").addEventListener("click", () => openModal("musicModal"));
+
+$("musicForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!currentPhone) return toast("Connectez-vous avant de commander.");
+
+  const saved = await saveOrder({
+    categorie:"musique",
+    service:"Création musicale",
+    titre:$("musicTitle").value.trim(),
+    style:$("musicStyle").value,
+    paroles:$("musicLyrics").value.trim(),
+    prix:5000
+  });
+
+  if (saved) {
+    toast("Demande musicale enregistrée.");
+    $("musicForm").reset();
+    closeModal("musicModal");
+  }
+});
+
+/* Demande publicitaire */
+$("openAdsButton").addEventListener("click", () => openModal("adsModal"));
+
+$("adsForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!currentPhone) return toast("Connectez-vous avant d'envoyer une demande.");
+
+  const saved = await saveOrder({
+    categorie:"publicite",
+    service:"Publicité digitale",
+    type_publicite:$("adsType").value,
+    lien:$("adsLink").value.trim(),
+    description:$("adsDescription").value.trim(),
+    prix:0
+  });
+
+  if (saved) {
+    toast("Demande envoyée. Le tarif sera confirmé.");
+    $("adsForm").reset();
+    closeModal("adsModal");
+  }
+});
+
+/* Catalogue API */
+const apiCatalog = [
+  {name:"Assistant IA",path:"/api/intelligence-artificielle/ai"},
+  {name:"Questions IA",path:"/api/intelligence-artificielle/ask"},
+  {name:"Traduction",path:"/translate"},
+  {name:"Génération d'image",path:"/genere-image/generate"},
+  {name:"Image",path:"/genere-image/image"},
+  {name:"Publicité",path:"/publicite/ads"},
+  {name:"Données API",path:"/api/data"},
+  {name:"Stockage",path:"/storage"},
+  {name:"Authentification admin",path:"/admin-auth"},
+  {name:"Média vidéo",path:"/media/video"},
+  {name:"Média musical",path:"/media/music"},
+  {name:"Hub API",path:"/hub"}
+];
+
+function renderApiCatalog() {
+  $("apiGrid").innerHTML = apiCatalog.map((api, index) => `
+    <article class="card">
+      <div class="card-icon">🔌</div>
+      <h4>${escapeHTML(api.name)}</h4>
+      <p style="overflow-wrap:anywhere">${escapeHTML(api.path)}</p>
+      <button class="btn btn-block small-btn" data-api="${index}">Demander un accès</button>
+    </article>
+  `).join("");
+
+  $("apiGrid").querySelectorAll("[data-api]").forEach(button => {
+    button.addEventListener("click", async () => {
+      const api = apiCatalog[Number(button.dataset.api)];
+      if (!currentPhone) return toast("Connectez-vous pour demander un accès.");
+
+      const saved = await saveOrder({
+        categorie:"api",
+        service:"Demande d'accès API — " + api.name,
+        api:api.path,
+        prix:0
+      });
+      if (saved) toast("Demande d'accès enregistrée.");
+    });
+  });
+}
+
+$("openApiButton").addEventListener("click", () => openModal("apiModal"));
+renderApiCatalog();
+
+/* Navigation mobile */
+document.querySelectorAll("[data-nav]").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll("[data-nav]").forEach(item => item.classList.remove("active"));
+    button.classList.add("active");
+
+    switch (button.dataset.nav) {
+      case "home":
+        closeAllModals();
+        window.scrollTo({top:0,behavior:"smooth"});
+        break;
+      case "social":
+        showSmmPlatformChooser();
+        break;
+      case "music":
+        openModal("musicModal");
+        break;
+      case "api":
+        openModal("apiModal");
+        break;
+      case "profile":
+        updateBalanceUI();
+        openModal("profileModal");
+        break;
+    }
+  });
+});
+
+function closeAllModals() {
+  document.querySelectorAll(".overlay").forEach(el => el.classList.remove("show"));
+}
+
+$("refreshBalance").addEventListener("click", loadUser);
+$("refreshOrders").addEventListener("click", loadOrders);
+
+initFirebase();
 </script>
 </body>
 </html>
