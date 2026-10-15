@@ -4,123 +4,282 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#050914">
+<meta name="description" content="JASON BUSINESS — Boutique numérique">
 <title>JASON BUSINESS — Boutique</title>
+
 <style>
 :root{
- --bg:#050914;--panel:#0b1425;--panel2:#101e32;
- --blue:#00d4ff;--gold:#d8aa45;--green:#22c55e;
- --text:#f4f7ff;--muted:#94a3b8;
- --border:rgba(216,170,69,.25)
+ --bg:#050914;
+ --panel:#0b1425;
+ --panel2:#101e32;
+ --blue:#00d4ff;
+ --gold:#d8aa45;
+ --green:#22c55e;
+ --text:#f4f7ff;
+ --muted:#94a3b8;
+ --border:rgba(216,170,69,.25);
+ --blueGlow:rgba(0,212,255,.12);
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
 body{
  margin:0;color:var(--text);font-family:Arial,sans-serif;
- background:radial-gradient(ellipse at top right,#07304a44,transparent 40%),
- radial-gradient(ellipse at bottom left,#d8aa4510,transparent 35%),var(--bg)
+ background:
+  radial-gradient(ellipse at top right,#07304a55,transparent 42%),
+  radial-gradient(ellipse at bottom left,#d8aa4518,transparent 38%),
+  var(--bg);
+ overflow-x:hidden;
 }
-button,input,select,textarea{font:inherit}button{cursor:pointer}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,
+textarea:focus-visible,a:focus-visible{
+ outline:2px solid var(--blue);outline-offset:3px
+}
+
+/* Lumières animées */
+.ambient{
+ position:fixed;z-index:0;width:180px;height:180px;
+ border-radius:50%;filter:blur(75px);opacity:.12;
+ pointer-events:none;animation:floatLight 13s ease-in-out infinite alternate
+}
+.ambient.one{top:8%;left:-100px;background:var(--blue)}
+.ambient.two{right:-110px;top:48%;background:var(--gold);animation-delay:-5s}
+.ambient.three{left:25%;bottom:-140px;background:#0077ff;animation-delay:-8s}
+@keyframes floatLight{
+ from{transform:translate3d(0,0,0) scale(1)}
+ to{transform:translate3d(30px,35px,0) scale(1.2)}
+}
+header,main,footer,.overlay{position:relative;z-index:1}
+
 header{
- position:sticky;top:0;z-index:5;padding:12px 14px;
+ position:sticky;top:0;z-index:10;padding:12px 14px;
  display:flex;justify-content:space-between;align-items:center;gap:8px;
- background:#050914f5;border-bottom:1px solid var(--border);
- backdrop-filter:blur(15px)
+ background:rgba(5,9,20,.94);
+ border-bottom:1px solid var(--border);
+ backdrop-filter:blur(18px);
+ box-shadow:0 7px 24px rgba(0,0,0,.12)
 }
-.brand{display:flex;align-items:center;gap:10px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
 .logo{
- width:43px;height:43px;display:grid;place-items:center;border-radius:13px;
- background:linear-gradient(135deg,#ffe8ac,var(--gold),#946515);
- color:#07111d;font-weight:900;font-size:18px
+ width:43px;height:43px;flex-shrink:0;display:grid;place-items:center;
+ border-radius:14px;background:linear-gradient(135deg,#ffe8ac,var(--gold),#946515);
+ color:#07111d;font-weight:900;font-size:18px;
+ box-shadow:0 0 22px rgba(216,170,69,.13);
+ animation:logoGlow 4s ease-in-out infinite
 }
-.brand h1{font-size:14px;margin:0 0 4px}
+@keyframes logoGlow{
+ 0%,100%{box-shadow:0 0 12px rgba(216,170,69,.12)}
+ 50%{box-shadow:0 0 25px rgba(216,170,69,.28)}
+}
+.brand h1{font-size:14px;margin:0 0 4px;letter-spacing:.5px}
 .brand small{font-size:10px;color:var(--muted)}
 .btn{
- border:1px solid var(--border);border-radius:11px;padding:11px 13px;
- color:var(--text);background:var(--panel2);font-size:12px;font-weight:bold
+ border:1px solid var(--border);border-radius:12px;padding:11px 13px;
+ color:var(--text);background:linear-gradient(135deg,#14243a,#0b1425);
+ font-size:12px;font-weight:bold;transition:transform .25s,border-color .25s,box-shadow .25s;
 }
-.btn:hover{border-color:var(--gold);transform:translateY(-1px)}
-.gold{background:linear-gradient(135deg,#ffe4a3,var(--gold));color:#10131a;border:0}
-main{max-width:900px;margin:auto;padding:16px 13px 80px}
+.btn:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 7px 20px #0003}
+.btn:active{transform:scale(.97)}
+.gold{
+ background:linear-gradient(125deg,#ffe4a3,var(--gold));
+ color:#10131a;border:0;
+ box-shadow:0 6px 20px rgba(216,170,69,.10)
+}
+.gold:hover{box-shadow:0 8px 25px rgba(216,170,69,.22)}
+
+main{max-width:900px;margin:auto;padding:17px 13px 80px}
 .hero{
- border:1px solid var(--border);border-radius:21px;padding:22px 18px;
- background:linear-gradient(135deg,#14243b,#080e1b);margin-bottom:23px
+ position:relative;overflow:hidden;
+ border:1px solid var(--border);border-radius:23px;padding:24px 19px;
+ background:
+  radial-gradient(ellipse at top right,rgba(0,212,255,.10),transparent 60%),
+  linear-gradient(135deg,#14243b,#080e1b);
+ margin-bottom:25px;
+ box-shadow:0 15px 40px rgba(0,0,0,.17);
+ animation:fadeUp .65s ease both;
 }
-.tag{font-size:10px;color:var(--gold);letter-spacing:1px;font-weight:bold}
-.hero h2{font-size:26px;line-height:1.25;margin:13px 0 8px}
-.hero h2 span{color:var(--gold)}
-.hero p{font-size:12px;line-height:1.8;color:var(--muted)}
-.section-title{font-size:17px;margin:23px 2px 12px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.hero::after{
+ content:"";position:absolute;top:0;left:-120%;width:65%;height:100%;
+ background:linear-gradient(100deg,transparent,rgba(255,255,255,.055),transparent);
+ transform:skewX(-20deg);animation:heroShine 8s ease-in-out infinite;
+ pointer-events:none
+}
+@keyframes heroShine{0%,65%{left:-120%}100%{left:160%}}
+@keyframes fadeUp{
+ from{opacity:0;transform:translateY(13px)}
+ to{opacity:1;transform:translateY(0)}
+}
+.tag{font-size:10px;color:var(--gold);letter-spacing:1.5px;font-weight:bold}
+.hero h2{font-size:27px;line-height:1.3;margin:14px 0 8px}
+.hero h2 span{color:var(--gold);text-shadow:0 0 20px #d8aa451c}
+.hero p{font-size:12px;line-height:1.9;color:var(--muted);max-width:570px}
+.hero .btn{margin-top:7px}
+.section-title{font-size:17px;margin:24px 2px 13px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .card{
- padding:15px 12px;border-radius:17px;border:1px solid var(--border);
- background:linear-gradient(145deg,#111f33,#09111e);min-width:0;
- transition:.2s
+ position:relative;overflow:hidden;display:flex;flex-direction:column;
+ padding:16px 12px;border-radius:19px;
+ border:1px solid var(--border);
+ background:linear-gradient(145deg,rgba(17,31,51,.97),rgba(9,17,30,.97));
+ min-width:0;transition:transform .28s,border-color .28s,box-shadow .28s;
+ animation:fadeUp .7s ease both
 }
-.card:hover{transform:translateY(-3px);border-color:#d8aa4580}
+.card::before{
+ content:"";position:absolute;inset:0;opacity:0;
+ background:radial-gradient(ellipse at top left,rgba(0,212,255,.08),transparent 70%);
+ transition:opacity .3s;pointer-events:none
+}
+.card:hover{
+ transform:translateY(-4px);border-color:#d8aa4580;
+ box-shadow:0 13px 30px rgba(0,0,0,.2)
+}
+.card:hover::before{opacity:1}
 .card-icon{
- width:43px;height:43px;border-radius:13px;display:grid;place-items:center;
- font-size:23px;background:#d8aa4512;border:1px solid var(--border);margin-bottom:11px
+ width:45px;height:45px;border-radius:14px;display:grid;place-items:center;
+ font-size:23px;background:linear-gradient(135deg,#d8aa4518,#00d4ff09);
+ border:1px solid var(--border);margin-bottom:12px;
+ transition:transform .3s
 }
-.card h3{font-size:14px;margin:0 0 8px}
-.card p{font-size:11px;color:var(--muted);line-height:1.65;min-height:38px}
-.muted{color:var(--muted);font-size:11px;line-height:1.7}
+.card:hover .card-icon{transform:translateY(-2px) rotate(-3deg)}
+.card h3{font-size:14px;margin:0 0 8px;line-height:1.5}
+.card p{font-size:11px;color:var(--muted);line-height:1.8;min-height:40px;flex:1}
+.muted{color:var(--muted);font-size:11px;line-height:1.8}
+.total{
+ padding:13px;border:1px solid var(--border);border-radius:13px;
+ display:flex;justify-content:space-between;align-items:center;gap:8px;
+ background:linear-gradient(120deg,#d8aa4510,#00d4ff05);
+ margin:13px 0;font-size:12px
+}
+.total strong{color:var(--gold);font-size:18px;text-align:right}
+.card>.btn{width:100%;margin-top:auto;min-height:42px}
+
+/* Fenêtres modales */
 .overlay{
- display:none;position:fixed;inset:0;z-index:20;
- background:#000b;align-items:flex-end;justify-content:center
+ display:none;position:fixed;inset:0;z-index:30;
+ background:rgba(0,0,0,.76);backdrop-filter:blur(7px);
+ align-items:flex-end;justify-content:center;padding:0
 }
-.overlay.show{display:flex}
+.overlay.show{display:flex;animation:fadeOverlay .2s ease}
+@keyframes fadeOverlay{from{opacity:0}to{opacity:1}}
 .modal{
  width:min(100%,620px);max-height:92vh;overflow:auto;
- background:#08111f;border:1px solid var(--border);
- border-radius:22px 22px 0 0;padding:17px;
- animation:up.2s ease
+ background:
+  radial-gradient(ellipse at top right,rgba(0,212,255,.07),transparent 45%),
+  #08111f;
+ border:1px solid var(--border);
+ border-radius:23px 23px 0 0;padding:18px;
+ box-shadow:0 -12px 55px rgba(0,0,0,.35);
+ animation:modalUp .28s ease
 }
-@keyframes up{from{transform:translateY(20px);opacity:.5}to{transform:none;opacity:1}}
-.modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
-.modal-head h2{font-size:18px;margin:0}
+@keyframes modalUp{
+ from{transform:translateY(28px);opacity:.6}
+ to{transform:translateY(0);opacity:1}
+}
+.modal-head{
+ display:flex;align-items:center;justify-content:space-between;gap:10px;
+ margin-bottom:15px;position:sticky;top:-18px;z-index:2;
+ background:#08111ff2;padding:9px 0 12px;border-bottom:1px solid rgba(216,170,69,.12)
+}
+.modal-head h2{font-size:17px;margin:0;line-height:1.5}
 .close{
- width:36px;height:36px;border:1px solid var(--border);border-radius:10px;
- background:#132035;color:white;font-size:20px
+ flex-shrink:0;width:37px;height:37px;border:1px solid var(--border);
+ border-radius:11px;background:#132035;color:white;font-size:22px;
+ transition:background .2s,transform .2s
 }
-.field{margin:13px 0}
-.field label{display:block;font-size:12px;margin-bottom:7px;color:#dce6f5}
+.close:hover{background:#263850;transform:rotate(90deg)}
+.field{margin:14px 0}
+.field label{display:block;font-size:12px;margin-bottom:8px;color:#dce6f5}
 .field input,.field textarea,.field select{
- width:100%;padding:12px;border-radius:11px;border:1px solid #293850;
- background:#0c192b;color:white;outline:none
+ width:100%;padding:13px;border-radius:12px;border:1px solid #293850;
+ background:#0c192b;color:white;outline:none;
+ transition:border-color .2s,box-shadow .2s
 }
-.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold)}
-.field textarea{min-height:100px;resize:vertical}
-.field small{display:block;color:var(--muted);font-size:10px;line-height:1.6;margin-top:5px}
+.field input:focus,.field textarea:focus,.field select:focus{
+ border-color:var(--gold);box-shadow:0 0 0 3px rgba(216,170,69,.07)
+}
+.field textarea{min-height:100px;resize:vertical;line-height:1.7}
+.field select option{background:#0c192b;color:white}
+.field small{display:block;color:var(--muted);font-size:10px;line-height:1.7;margin-top:6px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.platforms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.platforms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 .platform{
- padding:10px 3px;border:1px solid #28374d;border-radius:11px;
+ min-width:0;padding:11px 3px;border:1px solid #28374d;border-radius:12px;
  background:#0d192b;color:white;font-size:10px;display:flex;
- flex-direction:column;align-items:center;gap:6px
+ flex-direction:column;align-items:center;justify-content:center;gap:7px;
+ transition:transform .2s,border-color .2s,background .2s
 }
 .platform img{width:25px;height:25px;object-fit:contain}
-.platform.active{border-color:var(--gold);background:#d8aa4518}
-.total{
- padding:13px;border:1px solid var(--border);border-radius:12px;
- display:flex;justify-content:space-between;align-items:center;
- background:#d8aa450c;margin:14px 0;font-size:12px
+.platform.active{border-color:var(--gold);background:#d8aa4518;box-shadow:0 0 15px #d8aa4510}
+.platform:active{transform:scale(.96)}
+.status{
+ font-size:12px;line-height:1.8;margin:12px 0;
+ white-space:pre-wrap;overflow-wrap:anywhere
 }
-.total strong{color:var(--gold);font-size:19px}
-.status{font-size:12px;line-height:1.7;margin:12px 0;white-space:pre-wrap;overflow-wrap:anywhere}
 .ok{color:#86efac}.error{color:#fda4af}.info{color:#93c5fd}
-.preview{width:85px;height:85px;border-radius:13px;object-fit:cover;border:1px solid var(--border);display:none;margin-top:9px}
-.history-item{padding:12px;margin:9px 0;background:#0d192b;border:1px solid #28374d;border-radius:11px;font-size:11px;line-height:1.7;overflow-wrap:anywhere}
+.preview{
+ width:85px;height:85px;border-radius:14px;object-fit:cover;
+ border:1px solid var(--border);display:none;margin-top:10px;
+ background:#0c192b
+}
+.history-item{
+ padding:13px;margin:10px 0;background:#0d192b;
+ border:1px solid #28374d;border-radius:13px;
+ font-size:11px;line-height:1.8;overflow-wrap:anywhere
+}
 .history-item strong{color:var(--gold)}
+.history-item .muted{margin:3px 0}
 audio{width:100%;margin-top:12px}
-footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-size:10px;color:var(--muted)}
-@media(min-width:620px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.overlay{align-items:center;padding:15px}.modal{border-radius:22px}}
-@media(max-width:360px){.grid{gap:8px}.card{padding:11px 9px}.brand h1{font-size:12px}.row{grid-template-columns:1fr}}
+footer{
+ text-align:center;padding:22px 15px;border-top:1px solid var(--border);
+ font-size:10px;color:var(--muted);line-height:1.8
+}
+footer span{color:var(--gold)}
+@media(min-width:620px){
+ .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .overlay{align-items:center;padding:16px}
+ .modal{border-radius:23px;max-height:88vh}
+ main{padding-top:22px}
+ .hero{padding:30px 26px}
+}
+@media(max-width:360px){
+ .grid{gap:8px}
+ .card{padding:12px 9px}
+ .brand h1{font-size:12px}
+ .row{grid-template-columns:1fr}
+ .hero h2{font-size:24px}
+ .total strong{font-size:15px}
+ .modal{padding:14px}
+ .platforms{gap:5px}
+ .platform{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{
+  animation-duration:.01ms!important;
+  animation-iteration-count:1!important;
+  scroll-behavior:auto!important;
+  transition-duration:.01ms!important
+ }
+}
 </style>
 </head>
+
 <body>
+<div class="ambient one"></div>
+<div class="ambient two"></div>
+<div class="ambient three"></div>
+
 <header>
- <div class="brand"><div class="logo">JB</div><div><h1>JASON BUSINESS</h1><small>Boutique numérique</small></div></div>
+ <div class="brand">
+  <div class="logo">JB</div>
+  <div>
+   <h1>JASON BUSINESS</h1>
+   <small>Boutique numérique</small>
+  </div>
+ </div>
  <button class="btn" id="historyBtn">📋 Mes demandes</button>
 </header>
+
 <main>
  <section class="hero">
   <div class="tag">✦ TON ESPACE NUMÉRIQUE</div>
@@ -128,119 +287,307 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
   <p>Commandez une application, un site web, un chatbot, créez votre chanson ou préparez votre promotion sur les réseaux sociaux.</p>
   <button class="btn gold" id="exploreBtn">Découvrir les services ↓</button>
  </section>
+
  <h2 class="section-title" id="services">Nos services</h2>
  <section class="grid">
-  <article class="card"><div class="card-icon">📈</div><h3>Boostage réseaux sociaux</h3><p>Choisissez votre plateforme, followers, likes ou vues.</p><div class="total"><span>Prix</span><strong id="boostCardPrice">10 FC</strong></div><button class="btn gold" data-open="boostModal">Créer ma demande</button></article>
-  <article class="card"><div class="card-icon">📱</div><h3>Application mobile</h3><p>Nom, icône, site, description et WhatsApp.</p><div class="total"><span>Prix</span><strong>10 000 FC</strong></div><button class="btn" data-open="appModal">Commander</button></article>
-  <article class="card"><div class="card-icon">🌐</div><h3>Création de site web</h3><p>Portfolio, boutique en ligne, site vitrine, blog.</p><div class="total"><span>Prix</span><strong>15 000 FC</strong></div><button class="btn" data-open="siteModal">Commander</button></article>
-  <article class="card"><div class="card-icon">🤖</div><h3>Création de chatbot</h3><p>Définissez le nom, fonctionnalités, créateur.</p><div class="total"><span>Prix</span><strong>7 000 FC</strong></div><button class="btn" data-open="chatModal">Créer mon chatbot</button></article>
-  <article class="card"><div class="card-icon">🎵</div><h3>Créer une chanson</h3><p>Paroles, style et génération.</p><div class="total"><span>Prix</span><strong>500 FC</strong></div><button class="btn gold" data-open="musicModal">Créer ma chanson</button></article>
-  <article class="card"><div class="card-icon">📣</div><h3>Publicité</h3><p>Préparez votre publicité.</p><div class="total"><span>Prix</span><strong>1 000 FC</strong></div><button class="btn" data-open="adsModal">Créer ma publicité</button></article>
+  <article class="card">
+   <div class="card-icon">📈</div>
+   <h3>Boostage réseaux sociaux</h3>
+   <p>Choisissez votre plateforme et le type de service : followers, likes ou vues.</p>
+   <div class="total"><span>Prix indicatif</span><strong id="boostCardPrice">100 FC</strong></div>
+   <button class="btn gold" data-open="boostModal">Créer ma demande</button>
+  </article>
+
+  <article class="card">
+   <div class="card-icon">📱</div>
+   <h3>Application mobile</h3>
+   <p>Nom, icône, lien du site, description et numéro WhatsApp.</p>
+   <div class="total"><span>Prix</span><strong>10 000 FC</strong></div>
+   <button class="btn" data-open="appModal">Commander</button>
+  </article>
+
+  <article class="card">
+   <div class="card-icon">🌐</div>
+   <h3>Création de site web</h3>
+   <p>Portfolio, boutique en ligne, site vitrine, blog et autres projets.</p>
+   <div class="total"><span>Prix</span><strong>15 000 FC</strong></div>
+   <button class="btn" data-open="siteModal">Commander</button>
+  </article>
+
+  <article class="card">
+   <div class="card-icon">🤖</div>
+   <h3>Création de chatbot</h3>
+   <p>Définissez le nom, les fonctionnalités, le créateur et la description.</p>
+   <div class="total"><span>Prix</span><strong>7 000 FC</strong></div>
+   <button class="btn" data-open="chatModal">Créer mon chatbot</button>
+  </article>
+
+  <article class="card">
+   <div class="card-icon">🎵</div>
+   <h3>Créer une chanson</h3>
+   <p>Préparez votre titre, vos paroles et le style musical souhaité.</p>
+   <div class="total"><span>Prix</span><strong>500 FC</strong></div>
+   <button class="btn gold" data-open="musicModal">Créer ma chanson</button>
+  </article>
+
+  <article class="card">
+   <div class="card-icon">📣</div>
+   <h3>Publicité</h3>
+   <p>Préparez votre titre publicitaire, le texte et le lien à promouvoir.</p>
+   <div class="total"><span>Prix</span><strong>1 000 FC</strong></div>
+   <button class="btn" data-open="adsModal">Créer ma publicité</button>
+  </article>
  </section>
 </main>
-<footer>JASON BUSINESS · Services numériques</footer>
 
-<div class="overlay" id="boostModal">
+<footer>
+ <span>JASON BUSINESS</span> · Services numériques<br>
+ Une idée aujourd'hui, un projet demain.
+</footer>
+
+<!-- BOOSTAGE -->
+<div class="overlay" id="boostModal" role="dialog" aria-modal="true" aria-labelledby="boostTitle">
  <section class="modal">
-  <div class="modal-head"><h2>📈 Boostage des réseaux sociaux</h2><button class="close" data-close="boostModal">×</button></div>
-  <p class="muted">Ta commande ira direct dans l'admin JASON BUSINESS.</p>
+  <div class="modal-head">
+   <h2 id="boostTitle">📈 Boostage des réseaux sociaux</h2>
+   <button class="close" data-close="boostModal" aria-label="Fermer">×</button>
+  </div>
+  <p class="muted">Choisissez la plateforme, le service et la quantité. Votre demande sera enregistrée dans Firebase.</p>
   <div class="platforms" id="platformGrid"></div>
   <form id="boostForm">
-   <div class="field"><label>Plateforme sélectionnée</label><input id="boostPlatform" name="platform" readonly required></div>
-   <div class="field"><label>Que voulez-vous augmenter?</label><select id="boostType" name="type" required><option value="followers">Followers / abonnés</option><option value="likes">Likes</option><option value="views">Vues</option></select></div>
-   <div class="field"><label>Lien public *</label><input id="boostLink" name="link" type="url" required placeholder="https://..."></div>
-   <div class="field"><label>Quantité *</label><input id="boostQty" name="quantity" type="number" min="1" value="100" required></div>
-   <div class="field"><label>Votre numéro (pour retrouver ta commande dans l'admin) *</label><input id="boostPhone" name="phone" type="tel" required placeholder="Ex. 082..."></div>
-   <div class="total"><span>Prix indicatif</span><strong id="boostPrice">10 FC</strong></div>
+   <div class="field">
+    <label for="boostPlatform">Plateforme sélectionnée</label>
+    <input id="boostPlatform" name="platform" readonly required>
+   </div>
+   <div class="field">
+    <label for="boostType">Que voulez-vous augmenter ?</label>
+    <select id="boostType" name="type" required>
+     <option value="followers">Followers / abonnés</option>
+     <option value="likes">Likes</option>
+     <option value="views">Vues</option>
+    </select>
+   </div>
+   <div class="field">
+    <label for="boostLink">Lien public du compte ou de la publication *</label>
+    <input id="boostLink" name="link" type="url" required placeholder="https://...">
+   </div>
+   <div class="field">
+    <label for="boostQty">Quantité souhaitée *</label>
+    <input id="boostQty" name="quantity" type="number" min="1" max="1000000" value="100" required>
+    <small>Le prix affiché est indicatif. Vérifiez le tarif avec l'administrateur avant paiement.</small>
+   </div>
+   <div class="field">
+    <label for="boostPhone">Votre numéro de téléphone *</label>
+    <input id="boostPhone" name="phone" type="tel" required placeholder="Ex. +243...">
+   </div>
+   <div class="total"><span>Prix indicatif</span><strong id="boostPrice">100 FC</strong></div>
    <button class="btn gold" type="submit" style="width:100%">📤 Envoyer vers Admin</button>
-   <div class="status" id="boostStatus"></div>
+   <div class="status" id="boostStatus" aria-live="polite"></div>
   </form>
  </section>
 </div>
 
-<div class="overlay" id="appModal">
+<!-- APPLICATION -->
+<div class="overlay" id="appModal" role="dialog" aria-modal="true" aria-labelledby="appTitle">
  <section class="modal">
-  <div class="modal-head"><h2>📱 Commander une application</h2><button class="close" data-close="appModal">×</button></div>
+  <div class="modal-head">
+   <h2 id="appTitle">📱 Commander une application</h2>
+   <button class="close" data-close="appModal" aria-label="Fermer">×</button>
+  </div>
   <form id="appForm">
-   <div class="field"><label>Nom de l'application *</label><input name="appName" required></div>
-   <div class="field"><label>Icône *</label><input name="appIcon" type="file" accept="image/*" required><img id="appIconPreview" class="preview"></div>
-   <div class="field"><label>Lien du site *</label><input name="appUrl" type="url" required placeholder="https://..."></div>
-   <div class="field"><label>Description *</label><textarea name="description" required></textarea></div>
-   <div class="field"><label>WhatsApp *</label><input name="whatsapp" type="tel" required placeholder="+243..."></div>
+   <div class="field">
+    <label for="appName">Nom de l'application *</label>
+    <input id="appName" name="appName" required maxlength="100">
+   </div>
+   <div class="field">
+    <label for="appIcon">Icône de l'application *</label>
+    <input id="appIcon" name="appIcon" type="file" accept="image/*" required>
+    <img id="appIconPreview" class="preview" alt="Aperçu de l'icône">
+    <small>Choisissez une image. Le fichier est prévisualisé dans le navigateur ; son stockage permanent nécessite un service d'upload.</small>
+   </div>
+   <div class="field">
+    <label for="appUrl">Lien du site *</label>
+    <input id="appUrl" name="appUrl" type="url" required placeholder="https://...">
+   </div>
+   <div class="field">
+    <label for="appDescription">Description *</label>
+    <textarea id="appDescription" name="description" required maxlength="3000" placeholder="Décrivez les fonctionnalités de l'application..."></textarea>
+   </div>
+   <div class="field">
+    <label for="appWhatsapp">Numéro WhatsApp *</label>
+    <input id="appWhatsapp" name="whatsapp" type="tel" required placeholder="+243...">
+   </div>
    <div class="total"><span>Prix</span><strong>10 000 FC</strong></div>
    <button class="btn gold" type="submit" style="width:100%">📤 Envoyer vers Admin</button>
-   <div class="status" id="appStatus"></div>
+   <div class="status" id="appStatus" aria-live="polite"></div>
   </form>
  </section>
 </div>
 
-<div class="overlay" id="siteModal">
+<!-- SITE WEB -->
+<div class="overlay" id="siteModal" role="dialog" aria-modal="true" aria-labelledby="siteTitle">
  <section class="modal">
-  <div class="modal-head"><h2>🌐 Commander un site web</h2><button class="close" data-close="siteModal">×</button></div>
+  <div class="modal-head">
+   <h2 id="siteTitle">🌐 Commander un site web</h2>
+   <button class="close" data-close="siteModal" aria-label="Fermer">×</button>
+  </div>
   <form id="siteForm">
-   <div class="field"><label>Nom du site *</label><input name="siteName" required></div>
-   <div class="field"><label>Type *</label><select name="siteType" required><option>Portfolio</option><option>Boutique en ligne</option><option>Site vitrine</option><option>Blog</option><option>Autre</option></select></div>
-   <div class="field"><label>Description *</label><textarea name="description" required></textarea></div>
-   <div class="field"><label>WhatsApp *</label><input name="whatsapp" type="tel" required></div>
+   <div class="field">
+    <label for="siteName">Nom du site *</label>
+    <input id="siteName" name="siteName" required maxlength="100">
+   </div>
+   <div class="field">
+    <label for="siteType">Type de site *</label>
+    <select id="siteType" name="siteType" required>
+     <option value="Portfolio">Portfolio</option>
+     <option value="Boutique en ligne">Boutique en ligne</option>
+     <option value="Site vitrine">Site vitrine</option>
+     <option value="Blog">Blog</option>
+     <option value="Site éducatif">Site éducatif</option>
+     <option value="Autre">Autre</option>
+    </select>
+   </div>
+   <div class="field">
+    <label for="siteDescription">Description du projet *</label>
+    <textarea id="siteDescription" name="description" required maxlength="3000" placeholder="Décrivez le site que vous voulez créer..."></textarea>
+   </div>
+   <div class="field">
+    <label for="siteWhatsapp">Numéro WhatsApp *</label>
+    <input id="siteWhatsapp" name="whatsapp" type="tel" required placeholder="+243...">
+   </div>
    <div class="total"><span>Prix</span><strong>15 000 FC</strong></div>
    <button class="btn gold" type="submit" style="width:100%">📤 Envoyer vers Admin</button>
-   <div class="status" id="siteStatus"></div>
+   <div class="status" id="siteStatus" aria-live="polite"></div>
   </form>
  </section>
 </div>
 
-<div class="overlay" id="chatModal">
+<!-- CHATBOT -->
+<div class="overlay" id="chatModal" role="dialog" aria-modal="true" aria-labelledby="chatTitle">
  <section class="modal">
-  <div class="modal-head"><h2>🤖 Créer mon chatbot</h2><button class="close" data-close="chatModal">×</button></div>
+  <div class="modal-head">
+   <h2 id="chatTitle">🤖 Créer mon chatbot</h2>
+   <button class="close" data-close="chatModal" aria-label="Fermer">×</button>
+  </div>
   <form id="chatForm">
-   <div class="field"><label>Nom du chatbot *</label><input name="chatName" required></div>
-   <div class="field"><label>Fonctionnalités *</label><textarea name="features" required></textarea></div>
-   <div class="field"><label>Créateur *</label><input name="creator" required></div>
-   <div class="field"><label>Description *</label><textarea name="description" required></textarea></div>
-   <div class="field"><label>WhatsApp *</label><input name="whatsapp" type="tel" required></div>
+   <div class="field">
+    <label for="chatName">Nom du chatbot *</label>
+    <input id="chatName" name="chatName" required maxlength="100">
+   </div>
+   <div class="field">
+    <label for="chatFeatures">Fonctionnalités souhaitées *</label>
+    <textarea id="chatFeatures" name="features" required maxlength="3000" placeholder="Ex. répondre aux clients, traduire, aider aux études..."></textarea>
+   </div>
+   <div class="field">
+    <label for="chatCreator">Nom du créateur ou de la marque *</label>
+    <input id="chatCreator" name="creator" required maxlength="100">
+   </div>
+   <div class="field">
+    <label for="chatDescription">Description *</label>
+    <textarea id="chatDescription" name="description" required maxlength="3000"></textarea>
+   </div>
+   <div class="field">
+    <label for="chatWhatsapp">Numéro WhatsApp *</label>
+    <input id="chatWhatsapp" name="whatsapp" type="tel" required placeholder="+243...">
+   </div>
    <div class="total"><span>Prix</span><strong>7 000 FC</strong></div>
    <button class="btn gold" type="submit" style="width:100%">📤 Envoyer vers Admin</button>
-   <div class="status" id="chatStatus"></div>
+   <div class="status" id="chatStatus" aria-live="polite"></div>
   </form>
  </section>
 </div>
 
-<div class="overlay" id="musicModal">
+<!-- CHANSON -->
+<div class="overlay" id="musicModal" role="dialog" aria-modal="true" aria-labelledby="musicTitle">
  <section class="modal">
-  <div class="modal-head"><h2>🎵 Créer ma chanson</h2><button class="close" data-close="musicModal">×</button></div>
+  <div class="modal-head">
+   <h2 id="musicTitle">🎵 Créer ma chanson</h2>
+   <button class="close" data-close="musicModal" aria-label="Fermer">×</button>
+  </div>
   <form id="musicForm">
-   <div class="field"><label>Titre *</label><input name="title" required></div>
-   <div class="field"><label>Paroles *</label><textarea name="lyrics" required style="min-height:180px"></textarea></div>
-   <div class="field"><label>Style *</label><select name="style" required><option>Afrobeat</option><option>Afropop</option><option>Rumba congolaise</option><option>Ndombolo</option><option>Gospel</option><option>Hip-hop</option><option>Rap</option></select></div>
-   <div class="field"><label>WhatsApp *</label><input name="whatsapp" type="tel" required></div>
+   <div class="field">
+    <label for="musicTitleInput">Titre de la chanson *</label>
+    <input id="musicTitleInput" name="title" required maxlength="150">
+   </div>
+   <div class="field">
+    <label for="musicLyrics">Paroles *</label>
+    <textarea id="musicLyrics" name="lyrics" required maxlength="10000" style="min-height:180px" placeholder="Écrivez vos paroles ici..."></textarea>
+   </div>
+   <div class="field">
+    <label for="musicStyle">Style musical *</label>
+    <select id="musicStyle" name="style" required>
+     <option>Afrobeat</option>
+     <option>Afropop</option>
+     <option>Rumba congolaise</option>
+     <option>Ndombolo</option>
+     <option>Gospel</option>
+     <option>Hip-hop</option>
+     <option>Rap</option>
+     <option>Acoustique</option>
+    </select>
+   </div>
+   <div class="field">
+    <label for="musicWhatsapp">Numéro WhatsApp *</label>
+    <input id="musicWhatsapp" name="whatsapp" type="tel" required placeholder="+243...">
+   </div>
    <div class="total"><span>Prix</span><strong>500 FC</strong></div>
-   <button class="btn gold" id="generateSongBtn" type="submit" style="width:100%">🎶 Générer + Envoyer Admin</button>
-   <div class="status" id="musicStatus"></div>
+   <button class="btn gold" id="generateSongBtn" type="submit" style="width:100%">🎶 Envoyer la demande à Admin</button>
+   <div class="status" id="musicStatus" aria-live="polite"></div>
    <div id="musicResult"></div>
   </form>
  </section>
 </div>
 
-<div class="overlay" id="adsModal">
+<!-- PUBLICITÉ -->
+<div class="overlay" id="adsModal" role="dialog" aria-modal="true" aria-labelledby="adsTitle">
  <section class="modal">
-  <div class="modal-head"><h2>📣 Créer une publicité</h2><button class="close" data-close="adsModal">×</button></div>
+  <div class="modal-head">
+   <h2 id="adsTitle">📣 Créer une publicité</h2>
+   <button class="close" data-close="adsModal" aria-label="Fermer">×</button>
+  </div>
   <form id="adsForm">
-   <div class="field"><label>Titre *</label><input name="title" required></div>
-   <div class="field"><label>Texte *</label><textarea name="text" required></textarea></div>
-   <div class="field"><label>Lien *</label><input name="url" type="url" required></div>
-   <div class="field"><label>WhatsApp *</label><input name="whatsapp" type="tel" required></div>
+   <div class="field">
+    <label for="adsTitleInput">Titre *</label>
+    <input id="adsTitleInput" name="title" required maxlength="150">
+   </div>
+   <div class="field">
+    <label for="adsText">Texte publicitaire *</label>
+    <textarea id="adsText" name="text" required maxlength="3000"></textarea>
+   </div>
+   <div class="field">
+    <label for="adsUrl">Lien à promouvoir *</label>
+    <input id="adsUrl" name="url" type="url" required placeholder="https://...">
+   </div>
+   <div class="field">
+    <label for="adsWhatsapp">Numéro WhatsApp *</label>
+    <input id="adsWhatsapp" name="whatsapp" type="tel" required placeholder="+243...">
+   </div>
    <div class="total"><span>Prix</span><strong>1 000 FC</strong></div>
    <button class="btn gold" type="submit" style="width:100%">📤 Envoyer vers Admin</button>
-   <div class="status" id="adStatus"></div>
+   <div class="status" id="adStatus" aria-live="polite"></div>
   </form>
  </section>
 </div>
 
-<div class="overlay" id="historyModal"><section class="modal"><div class="modal-head"><h2>📋 Mes demandes</h2><button class="close" data-close="historyModal">×</button></div><div id="historyList"></div><button class="btn" id="clearHistory" style="width:100%;margin-top:12px">Effacer historique local</button></section></div>
+<!-- HISTORIQUE -->
+<div class="overlay" id="historyModal" role="dialog" aria-modal="true" aria-labelledby="historyTitle">
+ <section class="modal">
+  <div class="modal-head">
+   <h2 id="historyTitle">📋 Mes demandes</h2>
+   <button class="close" data-close="historyModal" aria-label="Fermer">×</button>
+  </div>
+  <p class="muted">Cet historique est enregistré localement sur cet appareil. Il ne représente pas nécessairement le statut actuel côté administrateur.</p>
+  <div id="historyList"></div>
+  <button class="btn" id="clearHistory" style="width:100%;margin-top:12px">Effacer l'historique local</button>
+ </section>
+</div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { initializeApp, getApps, getApp }
+ from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+ getDatabase, ref, push, set
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
  apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
@@ -251,118 +598,376 @@ const firebaseConfig = {
  messagingSenderId:"807081599583",
  appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
 };
-const app = initializeApp(firebaseConfig);
+
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 const db = getDatabase(app);
-const ROOT="jasonBusiness";
+const ROOT = "jasonBusiness";
+const $ = id => document.getElementById(id);
 
-const $=id=>document.getElementById(id);
-function show(id){$(id).classList.add("show");document.body.style.overflow="hidden"}
-function hide(id){$(id).classList.remove("show");if(!document.querySelector(".overlay.show"))document.body.style.overflow=""}
-document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>show(b.dataset.open)));
-document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>hide(b.dataset.close)));
-document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)hide(o.id)}));
+function show(id){
+ $(id).classList.add("show");
+ document.body.style.overflow="hidden";
+}
+function hide(id){
+ $(id).classList.remove("show");
+ if(!document.querySelector(".overlay.show")) document.body.style.overflow="";
+}
+document.querySelectorAll("[data-open]").forEach(button=>{
+ button.addEventListener("click",()=>show(button.dataset.open));
+});
+document.querySelectorAll("[data-close]").forEach(button=>{
+ button.addEventListener("click",()=>hide(button.dataset.close));
+});
+document.querySelectorAll(".overlay").forEach(overlay=>{
+ overlay.addEventListener("click",event=>{
+  if(event.target===overlay) hide(overlay.id);
+ });
+});
+document.addEventListener("keydown",event=>{
+ if(event.key==="Escape"){
+  const visible=document.querySelector(".overlay.show");
+  if(visible) hide(visible.id);
+ }
+});
 $("exploreBtn").onclick=()=>$("services").scrollIntoView({behavior:"smooth"});
-function status(id,msg,type="info"){const el=$(id);el.textContent=msg;el.className="status "+type;}
-const HISTORY_KEY="jasonBusinessBoutiqueOrdersV3";
-function readHistory(){try{return JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]")}catch{return []}}
-function saveOrder(type,data){const items=readHistory();items.unshift({type,date:new Date().toLocaleString("fr-FR"),data});localStorage.setItem(HISTORY_KEY,JSON.stringify(items.slice(0,100)));}
 
-// Firebase push
-async function pushCommande(path, payload){
- const newRef = push(ref(db, path));
- payload.createdAt = Date.now();
- payload.date = new Date().toLocaleString("fr-FR");
- payload.statut = "En attente";
- await set(newRef, payload);
+function setStatus(id,message,type="info"){
+ const element=$(id);
+ element.textContent=message;
+ element.className="status "+type;
+}
+
+const HISTORY_KEY="jasonBusinessBoutiqueOrdersV3";
+
+function readHistory(){
+ try{
+  const data=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]");
+  return Array.isArray(data)?data:[];
+ }catch{return []}
+}
+function saveOrder(type,data){
+ const items=readHistory();
+ const safeData={...data};
+ delete safeData.appIconFile;
+ items.unshift({type,date:new Date().toLocaleString("fr-FR"),data:safeData});
+ try{
+  localStorage.setItem(HISTORY_KEY,JSON.stringify(items.slice(0,100)));
+ }catch(error){
+  console.warn("Historique local indisponible :",error);
+ }
+}
+
+/* Les fichiers d'icône ne sont pas envoyés comme données Base64.
+   Pour les stocker durablement, connecter Firebase Storage ou un backend d'upload. */
+async function pushCommande(path,payload){
+ const newRef=push(ref(db,path));
+ const safePayload={
+  ...payload,
+  createdAt:Date.now(),
+  date:new Date().toLocaleString("fr-FR"),
+  statut:"En attente",
+  source:"boutique"
+ };
+ await set(newRef,safePayload);
  return newRef.key;
 }
 
-const platforms=[["Facebook","https://cdn.simpleicons.org/facebook/1877F2"],["Instagram","https://cdn.simpleicons.org/instagram/E4405F"],["TikTok","https://cdn.simpleicons.org/tiktok/ffffff"],["YouTube","https://cdn.simpleicons.org/youtube/FF0033"],["WhatsApp","https://cdn.simpleicons.org/whatsapp/25D366"],["Telegram","https://cdn.simpleicons.org/telegram/26A5E4"],["Snapchat","https://cdn.simpleicons.org/snapchat/FFFC00"],["X","https://cdn.simpleicons.org/x/ffffff"]];
+const platforms=[
+ ["Facebook","https://cdn.simpleicons.org/facebook/1877F2"],
+ ["Instagram","https://cdn.simpleicons.org/instagram/E4405F"],
+ ["TikTok","https://cdn.simpleicons.org/tiktok/ffffff"],
+ ["YouTube","https://cdn.simpleicons.org/youtube/FF0033"],
+ ["WhatsApp","https://cdn.simpleicons.org/whatsapp/25D366"],
+ ["Telegram","https://cdn.simpleicons.org/telegram/26A5E4"],
+ ["Snapchat","https://cdn.simpleicons.org/snapchat/FFFC00"],
+ ["X","https://cdn.simpleicons.org/x/ffffff"]
+];
+
 let chosenPlatform="Facebook";
+
 function buildPlatforms(){
  const grid=$("platformGrid");
+ grid.innerHTML="";
  platforms.forEach(([name,src])=>{
-  const b=document.createElement("button");b.type="button";b.className="platform";b.dataset.name=name;
-  const img=document.createElement("img");img.src=src;img.alt="";b.append(img);
-  const label=document.createElement("span");label.textContent=name;b.append(label);
-  b.onclick=()=>{chosenPlatform=name;$("boostPlatform").value=name;grid.querySelectorAll(".platform").forEach(x=>x.classList.remove("active"));b.classList.add("active"); calculateBoost();};
-  grid.append(b);
+  const button=document.createElement("button");
+  button.type="button";
+  button.className="platform";
+  button.dataset.name=name;
+  button.setAttribute("aria-pressed",name===chosenPlatform?"true":"false");
+
+  const img=document.createElement("img");
+  img.src=src;
+  img.alt="";
+  img.loading="lazy";
+  img.onerror=()=>{img.style.display="none";};
+
+  const label=document.createElement("span");
+  label.textContent=name;
+
+  button.append(img,label);
+  button.addEventListener("click",()=>{
+   chosenPlatform=name;
+   $("boostPlatform").value=name;
+   grid.querySelectorAll(".platform").forEach(item=>{
+    const active=item.dataset.name===name;
+    item.classList.toggle("active",active);
+    item.setAttribute("aria-pressed",String(active));
+   });
+   calculateBoost();
+  });
+  grid.append(button);
  });
- grid.querySelector('[data-name="Facebook"]')?.classList.add("active");
+ const initial=grid.querySelector(`[data-name="${chosenPlatform}"]`);
+ if(initial) initial.classList.add("active");
  $("boostPlatform").value=chosenPlatform;
 }
 buildPlatforms();
-function calculateBoost(){const qty=Number($("boostQty").value)||0; const rate=100; const total=Math.max(10,Math.ceil(qty*rate/100)); $("boostPrice").textContent=total+" FC"; $("boostCardPrice").textContent=total+" FC"; return total;}
-$("boostType")?.addEventListener("change",calculateBoost); $("boostQty")?.addEventListener("input",calculateBoost); calculateBoost();
 
-$("boostForm").addEventListener("submit", async e=>{
- e.preventDefault();
- const form=new FormData(e.target);
- const data=Object.fromEntries(form.entries());
+/* Tarification indicative : 100 FC par tranche de 100 unités,
+   avec un minimum de 100 FC. À ajuster selon les tarifs réels. */
+function calculateBoost(){
+ const qty=Math.max(0,Number($("boostQty").value)||0);
+ const total=Math.max(100,Math.ceil(qty/100)*100);
+ $("boostPrice").textContent=total.toLocaleString("fr-FR")+" FC";
+ $("boostCardPrice").textContent=total.toLocaleString("fr-FR")+" FC";
+ return total;
+}
+$("boostType").addEventListener("change",calculateBoost);
+$("boostQty").addEventListener("input",calculateBoost);
+calculateBoost();
+
+function isValidHttpUrl(value){
+ try{
+  const url=new URL(value);
+  return url.protocol==="https:"||url.protocol==="http:";
+ }catch{return false}
+}
+
+$("boostForm").addEventListener("submit",async event=>{
+ event.preventDefault();
+ const form=event.currentTarget;
+ if(!form.reportValidity()) return;
+
+ const data=Object.fromEntries(new FormData(form).entries());
+ if(!isValidHttpUrl(data.link)){
+  setStatus("boostStatus","❌ Entrez un lien public valide.","error");
+  return;
+ }
+
+ const button=form.querySelector('button[type="submit"]');
  const price=calculateBoost();
- status("boostStatus","⏳ Envoi vers admin...","info");
+ button.disabled=true;
+ setStatus("boostStatus","⏳ Envoi de la demande vers Firebase...","info");
+
  try{
   await pushCommande(`${ROOT}/demandes_commandes`,{
-   telephone: data.phone,
-   userPhone: data.phone,
-   plateforme: data.platform,
-   type_service: data.type,
-   service: data.type,
-   lien: data.link,
-   link: data.link,
-   quantite: Number(data.quantity),
-   montant: price,
-   prix: price,
+   telephone:data.phone,
+   userPhone:data.phone,
+   plateforme:data.platform,
+   type_service:data.type,
+   service:data.type,
+   lien:data.link,
+   link:data.link,
+   quantite:Number(data.quantity),
+   montant:price,
+   prix:price,
    selfBoost:true,
    source:"boutique"
   });
   saveOrder("Boostage",data);
-  status("boostStatus","✅ Envoyé ! Visible dans Admin > Boost","ok");
-  e.target.reset(); $("boostPlatform").value=chosenPlatform;
- }catch(err){status("boostStatus","❌ Erreur: "+err.message,"error");}
+  setStatus("boostStatus","✅ Demande enregistrée. Vérifiez avec l'administrateur le tarif et la disponibilité du service.","ok");
+  form.reset();
+  chosenPlatform="Facebook";
+  buildPlatforms();
+  calculateBoost();
+ }catch(error){
+  console.error(error);
+  setStatus("boostStatus","❌ Envoi impossible. Vérifiez votre connexion et les règles Firebase.","error");
+ }finally{
+  button.disabled=false;
+ }
 });
 
-async function handleStoreForm(formId, statusId, typeLabel, price, extraMap){
- $(formId).addEventListener("submit", async e=>{
-  e.preventDefault();
-  const form=new FormData(e.target);
-  const data=Object.fromEntries(form.entries());
-  status(statusId,"⏳ Envoi vers admin...","info");
+/* Aperçu de l'icône sélectionnée */
+$("appIcon").addEventListener("change",event=>{
+ const file=event.target.files?.[0];
+ const preview=$("appIconPreview");
+ if(!file){
+  preview.style.display="none";
+  preview.removeAttribute("src");
+  return;
+ }
+ if(!file.type.startsWith("image/")){
+  event.target.value="";
+  preview.style.display="none";
+  setStatus("appStatus","❌ Choisissez un fichier image valide.","error");
+  return;
+ }
+ if(file.size>5*1024*1024){
+  event.target.value="";
+  preview.style.display="none";
+  setStatus("appStatus","❌ L'image doit peser moins de 5 Mo.","error");
+  return;
+ }
+ const reader=new FileReader();
+ reader.onload=()=>{
+  preview.src=reader.result;
+  preview.style.display="block";
+ };
+ reader.onerror=()=>{
+  setStatus("appStatus","❌ Impossible de lire cette image.","error");
+ };
+ reader.readAsDataURL(file);
+});
+
+async function handleStoreForm(formId,statusId,typeLabel,price,extraMap){
+ $(formId).addEventListener("submit",async event=>{
+  event.preventDefault();
+  const form=event.currentTarget;
+  if(!form.reportValidity()) return;
+
+  const formData=new FormData(form);
+  const data=Object.fromEntries(formData.entries());
+  const iconFile=formId==="appForm"?formData.get("appIcon"):null;
+
+  if(formId==="appForm" && iconFile && iconFile.size>5*1024*1024){
+   setStatus(statusId,"❌ L'icône doit peser moins de 5 Mo.","error");
+   return;
+  }
+
+  const button=form.querySelector('button[type="submit"]');
+  button.disabled=true;
+  setStatus(statusId,"⏳ Envoi de la commande vers Firebase...","info");
+
   try{
+   const phone=data.whatsapp||data.phone||"";
+   const productName=data.appName||data.siteName||data.chatName||data.title||"";
+
    const payload={
-    telephone: data.whatsapp||data.phone,
-    client: data.whatsapp||data.phone,
-    produit: typeLabel+" - "+(data.appName||data.siteName||data.chatName||data.title||""),
-    product: typeLabel,
+    telephone:phone,
+    client:phone,
+    produit:typeLabel+" - "+productName,
+    product:typeLabel,
     quantite:1,
-    montant: price,
-    prix: price,
-    adresse: data.appUrl||data.siteType||data.creator||data.style||data.url||"",
-    description: data.description||data.features||data.text||data.lyrics||"",
-    lien: data.appUrl||data.url||"",
+    montant:price,
+    prix:price,
+    adresse:data.appUrl||data.siteType||data.creator||data.style||data.url||"",
+    description:data.description||data.features||data.text||data.lyrics||"",
+    lien:data.appUrl||data.url||"",
     ...extraMap(data)
    };
-   await pushCommande(`${ROOT}/store_commandes`, payload);
-   saveOrder(typeLabel,data);
-   status(statusId,"✅ Envoyé ! Visible dans Admin > Store","ok");
-   e.target.reset();
-  }catch(err){status(statusId,"❌ Erreur: "+err.message,"error");}
+
+   if(formId==="appForm"){
+    payload.appName=data.appName;
+    payload.appUrl=data.appUrl;
+    payload.appIconName=iconFile?.name||"";
+    payload.appIconType=iconFile?.type||"";
+    payload.appIconSize=iconFile?.size||0;
+    payload.noteIcon="Fichier à téléverser séparément pour le conserver.";
+   }
+
+   await pushCommande(`${ROOT}/store_commandes`,payload);
+
+   const historyData={...data};
+   if(iconFile) historyData.appIconFile=iconFile.name;
+   saveOrder(typeLabel,historyData);
+
+   setStatus(
+    statusId,
+    formId==="appForm"
+     ? "✅ Demande enregistrée dans Admin > Store. Attention : le fichier de l'icône n'est pas encore téléversé ; seul son nom et ses informations ont été enregistrés."
+     : "✅ Demande enregistrée dans Admin > Store. L'administrateur pourra examiner les détails.",
+    "ok"
+   );
+
+   form.reset();
+   if(formId==="appForm"){
+    $("appIconPreview").style.display="none";
+    $("appIconPreview").removeAttribute("src");
+   }
+  }catch(error){
+   console.error(error);
+   setStatus(statusId,"❌ Envoi impossible. Vérifiez votre connexion et les règles Firebase.","error");
+  }finally{
+   button.disabled=false;
+  }
  });
 }
 
-handleStoreForm("appForm","appStatus","Application 10000 FC",10000, d=>({appName:d.appName}));
-handleStoreForm("siteForm","siteStatus","Site Web 15000 FC",15000, d=>({siteName:d.siteName}));
-handleStoreForm("chatForm","chatStatus","Chatbot 7000 FC",7000, d=>({chatName:d.chatName}));
-handleStoreForm("musicForm","musicStatus","Chanson 500 FC",500, d=>({title:d.title,style:d.style}));
-handleStoreForm("adsForm","adStatus","Publicité 1000 FC",1000, d=>({title:d.title}));
+handleStoreForm(
+ "appForm","appStatus","Application 10000 FC",10000,
+ data=>({appName:data.appName,appUrl:data.appUrl,description:data.description})
+);
+handleStoreForm(
+ "siteForm","siteStatus","Site Web 15000 FC",15000,
+ data=>({siteName:data.siteName,siteType:data.siteType,description:data.description})
+);
+handleStoreForm(
+ "chatForm","chatStatus","Chatbot 7000 FC",7000,
+ data=>({chatName:data.chatName,creator:data.creator,features:data.features,description:data.description})
+);
+handleStoreForm(
+ "musicForm","musicStatus","Chanson 500 FC",500,
+ data=>({title:data.title,style:data.style,lyrics:data.lyrics})
+);
+handleStoreForm(
+ "adsForm","adStatus","Publicité 1000 FC",1000,
+ data=>({title:data.title,text:data.text,url:data.url})
+);
 
 function renderHistory(){
- const box=$("historyList"); const items=readHistory(); box.innerHTML=""; if(!items.length) box.textContent="Aucune demande";
- items.forEach(item=>{const div=document.createElement("div");div.className="history-item";div.innerHTML=`<strong>${item.type}</strong><div class="muted">${item.date}</div><div>${Object.entries(item.data).map(([k,v])=>k+": "+String(v).slice(0,100)).join(" · ")}</div>`; box.append(div);});
+ const box=$("historyList");
+ const items=readHistory();
+ box.innerHTML="";
+
+ if(!items.length){
+  const empty=document.createElement("div");
+  empty.className="history-item";
+  empty.textContent="Aucune demande enregistrée sur cet appareil.";
+  box.append(empty);
+ }else{
+  items.forEach(item=>{
+   const div=document.createElement("div");
+   div.className="history-item";
+
+   const title=document.createElement("strong");
+   title.textContent=item.type||"Demande";
+   div.append(title);
+
+   const date=document.createElement("div");
+   date.className="muted";
+   date.textContent=item.date||"Date inconnue";
+   div.append(date);
+
+   const details=document.createElement("div");
+   details.style.marginTop="7px";
+
+   const entries=Object.entries(item.data||{})
+    .filter(([key])=>key!=="appIconFile")
+    .map(([key,value])=>key+": "+String(value).slice(0,150));
+
+   details.textContent=entries.join(" · ");
+   div.append(details);
+
+   if(item.data?.appIconFile){
+    const iconInfo=document.createElement("div");
+    iconInfo.className="muted";
+    iconInfo.textContent="Icône choisie : "+item.data.appIconFile;
+    div.append(iconInfo);
+   }
+   box.append(div);
+  });
+ }
  show("historyModal");
 }
-$("historyBtn").onclick=renderHistory;
-$("clearHistory").onclick=()=>{if(confirm("Effacer?")){localStorage.removeItem(HISTORY_KEY); renderHistory();}};
+
+$("historyBtn").addEventListener("click",renderHistory);
+$("clearHistory").addEventListener("click",()=>{
+ if(confirm("Effacer uniquement l'historique local de cet appareil ?")){
+  localStorage.removeItem(HISTORY_KEY);
+  renderHistory();
+ }
+});
 </script>
 </body>
 </html>
