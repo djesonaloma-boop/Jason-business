@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#050914">
+<title>JASON BUSINESS — VIP</title>
+
+<style>
+:root{
+  --bg:#050914;
+  --panel:#0b1425;
+  --panel2:#101e33;
+  --blue:#00c8ff;
+  --gold:#d8aa45;
+  --bronze:#cd8955;
+  --silver:#cbd5e1;
+  --green:#22c55e;
+  --text:#f5f7ff;
+  --muted:#9baac0;
+  --border:rgba(255,255,255,.09);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:
+    radial-gradient(ellipse at top,rgba(0,130,255,.13),transparent 48%),
+    var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  padding-bottom:35px;
+}
+button{font-family:inherit}
+.header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:15px;
+  background:rgba(5,9,20,.95);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(14px);
+}
+.back{
+  width:42px;height:42px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  color:white;
+  background:var(--panel2);
+  font-size:21px;
+  cursor:pointer;
+}
+.brand{flex:1}
+.brand strong{
+  display:block;
+  letter-spacing:1px;
+  font-size:17px;
+}
+.brand small{color:var(--muted);font-size:11px}
+.online{
+  color:var(--green);
+  font-size:11px;
+  white-space:nowrap;
+}
+.container{
+  width:min(100% - 24px,760px);
+  margin:0 auto;
+}
+.hero{
+  text-align:center;
+  padding:27px 12px 20px;
+}
+.crown{
+  width:75px;height:75px;
+  display:grid;place-items:center;
+  margin:0 auto 13px;
+  border-radius:24px;
+  font-size:39px;
+  background:linear-gradient(135deg,#533b10,#d8aa45,#76501b);
+  box-shadow:0 8px 35px #d8aa4525;
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
+}
+.hero h1{
+  margin:0 0 9px;
+  font-size:28px;
+  letter-spacing:1px;
+}
+.hero h1 span{color:var(--gold)}
+.hero p{
+  max-width:450px;
+  margin:0 auto;
+  color:var(--muted);
+  line-height:1.6;
+  font-size:13px;
+}
+.balance{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:17px;
+  margin:8px 0 22px;
+  border:1px solid #00c8ff35;
+  border-radius:18px;
+  background:linear-gradient(120deg,#0c2032,#0a1425);
+}
+.balance-label{font-size:12px;color:var(--muted)}
+.balance-amount{
+  margin-top:6px;
+  font-size:23px;
+  font-weight:800;
+  color:var(--green);
+}
+.wallet-icon{
+  display:grid;place-items:center;
+  width:48px;height:48px;
+  border-radius:15px;
+  background:#00c8ff15;
+  font-size:25px;
+}
+.section-title{
+  margin:22px 2px 13px;
+  font-size:16px;
+}
+.section-title span{color:var(--gold)}
+.vip-list{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.vip-card{
+  position:relative;
+  overflow:hidden;
+  min-width:0;
+  padding:16px 13px;
+  border:1px solid var(--border);
+  border-radius:20px;
+  background:linear-gradient(145deg,#111d31,#080f1d);
+  transition:transform .2s,border-color .2s;
+  animation:appear .45s ease both;
+}
+.vip-card:before{
+  content:"";
+  position:absolute;
+  top:-50px;right:-45px;
+  width:110px;height:110px;
+  border-radius:50%;
+  background:var(--tier-color);
+  opacity:.10;
+  filter:blur(5px);
+}
+.vip-card.active{
+  border-color:var(--green);
+  box-shadow:0 0 20px #22c55e12;
+}
+@keyframes appear{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.vip-top{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:14px;
+}
+.vip-icon{
+  display:grid;place-items:center;
+  flex-shrink:0;
+  width:43px;height:43px;
+  border-radius:14px;
+  font-size:23px;
+  background:color-mix(in srgb,var(--tier-color) 15%,transparent);
+  border:1px solid color-mix(in srgb,var(--tier-color) 35%,transparent);
+}
+.vip-name{font-size:16px;font-weight:800}
+.vip-sub{margin-top:4px;color:var(--muted);font-size:10px}
+.discount{
+  display:inline-block;
+  margin-bottom:13px;
+  padding:7px 10px;
+  border-radius:9px;
+  color:#8df3ac;
+  background:#22c55e16;
+  font-size:13px;
+  font-weight:800;
+}
+.price-label{font-size:11px;color:var(--muted)}
+.price{
+  margin:5px 0 15px;
+  font-size:20px;
+  font-weight:800;
+  overflow-wrap:anywhere;
+}
+.price small{font-size:11px;color:var(--muted)}
+.activate{
+  width:100%;
+  padding:12px 8px;
+  border:0;
+  border-radius:12px;
+  background:linear-gradient(100deg,var(--tier-color),#f5d98a);
+  color:#10131a;
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
+  transition:filter .2s,transform .2s;
+}
+.activate:active{transform:scale(.97)}
+.activate:disabled{opacity:.5;cursor:not-allowed}
+.active-label{
+  text-align:center;
+  color:var(--green);
+  font-weight:800;
+  font-size:12px;
+  margin-top:3px;
+}
+.info{
+  margin-top:20px;
+  padding:15px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:#0b1425;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.8;
+}
+.info strong{color:var(--gold)}
+.info ul{padding-left:19px;margin-bottom:0}
+.toast{
+  position:fixed;
+  z-index:30;
+  bottom:20px;
+  left:50%;
+  width:max-content;
+  max-width:calc(100% - 30px);
+  transform:translate(-50%,20px);
+  padding:13px 17px;
+  border:1px solid #ffffff20;
+  border-radius:13px;
+  background:#132238;
+  color:white;
+  font-size:13px;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  box-shadow:0 8px 30px #0007;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:360px){
+  .vip-list{grid-template-columns:1fr}
+  .hero h1{font-size:24px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <button class="back" onclick="goBack()" aria-label="Retour">‹</button>
+  <div class="brand">
+    <strong>JASON BUSINESS</strong>
+    <small>Programme VIP officiel</small>
+  </div>
+  <div class="online">● En ligne</div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="crown">👑</div>
+    <h1>ESPACE <span>VIP</span></h1>
+    <p>
+      Choisis ton niveau VIP et profite de réductions sur les
+      commandes éligibles de JASON BUSINESS.
+    </p>
+  </section>
+
+  <section class="balance">
+    <div>
+      <div class="balance-label">💰 TON SOLDE PRINCIPAL</div>
+      <div class="balance-amount" id="balance">0 FC</div>
+    </div>
+    <div class="wallet-icon">👛</div>
+  </section>
+
+  <h2 class="section-title">Choisis ton <span>niveau VIP</span></h2>
+
+  <section class="vip-list" id="vipList"></section>
+
+  <section class="info">
+    <strong>ℹ️ Informations importantes</strong>
+    <ul>
+      <li>Ton solde doit couvrir le prix complet de l'activation.</li>
+      <li>Le prix du VIP est débité lors de l'activation.</li>
+      <li>Un seul niveau VIP est actif à la fois dans cette page.</li>
+      <li>La réduction concerne les commandes éligibles, pas le prix d'activation du VIP.</li>
+      <li>Les prix et pourcentages peuvent être modifiés dans le code.</li>
+    </ul>
+  </section>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/*
+  CONFIGURATION VIP
+  Modifie ici les prix et les réductions.
+*/
+const VIP_LEVELS = [
+  {id:"bronze", name:"Bronze", icon:"🥉", price:5000, discount:3, color:"#cd8955"},
+  {id:"argent", name:"Argent", icon:"🥈", price:10000, discount:5, color:"#cbd5e1"},
+  {id:"or", name:"Or", icon:"🥇", price:20000, discount:8, color:"#d8aa45"},
+  {id:"diamant", name:"Diamant", icon:"💎", price:35000, discount:12, color:"#63d8ff"},
+  {id:"mega", name:"Méga", icon:"🚀", price:50000, discount:15, color:"#b58cff"},
+  {id:"giga", name:"Giga", icon:"👑", price:100000, discount:20, color:"#4ade80"}
+];
+
+/*
+  MODE DE DÉMONSTRATION :
+  Cette page lit le solde depuis localStorage.
+  Elle n'est pas une preuve de paiement sécurisée.
+  Pour une vraie plateforme, l'activation et le débit
+  doivent être validés sur le serveur / dans Firebase.
+*/
+
+const ACCOUNT_KEY = "jasonBusiness_vip_account";
+const VIP_KEY = "jasonBusiness_vip_active";
+
+function getPhone(){
+  return localStorage.getItem("jasonBusinessUserPhone")
+      || localStorage.getItem("userPhone")
+      || "";
+}
+
+function readAccount(){
+  const phone = getPhone();
+
+  // Essaie de lire un objet utilisateur déjà enregistré.
+  const possibleKeys = [
+    "jasonBusinessUser",
+    "jasonBusiness_user",
+    "user"
+  ];
+
+  for(const key of possibleKeys){
+    try{
+      const obj = JSON.parse(localStorage.getItem(key) || "null");
+      if(obj && typeof obj === "object"){
+        const bal = Number(
+          obj.solde_principal ?? obj.balance ?? obj.solde ?? NaN
+        );
+        if(Number.isFinite(bal)){
+          return {source:"user", key, obj, balance:bal};
+        }
+      }
+    }catch(e){}
+  }
+
+  // Compte local de démonstration, distinct par téléphone.
+  const saved = localStorage.getItem(ACCOUNT_KEY + (phone || "_demo"));
+  if(saved !== null){
+    const n = Number(saved);
+    return {
+      source:"demo",
+      key:ACCOUNT_KEY + (phone || "_demo"),
+      obj:null,
+      balance:Number.isFinite(n) ? n : 0
+    };
+  }
+
+  // Si aucun solde local connu, afficher 0 FC.
+  return {
+    source:"demo",
+    key:ACCOUNT_KEY + (phone || "_demo"),
+    obj:null,
+    balance:0
+  };
+}
+
+function getActiveVip(){
+  const phone = getPhone();
+  try{
+    return JSON.parse(localStorage.getItem(VIP_KEY + (phone || "_demo")) || "null");
+  }catch(e){
+    return null;
+  }
+}
+
+function saveActiveVip(vip){
+  const phone = getPhone();
+  localStorage.setItem(VIP_KEY + (phone || "_demo"), JSON.stringify(vip));
+}
+
+function formatFC(amount){
+  return Math.round(amount).toLocaleString("fr-FR") + " FC";
+}
+
+function showToast(message){
+  const el = document.getElementById("toast");
+  el.textContent = message;
+  el.classList.add("show");
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(()=>el.classList.remove("show"),3000);
+}
+
+function render(){
+  const account = readAccount();
+  const active = getActiveVip();
+
+  document.getElementById("balance").textContent = formatFC(account.balance);
+
+  document.getElementById("vipList").innerHTML = VIP_LEVELS.map((vip,index)=>{
+    const isActive = active && active.id === vip.id;
+
+    return `
+      <article class="vip-card ${isActive ? "active" : ""}"
+        style="--tier-color:${vip.color};animation-delay:${index * 55}ms">
+        <div class="vip-top">
+          <div class="vip-icon">${vip.icon}</div>
+          <div>
+            <div class="vip-name">${vip.name}</div>
+            <div class="vip-sub">Niveau VIP ${index+1}</div>
+          </div>
+        </div>
+        <div class="discount">-${vip.discount}% de réduction</div>
+        <div class="price-label">Prix d'activation</div>
+        <div class="price">${formatFC(vip.price)}</div>
+        ${
+          isActive
+          ? `<div class="active-label">✓ TON VIP EST ACTIF</div>`
+          : `<button class="activate" onclick="activateVip('${vip.id}')">
+              ACTIVER ${vip.name.toUpperCase()}
+            </button>`
+        }
+      </article>
+    `;
+  }).join("");
+}
+
+function activateVip(id){
+  const vip = VIP_LEVELS.find(v=>v.id === id);
+  if(!vip) return;
+
+  const current = getActiveVip();
+  if(current && current.id === vip.id){
+    showToast("Ce niveau VIP est déjà actif.");
+    return;
+  }
+
+  const account = readAccount();
+
+  if(account.balance < vip.price){
+    showToast(
+      "Solde insuffisant. Il te manque " +
+      formatFC(vip.price - account.balance) + "."
+    );
+    return;
+  }
+
+  const confirmed = confirm(
+    "Confirmer l'activation du VIP " + vip.name + " ?\n\n" +
+    "Prix : " + formatFC(vip.price) + "\n" +
+    "Réduction : " + vip.discount + "%\n\n" +
+    "Le montant sera déduit de ton solde local."
+  );
+
+  if(!confirmed) return;
+
+  const newBalance = account.balance - vip.price;
+
+  // Débit local : démonstration uniquement.
+  if(account.source === "user" && account.obj){
+    if("solde_principal" in account.obj){
+      account.obj.solde_principal = newBalance;
+    }else if("balance" in account.obj){
+      account.obj.balance = newBalance;
+    }else{
+      account.obj.solde = newBalance;
+    }
+    localStorage.setItem(account.key, JSON.stringify(account.obj));
+  }else{
+    localStorage.setItem(account.key, String(newBalance));
+  }
+
+  saveActiveVip({
+    id:vip.id,
+    name:vip.name,
+    discount:vip.discount,
+    price:vip.price,
+    activatedAt:new Date().toISOString()
+  });
+
+  render();
+  showToast("VIP " + vip.name + " activé ! Réduction de " + vip.discount + "%.");
+}
+
+function goBack(){
+  if(history.length > 1){
+    history.back();
+  }else{
+    location.href = "dashboard.html";
+  }
+}
+
+render();
+</script>
+</body>
+</html>
