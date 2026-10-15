@@ -9,20 +9,22 @@
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#101d35 0,var(--bg) 100%);color:white;font-family:Arial;min-height:100vh}
 .container{max-width:1000px;margin:auto;padding:16px 14px 90px}
 .header{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
-.logo{font-weight:900;color:var(--blue)}
+.logo{font-weight:900;color:var(--blue);font-size:18px;letter-spacing:1px}
 .badge{font-size:10px;border:1px solid rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#22c55e;padding:7px 12px;border-radius:20px}
 .search{width:100%;background:#081222;border:1px solid #ffffff1b;color:white;border-radius:12px;padding:13px;margin:12px 0}
-.app-card{background:linear-gradient(145deg,#12213a,#0c1627);border:1px solid rgba(230,189,103,.35);border-radius:20px;padding:14px;display:flex;gap:14px;align-items:center}
-.app-icon{width:78px;height:78px;border-radius:18px;background:#000;border:2px solid var(--gold);overflow:hidden;flex-shrink:0;display:grid;place-items:center;font-size:28px}
+.app-card{background:linear-gradient(145deg,#12213a,#0c1627);border:1px solid rgba(216,170,69,.4);border-radius:20px;padding:14px;display:flex;gap:14px;align-items:center;box-shadow:0 8px 25px rgba(0,0,0,.3)}
+.app-icon{width:80px;height:80px;border-radius:20px;background:#000;border:2px solid var(--gold);overflow:hidden;flex-shrink:0}
 .app-icon img{width:100%;height:100%;object-fit:cover;display:block}
 .app-info{flex:1;min-width:0}
-.app-name{font-size:15px;font-weight:900;display:flex;gap:6px;flex-wrap:wrap}
-.app-meta{font-size:11px;color:#8e9aad;margin-top:2px}
-.app-desc{font-size:11px;color:#c5d2e5;margin-top:6px;line-height:1.4}
+.app-name{font-size:15px;font-weight:900}
+.app-meta{font-size:11px;color:#8e9aad;margin-top:3px}
+.app-desc{font-size:11px;color:#c5d2e5;margin-top:6px;line-height:1.45}
 .btn{border:0;border-radius:12px;padding:12px 18px;font-weight:900;font-size:12px;cursor:pointer}
-.btn-install{background:linear-gradient(100deg,#00d4ff,#0077ff);color:#001018}
-.btn-free{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);color:#22c55e;padding:3px 8px;font-size:9px;border-radius:6px}
+.btn-install{background:linear-gradient(100deg,#00d4ff,#0077ff);color:#001018;box-shadow:0 6px 18px rgba(0,212,255,.25)}
+.btn-free{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);color:#22c55e;padding:3px 8px;font-size:9px;border-radius:6px;margin-left:6px}
 .toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:3000;background:#12213a;border:1px solid rgba(230,189,103,.22);padding:12px 16px;border-radius:12px;font-size:12px;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
+.overlay{display:none;position:fixed;inset:0;background:#02050be8;z-index:1000;padding:16px;align-items:center;justify-content:center}.overlay.show{display:flex}
+.modal{width:100%;max-width:500px;background:linear-gradient(145deg,#12213a,#091321);border:1px solid rgba(230,189,103,.35);border-radius:22px;padding:20px}
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:rgba(5,9,20,.98);border-top:1px solid rgba(255,255,255,.08);padding:8px 4px calc(8px + env(safe-area-inset-bottom))}
 .bottom-nav a{flex:1;text-decoration:none;color:#6b7a90;font-size:10px;font-weight:700;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:4px}
 .bottom-nav a span.icon{font-size:20px}.bottom-nav a.active{color:var(--blue)}
@@ -31,10 +33,19 @@
 <body>
 <div class="container">
   <div class="header"><div class="logo">JASON STORE</div><div class="badge">● GRATUIT</div></div>
+  
+  <div style="padding:14px;border-radius:16px;background:linear-gradient(145deg,#1a2f55,#0c1627);border:1px solid rgba(0,212,255,.22);margin-bottom:12px">
+    <h3 style="margin:0">👑 Jason Business Officiel</h3>
+    <p style="font-size:11px;color:#8e9aad;margin:4px 0 0">WEB • DESIGN • DIGITAL • IA</p>
+  </div>
+
   <input class="search" id="search" placeholder="Rechercher...">
   <div id="list" style="display:grid;gap:14px;margin-top:12px"></div>
 </div>
+
+<div class="overlay" id="modal"><div class="modal" id="modalContent"></div></div>
 <div class="toast" id="toast"></div>
+
 <nav class="bottom-nav">
   <a href="tableau de bord.html"><span class="icon">📊</span>Dashboard</a>
   <a href="boutique.html"><span class="icon">🛍️</span>Boutique</a>
@@ -46,60 +57,60 @@
 const $=id=>document.getElementById(id);
 function toast(m){const el=$("toast");el.textContent=m;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),3000)}
 
-// CORRECTION : utilise ton domaine Vercel exact
-const ICON_URL = "jason_business_icon_512.png";
-const ICON_FALLBACK = "https://son-business.vercel.app/jason_business_icon_512.png";
-const ZIP_URL = "Jason Business 1.0 (2).zip";
+const ICON = "jason.png";
+const APK = "app-release.apk";
 
 let apps=[
   {
-    id:"jb1",
+    id:"jason1",
     name:"Jason Business 1.0",
-    version:"1.0",
+    version:"1.0.0",
     size:"28 MB",
     downloads:"5K+",
     cat:"business",
-    desc:"Application officielle Jason Business. WEB • DESIGN • DIGITAL • IA. Gestion solde, boost, équipe. 100% gratuite.",
-    file:"Jason Business 1.0 (2).zip"
+    desc:"Application officielle Jason Business. WEB • DESIGN • DIGITAL • IA. Tout ton business dans une app 100% gratuite.",
+    icon: ICON,
+    apk: APK
   }
 ];
 
 function render(f=""){
   const term=f.toLowerCase();
-  let filtered=apps.filter(a=>(a.name+a.desc).toLowerCase().includes(term));
-  $("list").innerHTML=filtered.map(a=>`
-    <div class="app-card">
-      <div class="app-icon">
-        <img src="${ICON_URL}" onerror="this.onerror=null; this.src='${ICON_FALLBACK}'; this.onerror=function(){this.style.display='none'; this.parentElement.innerHTML='JB'; this.parentElement.style.background='linear-gradient(100deg,#d8aa45,#00d4ff)'; this.parentElement.style.color='#001018'; this.parentElement.style.fontWeight='900'}">
-      </div>
+  $("list").innerHTML=apps.filter(a=> (a.name+a.desc).toLowerCase().includes(term)).map(a=>`
+    <div class="app-card" onclick="openDetail('${a.id}')">
+      <div class="app-icon"><img src="${a.icon}" alt="icon"></div>
       <div class="app-info">
-        <div class="app-name">${a.name} <span class="btn-free">GRATUIT</span></div>
+        <div class="app-name">${a.name}<span class="btn-free">GRATUIT</span></div>
         <div class="app-meta">v${a.version} • ${a.size} • ${a.downloads} • ${a.cat}</div>
         <div class="app-desc">${a.desc}</div>
-        <div style="margin-top:6px;font-size:10px;color:#00d4ff">📦 ${a.file}</div>
       </div>
-      <button class="btn btn-install" onclick="downloadApp()">INSTALLER</button>
+      <button class="btn btn-install" onclick="event.stopPropagation(); downloadApp('${a.id}')">INSTALLER</button>
     </div>
   `).join("");
 }
 
-window.downloadApp=function(){
-  toast("📥 Téléchargement en cours...");
-  // Méthode 1 : lien direct encodé
-  const url = encodeURI(ZIP_URL);
-  // Méthode 2 : force download
-  const a=document.createElement('a');
-  a.href=url;
-  a.download="Jason-Business-1.0.zip";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  
-  // Fallback : ouvre dans nouvel onglet
-  setTimeout(()=>{ window.open(url,"_blank"); },800);
+window.openDetail=function(id){
+  const a=apps.find(x=>x.id===id);
+  $("modalContent").innerHTML=`
+    <div style="display:flex;gap:14px;align-items:center">
+      <div style="width:90px;height:90px;border-radius:20px;overflow:hidden;border:2px solid #d8aa45"><img src="${a.icon}" style="width:100%;height:100%;object-fit:cover"></div>
+      <div><h3 style="margin:0">${a.name}</h3><small style="color:#8e9aad">v${a.version} • ${a.size}</small><br><span class="btn-free" style="margin-top:6px;display:inline-block">GRATUIT • OFFICIEL</span></div>
+    </div>
+    <p style="font-size:13px;color:#c5d2e5;margin-top:14px;line-height:1.6">${a.desc}</p>
+    <button class="btn btn-install" style="width:100%;padding:15px;margin-top:12px;font-size:14px" onclick="downloadApp('${a.id}')">📥 INSTALLER MAINTENANT</button>
+    <button class="btn" style="width:100%;margin-top:8px;background:#182943;color:white;border:1px solid #ffffff16" onclick="document.getElementById('modal').classList.remove('show')">Fermer</button>
+  `;
+  $("modal").classList.add("show");
+}
+
+window.downloadApp=function(id){
+  toast("📥 Téléchargement Jason Business...");
+  // Téléchargement direct - marche sur Vercel car nom simple
+  window.location.href = APK;
 }
 
 $("search").addEventListener("input",e=>render(e.target.value));
+document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)o.classList.remove("show")}));
 render();
 </script>
 </body>
