@@ -34,7 +34,8 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 .jb-points-top{display:flex;justify-content:space-between;align-items:center;gap:15px}.jb-points-title{color:var(--gold);font-size:12px;font-weight:bold}.jb-points-value{margin-top:7px;font-size:10px;opacity:.60}.jb-points-value b{color:var(--gold)}.jb-points-number{color:var(--gold);font-size:25px;font-weight:900}
 #jbConvertPoints{width:100%;margin-top:15px;padding:13px;border:0;border-radius:12px;background:var(--gold);color:#000;font-weight:900;cursor:pointer}#jbConvertPoints:active{transform:scale(.97)}#jbConvertPoints:disabled{opacity:.40;cursor:not-allowed}
 .jb-section{padding:0 20px}.jb-section-title{display:flex;justify-content:space-between;align-items:center;margin:27px 0 15px}.jb-section-title h3{margin:0;font-size:16px}.jb-section-title a{color:var(--blue);font-size:10px;text-decoration:none;font-weight:bold}
-.jb-service-card{display:flex;align-items:center;gap:13px;margin-bottom:10px;padding:14px;border-radius:17px;background:var(--glass);border:1px solid rgba(0,210,255,.12);backdrop-filter:blur(12px)}
+.jb-service-card{display:flex;align-items:center;gap:13px;margin-bottom:10px;padding:14px;border-radius:17px;background:var(--glass);border:1px solid rgba(0,210,255,.12);backdrop-filter:blur(12px);cursor:pointer;transition:.2s}
+.jb-service-card:active{transform:scale(.97);border-color:var(--blue)}
 .jb-service-icon{width:46px;height:46px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:13px;font-size:22px;background:rgba(0,210,255,.08);border:1px solid rgba(0,210,255,.20)}
 .jb-service-info{flex:1;min-width:0}.jb-service-name{font-size:13px;font-weight:bold}.jb-service-desc{margin-top:4px;font-size:9px;opacity:.50}.jb-service-price{font-size:11px;font-weight:bold;color:var(--blue);white-space:nowrap}
 .jb-invest-card{margin-bottom:10px;padding:15px;border-radius:16px;background:rgba(0,230,118,.05);border:1px solid rgba(0,230,118,.15)}
@@ -72,11 +73,21 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 </section>
 <section class="jb-section">
 <div class="jb-section-title"><h3>🛍️ Nos services</h3><a href="boutique.html">VOIR TOUT →</a></div>
-<div class="jb-service-card"><div class="jb-service-icon">📱</div><div class="jb-service-info"><div class="jb-service-name">Application</div><div class="jb-service-desc">Création d'application mobile</div></div><div class="jb-service-price">10 000 FC</div></div>
-<div class="jb-service-card"><div class="jb-service-icon">🌐</div><div class="jb-service-info"><div class="jb-service-name">Site web</div><div class="jb-service-desc">Site moderne et professionnel</div></div><div class="jb-service-price">15 000 FC</div></div>
-<div class="jb-service-card"><div class="jb-service-icon">🎵</div><div class="jb-service-info"><div class="jb-service-name">Chanson</div><div class="jb-service-desc">Création musicale personnalisée</div></div><div class="jb-service-price">5 000 FC</div></div>
-<div class="jb-service-card"><div class="jb-service-icon">🎨</div><div class="jb-service-info"><div class="jb-service-name">Logo</div><div class="jb-service-desc">Création de votre identité visuelle</div></div><div class="jb-service-price">3 000 FC</div></div>
-<div class="jb-service-card"><div class="jb-service-icon">🤖</div><div class="jb-service-info"><div class="jb-service-name">Chatbot</div><div class="jb-service-desc">Assistant et automatisation intelligente</div></div><div class="jb-service-price">7 000 FC</div></div>
+
+<div class="jb-service-card" onclick="goPage('boutique.html?service=app')"><div class="jb-service-icon">📱</div><div class="jb-service-info"><div class="jb-service-name">Application</div><div class="jb-service-desc">Création d'application mobile</div></div><div class="jb-service-price">10 000 FC</div></div>
+
+<div class="jb-service-card" onclick="goPage('boutique.html?service=site')"><div class="jb-service-icon">🌐</div><div class="jb-service-info"><div class="jb-service-name">Site web</div><div class="jb-service-desc">Site moderne et professionnel</div></div><div class="jb-service-price">15 000 FC</div></div>
+
+<div class="jb-service-card" onclick="goPage('boutique.html?service=music')"><div class="jb-service-icon">🎵</div><div class="jb-service-info"><div class="jb-service-name">Chanson</div><div class="jb-service-desc">Création musicale personnalisée</div></div><div class="jb-service-price">500 FC</div></div>
+
+<div class="jb-service-card" onclick="goPage('boutique.html?service=logo')"><div class="jb-service-icon">🎨</div><div class="jb-service-info"><div class="jb-service-name">Logo</div><div class="jb-service-desc">Création de votre identité visuelle</div></div><div class="jb-service-price">3 000 FC</div></div>
+
+<div class="jb-service-card" onclick="goPage('boutique.html?service=chatbot')"><div class="jb-service-icon">🤖</div><div class="jb-service-info"><div class="jb-service-name">Chatbot</div><div class="jb-service-desc">Assistant et automatisation intelligente</div></div><div class="jb-service-price">7 000 FC</div></div>
+
+<div class="jb-service-card" onclick="goPage('boutique.html?service=boost')"><div class="jb-service-icon">📈</div><div class="jb-service-info"><div class="jb-service-name">Boostage</div><div class="jb-service-desc">Followers, likes, vues</div></div><div class="jb-service-price">10 FC</div></div>
+
+<div class="jb-service-card" onclick="goPage('boutique.html?service=ads')"><div class="jb-service-icon">📣</div><div class="jb-service-info"><div class="jb-service-name">Publicité</div><div class="jb-service-desc">Promotion sur réseaux</div></div><div class="jb-service-price">1 000 FC</div></div>
+
 </section>
 <section class="jb-section">
 <div class="jb-section-title"><h3>⚡ Mes activités</h3><a href="boutique.html">COMMANDER →</a></div>
@@ -84,7 +95,6 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 </section>
 </div>
 
-<!-- MENU DU BAS AVEC STORE AJOUTÉ - GARDE MÊME APPARENCE -->
 <nav class="jb-navbar">
 <button onclick="goPage('dashboard.html')" class="jb-nav-link active"><div class="jb-nav-icon">📊</div>Dashboard</button>
 <button onclick="goPage('boutique.html')" class="jb-nav-link"><div class="jb-nav-icon">🛍️</div>Boutique</button>
