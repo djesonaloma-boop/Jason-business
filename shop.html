@@ -6,179 +6,154 @@
 <meta name="theme-color" content="#050914">
 <title>JASON BUSINESS — Boutique</title>
 <style>
-:root{--bg:#050914;--gold:#d8aa45;--gold2:#f5d785;--blue:#00c8ff;--text:#f5f7fc;--muted:#93a4bc;--border:rgba(216,170,69,.22)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial;min-height:100vh}
+:root{--bg:#050914;--panel:#0b1424;--gold:#d8aa45;--gold2:#f5d785;--blue:#00c8ff;--green:#22c55e;--text:#f5f7fc;--muted:#93a4bc;--border:rgba(216,170,69,.22)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top right,#102747,transparent 35%),var(--bg);color:var(--text);font-family:Arial;min-height:100vh}
 button,input,textarea,select{font:inherit}button{cursor:pointer}
-header{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;padding:12px 14px;background:#050914f2;backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
-.logo{width:37px;height:37px;display:grid;place-items:center;border-radius:11px;background:linear-gradient(135deg,#f6df98,#a87920);color:#08101d;font-weight:900}
+header{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;background:#050914f2;backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.brand{display:flex;align-items:center;gap:9px}.logo{width:37px;height:37px;display:grid;place-items:center;border-radius:11px;background:linear-gradient(135deg,#f6df98,#a87920);color:#08101d;font-weight:900}
+.brand h1{font-size:14px;margin:0}.brand small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
 .container{width:min(1100px,100%);margin:auto;padding:16px 13px 110px}
 .hero{padding:20px 16px;border:1px solid var(--border);border-radius:16px;background:linear-gradient(130deg,#101e33,#09111f);margin-bottom:16px}
-.eyebrow{color:var(--gold2);font-size:10px;letter-spacing:1.5px;font-weight:bold}
-.hero h2{font-size:25px;margin:9px 0}.hero p{font-size:12px;color:var(--muted);line-height:1.7;margin:0}
+.eyebrow{color:var(--gold2);font-size:10px;font-weight:bold;letter-spacing:1.5px}.hero h2{font-size:25px;line-height:1.25;margin:9px 0}.hero p{font-size:12px;color:var(--muted);line-height:1.7;margin:0}
+.hero-stats{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}.stat{padding:6px 9px;border:1px solid var(--border);border-radius:8px;font-size:10px;color:#e7d4a6}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:22px 1px 12px}.section-head h3{font-size:15px;margin:0}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.service{padding:12px 10px;border:1px solid var(--border);border-radius:13px;background:linear-gradient(150deg,#101d30,#080f1c)}
-.service-top{display:flex;align-items:center;gap:8px;margin-bottom:9px}
-.service-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#d8aa4513;border:1px solid #d8aa452e;font-size:17px}
-.service h4{font-size:12px;margin:0 0 4px}.category{font-size:9px;color:var(--muted)}
-.service p{font-size:10px;color:var(--muted);line-height:1.6;min-height:32px;margin:7px 0}
+.service{min-width:0;padding:12px 10px;border:1px solid var(--border);border-radius:13px;background:linear-gradient(150deg,#101d30,#080f1c)}
+.service-top{display:flex;align-items:center;gap:8px;margin-bottom:9px}.service-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#d8aa4513;border:1px solid #d8aa452e;font-size:17px}
+.service h4{font-size:12px;margin:0 0 4px}.category{font-size:9px;color:var(--muted)}.service p{font-size:10px;color:var(--muted);line-height:1.6;min-height:32px;margin:7px 0}
 .price{font-size:12px;color:var(--gold2);font-weight:bold;margin:9px 0}
-.btn{display:inline-flex;justify-content:center;padding:8px 9px;border-radius:7px;font-size:10px;font-weight:bold;width:100%}
-.btn-gold{background:linear-gradient(135deg,#f4d786,#c08a28);color:#111827;border:0}
-.btn-outline{background:#0a1424;border:1px solid var(--border);color:var(--gold2)}
-.notice{padding:10px 12px;border-radius:9px;background:#0b1c2e;border:1px solid #00c8ff28;color:#b8eaff;font-size:11px;margin:12px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:8px 9px;border:1px solid transparent;border-radius:7px;font-size:10px;font-weight:bold;width:100%}
+.btn-gold{background:linear-gradient(135deg,#f4d786,#c08a28);color:#111827}.btn-outline{background:#0a1424;border-color:var(--border);color:var(--gold2)}
+.notice{padding:10px 12px;border-radius:9px;background:#0b1c2e;border:1px solid #00c8ff28;color:#b8eaff;font-size:11px;line-height:1.6;margin:12px 0}
+.hidden{display:none!important}
 .modal{display:none;position:fixed;inset:0;z-index:100;padding:14px;overflow:auto;background:#000b;backdrop-filter:blur(7px);align-items:center;justify-content:center}
 .modal.show{display:flex}.modal-box{width:min(470px,100%);max-height:92vh;overflow:auto;padding:16px;border-radius:15px;background:#0a1322;border:1px solid var(--border)}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.close{width:28px;height:28px;border:1px solid var(--border);border-radius:8px;background:#172236;color:white}
 .field{margin-bottom:11px}.field label{display:block;font-size:11px;color:#c4d0e1;margin-bottom:6px}
 .field input,.field textarea,.field select{width:100%;padding:10px 11px;border-radius:8px;color:white;background:#070e1a;border:1px solid #27364c;outline:none;font-size:12px}
 .social-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .social-item{display:flex;flex-direction:column;align-items:center;gap:7px;padding:11px 4px;border:1px solid var(--border);border-radius:10px;background:#101d30;color:white}
-.social-item.selected{border-color:var(--gold);background:#17243a}
-.social-item img{width:28px;height:28px}
-.price-box{margin:14px 0;padding:14px;border:1px solid var(--border);border-radius:11px;background:#101f33}
-.price-row{display:flex;justify-content:space-between;margin:8px 0;font-size:11px;color:#b8c7da}
-.price-total{font-size:22px;font-weight:900;color:var(--gold2);margin-top:9px}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:#050914; border-top:1px solid #ffffff14;padding:10px 4px;z-index:9999}
+.social-item.selected{border-color:var(--gold);background:#17243a;transform:translateY(-2px)}.social-item img{width:28px;height:28px}
+.social-title{font-size:10px;color:var(--gold2);margin:12px 0 9px;font-weight:bold;letter-spacing:.6px}
+.price-box{margin:14px 0;padding:14px;border:1px solid var(--border);border-radius:11px;background:linear-gradient(130deg,#101f33,#0a1220)}
+.price-row{display:flex;justify-content:space-between;margin:8px 0;font-size:11px;color:#b8c7da}.price-total{font-size:22px;font-weight:900;color:var(--gold2);margin-top:9px}
+.qr-preview{display:block;width:220px;max-width:100%;margin:12px auto;background:white;border-radius:10px;padding:10px}
+.ad-preview{white-space:pre-wrap;text-align:center;padding:18px;border:1px dashed var(--border);border-radius:10px;background:#101e33;font-size:13px;line-height:1.6}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:#050914;border-top:1px solid #ffffff14;padding:10px 4px;z-index:9999}
 .bottom-nav button{flex:1;background:none;border:0;color:#6b7a90;font-size:10px;font-weight:700;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:5px}
 .bottom-nav button span.icon{font-size:22px}.bottom-nav button.active{color:var(--blue)}
-.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,15px);padding:10px 14px;border-radius:9px;background:#14233a;border:1px solid var(--border);color:white;font-size:11px;z-index:200;opacity:0;pointer-events:none;transition:.25s}
+.toast{position:fixed;bottom:90px;left:50%;transform:translate(-50%,15px);padding:10px 14px;border-radius:9px;background:#14233a;border:1px solid var(--border);color:white;font-size:11px;z-index:200;opacity:0;transition:.25s;max-width:90%;text-align:center}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 </style>
 </head>
 <body>
-<header>
-  <div style="display:flex;align-items:center;gap:9px"><div class="logo">JB</div><div><h1 style="font-size:14px;margin:0">JASON BUSINESS</h1><small style="color:var(--muted);font-size:10px">● Boutique digitale</small></div></div>
-</header>
+<header><div class="brand"><div class="logo">JB</div><div><h1>JASON BUSINESS</h1><small>● Boutique digitale</small></div></div><button class="btn btn-gold" style="width:auto;padding:6px 10px" onclick="location.reload()">↻</button></header>
 
 <main class="container">
-  <section class="hero">
-    <div class="eyebrow">VOTRE PARTENAIRE NUMÉRIQUE</div>
-    <h2>Créez vos projets<br>avec JASON BUSINESS</h2>
-    <p>3 services payants créés par nous. Les autres services, c'est vous qui créez vous-même.</p>
-  </section>
+<section class="hero"><div class="eyebrow">VOTRE PARTENAIRE NUMÉRIQUE</div><h2>Créez vos projets<br>avec JASON BUSINESS</h2><p>3 services payants créés par nous. 3 services SELF où vous créez vous-même.</p><div class="hero-stats"><span class="stat">✦ PAYANT : App / Site / Bot</span><span class="stat">⚡ SELF : Réseaux / Pub / QR</span><span class="stat">🇨🇩 RDC</span></div></section>
+<div class="notice"><b style="color:var(--gold2)">PAYANT :</b> Application, Site, Chatbot — <b style="color:var(--blue)">SELF :</b> Réseaux min 100, Publicité API davbot, QR code instantané</div>
+<div class="section-head"><h3>Nos services</h3><span>6 services</span></div>
 
-  <div class="notice"><b>PAYANT (nous créons) :</b> Application, Site web, Chatbot · <b>SELF (vous créez) :</b> Réseaux sociaux, Publicité</div>
+<section class="grid">
+<article class="service"><div class="service-top"><div class="service-icon">📱</div><div><h4>Application mobile</h4><div class="category">PAYANT - Nous créons</div></div></div><p>APK Android sur mesure.</p><div class="price">À partir de 10 000 FC</div><button class="btn btn-gold" onclick="showCreative('app')">Commander (Payant)</button></article>
+<article class="service"><div class="service-top"><div class="service-icon">🌐</div><div><h4>Site web</h4><div class="category">PAYANT - Nous créons</div></div></div><p>Vitrine, pro, boutique.</p><div class="price">À partir de 15 000 FC</div><button class="btn btn-gold" onclick="showCreative('site')">Commander (Payant)</button></article>
+<article class="service"><div class="service-top"><div class="service-icon">🤖</div><div><h4>Chatbot IA</h4><div class="category">PAYANT - Nous créons</div></div></div><p>Bot WhatsApp intelligent.</p><div class="price">À partir de 7 000 FC</div><button class="btn btn-gold" onclick="showCreative('bot')">Commander (Payant)</button></article>
+<article class="service" style="border-color:#00c8ff55"><div class="service-top"><div class="service-icon">📲</div><div><h4>Réseaux sociaux</h4><div class="category">SELF-BOOST - Vous créez</div></div></div><p>Boost auto min 100, prix auto.</p><div class="price">Minimum 10 FC</div><button class="btn btn-outline" onclick="showSocial()">Booster moi-même</button></article>
+<article class="service" style="border-color:#22c55e55"><div class="service-top"><div class="service-icon">📢</div><div><h4>Publicité</h4><div class="category">SELF - Via API</div></div></div><p>Créez via davbot-outils API.</p><div class="price">API: davbot-outils</div><button class="btn btn-outline" onclick="openAd()">Créer ma pub →</button></article>
+<article class="service" style="border-color:#f5d78555"><div class="service-top"><div class="service-icon">▦</div><div><h4>QR code</h4><div class="category">SELF - Instantané</div></div></div><p>Générez un QR à partir d'un lien.</p><div class="price">Création rapide</div><button class="btn btn-outline" onclick="openQR()">Créer mon QR →</button></article>
+</section>
 
-  <section class="grid">
-    <article class="service">
-      <div class="service-top"><div class="service-icon">📱</div><div><h4>Application mobile</h4><div class="category">PAYANT - Nous créons</div></div></div>
-      <p>Présentez votre idée et nous créons votre APK.</p>
-      <div class="price">À partir de 10 000 FC</div>
-      <button class="btn btn-gold" onclick="showCreative('app')">Commander (Payant)</button>
-    </article>
-    <article class="service">
-      <div class="service-top"><div class="service-icon">🌐</div><div><h4>Site web</h4><div class="category">PAYANT - Nous créons</div></div></div>
-      <p>Site vitrine, pro ou boutique en ligne.</p>
-      <div class="price">À partir de 15 000 FC</div>
-      <button class="btn btn-gold" onclick="showCreative('site')">Commander (Payant)</button>
-    </article>
-    <article class="service">
-      <div class="service-top"><div class="service-icon">🤖</div><div><h4>Chatbot IA</h4><div class="category">PAYANT - Nous créons</div></div></div>
-      <p>Chatbot pour votre activité.</p>
-      <div class="price">À partir de 7 000 FC</div>
-      <button class="btn btn-gold" onclick="showCreative('bot')">Commander (Payant)</button>
-    </article>
-    <article class="service" style="border-color:#00c8ff55">
-      <div class="service-top"><div class="service-icon">📲</div><div><h4>Réseaux sociaux</h4><div class="category">SELF-BOOST - Vous créez</div></div></div>
-      <p>Vous boostez vous-même. Min 100. Prix auto.</p>
-      <div class="price">Minimum 10 FC</div>
-      <button class="btn btn-outline" onclick="showSocial()">Booster moi-même</button>
-    </article>
-    <article class="service" style="border-color:#22c55e55">
-      <div class="service-top"><div class="service-icon">📢</div><div><h4>Publicité digitale</h4><div class="category">SELF - Vous créez</div></div></div>
-      <p>Créez votre pub via API officielle.</p>
-      <div class="price">API : davbot-outils</div>
-      <button class="btn btn-outline" onclick="goPage('https://davbot-outils.vercel.app/api/publicite/ads')">Créer ma pub →</button>
-    </article>
-  </section>
+<div class="section-head"><h3>Mes demandes</h3></div>
+<div id="ordersList" class="notice">Vos commandes apparaîtront ici.</div>
 </main>
 
 <!-- MODAL PAYANT -->
-<div class="modal" id="creativeModal"><div class="modal-box">
-  <div style="display:flex;justify-content:space-between"><h3 id="creativeTitle">Nouvelle demande</h3><button onclick="closeModal('creativeModal')">×</button></div>
-  <form id="creativeForm">
-    <input type="hidden" id="creativeType">
-    <div class="field"><label>Nom du projet</label><input id="creativeProject" required></div>
-    <div class="field"><label>Description</label><textarea id="creativeDescription" required></textarea></div>
-    <div class="field"><label>Budget FC</label><input id="creativeBudget" type="number"></div>
-    <button class="btn btn-gold" type="submit">Envoyer commande payante</button>
-  </form>
+<div class="modal" id="creativeModal"><div class="modal-box"><div class="modal-head"><h3 id="creativeTitle">Nouvelle demande</h3><button class="close" onclick="closeModal('creativeModal')">×</button></div>
+<form id="creativeForm"><input type="hidden" id="creativeType"><div class="field"><label>Nom du projet</label><input id="creativeProject" required></div><div class="field"><label>Description</label><textarea id="creativeDescription" required></textarea></div><div class="field"><label>Budget FC</label><input id="creativeBudget" type="number"></div><button class="btn btn-gold" type="submit">Envoyer commande payante</button></form></div></div>
+
+<!-- MODAL PUB -->
+<div class="modal" id="adModal"><div class="modal-box"><div class="modal-head"><h3>Publicité API</h3><button class="close" onclick="closeModal('adModal')">×</button></div>
+<form id="adForm"><div class="field"><label>Marque</label><input id="adBrand" required></div><div class="field"><label>Titre</label><input id="adTitle" required></div><div class="field"><label>Texte</label><textarea id="adText" required></textarea></div><div class="field"><label>Contact</label><input id="adContact"></div><button class="btn btn-outline" type="button" onclick="previewAd()">Prévisualiser</button><div id="adPreview" class="ad-preview hidden"></div><div id="adResult" class="notice hidden"></div><button class="btn btn-gold" type="submit" id="submitAd" style="margin-top:10px">Publier via API davbot</button></form></div></div>
+
+<!-- MODAL QR CODE COMPLET -->
+<div class="modal" id="qrModal"><div class="modal-box"><div class="modal-head"><h3>Créer QR code (SELF)</h3><button class="close" onclick="closeModal('qrModal')">×</button></div>
+<div class="field"><label>Lien ou texte à encoder</label><textarea id="qrText" placeholder="https://jason-business.com ou votre texte..." maxlength="1500"></textarea></div>
+<button class="btn btn-gold" onclick="generateQR()">Générer mon QR code</button>
+<div id="qrResult"></div>
+<div class="notice" style="margin-top:12px">Fonctionne hors ligne? Non, besoin d'internet pour charger l'image QR. L'image est générée via api.qrserver.com</div>
 </div></div>
 
-<!-- MODAL SOCIAL SELF-BOOST -->
-<div class="modal" id="socialModal"><div class="modal-box">
-  <div style="display:flex;justify-content:space-between"><h3>Booster Réseaux (SELF)</h3><button onclick="closeModal('socialModal')">×</button></div>
-  <div class="social-grid" id="socialLogoGrid">
-    <button class="social-item selected" data-platform="Facebook" onclick="selectPlatform('Facebook')"><img src="https://cdn.simpleicons.org/facebook/0866FF"><span>Facebook</span></button>
-    <button class="social-item" data-platform="TikTok" onclick="selectPlatform('TikTok')"><img src="https://cdn.simpleicons.org/tiktok/FFFFFF"><span>TikTok</span></button>
-    <button class="social-item" data-platform="Instagram" onclick="selectPlatform('Instagram')"><img src="https://cdn.simpleicons.org/instagram/E4405F"><span>Instagram</span></button>
-    <button class="social-item" data-platform="YouTube" onclick="selectPlatform('YouTube')"><img src="https://cdn.simpleicons.org/youtube/FF0033"><span>YouTube</span></button>
-    <button class="social-item" data-platform="WhatsApp" onclick="selectPlatform('WhatsApp')"><img src="https://cdn.simpleicons.org/whatsapp/25D366"><span>WhatsApp</span></button>
-    <button class="social-item" data-platform="Telegram" onclick="selectPlatform('Telegram')"><img src="https://cdn.simpleicons.org/telegram/26A5E4"><span>Telegram</span></button>
-  </div>
-  <div class="field"><label>Plateforme</label><select id="socialPlatform" onchange="selectPlatform(this.value)"><option>Facebook</option><option>TikTok</option><option>Instagram</option><option>YouTube</option><option>WhatsApp</option><option>Telegram</option></select></div>
-  <div class="field"><label>Type</label><select id="socialService" onchange="updatePrice()"><option>Abonnés</option><option>Likes</option><option>Vues</option><option>Commentaires</option><option>Partages</option></select></div>
-  <div class="field"><label>Lien https://</label><input id="socialLink" type="url" placeholder="https://..." required></div>
-  <div class="field"><label>Quantité (min 100)</label><input id="socialQuantity" type="number" value="100" min="100" oninput="updatePrice()"></div>
-  <div class="price-box">
-    <div class="price-row"><span>Prix / 1000</span><strong id="rateDisplay">500 FC</strong></div>
-    <div class="price-row"><span>Quantité</span><strong id="quantityDisplay">100</strong></div>
-    <div class="price-total" id="totalPrice">10 FC</div>
-  </div>
-  <button class="btn btn-gold" onclick="submitSocial()">Lancer mon boost</button>
+<!-- MODAL SOCIAL -->
+<div class="modal" id="socialModal"><div class="modal-box"><div class="modal-head"><h3>Booster SELF</h3><button class="close" onclick="closeModal('socialModal')">×</button></div>
+<p class="social-title">1. PLATEFORME</p><div class="social-grid">
+<button class="social-item selected" data-platform="Facebook" onclick="selectPlatform('Facebook')"><img src="https://cdn.simpleicons.org/facebook/0866FF"><span>Facebook</span></button>
+<button class="social-item" data-platform="TikTok" onclick="selectPlatform('TikTok')"><img src="https://cdn.simpleicons.org/tiktok/FFFFFF"><span>TikTok</span></button>
+<button class="social-item" data-platform="Instagram" onclick="selectPlatform('Instagram')"><img src="https://cdn.simpleicons.org/instagram/E4405F"><span>Instagram</span></button>
+<button class="social-item" data-platform="YouTube" onclick="selectPlatform('YouTube')"><img src="https://cdn.simpleicons.org/youtube/FF0033"><span>YouTube</span></button>
+<button class="social-item" data-platform="WhatsApp" onclick="selectPlatform('WhatsApp')"><img src="https://cdn.simpleicons.org/whatsapp/25D366"><span>WhatsApp</span></button>
+<button class="social-item" data-platform="Telegram" onclick="selectPlatform('Telegram')"><img src="https://cdn.simpleicons.org/telegram/26A5E4"><span>Telegram</span></button>
+</div>
+<div class="field"><label>Plateforme</label><select id="socialPlatform" onchange="selectPlatform(this.value)"><option>Facebook</option><option>TikTok</option><option>Instagram</option><option>YouTube</option><option>WhatsApp</option><option>Telegram</option></select></div>
+<div class="field"><label>Type</label><select id="socialService" onchange="updatePrice()"><option>Abonnés</option><option>Likes</option><option>Vues</option><option>Commentaires</option><option>Partages</option></select></div>
+<div class="field"><label>Lien https://</label><input id="socialLink" type="url" placeholder="https://..." required></div>
+<div class="field"><label>Quantité min 100</label><input id="socialQuantity" type="number" value="100" min="100" oninput="updatePrice()"></div>
+<div class="price-box"><div class="price-row"><span>Prix / 1000</span><strong id="rateDisplay">500 FC</strong></div><div class="price-row"><span>Quantité</span><strong id="quantityDisplay">100</strong></div><div class="price-total" id="totalPrice">50 FC</div></div>
+<button class="btn btn-gold" onclick="submitSocial()">Lancer mon boost</button>
 </div></div>
 
-<!-- MENU DU BAS QUI MARCHE COMME TA PHOTO -->
+<!-- MENU BAS QUI MARCHE -->
 <nav class="bottom-nav">
-  <button onclick="goPage('dashboard.html')"><span class="icon">📊</span>Dashboard</button>
-  <button class="active" onclick="goPage('boutique.html')"><span class="icon">🛍️</span>Boutique</button>
-  <button onclick="goPage('store.html')"><span class="icon">🛒</span>Store</button>
-  <button onclick="goPage('profil.html')"><span class="icon">👤</span>Profil</button>
+<button onclick="goPage('dashboard.html')"><span class="icon">📊</span>Dashboard</button>
+<button class="active" onclick="goPage('boutique.html')"><span class="icon">🛍️</span>Boutique</button>
+<button onclick="goPage('store.html')"><span class="icon">🛒</span>Store</button>
+<button onclick="goPage('profil.html')"><span class="icon">👤</span>Profil</button>
 </nav>
 
 <div class="toast" id="toast"></div>
 
 <script>
 function goPage(p){ window.location.href=p; }
-function toast(m){ const el=document.getElementById("toast"); el.textContent=m; el.classList.add("show"); setTimeout(()=>el.classList.remove("show"),3000); }
+function toast(m){ const el=document.getElementById("toast"); el.textContent=m; el.classList.add("show"); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove("show"),4000); }
 function openModal(id){ document.getElementById(id).classList.add("show"); }
 function closeModal(id){ document.getElementById(id).classList.remove("show"); }
-
-function showCreative(type){
-  const titles={app:"Application mobile - 10 000 FC", site:"Site web - 15 000 FC", bot:"Chatbot IA - 7 000 FC"};
-  document.getElementById("creativeType").value=type;
-  document.getElementById("creativeTitle").textContent=titles[type];
-  document.getElementById("creativeBudget").value= type==='app'?10000: type==='site'?15000:7000;
-  openModal("creativeModal");
-}
+function showCreative(t){ const m={app:["Application mobile",10000],site:["Site web",15000],bot:["Chatbot IA",7000]}; document.getElementById("creativeType").value=t; document.getElementById("creativeTitle").textContent=m[t][0]+" - "+m[t][1]+" FC"; document.getElementById("creativeBudget").value=m[t][1]; openModal("creativeModal"); }
+function openAd(){ document.getElementById("adForm").reset(); document.getElementById("adPreview").classList.add("hidden"); document.getElementById("adResult").classList.add("hidden"); openModal("adModal"); }
+function openQR(){ document.getElementById("qrText").value=""; document.getElementById("qrResult").innerHTML=""; openModal("qrModal"); }
 function showSocial(){ openModal("socialModal"); updatePrice(); }
-function selectPlatform(p){
-  document.getElementById("socialPlatform").value=p;
-  document.querySelectorAll(".social-item").forEach(b=>b.classList.toggle("selected", b.dataset.platform===p));
-  updatePrice();
-}
-const RATES={ "Abonnés":500,"Likes":100,"Vues":50,"Commentaires":800,"Partages":300 };
-function updatePrice(){
-  const s=document.getElementById("socialService").value;
-  const q=Math.max(100, Number(document.getElementById("socialQuantity").value)||100);
-  const rate=RATES[s]||500;
-  const total=Math.max(10, Math.ceil(rate*q/1000));
-  document.getElementById("rateDisplay").textContent=rate+" FC";
-  document.getElementById("quantityDisplay").textContent=q;
-  document.getElementById("totalPrice").textContent=total+" FC";
-  return total;
-}
-function submitSocial(){
-  const link=document.getElementById("socialLink").value;
-  if(!/^https?:\/\//i.test(link)) return toast("Lien https:// invalide");
-  if(Number(document.getElementById("socialQuantity").value)<100) return toast("Minimum 100");
-  toast("✅ Boost lancé : "+document.getElementById("socialPlatform").value+" "+document.getElementById("socialService").value);
-  closeModal("socialModal");
-}
-document.getElementById("creativeForm").addEventListener("submit", e=>{
-  e.preventDefault();
-  toast("✅ Commande payante envoyée : "+document.getElementById("creativeProject").value);
-  closeModal("creativeModal");
+function selectPlatform(p){ document.getElementById("socialPlatform").value=p; document.querySelectorAll(".social-item").forEach(b=>b.classList.toggle("selected",b.dataset.platform===p)); updatePrice(); }
+const RATES={Abonnés:500,Likes:100,Vues:50,Commentaires:800,Partages:300};
+function updatePrice(){ const s=document.getElementById("socialService").value; const q=Math.max(100,Number(document.getElementById("socialQuantity").value)||100); const rate=RATES[s]||500; const total=Math.max(10,Math.ceil(rate*q/1000)); document.getElementById("rateDisplay").textContent=rate+" FC"; document.getElementById("quantityDisplay").textContent=q; document.getElementById("totalPrice").textContent=total+" FC"; return total; }
+function submitSocial(){ const link=document.getElementById("socialLink").value; if(!/^https?:\/\//i.test(link)) return toast("Lien https:// invalide"); if(Number(document.getElementById("socialQuantity").value)<100) return toast("Minimum 100"); toast("✅ Boost SELF : "+document.getElementById("socialPlatform").value); closeModal("socialModal"); document.getElementById("ordersList").innerHTML="<div style='color:var(--gold2)'>✅ "+document.getElementById("socialPlatform").value+" - "+document.getElementById("socialService").value+" x"+document.getElementById("socialQuantity").value+" = "+updatePrice()+" FC</div>"+document.getElementById("ordersList").innerHTML; }
+document.getElementById("creativeForm").addEventListener("submit",e=>{e.preventDefault(); toast("✅ Commande PAYANTE : "+document.getElementById("creativeProject").value); closeModal("creativeModal");});
+function previewAd(){ const b=document.getElementById("adBrand").value, t=document.getElementById("adTitle").value, txt=document.getElementById("adText").value, c=document.getElementById("adContact").value; if(!b||!t||!txt) return toast("Remplis marque/titre/texte"); const el=document.getElementById("adPreview"); el.textContent=b.toUpperCase()+"\n\n"+t+"\n\n"+txt+(c?"\n\nContact: "+c:""); el.classList.remove("hidden"); }
+document.getElementById("adForm").addEventListener("submit", async e=>{
+e.preventDefault();
+const btn=document.getElementById("submitAd"); btn.disabled=true; btn.textContent="⏳ Publication...";
+const payload={brand:adBrand.value,title:adTitle.value,text:adText.value,contact:adContact.value};
+const resEl=document.getElementById("adResult");
+try{
+const r=await fetch("https://davbot-outils.vercel.app/api/publicite/ads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+const d=await r.json(); resEl.classList.remove("hidden");
+if(r.ok){resEl.textContent="✅ Pub créée : "+JSON.stringify(d).slice(0,300); toast("✅ Pub créée via API!");}
+else{resEl.textContent="❌ Erreur: "+(d.message||r.status); toast("Erreur API");}
+}catch(err){ resEl.classList.remove("hidden"); resEl.textContent="⚠️ CORS bloqué. Ajoute Access-Control-Allow-Origin:* dans ton API Vercel. Ouverture externe..."; window.open("https://davbot-outils.vercel.app/api/publicite/ads","_blank"); }
+finally{ btn.disabled=false; btn.textContent="Publier via API davbot"; }
 });
+function generateQR(){
+const v=document.getElementById("qrText").value.trim();
+if(!v) return toast("Entre ton lien ou texte");
+const box=document.getElementById("qrResult"); box.innerHTML="";
+const img=document.createElement("img"); img.className="qr-preview";
+img.src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="+encodeURIComponent(v);
+img.onerror=()=>{ box.innerHTML="<div class='notice'>❌ QR indisponible, vérifie internet</div>"; };
+const a=document.createElement("a"); a.className="btn btn-outline"; a.style.marginTop="10px";
+a.textContent="📥 Télécharger QR"; a.href=img.src; a.download="qrcode.png"; a.target="_blank";
+const share=document.createElement("button"); share.className="btn btn-gold"; share.style.marginTop="8px"; share.textContent="Partager QR";
+share.onclick=()=>{ if(navigator.share){ navigator.share({title:"QR Code", text:v, url:img.src}); } else { toast("Lien QR: "+img.src); } };
+box.append(img,a,share);
+toast("✅ QR code généré!");
+box.innerHTML="<div style='color:var(--gold2);text-align:center;margin:8px 0'>✅ QR pour: "+v.slice(0,50)+"</div>"+box.innerHTML;
+}
 </script>
 </body>
 </html>
