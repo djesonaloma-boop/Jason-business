@@ -6,722 +6,830 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#050914">
 <title>JASON BUSINESS — Boutique</title>
+
 <style>
 :root{
- --bg:#050914;--panel:#101d32;--panel2:#091321;
- --text:#f5f7fb;--muted:#91a0b7;
- --blue:#00d4ff;--gold:#d8aa45;--green:#22c55e;
+  --bg:#050914;
+  --panel:#0b1424;
+  --panel2:#101d31;
+  --gold:#d8aa45;
+  --gold2:#f5d785;
+  --blue:#00c8ff;
+  --green:#22c55e;
+  --text:#f5f7fc;
+  --muted:#93a4bc;
+  --border:rgba(216,170,69,.2);
+  --danger:#ff647c;
 }
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle at top,#142441,var(--bg) 48%,#02040a);color:var(--text);font-family:Arial,sans-serif;min-height:100vh}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-.container{max-width:1050px;margin:auto;padding:15px 13px 100px}
-header{display:flex;justify-content:space-between;align-items:center;padding:12px 0 20px;gap:10px}
-.brand{font-size:18px;font-weight:900;color:var(--blue)}
-.online{font-size:10px;color:var(--green);border:1px solid #22c55e55;padding:8px 11px;border-radius:20px}
-h2{font-size:19px;margin:8px 0}
-h3{font-size:16px;margin:0 0 13px}
-p{line-height:1.5}
-.muted{font-size:12px;color:var(--muted)}
-.hero{padding:19px;border:1px solid #d8aa4540;border-radius:20px;background:linear-gradient(140deg,#142744,#091321);margin-bottom:24px}
-.hero strong{color:var(--gold)}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.card{background:linear-gradient(145deg,#12213a,#0a1424);border:1px solid #d8aa4535;border-radius:17px;padding:15px;min-width:0;transition:.2s}
-.card:active{transform:scale(.985)}
-.card-icon{width:44px;height:44px;display:grid;place-items:center;background:#00d4ff12;border:1px solid #00d4ff35;border-radius:13px;font-size:23px}
-.card h3{margin:12px 0 7px}
-.card p{font-size:12px;color:var(--muted);min-height:35px}
-.btn{border:0;border-radius:11px;padding:12px 13px;font-weight:800}
-.gold{background:linear-gradient(100deg,#bd8629,#f3d88e);color:#15120b}
-.blue{background:linear-gradient(100deg,#00d4ff,#1680ff);color:#001018}
-.dark{background:#192a43;color:white;border:1px solid #ffffff16}
-.block{width:100%}
-.field{margin:12px 0}
-.field label{display:block;font-size:12px;color:#c8d5e8;margin-bottom:7px}
-.field input,.field select,.field textarea,.search{
- width:100%;padding:12px;background:#07101d;border:1px solid #ffffff20;
- border-radius:11px;color:white;outline:none
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:radial-gradient(circle at top right,#102747 0,transparent 35%),var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
 }
-.field textarea{min-height:85px;resize:vertical}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--blue)}
-.field option{background:#091321;color:white}
-.section{margin-top:27px}
-.pricebox{background:#07101d;border:1px solid #d8aa4540;border-radius:13px;padding:13px;margin:14px 0}
-.price-row{display:flex;justify-content:space-between;gap:12px;margin:8px 0;font-size:13px}
-.price-row strong{color:var(--gold)}
-.platform-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:14px}
-.platform{padding:12px 4px;background:#091321;color:white;border:1px solid #ffffff18;border-radius:14px;min-width:0}
-.platform img{width:34px;height:34px;object-fit:contain;display:block;margin:0 auto 8px}
-.platform span{font-size:11px;overflow-wrap:anywhere}
-.platform:active{border-color:var(--blue)}
-.overlay{display:none;position:fixed;inset:0;background:#02050bed;z-index:1000;padding:12px;overflow:auto;align-items:center;justify-content:center}
-.overlay.show{display:flex}
-.modal{width:100%;max-width:570px;max-height:94vh;overflow:auto;background:linear-gradient(145deg,#14233b,#07101d);border:1px solid #d8aa4545;border-radius:20px;padding:17px}
-.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px}
-.close{background:#182943;color:white;border:1px solid #ffffff20;border-radius:10px;width:36px;height:36px;font-size:22px}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+header{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;padding:12px 15px;
+  background:rgba(5,9,20,.94);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.brand{display:flex;align-items:center;gap:9px;min-width:0}
+.logo{
+  width:37px;height:37px;flex-shrink:0;
+  border-radius:11px;display:grid;place-items:center;
+  background:linear-gradient(135deg,#f6df98,#a87920);
+  color:#08101d;font-weight:900;font-size:15px;
+  box-shadow:0 0 18px #d8aa4528;
+}
+.brand h1{font-size:15px;margin:0}
+.brand small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+.header-actions{display:flex;gap:6px;align-items:center}
+.container{width:min(1100px,100%);margin:auto;padding:16px 13px 90px}
+.hero{
+  padding:19px 16px;border-radius:17px;
+  border:1px solid var(--border);
+  background:linear-gradient(130deg,#101e33,#09111f);
+  position:relative;overflow:hidden;margin-bottom:18px;
+}
+.hero:after{
+  content:"JB";position:absolute;right:12px;bottom:-23px;
+  font-size:95px;font-weight:900;color:#d8aa450a;
+  pointer-events:none;
+}
+.eyebrow{
+  color:var(--gold2);font-size:10px;font-weight:800;
+  letter-spacing:1.5px;text-transform:uppercase;
+}
+.hero h2{font-size:25px;line-height:1.2;margin:9px 0}
+.hero p{font-size:12px;color:var(--muted);line-height:1.7;margin:0;max-width:580px}
+.hero-stats{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.stat{
+  padding:6px 9px;border:1px solid var(--border);
+  border-radius:8px;font-size:10px;color:#e7d4a6;
+  background:#d8aa4508;
+}
+.section-head{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:8px;margin:23px 1px 12px;
+}
+.section-head h3{margin:0;font-size:15px}
+.section-head span{font-size:10px;color:var(--muted)}
+.search{
+  width:100%;padding:11px 12px;margin:0 0 12px;
+  color:white;background:var(--panel);
+  border:1px solid var(--border);border-radius:10px;outline:none;
+}
+.grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.service{
+  min-width:0;padding:13px 11px;
+  border:1px solid var(--border);border-radius:14px;
+  background:linear-gradient(150deg,#101d30,#080f1c);
+  transition:transform .2s,border-color .2s,box-shadow .2s;
+  animation:appear .4s ease both;
+}
+.service:hover{
+  transform:translateY(-2px);
+  border-color:#d8aa4577;
+  box-shadow:0 8px 24px #0004;
+}
+.service-top{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.service-icon{
+  width:35px;height:35px;flex-shrink:0;
+  display:grid;place-items:center;border-radius:10px;
+  background:#d8aa4513;border:1px solid #d8aa452e;
+  font-size:18px;
+}
+.service h4{font-size:12px;margin:0 0 4px}
+.service .category{font-size:9px;color:var(--muted)}
+.service p{font-size:10px;color:var(--muted);line-height:1.6;min-height:32px;margin:7px 0 10px}
+.price{color:var(--gold2);font-weight:800;font-size:12px;margin:8px 0}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:5px;border:1px solid transparent;border-radius:7px;
+  padding:7px 10px;font-size:10px;font-weight:700;
+  line-height:1.2;transition:.2s;white-space:normal;
+}
+.btn:active{transform:scale(.97)}
+.btn-gold{background:linear-gradient(135deg,#f4d786,#c08a28);color:#111827}
+.btn-outline{background:#0a1424;border-color:var(--border);color:var(--gold2)}
+.btn-blue{background:#06344a;color:#7be3ff;border-color:#00c8ff3b}
+.btn-green{background:#0d3024;color:#8cf0b1;border-color:#22c55e55}
+.btn-red{background:#35121b;color:#ff9cab;border-color:#ff647c55}
+.btn-mini{padding:6px 8px;font-size:9px;border-radius:6px}
+.service .btn{width:100%;min-height:29px}
+.full{width:100%}
 .hidden{display:none!important}
-.order{padding:12px 0;border-bottom:1px solid #ffffff12}
-.badge{display:inline-block;border-radius:20px;padding:5px 8px;background:#d8aa4518;color:var(--gold);font-size:10px}
-.toast{position:fixed;left:50%;bottom:85px;transform:translate(-50%,15px);opacity:0;pointer-events:none;z-index:3000;background:#14233b;border:1px solid #d8aa4555;padding:12px 15px;border-radius:12px;width:max-content;max-width:90%;font-size:12px;transition:.2s}
+.notice{
+  padding:10px 12px;border-radius:10px;
+  background:#0b1c2e;border:1px solid #00c8ff28;
+  color:#b8eaff;font-size:11px;line-height:1.6;margin:12px 0;
+}
+.notice.warning{background:#281e0c;border-color:#d8aa4538;color:#f7d98d}
+.modal{
+  display:none;position:fixed;inset:0;z-index:100;
+  padding:15px;overflow-y:auto;
+  background:#000b;backdrop-filter:blur(7px);
+  align-items:center;justify-content:center;
+}
+.modal.show{display:flex}
+.modal-box{
+  width:min(470px,100%);max-height:90vh;overflow-y:auto;
+  border-radius:16px;padding:17px;
+  background:#0a1322;border:1px solid var(--border);
+  box-shadow:0 20px 80px #0008;
+  animation:appear .2s ease;
+}
+.modal-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}
+.modal-head h3{font-size:15px;margin:0}
+.close{
+  width:28px;height:28px;border:1px solid var(--border);
+  border-radius:8px;background:#172236;color:white;font-size:17px;
+}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:11px;color:#c4d0e1;margin-bottom:6px}
+.field input,.field textarea,.field select{
+  width:100%;padding:10px 11px;border-radius:8px;
+  color:white;background:#070e1a;border:1px solid #27364c;outline:none;
+  font-size:12px;
+}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold)}
+.field textarea{min-height:80px;resize:vertical}
+.field select option{background:#0b1424}
+.result{font-size:11px;line-height:1.6;color:#b9c8dc;overflow-wrap:anywhere}
+.social-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.social-item{
+  display:flex;flex-direction:column;align-items:center;gap:7px;
+  padding:12px 5px;border:1px solid var(--border);
+  background:#0d192a;border-radius:10px;
+}
+.social-item span:first-child{font-size:20px}
+.social-item span:last-child{font-size:10px}
+.qr-preview{display:block;max-width:220px;width:100%;margin:12px auto;border-radius:8px;background:white}
+.ad-preview{
+  min-height:140px;padding:18px;border:1px dashed var(--border);
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  text-align:center;white-space:pre-wrap;overflow-wrap:anywhere;
+  background:linear-gradient(135deg,#10213a,#090f1b);
+}
+.toast{
+  position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);
+  background:#14233a;border:1px solid var(--border);color:white;
+  padding:10px 15px;border-radius:9px;font-size:11px;
+  z-index:200;opacity:0;pointer-events:none;transition:.25s;
+  width:max-content;max-width:90%;
+}
 .toast.show{opacity:1;transform:translate(-50%,0)}
-.preview{width:100%;max-height:300px;object-fit:contain;border-radius:12px;background:#07101d;margin:10px 0}
-.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.photo-grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px}
-.qr-output{text-align:center;padding:15px;background:white;border-radius:14px}
-.qr-output img{max-width:100%;width:230px}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:500;display:flex;justify-content:space-around;background:#050914f5;border-top:1px solid #ffffff13;padding:8px 3px calc(8px + env(safe-area-inset-bottom));backdrop-filter:blur(15px)}
-.bottom-nav a{flex:1;text-align:center;text-decoration:none;color:#8290a5;font-size:10px;font-weight:bold;padding:5px 0}
-.bottom-nav a span{display:block;font-size:20px;margin-bottom:4px}
-.bottom-nav a.active{color:var(--blue)}
-.notice{font-size:11px;color:var(--muted);line-height:1.6}
-hr{border:0;border-top:1px solid #ffffff15;margin:15px 0}
-@media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.platform-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+footer{text-align:center;color:#65758d;font-size:10px;padding:20px 0}
+@keyframes appear{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:650px){
+  .container{padding-top:22px}
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+  .hero{padding:25px}
+  .hero h2{font-size:30px}
+  .service{padding:15px}
+}
+@media(max-width:350px){
+  .grid{gap:7px}
+  .service{padding:10px 8px}
+  .service-icon{width:30px;height:30px;font-size:15px}
+  .service h4{font-size:11px}
+  .btn{font-size:9px;padding:6px 7px}
+}
 </style>
 </head>
+
 <body>
-<div class="container">
 <header>
- <div class="brand">JB • JASON BUSINESS</div>
- <div class="online">● EN LIGNE</div>
+  <div class="brand">
+    <div class="logo">JB</div>
+    <div>
+      <h1>JASON BUSINESS</h1>
+      <small>● Boutique digitale</small>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-outline btn-mini" id="refreshBtn" type="button">↻ Actualiser</button>
+    <button class="btn btn-gold btn-mini" id="apiBtn" type="button">API ↗</button>
+  </div>
 </header>
 
-<div class="hero">
- <div class="muted">BIENVENUE DANS VOTRE ESPACE</div>
- <h2 id="welcomePhone">Mon espace</h2>
- <p class="muted">Vos projets numériques, vos créations et vos commandes au même endroit.</p>
- <div class="price-row"><span>Solde disponible</span><strong id="balanceValue">Chargement…</strong></div>
- <button class="btn dark" onclick="location.href='api.html'">⚡ Accéder à mes API</button>
-</div>
+<main class="container">
+  <section class="hero">
+    <div class="eyebrow">Votre partenaire numérique</div>
+    <h2>Créez vos projets<br>avec JASON BUSINESS</h2>
+    <p>Commandez des applications, des sites web, des chatbots et des services numériques depuis votre téléphone.</p>
+    <div class="hero-stats">
+      <span class="stat">✦ Services numériques</span>
+      <span class="stat">⚡ Commande simplifiée</span>
+      <span class="stat">🇨🇩 RDC</span>
+    </div>
+  </section>
 
-<section>
-<h2>Nos services</h2>
-<p class="muted">Choisissez un service et remplissez votre demande.</p>
-<div class="grid">
- <article class="card">
-  <div class="card-icon">🌐</div><h3>Réseaux sociaux</h3>
-  <p>Abonnés, likes, vues, commentaires et partages.</p>
-  <button class="btn gold block" id="openSocial">Choisir un réseau</button>
- </article>
- <article class="card">
-  <div class="card-icon">📱</div><h3>Application mobile</h3>
-  <p>Décrivez votre application et joignez son icône.</p>
-  <button class="btn dark block" onclick="openCreative('app')">Commander</button>
- </article>
- <article class="card">
-  <div class="card-icon">💻</div><h3>Site web</h3>
-  <p>Boutique, entreprise, portfolio, blog et autres.</p>
-  <button class="btn dark block" onclick="openCreative('site')">Commander</button>
- </article>
- <article class="card">
-  <div class="card-icon">🤖</div><h3>Chatbot IA</h3>
-  <p>Assistant pour WhatsApp, Facebook, site web ou autre.</p>
-  <button class="btn dark block" onclick="openCreative('bot')">Commander</button>
- </article>
- <article class="card">
-  <div class="card-icon">📢</div><h3>Publicité gratuite</h3>
-  <p>Préparez une annonce avec un texte, un titre et une photo.</p>
-  <button class="btn dark block" onclick="openAd()">Créer ma publicité</button>
- </article>
- <article class="card">
-  <div class="card-icon">▦</div><h3>Créateur QR code</h3>
-  <p>Créez gratuitement un QR code avec vos informations.</p>
-  <button class="btn dark block" onclick="openQR()">Créer un QR code</button>
- </article>
-</div>
-</section>
-
-<section class="section">
- <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-  <h2>Mes commandes</h2>
-  <button class="btn dark" id="refreshOrders">Actualiser</button>
- </div>
- <div class="card" id="ordersList"><p class="muted">Chargement des commandes…</p></div>
-</section>
-</div>
-
-<!-- RESEAUX SOCIAUX -->
-<div class="overlay" id="socialModal">
-<div class="modal">
- <div class="modal-head"><h3 id="socialTitle">Choisir un réseau social</h3><button class="close" data-close="socialModal">×</button></div>
- <div id="platformChooser">
-  <input class="search" id="platformSearch" placeholder="Rechercher un réseau…">
-  <div class="platform-grid" id="platformGrid"></div>
- </div>
- <div id="socialFormArea" class="hidden">
-  <button class="btn dark" id="backPlatforms">← Retour aux réseaux</button>
-  <div id="selectedPlatformInfo" style="margin-top:14px"></div>
-  <form id="smmForm">
-   <div class="field"><label>Type de service</label><select id="smmService" required></select></div>
-   <div class="field"><label>Lien public du profil, post ou vidéo</label><input id="smmLink" type="url" placeholder="https://..." required></div>
-   <div class="field"><label>Quantité (minimum 10)</label><input id="smmQuantity" type="number" min="10" step="1" value="10" required></div>
-   <div class="pricebox">
-    <div class="price-row"><span>Prix estimé</span><strong id="smmPrice">0 FC</strong></div>
-    <div class="price-row"><span>Solde disponible</span><strong id="smmBalance">0 FC</strong></div>
-    <div class="notice" id="smmRate"></div>
-   </div>
-   <p class="notice">Le prix est une estimation selon le tarif affiché. La livraison réelle nécessite une API SMM fonctionnelle. Aucun boost n'est lancé tant que cette API n'est pas connectée.</p>
-   <button class="btn gold block" id="submitSmm" type="submit">Envoyer ma demande</button>
-  </form>
- </div>
-</div>
-</div>
-
-<!-- FORMULAIRES APPLICATION / SITE / CHATBOT -->
-<div class="overlay" id="creativeModal">
-<div class="modal">
- <div class="modal-head"><h3 id="creativeTitle">Commander</h3><button class="close" data-close="creativeModal">×</button></div>
- <form id="creativeForm">
-  <input type="hidden" id="creativeType">
-  <div class="field"><label>Votre nom ou nom de l'entreprise</label><input id="cName" required placeholder="Nom du projet"></div>
-  <div class="field"><label id="cKindLabel">Type de projet</label><select id="cKind" required></select></div>
-  <div class="field"><label>Fonctionnalités souhaitées</label><textarea id="cFeatures" placeholder="Ex. : connexion, paiement, espace client…"></textarea></div>
-  <div class="field"><label>Description détaillée</label><textarea id="cDescription" required placeholder="Expliquez ce que vous voulez créer…"></textarea></div>
-  <div class="field"><label>Lien de référence ou lien existant (facultatif)</label><input id="cLink" type="url" placeholder="https://..."></div>
-  <div class="field" id="iconField"><label>Icône / image du projet (facultatif)</label><input id="cIcon" type="file" accept="image/*"><div id="iconPreview"></div></div>
-  <div class="field"><label>Votre numéro WhatsApp</label><input id="cWhatsApp" type="tel" required placeholder="+243..."></div>
-  <div class="pricebox">
-   <div class="price-row"><span>Tarif de base estimé</span><strong id="creativePrice">0 FC</strong></div>
-   <p class="notice">Le tarif final dépend des fonctionnalités. La commande sera enregistrée pour confirmation avant le début du travail.</p>
+  <div class="notice">
+    Sélectionnez un service, remplissez le formulaire puis envoyez votre demande.
+    Une demande n'est pas une confirmation de paiement ni une livraison automatique.
   </div>
-  <button class="btn gold block" type="submit">Envoyer ma commande</button>
- </form>
-</div>
+
+  <div class="section-head">
+    <h3>Nos services</h3>
+    <span id="serviceCount">6 services</span>
+  </div>
+
+  <input id="serviceSearch" class="search" type="search" placeholder="Rechercher un service...">
+
+  <section class="grid" id="serviceGrid">
+    <article class="service" data-search="application mobile android apk">
+      <div class="service-top">
+        <div class="service-icon">📱</div>
+        <div><h4>Application mobile</h4><div class="category">Développement</div></div>
+      </div>
+      <p>Présentez votre idée et demandez une application adaptée à votre projet.</p>
+      <div class="price">À partir de 10 000 FC</div>
+      <button class="btn btn-gold" id="openApp" type="button">Créer mon application</button>
+    </article>
+
+    <article class="service" data-search="site web internet vitrine ecommerce">
+      <div class="service-top">
+        <div class="service-icon">🌐</div>
+        <div><h4>Site web</h4><div class="category">Web design</div></div>
+      </div>
+      <p>Site vitrine, site professionnel ou boutique en ligne selon vos besoins.</p>
+      <div class="price">À partir de 15 000 FC</div>
+      <button class="btn btn-gold" id="openSite" type="button">Créer mon site</button>
+    </article>
+
+    <article class="service" data-search="chatbot intelligence artificielle bot">
+      <div class="service-top">
+        <div class="service-icon">🤖</div>
+        <div><h4>Chatbot IA</h4><div class="category">Automatisation</div></div>
+      </div>
+      <p>Décrivez le chatbot que vous souhaitez créer pour votre activité.</p>
+      <div class="price">À partir de 7 000 FC</div>
+      <button class="btn btn-gold" id="openBot" type="button">Créer mon chatbot</button>
+    </article>
+
+    <article class="service" data-search="publicité affiche promotion marketing">
+      <div class="service-top">
+        <div class="service-icon">📢</div>
+        <div><h4>Publicité</h4><div class="category">Communication</div></div>
+      </div>
+      <p>Préparez le texte de votre publicité et les informations de votre marque.</p>
+      <div class="price">Sur demande</div>
+      <button class="btn btn-outline" id="openAd" type="button">Préparer ma pub</button>
+    </article>
+
+    <article class="service" data-search="qr code lien adresse contact">
+      <div class="service-top">
+        <div class="service-icon">▦</div>
+        <div><h4>QR code</h4><div class="category">Outil numérique</div></div>
+      </div>
+      <p>Générez un QR code à partir d'un lien, d'un texte ou d'une adresse web.</p>
+      <div class="price">Création rapide</div>
+      <button class="btn btn-outline" id="openQR" type="button">Créer mon QR code</button>
+    </article>
+
+    <article class="service" data-search="réseaux sociaux instagram facebook tiktok smm">
+      <div class="service-top">
+        <div class="service-icon">📲</div>
+        <div><h4>Réseaux sociaux</h4><div class="category">Services SMM</div></div>
+      </div>
+      <p>Préparez une demande de service pour votre page ou votre compte social.</p>
+      <div class="price">Selon le service</div>
+      <button class="btn btn-gold" id="openSocial" type="button">Ouvrir les services</button>
+    </article>
+  </section>
+
+  <div class="section-head">
+    <h3>Mes dernières demandes</h3>
+    <button class="btn btn-outline btn-mini" id="loadOrders" type="button">Actualiser</button>
+  </div>
+  <div id="ordersList" class="notice">Connectez-vous pour afficher les demandes enregistrées sur votre compte.</div>
+
+  <footer>JASON BUSINESS · Web • Design • Digital • IA<br>Créé par Jason Aloma 🇨🇩</footer>
+</main>
+
+<!-- MODAL : DEMANDE DE CRÉATION -->
+<div class="modal" id="creativeModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="creativeTitle">Nouvelle demande</h3>
+      <button class="close" data-close="creativeModal" type="button" aria-label="Fermer">×</button>
+    </div>
+    <form id="creativeForm">
+      <input type="hidden" id="creativeType">
+      <div class="field">
+        <label for="creativeName">Votre nom</label>
+        <input id="creativeName" required maxlength="100" placeholder="Votre nom ou entreprise">
+      </div>
+      <div class="field">
+        <label for="creativeContact">Téléphone ou e-mail</label>
+        <input id="creativeContact" required maxlength="120" placeholder="Votre contact">
+      </div>
+      <div class="field">
+        <label for="creativeProject">Nom du projet</label>
+        <input id="creativeProject" required maxlength="120" placeholder="Nom de votre projet">
+      </div>
+      <div class="field">
+        <label for="creativeDescription">Décrivez votre besoin</label>
+        <textarea id="creativeDescription" required maxlength="3000" placeholder="Expliquez les fonctionnalités souhaitées..."></textarea>
+      </div>
+      <div class="field">
+        <label for="creativeBudget">Budget estimé (FC)</label>
+        <input id="creativeBudget" type="number" min="0" placeholder="Budget facultatif">
+      </div>
+      <button class="btn btn-gold full" type="submit">Envoyer ma demande</button>
+    </form>
+  </div>
 </div>
 
-<!-- GENERATEUR PUBLICITE -->
-<div class="overlay" id="adModal">
-<div class="modal">
- <div class="modal-head"><h3>Créer ma publicité gratuitement</h3><button class="close" data-close="adModal">×</button></div>
- <form id="adForm">
-  <div class="field"><label>Nom de l'entreprise / produit</label><input id="adBusiness" required placeholder="Ex. : JASON BUSINESS"></div>
-  <div class="field"><label>Titre de la publicité</label><input id="adTitle" required maxlength="100" placeholder="Découvrez notre service"></div>
-  <div class="field"><label>Texte publicitaire</label><textarea id="adText" required placeholder="Présentez votre offre…"></textarea></div>
-  <div class="field"><label>Photo (facultatif)</label><input id="adImage" type="file" accept="image/*"></div>
-  <div class="field"><label>Contact ou lien</label><input id="adContact" placeholder="WhatsApp ou site web"></div>
-  <button class="btn blue block" type="button" id="previewAd">Générer l'aperçu gratuit</button>
- </form>
- <div id="adPreview" class="card hidden" style="margin-top:15px">
-  <div class="badge">APERÇU PUBLICITAIRE</div><h2 id="adPreviewTitle"></h2>
-  <img id="adPreviewImage" class="preview hidden" alt="Image publicitaire">
-  <p id="adPreviewText"></p><p id="adPreviewBusiness" class="muted"></p><p id="adPreviewContact"></p>
-  <button class="btn gold block" id="downloadAd">Télécharger l'aperçu</button>
- </div>
- <p class="notice">La création de l'aperçu est gratuite. La diffusion payante sur Facebook ou d'autres plateformes n'est pas incluse.</p>
-</div>
+<!-- MODAL : PUBLICITÉ -->
+<div class="modal" id="adModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>Préparer une publicité</h3>
+      <button class="close" data-close="adModal" type="button">×</button>
+    </div>
+    <form id="adForm">
+      <div class="field">
+        <label for="adBrand">Nom de la marque</label>
+        <input id="adBrand" required maxlength="100" placeholder="Nom de votre activité">
+      </div>
+      <div class="field">
+        <label for="adTitle">Titre de la publicité</label>
+        <input id="adTitle" required maxlength="120" placeholder="Titre accrocheur">
+      </div>
+      <div class="field">
+        <label for="adText">Texte publicitaire</label>
+        <textarea id="adText" required maxlength="1500" placeholder="Présentez votre produit ou service..."></textarea>
+      </div>
+      <div class="field">
+        <label for="adContact">Contact à afficher</label>
+        <input id="adContact" maxlength="120" placeholder="Téléphone, WhatsApp ou site web">
+      </div>
+      <button class="btn btn-outline full" type="button" id="previewAd">Prévisualiser</button>
+      <div class="ad-preview hidden" id="adPreview"></div>
+      <button class="btn btn-gold full" type="submit" style="margin-top:10px">Envoyer la demande</button>
+    </form>
+  </div>
 </div>
 
-<!-- QR CODE -->
-<div class="overlay" id="qrModal">
-<div class="modal">
- <div class="modal-head"><h3>Créateur de QR code gratuit</h3><button class="close" data-close="qrModal">×</button></div>
- <form id="qrForm">
-  <div class="field"><label>Nom ou titre</label><input id="qrName" placeholder="Mon entreprise"></div>
-  <div class="field"><label>Texte ou lien à encoder</label><textarea id="qrContent" required placeholder="https://... ou informations à afficher"></textarea></div>
-  <div class="field"><label>Numéro WhatsApp (facultatif)</label><input id="qrWhatsApp" type="tel" placeholder="+243..."></div>
-  <div class="field"><label>Ajouter au moins 3 photos</label><input id="qrPhotos" type="file" accept="image/*" multiple required><p class="notice">Sélectionnez au minimum 3 photos. Elles seront prévisualisées ici. Pour qu'un QR code permette de consulter ces photos sur un autre téléphone, elles doivent d'abord être hébergées en ligne avec des liens publics.</p></div>
-  <div class="photo-grid" id="qrPhotoPreview"></div>
-  <button class="btn gold block" type="submit">Générer mon QR code gratuit</button>
- </form>
- <div id="qrResult" class="hidden" style="margin-top:18px">
-  <div class="qr-output"><img id="qrImage" alt="QR code généré"></div>
-  <p class="notice" id="qrInfo"></p>
-  <button class="btn blue block" id="downloadQR">Télécharger le QR code</button>
- </div>
+<!-- MODAL : QR CODE -->
+<div class="modal" id="qrModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>Créer un QR code</h3>
+      <button class="close" data-close="qrModal" type="button">×</button>
+    </div>
+    <div class="field">
+      <label for="qrText">Lien ou texte à encoder</label>
+      <textarea id="qrText" maxlength="1500" placeholder="https://exemple.com ou votre texte"></textarea>
+    </div>
+    <button class="btn btn-gold full" id="generateQR" type="button">Générer le QR code</button>
+    <div id="qrResult" class="result"></div>
+    <p class="notice">Le QR code encode le texte ou le lien saisi. Il ne contient pas directement des photos.</p>
+  </div>
 </div>
+
+<!-- MODAL : RÉSEAUX SOCIAUX -->
+<div class="modal" id="socialModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>Services réseaux sociaux</h3>
+      <button class="close" data-close="socialModal" type="button">×</button>
+    </div>
+    <div class="field">
+      <label for="socialPlatform">Plateforme</label>
+      <select id="socialPlatform">
+        <option value="Facebook">Facebook</option>
+        <option value="Instagram">Instagram</option>
+        <option value="TikTok">TikTok</option>
+        <option value="YouTube">YouTube</option>
+        <option value="Telegram">Telegram</option>
+        <option value="WhatsApp">WhatsApp</option>
+        <option value="Autre">Autre</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="socialService">Type de service</label>
+      <select id="socialService">
+        <option value="Abonnés">Abonnés</option>
+        <option value="Likes">J'aime</option>
+        <option value="Vues">Vues</option>
+        <option value="Commentaires">Commentaires</option>
+        <option value="Partages">Partages</option>
+        <option value="Conseil de croissance">Conseil de croissance</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="socialLink">Lien public du compte ou de la publication</label>
+      <input id="socialLink" type="url" maxlength="500" placeholder="https://..." required>
+    </div>
+    <div class="field">
+      <label for="socialQuantity">Quantité souhaitée</label>
+      <input id="socialQuantity" type="number" min="10" max="1000000" value="100">
+    </div>
+    <div class="field">
+      <label for="socialContact">Votre contact</label>
+      <input id="socialContact" maxlength="120" placeholder="Téléphone ou e-mail">
+    </div>
+    <div class="notice warning">Cette page enregistre une demande. Le lancement automatique nécessite une véritable API SMM configurée côté serveur. Ne fournissez jamais votre mot de passe de réseau social.</div>
+    <button class="btn btn-gold full" id="submitSocial" type="button">Envoyer ma demande</button>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<nav class="bottom-nav">
- <a href="tableau%20de%20bord.html"><span>📊</span>Dashboard</a>
- <a href="boutique.html" class="active"><span>🛍️</span>Boutique</a>
- <a href="store.html"><span>🛒</span>Store</a>
- <a href="equipe.html"><span>👥</span>Équipe</a>
- <a href="profil.html"><span>👤</span>Profil</a>
-</nav>
-
 <script type="module">
-import {initializeApp,getApps} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {getDatabase,ref,get,push,set,update} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getDatabase, ref, push, set, query, orderByChild, equalTo, get
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-const firebaseConfig={
- apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
- authDomain:"starlink-investit.firebaseapp.com",
- databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
- projectId:"starlink-investit",
- storageBucket:"starlink-investit.firebasestorage.app",
- messagingSenderId:"807081599583",
- appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
+/*
+  IMPORTANT :
+  Remplacez les valeurs ci-dessous par la configuration Firebase
+  de votre propre projet avant d'utiliser l'enregistrement en ligne.
+*/
+const firebaseConfig = {
+  apiKey: "VOTRE_API_KEY",
+  authDomain: "VOTRE_PROJET.firebaseapp.com",
+  databaseURL: "https://VOTRE_PROJET-default-rtdb.firebaseio.com",
+  projectId: "VOTRE_PROJET",
+  storageBucket: "VOTRE_PROJET.appspot.com",
+  messagingSenderId: "VOTRE_SENDER_ID",
+  appId: "VOTRE_APP_ID"
 };
 
-const ROOT="jasonBusiness";
-const USERS_PATH=ROOT+"/users";
-const COMMANDS_PATH=ROOT+"/demandes_commandes";
-const $=id=>document.getElementById(id);
-const money=n=>Math.max(0,Number(n)||0).toLocaleString("fr-FR")+" FC";
+const ROOT = "jasonBusiness";
+const USERS_PATH = ROOT + "/users";
+const COMMANDS_PATH = ROOT + "/demandes_commandes";
 
-let db=null,currentPhone="",currentUser={},selectedPlatform=null,busy=false;
-let adObjectURL="",iconObjectURL="";
-let qrObjectURLs=[];
+let db = null;
+let firebaseReady = false;
+
+const $ = id => document.getElementById(id);
 
 function toast(message){
- const el=$("toast");
- el.textContent=message;el.classList.add("show");
- clearTimeout(toast.timer);
- toast.timer=setTimeout(()=>el.classList.remove("show"),3200);
+  const el = $("toast");
+  el.textContent = message;
+  el.classList.add("show");
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(()=>el.classList.remove("show"),3200);
 }
-function openModal(id){$(id).classList.add("show")}
-function closeModal(id){$(id).classList.remove("show")}
 
-document.querySelectorAll("[data-close]").forEach(b=>
- b.addEventListener("click",()=>closeModal(b.dataset.close))
-);
-document.querySelectorAll(".overlay").forEach(o=>
- o.addEventListener("click",e=>{if(e.target===o)o.classList.remove("show")})
-);
-
-function escapeHTML(value){
- return String(value??"").replace(/[&<>"']/g,c=>({
- "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
- }[c]));
+function openModal(id){
+  $(id).classList.add("show");
+  document.body.style.overflow = "hidden";
 }
+
+function closeModal(id){
+  $(id).classList.remove("show");
+  if(!document.querySelector(".modal.show")) document.body.style.overflow = "";
+}
+
 function getPhone(){
- return (localStorage.getItem("jasonBusinessPhone")||
- localStorage.getItem("userPhone")||
- localStorage.getItem("telephone")||
- localStorage.getItem("phone")||"").trim();
-}
-function getBalance(user){
- return Number(user?.solde_principal??user?.solde??0)||0;
-}
-function updateBalanceUI(){
- $("balanceValue").textContent=money(getBalance(currentUser));
- $("welcomePhone").textContent=currentPhone||"Compte non identifié";
- $("smmBalance").textContent=money(getBalance(currentUser));
-}
-async function initFirebase(){
- try{
-  const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
-  db=getDatabase(app);
-  currentPhone=getPhone();
-  if(!currentPhone){
-   $("ordersList").innerHTML='<p class="muted">Connectez-vous pour afficher vos commandes.</p>';
-   updateBalanceUI();return;
-  }
-  await loadUser();
-  await loadOrders();
- }catch(error){
-  console.error(error);
-  toast("Erreur de connexion Firebase.");
-  $("ordersList").innerHTML='<p class="muted">Impossible de charger les commandes.</p>';
- }
-}
-async function loadUser(){
- if(!db||!currentPhone)return;
- const snap=await get(ref(db,`${USERS_PATH}/${currentPhone}`));
- currentUser=snap.exists()?snap.val():{};
- updateBalanceUI();
-}
-async function loadOrders(){
- if(!db||!currentPhone)return;
- try{
-  const snap=await get(ref(db,COMMANDS_PATH));
-  const data=snap.exists()?snap.val():{};
-  const orders=Object.entries(data)
-   .filter(([id,o])=>o&&String(o.telephone||"")===currentPhone)
-   .map(([id,o])=>({id,...o}))
-   .sort((a,b)=>(Number(b.createdAt)||0)-(Number(a.createdAt)||0))
-   .slice(0,30);
-  $("ordersList").innerHTML=orders.length?orders.map(o=>`
-   <div class="order">
-    <strong>${escapeHTML(o.service||"Commande")}</strong>
-    <span class="badge">${escapeHTML(o.statut||"En attente")}</span>
-    <p class="muted">${escapeHTML(o.description||o.lien||o.produit_nom||"Demande reçue")}</p>
-    <div class="price-row"><span>Prix estimé</span><strong>${money(o.prix||0)}</strong></div>
-   </div>`).join(""):'<p class="muted">Aucune commande pour le moment.</p>';
- }catch(error){console.error(error)}
-}
-async function saveOrder(order){
- if(!db||!currentPhone){
-  toast("Connectez-vous avant de commander.");
-  return false;
- }
- try{
-  const orderRef=push(ref(db,COMMANDS_PATH));
-  await set(orderRef,{
-   ...order,telephone:currentPhone,createdAt:Date.now()
-  });
-  await loadOrders();
-  return true;
- }catch(error){
-  console.error(error);
-  toast("Enregistrement impossible. Vérifiez Firebase.");
-  return false;
- }
+  return localStorage.getItem("jasonBusinessUserPhone")
+    || localStorage.getItem("userPhone")
+    || "";
 }
 
-// Les tarifs sont modifiables ici.
-// Les tarifs SMM sont des estimations, à remplacer par ceux du fournisseur.
-const PLATFORMS=[
- {id:"facebook",name:"Facebook",slug:"facebook",color:"1877F2"},
- {id:"x",name:"X / Twitter",slug:"x",color:"FFFFFF"},
- {id:"whatsapp",name:"WhatsApp",slug:"whatsapp",color:"25D366"},
- {id:"snapchat",name:"Snapchat",slug:"snapchat",color:"FFFC00"},
- {id:"tiktok",name:"TikTok",slug:"tiktok",color:"FFFFFF"},
- {id:"youtube",name:"YouTube",slug:"youtube",color:"FF0000"},
- {id:"instagram",name:"Instagram",slug:"instagram",color:"E4405F"},
- {id:"telegram",name:"Telegram",slug:"telegram",color:"26A5E4"},
- {id:"spotify",name:"Spotify",slug:"spotify",color:"1DB954"},
- {id:"threads",name:"Threads",slug:"threads",color:"FFFFFF"}
-];
-const SERVICES={
- facebook:["Abonnés","Likes","Vues","Commentaires","Partages"],
- x:["Abonnés","Likes","Vues","Commentaires","Reposts"],
- whatsapp:["Membres de communauté","Promotion de lien"],
- snapchat:["Abonnés","Vues"],
- tiktok:["Abonnés","Likes","Vues","Commentaires","Partages"],
- youtube:["Abonnés","Likes","Vues","Commentaires"],
- instagram:["Abonnés","Likes","Vues","Commentaires","Partages"],
- telegram:["Membres","Vues","Réactions"],
- spotify:["Écoutes","Abonnés au profil"],
- threads:["Abonnés","Likes","Vues"]
-};
-const RATES={
- "Abonnés":{unit:100,price:1000},
- "Likes":{unit:100,price:500},
- "Vues":{unit:1000,price:700},
- "Commentaires":{unit:10,price:1500},
- "Partages":{unit:100,price:900},
- "Reposts":{unit:100,price:900},
- "Membres":{unit:100,price:1500},
- "Réactions":{unit:100,price:700},
- "Écoutes":{unit:1000,price:1200},
- "Abonnés au profil":{unit:100,price:1500},
- "Membres de communauté":{unit:100,price:1500},
- "Promotion de lien":{unit:10,price:1000}
-};
-function logoURL(p){
- return `https://cdn.simpleicons.org/${p.slug}/${p.color}`;
+function getUserName(){
+  return localStorage.getItem("jasonBusinessUserName")
+    || localStorage.getItem("userName")
+    || "";
 }
-function renderPlatforms(filter=""){
- const term=filter.toLowerCase().trim();
- const list=PLATFORMS.filter(p=>p.name.toLowerCase().includes(term));
- $("platformGrid").innerHTML=list.map(p=>`
- <button type="button" class="platform" data-platform="${p.id}">
- <img src="${logoURL(p)}" alt="${escapeHTML(p.name)}"
- onerror="this.style.display='none'">
- <span>${escapeHTML(p.name)}</span></button>`).join("");
- $("platformGrid").querySelectorAll("[data-platform]").forEach(b=>
-  b.addEventListener("click",()=>openPlatform(b.dataset.platform))
- );
-}
-function showSocial(){
- $("platformChooser").classList.remove("hidden");
- $("socialFormArea").classList.add("hidden");
- $("socialTitle").textContent="Choisir un réseau social";
- $("platformSearch").value="";
- renderPlatforms();
- openModal("socialModal");
-}
-function openPlatform(id){
- selectedPlatform=PLATFORMS.find(p=>p.id===id);
- if(!selectedPlatform)return;
- $("platformChooser").classList.add("hidden");
- $("socialFormArea").classList.remove("hidden");
- $("socialTitle").textContent=selectedPlatform.name;
- $("selectedPlatformInfo").innerHTML=`
- <div style="display:flex;align-items:center;gap:12px">
- <img src="${logoURL(selectedPlatform)}" alt="" style="width:36px;height:36px"
- onerror="this.style.display='none'">
- <div><strong>${escapeHTML(selectedPlatform.name)}</strong>
- <div class="muted">Choisissez votre prestation</div></div></div>`;
- $("smmService").innerHTML=(SERVICES[id]||[]).map(s=>
-  `<option value="${escapeHTML(s)}">${escapeHTML(s)}</option>`
- ).join("");
- $("smmQuantity").value=10;
- $("smmLink").value="";
- updateSmmPrice();
-}
-function calculateSmmPrice(service,quantity){
- const rate=RATES[service];
- if(!rate||!Number.isFinite(quantity)||quantity<10)return 0;
- return Math.ceil(quantity/rate.unit*rate.price);
-}
-function updateSmmPrice(){
- const service=$("smmService").value;
- const qty=Number($("smmQuantity").value);
- const rate=RATES[service];
- const price=calculateSmmPrice(service,qty);
- $("smmPrice").textContent=money(price);
- $("smmBalance").textContent=money(getBalance(currentUser));
- $("smmRate").textContent=rate?
-  `Tarif indicatif : ${money(rate.price)} par ${rate.unit} unité(s). Minimum : 10.`:"";
-}
-$("openSocial").addEventListener("click",showSocial);
-$("platformSearch").addEventListener("input",e=>renderPlatforms(e.target.value));
-$("backPlatforms").addEventListener("click",()=>{
- $("platformChooser").classList.remove("hidden");
- $("socialFormArea").classList.add("hidden");
- $("socialTitle").textContent="Choisir un réseau social";
-});
-$("smmService").addEventListener("change",updateSmmPrice);
-$("smmQuantity").addEventListener("input",updateSmmPrice);
 
-$("smmForm").addEventListener("submit",async e=>{
- e.preventDefault();
- if(busy)return;
- if(!db||!currentPhone)return toast("Connectez-vous pour continuer.");
- const link=$("smmLink").value.trim();
- const qty=Number($("smmQuantity").value);
- const service=$("smmService").value;
- if(!/^https?:\/\/\S+/i.test(link))return toast("Entrez un lien public valide.");
- if(!Number.isInteger(qty)||qty<10)return toast("Quantité minimum : 10.");
- const price=calculateSmmPrice(service,qty);
- if(price<=0)return toast("Tarif indisponible.");
- const btn=$("submitSmm");
- busy=true;btn.disabled=true;btn.textContent="Enregistrement…";
- try{
-  const ok=await saveOrder({
-   categorie:"smm",service:`${selectedPlatform.name} — ${service}`,
-   plateforme:selectedPlatform.name,lien:link,quantite:qty,
-   prix:price,statut:"En attente de connexion API",
-   description:`${service} : ${qty} unités. Prix indicatif.`
-  });
-  if(ok){
-   toast("Demande enregistrée. Livraison après configuration de l'API.");
-   closeModal("socialModal");
-  }
- }finally{
-  busy=false;btn.disabled=false;btn.textContent="Envoyer ma demande";
- }
-});
-
-// COMMANDES APPLICATION, SITE WEB ET CHATBOT
-const CREATIVE={
- app:{
-  title:"Commander une application mobile",base:10000,
-  label:"Type d'application",
-  options:["Application Android","Application iOS","Application Android et iOS","Application avec connexion","Application e-commerce","Autre"],
-  icon:true
- },
- site:{
-  title:"Commander un site web",base:15000,
-  label:"Type de site web",
-  options:["Site vitrine","Boutique e-commerce","Portfolio","Blog / actualités","Site d'entreprise","Plateforme avec comptes clients","Site avec paiement","Autre"],
-  icon:false
- },
- bot:{
-  title:"Commander un chatbot IA",base:7000,
-  label:"Type de chatbot",
-  options:["Chatbot WhatsApp","Chatbot Facebook Messenger","Chatbot pour site web","Chatbot multicanal","Chatbot de service client","Chatbot de vente","Autre"],
-  icon:false
- }
-};
-function openCreative(type){
- const c=CREATIVE[type];
- if(!c)return;
- $("creativeType").value=type;
- $("creativeTitle").textContent=c.title;
- $("cKindLabel").textContent=c.label;
- $("cKind").innerHTML=c.options.map(v=>
-  `<option>${escapeHTML(v)}</option>`).join("");
- $("creativePrice").textContent=money(c.base);
- $("iconField").classList.toggle("hidden",!c.icon);
- $("cIcon").value="";
- $("iconPreview").innerHTML="";
- $("cName").value="";
- $("cFeatures").value="";
- $("cDescription").value="";
- $("cLink").value="";
- $("cWhatsApp").value="";
- openModal("creativeModal");
-}
-$("cIcon").addEventListener("change",()=>{
- if(iconObjectURL)URL.revokeObjectURL(iconObjectURL);
- const file=$("cIcon").files[0];
- $("iconPreview").innerHTML="";
- if(file&&file.type.startsWith("image/")){
-  iconObjectURL=URL.createObjectURL(file);
-  const img=document.createElement("img");
-  img.src=iconObjectURL;img.alt="Aperçu de l'icône";
-  img.style.cssText="width:90px;height:90px;object-fit:contain;margin-top:8px;border-radius:12px";
-  $("iconPreview").appendChild(img);
- }
-});
-$("creativeForm").addEventListener("submit",async e=>{
- e.preventDefault();
- const type=$("creativeType").value;
- const c=CREATIVE[type];
- const file=$("cIcon").files[0];
- if(file&&file.size>5*1024*1024)return toast("L'image doit peser moins de 5 Mo.");
- const iconNote=file?`Fichier icône joint : ${file.name}. À transmettre séparément pour la production.`:"Aucune icône jointe.";
- const order={
-  categorie:type,
-  service:c.title,
-  produit_nom:$("cName").value.trim(),
-  type_projet:$("cKind").value,
-  fonctionnalites:$("cFeatures").value.trim(),
-  description:$("cDescription").value.trim(),
-  lien:$("cLink").value.trim(),
-  whatsapp:$("cWhatsApp").value.trim(),
-  prix:c.base,
-  statut:"En attente de confirmation",
-  fichier_description:iconNote
- };
- if(await saveOrder(order)){
-  toast("Commande enregistrée !");
-  $("creativeForm").reset();
-  closeModal("creativeModal");
- }
-});
-
-// PUBLICITE GRATUITE
-function openAd(){
- $("adForm").reset();
- $("adPreview").classList.add("hidden");
- openModal("adModal");
-}
-$("previewAd").addEventListener("click",()=>{
- const business=$("adBusiness").value.trim();
- const title=$("adTitle").value.trim();
- const text=$("adText").value.trim();
- if(!business||!title||!text)return toast("Complétez le nom, le titre et le texte.");
- $("adPreviewTitle").textContent=title;
- $("adPreviewText").textContent=text;
- $("adPreviewBusiness").textContent=business;
- $("adPreviewContact").textContent=$("adContact").value.trim();
- const file=$("adImage").files[0];
- const img=$("adPreviewImage");
- if(adObjectURL)URL.revokeObjectURL(adObjectURL);
- if(file){
-  if(!file.type.startsWith("image/"))return toast("Choisissez une image valide.");
-  if(file.size>5*1024*1024)return toast("Image maximum : 5 Mo.");
-  adObjectURL=URL.createObjectURL(file);
-  img.src=adObjectURL;img.classList.remove("hidden");
- }else{
-  img.removeAttribute("src");img.classList.add("hidden");
- }
- $("adPreview").classList.remove("hidden");
-});
-$("downloadAd").addEventListener("click",()=>{
- const business=$("adBusiness").value.trim();
- const title=$("adTitle").value.trim();
- const text=$("adText").value.trim();
- const contact=$("adContact").value.trim();
- const file=$("adImage").files[0];
- const canvas=document.createElement("canvas");
- canvas.width=1080;canvas.height=1080;
- const ctx=canvas.getContext("2d");
- ctx.fillStyle="#07101d";ctx.fillRect(0,0,1080,1080);
- ctx.fillStyle="#d8aa45";ctx.fillRect(0,0,1080,16);
- ctx.fillStyle="#00d4ff";ctx.font="bold 48px Arial";
- ctx.fillText(business.slice(0,32),60,100);
- ctx.fillStyle="#ffffff";ctx.font="bold 55px Arial";
- const lines=wrapText(ctx,title,900,62);
- lines.slice(0,3).forEach((line,i)=>ctx.fillText(line,60,220+i*75));
- let y=490;
- if(file){
-  const img=new Image();
-  img.onload=()=>{
-   const scale=Math.min(900/img.width,300/img.height);
-   const w=img.width*scale,h=img.height*scale;
-   ctx.drawImage(img,60,y,w,h);
-   y+=h+45;
-   drawAdText(ctx,text,contact,y);
-   exportCanvas(canvas);
+function showCreative(type){
+  const configs = {
+    app:{title:"Créer une application mobile",price:10000},
+    site:{title:"Créer un site web",price:15000},
+    bot:{title:"Créer un chatbot IA",price:7000}
   };
-  img.onerror=()=>{drawAdText(ctx,text,contact,y);exportCanvas(canvas)};
-  img.src=adObjectURL;
- }else{
-  drawAdText(ctx,text,contact,y);
-  exportCanvas(canvas);
- }
-});
-function wrapText(ctx,text,maxWidth,fontSize){
- ctx.font=`${fontSize}px Arial`;
- const words=text.split(/\s+/),lines=[];
- let line="";
- words.forEach(word=>{
-  const test=line?line+" "+word:word;
-  if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word}
-  else line=test;
- });
- if(line)lines.push(line);
- return lines;
-}
-function drawAdText(ctx,text,contact,y){
- ctx.fillStyle="#dce7f8";ctx.font="36px Arial";
- wrapText(ctx,text,900,36).slice(0,6).forEach((line,i)=>ctx.fillText(line,60,y+i*50));
- ctx.fillStyle="#d8aa45";ctx.font="bold 32px Arial";
- ctx.fillText(contact.slice(0,65),60,990);
-}
-function exportCanvas(canvas){
- canvas.toBlob(blob=>{
-  if(!blob)return toast("Téléchargement impossible.");
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;a.download="jason-business-publicite.png";a.click();
-  setTimeout(()=>URL.revokeObjectURL(url),1500);
- },"image/png");
+  const item = configs[type];
+  if(!item){toast("Service non reconnu.");return;}
+  $("creativeType").value = type;
+  $("creativeTitle").textContent = item.title;
+  $("creativeName").value = getUserName();
+  $("creativeContact").value = getPhone();
+  $("creativeProject").value = "";
+  $("creativeDescription").value = "";
+  $("creativeBudget").value = item.price;
+  openModal("creativeModal");
 }
 
-// QR CODE GRATUIT
+function openAd(){
+  $("adForm").reset();
+  $("adPreview").classList.add("hidden");
+  openModal("adModal");
+}
+
 function openQR(){
- $("qrForm").reset();
- $("qrPhotoPreview").innerHTML="";
- $("qrResult").classList.add("hidden");
- qrObjectURLs.forEach(URL.revokeObjectURL);qrObjectURLs=[];
- openModal("qrModal");
+  $("qrText").value = "";
+  $("qrResult").replaceChildren();
+  openModal("qrModal");
 }
-$("qrPhotos").addEventListener("change",()=>{
- $("qrPhotoPreview").innerHTML="";
- qrObjectURLs.forEach(URL.revokeObjectURL);qrObjectURLs=[];
- const files=Array.from($("qrPhotos").files||[]);
- files.slice(0,12).forEach(file=>{
-  if(!file.type.startsWith("image/"))return;
-  const url=URL.createObjectURL(file);qrObjectURLs.push(url);
-  const img=document.createElement("img");img.src=url;img.alt=file.name;
-  $("qrPhotoPreview").appendChild(img);
- });
- if(files.length<3)toast("Sélectionnez au moins 3 photos.");
- if(files.length>12)toast("Les 12 premières photos seront prévisualisées.");
-});
-$("qrForm").addEventListener("submit",e=>{
- e.preventDefault();
- const files=Array.from($("qrPhotos").files||[]);
- if(files.length<3)return toast("Minimum 3 photos obligatoire.");
- if(files.some(f=>!f.type.startsWith("image/")))return toast("Tous les fichiers doivent être des images.");
- if(files.some(f=>f.size>5*1024*1024))return toast("Chaque photo doit peser moins de 5 Mo.");
- let content=$("qrContent").value.trim();
- const whatsapp=$("qrWhatsApp").value.trim();
- const name=$("qrName").value.trim();
- if(whatsapp)content+="\nWhatsApp : "+whatsapp;
- if(name)content="Nom : "+name+"\n"+content;
- $("qrInfo").textContent=`QR code créé pour « ${name||"votre contenu"} ». Les ${files.length} photos sont sélectionnées sur cet appareil, mais ne sont pas intégrées dans le QR code.`;
- $("qrImage").src="https://api.qrserver.com/v1/create-qr-code/?size=600x600&margin=12&data="+encodeURIComponent(content);
- $("qrResult").classList.remove("hidden");
-});
-$("downloadQR").addEventListener("click",async()=>{
- try{
-  const response=await fetch($("qrImage").src);
-  if(!response.ok)throw new Error("QR code inaccessible");
-  const blob=await response.blob();
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;a.download="jason-business-qr.png";a.click();
-  setTimeout(()=>URL.revokeObjectURL(url),1500);
- }catch{
-  toast("Impossible de télécharger. Vérifiez votre connexion internet.");
- }
+
+function showSocial(){
+  $("socialContact").value = getPhone();
+  openModal("socialModal");
+}
+
+/* Écouteurs explicites : les boutons fonctionnent dans un module JavaScript. */
+$("openApp").addEventListener("click",()=>showCreative("app"));
+$("openSite").addEventListener("click",()=>showCreative("site"));
+$("openBot").addEventListener("click",()=>showCreative("bot"));
+$("openAd").addEventListener("click",openAd);
+$("openQR").addEventListener("click",openQR);
+$("openSocial").addEventListener("click",showSocial);
+
+document.querySelectorAll("[data-close]").forEach(button=>{
+  button.addEventListener("click",()=>closeModal(button.dataset.close));
 });
 
-$("refreshOrders").addEventListener("click",async()=>{
- if(!currentPhone)return toast("Connectez-vous d'abord.");
- await loadOrders();toast("Commandes actualisées.");
+document.querySelectorAll(".modal").forEach(modal=>{
+  modal.addEventListener("click",event=>{
+    if(event.target===modal) closeModal(modal.id);
+  });
 });
 
-initFirebase();
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape"){
+    document.querySelectorAll(".modal.show").forEach(modal=>closeModal(modal.id));
+  }
+});
+
+/* Recherche dans les services */
+$("serviceSearch").addEventListener("input",()=>{
+  const term = $("serviceSearch").value.trim().toLowerCase();
+  let count = 0;
+  document.querySelectorAll(".service").forEach(card=>{
+    const visible = card.dataset.search.toLowerCase().includes(term)
+      || card.innerText.toLowerCase().includes(term);
+    card.classList.toggle("hidden",!visible);
+    if(visible) count++;
+  });
+  $("serviceCount").textContent = count + " service(s)";
+});
+
+/* Initialisation Firebase */
+try{
+  if(firebaseConfig.apiKey !== "VOTRE_API_KEY" &&
+     firebaseConfig.projectId !== "VOTRE_PROJET" &&
+     firebaseConfig.databaseURL.startsWith("https://")){
+    const app = initializeApp(firebaseConfig);
+    db = getDatabase(app);
+    firebaseReady = true;
+  }
+}catch(error){
+  console.error("Firebase :",error);
+}
+
+async function saveRequest(type,details){
+  const phone = getPhone();
+  const data = {
+    type,
+    details,
+    telephone: phone || "",
+    nom: getUserName() || details.nom || "",
+    statut: "En attente",
+    date: new Date().toISOString(),
+    source: "boutique.html"
+  };
+
+  if(!firebaseReady || !db){
+    const localKey = "jasonBusinessPendingOrders";
+    const previous = JSON.parse(localStorage.getItem(localKey)||"[]");
+    previous.unshift({...data,localId:Date.now()});
+    localStorage.setItem(localKey,JSON.stringify(previous));
+    toast("Firebase non configuré : demande gardée sur ce téléphone.");
+    renderLocalOrders();
+    return false;
+  }
+
+  try{
+    const newRef = push(ref(db,COMMANDS_PATH));
+    await set(newRef,data);
+    toast("Votre demande a été envoyée.");
+    await loadOrders();
+    return true;
+  }catch(error){
+    console.error(error);
+    toast("Enregistrement impossible. Vérifiez Firebase et les règles d'accès.");
+    return false;
+  }
+}
+
+/* Formulaire application / site / chatbot */
+$("creativeForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  const type = $("creativeType").value;
+  const types = {
+    app:"Application mobile",
+    site:"Site web",
+    bot:"Chatbot IA"
+  };
+  const details = {
+    service:types[type]||type,
+    nom:$("creativeName").value.trim(),
+    contact:$("creativeContact").value.trim(),
+    projet:$("creativeProject").value.trim(),
+    description:$("creativeDescription").value.trim(),
+    budget:Number($("creativeBudget").value)||0
+  };
+  if(!details.nom||!details.contact||!details.projet||!details.description){
+    toast("Veuillez remplir tous les champs obligatoires.");
+    return;
+  }
+  const button = event.submitter;
+  button.disabled = true;
+  button.textContent = "Envoi...";
+  try{
+    await saveRequest(details.service,details);
+    closeModal("creativeModal");
+    event.target.reset();
+  }finally{
+    button.disabled = false;
+    button.textContent = "Envoyer ma demande";
+  }
+});
+
+/* Prévisualisation publicitaire */
+$("previewAd").addEventListener("click",()=>{
+  const brand = $("adBrand").value.trim();
+  const title = $("adTitle").value.trim();
+  const body = $("adText").value.trim();
+  const contact = $("adContact").value.trim();
+  if(!brand||!title||!body){
+    toast("Saisissez la marque, le titre et le texte.");
+    return;
+  }
+  $("adPreview").textContent =
+    brand.toUpperCase()+"\n\n"+title+"\n\n"+body+
+    (contact?"\n\nContact : "+contact:"");
+  $("adPreview").classList.remove("hidden");
+});
+
+$("adForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  const details = {
+    marque:$("adBrand").value.trim(),
+    titre:$("adTitle").value.trim(),
+    texte:$("adText").value.trim(),
+    contact:$("adContact").value.trim()
+  };
+  await saveRequest("Publicité",details);
+  closeModal("adModal");
+  event.target.reset();
+  $("adPreview").classList.add("hidden");
+});
+
+/* Génération du QR code via un service externe */
+$("generateQR").addEventListener("click",()=>{
+  const value = $("qrText").value.trim();
+  if(!value){toast("Entrez un lien ou un texte.");return;}
+
+  const result = $("qrResult");
+  result.replaceChildren();
+
+  const image = document.createElement("img");
+  image.className = "qr-preview";
+  image.alt = "QR code généré";
+  image.src = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="
+    + encodeURIComponent(value);
+
+  image.onerror = ()=>{
+    result.textContent = "Impossible de charger le QR code. Vérifiez votre connexion.";
+  };
+
+  const download = document.createElement("a");
+  download.className = "btn btn-outline full";
+  download.textContent = "Ouvrir l'image du QR code";
+  download.href = image.src;
+  download.target = "_blank";
+  download.rel = "noopener noreferrer";
+
+  result.append(image,download);
+});
+
+/* Demande de service réseaux sociaux */
+$("submitSocial").addEventListener("click",async()=>{
+  const link = $("socialLink").value.trim();
+  const quantity = Number($("socialQuantity").value);
+  if(!link || !/^https?:\/\//i.test(link)){
+    toast("Entrez un lien public valide commençant par https://");
+    return;
+  }
+  if(!Number.isInteger(quantity)||quantity<10||quantity>1000000){
+    toast("La quantité doit être comprise entre 10 et 1 000 000.");
+    return;
+  }
+  const button = $("submitSocial");
+  button.disabled = true;
+  button.textContent = "Envoi...";
+  try{
+    const details = {
+      plateforme:$("socialPlatform").value,
+      service:$("socialService").value,
+      lien:link,
+      quantite:quantity,
+      contact:$("socialContact").value.trim()
+    };
+    await saveRequest("Réseaux sociaux",details);
+    closeModal("socialModal");
+  }finally{
+    button.disabled = false;
+    button.textContent = "Envoyer ma demande";
+  }
+});
+
+/* Affichage des demandes enregistrées localement */
+function renderLocalOrders(){
+  const orders = JSON.parse(localStorage.getItem("jasonBusinessPendingOrders")||"[]");
+  const box = $("ordersList");
+  if(!orders.length){
+    box.textContent = "Aucune demande locale enregistrée.";
+    return;
+  }
+  box.replaceChildren();
+  orders.slice(0,5).forEach(order=>{
+    const item = document.createElement("div");
+    item.style.cssText="padding:9px 0;border-bottom:1px solid #26344a;font-size:11px;line-height:1.6";
+    const title = document.createElement("strong");
+    title.textContent = order.type || "Demande";
+    const status = document.createElement("div");
+    status.style.color="#d8aa45";
+    status.textContent = order.statut || "En attente";
+    const date = document.createElement("div");
+    date.style.color="#93a4bc";
+    date.textContent = order.date ? new Date(order.date).toLocaleString("fr-FR") : "";
+    item.append(title,status,date);
+    box.append(item);
+  });
+}
+
+async function loadOrders(){
+  if(!firebaseReady || !db){
+    renderLocalOrders();
+    return;
+  }
+  const phone = getPhone();
+  if(!phone){
+    $("ordersList").textContent = "Connectez-vous pour afficher vos demandes enregistrées en ligne.";
+    return;
+  }
+  try{
+    const snapshot = await get(
+      query(ref(db,COMMANDS_PATH),orderByChild("telephone"),equalTo(phone))
+    );
+    const box = $("ordersList");
+    box.replaceChildren();
+    if(!snapshot.exists()){
+      box.textContent = "Aucune demande trouvée pour ce numéro.";
+      return;
+    }
+    const items = [];
+    snapshot.forEach(child=>items.push(child.val()));
+    items.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+    items.slice(0,10).forEach(order=>{
+      const item = document.createElement("div");
+      item.style.cssText="padding:9px 0;border-bottom:1px solid #26344a;font-size:11px;line-height:1.6";
+      const title = document.createElement("strong");
+      title.textContent = order.type || "Demande";
+      const status = document.createElement("div");
+      status.style.color="#d8aa45";
+      status.textContent = order.statut || "En attente";
+      const date = document.createElement("div");
+      date.style.color="#93a4bc";
+      date.textContent = order.date ? new Date(order.date).toLocaleString("fr-FR") : "";
+      item.append(title,status,date);
+      box.append(item);
+    });
+  }catch(error){
+    console.error(error);
+    $("ordersList").textContent = "Impossible de charger les demandes. Vérifiez les règles Firebase.";
+  }
+}
+
+$("loadOrders").addEventListener("click",loadOrders);
+$("refreshBtn").addEventListener("click",()=>{
+  loadOrders();
+  toast("Actualisation demandée.");
+});
+$("apiBtn").addEventListener("click",()=>{
+  window.location.href="api.html";
+});
+
+loadOrders();
 </script>
 </body>
 </html>
