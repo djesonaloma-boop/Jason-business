@@ -23,7 +23,6 @@ body{background:radial-gradient(circle at top,#101d35 0,var(--bg) 45%,#02040a 10
 .content{flex:1;min-width:0;padding:20px}.page{display:none}.page.active{display:block}.page-title{font-size:24px;font-weight:900;margin-bottom:6px}.page-subtitle{font-size:12px;color:var(--muted);margin-bottom:20px}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px}.stat-card,.quick-card,.panel{background:linear-gradient(145deg,rgba(16,26,43,.96),rgba(8,14,26,.96));border:1px solid var(--border);border-radius:17px}
 .stat-card{padding:17px;min-height:105px}.stat-icon{font-size:22px;margin-bottom:9px}.stat-label{font-size:11px;color:var(--muted)}.stat-value{font-size:21px;font-weight:900;margin-top:6px;overflow-wrap:anywhere}
-.quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.quick-card{padding:17px;cursor:pointer}.quick-card b{display:block;margin-bottom:7px}.quick-card span{font-size:11px;color:var(--muted)}
 .panel{overflow:hidden;margin-bottom:18px}.panel-head{padding:15px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--border)}.panel-title{font-weight:900}.panel-description{font-size:11px;color:var(--muted);margin-top:5px}
 .search{width:100%;max-width:300px;background:#070d18;border:1px solid var(--border);border-radius:10px;color:white;padding:11px;outline:none}
 .table-wrap{width:100%;overflow-x:auto}table{width:100%;min-width:1100px;border-collapse:collapse}
@@ -40,304 +39,58 @@ td{font-size:12px;padding:13px;border-bottom:1px solid rgba(255,255,255,.045);ve
 </style>
 </head>
 <body>
-<div id="adminLogin">
-  <div class="login-box">
-    <div class="login-logo">JASON BUSINESS</div>
-    <div class="login-subtitle">🔐 PANNEAU D'ADMINISTRATION</div>
-    <input type="password" id="adminPassword" class="input" placeholder="Mot de passe administrateur">
-    <button id="loginAdmin" class="login-btn" type="button">🔓 Ouvrir l'administration</button>
-    <div id="loginError" class="login-error"></div>
-  </div>
-</div>
+<div id="adminLogin"><div class="login-box"><div class="login-logo">JASON BUSINESS</div><div class="login-subtitle">🔐 ADMIN</div><input type="password" id="adminPassword" class="input" placeholder="Mot de passe"><button id="loginAdmin" class="login-btn">🔓 Ouvrir</button><div id="loginError" class="login-error"></div></div></div>
 <div id="adminPanel">
-<header class="header">
- <div class="brand">JASON <span>BUSINESS</span></div>
- <div style="display:flex;align-items:center;gap:10px"><div class="status"><span class="dot"></span>Firebase connecté</div><button class="logout" id="adminLogout">Déconnexion</button></div>
-</header>
+<header class="header"><div class="brand">JASON <span>BUSINESS</span></div><div style="display:flex;align-items:center;gap:10px"><div class="status"><span class="dot"></span>Connecté</div><button class="logout" id="adminLogout">Déconnexion</button></div></header>
 <div class="layout">
- <aside class="sidebar">
-  <button class="menu-btn active" data-page="dashboard">📊 Dashboard</button>
-  <button class="menu-btn" data-page="users">👥 Utilisateurs</button>
-  <button class="menu-btn" data-page="commands">🛒 Commandes <span class="menu-count" id="menuCommands">0</span></button>
-  <button class="menu-btn" data-page="recharges">💳 Recharges <span class="menu-count" id="menuRecharges">0</span></button>
-  <button class="menu-btn" data-page="withdrawals">💸 Retraits <span class="menu-count" id="menuWithdrawals">0</span></button>
-  <button class="menu-btn" data-page="messages">💬 Messages</button>
-  <button class="menu-btn" data-page="send">📤 Envoyer</button>
- </aside>
- <main class="content">
-  <section class="page active" id="page-dashboard">
-   <div class="page-title">📊 Dashboard</div><div class="page-subtitle">Vue générale + commandes self-boost</div>
-   <div class="stats">
-    <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-label">Utilisateurs</div><div class="stat-value" id="statUsers">0</div></div>
-    <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-label">Soldes cumulés</div><div class="stat-value" id="totalBalance">0 FC</div></div>
-    <div class="stat-card"><div class="stat-icon">🛒</div><div class="stat-label">Commandes en attente</div><div class="stat-value" id="statCommands">0</div></div>
-    <div class="stat-card"><div class="stat-icon">💳</div><div class="stat-label">Recharges en attente</div><div class="stat-value" id="statRecharges">0</div></div>
-    <div class="stat-card"><div class="stat-icon">💸</div><div class="stat-label">Retraits en attente</div><div class="stat-value" id="statWithdrawals">0</div></div>
-    <div class="stat-card"><div class="stat-icon">💬</div><div class="stat-label">Messages</div><div class="stat-value" id="statMessages">0</div></div>
-   </div>
-  </section>
-  <section class="page" id="page-users">
-   <div class="page-title">👥 Utilisateurs</div><div class="page-subtitle">Gestion + mot de passe visible</div>
-   <div class="panel"><div class="panel-head"><div><div class="panel-title">Liste des utilisateurs</div><div class="panel-description">Clique 👁 pour voir le mot de passe actuel</div></div><input class="search" id="userSearch" placeholder="🔎 Rechercher"></div>
-   <div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>Gains</th><th>Points</th><th>VIP</th><th>MDP actuel</th><th>Actions</th></tr></thead><tbody id="usersTable"></tbody></table></div></div>
-  </section>
-  <section class="page" id="page-commands">
-   <div class="page-title">🛒 Commandes - Tous les détails + Modifier prix</div><div class="page-subtitle">Self-boost : client commande lui-même, tu vois tout ici</div>
-   <div class="panel"><div class="panel-head"><div><div class="panel-title">Demandes</div><div class="panel-description">Plateforme, service, lien, quantité, prix modifiable</div></div><input class="search" id="commandSearch" placeholder="🔎 Rechercher client, service, plateforme"></div>
-   <div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Plateforme</th><th>Service / Type</th><th>Lien</th><th>Qté</th><th>Prix</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div></div>
-  </section>
-  <section class="page" id="page-recharges">
-   <div class="page-title">💳 Recharges</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Transaction</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="rechargesTable"></tbody></table></div></div>
-  </section>
-  <section class="page" id="page-withdrawals">
-   <div class="page-title">💸 Retraits</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Numéro réception</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsTable"></tbody></table></div></div>
-  </section>
-  <section class="page" id="page-messages">
-   <div class="page-title">💬 Messages</div><div class="panel" id="messagesList"><div class="empty">Chargement…</div></div>
-  </section>
-  <section class="page" id="page-send">
-   <div class="page-title">📤 Envoyer un message</div><div class="panel"><div style="padding:17px">
-     <label>Numéro du client</label><input class="input" id="messageTo" placeholder="Ex. 085424199">
-     <label>Message</label><textarea id="messageText" style="display:block;width:100%;min-height:130px;margin:8px 0 14px;padding:12px;background:#070d18;border:1px solid var(--border);border-radius:12px;color:white" placeholder="Écrire…"></textarea>
-     <button id="sendMessageBtn" class="btn btn-blue" style="padding:12px 18px">📤 Envoyer</button><div id="sendStatus" style="margin-top:12px;font-size:12px"></div>
-   </div></div>
-  </section>
- </main>
+<aside class="sidebar">
+<button class="menu-btn active" data-page="dashboard">📊 Dashboard</button>
+<button class="menu-btn" data-page="users">👥 Utilisateurs</button>
+<button class="menu-btn" data-page="commands">🛒 Commandes <span class="menu-count" id="menuCommands">0</span></button>
+<button class="menu-btn" data-page="recharges">💳 Recharges <span class="menu-count" id="menuRecharges">0</span></button>
+<button class="menu-btn" data-page="withdrawals">💸 Retraits <span class="menu-count" id="menuWithdrawals">0</span></button>
+</aside>
+<main class="content">
+<section class="page active" id="page-dashboard"><div class="page-title">📊 Dashboard</div><div class="page-subtitle">Commandes avec prix modifiable</div><div class="stats"><div class="stat-card"><div class="stat-icon">👥</div><div class="stat-label">Utilisateurs</div><div class="stat-value" id="statUsers">0</div></div><div class="stat-card"><div class="stat-icon">💰</div><div class="stat-label">Soldes</div><div class="stat-value" id="totalBalance">0 FC</div></div><div class="stat-card"><div class="stat-icon">🛒</div><div class="stat-label">Commandes</div><div class="stat-value" id="statCommands">0</div></div></div></section>
+<section class="page" id="page-users"><div class="page-title">👥 Utilisateurs</div><div class="panel"><div class="panel-head"><div><div class="panel-title">Liste</div></div><input class="search" id="userSearch" placeholder="🔎 Rechercher"></div><div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>Points</th><th>MDP</th><th>Actions</th></tr></thead><tbody id="usersTable"></tbody></table></div></div></section>
+<section class="page" id="page-commands"><div class="page-title">🛒 Commandes - Prix modifiable</div><div class="panel"><div class="panel-head"><div><div class="panel-title">Toutes les commandes</div><div class="panel-description">Plateforme, lien, quantité, prix que tu peux modifier</div></div><input class="search" id="commandSearch" placeholder="🔎 Rechercher"></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Plateforme</th><th>Service</th><th>Lien</th><th>Qté</th><th>Prix</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div></div></section>
+<section class="page" id="page-recharges"><div class="page-title">💳 Recharges</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="rechargesTable"></tbody></table></div></div></section>
+<section class="page" id="page-withdrawals"><div class="page-title">💸 Retraits</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsTable"></tbody></table></div></div></section>
+</main>
 </div>
 </div>
-
 <div class="modal" id="userModal"><div class="modal-box"><div class="modal-header"><div class="modal-title">👤 Utilisateur</div><button class="close" onclick="closeModal('userModal')">×</button></div><div class="modal-content" id="userDetails"></div></div></div>
-<div class="modal" id="commandModal"><div class="modal-box"><div class="modal-header"><div class="modal-title">🛒 Détails commande + Modifier prix</div><button class="close" onclick="closeModal('commandModal')">×</button></div><div class="modal-content" id="commandDetails"></div></div></div>
+<div class="modal" id="commandModal"><div class="modal-box"><div class="modal-header"><div class="modal-title">🛒 Détails + Modifier prix</div><button class="close" onclick="closeModal('commandModal')">×</button></div><div class="modal-content" id="commandDetails"></div></div></div>
 <div id="toastContainer"></div>
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, onValue, update, remove, push, runTransaction, get, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-const firebaseConfig = {
- apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
- authDomain:"starlink-investit.firebaseapp.com",
- databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
- projectId:"starlink-investit",
- storageBucket:"starlink-investit.firebasestorage.app",
- messagingSenderId:"807081599583",
- appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
-};
-const fbApp = initializeApp(firebaseConfig);
-const db = getDatabase(fbApp);
-const ROOT = "jasonBusiness";
-const PATHS = { users:`${ROOT}/users`, commands:`${ROOT}/demandes_commandes`, recharges:`${ROOT}/demandes_recharges`, withdrawals:`${ROOT}/demandes_retraits`, messages:`${ROOT}/messages` };
-
+const firebaseConfig = { apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U", authDomain:"starlink-investit.firebaseapp.com", databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com", projectId:"starlink-investit", storageBucket:"starlink-investit.firebasestorage.app", messagingSenderId:"807081599583", appId:"1:807081599583:web:e00ec3959bc4acdae031ea" };
+const fbApp = initializeApp(firebaseConfig); const db = getDatabase(fbApp);
+const ROOT="jasonBusiness"; const PATHS={ users:`${ROOT}/users`, commands:`${ROOT}/demandes_commandes`, recharges:`${ROOT}/demandes_recharges`, withdrawals:`${ROOT}/demandes_retraits` };
 const loginBox=document.getElementById("adminLogin"), adminPanel=document.getElementById("adminPanel");
 function showAdmin(){loginBox.style.display="none";adminPanel.style.display="block";}
-async function loginAdmin(){
-  const pw=document.getElementById("adminPassword").value.trim();
-  const err=document.getElementById("loginError"), btn=document.getElementById("loginAdmin");
-  if(!pw){err.textContent="Entre le mot de passe";return;}
-  btn.disabled=true; btn.textContent="⏳ Vérification..."; err.textContent="";
-  try{
-    const r=await fetch("/api/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:pw})});
-    const txt=await r.text(); let data; try{data=JSON.parse(txt)}catch{throw new Error(txt)}
-    if(!r.ok||!data.token){err.textContent=data.error||"❌ Mot de passe incorrect";return;}
-    localStorage.setItem("jasonBusinessAdminToken",data.token); showAdmin(); toast("🔓 Admin ouvert");
-  }catch(e){err.textContent="❌ Serveur indisponible";}
-  finally{btn.disabled=false; btn.textContent="🔓 Ouvrir l'administration";}
-}
-document.getElementById("loginAdmin").addEventListener("click",loginAdmin);
-document.getElementById("adminPassword").addEventListener("keydown",e=>{if(e.key==="Enter") loginAdmin();});
-document.getElementById("adminLogout").addEventListener("click",()=>{localStorage.removeItem("jasonBusinessAdminToken"); location.reload();});
-const saved=localStorage.getItem("jasonBusinessAdminToken");
-if(saved){ fetch("/api/admin/session",{headers:{Authorization:`Bearer ${saved}`}}).then(r=>{if(r.ok) showAdmin(); else localStorage.removeItem("jasonBusinessAdminToken");}).catch(()=>localStorage.removeItem("jasonBusinessAdminToken")); }
-
-const $=id=>document.getElementById(id);
-const money=v=>Math.floor(Number(v)||0).toLocaleString("fr-FR");
-const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
-const getPhone=d=>d.telephone??d.userPhone??d.phone??d.numero??d.user??d.client??d.from??"";
-const getName=d=>d.nom??d.name??d.username??d.fullName??"Utilisateur";
-const getBal=d=>Number(d.solde_principal??d.solde??d.balance??0)||0;
-const getPass=d=>d.password??d.mot_de_passe??d.pass??d.mdp??"—";
-const getStatus=d=>d.statut??d.status??"En attente";
-const isPending=s=>String(s||"").toLowerCase().includes("attente");
-const badge=s=>{const v=String(s||"En attente"); const low=v.toLowerCase(); if(low.includes("valid")||low.includes("pay")||low.includes("termin")) return `<span class="badge badge-ok">✓ ${esc(v)}</span>`; if(low.includes("refus")||low.includes("annul")) return `<span class="badge badge-no">✕ ${esc(v)}</span>`; return `<span class="badge badge-pending">⏳ ${esc(v)}</span>`;}
+async function loginAdmin(){const pw=document.getElementById("adminPassword").value.trim(); const err=document.getElementById("loginError"), btn=document.getElementById("loginAdmin"); if(!pw){err.textContent="Entre le mot de passe";return;} btn.disabled=true; btn.textContent="⏳..."; err.textContent=""; try{const r=await fetch("/api/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:pw})}); const txt=await r.text(); let data; try{data=JSON.parse(txt)}catch{throw new Error(txt)} if(!r.ok||!data.token){err.textContent=data.error||"❌ Incorrect";return;} localStorage.setItem("jasonBusinessAdminToken",data.token); showAdmin(); toast("🔓 Admin ouvert");}catch(e){err.textContent="❌ Serveur";} finally{btn.disabled=false; btn.textContent="🔓 Ouvrir";}}
+document.getElementById("loginAdmin").addEventListener("click",loginAdmin); document.getElementById("adminPassword").addEventListener("keydown",e=>{if(e.key==="Enter") loginAdmin();}); document.getElementById("adminLogout").addEventListener("click",()=>{localStorage.removeItem("jasonBusinessAdminToken"); location.reload();});
+const saved=localStorage.getItem("jasonBusinessAdminToken"); if(saved){ fetch("/api/admin/session",{headers:{Authorization:`Bearer ${saved}`}}).then(r=>{if(r.ok) showAdmin(); else localStorage.removeItem("jasonBusinessAdminToken");}).catch(()=>localStorage.removeItem("jasonBusinessAdminToken")); }
+const $=id=>document.getElementById(id); const money=v=>Math.floor(Number(v)||0).toLocaleString("fr-FR"); const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c])); const getPhone=d=>d.telephone??d.userPhone??d.phone??d.numero??"";
+const getBal=d=>Number(d.solde_principal??d.solde??0)||0; const getPass=d=>d.password??d.mot_de_passe??"—"; const getStatus=d=>d.statut??d.status??"En attente"; const isPending=s=>String(s||"").toLowerCase().includes("attente");
+const badge=s=>{const v=String(s||"En attente"); const low=v.toLowerCase(); if(low.includes("valid")) return `<span class="badge badge-ok">✓ ${esc(v)}</span>`; if(low.includes("refus")) return `<span class="badge badge-no">✕ ${esc(v)}</span>`; return `<span class="badge badge-pending">⏳ ${esc(v)}</span>`;}
 function toast(m,type="success"){const c=$("toastContainer"); const el=document.createElement("div"); el.className=`toast ${type}`; el.textContent=m; c.appendChild(el); setTimeout(()=>el.remove(),3500);}
-window.closeModal=id=>document.getElementById(id).classList.remove("show");
-window.openModal=id=>document.getElementById(id).classList.add("show");
+window.closeModal=id=>document.getElementById(id).classList.remove("show"); window.openModal=id=>document.getElementById(id).classList.add("show");
 function openPage(p){document.querySelectorAll(".menu-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===p)); document.querySelectorAll(".page").forEach(s=>s.classList.toggle("active",s.id==="page-"+p));}
 document.querySelectorAll(".menu-btn").forEach(b=>b.addEventListener("click",()=>openPage(b.dataset.page)));
-
-let usersCache={}, commandsCache={}, rechargesCache={}, withdrawalsCache={};
-
-onValue(ref(db,PATHS.users),snap=>{
-  usersCache={}; const tbody=$("usersTable"); tbody.innerHTML=""; let count=0,total=0;
-  snap.forEach(child=>{
-    const phone=child.key; const d=child.val()||{}; usersCache[phone]=d; count++; const bal=getBal(d); total+=bal; const vip=Boolean(d.vipActif??d.vip??false); const enc=encodeURIComponent(phone);
-    const tr=document.createElement("tr");
-    tr.innerHTML=`<td>${esc(phone)}</td><td style="font-weight:700">${esc(getName(d))}</td><td>${money(bal)} FC</td><td>${money(d.solde_gains??0)} FC</td><td>⭐ ${money(d.points_fidelite??0)}</td><td>${vip?'<span class="badge badge-vip">👑 VIP</span>':'<span class="badge badge-blue">Normal</span>'}</td><td><code style="background:rgba(216,170,69,.15);padding:4px 6px;border-radius:6px;color:#d8aa45">${esc(getPass(d))}</code></td><td><button class="btn btn-blue" onclick="viewUser('${enc}')">👁</button><button class="btn btn-gold" onclick="resetPassword('${enc}')">🔑</button><button class="btn btn-green" onclick="addMoney('${enc}')">+1000</button><button class="btn btn-red" onclick="deleteUser('${enc}')">🗑</button></td>`;
-    tbody.appendChild(tr);
-  });
-  $("statUsers").textContent=count; $("totalBalance").textContent=money(total)+" FC";
-  if(!count) tbody.innerHTML=`<tr><td colspan="8"><div class="empty">Aucun utilisateur</div></td></tr>`;
-});
-
-document.getElementById("userSearch").addEventListener("input",e=>{const q=e.target.value.toLowerCase().trim(); document.querySelectorAll("#usersTable tr").forEach(r=>{r.style.display=r.innerText.toLowerCase().includes(q)?"":"none";});});
-document.getElementById("commandSearch").addEventListener("input",e=>{const q=e.target.value.toLowerCase().trim(); document.querySelectorAll("#commandsTable tr").forEach(r=>{r.style.display=r.innerText.toLowerCase().includes(q)?"":"none";});});
-
-window.viewUser=function(enc){
-  const phone=decodeURIComponent(enc); const d=usersCache[phone]||{};
-  $("userDetails").innerHTML=`
-    <div class="detail-grid">
-      <div class="detail-item"><small>📱 Numéro</small><strong>${esc(phone)}</strong></div>
-      <div class="detail-item"><small>👤 Nom</small><strong>${esc(getName(d))}</strong></div>
-      <div class="detail-item" style="border-color:rgba(216,170,69,.4)"><small>🔑 MDP ACTUEL</small><strong style="color:#d8aa45;font-size:18px">${esc(getPass(d))}</strong></div>
-      <div class="detail-item"><small>💰 Solde</small><strong>${money(getBal(d))} FC</strong></div>
-    </div>
-    <hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)">
-    <div style="display:flex;flex-wrap:wrap;gap:6px">
-      <button class="btn btn-gold" onclick="resetPassword('${enc}')">🔑 Reset MDP</button>
-      <button class="btn btn-green" onclick="addMoney('${enc}')">+1000</button>
-      <button class="btn btn-orange" onclick="removeMoney('${enc}')">-1000</button>
-      <button class="btn btn-red" onclick="deleteUser('${enc}')">🗑 Supprimer</button>
-    </div>`;
-  openModal("userModal");
-};
-
-window.addMoney=async(enc)=>{const p=decodeURIComponent(enc); if(!confirm(`+1000 FC à ${p}?`)) return; try{await runTransaction(ref(db,`${PATHS.users}/${p}/solde_principal`),c=>(Number(c)||0)+1000); toast("✅ +1000");}catch{toast("❌ Erreur","error");}};
-window.removeMoney=async(enc)=>{const p=decodeURIComponent(enc); if(!confirm(`-1000 FC de ${p}?`)) return; try{const r=await runTransaction(ref(db,`${PATHS.users}/${p}/solde_principal`),c=>{const v=Number(c)||0; if(v<1000) return; return v-1000;}); if(!r.committed){toast("❌ Solde insuffisant","error"); return;} toast("✅ -1000");}catch{toast("❌ Erreur","error");}};
-window.resetPassword=async(enc)=>{
-  const phone=decodeURIComponent(enc); const current=usersCache[phone]||{}; const oldPass=getPass(current);
-  const newPass=prompt(`MDP pour ${phone}\nAncien: ${oldPass}\nNouveau:`); if(newPass===null) return;
-  const clean=newPass.trim(); if(!clean||clean.length<4){toast("❌ Min 4 caractères","error"); return;}
-  try{await update(ref(db,`${PATHS.users}/${phone}`),{password:clean,mot_de_passe:clean,pass:clean,mdp:clean,lastPasswordReset:new Date().toISOString(),forceLogout:true}); toast(`✅ Nouveau MDP: ${clean}`); setTimeout(()=>{ if($("userModal").classList.contains("show")) viewUser(enc); },300);}catch{toast("❌ Erreur","error");}
-};
-window.deleteUser=async(enc)=>{const p=decodeURIComponent(enc); if(!confirm(`Supprimer ${p}?`)) return; try{await remove(ref(db,`${PATHS.users}/${p}`)); closeModal("userModal"); toast("✅ Supprimé");}catch{toast("❌ Erreur","error");}};
-
-// COMMANDES - AVEC TOUS LES DÉTAILS + MODIFIER PRIX
-onValue(ref(db,PATHS.commands),snap=>{
-  commandsCache={}; const tbody=$("commandsTable"); tbody.innerHTML=""; let pending=0;
-  const entries=[]; snap.forEach(ch=>{entries.push({id:ch.key,val:ch.val()||{}})}); entries.sort((a,b)=>(Number(b.val.createdAt)||0)-(Number(a.val.createdAt)||0));
-  entries.forEach(({id,val:d})=>{
-    commandsCache[id]=d; const st=getStatus(d); if(isPending(st)) pending++;
-    const amt=Number(d.montant??d.prix??0)||0;
-    const plateforme=d.plateforme??d.platforme??d.plateform??"—";
-    const typeService=d.type_service??d.typeService??d.service??"—";
-    const lien=d.lien??d.link??"—";
-    const qte=d.quantite??d.quantité??d.qty??"—";
-    const isSelf=d.selfBoost?'<span class="badge badge-self">SELF</span>':"";
-    const tr=document.createElement("tr");
-    tr.innerHTML=`<td>${esc(d.date??new Date(d.createdAt||0).toLocaleString()??"—")}</td>
-      <td><b>${esc(getPhone(d)||"—")}</b> ${isSelf}</td>
-      <td><b style="color:#d8aa45">${esc(plateforme)}</b></td>
-      <td>${esc(typeService)}<br><small style="color:#8e9aad">${esc(d.service??"")}</small></td>
-      <td><a href="${esc(lien)}" target="_blank" class="link" title="${esc(lien)}">${esc(lien).slice(0,35)}</a></td>
-      <td><b>${esc(qte)}</b></td>
-      <td><b style="color:#d8aa45" id="price-${id}">${money(amt)} FC</b></td>
-      <td>${badge(st)}</td>
-      <td>
-        <button class="btn btn-blue" onclick="viewCommand('${encodeURIComponent(id)}')">👁</button>
-        <button class="btn btn-gold" onclick="editPrice('${encodeURIComponent(id)}')">💰 Prix</button>
-        ${isPending(st)?`<button class="btn btn-green" onclick="validateCommand('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseCommand('${encodeURIComponent(id)}')">✕</button>`:`<button class="btn btn-dark" onclick="deleteCommand('${encodeURIComponent(id)}')">🗑</button>`}
-      </td>`;
-    tbody.appendChild(tr);
-  });
-  $("statCommands").textContent=pending; $("menuCommands").textContent=pending;
-  if(entries.length===0) tbody.innerHTML=`<tr><td colspan="9"><div class="empty">Aucune commande</div></td></tr>`;
-});
-
-window.viewCommand=function(enc){
-  const id=decodeURIComponent(enc); const d=commandsCache[id]||{};
-  const amt=Number(d.montant??d.prix??0)||0;
-  $("commandDetails").innerHTML=`
-    <div class="detail-grid">
-      <div class="detail-item"><small>📱 Client</small><strong>${esc(getPhone(d))}</strong></div>
-      <div class="detail-item"><small>📅 Date</small><strong>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</strong></div>
-      <div class="detail-item"><small>🌐 Plateforme</small><strong style="color:#d8aa45">${esc(d.plateforme??"—")}</strong></div>
-      <div class="detail-item"><small>🚀 Type boost</small><strong>${esc(d.type_service??d.service??"—")}</strong></div>
-      <div class="detail-item" style="grid-column:span 2"><small>🔗 Lien public</small><strong><a href="${esc(d.lien??"")}" target="_blank" class="link">${esc(d.lien??"—")}</a></strong></div>
-      <div class="detail-item"><small>🔢 Quantité</small><strong>${esc(d.quantite??"—")}</strong></div>
-      <div class="detail-item"><small>💰 Prix actuel</small><strong style="color:#d8aa45;font-size:18px" id="detailPrice">${money(amt)} FC</strong></div>
-      <div class="detail-item"><small>📌 Statut</small><strong>${esc(getStatus(d))}</strong></div>
-      <div class="detail-item"><small>🤖 Self-boost</small><strong>${d.selfBoost?"OUI - Client lui-même":"Non"}</strong></div>
-      <div class="detail-item" style="grid-column:span 2"><small>📝 Notes / Service complet</small><strong style="white-space:pre-wrap">${esc(JSON.stringify(d,null,2).slice(0,1000))}</strong></div>
-    </div>
-    <hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)">
-    <div style="display:flex;flex-wrap:wrap;gap:8px">
-      <button class="btn btn-gold" onclick="editPrice('${enc}')">💰 Modifier prix</button>
-      <button class="btn btn-green" onclick="validateCommand('${enc}')">✓ Valider</button>
-      <button class="btn btn-orange" onclick="copyLink('${enc}')">🔗 Copier lien</button>
-      <button class="btn btn-red" onclick="refuseCommand('${enc}')">✕ Refuser + Rembourser</button>
-      <button class="btn btn-dark" onclick="deleteCommand('${enc}')">🗑 Supprimer</button>
-    </div>`;
-  openModal("commandModal");
-};
-
-window.editPrice=async(enc)=>{
-  const id=decodeURIComponent(enc); const d=commandsCache[id]||{};
-  const currentPrice=Number(d.montant??d.prix??0)||0;
-  const input=prompt(`💰 Modifier prix pour ${getPhone(d)}\nService: ${d.plateforme??""} - ${d.type_service??d.service??""}\nLien: ${d.lien??""}\n\nPrix actuel: ${currentPrice} FC\n\nNouveau prix (FC):`, String(currentPrice));
-  if(input===null) return;
-  const newPrice=Number(input.replace(/[^0-9]/g,""));
-  if(isNaN(newPrice)||newPrice<0){toast("❌ Prix invalide","error"); return;}
-  const diff=newPrice-currentPrice;
-  const phone=getPhone(d);
-  if(!confirm(`Confirmer changement?\n${money(currentPrice)} → ${money(newPrice)} FC\nDifférence: ${diff>0?"+":""}${money(diff)} FC\nClient: ${phone}\n\nSi prix augmenté, solde client sera débité. Si diminué, remboursé.`)) return;
-  try{
-    // Mettre à jour commande
-    await update(ref(db,`${PATHS.commands}/${id}`),{prix:newPrice,montant:newPrice,priceEdited:true,oldPrice:currentPrice,newPrice:newPrice,editedAt:Date.now()});
-    // Ajuster solde si besoin
-    if(phone && diff!==0){
-      const userRef=ref(db,`${PATHS.users}/${phone}/solde_principal`);
-      const snap=await get(userRef);
-      let bal=Number(snap.exists()?snap.val():0)||0;
-      let newBal=bal-diff; // si diff positif, on retire plus
-      if(newBal<0){toast("❌ Solde client insuffisant pour augmenter prix","error"); /* rollback prix */ await update(ref(db,`${PATHS.commands}/${id}`),{prix:currentPrice,montant:currentPrice}); return;}
-      await set(userRef,newBal);
-    }
-    toast(`✅ Prix modifié: ${money(currentPrice)} → ${money(newPrice)} FC`);
-    if($("commandModal").classList.contains("show")) viewCommand(enc);
-  }catch(e){console.error(e); toast("❌ Erreur modification prix","error");}
-};
-
-window.copyLink=(enc)=>{const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const lien=d.lien??""; if(!lien){toast("Pas de lien","error"); return;} navigator.clipboard.writeText(lien).then(()=>toast("🔗 Lien copié")).catch(()=>{prompt("Copie lien:",lien)});};
-
-window.validateCommand=async(enc)=>{const id=decodeURIComponent(enc); try{const r=await runTransaction(ref(db,`${PATHS.commands}/${id}`),c=>{if(!c) return; if(!isPending(getStatus(c))) return; return {...c,statut:"Validée",dateValidation:new Date().toISOString()};}); if(!r.committed){toast("Déjà traitée","error"); return;} toast("✅ Validée"); closeModal("commandModal");}catch{toast("❌ Erreur","error");}};
-window.refuseCommand=async(enc)=>{const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const phone=getPhone(d); const amt=Number(d.montant??d.prix??0)||0; if(!confirm(`Refuser et rembourser ${money(amt)} à ${phone}?`)) return; try{const r=await runTransaction(ref(db,`${PATHS.commands}/${id}`),c=>{if(!c) return; if(!isPending(getStatus(c))) return; return {...c,statut:"Refusée — Remboursée"};}); if(!r.committed) return; if(phone&&amt>0){const snap=await get(ref(db,`${PATHS.users}/${phone}/solde_principal`)); const bal=Number(snap.exists()?snap.val():0)||0; await set(ref(db,`${PATHS.users}/${phone}/solde_principal`),bal+amt);} toast("✅ Remboursée"); closeModal("commandModal");}catch{toast("❌ Erreur","error");}};
-window.deleteCommand=async(enc)=>{const id=decodeURIComponent(enc); if(!confirm("Supprimer définitivement cette commande?")) return; try{await remove(ref(db,`${PATHS.commands}/${id}`)); toast("🗑 Supprimée"); closeModal("commandModal");}catch{toast("❌ Erreur","error");}};
-
-onValue(ref(db,PATHS.recharges),snap=>{
-  rechargesCache={}; const tbody=$("rechargesTable"); tbody.innerHTML=""; let pending=0;
-  snap.forEach(ch=>{const id=ch.key; const d=ch.val()||{}; rechargesCache[id]=d; const st=getStatus(d); if(isPending(st)) pending++; const amt=Number(d.montant??0)||0;
-    const tr=document.createElement("tr");
-    tr.innerHTML=`<td>${esc(d.date??"—")}</td><td>${esc(getPhone(d)||"—")}</td><td><b style="color:#d8aa45">${money(amt)} FC</b></td><td>${esc(d.methode??"—")}</td><td style="font-family:monospace;font-size:10px">${esc(d.transaction??"—")}</td><td>${badge(st)}</td><td>${isPending(st)?`<button class="btn btn-green" onclick="validateRecharge('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseRecharge('${encodeURIComponent(id)}')">✕</button>`:`<span style="font-size:10px">Traité</span>`}</td>`;
-    tbody.appendChild(tr);
-  });
-  $("statRecharges").textContent=pending; $("menuRecharges").textContent=pending;
-});
-window.validateRecharge=async(enc)=>{const id=decodeURIComponent(enc); const d=rechargesCache[id]||{}; const phone=getPhone(d); const amt=Number(d.montant??0)||0; if(!phone||amt<=0){toast("Invalide","error"); return;} if(!confirm(`Confirmer ${money(amt)} pour ${phone}?`)) return; try{const r=await runTransaction(ref(db,`${PATHS.recharges}/${id}`),c=>{if(!c) return; if(!isPending(getStatus(c))) return; return {...c,statut:"Validée",dateValidation:new Date().toISOString()};}); if(!r.committed){toast("Déjà traitée","error"); return;} await runTransaction(ref(db,`${PATHS.users}/${phone}/solde_principal`),c=>(Number(c)||0)+amt); toast(`✅ ${money(amt)} crédité`);}catch{toast("❌ Erreur","error");}};
-window.refuseRecharge=async(enc)=>{const id=decodeURIComponent(enc); if(!confirm("Refuser?")) return; try{await update(ref(db,`${PATHS.recharges}/${id}`),{statut:"Refusée"}); toast("Refusée");}catch{toast("❌ Erreur","error");}};
-
-onValue(ref(db,PATHS.withdrawals),snap=>{
-  withdrawalsCache={}; const tbody=$("withdrawalsTable"); tbody.innerHTML=""; let pending=0;
-  snap.forEach(ch=>{const id=ch.key; const d=ch.val()||{}; withdrawalsCache[id]=d; const st=getStatus(d); if(isPending(st)) pending++; const amt=Number(d.montant??0)||0;
-    const tr=document.createElement("tr");
-    tr.innerHTML=`<td>${esc(d.date??"—")}</td><td>${esc(getPhone(d)||"—")}</td><td>${money(amt)} FC</td><td>${esc(d.methode??"—")}</td><td>${esc(d.numero??"—")}</td><td>${badge(st)}</td><td>${isPending(st)?`<button class="btn btn-green" onclick="validateWithdrawal('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseWithdrawal('${encodeURIComponent(id)}')">✕</button>`:`Traité`}</td>`;
-    tbody.appendChild(tr);
-  });
-  $("statWithdrawals").textContent=pending; $("menuWithdrawals").textContent=pending;
-});
-window.validateWithdrawal=async(enc)=>{const id=decodeURIComponent(enc); if(!confirm("Valider retrait?")) return; try{await update(ref(db,`${PATHS.withdrawals}/${id}`),{statut:"Validée",dateValidation:new Date().toISOString()}); toast("✅ Retrait validé");}catch{toast("❌ Erreur","error");}};
-window.refuseWithdrawal=async(enc)=>{const id=decodeURIComponent(enc); const d=withdrawalsCache[id]||{}; const phone=getPhone(d); const amt=Number(d.montant??0)||0; if(!confirm(`Refuser et rembourser ${money(amt)} à ${phone}?`)) return; try{const r=await runTransaction(ref(db,`${PATHS.withdrawals}/${id}`),c=>{if(!c) return; if(!isPending(getStatus(c))) return; return {...c,statut:"Refusée — Remboursée"};}); if(!r.committed) return; if(phone&&amt>0) await runTransaction(ref(db,`${PATHS.users}/${phone}/solde_principal`),c=>(Number(c)||0)+amt); toast("Remboursé");}catch{toast("❌ Erreur","error");}};
-
-onValue(ref(db,PATHS.messages),snap=>{
-  const box=$("messagesList"); box.innerHTML=""; let count=0;
-  snap.forEach(ch=>{count++; const d=ch.val()||{}; const div=document.createElement("div"); div.style.cssText="padding:16px;border-bottom:1px solid rgba(255,255,255,.07)"; div.innerHTML=`<b>📱 ${esc(d.from??"User")}</b><div style="font-size:11px;color:#8e9aad;margin:6px 0">${esc(d.date??"")}</div><div style="font-size:13px;white-space:pre-wrap">${esc(d.message??"")}</div><div style="margin-top:8px"><button class="btn btn-blue" onclick="replyTo('${encodeURIComponent(getPhone(d)||"")}')">↩️</button><button class="btn btn-red" onclick="deleteMsg('${encodeURIComponent(ch.key)}')">🗑</button></div>`; box.appendChild(div);});
-  $("statMessages").textContent=count; if(count===0) box.innerHTML=`<div class="empty">Aucun message</div>`;
-});
-window.replyTo=(enc)=>{const p=decodeURIComponent(enc); $("messageTo").value=p; openPage("send");};
-window.deleteMsg=async(enc)=>{const id=decodeURIComponent(enc); if(!confirm("Supprimer?")) return; try{await remove(ref(db,`${PATHS.messages}/${id}`)); toast("Supprimé");}catch{toast("❌ Erreur","error");}};
-$("sendMessageBtn").addEventListener("click",async()=>{
-  const to=$("messageTo").value.trim(); const txt=$("messageText").value.trim(); const st=$("sendStatus");
-  if(!to||!txt){st.textContent="Entre numéro et message"; return;}
-  try{await push(ref(db,PATHS.messages),{to, message:txt, from:"ADMIN", date:new Date().toISOString(), statut:"Envoyé"}); st.textContent=`✅ Envoyé à ${to}`; $("messageText").value=""; toast("✅ Envoyé");}catch{st.textContent="❌ Erreur";}
-});
+let usersCache={}, commandsCache={};
+onValue(ref(db,PATHS.users),snap=>{ usersCache={}; const tbody=$("usersTable"); tbody.innerHTML=""; let count=0,total=0; snap.forEach(child=>{ const phone=child.key; const d=child.val()||{}; usersCache[phone]=d; count++; const bal=getBal(d); total+=bal; const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(phone)}</td><td>${esc(d.nom??"Utilisateur")}</td><td>${money(bal)} FC</td><td>${money(d.points_fidelite??0)}</td><td><code style="color:#d8aa45">${esc(getPass(d))}</code></td><td><button class="btn btn-blue" onclick="viewUser('${encodeURIComponent(phone)}')">👁</button></td>`; tbody.appendChild(tr);}); $("statUsers").textContent=count; $("totalBalance").textContent=money(total)+" FC"; });
+window.viewUser=function(enc){ const phone=decodeURIComponent(enc); const d=usersCache[phone]||{}; $("userDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>Numéro</small><strong>${esc(phone)}</strong></div><div class="detail-item"><small>Solde</small><strong>${money(getBal(d))} FC</strong></div><div class="detail-item" style="border-color:#d8aa45"><small>MDP</small><strong style="color:#d8aa45">${esc(getPass(d))}</strong></div></div>`; openModal("userModal"); };
+onValue(ref(db,PATHS.commands),snap=>{ commandsCache={}; const tbody=$("commandsTable"); tbody.innerHTML=""; let pending=0; const entries=[]; snap.forEach(ch=>{entries.push({id:ch.key,val:ch.val()||{}})}); entries.sort((a,b)=>(Number(b.val.createdAt)||0)-(Number(a.val.createdAt)||0)); entries.forEach(({id,val:d})=>{ commandsCache[id]=d; const st=getStatus(d); if(isPending(st)) pending++; const amt=Number(d.montant??d.prix??0)||0; const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</td><td><b>${esc(getPhone(d)||"—")}</b></td><td><b style="color:#d8aa45">${esc(d.plateforme??"—")}</b></td><td>${esc(d.type_service??d.service??"—")}</td><td><a href="${esc(d.lien??"")}" target="_blank" class="link">${esc((d.lien??"").slice(0,30))}</a></td><td>${esc(d.quantite??"—")}</td><td><b style="color:#d8aa45">${money(amt)} FC</b></td><td>${badge(st)}</td><td><button class="btn btn-blue" onclick="viewCommand('${encodeURIComponent(id)}')">👁</button><button class="btn btn-gold" onclick="editPrice('${encodeURIComponent(id)}')">💰 Prix</button>${isPending(st)?`<button class="btn btn-green" onclick="validateCommand('${encodeURIComponent(id)}')">✓</button>`:`<button class="btn btn-dark" onclick="deleteCommand('${encodeURIComponent(id)}')">🗑</button>`}</td>`; tbody.appendChild(tr);}); $("statCommands").textContent=pending; $("menuCommands").textContent=pending; });
+window.viewCommand=function(enc){ const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const amt=Number(d.montant??d.prix??0)||0; $("commandDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>Client</small><strong>${esc(getPhone(d))}</strong></div><div class="detail-item"><small>Plateforme</small><strong style="color:#d8aa45">${esc(d.plateforme??"—")}</strong></div><div class="detail-item" style="grid-column:span 2"><small>Lien</small><strong><a href="${esc(d.lien??"")}" target="_blank" class="link">${esc(d.lien??"—")}</a></strong></div><div class="detail-item"><small>Quantité</small><strong>${esc(d.quantite??"—")}</strong></div><div class="detail-item"><small>Prix</small><strong style="color:#d8aa45;font-size:18px">${money(amt)} FC</strong></div><div class="detail-item"><small>Service</small><strong>${esc(d.type_service??d.service??"—")}</strong></div><div class="detail-item" style="grid-column:span 2"><small>Données complètes</small><strong style="white-space:pre-wrap;font-size:11px">${esc(JSON.stringify(d,null,2).slice(0,1500))}</strong></div></div><hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)"><div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn btn-gold" onclick="editPrice('${enc}')">💰 Modifier prix</button><button class="btn btn-green" onclick="validateCommand('${enc}')">✓ Valider</button><button class="btn btn-orange" onclick="copyLink('${enc}')">🔗 Copier lien</button><button class="btn btn-red" onclick="deleteCommand('${enc}')">🗑 Supprimer</button></div>`; openModal("commandModal"); };
+window.editPrice=async(enc)=>{ const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const current=Number(d.montant??d.prix??0)||0; const input=prompt(`💰 Modifier prix\nClient: ${getPhone(d)}\nService: ${d.plateforme??""} ${d.type_service??""}\nPrix actuel: ${current} FC\nNouveau prix:`, String(current)); if(input===null) return; const newPrice=Number(input.replace(/[^0-9]/g,"")); if(isNaN(newPrice)){toast("Prix invalide","error");return;} const diff=newPrice-current; const phone=getPhone(d); if(!confirm(`Confirmer?\n${money(current)} → ${money(newPrice)} FC\nDiff: ${diff>0?"+":""}${money(diff)} FC`)) return; try{ await update(ref(db,`${PATHS.commands}/${id}`),{prix:newPrice,montant:newPrice,priceEdited:true,oldPrice:current,newPrice:newPrice,editedAt:Date.now()}); if(phone&&diff!==0){ const userRef=ref(db,`${PATHS.users}/${phone}/solde_principal`); const snap=await get(userRef); let bal=Number(snap.exists()?snap.val():0)||0; let newBal=bal-diff; if(newBal<0){toast("Solde insuffisant","error"); await update(ref(db,`${PATHS.commands}/${id}`),{prix:current,montant:current}); return;} await set(userRef,newBal);} toast(`✅ Prix: ${money(current)} → ${money(newPrice)} FC`); if($("commandModal").classList.contains("show")) viewCommand(enc);}catch(e){toast("Erreur","error");}};
+window.copyLink=(enc)=>{ const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const lien=d.lien??""; if(!lien){toast("Pas de lien","error");return;} navigator.clipboard.writeText(lien).then(()=>toast("🔗 Copié")); };
+window.validateCommand=async(enc)=>{ const id=decodeURIComponent(enc); try{ const r=await runTransaction(ref(db,`${PATHS.commands}/${id}`),c=>{if(!c) return; if(!isPending(getStatus(c))) return; return {...c,statut:"Validée",dateValidation:new Date().toISOString()};}); if(!r.committed){toast("Déjà traitée","error");return;} toast("✅ Validée"); closeModal("commandModal");}catch{toast("Erreur","error");}};
+window.deleteCommand=async(enc)=>{ const id=decodeURIComponent(enc); if(!confirm("Supprimer?")) return; try{ await remove(ref(db,`${PATHS.commands}/${id}`)); toast("🗑 Supprimée"); closeModal("commandModal");}catch{toast("Erreur","error");}};
+onValue(ref(db,PATHS.recharges),snap=>{ const tbody=$("rechargesTable"); tbody.innerHTML=""; let pending=0; snap.forEach(ch=>{ const d=ch.val()||{}; if(isPending(getStatus(d))) pending++; const amt=Number(d.montant??0)||0; const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(d.date??"—")}</td><td>${esc(getPhone(d))}</td><td>${money(amt)} FC</td><td>${badge(getStatus(d))}</td><td><button class="btn btn-green">✓</button></td>`; tbody.appendChild(tr);}); $("menuRecharges").textContent=pending; });
+onValue(ref(db,PATHS.withdrawals),snap=>{ const tbody=$("withdrawalsTable"); tbody.innerHTML=""; let pending=0; snap.forEach(ch=>{ const d=ch.val()||{}; if(isPending(getStatus(d))) pending++; const amt=Number(d.montant??0)||0; const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(d.date??"—")}</td><td>${esc(getPhone(d))}</td><td>${money(amt)} FC</td><td>${badge(getStatus(d))}</td><td><button class="btn btn-green">✓</button></td>`; tbody.appendChild(tr);}); $("menuWithdrawals").textContent=pending; });
 </script>
 </body>
 </html>
