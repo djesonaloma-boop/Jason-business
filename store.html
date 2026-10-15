@@ -7,7 +7,10 @@
 <style>
 :root{--bg:#050914;--blue:#00d4ff;--gold:#d8aa45;--green:#22c55e}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#101d35 0,var(--bg) 100%);color:white;font-family:Arial;min-height:100vh}
-.container{max-width:1000px;margin:auto;padding:16px 14px 100px}.header{display:flex;justify-content:space-between;align-items:center;padding:14px 0}.logo{font-weight:900;color:var(--blue);font-size:18px}.badge{font-size:10px;border:1px solid #22c55e55;background:#22c55e15;color:var(--green);padding:7px 12px;border-radius:20px}.search{width:100%;background:#081222;border:1px solid #ffffff1b;color:white;border-radius:12px;padding:13px;margin:12px 0}.hero{padding:16px;border-radius:16px;background:linear-gradient(145deg,#1a2f55,#0c1627);border:1px solid #00d4ff38;margin-bottom:16px}.app-card{background:linear-gradient(145deg,#12213a,#0c1627);border:1px solid #d8aa4570;border-radius:20px;padding:14px;display:flex;gap:14px;align-items:center}.app-icon{width:78px;height:78px;border-radius:19px;background:#000;border:2px solid var(--gold);overflow:hidden;flex-shrink:0}.app-icon img{width:100%;height:100%;object-fit:cover}.app-info{flex:1;min-width:0}.app-name{font-size:15px;font-weight:900}.app-meta{font-size:11px;color:#8e9aad;margin-top:5px}.app-desc{font-size:11px;color:#c5d2e5;margin-top:7px}.btn{border:0;border-radius:12px;padding:12px 15px;font-weight:900;font-size:12px;cursor:pointer}.btn-install{background:linear-gradient(100deg,#00d4ff,#0077ff);color:#001018}.btn-free{background:#22c55e20;border:1px solid #22c55e40;color:#22c55e;padding:4px 7px;font-size:9px;border-radius:6px;margin-left:6px}.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:3000;background:#12213a;border:1px solid #d8aa4540;padding:12px 16px;border-radius:12px;font-size:12px;transition:.25s;text-align:center;max-width:90%}.toast.show{opacity:1;transform:translate(-50%,0)}.overlay{display:none;position:fixed;inset:0;background:#02050be8;z-index:1000;padding:16px;align-items:center;justify-content:center}.overlay.show{display:flex}.modal{width:100%;max-width:500px;background:linear-gradient(145deg,#12213a,#091321);border:1px solid #e6bd6759;border-radius:22px;padding:20px}.bottom-nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:#050914fa;border-top:1px solid #ffffff14;padding:8px 4px}.bottom-nav a{flex:1;text-decoration:none;color:#6b7a90;font-size:10px;font-weight:700;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:4px}.bottom-nav a span.icon{font-size:20px}.bottom-nav a.active{color:var(--blue)}
+.container{max-width:1000px;margin:auto;padding:16px 14px 110px}.header{display:flex;justify-content:space-between;align-items:center;padding:14px 0}.logo{font-weight:900;color:var(--blue);font-size:18px}.badge{font-size:10px;border:1px solid #22c55e55;background:#22c55e15;color:var(--green);padding:7px 12px;border-radius:20px}.search{width:100%;background:#081222;border:1px solid #ffffff1b;color:white;border-radius:12px;padding:13px;margin:12px 0}.hero{padding:16px;border-radius:16px;background:linear-gradient(145deg,#1a2f55,#0c1627);border:1px solid #00d4ff38;margin-bottom:16px}.app-card{background:linear-gradient(145deg,#12213a,#0c1627);border:1px solid #d8aa4570;border-radius:20px;padding:14px;display:flex;gap:14px;align-items:center}.app-icon{width:78px;height:78px;border-radius:19px;background:#000;border:2px solid var(--gold);overflow:hidden;flex-shrink:0}.app-icon img{width:100%;height:100%;object-fit:cover}.app-info{flex:1;min-width:0}.app-name{font-size:15px;font-weight:900}.app-meta{font-size:11px;color:#8e9aad;margin-top:5px}.app-desc{font-size:11px;color:#c5d2e5;margin-top:7px}.btn{border:0;border-radius:12px;padding:12px 15px;font-weight:900;font-size:12px;cursor:pointer}.btn-install{background:linear-gradient(100deg,#00d4ff,#0077ff);color:#001018}.btn-free{background:#22c55e20;border:1px solid #22c55e40;color:#22c55e;padding:4px 7px;font-size:9px;border-radius:6px;margin-left:6px}.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:3000;background:#12213a;border:1px solid #d8aa4540;padding:12px 16px;border-radius:12px;font-size:12px;transition:.25s;text-align:center;max-width:90%}.toast.show{opacity:1;transform:translate(-50%,0)}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:#050914; border-top:1px solid #ffffff14;padding:10px 4px;z-index:9999}
+.bottom-nav button{flex:1;background:none;border:0;color:#6b7a90;font-size:10px;font-weight:700;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer}
+.bottom-nav button span.icon{font-size:22px}.bottom-nav button.active{color:var(--blue)}
 </style>
 </head>
 <body>
@@ -17,17 +20,22 @@
 <input class="search" id="search" placeholder="Rechercher...">
 <div id="list"></div>
 </div>
-<div class="overlay" id="modal"><div class="modal" id="modalContent"></div></div>
 <div class="toast" id="toast"></div>
+
+<!-- MENU DU BAS QUI MARCHE 100% EN APK -->
 <nav class="bottom-nav">
-<a href="tableau%20de%20bord.html"><span class="icon">📊</span>Dashboard</a>
-<a href="boutique.html"><span class="icon">🛍️</span>Boutique</a>
-<a href="store.html" class="active"><span class="icon">🛒</span>Store</a>
-<a href="profil.html"><span class="icon">👤</span>Profil</a>
+  <button onclick="goPage('dashboard.html')"><span class="icon">📊</span>Dashboard</button>
+  <button onclick="goPage('boutique.html')"><span class="icon">🛍️</span>Boutique</button>
+  <button class="active" onclick="goPage('store.html')"><span class="icon">🛒</span>Store</button>
+  <button onclick="goPage('profil.html')"><span class="icon">👤</span>Profil</button>
 </nav>
+
 <script>
-const $=id=>document.getElementById(id);
-function toast(m){const el=$("toast");el.textContent=m;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),3500);}
+function goPage(p){
+  // Fix WebView Android
+  window.location.href = p;
+}
+function toastMsg(m){const el=document.getElementById("toast");el.textContent=m;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),3000);}
 
 const ICON="./jason.png";
 const APK="./jason.apk";
@@ -35,31 +43,22 @@ const APK="./jason.apk";
 const apps=[{id:"jason1",name:"Jason Business 1.0",version:"1.0.0",size:"28 MB",desc:"Découvre Jason Business : WEB, DESIGN, DIGITAL et IA.",icon:ICON,apk:APK}];
 
 function render(){
-  $("list").innerHTML=apps.map(a=>`
+  document.getElementById("list").innerHTML=apps.map(a=>`
     <div class="app-card">
-      <div class="app-icon"><img src="${a.icon}" alt="JB" onerror="this.src='https://raw.githubusercontent.com/djesonaloma-boop/Jason-business/principal/jason.png'"></div>
+      <div class="app-icon"><img src="${a.icon}" onerror="this.src='https://raw.githubusercontent.com/djesonaloma-boop/Jason-business/principal/jason.png'"></div>
       <div class="app-info"><div class="app-name">${a.name}<span class="btn-free">GRATUIT</span></div><div class="app-meta">v${a.version} • ${a.size}</div><div class="app-desc">${a.desc}</div></div>
       <button class="btn btn-install" onclick="downloadApp()">INSTALLER</button>
     </div>`).join("");
 }
-
-window.downloadApp=function(){
-  toast("📥 Téléchargement en cours... jason.apk");
-  // FIX WEBVIEW : créer un lien de téléchargement réel
-  const link=document.createElement("a");
-  link.href=APK;
-  link.download="jason.apk";
-  link.target="_blank";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  
-  // Fallback pour WebView
-  setTimeout(()=>{
-    try{ window.open(APK,"_blank"); }catch(e){}
-  },800);
-};
-
+function downloadApp(){
+  toastMsg("📥 Téléchargement en cours...");
+  const a=document.createElement("a");
+  a.href=APK+"?t="+Date.now();
+  a.download="jason.apk";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
 render();
 </script>
 </body>
