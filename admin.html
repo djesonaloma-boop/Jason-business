@@ -3,203 +3,242 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#050914">
 <title>JASON BUSINESS — ADMIN</title>
 <style>
-:root{--bg:#050914;--panel:#0b1220;--border:rgba(255,255,255,.08);--text:#f5f7fb;--muted:#8e9aad;--blue:#3b82f6;--green:#22c55e;--red:#ef4444;--gold:#d8aa45;}
+:root{
+ --bg:#050914;--panel:#0b1220;--border:rgba(255,255,255,.08);
+ --text:#f5f7fb;--muted:#8e9aad;--blue:#3b82f6;
+ --green:#22c55e;--red:#ef4444;--orange:#f97316;--purple:#a855f7;
+}
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,sans-serif}
-body{background:#050914;color:var(--text);min-height:100vh}
-button,input{font:inherit}button{cursor:pointer}
-#adminLogin{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;background:#050914;z-index:9999}
-.login-box{width:100%;max-width:400px;background:#0b1220;border:1px solid var(--border);border-radius:24px;padding:30px}
-.input{width:100%;background:#070d18;border:1px solid var(--border);color:white;border-radius:13px;padding:14px;margin-bottom:12px;outline:none}
+body{background:radial-gradient(circle at top,#101d35 0,var(--bg) 45%,#02040a 100%);color:var(--text);min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer}
+#adminLogin{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at top,#172744,#030711 70%);z-index:9999}
+.login-box{width:100%;max-width:400px;background:rgba(11,18,32,.96);border:1px solid var(--border);border-radius:24px;padding:30px;box-shadow:0 25px 80px #0009}
+.login-logo{text-align:center;font-size:25px;font-weight:900;letter-spacing:1px;margin-bottom:7px}
+.login-subtitle{text-align:center;color:var(--muted);font-size:12px;margin-bottom:25px}
+.input{width:100%;background:#070d18;border:1px solid var(--border);color:white;border-radius:13px;padding:14px;outline:none;margin-bottom:12px}
 .input:focus{border-color:var(--blue)}
 .login-btn{width:100%;border:0;border-radius:13px;padding:14px;background:var(--blue);color:white;font-weight:800}
 .login-error{color:#ff6b6b;text-align:center;font-size:12px;min-height:18px;margin-top:12px}
-#adminPanel{display:none}
-.header{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:#050914f5;border-bottom:1px solid var(--border);backdrop-filter:blur(10px)}
-.brand{font-weight:900}.brand span{color:#4da3ff}
+#adminPanel{display:none;min-height:100vh}
+.header{position:sticky;top:0;z-index:100;min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:rgba(5,9,20,.94);backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
+.brand{font-size:18px;font-weight:900}.brand span{color:#4da3ff}
+.header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.admin-status{display:flex;align-items:center;gap:7px;font-size:11px;color:#9ca9bc}
+.online-dot{width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 10px var(--green)}
 .logout{border:1px solid #ef44444d;background:#ef444414;color:#ff6b6b;border-radius:10px;padding:9px 12px;font-weight:700}
-.layout{display:flex}.sidebar{width:235px;background:#070c17;border-right:1px solid var(--border);padding:15px 12px;min-height:calc(100vh - 60px)}
-.menu-btn{width:100%;border:0;background:transparent;color:#a8b3c5;padding:13px 12px;margin-bottom:5px;border-radius:12px;text-align:left;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:space-between}
+.layout{display:flex;min-height:calc(100vh - 68px)}
+.sidebar{width:235px;flex-shrink:0;background:#070c17f0;border-right:1px solid var(--border);padding:15px 12px}
+.menu-btn{width:100%;border:0;background:transparent;color:#a8b3c5;padding:13px 12px;margin-bottom:5px;border-radius:12px;text-align:left;display:flex;align-items:center;gap:10px;font-weight:700;font-size:13px;white-space:nowrap}
 .menu-btn.active{background:#3b82f626;color:#fff}
-.menu-count{background:var(--red);color:white;border-radius:20px;min-width:21px;height:21px;display:flex;align-items:center;justify-content:center;font-size:10px}
-.content{flex:1;padding:20px;min-width:0}
+.menu-count{margin-left:auto;min-width:21px;height:21px;display:flex;align-items:center;justify-content:center;border-radius:20px;background:var(--red);color:white;font-size:10px}
+.content{flex:1;min-width:0;padding:20px}
 .page{display:none}.page.active{display:block}
-.page-title{font-size:22px;font-weight:900;margin-bottom:15px}
+.page-title{font-size:25px;font-weight:900;margin-bottom:5px}
+.page-subtitle{color:var(--muted);font-size:12px;margin-bottom:20px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:20px}
+.stat-card{background:linear-gradient(145deg,#101a2bf5,#080e1af5);border:1px solid var(--border);border-radius:18px;padding:18px;min-height:110px}
+.stat-icon{font-size:22px;margin-bottom:10px}.stat-label{color:var(--muted);font-size:11px}
+.stat-value{font-size:22px;font-weight:900;margin-top:5px;overflow-wrap:anywhere}
 .panel{background:#0b1220e6;border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:18px}
-.panel-head{padding:16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center}
-.table-wrap{width:100%;overflow-x:auto}table{width:100%;min-width:900px;border-collapse:collapse}
+.panel-head{padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--border)}
+.table-wrap{width:100%;overflow-x:auto}
+table{width:100%;min-width:760px;border-collapse:collapse}
 th{color:#7f8da2;font-size:10px;text-transform:uppercase;text-align:left;padding:13px;border-bottom:1px solid var(--border)}
-td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;max-width:200px;overflow:hidden;text-overflow:ellipsis}
+td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:middle}
 .btn{border:0;border-radius:8px;padding:8px 10px;color:white;font-size:10px;font-weight:800;margin:2px}
-.btn-blue{background:var(--blue)}.btn-green{background:var(--green)}.btn-red{background:var(--red)}.btn-gold{background:var(--gold);color:#111}.btn-dark{background:#263246}.btn-purple{background:#a855f7}
-.badge{border-radius:20px;padding:5px 8px;font-size:10px;font-weight:800}
-.badge-success{background:#22c55e1f;color:#54e889}.badge-danger{background:#ef44441f;color:#ff7777}.badge-pending{background:#f59e0b1f;color:#ffc95a}
-.toolbar-input{background:#070d18;border:1px solid var(--border);border-radius:10px;color:white;padding:10px}
-#toastContainer{position:fixed;top:78px;right:15px;z-index:10000;display:flex;flex-direction:column;gap:8px;width:min(330px,calc(100% - 30px))}
-.toast{padding:13px 15px;border-radius:12px;background:#111b2d;border:1px solid var(--border);font-size:12px}
+.btn-blue{background:var(--blue)}.btn-green{background:var(--green)}.btn-red{background:var(--red)}.btn-orange{background:var(--orange)}.btn-purple{background:var(--purple)}
+.badge{display:inline-flex;border-radius:20px;padding:5px 8px;font-size:10px;font-weight:800}
+.badge-success{color:#54e889;background:#22c55e1f}.badge-danger{color:#ff7777;background:#ef44441f}.badge-pending{color:#ffc95a;background:#f59e0b1f}.badge-blue{color:#70a9ff;background:#3b82f621}
+.toolbar-input,.price-input,.small-select{background:#070d18;border:1px solid var(--border);border-radius:10px;color:white;padding:10px;outline:none}
+.price-input{width:100%;min-width:100px}.small-select{max-width:160px}
+.section-note{color:var(--muted);font-size:12px;line-height:1.7;padding:15px}
+.price-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:16px}
+.price-card{background:#070d18;border:1px solid var(--border);border-radius:15px;padding:16px}
+.price-card h3{font-size:14px;margin-bottom:7px}.price-card p{color:var(--muted);font-size:11px;margin-bottom:13px;line-height:1.5}
+.price-row{display:flex;align-items:center;gap:9px}.price-row label{font-size:11px;color:var(--muted);flex:1}.price-row input{width:125px;max-width:55%}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;padding:0 16px 16px}
+#toastContainer{position:fixed;top:78px;right:15px;z-index:10000;display:flex;flex-direction:column;gap:8px;width:min(330px,calc(100% - 30px))}.toast{padding:13px 15px;border-radius:12px;background:#111b2d;border:1px solid var(--border);font-size:12px}
 .empty{text-align:center;color:var(--muted);padding:25px}
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.7);z-index:5000;backdrop-filter:blur(5px)}.modal.show{display:flex}
-.modal-box{width:100%;max-width:700px;max-height:90vh;overflow:auto;background:#0b1220;border:1px solid var(--border);border-radius:20px}
-.modal-header{display:flex;justify-content:space-between;align-items:center;padding:17px;border-bottom:1px solid var(--border)}
-.close{width:34px;height:34px;border:0;border-radius:10px;background:rgba(255,255,255,.06);color:white;font-size:20px}
-.modal-content{padding:18px;white-space:pre-wrap;word-break:break-word;font-size:12px;line-height:1.6}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.price-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.layout{display:block}.sidebar{width:100%;display:flex;overflow-x:auto;border-right:0;border-bottom:1px solid var(--border);padding:8px}.menu-btn{width:auto;flex-shrink:0}.content{padding:14px}.page-title{font-size:22px}.header{padding:12px}.admin-status{display:none}}
 </style>
 </head>
 <body>
 
 <div id="adminLogin">
  <div class="login-box">
-  <div style="text-align:center;font-weight:900;font-size:22px;margin-bottom:15px">JASON BUSINESS</div>
-  <div style="text-align:center;color:#8e9aad;font-size:11px;margin-bottom:15px">Code admin : 10092007</div>
-  <input id="adminPassword" class="input" type="text" inputmode="numeric" autocomplete="off" placeholder="Mot de passe administrateur">
-  <button id="loginAdmin" class="login-btn">🔓 Ouvrir l'administration</button>
+  <div class="login-logo">JASON BUSINESS</div>
+  <div class="login-subtitle">🔐 PANNEAU D'ADMINISTRATION — Code 10092007</div>
+  <input type="text" inputmode="numeric" autocomplete="off" id="adminPassword" class="input" placeholder="Mot de passe administrateur">
+  <button id="loginAdmin" class="login-btn" type="button">🔓 Ouvrir l'administration</button>
   <div id="loginError" class="login-error"></div>
  </div>
 </div>
 
 <div id="adminPanel">
- <div class="header"><div class="brand">JASON <span>BUSINESS</span></div><div style="display:flex;gap:10px;align-items:center"><span style="font-size:11px;color:#8e9aad" id="debug">Chargement...</span><button class="logout" id="adminLogout">Déconnexion</button></div></div>
+ <header class="header">
+  <div class="brand">JASON <span>BUSINESS</span></div>
+  <div class="header-right"><div class="admin-status"><span class="online-dot"></span>Session administrateur</div><button class="logout" id="adminLogout" type="button">Déconnexion</button></div>
+ </header>
  <div class="layout">
   <aside class="sidebar">
    <button class="menu-btn active" data-page="dashboard">📊 Dashboard</button>
-   <button class="menu-btn" data-page="recharges">💳 Dépôts <span class="menu-count" id="menuRecharges">0</span></button>
+   <button class="menu-btn" data-page="users">👥 Utilisateurs</button>
+   <button class="menu-btn" data-page="commands">🛒 Commandes <span class="menu-count" id="menuCommands">0</span></button>
+   <button class="menu-btn" data-page="recharges">💳 Recharges <span class="menu-count" id="menuRecharges">0</span></button>
    <button class="menu-btn" data-page="withdrawals">💸 Retraits <span class="menu-count" id="menuWithdrawals">0</span></button>
-   <button class="menu-btn" data-page="commands">🛒 Boost <span class="menu-count" id="menuCommands">0</span></button>
-   <button class="menu-btn" data-page="store">🛍️ Store <span class="menu-count" id="menuStore">0</span></button>
-   <button class="menu-btn" data-page="users">👥 Users</button>
+   <button class="menu-btn" data-page="vip">👑 VIP <span class="menu-count" id="menuVip">0</span></button>
+   <button class="menu-btn" data-page="api">🔌 API et tarifs</button>
   </aside>
   <main class="content">
    <section class="page active" id="page-dashboard">
-    <div class="page-title">📊 Dashboard - Où sont tes données?</div>
-    <div class="panel"><div class="panel-head"><strong>Diagnostic Firebase</strong></div><div style="padding:15px;font-size:12px;line-height:1.8" id="diag"></div></div>
-    <div class="panel"><div class="panel-head"><strong>Test rapide (crée une vraie donnée Firebase)</strong></div><div style="padding:15px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-blue" onclick="createTestRecharge()">+ Créer Test Dépôt</button><button class="btn btn-purple" onclick="createTestWithdrawal()">+ Créer Test Retrait</button><button class="btn btn-gold" onclick="createTestBoost()">+ Créer Test Boost</button><button class="btn btn-dark" onclick="createTestStore()">+ Test Store</button></div></div>
+    <div class="page-title">📊 Dashboard</div><div class="page-subtitle">Vue générale — Fix recharge/retrait : scan multi-chemins Firebase</div>
+    <div class="stats">
+     <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-label">Utilisateurs</div><div class="stat-value" id="statUsers">0</div></div>
+     <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-label">Solde total</div><div class="stat-value" id="totalBalance">0 FC</div></div>
+     <div class="stat-card"><div class="stat-icon">🛒</div><div class="stat-label">Commandes en attente</div><div class="stat-value" id="statCommands">0</div></div>
+     <div class="stat-card"><div class="stat-icon">💳</div><div class="stat-label">Recharges en attente</div><div class="stat-value" id="statRecharges">0</div></div>
+     <div class="stat-card"><div class="stat-icon">💸</div><div class="stat-label">Retraits en attente</div><div class="stat-value" id="statWithdrawals">0</div></div>
+     <div class="stat-card"><div class="stat-icon">👑</div><div class="stat-label">Membres VIP actifs</div><div class="stat-value" id="statVip">0</div></div>
+    </div>
+    <div class="panel"><div class="panel-head"><strong>Diagnostic Firebase</strong></div><div class="section-note" id="diagInfo">Connexion...</div></div>
    </section>
-   <section class="page" id="page-recharges"><div class="page-title">💳 Dépôts — Tous les chemins confondus</div><div class="panel"><div class="panel-head"><strong>Tous les dépôts trouvés</strong><input id="searchRecharge" class="toolbar-input" placeholder="🔎 Numéro client"></div><div class="table-wrap"><table><thead><tr><th>Source Firebase</th><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Transaction</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="rechargesTable"></tbody></table></div></div></section>
-   <section class="page" id="page-withdrawals"><div class="page-title">💸 Retraits — Tous les chemins confondus</div><div class="panel"><div class="panel-head"><strong>Tous les retraits trouvés</strong><input id="searchWithdrawal" class="toolbar-input" placeholder="🔎 Numéro"></div><div class="table-wrap"><table><thead><tr><th>Source</th><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Numéro</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsTable"></tbody></table></div></div></section>
-   <section class="page" id="page-commands"><div class="page-title">🛒 Boost — Tous les chemins</div><div class="panel"><div class="panel-head"><strong>Boost</strong></div><div class="table-wrap"><table><thead><tr><th>Source</th><th>Date</th><th>Client</th><th>Plateforme</th><th>Service</th><th>Qté</th><th>Prix</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div></div></section>
-   <section class="page" id="page-store"><div class="page-title">🛍️ Store — App, Site, Chatbot, Chanson, Pub</div><div class="panel"><div class="panel-head"><strong>Store</strong></div><div class="table-wrap"><table><thead><tr><th>Source</th><th>Date</th><th>Client</th><th>Produit</th><th>Prix</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="storeTable"></tbody></table></div></div></section>
-   <section class="page" id="page-users"><div class="page-title">👥 Users</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Solde</th><th>Nom</th><th>MDP</th></tr></thead><tbody id="usersTable"></tbody></table></div></div></section>
+   <section class="page" id="page-users"><div class="page-title">👥 Utilisateurs</div><div class="panel"><div class="panel-head"><strong>Liste des clients</strong><input id="userSearch" class="toolbar-input" placeholder="🔎 Rechercher..." style="width:100%;max-width:300px"></div><div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>VIP</th><th>Actions</th></tr></thead><tbody id="usersTable"></tbody></table></div></div></section>
+   <section class="page" id="page-commands"><div class="page-title">🛒 Commandes</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Client</th><th>Service</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div></div></section>
+   <section class="page" id="page-recharges"><div class="page-title">💳 Recharges — Tu vois tout maintenant</div><div class="panel"><div class="panel-head"><strong>Dépôts (tous chemins Firebase)</strong><button class="btn btn-blue" onclick="createTestRecharge()">+ Test Dépôt</button></div><div class="table-wrap"><table><thead><tr><th>Source</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="rechargesTable"></tbody></table></div></div></section>
+   <section class="page" id="page-withdrawals"><div class="page-title">💸 Retraits — Tu vois tout maintenant</div><div class="panel"><div class="panel-head"><strong>Retraits (tous chemins)</strong><button class="btn btn-purple" onclick="createTestWithdrawal()">+ Test Retrait</button></div><div class="table-wrap"><table><thead><tr><th>Source</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsTable"></tbody></table></div></div></section>
+   <section class="page" id="page-vip"><div class="page-title">👑 Gestion VIP</div><div class="panel"><div class="panel-head"><strong>Clients VIP</strong><input id="vipSearch" class="toolbar-input" placeholder="🔎 Rechercher"></div><div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Niveau</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="vipTable"></tbody></table></div></div></section>
+   <section class="page" id="page-api"><div class="page-title">🔌 API et tarifs</div><div class="panel"><div class="panel-head"><strong>Tarification</strong><span class="badge badge-blue">Prix en FC</span></div><div class="price-grid" id="priceGrid"></div><div class="action-row"><button class="btn btn-blue" id="savePrices">💾 Enregistrer</button><button class="btn btn-purple" id="reloadPrices">↻ Recharger</button></div></div><div class="panel"><div class="section-note" id="apiInfo">...</div></div></section>
   </main>
  </div>
 </div>
 
-<div class="modal" id="detailModal"><div class="modal-box"><div class="modal-header"><div id="modalTitle">Détails</div><button class="close" onclick="closeModal('detailModal')">×</button></div><div class="modal-content" id="modalContent"></div></div></div>
 <div id="toastContainer"></div>
 
 <script>
+// LOGIN FIXE - TON APPARENCE GARDÉE
 const ADMIN_CODE="10092007";
 function showAdmin(){document.getElementById("adminLogin").style.display="none";document.getElementById("adminPanel").style.display="block";localStorage.setItem("jasonAdmin","ok"); if(window._start) window._start();}
-function doLogin(){const pw=(document.getElementById("adminPassword").value||"").trim(); if(pw===ADMIN_CODE) showAdmin(); else document.getElementById("loginError").textContent="❌ Code incorrect - tape 10092007";}
-document.addEventListener("DOMContentLoaded",()=>{document.getElementById("loginAdmin").onclick=doLogin; document.getElementById("adminPassword").onkeydown=e=>{if(e.key==="Enter") doLogin();}; document.getElementById("adminLogout").onclick=()=>{localStorage.removeItem("jasonAdmin"); location.reload();}; if(localStorage.getItem("jasonAdmin")==="ok"){document.getElementById("adminLogin").style.display="none";document.getElementById("adminPanel").style.display="block";}});
-function closeModal(id){document.getElementById(id).classList.remove("show");} function openModal(id){document.getElementById(id).classList.add("show");}
-function toast(m){const c=document.getElementById("toastContainer"); const el=document.createElement("div"); el.className="toast"; el.textContent=m; c.appendChild(el); setTimeout(()=>el.remove(),4000);}
-function openPage(p){document.querySelectorAll(".menu-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===p)); document.querySelectorAll(".page").forEach(s=>s.classList.toggle("active",s.id==="page-"+p));}
-document.querySelectorAll(".menu-btn").forEach(b=>b.addEventListener("click",()=>openPage(b.dataset.page)));
+function doLogin(){const pw=(document.getElementById("adminPassword").value||"").trim(); const err=document.getElementById("loginError"); if(pw===ADMIN_CODE) showAdmin(); else err.textContent="❌ Code incorrect - tape 10092007";}
+document.addEventListener("DOMContentLoaded",()=>{
+ document.getElementById("loginAdmin").onclick=doLogin;
+ document.getElementById("adminPassword").onkeydown=e=>{if(e.key==="Enter") doLogin();};
+ document.getElementById("adminLogout").onclick=()=>{localStorage.removeItem("jasonAdmin"); location.reload();};
+ if(localStorage.getItem("jasonAdmin")==="ok"){document.getElementById("adminLogin").style.display="none";document.getElementById("adminPanel").style.display="block";}
+});
 </script>
 
 <script type="module">
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, onValue, update, remove, push, runTransaction, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, onValue, update, remove, push, runTransaction, get, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
 const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
 const db=getDatabase(app);
 const ROOT="jasonBusiness";
-let usersCache={}, allRecharges=[], allWithdrawals=[], allCommands=[], allStore=[]; let started=false;
+const USERS_PATH=`${ROOT}/users`;
+const PRICES_PATH=`${ROOT}/config/apiPrices`;
+const defaultPrices={boosting:{label:"Boosting / réseaux sociaux",price:5000,description:"Tarif de base"},chatbot:{label:"API Chatbot IA",price:10000,description:"Accès chatbot"},translation:{label:"Traduction IA",price:2000,description:"Traduction"},image:{label:"Génération d’images",price:5000,description:"Images"},music:{label:"Génération musicale",price:10000,description:"Musique"},video:{label:"Génération vidéo",price:15000,description:"Vidéo"}};
+let usersCache={}, commandsCache={}, rechargesCache={}, withdrawalsCache={}, pricesCache={};
+let started=false;
 const $=id=>document.getElementById(id);
 const money=v=>Math.floor(Number(v)||0).toLocaleString("fr-FR");
 const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
-const getPhone=d=>String(d.telephone??d.userPhone??d.phone??d.numero??d.user??d.client??d.from??"").trim();
+const getPhone=d=>String(d.telephone??d.userPhone??d.phone??d.numero??d.user??d.client??"").trim();
+const getName=d=>d.nom||d.name||"Utilisateur";
+const getBal=d=>Number(d.solde_principal??d.solde??d.balance??0)||0;
 const getStatus=d=>String(d.statut??d.status??"En attente");
 const isPending=s=>String(s||"").toLowerCase().includes("attente");
-const badge=s=>{const l=String(s||"").toLowerCase(); if(l.includes("valid")||l.includes("pay")) return `<span class="badge badge-success">✓ ${esc(s)}</span>`; if(l.includes("refus")) return `<span class="badge badge-danger">✕ ${esc(s)}</span>`; return `<span class="badge badge-pending">⏳ ${esc(s)}</span>`;};
+const isVip=d=>{const s=String(d.vipStatus||"").toLowerCase(); return d.vip===true||d.isVip===true||s==="actif";};
+const vipLevel=d=>d.vipLevel||"Aucun";
+const badge=s=>{const l=String(s||"").toLowerCase(); if(l.includes("valid")||l.includes("pay")) return `<span class="badge badge-success">✓ ${esc(s)}</span>`; if(l.includes("refus")) return `<span class="badge badge-danger">✕ ${esc(s)}</span>`; return `<span class="badge badge-pending">⏳ ${esc(s)}</span>`;}
+function toast(m){const c=$("toastContainer"); const el=document.createElement("div"); el.className="toast"; el.textContent=m; c.appendChild(el); setTimeout(()=>el.remove(),3500);}
+function openPage(p){document.querySelectorAll(".menu-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===p)); document.querySelectorAll(".page").forEach(s=>s.classList.toggle("active",s.id==="page-"+p));}
+document.querySelectorAll(".menu-btn").forEach(b=>b.addEventListener("click",()=>openPage(b.dataset.page)));
 
 window._start=()=>{
  if(started) return; started=true;
- $("diag").innerHTML="Je scanne Firebase...<br>";
- onValue(ref(db, `${ROOT}/users`), snap=>{
-  usersCache={}; allRecharges=[]; allWithdrawals=[]; let list="";
-  snap.forEach(u=>{
-   const phone=u.key; const data=u.val()||{}; usersCache[phone]=data; list+=phone+" ";
-   ["demandes_recharges","recharges","depot","depots"].forEach(k=>{
-    if(data[k] && typeof data[k]==="object"){
-     Object.entries(data[k]).forEach(([id,val])=>{ if(typeof val==="object") allRecharges.push({id:phone+"/"+k+"/"+id, source:`${ROOT}/users/${phone}/${k}`, data:{...val, telephone:val.telephone||phone}, fullPath:`${ROOT}/users/${phone}/${k}/${id}`}); });
-    }
-   });
-   ["demandes_retraits","retraits","retrait","withdrawals"].forEach(k=>{
-    if(data[k] && typeof data[k]==="object"){
-     Object.entries(data[k]).forEach(([id,val])=>{ if(typeof val==="object") allWithdrawals.push({id:phone+"/"+k+"/"+id, source:`${ROOT}/users/${phone}/${k}`, data:{...val, telephone:val.telephone||phone}, fullPath:`${ROOT}/users/${phone}/${k}/${id}`}); });
-    }
-   });
-  });
-  renderUsers(); renderAll();
-  $("diag").innerHTML=`<b>Users:</b> ${snap.size}<br><small>${esc(list.slice(0,200))}</small><br><br>`;
+ onValue(ref(db, USERS_PATH), snap=>{
+  usersCache={}; let total=0,balance=0,vipCount=0; snap.forEach(ch=>{const d=ch.val()||{}; usersCache[ch.key]=d; total++; balance+=getBal(d); if(isVip(d)) vipCount++;});
+  $("statUsers").textContent=total; $("totalBalance").textContent=money(balance)+" FC"; $("statVip").textContent=vipCount; $("menuVip").textContent=vipCount; renderUsers(); renderVip(); scanNestedInUsers();
  });
- const listen=(path,type)=>{
-  onValue(ref(db,path), snap=>{
-   $("diag").innerHTML+=`📁 ${path} : ${snap.size} éléments<br>`;
-   if(type==="recharge"){ allRecharges=allRecharges.filter(r=>r.source!==path); snap.forEach(ch=>{ allRecharges.push({id:ch.key, source:path, data:ch.val()||{}, fullPath:`${path}/${ch.key}`}); }); renderAll(); }
-   if(type==="retrait"){ allWithdrawals=allWithdrawals.filter(r=>r.source!==path); snap.forEach(ch=>{ allWithdrawals.push({id:ch.key, source:path, data:ch.val()||{}, fullPath:`${path}/${ch.key}`}); }); renderAll(); }
-   if(type==="command"){ allCommands=allCommands.filter(r=>r.source!==path); snap.forEach(ch=>{ allCommands.push({id:ch.key, source:path, data:ch.val()||{}, fullPath:`${path}/${ch.key}`}); }); renderAll(); }
-   if(type==="store"){ allStore=allStore.filter(r=>r.source!==path); snap.forEach(ch=>{ allStore.push({id:ch.key, source:path, data:ch.val()||{}, fullPath:`${path}/${ch.key}`}); }); renderAll(); }
-  });
- };
- listen(`${ROOT}/demandes_recharges`,"recharge"); listen(`${ROOT}/recharges`,"recharge"); listen(`demandes_recharges`,"recharge");
- listen(`${ROOT}/demandes_retraits`,"retrait"); listen(`${ROOT}/retraits`,"retrait"); listen(`demandes_retraits`,"retrait");
- listen(`${ROOT}/demandes_commandes`,"command"); listen(`${ROOT}/store_commandes`,"store"); listen(`${ROOT}/commandes`,"command");
+ const rechargePaths=[`${ROOT}/demandes_recharges`,`${ROOT}/recharges`,`demandes_recharges`,`${ROOT}/depots`];
+ const retraitPaths=[`${ROOT}/demandes_retraits`,`${ROOT}/retraits`,`demandes_retraits`];
+ rechargePaths.forEach(p=> onValue(ref(db,p), s=>{ if(s.size===0){ Object.keys(rechargesCache).forEach(k=>{ if(rechargesCache[k]._src===p) delete rechargesCache[k];}); renderRecharges(); return;} s.forEach(ch=>{ rechargesCache[ch.key]={...ch.val(), _src:p, _full:`${p}/${ch.key}`};}); renderRecharges(); }));
+ retraitPaths.forEach(p=> onValue(ref(db,p), s=>{ if(s.size===0){ Object.keys(withdrawalsCache).forEach(k=>{ if(withdrawalsCache[k]._src===p) delete withdrawalsCache[k];}); renderWithdrawals(); return;} s.forEach(ch=>{ withdrawalsCache[ch.key]={...ch.val(), _src:p, _full:`${p}/${ch.key}`};}); renderWithdrawals(); }));
+ onValue(ref(db, `${ROOT}/demandes_commandes`), s=>{ commandsCache={}; s.forEach(ch=>commandsCache[ch.key]=ch.val()||{}); renderCommands();});
+ onValue(ref(db, PRICES_PATH), s=>{ pricesCache=s.val()||{}; renderPrices(); $("apiInfo").textContent=s.exists()?"Tarifs chargés":"Aucun tarif";});
 };
+
+function scanNestedInUsers(){
+ let nestedR=0, nestedW=0;
+ Object.entries(usersCache).forEach(([phone, data])=>{
+  ["demandes_recharges","recharges","depot"].forEach(k=>{ if(data[k] && typeof data[k]==="object"){ Object.entries(data[k]).forEach(([id,val])=>{ if(typeof val==="object" && val.montant){ const key=phone+"_"+k+"_"+id; rechargesCache[key]={...val, telephone:val.telephone||phone, _src:`${USERS_PATH}/${phone}/${k}`, _full:`${USERS_PATH}/${phone}/${k}/${id}`}; nestedR++; }}); }});
+  ["demandes_retraits","retraits"].forEach(k=>{ if(data[k] && typeof data[k]==="object"){ Object.entries(data[k]).forEach(([id,val])=>{ if(typeof val==="object" && val.montant){ const key=phone+"_"+k+"_"+id; withdrawalsCache[key]={...val, telephone:val.telephone||phone, _src:`${USERS_PATH}/${phone}/${k}`, _full:`${USERS_PATH}/${phone}/${k}/${id}`}; nestedW++; }}); }});
+ });
+ $("diagInfo").innerHTML=`Scan Firebase : Users ${Object.keys(usersCache).length} | Recharges ${Object.keys(rechargesCache).length} (${nestedR} dans users/) | Retraits ${Object.keys(withdrawalsCache).length} (${nestedW} dans users/) | Commandes ${Object.keys(commandsCache).length}`;
+ renderRecharges(); renderWithdrawals();
+}
 
 function renderUsers(){
  const tbody=$("usersTable"); tbody.innerHTML="";
- Object.entries(usersCache).forEach(([phone,d])=>{ const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(phone)}</td><td>${money(d.solde_principal||d.solde||0)} FC</td><td>${esc(d.nom||d.name||"")}</td><td style="color:#d8aa45">${esc(d.password||d.mot_de_passe||"—")}</td>`; tbody.appendChild(tr); });
+ Object.entries(usersCache).forEach(([phone,d])=>{ const vip=isVip(d); const tr=document.createElement("tr"); tr.dataset.search=(phone+" "+getName(d)).toLowerCase(); tr.innerHTML=`<td>${esc(phone)}</td><td>${esc(getName(d))}</td><td>${money(getBal(d))} FC</td><td>${vip?'<span class="badge badge-success">👑 '+esc(vipLevel(d))+'</span>':'<span class="badge badge-blue">Standard</span>'}</td><td><button class="btn btn-purple" onclick="openPage('vip')">👑 VIP</button><button class="btn btn-red" onclick="deleteUser('${esc(phone)}')">🗑</button></td>`; tbody.appendChild(tr); });
+ if(!Object.keys(usersCache).length) tbody.innerHTML='<tr><td colspan="5" class="empty">Aucun utilisateur</td></tr>';
 }
-function renderAll(){ renderRecharges(); renderWithdrawals(); renderCommands(); renderStore(); }
+function renderVip(){
+ const tbody=$("vipTable"); tbody.innerHTML="";
+ Object.entries(usersCache).forEach(([phone,d])=>{ const active=isVip(d); const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(phone)}</td><td>${esc(getName(d))}</td><td><select class="small-select" data-level="${esc(phone)}">${["Aucun","Bronze","Silver","Gold","Platinum","Diamond"].map(l=>`<option value="${l}" ${vipLevel(d)===l?"selected":""}>${l}</option>`).join("")}</select></td><td>${active?'<span class="badge badge-success">Actif</span>':'<span class="badge badge-danger">Inactif</span>'}</td><td><button class="btn btn-purple" onclick="saveVip('${esc(phone)}')">💾</button><button class="btn ${active?"btn-red":"btn-green"}" onclick="toggleVip('${esc(phone)}')">${active?"Désactiver":"Activer"}</button></td>`; tbody.appendChild(tr); });
+}
+window.deleteUser=async(phone)=>{ if(!confirm("Supprimer "+phone+"?")) return; await remove(ref(db, `${USERS_PATH}/${phone}`)); toast("Supprimé"); };
+window.saveVip=async(phone)=>{ const sel=document.querySelector(`[data-level="${CSS.escape(phone)}"]`); const level=sel?.value||"Aucun"; await update(ref(db, `${USERS_PATH}/${phone}`), {vipLevel:level, vipStatus:level!=="Aucun"?"Actif":"Inactif", vip:level!=="Aucun", isVip:level!=="Aucun"}); toast("VIP enregistré"); };
+window.toggleVip=async(phone)=>{ const d=usersCache[phone]||{}; const active=!isVip(d); const level=active?(vipLevel(d)==="Aucun"?"Bronze":vipLevel(d)):"Aucun"; await update(ref(db, `${USERS_PATH}/${phone}`), {vip:active, isVip:active, vipStatus:active?"Actif":"Inactif", vipLevel:level}); toast(active?"Activé":"Désactivé"); };
+
+function renderCommands(){
+ const tbody=$("commandsTable"); tbody.innerHTML=""; let pending=0;
+ Object.entries(commandsCache).forEach(([id,d])=>{ if(isPending(getStatus(d))) pending++; const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(getPhone(d))}</td><td>${esc(d.service||"Service")}</td><td>${money(d.montant||0)} FC</td><td>${badge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateCommand('${id}')">✓ Valider</button><button class="btn btn-red" onclick="refuseCommand('${id}')">✕ Refuser</button>`:"Traité"}</td>`; tbody.appendChild(tr); });
+ $("statCommands").textContent=pending; $("menuCommands").textContent=pending;
+}
 function renderRecharges(){
- const tbody=$("rechargesTable"); tbody.innerHTML=""; let p=0;
- allRecharges.sort((a,b)=>(Number(b.data.createdAt||0)-Number(a.data.createdAt||0)));
- allRecharges.forEach(item=>{
-  const d=item.data; if(isPending(getStatus(d))) p++;
-  const tr=document.createElement("tr");
-  tr.innerHTML=`<td style="font-size:9px;color:#8e9aad">${esc(item.source)}</td><td>${esc(d.date||new Date(d.createdAt||0).toLocaleString())}</td><td><b>${esc(getPhone(d)||"—")}</b></td><td><b style="color:#d8aa45">${money(d.montant||0)} FC</b></td><td>${esc(d.methode||"—")}</td><td style="font-size:10px">${esc(d.transaction||"—")}</td><td>${badge(getStatus(d))}</td><td><button class="btn btn-blue" onclick="viewDetail('${encodeURIComponent(item.fullPath)}')">👁</button>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateRechargeByPath('${encodeURIComponent(item.fullPath)}')">✓</button><button class="btn btn-red" onclick="refuseRechargeByPath('${encodeURIComponent(item.fullPath)}')">✕</button>`:`<button class="btn btn-dark" onclick="deleteByPath('${encodeURIComponent(item.fullPath)}')">🗑</button>`}</td>`;
-  tbody.appendChild(tr);
- });
- $("menuRecharges").textContent=p; $("debug").textContent=`Recharges: ${allRecharges.length} | Retraits: ${allWithdrawals.length}`;
- if(!allRecharges.length) tbody.innerHTML='<tr><td colspan="8" class="empty">Aucune recharge. Clique + Test Dépôt pour tester. Le diagnostic te montre où ton app cliente écrit.</td></tr>';
+ const tbody=$("rechargesTable"); tbody.innerHTML=""; let pending=0;
+ Object.entries(rechargesCache).forEach(([key,d])=>{ if(isPending(getStatus(d))) pending++; const tr=document.createElement("tr"); tr.innerHTML=`<td style="font-size:9px;color:#8e9aad">${esc(d._src||"")}</td><td>${esc(getPhone(d)||"—")}</td><td><b style="color:#22c55e">${money(d.montant||0)} FC</b></td><td>${esc(d.methode||"—")}</td><td>${badge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateRecharge('${esc(key)}')">✓ Valider</button><button class="btn btn-red" onclick="refuseRecharge('${esc(key)}')">✕ Refuser</button>`:`<button class="btn btn-dark" onclick="deleteRecharge('${esc(key)}')">🗑</button>`}</td>`; tbody.appendChild(tr); });
+ $("statRecharges").textContent=pending; $("menuRecharges").textContent=pending;
+ if(!Object.keys(rechargesCache).length) tbody.innerHTML='<tr><td colspan="6" class="empty">Aucune recharge — clique + Test Dépôt</td></tr>';
 }
 function renderWithdrawals(){
- const tbody=$("withdrawalsTable"); tbody.innerHTML=""; let p=0;
- allWithdrawals.sort((a,b)=>(Number(b.data.createdAt||0)-Number(a.data.createdAt||0)));
- allWithdrawals.forEach(item=>{
-  const d=item.data; if(isPending(getStatus(d))) p++;
-  const tr=document.createElement("tr");
-  tr.innerHTML=`<td style="font-size:9px;color:#8e9aad">${esc(item.source)}</td><td>${esc(d.date||"")}</td><td><b>${esc(getPhone(d)||"—")}</b></td><td>${money(d.montant||0)} FC</td><td>${esc(d.methode||"—")}</td><td>${esc(d.numero||"—")}</td><td>${badge(getStatus(d))}</td><td><button class="btn btn-blue" onclick="viewDetail('${encodeURIComponent(item.fullPath)}')">👁</button>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateWithdrawalByPath('${encodeURIComponent(item.fullPath)}')">✓</button><button class="btn btn-red" onclick="refuseWithdrawalByPath('${encodeURIComponent(item.fullPath)}')">✕</button>`:`<button class="btn btn-dark" onclick="deleteByPath('${encodeURIComponent(item.fullPath)}')">🗑</button>`}</td>`;
-  tbody.appendChild(tr);
+ const tbody=$("withdrawalsTable"); tbody.innerHTML=""; let pending=0;
+ Object.entries(withdrawalsCache).forEach(([key,d])=>{ if(isPending(getStatus(d))) pending++; const tr=document.createElement("tr"); tr.innerHTML=`<td style="font-size:9px;color:#8e9aad">${esc(d._src||"")}</td><td>${esc(getPhone(d)||"—")}</td><td>${money(d.montant||0)} FC</td><td>${esc(d.methode||"—")}</td><td>${badge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateWithdrawal('${esc(key)}')">✓ Payé</button><button class="btn btn-red" onclick="refuseWithdrawal('${esc(key)}')">✕ Refuser</button>`:`<button class="btn btn-dark" onclick="deleteWithdrawal('${esc(key)}')">🗑</button>`}</td>`; tbody.appendChild(tr); });
+ $("statWithdrawals").textContent=pending; $("menuWithdrawals").textContent=pending;
+ if(!Object.keys(withdrawalsCache).length) tbody.innerHTML='<tr><td colspan="6" class="empty">Aucun retrait</td></tr>';
+}
+
+window.validateCommand=async(id)=>{ await update(ref(db, `${ROOT}/demandes_commandes/${id}`), {statut:"Validée"}); toast("Validée"); };
+window.refuseCommand=async(id)=>{ const d=commandsCache[id]||{}; const phone=getPhone(d), amt=Number(d.montant||0); if(!confirm("Refuser et rembourser?")) return; await update(ref(db, `${ROOT}/demandes_commandes/${id}`), {statut:"Refusée"}); if(phone&&amt>0) await runTransaction(ref(db, `${USERS_PATH}/${phone}/solde_principal`), c=>(Number(c)||0)+amt); toast("Refusée"); };
+
+window.validateRecharge=async(key)=>{ const d=rechargesCache[key]||{}; const phone=getPhone(d); const amt=Number(d.montant||0); const full=d._full; if(!phone||amt<=0) return toast("Invalide"); if(!confirm(`Créditer ${money(amt)} à ${phone}?`)) return; await runTransaction(ref(db, `${USERS_PATH}/${phone}/solde_principal`), c=>(Number(c)||0)+amt); await update(ref(db, full), {statut:"Validée"}); toast("✅ Crédité"); };
+window.refuseRecharge=async(key)=>{ const d=rechargesCache[key]||{}; if(!confirm("Refuser?")) return; await update(ref(db, d._full), {statut:"Refusée"}); toast("Refusée"); };
+window.deleteRecharge=async(key)=>{ const d=rechargesCache[key]||{}; await remove(ref(db, d._full)); delete rechargesCache[key]; renderRecharges(); };
+
+window.validateWithdrawal=async(key)=>{ const d=withdrawalsCache[key]||{}; if(!confirm("Marquer payé?")) return; await update(ref(db, d._full), {statut:"Payé"}); toast("Payé"); };
+window.refuseWithdrawal=async(key)=>{ const d=withdrawalsCache[key]||{}; const phone=getPhone(d), amt=Number(d.montant||0); if(!confirm(`Refuser et rembourser ${money(amt)} à ${phone}?`)) return; await update(ref(db, d._full), {statut:"Refusée — Remboursée"}); if(phone&&amt>0) await runTransaction(ref(db, `${USERS_PATH}/${phone}/solde_principal`), c=>(Number(c)||0)+amt); toast("Remboursé"); };
+window.deleteWithdrawal=async(key)=>{ const d=withdrawalsCache[key]||{}; await remove(ref(db, d._full)); delete withdrawalsCache[key]; renderWithdrawals(); };
+
+window.createTestRecharge=async()=>{ const phone=prompt("Numéro client","0820000000"); if(!phone) return; const amt=prompt("Montant","5000"); if(!amt) return; await push(ref(db, `${ROOT}/demandes_recharges`), {telephone:phone, montant:Number(amt), methode:"M-Pesa", transaction:"TEST"+Date.now(), date:new Date().toLocaleString("fr-FR"), createdAt:Date.now(), statut:"En attente"}); toast("✅ Test dépôt créé"); };
+window.createTestWithdrawal=async()=>{ const phone=prompt("Numéro client","0820000000"); if(!phone) return; const amt=prompt("Montant","2000"); if(!amt) return; await push(ref(db, `${ROOT}/demandes_retraits`), {telephone:phone, montant:Number(amt), methode:"Airtel", numero:phone, date:new Date().toLocaleString("fr-FR"), createdAt:Date.now(), statut:"En attente"}); toast("✅ Test retrait créé"); };
+
+function renderPrices(){
+ const grid=$("priceGrid"); grid.innerHTML="";
+ Object.entries(defaultPrices).forEach(([key,fallback])=>{
+  const stored=pricesCache[key]||{}; const label=stored.label||fallback.label; const price=stored.price??fallback.price; const desc=stored.description||fallback.description;
+  const card=document.createElement("div"); card.className="price-card"; card.innerHTML=`<h3>${esc(label)}</h3><p>${esc(desc)}</p><div class="price-row"><label>Prix FC</label><input class="price-input" type="number" value="${Number(price)||0}" data-price-key="${key}"></div>`;
+  grid.appendChild(card);
  });
- $("menuWithdrawals").textContent=p;
- if(!allWithdrawals.length) tbody.innerHTML='<tr><td colspan="8" class="empty">Aucun retrait</td></tr>';
 }
-function renderCommands(){
- const tbody=$("commandsTable"); tbody.innerHTML=""; let p=0;
- allCommands.forEach(item=>{ const d=item.data; if(isPending(getStatus(d))) p++; const tr=document.createElement("tr"); tr.innerHTML=`<td style="font-size:9px">${esc(item.source)}</td><td>${esc(d.date||"")}</td><td>${esc(getPhone(d)||"—")}</td><td>${esc(d.plateforme||"—")}</td><td>${esc(d.type_service||d.service||"—")}</td><td>${esc(d.quantite||"—")}</td><td>${money(d.montant||d.prix||0)} FC</td><td>${badge(getStatus(d))}</td><td><button class="btn btn-blue" onclick="viewDetail('${encodeURIComponent(item.fullPath)}')">👁</button><button class="btn btn-dark" onclick="deleteByPath('${encodeURIComponent(item.fullPath)}')">🗑</button></td>`; tbody.appendChild(tr); });
- $("menuCommands").textContent=p;
-}
-function renderStore(){
- const tbody=$("storeTable"); tbody.innerHTML=""; let p=0;
- allStore.forEach(item=>{ const d=item.data; if(isPending(getStatus(d))) p++; const tr=document.createElement("tr"); tr.innerHTML=`<td style="font-size:9px">${esc(item.source)}</td><td>${esc(d.date||"")}</td><td>${esc(getPhone(d)||"—")}</td><td>${esc(d.produit||"—")}</td><td>${money(d.montant||d.prix||0)} FC</td><td>${badge(getStatus(d))}</td><td><button class="btn btn-blue" onclick="viewDetail('${encodeURIComponent(item.fullPath)}')">👁</button><button class="btn btn-dark" onclick="deleteByPath('${encodeURIComponent(item.fullPath)}')">🗑</button></td>`; tbody.appendChild(tr); });
- const el=document.getElementById("menuStore"); if(el) el.textContent=p;
-}
-
-window.viewDetail=async(enc)=>{ const path=decodeURIComponent(enc); const snap=await get(ref(db,path)); $("modalTitle").textContent=path; $("modalContent").textContent=JSON.stringify(snap.val()||"Vide",null,2); openModal("detailModal"); };
-window.deleteByPath=async(enc)=>{ const path=decodeURIComponent(enc); if(!confirm("Supprimer "+path+"?")) return; await remove(ref(db,path)); toast("Supprimé"); };
-window.validateRechargeByPath=async(enc)=>{ const path=decodeURIComponent(enc); const snap=await get(ref(db,path)); const d=snap.val()||{}; const phone=getPhone(d); const amt=Number(d.montant||0)||0; if(!phone||amt<=0) return toast("Invalide"); if(!confirm(`Créditer ${money(amt)} à ${phone}?`)) return; await runTransaction(ref(db, `${ROOT}/users/${phone}/solde_principal`), c=>(Number(c)||0)+amt); await update(ref(db,path), {statut:"Validée"}); toast("✅ Crédité"); };
-window.refuseRechargeByPath=async(enc)=>{ const path=decodeURIComponent(enc); if(!confirm("Refuser?")) return; await update(ref(db,path), {statut:"Refusée"}); toast("Refusée"); };
-window.validateWithdrawalByPath=async(enc)=>{ const path=decodeURIComponent(enc); if(!confirm("Valider retrait payé?")) return; await update(ref(db,path), {statut:"Payé"}); toast("Validé"); };
-window.refuseWithdrawalByPath=async(enc)=>{ const path=decodeURIComponent(enc); const snap=await get(ref(db,path)); const d=snap.val()||{}; const phone=getPhone(d); const amt=Number(d.montant||0)||0; if(!confirm(`Refuser et rembourser ${money(amt)} à ${phone}?`)) return; await update(ref(db,path), {statut:"Refusée — Remboursée"}); if(phone&&amt>0) await runTransaction(ref(db, `${ROOT}/users/${phone}/solde_principal`), c=>(Number(c)||0)+amt); toast("Remboursé"); };
-
-window.createTestRecharge=async()=>{ const phone=prompt("Numéro client","0820000000"); if(!phone) return; const amt=prompt("Montant","5000"); if(!amt) return; await push(ref(db, `${ROOT}/demandes_recharges`), {telephone:phone, montant:Number(amt), methode:"M-Pesa", transaction:"TEST"+Date.now(), date:new Date().toLocaleString("fr-FR"), createdAt:Date.now(), statut:"En attente"}); toast("✅ Dépôt créé"); };
-window.createTestWithdrawal=async()=>{ const phone=prompt("Numéro client","0820000000"); if(!phone) return; const amt=prompt("Montant","2000"); if(!amt) return; await push(ref(db, `${ROOT}/demandes_retraits`), {telephone:phone, montant:Number(amt), methode:"Airtel", numero:phone, date:new Date().toLocaleString("fr-FR"), createdAt:Date.now(), statut:"En attente"}); toast("✅ Retrait créé"); };
-window.createTestBoost=async()=>{ const phone=prompt("Numéro client","0820000000"); if(!phone) return; await push(ref(db, `${ROOT}/demandes_commandes`), {telephone:phone, plateforme:"TikTok", type_service:"followers", lien:"https://tiktok.com/@test", quantite:1000, montant:5000, date:new Date().toLocaleString("fr-FR"), createdAt:Date.now(), statut:"En attente"}); toast("✅ Boost créé"); };
-window.createTestStore=async()=>{ const phone=prompt("Numéro client","0820000000"); if(!phone) return; await push(ref(db, `${ROOT}/store_commandes`), {telephone:phone, produit:"Test Produit", montant:10000, date:new Date().toLocaleString("fr-FR"), createdAt:Date.now(), statut:"En attente"}); toast("✅ Store créé"); };
+$("savePrices").addEventListener("click", async()=>{ const next={}; for(const [k,f] of Object.entries(defaultPrices)){ const inp=document.querySelector(`[data-price-key="${k}"]`); next[k]={label:pricesCache[k]?.label||f.label, description:pricesCache[k]?.description||f.description, price:Math.floor(Number(inp.value)||0), updatedAt:Date.now()}; } await set(ref(db, PRICES_PATH), next); toast("Tarifs enregistrés"); });
+$("reloadPrices").addEventListener("click", async()=>{ const snap=await get(ref(db, PRICES_PATH)); pricesCache=snap.val()||{}; renderPrices(); toast("Rechargé"); });
+$("userSearch").addEventListener("input", ()=>{ const s=$("userSearch").value.toLowerCase(); document.querySelectorAll("#usersTable tr").forEach(tr=>{ tr.style.display=tr.dataset.search?.includes(s)?"":"none"; }); });
+$("vipSearch").addEventListener("input", ()=>{ const s=$("vipSearch").value.toLowerCase(); document.querySelectorAll("#vipTable tr").forEach(tr=>{ tr.style.display=tr.dataset.search?.includes(s)?"":"none"; }); });
 
 if(localStorage.getItem("jasonAdmin")==="ok") window._start();
 </script>
