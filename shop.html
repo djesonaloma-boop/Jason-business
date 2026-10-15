@@ -1,115 +1,726 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#050914">
 <title>JASON BUSINESS — Boutique</title>
 <style>
-:root{--bg:#050914;--text:#f5f7fb;--muted:#8e9aad;--blue:#00d4ff;--gold:#d8aa45}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#101d35 0,var(--bg) 45%,#02040a 100%);color:var(--text);font-family:Arial,Helvetica,sans-serif;min-height:100vh}
-button,input,select,textarea{font:inherit}button{cursor:pointer}.container{max-width:1000px;margin:auto;padding:16px 14px 90px}
+:root{
+ --bg:#050914;--panel:#101d32;--panel2:#091321;
+ --text:#f5f7fb;--muted:#91a0b7;
+ --blue:#00d4ff;--gold:#d8aa45;--green:#22c55e;
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at top,#142441,var(--bg) 48%,#02040a);color:var(--text);font-family:Arial,sans-serif;min-height:100vh}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.container{max-width:1050px;margin:auto;padding:15px 13px 100px}
+header{display:flex;justify-content:space-between;align-items:center;padding:12px 0 20px;gap:10px}
+.brand{font-size:18px;font-weight:900;color:var(--blue)}
+.online{font-size:10px;color:var(--green);border:1px solid #22c55e55;padding:8px 11px;border-radius:20px}
+h2{font-size:19px;margin:8px 0}
+h3{font-size:16px;margin:0 0 13px}
+p{line-height:1.5}
+.muted{font-size:12px;color:var(--muted)}
+.hero{padding:19px;border:1px solid #d8aa4540;border-radius:20px;background:linear-gradient(140deg,#142744,#091321);margin-bottom:24px}
+.hero strong{color:var(--gold)}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.card{background:linear-gradient(145deg,#12213a,#0c1627);border:1px solid rgba(230,189,103,.22);border-radius:18px;padding:16px;transition:transform.12s}
-.card:active{transform:scale(0.98)}
-.card h4{font-size:14px;margin:11px 0 7px}.card p{font-size:11px;color:var(--muted);margin:0 0 12px}
-.card-icon{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:#168cff19;border:1px solid #168cff40}
-.btn{border:0;border-radius:12px;padding:13px 14px;font-weight:900;cursor:pointer}
-.btn-gold{background:linear-gradient(100deg,#c08a2c,#f1d48b);color:#111;box-shadow:0 6px 18px rgba(216,170,69,.25)}
-.btn-blue{background:linear-gradient(100deg,#00d4ff,#0077ff);color:#001018;box-shadow:0 6px 18px rgba(0,212,255,.25)}
-.btn-dark{background:#182943;border:1px solid #ffffff16;color:#e8efff}.btn-block{width:100%}
-.search,.field input,.field select,.field textarea{width:100%;background:#081222;border:1px solid #ffffff1b;color:white;border-radius:12px;padding:13px;outline:none}.field{margin-bottom:12px}.field label{display:block;font-size:11px;color:#c5d2e5;margin-bottom:6px}.field textarea{min-height:70px}
-.price-box{padding:14px;border-radius:14px;background:#07101d;border:1px solid rgba(230,189,103,.22);margin:12px 0}.price-box div{display:flex;justify-content:space-between;font-size:12px;margin:6px 0}.price-box strong{color:var(--gold)}
-.overlay{display:none;position:fixed;inset:0;background:#02050be8;z-index:1000;padding:16px;overflow-y:auto;align-items:center;justify-content:center}.overlay.show{display:flex}
-.modal{width:100%;max-width:570px;max-height:92vh;overflow-y:auto;background:linear-gradient(145deg,#12213a,#091321);border:1px solid rgba(230,189,103,.22);border-radius:22px;padding:19px}
-.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.close{width:34px;height:34px;border-radius:10px;border:1px solid #ffffff1c;background:#17253b;color:white;font-size:20px}
-.platform-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.platform{background:#0a1424;border:1px solid #ffffff18;border-radius:15px;padding:13px 6px;text-align:center;color:white}.platform img{width:32px;height:32px;margin:0 auto 8px;display:block}.platform span{font-size:11px}
-.empty{padding:20px;text-align:center;color:var(--muted);font-size:13px}.hidden{display:none!important}
-.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:3000;background:#12213a;border:1px solid rgba(230,189,103,.22);padding:12px 16px;border-radius:12px;max-width:90%;font-size:12px;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
-.bottom-nav{position:fixed;z-index:500;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:rgba(5,9,20,.98);backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.08);padding:8px 4px}
-.bottom-nav a{flex:1;text-decoration:none;color:#6b7a90;font-size:10px;font-weight:700;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:4px}
-.bottom-nav a span.icon{font-size:20px}.bottom-nav a.active{color:var(--blue)}
+.card{background:linear-gradient(145deg,#12213a,#0a1424);border:1px solid #d8aa4535;border-radius:17px;padding:15px;min-width:0;transition:.2s}
+.card:active{transform:scale(.985)}
+.card-icon{width:44px;height:44px;display:grid;place-items:center;background:#00d4ff12;border:1px solid #00d4ff35;border-radius:13px;font-size:23px}
+.card h3{margin:12px 0 7px}
+.card p{font-size:12px;color:var(--muted);min-height:35px}
+.btn{border:0;border-radius:11px;padding:12px 13px;font-weight:800}
+.gold{background:linear-gradient(100deg,#bd8629,#f3d88e);color:#15120b}
+.blue{background:linear-gradient(100deg,#00d4ff,#1680ff);color:#001018}
+.dark{background:#192a43;color:white;border:1px solid #ffffff16}
+.block{width:100%}
+.field{margin:12px 0}
+.field label{display:block;font-size:12px;color:#c8d5e8;margin-bottom:7px}
+.field input,.field select,.field textarea,.search{
+ width:100%;padding:12px;background:#07101d;border:1px solid #ffffff20;
+ border-radius:11px;color:white;outline:none
+}
+.field textarea{min-height:85px;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--blue)}
+.field option{background:#091321;color:white}
+.section{margin-top:27px}
+.pricebox{background:#07101d;border:1px solid #d8aa4540;border-radius:13px;padding:13px;margin:14px 0}
+.price-row{display:flex;justify-content:space-between;gap:12px;margin:8px 0;font-size:13px}
+.price-row strong{color:var(--gold)}
+.platform-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:14px}
+.platform{padding:12px 4px;background:#091321;color:white;border:1px solid #ffffff18;border-radius:14px;min-width:0}
+.platform img{width:34px;height:34px;object-fit:contain;display:block;margin:0 auto 8px}
+.platform span{font-size:11px;overflow-wrap:anywhere}
+.platform:active{border-color:var(--blue)}
+.overlay{display:none;position:fixed;inset:0;background:#02050bed;z-index:1000;padding:12px;overflow:auto;align-items:center;justify-content:center}
+.overlay.show{display:flex}
+.modal{width:100%;max-width:570px;max-height:94vh;overflow:auto;background:linear-gradient(145deg,#14233b,#07101d);border:1px solid #d8aa4545;border-radius:20px;padding:17px}
+.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px}
+.close{background:#182943;color:white;border:1px solid #ffffff20;border-radius:10px;width:36px;height:36px;font-size:22px}
+.hidden{display:none!important}
+.order{padding:12px 0;border-bottom:1px solid #ffffff12}
+.badge{display:inline-block;border-radius:20px;padding:5px 8px;background:#d8aa4518;color:var(--gold);font-size:10px}
+.toast{position:fixed;left:50%;bottom:85px;transform:translate(-50%,15px);opacity:0;pointer-events:none;z-index:3000;background:#14233b;border:1px solid #d8aa4555;padding:12px 15px;border-radius:12px;width:max-content;max-width:90%;font-size:12px;transition:.2s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.preview{width:100%;max-height:300px;object-fit:contain;border-radius:12px;background:#07101d;margin:10px 0}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.photo-grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px}
+.qr-output{text-align:center;padding:15px;background:white;border-radius:14px}
+.qr-output img{max-width:100%;width:230px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:500;display:flex;justify-content:space-around;background:#050914f5;border-top:1px solid #ffffff13;padding:8px 3px calc(8px + env(safe-area-inset-bottom));backdrop-filter:blur(15px)}
+.bottom-nav a{flex:1;text-align:center;text-decoration:none;color:#8290a5;font-size:10px;font-weight:bold;padding:5px 0}
+.bottom-nav a span{display:block;font-size:20px;margin-bottom:4px}
+.bottom-nav a.active{color:var(--blue)}
+.notice{font-size:11px;color:var(--muted);line-height:1.6}
+hr{border:0;border-top:1px solid #ffffff15;margin:15px 0}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.platform-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
 </style>
 </head>
 <body>
 <div class="container">
-<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 0"><div style="font-size:18px;font-weight:900;color:var(--blue)">JASON BUSINESS</div><div style="font-size:10px;border:1px solid rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:#22c55e;padding:7px 12px;border-radius:20px">● EN LIGNE</div></div>
-<div style="padding:10px 0 8px"><small style="color:var(--muted);font-size:11px">BIENVENUE SUR VOTRE ESPACE</small><strong id="welcomePhone" style="display:block;margin-top:6px;font-size:20px;font-weight:900">...</strong><div class="note" id="accountMessage" style="margin-top:6px">Solde: <span id="balanceValue" style="color:var(--gold);font-weight:900">0 FC</span></div></div>
+<header>
+ <div class="brand">JB • JASON BUSINESS</div>
+ <div class="online">● EN LIGNE</div>
+</header>
 
-<section style="margin-top:22px"><div style="display:flex;justify-content:space-between;margin-bottom:12px"><h3 style="margin:0">Nos services</h3><span style="font-size:11px;color:var(--blue)">SELF-BOOST MIN 100</span></div>
-<div class="grid">
-<!-- JASON STORE SUPPRIMÉ ICI - IL N'Y A PLUS LE BOUTON -->
-<article class="card"><div class="card-icon">🌐</div><h4>Réseaux sociaux</h4><p>Boost auto via API, prix calcul auto.</p><button class="btn btn-gold btn-block" id="openSocialButton">RÉSEAUX SOCIAUX</button></article>
-<article class="card"><div class="card-icon">🎵</div><h4>Création musicale</h4><p>Via /api/media/music</p><button class="btn btn-block btn-dark" id="openMusicButton">Commander</button></article>
-<article class="card"><div class="card-icon">📢</div><h4>Publicité digitale</h4><p>Via /api/publicite/ads</p><button class="btn btn-block btn-dark" id="openAdsButton">Découvrir</button></article>
-<article class="card"><div class="card-icon">💻</div><h4>Site web</h4><p>Vitrine, Portfolio, Boutique</p><button class="btn btn-block btn-dark creative-button" data-service="Site web">Commander</button></article>
-<article class="card"><div class="card-icon">📱</div><h4>Application mobile</h4><p>Nom + Icône + Lien + Description</p><button class="btn btn-block btn-dark creative-button" data-service="Application mobile">Commander</button></article>
-<article class="card"><div class="card-icon">🤖</div><h4>Chatbot IA</h4><p>Via /api/intelligence-artificielle/ai</p><button class="btn btn-block btn-dark creative-button" data-service="Chatbot">Commander</button></article>
-</div></section>
-<section style="margin-top:22px"><div style="display:flex;justify-content:space-between;margin-bottom:12px"><h3 style="margin:0">Mes commandes</h3><button class="btn btn-dark" id="refreshOrders" style="padding:8px 10px;font-size:11px">Actualiser</button></div><div id="ordersList" class="card"><div class="empty">Chargement…</div></div></section>
+<div class="hero">
+ <div class="muted">BIENVENUE DANS VOTRE ESPACE</div>
+ <h2 id="welcomePhone">Mon espace</h2>
+ <p class="muted">Vos projets numériques, vos créations et vos commandes au même endroit.</p>
+ <div class="price-row"><span>Solde disponible</span><strong id="balanceValue">Chargement…</strong></div>
+ <button class="btn dark" onclick="location.href='api.html'">⚡ Accéder à mes API</button>
 </div>
 
-<!-- MODAL SMM -->
-<div class="overlay" id="smmModal"><div class="modal"><div class="modal-head"><h3 id="smmTitle">Choisir un réseau social</h3><button class="close" data-close="smmModal">×</button></div>
-<div id="platformChooser"><input class="search" id="platformSearch" placeholder="Rechercher Facebook, TikTok…"><div class="platform-grid" id="platformGrid"></div></div>
-<div id="platformServices" class="hidden"><button class="btn btn-dark" id="backToPlatforms" style="padding:8px 10px;font-size:11px">← Retour</button><hr style="margin:12px 0;border-color:#ffffff12"><div id="selectedPlatformInfo"></div>
-<form id="smmForm">
-<div class="field"><label>Type de boost</label><select id="smmService" required></select></div>
-<div class="field"><label>Lien public</label><input id="smmLink" type="url" placeholder="https://..." required></div>
-<div class="field"><label>Quantité (minimum 100)</label><input id="smmQuantity" type="number" min="100" step="10" value="100" required></div>
-<div class="price-box"><div><span>Prix calcul auto</span><strong id="smmPrice">0 FC</strong></div><div><span>Solde disponible</span><strong id="smmBalance">0 FC</strong></div><div><span id="smmDetail" class="note"></span></div><div id="apiStatus" class="note" style="margin-top:8px;color:var(--blue)"></div></div>
-<button class="btn btn-gold btn-block" type="submit" id="submitSmm">Confirmer ma commande (SELF-BOOST)</button>
-</form></div></div></div>
+<section>
+<h2>Nos services</h2>
+<p class="muted">Choisissez un service et remplissez votre demande.</p>
+<div class="grid">
+ <article class="card">
+  <div class="card-icon">🌐</div><h3>Réseaux sociaux</h3>
+  <p>Abonnés, likes, vues, commentaires et partages.</p>
+  <button class="btn gold block" id="openSocial">Choisir un réseau</button>
+ </article>
+ <article class="card">
+  <div class="card-icon">📱</div><h3>Application mobile</h3>
+  <p>Décrivez votre application et joignez son icône.</p>
+  <button class="btn dark block" onclick="openCreative('app')">Commander</button>
+ </article>
+ <article class="card">
+  <div class="card-icon">💻</div><h3>Site web</h3>
+  <p>Boutique, entreprise, portfolio, blog et autres.</p>
+  <button class="btn dark block" onclick="openCreative('site')">Commander</button>
+ </article>
+ <article class="card">
+  <div class="card-icon">🤖</div><h3>Chatbot IA</h3>
+  <p>Assistant pour WhatsApp, Facebook, site web ou autre.</p>
+  <button class="btn dark block" onclick="openCreative('bot')">Commander</button>
+ </article>
+ <article class="card">
+  <div class="card-icon">📢</div><h3>Publicité gratuite</h3>
+  <p>Préparez une annonce avec un texte, un titre et une photo.</p>
+  <button class="btn dark block" onclick="openAd()">Créer ma publicité</button>
+ </article>
+ <article class="card">
+  <div class="card-icon">▦</div><h3>Créateur QR code</h3>
+  <p>Créez gratuitement un QR code avec vos informations.</p>
+  <button class="btn dark block" onclick="openQR()">Créer un QR code</button>
+ </article>
+</div>
+</section>
+
+<section class="section">
+ <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+  <h2>Mes commandes</h2>
+  <button class="btn dark" id="refreshOrders">Actualiser</button>
+ </div>
+ <div class="card" id="ordersList"><p class="muted">Chargement des commandes…</p></div>
+</section>
+</div>
+
+<!-- RESEAUX SOCIAUX -->
+<div class="overlay" id="socialModal">
+<div class="modal">
+ <div class="modal-head"><h3 id="socialTitle">Choisir un réseau social</h3><button class="close" data-close="socialModal">×</button></div>
+ <div id="platformChooser">
+  <input class="search" id="platformSearch" placeholder="Rechercher un réseau…">
+  <div class="platform-grid" id="platformGrid"></div>
+ </div>
+ <div id="socialFormArea" class="hidden">
+  <button class="btn dark" id="backPlatforms">← Retour aux réseaux</button>
+  <div id="selectedPlatformInfo" style="margin-top:14px"></div>
+  <form id="smmForm">
+   <div class="field"><label>Type de service</label><select id="smmService" required></select></div>
+   <div class="field"><label>Lien public du profil, post ou vidéo</label><input id="smmLink" type="url" placeholder="https://..." required></div>
+   <div class="field"><label>Quantité (minimum 10)</label><input id="smmQuantity" type="number" min="10" step="1" value="10" required></div>
+   <div class="pricebox">
+    <div class="price-row"><span>Prix estimé</span><strong id="smmPrice">0 FC</strong></div>
+    <div class="price-row"><span>Solde disponible</span><strong id="smmBalance">0 FC</strong></div>
+    <div class="notice" id="smmRate"></div>
+   </div>
+   <p class="notice">Le prix est une estimation selon le tarif affiché. La livraison réelle nécessite une API SMM fonctionnelle. Aucun boost n'est lancé tant que cette API n'est pas connectée.</p>
+   <button class="btn gold block" id="submitSmm" type="submit">Envoyer ma demande</button>
+  </form>
+ </div>
+</div>
+</div>
+
+<!-- FORMULAIRES APPLICATION / SITE / CHATBOT -->
+<div class="overlay" id="creativeModal">
+<div class="modal">
+ <div class="modal-head"><h3 id="creativeTitle">Commander</h3><button class="close" data-close="creativeModal">×</button></div>
+ <form id="creativeForm">
+  <input type="hidden" id="creativeType">
+  <div class="field"><label>Votre nom ou nom de l'entreprise</label><input id="cName" required placeholder="Nom du projet"></div>
+  <div class="field"><label id="cKindLabel">Type de projet</label><select id="cKind" required></select></div>
+  <div class="field"><label>Fonctionnalités souhaitées</label><textarea id="cFeatures" placeholder="Ex. : connexion, paiement, espace client…"></textarea></div>
+  <div class="field"><label>Description détaillée</label><textarea id="cDescription" required placeholder="Expliquez ce que vous voulez créer…"></textarea></div>
+  <div class="field"><label>Lien de référence ou lien existant (facultatif)</label><input id="cLink" type="url" placeholder="https://..."></div>
+  <div class="field" id="iconField"><label>Icône / image du projet (facultatif)</label><input id="cIcon" type="file" accept="image/*"><div id="iconPreview"></div></div>
+  <div class="field"><label>Votre numéro WhatsApp</label><input id="cWhatsApp" type="tel" required placeholder="+243..."></div>
+  <div class="pricebox">
+   <div class="price-row"><span>Tarif de base estimé</span><strong id="creativePrice">0 FC</strong></div>
+   <p class="notice">Le tarif final dépend des fonctionnalités. La commande sera enregistrée pour confirmation avant le début du travail.</p>
+  </div>
+  <button class="btn gold block" type="submit">Envoyer ma commande</button>
+ </form>
+</div>
+</div>
+
+<!-- GENERATEUR PUBLICITE -->
+<div class="overlay" id="adModal">
+<div class="modal">
+ <div class="modal-head"><h3>Créer ma publicité gratuitement</h3><button class="close" data-close="adModal">×</button></div>
+ <form id="adForm">
+  <div class="field"><label>Nom de l'entreprise / produit</label><input id="adBusiness" required placeholder="Ex. : JASON BUSINESS"></div>
+  <div class="field"><label>Titre de la publicité</label><input id="adTitle" required maxlength="100" placeholder="Découvrez notre service"></div>
+  <div class="field"><label>Texte publicitaire</label><textarea id="adText" required placeholder="Présentez votre offre…"></textarea></div>
+  <div class="field"><label>Photo (facultatif)</label><input id="adImage" type="file" accept="image/*"></div>
+  <div class="field"><label>Contact ou lien</label><input id="adContact" placeholder="WhatsApp ou site web"></div>
+  <button class="btn blue block" type="button" id="previewAd">Générer l'aperçu gratuit</button>
+ </form>
+ <div id="adPreview" class="card hidden" style="margin-top:15px">
+  <div class="badge">APERÇU PUBLICITAIRE</div><h2 id="adPreviewTitle"></h2>
+  <img id="adPreviewImage" class="preview hidden" alt="Image publicitaire">
+  <p id="adPreviewText"></p><p id="adPreviewBusiness" class="muted"></p><p id="adPreviewContact"></p>
+  <button class="btn gold block" id="downloadAd">Télécharger l'aperçu</button>
+ </div>
+ <p class="notice">La création de l'aperçu est gratuite. La diffusion payante sur Facebook ou d'autres plateformes n'est pas incluse.</p>
+</div>
+</div>
+
+<!-- QR CODE -->
+<div class="overlay" id="qrModal">
+<div class="modal">
+ <div class="modal-head"><h3>Créateur de QR code gratuit</h3><button class="close" data-close="qrModal">×</button></div>
+ <form id="qrForm">
+  <div class="field"><label>Nom ou titre</label><input id="qrName" placeholder="Mon entreprise"></div>
+  <div class="field"><label>Texte ou lien à encoder</label><textarea id="qrContent" required placeholder="https://... ou informations à afficher"></textarea></div>
+  <div class="field"><label>Numéro WhatsApp (facultatif)</label><input id="qrWhatsApp" type="tel" placeholder="+243..."></div>
+  <div class="field"><label>Ajouter au moins 3 photos</label><input id="qrPhotos" type="file" accept="image/*" multiple required><p class="notice">Sélectionnez au minimum 3 photos. Elles seront prévisualisées ici. Pour qu'un QR code permette de consulter ces photos sur un autre téléphone, elles doivent d'abord être hébergées en ligne avec des liens publics.</p></div>
+  <div class="photo-grid" id="qrPhotoPreview"></div>
+  <button class="btn gold block" type="submit">Générer mon QR code gratuit</button>
+ </form>
+ <div id="qrResult" class="hidden" style="margin-top:18px">
+  <div class="qr-output"><img id="qrImage" alt="QR code généré"></div>
+  <p class="notice" id="qrInfo"></p>
+  <button class="btn blue block" id="downloadQR">Télécharger le QR code</button>
+ </div>
+</div>
+</div>
 
 <div class="toast" id="toast"></div>
 
-<!-- SEULEMENT LE MENU DU BAS RESTE COMME TU VEUX -->
 <nav class="bottom-nav">
-  <a href="tableau%20de%20bord.html"><span class="icon">📊</span>Dashboard</a>
-  <a href="boutique.html" class="active"><span class="icon">🛍️</span>Boutique</a>
-  <a href="store.html"><span class="icon">🛒</span>Store</a>
-  <a href="equipe.html"><span class="icon">👥</span>Équipe</a>
-  <a href="profil.html"><span class="icon">👤</span>Profil</a>
+ <a href="tableau%20de%20bord.html"><span>📊</span>Dashboard</a>
+ <a href="boutique.html" class="active"><span>🛍️</span>Boutique</a>
+ <a href="store.html"><span>🛒</span>Store</a>
+ <a href="equipe.html"><span>👥</span>Équipe</a>
+ <a href="profil.html"><span>👤</span>Profil</a>
 </nav>
 
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {getDatabase,ref,get,set,push} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
-const ROOT="jasonBusiness";const USERS_PATH=`${ROOT}/users`;const COMMANDS_PATH=`${ROOT}/demandes_commandes`;
-const $=id=>document.getElementById(id);const money=n=>Math.max(0,Number(n)||0).toLocaleString("fr-FR")+" FC";
+import {initializeApp,getApps} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {getDatabase,ref,get,push,set,update} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+const firebaseConfig={
+ apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
+ authDomain:"starlink-investit.firebaseapp.com",
+ databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
+ projectId:"starlink-investit",
+ storageBucket:"starlink-investit.firebasestorage.app",
+ messagingSenderId:"807081599583",
+ appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
+};
+
+const ROOT="jasonBusiness";
+const USERS_PATH=ROOT+"/users";
+const COMMANDS_PATH=ROOT+"/demandes_commandes";
+const $=id=>document.getElementById(id);
+const money=n=>Math.max(0,Number(n)||0).toLocaleString("fr-FR")+" FC";
+
 let db=null,currentPhone="",currentUser={},selectedPlatform=null,busy=false;
-function toast(m){const el=$("toast");el.textContent=m;el.classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove("show"),3000)}
-function openModal(id){$(id).classList.add("show")}function closeModal(id){$(id).classList.remove("show")}
-document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>closeModal(b.dataset.close)));
-document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)o.classList.remove("show")}));
-function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function getPhone(){return (localStorage.getItem("jasonBusinessPhone")||localStorage.getItem("userPhone")||localStorage.getItem("telephone")||localStorage.getItem("phone")||"").trim()}
-function getBalance(user){return Number(user?.solde_principal??user?.solde??0)||0}
-function updateBalanceUI(){$("balanceValue").textContent=money(getBalance(currentUser));$("welcomePhone").textContent=currentPhone||"0856421499";}
-async function initFirebase(){db=getDatabase(initializeApp(firebaseConfig));currentPhone=getPhone();if(!currentPhone){updateBalanceUI();return}await loadUser();await loadOrders();}
-async function loadUser(){if(!db||!currentPhone)return;try{const s=await get(ref(db,`${USERS_PATH}/${currentPhone}`));currentUser=s.exists()?s.val():{};updateBalanceUI();}catch{}}
-async function loadOrders(){if(!db||!currentPhone)return;try{const s=await get(ref(db,COMMANDS_PATH));const data=s.exists()?s.val():{};const orders=Object.entries(data).filter(([id,o])=>o&&String(o.telephone||"")===currentPhone).map(([id,o])=>({id,...o})).sort((a,b)=>(Number(b.createdAt)||0)-(Number(a.createdAt)||0)).slice(0,20);$("ordersList").innerHTML=orders.length?orders.map(o=>`<div style="padding:10px 0;border-bottom:1px solid #ffffff12"><strong>${escapeHTML(o.service||"Commande")}</strong> <small style="color:${o.statut==='En cours'?'var(--blue)':'var(--gold)'}">[${escapeHTML(o.statut||"En attente")}]</small><p class="note">${escapeHTML(o.lien||o.produit_nom||"").slice(0,60)} · ${money(o.prix||0)}</p></div>`).join(""):'<div class="empty">Aucune commande</div>';}catch{}}
-async function saveOrder(order){if(!db||!currentPhone)return toast("Non connecté"),false;try{const orderRef=push(ref(db,COMMANDS_PATH));await set(orderRef,{...order,telephone:currentPhone,createdAt:Date.now()});await loadOrders();return true}catch{toast("Erreur");return false}}
-const platforms=[{id:"facebook",name:"Facebook",slug:"facebook",color:"1877F2"},{id:"youtube",name:"YouTube",slug:"youtube",color:"FF0000"},{id:"x",name:"X",slug:"x",color:"FFFFFF"},{id:"whatsapp",name:"WhatsApp",slug:"whatsapp",color:"25D366"},{id:"snapchat",name:"Snapchat",slug:"snapchat",color:"FFFC00"},{id:"spotify",name:"Spotify",slug:"spotify",color:"1DB954"},{id:"tiktok",name:"TikTok",slug:"tiktok",color:"FFFFFF"},{id:"instagram",name:"Instagram",slug:"instagram",color:"E4405F"},{id:"telegram",name:"Telegram",slug:"telegram",color:"26A5E4"},{id:"threads",name:"Threads",slug:"threads",color:"FFFFFF"}];
-const servicesByPlatform={facebook:["Abonnés","Likes","Vues","Commentaires","Partages"],youtube:["Abonnés","Likes","Vues","Commentaires","Partages"],x:["Abonnés","Likes","Vues","Commentaires","Reposts"],whatsapp:["Membres de communauté","Promotion de lien"],snapchat:["Abonnés","Vues"],spotify:["Écoutes","Abonnés au profil"],tiktok:["Abonnés","Likes","Vues","Commentaires","Partages"],instagram:["Abonnés","Likes","Vues","Commentaires","Partages"],telegram:["Membres","Vues","Réactions","Partages"],threads:["Abonnés","Likes","Vues"]};
-const smmCatalog={"Abonnés":{qty:100,price:1000},"Likes":{qty:100,price:500},"Vues":{qty:1000,price:700},"Partages":{qty:100,price:900},"Commentaires":{qty:50,price:1500},"Membres":{qty:100,price:1500},"Réactions":{qty:100,price:700},"Reposts":{qty:100,price:900},"Écoutes":{qty:1000,price:1200},"Abonnés au profil":{qty:100,price:1500},"Membres de communauté":{qty:100,price:1500},"Promotion de lien":{qty:1,price:1000}};
-function logoURL(p){return `https://cdn.simpleicons.org/${p.slug}/${p.color}`}
-function showSmmPlatformChooser(){$("platformChooser").classList.remove("hidden");$("platformServices").classList.add("hidden");$("smmTitle").textContent="Choisir un réseau";$("platformSearch").value="";renderPlatforms();openModal("smmModal")}
-function renderPlatforms(filter=""){const term=filter.trim().toLowerCase();const list=platforms.filter(p=>p.name.toLowerCase().includes(term));$("platformGrid").innerHTML=list.map(p=>`<button type="button" class="platform" data-platform="${p.id}"><img src="${logoURL(p)}"><span>${escapeHTML(p.name)}</span></button>`).join("");$("platformGrid").querySelectorAll("[data-platform]").forEach(b=>b.addEventListener("click",()=>openPlatform(b.dataset.platform)));}
-function openPlatform(id){selectedPlatform=platforms.find(p=>p.id===id);if(!selectedPlatform)return;$("platformChooser").classList.add("hidden");$("platformServices").classList.remove("hidden");$("smmTitle").textContent=selectedPlatform.name;$("selectedPlatformInfo").innerHTML=`<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px"><img src="${logoURL(selectedPlatform)}" style="width:42px"><div><strong>${escapeHTML(selectedPlatform.name)}</strong><p class="note">API boost auto</p></div></div>`;$("smmService").innerHTML=(servicesByPlatform[id]||[]).map(s=>`<option>${escapeHTML(s)}</option>`).join("");$("smmQuantity").value="100";$("smmLink").value="";updateSmmPrice();}
-function calculatePrice(service,qty){const item=smmCatalog[service];if(!item||qty<100)return 0;return Math.ceil(qty/item.qty*item.price);}
-function updateSmmPrice(){const qty=Number($("smmQuantity").value);const price=calculatePrice($("smmService").value,qty);$("smmPrice").textContent=money(price);$("smmBalance").textContent=money(getBalance(currentUser));$("smmDetail").textContent=price?`${qty} - ${smmCatalog[$("smmService").value]?.price||0} FC / ${smmCatalog[$("smmService").value]?.qty||100}`:"";}
+let adObjectURL="",iconObjectURL="";
+let qrObjectURLs=[];
+
+function toast(message){
+ const el=$("toast");
+ el.textContent=message;el.classList.add("show");
+ clearTimeout(toast.timer);
+ toast.timer=setTimeout(()=>el.classList.remove("show"),3200);
+}
+function openModal(id){$(id).classList.add("show")}
+function closeModal(id){$(id).classList.remove("show")}
+
+document.querySelectorAll("[data-close]").forEach(b=>
+ b.addEventListener("click",()=>closeModal(b.dataset.close))
+);
+document.querySelectorAll(".overlay").forEach(o=>
+ o.addEventListener("click",e=>{if(e.target===o)o.classList.remove("show")})
+);
+
+function escapeHTML(value){
+ return String(value??"").replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
+}
+function getPhone(){
+ return (localStorage.getItem("jasonBusinessPhone")||
+ localStorage.getItem("userPhone")||
+ localStorage.getItem("telephone")||
+ localStorage.getItem("phone")||"").trim();
+}
+function getBalance(user){
+ return Number(user?.solde_principal??user?.solde??0)||0;
+}
+function updateBalanceUI(){
+ $("balanceValue").textContent=money(getBalance(currentUser));
+ $("welcomePhone").textContent=currentPhone||"Compte non identifié";
+ $("smmBalance").textContent=money(getBalance(currentUser));
+}
+async function initFirebase(){
+ try{
+  const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
+  db=getDatabase(app);
+  currentPhone=getPhone();
+  if(!currentPhone){
+   $("ordersList").innerHTML='<p class="muted">Connectez-vous pour afficher vos commandes.</p>';
+   updateBalanceUI();return;
+  }
+  await loadUser();
+  await loadOrders();
+ }catch(error){
+  console.error(error);
+  toast("Erreur de connexion Firebase.");
+  $("ordersList").innerHTML='<p class="muted">Impossible de charger les commandes.</p>';
+ }
+}
+async function loadUser(){
+ if(!db||!currentPhone)return;
+ const snap=await get(ref(db,`${USERS_PATH}/${currentPhone}`));
+ currentUser=snap.exists()?snap.val():{};
+ updateBalanceUI();
+}
+async function loadOrders(){
+ if(!db||!currentPhone)return;
+ try{
+  const snap=await get(ref(db,COMMANDS_PATH));
+  const data=snap.exists()?snap.val():{};
+  const orders=Object.entries(data)
+   .filter(([id,o])=>o&&String(o.telephone||"")===currentPhone)
+   .map(([id,o])=>({id,...o}))
+   .sort((a,b)=>(Number(b.createdAt)||0)-(Number(a.createdAt)||0))
+   .slice(0,30);
+  $("ordersList").innerHTML=orders.length?orders.map(o=>`
+   <div class="order">
+    <strong>${escapeHTML(o.service||"Commande")}</strong>
+    <span class="badge">${escapeHTML(o.statut||"En attente")}</span>
+    <p class="muted">${escapeHTML(o.description||o.lien||o.produit_nom||"Demande reçue")}</p>
+    <div class="price-row"><span>Prix estimé</span><strong>${money(o.prix||0)}</strong></div>
+   </div>`).join(""):'<p class="muted">Aucune commande pour le moment.</p>';
+ }catch(error){console.error(error)}
+}
+async function saveOrder(order){
+ if(!db||!currentPhone){
+  toast("Connectez-vous avant de commander.");
+  return false;
+ }
+ try{
+  const orderRef=push(ref(db,COMMANDS_PATH));
+  await set(orderRef,{
+   ...order,telephone:currentPhone,createdAt:Date.now()
+  });
+  await loadOrders();
+  return true;
+ }catch(error){
+  console.error(error);
+  toast("Enregistrement impossible. Vérifiez Firebase.");
+  return false;
+ }
+}
+
+// Les tarifs sont modifiables ici.
+// Les tarifs SMM sont des estimations, à remplacer par ceux du fournisseur.
+const PLATFORMS=[
+ {id:"facebook",name:"Facebook",slug:"facebook",color:"1877F2"},
+ {id:"x",name:"X / Twitter",slug:"x",color:"FFFFFF"},
+ {id:"whatsapp",name:"WhatsApp",slug:"whatsapp",color:"25D366"},
+ {id:"snapchat",name:"Snapchat",slug:"snapchat",color:"FFFC00"},
+ {id:"tiktok",name:"TikTok",slug:"tiktok",color:"FFFFFF"},
+ {id:"youtube",name:"YouTube",slug:"youtube",color:"FF0000"},
+ {id:"instagram",name:"Instagram",slug:"instagram",color:"E4405F"},
+ {id:"telegram",name:"Telegram",slug:"telegram",color:"26A5E4"},
+ {id:"spotify",name:"Spotify",slug:"spotify",color:"1DB954"},
+ {id:"threads",name:"Threads",slug:"threads",color:"FFFFFF"}
+];
+const SERVICES={
+ facebook:["Abonnés","Likes","Vues","Commentaires","Partages"],
+ x:["Abonnés","Likes","Vues","Commentaires","Reposts"],
+ whatsapp:["Membres de communauté","Promotion de lien"],
+ snapchat:["Abonnés","Vues"],
+ tiktok:["Abonnés","Likes","Vues","Commentaires","Partages"],
+ youtube:["Abonnés","Likes","Vues","Commentaires"],
+ instagram:["Abonnés","Likes","Vues","Commentaires","Partages"],
+ telegram:["Membres","Vues","Réactions"],
+ spotify:["Écoutes","Abonnés au profil"],
+ threads:["Abonnés","Likes","Vues"]
+};
+const RATES={
+ "Abonnés":{unit:100,price:1000},
+ "Likes":{unit:100,price:500},
+ "Vues":{unit:1000,price:700},
+ "Commentaires":{unit:10,price:1500},
+ "Partages":{unit:100,price:900},
+ "Reposts":{unit:100,price:900},
+ "Membres":{unit:100,price:1500},
+ "Réactions":{unit:100,price:700},
+ "Écoutes":{unit:1000,price:1200},
+ "Abonnés au profil":{unit:100,price:1500},
+ "Membres de communauté":{unit:100,price:1500},
+ "Promotion de lien":{unit:10,price:1000}
+};
+function logoURL(p){
+ return `https://cdn.simpleicons.org/${p.slug}/${p.color}`;
+}
+function renderPlatforms(filter=""){
+ const term=filter.toLowerCase().trim();
+ const list=PLATFORMS.filter(p=>p.name.toLowerCase().includes(term));
+ $("platformGrid").innerHTML=list.map(p=>`
+ <button type="button" class="platform" data-platform="${p.id}">
+ <img src="${logoURL(p)}" alt="${escapeHTML(p.name)}"
+ onerror="this.style.display='none'">
+ <span>${escapeHTML(p.name)}</span></button>`).join("");
+ $("platformGrid").querySelectorAll("[data-platform]").forEach(b=>
+  b.addEventListener("click",()=>openPlatform(b.dataset.platform))
+ );
+}
+function showSocial(){
+ $("platformChooser").classList.remove("hidden");
+ $("socialFormArea").classList.add("hidden");
+ $("socialTitle").textContent="Choisir un réseau social";
+ $("platformSearch").value="";
+ renderPlatforms();
+ openModal("socialModal");
+}
+function openPlatform(id){
+ selectedPlatform=PLATFORMS.find(p=>p.id===id);
+ if(!selectedPlatform)return;
+ $("platformChooser").classList.add("hidden");
+ $("socialFormArea").classList.remove("hidden");
+ $("socialTitle").textContent=selectedPlatform.name;
+ $("selectedPlatformInfo").innerHTML=`
+ <div style="display:flex;align-items:center;gap:12px">
+ <img src="${logoURL(selectedPlatform)}" alt="" style="width:36px;height:36px"
+ onerror="this.style.display='none'">
+ <div><strong>${escapeHTML(selectedPlatform.name)}</strong>
+ <div class="muted">Choisissez votre prestation</div></div></div>`;
+ $("smmService").innerHTML=(SERVICES[id]||[]).map(s=>
+  `<option value="${escapeHTML(s)}">${escapeHTML(s)}</option>`
+ ).join("");
+ $("smmQuantity").value=10;
+ $("smmLink").value="";
+ updateSmmPrice();
+}
+function calculateSmmPrice(service,quantity){
+ const rate=RATES[service];
+ if(!rate||!Number.isFinite(quantity)||quantity<10)return 0;
+ return Math.ceil(quantity/rate.unit*rate.price);
+}
+function updateSmmPrice(){
+ const service=$("smmService").value;
+ const qty=Number($("smmQuantity").value);
+ const rate=RATES[service];
+ const price=calculateSmmPrice(service,qty);
+ $("smmPrice").textContent=money(price);
+ $("smmBalance").textContent=money(getBalance(currentUser));
+ $("smmRate").textContent=rate?
+  `Tarif indicatif : ${money(rate.price)} par ${rate.unit} unité(s). Minimum : 10.`:"";
+}
+$("openSocial").addEventListener("click",showSocial);
 $("platformSearch").addEventListener("input",e=>renderPlatforms(e.target.value));
-$("backToPlatforms").addEventListener("click",()=>{$("platformChooser").classList.remove("hidden");$("platformServices").classList.add("hidden");$("smmTitle").textContent="Choisir un réseau";});
-$("smmService").addEventListener("change",updateSmmPrice);$("smmQuantity").addEventListener("input",updateSmmPrice);
-$("openSocialButton").addEventListener("click",showSmmPlatformChooser);
-$("smmForm").addEventListener("submit", async e=>{
-e.preventDefault();if(busy) return;const service=$("smmService").value;const link=$("smmLink").value.trim();const qty=Number($("smmQuantity").value);const price=calculatePrice(service,qty);
-if(!/^https?:\/\/\S+/i.test(link)) return toast("Lien https:// invalide");if(qty<100) return toast("Min 100");
-busy=true;const btn=$("submitSmm");btn.disabled=true;btn.textContent="⏳ Envoi...";
-try{const userRef=ref(db,`${USERS_PATH}/${currentPhone}`);const snap=await get(userRef);let user=snap.exists()?snap.val():{};let bal=Number(user.solde_principal??user.solde??0);if(bal<price){toast(`Solde insuffisant`);return;}let newBal=bal-price;if(user.solde_principal!==undefined){user.solde_principal=newBal}else{user.solde=newBal}await set(userRef,user);currentUser=user;updateBalanceUI();await saveOrder({categorie:"smm",service:`${selectedPlatform.name} — ${service}`,plateforme:selectedPlatform.name,lien:link,quantite:qty,prix:price,statut:"En cours"});toast(`✅ Boost lancé`);$("smmForm").reset();closeModal("smmModal");}catch(err){toast("❌ "+err.message);}finally{busy=false;btn.disabled=false;btn.textContent="Confirmer ma commande (SELF-BOOST)";}
+$("backPlatforms").addEventListener("click",()=>{
+ $("platformChooser").classList.remove("hidden");
+ $("socialFormArea").classList.add("hidden");
+ $("socialTitle").textContent="Choisir un réseau social";
 });
-$("refreshOrders")?.addEventListener("click",()=>location.reload());
+$("smmService").addEventListener("change",updateSmmPrice);
+$("smmQuantity").addEventListener("input",updateSmmPrice);
+
+$("smmForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ if(busy)return;
+ if(!db||!currentPhone)return toast("Connectez-vous pour continuer.");
+ const link=$("smmLink").value.trim();
+ const qty=Number($("smmQuantity").value);
+ const service=$("smmService").value;
+ if(!/^https?:\/\/\S+/i.test(link))return toast("Entrez un lien public valide.");
+ if(!Number.isInteger(qty)||qty<10)return toast("Quantité minimum : 10.");
+ const price=calculateSmmPrice(service,qty);
+ if(price<=0)return toast("Tarif indisponible.");
+ const btn=$("submitSmm");
+ busy=true;btn.disabled=true;btn.textContent="Enregistrement…";
+ try{
+  const ok=await saveOrder({
+   categorie:"smm",service:`${selectedPlatform.name} — ${service}`,
+   plateforme:selectedPlatform.name,lien:link,quantite:qty,
+   prix:price,statut:"En attente de connexion API",
+   description:`${service} : ${qty} unités. Prix indicatif.`
+  });
+  if(ok){
+   toast("Demande enregistrée. Livraison après configuration de l'API.");
+   closeModal("socialModal");
+  }
+ }finally{
+  busy=false;btn.disabled=false;btn.textContent="Envoyer ma demande";
+ }
+});
+
+// COMMANDES APPLICATION, SITE WEB ET CHATBOT
+const CREATIVE={
+ app:{
+  title:"Commander une application mobile",base:10000,
+  label:"Type d'application",
+  options:["Application Android","Application iOS","Application Android et iOS","Application avec connexion","Application e-commerce","Autre"],
+  icon:true
+ },
+ site:{
+  title:"Commander un site web",base:15000,
+  label:"Type de site web",
+  options:["Site vitrine","Boutique e-commerce","Portfolio","Blog / actualités","Site d'entreprise","Plateforme avec comptes clients","Site avec paiement","Autre"],
+  icon:false
+ },
+ bot:{
+  title:"Commander un chatbot IA",base:7000,
+  label:"Type de chatbot",
+  options:["Chatbot WhatsApp","Chatbot Facebook Messenger","Chatbot pour site web","Chatbot multicanal","Chatbot de service client","Chatbot de vente","Autre"],
+  icon:false
+ }
+};
+function openCreative(type){
+ const c=CREATIVE[type];
+ if(!c)return;
+ $("creativeType").value=type;
+ $("creativeTitle").textContent=c.title;
+ $("cKindLabel").textContent=c.label;
+ $("cKind").innerHTML=c.options.map(v=>
+  `<option>${escapeHTML(v)}</option>`).join("");
+ $("creativePrice").textContent=money(c.base);
+ $("iconField").classList.toggle("hidden",!c.icon);
+ $("cIcon").value="";
+ $("iconPreview").innerHTML="";
+ $("cName").value="";
+ $("cFeatures").value="";
+ $("cDescription").value="";
+ $("cLink").value="";
+ $("cWhatsApp").value="";
+ openModal("creativeModal");
+}
+$("cIcon").addEventListener("change",()=>{
+ if(iconObjectURL)URL.revokeObjectURL(iconObjectURL);
+ const file=$("cIcon").files[0];
+ $("iconPreview").innerHTML="";
+ if(file&&file.type.startsWith("image/")){
+  iconObjectURL=URL.createObjectURL(file);
+  const img=document.createElement("img");
+  img.src=iconObjectURL;img.alt="Aperçu de l'icône";
+  img.style.cssText="width:90px;height:90px;object-fit:contain;margin-top:8px;border-radius:12px";
+  $("iconPreview").appendChild(img);
+ }
+});
+$("creativeForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const type=$("creativeType").value;
+ const c=CREATIVE[type];
+ const file=$("cIcon").files[0];
+ if(file&&file.size>5*1024*1024)return toast("L'image doit peser moins de 5 Mo.");
+ const iconNote=file?`Fichier icône joint : ${file.name}. À transmettre séparément pour la production.`:"Aucune icône jointe.";
+ const order={
+  categorie:type,
+  service:c.title,
+  produit_nom:$("cName").value.trim(),
+  type_projet:$("cKind").value,
+  fonctionnalites:$("cFeatures").value.trim(),
+  description:$("cDescription").value.trim(),
+  lien:$("cLink").value.trim(),
+  whatsapp:$("cWhatsApp").value.trim(),
+  prix:c.base,
+  statut:"En attente de confirmation",
+  fichier_description:iconNote
+ };
+ if(await saveOrder(order)){
+  toast("Commande enregistrée !");
+  $("creativeForm").reset();
+  closeModal("creativeModal");
+ }
+});
+
+// PUBLICITE GRATUITE
+function openAd(){
+ $("adForm").reset();
+ $("adPreview").classList.add("hidden");
+ openModal("adModal");
+}
+$("previewAd").addEventListener("click",()=>{
+ const business=$("adBusiness").value.trim();
+ const title=$("adTitle").value.trim();
+ const text=$("adText").value.trim();
+ if(!business||!title||!text)return toast("Complétez le nom, le titre et le texte.");
+ $("adPreviewTitle").textContent=title;
+ $("adPreviewText").textContent=text;
+ $("adPreviewBusiness").textContent=business;
+ $("adPreviewContact").textContent=$("adContact").value.trim();
+ const file=$("adImage").files[0];
+ const img=$("adPreviewImage");
+ if(adObjectURL)URL.revokeObjectURL(adObjectURL);
+ if(file){
+  if(!file.type.startsWith("image/"))return toast("Choisissez une image valide.");
+  if(file.size>5*1024*1024)return toast("Image maximum : 5 Mo.");
+  adObjectURL=URL.createObjectURL(file);
+  img.src=adObjectURL;img.classList.remove("hidden");
+ }else{
+  img.removeAttribute("src");img.classList.add("hidden");
+ }
+ $("adPreview").classList.remove("hidden");
+});
+$("downloadAd").addEventListener("click",()=>{
+ const business=$("adBusiness").value.trim();
+ const title=$("adTitle").value.trim();
+ const text=$("adText").value.trim();
+ const contact=$("adContact").value.trim();
+ const file=$("adImage").files[0];
+ const canvas=document.createElement("canvas");
+ canvas.width=1080;canvas.height=1080;
+ const ctx=canvas.getContext("2d");
+ ctx.fillStyle="#07101d";ctx.fillRect(0,0,1080,1080);
+ ctx.fillStyle="#d8aa45";ctx.fillRect(0,0,1080,16);
+ ctx.fillStyle="#00d4ff";ctx.font="bold 48px Arial";
+ ctx.fillText(business.slice(0,32),60,100);
+ ctx.fillStyle="#ffffff";ctx.font="bold 55px Arial";
+ const lines=wrapText(ctx,title,900,62);
+ lines.slice(0,3).forEach((line,i)=>ctx.fillText(line,60,220+i*75));
+ let y=490;
+ if(file){
+  const img=new Image();
+  img.onload=()=>{
+   const scale=Math.min(900/img.width,300/img.height);
+   const w=img.width*scale,h=img.height*scale;
+   ctx.drawImage(img,60,y,w,h);
+   y+=h+45;
+   drawAdText(ctx,text,contact,y);
+   exportCanvas(canvas);
+  };
+  img.onerror=()=>{drawAdText(ctx,text,contact,y);exportCanvas(canvas)};
+  img.src=adObjectURL;
+ }else{
+  drawAdText(ctx,text,contact,y);
+  exportCanvas(canvas);
+ }
+});
+function wrapText(ctx,text,maxWidth,fontSize){
+ ctx.font=`${fontSize}px Arial`;
+ const words=text.split(/\s+/),lines=[];
+ let line="";
+ words.forEach(word=>{
+  const test=line?line+" "+word:word;
+  if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word}
+  else line=test;
+ });
+ if(line)lines.push(line);
+ return lines;
+}
+function drawAdText(ctx,text,contact,y){
+ ctx.fillStyle="#dce7f8";ctx.font="36px Arial";
+ wrapText(ctx,text,900,36).slice(0,6).forEach((line,i)=>ctx.fillText(line,60,y+i*50));
+ ctx.fillStyle="#d8aa45";ctx.font="bold 32px Arial";
+ ctx.fillText(contact.slice(0,65),60,990);
+}
+function exportCanvas(canvas){
+ canvas.toBlob(blob=>{
+  if(!blob)return toast("Téléchargement impossible.");
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;a.download="jason-business-publicite.png";a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+ },"image/png");
+}
+
+// QR CODE GRATUIT
+function openQR(){
+ $("qrForm").reset();
+ $("qrPhotoPreview").innerHTML="";
+ $("qrResult").classList.add("hidden");
+ qrObjectURLs.forEach(URL.revokeObjectURL);qrObjectURLs=[];
+ openModal("qrModal");
+}
+$("qrPhotos").addEventListener("change",()=>{
+ $("qrPhotoPreview").innerHTML="";
+ qrObjectURLs.forEach(URL.revokeObjectURL);qrObjectURLs=[];
+ const files=Array.from($("qrPhotos").files||[]);
+ files.slice(0,12).forEach(file=>{
+  if(!file.type.startsWith("image/"))return;
+  const url=URL.createObjectURL(file);qrObjectURLs.push(url);
+  const img=document.createElement("img");img.src=url;img.alt=file.name;
+  $("qrPhotoPreview").appendChild(img);
+ });
+ if(files.length<3)toast("Sélectionnez au moins 3 photos.");
+ if(files.length>12)toast("Les 12 premières photos seront prévisualisées.");
+});
+$("qrForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const files=Array.from($("qrPhotos").files||[]);
+ if(files.length<3)return toast("Minimum 3 photos obligatoire.");
+ if(files.some(f=>!f.type.startsWith("image/")))return toast("Tous les fichiers doivent être des images.");
+ if(files.some(f=>f.size>5*1024*1024))return toast("Chaque photo doit peser moins de 5 Mo.");
+ let content=$("qrContent").value.trim();
+ const whatsapp=$("qrWhatsApp").value.trim();
+ const name=$("qrName").value.trim();
+ if(whatsapp)content+="\nWhatsApp : "+whatsapp;
+ if(name)content="Nom : "+name+"\n"+content;
+ $("qrInfo").textContent=`QR code créé pour « ${name||"votre contenu"} ». Les ${files.length} photos sont sélectionnées sur cet appareil, mais ne sont pas intégrées dans le QR code.`;
+ $("qrImage").src="https://api.qrserver.com/v1/create-qr-code/?size=600x600&margin=12&data="+encodeURIComponent(content);
+ $("qrResult").classList.remove("hidden");
+});
+$("downloadQR").addEventListener("click",async()=>{
+ try{
+  const response=await fetch($("qrImage").src);
+  if(!response.ok)throw new Error("QR code inaccessible");
+  const blob=await response.blob();
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;a.download="jason-business-qr.png";a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+ }catch{
+  toast("Impossible de télécharger. Vérifiez votre connexion internet.");
+ }
+});
+
+$("refreshOrders").addEventListener("click",async()=>{
+ if(!currentPhone)return toast("Connectez-vous d'abord.");
+ await loadOrders();toast("Commandes actualisées.");
+});
+
 initFirebase();
 </script>
 </body>
