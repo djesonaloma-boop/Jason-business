@@ -2,154 +2,491 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#050914">
 <title>JASON BUSINESS — ADMIN</title>
 <style>
-:root{--bg:#050914;--panel:#0b1220;--border:rgba(255,255,255,.08);--text:#f5f7fb;--muted:#8e9aad;--blue:#3b82f6;--green:#22c55e;--red:#ef4444;--gold:#d8aa45}
-*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Segoe UI,Arial,sans-serif}
+:root{
+ --bg:#050914;--panel:#0b1220;--border:rgba(255,255,255,.08);
+ --text:#f5f7fb;--muted:#8e9aad;--blue:#3b82f6;
+ --green:#22c55e;--red:#ef4444;--orange:#f97316;--purple:#a855f7;--gold:#d8aa45;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,sans-serif}
 body{background:radial-gradient(circle at top,#101d35 0,var(--bg) 45%,#02040a 100%);color:var(--text);min-height:100vh}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
 #adminLogin{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at top,#172744,#030711 70%);z-index:9999}
-.login-box{width:100%;max-width:400px;background:rgba(11,18,32,.96);border:1px solid var(--border);border-radius:24px;padding:30px;box-shadow:0 25px 80px rgba(0,0,0,.55)}
-.login-logo{text-align:center;font-size:25px;font-weight:900;letter-spacing:1px;margin-bottom:7px}.login-subtitle{text-align:center;color:var(--muted);font-size:12px;margin-bottom:25px}
-.input{width:100%;background:#070d18;border:1px solid var(--border);color:white;border-radius:13px;padding:14px;outline:none;margin-bottom:12px}.input:focus{border-color:var(--gold)}
-.login-btn{width:100%;border:0;border-radius:13px;padding:14px;background:var(--gold);color:#111;font-weight:900;cursor:pointer}
+.login-box{width:100%;max-width:400px;background:rgba(11,18,32,.96);border:1px solid var(--border);border-radius:24px;padding:30px;box-shadow:0 25px 80px #0009}
+.login-logo{text-align:center;font-size:25px;font-weight:900;letter-spacing:1px;margin-bottom:7px}
+.login-subtitle{text-align:center;color:var(--muted);font-size:12px;margin-bottom:25px}
+.input{width:100%;background:#070d18;border:1px solid var(--border);color:white;border-radius:13px;padding:14px;outline:none;margin-bottom:12px}
+.input:focus{border-color:var(--blue)}
+.login-btn{width:100%;border:0;border-radius:13px;padding:14px;background:var(--blue);color:white;font-weight:800}
 .login-error{color:#ff6b6b;text-align:center;font-size:12px;min-height:18px;margin-top:12px}
 #adminPanel{display:none;min-height:100vh}
-.header{height:68px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:rgba(5,9,20,.96);border-bottom:1px solid var(--border)}
-.brand{font-size:17px;font-weight:900}.brand span{color:var(--gold)}.status{font-size:11px;color:var(--muted)}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:6px}
-.logout{border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.08);color:#ff6b6b;border-radius:10px;padding:8px 12px;cursor:pointer;font-weight:700;font-size:11px}
-.layout{display:flex;min-height:calc(100vh - 68px)}.sidebar{width:230px;flex-shrink:0;padding:14px 10px;background:rgba(7,12,23,.95);border-right:1px solid var(--border)}
-.menu-btn{width:100%;display:flex;align-items:center;gap:9px;padding:13px 11px;margin-bottom:5px;border:0;border-radius:12px;background:transparent;color:#a8b3c5;text-align:left;font-weight:700;font-size:12px;cursor:pointer}.menu-btn.active,.menu-btn:hover{background:rgba(216,170,69,.12);color:#fff}.menu-count{margin-left:auto;background:var(--red);color:white;border-radius:20px;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:10px;padding:0 5px}
-.content{flex:1;min-width:0;padding:20px}.page{display:none}.page.active{display:block}.page-title{font-size:24px;font-weight:900;margin-bottom:6px}.page-subtitle{font-size:12px;color:var(--muted);margin-bottom:20px}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px}.stat-card,.panel{background:linear-gradient(145deg,rgba(16,26,43,.96),rgba(8,14,26,.96));border:1px solid var(--border);border-radius:17px}
-.stat-card{padding:17px;min-height:105px}.stat-label{font-size:11px;color:var(--muted)}.stat-value{font-size:21px;font-weight:900;margin-top:6px}
-.panel{overflow:hidden;margin-bottom:18px}.panel-head{padding:15px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--border);flex-wrap:wrap}.panel-title{font-weight:900}
-.search{width:100%;max-width:300px;background:#070d18;border:1px solid var(--border);border-radius:10px;color:white;padding:11px;outline:none}
-.table-wrap{width:100%;overflow-x:auto}table{width:100%;min-width:1150px;border-collapse:collapse}th{font-size:10px;text-transform:uppercase;color:#8794a8;text-align:left;padding:13px;border-bottom:1px solid var(--border)}td{font-size:12px;padding:13px;border-bottom:1px solid rgba(255,255,255,.045)}
-.btn{border:0;border-radius:8px;padding:7px 9px;color:white;font-size:10px;font-weight:800;cursor:pointer;margin:2px}.btn-blue{background:var(--blue)}.btn-green{background:var(--green)}.btn-red{background:var(--red)}.btn-dark{background:#263246}.btn-gold{background:var(--gold);color:#111}
-.badge{display:inline-flex;border-radius:20px;padding:5px 8px;font-size:10px;font-weight:800}.badge-pending{color:#ffc95a;background:rgba(245,158,11,.12)}.badge-ok{color:#54e889;background:rgba(34,197,94,.12)}.badge-no{color:#ff7777;background:rgba(239,68,68,.12)}
-.empty{padding:28px;text-align:center;color:var(--muted);font-size:13px}
-#toastContainer{position:fixed;right:12px;top:78px;z-index:10000;width:min(320px,calc(100% - 24px));display:flex;flex-direction:column;gap:8px}.toast{padding:12px;background:#111b2d;border:1px solid var(--border);border-radius:11px;font-size:12px}
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.72);z-index:5000}.modal.show{display:flex}.modal-box{width:100%;max-width:680px;max-height:90vh;overflow-y:auto;background:#0b1220;border:1px solid var(--border);border-radius:20px}.modal-header{display:flex;justify-content:space-between;padding:17px;border-bottom:1px solid var(--border)}.modal-content{padding:18px}
-.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.detail-item{background:rgba(255,255,255,.035);border:1px solid var(--border);border-radius:12px;padding:12px}.detail-item small{display:block;color:var(--muted);font-size:10px;margin-bottom:6px}.detail-item strong{font-size:13px;word-break:break-word}
-@media(max-width:850px){.layout{display:block}.sidebar{width:100%;display:flex;overflow-x:auto}.menu-btn{width:auto;flex-shrink:0}.content{padding:14px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.header{position:sticky;top:0;z-index:100;min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:rgba(5,9,20,.94);backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
+.brand{font-size:18px;font-weight:900}.brand span{color:#4da3ff}
+.header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.admin-status{display:flex;align-items:center;gap:7px;font-size:11px;color:#9ca9bc}
+.online-dot{width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 10px var(--green)}
+.logout{border:1px solid #ef44444d;background:#ef444414;color:#ff6b6b;border-radius:10px;padding:9px 12px;font-weight:700}
+.layout{display:flex;min-height:calc(100vh - 68px)}
+.sidebar{width:235px;flex-shrink:0;background:#070c17f0;border-right:1px solid var(--border);padding:15px 12px}
+.menu-btn{width:100%;border:0;background:transparent;color:#a8b3c5;padding:13px 12px;margin-bottom:5px;border-radius:12px;text-align:left;display:flex;align-items:center;gap:10px;font-weight:700;font-size:13px;white-space:nowrap}
+.menu-btn.active{background:#3b82f626;color:#fff}
+.menu-count{margin-left:auto;min-width:21px;height:21px;display:flex;align-items:center;justify-content:center;border-radius:20px;background:var(--red);color:white;font-size:10px}
+.content{flex:1;min-width:0;padding:20px}
+.page{display:none}.page.active{display:block}
+.page-title{font-size:25px;font-weight:900;margin-bottom:5px}
+.page-subtitle{color:var(--muted);font-size:12px;margin-bottom:20px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:20px}
+.stat-card{background:linear-gradient(145deg,#101a2bf5,#080e1af5);border:1px solid var(--border);border-radius:18px;padding:18px;min-height:110px}
+.stat-icon{font-size:22px;margin-bottom:10px}.stat-label{color:var(--muted);font-size:11px}
+.stat-value{font-size:22px;font-weight:900;margin-top:5px;overflow-wrap:anywhere}
+.panel{background:#0b1220e6;border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:18px}
+.panel-head{padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--border)}
+.table-wrap{width:100%;overflow-x:auto}
+table{width:100%;min-width:900px;border-collapse:collapse}
+th{color:#7f8da2;font-size:10px;text-transform:uppercase;text-align:left;padding:13px;border-bottom:1px solid var(--border)}
+td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:middle;max-width:220px;overflow:hidden;text-overflow:ellipsis}
+.btn{border:0;border-radius:8px;padding:8px 10px;color:white;font-size:10px;font-weight:800;margin:2px}
+.btn-blue{background:var(--blue)}.btn-green{background:var(--green)}.btn-red{background:var(--red)}.btn-orange{background:var(--orange)}.btn-purple{background:var(--purple)}.btn-gold{background:var(--gold);color:#111}.btn-dark{background:#263246}
+.badge{display:inline-flex;border-radius:20px;padding:5px 8px;font-size:10px;font-weight:800}.badge-success{color:#54e889;background:#22c55e1f}.badge-danger{color:#ff7777;background:#ef44441f}.badge-pending{color:#ffc95a;background:#f59e0b1f}.badge-blue{color:#70a9ff;background:#3b82f621}.badge-gold{color:#d8aa45;background:rgba(216,170,69,.15)}
+.toolbar-input,.price-input,.small-select{background:#070d18;border:1px solid var(--border);border-radius:10px;color:white;padding:10px;outline:none}
+.price-input{width:100%;min-width:100px}.small-select{max-width:160px}
+.section-note{color:var(--muted);font-size:12px;line-height:1.7;padding:15px}
+.price-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:16px}
+.price-card{background:#070d18;border:1px solid var(--border);border-radius:15px;padding:16px}
+.price-card h3{font-size:14px;margin-bottom:7px}.price-card p{color:var(--muted);font-size:11px;margin-bottom:13px;line-height:1.5}
+.price-row{display:flex;align-items:center;gap:9px}.price-row label{font-size:11px;color:var(--muted);flex:1}.price-row input{width:125px;max-width:55%}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;padding:0 16px 16px}
+#toastContainer{position:fixed;top:78px;right:15px;z-index:10000;display:flex;flex-direction:column;gap:8px;width:min(330px,calc(100% - 30px))}.toast{padding:13px 15px;border-radius:12px;background:#111b2d;border:1px solid var(--border);font-size:12px}
+.empty{text-align:center;color:var(--muted);padding:25px}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.72);backdrop-filter:blur(7px);z-index:5000}.modal.show{display:flex}.modal-box{width:100%;max-width:680px;max-height:90vh;overflow-y:auto;background:#0b1220;border:1px solid var(--border);border-radius:20px}.modal-header{display:flex;align-items:center;justify-content:space-between;padding:17px;border-bottom:1px solid var(--border)}.modal-title{font-weight:900}.close{width:34px;height:34px;border:0;border-radius:10px;background:rgba(255,255,255,.06);color:white;font-size:20px;cursor:pointer}.modal-content{padding:18px}
+.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.detail-item{background:rgba(255,255,255,.035);border:1px solid var(--border);border-radius:12px;padding:12px}.detail-item small{display:block;color:var(--muted);font-size:10px;margin-bottom:6px}.detail-item strong{display:block;font-size:13px;word-break:break-word}
+.link{color:var(--blue);text-decoration:none;word-break:break-all}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.price-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.layout{display:block}.sidebar{width:100%;display:flex;overflow-x:auto;border-right:0;border-bottom:1px solid var(--border);padding:8px}.menu-btn{width:auto;flex-shrink:0}.content{padding:14px}.page-title{font-size:22px}.header{padding:12px}.admin-status{display:none}.detail-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div id="adminLogin">
-  <div class="login-box">
-    <div class="login-logo">JASON BUSINESS</div>
-    <div class="login-subtitle">🔐 PANNEAU D'ADMINISTRATION</div>
-    <!-- autocomplete off pour bloquer Google -->
-    <input type="text" inputmode="numeric" autocomplete="off" id="adminPassword" class="input" placeholder="Mot de passe administrateur">
-    <button id="loginAdmin" class="login-btn" type="button">🔓 Ouvrir l'administration</button>
-    <div id="loginError" class="login-error"></div>
-  </div>
+ <div class="login-box">
+  <div class="login-logo">JASON BUSINESS</div>
+  <div class="login-subtitle">🔐 PANNEAU D'ADMINISTRATION</div>
+  <input type="text" inputmode="numeric" autocomplete="off" id="adminPassword" class="input" placeholder="Mot de passe administrateur">
+  <button id="loginAdmin" class="login-btn" type="button">🔓 Ouvrir l'administration</button>
+  <div id="loginError" class="login-error"></div>
+ </div>
 </div>
+
 <div id="adminPanel">
-<header class="header"><div class="brand">JASON <span>BUSINESS</span></div><div style="display:flex;align-items:center;gap:10px"><div class="status"><span class="dot"></span>Firebase connecté</div><button class="logout" id="adminLogout">Déconnexion</button></div></header>
-<div class="layout">
- <aside class="sidebar">
-  <button class="menu-btn active" data-page="dashboard">📊 Dashboard</button>
-  <button class="menu-btn" data-page="users">👥 Utilisateurs</button>
-  <button class="menu-btn" data-page="commands">🛒 Boost <span class="menu-count" id="menuCommands">0</span></button>
-  <button class="menu-btn" data-page="store">🛍️ Store <span class="menu-count" id="menuStore">0</span></button>
-  <button class="menu-btn" data-page="recharges">💳 Dépôts <span class="menu-count" id="menuRecharges">0</span></button>
-  <button class="menu-btn" data-page="withdrawals">💸 Retraits <span class="menu-count" id="menuWithdrawals">0</span></button>
-  <button class="menu-btn" data-page="messages">💬 Messages</button>
-  <button class="menu-btn" data-page="send">📤 Envoyer</button>
- </aside>
- <main class="content">
-  <section class="page active" id="page-dashboard"><div class="page-title">📊 Dashboard</div><div class="page-subtitle">Code: 10092007</div><div class="stats"><div class="stat-card"><div class="stat-label">Utilisateurs</div><div class="stat-value" id="statUsers">0</div></div><div class="stat-card"><div class="stat-label">Soldes cumulés</div><div class="stat-value" id="totalBalance">0 FC</div></div><div class="stat-card"><div class="stat-label">Boost en attente</div><div class="stat-value" id="statCommands">0</div></div><div class="stat-card"><div class="stat-label">Store en attente</div><div class="stat-value" id="statStore">0</div></div><div class="stat-card"><div class="stat-label">Dépôts en attente</div><div class="stat-value" id="statRecharges">0</div></div><div class="stat-card"><div class="stat-label">Retraits en attente</div><div class="stat-value" id="statWithdrawals">0</div></div></div></section>
-  <section class="page" id="page-users"><div class="panel"><div class="panel-head"><div class="panel-title">Utilisateurs</div><input class="search" id="userSearch" placeholder="🔎 Rechercher"></div><div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>Points</th><th>MDP</th><th>Actions</th></tr></thead><tbody id="usersTable"></tbody></table></div></div></section>
-  <section class="page" id="page-commands"><div class="panel"><div class="panel-head"><div class="panel-title">Boost - Modifier prix</div><input class="search" id="commandSearch" placeholder="🔎"></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Plateforme</th><th>Service</th><th>Lien</th><th>Qté</th><th>Prix</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div></div></section>
-  <section class="page" id="page-store"><div class="panel"><div class="panel-head"><div class="panel-title">Store - Modifier prix</div><input class="search" id="storeSearch" placeholder="🔎"></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Produit</th><th>Qté</th><th>Prix</th><th>Adresse</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="storeTable"></tbody></table></div></div></section>
-  <section class="page" id="page-recharges"><div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Transaction</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="rechargesTable"></tbody></table></div></div></section>
-  <section class="page" id="page-withdrawals"><div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Numéro</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsTable"></tbody></table></div></div></section>
-  <section class="page" id="page-messages"><div class="panel" id="messagesList"><div class="empty">Chargement…</div></div></section>
-  <section class="page" id="page-send"><div class="panel"><div style="padding:17px"><input class="input" id="messageTo" placeholder="Numéro client"><textarea id="messageText" style="width:100%;min-height:130px;margin:8px 0 14px;padding:12px;background:#070d18;border:1px solid var(--border);border-radius:12px;color:white" placeholder="Message…"></textarea><button id="sendMessageBtn" class="btn btn-blue" style="padding:12px 18px">📤 Envoyer</button><div id="sendStatus" style="margin-top:12px;font-size:12px"></div></div></div></section>
- </main>
+ <header class="header">
+  <div class="brand">JASON <span>BUSINESS</span></div>
+  <div class="header-right">
+   <div class="admin-status"><span class="online-dot"></span>Session administrateur - 10092007</div>
+   <button class="logout" id="adminLogout" type="button">Déconnexion</button>
+  </div>
+ </header>
+ <div class="layout">
+  <aside class="sidebar">
+   <button class="menu-btn active" data-page="dashboard">📊 Dashboard</button>
+   <button class="menu-btn" data-page="users">👥 Utilisateurs</button>
+   <button class="menu-btn" data-page="commands">🛒 Boost <span class="menu-count" id="menuCommands">0</span></button>
+   <button class="menu-btn" data-page="store">🛍️ Store <span class="menu-count" id="menuStore">0</span></button>
+   <button class="menu-btn" data-page="recharges">💳 Dépôts <span class="menu-count" id="menuRecharges">0</span></button>
+   <button class="menu-btn" data-page="withdrawals">💸 Retraits <span class="menu-count" id="menuWithdrawals">0</span></button>
+   <button class="menu-btn" data-page="messages">💬 Messages</button>
+   <button class="menu-btn" data-page="vip">👑 VIP <span class="menu-count" id="menuVip">0</span></button>
+   <button class="menu-btn" data-page="api">🔌 API et tarifs</button>
+  </aside>
+  <main class="content">
+   <section class="page active" id="page-dashboard">
+    <div class="page-title">📊 Dashboard</div>
+    <div class="page-subtitle">Vue générale de JASON BUSINESS - Code admin 10092007</div>
+    <div class="stats">
+     <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-label">Utilisateurs</div><div class="stat-value" id="statUsers">0</div></div>
+     <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-label">Solde total</div><div class="stat-value" id="totalBalance">0 FC</div></div>
+     <div class="stat-card"><div class="stat-icon">🛒</div><div class="stat-label">Boost en attente</div><div class="stat-value" id="statCommands">0</div></div>
+     <div class="stat-card"><div class="stat-icon">🛍️</div><div class="stat-label">Store en attente</div><div class="stat-value" id="statStore">0</div></div>
+     <div class="stat-card"><div class="stat-icon">💳</div><div class="stat-label">Dépôts en attente</div><div class="stat-value" id="statRecharges">0</div></div>
+     <div class="stat-card"><div class="stat-icon">💸</div><div class="stat-label">Retraits en attente</div><div class="stat-value" id="statWithdrawals">0</div></div>
+     <div class="stat-card"><div class="stat-icon">👑</div><div class="stat-label">Membres VIP actifs</div><div class="stat-value" id="statVip">0</div></div>
+     <div class="stat-card"><div class="stat-icon">💬</div><div class="stat-label">Messages</div><div class="stat-value" id="statMessages">0</div></div>
+    </div>
+   </section>
+
+   <section class="page" id="page-users">
+    <div class="page-title">👥 Utilisateurs</div>
+    <div class="page-subtitle">Consulte et gère les comptes clients.</div>
+    <div class="panel">
+     <div class="panel-head"><strong>Liste des clients</strong><input id="userSearch" class="toolbar-input" placeholder="🔎 Rechercher..." style="width:100%;max-width:300px"></div>
+     <div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>VIP</th><th>MDP actuel</th><th>Actions</th></tr></thead><tbody id="usersTable"><tr><td colspan="6" class="empty">Chargement…</td></tr></tbody></table></div>
+    </div>
+   </section>
+
+   <section class="page" id="page-commands">
+    <div class="page-title">🛒 Commandes Boost - Modifier prix + Voir détails</div>
+    <div class="page-subtitle">Valide ou refuse les demandes + modifie le prix</div>
+    <div class="panel">
+     <div class="panel-head"><strong>Demandes Boost</strong><input id="commandSearch" class="toolbar-input" placeholder="🔎 Plateforme, service, client" style="width:100%;max-width:300px"></div>
+     <div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Plateforme</th><th>Service / Type</th><th>Lien</th><th>Qté</th><th>Prix</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div>
+    </div>
+   </section>
+
+   <section class="page" id="page-store">
+    <div class="page-title">🛍️ Store - Modifier prix + Voir commande</div>
+    <div class="page-subtitle">Commandes boutique physique</div>
+    <div class="panel">
+     <div class="panel-head"><strong>Commandes Store</strong><input id="storeSearch" class="toolbar-input" placeholder="🔎 Client, produit" style="width:100%;max-width:300px"></div>
+     <div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Produit</th><th>Qté</th><th>Prix</th><th>Adresse</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="storeTable"></tbody></table></div>
+    </div>
+   </section>
+
+   <section class="page" id="page-recharges">
+    <div class="page-title">💳 Recharges / Dépôts</div>
+    <div class="page-subtitle">Validation des dépôts des clients.</div>
+    <div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Transaction</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="rechargesTable"></tbody></table></div></div>
+   </section>
+
+   <section class="page" id="page-withdrawals">
+    <div class="page-title">💸 Retraits</div>
+    <div class="page-subtitle">Suivi des demandes de retrait.</div>
+    <div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Numéro réception</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsTable"></tbody></table></div></div>
+   </section>
+
+   <section class="page" id="page-messages">
+    <div class="page-title">💬 Messages clients</div>
+    <div class="page-subtitle">Messages reçus + envoyer réponse</div>
+    <div class="panel">
+     <div class="panel-head"><strong>Messages</strong><div style="display:flex;gap:8px"><input id="messageTo" class="toolbar-input" placeholder="Numéro client"><input id="messageTextInput" class="toolbar-input" placeholder="Message..." style="min-width:200px"><button class="btn btn-blue" id="sendMessageBtn">📤 Envoyer</button></div></div>
+     <div id="messagesList"><div class="empty">Chargement…</div></div>
+    </div>
+   </section>
+
+   <section class="page" id="page-vip">
+    <div class="page-title">👑 Gestion VIP</div>
+    <div class="page-subtitle">Attribue un niveau VIP ou désactive le statut d'un membre.</div>
+    <div class="panel">
+     <div class="panel-head"><strong>Clients VIP</strong><input id="vipSearch" class="toolbar-input" placeholder="🔎 Rechercher un client" style="width:100%;max-width:280px"></div>
+     <div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Niveau</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="vipTable"></tbody></table></div>
+     <div class="section-note">Les modifications sont enregistrées dans le profil du client sous <code>vipLevel</code> et <code>vipStatus</code>.</div>
+    </div>
+   </section>
+
+   <section class="page" id="page-api">
+    <div class="page-title">🔌 API et tarifs</div>
+    <div class="page-subtitle">Modifie les prix des services et enregistre-les dans Firebase.</div>
+    <div class="panel">
+     <div class="panel-head"><strong>Tarification des services</strong><span class="badge badge-blue">Prix en FC</span></div>
+     <div class="section-note">Ces tarifs sont stockés dans <code>jasonBusiness/config/apiPrices</code>.</div>
+     <div class="price-grid" id="priceGrid"><div class="empty">Chargement des tarifs…</div></div>
+     <div class="action-row">
+      <button class="btn btn-blue" id="savePrices">💾 Enregistrer les tarifs</button>
+      <button class="btn btn-purple" id="reloadPrices">↻ Recharger depuis Firebase</button>
+     </div>
+    </div>
+    <div class="panel"><div class="panel-head"><strong>État de la configuration</strong></div><div class="section-note" id="apiInfo">En attente de connexion à Firebase.</div></div>
+   </section>
+
+  </main>
+ </div>
 </div>
-</div>
-<div class="modal" id="commandModal"><div class="modal-box"><div class="modal-header"><div class="modal-title">Détails</div><button class="close" onclick="closeModal('commandModal')" style="width:34px;height:34px;border:0;border-radius:10px;background:rgba(255,255,255,.06);color:white;font-size:20px;cursor:pointer">×</button></div><div class="modal-content" id="commandDetails"></div></div></div>
+
+<div class="modal" id="commandModal"><div class="modal-box"><div class="modal-header"><div class="modal-title" id="modalTitle">🛒 Détails commande</div><button class="close" onclick="closeModal('commandModal')">×</button></div><div class="modal-content" id="commandDetails"></div></div></div>
 <div id="toastContainer"></div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, onValue, update, remove, push, runTransaction, get, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-const firebaseConfig = { apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U", authDomain:"starlink-investit.firebaseapp.com", databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com", projectId:"starlink-investit", storageBucket:"starlink-investit.firebasestorage.app", messagingSenderId:"807081599583", appId:"1:807081599583:web:e00ec3959bc4acdae031ea" };
-const dbApp = initializeApp(firebaseConfig);
-const db = getDatabase(dbApp);
+
+const firebaseConfig = {
+ apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
+ authDomain:"starlink-investit.firebaseapp.com",
+ databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
+ projectId:"starlink-investit",
+ storageBucket:"starlink-investit.firebasestorage.app",
+ messagingSenderId:"807081599583",
+ appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
+};
+const app = getApps().length? getApps()[0] : initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
 const ROOT="jasonBusiness";
-const PATHS={users:`${ROOT}/users`,commands:`${ROOT}/demandes_commandes`,store:`${ROOT}/store_commandes`,recharges:`${ROOT}/demandes_recharges`,withdrawals:`${ROOT}/demandes_retraits`,messages:`${ROOT}/messages`};
+const PATHS={
+ users:`${ROOT}/users`,
+ commands:`${ROOT}/demandes_commandes`,
+ store:`${ROOT}/store_commandes`,
+ recharges:`${ROOT}/demandes_recharges`,
+ withdrawals:`${ROOT}/demandes_retraits`,
+ messages:`${ROOT}/messages`,
+ prices:`${ROOT}/config/apiPrices`
+};
 const ADMIN_CODE="10092007";
-const loginBox=document.getElementById("adminLogin"), adminPanel=document.getElementById("adminPanel");
-function showAdmin(){loginBox.style.display="none";adminPanel.style.display="block"; localStorage.setItem("jasonBusinessAdminToken","ok");}
-function loginAdmin(){
-  const pw=document.getElementById("adminPassword").value.trim();
-  const err=document.getElementById("loginError");
-  if(pw===ADMIN_CODE){showAdmin();} else {err.textContent="❌ Code incorrect - tape 10092007"; setTimeout(()=>err.textContent="",3000);}
-}
-document.getElementById("loginAdmin").addEventListener("click",loginAdmin);
-document.getElementById("adminPassword").addEventListener("keydown",e=>{if(e.key==="Enter") loginAdmin();});
-document.getElementById("adminLogout").addEventListener("click",()=>{localStorage.removeItem("jasonBusinessAdminToken"); location.reload();});
-if(localStorage.getItem("jasonBusinessAdminToken")){showAdmin();}
+
+const defaultPrices={
+ boosting:{label:"Boosting / réseaux sociaux",price:5000,description:"Tarif de base du service de boosting."},
+ chatbot:{label:"API Chatbot IA",price:10000,description:"Accès ou utilisation du service chatbot."},
+ translation:{label:"Traduction IA",price:2000,description:"Tarif de base de traduction."},
+ image:{label:"Génération d’images",price:5000,description:"Tarif de génération d’images."},
+ music:{label:"Génération musicale",price:10000,description:"Tarif de création musicale."},
+ video:{label:"Génération vidéo",price:15000,description:"Tarif de génération vidéo."}
+};
+
+let usersCache={},commandsCache={},storeCache={},rechargesCache={},withdrawalsCache={},pricesCache={},messagesCache={};
+let listenersStarted=false;
 const $=id=>document.getElementById(id);
 const money=v=>Math.floor(Number(v)||0).toLocaleString("fr-FR");
 const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
 const getPhone=d=>d.telephone??d.userPhone??d.phone??d.numero??d.user??d.client??d.from??"";
+const getName=d=>d.nom??d.name??d.username??"Utilisateur";
+const getBal=d=>Number(d.solde_principal??d.solde??d.balance??0)||0;
+const getPass=d=>d.password??d.mot_de_passe??d.pass??"—";
 const getStatus=d=>d.statut??d.status??"En attente";
 const isPending=s=>String(s||"").toLowerCase().includes("attente");
-const badge=s=>{const v=String(s||"En attente"); const low=v.toLowerCase(); if(low.includes("valid")) return `<span class="badge badge-ok">✓ ${esc(v)}</span>`; if(low.includes("refus")) return `<span class="badge badge-no">✕ ${esc(v)}</span>`; return `<span class="badge badge-pending">⏳ ${esc(v)}</span>`;}
-function toast(m){const c=$("toastContainer"); const el=document.createElement("div"); el.className="toast"; el.textContent=m; c.appendChild(el); setTimeout(()=>el.remove(),3000);}
+const isVip=d=>{const s=String(d.vipStatus??"").toLowerCase(); return d.vip===true||d.isVip===true||s==="actif";};
+const vipLevel=d=>d.vipLevel||d.niveauVip||"Aucun";
+const badge=s=>{const v=String(s||"En attente"); const l=v.toLowerCase(); if(l.includes("valid")||l.includes("pay")) return `<span class="badge badge-success">✓ ${esc(v)}</span>`; if(l.includes("refus")||l.includes("annul")) return `<span class="badge badge-danger">✕ ${esc(v)}</span>`; return `<span class="badge badge-pending">⏳ ${esc(v)}</span>`;}
+function toast(m){const c=$("toastContainer"); const el=document.createElement("div"); el.className="toast"; el.textContent=m; c.appendChild(el); setTimeout(()=>el.remove(),3500);}
 window.closeModal=id=>document.getElementById(id).classList.remove("show");
 window.openModal=id=>document.getElementById(id).classList.add("show");
 function openPage(p){document.querySelectorAll(".menu-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===p)); document.querySelectorAll(".page").forEach(s=>s.classList.toggle("active",s.id==="page-"+p));}
 document.querySelectorAll(".menu-btn").forEach(b=>b.addEventListener("click",()=>openPage(b.dataset.page)));
-let usersCache={},commandsCache={},storeCache={},rechargesCache={},withdrawalsCache={};
-onValue(ref(db,PATHS.users),snap=>{
-  usersCache={}; const tbody=$("usersTable"); tbody.innerHTML=""; let count=0,total=0;
-  snap.forEach(child=>{const phone=child.key; const d=child.val()||{}; usersCache[phone]=d; count++; const bal=Number(d.solde_principal||0)||0; total+=bal; const enc=encodeURIComponent(phone); const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(phone)}</td><td>${esc(d.nom||"")}</td><td>${money(bal)} FC</td><td>${d.points_fidelite||0}</td><td><code style="color:#d8aa45">${esc(d.password||"")}</code></td><td><button class="btn btn-blue" onclick="viewUser('${enc}')">👁</button></td>`; tbody.appendChild(tr);});
-  $("statUsers").textContent=count; $("totalBalance").textContent=money(total)+" FC";
+
+// LOGIN avec code 10092007 direct
+function showAdmin(){document.getElementById("adminLogin").style.display="none";document.getElementById("adminPanel").style.display="block"; localStorage.setItem("jasonBusinessAdminToken","ok_"+Date.now()); startListeners();}
+function loginAdmin(){
+ const pw=document.getElementById("adminPassword").value.trim();
+ const err=document.getElementById("loginError");
+ if(!pw){err.textContent="Entre le mot de passe"; return;}
+ if(pw===ADMIN_CODE){showAdmin(); toast("🔓 Admin ouvert - 10092007");} else {err.textContent="❌ Code incorrect - c'est 10092007"; toast("❌ Code incorrect");}
+}
+document.getElementById("loginAdmin").addEventListener("click",loginAdmin);
+document.getElementById("adminPassword").addEventListener("keydown",e=>{if(e.key==="Enter") loginAdmin();});
+document.getElementById("adminLogout").addEventListener("click",()=>{localStorage.removeItem("jasonBusinessAdminToken"); location.reload();});
+if(localStorage.getItem("jasonBusinessAdminToken")){document.getElementById("adminLogin").style.display="none";document.getElementById("adminPanel").style.display="block";}
+
+function startListeners(){
+ if(listenersStarted) return; listenersStarted=true;
+ onValue(ref(db,PATHS.users),snap=>{
+  usersCache={}; let total=0,balance=0,vipCount=0; snap.forEach(ch=>{const d=ch.val()||{}; usersCache[ch.key]=d; total++; balance+=getBal(d); if(isVip(d)) vipCount++;});
+  $("statUsers").textContent=total; $("totalBalance").textContent=money(balance)+" FC"; $("statVip").textContent=vipCount; $("menuVip").textContent=vipCount;
+  renderUsers(); renderVip();
+ });
+ onValue(ref(db,PATHS.commands),snap=>{
+  commandsCache={}; snap.forEach(ch=>commandsCache[ch.key]=ch.val()||{}); renderCommands();
+ });
+ onValue(ref(db,PATHS.store),snap=>{
+  storeCache={}; snap.forEach(ch=>storeCache[ch.key]=ch.val()||{}); renderStore();
+ });
+ onValue(ref(db,PATHS.recharges),snap=>{
+  rechargesCache={}; snap.forEach(ch=>rechargesCache[ch.key]=ch.val()||{}); renderRecharges();
+ });
+ onValue(ref(db,PATHS.withdrawals),snap=>{
+  withdrawalsCache={}; snap.forEach(ch=>withdrawalsCache[ch.key]=ch.val()||{}); renderWithdrawals();
+ });
+ onValue(ref(db,PATHS.prices),snap=>{
+  pricesCache=snap.val()||{}; renderPrices();
+  $("apiInfo").textContent=snap.exists()?"Tarifs chargés depuis Firebase":"Aucun tarif enregistré - exemples affichés";
+ });
+ onValue(ref(db,PATHS.messages),snap=>{
+  messagesCache={}; snap.forEach(ch=>messagesCache[ch.key]=ch.val()||{}); renderMessages();
+ });
+}
+
+function renderUsers(){
+ const tbody=$("usersTable"); tbody.innerHTML="";
+ Object.entries(usersCache).forEach(([phone,d])=>{
+  const vip=isVip(d); const enc=encodeURIComponent(phone);
+  const tr=document.createElement("tr"); tr.dataset.search=(phone+" "+getName(d)).toLowerCase();
+  tr.innerHTML=`<td>${esc(phone)}</td><td>${esc(getName(d))}</td><td>${money(getBal(d))} FC</td><td>${vip?'<span class="badge badge-success">👑 '+esc(vipLevel(d))+'</span>':'<span class="badge badge-blue">Standard</span>'}</td><td><code style="background:rgba(216,170,69,.15);padding:4px 6px;border-radius:6px;color:#d8aa45">${esc(getPass(d))}</code></td><td><button class="btn btn-blue" onclick="viewUser('${enc}')">👁</button><button class="btn btn-red" onclick="deleteUser('${enc}')">🗑</button></td>`;
+  tbody.appendChild(tr);
+ });
+ if(!Object.keys(usersCache).length) tbody.innerHTML='<tr><td colspan="6" class="empty">Aucun utilisateur</td></tr>';
+}
+function renderVip(){
+ const tbody=$("vipTable"); tbody.innerHTML="";
+ Object.entries(usersCache).forEach(([phone,d])=>{
+  const active=isVip(d); const tr=document.createElement("tr"); tr.dataset.search=(phone+" "+getName(d)).toLowerCase();
+  tr.innerHTML=`<td>${esc(phone)}</td><td>${esc(getName(d))}</td><td><select class="small-select" data-level="${esc(phone)}">${["Aucun","Bronze","Silver","Gold","Platinum","Diamond"].map(l=>`<option value="${l}" ${vipLevel(d)===l?"selected":""}>${l}</option>`).join("")}</select></td><td>${active?'<span class="badge badge-success">Actif</span>':'<span class="badge badge-danger">Inactif</span>'}</td><td><button class="btn btn-purple" onclick="saveVip('${encodeURIComponent(phone)}')">💾</button><button class="btn ${active?"btn-red":"btn-green"}" onclick="toggleVip('${encodeURIComponent(phone)}')">${active?"Désactiver":"Activer"}</button></td>`;
+  tbody.appendChild(tr);
+ });
+}
+window.viewUser=function(enc){
+ const phone=decodeURIComponent(enc); const d=usersCache[phone]||{};
+ document.getElementById("modalTitle").textContent="👤 "+phone;
+ $("commandDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>📱 Numéro</small><strong>${esc(phone)}</strong></div><div class="detail-item"><small>👤 Nom</small><strong>${esc(getName(d))}</strong></div><div class="detail-item" style="border-color:rgba(216,170,69,.4)"><small>🔑 MDP</small><strong style="color:#d8aa45">${esc(getPass(d))}</strong></div><div class="detail-item"><small>💰 Solde</small><strong>${money(getBal(d))} FC</strong></div><div class="detail-item" style="grid-column:span 2"><small>📝 JSON complet</small><strong style="white-space:pre-wrap;font-size:10px">${esc(JSON.stringify(d,null,2).slice(0,2000))}</strong></div></div>`;
+ openModal("commandModal");
+};
+window.deleteUser=async(enc)=>{const p=decodeURIComponent(enc); if(!confirm("Supprimer "+p+"?")) return; await remove(ref(db,`${PATHS.users}/${p}`)); toast("Supprimé");};
+window.saveVip=async(enc)=>{const phone=decodeURIComponent(enc); const sel=document.querySelector(`[data-level="${CSS.escape(phone)}"]`); const level=sel?.value||"Aucun"; await update(ref(db,`${PATHS.users}/${phone}`),{vipLevel:level,vipStatus:level!=="Aucun"?"Actif":"Inactif",vip:level!=="Aucun",isVip:level!=="Aucun"}); toast("VIP enregistré");};
+window.toggleVip=async(enc)=>{const phone=decodeURIComponent(enc); const d=usersCache[phone]||{}; const active=!isVip(d); const level=active?(vipLevel(d)==="Aucun"?"Bronze":vipLevel(d)):"Aucun"; await update(ref(db,`${PATHS.users}/${phone}`),{vip:active,isVip:active,vipStatus:active?"Actif":"Inactif",vipLevel:level}); toast(active?"VIP activé":"VIP désactivé");};
+
+function renderCommands(){
+ const tbody=$("commandsTable"); tbody.innerHTML=""; let pending=0;
+ const entries=Object.entries(commandsCache).sort((a,b)=>(Number(b[1].createdAt||0)-Number(a[1].createdAt||0)));
+ entries.forEach(([id,d])=>{
+  const st=getStatus(d); if(st.toLowerCase().includes("attente")) pending++;
+  const amt=Number(d.montant??d.prix??0)||0;
+  const plateforme=d.plateforme??d.platforme??"—";
+  const service=d.type_service??d.service??"—";
+  const lien=d.lien??d.link??"—";
+  const qte=d.quantite??d.qty??"—";
+  const tr=document.createElement("tr"); tr.dataset.search=(getPhone(d)+" "+plateforme+" "+service).toLowerCase();
+  tr.innerHTML=`<td>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</td><td><b>${esc(getPhone(d)||"—")}</b> ${d.selfBoost?'<span class="badge badge-gold">SELF</span>':""}</td><td><b style="color:#d8aa45">${esc(plateforme)}</b></td><td>${esc(service)}</td><td><a href="${esc(lien)}" target="_blank" class="link" title="${esc(lien)}">${esc(lien).slice(0,30)}</a></td><td><b>${esc(qte)}</b></td><td><b style="color:#d8aa45">${money(amt)} FC</b></td><td>${badge(st)}</td><td><button class="btn btn-blue" onclick="viewCommand('${encodeURIComponent(id)}')">👁</button><button class="btn btn-gold" onclick="editPrice('${encodeURIComponent(id)}')">💰 Prix</button>${isPending(st)?`<button class="btn btn-green" onclick="validateCommand('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseCommand('${encodeURIComponent(id)}')">✕</button>`:`<button class="btn btn-dark" onclick="deleteCommand('${encodeURIComponent(id)}')">🗑</button>`}</td>`;
+  tbody.appendChild(tr);
+ });
+ $("statCommands").textContent=pending; $("menuCommands").textContent=pending;
+ if(!entries.length) tbody.innerHTML='<tr><td colspan="9" class="empty">Aucune commande Boost</td></tr>';
+}
+function renderStore(){
+ const tbody=$("storeTable"); tbody.innerHTML=""; let pending=0;
+ const entries=Object.entries(storeCache).sort((a,b)=>(Number(b[1].createdAt||0)-Number(a[1].createdAt||0)));
+ entries.forEach(([id,d])=>{
+  const st=getStatus(d); if(st.toLowerCase().includes("attente")) pending++;
+  const amt=Number(d.montant??d.prix??d.total??0)||0;
+  const tr=document.createElement("tr"); tr.dataset.search=(getPhone(d)+" "+(d.produit||"")).toLowerCase();
+  tr.innerHTML=`<td>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</td><td><b>${esc(getPhone(d)||"—")}</b></td><td>${esc(d.produit??d.product??"—")}</td><td>${esc(d.quantite??1)}</td><td><b style="color:#d8aa45">${money(amt)} FC</b></td><td style="max-width:180px;white-space:pre-wrap">${esc(d.adresse??d.livraison??"—")}</td><td>${badge(st)}</td><td><button class="btn btn-blue" onclick="viewStore('${encodeURIComponent(id)}')">👁</button><button class="btn btn-gold" onclick="editStorePrice('${encodeURIComponent(id)}')">💰 Prix</button>${isPending(st)?`<button class="btn btn-green" onclick="validateStore('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseStore('${encodeURIComponent(id)}')">✕</button>`:`<button class="btn btn-dark" onclick="deleteStore('${encodeURIComponent(id)}')">🗑</button>`}</td>`;
+  tbody.appendChild(tr);
+ });
+ $("statStore").textContent=pending; $("menuStore").textContent=pending;
+ if(!entries.length) tbody.innerHTML='<tr><td colspan="8" class="empty">Aucune commande Store</td></tr>';
+}
+
+window.viewCommand=function(enc){
+ const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const amt=Number(d.montant??d.prix??0)||0;
+ $("modalTitle").textContent="🛒 Commande Boost - Voir";
+ $("commandDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>📱 Client</small><strong>${esc(getPhone(d))}</strong></div><div class="detail-item"><small>📅 Date</small><strong>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</strong></div><div class="detail-item"><small>🌐 Plateforme</small><strong style="color:#d8aa45">${esc(d.plateforme??"—")}</strong></div><div class="detail-item"><small>🚀 Service</small><strong>${esc(d.type_service??d.service??"—")}</strong></div><div class="detail-item" style="grid-column:span 2"><small>🔗 Lien public</small><strong><a href="${esc(d.lien??"")}" target="_blank" class="link">${esc(d.lien??"—")}</a></strong></div><div class="detail-item"><small>🔢 Quantité</small><strong>${esc(d.quantite??"—")}</strong></div><div class="detail-item"><small>💰 Prix</small><strong style="color:#d8aa45;font-size:18px">${money(amt)} FC</strong></div><div class="detail-item"><small>📌 Statut</small><strong>${esc(getStatus(d))}</strong></div><div class="detail-item" style="grid-column:span 2"><small>📝 JSON complet commande</small><strong style="white-space:pre-wrap;font-size:10px">${esc(JSON.stringify(d,null,2).slice(0,3000))}</strong></div></div><hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)"><div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn btn-gold" onclick="editPrice('${enc}')">💰 Modifier prix</button><button class="btn btn-green" onclick="validateCommand('${enc}')">✓ Valider</button><button class="btn btn-orange" onclick="copyLink('${enc}')">🔗 Copier lien</button><button class="btn btn-red" onclick="refuseCommand('${enc}')">✕ Refuser + Rembourser</button><button class="btn btn-dark" onclick="deleteCommand('${enc}')">🗑 Supprimer</button></div>`;
+ openModal("commandModal");
+};
+window.viewStore=function(enc){
+ const id=decodeURIComponent(enc); const d=storeCache[id]||{};
+ const amt=Number(d.montant??d.prix??0)||0;
+ $("modalTitle").textContent="🛍️ Commande Store - Voir";
+ $("commandDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>📱 Client</small><strong>${esc(getPhone(d)||"—")}</strong></div><div class="detail-item"><small>📅 Date</small><strong>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</strong></div><div class="detail-item"><small>🛍️ Produit</small><strong>${esc(d.produit??"—")}</strong></div><div class="detail-item"><small>💰 Prix</small><strong style="color:#d8aa45;font-size:18px">${money(amt)} FC</strong></div><div class="detail-item" style="grid-column:span 2"><small>📦 Adresse livraison</small><strong>${esc(d.adresse??d.livraison??"—")}</strong></div><div class="detail-item" style="grid-column:span 2"><small>📝 JSON complet</small><strong style="white-space:pre-wrap;font-size:10px">${esc(JSON.stringify(d,null,2).slice(0,3000))}</strong></div></div><hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)"><div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn btn-gold" onclick="editStorePrice('${enc}')">💰 Modifier prix Store</button><button class="btn btn-green" onclick="validateStore('${enc}')">✓ Valider</button><button class="btn btn-red" onclick="refuseStore('${enc}')">✕ Refuser</button><button class="btn btn-dark" onclick="deleteStore('${enc}')">🗑 Supprimer</button></div>`;
+ openModal("commandModal");
+};
+window.editPrice=async(enc)=>{
+ const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const cur=Number(d.montant??d.prix??0)||0;
+ const input=prompt(`💰 Modifier prix Boost\nClient: ${getPhone(d)}\nService: ${d.plateforme??""} - ${d.type_service??""}\nLien: ${d.lien??""}\n\nPrix actuel: ${cur} FC\nNouveau prix:`,String(cur)); if(input===null) return;
+ const newPrice=Number(input.replace(/[^0-9]/g,"")); if(isNaN(newPrice)) return toast("❌ Prix invalide");
+ const diff=newPrice-cur; const phone=getPhone(d);
+ if(!confirm(`Confirmer ${money(cur)} → ${money(newPrice)} FC?\nDiff: ${diff>0?"+":""}${money(diff)} FC`)) return;
+ await update(ref(db,`${PATHS.commands}/${id}`),{prix:newPrice,montant:newPrice,priceEdited:true,oldPrice:cur,newPrice:newPrice,editedAt:Date.now()});
+ if(phone&&diff!==0){
+  const snap=await get(ref(db,`${PATHS.users}/${phone}/solde_principal`)); let bal=Number(snap.exists()?snap.val():0)||0; let newBal=bal-diff;
+  if(newBal<0){toast("❌ Solde client insuffisant"); await update(ref(db,`${PATHS.commands}/${id}`),{prix:cur,montant:cur}); return;}
+  await set(ref(db,`${PATHS.users}/${phone}/solde_principal`),newBal);
+ }
+ toast(`✅ Prix Boost ${money(cur)} → ${money(newPrice)} FC`); if($("commandModal").classList.contains("show")) viewCommand(enc);
+};
+window.editStorePrice=async(enc)=>{
+ const id=decodeURIComponent(enc); const d=storeCache[id]||{}; const cur=Number(d.montant??d.prix??0)||0;
+ const input=prompt(`💰 Modifier prix Store\nClient: ${getPhone(d)}\nProduit: ${d.produit??""}\nPrix actuel: ${cur} FC`,String(cur)); if(input===null) return;
+ const newPrice=Number(input.replace(/[^0-9]/g,"")); if(isNaN(newPrice)) return toast("❌ Prix invalide");
+ await update(ref(db,`${PATHS.store}/${id}`),{prix:newPrice,montant:newPrice,priceEdited:true,oldPrice:cur,editedAt:Date.now()});
+ toast(`✅ Store prix ${money(cur)} → ${money(newPrice)} FC`); if($("commandModal").classList.contains("show")) viewStore(enc);
+};
+window.copyLink=(enc)=>{const d=commandsCache[decodeURIComponent(enc)]||{}; const lien=d.lien??""; if(!lien) return toast("Pas de lien"); navigator.clipboard.writeText(lien).then(()=>toast("🔗 Lien copié"));};
+window.validateCommand=async(enc)=>{await update(ref(db,`${PATHS.commands}/${decodeURIComponent(enc)}`),{statut:"Validée",dateValidation:new Date().toISOString()}); toast("✅ Boost validé"); closeModal("commandModal");};
+window.refuseCommand=async(enc)=>{
+ const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const phone=getPhone(d); const amt=Number(d.montant??d.prix??0)||0;
+ if(!confirm(`Refuser et rembourser ${money(amt)} à ${phone}?`)) return;
+ await update(ref(db,`${PATHS.commands}/${id}`),{statut:"Refusée — Remboursée"});
+ if(phone&&amt>0) await runTransaction(ref(db,`${PATHS.users}/${phone}/solde_principal`),c=>(Number(c)||0)+amt);
+ toast("✅ Remboursé"); closeModal("commandModal");
+};
+window.deleteCommand=async(enc)=>{if(!confirm("Supprimer définitivement?")) return; await remove(ref(db,`${PATHS.commands}/${decodeURIComponent(enc)}`)); closeModal("commandModal"); toast("🗑 Supprimée");};
+window.validateStore=async(enc)=>{await update(ref(db,`${PATHS.store}/${decodeURIComponent(enc)}`),{statut:"Validée"}); toast("✅ Store validé"); closeModal("commandModal");};
+window.refuseStore=async(enc)=>{
+ const id=decodeURIComponent(enc); const d=storeCache[id]||{}; const phone=getPhone(d); const amt=Number(d.montant??d.prix??0)||0;
+ if(!confirm(`Refuser et rembourser ${money(amt)} à ${phone}?`)) return;
+ await update(ref(db,`${PATHS.store}/${id}`),{statut:"Refusée — Remboursée"});
+ if(phone&&amt>0) await runTransaction(ref(db,`${PATHS.users}/${phone}/solde_principal`),c=>(Number(c)||0)+amt);
+ toast("✅ Store remboursé"); closeModal("commandModal");
+};
+window.deleteStore=async(enc)=>{await remove(ref(db,`${PATHS.store}/${decodeURIComponent(enc)}`)); closeModal("commandModal"); toast("🗑 Store supprimé");};
+
+function renderRecharges(){
+ const tbody=$("rechargesTable"); tbody.innerHTML=""; let pending=0;
+ Object.entries(rechargesCache).forEach(([id,d])=>{
+  const st=getStatus(d); if(isPending(st)) pending++;
+  const amt=Number(d.montant??0)||0;
+  const tr=document.createElement("tr");
+  tr.innerHTML=`<td>${esc(d.date??"")}</td><td>${esc(getPhone(d)||"—")}</td><td><b style="color:#d8aa45">${money(amt)} FC</b></td><td>${esc(d.methode??"—")}</td><td style="font-family:monospace;font-size:10px">${esc(d.transaction??"—")}</td><td>${badge(st)}</td><td>${isPending(st)?`<button class="btn btn-green" onclick="validateRecharge('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseRecharge('${encodeURIComponent(id)}')">✕</button>`:`Traité`}</td>`;
+  tbody.appendChild(tr);
+ });
+ $("statRecharges").textContent=pending; $("menuRecharges").textContent=pending;
+ if(!Object.keys(rechargesCache).length) tbody.innerHTML='<tr><td colspan="7" class="empty">Aucune recharge</td></tr>';
+}
+function renderWithdrawals(){
+ const tbody=$("withdrawalsTable"); tbody.innerHTML=""; let pending=0;
+ Object.entries(withdrawalsCache).forEach(([id,d])=>{
+  const st=getStatus(d); if(isPending(st)) pending++;
+  const amt=Number(d.montant??0)||0;
+  const tr=document.createElement("tr");
+  tr.innerHTML=`<td>${esc(d.date??"")}</td><td>${esc(getPhone(d)||"—")}</td><td>${money(amt)} FC</td><td>${esc(d.methode??"—")}</td><td>${esc(d.numero??"—")}</td><td>${badge(st)}</td><td>${isPending(st)?`<button class="btn btn-green" onclick="validateWithdrawal('${encodeURIComponent(id)}')">✓ Payé</button><button class="btn btn-red" onclick="refuseWithdrawal('${encodeURIComponent(id)}')">✕</button>`:`Traité`}</td>`;
+  tbody.appendChild(tr);
+ });
+ $("statWithdrawals").textContent=pending; $("menuWithdrawals").textContent=pending;
+ if(!Object.keys(withdrawalsCache).length) tbody.innerHTML='<tr><td colspan="7" class="empty">Aucun retrait</td></tr>';
+}
+window.validateRecharge=async(enc)=>{
+ const id=decodeURIComponent(enc); const d=rechargesCache[id]||{}; const phone=getPhone(d); const amt=Number(d.montant??0)||0;
+ if(!phone||amt<=0) return toast("Invalide"); if(!confirm(`Confirmer dépôt ${money(amt)} pour ${phone}?`)) return;
+ await runTransaction(ref(db,`${PATHS.users}/${phone}/solde_principal`),c=>(Number(c)||0)+amt);
+ await update(ref(db,`${PATHS.recharges}/${id}`),{statut:"Validée",dateValidation:new Date().toISOString()});
+ toast(`✅ ${money(amt)} crédité`);
+};
+window.refuseRecharge=async(enc)=>{if(!confirm("Refuser dépôt?")) return; await update(ref(db,`${PATHS.recharges}/${decodeURIComponent(enc)}`),{statut:"Refusée"}); toast("Refusée");};
+window.validateWithdrawal=async(enc)=>{if(!confirm("Valider retrait?")) return; await update(ref(db,`${PATHS.withdrawals}/${decodeURIComponent(enc)}`),{statut:"Validée",dateValidation:new Date().toISOString()}); toast("✅ Retrait validé");};
+window.refuseWithdrawal=async(enc)=>{
+ const id=decodeURIComponent(enc); const d=withdrawalsCache[id]||{}; const phone=getPhone(d); const amt=Number(d.montant??0)||0;
+ if(!confirm(`Refuser et rembourser ${money(amt)} à ${phone}?`)) return;
+ await update(ref(db,`${PATHS.withdrawals}/${id}`),{statut:"Refusée — Remboursée"});
+ if(phone&&amt>0) await runTransaction(ref(db,`${PATHS.users}/${phone}/solde_principal`),c=>(Number(c)||0)+amt);
+ toast("Remboursé");
+};
+
+function renderMessages(){
+ const box=$("messagesList"); box.innerHTML=""; let count=0;
+ Object.entries(messagesCache).sort((a,b)=>(Number(b[1].createdAt||0)-Number(a[1].createdAt||0))).forEach(([id,d])=>{
+  count++; const div=document.createElement("div"); div.style.cssText="padding:16px;border-bottom:1px solid rgba(255,255,255,.07)";
+  div.innerHTML=`<div style="display:flex;justify-content:space-between;gap:10px"><b>📱 ${esc(d.from??getPhone(d)||d.to||"Client")}</b><span style="font-size:10px;color:#8e9aad">${esc(d.date??"")}</span></div><div style="margin:8px 0;font-size:13px;white-space:pre-wrap">${esc(d.message??d.text??"")}</div><div><button class="btn btn-blue" onclick="replyTo('${encodeURIComponent(getPhone(d)||d.from||"")}')">↩️ Répondre</button><button class="btn btn-red" onclick="deleteMsg('${encodeURIComponent(id)}')">🗑</button></div>`;
+  box.appendChild(div);
+ });
+ $("statMessages").textContent=count;
+ if(!count) box.innerHTML='<div class="empty">Aucun message</div>';
+}
+window.replyTo=(enc)=>{const p=decodeURIComponent(enc); $("messageTo").value=p; openPage("messages"); $("messageTextInput").focus();};
+window.deleteMsg=async(enc)=>{if(!confirm("Supprimer message?")) return; await remove(ref(db,`${PATHS.messages}/${decodeURIComponent(enc)}`)); toast("Supprimé");};
+$("sendMessageBtn").addEventListener("click",async()=>{
+ const to=$("messageTo").value.trim(); const txt=$("messageTextInput").value.trim();
+ if(!to||!txt){toast("Entre numéro et message"); return;}
+ await push(ref(db,PATHS.messages),{to,message:txt,from:"ADMIN",date:new Date().toISOString(),createdAt:Date.now(),statut:"Envoyé"});
+ $("messageTextInput").value=""; toast("✅ Envoyé à "+to);
 });
-onValue(ref(db,PATHS.commands),snap=>{
-  commandsCache={}; const tbody=$("commandsTable"); tbody.innerHTML=""; let pending=0; const entries=[]; snap.forEach(ch=>entries.push({id:ch.key,val:ch.val()||{}})); entries.sort((a,b)=>(Number(b.val.createdAt)||0)-(Number(a.val.createdAt)||0));
-  entries.forEach(({id,val:d})=>{commandsCache[id]=d; const st=getStatus(d); if(isPending(st)) pending++; const amt=Number(d.montant??d.prix??0)||0; const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(d.date||"")}</td><td>${esc(getPhone(d))}</td><td>${esc(d.plateforme||"")}</td><td>${esc(d.type_service||d.service||"")}</td><td><a href="${esc(d.lien||"")}" target="_blank" style="color:#3b82f6">${esc((d.lien||"").slice(0,20))}</a></td><td>${esc(d.quantite||"")}</td><td>${money(amt)} FC</td><td>${badge(st)}</td><td><button class="btn btn-blue" onclick="viewCommand('${encodeURIComponent(id)}')">👁</button><button class="btn btn-gold" onclick="editPrice('${encodeURIComponent(id)}')">💰</button>${isPending(st)?`<button class="btn btn-green" onclick="validateCommand('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseCommand('${encodeURIComponent(id)}')">✕</button>`:`<button class="btn btn-dark" onclick="deleteCommand('${encodeURIComponent(id)}')">🗑</button>`}</td>`; tbody.appendChild(tr);});
-  $("statCommands").textContent=pending; $("menuCommands").textContent=pending;
+
+function renderPrices(){
+ const grid=$("priceGrid"); grid.innerHTML="";
+ Object.entries(defaultPrices).forEach(([key,fallback])=>{
+  const stored=pricesCache[key]||{}; const label=stored.label||fallback.label; const price=stored.price??fallback.price; const desc=stored.description||fallback.description;
+  const card=document.createElement("div"); card.className="price-card";
+  card.innerHTML=`<h3>${esc(label)}</h3><p>${esc(desc)}</p><div class="price-row"><label>Prix en FC</label><input class="price-input" id="price-${key}" type="number" min="0" value="${Number(price)||0}" data-price-key="${key}"></div>`;
+  grid.appendChild(card);
+ });
+}
+$("savePrices").addEventListener("click",async()=>{
+ const next={}; for(const [key,fallback] of Object.entries(defaultPrices)){const input=document.querySelector(`[data-price-key="${key}"]`); const price=Number(input?.value); if(isNaN(price)||price<0){toast("Prix invalide"); return;} next[key]={label:pricesCache[key]?.label||fallback.label,description:pricesCache[key]?.description||fallback.description,price:Math.floor(price),updatedAt:Date.now()};} if(!confirm("Enregistrer les nouveaux prix?")) return; await set(ref(db,PATHS.prices),next); pricesCache=next; toast("✅ Tarifs enregistrés");
 });
-onValue(ref(db,PATHS.store),snap=>{
-  storeCache={}; const tbody=$("storeTable"); tbody.innerHTML=""; let pending=0; const entries=[]; snap.forEach(ch=>entries.push({id:ch.key,val:ch.val()||{}})); entries.sort((a,b)=>(Number(b.val.createdAt)||0)-(Number(a.val.createdAt)||0));
-  entries.forEach(({id,val:d})=>{storeCache[id]=d; const st=getStatus(d); if(isPending(st)) pending++; const amt=Number(d.montant??d.prix??0)||0; const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(d.date||"")}</td><td>${esc(getPhone(d))}</td><td>${esc(d.produit||"")}</td><td>${esc(d.quantite||1)}</td><td>${money(amt)} FC</td><td>${esc(d.adresse||"")}</td><td>${badge(st)}</td><td><button class="btn btn-blue" onclick="viewStore('${encodeURIComponent(id)}')">👁</button><button class="btn btn-gold" onclick="editStorePrice('${encodeURIComponent(id)}')">💰</button>${isPending(st)?`<button class="btn btn-green" onclick="validateStore('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseStore('${encodeURIComponent(id)}')">✕</button>`:`<button class="btn btn-dark" onclick="deleteStore('${encodeURIComponent(id)}')">🗑</button>`}</td>`; tbody.appendChild(tr);});
-  $("statStore").textContent=pending; $("menuStore").textContent=pending;
-});
-window.viewCommand=function(enc){const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const amt=Number(d.montant??d.prix??0)||0; $("commandDetails").innerHTML=`<div style="white-space:pre-wrap;font-size:12px">${esc(JSON.stringify(d,null,2))}</div><hr style="margin:12px 0"><button class="btn btn-gold" onclick="editPrice('${enc}')">💰 Modifier prix</button><button class="btn btn-green" onclick="validateCommand('${enc}')">✓ Valider</button><button class="btn btn-red" onclick="refuseCommand('${enc}')">✕ Refuser</button>`; openModal("commandModal");};
-window.viewStore=function(enc){const id=decodeURIComponent(enc); const d=storeCache[id]||{}; $("commandDetails").innerHTML=`<div style="white-space:pre-wrap;font-size:12px">${esc(JSON.stringify(d,null,2))}</div><hr style="margin:12px 0"><button class="btn btn-gold" onclick="editStorePrice('${enc}')">💰 Modifier prix</button>`; openModal("commandModal");};
-window.viewUser=function(enc){const phone=decodeURIComponent(enc); const d=usersCache[phone]||{}; $("commandDetails").innerHTML=`<div style="white-space:pre-wrap">${esc(JSON.stringify(d,null,2))}</div>`; openModal("commandModal");};
-window.editPrice=async(enc)=>{const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const cur=Number(d.montant??d.prix??0)||0; const input=prompt(`Prix actuel ${cur} FC\nNouveau prix:`,String(cur)); if(!input) return; const newPrice=Number(input.replace(/[^0-9]/g,"")); await update(ref(db,`${PATHS.commands}/${id}`),{prix:newPrice,montant:newPrice}); toast("✅ Prix modifié");};
-window.editStorePrice=async(enc)=>{const id=decodeURIComponent(enc); const d=storeCache[id]||{}; const cur=Number(d.montant??d.prix??0)||0; const input=prompt(`Prix actuel ${cur} FC\nNouveau prix:`,String(cur)); if(!input) return; const newPrice=Number(input.replace(/[^0-9]/g,"")); await update(ref(db,`${PATHS.store}/${id}`),{prix:newPrice,montant:newPrice}); toast("✅ Prix Store modifié");};
-window.validateCommand=async(enc)=>{await update(ref(db,`${PATHS.commands}/${decodeURIComponent(enc)}`),{statut:"Validée"}); toast("✅ Validée"); closeModal("commandModal");};
-window.refuseCommand=async(enc)=>{await update(ref(db,`${PATHS.commands}/${decodeURIComponent(enc)}`),{statut:"Refusée"}); toast("Refusée"); closeModal("commandModal");};
-window.deleteCommand=async(enc)=>{if(!confirm("Supprimer?")) return; await remove(ref(db,`${PATHS.commands}/${decodeURIComponent(enc)}`)); closeModal("commandModal");};
-window.validateStore=async(enc)=>{await update(ref(db,`${PATHS.store}/${decodeURIComponent(enc)}`),{statut:"Validée"}); closeModal("commandModal");};
-window.refuseStore=async(enc)=>{await update(ref(db,`${PATHS.store}/${decodeURIComponent(enc)}`),{statut:"Refusée"}); closeModal("commandModal");};
-window.deleteStore=async(enc)=>{await remove(ref(db,`${PATHS.store}/${decodeURIComponent(enc)}`)); closeModal("commandModal");};
-onValue(ref(db,PATHS.recharges),snap=>{
-  const tbody=$("rechargesTable"); tbody.innerHTML=""; let pending=0; snap.forEach(ch=>{const d=ch.val()||{}; const st=getStatus(d); if(isPending(st)) pending++; const amt=Number(d.montant||0); const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(d.date||"")}</td><td>${esc(getPhone(d))}</td><td>${money(amt)} FC</td><td>${esc(d.methode||"")}</td><td>${esc(d.transaction||"")}</td><td>${badge(st)}</td><td><button class="btn btn-green" onclick="validateRecharge('${encodeURIComponent(ch.key)}')">✓</button><button class="btn btn-red" onclick="refuseRecharge('${encodeURIComponent(ch.key)}')">✕</button></td>`; tbody.appendChild(tr);}); $("statRecharges").textContent=pending; $("menuRecharges").textContent=pending;
-});
-onValue(ref(db,PATHS.withdrawals),snap=>{
-  const tbody=$("withdrawalsTable"); tbody.innerHTML=""; let pending=0; snap.forEach(ch=>{const d=ch.val()||{}; const st=getStatus(d); if(isPending(st)) pending++; const amt=Number(d.montant||0); const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(d.date||"")}</td><td>${esc(getPhone(d))}</td><td>${money(amt)} FC</td><td>${esc(d.methode||"")}</td><td>${esc(d.numero||"")}</td><td>${badge(st)}</td><td><button class="btn btn-green" onclick="validateWithdrawal('${encodeURIComponent(ch.key)}')">✓</button><button class="btn btn-red" onclick="refuseWithdrawal('${encodeURIComponent(ch.key)}')">✕</button></td>`; tbody.appendChild(tr);}); $("statWithdrawals").textContent=pending; $("menuWithdrawals").textContent=pending;
-});
-window.validateRecharge=async(enc)=>{const id=decodeURIComponent(enc); const snap=await get(ref(db,`${PATHS.recharges}/${id}`)); const d=snap.val()||{}; const phone=getPhone(d); const amt=Number(d.montant||0); await update(ref(db,`${PATHS.recharges}/${id}`),{statut:"Validée"}); if(phone) await runTransaction(ref(db,`${PATHS.users}/${phone}/solde_principal`),c=>(Number(c)||0)+amt); toast("✅ Dépôt validé");};
-window.refuseRecharge=async(enc)=>{await update(ref(db,`${PATHS.recharges}/${decodeURIComponent(enc)}`),{statut:"Refusée"});};
-window.validateWithdrawal=async(enc)=>{await update(ref(db,`${PATHS.withdrawals}/${decodeURIComponent(enc)}`),{statut:"Validée"}); toast("✅ Retrait validé");};
-window.refuseWithdrawal=async(enc)=>{await update(ref(db,`${PATHS.withdrawals}/${decodeURIComponent(enc)}`),{statut:"Refusée — Remboursée"});};
-onValue(ref(db,PATHS.messages),snap=>{const box=$("messagesList"); box.innerHTML=""; snap.forEach(ch=>{const d=ch.val()||{}; const div=document.createElement("div"); div.style.padding="16px"; div.style.borderBottom="1px solid rgba(255,255,255,.07)"; div.innerHTML=`<b>${esc(d.from||"")}</b> - ${esc(d.message||"")}`; box.appendChild(div);});});
-document.getElementById("search")?.addEventListener("input",()=>{});
-document.getElementById("userSearch").addEventListener("input",e=>{const q=e.target.value.toLowerCase(); document.querySelectorAll("#usersTable tr").forEach(r=>{r.style.display=r.innerText.toLowerCase().includes(q)?"":"none";});});
-document.getElementById("commandSearch").addEventListener("input",e=>{const q=e.target.value.toLowerCase(); document.querySelectorAll("#commandsTable tr").forEach(r=>{r.style.display=r.innerText.toLowerCase().includes(q)?"":"none";});});
-document.getElementById("storeSearch").addEventListener("input",e=>{const q=e.target.value.toLowerCase(); document.querySelectorAll("#storeTable tr").forEach(r=>{r.style.display=r.innerText.toLowerCase().includes(q)?"":"none";});});
-document.getElementById("sendMessageBtn").addEventListener("click",async()=>{const to=$("messageTo").value.trim(); const txt=$("messageText").value.trim(); if(!to||!txt) return; await push(ref(db,PATHS.messages),{to,message:txt,from:"ADMIN",date:new Date().toISOString()}); $("sendStatus").textContent="✅ Envoyé à "+to; $("messageText").value="";});
+$("reloadPrices").addEventListener("click",async()=>{const snap=await get(ref(db,PATHS.prices)); pricesCache=snap.val()||{}; renderPrices(); toast("Rechargé");});
+
+function applySearch(id,table){const s=($(id).value||"").toLowerCase(); document.querySelectorAll(`#${table} tr`).forEach(tr=>{tr.style.display=tr.dataset.search?.includes(s)||tr.innerText.toLowerCase().includes(s)?"":"none";});}
+$("userSearch").addEventListener("input",()=>applySearch("userSearch","usersTable"));
+$("commandSearch").addEventListener("input",()=>applySearch("commandSearch","commandsTable"));
+$("storeSearch").addEventListener("input",()=>applySearch("storeSearch","storeTable"));
+$("vipSearch").addEventListener("input",()=>applySearch("vipSearch","vipTable"));
+
+if(localStorage.getItem("jasonBusinessAdminToken")) startListeners();
 </script>
 </body>
 </html>
