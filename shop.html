@@ -40,7 +40,6 @@ header{
 }
 .btn:hover{border-color:var(--gold);transform:translateY(-1px)}
 .gold{background:linear-gradient(135deg,#ffe4a3,var(--gold));color:#10131a;border:0}
-.blue{background:linear-gradient(135deg,#00d4ff,#087cff);color:#00121b;border:0}
 main{max-width:900px;margin:auto;padding:16px 13px 80px}
 .hero{
  border:1px solid var(--border);border-radius:21px;padding:22px 18px;
@@ -50,6 +49,12 @@ main{max-width:900px;margin:auto;padding:16px 13px 80px}
 .hero h2{font-size:26px;line-height:1.25;margin:13px 0 8px}
 .hero h2 span{color:var(--gold)}
 .hero p{font-size:12px;line-height:1.8;color:var(--muted)}
+.solde-box{
+ display:flex;justify-content:space-between;align-items:center;
+ padding:12px 14px;border-radius:12px;border:1px solid var(--border);
+ background:rgba(216,170,69,.08);margin:14px 0;font-size:12px
+}
+.solde-box strong{color:var(--gold);font-size:15px}
 .section-title{font-size:17px;margin:23px 2px 12px}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
 .card{
@@ -115,16 +120,11 @@ main{max-width:900px;margin:auto;padding:16px 13px 80px}
 }
 .history-item{padding:12px;margin:9px 0;background:#0d192b;border:1px solid #28374d;border-radius:11px;font-size:11px;line-height:1.7;overflow-wrap:anywhere}
 .history-item strong{color:var(--gold)}
-audio{width:100%;margin-top:12px}
 footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-size:10px;color:var(--muted)}
 @media(min-width:620px){
 .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 .overlay{align-items:center;padding:15px}
 .modal{border-radius:22px}
-}
-@media(max-width:360px){
-.grid{gap:8px}.card{padding:11px 9px}
-.brand h1{font-size:12px}.row{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -141,196 +141,39 @@ footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-si
  <section class="hero">
   <div class="tag">✦ TON ESPACE NUMÉRIQUE</div>
   <h2>Crée ton projet.<br><span>Réalise tes idées.</span></h2>
-  <p>Commandez une application, un site web, un chatbot, créez votre chanson ou préparez votre promotion sur les réseaux sociaux.</p>
+  <p>Commandez une application, un site web, un chatbot, créez votre chanson ou préparez votre promotion.</p>
   <button class="btn gold" id="exploreBtn">Découvrir les services ↓</button>
+  <div class="solde-box"><span>💰 Mon solde : <strong id="myBalance">0 FC</strong></span><span id="phoneDisplay" style="font-size:10px;color:#94a3b8"></span></div>
+  <div class="field" style="margin-top:10px"><label>Entrez votre numéro pour voir votre solde *</label><div style="display:flex;gap:8px"><input id="loginPhone" placeholder="+243..." style="flex:1"><button class="btn gold" id="checkBalanceBtn">Voir solde</button></div></div>
  </section>
 
  <h2 class="section-title" id="services">Nos services</h2>
  <section class="grid">
-  <article class="card">
-   <div class="card-icon">📈</div><h3>Boostage réseaux sociaux</h3>
-   <p>Choisissez votre plateforme, followers, likes ou vues, puis entrez la quantité souhaitée.</p>
-   <div class="total"><span>Prix</span><strong id="p-boost">10 FC</strong></div>
-   <button class="btn gold" data-open="boostModal">Créer ma demande</button>
-  </article>
-  <article class="card">
-   <div class="card-icon">📱</div><h3>Application mobile</h3>
-   <p>Indiquez le nom, l'icône, le site, la description et votre WhatsApp.</p>
-   <div class="total"><span>Prix</span><strong id="p-app">10 000 FC</strong></div>
-   <button class="btn" data-open="appModal">Commander</button>
-  </article>
-  <article class="card">
-   <div class="card-icon">🌐</div><h3>Création de site web</h3>
-   <p>Portfolio, boutique en ligne, site vitrine, blog et autres projets.</p>
-   <div class="total"><span>Prix</span><strong id="p-site">15 000 FC</strong></div>
-   <button class="btn" data-open="siteModal">Commander</button>
-  </article>
-  <article class="card">
-   <div class="card-icon">🤖</div><h3>Création de chatbot</h3>
-   <p>Définissez le nom du chatbot, ses fonctionnalités, son créateur et sa description.</p>
-   <div class="total"><span>Prix</span><strong id="p-chatbot">7 000 FC</strong></div>
-   <button class="btn" data-open="chatModal">Créer mon chatbot</button>
-  </article>
-  <article class="card">
-   <div class="card-icon">🎵</div><h3>Créer une chanson</h3>
-   <p>Écrivez vos paroles, choisissez un style et envoyez votre demande de génération.</p>
-   <div class="total"><span>Prix</span><strong id="p-music">500 FC</strong></div>
-   <button class="btn gold" data-open="musicModal">Créer ma chanson</button>
-  </article>
-  <article class="card">
-   <div class="card-icon">📣</div><h3>Publicité</h3>
-   <p>Préparez votre publicité et envoyez les détails à l'API publicitaire.</p>
-   <div class="total"><span>Prix</span><strong id="p-ads">1 000 FC</strong></div>
-   <button class="btn" data-open="adsModal">Créer ma publicité</button>
-  </article>
+  <article class="card"><div class="card-icon">📈</div><h3>Boostage réseaux sociaux</h3><p>Followers, likes, vues.</p><div class="total"><span>Prix</span><strong id="p-boost">10 FC</strong></div><button class="btn gold" data-open="boostModal">Créer ma demande</button></article>
+  <article class="card"><div class="card-icon">📱</div><h3>Application mobile</h3><p>Nom, icône, site, description et WhatsApp.</p><div class="total"><span>Prix</span><strong id="p-app">10 000 FC</strong></div><button class="btn" data-open="appModal">Commander</button></article>
+  <article class="card"><div class="card-icon">🌐</div><h3>Création de site web</h3><p>Portfolio, boutique, vitrine.</p><div class="total"><span>Prix</span><strong id="p-site">15 000 FC</strong></div><button class="btn" data-open="siteModal">Commander</button></article>
+  <article class="card"><div class="card-icon">🤖</div><h3>Création de chatbot</h3><p>Nom, fonctionnalités, créateur.</p><div class="total"><span>Prix</span><strong id="p-chatbot">7 000 FC</strong></div><button class="btn" data-open="chatModal">Créer mon chatbot</button></article>
+  <article class="card"><div class="card-icon">🎵</div><h3>Créer une chanson</h3><p>Paroles, style musical.</p><div class="total"><span>Prix</span><strong id="p-music">500 FC</strong></div><button class="btn gold" data-open="musicModal">Créer ma chanson</button></article>
+  <article class="card"><div class="card-icon">📣</div><h3>Publicité</h3><p>Préparez votre publicité.</p><div class="total"><span>Prix</span><strong id="p-ads">1 000 FC</strong></div><button class="btn" data-open="adsModal">Créer ma publicité</button></article>
  </section>
-
- <div class="muted" style="margin-top:18px">
-  Les demandes de services sont conservées sur cet appareil. Le boostage et la génération musicale nécessitent une API fonctionnelle pour exécuter réellement les opérations.
- </div>
 </main>
 
 <footer>JASON BUSINESS · Services numériques</footer>
 
-<div class="overlay" id="boostModal">
- <section class="modal">
-  <div class="modal-head"><h2>📈 Boostage des réseaux sociaux</h2><button class="close" data-close="boostModal">×</button></div>
-  <p class="muted">Choisissez le réseau social, le service et la quantité. Le montant affiché est indicatif.</p>
-  <div class="platforms" id="platformGrid"></div>
-  <form id="boostForm">
-   <div class="field"><label>Plateforme sélectionnée</label><input id="boostPlatform" name="platform" readonly required></div>
-   <div class="field"><label for="boostType">Que voulez-vous augmenter?</label>
-    <select id="boostType" name="type" required>
-     <option value="followers">Followers / abonnés</option>
-     <option value="likes">Likes / mentions J'aime</option>
-     <option value="views">Vues</option>
-    </select>
-   </div>
-   <div class="field"><label for="boostLink">Lien public du profil ou de la publication *</label><input id="boostLink" name="link" type="url" required placeholder="https://..."></div>
-   <div class="field"><label for="boostQty">Quantité souhaitée *</label><input id="boostQty" name="quantity" type="number" min="1" max="1000000" value="100" required></div>
-   <div class="total"><span>Prix indicatif</span><strong id="boostPrice">10 FC</strong></div>
-   <div class="field"><label for="boostWhatsApp">Votre numéro WhatsApp *</label><input id="boostWhatsApp" name="whatsapp" type="tel" required placeholder="+243..."></div>
-   <button class="btn gold" type="submit" style="width:100%">Enregistrer ma demande</button>
-   <div class="status" id="boostStatus"></div>
-  </form>
- </section>
-</div>
+<!-- MODALS -->
+<div class="overlay" id="boostModal"><section class="modal"><div class="modal-head"><h2>📈 Boostage</h2><button class="close" data-close="boostModal">×</button></div><div class="platforms" id="platformGrid"></div><form id="boostForm"><div class="field"><label>Plateforme sélectionnée</label><input id="boostPlatform" name="platform" readonly required></div><div class="field"><label>Que voulez-vous augmenter?</label><select id="boostType" name="type" required><option value="followers">Followers</option><option value="likes">Likes</option><option value="views">Vues</option></select></div><div class="field"><label>Lien public *</label><input id="boostLink" name="link" type="url" required placeholder="https://..."></div><div class="field"><label>Quantité *</label><input id="boostQty" name="quantity" type="number" min="1" value="100" required></div><div class="total"><span>Prix indicatif</span><strong id="boostPrice">10 FC</strong></div><div class="status" id="boostStatus"></div><button class="btn gold" type="submit" style="width:100%">Enregistrer ma demande</button></form></section></div>
 
-<div class="overlay" id="appModal">
- <section class="modal">
-  <div class="modal-head"><h2>📱 Commander une application</h2><button class="close" data-close="appModal">×</button></div>
-  <form id="appForm">
-   <div class="field"><label for="appName">Nom de l'application *</label><input id="appName" name="appName" required placeholder="Ex. Mon application"></div>
-   <div class="field"><label for="appIcon">Icône de l'application *</label><input id="appIcon" name="appIcon" type="file" accept="image/*" required><small>Choisissez une image depuis votre téléphone.</small><img id="appIconPreview" class="preview" alt="Aperçu de l'icône"></div>
-   <div class="field"><label for="appUrl">Lien du site web *</label><input id="appUrl" name="appUrl" type="url" required placeholder="https://exemple.com"></div>
-   <div class="field"><label for="appDescription">Description de l'application *</label><textarea id="appDescription" name="description" required placeholder="Expliquez ce que fait votre application..."></textarea></div>
-   <div class="field"><label for="appWhatsApp">Votre numéro WhatsApp *</label><input id="appWhatsApp" name="whatsapp" type="tel" required placeholder="+243..."></div>
-   <div class="total"><span>Prix</span><strong id="m-app">10 000 FC</strong></div>
-   <button class="btn gold" type="submit" style="width:100%">Envoyer ma commande</button>
-   <div class="status" id="appStatus"></div>
-  </form>
- </section>
-</div>
+<div class="overlay" id="appModal"><section class="modal"><div class="modal-head"><h2>📱 Application</h2><button class="close" data-close="appModal">×</button></div><form id="appForm"><div class="field"><label>Nom app *</label><input id="appName" name="appName" required></div><div class="field"><label>Icône *</label><input id="appIcon" name="appIcon" type="file" accept="image/*" required><img id="appIconPreview" class="preview"></div><div class="field"><label>Site *</label><input id="appUrl" name="appUrl" type="url" required></div><div class="field"><label>Description *</label><textarea id="appDescription" name="description" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="appWhatsApp" name="whatsapp" type="tel" required></div><div class="total"><span>Prix</span><strong id="m-app">10 000 FC</strong></div><div class="status" id="appStatus"></div><button class="btn gold" type="submit" style="width:100%">Envoyer ma commande</button></form></section></div>
 
-<div class="overlay" id="siteModal">
- <section class="modal">
-  <div class="modal-head"><h2>🌐 Commander un site web</h2><button class="close" data-close="siteModal">×</button></div>
-  <form id="siteForm">
-   <div class="field"><label for="siteName">Nom du site web *</label><input id="siteName" name="siteName" required placeholder="Ex. Ma Boutique"></div>
-   <div class="field"><label for="siteType">Type de site *</label>
-    <select id="siteType" name="siteType" required>
-     <option value="Portfolio">Portfolio</option>
-     <option value="Boutique en ligne">Boutique en ligne</option>
-     <option value="Site vitrine">Site vitrine</option>
-     <option value="Blog">Blog</option>
-     <option value="Site d'entreprise">Site d'entreprise</option>
-     <option value="Site éducatif">Site éducatif</option>
-     <option value="Site d'actualités">Site d'actualités</option>
-     <option value="Restaurant">Restaurant</option>
-     <option value="Musique">Site musical</option>
-     <option value="Immobilier">Immobilier</option>
-     <option value="Réservation">Réservation</option>
-     <option value="Réseau social">Réseau social</option>
-     <option value="Autre">Autre type</option>
-    </select>
-   </div>
-   <div class="field"><label for="siteDescription">Description et fonctionnalités *</label><textarea id="siteDescription" name="description" required placeholder="Décrivez votre site, les pages et les fonctions nécessaires..."></textarea></div>
-   <div class="field"><label for="siteWhatsApp">Votre numéro WhatsApp *</label><input id="siteWhatsApp" name="whatsapp" type="tel" required placeholder="+243..."></div>
-   <div class="total"><span>Prix</span><strong id="m-site">15 000 FC</strong></div>
-   <button class="btn gold" type="submit" style="width:100%">Envoyer ma commande</button>
-   <div class="status" id="siteStatus"></div>
-  </form>
- </section>
-</div>
+<div class="overlay" id="siteModal"><section class="modal"><div class="modal-head"><h2>🌐 Site web</h2><button class="close" data-close="siteModal">×</button></div><form id="siteForm"><div class="field"><label>Nom site *</label><input id="siteName" name="siteName" required></div><div class="field"><label>Type</label><select id="siteType"><option>Portfolio</option><option>Boutique en ligne</option><option>Site vitrine</option><option>Blog</option><option>Autre</option></select></div><div class="field"><label>Description *</label><textarea id="siteDescription" name="description" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="siteWhatsApp" name="whatsapp" type="tel" required></div><div class="total"><span>Prix</span><strong id="m-site">15 000 FC</strong></div><div class="status" id="siteStatus"></div><button class="btn gold" type="submit" style="width:100%">Envoyer ma commande</button></form></section></div>
 
-<div class="overlay" id="chatModal">
- <section class="modal">
-  <div class="modal-head"><h2>🤖 Créer mon chatbot</h2><button class="close" data-close="chatModal">×</button></div>
-  <form id="chatForm">
-   <div class="field"><label for="chatName">Nom de votre chatbot *</label><input id="chatName" name="chatName" required placeholder="Ex. Assistant Client"></div>
-   <div class="field"><label for="chatFeatures">Fonctionnalités souhaitées *</label><textarea id="chatFeatures" name="features" required placeholder="Ex. répondre aux questions, traduire, aider les clients..."></textarea></div>
-   <div class="field"><label for="chatCreator">Nom du créateur du chatbot *</label><input id="chatCreator" name="creator" required placeholder="Nom du créateur"></div>
-   <div class="field"><label for="chatDescription">Description du chatbot *</label><textarea id="chatDescription" name="description" required placeholder="Décrivez son objectif, ses utilisateurs et son fonctionnement..."></textarea></div>
-   <div class="field"><label for="chatWhatsApp">Votre numéro WhatsApp *</label><input id="chatWhatsApp" name="whatsapp" type="tel" required placeholder="+243..."></div>
-   <div class="total"><span>Prix</span><strong id="m-chatbot">7 000 FC</strong></div>
-   <button class="btn gold" type="submit" style="width:100%">Envoyer ma commande</button>
-   <div class="status" id="chatStatus"></div>
-  </form>
- </section>
-</div>
+<div class="overlay" id="chatModal"><section class="modal"><div class="modal-head"><h2>🤖 Chatbot</h2><button class="close" data-close="chatModal">×</button></div><form id="chatForm"><div class="field"><label>Nom chatbot *</label><input id="chatName" name="chatName" required></div><div class="field"><label>Fonctionnalités *</label><textarea id="chatFeatures" name="features" required></textarea></div><div class="field"><label>Créateur *</label><input id="chatCreator" name="creator" required></div><div class="field"><label>Description *</label><textarea id="chatDescription" name="description" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="chatWhatsApp" name="whatsapp" type="tel" required></div><div class="total"><span>Prix</span><strong id="m-chatbot">7 000 FC</strong></div><div class="status" id="chatStatus"></div><button class="btn gold" type="submit" style="width:100%">Envoyer ma commande</button></form></section></div>
 
-<div class="overlay" id="musicModal">
- <section class="modal">
-  <div class="modal-head"><h2>🎵 Créer ma chanson</h2><button class="close" data-close="musicModal">×</button></div>
-  <p class="muted">Écrivez vos propres paroles et sélectionnez le style musical.</p>
-  <form id="musicForm">
-   <div class="field"><label for="songTitle">Titre de la chanson *</label><input id="songTitle" name="title" required maxlength="120" placeholder="Titre de ma chanson"></div>
-   <div class="field"><label for="songLyrics">Écrivez les paroles de votre chanson *</label><textarea id="songLyrics" name="lyrics" required style="min-height:180px" placeholder="Couplet 1..."></textarea></div>
-   <div class="field"><label for="songStyle">Style musical *</label>
-    <select id="songStyle" name="style" required>
-     <option value="Afrobeat">Afrobeat</option><option value="Afropop">Afropop</option><option value="Rumba congolaise">Rumba congolaise</option><option value="Ndombolo">Ndombolo</option><option value="Gospel">Gospel</option><option value="Hip-hop">Hip-hop</option><option value="Rap">Rap</option><option value="Pop">Pop</option><option value="Amapiano">Amapiano</option>
-    </select>
-   </div>
-   <div class="field"><label for="songMood">Ambiance souhaitée</label>
-    <select id="songMood" name="mood">
-     <option value="Énergique">Énergique</option><option value="Joyeuse">Joyeuse</option><option value="Émouvante">Émouvante</option><option value="Romantique">Romantique</option>
-    </select>
-   </div>
-   <div class="field"><label for="songWhatsApp">Votre numéro WhatsApp (facultatif)</label><input id="songWhatsApp" name="whatsapp" type="tel" placeholder="+243..."></div>
-   <div class="total"><span>Prix</span><strong id="m-music">500 FC</strong></div>
-   <button class="btn gold" id="generateSongBtn" type="submit" style="width:100%">🎶 Générer ma chanson</button>
-   <div class="status" id="musicStatus"></div>
-   <div id="musicResult"></div>
-  </form>
- </section>
-</div>
+<div class="overlay" id="musicModal"><section class="modal"><div class="modal-head"><h2>🎵 Chanson</h2><button class="close" data-close="musicModal">×</button></div><form id="musicForm"><div class="field"><label>Titre *</label><input id="songTitle" name="title" required></div><div class="field"><label>Paroles *</label><textarea id="songLyrics" name="lyrics" required style="min-height:180px"></textarea></div><div class="field"><label>Style *</label><select id="songStyle" name="style"><option>Afrobeat</option><option>Rumba congolaise</option><option>Gospel</option></select></div><div class="field"><label>Ambiance</label><select id="songMood" name="mood"><option>Énergique</option><option>Joyeuse</option></select></div><div class="total"><span>Prix</span><strong id="m-music">500 FC</strong></div><div class="status" id="musicStatus"></div><button class="btn gold" id="generateSongBtn" type="submit" style="width:100%">🎶 Générer ma chanson</button><div id="musicResult"></div></form></section></div>
 
-<div class="overlay" id="adsModal">
- <section class="modal">
-  <div class="modal-head"><h2>📣 Créer une publicité</h2><button class="close" data-close="adsModal">×</button></div>
-  <form id="adsForm">
-   <div class="field"><label for="adTitle">Titre de la publicité *</label><input id="adTitle" name="title" required></div>
-   <div class="field"><label for="adText">Texte publicitaire *</label><textarea id="adText" name="text" required></textarea></div>
-   <div class="field"><label for="adUrl">Lien à promouvoir *</label><input id="adUrl" name="url" type="url" required placeholder="https://..."></div>
-   <div class="row">
-    <div class="field"><label for="adPlatform">Plateforme</label><select id="adPlatform" name="platform"><option>Facebook</option><option>Instagram</option><option>TikTok</option><option>YouTube</option><option>WhatsApp</option><option>Autre</option></select></div>
-    <div class="field"><label for="adBudget">Budget (FC)</label><input id="adBudget" name="budget" type="number" min="0" placeholder="10000"></div>
-   </div>
-   <div class="field"><label for="adWhatsApp">Votre numéro WhatsApp (facultatif)</label><input id="adWhatsApp" name="whatsapp" type="tel" placeholder="+243..."></div>
-   <div class="total"><span>Prix</span><strong id="m-ads">1 000 FC</strong></div>
-   <button class="btn gold" id="submitAdBtn" type="submit" style="width:100%">Envoyer à l'API publicité</button>
-   <div class="status" id="adStatus"></div>
-  </form>
- </section>
-</div>
+<div class="overlay" id="adsModal"><section class="modal"><div class="modal-head"><h2>📣 Publicité</h2><button class="close" data-close="adsModal">×</button></div><form id="adsForm"><div class="field"><label>Titre *</label><input id="adTitle" name="title" required></div><div class="field"><label>Texte *</label><textarea id="adText" name="text" required></textarea></div><div class="field"><label>Lien *</label><input id="adUrl" name="url" type="url" required></div><div class="row"><div class="field"><label>Plateforme</label><select id="adPlatform" name="platform"><option>Facebook</option><option>Instagram</option><option>TikTok</option></select></div><div class="field"><label>Budget (FC)</label><input id="adBudget" name="budget" type="number" placeholder="10000"></div></div><div class="total"><span>Prix</span><strong id="m-ads">1 000 FC</strong></div><div class="status" id="adStatus"></div><button class="btn gold" id="submitAdBtn" type="submit" style="width:100%">Envoyer à l'API publicité</button></form></section></div>
 
-<div class="overlay" id="historyModal">
- <section class="modal">
-  <div class="modal-head"><h2>📋 Mes demandes</h2><button class="close" data-close="historyModal">×</button></div>
-  <div id="historyList"></div>
-  <button class="btn" id="clearHistory" style="width:100%;margin-top:12px">Effacer l'historique local</button>
- </section>
-</div>
+<div class="overlay" id="historyModal"><section class="modal"><div class="modal-head"><h2>📋 Mes demandes</h2><button class="close" data-close="historyModal">×</button></div><div id="historyList"></div><button class="btn" id="clearHistory" style="width:100%;margin-top:12px">Effacer</button></section></div>
 
 <script>
 "use strict";
@@ -340,61 +183,193 @@ const HISTORY_KEY="jasonBusinessBoutiqueOrdersV3";
 const $=id=>document.getElementById(id);
 function show(id){$(id).classList.add("show");document.body.style.overflow="hidden"}
 function hide(id){$(id).classList.remove("show");if(!document.querySelector(".overlay.show"))document.body.style.overflow=""}
-document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>show(b.dataset.open)));
+document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>{const phone=localStorage.getItem("jb_phone"); if(!phone){status("boostStatus","Veuillez d'abord entrer votre numéro en haut et vérifier votre solde.","error"); $("loginPhone").scrollIntoView({behavior:"smooth"}); return;} show(b.dataset.open);}));
 document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>hide(b.dataset.close)));
 document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)hide(o.id)}));
-document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".overlay.show").forEach(o=>hide(o.id))});
 $("exploreBtn").onclick=()=>$("services").scrollIntoView({behavior:"smooth"});
-function status(id,msg,type="info"){const el=$(id);el.textContent=msg;el.className="status "+type;}
+function status(id,msg,type="info"){const el=$(id);if(!el) return; el.textContent=msg;el.className="status "+type;}
 function readHistory(){try{const x=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]");return Array.isArray(x)?x:[]}catch(e){return []}}
 function saveOrder(type,data){const items=readHistory();items.unshift({type,date:new Date().toLocaleString("fr-FR"),data});localStorage.setItem(HISTORY_KEY,JSON.stringify(items.slice(0,100)));}
-function renderHistory(){const box=$("historyList"),items=readHistory();box.innerHTML="";if(!items.length){box.textContent="Aucune demande enregistrée sur cet appareil."}items.forEach(item=>{const div=document.createElement("div");div.className="history-item";const strong=document.createElement("strong");strong.textContent=item.type;const date=document.createElement("div");date.className="muted";date.textContent=item.date;const details=document.createElement("div");const data=item.data||{};details.textContent=Object.entries(data).filter(([k,v])=>v!==""&&v!=null&&k!=="iconData").map(([k,v])=>k+": "+String(v)).join(" · ");div.append(strong,date,details);box.append(div);});show("historyModal");}
+function renderHistory(){const box=$("historyList"),items=readHistory();box.innerHTML="";if(!items.length){box.textContent="Aucune demande."}items.forEach(item=>{const div=document.createElement("div");div.className="history-item";div.innerHTML=`<strong>${item.type} - ${item.data.price||""}</strong><div class=muted>${item.date}</div>`;box.append(div);});show("historyModal");}
 $("historyBtn").onclick=renderHistory;
-$("clearHistory").onclick=()=>{if(confirm("Effacer toutes les demandes sauvegardées sur cet appareil?")){localStorage.removeItem(HISTORY_KEY);renderHistory();}};
-function validUrl(value){try{const u=new URL(value);return u.protocol==="https:"||u.protocol==="http:"}catch(e){return false}}
-function validPhone(value){return /^[+0-9()\-\s]{7,22}$/.test(value.trim())}
-function formObject(form){return Object.fromEntries(new FormData(form).entries());}
-const platforms=[["Facebook","https://cdn.simpleicons.org/facebook/1877F2"],["Instagram","https://cdn.simpleicons.org/instagram/E4405F"],["TikTok","https://cdn.simpleicons.org/tiktok/ffffff"],["YouTube","https://cdn.simpleicons.org/youtube/FF0033"],["WhatsApp","https://cdn.simpleicons.org/whatsapp/25D366"],["Telegram","https://cdn.simpleicons.org/telegram/26A5E4"],["Snapchat","https://cdn.simpleicons.org/snapchat/FFFC00"],["X","https://cdn.simpleicons.org/x/ffffff"],["LinkedIn","https://cdn.simpleicons.org/linkedin/0A66C2"],["Pinterest","https://cdn.simpleicons.org/pinterest/BD081C"],["Discord","https://cdn.simpleicons.org/discord/5865F2"],["Autre",""]];
+$("clearHistory").onclick=()=>{if(confirm("Effacer?")){localStorage.removeItem(HISTORY_KEY);renderHistory();}};
+function validUrl(v){try{const u=new URL(v);return u.protocol.startsWith("http")}catch{return false}}
+function formObject(f){return Object.fromEntries(new FormData(f).entries());}
+const platforms=[["Facebook","https://cdn.simpleicons.org/facebook/1877F2"],["Instagram","https://cdn.simpleicons.org/instagram/E4405F"],["TikTok","https://cdn.simpleicons.org/tiktok/ffffff"],["YouTube","https://cdn.simpleicons.org/youtube/FF0033"],["WhatsApp","https://cdn.simpleicons.org/whatsapp/25D366"],["Telegram","https://cdn.simpleicons.org/telegram/26A5E4"]];
 let chosenPlatform="Facebook";
-function buildPlatformButtons(){const grid=$("platformGrid");platforms.forEach(([name,src])=>{const b=document.createElement("button");b.type="button";b.className="platform";b.dataset.name=name;if(src){const img=document.createElement("img");img.src=src;img.alt="";img.onerror=()=>{img.remove();const t=document.createElement("span");t.textContent="●";t.style.fontSize="23px";b.prepend(t)};b.append(img);}else{const t=document.createElement("span");t.textContent="＋";t.style.fontSize="23px";b.append(t);}const label=document.createElement("span");label.textContent=name;b.append(label);b.onclick=()=>{chosenPlatform=name;$("boostPlatform").value=name;grid.querySelectorAll(".platform").forEach(x=>x.classList.remove("active"));b.classList.add("active");};grid.append(b);});const first=grid.querySelector('[data-name="Facebook"]');if(first)first.classList.add("active");$("boostPlatform").value=chosenPlatform;}
+function buildPlatformButtons(){const grid=$("platformGrid");platforms.forEach(([name,src])=>{const b=document.createElement("button");b.type="button";b.className="platform";b.dataset.name=name;const img=document.createElement("img");img.src=src;b.append(img);const lab=document.createElement("span");lab.textContent=name;b.append(lab);b.onclick=()=>{chosenPlatform=name;$("boostPlatform").value=name;grid.querySelectorAll(".platform").forEach(x=>x.classList.remove("active"));b.classList.add("active");calculateBoost();};grid.append(b);});grid.querySelector('[data-name="Facebook"]').classList.add("active");$("boostPlatform").value=chosenPlatform;}
 buildPlatformButtons();
-const indicativeRates={followers:{Facebook:1200,Instagram:1500,TikTok:1300,YouTube:2500,WhatsApp:1000,Telegram:800,Snapchat:1500,X:1200,LinkedIn:2500,Pinterest:1000,Discord:1000,Autre:1000},likes:{Facebook:500,Instagram:600,TikTok:500,YouTube:800,WhatsApp:500,Telegram:500,Snapchat:600,X:500,LinkedIn:1000,Pinterest:500,Discord:500,Autre:500},views:{Facebook:400,Instagram:500,TikTok:400,YouTube:700,WhatsApp:300,Telegram:300,Snapchat:500,X:400,LinkedIn:600,Pinterest:300,Discord:300,Autre:400}};
-function calculateBoost(){const type=$("boostType").value;const qty=Math.max(0,Number($("boostQty").value)||0);const rate=(indicativeRates[type]||{})[chosenPlatform]||500;const total=Math.max(10,Math.ceil(rate*qty/1000));$("boostPrice").textContent=total.toLocaleString("fr-FR")+" FC";}
-$("boostType").addEventListener("change",calculateBoost);$("boostQty").addEventListener("input",calculateBoost);calculateBoost();
-$("boostForm").addEventListener("submit",e=>{e.preventDefault();const d=formObject(e.currentTarget);if(!validUrl(d.link)){status("boostStatus","Entrez un lien public valide.","error");return}if(!validPhone(d.whatsapp)){status("boostStatus","Entrez un numéro WhatsApp valide.","error");return}d.priceIndicatif=$("boostPrice").textContent;saveOrder("Boostage réseaux sociaux",d);status("boostStatus","Demande enregistrée.","ok");});
-let appIconData="";$("appIcon").addEventListener("change",()=>{const file=$("appIcon").files[0];appIconData="";if(!file){$("appIconPreview").style.display="none";return}if(!file.type.startsWith("image/")){status("appStatus","Choisissez un fichier image.","error");return}if(file.size>3*1024*1024){status("appStatus","L'image doit faire moins de 3 Mo.","error");$("appIcon").value="";return}const reader=new FileReader();reader.onload=()=>{appIconData=String(reader.result);$("appIconPreview").src=appIconData;$("appIconPreview").style.display="block";};reader.readAsDataURL(file);});
-$("appForm").addEventListener("submit",e=>{e.preventDefault();const d=formObject(e.currentTarget);if(!validUrl(d.appUrl)){status("appStatus","Entrez un lien de site valide.","error");return}if(!validPhone(d.whatsapp)){status("appStatus","Entrez un numéro WhatsApp valide.","error");return}d.iconFileName=$("appIcon").files[0]?.name||"";d.iconData=appIconData;d.price="10 000 FC";saveOrder("Commande application",d);status("appStatus","Commande 10 000 FC enregistrée.","ok");});
-$("siteForm").addEventListener("submit",e=>{e.preventDefault();const d=formObject(e.currentTarget);if(!validPhone(d.whatsapp)){status("siteStatus","Entrez un numéro WhatsApp valide.","error");return}d.price="15 000 FC";saveOrder("Commande site web",d);status("siteStatus","Commande 15 000 FC enregistrée.","ok");});
-$("chatForm").addEventListener("submit",e=>{e.preventDefault();const d=formObject(e.currentTarget);if(!validPhone(d.whatsapp)){status("chatStatus","Entrez un numéro WhatsApp valide.","error");return}d.price="7 000 FC";saveOrder("Commande chatbot",d);status("chatStatus","Commande 7 000 FC enregistrée.","ok");});
-function findAudioUrl(data){if(!data||typeof data!=="object")return "";const keys=["audio_url","audioUrl","audio","music_url","musicUrl","url","download_url","downloadUrl","file_url","fileUrl"];for(const k of keys){if(typeof data[k]==="string"&&/^https?:\/\//i.test(data[k]))return data[k];}if(data.data&&typeof data.data==="object")return findAudioUrl(data.data);if(data.result&&typeof data.result==="object")return findAudioUrl(data.result);if(data.song&&typeof data.song==="object")return findAudioUrl(data.song);return "";}
-async function readApiResponse(response){const raw=await response.text();try{return raw?JSON.parse(raw):{}}catch(e){return {message:raw}}}
-$("musicForm").addEventListener("submit",async e=>{
- e.preventDefault();const d=formObject(e.currentTarget);const btn=$("generateSongBtn");if(d.lyrics.trim().length<10){status("musicStatus","Écrivez des paroles plus complètes.","error");return}btn.disabled=true;btn.textContent="Génération en cours…";$("musicResult").innerHTML="";status("musicStatus","Connexion...","info");
- try{const response=await fetch(MUSIC_API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({title:d.title,style:d.style,lyrics:d.lyrics,mood:d.mood,whatsapp:d.whatsapp||""})});const result=await readApiResponse(response);if(!response.ok)throw new Error(result.message||"Erreur");result.price="500 FC";saveOrder("Création de chanson",{title:d.title,style:d.style,price:"500 FC"});const audioUrl=findAudioUrl(result);if(audioUrl){const audio=document.createElement("audio");audio.controls=true;audio.src=audioUrl;$("musicResult").append(audio);status("musicStatus","Audio trouvé - 500 FC","ok");}else{status("musicStatus","Réponse reçue - 500 FC","info");}}catch(err){status("musicStatus","Erreur: "+err.message,"error");}finally{btn.disabled=false;btn.textContent="🎶 Générer ma chanson";}
-});
-$("adsForm").addEventListener("submit",async e=>{
- e.preventDefault();const d=formObject(e.currentTarget);if(!validUrl(d.url)){status("adStatus","Lien invalide.","error");return}const btn=$("submitAdBtn");btn.disabled=true;btn.textContent="Envoi...";status("adStatus","Envoi API...","info");
- try{const response=await fetch(ADS_API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"create_ad",title:d.title,text:d.text,url:d.url,platform:d.platform,budget:d.budget?Number(d.budget):0,whatsapp:d.whatsapp||"",price:"1 000 FC"})});const result=await readApiResponse(response);if(!response.ok)throw new Error(result.message||"Erreur");saveOrder("Publicité",{title:d.title,price:"1 000 FC"});status("adStatus","Pub créée - 1 000 FC","ok");}catch(err){status("adStatus","Erreur: "+err.message,"error");}finally{btn.disabled=false;btn.textContent="Envoyer à l'API publicité";}
-});
+function calculateBoost(){const qty=Math.max(0,Number($("boostQty").value)||0);const total=Math.max(window.BOOST_BASE||10,Math.ceil(10*qty/100));$("boostPrice").textContent=total.toLocaleString("fr-FR")+" FC"; return total;}
+$("boostQty").addEventListener("input",calculateBoost);
+$("boostType").addEventListener("change",calculateBoost);
+let appIconData="";$("appIcon").addEventListener("change",()=>{const file=$("appIcon").files[0];if(!file){$("appIconPreview").style.display="none";return}const r=new FileReader();r.onload=()=>{appIconData=r.result;$("appIconPreview").src=appIconData;$("appIconPreview").style.display="block";};r.readAsDataURL(file);});
+function findAudioUrl(data){if(!data||typeof data!=="object")return "";const keys=["audio_url","audioUrl","audio","music_url","url"];for(const k of keys){if(typeof data[k]==="string"&&/^https?:\/\//i.test(data[k]))return data[k];}if(data.data&&typeof data.data==="object")return findAudioUrl(data.data);return "";}
+async function readApiResponse(r){const raw=await r.text();try{return raw?JSON.parse(raw):{}}catch(e){return {message:raw}}}
 </script>
 
-<!-- SEULEMENT LECTURE PRIX DEPUIS ADMIN - NE TOUCHE PAS AUX FONCTIONNALITES -->
+<!-- LOGIQUE SOLDE + PRIX DYNAMIQUE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, onValue, get, push, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
-const fbApp=initializeApp(firebaseConfig); const db=getDatabase(fbApp);
+const app=initializeApp(firebaseConfig); const db=getDatabase(app);
 const fmt=v=>Math.floor(Number(v)||0).toLocaleString("fr-FR")+" FC";
+let PRICES={boost:10, app:10000, site:15000, chatbot:7000, music:500, ads:1000};
+window.BOOST_BASE=10;
+
 onValue(ref(db,"jasonBusiness/services_prices"),snap=>{
   const d=snap.val()||{};
-  if(d.boost!==undefined){const el=document.getElementById("p-boost"); if(el) el.textContent=fmt(d.boost);}
-  if(d.app!==undefined){const a=document.getElementById("p-app"), b=document.getElementById("m-app"); if(a) a.textContent=fmt(d.app); if(b) b.textContent=fmt(d.app);}
-  if(d.site!==undefined){const a=document.getElementById("p-site"), b=document.getElementById("m-site"); if(a) a.textContent=fmt(d.site); if(b) b.textContent=fmt(d.site);}
-  if(d.chatbot!==undefined){const a=document.getElementById("p-chatbot"), b=document.getElementById("m-chatbot"); if(a) a.textContent=fmt(d.chatbot); if(b) b.textContent=fmt(d.chatbot);}
-  if(d.music!==undefined){const a=document.getElementById("p-music"), b=document.getElementById("m-music"); if(a) a.textContent=fmt(d.music); if(b) b.textContent=fmt(d.music);}
-  if(d.ads!==undefined){const a=document.getElementById("p-ads"), b=document.getElementById("m-ads"); if(a) a.textContent=fmt(d.ads); if(b) b.textContent=fmt(d.ads);}
+  if(d.boost!==undefined){PRICES.boost=Number(d.boost); window.BOOST_BASE=Number(d.boost); const el=document.getElementById("p-boost"); if(el) el.textContent=fmt(d.boost); calculateBoost();}
+  if(d.app!==undefined){PRICES.app=Number(d.app); const a=document.getElementById("p-app"), b=document.getElementById("m-app"); if(a) a.textContent=fmt(d.app); if(b) b.textContent=fmt(d.app);}
+  if(d.site!==undefined){PRICES.site=Number(d.site); const a=document.getElementById("p-site"), b=document.getElementById("m-site"); if(a) a.textContent=fmt(d.site); if(b) b.textContent=fmt(d.site);}
+  if(d.chatbot!==undefined){PRICES.chatbot=Number(d.chatbot); const a=document.getElementById("p-chatbot"), b=document.getElementById("m-chatbot"); if(a) a.textContent=fmt(d.chatbot); if(b) b.textContent=fmt(d.chatbot);}
+  if(d.music!==undefined){PRICES.music=Number(d.music); const a=document.getElementById("p-music"), b=document.getElementById("m-music"); if(a) a.textContent=fmt(d.music); if(b) b.textContent=fmt(d.music);}
+  if(d.ads!==undefined){PRICES.ads=Number(d.ads); const a=document.getElementById("p-ads"), b=document.getElementById("m-ads"); if(a) a.textContent=fmt(d.ads); if(b) b.textContent=fmt(d.ads);}
 });
-</script>
 
+async function getBalance(phone){
+  if(!phone) return 0;
+  try{
+    const snap=await get(ref(db,`jasonBusiness/users/${phone}/solde_principal`));
+    if(snap.exists()) return Number(snap.val())||0;
+    const snap2=await get(ref(db,`jasonBusiness/users/${phone}/solde`));
+    return snap2.exists()?Number(snap2.val())||0:0;
+  }catch(e){return 0;}
+}
+
+async function checkAndDeduct(phone, price, statusId){
+  const bal=await getBalance(phone);
+  if(bal < price){
+    status(statusId, `❌ Solde insuffisant.\nVotre solde: ${fmt(bal)}\nPrix requis: ${fmt(price)}\n\n👉 Veuillez d'abord recharger votre compte avant de commander.`, "error");
+    return false;
+  }
+  // Déduire
+  try{
+    const userRef=ref(db,`jasonBusiness/users/${phone}`);
+    const snap=await get(userRef);
+    if(snap.exists()){
+      const current=Number(snap.val().solde_principal??snap.val().solde??0)||0;
+      await update(userRef,{solde_principal: current - price});
+    }
+    document.getElementById("myBalance").textContent=fmt(bal - price);
+    return true;
+  }catch(e){
+    status(statusId, "Erreur solde", "error");
+    return false;
+  }
+}
+
+const loginPhoneInput=document.getElementById("loginPhone");
+const myBalanceEl=document.getElementById("myBalance");
+const phoneDisplay=document.getElementById("phoneDisplay");
+const savedPhone=localStorage.getItem("jb_phone");
+if(savedPhone){loginPhoneInput.value=savedPhone; phoneDisplay.textContent=savedPhone; getBalance(savedPhone).then(b=>myBalanceEl.textContent=fmt(b));}
+
+document.getElementById("checkBalanceBtn").addEventListener("click", async()=>{
+  const phone=loginPhoneInput.value.trim();
+  if(!phone){status("boostStatus","Entrez votre numéro", "error"); return;}
+  localStorage.setItem("jb_phone", phone);
+  phoneDisplay.textContent=phone;
+  myBalanceEl.textContent="Chargement...";
+  const bal=await getBalance(phone);
+  myBalanceEl.textContent=fmt(bal);
+  if(bal===0){
+    alert("⚠️ Votre compte n'est pas rechargé.\nSolde: 0 FC\nVeuillez recharger votre compte avant de commander.");
+  }
+});
+
+// FORM SUBMITS AVEC BLOCAGE SOLDE
+document.getElementById("boostForm").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const d=Object.fromEntries(new FormData(e.currentTarget).entries());
+  if(!validUrl(d.link)){status("boostStatus","Lien invalide","error");return;}
+  const phone=localStorage.getItem("jb_phone"); if(!phone){status("boostStatus","Entrez d'abord votre numéro en haut pour vérifier votre solde","error"); return;}
+  const price=calculateBoost();
+  const ok=await checkAndDeduct(phone, price, "boostStatus"); if(!ok) return;
+  const data={...d, telephone:phone, prix:fmt(price), montant:price, plateforme:chosenPlatform, date:new Date().toLocaleString("fr-FR"), createdAt:Date.now(), statut:"En attente"};
+  try{await push(ref(db,"jasonBusiness/demandes_commandes"), data);}catch(e){}
+  saveOrder("Boostage", data);
+  status("boostStatus", `✅ Commande ${fmt(price)} enregistrée. Solde débité.`, "ok");
+});
+
+document.getElementById("appForm").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const d=Object.fromEntries(new FormData(e.currentTarget).entries());
+  if(!validUrl(d.appUrl)){status("appStatus","Lien invalide","error");return;}
+  const phone=d.whatsapp||localStorage.getItem("jb_phone"); if(!phone){status("appStatus","Numéro requis","error");return;}
+  const price=PRICES.app;
+  const ok=await checkAndDeduct(phone, price, "appStatus"); if(!ok) return;
+  const data={...d, telephone:phone, prix:fmt(price), montant:price, service:"Application", date:new Date().toLocaleString("fr-FR"), createdAt:Date.now(), statut:"En attente"};
+  try{await push(ref(db,"jasonBusiness/demandes_commandes"), data);}catch(e){}
+  saveOrder("Application", data);
+  status("appStatus", `✅ Commande ${fmt(price)} enregistrée.`, "ok");
+});
+
+document.getElementById("siteForm").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const d=Object.fromEntries(new FormData(e.currentTarget).entries());
+  const phone=d.whatsapp||localStorage.getItem("jb_phone");
+  const price=PRICES.site;
+  const ok=await checkAndDeduct(phone, price, "siteStatus"); if(!ok) return;
+  const data={...d, telephone:phone, prix:fmt(price), montant:price, service:"Site web", date:new Date().toLocaleString("fr-FR"), createdAt:Date.now(), statut:"En attente"};
+  try{await push(ref(db,"jasonBusiness/demandes_commandes"), data);}catch(e){}
+  saveOrder("Site web", data);
+  status("siteStatus", `✅ Commande ${fmt(price)} enregistrée.`, "ok");
+});
+
+document.getElementById("chatForm").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const d=Object.fromEntries(new FormData(e.currentTarget).entries());
+  const phone=d.whatsapp||localStorage.getItem("jb_phone");
+  const price=PRICES.chatbot;
+  const ok=await checkAndDeduct(phone, price, "chatStatus"); if(!ok) return;
+  const data={...d, telephone:phone, prix:fmt(price), montant:price, service:"Chatbot", date:new Date().toLocaleString("fr-FR"), createdAt:Date.now(), statut:"En attente"};
+  try{await push(ref(db,"jasonBusiness/demandes_commandes"), data);}catch(e){}
+  saveOrder("Chatbot", data);
+  status("chatStatus", `✅ Commande ${fmt(price)} enregistrée.`, "ok");
+});
+
+document.getElementById("musicForm").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const d=Object.fromEntries(new FormData(e.currentTarget).entries());
+  if(d.lyrics.trim().length<10){status("musicStatus","Paroles trop courtes","error");return;}
+  const phone=localStorage.getItem("jb_phone"); if(!phone){status("musicStatus","Entrez d'abord votre numéro en haut","error");return;}
+  const price=PRICES.music;
+  const ok=await checkAndDeduct(phone, price, "musicStatus"); if(!ok) return;
+  const btn=document.getElementById("generateSongBtn"); btn.disabled=true; btn.textContent="Génération...";
+  try{
+    const response=await fetch("https://musique-api.vercel.app/api/music",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({title:d.title,style:d.style,lyrics:d.lyrics,mood:d.mood})});
+    const result=await response.text().then(t=>{try{return JSON.parse(t)}catch{return {}}});
+    const data={...d, telephone:phone, prix:fmt(price), montant:price, service:"Chanson", date:new Date().toLocaleString("fr-FR"), createdAt:Date.now(), statut:"En attente"};
+    try{await push(ref(db,"jasonBusiness/demandes_commandes"), data);}catch(e){}
+    saveOrder("Chanson", data);
+    const audioUrl=findAudioUrl(result);
+    if(audioUrl){const audio=document.createElement("audio"); audio.controls=true; audio.src=audioUrl; document.getElementById("musicResult").append(audio);}
+    status("musicStatus", `✅ Chanson ${fmt(price)} - Solde débité.`, "ok");
+  }catch(err){status("musicStatus","Erreur: "+err.message,"error");}finally{btn.disabled=false; btn.textContent="🎶 Générer ma chanson";}
+});
+
+document.getElementById("adsForm").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const d=Object.fromEntries(new FormData(e.currentTarget).entries());
+  if(!validUrl(d.url)){status("adStatus","Lien invalide","error");return;}
+  const phone=localStorage.getItem("jb_phone"); if(!phone){status("adStatus","Entrez d'abord votre numéro en haut","error");return;}
+  const price=PRICES.ads;
+  const ok=await checkAndDeduct(phone, price, "adStatus"); if(!ok) return;
+  const btn=document.getElementById("submitAdBtn"); btn.disabled=true;
+  try{
+    const response=await fetch("https://davbot-outils.vercel.app/api/publicite/ads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"create_ad",title:d.title,text:d.text,url:d.url,platform:d.platform,budget:d.budget?Number(d.budget):0})});
+    const data={...d, telephone:phone, prix:fmt(price), montant:price, service:"Publicité", date:new Date().toLocaleString("fr-FR"), createdAt:Date.now(), statut:"En attente"};
+    try{await push(ref(db,"jasonBusiness/demandes_commandes"), data);}catch(e){}
+    saveOrder("Publicité", data);
+    status("adStatus", `✅ Pub ${fmt(price)} - Solde débité.`, "ok");
+  }catch(err){status("adStatus","Erreur: "+err.message,"error");}finally{btn.disabled=false; btn.textContent="Envoyer à l'API publicité";}
+});
+
+function status(id,msg,type="info"){const el=document.getElementById(id);if(!el) return; el.textContent=msg; el.className="status "+type;}
+function saveOrder(type,data){const HISTORY_KEY="jasonBusinessBoutiqueOrdersV3"; const items=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]"); items.unshift({type,date:new Date().toLocaleString("fr-FR"),data}); localStorage.setItem(HISTORY_KEY, JSON.stringify(items.slice(0,100)));}
+function validUrl(v){try{const u=new URL(v);return u.protocol.startsWith("http")}catch{return false}}
+function findAudioUrl(data){if(!data||typeof data!=="object")return "";const keys=["audio_url","audioUrl","audio","music_url","url"];for(const k of keys){if(typeof data[k]==="string"&&/^https?:\/\//i.test(data[k]))return data[k];}if(data.data&&typeof data.data==="object")return findAudioUrl(data.data);return "";}
+</script>
 </body>
 </html>
