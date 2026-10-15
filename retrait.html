@@ -5,75 +5,367 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="theme-color" content="#050a14">
 <title>JASON Business — Retrait</title>
+
 <style>
-:root{--blue:#00d2ff;--blue2:#0077ff;--dark:#050a14;--green:#00e676;--red:#ff4757;--yellow:#ffd740;--card:rgba(5,10,20,.92);--border:rgba(0,210,255,.25)}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
-body{min-height:100vh;padding:20px 12px 40px;font-family:"Segoe UI",Arial,sans-serif;color:white;background:linear-gradient(rgba(3,8,18,.82),rgba(3,8,18,.97)),url("IMG_0870.jpeg") center/cover fixed}
+:root{
+  --blue:#00d2ff;
+  --blue2:#0077ff;
+  --dark:#050a14;
+  --green:#00e676;
+  --red:#ff4757;
+  --yellow:#ffd740;
+  --card:rgba(5,10,20,.94);
+  --border:rgba(0,210,255,.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  padding:20px 12px 40px;
+  font-family:"Segoe UI",Arial,sans-serif;
+  color:white;
+  background:
+    linear-gradient(rgba(3,8,18,.84),rgba(3,8,18,.97)),
+    url("IMG_0870.jpeg") center/cover fixed;
+}
+button,input,select{font:inherit}
 .jb-container{width:100%;max-width:460px;margin:auto}
-.jb-header{text-align:center;margin:8px 0 20px}
-.jb-logo{width:62px;height:62px;margin:0 auto 12px;border-radius:20px;display:flex;justify-content:center;align-items:center;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#001018;font-size:27px;font-weight:900;box-shadow:0 0 30px rgba(0,210,255,.35)}
-.jb-title{font-size:23px;font-weight:900;letter-spacing:1px}.jb-title span{color:var(--blue)}.jb-subtitle{margin-top:7px;font-size:11px;opacity:.55;line-height:1.5}
-.jb-card{width:100%;padding:21px;border-radius:24px;background:var(--card);border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.45);backdrop-filter:blur(18px)}
-.jb-user-box{display:flex;align-items:center;gap:12px;padding:13px;margin-bottom:16px;border-radius:15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)}
-.jb-user-icon{width:42px;height:42px;flex-shrink:0;border-radius:13px;display:flex;align-items:center;justify-content:center;background:rgba(0,210,255,.12);color:var(--blue);font-size:19px}
-.jb-user-info{min-width:0}.jb-user-name{font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.jb-user-phone{margin-top:3px;font-size:10px;opacity:.5}
-.jb-balance{text-align:center;padding:18px;border-radius:18px;background:rgba(0,210,255,.07);border:1px solid rgba(0,210,255,.18)}
-.jb-balance-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;opacity:.55}
-#jbBalance{display:block;margin-top:5px;color:var(--blue);font-size:29px;font-weight:900}.jb-balance-fc{font-size:11px;opacity:.6}
+.jb-header{text-align:center;margin:8px 0 20px;animation:fadeDown .7s ease}
+.jb-logo{
+  width:66px;height:66px;margin:0 auto 12px;border-radius:21px;
+  display:flex;justify-content:center;align-items:center;
+  background:linear-gradient(135deg,var(--blue),var(--blue2));
+  color:#001018;font-size:29px;font-weight:900;
+  box-shadow:0 0 30px rgba(0,210,255,.35);
+  animation:floatLogo 3s ease-in-out infinite;
+}
+.jb-title{font-size:23px;font-weight:900;letter-spacing:1px}
+.jb-title span{color:var(--blue)}
+.jb-subtitle{margin-top:7px;font-size:11px;opacity:.65;line-height:1.6}
+.jb-card{
+  width:100%;padding:21px;border-radius:24px;
+  background:var(--card);border:1px solid var(--border);
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+  backdrop-filter:blur(18px);
+  animation:fadeUp .7s ease;
+}
+.jb-user-box{
+  display:flex;align-items:center;gap:12px;padding:13px;
+  margin-bottom:16px;border-radius:15px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.07)
+}
+.jb-user-icon{
+  width:42px;height:42px;flex-shrink:0;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,210,255,.12);color:var(--blue);font-size:19px
+}
+.jb-user-info{min-width:0}
+.jb-user-name{font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jb-user-phone{margin-top:3px;font-size:10px;opacity:.6}
+.jb-balance{
+  text-align:center;padding:18px;border-radius:18px;
+  background:rgba(0,210,255,.07);
+  border:1px solid rgba(0,210,255,.18)
+}
+.jb-balance-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;opacity:.7}
+#jbBalance{display:block;margin-top:5px;color:var(--blue);font-size:29px;font-weight:900}
+.jb-balance-fc{font-size:11px;opacity:.7}
 .jb-balance-details{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}
-.jb-detail{padding:10px;border-radius:11px;background:rgba(255,255,255,.045);font-size:10px;opacity:.7}.jb-detail strong{display:block;margin-top:3px;color:white;font-size:12px}
-.jb-section{margin-top:20px}.jb-label{display:block;margin-bottom:7px;font-size:11px;opacity:.65}
-.jb-input,.jb-select{width:100%;padding:15px;border-radius:13px;border:1px solid rgba(255,255,255,.10);outline:none;background:rgba(0,0,0,.48);color:white;font-family:inherit;font-size:14px;transition:.2s}
-.jb-input:focus,.jb-select:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(0,210,255,.08)}.jb-select option{background:#101722;color:white}
-.jb-info{margin-top:17px;padding:14px;border-radius:14px;background:rgba(255,215,64,.055);border:1px solid rgba(255,215,64,.14);font-size:10px;line-height:1.7}.jb-info-title{color:var(--yellow);font-weight:900;margin-bottom:4px}
-.jb-summary{margin-top:16px;padding:15px;border-radius:15px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}
-.jb-summary-row{display:flex;justify-content:space-between;gap:10px;padding:6px 0;font-size:12px}.jb-summary-row span{opacity:.6}.jb-summary-total{margin-top:7px;padding-top:11px;border-top:1px solid rgba(255,255,255,.08);font-size:14px;font-weight:900}#jbNet{color:var(--green)}
-#jbWithdrawButton{width:100%;margin-top:18px;padding:16px;border:none;border-radius:14px;background:linear-gradient(135deg,var(--red),#ff1744);color:white;font-size:13px;font-weight:900;cursor:pointer;transition:.2s;box-shadow:0 8px 25px rgba(255,71,87,.16)}
-#jbWithdrawButton:active{transform:scale(.98)}#jbWithdrawButton:disabled{background:#343943;opacity:.55;cursor:not-allowed;box-shadow:none}
-#jbStatus{min-height:20px;margin-top:12px;text-align:center;font-size:11px;line-height:1.5}.jb-success{color:var(--green)}.jb-error{color:var(--red)}.jb-loading{color:var(--yellow)}
-.jb-back{display:block;margin-top:17px;padding:13px;border-radius:13px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.035);color:white;text-decoration:none;text-align:center;font-size:12px}.jb-back:hover{color:var(--blue);border-color:var(--blue)}
-.jb-notice{margin-top:14px;padding:13px;border-radius:13px;background:rgba(0,210,255,.04);border:1px solid rgba(0,210,255,.10);font-size:9px;line-height:1.6;text-align:center;opacity:.5}
-@media(max-width:380px){body{padding:14px 9px 30px}.jb-card{padding:17px}.jb-title{font-size:21px}}
+.jb-detail{padding:10px;border-radius:11px;background:rgba(255,255,255,.045);font-size:10px;opacity:.8}
+.jb-detail strong{display:block;margin-top:3px;color:white;font-size:12px}
+.jb-section{margin-top:20px}
+.jb-label{display:block;margin-bottom:9px;font-size:11px;opacity:.8}
+.jb-input,.jb-select{
+  width:100%;padding:15px;border-radius:13px;
+  border:1px solid rgba(255,255,255,.12);
+  outline:none;background:rgba(0,0,0,.48);color:white;
+  font-family:inherit;font-size:14px;transition:.25s
+}
+.jb-input:focus,.jb-select:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(0,210,255,.09)
+}
+.jb-select option{background:#101722;color:white}
+
+/* CARTES DES MOYENS DE PAIEMENT */
+.jb-payment-methods{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:9px;
+}
+.jb-payment-card{
+  min-width:0;min-height:112px;padding:11px 5px;
+  border-radius:15px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:9px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.045);
+  color:white;cursor:pointer;
+  transition:transform .22s,border-color .22s,background .22s,box-shadow .22s;
+}
+.jb-payment-card:active{transform:scale(.96)}
+.jb-payment-card.selected{
+  border-color:var(--blue);
+  background:rgba(0,210,255,.11);
+  box-shadow:0 0 18px rgba(0,210,255,.12);
+}
+.jb-payment-card img{
+  display:block;width:100%;max-width:86px;height:43px;
+  object-fit:contain;border-radius:5px;
+}
+.jb-payment-name{font-size:10px;font-weight:800;text-align:center}
+.jb-payment-check{font-size:10px;color:var(--blue);font-weight:800;min-height:12px}
+.jb-payment-fallback{
+  display:none;font-size:11px;font-weight:900;
+  text-align:center;min-height:43px;align-content:center;
+}
+.jb-payment-help{
+  margin-top:9px;font-size:10px;line-height:1.6;
+  color:rgba(255,255,255,.58)
+}
+
+.jb-info{
+  margin-top:17px;padding:14px;border-radius:14px;
+  background:rgba(255,215,64,.055);
+  border:1px solid rgba(255,215,64,.14);
+  font-size:10px;line-height:1.8
+}
+.jb-info-title{color:var(--yellow);font-weight:900;margin-bottom:4px}
+.jb-summary{
+  margin-top:16px;padding:15px;border-radius:15px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.07)
+}
+.jb-summary-row{display:flex;justify-content:space-between;gap:10px;padding:6px 0;font-size:12px}
+.jb-summary-row span{opacity:.7}
+.jb-summary-total{margin-top:7px;padding-top:11px;border-top:1px solid rgba(255,255,255,.08);font-size:14px;font-weight:900}
+#jbNet{color:var(--green)}
+#jbWithdrawButton{
+  width:100%;margin-top:18px;padding:16px;border:none;border-radius:14px;
+  background:linear-gradient(135deg,var(--red),#ff1744);
+  color:white;font-size:13px;font-weight:900;cursor:pointer;
+  transition:.2s;box-shadow:0 8px 25px rgba(255,71,87,.16)
+}
+#jbWithdrawButton:active{transform:scale(.98)}
+#jbWithdrawButton:disabled{background:#343943;opacity:.6;cursor:not-allowed;box-shadow:none}
+#jbStatus{min-height:20px;margin-top:12px;text-align:center;font-size:11px;line-height:1.6}
+.jb-success{color:var(--green)}
+.jb-error{color:var(--red)}
+.jb-loading{color:var(--yellow)}
+.jb-back{
+  display:block;margin-top:17px;padding:13px;border-radius:13px;
+  border:1px solid rgba(255,255,255,.09);
+  background:rgba(255,255,255,.035);
+  color:white;text-decoration:none;text-align:center;font-size:12px;
+  transition:.2s
+}
+.jb-back:hover{color:var(--blue);border-color:var(--blue)}
+.jb-notice{
+  margin-top:14px;padding:13px;border-radius:13px;
+  background:rgba(0,210,255,.04);
+  border:1px solid rgba(0,210,255,.10);
+  font-size:9px;line-height:1.8;text-align:center;opacity:.7
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(18px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeDown{
+  from{opacity:0;transform:translateY(-12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes floatLogo{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
+}
+@media(max-width:380px){
+  body{padding:14px 9px 30px}
+  .jb-card{padding:16px}
+  .jb-title{font-size:20px}
+  .jb-payment-card{min-height:103px}
+  .jb-payment-card img{max-width:72px;height:38px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
 </style>
 </head>
+
 <body>
 <div class="jb-container">
-<header class="jb-header"><div class="jb-logo">J</div><h1 class="jb-title">RETRAIT <span>JASON BUSINESS</span></h1><p class="jb-subtitle">Retirez vos gains disponibles vers votre moyen de paiement.</p></header>
+
+<header class="jb-header">
+  <div class="jb-logo">J</div>
+  <h1 class="jb-title">RETRAIT <span>JASON BUSINESS</span></h1>
+  <p class="jb-subtitle">Retirez vos gains disponibles vers votre moyen de paiement.</p>
+</header>
+
 <div class="jb-card">
-<div class="jb-user-box"><div class="jb-user-icon">👤</div><div class="jb-user-info"><div class="jb-user-name" id="jbUserName">Chargement...</div><div class="jb-user-phone" id="jbUserPhone">...</div></div></div>
-<div class="jb-balance"><div class="jb-balance-label">Solde retirable</div><span id="jbBalance">0</span><span class="jb-balance-fc">FC</span>
-<div class="jb-balance-details"><div class="jb-detail">Gains <strong id="jbGains">0 FC</strong></div><div class="jb-detail">Commissions <strong id="jbCommissions">0 FC</strong></div></div></div>
-<div class="jb-section"><label class="jb-label" for="jbAmount">💰 Montant du retrait</label><input class="jb-input" type="number" id="jbAmount" min="5000" step="1" inputmode="numeric" placeholder="Minimum 5 000 FC"></div>
-<div class="jb-section"><label class="jb-label" for="jbMethod">📱 Méthode de paiement</label><select class="jb-select" id="jbMethod"><option value="Orange Money">Orange Money</option><option value="Airtel Money">Airtel Money</option><option value="M-Pesa">M-Pesa</option></select></div>
-<div class="jb-section"><label class="jb-label" for="jbWallet">📞 Numéro de réception</label><input class="jb-input" type="tel" id="jbWallet" maxlength="20" inputmode="tel" autocomplete="tel" placeholder="Exemple : 0840000000"></div>
-<div class="jb-info"><div class="jb-info-title">ℹ️ Conditions du retrait</div>• Montant minimum : <b>5 000 FC</b><br>• Frais de retrait : <b>5%</b><br>• Traitement : <b>1h à 24h</b><br>• Le paiement est effectué après validation par l'administration.</div>
-<div class="jb-summary"><div class="jb-summary-row"><span>Montant demandé</span><strong id="jbRequested">0 FC</strong></div><div class="jb-summary-row"><span>Frais 5%</span><strong id="jbFees">0 FC</strong></div><div class="jb-summary-row jb-summary-total"><span>Vous recevrez</span><strong id="jbNet">0 FC</strong></div></div>
-<button id="jbWithdrawButton" type="button" disabled>CHARGEMENT DU COMPTE...</button>
-<div id="jbStatus"></div>
-<a href="profil.html" class="jb-back">← Retour au profil</a>
-<div class="jb-notice">🔒 Votre demande est enregistrée dans Firebase.<br>⚠️ Le solde est réservé lors de la demande et sera traité par l'administration.<br>Ne partagez jamais votre mot de passe.</div>
+
+  <div class="jb-user-box">
+    <div class="jb-user-icon">👤</div>
+    <div class="jb-user-info">
+      <div class="jb-user-name" id="jbUserName">Chargement...</div>
+      <div class="jb-user-phone" id="jbUserPhone">...</div>
+    </div>
+  </div>
+
+  <div class="jb-balance">
+    <div class="jb-balance-label">Solde retirable</div>
+    <span id="jbBalance">0</span>
+    <span class="jb-balance-fc">FC</span>
+
+    <div class="jb-balance-details">
+      <div class="jb-detail">Gains
+        <strong id="jbGains">0 FC</strong>
+      </div>
+      <div class="jb-detail">Commissions
+        <strong id="jbCommissions">0 FC</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="jb-section">
+    <label class="jb-label" for="jbAmount">💰 Montant du retrait</label>
+    <input class="jb-input" type="number" id="jbAmount"
+      min="5000" step="1" inputmode="numeric"
+      placeholder="Minimum 5 000 FC">
+  </div>
+
+  <div class="jb-section">
+    <span class="jb-label">📱 Choisissez votre moyen de paiement</span>
+
+    <div class="jb-payment-methods">
+
+      <button class="jb-payment-card selected" type="button"
+        data-method="Orange Money" aria-pressed="true">
+        <img
+          src="https://infas.ciconcours.com/images/orange-money.png"
+          alt="Logo Orange Money"
+          referrerpolicy="no-referrer"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <span class="jb-payment-fallback">ORANGE<br>MONEY</span>
+        <span class="jb-payment-name">Orange Money</span>
+        <span class="jb-payment-check">✓ Sélectionné</span>
+      </button>
+
+      <button class="jb-payment-card" type="button"
+        data-method="Airtel Money" aria-pressed="false">
+        <img
+          src="https://eu-images.contentstack.com/v3/assets/blt7dacf616844cf077/bltf47b2d5e5ec3c9e9/6ab3a5ba79b97f72eea45670/Airtel_Money_1280.png?auto=webp&disable=upscale&quality=80&width=1280"
+          alt="Logo Airtel Money"
+          referrerpolicy="no-referrer"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <span class="jb-payment-fallback">AIRTEL<br>MONEY</span>
+        <span class="jb-payment-name">Airtel Money</span>
+        <span class="jb-payment-check"></span>
+      </button>
+
+      <button class="jb-payment-card" type="button"
+        data-method="M-Pesa" aria-pressed="false">
+        <img
+          src="https://www.digicard.co.tz/images/payments/mpesa.png"
+          alt="Logo M-Pesa"
+          referrerpolicy="no-referrer"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <span class="jb-payment-fallback">M-PESA</span>
+        <span class="jb-payment-name">M-Pesa</span>
+        <span class="jb-payment-check"></span>
+      </button>
+
+    </div>
+
+    <p class="jb-payment-help">
+      Sélectionnez le portefeuille sur lequel vous souhaitez recevoir le paiement.
+      La disponibilité du paiement dépend de la validation par l'administration.
+    </p>
+
+    <select class="jb-select" id="jbMethod" hidden aria-hidden="true">
+      <option value="Orange Money">Orange Money</option>
+      <option value="Airtel Money">Airtel Money</option>
+      <option value="M-Pesa">M-Pesa</option>
+    </select>
+  </div>
+
+  <div class="jb-section">
+    <label class="jb-label" for="jbWallet">📞 Numéro de réception</label>
+    <input class="jb-input" type="tel" id="jbWallet"
+      maxlength="20" inputmode="tel" autocomplete="tel"
+      placeholder="Exemple : 0840000000">
+  </div>
+
+  <div class="jb-info">
+    <div class="jb-info-title">ℹ️ Conditions du retrait</div>
+    • Montant minimum : <b>5 000 FC</b><br>
+    • Frais de retrait : <b>5%</b><br>
+    • Traitement indicatif : <b>1h à 24h</b><br>
+    • Le paiement est effectué après validation par l'administration.
+  </div>
+
+  <div class="jb-summary">
+    <div class="jb-summary-row">
+      <span>Montant demandé</span>
+      <strong id="jbRequested">0 FC</strong>
+    </div>
+    <div class="jb-summary-row">
+      <span>Frais 5%</span>
+      <strong id="jbFees">0 FC</strong>
+    </div>
+    <div class="jb-summary-row jb-summary-total">
+      <span>Vous recevrez</span>
+      <strong id="jbNet">0 FC</strong>
+    </div>
+  </div>
+
+  <button id="jbWithdrawButton" type="button" disabled>
+    CHARGEMENT DU COMPTE...
+  </button>
+
+  <div id="jbStatus" role="status" aria-live="polite"></div>
+
+  <a href="profil.html" class="jb-back">← Retour au profil</a>
+
+  <div class="jb-notice">
+    🔒 Votre demande est enregistrée dans Firebase.<br>
+    ⚠️ Le solde est débité lors de la demande et la transaction doit être traitée par l'administration.<br>
+    Ne partagez jamais votre mot de passe.
+  </div>
+
 </div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, onValue, get, push, set, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import {
+  getDatabase, ref, onValue, get, push, set, update
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
-    apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
-    authDomain:"starlink-investit.firebaseapp.com",
-    databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
-    projectId:"starlink-investit",
-    storageBucket:"starlink-investit.firebasestorage.app",
-    messagingSenderId:"807081599583",
-    appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
+  apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
+  authDomain:"starlink-investit.firebaseapp.com",
+  databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
+  projectId:"starlink-investit",
+  storageBucket:"starlink-investit.firebasestorage.app",
+  messagingSenderId:"807081599583",
+  appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
 };
+
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-/* ===== FIX SESSION COMPATIBLE ===== */
-const userPhone = localStorage.getItem("userPhone") || localStorage.getItem("jasonPhone") || localStorage.getItem("jasonBusinessPhone") || localStorage.getItem("jasonBusinessUserPhone") || localStorage.getItem("phone");
-if(!userPhone){ window.location.replace("login.html"); throw new Error("Aucun utilisateur connecté."); }
+/* COMPATIBILITÉ DE SESSION */
+const userPhone =
+  localStorage.getItem("userPhone") ||
+  localStorage.getItem("jasonPhone") ||
+  localStorage.getItem("jasonBusinessPhone") ||
+  localStorage.getItem("jasonBusinessUserPhone") ||
+  localStorage.getItem("phone");
+
+if(!userPhone){
+  window.location.replace("login.html");
+  throw new Error("Aucun utilisateur connecté.");
+}
 
 const userRef = ref(db, "jasonBusiness/users/" + userPhone);
 const withdrawalsRef = ref(db, "jasonBusiness/demandes_retraits");
@@ -91,6 +383,7 @@ const feesElement = document.getElementById("jbFees");
 const netElement = document.getElementById("jbNet");
 const buttonElement = document.getElementById("jbWithdrawButton");
 const statusElement = document.getElementById("jbStatus");
+const paymentCards = document.querySelectorAll(".jb-payment-card");
 
 let currentUser = null;
 let currentGains = 0;
@@ -98,158 +391,304 @@ let currentCommissions = 0;
 let currentPrincipal = 0;
 let currentBalance = 0;
 let accountLoaded = false;
+let submitting = false;
 
-function formatFC(value){ return Math.floor(Number(value)||0).toLocaleString("fr-FR"); }
-function showStatus(message,type=""){ statusElement.className=type; statusElement.textContent=message; }
+/* SÉLECTION DU MOYEN DE PAIEMENT */
+paymentCards.forEach(card => {
+  card.addEventListener("click", () => {
+    const method = card.dataset.method;
+    methodElement.value = method;
 
-function getGains(d){ return Number(d.solde_gains ?? d.soldeGains ?? d.gains ?? d.revenus ?? 0)||0; }
-function getCom(d){ return Number(d.solde_commissions ?? d.soldeCommissions ?? d.commissions ?? 0)||0; }
-function getPrincipal(d){ return Number(d.solde_principal ?? d.soldePrincipal ?? d.solde ?? d.balance ?? 0)||0; }
-function getName(d){ return d.nom || d.name || d.username || "Utilisateur"; }
+    paymentCards.forEach(item => {
+      const selected = item === card;
+      item.classList.toggle("selected", selected);
+      item.setAttribute("aria-pressed", String(selected));
 
-function updateSummary(){
-    const amount = Math.floor(Number(amountElement.value)||0);
-    const fees = Math.floor(amount*0.05);
-    const net = Math.max(0, amount-fees);
-    requestedElement.textContent = formatFC(amount)+" FC";
-    feesElement.textContent = formatFC(fees)+" FC";
-    netElement.textContent = formatFC(net)+" FC";
-}
-amountElement.addEventListener("input",updateSummary);
-
-onValue(userRef,(snapshot)=>{
-    accountLoaded = true;
-    if(!snapshot.exists()){
-        currentUser = null; currentGains=0; currentCommissions=0; currentPrincipal=0; currentBalance=0;
-        userNameElement.textContent="Compte introuvable";
-        userPhoneElement.textContent=userPhone;
-        balanceElement.textContent="0";
-        gainsElement.textContent="0 FC"; commissionsElement.textContent="0 FC";
-        buttonElement.disabled=true; buttonElement.textContent="COMPTE INTROUVABLE";
-        showStatus("❌ Aucun compte trouvé pour ce numéro.","jb-error"); return;
-    }
-    const data = snapshot.val();
-    currentUser = data;
-    userNameElement.textContent = getName(data);
-    userPhoneElement.textContent = userPhone;
-
-    currentGains = getGains(data);
-    currentCommissions = getCom(data);
-    currentPrincipal = getPrincipal(data);
-
-    // Solde retirable = gains + commissions + principal (tu peux changer si tu veux seulement gains+com)
-    // Ici on met tout pour que le client voit son solde
-    currentBalance = Math.max(0, currentGains + currentCommissions + currentPrincipal);
-    // Si tu veux seulement gains+commissions, remplace par:
-    // currentBalance = Math.max(0, currentGains + currentCommissions);
-
-    balanceElement.textContent = formatFC(currentBalance);
-    gainsElement.textContent = formatFC(currentGains + currentPrincipal)+" FC";
-    commissionsElement.textContent = formatFC(currentCommissions)+" FC";
-
-    if(currentBalance < 5000){
-        buttonElement.disabled=true;
-        buttonElement.textContent="SOLDE INSUFFISANT ("+formatFC(currentBalance)+" FC)";
-        showStatus("⚠️ Solde minimum requis : 5 000 FC. Solde actuel: "+formatFC(currentBalance)+" FC","jb-error");
-        return;
-    }
-    buttonElement.disabled=false;
-    buttonElement.textContent="DEMANDER LE PAIEMENT";
-    showStatus("");
+      const check = item.querySelector(".jb-payment-check");
+      check.textContent = selected ? "✓ Sélectionné" : "";
+    });
+  });
 });
 
-buttonElement.addEventListener("click",async()=>{
-    if(!accountLoaded||!currentUser){showStatus("❌ Compte non disponible.","jb-error"); return;}
-    const amount = Math.floor(Number(amountElement.value));
-    if(!Number.isFinite(amount)||amount<5000){showStatus("❌ Le retrait minimum est de 5 000 FC.","jb-error"); amountElement.focus(); return;}
-    if(amount>currentBalance){showStatus("❌ Solde insuffisant. Disponible: "+formatFC(currentBalance)+" FC","jb-error"); return;}
-    const wallet = walletElement.value.trim();
-    if(wallet.length<9){showStatus("❌ Veuillez entrer un numéro valide.","jb-error"); walletElement.focus(); return;}
-    const method = methodElement.value;
-    const fees = Math.floor(amount*0.05);
-    const net = amount-fees;
+function formatFC(value){
+  return Math.floor(Number(value) || 0).toLocaleString("fr-FR");
+}
 
-    const confirmation = confirm("Confirmer votre demande de retrait ?\n\nMontant : "+formatFC(amount)+" FC\nFrais : "+formatFC(fees)+" FC\nVous recevrez : "+formatFC(net)+" FC\n\nMéthode : "+method+"\nNuméro : "+wallet);
-    if(!confirmation) return;
+function showStatus(message, type=""){
+  statusElement.className = type;
+  statusElement.textContent = message;
+}
 
-    buttonElement.disabled=true; buttonElement.textContent="TRANSMISSION...";
-    showStatus("⏳ Enregistrement de votre demande...","jb-loading");
+function getGains(data){
+  return Number(
+    data.solde_gains ??
+    data.soldeGains ??
+    data.gains ??
+    data.revenus ?? 0
+  ) || 0;
+}
 
-    try{
-        const snapshot = await get(userRef);
-        if(!snapshot.exists()) throw new Error("Compte introuvable.");
-        const user = snapshot.val();
-        const gains = getGains(user);
-        const com = getCom(user);
-        const princ = getPrincipal(user);
-        const total = gains+com+princ;
+function getCom(data){
+  return Number(
+    data.solde_commissions ??
+    data.soldeCommissions ??
+    data.commissions ?? 0
+  ) || 0;
+}
 
-        if(amount>total) throw new Error("Solde insuffisant.");
+function getPrincipal(data){
+  return Number(
+    data.solde_principal ??
+    data.soldePrincipal ??
+    data.solde ??
+    data.balance ?? 0
+  ) || 0;
+}
 
-        // Deduction logique: d'abord gains, puis principal, puis commissions
-        let newGains = gains;
-        let newPrincipal = princ;
-        let newCom = com;
-        let remaining = amount;
+function getName(data){
+  return data.nom || data.name || data.username || "Utilisateur";
+}
 
-        if(newGains>=remaining){ newGains-=remaining; remaining=0; }
-        else{ remaining-=newGains; newGains=0; }
+function updateSummary(){
+  const amount = Math.floor(Number(amountElement.value) || 0);
+  const fees = Math.floor(amount * 0.05);
+  const net = Math.max(0, amount - fees);
 
-        if(remaining>0){
-          if(newPrincipal>=remaining){ newPrincipal-=remaining; remaining=0; }
-          else{ remaining-=newPrincipal; newPrincipal=0; }
-        }
-        if(remaining>0){ newCom = Math.max(0, newCom-remaining); }
+  requestedElement.textContent = formatFC(amount) + " FC";
+  feesElement.textContent = formatFC(fees) + " FC";
+  netElement.textContent = formatFC(net) + " FC";
+}
 
-        const newRequest = push(withdrawalsRef);
-        const requestId = newRequest.key;
-        const timestamp = Date.now();
+amountElement.addEventListener("input", updateSummary);
 
-        const requestData = {
-            id: requestId,
-            telephone: userPhone,
-            nom: getName(user),
-            montant: amount,
-            montantDemande: amount,
-            frais: fees,
-            montantNet: net,
-            methode: method,
-            numero_reception: wallet,
-            numero: wallet,
-            statut: "En attente",
-            timestamp: timestamp,
-            createdAt: timestamp,
-            date: new Date(timestamp).toLocaleString("fr-FR"),
-            source: "jasonBusiness",
-            type: "retrait",
-            gainsAvant: gains,
-            commissionsAvant: com,
-            principalAvant: princ,
-            soldeAvant: total,
-            gainsApres: newGains,
-            commissionsApres: newCom,
-            principalApres: newPrincipal,
-            soldeApres: newGains+newCom+newPrincipal
-        };
+onValue(userRef, snapshot => {
+  accountLoaded = true;
 
-        await set(newRequest, requestData);
-        await update(userRef, {
-            solde_gains: newGains,
-            solde_commissions: newCom,
-            solde_principal: newPrincipal,
-            solde: newPrincipal
-        });
+  if(!snapshot.exists()){
+    currentUser = null;
+    currentGains = 0;
+    currentCommissions = 0;
+    currentPrincipal = 0;
+    currentBalance = 0;
 
-        showStatus("✅ Demande envoyée avec succès. En attente de validation.","jb-success");
-        buttonElement.textContent="✅ DEMANDE ENVOYÉE";
-        amountElement.value=""; walletElement.value=""; updateSummary();
+    userNameElement.textContent = "Compte introuvable";
+    userPhoneElement.textContent = userPhone;
+    balanceElement.textContent = "0";
+    gainsElement.textContent = "0 FC";
+    commissionsElement.textContent = "0 FC";
 
-        setTimeout(()=>{ window.location.href="profil.html"; },2200);
-    }catch(error){
-        console.error(error);
-        showStatus("❌ Impossible d'envoyer: "+(error.message||"Erreur Firebase"),"jb-error");
-        buttonElement.disabled=false; buttonElement.textContent="RÉESSAYER";
+    buttonElement.disabled = true;
+    buttonElement.textContent = "COMPTE INTROUVABLE";
+    showStatus("❌ Aucun compte trouvé pour ce numéro.", "jb-error");
+    return;
+  }
+
+  const data = snapshot.val();
+  currentUser = data;
+
+  userNameElement.textContent = getName(data);
+  userPhoneElement.textContent = userPhone;
+
+  currentGains = getGains(data);
+  currentCommissions = getCom(data);
+  currentPrincipal = getPrincipal(data);
+
+  // Même logique que dans ton code : gains + commissions + principal.
+  currentBalance = Math.max(
+    0,
+    currentGains + currentCommissions + currentPrincipal
+  );
+
+  balanceElement.textContent = formatFC(currentBalance);
+  gainsElement.textContent = formatFC(currentGains + currentPrincipal) + " FC";
+  commissionsElement.textContent = formatFC(currentCommissions) + " FC";
+
+  if(currentBalance < 5000){
+    buttonElement.disabled = true;
+    buttonElement.textContent =
+      "SOLDE INSUFFISANT (" + formatFC(currentBalance) + " FC)";
+
+    showStatus(
+      "⚠️ Solde minimum requis : 5 000 FC. Solde actuel : " +
+      formatFC(currentBalance) + " FC",
+      "jb-error"
+    );
+    return;
+  }
+
+  buttonElement.disabled = false;
+  buttonElement.textContent = "DEMANDER LE PAIEMENT";
+  showStatus("");
+});
+
+buttonElement.addEventListener("click", async () => {
+  if(submitting) return;
+
+  if(!accountLoaded || !currentUser){
+    showStatus("❌ Compte non disponible.", "jb-error");
+    return;
+  }
+
+  const amount = Math.floor(Number(amountElement.value));
+
+  if(!Number.isFinite(amount) || amount < 5000){
+    showStatus("❌ Le retrait minimum est de 5 000 FC.", "jb-error");
+    amountElement.focus();
+    return;
+  }
+
+  if(amount > currentBalance){
+    showStatus(
+      "❌ Solde insuffisant. Disponible : " +
+      formatFC(currentBalance) + " FC",
+      "jb-error"
+    );
+    return;
+  }
+
+  const wallet = walletElement.value.trim();
+
+  if(wallet.length < 9){
+    showStatus("❌ Veuillez entrer un numéro valide.", "jb-error");
+    walletElement.focus();
+    return;
+  }
+
+  const method = methodElement.value;
+  const fees = Math.floor(amount * 0.05);
+  const net = amount - fees;
+
+  const confirmation = confirm(
+    "Confirmer votre demande de retrait ?\n\n" +
+    "Montant : " + formatFC(amount) + " FC\n" +
+    "Frais : " + formatFC(fees) + " FC\n" +
+    "Vous recevrez : " + formatFC(net) + " FC\n\n" +
+    "Méthode : " + method + "\n" +
+    "Numéro : " + wallet + "\n\n" +
+    "Le paiement attendra la validation de l'administration."
+  );
+
+  if(!confirmation) return;
+
+  submitting = true;
+  buttonElement.disabled = true;
+  buttonElement.textContent = "TRANSMISSION...";
+  showStatus("⏳ Enregistrement de votre demande...", "jb-loading");
+
+  try{
+    const snapshot = await get(userRef);
+
+    if(!snapshot.exists()){
+      throw new Error("Compte introuvable.");
     }
+
+    const user = snapshot.val();
+    const gains = getGains(user);
+    const com = getCom(user);
+    const princ = getPrincipal(user);
+    const total = gains + com + princ;
+
+    if(amount > total){
+      throw new Error("Solde insuffisant.");
+    }
+
+    // Déduction : gains, puis principal, puis commissions.
+    let newGains = gains;
+    let newPrincipal = princ;
+    let newCom = com;
+    let remaining = amount;
+
+    if(newGains >= remaining){
+      newGains -= remaining;
+      remaining = 0;
+    }else{
+      remaining -= newGains;
+      newGains = 0;
+    }
+
+    if(remaining > 0){
+      if(newPrincipal >= remaining){
+        newPrincipal -= remaining;
+        remaining = 0;
+      }else{
+        remaining -= newPrincipal;
+        newPrincipal = 0;
+      }
+    }
+
+    if(remaining > 0){
+      newCom = Math.max(0, newCom - remaining);
+    }
+
+    const newRequest = push(withdrawalsRef);
+    const requestId = newRequest.key;
+    const timestamp = Date.now();
+
+    const requestData = {
+      id: requestId,
+      telephone: userPhone,
+      nom: getName(user),
+      montant: amount,
+      montantDemande: amount,
+      frais: fees,
+      montantNet: net,
+      methode: method,
+      numero_reception: wallet,
+      numero: wallet,
+      statut: "En attente",
+      timestamp: timestamp,
+      createdAt: timestamp,
+      date: new Date(timestamp).toLocaleString("fr-FR"),
+      source: "jasonBusiness",
+      type: "retrait",
+      gainsAvant: gains,
+      commissionsAvant: com,
+      principalAvant: princ,
+      soldeAvant: total,
+      gainsApres: newGains,
+      commissionsApres: newCom,
+      principalApres: newPrincipal,
+      soldeApres: newGains + newCom + newPrincipal
+    };
+
+    await set(newRequest, requestData);
+
+    await update(userRef, {
+      solde_gains: newGains,
+      solde_commissions: newCom,
+      solde_principal: newPrincipal,
+      solde: newPrincipal
+    });
+
+    showStatus(
+      "✅ Demande envoyée avec succès. En attente de validation.",
+      "jb-success"
+    );
+
+    buttonElement.textContent = "✅ DEMANDE ENVOYÉE";
+    amountElement.value = "";
+    walletElement.value = "";
+    updateSummary();
+
+    setTimeout(() => {
+      window.location.href = "profil.html";
+    }, 2200);
+
+  }catch(error){
+    console.error(error);
+
+    showStatus(
+      "❌ Impossible d'envoyer : " +
+      (error.message || "Erreur Firebase"),
+      "jb-error"
+    );
+
+    buttonElement.disabled = false;
+    buttonElement.textContent = "RÉESSAYER";
+
+  }finally{
+    submitting = false;
+  }
 });
 
 updateSummary();
