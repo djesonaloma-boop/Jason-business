@@ -9,15 +9,9 @@
 
 <style>
 :root{
-  --bg:#050914;
-  --panel:#0b1424;
-  --gold:#d8aa45;
-  --gold2:#f5d785;
-  --blue:#00c8ff;
-  --green:#22c55e;
-  --text:#f5f7fc;
-  --muted:#93a4bc;
-  --border:rgba(216,170,69,.22);
+  --bg:#050914;--panel:#0b1424;--gold:#d8aa45;--gold2:#f5d785;
+  --blue:#00c8ff;--green:#22c55e;--text:#f5f7fc;
+  --muted:#93a4bc;--border:rgba(216,170,69,.22);
 }
 *{box-sizing:border-box}
 body{
@@ -29,14 +23,12 @@ button{cursor:pointer}
 header{
   position:sticky;top:0;z-index:20;display:flex;align-items:center;
   justify-content:space-between;gap:10px;padding:12px 14px;
-  background:#050914f2;backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--border)
+  background:#050914f2;backdrop-filter:blur(14px);border-bottom:1px solid var(--border)
 }
 .brand{display:flex;align-items:center;gap:9px}
 .logo{
-  width:37px;height:37px;display:grid;place-items:center;
-  border-radius:11px;background:linear-gradient(135deg,#f6df98,#a87920);
-  color:#08101d;font-weight:900
+  width:37px;height:37px;display:grid;place-items:center;border-radius:11px;
+  background:linear-gradient(135deg,#f6df98,#a87920);color:#08101d;font-weight:900
 }
 .brand h1{font-size:14px;margin:0}
 .brand small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
@@ -82,7 +74,6 @@ header{
 }
 .btn-gold{background:linear-gradient(135deg,#f4d786,#c08a28);color:#111827}
 .btn-outline{background:#0a1424;border-color:var(--border);color:var(--gold2)}
-.btn-blue{background:#06344a;color:#7be3ff;border-color:#00c8ff3b}
 .btn-mini{padding:6px 8px;font-size:9px}
 .full{width:100%}
 .service .btn{width:100%;min-height:29px}
@@ -116,6 +107,12 @@ header{
 .social-item img{width:28px;height:28px;object-fit:contain}
 .social-item span{font-size:10px;text-align:center;overflow-wrap:anywhere}
 .social-title{font-size:10px;color:var(--gold2);margin:12px 0 9px;font-weight:bold;letter-spacing:.6px}
+.price-box{
+  margin:14px 0;padding:14px;border:1px solid var(--border);border-radius:11px;
+  background:linear-gradient(130deg,#101f33,#0a1220)
+}
+.price-row{display:flex;justify-content:space-between;gap:8px;margin:8px 0;font-size:11px;color:#b8c7da}
+.price-total{font-size:22px;font-weight:900;color:var(--gold2);margin-top:9px}
 .ad-preview{white-space:pre-wrap;overflow-wrap:anywhere;text-align:center;padding:18px;border:1px dashed var(--border);border-radius:10px;background:#101e33;font-size:13px;line-height:1.6}
 .qr-preview{display:block;width:220px;max-width:100%;margin:12px auto;background:white;border-radius:7px}
 .result{font-size:11px;line-height:1.6;overflow-wrap:anywhere;color:#c4d0e1}
@@ -157,165 +154,156 @@ footer{text-align:center;color:#65758d;font-size:10px;line-height:1.8;padding:20
     </div>
   </section>
 
-  <div class="notice">Sélectionnez un service, remplissez le formulaire et envoyez votre demande. Une demande n'est pas une confirmation de paiement ni une livraison automatique.</div>
-
+  <div class="notice">Sélectionnez un service, remplissez le formulaire et envoyez votre demande. Les demandes sont soumises à vérification.</div>
   <div class="section-head"><h3>Nos services</h3><span id="serviceCount">6 services</span></div>
   <input id="serviceSearch" class="search" type="search" placeholder="Rechercher un service...">
 
-  <section class="grid" id="serviceGrid">
+  <section class="grid">
     <article class="service" data-search="application mobile android apk">
       <div class="service-top"><div class="service-icon">📱</div><div><h4>Application mobile</h4><div class="category">Développement</div></div></div>
       <p>Présentez votre idée et demandez une application adaptée à votre projet.</p>
       <div class="price">À partir de 10 000 FC</div>
       <button class="btn btn-gold" id="openApp" type="button">Créer mon application</button>
     </article>
-
     <article class="service" data-search="site web internet vitrine ecommerce">
       <div class="service-top"><div class="service-icon">🌐</div><div><h4>Site web</h4><div class="category">Web design</div></div></div>
       <p>Site vitrine, site professionnel ou boutique en ligne selon vos besoins.</p>
       <div class="price">À partir de 15 000 FC</div>
       <button class="btn btn-gold" id="openSite" type="button">Créer mon site</button>
     </article>
-
     <article class="service" data-search="chatbot intelligence artificielle bot">
       <div class="service-top"><div class="service-icon">🤖</div><div><h4>Chatbot IA</h4><div class="category">Automatisation</div></div></div>
       <p>Décrivez le chatbot que vous souhaitez pour votre activité.</p>
       <div class="price">À partir de 7 000 FC</div>
       <button class="btn btn-gold" id="openBot" type="button">Créer mon chatbot</button>
     </article>
-
     <article class="service" data-search="publicité affiche promotion marketing">
       <div class="service-top"><div class="service-icon">📢</div><div><h4>Publicité</h4><div class="category">Communication</div></div></div>
       <p>Préparez le texte et les informations de votre marque.</p>
       <div class="price">Sur demande</div>
       <button class="btn btn-outline" id="openAd" type="button">Préparer ma pub</button>
     </article>
-
     <article class="service" data-search="qr code lien adresse">
       <div class="service-top"><div class="service-icon">▦</div><div><h4>QR code</h4><div class="category">Outil numérique</div></div></div>
       <p>Créez un QR code à partir d'un lien ou d'un texte.</p>
       <div class="price">Création rapide</div>
       <button class="btn btn-outline" id="openQR" type="button">Créer mon QR code</button>
     </article>
-
     <article class="service" data-search="réseaux sociaux facebook twitter x whatsapp snapchat tiktok youtube instagram telegram smm">
-      <div class="service-top"><div class="service-icon">📲</div><div><h4>Réseaux sociaux</h4><div class="category">Services SMM</div></div></div>
-      <p>Choisissez une plateforme grâce à son logo et préparez votre demande.</p>
-      <div class="price">Selon le service</div>
-      <button class="btn btn-gold" id="openSocial" type="button">Voir les réseaux</button>
+      <div class="service-top"><div class="service-icon">📲</div><div><h4>Réseaux sociaux</h4><div class="category">Création personnalisée</div></div></div>
+      <p>Créez vous-même votre demande et consultez le prix calculé avant de l'envoyer.</p>
+      <div class="price">Minimum 10 FC</div>
+      <button class="btn btn-gold" id="openSocial" type="button">Créer mon service</button>
     </article>
   </section>
 
-  <div class="section-head">
-    <h3>Mes dernières demandes</h3>
-    <button class="btn btn-outline btn-mini" id="loadOrders" type="button">Actualiser</button>
-  </div>
+  <div class="section-head"><h3>Mes dernières demandes</h3><button class="btn btn-outline btn-mini" id="loadOrders" type="button">Actualiser</button></div>
   <div id="ordersList" class="notice">Les demandes locales apparaîtront ici.</div>
   <footer>JASON BUSINESS · Web • Design • Digital • IA<br>Créé par Jason Aloma 🇨🇩</footer>
 </main>
 
-<!-- MODAL CRÉATION -->
-<div class="modal" id="creativeModal">
-  <div class="modal-box">
-    <div class="modal-head"><h3 id="creativeTitle">Nouvelle demande</h3><button class="close" data-close="creativeModal" type="button">×</button></div>
-    <form id="creativeForm">
-      <input type="hidden" id="creativeType">
-      <div class="field"><label for="creativeName">Votre nom</label><input id="creativeName" required maxlength="100" placeholder="Votre nom ou entreprise"></div>
-      <div class="field"><label for="creativeContact">Téléphone ou e-mail</label><input id="creativeContact" required maxlength="120" placeholder="Votre contact"></div>
-      <div class="field"><label for="creativeProject">Nom du projet</label><input id="creativeProject" required maxlength="120" placeholder="Nom du projet"></div>
-      <div class="field"><label for="creativeDescription">Description</label><textarea id="creativeDescription" required maxlength="3000" placeholder="Expliquez ce que vous souhaitez..."></textarea></div>
-      <div class="field"><label for="creativeBudget">Budget estimé (FC)</label><input id="creativeBudget" type="number" min="0" placeholder="Budget facultatif"></div>
-      <button class="btn btn-gold full" type="submit">Envoyer ma demande</button>
-    </form>
+<!-- FORMULAIRE APPLICATION / SITE / CHATBOT -->
+<div class="modal" id="creativeModal"><div class="modal-box">
+  <div class="modal-head"><h3 id="creativeTitle">Nouvelle demande</h3><button class="close" data-close="creativeModal" type="button">×</button></div>
+  <form id="creativeForm">
+    <input type="hidden" id="creativeType">
+    <div class="field"><label for="creativeName">Votre nom</label><input id="creativeName" required maxlength="100"></div>
+    <div class="field"><label for="creativeContact">Téléphone ou e-mail</label><input id="creativeContact" required maxlength="120"></div>
+    <div class="field"><label for="creativeProject">Nom du projet</label><input id="creativeProject" required maxlength="120"></div>
+    <div class="field"><label for="creativeDescription">Description</label><textarea id="creativeDescription" required maxlength="3000" placeholder="Expliquez ce que vous souhaitez..."></textarea></div>
+    <div class="field"><label for="creativeBudget">Budget estimé (FC)</label><input id="creativeBudget" type="number" min="0"></div>
+    <button class="btn btn-gold full" type="submit">Envoyer ma demande</button>
+  </form>
+</div></div>
+
+<!-- PUBLICITÉ -->
+<div class="modal" id="adModal"><div class="modal-box">
+  <div class="modal-head"><h3>Préparer une publicité</h3><button class="close" data-close="adModal" type="button">×</button></div>
+  <form id="adForm">
+    <div class="field"><label for="adBrand">Nom de la marque</label><input id="adBrand" required maxlength="100"></div>
+    <div class="field"><label for="adTitle">Titre</label><input id="adTitle" required maxlength="120"></div>
+    <div class="field"><label for="adText">Texte publicitaire</label><textarea id="adText" required maxlength="1500"></textarea></div>
+    <div class="field"><label for="adContact">Contact à afficher</label><input id="adContact" maxlength="120"></div>
+    <button class="btn btn-outline full" id="previewAd" type="button">Prévisualiser</button>
+    <div id="adPreview" class="ad-preview hidden" style="margin-top:10px"></div>
+    <button class="btn btn-gold full" type="submit" style="margin-top:10px">Envoyer la demande</button>
+  </form>
+</div></div>
+
+<!-- QR CODE -->
+<div class="modal" id="qrModal"><div class="modal-box">
+  <div class="modal-head"><h3>Créer un QR code</h3><button class="close" data-close="qrModal" type="button">×</button></div>
+  <div class="field"><label for="qrText">Lien ou texte</label><textarea id="qrText" maxlength="1500" placeholder="https://exemple.com"></textarea></div>
+  <button class="btn btn-gold full" id="generateQR" type="button">Générer le QR code</button>
+  <div id="qrResult" class="result"></div>
+  <div class="notice">Une connexion Internet est nécessaire pour charger le QR code.</div>
+</div></div>
+
+<!-- CRÉATION PERSONNALISÉE DU SERVICE SOCIAL -->
+<div class="modal" id="socialModal"><div class="modal-box">
+  <div class="modal-head"><h3>Créer mon service social</h3><button class="close" data-close="socialModal" type="button">×</button></div>
+
+  <p class="social-title">1. CHOISISSEZ VOTRE PLATEFORME</p>
+  <div class="social-grid" id="socialLogoGrid">
+    <button class="social-item selected" type="button" data-platform="Facebook"><img src="https://cdn.simpleicons.org/facebook/0866FF" alt="Facebook"><span>Facebook</span></button>
+    <button class="social-item" type="button" data-platform="X"><img src="https://cdn.simpleicons.org/x/FFFFFF" alt="X"><span>X / Twitter</span></button>
+    <button class="social-item" type="button" data-platform="WhatsApp"><img src="https://cdn.simpleicons.org/whatsapp/25D366" alt="WhatsApp"><span>WhatsApp</span></button>
+    <button class="social-item" type="button" data-platform="Snapchat"><img src="https://cdn.simpleicons.org/snapchat/FFFC00" alt="Snapchat"><span>Snapchat</span></button>
+    <button class="social-item" type="button" data-platform="TikTok"><img src="https://cdn.simpleicons.org/tiktok/FFFFFF" alt="TikTok"><span>TikTok</span></button>
+    <button class="social-item" type="button" data-platform="YouTube"><img src="https://cdn.simpleicons.org/youtube/FF0033" alt="YouTube"><span>YouTube</span></button>
+    <button class="social-item" type="button" data-platform="Instagram"><img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram"><span>Instagram</span></button>
+    <button class="social-item" type="button" data-platform="Telegram"><img src="https://cdn.simpleicons.org/telegram/26A5E4" alt="Telegram"><span>Telegram</span></button>
+    <button class="social-item" type="button" data-platform="Messenger"><img src="https://cdn.simpleicons.org/messenger/0866FF" alt="Messenger"><span>Messenger</span></button>
+    <button class="social-item" type="button" data-platform="Threads"><img src="https://cdn.simpleicons.org/threads/FFFFFF" alt="Threads"><span>Threads</span></button>
+    <button class="social-item" type="button" data-platform="Pinterest"><img src="https://cdn.simpleicons.org/pinterest/BD081C" alt="Pinterest"><span>Pinterest</span></button>
+    <button class="social-item" type="button" data-platform="LinkedIn"><img src="https://cdn.simpleicons.org/linkedin/0A66C2" alt="LinkedIn"><span>LinkedIn</span></button>
+    <button class="social-item" type="button" data-platform="Discord"><img src="https://cdn.simpleicons.org/discord/5865F2" alt="Discord"><span>Discord</span></button>
+    <button class="social-item" type="button" data-platform="Reddit"><img src="https://cdn.simpleicons.org/reddit/FF4500" alt="Reddit"><span>Reddit</span></button>
+    <button class="social-item" type="button" data-platform="Twitch"><img src="https://cdn.simpleicons.org/twitch/9146FF" alt="Twitch"><span>Twitch</span></button>
+    <button class="social-item" type="button" data-platform="Spotify"><img src="https://cdn.simpleicons.org/spotify/1ED760" alt="Spotify"><span>Spotify</span></button>
+    <button class="social-item" type="button" data-platform="Viber"><img src="https://cdn.simpleicons.org/viber/7360F2" alt="Viber"><span>Viber</span></button>
+    <button class="social-item" type="button" data-platform="WeChat"><img src="https://cdn.simpleicons.org/wechat/07C160" alt="WeChat"><span>WeChat</span></button>
+    <button class="social-item" type="button" data-platform="Tumblr"><img src="https://cdn.simpleicons.org/tumblr/36465D" alt="Tumblr"><span>Tumblr</span></button>
+    <button class="social-item" type="button" data-platform="LINE"><img src="https://cdn.simpleicons.org/line/00C300" alt="LINE"><span>LINE</span></button>
+    <button class="social-item" type="button" data-platform="Kwai"><img src="https://cdn.simpleicons.org/kuaishou/FF4906" alt="Kwai"><span>Kwai</span></button>
+    <button class="social-item" type="button" data-platform="Quora"><img src="https://cdn.simpleicons.org/quora/B92B27" alt="Quora"><span>Quora</span></button>
+    <button class="social-item" type="button" data-platform="Medium"><img src="https://cdn.simpleicons.org/medium/FFFFFF" alt="Medium"><span>Medium</span></button>
+    <button class="social-item" type="button" data-platform="GitHub"><img src="https://cdn.simpleicons.org/github/FFFFFF" alt="GitHub"><span>GitHub</span></button>
   </div>
-</div>
 
-<!-- MODAL PUBLICITÉ -->
-<div class="modal" id="adModal">
-  <div class="modal-box">
-    <div class="modal-head"><h3>Préparer une publicité</h3><button class="close" data-close="adModal" type="button">×</button></div>
-    <form id="adForm">
-      <div class="field"><label for="adBrand">Nom de la marque</label><input id="adBrand" required maxlength="100"></div>
-      <div class="field"><label for="adTitle">Titre</label><input id="adTitle" required maxlength="120"></div>
-      <div class="field"><label for="adText">Texte publicitaire</label><textarea id="adText" required maxlength="1500"></textarea></div>
-      <div class="field"><label for="adContact">Contact à afficher</label><input id="adContact" maxlength="120"></div>
-      <button class="btn btn-outline full" id="previewAd" type="button">Prévisualiser</button>
-      <div id="adPreview" class="ad-preview hidden" style="margin-top:10px"></div>
-      <button class="btn btn-gold full" type="submit" style="margin-top:10px">Envoyer la demande</button>
-    </form>
+  <p class="social-title">2. CONFIGUREZ VOTRE SERVICE</p>
+  <div class="field"><label for="socialPlatform">Plateforme choisie</label><select id="socialPlatform">
+    <option>Facebook</option><option>X</option><option>WhatsApp</option><option>Snapchat</option><option>TikTok</option><option>YouTube</option><option>Instagram</option><option>Telegram</option><option>Messenger</option><option>Threads</option><option>Pinterest</option><option>LinkedIn</option><option>Discord</option><option>Reddit</option><option>Twitch</option><option>Spotify</option><option>Viber</option><option>WeChat</option><option>Tumblr</option><option>LINE</option><option>Kwai</option><option>Quora</option><option>Medium</option><option>GitHub</option><option>Autre</option>
+  </select></div>
+
+  <div class="field"><label for="socialService">Type de service</label><select id="socialService">
+    <option value="Abonnés">Abonnés</option>
+    <option value="Likes">J'aime</option>
+    <option value="Vues">Vues</option>
+    <option value="Commentaires">Commentaires</option>
+    <option value="Partages">Partages</option>
+    <option value="Visites de profil">Visites de profil</option>
+    <option value="Conseil de croissance">Conseil de croissance</option>
+    <option value="Autre demande personnalisée">Autre demande personnalisée</option>
+  </select></div>
+
+  <div class="field"><label for="socialLink">Lien public de la page, du profil ou de la publication</label><input id="socialLink" type="url" maxlength="500" placeholder="https://..." required></div>
+  <div class="field"><label for="socialQuantity">Quantité souhaitée</label><input id="socialQuantity" type="number" min="1" max="1000000" value="100" required></div>
+  <div class="field"><label for="socialContact">Votre contact</label><input id="socialContact" maxlength="120" placeholder="Téléphone ou e-mail"></div>
+  <div class="field"><label for="socialDescription">Instructions supplémentaires (facultatif)</label><textarea id="socialDescription" maxlength="1000" placeholder="Décrivez précisément votre demande..."></textarea></div>
+
+  <div class="price-box">
+    <div class="price-row"><span>Tarif pour 1 000 unités</span><strong id="rateDisplay">100 FC</strong></div>
+    <div class="price-row"><span>Quantité</span><strong id="quantityDisplay">100</strong></div>
+    <div class="price-row"><span>Montant calculé</span><strong id="rawPriceDisplay">10 FC</strong></div>
+    <div class="price-row"><span>Prix minimum</span><strong>10 FC</strong></div>
+    <div class="price-total" id="totalPrice">10 FC</div>
+    <div class="result" id="priceExplanation">Le prix est estimé automatiquement.</div>
   </div>
-</div>
 
-<!-- MODAL QR -->
-<div class="modal" id="qrModal">
-  <div class="modal-box">
-    <div class="modal-head"><h3>Créer un QR code</h3><button class="close" data-close="qrModal" type="button">×</button></div>
-    <div class="field"><label for="qrText">Lien ou texte</label><textarea id="qrText" maxlength="1500" placeholder="https://exemple.com"></textarea></div>
-    <button class="btn btn-gold full" id="generateQR" type="button">Générer le QR code</button>
-    <div id="qrResult" class="result"></div>
-    <div class="notice">Une connexion Internet est nécessaire pour charger le QR code.</div>
-  </div>
-</div>
-
-<!-- MODAL RÉSEAUX SOCIAUX -->
-<div class="modal" id="socialModal">
-  <div class="modal-box">
-    <div class="modal-head"><h3>Réseaux sociaux</h3><button class="close" data-close="socialModal" type="button">×</button></div>
-
-    <p class="social-title">CHOISISSEZ UNE PLATEFORME</p>
-
-    <div class="social-grid" id="socialLogoGrid">
-      <button class="social-item selected" type="button" data-platform="Facebook"><img src="https://cdn.simpleicons.org/facebook/0866FF" alt="Facebook"><span>Facebook</span></button>
-      <button class="social-item" type="button" data-platform="X"><img src="https://cdn.simpleicons.org/x/FFFFFF" alt="X"><span>X / Twitter</span></button>
-      <button class="social-item" type="button" data-platform="WhatsApp"><img src="https://cdn.simpleicons.org/whatsapp/25D366" alt="WhatsApp"><span>WhatsApp</span></button>
-      <button class="social-item" type="button" data-platform="Snapchat"><img src="https://cdn.simpleicons.org/snapchat/FFFC00" alt="Snapchat"><span>Snapchat</span></button>
-      <button class="social-item" type="button" data-platform="TikTok"><img src="https://cdn.simpleicons.org/tiktok/FFFFFF" alt="TikTok"><span>TikTok</span></button>
-      <button class="social-item" type="button" data-platform="YouTube"><img src="https://cdn.simpleicons.org/youtube/FF0033" alt="YouTube"><span>YouTube</span></button>
-      <button class="social-item" type="button" data-platform="Instagram"><img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram"><span>Instagram</span></button>
-      <button class="social-item" type="button" data-platform="Telegram"><img src="https://cdn.simpleicons.org/telegram/26A5E4" alt="Telegram"><span>Telegram</span></button>
-      <button class="social-item" type="button" data-platform="Messenger"><img src="https://cdn.simpleicons.org/messenger/0866FF" alt="Messenger"><span>Messenger</span></button>
-      <button class="social-item" type="button" data-platform="Threads"><img src="https://cdn.simpleicons.org/threads/FFFFFF" alt="Threads"><span>Threads</span></button>
-      <button class="social-item" type="button" data-platform="Pinterest"><img src="https://cdn.simpleicons.org/pinterest/BD081C" alt="Pinterest"><span>Pinterest</span></button>
-      <button class="social-item" type="button" data-platform="LinkedIn"><img src="https://cdn.simpleicons.org/linkedin/0A66C2" alt="LinkedIn"><span>LinkedIn</span></button>
-      <button class="social-item" type="button" data-platform="Discord"><img src="https://cdn.simpleicons.org/discord/5865F2" alt="Discord"><span>Discord</span></button>
-      <button class="social-item" type="button" data-platform="Reddit"><img src="https://cdn.simpleicons.org/reddit/FF4500" alt="Reddit"><span>Reddit</span></button>
-      <button class="social-item" type="button" data-platform="Twitch"><img src="https://cdn.simpleicons.org/twitch/9146FF" alt="Twitch"><span>Twitch</span></button>
-      <button class="social-item" type="button" data-platform="Spotify"><img src="https://cdn.simpleicons.org/spotify/1ED760" alt="Spotify"><span>Spotify</span></button>
-      <button class="social-item" type="button" data-platform="Viber"><img src="https://cdn.simpleicons.org/viber/7360F2" alt="Viber"><span>Viber</span></button>
-      <button class="social-item" type="button" data-platform="WeChat"><img src="https://cdn.simpleicons.org/wechat/07C160" alt="WeChat"><span>WeChat</span></button>
-      <button class="social-item" type="button" data-platform="Tumblr"><img src="https://cdn.simpleicons.org/tumblr/36465D" alt="Tumblr"><span>Tumblr</span></button>
-      <button class="social-item" type="button" data-platform="Line"><img src="https://cdn.simpleicons.org/line/00C300" alt="LINE"><span>LINE</span></button>
-      <button class="social-item" type="button" data-platform="Kwai"><img src="https://cdn.simpleicons.org/kuaishou/FF4906" alt="Kwai"><span>Kwai</span></button>
-      <button class="social-item" type="button" data-platform="Quora"><img src="https://cdn.simpleicons.org/quora/B92B27" alt="Quora"><span>Quora</span></button>
-      <button class="social-item" type="button" data-platform="Medium"><img src="https://cdn.simpleicons.org/medium/FFFFFF" alt="Medium"><span>Medium</span></button>
-      <button class="social-item" type="button" data-platform="GitHub"><img src="https://cdn.simpleicons.org/github/FFFFFF" alt="GitHub"><span>GitHub</span></button>
-    </div>
-
-    <div class="field" style="margin-top:15px"><label for="socialPlatform">Plateforme sélectionnée</label>
-      <select id="socialPlatform">
-        <option>Facebook</option><option>X</option><option>WhatsApp</option><option>Snapchat</option>
-        <option>TikTok</option><option>YouTube</option><option>Instagram</option><option>Telegram</option>
-        <option>Messenger</option><option>Threads</option><option>Pinterest</option><option>LinkedIn</option>
-        <option>Discord</option><option>Reddit</option><option>Twitch</option><option>Spotify</option>
-        <option>Viber</option><option>WeChat</option><option>Tumblr</option><option>Line</option>
-        <option>Kwai</option><option>Quora</option><option>Medium</option><option>GitHub</option><option>Autre</option>
-      </select>
-    </div>
-
-    <div class="field"><label for="socialService">Service souhaité</label>
-      <select id="socialService">
-        <option value="Abonnés">Abonnés</option><option value="Likes">J'aime</option>
-        <option value="Vues">Vues</option><option value="Commentaires">Commentaires</option>
-        <option value="Partages">Partages</option><option value="Conseil de croissance">Conseil de croissance</option>
-      </select>
-    </div>
-    <div class="field"><label for="socialLink">Lien public du compte ou de la publication</label><input id="socialLink" type="url" maxlength="500" placeholder="https://..." required></div>
-    <div class="field"><label for="socialQuantity">Quantité souhaitée</label><input id="socialQuantity" type="number" min="10" max="1000000" value="100"></div>
-    <div class="field"><label for="socialContact">Votre contact</label><input id="socialContact" maxlength="120" placeholder="Téléphone ou e-mail"></div>
-    <div class="notice warning">Les logos permettent de choisir une plateforme. Le boost automatique nécessite une API SMM réellement connectée. Ne partagez jamais votre mot de passe.</div>
-    <button class="btn btn-gold full" id="submitSocial" type="button">Envoyer ma demande</button>
-  </div>
-</div>
+  <div class="notice warning">Le prix est calculé à partir des tarifs configurés dans ce fichier. Les demandes sont enregistrées, mais leur exécution automatique nécessite une API SMM réelle et configurée. Ne donnez jamais votre mot de passe.</div>
+  <button class="btn btn-gold full" id="submitSocial" type="button">Créer ma demande</button>
+</div></div>
 
 <div class="toast" id="toast"></div>
 
@@ -324,7 +312,10 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase
 import {getDatabase,ref,push,set,query,orderByChild,equalTo,get}
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-/* Remplacez ces valeurs par la configuration Firebase de votre projet. */
+/*
+ Remplacez les valeurs par la configuration Firebase de votre projet.
+ Les tarifs sociaux ci-dessous sont des exemples modifiables.
+*/
 const firebaseConfig={
   apiKey:"VOTRE_API_KEY",
   authDomain:"VOTRE_PROJET.firebaseapp.com",
@@ -335,35 +326,50 @@ const firebaseConfig={
   appId:"VOTRE_APP_ID"
 };
 
-const ROOT="jasonBusiness";
-const COMMANDS_PATH=ROOT+"/demandes_commandes";
+const COMMANDS_PATH="jasonBusiness/demandes_commandes";
+const MIN_PRICE=10;
+
+/* Tarifs en FC pour 1 000 unités : à remplacer par tes vrais tarifs. */
+const RATES={
+  "Facebook":{"Abonnés":500,"Likes":100,"Vues":50,"Commentaires":800,"Partages":300,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "X":{"Abonnés":700,"Likes":150,"Vues":80,"Commentaires":900,"Partages":350,"Visites de profil":150,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "WhatsApp":{"Abonnés":500,"Likes":100,"Vues":100,"Commentaires":500,"Partages":200,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "Snapchat":{"Abonnés":600,"Likes":120,"Vues":100,"Commentaires":700,"Partages":250,"Visites de profil":150,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "TikTok":{"Abonnés":400,"Likes":80,"Vues":40,"Commentaires":600,"Partages":200,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "YouTube":{"Abonnés":1000,"Likes":200,"Vues":100,"Commentaires":1000,"Partages":300,"Visites de profil":150,"Conseil de croissance":1500,"Autre demande personnalisée":1500},
+  "Instagram":{"Abonnés":500,"Likes":100,"Vues":50,"Commentaires":700,"Partages":250,"Visites de profil":120,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "Telegram":{"Abonnés":400,"Likes":100,"Vues":80,"Commentaires":500,"Partages":200,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "Messenger":{"Abonnés":500,"Likes":100,"Vues":100,"Commentaires":500,"Partages":200,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "Threads":{"Abonnés":500,"Likes":100,"Vues":80,"Commentaires":600,"Partages":250,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "Pinterest":{"Abonnés":500,"Likes":100,"Vues":80,"Commentaires":600,"Partages":250,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "LinkedIn":{"Abonnés":1000,"Likes":200,"Vues":150,"Commentaires":1000,"Partages":400,"Visites de profil":200,"Conseil de croissance":1500,"Autre demande personnalisée":1500},
+  "Discord":{"Abonnés":500,"Likes":100,"Vues":80,"Commentaires":500,"Partages":200,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "Reddit":{"Abonnés":600,"Likes":150,"Vues":100,"Commentaires":700,"Partages":250,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "Twitch":{"Abonnés":800,"Likes":150,"Vues":100,"Commentaires":700,"Partages":300,"Visites de profil":150,"Conseil de croissance":1200,"Autre demande personnalisée":1200},
+  "Spotify":{"Abonnés":1000,"Likes":200,"Vues":150,"Commentaires":500,"Partages":300,"Visites de profil":150,"Conseil de croissance":1500,"Autre demande personnalisée":1500},
+  "Viber":{"Abonnés":500,"Likes":100,"Vues":100,"Commentaires":500,"Partages":200,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "WeChat":{"Abonnés":500,"Likes":100,"Vues":100,"Commentaires":500,"Partages":200,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "Tumblr":{"Abonnés":500,"Likes":100,"Vues":80,"Commentaires":600,"Partages":250,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "LINE":{"Abonnés":500,"Likes":100,"Vues":100,"Commentaires":500,"Partages":200,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "Kwai":{"Abonnés":500,"Likes":100,"Vues":50,"Commentaires":600,"Partages":250,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "Quora":{"Abonnés":500,"Likes":150,"Vues":100,"Commentaires":700,"Partages":250,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "Medium":{"Abonnés":500,"Likes":150,"Vues":100,"Commentaires":700,"Partages":250,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "GitHub":{"Abonnés":500,"Likes":100,"Vues":100,"Commentaires":500,"Partages":200,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000},
+  "Autre":{"Abonnés":500,"Likes":100,"Vues":100,"Commentaires":500,"Partages":200,"Visites de profil":100,"Conseil de croissance":1000,"Autre demande personnalisée":1000}
+};
+
 const $=id=>document.getElementById(id);
-let db=null;
-let firebaseReady=false;
+let db=null,firebaseReady=false;
 
 function toast(message){
-  const el=$("toast");
-  el.textContent=message;
-  el.classList.add("show");
-  clearTimeout(toast.timer);
-  toast.timer=setTimeout(()=>el.classList.remove("show"),3000);
+  const el=$("toast");el.textContent=message;el.classList.add("show");
+  clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove("show"),3000);
 }
-function openModal(id){
-  $(id).classList.add("show");
-  document.body.style.overflow="hidden";
-}
-function closeModal(id){
-  $(id).classList.remove("show");
-  if(!document.querySelector(".modal.show"))document.body.style.overflow="";
-}
-function getPhone(){
-  return localStorage.getItem("jasonBusinessUserPhone")||
-    localStorage.getItem("userPhone")||"";
-}
-function getUserName(){
-  return localStorage.getItem("jasonBusinessUserName")||
-    localStorage.getItem("userName")||"";
-}
+function openModal(id){$(id).classList.add("show");document.body.style.overflow="hidden";}
+function closeModal(id){$(id).classList.remove("show");if(!document.querySelector(".modal.show"))document.body.style.overflow="";}
+function getPhone(){return localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||"";}
+function getUserName(){return localStorage.getItem("jasonBusinessUserName")||localStorage.getItem("userName")||"";}
+function money(n){return Math.ceil(Number(n)||0).toLocaleString("fr-FR")+" FC";}
 
 function showCreative(type){
   const options={
@@ -371,34 +377,21 @@ function showCreative(type){
     site:{title:"Créer un site web",price:15000},
     bot:{title:"Créer un chatbot IA",price:7000}
   };
-  const item=options[type];
-  if(!item)return;
-  $("creativeType").value=type;
-  $("creativeTitle").textContent=item.title;
-  $("creativeName").value=getUserName();
-  $("creativeContact").value=getPhone();
-  $("creativeProject").value="";
-  $("creativeDescription").value="";
-  $("creativeBudget").value=item.price;
-  openModal("creativeModal");
+  const item=options[type];if(!item)return;
+  $("creativeType").value=type;$("creativeTitle").textContent=item.title;
+  $("creativeName").value=getUserName();$("creativeContact").value=getPhone();
+  $("creativeProject").value="";$("creativeDescription").value="";
+  $("creativeBudget").value=item.price;openModal("creativeModal");
 }
-function openAd(){
-  $("adForm").reset();
-  $("adPreview").classList.add("hidden");
-  openModal("adModal");
-}
-function openQR(){
-  $("qrText").value="";
-  $("qrResult").replaceChildren();
-  openModal("qrModal");
-}
+function openAd(){$("adForm").reset();$("adPreview").classList.add("hidden");openModal("adModal");}
+function openQR(){$("qrText").value="";$("qrResult").replaceChildren();openModal("qrModal");}
 function showSocial(){
   $("socialContact").value=getPhone();
   syncSocialSelection($("socialPlatform").value);
+  updateSocialPrice();
   openModal("socialModal");
 }
 
-/* Tous les boutons sont reliés explicitement à leurs fonctions. */
 $("openApp").addEventListener("click",()=>showCreative("app"));
 $("openSite").addEventListener("click",()=>showCreative("site"));
 $("openBot").addEventListener("click",()=>showCreative("bot"));
@@ -406,68 +399,67 @@ $("openAd").addEventListener("click",openAd);
 $("openQR").addEventListener("click",openQR);
 $("openSocial").addEventListener("click",showSocial);
 
-document.querySelectorAll("[data-close]").forEach(button=>{
-  button.addEventListener("click",()=>closeModal(button.dataset.close));
-});
-document.querySelectorAll(".modal").forEach(modal=>{
-  modal.addEventListener("click",event=>{
-    if(event.target===modal)closeModal(modal.id);
-  });
-});
-document.addEventListener("keydown",event=>{
-  if(event.key==="Escape"){
-    document.querySelectorAll(".modal.show").forEach(m=>closeModal(m.id));
-  }
-});
+document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>closeModal(b.dataset.close)));
+document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)closeModal(m.id);}));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".modal.show").forEach(m=>closeModal(m.id));});
 
-/* Recherche des services */
 $("serviceSearch").addEventListener("input",()=>{
-  const term=$("serviceSearch").value.trim().toLowerCase();
-  let count=0;
+  const term=$("serviceSearch").value.trim().toLowerCase();let count=0;
   document.querySelectorAll(".service").forEach(card=>{
     const visible=(card.dataset.search+" "+card.innerText).toLowerCase().includes(term);
-    card.classList.toggle("hidden",!visible);
-    if(visible)count++;
+    card.classList.toggle("hidden",!visible);if(visible)count++;
   });
   $("serviceCount").textContent=count+" service(s)";
 });
 
-/* Sélection par logo */
+/* Choix du réseau via les logos */
 function syncSocialSelection(platform){
   $("socialPlatform").value=platform;
-  document.querySelectorAll("#socialLogoGrid .social-item").forEach(button=>{
-    button.classList.toggle("selected",button.dataset.platform===platform);
+  document.querySelectorAll("#socialLogoGrid .social-item").forEach(b=>{
+    b.classList.toggle("selected",b.dataset.platform===platform);
   });
 }
 document.querySelectorAll("#socialLogoGrid .social-item").forEach(button=>{
   button.addEventListener("click",()=>{
     syncSocialSelection(button.dataset.platform);
-    toast("Plateforme sélectionnée : "+button.dataset.platform);
+    updateSocialPrice();
   });
 });
 $("socialPlatform").addEventListener("change",()=>{
-  syncSocialSelection($("socialPlatform").value);
+  syncSocialSelection($("socialPlatform").value);updateSocialPrice();
 });
 
-/* Initialisation Firebase */
+/* Calcul automatique : tarif pour 1 000 unités, minimum 10 FC. */
+function updateSocialPrice(){
+  const platform=$("socialPlatform").value;
+  const service=$("socialService").value;
+  const quantity=Math.max(0,Number($("socialQuantity").value)||0);
+  const rate=(RATES[platform]&&RATES[platform][service])||1000;
+  const calculated=(rate*quantity)/1000;
+  const total=Math.max(MIN_PRICE,Math.ceil(calculated));
+
+  $("rateDisplay").textContent=money(rate);
+  $("quantityDisplay").textContent=quantity.toLocaleString("fr-FR");
+  $("rawPriceDisplay").textContent=money(calculated);
+  $("totalPrice").textContent=money(total);
+  $("priceExplanation").textContent=
+    "Tarif indicatif : "+money(rate)+" pour 1 000 unités. Prix minimum appliqué : "+money(MIN_PRICE)+".";
+  return {platform,service,quantity,rate,calculated,total};
+}
+$("socialService").addEventListener("change",updateSocialPrice);
+$("socialQuantity").addEventListener("input",updateSocialPrice);
+
+/* Firebase */
 try{
-  if(firebaseConfig.apiKey!=="VOTRE_API_KEY"&&
-     firebaseConfig.projectId!=="VOTRE_PROJET"&&
-     firebaseConfig.databaseURL.startsWith("https://")){
-    db=getDatabase(initializeApp(firebaseConfig));
-    firebaseReady=true;
+  if(firebaseConfig.apiKey!=="VOTRE_API_KEY"&&firebaseConfig.projectId!=="VOTRE_PROJET"&&firebaseConfig.databaseURL.startsWith("https://")){
+    db=getDatabase(initializeApp(firebaseConfig));firebaseReady=true;
   }
-}catch(error){console.error("Firebase:",error);}
+}catch(e){console.error("Firebase:",e);}
 
 async function saveRequest(type,details){
   const data={
-    type,
-    details,
-    telephone:getPhone(),
-    nom:getUserName()||details.nom||"",
-    statut:"En attente",
-    date:new Date().toISOString(),
-    source:"boutique.html"
+    type,details,telephone:getPhone(),nom:getUserName()||details.nom||"",
+    statut:"En attente",date:new Date().toISOString(),source:"boutique.html"
   };
   if(!firebaseReady||!db){
     const key="jasonBusinessPendingOrders";
@@ -475,51 +467,35 @@ async function saveRequest(type,details){
     orders.unshift({...data,localId:Date.now()});
     localStorage.setItem(key,JSON.stringify(orders));
     toast("Firebase non configuré : demande conservée sur ce téléphone.");
-    renderLocalOrders();
-    return;
+    renderLocalOrders();return;
   }
   try{
     await set(push(ref(db,COMMANDS_PATH)),data);
-    toast("Votre demande a été envoyée.");
+    toast("Demande enregistrée.");
     await loadOrders();
-  }catch(error){
-    console.error(error);
-    toast("Échec d'enregistrement. Vérifiez Firebase.");
-  }
+  }catch(e){console.error(e);toast("Échec d'enregistrement. Vérifiez Firebase.");}
 }
 
-/* Formulaire de création */
+/* Formulaire création */
 $("creativeForm").addEventListener("submit",async event=>{
   event.preventDefault();
   const type=$("creativeType").value;
   const names={app:"Application mobile",site:"Site web",bot:"Chatbot IA"};
   const details={
-    nom:$("creativeName").value.trim(),
-    contact:$("creativeContact").value.trim(),
-    projet:$("creativeProject").value.trim(),
-    description:$("creativeDescription").value.trim(),
+    nom:$("creativeName").value.trim(),contact:$("creativeContact").value.trim(),
+    projet:$("creativeProject").value.trim(),description:$("creativeDescription").value.trim(),
     budget:Number($("creativeBudget").value)||0
   };
-  if(!details.nom||!details.contact||!details.projet||!details.description){
-    toast("Remplissez les champs obligatoires.");return;
-  }
-  const button=event.submitter;
-  button.disabled=true;button.textContent="Envoi...";
-  try{
-    await saveRequest(names[type]||type,details);
-    closeModal("creativeModal");
-    event.target.reset();
-  }finally{
-    button.disabled=false;button.textContent="Envoyer ma demande";
-  }
+  if(!details.nom||!details.contact||!details.projet||!details.description){toast("Remplissez les champs obligatoires.");return;}
+  const button=event.submitter;button.disabled=true;button.textContent="Envoi...";
+  try{await saveRequest(names[type]||type,details);closeModal("creativeModal");event.target.reset();}
+  finally{button.disabled=false;button.textContent="Envoyer ma demande";}
 });
 
 /* Publicité */
 $("previewAd").addEventListener("click",()=>{
-  const brand=$("adBrand").value.trim();
-  const title=$("adTitle").value.trim();
-  const text=$("adText").value.trim();
-  const contact=$("adContact").value.trim();
+  const brand=$("adBrand").value.trim(),title=$("adTitle").value.trim();
+  const text=$("adText").value.trim(),contact=$("adContact").value.trim();
   if(!brand||!title||!text){toast("Saisissez la marque, le titre et le texte.");return;}
   $("adPreview").textContent=brand.toUpperCase()+"\n\n"+title+"\n\n"+text+(contact?"\n\nContact : "+contact:"");
   $("adPreview").classList.remove("hidden");
@@ -527,61 +503,67 @@ $("previewAd").addEventListener("click",()=>{
 $("adForm").addEventListener("submit",async event=>{
   event.preventDefault();
   await saveRequest("Publicité",{
-    marque:$("adBrand").value.trim(),
-    titre:$("adTitle").value.trim(),
-    texte:$("adText").value.trim(),
-    contact:$("adContact").value.trim()
+    marque:$("adBrand").value.trim(),titre:$("adTitle").value.trim(),
+    texte:$("adText").value.trim(),contact:$("adContact").value.trim()
   });
   closeModal("adModal");event.target.reset();$("adPreview").classList.add("hidden");
 });
 
-/* QR code : le service externe a besoin d'Internet. */
+/* QR code */
 $("generateQR").addEventListener("click",()=>{
-  const value=$("qrText").value.trim();
-  if(!value){toast("Entrez un lien ou un texte.");return;}
-  const result=$("qrResult");
-  result.replaceChildren();
-  const img=document.createElement("img");
-  img.className="qr-preview";img.alt="QR code";
+  const value=$("qrText").value.trim();if(!value){toast("Entrez un lien ou un texte.");return;}
+  const result=$("qrResult");result.replaceChildren();
+  const img=document.createElement("img");img.className="qr-preview";img.alt="QR code";
   img.src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="+encodeURIComponent(value);
-  img.onerror=()=>{result.textContent="QR code indisponible. Vérifiez la connexion Internet.";};
-  const link=document.createElement("a");
-  link.className="btn btn-outline full";link.textContent="Ouvrir le QR code";
-  link.href=img.src;link.target="_blank";link.rel="noopener noreferrer";
+  img.onerror=()=>{result.textContent="QR code indisponible. Vérifiez votre connexion Internet.";};
+  const link=document.createElement("a");link.className="btn btn-outline full";
+  link.textContent="Ouvrir le QR code";link.href=img.src;link.target="_blank";link.rel="noopener noreferrer";
   result.append(img,link);
 });
 
-/* Demande réseaux sociaux */
+/* Création de la demande sociale personnalisée avec prix calculé */
 $("submitSocial").addEventListener("click",async()=>{
   const link=$("socialLink").value.trim();
   const quantity=Number($("socialQuantity").value);
   if(!link||!/^https?:\/\//i.test(link)){
-    toast("Entrez un lien public commençant par https://");return;
+    toast("Entrez un lien public valide commençant par https://");return;
   }
-  if(!Number.isInteger(quantity)||quantity<10||quantity>1000000){
-    toast("La quantité doit être comprise entre 10 et 1 000 000.");return;
+  if(!Number.isInteger(quantity)||quantity<1||quantity>1000000){
+    toast("La quantité doit être comprise entre 1 et 1 000 000.");return;
   }
+
+  const pricing=updateSocialPrice();
+  const details={
+    plateforme:pricing.platform,
+    service:pricing.service,
+    lien:link,
+    quantite:pricing.quantity,
+    tarif_pour_1000_FC:pricing.rate,
+    prix_calcule_FC:pricing.calculated,
+    prix_final_FC:pricing.total,
+    prix_minimum_FC:MIN_PRICE,
+    contact:$("socialContact").value.trim(),
+    instructions:$("socialDescription").value.trim()
+  };
+
   const button=$("submitSocial");
-  button.disabled=true;button.textContent="Envoi...";
+  button.disabled=true;button.textContent="Création...";
   try{
-    await saveRequest("Réseaux sociaux",{
-      plateforme:$("socialPlatform").value,
-      service:$("socialService").value,
-      lien:link,
-      quantite:quantity,
-      contact:$("socialContact").value.trim()
-    });
+    await saveRequest("Service social personnalisé",details);
     closeModal("socialModal");
+    $("socialLink").value="";
+    $("socialQuantity").value="100";
+    $("socialDescription").value="";
+    updateSocialPrice();
   }finally{
-    button.disabled=false;button.textContent="Envoyer ma demande";
+    button.disabled=false;button.textContent="Créer ma demande";
   }
 });
 
-/* Historique des demandes locales */
+/* Historique */
 function renderLocalOrders(){
   const orders=JSON.parse(localStorage.getItem("jasonBusinessPendingOrders")||"[]");
-  const box=$("ordersList");
-  box.replaceChildren();
+  const box=$("ordersList");box.replaceChildren();
   if(!orders.length){box.textContent="Aucune demande locale enregistrée.";return;}
   orders.slice(0,8).forEach(order=>{
     const item=document.createElement("div");
@@ -590,37 +572,46 @@ function renderLocalOrders(){
     const status=document.createElement("div");status.style.color="#d8aa45";status.textContent=order.statut||"En attente";
     const date=document.createElement("div");date.style.color="#93a4bc";
     date.textContent=order.date?new Date(order.date).toLocaleString("fr-FR"):"";
-    item.append(title,status,date);box.append(item);
+    item.append(title,status,date);
+
+    if(order.details&&order.details.prix_final_FC){
+      const price=document.createElement("div");
+      price.style.color="#f5d785";price.textContent="Prix estimé : "+money(order.details.prix_final_FC);
+      item.append(price);
+    }
+    box.append(item);
   });
 }
 async function loadOrders(){
   if(!firebaseReady||!db){renderLocalOrders();return;}
   const phone=getPhone();
-  if(!phone){$("ordersList").textContent="Connectez-vous pour voir vos demandes en ligne.";return;}
+  if(!phone){$("ordersList").textContent="Connectez-vous pour afficher vos demandes en ligne.";return;}
   try{
     const snap=await get(query(ref(db,COMMANDS_PATH),orderByChild("telephone"),equalTo(phone)));
     const box=$("ordersList");box.replaceChildren();
     if(!snap.exists()){box.textContent="Aucune demande trouvée pour ce numéro.";return;}
-    const items=[];
-    snap.forEach(child=>items.push(child.val()));
+    const items=[];snap.forEach(child=>items.push(child.val()));
     items.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
     items.slice(0,10).forEach(order=>{
       const item=document.createElement("div");
       item.style.cssText="padding:9px 0;border-bottom:1px solid #26344a;font-size:11px;line-height:1.6";
       const title=document.createElement("strong");title.textContent=order.type||"Demande";
       const status=document.createElement("div");status.style.color="#d8aa45";status.textContent=order.statut||"En attente";
-      const date=document.createElement("div");date.style.color="#93a4bc";
-      date.textContent=order.date?new Date(order.date).toLocaleString("fr-FR"):"";
-      item.append(title,status,date);box.append(item);
+      const date=document.createElement("div");date.style.color="#93a4bc";date.textContent=order.date?new Date(order.date).toLocaleString("fr-FR"):"";
+      item.append(title,status,date);
+      if(order.details&&order.details.prix_final_FC){
+        const price=document.createElement("div");price.style.color="#f5d785";
+        price.textContent="Prix estimé : "+money(order.details.prix_final_FC);item.append(price);
+      }
+      box.append(item);
     });
-  }catch(error){
-    console.error(error);$("ordersList").textContent="Impossible de charger les demandes. Vérifiez Firebase.";
-  }
+  }catch(e){console.error(e);$("ordersList").textContent="Impossible de charger les demandes. Vérifiez Firebase.";}
 }
 $("loadOrders").addEventListener("click",loadOrders);
 $("refreshBtn").addEventListener("click",()=>{loadOrders();toast("Actualisation demandée.");});
 $("apiBtn").addEventListener("click",()=>{location.href="api.html";});
 
+updateSocialPrice();
 loadOrders();
 </script>
 </body>
