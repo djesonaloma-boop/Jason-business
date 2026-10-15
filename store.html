@@ -74,8 +74,8 @@ function toast(m){
 }
 
 const ICON = "./jason.png";
-// Lien GitHub Release direct (garantit 0 erreur 404 sur Vercel)
-const APK = "https://github.com/djesonaloma-boop/Jason-business/releases/download/v1.0.0/jason.apk";
+// Lien direct vers l'APK hébergé sur Vercel
+const APK = "./jason.apk";
 
 let apps=[
   {
@@ -154,7 +154,7 @@ window.downloadApp=function(id){
 
   toast("📥 Téléchargement de " + a.name + " en cours...");
 
-  // Déclenchement propre du téléchargement
+  // Déclenchement direct du téléchargement de l'APK
   const link = document.createElement("a");
   link.href = a.apk;
   link.download = "jason.apk";
