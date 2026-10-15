@@ -13,8 +13,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}.container{max-w
 .card:active{transform:scale(0.98)}
 .card h4{font-size:14px;margin:11px 0 7px}.card p{font-size:11px;color:var(--muted);margin:0 0 12px}
 .card-icon{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:#168cff19;border:1px solid #168cff40}
-.btn{border:0;border-radius:12px;padding:13px 14px;font-weight:900;cursor:pointer;transition:transform.12s ease, box-shadow.12s ease, opacity.2s;position:relative;overflow:hidden}
-.btn:active{transform:scale(0.96)}
+.btn{border:0;border-radius:12px;padding:13px 14px;font-weight:900;cursor:pointer}
 .btn-gold{background:linear-gradient(100deg,#c08a2c,#f1d48b);color:#111;box-shadow:0 6px 18px rgba(216,170,69,.25)}
 .btn-blue{background:linear-gradient(100deg,#00d4ff,#0077ff);color:#001018;box-shadow:0 6px 18px rgba(0,212,255,.25)}
 .btn-dark{background:#182943;border:1px solid #ffffff16;color:#e8efff}.btn-block{width:100%}
@@ -23,14 +22,12 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}.container{max-w
 .overlay{display:none;position:fixed;inset:0;background:#02050be8;z-index:1000;padding:16px;overflow-y:auto;align-items:center;justify-content:center}.overlay.show{display:flex}
 .modal{width:100%;max-width:570px;max-height:92vh;overflow-y:auto;background:linear-gradient(145deg,#12213a,#091321);border:1px solid rgba(230,189,103,.22);border-radius:22px;padding:19px}
 .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.close{width:34px;height:34px;border-radius:10px;border:1px solid #ffffff1c;background:#17253b;color:white;font-size:20px}
-.platform-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.platform{background:#0a1424;border:1px solid #ffffff18;border-radius:15px;padding:13px 6px;text-align:center;color:white;transition:transform.12s}.platform:active{transform:scale(0.92)}.platform img{width:32px;height:32px;margin:0 auto 8px;display:block}.platform span{font-size:11px}
+.platform-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.platform{background:#0a1424;border:1px solid #ffffff18;border-radius:15px;padding:13px 6px;text-align:center;color:white}.platform img{width:32px;height:32px;margin:0 auto 8px;display:block}.platform span{font-size:11px}
 .empty{padding:20px;text-align:center;color:var(--muted);font-size:13px}.hidden{display:none!important}
 .toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:3000;background:#12213a;border:1px solid rgba(230,189,103,.22);padding:12px 16px;border-radius:12px;max-width:90%;font-size:12px;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
-.bottom-nav{position:fixed;z-index:500;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:rgba(5,9,20,.98);backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.08);padding:8px 4px}.bottom-nav a{flex:1;text-decoration:none;color:#6b7a90;font-size:10px;font-weight:700;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bottom-nav{position:fixed;z-index:500;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:rgba(5,9,20,.98);backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.08);padding:8px 4px}
+.bottom-nav a{flex:1;text-decoration:none;color:#6b7a90;font-size:10px;font-weight:700;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:4px}
 .bottom-nav a span.icon{font-size:20px}.bottom-nav a.active{color:var(--blue)}
-/* STORE CARDS STYLE COMME TA CAPTURE */
-.store-card{background:linear-gradient(145deg,#0f1f35,#0a1526);border:1px solid #ffffff12;border-radius:16px;padding:14px;display:flex;gap:12px;align-items:center}
-.store-icon{width:52px;height:52px;border-radius:12px;background:#0a1a30;border:1px solid #ffffff12;display:grid;place-items:center;font-size:24px;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -40,7 +37,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}.container{max-w
 
 <section style="margin-top:22px"><div style="display:flex;justify-content:space-between;margin-bottom:12px"><h3 style="margin:0">Nos services</h3><span style="font-size:11px;color:var(--blue)">SELF-BOOST MIN 100</span></div>
 <div class="grid">
-<article class="card" style="border:1px solid var(--blue);box-shadow:0 0 18px rgba(0,212,255,.18)"><div class="card-icon" style="background:#00d4ff19;border-color:#00d4ff40">🛒</div><h4>Jason Store</h4><p>Produits officiels, packs business.</p><button class="btn btn-blue btn-block" id="openStoreButton">JASON STORE</button></article>
+<!-- JASON STORE SUPPRIMÉ ICI - IL N'Y A PLUS LE BOUTON -->
 <article class="card"><div class="card-icon">🌐</div><h4>Réseaux sociaux</h4><p>Boost auto via API, prix calcul auto.</p><button class="btn btn-gold btn-block" id="openSocialButton">RÉSEAUX SOCIAUX</button></article>
 <article class="card"><div class="card-icon">🎵</div><h4>Création musicale</h4><p>Via /api/media/music</p><button class="btn btn-block btn-dark" id="openMusicButton">Commander</button></article>
 <article class="card"><div class="card-icon">📢</div><h4>Publicité digitale</h4><p>Via /api/publicite/ads</p><button class="btn btn-block btn-dark" id="openAdsButton">Découvrir</button></article>
@@ -63,15 +60,9 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}.container{max-w
 <button class="btn btn-gold btn-block" type="submit" id="submitSmm">Confirmer ma commande (SELF-BOOST)</button>
 </form></div></div></div>
 
-<!-- MODAL JASON STORE CORRIGÉ COMME TA CAPTURE -->
-<div class="overlay" id="storeModal"><div class="modal"><div class="modal-head"><h3>🛒 JASON STORE</h3><button class="close" data-close="storeModal">×</button></div>
-<input class="search" id="storeSearch" placeholder="Rechercher produit...">
-<div id="storeProducts" style="margin-top:16px;display:grid;gap:12px"></div>
-<div style="margin-top:18px;text-align:center"><a href="boutique.html" style="color:var(--blue);font-size:12px;text-decoration:none;font-weight:800">VOIR BOUTIQUE COMPLÈTE →</a></div>
-</div></div>
-
 <div class="toast" id="toast"></div>
 
+<!-- SEULEMENT LE MENU DU BAS RESTE COMME TU VEUX -->
 <nav class="bottom-nav">
   <a href="tableau%20de%20bord.html"><span class="icon">📊</span>Dashboard</a>
   <a href="boutique.html" class="active"><span class="icon">🛍️</span>Boutique</a>
@@ -84,7 +75,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}.container{max-w
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {getDatabase,ref,get,set,push} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
-const ROOT="jasonBusiness";const USERS_PATH=`${ROOT}/users`;const COMMANDS_PATH=`${ROOT}/demandes_commandes`;const STORE_PATH=`${ROOT}/store_products`;
+const ROOT="jasonBusiness";const USERS_PATH=`${ROOT}/users`;const COMMANDS_PATH=`${ROOT}/demandes_commandes`;
 const $=id=>document.getElementById(id);const money=n=>Math.max(0,Number(n)||0).toLocaleString("fr-FR")+" FC";
 let db=null,currentPhone="",currentUser={},selectedPlatform=null,busy=false;
 function toast(m){const el=$("toast");el.textContent=m;el.classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove("show"),3000)}
@@ -97,7 +88,7 @@ function getBalance(user){return Number(user?.solde_principal??user?.solde??0)||
 function updateBalanceUI(){$("balanceValue").textContent=money(getBalance(currentUser));$("welcomePhone").textContent=currentPhone||"0856421499";}
 async function initFirebase(){db=getDatabase(initializeApp(firebaseConfig));currentPhone=getPhone();if(!currentPhone){updateBalanceUI();return}await loadUser();await loadOrders();}
 async function loadUser(){if(!db||!currentPhone)return;try{const s=await get(ref(db,`${USERS_PATH}/${currentPhone}`));currentUser=s.exists()?s.val():{};updateBalanceUI();}catch{}}
-async function loadOrders(){if(!db||!currentPhone)return;try{const s=await get(ref(db,COMMANDS_PATH));const data=s.exists()?s.val():{};const orders=Object.entries(data).filter(([id,o])=>o&&String(o.telephone||"")===currentPhone).map(([id,o])=>({id,...o})).sort((a,b)=>(Number(b.createdAt)||0)-(Number(a.createdAt)||0)).slice(0,20);$("ordersList").innerHTML=orders.length?orders.map(o=>`<div style="padding:10px 0;border-bottom:1px solid #ffffff12"><strong>${escapeHTML(o.service||"Commande")}</strong> <small style="color:${o.statut==='En cours'?'var(--blue)':'var(--gold)'}">[${escapeHTML(o.statut||"En attente")}]</small><p class="note">${escapeHTML(o.lien||o.produit_nom||"").slice(0,60)} · ${money(o.prix||0)} ${o.api_order_id?`· ID:${escapeHTML(o.api_order_id)}`:''}</p></div>`).join(""):'<div class="empty">Aucune commande</div>';}catch{}}
+async function loadOrders(){if(!db||!currentPhone)return;try{const s=await get(ref(db,COMMANDS_PATH));const data=s.exists()?s.val():{};const orders=Object.entries(data).filter(([id,o])=>o&&String(o.telephone||"")===currentPhone).map(([id,o])=>({id,...o})).sort((a,b)=>(Number(b.createdAt)||0)-(Number(a.createdAt)||0)).slice(0,20);$("ordersList").innerHTML=orders.length?orders.map(o=>`<div style="padding:10px 0;border-bottom:1px solid #ffffff12"><strong>${escapeHTML(o.service||"Commande")}</strong> <small style="color:${o.statut==='En cours'?'var(--blue)':'var(--gold)'}">[${escapeHTML(o.statut||"En attente")}]</small><p class="note">${escapeHTML(o.lien||o.produit_nom||"").slice(0,60)} · ${money(o.prix||0)}</p></div>`).join(""):'<div class="empty">Aucune commande</div>';}catch{}}
 async function saveOrder(order){if(!db||!currentPhone)return toast("Non connecté"),false;try{const orderRef=push(ref(db,COMMANDS_PATH));await set(orderRef,{...order,telephone:currentPhone,createdAt:Date.now()});await loadOrders();return true}catch{toast("Erreur");return false}}
 const platforms=[{id:"facebook",name:"Facebook",slug:"facebook",color:"1877F2"},{id:"youtube",name:"YouTube",slug:"youtube",color:"FF0000"},{id:"x",name:"X",slug:"x",color:"FFFFFF"},{id:"whatsapp",name:"WhatsApp",slug:"whatsapp",color:"25D366"},{id:"snapchat",name:"Snapchat",slug:"snapchat",color:"FFFC00"},{id:"spotify",name:"Spotify",slug:"spotify",color:"1DB954"},{id:"tiktok",name:"TikTok",slug:"tiktok",color:"FFFFFF"},{id:"instagram",name:"Instagram",slug:"instagram",color:"E4405F"},{id:"telegram",name:"Telegram",slug:"telegram",color:"26A5E4"},{id:"threads",name:"Threads",slug:"threads",color:"FFFFFF"}];
 const servicesByPlatform={facebook:["Abonnés","Likes","Vues","Commentaires","Partages"],youtube:["Abonnés","Likes","Vues","Commentaires","Partages"],x:["Abonnés","Likes","Vues","Commentaires","Reposts"],whatsapp:["Membres de communauté","Promotion de lien"],snapchat:["Abonnés","Vues"],spotify:["Écoutes","Abonnés au profil"],tiktok:["Abonnés","Likes","Vues","Commentaires","Partages"],instagram:["Abonnés","Likes","Vues","Commentaires","Partages"],telegram:["Membres","Vues","Réactions","Partages"],threads:["Abonnés","Likes","Vues"]};
@@ -115,41 +106,9 @@ $("openSocialButton").addEventListener("click",showSmmPlatformChooser);
 $("smmForm").addEventListener("submit", async e=>{
 e.preventDefault();if(busy) return;const service=$("smmService").value;const link=$("smmLink").value.trim();const qty=Number($("smmQuantity").value);const price=calculatePrice(service,qty);
 if(!/^https?:\/\/\S+/i.test(link)) return toast("Lien https:// invalide");if(qty<100) return toast("Min 100");
-busy=true;const btn=$("submitSmm");const originalHTML=btn.innerHTML;btn.disabled=true;btn.textContent="⏳ Envoi...";
-try{const userRef=ref(db,`${USERS_PATH}/${currentPhone}`);const snap=await get(userRef);let user=snap.exists()?snap.val():{};let bal=Number(user.solde_principal??user.solde??0);if(bal<price){toast(`Solde insuffisant`);return;}let newBal=bal-price;if(user.solde_principal!==undefined){user.solde_principal=newBal}else{user.solde=newBal}await set(userRef,user);currentUser=user;updateBalanceUI();await saveOrder({categorie:"smm",service:`${selectedPlatform.name} — ${service}`,plateforme:selectedPlatform.name,lien:link,quantite:qty,prix:price,statut:"En cours"});toast(`✅ Boost lancé`);$("smmForm").reset();closeModal("smmModal");}catch(err){toast("❌ "+err.message);}finally{busy=false;btn.disabled=false;btn.innerHTML=originalHTML;}
+busy=true;const btn=$("submitSmm");btn.disabled=true;btn.textContent="⏳ Envoi...";
+try{const userRef=ref(db,`${USERS_PATH}/${currentPhone}`);const snap=await get(userRef);let user=snap.exists()?snap.val():{};let bal=Number(user.solde_principal??user.solde??0);if(bal<price){toast(`Solde insuffisant`);return;}let newBal=bal-price;if(user.solde_principal!==undefined){user.solde_principal=newBal}else{user.solde=newBal}await set(userRef,user);currentUser=user;updateBalanceUI();await saveOrder({categorie:"smm",service:`${selectedPlatform.name} — ${service}`,plateforme:selectedPlatform.name,lien:link,quantite:qty,prix:price,statut:"En cours"});toast(`✅ Boost lancé`);$("smmForm").reset();closeModal("smmModal");}catch(err){toast("❌ "+err.message);}finally{busy=false;btn.disabled=false;btn.textContent="Confirmer ma commande (SELF-BOOST)";}
 });
-
-// === JASON STORE - IDENTIQUE A TA CAPTURE ===
-let storeProductsCache=[
-  {id:"pack1", name:"Pack Business Starter", price:15000, desc:"Formation + modèle site + logo", icon:"📦"},
-  {id:"pack2", name:"Pack Boost Pro", price:25000, desc:"1000 abonnés + pub Facebook", icon:"🚀"},
-  {id:"pack3", name:"Formation TikTok Money", price:10000, desc:"Monétisation en 30 jours", icon:"🎓"},
-  {id:"pack4", name:"Logo Pro + Branding", price:8000, desc:"Logo HD + palette", icon:"🎨"},
-];
-function renderStoreProducts(filter=""){
-  const term=filter.toLowerCase();
-  const list=storeProductsCache.filter(p=> (p.name||"").toLowerCase().includes(term));
-  const el=$("storeProducts");
-  if(!list.length){el.innerHTML=`<div class="empty">Aucun produit</div>`;return;}
-  el.innerHTML=list.map(p=>`
-  <div class="store-card">
-    <div class="store-icon">${p.icon}</div>
-    <div style="flex:1;min-width:0">
-      <div style="font-size:13px;font-weight:800;white-space:pre-line">${escapeHTML(p.name)}</div>
-      <div class="note" style="margin:4px 0;font-size:11px">${escapeHTML(p.desc)}</div>
-      <div style="color:var(--gold);font-weight:900;font-size:13px">${money(p.price)}</div>
-    </div>
-    <button class="btn btn-blue" style="padding:10px 16px;font-size:11px;border-radius:20px" onclick="buyStoreProduct('${p.id}')">ACHETER</button>
-  </div>`).join("");
-}
-window.buyStoreProduct=async function(productId){
-  const product=storeProductsCache.find(p=>p.id===productId);
-  if(!product) return toast("Produit introuvable");
-  const msg = `Bonjour Jason Business, je veux acheter ${product.name} à ${product.price} FC`;
-  window.open(`https://wa.me/243827203000?text=${encodeURIComponent(msg)}`,"_blank");
-}
-$("openStoreButton")?.addEventListener("click",()=>{openModal("storeModal");renderStoreProducts();});
-$("storeSearch")?.addEventListener("input",e=>renderStoreProducts(e.target.value));
 $("refreshOrders")?.addEventListener("click",()=>location.reload());
 initFirebase();
 </script>
