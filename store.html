@@ -2,703 +2,141 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#080e1c">
-<meta name="description" content="Télécharge gratuitement JASON BUSINESS pour Android.">
-<title>JASON STORE — JASON BUSINESS</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#050914">
+<title>JASON STORE - Officiel</title>
 <style>
-:root {
-    --bg:#080e1c;
-    --panel:#101d32;
-    --panel2:#0b1527;
-    --blue:#00cfff;
-    --blue2:#087dff;
-    --gold:#d8aa45;
-    --green:#35c879;
-    --white:#f5f7ff;
-    --muted:#9aa9c2;
-    --border:#193c59;
-}
-
-* {
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html {
-    scroll-behavior:smooth;
-}
-
-body {
-    background:linear-gradient(180deg,#0e1b32 0%,#080e1c 70%,#050914 100%);
-    color:var(--white);
-    font-family:Arial,Helvetica,sans-serif;
-    min-height:100vh;
-    padding-bottom:100px;
-}
-
-button,input,a {
-    font:inherit;
-    -webkit-tap-highlight-color:transparent;
-}
-
-a {
-    color:inherit;
-    text-decoration:none;
-}
-
-button {
-    cursor:pointer;
-}
-
-.topbar {
-    height:106px;
-    background:#1c1c1c;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 25px 0 30px;
-    gap:15px;
-}
-
-.topbar h1 {
-    font-size:clamp(22px,5vw,34px);
-    font-weight:700;
-    color:#fff;
-    text-transform:lowercase;
-}
-
-.brand-logo {
-    width:60px;
-    height:60px;
-    border:1px solid #333;
-    object-fit:contain;
-    background:#080d1a;
-}
-
-/* Remplace le contenu de .brand-logo par ton vrai logo
-   si son chemin est différent. */
-
-.container {
-    width:calc(100% - 52px);
-    max-width:850px;
-    margin:auto;
-}
-
-.store-heading {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    margin:61px 0 26px;
-}
-
-.store-heading h2 {
-    color:var(--blue);
-    font-size:clamp(24px,5vw,36px);
-    font-weight:900;
-    letter-spacing:1px;
-}
-
-.free-badge {
-    border:1px solid #176b4b;
-    background:#10352c;
-    color:var(--green);
-    border-radius:40px;
-    padding:15px 21px;
-    font-size:16px;
-    white-space:nowrap;
-}
-
-.hero-card {
-    border:2px solid #174465;
-    border-radius:30px;
-    padding:30px;
-    background:linear-gradient(125deg,#14233b,#0e1a30);
-    box-shadow:0 12px 35px #0002;
-    margin-bottom:52px;
-}
-
-.hero-card h3 {
-    font-size:clamp(23px,5vw,35px);
-    line-height:1.35;
-    margin-bottom:12px;
-}
-
-.hero-card .subtitle {
-    color:#a4b1c8;
-    font-size:19px;
-    line-height:1.6;
-    margin-bottom:18px;
-}
-
-.hero-card .free-text {
-    color:var(--green);
-    font-size:19px;
-    line-height:1.5;
-}
-
-.search-box {
-    margin-bottom:45px;
-}
-
-.search-box input {
-    width:100%;
-    min-height:84px;
-    padding:20px 25px;
-    color:white;
-    background:#081121;
-    border:2px solid #202c40;
-    border-radius:26px;
-    outline:none;
-    font-size:19px;
-}
-
-.search-box input:focus {
-    border-color:#16769a;
-}
-
-.search-box input::placeholder {
-    color:#727a89;
-}
-
-.app-card {
-    border:2px solid #655638;
-    border-radius:38px;
-    padding:20px;
-    background:linear-gradient(135deg,#15243b,#101a2b);
-    display:grid;
-    grid-template-columns:118px minmax(0,1fr) auto;
-    align-items:center;
-    gap:17px;
-    box-shadow:0 12px 30px #0002;
-    margin-bottom:28px;
-    animation:fadeIn .5s ease;
-}
-
-.app-icon {
-    width:118px;
-    height:118px;
-    border-radius:37px;
-    border:4px solid var(--gold);
-    background:linear-gradient(135deg,#263b4b,#b49b58,#253446);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#fff;
-    font-size:29px;
-    font-weight:900;
-    overflow:hidden;
-}
-
-.app-icon img {
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.app-details {
-    min-width:0;
-}
-
-.app-title-line {
-    display:flex;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-bottom:7px;
-}
-
-.app-title-line h3 {
-    font-size:23px;
-    line-height:1.35;
-}
-
-.small-free {
-    color:var(--green);
-    background:#103c35;
-    border:1px solid #146b59;
-    border-radius:13px;
-    padding:5px 12px;
-    font-size:14px;
-    font-weight:bold;
-}
-
-.version {
-    color:#a2aec4;
-    font-size:18px;
-    margin-bottom:14px;
-}
-
-.description {
-    color:#c4cee0;
-    font-size:18px;
-    line-height:1.75;
-    overflow-wrap:anywhere;
-}
-
-.install-btn {
-    border:3px solid #f4d47c;
-    border-radius:28px;
-    padding:18px 20px;
-    min-width:145px;
-    background:linear-gradient(135deg,#04d9ff,#0875ff);
-    color:#061426;
-    font-size:17px;
-    font-weight:900;
-    box-shadow:0 0 0 2px #a8791f,0 7px 20px #008cff20;
-    text-align:center;
-    transition:transform .2s,filter .2s;
-}
-
-.install-btn:active {
-    transform:scale(.96);
-}
-
-.install-btn:disabled {
-    opacity:.6;
-    cursor:wait;
-}
-
-.notice {
-    border:2px solid #15445b;
-    background:#0b1729;
-    border-radius:25px;
-    padding:25px;
-    margin:28px 0 42px;
-    color:#d0d9e9;
-    font-size:18px;
-    line-height:1.85;
-    overflow-wrap:anywhere;
-}
-
-.status {
-    display:none;
-    margin:15px 0 25px;
-    padding:17px;
-    border:1px solid #24415c;
-    border-radius:16px;
-    background:#112139;
-    color:#e3ebf8;
-    font-size:14px;
-    line-height:1.7;
-}
-
-.status.show {
-    display:block;
-}
-
-.status.error {
-    border-color:#884d4d;
-    color:#ffc5c5;
-}
-
-.status a {
-    color:var(--blue);
-    text-decoration:underline;
-    font-weight:bold;
-}
-
-.footer {
-    text-align:center;
-    color:#697a95;
-    font-size:13px;
-    padding:0 15px 25px;
-    line-height:2;
-}
-
-.footer strong {
-    color:var(--gold);
-}
-
-/* Navigation inférieure */
-
-.bottom-nav {
-    position:fixed;
-    z-index:100;
-    bottom:0;
-    left:0;
-    width:100%;
-    min-height:88px;
-    padding:10px 5px calc(10px + env(safe-area-inset-bottom));
-    background:#050914f7;
-    border-top:1px solid #172236;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    backdrop-filter:blur(15px);
-}
-
-.nav-item {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:7px;
-    color:#758198;
-    font-size:13px;
-    font-weight:bold;
-}
-
-.nav-item .nav-icon {
-    font-size:29px;
-    line-height:1.1;
-}
-
-.nav-item.active {
-    color:var(--blue);
-}
-
-.empty-state {
-    display:none;
-    padding:25px;
-    margin-bottom:25px;
-    text-align:center;
-    color:var(--muted);
-    border:1px solid var(--border);
-    border-radius:20px;
-}
-
-@keyframes fadeIn {
-    from {opacity:0;transform:translateY(10px);}
-    to {opacity:1;transform:translateY(0);}
-}
-
-@media(max-width:600px) {
-    .topbar {
-        height:106px;
-        padding:0 25px 0 30px;
-    }
-
-    .brand-logo {
-        width:60px;
-        height:60px;
-    }
-
-    .container {
-        width:calc(100% - 52px);
-    }
-
-    .store-heading {
-        margin-top:61px;
-    }
-
-    .free-badge {
-        padding:15px 18px;
-        font-size:16px;
-    }
-
-    .hero-card {
-        padding:30px;
-        border-radius:30px;
-    }
-
-    .search-box input {
-        min-height:84px;
-        font-size:19px;
-    }
-
-    .app-card {
-        grid-template-columns:118px minmax(0,1fr);
-        gap:15px;
-        padding:20px;
-        border-radius:38px;
-    }
-
-    .app-icon {
-        width:118px;
-        height:118px;
-    }
-
-    .app-title-line h3 {
-        font-size:23px;
-    }
-
-    .version {
-        font-size:18px;
-        line-height:1.5;
-    }
-
-    .description {
-        font-size:18px;
-        line-height:1.75;
-    }
-
-    .install-btn {
-        grid-column:2;
-        justify-self:start;
-        min-width:145px;
-        padding:18px 20px;
-        border-radius:28px;
-    }
-
-    .notice {
-        padding:25px;
-        font-size:18px;
-    }
-}
-
-@media(max-width:380px) {
-    .container {
-        width:calc(100% - 30px);
-    }
-
-    .app-card {
-        grid-template-columns:80px minmax(0,1fr);
-        gap:12px;
-        padding:14px;
-        border-radius:25px;
-    }
-
-    .app-icon {
-        width:80px;
-        height:80px;
-        border-radius:25px;
-        font-size:23px;
-    }
-
-    .app-title-line h3 {
-        font-size:18px;
-    }
-
-    .version,.description {
-        font-size:14px;
-    }
-
-    .install-btn {
-        grid-column:1 / -1;
-        justify-self:stretch;
-    }
-
-    .hero-card {
-        padding:22px;
-    }
-
-    .hero-card .subtitle,
-    .hero-card .free-text {
-        font-size:15px;
-    }
-
-    .store-heading h2 {
-        font-size:22px;
-    }
-
-    .free-badge {
-        font-size:12px;
-        padding:11px;
-    }
-}
+:root{--bg:#050914;--blue:#00d4ff;--gold:#d8aa45;--green:#22c55e}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at top,#101d35 0,var(--bg) 100%);color:white;font-family:Arial,sans-serif;min-height:100vh}
+.container{max-width:1000px;margin:auto;padding:16px 14px 100px}
+.header{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
+.logo{font-weight:900;color:var(--blue);font-size:18px;letter-spacing:1px}
+.badge{font-size:10px;border:1px solid #22c55e55;background:#22c55e15;color:var(--green);padding:7px 12px;border-radius:20px}
+.search{width:100%;background:#081222;border:1px solid #ffffff1b;color:white;border-radius:12px;padding:13px;margin:12px 0;outline:none}
+.search:focus{border-color:var(--blue)}
+.hero{padding:16px;border-radius:16px;background:linear-gradient(145deg,#1a2f55,#0c1627);border:1px solid #00d4ff38;margin-bottom:16px}
+.app-card{background:linear-gradient(145deg,#12213a,#0c1627);border:1px solid #d8aa4570;border-radius:20px;padding:14px;display:flex;gap:14px;align-items:center;box-shadow:0 8px 25px #0006}
+.app-icon{width:78px;height:78px;border-radius:19px;background:#000;border:2px solid var(--gold);overflow:hidden;flex-shrink:0}
+.app-icon img{width:100%;height:100%;object-fit:cover;display:block}
+.app-info{flex:1;min-width:0}
+.app-name{font-size:15px;font-weight:900}
+.app-meta{font-size:11px;color:#8e9aad;margin-top:5px}
+.app-desc{font-size:11px;color:#c5d2e5;margin-top:7px;line-height:1.5}
+.btn{border:0;border-radius:12px;padding:12px 15px;font-weight:900;font-size:12px;cursor:pointer}
+.btn-install{background:linear-gradient(100deg,#00d4ff,#0077ff);color:#001018;box-shadow:0 6px 18px #00d4ff30;white-space:nowrap}
+.btn-free{background:#22c55e20;border:1px solid #22c55e40;color:#22c55e;padding:4px 7px;font-size:9px;border-radius:6px;margin-left:6px}
+.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:3000;background:#12213a;border:1px solid #d8aa4540;padding:12px 16px;border-radius:12px;font-size:12px;transition:.25s;text-align:center;width:max-content;max-width:90%}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.overlay{display:none;position:fixed;inset:0;background:#02050be8;z-index:1000;padding:16px;align-items:center;justify-content:center}
+.overlay.show{display:flex}
+.modal{width:100%;max-width:500px;max-height:90vh;overflow:auto;background:linear-gradient(145deg,#12213a,#091321);border:1px solid #e6bd6759;border-radius:22px;padding:20px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:#050914fa;border-top:1px solid #ffffff14;padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:900}
+.bottom-nav a{flex:1;text-decoration:none;color:#6b7a90;font-size:10px;font-weight:700;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bottom-nav a span.icon{font-size:20px}
+.bottom-nav a.active{color:var(--blue)}
 </style>
 </head>
-
 <body>
+<div class="container">
+  <div class="header">
+    <div class="logo">JASON STORE</div>
+    <div class="badge">● GRATUIT</div>
+  </div>
+  <div class="hero">
+    <h3 style="margin:0">👑 Jason Business Officiel</h3>
+    <p style="font-size:11px;color:#aab8cc;margin:7px 0 0">WEB • DESIGN • DIGITAL • IA</p>
+    <p style="font-size:12px;color:#22c55e;margin:10px 0 0">✓ Application disponible gratuitement</p>
+  </div>
+  <input class="search" id="search" placeholder="Rechercher une application...">
+  <div id="list" style="display:grid;gap:14px;margin-top:12px"></div>
+  <p style="text-align:center;color:#65748b;font-size:10px;margin-top:25px">JASON STORE © 2026 • Jason Aloma 🇨🇩</p>
+</div>
 
-<header class="topbar">
-    <h1>jason business</h1>
-
-    <!-- Modifie ce chemin si ton logo est ailleurs -->
-    <img
-        class="brand-logo"
-        src="logo.png"
-        alt="Logo JASON BUSINESS"
-        onerror="this.style.display='none'"
-    >
-</header>
-
-<main class="container">
-
-    <section class="store-heading">
-        <h2>JASON STORE</h2>
-        <div class="free-badge">● GRATUIT</div>
-    </section>
-
-    <section class="hero-card">
-        <h3>👑 Jason Business Officiel</h3>
-        <p class="subtitle">WEB • DESIGN • DIGITAL • IA</p>
-        <p class="free-text">✓ Application disponible gratuitement</p>
-    </section>
-
-    <section class="search-box">
-        <input
-            id="searchInput"
-            type="search"
-            placeholder="Rechercher une application..."
-            aria-label="Rechercher une application"
-        >
-    </section>
-
-    <section class="app-card" id="appCard">
-        <div class="app-icon">
-            <!-- Si tu as un logo d'application, place-le ici -->
-            <img
-                src="logo.png"
-                alt="Icône Jason Business"
-                onerror="this.style.display='none';this.parentElement.textContent='JB'"
-            >
-        </div>
-
-        <div class="app-details">
-            <div class="app-title-line">
-                <h3>Jason Business 1.0</h3>
-                <span class="small-free">GRATUIT</span>
-            </div>
-
-            <p class="version">Version 1.0.0 • Android</p>
-
-            <p class="description">
-                Découvre Jason Business : WEB, DESIGN, DIGITAL et IA.
-                Accède à tes outils et services digitaux depuis ton téléphone.
-            </p>
-        </div>
-
-        <a
-            href="#"
-            class="install-btn"
-            id="installBtn"
-            role="button"
-        >INSTALLER</a>
-    </section>
-
-    <div class="empty-state" id="emptyState">
-        Aucune application trouvée.
-    </div>
-
-    <div class="status" id="downloadStatus" role="status" aria-live="polite"></div>
-
-    <section class="notice">
-        Si le téléchargement ne démarre pas, utilise le lien direct ci-dessous.
-        Après le téléchargement, ouvre le fichier APK depuis les téléchargements
-        Android pour poursuivre l'installation.
-    </section>
-
-</main>
-
-<footer class="footer">
-    JASON STORE © <span id="year"></span> • Jason Aloma 🇨🇩<br>
-    WEB • DESIGN • DIGITAL • IA
-</footer>
+<div class="overlay" id="modal"><div class="modal" id="modalContent"></div></div>
+<div class="toast" id="toast"></div>
 
 <nav class="bottom-nav">
-    <a href="dashboard.html" class="nav-item">
-        <span class="nav-icon">📊</span>
-        <span>Dashboard</span>
-    </a>
-
-    <a href="boutique.html" class="nav-item">
-        <span class="nav-icon">🛍️</span>
-        <span>Boutique</span>
-    </a>
-
-    <a href="store.html" class="nav-item active">
-        <span class="nav-icon">🛒</span>
-        <span>Store</span>
-    </a>
-
-    <a href="profil.html" class="nav-item">
-        <span class="nav-icon">👤</span>
-        <span>Profil</span>
-    </a>
+  <a href="tableau%20de%20bord.html"><span class="icon">📊</span>Dashboard</a>
+  <a href="boutique.html"><span class="icon">🛍️</span>Boutique</a>
+  <a href="store.html" class="active"><span class="icon">🛒</span>Store</a>
+  <a href="profil.html"><span class="icon">👤</span>Profil</a>
 </nav>
 
 <script>
-"use strict";
-
-/*
-==========================================================
-CONFIGURATION DU TÉLÉCHARGEMENT GITHUB
-==========================================================
-
-OPTION A — APK stocké directement dans le dépôt GitHub :
-https://raw.githubusercontent.com/UTILISATEUR/DEPOT/main/app-release.apk
-
-Si le fichier est dans un sous-dossier, ajoute son chemin :
-https://raw.githubusercontent.com/UTILISATEUR/DEPOT/main/android/app-release.apk
-
-OPTION B — APK publié dans GitHub Releases :
-https://github.com/UTILISATEUR/DEPOT/releases/latest/download/app-release.apk
-
-Remplace les exemples ci-dessous par TON véritable lien.
-Ne laisse pas TON-UTILISATEUR ou TON-DEPOT dans l'adresse.
-*/
-
-const APK_URL =
-    "https://github.com/TON-UTILISATEUR/TON-DEPOT/releases/latest/download/app-release.apk";
-
-/*
-Si ton APK est dans le dépôt principal et non dans Releases,
-utilise plutôt une URL raw.githubusercontent.com, par exemple :
-
-const APK_URL =
-    "https://raw.githubusercontent.com/TON-UTILISATEUR/TON-DEPOT/main/app-release.apk";
-*/
-
-const installBtn = document.getElementById("installBtn");
-const downloadStatus = document.getElementById("downloadStatus");
-const searchInput = document.getElementById("searchInput");
-const appCard = document.getElementById("appCard");
-const emptyState = document.getElementById("emptyState");
-
-document.getElementById("year").textContent =
-    new Date().getFullYear();
-
-function showStatus(message, isError = false) {
-    downloadStatus.className = "status show" + (isError ? " error" : "");
-    downloadStatus.textContent = message;
+const $ = id => document.getElementById(id);
+function toast(m){
+  const el=$("toast");
+  el.textContent=m;
+  el.classList.add("show");
+  clearTimeout(window.toastTimer);
+  window.toastTimer=setTimeout(()=>el.classList.remove("show"),3000);
 }
 
-/*
-Le lien doit être une véritable URL HTTPS.
-Le clic ouvre directement le fichier hébergé sur GitHub.
-Nous n'affichons pas de faux message confirmant un téléchargement.
-*/
+// FICHIERS FIXES - LIENS RAW GITHUB (marche toujours)
+const ICON = "https://raw.githubusercontent.com/djesonaloma-boop/Jason-business/principal/jason.png";
+const APK = "https://raw.githubusercontent.com/djesonaloma-boop/Jason-business/principal/app-release.apk";
 
-installBtn.addEventListener("click", function(event) {
-    event.preventDefault();
+const apps=[{
+  id:"jason1",
+  name:"Jason Business 1.0",
+  version:"1.0.0",
+  size:"28 MB",
+  downloads:"5K+",
+  rating:"5.0 ★",
+  cat:"Business",
+  desc:"Découvre Jason Business : WEB, DESIGN, DIGITAL et IA. Accède à tes outils et services digitaux depuis ton téléphone.",
+  icon:ICON,
+  apk:APK
+}];
 
-    if (
-        !APK_URL.startsWith("https://") ||
-        APK_URL.includes("TON-UTILISATEUR") ||
-        APK_URL.includes("TON-DEPOT")
-    ) {
-        showStatus(
-            "⚠️ Le lien GitHub n'est pas encore configuré. " +
-            "Remplace TON-UTILISATEUR et TON-DEPOT dans la constante APK_URL " +
-            "par les informations de ton dépôt GitHub.",
-            true
-        );
-        return;
-    }
+function render(f=""){
+  const term=f.toLowerCase().trim();
+  const filtered=apps.filter(a=>(a.name+" "+a.desc).toLowerCase().includes(term));
+  if(!filtered.length){
+    $("list").innerHTML='<div style="text-align:center;padding:30px;color:#8e9aad">Aucune application trouvée.</div>';
+    return;
+  }
+  $("list").innerHTML=filtered.map(a=>`
+    <div class="app-card">
+      <div class="app-icon" onclick="openDetail('${a.id}')">
+        <img src="${a.icon}" alt="JB" onerror="this.src='./jason.png'; this.onerror=function(){this.parentElement.innerHTML='<div style=width:100%;height:100%;display:grid;place-items:center;background:linear-gradient(135deg,#d8aa45,#00d4ff);color:#000;font-weight:900;font-size:24px>JB</div>'}">
+      </div>
+      <div class="app-info" onclick="openDetail('${a.id}')">
+        <div class="app-name">${a.name}<span class="btn-free">GRATUIT</span></div>
+        <div class="app-meta">Version ${a.version} • Android • ${a.size}</div>
+        <div class="app-desc">${a.desc}</div>
+      </div>
+      <button class="btn btn-install" onclick="downloadApp('${a.id}')">INSTALLER</button>
+    </div>
+  `).join("");
+}
 
-    showStatus(
-        "Ouverture du lien de téléchargement GitHub. " +
-        "Si le fichier ne se télécharge pas, vérifie que l'APK existe " +
-        "à cette adresse et que le dépôt est public."
-    );
+window.openDetail=function(id){
+  const a=apps.find(x=>x.id===id);
+  $("modalContent").innerHTML=`
+    <div style="display:flex;gap:14px;align-items:center">
+      <div class="app-icon" style="width:80px;height:80px;border-radius:20px;overflow:hidden;border:2px solid #d8aa45"><img src="${a.icon}" style="width:100%;height:100%;object-fit:cover"></div>
+      <div><h3 style="margin:0 0 8px">${a.name}</h3><small style="color:#8e9aad">JASON BUSINESS</small><br><span class="btn-free" style="display:inline-block;margin:8px 0 0">OFFICIEL • GRATUIT</span></div>
+    </div>
+    <div style="background:#081222;padding:14px;border-radius:12px;margin-top:16px"><div style="font-size:12px;color:var(--gold)">Version ${a.version}</div><div style="font-size:11px;color:#8e9aad;margin-top:5px">Fichier d'installation Android (.APK) - 28 MB</div></div>
+    <p style="font-size:12px;color:#c5d2e5;line-height:1.7;margin-top:16px">${a.desc}</p>
+    <button class="btn btn-install" style="width:100%;padding:15px" onclick="downloadApp('${a.id}')">📥 Télécharger gratuitement</button>
+    <button class="btn" style="width:100%;margin-top:9px;background:#182943;color:white" onclick="closeModal()">Fermer</button>
+  `;
+  $("modal").classList.add("show");
+};
 
-    /*
-    Utilisation d'une navigation directe, plus fiable qu'un faux
-    message ou qu'un attribut download sur un lien externe.
-    GitHub doit fournir un fichier APK accessible.
-    */
-    window.location.assign(APK_URL);
-});
+window.closeModal=function(){ $("modal").classList.remove("show"); };
+window.downloadApp=function(id){
+  toast("📥 Téléchargement Jason Business...");
+  window.location.href = APK;
+  closeModal();
+};
 
-/* Recherche de l'application dans la boutique */
-
-searchInput.addEventListener("input", function() {
-    const query = searchInput.value.trim().toLowerCase();
-
-    const searchableText = (
-        "jason business android web design digital ia application"
-    ).toLowerCase();
-
-    const matches = searchableText.includes(query);
-
-    appCard.style.display = matches ? "grid" : "none";
-    emptyState.style.display = matches ? "none" : "block";
-});
+$("search").addEventListener("input", e=>render(e.target.value));
+$("modal").addEventListener("click", e=>{ if(e.target===$("modal")) closeModal(); });
+render();
 </script>
-
 </body>
 </html>
