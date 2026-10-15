@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#050914">
-<meta name="description" content="JASON STORE — Télécharge les applications de Jason Business.">
-<title>JASON STORE — Officiel</title>
+<title>JASON STORE</title>
 
 <style>
 :root{
@@ -14,151 +13,182 @@
   --blue2:#0077ff;
   --gold:#d8aa45;
   --green:#22c55e;
-  --card:#101d32;
-  --muted:#8e9aad;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   margin:0;
-  min-height:100vh;
+  background:
+    radial-gradient(ellipse at top,#172b4c 0%,#0a1426 42%,var(--bg) 100%);
   color:white;
   font-family:Arial,Helvetica,sans-serif;
-  background:radial-gradient(circle at top,#142746 0,var(--bg) 68%);
+  min-height:100vh;
+  overflow-x:hidden;
 }
-button,input{font:inherit}
-button{ -webkit-tap-highlight-color:transparent }
+button,input{font-family:inherit}
 .container{
   max-width:1000px;
   margin:auto;
   padding:16px 14px 110px;
 }
+
+/* EN-TÊTE */
 .header{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:10px;
   padding:14px 0;
-  animation:fadeDown .5s ease;
+  animation:fadeDown .6s ease;
 }
 .logo{
   font-weight:900;
   color:var(--blue);
   font-size:18px;
   letter-spacing:1px;
-  text-shadow:0 0 18px #00d4ff30;
+  text-shadow:0 0 18px #00d4ff55;
 }
 .badge{
   font-size:10px;
-  border:1px solid #22c55e55;
-  background:#22c55e15;
+  border:1px solid #22c55e66;
+  background:linear-gradient(135deg,#22c55e20,#22c55e08);
   color:var(--green);
-  padding:7px 12px;
+  padding:8px 12px;
   border-radius:20px;
+  box-shadow:0 0 15px #22c55e0b;
   white-space:nowrap;
 }
+
+/* BANNIÈRE ORIGINALE */
 .hero{
   position:relative;
   overflow:hidden;
-  padding:20px 17px;
-  border-radius:19px;
-  background:linear-gradient(145deg,#1a2f55,#0c1627);
-  border:1px solid #00d4ff38;
+  padding:19px 16px;
+  border-radius:18px;
+  background:linear-gradient(145deg,#1a3156,#101d33 60%,#0b1526);
+  border:1px solid #00d4ff45;
   margin-bottom:16px;
-  box-shadow:0 15px 40px #0003;
-  animation:fadeUp .6s ease;
+  box-shadow:0 12px 35px #0004,inset 0 1px #ffffff08;
+  animation:fadeUp .65s ease;
 }
-.hero:after{
+.hero:before{
   content:"";
   position:absolute;
-  width:140px;height:140px;
-  right:-50px;top:-65px;
+  width:150px;
+  height:150px;
+  top:-85px;
+  right:-45px;
   border-radius:50%;
-  background:#00d4ff12;
+  background:#00d4ff13;
+  border:1px solid #00d4ff12;
   pointer-events:none;
 }
-.hero h3{font-size:19px;margin:0}
-.hero-subtitle{
+.hero h3{
+  position:relative;
+  margin:0;
+  font-size:17px;
+  font-weight:900;
+}
+.hero p{position:relative}
+.hero .subtitle{
   font-size:11px;
-  color:#aab8cc;
+  color:#b5c5da;
   margin:8px 0 0;
   letter-spacing:1px;
 }
-.hero-free{
+.hero .free-text{
   font-size:12px;
   color:var(--green);
   margin:12px 0 0;
 }
-.search-wrap{position:relative;margin:15px 0}
-.search-icon{
-  position:absolute;
-  left:14px;top:50%;
-  transform:translateY(-50%);
-  font-size:16px;
-  pointer-events:none;
-}
+
+/* RECHERCHE */
 .search{
+  display:block;
   width:100%;
-  background:#081222;
+  background:linear-gradient(135deg,#0b1729,#081222);
   border:1px solid #ffffff1b;
   color:white;
   border-radius:13px;
-  padding:14px 14px 14px 42px;
+  padding:14px;
+  margin:12px 0 16px;
   outline:none;
   font-size:13px;
-  transition:.2s;
+  transition:border-color .25s,box-shadow .25s;
+  box-shadow:0 6px 18px #0002;
 }
+.search::placeholder{color:#8190a7}
 .search:focus{
   border-color:var(--blue);
-  box-shadow:0 0 0 3px #00d4ff12;
+  box-shadow:0 0 0 3px #00d4ff14,0 6px 20px #0003;
 }
-.search::placeholder{color:#74839a}
-.section-heading{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin:22px 2px 12px;
+
+/* APPLICATION */
+#list{
+  display:grid;
+  gap:13px;
 }
-.section-heading h2{font-size:14px;margin:0}
-.result-count{font-size:10px;color:var(--muted)}
-#list{display:grid;gap:13px}
 .app-card{
-  background:linear-gradient(145deg,#12213a,#0c1627);
-  border:1px solid #d8aa4555;
+  background:linear-gradient(145deg,#142642,#0c1627);
+  border:1px solid #d8aa4566;
   border-radius:20px;
   padding:14px;
   display:flex;
-  gap:13px;
+  gap:14px;
   align-items:center;
-  box-shadow:0 10px 30px #0002;
-  animation:fadeUp .45s ease both;
-  transition:transform .2s,border-color .2s;
+  box-shadow:0 12px 28px #0003;
+  animation:fadeUp .5s ease both;
+  transition:transform .2s,border-color .2s,box-shadow .2s;
 }
-.app-card:hover{
-  border-color:#d8aa45;
-  transform:translateY(-2px);
-}
+.app-card:active{transform:scale(.99)}
 .app-icon{
-  width:76px;height:76px;
+  width:78px;
+  height:78px;
   border-radius:19px;
   background:#000;
   border:2px solid var(--gold);
   overflow:hidden;
   flex-shrink:0;
-  box-shadow:0 0 20px #d8aa4518;
+  box-shadow:0 0 20px #d8aa451b;
 }
 .app-icon img{
-  width:100%;height:100%;
+  width:100%;
+  height:100%;
   object-fit:cover;
   display:block;
 }
 .app-info{flex:1;min-width:0}
 .app-name{
-  font-size:14px;
+  font-size:15px;
   font-weight:900;
   line-height:1.5;
   overflow-wrap:anywhere;
+}
+.app-meta{
+  font-size:11px;
+  color:#8e9aad;
+  margin-top:5px;
+}
+.app-desc{
+  font-size:11px;
+  color:#c5d2e5;
+  margin-top:7px;
+  line-height:1.5;
+}
+.btn{
+  border:0;
+  border-radius:12px;
+  padding:12px 15px;
+  font-weight:900;
+  font-size:12px;
+  cursor:pointer;
+  transition:transform .15s,filter .2s;
+}
+.btn:active{transform:scale(.95)}
+.btn-install{
+  background:linear-gradient(110deg,#00d4ff,#0077ff);
+  color:#001018;
+  box-shadow:0 5px 18px #0077ff30;
 }
 .btn-free{
   display:inline-block;
@@ -171,94 +201,70 @@ button{ -webkit-tap-highlight-color:transparent }
   margin-left:6px;
   vertical-align:middle;
 }
-.app-meta{font-size:10px;color:#8e9aad;margin-top:6px}
-.app-desc{font-size:11px;color:#c5d2e5;margin-top:8px;line-height:1.6}
-.app-actions{
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-  flex-shrink:0;
-}
-.btn{
-  border:0;
-  border-radius:12px;
-  padding:12px 13px;
-  font-weight:900;
-  font-size:11px;
-  cursor:pointer;
-  transition:transform .15s,opacity .15s;
-}
-.btn:active{transform:scale(.96)}
-.btn-install{
-  background:linear-gradient(100deg,#00d4ff,#0077ff);
-  color:#001018;
-  box-shadow:0 5px 17px #0077ff25;
-}
-.btn-install:disabled{opacity:.55;cursor:not-allowed}
-.empty{
-  text-align:center;
-  padding:35px 15px;
-  border:1px dashed #ffffff25;
-  border-radius:17px;
-  color:#aab8cc;
-  font-size:12px;
-  line-height:1.8;
-}
-.empty-icon{font-size:30px;margin-bottom:8px}
-.info-box{
-  margin-top:20px;
-  padding:14px;
-  border-radius:14px;
-  background:#00d4ff08;
-  border:1px solid #00d4ff20;
-  color:#9eafc5;
-  font-size:10px;
-  line-height:1.8;
-}
-.info-box strong{color:var(--blue)}
+
+/* MESSAGE */
 .toast{
   position:fixed;
-  left:50%;bottom:90px;
+  left:50%;
+  bottom:90px;
   transform:translate(-50%,20px);
-  opacity:0;pointer-events:none;
-  z-index:30000;
+  opacity:0;
+  pointer-events:none;
+  z-index:3000;
   background:#12213a;
-  border:1px solid #d8aa4570;
-  box-shadow:0 10px 35px #0006;
-  padding:13px 17px;
-  border-radius:13px;
+  border:1px solid #d8aa4560;
+  box-shadow:0 8px 30px #0005;
+  padding:12px 16px;
+  border-radius:12px;
   font-size:12px;
-  line-height:1.5;
-  transition:.25s;
+  transition:opacity .25s,transform .25s;
   text-align:center;
-  width:max-content;
   max-width:90%;
 }
-.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* MENU INFÉRIEUR ORIGINAL */
 .bottom-nav{
   position:fixed;
-  bottom:0;left:0;right:0;
+  bottom:0;
+  left:0;
+  right:0;
   display:flex;
   justify-content:space-around;
-  background:rgba(5,9,20,.97);
-  backdrop-filter:blur(16px);
+  background:rgba(5,9,20,.96);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
   border-top:1px solid #ffffff14;
-  padding:9px 4px calc(9px + env(safe-area-inset-bottom));
+  padding:10px 4px calc(10px + env(safe-area-inset-bottom));
   z-index:9999;
+  box-shadow:0 -8px 25px #0002;
 }
 .bottom-nav button{
   flex:1;
-  background:none;border:0;
+  background:none;
+  border:0;
   color:#6b7a90;
-  font-size:10px;font-weight:700;
+  font-size:10px;
+  font-weight:700;
   padding:6px 2px;
-  display:flex;flex-direction:column;
-  align-items:center;gap:5px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
   cursor:pointer;
+  transition:color .2s,transform .2s;
 }
-.bottom-nav button span.icon{font-size:21px}
+.bottom-nav button span.icon{font-size:22px}
 .bottom-nav button.active{color:var(--blue)}
-.bottom-nav button.active span.icon{text-shadow:0 0 15px #00d4ff55}
+.bottom-nav button.active span.icon{
+  filter:drop-shadow(0 0 7px #00d4ff65);
+}
+.bottom-nav button:active{transform:scale(.94)}
+
+/* ANIMATIONS */
 @keyframes fadeUp{
   from{opacity:0;transform:translateY(12px)}
   to{opacity:1;transform:translateY(0)}
@@ -267,19 +273,21 @@ button{ -webkit-tap-highlight-color:transparent }
   from{opacity:0;transform:translateY(-10px)}
   to{opacity:1;transform:translateY(0)}
 }
-@media(max-width:520px){
+
+/* PETITS ÉCRANS */
+@media(max-width:420px){
+  .container{padding:13px 11px 110px}
   .app-card{gap:10px;padding:11px}
-  .app-icon{width:62px;height:62px;border-radius:15px}
-  .app-name{font-size:12px}
+  .app-icon{width:65px;height:65px;border-radius:16px}
+  .app-name{font-size:13px}
+  .app-meta{font-size:10px}
   .app-desc{font-size:10px}
   .btn-install{padding:11px 9px;font-size:10px}
-  .app-actions{max-width:90px}
 }
 @media(max-width:350px){
   .app-card{flex-wrap:wrap}
   .app-info{min-width:calc(100% - 80px)}
-  .app-actions{width:100%;max-width:none}
-  .btn-install{width:100%}
+  .app-card>.btn-install{width:100%}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{
@@ -294,94 +302,69 @@ button{ -webkit-tap-highlight-color:transparent }
 <body>
 <div class="container">
 
-  <header class="header">
+  <div class="header">
     <div class="logo">JASON STORE</div>
     <div class="badge">● GRATUIT</div>
-  </header>
+  </div>
 
-  <section class="hero">
+  <div class="hero">
     <h3>👑 Jason Business Officiel</h3>
-    <p class="hero-subtitle">WEB • DESIGN • DIGITAL • IA</p>
-    <p class="hero-free">✓ Découvre et télécharge nos applications</p>
-  </section>
-
-  <div class="search-wrap">
-    <span class="search-icon">🔎</span>
-    <input class="search" id="search"
-      type="search"
-      placeholder="Rechercher une application..."
-      autocomplete="off">
+    <p class="subtitle">WEB • DESIGN • DIGITAL • IA</p>
+    <p class="free-text">✓ Application disponible gratuitement</p>
   </div>
 
-  <div class="section-heading">
-    <h2>📱 Applications disponibles</h2>
-    <span class="result-count" id="resultCount">1 application</span>
-  </div>
+  <input
+    class="search"
+    id="search"
+    placeholder="Rechercher..."
+    autocomplete="off"
+  >
 
   <div id="list"></div>
 
-  <div class="info-box">
-    <strong>ℹ️ À savoir</strong><br>
-    Le téléchargement nécessite une connexion Internet.
-    Vérifie que le fichier APK existe bien sur le serveur.
-    Android peut demander l'autorisation d'installer une application
-    provenant de cette source.
-  </div>
-
 </div>
 
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="toast" id="toast"></div>
 
+<!-- MENU ORIGINAL CONSERVÉ -->
 <nav class="bottom-nav">
-  <button type="button" onclick="goPage('dashboard.html')">
+  <button onclick="goPage('dashboard.html')">
     <span class="icon">📊</span>Dashboard
   </button>
-  <button type="button" onclick="goPage('boutique.html')">
+  <button onclick="goPage('boutique.html')">
     <span class="icon">🛍️</span>Boutique
   </button>
-  <button type="button" class="active" onclick="goPage('store.html')">
+  <button class="active" onclick="goPage('store.html')">
     <span class="icon">🛒</span>Store
   </button>
-  <button type="button" onclick="goPage('profil.html')">
+  <button onclick="goPage('profil.html')">
     <span class="icon">👤</span>Profil
   </button>
 </nav>
 
 <script>
-"use strict";
-
-/* NAVIGATION */
-function goPage(page){
-  window.location.href = page;
+function goPage(p){
+  window.location.href = p;
 }
 
-/* MESSAGE TEMPORAIRE */
 let toastTimer;
-
 function toastMsg(message){
-  const toast = document.getElementById("toast");
-  toast.textContent = message;
-  toast.classList.add("show");
-
+  const el = document.getElementById("toast");
+  el.textContent = message;
+  el.classList.add("show");
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => {
-    toast.classList.remove("show");
-  }, 3200);
+    el.classList.remove("show");
+  },3000);
 }
 
-/* FICHIERS DE L'APPLICATION
-   Vérifie que ces fichiers existent dans le même dossier :
-   jason.png
-   jason.apk
-*/
 const ICON = "./jason.png";
 const APK = "./jason.apk";
 
-/* CATALOGUE */
 const apps = [
   {
     id:"jason1",
-    name:"Jason Business",
+    name:"Jason Business 1.0",
     version:"1.0.0",
     size:"28 MB",
     desc:"Découvre Jason Business : WEB, DESIGN, DIGITAL et IA.",
@@ -390,150 +373,88 @@ const apps = [
   }
 ];
 
-/* CONSTRUCTION SÉCURISÉE DES CARTES */
-function createAppCard(app,index){
-  const card = document.createElement("article");
-  card.className = "app-card";
-  card.style.animationDelay = (index * 70) + "ms";
-
-  const iconBox = document.createElement("div");
-  iconBox.className = "app-icon";
-
-  const img = document.createElement("img");
-  img.src = app.icon;
-  img.alt = "Icône " + app.name;
-  img.loading = "lazy";
-
-  img.onerror = function(){
-    if(this.dataset.fallbackUsed !== "1"){
-      this.dataset.fallbackUsed = "1";
-      this.src = "https://raw.githubusercontent.com/djesonaloma-boop/Jason-business/principal/jason.png";
-    }else{
-      this.onerror = null;
-      this.style.display = "none";
-      iconBox.textContent = "JB";
-      iconBox.style.display = "flex";
-      iconBox.style.alignItems = "center";
-      iconBox.style.justifyContent = "center";
-      iconBox.style.color = "#00d4ff";
-      iconBox.style.fontWeight = "900";
-    }
-  };
-
-  iconBox.appendChild(img);
-
-  const info = document.createElement("div");
-  info.className = "app-info";
-
-  const name = document.createElement("div");
-  name.className = "app-name";
-  name.textContent = app.name;
-
-  const free = document.createElement("span");
-  free.className = "btn-free";
-  free.textContent = "GRATUIT";
-  name.appendChild(free);
-
-  const meta = document.createElement("div");
-  meta.className = "app-meta";
-  meta.textContent = "Version " + app.version + " • " + app.size;
-
-  const desc = document.createElement("div");
-  desc.className = "app-desc";
-  desc.textContent = app.desc;
-
-  info.append(name,meta,desc);
-
-  const actions = document.createElement("div");
-  actions.className = "app-actions";
-
-  const install = document.createElement("button");
-  install.className = "btn btn-install";
-  install.type = "button";
-  install.textContent = "INSTALLER";
-  install.addEventListener("click",() => downloadApp(app,install));
-
-  actions.appendChild(install);
-  card.append(iconBox,info,actions);
-
-  return card;
-}
-
-/* AFFICHAGE + RECHERCHE */
 function render(){
   const list = document.getElementById("list");
-  const query = document.getElementById("search").value
-    .trim()
-    .toLocaleLowerCase("fr");
+  const query = document.getElementById("search")
+    .value.trim().toLowerCase();
 
-  const filtered = apps.filter(app =>
-    (app.name + " " + app.desc + " " + app.version)
-      .toLocaleLowerCase("fr")
-      .includes(query)
+  const filtered = apps.filter(a =>
+    (a.name + " " + a.desc + " " + a.version)
+      .toLowerCase().includes(query)
   );
 
-  list.replaceChildren();
-
-  document.getElementById("resultCount").textContent =
-    filtered.length + (filtered.length > 1 ? " applications" : " application");
+  list.innerHTML = "";
 
   if(filtered.length === 0){
-    const empty = document.createElement("div");
-    empty.className = "empty";
-
-    const icon = document.createElement("div");
-    icon.className = "empty-icon";
-    icon.textContent = "🔎";
-
-    const message = document.createElement("div");
-    message.textContent = "Aucune application trouvée.";
-
-    const hint = document.createElement("div");
-    hint.textContent = "Essaie un autre nom de recherche.";
-
-    empty.append(icon,message,hint);
-    list.appendChild(empty);
+    list.innerHTML =
+      '<div style="text-align:center;padding:25px;color:#8e9aad;font-size:12px">Aucune application trouvée.</div>';
     return;
   }
 
-  filtered.forEach((app,index => {
-    list.appendChild(createAppCard(app,index));
-  }));
+  filtered.forEach(a => {
+    const card = document.createElement("div");
+    card.className = "app-card";
+
+    const iconBox = document.createElement("div");
+    iconBox.className = "app-icon";
+
+    const img = document.createElement("img");
+    img.src = a.icon;
+    img.alt = a.name;
+
+    img.onerror = function(){
+      if(!this.dataset.fallback){
+        this.dataset.fallback = "1";
+        this.src = "https://raw.githubusercontent.com/djesonaloma-boop/Jason-business/principal/jason.png";
+      }else{
+        this.onerror = null;
+      }
+    };
+
+    iconBox.appendChild(img);
+
+    const info = document.createElement("div");
+    info.className = "app-info";
+
+    const name = document.createElement("div");
+    name.className = "app-name";
+    name.textContent = a.name;
+
+    const free = document.createElement("span");
+    free.className = "btn-free";
+    free.textContent = "GRATUIT";
+    name.appendChild(free);
+
+    const meta = document.createElement("div");
+    meta.className = "app-meta";
+    meta.textContent = "v" + a.version + " • " + a.size;
+
+    const desc = document.createElement("div");
+    desc.className = "app-desc";
+    desc.textContent = a.desc;
+
+    info.append(name,meta,desc);
+
+    const install = document.createElement("button");
+    install.className = "btn btn-install";
+    install.textContent = "INSTALLER";
+    install.type = "button";
+    install.addEventListener("click",downloadApp);
+
+    card.append(iconBox,info,install);
+    list.appendChild(card);
+  });
 }
 
-/* TÉLÉCHARGEMENT APK */
-function downloadApp(app,button){
-  if(!app.apk){
-    toastMsg("❌ Le fichier APK n'est pas configuré.");
-    return;
-  }
+function downloadApp(){
+  toastMsg("📥 Téléchargement en cours...");
 
-  const originalText = button.textContent;
-  button.disabled = true;
-  button.textContent = "OUVERTURE...";
-
-  toastMsg("📥 Préparation du téléchargement...");
-
-  try{
-    const link = document.createElement("a");
-    link.href = app.apk;
-    link.download = "jason.apk";
-    link.rel = "noopener";
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-
-    toastMsg("📥 Téléchargement lancé. Vérifie tes téléchargements.");
-
-  }catch(error){
-    console.error(error);
-    toastMsg("❌ Impossible de lancer le téléchargement.");
-  }
-
-  setTimeout(() => {
-    button.disabled = false;
-    button.textContent = originalText;
-  },1800);
+  const a = document.createElement("a");
+  a.href = APK + "?t=" + Date.now();
+  a.download = "jason.apk";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
 }
 
 document.getElementById("search").addEventListener("input",render);
