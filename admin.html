@@ -13,7 +13,7 @@ body{background:radial-gradient(circle at top,#101d35 0,var(--bg) 45%,#02040a 10
 .login-box{width:100%;max-width:400px;background:rgba(11,18,32,.96);border:1px solid var(--border);border-radius:24px;padding:30px;box-shadow:0 25px 80px rgba(0,0,0,.55)}
 .login-logo{text-align:center;font-size:25px;font-weight:900;letter-spacing:1px;margin-bottom:7px}.login-subtitle{text-align:center;color:var(--muted);font-size:12px;margin-bottom:25px}
 .input{width:100%;background:#070d18;border:1px solid var(--border);color:white;border-radius:13px;padding:14px;outline:none;margin-bottom:12px}.input:focus{border-color:var(--gold)}
-.login-btn{width:100%;border:0;border-radius:13px;padding:14px;background:var(--gold);color:#111;font-weight:900;cursor:pointer}.login-error{color:#ff6b6b;text-align:center;font-size:12px;min-height:18px;margin-top:12px}
+.login-btn{width:100%;border:0;border-radius:13px;padding:14px;background:var(--gold);color:#111;font-weight:900;cursor:pointer}.login-btn:active{transform:scale(.97)}.login-error{color:#ff6b6b;text-align:center;font-size:12px;min-height:18px;margin-top:12px}
 #adminPanel{display:none;min-height:100vh}
 .header{height:68px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:rgba(5,9,20,.96);backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
 .brand{font-size:17px;font-weight:900}.brand span{color:var(--gold)}.status{font-size:11px;color:var(--muted)}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:6px;box-shadow:0 0 8px var(--green)}
@@ -21,22 +21,21 @@ body{background:radial-gradient(circle at top,#101d35 0,var(--bg) 45%,#02040a 10
 .layout{display:flex;min-height:calc(100vh - 68px)}.sidebar{width:230px;flex-shrink:0;padding:14px 10px;background:rgba(7,12,23,.95);border-right:1px solid var(--border)}
 .menu-btn{width:100%;display:flex;align-items:center;gap:9px;padding:13px 11px;margin-bottom:5px;border:0;border-radius:12px;background:transparent;color:#a8b3c5;text-align:left;font-weight:700;font-size:12px;cursor:pointer}.menu-btn.active,.menu-btn:hover{background:rgba(216,170,69,.12);color:#fff}.menu-count{margin-left:auto;background:var(--red);color:white;border-radius:20px;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:10px;padding:0 5px}
 .content{flex:1;min-width:0;padding:20px}.page{display:none}.page.active{display:block}.page-title{font-size:24px;font-weight:900;margin-bottom:6px}.page-subtitle{font-size:12px;color:var(--muted);margin-bottom:20px}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px}.stat-card,.quick-card,.panel{background:linear-gradient(145deg,rgba(16,26,43,.96),rgba(8,14,26,.96));border:1px solid var(--border);border-radius:17px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px}.stat-card,.panel{background:linear-gradient(145deg,rgba(16,26,43,.96),rgba(8,14,26,.96));border:1px solid var(--border);border-radius:17px}
 .stat-card{padding:17px;min-height:105px}.stat-icon{font-size:22px;margin-bottom:9px}.stat-label{font-size:11px;color:var(--muted)}.stat-value{font-size:21px;font-weight:900;margin-top:6px;overflow-wrap:anywhere}
-.quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.quick-card{padding:17px;cursor:pointer}.quick-card b{display:block;margin-bottom:7px}.quick-card span{font-size:11px;color:var(--muted)}
-.panel{overflow:hidden;margin-bottom:18px}.panel-head{padding:15px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--border)}.panel-title{font-weight:900}.panel-description{font-size:11px;color:var(--muted);margin-top:5px}
+.panel{overflow:hidden;margin-bottom:18px}.panel-head{padding:15px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--border);flex-wrap:wrap}.panel-title{font-weight:900}.panel-description{font-size:11px;color:var(--muted);margin-top:5px}
 .search{width:100%;max-width:300px;background:#070d18;border:1px solid var(--border);border-radius:10px;color:white;padding:11px;outline:none}
 .table-wrap{width:100%;overflow-x:auto}table{width:100%;min-width:1150px;border-collapse:collapse}
 th{font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:#8794a8;text-align:left;padding:13px;border-bottom:1px solid var(--border);white-space:nowrap}
-td{font-size:12px;padding:13px;border-bottom:1px solid rgba(255,255,255,.045);vertical-align:middle;max-width:200px;overflow:hidden;text-overflow:ellipsis}tr:hover td{background:rgba(255,255,255,.02)}
-.btn{border:0;border-radius:8px;padding:7px 9px;color:white;font-size:10px;font-weight:800;cursor:pointer;margin:2px;white-space:nowrap}.btn-blue{background:var(--blue)}.btn-green{background:var(--green)}.btn-red{background:var(--red)}.btn-orange{background:var(--orange)}.btn-purple{background:var(--purple)}.btn-dark{background:#263246}.btn-gold{background:var(--gold);color:#111}
+td{font-size:12px;padding:13px;border-bottom:1px solid rgba(255,255,255,.045);vertical-align:middle;max-width:220px;overflow:hidden;text-overflow:ellipsis}tr:hover td{background:rgba(255,255,255,.02)}
+.btn{border:0;border-radius:8px;padding:7px 9px;color:white;font-size:10px;font-weight:800;cursor:pointer;margin:2px;white-space:nowrap}.btn-blue{background:var(--blue)}.btn-green{background:var(--green)}.btn-red{background:var(--red)}.btn-orange{background:var(--orange)}.btn-dark{background:#263246}.btn-gold{background:var(--gold);color:#111}
 .badge{display:inline-flex;align-items:center;gap:4px;border-radius:20px;padding:5px 8px;font-size:10px;font-weight:800;white-space:nowrap}.badge-pending{color:#ffc95a;background:rgba(245,158,11,.12)}.badge-ok{color:#54e889;background:rgba(34,197,94,.12)}.badge-no{color:#ff7777;background:rgba(239,68,68,.12)}.badge-vip{color:#d39aff;background:rgba(168,85,247,.14)}.badge-blue{color:#70a9ff;background:rgba(59,130,246,.13)}.badge-self{color:var(--gold);background:rgba(216,170,69,.15)}
 .empty{padding:28px;text-align:center;color:var(--muted);font-size:13px}
 #toastContainer{position:fixed;right:12px;top:78px;z-index:10000;width:min(320px,calc(100% - 24px));display:flex;flex-direction:column;gap:8px}.toast{padding:12px;background:#111b2d;border:1px solid var(--border);border-radius:11px;font-size:12px;box-shadow:0 15px 40px rgba(0,0,0,.4)}.toast.success{border-color:rgba(34,197,94,.35)}.toast.error{border-color:rgba(239,68,68,.35)}
 .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.72);backdrop-filter:blur(7px);z-index:5000}.modal.show{display:flex}.modal-box{width:100%;max-width:680px;max-height:90vh;overflow-y:auto;background:#0b1220;border:1px solid var(--border);border-radius:20px;box-shadow:0 30px 100px rgba(0,0,0,.7)}.modal-header{display:flex;align-items:center;justify-content:space-between;padding:17px;border-bottom:1px solid var(--border)}.modal-title{font-weight:900;font-size:16px}.close{width:34px;height:34px;border:0;border-radius:10px;background:rgba(255,255,255,.06);color:white;font-size:20px;cursor:pointer}.modal-content{padding:18px}
 .detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.detail-item{background:rgba(255,255,255,.035);border:1px solid var(--border);border-radius:12px;padding:12px}.detail-item small{display:block;color:var(--muted);font-size:10px;margin-bottom:6px}.detail-item strong{display:block;font-size:13px;word-break:break-word}
 .link{color:var(--blue);text-decoration:none;word-break:break-all}
-@media(max-width:850px){.layout{display:block}.sidebar{width:100%;display:flex;overflow-x:auto;padding:8px;border-right:0;border-bottom:1px solid var(--border)}.menu-btn{width:auto;flex-shrink:0;margin:0 4px;padding:11px}.content{padding:14px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.panel-head{align-items:flex-start;flex-direction:column}.search{max-width:none}.detail-grid{grid-template-columns:1fr}}
+@media(max-width:850px){.layout{display:block}.sidebar{width:100%;display:flex;overflow-x:auto;padding:8px;border-right:0;border-bottom:1px solid var(--border)}.menu-btn{width:auto;flex-shrink:0;margin:0 4px;padding:11px}.content{padding:14px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.panel-head{flex-direction:column;align-items:flex-start}.search{max-width:none}.detail-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -67,7 +66,7 @@ td{font-size:12px;padding:13px;border-bottom:1px solid rgba(255,255,255,.045);ve
  </aside>
  <main class="content">
   <section class="page active" id="page-dashboard">
-   <div class="page-title">📊 Dashboard</div><div class="page-subtitle">Vue générale + toutes les commandes</div>
+   <div class="page-title">📊 Dashboard</div><div class="page-subtitle">Code admin : 10092007</div>
    <div class="stats">
     <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-label">Utilisateurs</div><div class="stat-value" id="statUsers">0</div></div>
     <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-label">Soldes cumulés</div><div class="stat-value" id="totalBalance">0 FC</div></div>
@@ -77,74 +76,50 @@ td{font-size:12px;padding:13px;border-bottom:1px solid rgba(255,255,255,.045);ve
     <div class="stat-card"><div class="stat-icon">💸</div><div class="stat-label">Retraits en attente</div><div class="stat-value" id="statWithdrawals">0</div></div>
    </div>
   </section>
-  <section class="page" id="page-users">
-   <div class="page-title">👥 Utilisateurs</div><div class="page-subtitle">Gestion + mot de passe visible</div>
-   <div class="panel"><div class="panel-head"><div><div class="panel-title">Liste des utilisateurs</div><div class="panel-description">Clique 👁 pour voir le mot de passe actuel</div></div><input class="search" id="userSearch" placeholder="🔎 Rechercher"></div>
-   <div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>Gains</th><th>Points</th><th>VIP</th><th>MDP actuel</th><th>Actions</th></tr></thead><tbody id="usersTable"></tbody></table></div></div>
-  </section>
-  <section class="page" id="page-commands">
-   <div class="page-title">🛒 Commandes Boost - Modifier prix + Voir détails</div><div class="page-subtitle">Self-boost : client commande lui-même</div>
-   <div class="panel"><div class="panel-head"><div><div class="panel-title">Demandes Boost</div><div class="panel-description">Plateforme, service, lien, quantité, prix modifiable</div></div><input class="search" id="commandSearch" placeholder="🔎 Rechercher"></div>
-   <div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Plateforme</th><th>Service / Type</th><th>Lien</th><th>Qté</th><th>Prix</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div></div>
-  </section>
-  <section class="page" id="page-store">
-   <div class="page-title">🛍️ Store — Modifier prix + Voir commande</div><div class="page-subtitle">Commandes boutique physique / numérique</div>
-   <div class="panel"><div class="panel-head"><div><div class="panel-title">Commandes Store</div><div class="panel-description">Produit, quantité, prix modifiable, adresse livraison</div></div><input class="search" id="storeSearch" placeholder="🔎 Rechercher client, produit"></div>
-   <div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Produit</th><th>Qté</th><th>Prix</th><th>Adresse / Livraison</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="storeTable"></tbody></table></div></div>
-  </section>
-  <section class="page" id="page-recharges">
-   <div class="page-title">💳 Dépôts / Recharges</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Transaction</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="rechargesTable"></tbody></table></div></div>
-  </section>
-  <section class="page" id="page-withdrawals">
-   <div class="page-title">💸 Retraits</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Numéro réception</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsTable"></tbody></table></div></div>
-  </section>
-  <section class="page" id="page-messages">
-   <div class="page-title">💬 Messages clients</div><div class="panel" id="messagesList"><div class="empty">Chargement…</div></div>
-  </section>
-  <section class="page" id="page-send">
-   <div class="page-title">📤 Envoyer un message</div><div class="panel"><div style="padding:17px">
-     <label>Numéro du client</label><input class="input" id="messageTo" placeholder="Ex. 085424199">
-     <label>Message</label><textarea id="messageText" style="display:block;width:100%;min-height:130px;margin:8px 0 14px;padding:12px;background:#070d18;border:1px solid var(--border);border-radius:12px;color:white" placeholder="Écrire…"></textarea>
-     <button id="sendMessageBtn" class="btn btn-blue" style="padding:12px 18px">📤 Envoyer</button><div id="sendStatus" style="margin-top:12px;font-size:12px"></div>
-   </div></div>
-  </section>
+  <section class="page" id="page-users"><div class="page-title">👥 Utilisateurs</div><div class="panel"><div class="panel-head"><div><div class="panel-title">Liste utilisateurs</div><div class="panel-description">Mot de passe visible</div></div><input class="search" id="userSearch" placeholder="🔎 Rechercher"></div><div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>Gains</th><th>Points</th><th>VIP</th><th>MDP actuel</th><th>Actions</th></tr></thead><tbody id="usersTable"></tbody></table></div></div></section>
+  <section class="page" id="page-commands"><div class="page-title">🛒 Boost — Modifier prix + Voir</div><div class="panel"><div class="panel-head"><div><div class="panel-title">Commandes Boost</div><div class="panel-description">Plateforme, service, lien, quantité, prix modifiable</div></div><input class="search" id="commandSearch" placeholder="🔎 Rechercher"></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Plateforme</th><th>Service</th><th>Lien</th><th>Qté</th><th>Prix</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div></div></section>
+  <section class="page" id="page-store"><div class="page-title">🛍️ Store — Modifier prix + Voir</div><div class="panel"><div class="panel-head"><div><div class="panel-title">Commandes Store</div><div class="panel-description">Produit, quantité, prix modifiable, adresse</div></div><input class="search" id="storeSearch" placeholder="🔎 Rechercher"></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Produit</th><th>Qté</th><th>Prix</th><th>Adresse</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="storeTable"></tbody></table></div></div></section>
+  <section class="page" id="page-recharges"><div class="page-title">💳 Dépôts</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Transaction</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="rechargesTable"></tbody></table></div></div></section>
+  <section class="page" id="page-withdrawals"><div class="page-title">💸 Retraits</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Numéro</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsTable"></tbody></table></div></div></section>
+  <section class="page" id="page-messages"><div class="page-title">💬 Messages clients</div><div class="panel" id="messagesList"><div class="empty">Chargement…</div></div></section>
+  <section class="page" id="page-send"><div class="page-title">📤 Envoyer un message</div><div class="panel"><div style="padding:17px"><label>Numéro du client</label><input class="input" id="messageTo" placeholder="Ex. 085424199"><label>Message</label><textarea id="messageText" style="display:block;width:100%;min-height:130px;margin:8px 0 14px;padding:12px;background:#070d18;border:1px solid var(--border);border-radius:12px;color:white" placeholder="Écrire…"></textarea><button id="sendMessageBtn" class="btn btn-blue" style="padding:12px 18px">📤 Envoyer</button><div id="sendStatus" style="margin-top:12px;font-size:12px"></div></div></div></section>
  </main>
 </div>
 </div>
 
 <div class="modal" id="userModal"><div class="modal-box"><div class="modal-header"><div class="modal-title">👤 Utilisateur</div><button class="close" onclick="closeModal('userModal')">×</button></div><div class="modal-content" id="userDetails"></div></div></div>
-<div class="modal" id="commandModal"><div class="modal-box"><div class="modal-header"><div class="modal-title">🛒 Détails commande + Modifier prix</div><button class="close" onclick="closeModal('commandModal')">×</button></div><div class="modal-content" id="commandDetails"></div></div></div>
+<div class="modal" id="commandModal"><div class="modal-box"><div class="modal-header"><div class="modal-title">🛒 Détails commande</div><button class="close" onclick="closeModal('commandModal')">×</button></div><div class="modal-content" id="commandDetails"></div></div></div>
 <div id="toastContainer"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, onValue, update, remove, push, runTransaction, get, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 const firebaseConfig = { apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U", authDomain:"starlink-investit.firebaseapp.com", databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com", projectId:"starlink-investit", storageBucket:"starlink-investit.firebasestorage.app", messagingSenderId:"807081599583", appId:"1:807081599583:web:e00ec3959bc4acdae031ea" };
-const fbApp = initializeApp(firebaseConfig);
-const db = getDatabase(fbApp);
+const dbApp = initializeApp(firebaseConfig);
+const db = getDatabase(dbApp);
 const ROOT = "jasonBusiness";
 const PATHS = { users:`${ROOT}/users`, commands:`${ROOT}/demandes_commandes`, store:`${ROOT}/store_commandes`, recharges:`${ROOT}/demandes_recharges`, withdrawals:`${ROOT}/demandes_retraits`, messages:`${ROOT}/messages` };
 
+// CODE ADMIN ICI - 10092007
+const ADMIN_CODE = "10092007";
+
 const loginBox=document.getElementById("adminLogin"), adminPanel=document.getElementById("adminPanel");
-function showAdmin(){loginBox.style.display="none";adminPanel.style.display="block";}
-async function loginAdmin(){
+function showAdmin(){loginBox.style.display="none";adminPanel.style.display="block"; localStorage.setItem("jasonBusinessAdminToken","admin_token_"+Date.now());}
+function loginAdmin(){
   const pw=document.getElementById("adminPassword").value.trim();
   const err=document.getElementById("loginError"), btn=document.getElementById("loginAdmin");
   if(!pw){err.textContent="Entre le mot de passe";return;}
-  btn.disabled=true; btn.textContent="⏳ Vérification..."; err.textContent="";
-  try{
-    const r=await fetch("/api/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:pw})});
-    const txt=await r.text(); let data; try{data=JSON.parse(txt)}catch{throw new Error(txt)}
-    if(!r.ok||!data.token){err.textContent=data.error||"❌ Mot de passe incorrect";return;}
-    localStorage.setItem("jasonBusinessAdminToken",data.token); showAdmin(); toast("🔓 Admin ouvert");
-  }catch(e){err.textContent="❌ Serveur indisponible";}
-  finally{btn.disabled=false; btn.textContent="🔓 Ouvrir l'administration";}
+  if(pw === ADMIN_CODE){
+    showAdmin(); toast("🔓 Admin ouvert - Code 10092007");
+  } else {
+    err.textContent="❌ Code incorrect - C'est 10092007";
+    toast("❌ Code incorrect","error");
+  }
 }
 document.getElementById("loginAdmin").addEventListener("click",loginAdmin);
 document.getElementById("adminPassword").addEventListener("keydown",e=>{if(e.key==="Enter") loginAdmin();});
 document.getElementById("adminLogout").addEventListener("click",()=>{localStorage.removeItem("jasonBusinessAdminToken"); location.reload();});
-const saved=localStorage.getItem("jasonBusinessAdminToken");
-if(saved){ fetch("/api/admin/session",{headers:{Authorization:`Bearer ${saved}`}}).then(r=>{if(r.ok) showAdmin(); else localStorage.removeItem("jasonBusinessAdminToken");}).catch(()=>localStorage.removeItem("jasonBusinessAdminToken")); }
+if(localStorage.getItem("jasonBusinessAdminToken")){ showAdmin(); }
 
 const $=id=>document.getElementById(id);
 const money=v=>Math.floor(Number(v)||0).toLocaleString("fr-FR");
@@ -175,19 +150,14 @@ onValue(ref(db,PATHS.users),snap=>{
   $("statUsers").textContent=count; $("totalBalance").textContent=money(total)+" FC";
   if(!count) tbody.innerHTML=`<tr><td colspan="8"><div class="empty">Aucun utilisateur</div></td></tr>`;
 });
-
 document.getElementById("userSearch").addEventListener("input",e=>{const q=e.target.value.toLowerCase().trim(); document.querySelectorAll("#usersTable tr").forEach(r=>{r.style.display=r.innerText.toLowerCase().includes(q)?"":"none";});});
 document.getElementById("commandSearch").addEventListener("input",e=>{const q=e.target.value.toLowerCase().trim(); document.querySelectorAll("#commandsTable tr").forEach(r=>{r.style.display=r.innerText.toLowerCase().includes(q)?"":"none";});});
 document.getElementById("storeSearch").addEventListener("input",e=>{const q=e.target.value.toLowerCase().trim(); document.querySelectorAll("#storeTable tr").forEach(r=>{r.style.display=r.innerText.toLowerCase().includes(q)?"":"none";});});
 
-window.viewUser=function(enc){
-  const phone=decodeURIComponent(enc); const d=usersCache[phone]||{};
-  $("userDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>📱 Numéro</small><strong>${esc(phone)}</strong></div><div class="detail-item"><small>👤 Nom</small><strong>${esc(getName(d))}</strong></div><div class="detail-item" style="border-color:rgba(216,170,69,.4)"><small>🔑 MDP ACTUEL</small><strong style="color:#d8aa45;font-size:18px">${esc(getPass(d))}</strong></div><div class="detail-item"><small>💰 Solde</small><strong>${money(getBal(d))} FC</strong></div></div><hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)"><div style="display:flex;flex-wrap:wrap;gap:6px"><button class="btn btn-gold" onclick="resetPassword('${enc}')">🔑 Reset MDP</button><button class="btn btn-green" onclick="addMoney('${enc}')">+1000</button><button class="btn btn-orange" onclick="removeMoney('${enc}')">-1000</button><button class="btn btn-red" onclick="deleteUser('${enc}')">🗑 Supprimer</button></div>`;
-  openModal("userModal");
-};
+window.viewUser=function(enc){const phone=decodeURIComponent(enc); const d=usersCache[phone]||{}; $("userDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>📱 Numéro</small><strong>${esc(phone)}</strong></div><div class="detail-item"><small>👤 Nom</small><strong>${esc(getName(d))}</strong></div><div class="detail-item" style="border-color:rgba(216,170,69,.4)"><small>🔑 MDP ACTUEL</small><strong style="color:#d8aa45;font-size:18px">${esc(getPass(d))}</strong></div><div class="detail-item"><small>💰 Solde</small><strong>${money(getBal(d))} FC</strong></div></div><hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)"><div style="display:flex;flex-wrap:wrap;gap:6px"><button class="btn btn-gold" onclick="resetPassword('${enc}')">🔑 Reset MDP</button><button class="btn btn-green" onclick="addMoney('${enc}')">+1000</button><button class="btn btn-orange" onclick="removeMoney('${enc}')">-1000</button><button class="btn btn-red" onclick="deleteUser('${enc}')">🗑 Supprimer</button></div>`; openModal("userModal");};
 window.addMoney=async(enc)=>{const p=decodeURIComponent(enc); if(!confirm(`+1000 FC à ${p}?`)) return; try{await runTransaction(ref(db,`${PATHS.users}/${p}/solde_principal`),c=>(Number(c)||0)+1000); toast("✅ +1000");}catch{toast("❌ Erreur","error");}};
 window.removeMoney=async(enc)=>{const p=decodeURIComponent(enc); if(!confirm(`-1000 FC de ${p}?`)) return; try{const r=await runTransaction(ref(db,`${PATHS.users}/${p}/solde_principal`),c=>{const v=Number(c)||0; if(v<1000) return; return v-1000;}); if(!r.committed){toast("❌ Solde insuffisant","error"); return;} toast("✅ -1000");}catch{toast("❌ Erreur","error");}};
-window.resetPassword=async(enc)=>{const phone=decodeURIComponent(enc); const current=usersCache[phone]||{}; const oldPass=getPass(current); const newPass=prompt(`MDP pour ${phone}\nAncien: ${oldPass}\nNouveau:`); if(newPass===null) return; const clean=newPass.trim(); if(!clean||clean.length<4){toast("❌ Min 4 caractères","error"); return;} try{await update(ref(db,`${PATHS.users}/${phone}`),{password:clean,mot_de_passe:clean,pass:clean,mdp:clean,lastPasswordReset:new Date().toISOString(),forceLogout:true}); toast(`✅ Nouveau MDP: ${clean}`); setTimeout(()=>{ if($("userModal").classList.contains("show")) viewUser(enc); },300);}catch{toast("❌ Erreur","error");}};
+window.resetPassword=async(enc)=>{const phone=decodeURIComponent(enc); const cur=usersCache[phone]||{}; const oldPass=getPass(cur); const newPass=prompt(`MDP pour ${phone}\nAncien: ${oldPass}\nNouveau:`); if(newPass===null) return; const clean=newPass.trim(); if(!clean||clean.length<4){toast("❌ Min 4 caractères","error"); return;} try{await update(ref(db,`${PATHS.users}/${phone}`),{password:clean,mot_de_passe:clean,pass:clean,mdp:clean,lastPasswordReset:new Date().toISOString()}); toast(`✅ Nouveau MDP: ${clean}`); setTimeout(()=>{ if($("userModal").classList.contains("show")) viewUser(enc); },300);}catch{toast("❌ Erreur","error");}};
 window.deleteUser=async(enc)=>{const p=decodeURIComponent(enc); if(!confirm(`Supprimer ${p}?`)) return; try{await remove(ref(db,`${PATHS.users}/${p}`)); closeModal("userModal"); toast("✅ Supprimé");}catch{toast("❌ Erreur","error");}};
 
 onValue(ref(db,PATHS.commands),snap=>{
@@ -195,63 +165,30 @@ onValue(ref(db,PATHS.commands),snap=>{
   const entries=[]; snap.forEach(ch=>{entries.push({id:ch.key,val:ch.val()||{}})}); entries.sort((a,b)=>(Number(b.val.createdAt)||0)-(Number(a.val.createdAt)||0));
   entries.forEach(({id,val:d})=>{
     commandsCache[id]=d; const st=getStatus(d); if(isPending(st)) pending++;
-    const amt=Number(d.montant??d.prix??0)||0;
-    const plateforme=d.plateforme??d.platforme??"—";
-    const typeService=d.type_service??d.typeService??d.service??"—";
-    const lien=d.lien??d.link??"—";
-    const qte=d.quantite??d.quantité??d.qty??"—";
-    const isSelf=d.selfBoost?'<span class="badge badge-self">SELF</span>':"";
+    const amt=Number(d.montant??d.prix??0)||0; const plateforme=d.plateforme??"—"; const typeService=d.type_service??d.typeService??d.service??"—"; const lien=d.lien??"—"; const qte=d.quantite??"—"; const isSelf=d.selfBoost?'<span class="badge badge-self">SELF</span>':"";
     const tr=document.createElement("tr");
-    tr.innerHTML=`<td>${esc(d.date??new Date(d.createdAt||0).toLocaleString()??"—")}</td><td><b>${esc(getPhone(d)||"—")}</b> ${isSelf}</td><td><b style="color:#d8aa45">${esc(plateforme)}</b></td><td>${esc(typeService)}</td><td><a href="${esc(lien)}" target="_blank" class="link">${esc(lien).slice(0,35)}</a></td><td><b>${esc(qte)}</b></td><td><b style="color:#d8aa45">${money(amt)} FC</b></td><td>${badge(st)}</td><td><button class="btn btn-blue" onclick="viewCommand('${encodeURIComponent(id)}')">👁</button><button class="btn btn-gold" onclick="editPrice('${encodeURIComponent(id)}')">💰 Prix</button>${isPending(st)?`<button class="btn btn-green" onclick="validateCommand('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseCommand('${encodeURIComponent(id)}')">✕</button>`:`<button class="btn btn-dark" onclick="deleteCommand('${encodeURIComponent(id)}')">🗑</button>`}</td>`;
+    tr.innerHTML=`<td>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</td><td><b>${esc(getPhone(d)||"—")}</b> ${isSelf}</td><td><b style="color:#d8aa45">${esc(plateforme)}</b></td><td>${esc(typeService)}</td><td><a href="${esc(lien)}" target="_blank" class="link">${esc(lien).slice(0,35)}</a></td><td><b>${esc(qte)}</b></td><td><b style="color:#d8aa45">${money(amt)} FC</b></td><td>${badge(st)}</td><td><button class="btn btn-blue" onclick="viewCommand('${encodeURIComponent(id)}')">👁</button><button class="btn btn-gold" onclick="editPrice('${encodeURIComponent(id)}')">💰 Prix</button>${isPending(st)?`<button class="btn btn-green" onclick="validateCommand('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseCommand('${encodeURIComponent(id)}')">✕</button>`:`<button class="btn btn-dark" onclick="deleteCommand('${encodeURIComponent(id)}')">🗑</button>`}</td>`;
     tbody.appendChild(tr);
   });
   $("statCommands").textContent=pending; $("menuCommands").textContent=pending;
   if(entries.length===0) tbody.innerHTML=`<tr><td colspan="9"><div class="empty">Aucune commande Boost</div></td></tr>`;
 });
-
 onValue(ref(db,PATHS.store),snap=>{
   storeCache={}; const tbody=$("storeTable"); tbody.innerHTML=""; let pending=0;
   const entries=[]; snap.forEach(ch=>{entries.push({id:ch.key,val:ch.val()||{}})}); entries.sort((a,b)=>(Number(b.val.createdAt)||0)-(Number(a.val.createdAt)||0));
   entries.forEach(({id,val:d})=>{
-    storeCache[id]=d; const st=getStatus(d); if(isPending(st)) pending++;
-    const amt=Number(d.montant??d.prix??d.total??0)||0;
+    storeCache[id]=d; const st=getStatus(d); if(isPending(st)) pending++; const amt=Number(d.montant??d.prix??d.total??0)||0;
     const tr=document.createElement("tr");
-    tr.innerHTML=`<td>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</td><td><b>${esc(getPhone(d)||d.client||"—")}</b></td><td>${esc(d.produit??d.product??d.nom??"—")}</td><td>${esc(d.quantite??1)}</td><td><b style="color:#d8aa45">${money(amt)} FC</b></td><td style="max-width:180px;white-space:pre-wrap">${esc(d.adresse??d.livraison??"—")}</td><td>${badge(st)}</td><td><button class="btn btn-blue" onclick="viewStore('${encodeURIComponent(id)}')">👁</button><button class="btn btn-gold" onclick="editStorePrice('${encodeURIComponent(id)}')">💰 Prix</button>${isPending(st)?`<button class="btn btn-green" onclick="validateStore('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseStore('${encodeURIComponent(id)}')">✕</button>`:`<button class="btn btn-dark" onclick="deleteStore('${encodeURIComponent(id)}')">🗑</button>`}</td>`;
+    tr.innerHTML=`<td>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</td><td><b>${esc(getPhone(d)||d.client||"—")}</b></td><td>${esc(d.produit??d.product??"—")}</td><td>${esc(d.quantite??1)}</td><td><b style="color:#d8aa45">${money(amt)} FC</b></td><td style="max-width:180px;white-space:pre-wrap">${esc(d.adresse??d.livraison??"—")}</td><td>${badge(st)}</td><td><button class="btn btn-blue" onclick="viewStore('${encodeURIComponent(id)}')">👁</button><button class="btn btn-gold" onclick="editStorePrice('${encodeURIComponent(id)}')">💰 Prix</button>${isPending(st)?`<button class="btn btn-green" onclick="validateStore('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseStore('${encodeURIComponent(id)}')">✕</button>`:`<button class="btn btn-dark" onclick="deleteStore('${encodeURIComponent(id)}')">🗑</button>`}</td>`;
     tbody.appendChild(tr);
   });
   $("statStore").textContent=pending; $("menuStore").textContent=pending;
   if(entries.length===0) tbody.innerHTML=`<tr><td colspan="8"><div class="empty">Aucune commande Store</div></td></tr>`;
 });
-
-window.viewCommand=function(enc){
-  const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const amt=Number(d.montant??d.prix??0)||0;
-  $("commandDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>📱 Client</small><strong>${esc(getPhone(d))}</strong></div><div class="detail-item"><small>📅 Date</small><strong>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</strong></div><div class="detail-item"><small>🌐 Plateforme</small><strong style="color:#d8aa45">${esc(d.plateforme??"—")}</strong></div><div class="detail-item"><small>🚀 Type boost</small><strong>${esc(d.type_service??d.service??"—")}</strong></div><div class="detail-item" style="grid-column:span 2"><small>🔗 Lien public</small><strong><a href="${esc(d.lien??"")}" target="_blank" class="link">${esc(d.lien??"—")}</a></strong></div><div class="detail-item"><small>🔢 Quantité</small><strong>${esc(d.quantite??"—")}</strong></div><div class="detail-item"><small>💰 Prix actuel</small><strong style="color:#d8aa45;font-size:18px">${money(amt)} FC</strong></div><div class="detail-item"><small>📌 Statut</small><strong>${esc(getStatus(d))}</strong></div><div class="detail-item" style="grid-column:span 2"><small>📝 JSON complet commande</small><strong style="white-space:pre-wrap;font-size:10px">${esc(JSON.stringify(d,null,2).slice(0,2000))}</strong></div></div><hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)"><div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn btn-gold" onclick="editPrice('${enc}')">💰 Modifier prix</button><button class="btn btn-green" onclick="validateCommand('${enc}')">✓ Valider</button><button class="btn btn-orange" onclick="copyLink('${enc}')">🔗 Copier lien</button><button class="btn btn-red" onclick="refuseCommand('${enc}')">✕ Refuser + Rembourser</button><button class="btn btn-dark" onclick="deleteCommand('${enc}')">🗑 Supprimer</button></div>`;
-  openModal("commandModal");
-};
-window.viewStore=function(enc){
-  const id=decodeURIComponent(enc); const d=storeCache[id]||{}; const amt=Number(d.montant??d.prix??d.total??0)||0;
-  $("commandDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>📱 Client</small><strong>${esc(getPhone(d)||d.client||"—")}</strong></div><div class="detail-item"><small>📅 Date</small><strong>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</strong></div><div class="detail-item"><small>🛍️ Produit</small><strong>${esc(d.produit??d.product??"—")}</strong></div><div class="detail-item"><small>💰 Prix</small><strong style="color:#d8aa45;font-size:18px">${money(amt)} FC</strong></div><div class="detail-item" style="grid-column:span 2"><small>📦 Adresse livraison</small><strong>${esc(d.adresse??d.livraison??"—")}</strong></div><div class="detail-item" style="grid-column:span 2"><small>📝 JSON complet</small><strong style="white-space:pre-wrap;font-size:10px">${esc(JSON.stringify(d,null,2).slice(0,2000))}</strong></div></div><hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)"><div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn btn-gold" onclick="editStorePrice('${enc}')">💰 Modifier prix Store</button><button class="btn btn-green" onclick="validateStore('${enc}')">✓ Valider</button><button class="btn btn-red" onclick="refuseStore('${enc}')">✕ Refuser + Rembourser</button><button class="btn btn-dark" onclick="deleteStore('${enc}')">🗑 Supprimer</button></div>`;
-  openModal("commandModal");
-};
-window.editPrice=async(enc)=>{
-  const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const cur=Number(d.montant??d.prix??0)||0;
-  const input=prompt(`💰 Modifier prix Boost pour ${getPhone(d)}\nService: ${d.plateforme??""} - ${d.type_service??""}\nLien: ${d.lien??""}\nPrix actuel: ${cur} FC\n\nNouveau prix:`, String(cur)); if(input===null) return;
-  const newPrice=Number(input.replace(/[^0-9]/g,"")); if(isNaN(newPrice)) return toast("❌ Prix invalide","error");
-  const diff=newPrice-cur; const phone=getPhone(d);
-  if(!confirm(`Confirmer ${money(cur)} → ${money(newPrice)} FC?\nDiff: ${diff>0?"+":""}${money(diff)} FC\nClient: ${phone}`)) return;
-  try{
-    await update(ref(db,`${PATHS.commands}/${id}`),{prix:newPrice,montant:newPrice,priceEdited:true,oldPrice:cur,newPrice:newPrice,editedAt:Date.now()});
-    if(phone&&diff!==0){const snap=await get(ref(db,`${PATHS.users}/${phone}/solde_principal`)); let bal=Number(snap.exists()?snap.val():0)||0; let newBal=bal-diff; if(newBal<0){toast("❌ Solde client insuffisant","error"); await update(ref(db,`${PATHS.commands}/${id}`),{prix:cur,montant:cur}); return;} await set(ref(db,`${PATHS.users}/${phone}/solde_principal`),newBal);}
-    toast(`✅ Prix Boost: ${money(cur)} → ${money(newPrice)} FC`); if($("commandModal").classList.contains("show")) viewCommand(enc);
-  }catch(e){toast("❌ Erreur prix","error");}
-};
-window.editStorePrice=async(enc)=>{
-  const id=decodeURIComponent(enc); const d=storeCache[id]||{}; const cur=Number(d.montant??d.prix??0)||0;
-  const input=prompt(`💰 Modifier prix Store pour ${getPhone(d)||d.client}\nProduit: ${d.produit??""}\nPrix actuel: ${cur} FC`, String(cur)); if(input===null) return;
-  const newPrice=Number(input.replace(/[^0-9]/g,"")); if(isNaN(newPrice)) return toast("❌ Prix invalide","error");
-  await update(ref(db,`${PATHS.store}/${id}`),{prix:newPrice,montant:newPrice,priceEdited:true,oldPrice:cur,editedAt:Date.now()});
-  toast(`✅ Store prix ${money(cur)} → ${money(newPrice)} FC`); if($("commandModal").classList.contains("show")) viewStore(enc);
-};
+window.viewCommand=function(enc){const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const amt=Number(d.montant??d.prix??0)||0; $("commandDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>📱 Client</small><strong>${esc(getPhone(d))}</strong></div><div class="detail-item"><small>📅 Date</small><strong>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</strong></div><div class="detail-item"><small>🌐 Plateforme</small><strong style="color:#d8aa45">${esc(d.plateforme??"—")}</strong></div><div class="detail-item"><small>🚀 Type boost</small><strong>${esc(d.type_service??d.service??"—")}</strong></div><div class="detail-item" style="grid-column:span 2"><small>🔗 Lien public</small><strong><a href="${esc(d.lien??"")}" target="_blank" class="link">${esc(d.lien??"—")}</a></strong></div><div class="detail-item"><small>🔢 Quantité</small><strong>${esc(d.quantite??"—")}</strong></div><div class="detail-item"><small>💰 Prix actuel</small><strong style="color:#d8aa45;font-size:18px">${money(amt)} FC</strong></div><div class="detail-item"><small>📌 Statut</small><strong>${esc(getStatus(d))}</strong></div><div class="detail-item" style="grid-column:span 2"><small>📝 JSON complet commande</small><strong style="white-space:pre-wrap;font-size:10px">${esc(JSON.stringify(d,null,2).slice(0,2000))}</strong></div></div><hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)"><div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn btn-gold" onclick="editPrice('${enc}')">💰 Modifier prix</button><button class="btn btn-green" onclick="validateCommand('${enc}')">✓ Valider</button><button class="btn btn-orange" onclick="copyLink('${enc}')">🔗 Copier lien</button><button class="btn btn-red" onclick="refuseCommand('${enc}')">✕ Refuser + Rembourser</button><button class="btn btn-dark" onclick="deleteCommand('${enc}')">🗑 Supprimer</button></div>`; openModal("commandModal");};
+window.viewStore=function(enc){const id=decodeURIComponent(enc); const d=storeCache[id]||{}; const amt=Number(d.montant??d.prix??d.total??0)||0; $("commandDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>📱 Client</small><strong>${esc(getPhone(d)||d.client||"—")}</strong></div><div class="detail-item"><small>📅 Date</small><strong>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</strong></div><div class="detail-item"><small>🛍️ Produit</small><strong>${esc(d.produit??d.product??"—")}</strong></div><div class="detail-item"><small>💰 Prix</small><strong style="color:#d8aa45;font-size:18px">${money(amt)} FC</strong></div><div class="detail-item" style="grid-column:span 2"><small>📦 Adresse livraison</small><strong>${esc(d.adresse??d.livraison??"—")}</strong></div><div class="detail-item" style="grid-column:span 2"><small>📝 JSON complet</small><strong style="white-space:pre-wrap;font-size:10px">${esc(JSON.stringify(d,null,2).slice(0,2000))}</strong></div></div><hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)"><div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn btn-gold" onclick="editStorePrice('${enc}')">💰 Modifier prix Store</button><button class="btn btn-green" onclick="validateStore('${enc}')">✓ Valider</button><button class="btn btn-red" onclick="refuseStore('${enc}')">✕ Refuser + Rembourser</button><button class="btn btn-dark" onclick="deleteStore('${enc}')">🗑 Supprimer</button></div>`; openModal("commandModal");};
+window.editPrice=async(enc)=>{const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const cur=Number(d.montant??d.prix??0)||0; const input=prompt(`💰 Modifier prix Boost pour ${getPhone(d)}\nService: ${d.plateforme??""} - ${d.type_service??""}\nLien: ${d.lien??""}\nPrix actuel: ${cur} FC\n\nNouveau prix:`, String(cur)); if(input===null) return; const newPrice=Number(input.replace(/[^0-9]/g,"")); if(isNaN(newPrice)) return toast("❌ Prix invalide","error"); const diff=newPrice-cur; const phone=getPhone(d); if(!confirm(`Confirmer ${money(cur)} → ${money(newPrice)} FC?\nDiff: ${diff>0?"+":""}${money(diff)} FC\nClient: ${phone}`)) return; try{await update(ref(db,`${PATHS.commands}/${id}`),{prix:newPrice,montant:newPrice,priceEdited:true,oldPrice:cur,newPrice:newPrice,editedAt:Date.now()}); if(phone&&diff!==0){const snap=await get(ref(db,`${PATHS.users}/${phone}/solde_principal`)); let bal=Number(snap.exists()?snap.val():0)||0; let newBal=bal-diff; if(newBal<0){toast("❌ Solde client insuffisant","error"); await update(ref(db,`${PATHS.commands}/${id}`),{prix:cur,montant:cur}); return;} await set(ref(db,`${PATHS.users}/${phone}/solde_principal`),newBal);} toast(`✅ Prix Boost: ${money(cur)} → ${money(newPrice)} FC`); if($("commandModal").classList.contains("show")) viewCommand(enc);}catch(e){toast("❌ Erreur prix","error");}};
+window.editStorePrice=async(enc)=>{const id=decodeURIComponent(enc); const d=storeCache[id]||{}; const cur=Number(d.montant??d.prix??0)||0; const input=prompt(`💰 Modifier prix Store pour ${getPhone(d)||d.client}\nProduit: ${d.produit??""}\nPrix actuel: ${cur} FC`, String(cur)); if(input===null) return; const newPrice=Number(input.replace(/[^0-9]/g,"")); if(isNaN(newPrice)) return toast("❌ Prix invalide","error"); await update(ref(db,`${PATHS.store}/${id}`),{prix:newPrice,montant:newPrice,priceEdited:true,oldPrice:cur,editedAt:Date.now()}); toast(`✅ Store prix ${money(cur)} → ${money(newPrice)} FC`); if($("commandModal").classList.contains("show")) viewStore(enc);};
 window.copyLink=(enc)=>{const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const lien=d.lien??""; if(!lien){toast("Pas de lien","error"); return;} navigator.clipboard.writeText(lien).then(()=>toast("🔗 Lien copié")).catch(()=>{prompt("Copie lien:",lien)});};
 window.validateCommand=async(enc)=>{const id=decodeURIComponent(enc); try{const r=await runTransaction(ref(db,`${PATHS.commands}/${id}`),c=>{if(!c) return; if(!isPending(getStatus(c))) return; return {...c,statut:"Validée",dateValidation:new Date().toISOString()};}); if(!r.committed){toast("Déjà traitée","error"); return;} toast("✅ Boost Validée"); closeModal("commandModal");}catch{toast("❌ Erreur","error");}};
 window.refuseCommand=async(enc)=>{const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const phone=getPhone(d); const amt=Number(d.montant??d.prix??0)||0; if(!confirm(`Refuser et rembourser ${money(amt)} à ${phone}?`)) return; try{const r=await runTransaction(ref(db,`${PATHS.commands}/${id}`),c=>{if(!c) return; if(!isPending(getStatus(c))) return; return {...c,statut:"Refusée — Remboursée"};}); if(!r.committed) return; if(phone&&amt>0){const snap=await get(ref(db,`${PATHS.users}/${phone}/solde_principal`)); const bal=Number(snap.exists()?snap.val():0)||0; await set(ref(db,`${PATHS.users}/${phone}/solde_principal`),bal+amt);} toast("✅ Remboursée"); closeModal("commandModal");}catch{toast("❌ Erreur","error");}};
