@@ -6,938 +6,623 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#050914">
 <title>JASON BUSINESS — Boutique</title>
-
 <style>
 :root{
-  --bg:#050914;
-  --panel:#0b1425;
-  --panel2:#101e32;
-  --blue:#00cfff;
-  --gold:#d8aa45;
-  --green:#22c55e;
-  --text:#f4f7ff;
-  --muted:#94a3b8;
-  --border:rgba(216,170,69,.23);
-  --danger:#fb7185;
+ --bg:#050914;--panel:#0b1425;--panel2:#101e32;
+ --blue:#00d4ff;--gold:#d8aa45;--green:#22c55e;
+ --text:#f4f7ff;--muted:#94a3b8;
+ --border:rgba(216,170,69,.25)
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
 body{
-  margin:0;
-  color:var(--text);
-  background:
-    radial-gradient(ellipse at top right,rgba(0,207,255,.09),transparent 35%),
-    radial-gradient(ellipse at bottom left,rgba(216,170,69,.07),transparent 30%),
-    var(--bg);
-  font-family:Arial,Helvetica,sans-serif;
-  min-height:100vh;
+ margin:0;color:var(--text);font-family:Arial,sans-serif;
+ background:radial-gradient(ellipse at top right,#07304a44,transparent 40%),
+ radial-gradient(ellipse at bottom left,#d8aa4510,transparent 35%),var(--bg)
 }
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-button:disabled{opacity:.5;cursor:not-allowed}
 header{
-  position:sticky;top:0;z-index:10;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:10px;padding:13px 15px;
-  background:rgba(5,9,20,.95);
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(16px);
+ position:sticky;top:0;z-index:5;padding:12px 14px;
+ display:flex;justify-content:space-between;align-items:center;gap:8px;
+ background:#050914f5;border-bottom:1px solid var(--border);
+ backdrop-filter:blur(15px)
 }
-.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand{display:flex;align-items:center;gap:10px}
 .logo{
-  width:43px;height:43px;border-radius:14px;
-  display:grid;place-items:center;flex-shrink:0;
-  color:#08111d;font-weight:900;font-size:18px;
-  background:linear-gradient(135deg,#ffe29a,var(--gold),#946515);
-  box-shadow:0 0 20px #d8aa4525;
+ width:43px;height:43px;display:grid;place-items:center;border-radius:13px;
+ background:linear-gradient(135deg,#ffe8ac,var(--gold),#946515);
+ color:#07111d;font-weight:900;font-size:18px
 }
-.brand h1{font-size:15px;margin:0 0 4px}
-.brand small{color:var(--muted);font-size:11px}
-.header-actions{display:flex;gap:7px}
+.brand h1{font-size:14px;margin:0 0 4px}
+.brand small{font-size:10px;color:var(--muted)}
 .btn{
-  border:1px solid var(--border);
-  background:var(--panel2);
-  color:var(--text);
-  border-radius:11px;padding:10px 12px;
-  font-size:12px;font-weight:700;
-  transition:.2s;
+ border:1px solid var(--border);border-radius:11px;padding:11px 13px;
+ color:var(--text);background:var(--panel2);font-size:12px;font-weight:bold
 }
-.btn:hover{transform:translateY(-2px);border-color:var(--gold)}
-.btn-gold{
-  color:#111827;
-  border:0;
-  background:linear-gradient(135deg,#ffe4a3,var(--gold));
-}
-.btn-blue{
-  background:linear-gradient(135deg,#00cfff,#087cff);
-  color:#03101b;border:0;
-}
-.btn-green{background:#14532d;border-color:#22c55e;color:#bbf7d0}
-main{width:min(100%,850px);margin:auto;padding:18px 14px 100px}
+.btn:hover{border-color:var(--gold);transform:translateY(-1px)}
+.gold{background:linear-gradient(135deg,#ffe4a3,var(--gold));color:#10131a;border:0}
+.blue{background:linear-gradient(135deg,#00d4ff,#087cff);color:#00121b;border:0}
+main{max-width:900px;margin:auto;padding:16px 13px 80px}
 .hero{
-  position:relative;overflow:hidden;
-  padding:23px 19px;margin-bottom:18px;
-  border:1px solid var(--border);border-radius:22px;
-  background:linear-gradient(135deg,#111f34,#080e1b 75%);
+ border:1px solid var(--border);border-radius:21px;padding:22px 18px;
+ background:linear-gradient(135deg,#14243b,#080e1b);margin-bottom:23px
 }
-.hero:after{
-  content:"";position:absolute;right:-45px;top:-65px;
-  width:170px;height:170px;border-radius:50%;
-  border:24px solid #d8aa4510;
-}
-.hero-tag{
-  display:inline-block;padding:6px 9px;border-radius:20px;
-  color:var(--gold);background:#d8aa4512;
-  border:1px solid var(--border);font-size:10px;font-weight:800;
-}
-.hero h2{font-size:25px;line-height:1.25;margin:13px 0 9px}
+.tag{font-size:10px;color:var(--gold);letter-spacing:1px;font-weight:bold}
+.hero h2{font-size:26px;line-height:1.25;margin:13px 0 8px}
 .hero h2 span{color:var(--gold)}
-.hero p{font-size:13px;line-height:1.7;color:var(--muted);max-width:500px}
-.hero-buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.section-title{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:10px;margin:24px 2px 12px;
-}
-.section-title h2{font-size:16px;margin:0}
-.section-title span{color:var(--muted);font-size:11px}
+.hero p{font-size:12px;line-height:1.8;color:var(--muted)}
+.section-title{font-size:17px;margin:23px 2px 12px}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
-.service{
-  min-width:0;position:relative;overflow:hidden;
-  background:linear-gradient(145deg,#101d30,#09111f);
-  border:1px solid var(--border);border-radius:17px;
-  padding:15px 13px;transition:.22s;
+.card{
+ padding:15px 12px;border-radius:17px;border:1px solid var(--border);
+ background:linear-gradient(145deg,#111f33,#09111e);min-width:0;
+ transition:.2s
 }
-.service:hover{transform:translateY(-3px);border-color:#d8aa4580}
-.service-icon{
-  width:43px;height:43px;display:grid;place-items:center;
-  font-size:22px;border-radius:13px;margin-bottom:12px;
-  background:linear-gradient(135deg,#d8aa4520,#00cfff10);
-  border:1px solid var(--border);
+.card:hover{transform:translateY(-3px);border-color:#d8aa4580}
+.card-icon{
+ width:43px;height:43px;border-radius:13px;display:grid;place-items:center;
+ font-size:23px;background:#d8aa4512;border:1px solid var(--border);margin-bottom:11px
 }
-.service h3{font-size:14px;margin:0 0 7px}
-.service p{font-size:11px;line-height:1.6;color:var(--muted);min-height:35px;margin:0 0 13px}
-.service .btn{width:100%}
-.price{font-size:11px;color:var(--gold);margin-bottom:10px;font-weight:bold}
-.note{
-  margin-top:17px;padding:12px;border-radius:13px;
-  background:#0a1627;border:1px solid var(--border);
-  color:var(--muted);font-size:11px;line-height:1.7;
-}
+.card h3{font-size:14px;margin:0 0 8px}
+.card p{font-size:11px;color:var(--muted);line-height:1.65;min-height:38px}
+.card .btn{width:100%;margin-top:8px}
+.muted{color:var(--muted);font-size:11px;line-height:1.7}
 .overlay{
-  display:none;position:fixed;inset:0;z-index:30;
-  background:#000b;align-items:flex-end;justify-content:center;
-  padding:0;
+ display:none;position:fixed;inset:0;z-index:20;
+ background:#000b;align-items:flex-end;justify-content:center
 }
 .overlay.show{display:flex}
 .modal{
-  width:min(100%,600px);max-height:91vh;overflow:auto;
-  background:#08111f;border:1px solid var(--border);
-  border-radius:22px 22px 0 0;padding:18px;
-  animation:rise .22s ease;
+ width:min(100%,620px);max-height:92vh;overflow:auto;
+ background:#08111f;border:1px solid var(--border);
+ border-radius:22px 22px 0 0;padding:17px;
+ animation:up .2s ease
 }
-@keyframes rise{from{transform:translateY(30px);opacity:.5}to{transform:translateY(0);opacity:1}}
-.modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}
+@keyframes up{from{transform:translateY(20px);opacity:.5}to{transform:none;opacity:1}}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
 .modal-head h2{font-size:18px;margin:0}
 .close{
-  width:35px;height:35px;border-radius:10px;
-  border:1px solid var(--border);background:#101e32;color:white;font-size:19px;
+ width:36px;height:36px;border:1px solid var(--border);border-radius:10px;
+ background:#132035;color:white;font-size:20px
 }
-.field{margin:12px 0}
-.field label{display:block;font-size:12px;color:#cbd5e1;margin-bottom:7px}
-.field input,.field select,.field textarea{
-  display:block;width:100%;padding:12px;
-  border:1px solid #27364d;border-radius:11px;
-  outline:none;background:#0d192b;color:white;
+.field{margin:13px 0}
+.field label{display:block;font-size:12px;margin-bottom:7px;color:#dce6f5}
+.field input,.field textarea,.field select{
+ width:100%;padding:12px;border-radius:11px;border:1px solid #293850;
+ background:#0c192b;color:white;outline:none
 }
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold)}
-.field textarea{resize:vertical;min-height:90px}
-.field small{display:block;color:var(--muted);font-size:10px;line-height:1.5;margin-top:5px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.total-box{
-  padding:13px;border:1px solid var(--border);border-radius:12px;
-  background:#d8aa450b;display:flex;justify-content:space-between;
-  gap:10px;align-items:center;margin:14px 0;
-}
-.total-box strong{color:var(--gold);font-size:18px}
-.status{font-size:12px;line-height:1.6;margin:12px 0;white-space:pre-wrap;overflow-wrap:anywhere}
-.status.ok{color:#86efac}
-.status.error{color:#fda4af}
-.status.info{color:#93c5fd}
-.platform-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold)}
+.field textarea{min-height:100px;resize:vertical}
+.field small{display:block;color:var(--muted);font-size:10px;line-height:1.6;margin-top:5px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.platforms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
 .platform{
-  background:#0d192b;color:white;border:1px solid #26354a;
-  border-radius:12px;padding:10px 3px;font-size:10px;
-  display:flex;flex-direction:column;align-items:center;gap:7px;
+ padding:10px 3px;border:1px solid #28374d;border-radius:11px;
+ background:#0d192b;color:white;font-size:10px;display:flex;
+ flex-direction:column;align-items:center;gap:6px
 }
-.platform.active{border-color:var(--gold);background:#d8aa4515}
-.platform img{width:26px;height:26px;object-fit:contain}
-.platform .fallback{font-size:23px;height:26px}
-.history-item{
-  background:#0d192b;border:1px solid #26354a;
-  border-radius:11px;padding:11px;margin:8px 0;font-size:11px;
-  overflow-wrap:anywhere;
+.platform img{width:25px;height:25px;object-fit:contain}
+.platform.active{border-color:var(--gold);background:#d8aa4518}
+.total{
+ padding:13px;border:1px solid var(--border);border-radius:12px;
+ display:flex;justify-content:space-between;align-items:center;
+ background:#d8aa450c;margin:14px 0;font-size:12px
 }
+.total strong{color:var(--gold);font-size:19px}
+.status{font-size:12px;line-height:1.7;margin:12px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.ok{color:#86efac}.error{color:#fda4af}.info{color:#93c5fd}
+.preview{
+ width:85px;height:85px;border-radius:13px;object-fit:cover;
+ border:1px solid var(--border);display:none;margin-top:9px
+}
+.history-item{padding:12px;margin:9px 0;background:#0d192b;border:1px solid #28374d;border-radius:11px;font-size:11px;line-height:1.7;overflow-wrap:anywhere}
 .history-item strong{color:var(--gold)}
-.qr-preview{display:flex;justify-content:center;margin:14px 0}
-.qr-preview img{width:190px;height:190px;background:white;padding:8px;border-radius:12px}
-footer{
-  border-top:1px solid var(--border);text-align:center;
-  color:var(--muted);font-size:10px;padding:18px 12px;
-}
-@media(min-width:600px){
-  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .overlay{align-items:center;padding:15px}
-  .modal{border-radius:22px}
-  main{padding-top:25px}
+audio{width:100%;margin-top:12px}
+footer{text-align:center;padding:20px;border-top:1px solid var(--border);font-size:10px;color:var(--muted)}
+@media(min-width:620px){
+ .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .overlay{align-items:center;padding:15px}
+ .modal{border-radius:22px}
 }
 @media(max-width:360px){
-  .brand h1{font-size:13px}
-  .header-actions .btn{padding:9px 8px;font-size:10px}
-  .grid{gap:8px}
-  .service{padding:12px 10px}
-  .form-row{grid-template-columns:1fr}
+ .grid{gap:8px}.card{padding:11px 9px}
+ .brand h1{font-size:12px}.row{grid-template-columns:1fr}
 }
 </style>
 </head>
-
 <body>
 <header>
-  <div class="brand">
-    <div class="logo">JB</div>
-    <div>
-      <h1>JASON BUSINESS</h1>
-      <small>Boutique numérique</small>
-    </div>
-  </div>
-  <div class="header-actions">
-    <button class="btn" id="historyBtn">Historique</button>
-    <button class="btn btn-gold" id="apiBtn">API</button>
-  </div>
+ <div class="brand">
+  <div class="logo">JB</div>
+  <div><h1>JASON BUSINESS</h1><small>Boutique numérique</small></div>
+ </div>
+ <button class="btn" id="historyBtn">📋 Mes demandes</button>
 </header>
 
 <main>
-  <section class="hero">
-    <span class="hero-tag">✦ ESPACE SERVICES NUMÉRIQUES</span>
-    <h2>Vos projets,<br><span>votre créativité.</span></h2>
-    <p>
-      Créez votre demande de service, préparez votre publicité
-      et découvrez les outils numériques depuis votre téléphone.
-    </p>
-    <div class="hero-buttons">
-      <button class="btn btn-gold" id="startAdsBtn">Créer une publicité</button>
-      <button class="btn" id="startSocialBtn">Réseaux sociaux</button>
-    </div>
-  </section>
+ <section class="hero">
+  <div class="tag">✦ TON ESPACE NUMÉRIQUE</div>
+  <h2>Crée ton projet.<br><span>Réalise tes idées.</span></h2>
+  <p>Commandez une application, un site web, un chatbot, créez votre chanson ou préparez votre promotion sur les réseaux sociaux.</p>
+  <button class="btn gold" id="exploreBtn">Découvrir les services ↓</button>
+ </section>
 
-  <div class="section-title">
-    <h2>Nos services</h2>
-    <span>Choisissez un service</span>
-  </div>
+ <h2 class="section-title" id="services">Nos services</h2>
+ <section class="grid">
+  <article class="card">
+   <div class="card-icon">📈</div><h3>Boostage réseaux sociaux</h3>
+   <p>Choisissez votre plateforme, followers, likes ou vues, puis entrez la quantité souhaitée.</p>
+   <button class="btn gold" data-open="boostModal">Créer ma demande</button>
+  </article>
+  <article class="card">
+   <div class="card-icon">📱</div><h3>Application mobile</h3>
+   <p>Indiquez le nom, l'icône, le site, la description et votre WhatsApp.</p>
+   <button class="btn" data-open="appModal">Commander</button>
+  </article>
+  <article class="card">
+   <div class="card-icon">🌐</div><h3>Création de site web</h3>
+   <p>Portfolio, boutique en ligne, site vitrine, blog et autres projets.</p>
+   <button class="btn" data-open="siteModal">Commander</button>
+  </article>
+  <article class="card">
+   <div class="card-icon">🤖</div><h3>Création de chatbot</h3>
+   <p>Définissez le nom du chatbot, ses fonctionnalités, son créateur et sa description.</p>
+   <button class="btn" data-open="chatModal">Créer mon chatbot</button>
+  </article>
+  <article class="card">
+   <div class="card-icon">🎵</div><h3>Créer une chanson</h3>
+   <p>Écrivez vos paroles, choisissez un style et envoyez votre demande de génération.</p>
+   <button class="btn gold" data-open="musicModal">Créer ma chanson</button>
+  </article>
+  <article class="card">
+   <div class="card-icon">📣</div><h3>Publicité</h3>
+   <p>Préparez votre publicité et envoyez les détails à l'API publicitaire.</p>
+   <button class="btn" data-open="adsModal">Créer ma publicité</button>
+  </article>
+ </section>
 
-  <section class="grid">
-    <article class="service">
-      <div class="service-icon">📱</div>
-      <h3>Application mobile</h3>
-      <p>Présentez votre idée d'application et vos besoins.</p>
-      <div class="price">À partir de 10 000 FC</div>
-      <button class="btn" data-service="Application mobile">Commander</button>
-    </article>
-
-    <article class="service">
-      <div class="service-icon">🌐</div>
-      <h3>Site web</h3>
-      <p>Site vitrine, portfolio ou site professionnel.</p>
-      <div class="price">À partir de 15 000 FC</div>
-      <button class="btn" data-service="Site web">Commander</button>
-    </article>
-
-    <article class="service">
-      <div class="service-icon">🤖</div>
-      <h3>Chatbot IA</h3>
-      <p>Décrivez votre assistant virtuel et ses fonctionnalités.</p>
-      <div class="price">À partir de 7 000 FC</div>
-      <button class="btn" data-service="Chatbot IA">Commander</button>
-    </article>
-
-    <article class="service">
-      <div class="service-icon">📣</div>
-      <h3>Publicité digitale</h3>
-      <p>Préparez votre campagne et soumettez-la à l'API publicitaire.</p>
-      <div class="price">Budget défini par le client</div>
-      <button class="btn btn-gold" id="adsCardBtn">Créer ma publicité</button>
-    </article>
-
-    <article class="service">
-      <div class="service-icon">🔳</div>
-      <h3>QR Code</h3>
-      <p>Générez un QR code pour un site ou un lien public.</p>
-      <div class="price">Création du QR</div>
-      <button class="btn" id="qrBtn">Créer un QR code</button>
-    </article>
-
-    <article class="service">
-      <div class="service-icon">🎵</div>
-      <h3>Création musicale</h3>
-      <p>Décrivez votre projet musical, le style et le thème.</p>
-      <div class="price">À partir de 5 000 FC</div>
-      <button class="btn" data-service="Création musicale">Commander</button>
-    </article>
-
-    <article class="service">
-      <div class="service-icon">📲</div>
-      <h3>Réseaux sociaux</h3>
-      <p>Créez une demande personnalisée pour votre plateforme.</p>
-      <div class="price">Prix calculé selon la demande</div>
-      <button class="btn" id="socialCardBtn">Créer une demande</button>
-    </article>
-
-    <article class="service">
-      <div class="service-icon">🔌</div>
-      <h3>Vente d'API</h3>
-      <p>Consultez les outils API disponibles dans votre espace.</p>
-      <div class="price">Selon l'API choisie</div>
-      <button class="btn" id="apiCardBtn">Consulter les API</button>
-    </article>
-  </section>
-
-  <div class="note">
-    <strong style="color:var(--gold)">Information :</strong>
-    l'envoi d'une demande ne garantit pas à lui seul la diffusion d'une
-    publicité. La création réelle d'une campagne dépend des fonctions
-    prises en charge par l'API et des éventuelles validations requises.
-  </div>
+ <div class="muted" style="margin-top:18px">
+  Les demandes de services sont conservées sur cet appareil. Le boostage et la génération musicale nécessitent une API fonctionnelle pour exécuter réellement les opérations.
+ </div>
 </main>
 
-<footer>
-  JASON BUSINESS · Services numériques
-</footer>
+<footer>JASON BUSINESS · Services numériques</footer>
 
-<!-- MODAL PUBLICITÉ -->
+<!-- BOOSTAGE -->
+<div class="overlay" id="boostModal">
+ <section class="modal">
+  <div class="modal-head"><h2>📈 Boostage des réseaux sociaux</h2><button class="close" data-close="boostModal">×</button></div>
+  <p class="muted">Choisissez le réseau social, le service et la quantité. Le montant affiché est indicatif : la commande ne sera pas envoyée à un fournisseur SMM tant que son API n'est pas configurée.</p>
+  <div class="platforms" id="platformGrid"></div>
+  <form id="boostForm">
+   <div class="field"><label>Plateforme sélectionnée</label><input id="boostPlatform" name="platform" readonly required></div>
+   <div class="field"><label for="boostType">Que voulez-vous augmenter ?</label>
+    <select id="boostType" name="type" required>
+     <option value="followers">Followers / abonnés</option>
+     <option value="likes">Likes / mentions J'aime</option>
+     <option value="views">Vues</option>
+    </select>
+   </div>
+   <div class="field"><label for="boostLink">Lien public du profil ou de la publication *</label><input id="boostLink" name="link" type="url" required placeholder="https://..."></div>
+   <div class="field"><label for="boostQty">Quantité souhaitée *</label><input id="boostQty" name="quantity" type="number" min="1" max="1000000" value="100" required></div>
+   <div class="total"><span>Prix indicatif</span><strong id="boostPrice">10 FC</strong></div>
+   <div class="field"><label for="boostWhatsApp">Votre numéro WhatsApp *</label><input id="boostWhatsApp" name="whatsapp" type="tel" required placeholder="+243..."></div>
+   <button class="btn gold" type="submit" style="width:100%">Enregistrer ma demande</button>
+   <div class="status" id="boostStatus"></div>
+  </form>
+ </section>
+</div>
+
+<!-- APPLICATION -->
+<div class="overlay" id="appModal">
+ <section class="modal">
+  <div class="modal-head"><h2>📱 Commander une application</h2><button class="close" data-close="appModal">×</button></div>
+  <form id="appForm">
+   <div class="field"><label for="appName">Nom de l'application *</label><input id="appName" name="appName" required placeholder="Ex. Mon application"></div>
+   <div class="field"><label for="appIcon">Icône de l'application *</label><input id="appIcon" name="appIcon" type="file" accept="image/*" required><small>Choisissez une image depuis votre téléphone.</small><img id="appIconPreview" class="preview" alt="Aperçu de l'icône"></div>
+   <div class="field"><label for="appUrl">Lien du site web *</label><input id="appUrl" name="appUrl" type="url" required placeholder="https://exemple.com"></div>
+   <div class="field"><label for="appDescription">Description de l'application *</label><textarea id="appDescription" name="description" required placeholder="Expliquez ce que fait votre application..."></textarea></div>
+   <div class="field"><label for="appWhatsApp">Votre numéro WhatsApp *</label><input id="appWhatsApp" name="whatsapp" type="tel" required placeholder="+243..."></div>
+   <button class="btn gold" type="submit" style="width:100%">Envoyer ma commande</button>
+   <div class="status" id="appStatus"></div>
+  </form>
+ </section>
+</div>
+
+<!-- SITE WEB -->
+<div class="overlay" id="siteModal">
+ <section class="modal">
+  <div class="modal-head"><h2>🌐 Commander un site web</h2><button class="close" data-close="siteModal">×</button></div>
+  <form id="siteForm">
+   <div class="field"><label for="siteName">Nom du site web *</label><input id="siteName" name="siteName" required placeholder="Ex. Ma Boutique"></div>
+   <div class="field"><label for="siteType">Type de site *</label>
+    <select id="siteType" name="siteType" required>
+     <option value="Portfolio">Portfolio</option>
+     <option value="Boutique en ligne">Boutique en ligne</option>
+     <option value="Site vitrine">Site vitrine</option>
+     <option value="Blog">Blog</option>
+     <option value="Site d'entreprise">Site d'entreprise</option>
+     <option value="Site éducatif">Site éducatif</option>
+     <option value="Site d'actualités">Site d'actualités</option>
+     <option value="Restaurant">Restaurant</option>
+     <option value="Musique">Site musical</option>
+     <option value="Immobilier">Immobilier</option>
+     <option value="Réservation">Réservation</option>
+     <option value="Réseau social">Réseau social</option>
+     <option value="Autre">Autre type</option>
+    </select>
+   </div>
+   <div class="field"><label for="siteDescription">Description et fonctionnalités *</label><textarea id="siteDescription" name="description" required placeholder="Décrivez votre site, les pages et les fonctions nécessaires..."></textarea></div>
+   <div class="field"><label for="siteWhatsApp">Votre numéro WhatsApp *</label><input id="siteWhatsApp" name="whatsapp" type="tel" required placeholder="+243..."></div>
+   <button class="btn gold" type="submit" style="width:100%">Envoyer ma commande</button>
+   <div class="status" id="siteStatus"></div>
+  </form>
+ </section>
+</div>
+
+<!-- CHATBOT -->
+<div class="overlay" id="chatModal">
+ <section class="modal">
+  <div class="modal-head"><h2>🤖 Créer mon chatbot</h2><button class="close" data-close="chatModal">×</button></div>
+  <form id="chatForm">
+   <div class="field"><label for="chatName">Nom de votre chatbot *</label><input id="chatName" name="chatName" required placeholder="Ex. Assistant Client"></div>
+   <div class="field"><label for="chatFeatures">Fonctionnalités souhaitées *</label><textarea id="chatFeatures" name="features" required placeholder="Ex. répondre aux questions, traduire, aider les clients..."></textarea></div>
+   <div class="field"><label for="chatCreator">Nom du créateur du chatbot *</label><input id="chatCreator" name="creator" required placeholder="Nom du créateur"></div>
+   <div class="field"><label for="chatDescription">Description du chatbot *</label><textarea id="chatDescription" name="description" required placeholder="Décrivez son objectif, ses utilisateurs et son fonctionnement..."></textarea></div>
+   <div class="field"><label for="chatWhatsApp">Votre numéro WhatsApp *</label><input id="chatWhatsApp" name="whatsapp" type="tel" required placeholder="+243..."></div>
+   <button class="btn gold" type="submit" style="width:100%">Envoyer ma commande</button>
+   <div class="status" id="chatStatus"></div>
+  </form>
+ </section>
+</div>
+
+<!-- CHANSON -->
+<div class="overlay" id="musicModal">
+ <section class="modal">
+  <div class="modal-head"><h2>🎵 Créer ma chanson</h2><button class="close" data-close="musicModal">×</button></div>
+  <p class="muted">Écrivez vos propres paroles et sélectionnez le style musical. Le bouton lance une requête vers le service de génération musicale configuré.</p>
+  <form id="musicForm">
+   <div class="field"><label for="songTitle">Titre de la chanson *</label><input id="songTitle" name="title" required maxlength="120" placeholder="Titre de ma chanson"></div>
+   <div class="field"><label for="songLyrics">Écrivez les paroles de votre chanson *</label><textarea id="songLyrics" name="lyrics" required style="min-height:180px" placeholder="Couplet 1...&#10;Refrain...&#10;Couplet 2..."></textarea></div>
+   <div class="field"><label for="songStyle">Style musical *</label>
+    <select id="songStyle" name="style" required>
+     <option value="Afrobeat">Afrobeat</option>
+     <option value="Afropop">Afropop</option>
+     <option value="Rumba congolaise">Rumba congolaise</option>
+     <option value="Ndombolo">Ndombolo</option>
+     <option value="Gospel">Gospel</option>
+     <option value="Gospel worship">Gospel worship</option>
+     <option value="Hip-hop">Hip-hop</option>
+     <option value="Rap">Rap</option>
+     <option value="Trap">Trap</option>
+     <option value="R&B">R&B</option>
+     <option value="Soul">Soul</option>
+     <option value="Pop">Pop</option>
+     <option value="Amapiano">Amapiano</option>
+     <option value="Dancehall">Dancehall</option>
+     <option value="Reggae">Reggae</option>
+     <option value="Zouk">Zouk</option>
+     <option value="Kompa">Kompa</option>
+     <option value="Jazz">Jazz</option>
+     <option value="Acoustique">Acoustique</option>
+     <option value="Ballade romantique">Ballade romantique</option>
+     <option value="Musique classique">Musique classique</option>
+     <option value="Électro">Électro</option>
+     <option value="Drill">Drill</option>
+     <option value="Afro-fusion">Afro-fusion</option>
+     <option value="Musique traditionnelle africaine">Musique traditionnelle africaine</option>
+    </select>
+   </div>
+   <div class="field"><label for="songMood">Ambiance souhaitée</label>
+    <select id="songMood" name="mood">
+     <option value="Énergique">Énergique</option>
+     <option value="Joy euse">Joyeuse</option>
+     <option value="Émouvante">Émouvante</option>
+     <option value="Romantique">Romantique</option>
+     <option value="Inspirante">Inspirante</option>
+     <option value="Festive">Festive</option>
+     <option value="Paisible">Paisible</option>
+    </select>
+   </div>
+   <div class="field"><label for="songWhatsApp">Votre numéro WhatsApp (facultatif)</label><input id="songWhatsApp" name="whatsapp" type="tel" placeholder="+243..."></div>
+   <button class="btn gold" id="generateSongBtn" type="submit" style="width:100%">🎶 Générer ma chanson</button>
+   <div class="status" id="musicStatus"></div>
+   <div id="musicResult"></div>
+  </form>
+ </section>
+</div>
+
+<!-- PUBLICITÉ -->
 <div class="overlay" id="adsModal">
-  <section class="modal">
-    <div class="modal-head">
-      <h2>📣 Créer ma publicité</h2>
-      <button class="close" data-close="adsModal" aria-label="Fermer">×</button>
-    </div>
-
-    <p style="font-size:12px;color:var(--muted);line-height:1.6">
-      Remplissez les informations de votre campagne. Votre demande sera
-      envoyée à l'API publicitaire configurée.
-    </p>
-
-    <form id="adsForm">
-      <div class="field">
-        <label for="adTitle">Titre de la publicité *</label>
-        <input id="adTitle" name="title" required maxlength="100"
-               placeholder="Ex. Promotion de mon entreprise">
-      </div>
-
-      <div class="field">
-        <label for="adText">Texte de la publicité *</label>
-        <textarea id="adText" name="text" required maxlength="3000"
-          placeholder="Présentez votre produit ou service..."></textarea>
-      </div>
-
-      <div class="field">
-        <label for="adUrl">Lien à promouvoir *</label>
-        <input id="adUrl" name="url" type="url" required
-          placeholder="https://exemple.com">
-        <small>Entrez un lien public complet commençant par https:// ou http://.</small>
-      </div>
-
-      <div class="form-row">
-        <div class="field">
-          <label for="adPlatform">Plateforme</label>
-          <select id="adPlatform" name="platform">
-            <option value="facebook">Facebook</option>
-            <option value="instagram">Instagram</option>
-            <option value="tiktok">TikTok</option>
-            <option value="youtube">YouTube</option>
-            <option value="whatsapp">WhatsApp</option>
-            <option value="other">Autre / à définir</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="adBudget">Budget prévu (FC)</label>
-          <input id="adBudget" name="budget" type="number" min="0" step="1"
-            placeholder="Ex. 10000">
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="field">
-          <label for="adAudience">Public cible</label>
-          <input id="adAudience" name="audience" maxlength="200"
-            placeholder="Ex. Clients à Kinshasa">
-        </div>
-        <div class="field">
-          <label for="adDuration">Durée souhaitée</label>
-          <select id="adDuration" name="duration">
-            <option value="1 jour">1 jour</option>
-            <option value="3 jours">3 jours</option>
-            <option value="7 jours">7 jours</option>
-            <option value="14 jours">14 jours</option>
-            <option value="30 jours">30 jours</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="field">
-        <label for="adImage">Lien public de l'image (facultatif)</label>
-        <input id="adImage" name="imageUrl" type="url"
-          placeholder="https://exemple.com/image.jpg">
-      </div>
-
-      <div class="field">
-        <label for="adEmail">E-mail de suivi (facultatif)</label>
-        <input id="adEmail" name="email" type="email"
-          placeholder="vous@exemple.com">
-      </div>
-
-      <button class="btn btn-gold" id="submitAdBtn" type="submit" style="width:100%">
-        Envoyer ma demande
-      </button>
-      <div id="adStatus" class="status" role="status"></div>
-    </form>
-  </section>
+ <section class="modal">
+  <div class="modal-head"><h2>📣 Créer une publicité</h2><button class="close" data-close="adsModal">×</button></div>
+  <form id="adsForm">
+   <div class="field"><label for="adTitle">Titre de la publicité *</label><input id="adTitle" name="title" required></div>
+   <div class="field"><label for="adText">Texte publicitaire *</label><textarea id="adText" name="text" required></textarea></div>
+   <div class="field"><label for="adUrl">Lien à promouvoir *</label><input id="adUrl" name="url" type="url" required placeholder="https://..."></div>
+   <div class="row">
+    <div class="field"><label for="adPlatform">Plateforme</label><select id="adPlatform" name="platform"><option>Facebook</option><option>Instagram</option><option>TikTok</option><option>YouTube</option><option>WhatsApp</option><option>Autre</option></select></div>
+    <div class="field"><label for="adBudget">Budget (FC)</label><input id="adBudget" name="budget" type="number" min="0" placeholder="10000"></div>
+   </div>
+   <div class="field"><label for="adWhatsApp">Votre numéro WhatsApp (facultatif)</label><input id="adWhatsApp" name="whatsapp" type="tel" placeholder="+243..."></div>
+   <button class="btn gold" id="submitAdBtn" type="submit" style="width:100%">Envoyer à l'API publicité</button>
+   <div class="status" id="adStatus"></div>
+  </form>
+ </section>
 </div>
 
-<!-- MODAL RÉSEAUX SOCIAUX -->
-<div class="overlay" id="socialModal">
-  <section class="modal">
-    <div class="modal-head">
-      <h2>📲 Demande réseaux sociaux</h2>
-      <button class="close" data-close="socialModal" aria-label="Fermer">×</button>
-    </div>
-
-    <p style="font-size:12px;color:var(--muted)">
-      Sélectionnez une plateforme, puis précisez votre demande.
-    </p>
-
-    <div class="platform-grid" id="platformGrid"></div>
-
-    <form id="socialForm">
-      <div class="field">
-        <label for="socialPlatform">Plateforme choisie</label>
-        <input id="socialPlatform" name="platform" readonly required>
-      </div>
-      <div class="field">
-        <label for="socialType">Type de demande</label>
-        <select id="socialType" name="service" required>
-          <option value="Promotion de publication">Promotion de publication</option>
-          <option value="Publicité de page ou profil">Publicité de page ou profil</option>
-          <option value="Campagne vidéo">Campagne vidéo</option>
-          <option value="Conseil de croissance">Conseil de croissance</option>
-          <option value="Autre demande">Autre demande</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="socialLink">Lien public du profil ou contenu *</label>
-        <input id="socialLink" name="link" type="url" required
-          placeholder="https://...">
-      </div>
-      <div class="field">
-        <label for="socialDescription">Description de votre demande *</label>
-        <textarea id="socialDescription" name="description" required
-          placeholder="Expliquez ce que vous souhaitez promouvoir..."></textarea>
-      </div>
-      <button class="btn btn-gold" type="submit" style="width:100%">
-        Enregistrer ma demande
-      </button>
-      <div id="socialStatus" class="status" role="status"></div>
-    </form>
-  </section>
-</div>
-
-<!-- MODAL AUTRES SERVICES -->
-<div class="overlay" id="serviceModal">
-  <section class="modal">
-    <div class="modal-head">
-      <h2 id="serviceModalTitle">Commander un service</h2>
-      <button class="close" data-close="serviceModal" aria-label="Fermer">×</button>
-    </div>
-    <form id="serviceForm">
-      <input type="hidden" id="serviceName" name="service">
-      <div class="field">
-        <label for="serviceDescription">Décrivez votre projet *</label>
-        <textarea id="serviceDescription" name="description" required
-          placeholder="Expliquez votre besoin en détail..."></textarea>
-      </div>
-      <div class="field">
-        <label for="serviceBudget">Budget envisagé (FC, facultatif)</label>
-        <input id="serviceBudget" name="budget" type="number" min="0"
-          placeholder="Entrez votre budget">
-      </div>
-      <div class="field">
-        <label for="serviceEmail">E-mail de contact (facultatif)</label>
-        <input id="serviceEmail" name="email" type="email"
-          placeholder="vous@exemple.com">
-      </div>
-      <button class="btn btn-gold" type="submit" style="width:100%">
-        Enregistrer ma demande
-      </button>
-      <div id="serviceStatus" class="status" role="status"></div>
-    </form>
-  </section>
-</div>
-
-<!-- MODAL QR CODE -->
-<div class="overlay" id="qrModal">
-  <section class="modal">
-    <div class="modal-head">
-      <h2>🔳 Générateur QR Code</h2>
-      <button class="close" data-close="qrModal" aria-label="Fermer">×</button>
-    </div>
-    <div class="field">
-      <label for="qrUrl">Lien à convertir en QR code</label>
-      <input id="qrUrl" type="url" placeholder="https://exemple.com">
-    </div>
-    <button class="btn btn-gold" id="generateQr" style="width:100%">Générer le QR code</button>
-    <div class="qr-preview" id="qrPreview"></div>
-    <button class="btn" id="downloadQr" style="width:100%;display:none">Ouvrir l'image du QR</button>
-    <p style="font-size:10px;color:var(--muted);line-height:1.6">
-      La génération de l'image utilise un service externe. Ne saisissez pas de lien privé.
-    </p>
-  </section>
-</div>
-
-<!-- MODAL HISTORIQUE -->
+<!-- HISTORIQUE -->
 <div class="overlay" id="historyModal">
-  <section class="modal">
-    <div class="modal-head">
-      <h2>🧾 Mes demandes</h2>
-      <button class="close" data-close="historyModal" aria-label="Fermer">×</button>
-    </div>
-    <div id="historyList"></div>
-    <button class="btn" id="clearHistory" style="width:100%;margin-top:12px">
-      Effacer l'historique de cet appareil
-    </button>
-  </section>
+ <section class="modal">
+  <div class="modal-head"><h2>📋 Mes demandes</h2><button class="close" data-close="historyModal">×</button></div>
+  <div id="historyList"></div>
+  <button class="btn" id="clearHistory" style="width:100%;margin-top:12px">Effacer l'historique local</button>
+ </section>
 </div>
 
 <script>
 "use strict";
 
-/* =========================================================
-   CONFIGURATION
-========================================================= */
-const ADS_API = "https://davbot-outils.vercel.app/api/publicite/ads";
-const API_PAGE = "api.html";
-const HISTORY_KEY = "jasonBusinessBoutiqueOrdersV2";
+/* API : la génération réelle dépend du contrat du service */
+const ADS_API="https://davbot-outils.vercel.app/api/publicite/ads";
+const MUSIC_API="https://musique-api.vercel.app/api/music";
+const HISTORY_KEY="jasonBusinessBoutiqueOrdersV3";
+const $=id=>document.getElementById(id);
 
-/*
-  L'endpoint public répond actuellement avec un catalogue.
-  Le format exact accepté pour créer une campagne dépend du backend.
-  Le code envoie une requête POST JSON et affiche la réponse réelle.
-  Si le backend attend d'autres champs ou une autre action, adaptez
-  adsPayload à la structure officielle de votre API.
-*/
+function show(id){$(id).classList.add("show");document.body.style.overflow="hidden"}
+function hide(id){$(id).classList.remove("show");if(!document.querySelector(".overlay.show"))document.body.style.overflow=""}
+document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>show(b.dataset.open)));
+document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>hide(b.dataset.close)));
+document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)hide(o.id)}));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".overlay.show").forEach(o=>hide(o.id))});
+$("exploreBtn").onclick=()=>$("services").scrollIntoView({behavior:"smooth"});
 
-/* =========================================================
-   OUTILS D'INTERFACE
-========================================================= */
-const $ = id => document.getElementById(id);
-
-function showModal(id){
-  $(id).classList.add("show");
-  document.body.style.overflow="hidden";
-}
-function hideModal(id){
-  $(id).classList.remove("show");
-  if(!document.querySelector(".overlay.show")) document.body.style.overflow="";
-}
-function setStatus(id,message,type="info"){
-  const el=$(id);
-  el.textContent=message;
-  el.className="status "+type;
+function status(id,msg,type="info"){
+ const el=$(id);el.textContent=msg;el.className="status "+type;
 }
 function readHistory(){
-  try{
-    const data=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]");
-    return Array.isArray(data)?data:[];
-  }catch(e){return []}
+ try{const x=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]");return Array.isArray(x)?x:[]}
+ catch(e){return []}
 }
-function saveOrder(order){
-  const history=readHistory();
-  history.unshift({
-    id:"JB-"+Date.now(),
-    date:new Date().toLocaleString("fr-FR"),
-    status:"Demande enregistrée sur cet appareil",
-    ...order
-  });
-  localStorage.setItem(HISTORY_KEY,JSON.stringify(history.slice(0,100)));
+function saveOrder(type,data){
+ const items=readHistory();
+ items.unshift({type,date:new Date().toLocaleString("fr-FR"),data});
+ localStorage.setItem(HISTORY_KEY,JSON.stringify(items.slice(0,100)));
 }
-function safeText(value){
-  return String(value??"").replace(/[&<>"']/g,c=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  })[c]);
-}
-function validHttpUrl(value){
-  try{
-    const url=new URL(value);
-    return url.protocol==="https:"||url.protocol==="http:";
-  }catch(e){return false}
-}
-
-/* =========================================================
-   OUVERTURE / FERMETURE DES FENÊTRES
-========================================================= */
-document.querySelectorAll("[data-close]").forEach(btn=>{
-  btn.addEventListener("click",()=>hideModal(btn.dataset.close));
-});
-document.querySelectorAll(".overlay").forEach(overlay=>{
-  overlay.addEventListener("click",event=>{
-    if(event.target===overlay) hideModal(overlay.id);
-  });
-});
-document.addEventListener("keydown",event=>{
-  if(event.key==="Escape"){
-    document.querySelectorAll(".overlay.show").forEach(el=>hideModal(el.id));
-  }
-});
-
-$("startAdsBtn").addEventListener("click",()=>openAds());
-$("adsCardBtn").addEventListener("click",()=>openAds());
-$("startSocialBtn").addEventListener("click",()=>openSocial());
-$("socialCardBtn").addEventListener("click",()=>openSocial());
-$("historyBtn").addEventListener("click",()=>renderHistory());
-$("apiBtn").addEventListener("click",()=>location.href=API_PAGE);
-$("apiCardBtn").addEventListener("click",()=>location.href=API_PAGE);
-
-function openAds(){
-  setStatus("adStatus","");
-  showModal("adsModal");
-}
-function openSocial(){
-  setStatus("socialStatus","");
-  showModal("socialModal");
-}
-
-/* =========================================================
-   PUBLICITÉ : APPEL À L'API
-========================================================= */
-async function readResponse(response){
-  const text=await response.text();
-  if(!text) return {};
-  try{return JSON.parse(text)}catch(e){return {message:text}}
-}
-function responseMessage(data){
-  if(!data) return "";
-  if(typeof data==="string") return data;
-  return data.message||data.error||data.detail||data.status||"";
-}
-
-$("adsForm").addEventListener("submit",async event=>{
-  event.preventDefault();
-
-  const button=$("submitAdBtn");
-  const form=new FormData(event.currentTarget);
-  const title=String(form.get("title")||"").trim();
-  const text=String(form.get("text")||"").trim();
-  const url=String(form.get("url")||"").trim();
-  const imageUrl=String(form.get("imageUrl")||"").trim();
-  const budgetRaw=String(form.get("budget")||"").trim();
-
-  if(!title||!text||!url){
-    setStatus("adStatus","Veuillez remplir le titre, le texte et le lien.","error");
-    return;
-  }
-  if(!validHttpUrl(url)){
-    setStatus("adStatus","Le lien de destination doit être une URL valide.","error");
-    return;
-  }
-  if(imageUrl&&!validHttpUrl(imageUrl)){
-    setStatus("adStatus","Le lien de l'image n'est pas valide.","error");
-    return;
-  }
-  if(budgetRaw&&Number(budgetRaw)<0){
-    setStatus("adStatus","Le budget ne peut pas être négatif.","error");
-    return;
-  }
-
-  /*
-    Le backend doit accepter ces champs pour créer une campagne.
-    Si son contrat utilise un autre nom d'action ou d'autres propriétés,
-    modifiez cet objet selon la documentation du backend.
-  */
-  const adsPayload={
-    action:"create_ad",
-    title:title,
-    text:text,
-    url:url,
-    platform:String(form.get("platform")||"other"),
-    budget:budgetRaw?Number(budgetRaw):0,
-    audience:String(form.get("audience")||"").trim(),
-    duration:String(form.get("duration")||"7 jours"),
-    imageUrl:imageUrl,
-    email:String(form.get("email")||"").trim()
-  };
-
-  button.disabled=true;
-  button.textContent="Envoi en cours…";
-  setStatus("adStatus","Connexion à l'API publicitaire…","info");
-
-  try{
-    const response=await fetch(ADS_API,{
-      method:"POST",
-      headers:{"Content-Type":"application/json","Accept":"application/json"},
-      body:JSON.stringify(adsPayload)
-    });
-    const data=await readResponse(response);
-
-    if(!response.ok||data.success===false||data.error){
-      const detail=responseMessage(data);
-      throw new Error(detail||("Erreur HTTP "+response.status));
-    }
-
-    saveOrder({
-      type:"Publicité digitale",
-      title:title,
-      platform:adsPayload.platform,
-      url:url,
-      budget:adsPayload.budget,
-      description:text,
-      apiResponse:data
-    });
-
-    setStatus(
-      "adStatus",
-      "Réponse reçue de l'API :\n"+
-      (responseMessage(data)||"La requête a été acceptée par le serveur.")+
-      "\n\nVérifiez le statut de la campagne dans votre système publicitaire.",
-      "ok"
-    );
-    $("adsForm").reset();
-  }catch(error){
-    console.error("Erreur API publicité:",error);
-    setStatus(
-      "adStatus",
-      "La demande n'a pas pu être confirmée par l'API.\n"+
-      (error.message||"Erreur de connexion")+
-      "\n\nVérifiez que l'API accepte les requêtes POST depuis ce site, "+
-      "son format de données et sa configuration CORS. Votre demande n'est pas présentée comme publiée.",
-      "error"
-    );
-  }finally{
-    button.disabled=false;
-    button.textContent="Envoyer ma demande";
-  }
-});
-
-/* =========================================================
-   RÉSEAUX SOCIAUX
-========================================================= */
-const platforms=[
-  ["Facebook","facebook","https://cdn.simpleicons.org/facebook/1877F2","f"],
-  ["Instagram","instagram","https://cdn.simpleicons.org/instagram/E4405F","◎"],
-  ["TikTok","tiktok","https://cdn.simpleicons.org/tiktok/ffffff","♪"],
-  ["YouTube","youtube","https://cdn.simpleicons.org/youtube/FF0033","▶"],
-  ["WhatsApp","whatsapp","https://cdn.simpleicons.org/whatsapp/25D366","☎"],
-  ["Telegram","telegram","https://cdn.simpleicons.org/telegram/26A5E4","➤"],
-  ["Snapchat","snapchat","https://cdn.simpleicons.org/snapchat/FFFC00","👻"],
-  ["X","x","https://cdn.simpleicons.org/x/ffffff","X"],
-  ["Messenger","messenger","https://cdn.simpleicons.org/messenger/0084FF","ϟ"],
-  ["LinkedIn","linkedin","https://cdn.simpleicons.org/linkedin/0A66C2","in"],
-  ["Pinterest","pinterest","https://cdn.simpleicons.org/pinterest/BD081C","P"],
-  ["Discord","discord","https://cdn.simpleicons.org/discord/5865F2","◉"],
-  ["Reddit","reddit","https://cdn.simpleicons.org/reddit/FF4500","●"],
-  ["Twitch","twitch","https://cdn.simpleicons.org/twitch/9146FF","▣"],
-  ["Spotify","spotify","https://cdn.simpleicons.org/spotify/1DB954","♫"],
-  ["Viber","viber","https://cdn.simpleicons.org/viber/7360F2","☎"],
-  ["Threads","threads","https://cdn.simpleicons.org/threads/ffffff","@"],
-  ["GitHub","github","https://cdn.simpleicons.org/github/ffffff","⌘"],
-  ["WeChat","wechat","https://cdn.simpleicons.org/wechat/07C160","☏"],
-  ["Autre","other","","＋"]
-];
-
-let selectedPlatform="Facebook";
-
-function buildPlatforms(){
-  const grid=$("platformGrid");
-  grid.innerHTML="";
-  platforms.forEach(([name,value,src,fallback])=>{
-    const button=document.createElement("button");
-    button.type="button";
-    button.className="platform";
-    button.dataset.platform=value;
-    if(src){
-      const img=document.createElement("img");
-      img.src=src;
-      img.alt="";
-      img.onerror=()=>{img.replaceWith(makeFallback(fallback));};
-      button.appendChild(img);
-    }else{
-      button.appendChild(makeFallback(fallback));
-    }
-    const label=document.createElement("span");
-    label.textContent=name;
-    button.appendChild(label);
-    button.addEventListener("click",()=>{
-      selectedPlatform=name;
-      $("socialPlatform").value=name;
-      grid.querySelectorAll(".platform").forEach(el=>el.classList.remove("active"));
-      button.classList.add("active");
-    });
-    grid.appendChild(button);
-  });
-}
-function makeFallback(value){
-  const span=document.createElement("span");
-  span.className="fallback";
-  span.textContent=value;
-  return span;
-}
-buildPlatforms();
-$("socialPlatform").value=selectedPlatform;
-const firstPlatform=$("platformGrid").querySelector('[data-platform="facebook"]');
-if(firstPlatform)firstPlatform.classList.add("active");
-
-$("socialForm").addEventListener("submit",event=>{
-  event.preventDefault();
-  const form=new FormData(event.currentTarget);
-  const link=String(form.get("link")||"").trim();
-  if(!validHttpUrl(link)){
-    setStatus("socialStatus","Entrez un lien public valide.","error");
-    return;
-  }
-
-  const order={
-    type:"Réseaux sociaux",
-    platform:String(form.get("platform")||""),
-    service:String(form.get("service")||""),
-    url:link,
-    description:String(form.get("description")||"").trim()
-  };
-  saveOrder(order);
-  setStatus(
-    "socialStatus",
-    "Votre demande a été enregistrée sur cet appareil. Elle n'a pas été envoyée à un fournisseur externe.",
-    "ok"
-  );
-  event.currentTarget.reset();
-  $("socialPlatform").value=selectedPlatform;
-});
-
-/* =========================================================
-   COMMANDES DES AUTRES SERVICES
-========================================================= */
-document.querySelectorAll("[data-service]").forEach(button=>{
-  button.addEventListener("click",()=>{
-    const service=button.dataset.service;
-    $("serviceName").value=service;
-    $("serviceModalTitle").textContent="Demande : "+service;
-    $("serviceDescription").value="";
-    $("serviceBudget").value="";
-    $("serviceEmail").value="";
-    setStatus("serviceStatus","");
-    showModal("serviceModal");
-  });
-});
-
-$("serviceForm").addEventListener("submit",event=>{
-  event.preventDefault();
-  const form=new FormData(event.currentTarget);
-  const budget=String(form.get("budget")||"").trim();
-  if(budget&&Number(budget)<0){
-    setStatus("serviceStatus","Le budget doit être positif.","error");
-    return;
-  }
-  saveOrder({
-    type:String(form.get("service")||"Service"),
-    description:String(form.get("description")||"").trim(),
-    budget:budget?Number(budget):null,
-    email:String(form.get("email")||"").trim()
-  });
-  setStatus("serviceStatus","Votre demande a été enregistrée sur cet appareil.","ok");
-  event.currentTarget.reset();
-});
-
-/* =========================================================
-   QR CODE
-========================================================= */
-let qrImageUrl="";
-$("qrBtn").addEventListener("click",()=>{
-  $("qrUrl").value="";
-  $("qrPreview").innerHTML="";
-  $("downloadQr").style.display="none";
-  showModal("qrModal");
-});
-$("generateQr").addEventListener("click",()=>{
-  const url=$("qrUrl").value.trim();
-  if(!validHttpUrl(url)){
-    $("qrPreview").textContent="Entrez une URL valide commençant par https:// ou http://.";
-    $("qrPreview").style.color="#fda4af";
-    return;
-  }
-  qrImageUrl="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data="+encodeURIComponent(url);
-  const img=document.createElement("img");
-  img.alt="QR code généré";
-  img.src=qrImageUrl;
-  img.onload=()=>{$("qrPreview").style.color="";};
-  img.onerror=()=>{$("qrPreview").textContent="Impossible de générer le QR code. Réessayez.";};
-  $("qrPreview").innerHTML="";
-  $("qrPreview").appendChild(img);
-  $("downloadQr").style.display="block";
-  saveOrder({type:"QR Code",url:url});
-});
-$("downloadQr").addEventListener("click",()=>{
-  if(qrImageUrl)window.open(qrImageUrl,"_blank","noopener,noreferrer");
-});
-
-/* =========================================================
-   HISTORIQUE LOCAL
-========================================================= */
 function renderHistory(){
-  const list=$("historyList");
-  const items=readHistory();
-  list.innerHTML="";
-  if(!items.length){
-    list.textContent="Aucune demande enregistrée sur cet appareil.";
-  }else{
-    items.forEach(item=>{
-      const div=document.createElement("div");
-      div.className="history-item";
-      const title=document.createElement("strong");
-      title.textContent=item.type||"Demande";
-      const date=document.createElement("div");
-      date.style.color="var(--muted)";
-      date.style.margin="5px 0";
-      date.textContent=item.date||"";
-      const details=document.createElement("div");
-      details.textContent=item.title||item.service||item.description||item.url||"Demande enregistrée";
-      div.append(title,date,details);
-      if(item.platform){
-        const platform=document.createElement("div");
-        platform.style.marginTop="5px";
-        platform.textContent="Plateforme : "+item.platform;
-        div.appendChild(platform);
-      }
-      list.appendChild(div);
-    });
-  }
-  showModal("historyModal");
+ const box=$("historyList"),items=readHistory();
+ box.innerHTML="";
+ if(!items.length){box.textContent="Aucune demande enregistrée sur cet appareil."}
+ items.forEach(item=>{
+  const div=document.createElement("div");div.className="history-item";
+  const strong=document.createElement("strong");strong.textContent=item.type;
+  const date=document.createElement("div");date.className="muted";date.textContent=item.date;
+  const details=document.createElement("div");
+  const data=item.data||{};
+  details.textContent=Object.entries(data).filter(([k,v])=>v!==""&&v!=null&&k!=="iconData").map(([k,v])=>k+": "+String(v)).join(" · ");
+  div.append(strong,date,details);box.append(div);
+ });
+ show("historyModal");
 }
-$("clearHistory").addEventListener("click",()=>{
-  if(confirm("Effacer toutes les demandes locales de cet appareil ?")){
-    localStorage.removeItem(HISTORY_KEY);
-    renderHistory();
+$("historyBtn").onclick=renderHistory;
+$("clearHistory").onclick=()=>{
+ if(confirm("Effacer toutes les demandes sauvegardées sur cet appareil ?")){
+  localStorage.removeItem(HISTORY_KEY);renderHistory();
+ }
+};
+function validUrl(value){
+ try{const u=new URL(value);return u.protocol==="https:"||u.protocol==="http:"}catch(e){return false}
+}
+function validPhone(value){return /^[+0-9()\-\s]{7,22}$/.test(value.trim())}
+function formObject(form){
+ return Object.fromEntries(new FormData(form).entries());
+}
+
+/* BOOSTAGE */
+const platforms=[
+ ["Facebook","https://cdn.simpleicons.org/facebook/1877F2"],
+ ["Instagram","https://cdn.simpleicons.org/instagram/E4405F"],
+ ["TikTok","https://cdn.simpleicons.org/tiktok/ffffff"],
+ ["YouTube","https://cdn.simpleicons.org/youtube/FF0033"],
+ ["WhatsApp","https://cdn.simpleicons.org/whatsapp/25D366"],
+ ["Telegram","https://cdn.simpleicons.org/telegram/26A5E4"],
+ ["Snapchat","https://cdn.simpleicons.org/snapchat/FFFC00"],
+ ["X","https://cdn.simpleicons.org/x/ffffff"],
+ ["LinkedIn","https://cdn.simpleicons.org/linkedin/0A66C2"],
+ ["Pinterest","https://cdn.simpleicons.org/pinterest/BD081C"],
+ ["Discord","https://cdn.simpleicons.org/discord/5865F2"],
+ ["Autre",""]
+];
+let chosenPlatform="Facebook";
+function buildPlatformButtons(){
+ const grid=$("platformGrid");
+ platforms.forEach(([name,src])=>{
+  const b=document.createElement("button");b.type="button";b.className="platform";b.dataset.name=name;
+  if(src){
+   const img=document.createElement("img");img.src=src;img.alt="";
+   img.onerror=()=>{img.remove();const t=document.createElement("span");t.textContent="●";t.style.fontSize="23px";b.prepend(t)};
+   b.append(img);
+  }else{
+   const t=document.createElement("span");t.textContent="＋";t.style.fontSize="23px";b.append(t);
   }
+  const label=document.createElement("span");label.textContent=name;b.append(label);
+  b.onclick=()=>{
+   chosenPlatform=name;$("boostPlatform").value=name;
+   grid.querySelectorAll(".platform").forEach(x=>x.classList.remove("active"));b.classList.add("active");
+  };
+  grid.append(b);
+ });
+ const first=grid.querySelector('[data-name="Facebook"]');
+ if(first)first.classList.add("active");
+ $("boostPlatform").value=chosenPlatform;
+}
+buildPlatformButtons();
+
+/* Prix indicatifs par 1 000 unités, à remplacer par les tarifs du fournisseur */
+const indicativeRates={
+ followers: {Facebook:1200,Instagram:1500,TikTok:1300,YouTube:2500,WhatsApp:1000,Telegram:800,Snapchat:1500,X:1200,LinkedIn:2500,Pinterest:1000,Discord:1000,Autre:1000},
+ likes:     {Facebook:500,Instagram:600,TikTok:500,YouTube:800,WhatsApp:500,Telegram:500,Snapchat:600,X:500,LinkedIn:1000,Pinterest:500,Discord:500,Autre:500},
+ views:     {Facebook:400,Instagram:500,TikTok:400,YouTube:700,WhatsApp:300,Telegram:300,Snapchat:500,X:400,LinkedIn:600,Pinterest:300,Discord:300,Autre:400}
+};
+function calculateBoost(){
+ const type=$("boostType").value;
+ const qty=Math.max(0,Number($("boostQty").value)||0);
+ const rate=(indicativeRates[type]||{})[chosenPlatform]||500;
+ const total=Math.max(10,Math.ceil(rate*qty/1000));
+ $("boostPrice").textContent=total.toLocaleString("fr-FR")+" FC";
+}
+$("boostType").addEventListener("change",calculateBoost);
+$("boostQty").addEventListener("input",calculateBoost);
+calculateBoost();
+
+$("boostForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const d=formObject(e.currentTarget);
+ if(!validUrl(d.link)){status("boostStatus","Entrez un lien public valide.","error");return}
+ if(!validPhone(d.whatsapp)){status("boostStatus","Entrez un numéro WhatsApp valide.","error");return}
+ d.priceIndicatif=$("boostPrice").textContent;
+ saveOrder("Boostage réseaux sociaux",d);
+ status("boostStatus","Demande enregistrée sur cet appareil.\nLe prix est indicatif. Pour exécuter réellement le boostage, configurez un fournisseur SMM et son API dans le backend.","ok");
 });
 
-/* =========================================================
-   TEST DE L'API : CATALOGUE
-========================================================= */
-async function checkAdsApi(){
-  try{
-    const response=await fetch(ADS_API,{method:"GET",headers:{"Accept":"application/json"}});
-    if(!response.ok) throw new Error("HTTP "+response.status);
-    const data=await response.json();
-    console.info("API publicitaire disponible :",data);
-  }catch(error){
-    console.warn("Le catalogue publicitaire n'a pas pu être chargé :",error);
-  }
+/* APERÇU ICÔNE D'APPLICATION */
+let appIconData="";
+$("appIcon").addEventListener("change",()=>{
+ const file=$("appIcon").files[0];
+ appIconData="";
+ if(!file){$("appIconPreview").style.display="none";return}
+ if(!file.type.startsWith("image/")){status("appStatus","Choisissez un fichier image.","error");return}
+ if(file.size>3*1024*1024){status("appStatus","L'image doit faire moins de 3 Mo.","error");$("appIcon").value="";return}
+ const reader=new FileReader();
+ reader.onload=()=>{
+  appIconData=String(reader.result);
+  $("appIconPreview").src=appIconData;
+  $("appIconPreview").style.display="block";
+ };
+ reader.readAsDataURL(file);
+});
+$("appForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const d=formObject(e.currentTarget);
+ if(!validUrl(d.appUrl)){status("appStatus","Entrez un lien de site valide.","error");return}
+ if(!validPhone(d.whatsapp)){status("appStatus","Entrez un numéro WhatsApp valide.","error");return}
+ d.iconFileName=$("appIcon").files[0]?.name||"";
+ d.iconData=appIconData;
+ saveOrder("Commande application",d);
+ status("appStatus","Commande enregistrée sur cet appareil. L'icône est incluse dans les données locales de cette demande. Elle doit être envoyée à votre backend pour être visible par l'administrateur.","ok");
+});
+
+/* SITE WEB */
+$("siteForm").addEventListener("submit",e=>{
+ e.preventDefault();const d=formObject(e.currentTarget);
+ if(!validPhone(d.whatsapp)){status("siteStatus","Entrez un numéro WhatsApp valide.","error");return}
+ saveOrder("Commande site web",d);
+ status("siteStatus","Votre demande de site web a été enregistrée sur cet appareil. Connectez ce formulaire à votre backend pour transmettre la commande à l'administrateur.","ok");
+});
+
+/* CHATBOT */
+$("chatForm").addEventListener("submit",e=>{
+ e.preventDefault();const d=formObject(e.currentTarget);
+ if(!validPhone(d.whatsapp)){status("chatStatus","Entrez un numéro WhatsApp valide.","error");return}
+ saveOrder("Commande chatbot",d);
+ status("chatStatus","Votre demande de chatbot a été enregistrée sur cet appareil. Connectez ce formulaire à votre backend pour transmettre la commande à l'administrateur.","ok");
+});
+
+/* CHANSON : API DE GÉNÉRATION */
+function findAudioUrl(data){
+ if(!data||typeof data!=="object")return "";
+ const keys=["audio_url","audioUrl","audio","music_url","musicUrl","url","download_url","downloadUrl","file_url","fileUrl"];
+ for(const k of keys){
+  if(typeof data[k]==="string"&&/^https?:\/\//i.test(data[k]))return data[k];
+ }
+ if(data.data&&typeof data.data==="object")return findAudioUrl(data.data);
+ if(data.result&&typeof data.result==="object")return findAudioUrl(data.result);
+ if(data.song&&typeof data.song==="object")return findAudioUrl(data.song);
+ return "";
 }
-checkAdsApi();
+async function readApiResponse(response){
+ const raw=await response.text();
+ try{return raw?JSON.parse(raw):{}}catch(e){return {message:raw}}
+}
+$("musicForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const d=formObject(e.currentTarget);
+ const btn=$("generateSongBtn");
+ if(d.lyrics.trim().length<10){status("musicStatus","Écrivez des paroles plus complètes avant de générer.","error");return}
+ btn.disabled=true;btn.textContent="Génération en cours…";
+ $("musicResult").innerHTML="";
+ status("musicStatus","Connexion au service de génération musicale…","info");
+ try{
+  const response=await fetch(MUSIC_API,{
+   method:"POST",
+   headers:{"Content-Type":"application/json","Accept":"application/json"},
+   body:JSON.stringify({
+    title:d.title,
+    style:d.style,
+    lyrics:d.lyrics,
+    mood:d.mood,
+    whatsapp:d.whatsapp||""
+   })
+  });
+  const result=await readApiResponse(response);
+  if(!response.ok||result.success===false||result.error){
+   throw new Error(result.message||result.error||("Erreur HTTP "+response.status));
+  }
+  saveOrder("Création de chanson",{
+   title:d.title,style:d.style,mood:d.mood,
+   lyrics:d.lyrics,whatsapp:d.whatsapp||""
+  });
+  const audioUrl=findAudioUrl(result);
+  if(audioUrl){
+   const audio=document.createElement("audio");audio.controls=true;audio.src=audioUrl;
+   const link=document.createElement("a");link.href=audioUrl;link.target="_blank";link.rel="noopener";link.textContent="Ouvrir ou télécharger le fichier audio";link.className="btn";
+   link.style.display="inline-block";link.style.marginTop="10px";
+   $("musicResult").append(audio,document.createElement("br"),link);
+   status("musicStatus","Le serveur a répondu et un lien audio a été trouvé. Écoutez le résultat ci-dessous.","ok");
+  }else{
+   const pre=document.createElement("pre");
+   pre.style.cssText="white-space:pre-wrap;overflow-wrap:anywhere;background:#0c192b;padding:10px;border-radius:10px;color:#cbd5e1;font-size:11px";
+   pre.textContent=JSON.stringify(result,null,2).slice(0,5000);
+   $("musicResult").append(pre);
+   status("musicStatus","Réponse reçue, mais aucun lien audio reconnu automatiquement. Vérifiez le format de réponse de l'API.","info");
+  }
+ }catch(err){
+  console.error(err);
+  status("musicStatus","La génération n'a pas abouti.\n"+(err.message||"Erreur de connexion")+"\nVérifiez le format requis par l'API et sa configuration CORS.","error");
+ }finally{
+  btn.disabled=false;btn.textContent="🎶 Générer ma chanson";
+ }
+});
+
+/* PUBLICITÉ : envoi au endpoint fourni */
+$("adsForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const d=formObject(e.currentTarget);
+ if(!validUrl(d.url)){status("adStatus","Entrez un lien de destination valide.","error");return}
+ const btn=$("submitAdBtn");btn.disabled=true;btn.textContent="Envoi en cours…";
+ status("adStatus","Envoi à l'API publicitaire…","info");
+ try{
+  const response=await fetch(ADS_API,{
+   method:"POST",
+   headers:{"Content-Type":"application/json","Accept":"application/json"},
+   body:JSON.stringify({
+    action:"create_ad",title:d.title,text:d.text,url:d.url,
+    platform:d.platform,budget:d.budget?Number(d.budget):0,
+    whatsapp:d.whatsapp||""
+   })
+  });
+  const result=await readApiResponse(response);
+  if(!response.ok||result.success===false||result.error){
+   throw new Error(result.message||result.error||("Erreur HTTP "+response.status));
+  }
+  saveOrder("Demande de publicité",d);
+  status("adStatus","Réponse reçue de l'API :\n"+(result.message||result.status||"Requête acceptée.")+"\nVérifiez le statut réel de la campagne dans votre système publicitaire.","ok");
+ }catch(err){
+  status("adStatus","L'API n'a pas confirmé la demande.\n"+(err.message||"Erreur de connexion")+"\nLe backend doit accepter ce format POST et autoriser les requêtes CORS depuis votre site.","error");
+ }finally{
+  btn.disabled=false;btn.textContent="Envoyer à l'API publicité";
+ }
+});
 </script>
 </body>
 </html>
