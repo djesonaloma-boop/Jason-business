@@ -4,14 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#030812">
-<meta name="description" content="JASON BUSINESS — Connexion à votre espace personnel">
 <title>JASON Business — Connexion</title>
 <style>
 :root{--blue:#00d2ff;--blue2:#0077ff;--dark:#050a14;--card:rgba(0,0,0,.86);--red:#ff4757;--green:#00e676;--yellow:#ffeb3b}
 *{box-sizing:border-box}html{min-height:100%}
 body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;background:linear-gradient(rgba(3,8,18,.65),rgba(3,8,18,.90)),url("IMG_0870.jpeg") center/cover fixed;color:white;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
 .overlay-login{position:fixed;inset:0;background:radial-gradient(circle at center,rgba(0,210,255,.08),transparent 45%);pointer-events:none}
-.card{width:100%;max-width:390px;padding:30px 24px;background:var(--card);border:1px solid rgba(0,210,255,.55);border-radius:25px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 0 35px rgba(0,210,255,.20);position:relative;z-index:2}
+.card{width:100%;max-width:390px;padding:30px 24px;background:var(--card);border:1px solid rgba(0,210,255,.55);border-radius:25px;backdrop-filter:blur(18px);box-shadow:0 0 35px rgba(0,210,255,.20);position:relative;z-index:2}
 .logo{width:75px;height:75px;margin:0 auto 15px;border-radius:22px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#001018;font-size:27px;font-weight:900;box-shadow:0 0 30px rgba(0,210,255,.45)}
 h1{color:var(--blue);letter-spacing:3px;margin:0 0 6px;font-size:24px}.subtitle{margin:0 0 25px;font-size:13px;opacity:.65;letter-spacing:1px}
 .input-group{text-align:left;margin-top:14px}.input-group label{display:block;margin-bottom:7px;font-size:12px;opacity:.65}
@@ -23,8 +22,22 @@ button{width:100%;padding:15px;margin-top:22px;border:none;border-radius:12px;ba
 button:hover{box-shadow:0 0 20px rgba(0,210,255,.35)}button:active{transform:scale(.97)}button:disabled{opacity:.55;cursor:not-allowed}
 .status{min-height:22px;margin-top:15px;font-size:13px;color:var(--yellow);font-weight:bold;line-height:1.5}
 .register{margin-top:22px;font-size:13px;line-height:1.6;opacity:.75}.register strong{color:white}.register a{color:var(--blue);text-decoration:none;font-weight:bold}.register a:hover{text-decoration:underline}
+.forgot-link{margin-top:14px;display:block;font-size:12px;color:var(--blue);cursor:pointer;text-decoration:none;font-weight:700}
+.forgot-link:hover{text-decoration:underline}
 .security{margin-top:20px;padding:10px;border-radius:10px;background:rgba(0,230,118,.05);border:1px solid rgba(0,230,118,.12);color:var(--green);font-size:10px}
-@media(max-width:380px){body{padding:12px}.card{padding:25px 18px}h1{font-size:21px}.logo{width:68px;height:68px;font-size:24px}}
+
+/* MODAL MOT DE PASSE OUBLIE */
+.overlay{position:fixed;inset:0;background:rgba(2,5,11,.88);z-index:1000;display:none;align-items:center;justify-content:center;padding:16px}
+.overlay.show{display:flex}
+.modal-forgot{width:100%;max-width:390px;background:linear-gradient(145deg,#0f1f3a,#091121);border:1px solid rgba(0,210,255,.35);border-radius:22px;padding:24px;text-align:left;box-shadow:0 0 30px rgba(0,210,255,.20)}
+.modal-forgot h3{margin:0 0 8px;color:var(--blue);text-align:center;letter-spacing:1px}
+.modal-forgot p{font-size:12px;opacity:.7;text-align:center;margin:0 0 18px;line-height:1.5}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.close{width:34px;height:34px;border-radius:10px;border:1px solid #ffffff1c;background:#17253b;color:white;font-size:20px;cursor:pointer}
+.btn-gold{background:linear-gradient(100deg,#c08a2c,#f1d48b);color:#111}
+.spinner{display:inline-block;width:16px;height:16px;border:2.5px solid rgba(0,0,0,.25);border-top-color:#111;border-radius:50%;animation:spin .6s linear infinite;margin-right:8px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:380px){body{padding:12px}.card{padding:25px 18px}}
 </style>
 </head>
 <body>
@@ -42,9 +55,37 @@ button:hover{box-shadow:0 0 20px rgba(0,210,255,.35)}button:active{transform:sca
         <div class="input-box"><span>🔐</span><input type="password" id="jasonLoginPassword" placeholder="Votre mot de passe" autocomplete="current-password"><span class="password-toggle" id="jasonPasswordToggle" title="Afficher">👁️</span></div>
     </div>
     <button id="jasonLoginButton" type="button">🚀 SE CONNECTER</button>
+    <a class="forgot-link" id="openForgot">🔑 Mot de passe oublié ?</a>
     <div id="jasonLoginStatus" class="status" aria-live="polite"></div>
     <div class="register">Nouveau sur <strong>Jason Business</strong> ?<br><a href="register.html">Créer un compte</a></div>
     <div class="security">🔒 Connexion sécurisée à votre espace Jason Business</div>
+</div>
+
+<!-- MODAL RESET -->
+<div class="overlay" id="forgotModal">
+  <div class="modal-forgot">
+    <div class="modal-head">
+      <h3 style="margin:0">🔑 Nouveau mot de passe</h3>
+      <button class="close" id="closeForgot">×</button>
+    </div>
+    <p>Entre ton numéro et crée un nouveau mot de passe. Pas besoin d'ancien mot de passe.</p>
+    
+    <div class="input-group">
+      <label>NUMÉRO DE TÉLÉPHONE</label>
+      <div class="input-box"><span>📱</span><input type="tel" id="forgotPhone" placeholder="243XXXXXXXXX"></div>
+    </div>
+    <div class="input-group">
+      <label>NOUVEAU MOT DE PASSE</label>
+      <div class="input-box"><span>🔐</span><input type="password" id="forgotNewPass" placeholder="Min 6 caractères"><span class="password-toggle" id="toggleNewPass">👁️</span></div>
+    </div>
+    <div class="input-group">
+      <label>CONFIRMER MOT DE PASSE</label>
+      <div class="input-box"><span>✅</span><input type="password" id="forgotConfirmPass" placeholder="Confirme le mot de passe"><span class="password-toggle" id="toggleConfirmPass">👁️</span></div>
+    </div>
+
+    <button id="forgotButton" type="button" class="btn-gold" style="margin-top:18px;border-radius:12px;padding:15px;font-weight:900;width:100%;border:0;cursor:pointer">🔄 CHANGER MON MOT DE PASSE</button>
+    <div id="forgotStatus" class="status" style="text-align:center"></div>
+  </div>
 </div>
 
 <script type="module">
@@ -63,9 +104,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// COMPATIBILITE ANCIEN + NOUVEAU CHEMIN
 const PATHS_TO_CHECK = ["jasonBusiness/users", "Jasonuser", "users"];
-
 const JASON_SESSION_KEY = "jasonBusinessUserPhone";
 
 const loginPhoneInput = document.getElementById("jasonLoginPhone");
@@ -73,13 +112,6 @@ const loginPasswordInput = document.getElementById("jasonLoginPassword");
 const loginButton = document.getElementById("jasonLoginButton");
 const loginStatus = document.getElementById("jasonLoginStatus");
 const passwordToggle = document.getElementById("jasonPasswordToggle");
-
-// Si déjà connecté mais pas de forceLogout, on laisse dashboard gérer
-const existing = localStorage.getItem("userPhone") || localStorage.getItem("jasonPhone") || localStorage.getItem(JASON_SESSION_KEY) || localStorage.getItem("phone");
-if(existing){
-  // on ne redirige pas direct, on vérifie d'abord si forceLogout
-  // sinon la déconnexion forcée après reset ne marche pas
-}
 
 passwordToggle.addEventListener("click",()=>{
   if(loginPasswordInput.type==="password"){loginPasswordInput.type="text"; passwordToggle.innerText="🙈";}
@@ -96,77 +128,46 @@ function showJasonStatus(msg,type="warning"){
   else loginStatus.style.color="#ffeb3b";
 }
 function resetLoginButton(){loginButton.disabled=false; loginButton.innerText="🚀 SE CONNECTER";}
-
 function getStoredPassword(userData){
-  // Lit TOUS les champs possibles
   return String(userData.password ?? userData.mot_de_passe ?? userData.motDePasse ?? userData.pass ?? userData.mdp ?? userData.code ?? "").trim();
+}
+
+async function findUserByPhone(phoneRaw){
+  for(const basePath of PATHS_TO_CHECK){
+    let r = ref(db, basePath + "/" + phoneRaw);
+    let snap = await get(r);
+    if(snap.exists()) return {data:snap.val(), path:basePath, key:phoneRaw};
+    if(phoneRaw.startsWith("0")){
+      const withoutZero = phoneRaw.substring(1);
+      r = ref(db, basePath + "/" + withoutZero);
+      snap = await get(r);
+      if(snap.exists()) return {data:snap.val(), path:basePath, key:withoutZero};
+    }
+  }
+  return null;
 }
 
 async function loginJasonBusiness(){
   const phoneRaw = cleanJasonPhone(loginPhoneInput.value);
   const password = loginPasswordInput.value.trim();
-
-  if(!phoneRaw){showJasonStatus("❌ Entrez votre numéro.","error"); loginPhoneInput.focus(); return;}
-  if(!password){showJasonStatus("❌ Entrez votre mot de passe.","error"); loginPasswordInput.focus(); return;}
-
+  if(!phoneRaw){showJasonStatus("❌ Entrez votre numéro.","error"); return;}
+  if(!password){showJasonStatus("❌ Entrez votre mot de passe.","error"); return;}
   loginButton.disabled=true; loginButton.innerText="⏳ AUTHENTIFICATION...";
   showJasonStatus("Connexion à Jason Business...","warning");
-
   try{
-    let foundData = null;
-    let foundPath = null;
-    let foundKey = null;
-
-    // 1. Cherche dans les 3 chemins possibles
-    for(const basePath of PATHS_TO_CHECK){
-      const r = ref(db, basePath + "/" + phoneRaw);
-      const snap = await get(r);
-      if(snap.exists()){
-        foundData = snap.val()||{};
-        foundPath = basePath;
-        foundKey = phoneRaw;
-        break;
-      }
-      // Essai aussi sans 0 initial si le numéro commence par 0
-      if(phoneRaw.startsWith("0")){
-        const withoutZero = phoneRaw.substring(1);
-        const r2 = ref(db, basePath + "/" + withoutZero);
-        const snap2 = await get(r2);
-        if(snap2.exists()){
-          foundData = snap2.val()||{};
-          foundPath = basePath;
-          foundKey = withoutZero;
-          break;
-        }
-      }
+    const found = await findUserByPhone(phoneRaw);
+    if(!found){showJasonStatus("❌ Aucun compte trouvé.","error"); resetLoginButton(); return;}
+    if(found.data.disabled===true || found.data.bloque===true || found.data.active===false){
+      showJasonStatus("🚫 Compte désactivé.","error"); resetLoginButton(); return;
     }
-
-    if(!foundData){
-      showJasonStatus("❌ Aucun compte trouvé pour ce numéro.","error");
-      resetLoginButton(); return;
-    }
-
-    if(foundData.disabled===true || foundData.bloque===true || foundData.active===false){
-      showJasonStatus("🚫 Ce compte a été désactivé.","error");
-      resetLoginButton(); return;
-    }
-
-    // 2. Vérification mot de passe COMPATIBLE
-    const savedPassword = getStoredPassword(foundData);
+    const savedPassword = getStoredPassword(found.data);
     if(savedPassword !== String(password).trim()){
-      showJasonStatus("❌ Mot de passe incorrect.","error");
-      resetLoginButton(); return;
+      showJasonStatus("❌ Mot de passe incorrect.","error"); resetLoginButton(); return;
     }
-
-    // 3. Si forceLogout existe, on le nettoie après login réussi
-    if(foundData.forceLogout){
-      try{
-        await update(ref(db, foundPath + "/" + foundKey), {forceLogout: null});
-      }catch(e){}
+    if(found.data.forceLogout){
+      try{await update(ref(db, found.path + "/" + found.key), {forceLogout: null});}catch(e){}
     }
-
-    // 4. SESSION COMPATIBLE AVEC TOUTES LES PAGES (profil, dashboard, admin)
-    const finalPhone = foundKey; // garde la clé qui a matché
+    const finalPhone = found.key;
     localStorage.setItem("userPhone", finalPhone);
     localStorage.setItem("jasonPhone", finalPhone);
     localStorage.setItem("phone", finalPhone);
@@ -174,40 +175,94 @@ async function loginJasonBusiness(){
     localStorage.setItem(JASON_SESSION_KEY, finalPhone);
     localStorage.setItem("jasonBusinessLogged","true");
     localStorage.setItem("jasonBusinessLoginTime", Date.now().toString());
-    localStorage.setItem("jasonBusinessUserName", String(foundData.nom||foundData.name||foundData.username||"Utilisateur"));
-
-    showJasonStatus("✅ Accès autorisé. Bienvenue !","success");
+    localStorage.setItem("jasonBusinessUserName", String(found.data.nom||found.data.name||"Utilisateur"));
+    showJasonStatus("✅ Accès autorisé !","success");
     loginButton.innerText="✅ CONNEXION RÉUSSIE";
-
     setTimeout(()=>{window.location.replace("dashboard.html");},700);
-
   }catch(error){
-    console.error(error);
-    showJasonStatus("⚠️ Impossible de contacter Firebase.","error");
-    resetLoginButton();
+    console.error(error); showJasonStatus("⚠️ Erreur Firebase.","error"); resetLoginButton();
   }
 }
-
 loginButton.addEventListener("click",loginJasonBusiness);
 loginPhoneInput.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault(); loginJasonBusiness();}});
 loginPasswordInput.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault(); loginJasonBusiness();}});
 
-window.addEventListener("load",()=>{
-  // Vérifie si l'utilisateur a été forcé à se déconnecter par l'admin
-  const checkForceLogout = async()=>{
-    const phone = localStorage.getItem("userPhone") || localStorage.getItem("jasonPhone") || localStorage.getItem(JASON_SESSION_KEY);
-    if(!phone) return;
-    try{
-      const snap = await get(ref(db, "jasonBusiness/users/"+phone));
-      if(snap.exists() && snap.val().forceLogout){
-        // Admin a reset le MDP, on déconnecte tout
-        localStorage.clear(); sessionStorage.clear();
-        showJasonStatus("🔑 Votre mot de passe a été réinitialisé. Reconnectez-vous avec le nouveau.","warning");
-      }
-    }catch(e){}
-  };
-  checkForceLogout();
-  if(!loginPhoneInput.value) loginPhoneInput.focus();
+// ==== MOT DE PASSE OUBLIE ====
+const forgotModal = document.getElementById("forgotModal");
+const openForgot = document.getElementById("openForgot");
+const closeForgot = document.getElementById("closeForgot");
+const forgotPhone = document.getElementById("forgotPhone");
+const forgotNewPass = document.getElementById("forgotNewPass");
+const forgotConfirmPass = document.getElementById("forgotConfirmPass");
+const forgotButton = document.getElementById("forgotButton");
+const forgotStatus = document.getElementById("forgotStatus");
+
+function showForgotStatus(msg,type="warning"){
+  forgotStatus.innerText=msg;
+  if(type==="success") forgotStatus.style.color="#00e676";
+  else if(type==="error") forgotStatus.style.color="#ff4757";
+  else forgotStatus.style.color="#ffeb3b";
+}
+
+openForgot.addEventListener("click",()=>{
+  forgotPhone.value = cleanJasonPhone(loginPhoneInput.value);
+  forgotModal.classList.add("show");
+});
+closeForgot.addEventListener("click",()=>forgotModal.classList.remove("show"));
+forgotModal.addEventListener("click",e=>{if(e.target===forgotModal) forgotModal.classList.remove("show");});
+
+document.getElementById("toggleNewPass").addEventListener("click",function(){
+  if(forgotNewPass.type==="password"){forgotNewPass.type="text"; this.innerText="🙈";}else{forgotNewPass.type="password"; this.innerText="👁️";}
+});
+document.getElementById("toggleConfirmPass").addEventListener("click",function(){
+  if(forgotConfirmPass.type==="password"){forgotConfirmPass.type="text"; this.innerText="🙈";}else{forgotConfirmPass.type="password"; this.innerText="👁️";}
+});
+
+forgotButton.addEventListener("click", async()=>{
+  const phoneRaw = cleanJasonPhone(forgotPhone.value);
+  const newPass = forgotNewPass.value.trim();
+  const confirmPass = forgotConfirmPass.value.trim();
+
+  if(!phoneRaw){showForgotStatus("❌ Entre ton numéro","error"); return;}
+  if(newPass.length<6){showForgotStatus("❌ Min 6 caractères","error"); return;}
+  if(newPass!==confirmPass){showForgotStatus("❌ Les mots de passe ne correspondent pas","error"); return;}
+
+  forgotButton.disabled=true;
+  const oldText=forgotButton.innerHTML;
+  forgotButton.innerHTML=`<span class="spinner"></span> Traitement...`;
+  showForgotStatus("Vérification du compte...","warning");
+
+  try{
+    const found = await findUserByPhone(phoneRaw);
+    if(!found){showForgotStatus("❌ Aucun compte avec ce numéro","error"); forgotButton.disabled=false; forgotButton.innerHTML=oldText; return;}
+
+    // MISE A JOUR MOT DE PASSE - compatible toutes versions
+    await update(ref(db, found.path + "/" + found.key), {
+      password: newPass,
+      mot_de_passe: newPass,
+      motDePasse: newPass,
+      pass: newPass,
+      lastPasswordReset: Date.now(),
+      forceLogout: null
+    });
+
+    showForgotStatus("✅ Mot de passe changé ! Connecte-toi maintenant","success");
+    forgotButton.innerHTML=`✅ CHANGÉ !`;
+    setTimeout(()=>{
+      forgotModal.classList.remove("show");
+      loginPhoneInput.value=phoneRaw;
+      loginPasswordInput.value=newPass;
+      showJasonStatus("✅ Nouveau mot de passe défini, connecte-toi","success");
+      forgotButton.disabled=false;
+      forgotButton.innerHTML=oldText;
+      forgotNewPass.value=""; forgotConfirmPass.value="";
+    },1200);
+
+  }catch(e){
+    console.error(e);
+    showForgotStatus("⚠️ Erreur: "+e.message,"error");
+    forgotButton.disabled=false; forgotButton.innerHTML=oldText;
+  }
 });
 </script>
 </body>
