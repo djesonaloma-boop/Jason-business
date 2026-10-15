@@ -61,9 +61,8 @@ td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:
 .action-row{display:flex;gap:8px;flex-wrap:wrap;padding:0 16px 16px}
 #toastContainer{position:fixed;top:78px;right:15px;z-index:10000;display:flex;flex-direction:column;gap:8px;width:min(330px,calc(100% - 30px))}.toast{padding:13px 15px;border-radius:12px;background:#111b2d;border:1px solid var(--border);font-size:12px}
 .empty{text-align:center;color:var(--muted);padding:25px}
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.72);backdrop-filter:blur(7px);z-index:5000}.modal.show{display:flex}.modal-box{width:100%;max-width:680px;max-height:90vh;overflow-y:auto;background:#0b1220;border:1px solid var(--border);border-radius:20px}.modal-header{display:flex;align-items:center;justify-content:space-between;padding:17px;border-bottom:1px solid var(--border)}.modal-title{font-weight:900}.close{width:34px;height:34px;border:0;border-radius:10px;background:rgba(255,255,255,.06);color:white;font-size:20px;cursor:pointer}.modal-content{padding:18px}
-.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.detail-item{background:rgba(255,255,255,.035);border:1px solid var(--border);border-radius:12px;padding:12px}.detail-item small{display:block;color:var(--muted);font-size:10px;margin-bottom:6px}.detail-item strong{display:block;font-size:13px;word-break:break-word}
-.link{color:var(--blue);text-decoration:none;word-break:break-all}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.72);backdrop-filter:blur(7px);z-index:5000}.modal.show{display:flex}.modal-box{width:100%;max-width:700px;max-height:90vh;overflow-y:auto;background:#0b1220;border:1px solid var(--border);border-radius:20px}.modal-header{display:flex;align-items:center;justify-content:space-between;padding:17px;border-bottom:1px solid var(--border)}.modal-title{font-weight:900}.close{width:34px;height:34px;border:0;border-radius:10px;background:rgba(255,255,255,.06);color:white;font-size:20px;cursor:pointer}.modal-content{padding:18px}
+.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.detail-item{background:rgba(255,255,255,.035);border:1px solid var(--border);border-radius:12px;padding:12px}.detail-item small{display:block;color:var(--muted);font-size:10px;margin-bottom:6px}.detail-item strong{display:block;font-size:13px;word-break:break-word}.link{color:var(--blue);text-decoration:none;word-break:break-all}
 @media(max-width:900px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.price-grid{grid-template-columns:1fr}}
 @media(max-width:700px){.layout{display:block}.sidebar{width:100%;display:flex;overflow-x:auto;border-right:0;border-bottom:1px solid var(--border);padding:8px}.menu-btn{width:auto;flex-shrink:0}.content{padding:14px}.page-title{font-size:22px}.header{padding:12px}.admin-status{display:none}.detail-grid{grid-template-columns:1fr}}
 </style>
@@ -82,10 +81,7 @@ td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:
 <div id="adminPanel">
  <header class="header">
   <div class="brand">JASON <span>BUSINESS</span></div>
-  <div class="header-right">
-   <div class="admin-status"><span class="online-dot"></span>Session administrateur - 10092007</div>
-   <button class="logout" id="adminLogout" type="button">Déconnexion</button>
-  </div>
+  <div class="header-right"><div class="admin-status"><span class="online-dot"></span>Session administrateur - 10092007</div><button class="logout" id="adminLogout" type="button">Déconnexion</button></div>
  </header>
  <div class="layout">
   <aside class="sidebar">
@@ -95,14 +91,13 @@ td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:
    <button class="menu-btn" data-page="store">🛍️ Store <span class="menu-count" id="menuStore">0</span></button>
    <button class="menu-btn" data-page="recharges">💳 Dépôts <span class="menu-count" id="menuRecharges">0</span></button>
    <button class="menu-btn" data-page="withdrawals">💸 Retraits <span class="menu-count" id="menuWithdrawals">0</span></button>
-   <button class="menu-btn" data-page="messages">💬 Messages</button>
+   <button class="menu-btn" data-page="messages">💬 Messages <span class="menu-count" id="menuMessages">0</span></button>
    <button class="menu-btn" data-page="vip">👑 VIP <span class="menu-count" id="menuVip">0</span></button>
    <button class="menu-btn" data-page="api">🔌 API et tarifs</button>
   </aside>
   <main class="content">
    <section class="page active" id="page-dashboard">
-    <div class="page-title">📊 Dashboard</div>
-    <div class="page-subtitle">Vue générale de JASON BUSINESS - Code admin 10092007</div>
+    <div class="page-title">📊 Dashboard</div><div class="page-subtitle">Code admin 10092007 - Toutes les commandes boutique connectées</div>
     <div class="stats">
      <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-label">Utilisateurs</div><div class="stat-value" id="statUsers">0</div></div>
      <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-label">Solde total</div><div class="stat-value" id="totalBalance">0 FC</div></div>
@@ -110,130 +105,80 @@ td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:
      <div class="stat-card"><div class="stat-icon">🛍️</div><div class="stat-label">Store en attente</div><div class="stat-value" id="statStore">0</div></div>
      <div class="stat-card"><div class="stat-icon">💳</div><div class="stat-label">Dépôts en attente</div><div class="stat-value" id="statRecharges">0</div></div>
      <div class="stat-card"><div class="stat-icon">💸</div><div class="stat-label">Retraits en attente</div><div class="stat-value" id="statWithdrawals">0</div></div>
-     <div class="stat-card"><div class="stat-icon">👑</div><div class="stat-label">Membres VIP actifs</div><div class="stat-value" id="statVip">0</div></div>
+     <div class="stat-card"><div class="stat-icon">👑</div><div class="stat-label">VIP actifs</div><div class="stat-value" id="statVip">0</div></div>
      <div class="stat-card"><div class="stat-icon">💬</div><div class="stat-label">Messages</div><div class="stat-value" id="statMessages">0</div></div>
     </div>
    </section>
 
    <section class="page" id="page-users">
-    <div class="page-title">👥 Utilisateurs</div>
-    <div class="page-subtitle">Consulte et gère les comptes clients.</div>
-    <div class="panel">
-     <div class="panel-head"><strong>Liste des clients</strong><input id="userSearch" class="toolbar-input" placeholder="🔎 Rechercher..." style="width:100%;max-width:300px"></div>
-     <div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>VIP</th><th>MDP actuel</th><th>Actions</th></tr></thead><tbody id="usersTable"><tr><td colspan="6" class="empty">Chargement…</td></tr></tbody></table></div>
-    </div>
+    <div class="page-title">👥 Utilisateurs</div><div class="panel"><div class="panel-head"><strong>Liste des clients</strong><input id="userSearch" class="toolbar-input" placeholder="🔎 Rechercher..."></div><div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>VIP</th><th>MDP actuel</th><th>Actions</th></tr></thead><tbody id="usersTable"></tbody></table></div></div>
    </section>
 
    <section class="page" id="page-commands">
-    <div class="page-title">🛒 Commandes Boost - Modifier prix + Voir détails</div>
-    <div class="page-subtitle">Valide ou refuse les demandes + modifie le prix</div>
-    <div class="panel">
-     <div class="panel-head"><strong>Demandes Boost</strong><input id="commandSearch" class="toolbar-input" placeholder="🔎 Plateforme, service, client" style="width:100%;max-width:300px"></div>
-     <div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Plateforme</th><th>Service / Type</th><th>Lien</th><th>Qté</th><th>Prix</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div>
-    </div>
+    <div class="page-title">🛒 Boost — Modifier prix + Voir détails complet</div><div class="panel"><div class="panel-head"><strong>Commandes Boost (boutique connectée)</strong><input id="commandSearch" class="toolbar-input" placeholder="🔎 Plateforme, service, client"></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Plateforme</th><th>Service</th><th>Lien</th><th>Qté</th><th>Prix</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div></div>
    </section>
 
    <section class="page" id="page-store">
-    <div class="page-title">🛍️ Store - Modifier prix + Voir commande</div>
-    <div class="page-subtitle">Commandes boutique physique</div>
-    <div class="panel">
-     <div class="panel-head"><strong>Commandes Store</strong><input id="storeSearch" class="toolbar-input" placeholder="🔎 Client, produit" style="width:100%;max-width:300px"></div>
-     <div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Produit</th><th>Qté</th><th>Prix</th><th>Adresse</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="storeTable"></tbody></table></div>
-    </div>
+    <div class="page-title">🛍️ Store — Modifier prix + Voir commande</div><div class="panel"><div class="panel-head"><strong>Commandes Store (App, Site, Chatbot, Chanson, Pub)</strong><input id="storeSearch" class="toolbar-input" placeholder="🔎 Client, produit"></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Produit</th><th>Qté</th><th>Prix</th><th>Adresse / Détails</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="storeTable"></tbody></table></div></div>
    </section>
 
-   <section class="page" id="page-recharges">
-    <div class="page-title">💳 Recharges / Dépôts</div>
-    <div class="page-subtitle">Validation des dépôts des clients.</div>
-    <div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Transaction</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="rechargesTable"></tbody></table></div></div>
-   </section>
-
-   <section class="page" id="page-withdrawals">
-    <div class="page-title">💸 Retraits</div>
-    <div class="page-subtitle">Suivi des demandes de retrait.</div>
-    <div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Numéro réception</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsTable"></tbody></table></div></div>
-   </section>
-
+   <section class="page" id="page-recharges"><div class="page-title">💳 Dépôts</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Transaction</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="rechargesTable"></tbody></table></div></div></section>
+   <section class="page" id="page-withdrawals"><div class="page-title">💸 Retraits</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Numéro</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsTable"></tbody></table></div></div></section>
    <section class="page" id="page-messages">
     <div class="page-title">💬 Messages clients</div>
-    <div class="page-subtitle">Messages reçus + envoyer réponse</div>
-    <div class="panel">
-     <div class="panel-head"><strong>Messages</strong><div style="display:flex;gap:8px"><input id="messageTo" class="toolbar-input" placeholder="Numéro client"><input id="messageTextInput" class="toolbar-input" placeholder="Message..." style="min-width:200px"><button class="btn btn-blue" id="sendMessageBtn">📤 Envoyer</button></div></div>
-     <div id="messagesList"><div class="empty">Chargement…</div></div>
-    </div>
+    <div class="panel"><div class="panel-head"><strong>Messages</strong><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="messageTo" class="toolbar-input" placeholder="Numéro"><input id="messageTextInput" class="toolbar-input" placeholder="Message..." style="min-width:200px"><button class="btn btn-blue" id="sendMessageBtn">📤 Envoyer</button></div></div><div id="messagesList"><div class="empty">Chargement…</div></div></div>
    </section>
-
    <section class="page" id="page-vip">
-    <div class="page-title">👑 Gestion VIP</div>
-    <div class="page-subtitle">Attribue un niveau VIP ou désactive le statut d'un membre.</div>
-    <div class="panel">
-     <div class="panel-head"><strong>Clients VIP</strong><input id="vipSearch" class="toolbar-input" placeholder="🔎 Rechercher un client" style="width:100%;max-width:280px"></div>
-     <div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Niveau</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="vipTable"></tbody></table></div>
-     <div class="section-note">Les modifications sont enregistrées dans le profil du client sous <code>vipLevel</code> et <code>vipStatus</code>.</div>
-    </div>
+    <div class="page-title">👑 Gestion VIP</div><div class="panel"><div class="panel-head"><strong>Clients VIP</strong><input id="vipSearch" class="toolbar-input" placeholder="🔎 Rechercher"></div><div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Niveau</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="vipTable"></tbody></table></div></div>
    </section>
-
    <section class="page" id="page-api">
-    <div class="page-title">🔌 API et tarifs</div>
-    <div class="page-subtitle">Modifie les prix des services et enregistre-les dans Firebase.</div>
-    <div class="panel">
-     <div class="panel-head"><strong>Tarification des services</strong><span class="badge badge-blue">Prix en FC</span></div>
-     <div class="section-note">Ces tarifs sont stockés dans <code>jasonBusiness/config/apiPrices</code>.</div>
-     <div class="price-grid" id="priceGrid"><div class="empty">Chargement des tarifs…</div></div>
-     <div class="action-row">
-      <button class="btn btn-blue" id="savePrices">💾 Enregistrer les tarifs</button>
-      <button class="btn btn-purple" id="reloadPrices">↻ Recharger depuis Firebase</button>
-     </div>
-    </div>
-    <div class="panel"><div class="panel-head"><strong>État de la configuration</strong></div><div class="section-note" id="apiInfo">En attente de connexion à Firebase.</div></div>
+    <div class="page-title">🔌 API et tarifs</div><div class="panel"><div class="panel-head"><strong>Tarification</strong><span class="badge badge-blue">Prix en FC</span></div><div class="price-grid" id="priceGrid"><div class="empty">Chargement…</div></div><div class="action-row"><button class="btn btn-blue" id="savePrices">💾 Enregistrer</button><button class="btn btn-purple" id="reloadPrices">↻ Recharger</button></div></div><div class="panel"><div class="panel-head"><strong>État</strong></div><div class="section-note" id="apiInfo">En attente Firebase</div></div>
    </section>
-
   </main>
  </div>
 </div>
 
-<div class="modal" id="commandModal"><div class="modal-box"><div class="modal-header"><div class="modal-title" id="modalTitle">🛒 Détails commande</div><button class="close" onclick="closeModal('commandModal')">×</button></div><div class="modal-content" id="commandDetails"></div></div></div>
+<div class="modal" id="commandModal"><div class="modal-box"><div class="modal-header"><div class="modal-title" id="modalTitle">Détails</div><button class="close" onclick="closeModal('commandModal')">×</button></div><div class="modal-content" id="commandDetails"></div></div></div>
 <div id="toastContainer"></div>
+
+<!-- LOGIN SIMPLE QUI MARCHE SANS FIREBASE -->
+<script>
+const ADMIN_CODE="10092007";
+function showAdminPanel(){
+ document.getElementById("adminLogin").style.display="none";
+ document.getElementById("adminPanel").style.display="block";
+ localStorage.setItem("jasonAdmin","ok");
+ if(window._start) window._start();
+}
+function doLogin(){
+ const pw=(document.getElementById("adminPassword").value||"").trim();
+ const err=document.getElementById("loginError");
+ if(pw===ADMIN_CODE){showAdminPanel();}else{err.textContent="❌ Code incorrect - tape 10092007"; setTimeout(()=>err.textContent="",3000);}
+}
+document.addEventListener("DOMContentLoaded",()=>{
+ const btn=document.getElementById("loginAdmin");
+ const inp=document.getElementById("adminPassword");
+ const logout=document.getElementById("adminLogout");
+ if(btn) btn.onclick=doLogin;
+ if(inp) inp.onkeydown=e=>{if(e.key==="Enter") doLogin();};
+ if(logout) logout.onclick=()=>{localStorage.removeItem("jasonAdmin"); location.reload();};
+ if(localStorage.getItem("jasonAdmin")==="ok"){document.getElementById("adminLogin").style.display="none";document.getElementById("adminPanel").style.display="block";}
+});
+function closeModal(id){document.getElementById(id).classList.remove("show");}
+function openModal(id){document.getElementById(id).classList.add("show");}
+</script>
 
 <script type="module">
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, onValue, update, remove, push, runTransaction, get, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-const firebaseConfig = {
- apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
- authDomain:"starlink-investit.firebaseapp.com",
- databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
- projectId:"starlink-investit",
- storageBucket:"starlink-investit.firebasestorage.app",
- messagingSenderId:"807081599583",
- appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
-};
-const app = getApps().length? getApps()[0] : initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
+const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
+const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
+const db=getDatabase(app);
 const ROOT="jasonBusiness";
-const PATHS={
- users:`${ROOT}/users`,
- commands:`${ROOT}/demandes_commandes`,
- store:`${ROOT}/store_commandes`,
- recharges:`${ROOT}/demandes_recharges`,
- withdrawals:`${ROOT}/demandes_retraits`,
- messages:`${ROOT}/messages`,
- prices:`${ROOT}/config/apiPrices`
-};
-const ADMIN_CODE="10092007";
-
-const defaultPrices={
- boosting:{label:"Boosting / réseaux sociaux",price:5000,description:"Tarif de base du service de boosting."},
- chatbot:{label:"API Chatbot IA",price:10000,description:"Accès ou utilisation du service chatbot."},
- translation:{label:"Traduction IA",price:2000,description:"Tarif de base de traduction."},
- image:{label:"Génération d’images",price:5000,description:"Tarif de génération d’images."},
- music:{label:"Génération musicale",price:10000,description:"Tarif de création musicale."},
- video:{label:"Génération vidéo",price:15000,description:"Tarif de génération vidéo."}
-};
-
+const PATHS={users:`${ROOT}/users`,commands:`${ROOT}/demandes_commandes`,store:`${ROOT}/store_commandes`,recharges:`${ROOT}/demandes_recharges`,withdrawals:`${ROOT}/demandes_retraits`,messages:`${ROOT}/messages`,prices:`${ROOT}/config/apiPrices`};
+const defaultPrices={boosting:{label:"Boosting / réseaux sociaux",price:5000,description:"Tarif de base du service de boosting."},chatbot:{label:"API Chatbot IA",price:10000,description:"Accès chatbot."},translation:{label:"Traduction IA",price:2000,description:"Tarif traduction."},image:{label:"Génération d’images",price:5000,description:"Tarif images."},music:{label:"Génération musicale",price:10000,description:"Tarif musique."},video:{label:"Génération vidéo",price:15000,description:"Tarif vidéo."}};
 let usersCache={},commandsCache={},storeCache={},rechargesCache={},withdrawalsCache={},pricesCache={},messagesCache={};
-let listenersStarted=false;
+let started=false;
 const $=id=>document.getElementById(id);
 const money=v=>Math.floor(Number(v)||0).toLocaleString("fr-FR");
 const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
@@ -247,51 +192,24 @@ const isVip=d=>{const s=String(d.vipStatus??"").toLowerCase(); return d.vip===tr
 const vipLevel=d=>d.vipLevel||d.niveauVip||"Aucun";
 const badge=s=>{const v=String(s||"En attente"); const l=v.toLowerCase(); if(l.includes("valid")||l.includes("pay")) return `<span class="badge badge-success">✓ ${esc(v)}</span>`; if(l.includes("refus")||l.includes("annul")) return `<span class="badge badge-danger">✕ ${esc(v)}</span>`; return `<span class="badge badge-pending">⏳ ${esc(v)}</span>`;}
 function toast(m){const c=$("toastContainer"); const el=document.createElement("div"); el.className="toast"; el.textContent=m; c.appendChild(el); setTimeout(()=>el.remove(),3500);}
-window.closeModal=id=>document.getElementById(id).classList.remove("show");
-window.openModal=id=>document.getElementById(id).classList.add("show");
 function openPage(p){document.querySelectorAll(".menu-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===p)); document.querySelectorAll(".page").forEach(s=>s.classList.toggle("active",s.id==="page-"+p));}
 document.querySelectorAll(".menu-btn").forEach(b=>b.addEventListener("click",()=>openPage(b.dataset.page)));
 
-// LOGIN avec code 10092007 direct
-function showAdmin(){document.getElementById("adminLogin").style.display="none";document.getElementById("adminPanel").style.display="block"; localStorage.setItem("jasonBusinessAdminToken","ok_"+Date.now()); startListeners();}
-function loginAdmin(){
- const pw=document.getElementById("adminPassword").value.trim();
- const err=document.getElementById("loginError");
- if(!pw){err.textContent="Entre le mot de passe"; return;}
- if(pw===ADMIN_CODE){showAdmin(); toast("🔓 Admin ouvert - 10092007");} else {err.textContent="❌ Code incorrect - c'est 10092007"; toast("❌ Code incorrect");}
-}
-document.getElementById("loginAdmin").addEventListener("click",loginAdmin);
-document.getElementById("adminPassword").addEventListener("keydown",e=>{if(e.key==="Enter") loginAdmin();});
-document.getElementById("adminLogout").addEventListener("click",()=>{localStorage.removeItem("jasonBusinessAdminToken"); location.reload();});
-if(localStorage.getItem("jasonBusinessAdminToken")){document.getElementById("adminLogin").style.display="none";document.getElementById("adminPanel").style.display="block";}
-
-function startListeners(){
- if(listenersStarted) return; listenersStarted=true;
+window._start=()=>{
+ if(started) return; started=true;
  onValue(ref(db,PATHS.users),snap=>{
   usersCache={}; let total=0,balance=0,vipCount=0; snap.forEach(ch=>{const d=ch.val()||{}; usersCache[ch.key]=d; total++; balance+=getBal(d); if(isVip(d)) vipCount++;});
   $("statUsers").textContent=total; $("totalBalance").textContent=money(balance)+" FC"; $("statVip").textContent=vipCount; $("menuVip").textContent=vipCount;
   renderUsers(); renderVip();
  });
- onValue(ref(db,PATHS.commands),snap=>{
-  commandsCache={}; snap.forEach(ch=>commandsCache[ch.key]=ch.val()||{}); renderCommands();
- });
- onValue(ref(db,PATHS.store),snap=>{
-  storeCache={}; snap.forEach(ch=>storeCache[ch.key]=ch.val()||{}); renderStore();
- });
- onValue(ref(db,PATHS.recharges),snap=>{
-  rechargesCache={}; snap.forEach(ch=>rechargesCache[ch.key]=ch.val()||{}); renderRecharges();
- });
- onValue(ref(db,PATHS.withdrawals),snap=>{
-  withdrawalsCache={}; snap.forEach(ch=>withdrawalsCache[ch.key]=ch.val()||{}); renderWithdrawals();
- });
- onValue(ref(db,PATHS.prices),snap=>{
-  pricesCache=snap.val()||{}; renderPrices();
-  $("apiInfo").textContent=snap.exists()?"Tarifs chargés depuis Firebase":"Aucun tarif enregistré - exemples affichés";
- });
- onValue(ref(db,PATHS.messages),snap=>{
-  messagesCache={}; snap.forEach(ch=>messagesCache[ch.key]=ch.val()||{}); renderMessages();
- });
-}
+ onValue(ref(db,PATHS.commands),snap=>{commandsCache={}; snap.forEach(ch=>commandsCache[ch.key]=ch.val()||{}); renderCommands();});
+ onValue(ref(db,PATHS.store),snap=>{storeCache={}; snap.forEach(ch=>storeCache[ch.key]=ch.val()||{}); renderStore();});
+ onValue(ref(db,PATHS.recharges),snap=>{rechargesCache={}; snap.forEach(ch=>rechargesCache[ch.key]=ch.val()||{}); renderRecharges();});
+ onValue(ref(db,PATHS.withdrawals),snap=>{withdrawalsCache={}; snap.forEach(ch=>withdrawalsCache[ch.key]=ch.val()||{}); renderWithdrawals();});
+ onValue(ref(db,PATHS.prices),snap=>{pricesCache=snap.val()||{}; renderPrices(); $("apiInfo").textContent=snap.exists()?"Tarifs chargés depuis Firebase":"Aucun tarif enregistré";});
+ onValue(ref(db,PATHS.messages),snap=>{messagesCache={}; snap.forEach(ch=>messagesCache[ch.key]=ch.val()||{}); renderMessages();});
+};
+if(localStorage.getItem("jasonAdmin")==="ok") window._start();
 
 function renderUsers(){
  const tbody=$("usersTable"); tbody.innerHTML="";
@@ -311,13 +229,8 @@ function renderVip(){
   tbody.appendChild(tr);
  });
 }
-window.viewUser=function(enc){
- const phone=decodeURIComponent(enc); const d=usersCache[phone]||{};
- document.getElementById("modalTitle").textContent="👤 "+phone;
- $("commandDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>📱 Numéro</small><strong>${esc(phone)}</strong></div><div class="detail-item"><small>👤 Nom</small><strong>${esc(getName(d))}</strong></div><div class="detail-item" style="border-color:rgba(216,170,69,.4)"><small>🔑 MDP</small><strong style="color:#d8aa45">${esc(getPass(d))}</strong></div><div class="detail-item"><small>💰 Solde</small><strong>${money(getBal(d))} FC</strong></div><div class="detail-item" style="grid-column:span 2"><small>📝 JSON complet</small><strong style="white-space:pre-wrap;font-size:10px">${esc(JSON.stringify(d,null,2).slice(0,2000))}</strong></div></div>`;
- openModal("commandModal");
-};
-window.deleteUser=async(enc)=>{const p=decodeURIComponent(enc); if(!confirm("Supprimer "+p+"?")) return; await remove(ref(db,`${PATHS.users}/${p}`)); toast("Supprimé");};
+window.viewUser=function(enc){const phone=decodeURIComponent(enc); const d=usersCache[phone]||{}; $("modalTitle").textContent="👤 "+phone; $("commandDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>📱 Numéro</small><strong>${esc(phone)}</strong></div><div class="detail-item"><small>👤 Nom</small><strong>${esc(getName(d))}</strong></div><div class="detail-item"><small>🔑 MDP</small><strong style="color:#d8aa45">${esc(getPass(d))}</strong></div><div class="detail-item"><small>💰 Solde</small><strong>${money(getBal(d))} FC</strong></div><div class="detail-item" style="grid-column:span 2"><small>JSON</small><strong style="white-space:pre-wrap;font-size:10px">${esc(JSON.stringify(d,null,2).slice(0,2000))}</strong></div></div>`; openModal("commandModal");};
+window.deleteUser=async(enc)=>{if(!confirm("Supprimer?")) return; await remove(ref(db,`${PATHS.users}/${decodeURIComponent(enc)}`));};
 window.saveVip=async(enc)=>{const phone=decodeURIComponent(enc); const sel=document.querySelector(`[data-level="${CSS.escape(phone)}"]`); const level=sel?.value||"Aucun"; await update(ref(db,`${PATHS.users}/${phone}`),{vipLevel:level,vipStatus:level!=="Aucun"?"Actif":"Inactif",vip:level!=="Aucun",isVip:level!=="Aucun"}); toast("VIP enregistré");};
 window.toggleVip=async(enc)=>{const phone=decodeURIComponent(enc); const d=usersCache[phone]||{}; const active=!isVip(d); const level=active?(vipLevel(d)==="Aucun"?"Bronze":vipLevel(d)):"Aucun"; await update(ref(db,`${PATHS.users}/${phone}`),{vip:active,isVip:active,vipStatus:active?"Actif":"Inactif",vipLevel:level}); toast(active?"VIP activé":"VIP désactivé");};
 
@@ -325,14 +238,11 @@ function renderCommands(){
  const tbody=$("commandsTable"); tbody.innerHTML=""; let pending=0;
  const entries=Object.entries(commandsCache).sort((a,b)=>(Number(b[1].createdAt||0)-Number(a[1].createdAt||0)));
  entries.forEach(([id,d])=>{
-  const st=getStatus(d); if(st.toLowerCase().includes("attente")) pending++;
+  const st=getStatus(d); if(isPending(st)) pending++;
   const amt=Number(d.montant??d.prix??0)||0;
-  const plateforme=d.plateforme??d.platforme??"—";
-  const service=d.type_service??d.service??"—";
-  const lien=d.lien??d.link??"—";
-  const qte=d.quantite??d.qty??"—";
+  const plateforme=d.plateforme??"—"; const service=d.type_service??d.service??"—"; const lien=d.lien??"—"; const qte=d.quantite??"—";
   const tr=document.createElement("tr"); tr.dataset.search=(getPhone(d)+" "+plateforme+" "+service).toLowerCase();
-  tr.innerHTML=`<td>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</td><td><b>${esc(getPhone(d)||"—")}</b> ${d.selfBoost?'<span class="badge badge-gold">SELF</span>':""}</td><td><b style="color:#d8aa45">${esc(plateforme)}</b></td><td>${esc(service)}</td><td><a href="${esc(lien)}" target="_blank" class="link" title="${esc(lien)}">${esc(lien).slice(0,30)}</a></td><td><b>${esc(qte)}</b></td><td><b style="color:#d8aa45">${money(amt)} FC</b></td><td>${badge(st)}</td><td><button class="btn btn-blue" onclick="viewCommand('${encodeURIComponent(id)}')">👁</button><button class="btn btn-gold" onclick="editPrice('${encodeURIComponent(id)}')">💰 Prix</button>${isPending(st)?`<button class="btn btn-green" onclick="validateCommand('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseCommand('${encodeURIComponent(id)}')">✕</button>`:`<button class="btn btn-dark" onclick="deleteCommand('${encodeURIComponent(id)}')">🗑</button>`}</td>`;
+  tr.innerHTML=`<td>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</td><td><b>${esc(getPhone(d)||"—")}</b> ${d.selfBoost?'<span class="badge badge-gold">SELF</span>':""}</td><td><b style="color:#d8aa45">${esc(plateforme)}</b></td><td>${esc(service)}</td><td><a href="${esc(lien)}" target="_blank" class="link">${esc(lien).slice(0,30)}</a></td><td><b>${esc(qte)}</b></td><td><b style="color:#d8aa45">${money(amt)} FC</b></td><td>${badge(st)}</td><td><button class="btn btn-blue" onclick="viewCommand('${encodeURIComponent(id)}')">👁</button><button class="btn btn-gold" onclick="editPrice('${encodeURIComponent(id)}')">💰 Prix</button>${isPending(st)?`<button class="btn btn-green" onclick="validateCommand('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseCommand('${encodeURIComponent(id)}')">✕</button>`:`<button class="btn btn-dark" onclick="deleteCommand('${encodeURIComponent(id)}')">🗑</button>`}</td>`;
   tbody.appendChild(tr);
  });
  $("statCommands").textContent=pending; $("menuCommands").textContent=pending;
@@ -342,27 +252,25 @@ function renderStore(){
  const tbody=$("storeTable"); tbody.innerHTML=""; let pending=0;
  const entries=Object.entries(storeCache).sort((a,b)=>(Number(b[1].createdAt||0)-Number(a[1].createdAt||0)));
  entries.forEach(([id,d])=>{
-  const st=getStatus(d); if(st.toLowerCase().includes("attente")) pending++;
+  const st=getStatus(d); if(isPending(st)) pending++;
   const amt=Number(d.montant??d.prix??d.total??0)||0;
   const tr=document.createElement("tr"); tr.dataset.search=(getPhone(d)+" "+(d.produit||"")).toLowerCase();
-  tr.innerHTML=`<td>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</td><td><b>${esc(getPhone(d)||"—")}</b></td><td>${esc(d.produit??d.product??"—")}</td><td>${esc(d.quantite??1)}</td><td><b style="color:#d8aa45">${money(amt)} FC</b></td><td style="max-width:180px;white-space:pre-wrap">${esc(d.adresse??d.livraison??"—")}</td><td>${badge(st)}</td><td><button class="btn btn-blue" onclick="viewStore('${encodeURIComponent(id)}')">👁</button><button class="btn btn-gold" onclick="editStorePrice('${encodeURIComponent(id)}')">💰 Prix</button>${isPending(st)?`<button class="btn btn-green" onclick="validateStore('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseStore('${encodeURIComponent(id)}')">✕</button>`:`<button class="btn btn-dark" onclick="deleteStore('${encodeURIComponent(id)}')">🗑</button>`}</td>`;
+  tr.innerHTML=`<td>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</td><td><b>${esc(getPhone(d)||"—")}</b></td><td>${esc(d.produit??"—")}</td><td>${esc(d.quantite??1)}</td><td><b style="color:#d8aa45">${money(amt)} FC</b></td><td style="max-width:180px;white-space:pre-wrap">${esc(d.adresse??d.livraison??d.description??"—")}</td><td>${badge(st)}</td><td><button class="btn btn-blue" onclick="viewStore('${encodeURIComponent(id)}')">👁</button><button class="btn btn-gold" onclick="editStorePrice('${encodeURIComponent(id)}')">💰 Prix</button>${isPending(st)?`<button class="btn btn-green" onclick="validateStore('${encodeURIComponent(id)}')">✓</button><button class="btn btn-red" onclick="refuseStore('${encodeURIComponent(id)}')">✕</button>`:`<button class="btn btn-dark" onclick="deleteStore('${encodeURIComponent(id)}')">🗑</button>`}</td>`;
   tbody.appendChild(tr);
  });
  $("statStore").textContent=pending; $("menuStore").textContent=pending;
  if(!entries.length) tbody.innerHTML='<tr><td colspan="8" class="empty">Aucune commande Store</td></tr>';
 }
-
 window.viewCommand=function(enc){
  const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const amt=Number(d.montant??d.prix??0)||0;
- $("modalTitle").textContent="🛒 Commande Boost - Voir";
- $("commandDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>📱 Client</small><strong>${esc(getPhone(d))}</strong></div><div class="detail-item"><small>📅 Date</small><strong>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</strong></div><div class="detail-item"><small>🌐 Plateforme</small><strong style="color:#d8aa45">${esc(d.plateforme??"—")}</strong></div><div class="detail-item"><small>🚀 Service</small><strong>${esc(d.type_service??d.service??"—")}</strong></div><div class="detail-item" style="grid-column:span 2"><small>🔗 Lien public</small><strong><a href="${esc(d.lien??"")}" target="_blank" class="link">${esc(d.lien??"—")}</a></strong></div><div class="detail-item"><small>🔢 Quantité</small><strong>${esc(d.quantite??"—")}</strong></div><div class="detail-item"><small>💰 Prix</small><strong style="color:#d8aa45;font-size:18px">${money(amt)} FC</strong></div><div class="detail-item"><small>📌 Statut</small><strong>${esc(getStatus(d))}</strong></div><div class="detail-item" style="grid-column:span 2"><small>📝 JSON complet commande</small><strong style="white-space:pre-wrap;font-size:10px">${esc(JSON.stringify(d,null,2).slice(0,3000))}</strong></div></div><hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)"><div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn btn-gold" onclick="editPrice('${enc}')">💰 Modifier prix</button><button class="btn btn-green" onclick="validateCommand('${enc}')">✓ Valider</button><button class="btn btn-orange" onclick="copyLink('${enc}')">🔗 Copier lien</button><button class="btn btn-red" onclick="refuseCommand('${enc}')">✕ Refuser + Rembourser</button><button class="btn btn-dark" onclick="deleteCommand('${enc}')">🗑 Supprimer</button></div>`;
+ $("modalTitle").textContent="🛒 Boost - Voir + Modifier prix";
+ $("commandDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>📱 Client</small><strong>${esc(getPhone(d))}</strong></div><div class="detail-item"><small>📅 Date</small><strong>${esc(d.date??"")}</strong></div><div class="detail-item"><small>🌐 Plateforme</small><strong style="color:#d8aa45">${esc(d.plateforme??"—")}</strong></div><div class="detail-item"><small>🚀 Service</small><strong>${esc(d.type_service??d.service??"—")}</strong></div><div class="detail-item" style="grid-column:span 2"><small>🔗 Lien</small><strong><a href="${esc(d.lien??"")}" target="_blank" class="link">${esc(d.lien??"—")}</a></strong></div><div class="detail-item"><small>🔢 Quantité</small><strong>${esc(d.quantite??"—")}</strong></div><div class="detail-item"><small>💰 Prix actuel</small><strong style="color:#d8aa45;font-size:18px">${money(amt)} FC</strong></div><div class="detail-item" style="grid-column:span 2"><small>📝 JSON complet</small><strong style="white-space:pre-wrap;font-size:10px">${esc(JSON.stringify(d,null,2).slice(0,3000))}</strong></div></div><hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)"><div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn btn-gold" onclick="editPrice('${enc}')">💰 Modifier prix</button><button class="btn btn-green" onclick="validateCommand('${enc}')">✓ Valider</button><button class="btn btn-orange" onclick="copyLink('${enc}')">🔗 Copier lien</button><button class="btn btn-red" onclick="refuseCommand('${enc}')">✕ Refuser + Rembourser</button><button class="btn btn-dark" onclick="deleteCommand('${enc}')">🗑 Supprimer</button></div>`;
  openModal("commandModal");
 };
 window.viewStore=function(enc){
- const id=decodeURIComponent(enc); const d=storeCache[id]||{};
- const amt=Number(d.montant??d.prix??0)||0;
- $("modalTitle").textContent="🛍️ Commande Store - Voir";
- $("commandDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>📱 Client</small><strong>${esc(getPhone(d)||"—")}</strong></div><div class="detail-item"><small>📅 Date</small><strong>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</strong></div><div class="detail-item"><small>🛍️ Produit</small><strong>${esc(d.produit??"—")}</strong></div><div class="detail-item"><small>💰 Prix</small><strong style="color:#d8aa45;font-size:18px">${money(amt)} FC</strong></div><div class="detail-item" style="grid-column:span 2"><small>📦 Adresse livraison</small><strong>${esc(d.adresse??d.livraison??"—")}</strong></div><div class="detail-item" style="grid-column:span 2"><small>📝 JSON complet</small><strong style="white-space:pre-wrap;font-size:10px">${esc(JSON.stringify(d,null,2).slice(0,3000))}</strong></div></div><hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)"><div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn btn-gold" onclick="editStorePrice('${enc}')">💰 Modifier prix Store</button><button class="btn btn-green" onclick="validateStore('${enc}')">✓ Valider</button><button class="btn btn-red" onclick="refuseStore('${enc}')">✕ Refuser</button><button class="btn btn-dark" onclick="deleteStore('${enc}')">🗑 Supprimer</button></div>`;
+ const id=decodeURIComponent(enc); const d=storeCache[id]||{}; const amt=Number(d.montant??d.prix??0)||0;
+ $("modalTitle").textContent="🛍️ Store - Voir + Modifier prix";
+ $("commandDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>📱 Client</small><strong>${esc(getPhone(d)||"—")}</strong></div><div class="detail-item"><small>📅 Date</small><strong>${esc(d.date??"")}</strong></div><div class="detail-item"><small>🛍️ Produit</small><strong>${esc(d.produit??"—")}</strong></div><div class="detail-item"><small>💰 Prix</small><strong style="color:#d8aa45;font-size:18px">${money(amt)} FC</strong></div><div class="detail-item" style="grid-column:span 2"><small>📦 Adresse / Détails</small><strong>${esc(d.adresse??d.livraison??d.description??"—")}</strong></div><div class="detail-item" style="grid-column:span 2"><small>JSON</small><strong style="white-space:pre-wrap;font-size:10px">${esc(JSON.stringify(d,null,2).slice(0,3000))}</strong></div></div><hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)"><div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn btn-gold" onclick="editStorePrice('${enc}')">💰 Modifier prix Store</button><button class="btn btn-green" onclick="validateStore('${enc}')">✓ Valider</button><button class="btn btn-red" onclick="refuseStore('${enc}')">✕ Refuser</button><button class="btn btn-dark" onclick="deleteStore('${enc}')">🗑 Supprimer</button></div>`;
  openModal("commandModal");
 };
 window.editPrice=async(enc)=>{
@@ -395,7 +303,7 @@ window.refuseCommand=async(enc)=>{
  if(phone&&amt>0) await runTransaction(ref(db,`${PATHS.users}/${phone}/solde_principal`),c=>(Number(c)||0)+amt);
  toast("✅ Remboursé"); closeModal("commandModal");
 };
-window.deleteCommand=async(enc)=>{if(!confirm("Supprimer définitivement?")) return; await remove(ref(db,`${PATHS.commands}/${decodeURIComponent(enc)}`)); closeModal("commandModal"); toast("🗑 Supprimée");};
+window.deleteCommand=async(enc)=>{if(!confirm("Supprimer?")) return; await remove(ref(db,`${PATHS.commands}/${decodeURIComponent(enc)}`)); closeModal("commandModal");};
 window.validateStore=async(enc)=>{await update(ref(db,`${PATHS.store}/${decodeURIComponent(enc)}`),{statut:"Validée"}); toast("✅ Store validé"); closeModal("commandModal");};
 window.refuseStore=async(enc)=>{
  const id=decodeURIComponent(enc); const d=storeCache[id]||{}; const phone=getPhone(d); const amt=Number(d.montant??d.prix??0)||0;
@@ -404,7 +312,7 @@ window.refuseStore=async(enc)=>{
  if(phone&&amt>0) await runTransaction(ref(db,`${PATHS.users}/${phone}/solde_principal`),c=>(Number(c)||0)+amt);
  toast("✅ Store remboursé"); closeModal("commandModal");
 };
-window.deleteStore=async(enc)=>{await remove(ref(db,`${PATHS.store}/${decodeURIComponent(enc)}`)); closeModal("commandModal"); toast("🗑 Store supprimé");};
+window.deleteStore=async(enc)=>{await remove(ref(db,`${PATHS.store}/${decodeURIComponent(enc)}`)); closeModal("commandModal");};
 
 function renderRecharges(){
  const tbody=$("rechargesTable"); tbody.innerHTML=""; let pending=0;
@@ -451,14 +359,14 @@ function renderMessages(){
  const box=$("messagesList"); box.innerHTML=""; let count=0;
  Object.entries(messagesCache).sort((a,b)=>(Number(b[1].createdAt||0)-Number(a[1].createdAt||0))).forEach(([id,d])=>{
   count++; const div=document.createElement("div"); div.style.cssText="padding:16px;border-bottom:1px solid rgba(255,255,255,.07)";
-  div.innerHTML=`<div style="display:flex;justify-content:space-between;gap:10px"><b>📱 ${esc(d.from??getPhone(d)||d.to||"Client")}</b><span style="font-size:10px;color:#8e9aad">${esc(d.date??"")}</span></div><div style="margin:8px 0;font-size:13px;white-space:pre-wrap">${esc(d.message??d.text??"")}</div><div><button class="btn btn-blue" onclick="replyTo('${encodeURIComponent(getPhone(d)||d.from||"")}')">↩️ Répondre</button><button class="btn btn-red" onclick="deleteMsg('${encodeURIComponent(id)}')">🗑</button></div>`;
+  div.innerHTML=`<div style="display:flex;justify-content:space-between"><b>📱 ${esc(d.from??getPhone(d)||d.to||"Client")}</b><span style="font-size:10px;color:#8e9aad">${esc(d.date??"")}</span></div><div style="margin:8px 0;font-size:13px;white-space:pre-wrap">${esc(d.message??d.text??"")}</div><div><button class="btn btn-blue" onclick="replyTo('${encodeURIComponent(getPhone(d)||d.from||"")}')">↩️ Répondre</button><button class="btn btn-red" onclick="deleteMsg('${encodeURIComponent(id)}')">🗑</button></div>`;
   box.appendChild(div);
  });
- $("statMessages").textContent=count;
+ $("statMessages").textContent=count; $("menuMessages").textContent=count;
  if(!count) box.innerHTML='<div class="empty">Aucun message</div>';
 }
 window.replyTo=(enc)=>{const p=decodeURIComponent(enc); $("messageTo").value=p; openPage("messages"); $("messageTextInput").focus();};
-window.deleteMsg=async(enc)=>{if(!confirm("Supprimer message?")) return; await remove(ref(db,`${PATHS.messages}/${decodeURIComponent(enc)}`)); toast("Supprimé");};
+window.deleteMsg=async(enc)=>{if(!confirm("Supprimer?")) return; await remove(ref(db,`${PATHS.messages}/${decodeURIComponent(enc)}`)); toast("Supprimé");};
 $("sendMessageBtn").addEventListener("click",async()=>{
  const to=$("messageTo").value.trim(); const txt=$("messageTextInput").value.trim();
  if(!to||!txt){toast("Entre numéro et message"); return;}
@@ -471,12 +379,12 @@ function renderPrices(){
  Object.entries(defaultPrices).forEach(([key,fallback])=>{
   const stored=pricesCache[key]||{}; const label=stored.label||fallback.label; const price=stored.price??fallback.price; const desc=stored.description||fallback.description;
   const card=document.createElement("div"); card.className="price-card";
-  card.innerHTML=`<h3>${esc(label)}</h3><p>${esc(desc)}</p><div class="price-row"><label>Prix en FC</label><input class="price-input" id="price-${key}" type="number" min="0" value="${Number(price)||0}" data-price-key="${key}"></div>`;
+  card.innerHTML=`<h3>${esc(label)}</h3><p>${esc(desc)}</p><div class="price-row"><label>Prix en FC</label><input class="price-input" type="number" min="0" value="${Number(price)||0}" data-price-key="${key}"></div>`;
   grid.appendChild(card);
  });
 }
 $("savePrices").addEventListener("click",async()=>{
- const next={}; for(const [key,fallback] of Object.entries(defaultPrices)){const input=document.querySelector(`[data-price-key="${key}"]`); const price=Number(input?.value); if(isNaN(price)||price<0){toast("Prix invalide"); return;} next[key]={label:pricesCache[key]?.label||fallback.label,description:pricesCache[key]?.description||fallback.description,price:Math.floor(price),updatedAt:Date.now()};} if(!confirm("Enregistrer les nouveaux prix?")) return; await set(ref(db,PATHS.prices),next); pricesCache=next; toast("✅ Tarifs enregistrés");
+ const next={}; for(const [key,fallback] of Object.entries(defaultPrices)){const input=document.querySelector(`[data-price-key="${key}"]`); const price=Number(input?.value); if(isNaN(price)||price<0){toast("Prix invalide"); return;} next[key]={label:pricesCache[key]?.label||fallback.label,description:pricesCache[key]?.description||fallback.description,price:Math.floor(price),updatedAt:Date.now()};} if(!confirm("Enregistrer?")) return; await set(ref(db,PATHS.prices),next); pricesCache=next; toast("✅ Tarifs enregistrés");
 });
 $("reloadPrices").addEventListener("click",async()=>{const snap=await get(ref(db,PATHS.prices)); pricesCache=snap.val()||{}; renderPrices(); toast("Rechargé");});
 
@@ -485,8 +393,6 @@ $("userSearch").addEventListener("input",()=>applySearch("userSearch","usersTabl
 $("commandSearch").addEventListener("input",()=>applySearch("commandSearch","commandsTable"));
 $("storeSearch").addEventListener("input",()=>applySearch("storeSearch","storeTable"));
 $("vipSearch").addEventListener("input",()=>applySearch("vipSearch","vipTable"));
-
-if(localStorage.getItem("jasonBusinessAdminToken")) startListeners();
 </script>
 </body>
 </html>
