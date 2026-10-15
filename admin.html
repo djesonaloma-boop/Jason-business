@@ -50,7 +50,8 @@ th{color:#7f8da2;font-size:10px;text-transform:uppercase;text-align:left;padding
 td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:middle;max-width:220px;overflow:hidden;text-overflow:ellipsis}
 .btn{border:0;border-radius:8px;padding:8px 10px;color:white;font-size:10px;font-weight:800;margin:2px}
 .btn-blue{background:var(--blue)}.btn-green{background:var(--green)}.btn-red{background:var(--red)}.btn-orange{background:var(--orange)}.btn-purple{background:var(--purple)}.btn-gold{background:var(--gold);color:#111}.btn-dark{background:#263246}
-.badge{display:inline-flex;border-radius:20px;padding:5px 8px;font-size:10px;font-weight:800}.badge-success{color:#54e889;background:#22c55e1f}.badge-danger{color:#ff7777;background:#ef44441f}.badge-pending{color:#ffc95a;background:#f59e0b1f}.badge-blue{color:#70a9ff;background:#3b82f621}.badge-gold{color:#d8aa45;background:rgba(216,170,69,.15)}
+.badge{display:inline-flex;border-radius:20px;padding:5px 8px;font-size:10px;font-weight:800}
+.badge-success{color:#54e889;background:#22c55e1f}.badge-danger{color:#ff7777;background:#ef44441f}.badge-pending{color:#ffc95a;background:#f59e0b1f}.badge-blue{color:#70a9ff;background:#3b82f621}.badge-gold{color:var(--gold);background:rgba(216,170,69,.15)}
 .toolbar-input,.price-input,.small-select{background:#070d18;border:1px solid var(--border);border-radius:10px;color:white;padding:10px;outline:none}
 .price-input{width:100%;min-width:100px}.small-select{max-width:160px}
 .section-note{color:var(--muted);font-size:12px;line-height:1.7;padding:15px}
@@ -68,6 +69,7 @@ td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:
 </style>
 </head>
 <body>
+
 <div id="adminLogin">
  <div class="login-box">
   <div class="login-logo">JASON BUSINESS</div>
@@ -81,7 +83,10 @@ td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:
 <div id="adminPanel">
  <header class="header">
   <div class="brand">JASON <span>BUSINESS</span></div>
-  <div class="header-right"><div class="admin-status"><span class="online-dot"></span>Session administrateur - 10092007</div><button class="logout" id="adminLogout" type="button">Déconnexion</button></div>
+  <div class="header-right">
+   <div class="admin-status"><span class="online-dot"></span>Session administrateur - 10092007</div>
+   <button class="logout" id="adminLogout" type="button">Déconnexion</button>
+  </div>
  </header>
  <div class="layout">
   <aside class="sidebar">
@@ -97,7 +102,8 @@ td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:
   </aside>
   <main class="content">
    <section class="page active" id="page-dashboard">
-    <div class="page-title">📊 Dashboard</div><div class="page-subtitle">Code admin 10092007 - Toutes les commandes boutique connectées</div>
+    <div class="page-title">📊 Dashboard</div>
+    <div class="page-subtitle">Vue générale - Code admin 10092007</div>
     <div class="stats">
      <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-label">Utilisateurs</div><div class="stat-value" id="statUsers">0</div></div>
      <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-label">Solde total</div><div class="stat-value" id="totalBalance">0 FC</div></div>
@@ -111,28 +117,43 @@ td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:
    </section>
 
    <section class="page" id="page-users">
-    <div class="page-title">👥 Utilisateurs</div><div class="panel"><div class="panel-head"><strong>Liste des clients</strong><input id="userSearch" class="toolbar-input" placeholder="🔎 Rechercher..."></div><div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>VIP</th><th>MDP actuel</th><th>Actions</th></tr></thead><tbody id="usersTable"></tbody></table></div></div>
+    <div class="page-title">👥 Utilisateurs</div>
+    <div class="panel"><div class="panel-head"><strong>Liste des clients</strong><input id="userSearch" class="toolbar-input" placeholder="🔎 Rechercher..." style="width:100%;max-width:300px"></div><div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>VIP</th><th>MDP</th><th>Actions</th></tr></thead><tbody id="usersTable"><tr><td colspan="6" class="empty">Chargement…</td></tr></tbody></table></div></div>
    </section>
 
    <section class="page" id="page-commands">
-    <div class="page-title">🛒 Boost — Modifier prix + Voir détails complet</div><div class="panel"><div class="panel-head"><strong>Commandes Boost (boutique connectée)</strong><input id="commandSearch" class="toolbar-input" placeholder="🔎 Plateforme, service, client"></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Plateforme</th><th>Service</th><th>Lien</th><th>Qté</th><th>Prix</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div></div>
+    <div class="page-title">🛒 Boost — Modifier prix + Voir</div>
+    <div class="panel"><div class="panel-head"><strong>Commandes Boost</strong><input id="commandSearch" class="toolbar-input" placeholder="🔎 Plateforme, service, client" style="width:100%;max-width:300px"></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Plateforme</th><th>Service</th><th>Lien</th><th>Qté</th><th>Prix</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div></div>
    </section>
 
    <section class="page" id="page-store">
-    <div class="page-title">🛍️ Store — Modifier prix + Voir commande</div><div class="panel"><div class="panel-head"><strong>Commandes Store (App, Site, Chatbot, Chanson, Pub)</strong><input id="storeSearch" class="toolbar-input" placeholder="🔎 Client, produit"></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Produit</th><th>Qté</th><th>Prix</th><th>Adresse / Détails</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="storeTable"></tbody></table></div></div>
+    <div class="page-title">🛍️ Store — Modifier prix + Voir</div>
+    <div class="panel"><div class="panel-head"><strong>Commandes Store (App, Site, Chatbot, Chanson, Pub)</strong><input id="storeSearch" class="toolbar-input" placeholder="🔎 Client, produit"></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Produit</th><th>Qté</th><th>Prix</th><th>Détails</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="storeTable"></tbody></table></div></div>
    </section>
 
-   <section class="page" id="page-recharges"><div class="page-title">💳 Dépôts</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Transaction</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="rechargesTable"></tbody></table></div></div></section>
-   <section class="page" id="page-withdrawals"><div class="page-title">💸 Retraits</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Numéro</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsTable"></tbody></table></div></div></section>
+   <section class="page" id="page-recharges">
+    <div class="page-title">💳 Dépôts</div>
+    <div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Transaction</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="rechargesTable"></tbody></table></div></div>
+   </section>
+
+   <section class="page" id="page-withdrawals">
+    <div class="page-title">💸 Retraits</div>
+    <div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Numéro</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsTable"></tbody></table></div></div>
+   </section>
+
    <section class="page" id="page-messages">
     <div class="page-title">💬 Messages clients</div>
-    <div class="panel"><div class="panel-head"><strong>Messages</strong><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="messageTo" class="toolbar-input" placeholder="Numéro"><input id="messageTextInput" class="toolbar-input" placeholder="Message..." style="min-width:200px"><button class="btn btn-blue" id="sendMessageBtn">📤 Envoyer</button></div></div><div id="messagesList"><div class="empty">Chargement…</div></div></div>
+    <div class="panel"><div class="panel-head"><strong>Messages</strong><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="messageTo" class="toolbar-input" placeholder="Numéro client"><input id="messageTextInput" class="toolbar-input" placeholder="Message..." style="min-width:200px"><button class="btn btn-blue" id="sendMessageBtn">📤 Envoyer</button></div></div><div id="messagesList"><div class="empty">Chargement…</div></div></div>
    </section>
+
    <section class="page" id="page-vip">
-    <div class="page-title">👑 Gestion VIP</div><div class="panel"><div class="panel-head"><strong>Clients VIP</strong><input id="vipSearch" class="toolbar-input" placeholder="🔎 Rechercher"></div><div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Niveau</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="vipTable"></tbody></table></div></div>
+    <div class="page-title">👑 Gestion VIP</div>
+    <div class="panel"><div class="panel-head"><strong>Clients VIP</strong><input id="vipSearch" class="toolbar-input" placeholder="🔎 Rechercher un client"></div><div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Niveau</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="vipTable"></tbody></table></div></div>
    </section>
+
    <section class="page" id="page-api">
-    <div class="page-title">🔌 API et tarifs</div><div class="panel"><div class="panel-head"><strong>Tarification</strong><span class="badge badge-blue">Prix en FC</span></div><div class="price-grid" id="priceGrid"><div class="empty">Chargement…</div></div><div class="action-row"><button class="btn btn-blue" id="savePrices">💾 Enregistrer</button><button class="btn btn-purple" id="reloadPrices">↻ Recharger</button></div></div><div class="panel"><div class="panel-head"><strong>État</strong></div><div class="section-note" id="apiInfo">En attente Firebase</div></div>
+    <div class="page-title">🔌 API et tarifs</div>
+    <div class="panel"><div class="panel-head"><strong>Tarification des services</strong><span class="badge badge-blue">Prix en FC</span></div><div class="price-grid" id="priceGrid"><div class="empty">Chargement des tarifs…</div></div><div class="action-row"><button class="btn btn-blue" id="savePrices">💾 Enregistrer les tarifs</button><button class="btn btn-purple" id="reloadPrices">↻ Recharger depuis Firebase</button></div></div><div class="panel"><div class="panel-head"><strong>État de la configuration</strong></div><div class="section-note" id="apiInfo">En attente de connexion à Firebase.</div></div>
    </section>
   </main>
  </div>
@@ -141,19 +162,19 @@ td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:
 <div class="modal" id="commandModal"><div class="modal-box"><div class="modal-header"><div class="modal-title" id="modalTitle">Détails</div><button class="close" onclick="closeModal('commandModal')">×</button></div><div class="modal-content" id="commandDetails"></div></div></div>
 <div id="toastContainer"></div>
 
-<!-- LOGIN SIMPLE QUI MARCHE SANS FIREBASE -->
 <script>
+// LOGIN FIXE 10092007 - NE DEPEND PAS DE FIREBASE
 const ADMIN_CODE="10092007";
 function showAdminPanel(){
  document.getElementById("adminLogin").style.display="none";
  document.getElementById("adminPanel").style.display="block";
  localStorage.setItem("jasonAdmin","ok");
- if(window._start) window._start();
+ if(window._startFirebase) window._startFirebase();
 }
 function doLogin(){
  const pw=(document.getElementById("adminPassword").value||"").trim();
  const err=document.getElementById("loginError");
- if(pw===ADMIN_CODE){showAdminPanel();}else{err.textContent="❌ Code incorrect - tape 10092007"; setTimeout(()=>err.textContent="",3000);}
+ if(pw===ADMIN_CODE){showAdminPanel();}else{err.textContent="❌ Code incorrect - tape 10092007";}
 }
 document.addEventListener("DOMContentLoaded",()=>{
  const btn=document.getElementById("loginAdmin");
@@ -183,7 +204,7 @@ const $=id=>document.getElementById(id);
 const money=v=>Math.floor(Number(v)||0).toLocaleString("fr-FR");
 const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
 const getPhone=d=>d.telephone??d.userPhone??d.phone??d.numero??d.user??d.client??d.from??"";
-const getName=d=>d.nom??d.name??d.username??"Utilisateur";
+const getName=d=>d.nom??d.name??"Utilisateur";
 const getBal=d=>Number(d.solde_principal??d.solde??d.balance??0)||0;
 const getPass=d=>d.password??d.mot_de_passe??d.pass??"—";
 const getStatus=d=>d.statut??d.status??"En attente";
@@ -195,7 +216,7 @@ function toast(m){const c=$("toastContainer"); const el=document.createElement("
 function openPage(p){document.querySelectorAll(".menu-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===p)); document.querySelectorAll(".page").forEach(s=>s.classList.toggle("active",s.id==="page-"+p));}
 document.querySelectorAll(".menu-btn").forEach(b=>b.addEventListener("click",()=>openPage(b.dataset.page)));
 
-window._start=()=>{
+window._startFirebase=()=>{
  if(started) return; started=true;
  onValue(ref(db,PATHS.users),snap=>{
   usersCache={}; let total=0,balance=0,vipCount=0; snap.forEach(ch=>{const d=ch.val()||{}; usersCache[ch.key]=d; total++; balance+=getBal(d); if(isVip(d)) vipCount++;});
@@ -209,7 +230,7 @@ window._start=()=>{
  onValue(ref(db,PATHS.prices),snap=>{pricesCache=snap.val()||{}; renderPrices(); $("apiInfo").textContent=snap.exists()?"Tarifs chargés depuis Firebase":"Aucun tarif enregistré";});
  onValue(ref(db,PATHS.messages),snap=>{messagesCache={}; snap.forEach(ch=>messagesCache[ch.key]=ch.val()||{}); renderMessages();});
 };
-if(localStorage.getItem("jasonAdmin")==="ok") window._start();
+if(localStorage.getItem("jasonAdmin")==="ok") window._startFirebase();
 
 function renderUsers(){
  const tbody=$("usersTable"); tbody.innerHTML="";
@@ -270,7 +291,7 @@ window.viewCommand=function(enc){
 window.viewStore=function(enc){
  const id=decodeURIComponent(enc); const d=storeCache[id]||{}; const amt=Number(d.montant??d.prix??0)||0;
  $("modalTitle").textContent="🛍️ Store - Voir + Modifier prix";
- $("commandDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>📱 Client</small><strong>${esc(getPhone(d)||"—")}</strong></div><div class="detail-item"><small>📅 Date</small><strong>${esc(d.date??"")}</strong></div><div class="detail-item"><small>🛍️ Produit</small><strong>${esc(d.produit??"—")}</strong></div><div class="detail-item"><small>💰 Prix</small><strong style="color:#d8aa45;font-size:18px">${money(amt)} FC</strong></div><div class="detail-item" style="grid-column:span 2"><small>📦 Adresse / Détails</small><strong>${esc(d.adresse??d.livraison??d.description??"—")}</strong></div><div class="detail-item" style="grid-column:span 2"><small>JSON</small><strong style="white-space:pre-wrap;font-size:10px">${esc(JSON.stringify(d,null,2).slice(0,3000))}</strong></div></div><hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)"><div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn btn-gold" onclick="editStorePrice('${enc}')">💰 Modifier prix Store</button><button class="btn btn-green" onclick="validateStore('${enc}')">✓ Valider</button><button class="btn btn-red" onclick="refuseStore('${enc}')">✕ Refuser</button><button class="btn btn-dark" onclick="deleteStore('${enc}')">🗑 Supprimer</button></div>`;
+ $("commandDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>📱 Client</small><strong>${esc(getPhone(d)||"—")}</strong></div><div class="detail-item"><small>📅 Date</small><strong>${esc(d.date??"")}</strong></div><div class="detail-item"><small>🛍️ Produit</small><strong>${esc(d.produit??"—")}</strong></div><div class="detail-item"><small>💰 Prix</small><strong style="color:#d8aa45;font-size:18px">${money(amt)} FC</strong></div><div class="detail-item" style="grid-column:span 2"><small>📦 Détails</small><strong>${esc(d.adresse??d.livraison??d.description??"—")}</strong></div><div class="detail-item" style="grid-column:span 2"><small>JSON</small><strong style="white-space:pre-wrap;font-size:10px">${esc(JSON.stringify(d,null,2).slice(0,3000))}</strong></div></div><hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)"><div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn btn-gold" onclick="editStorePrice('${enc}')">💰 Modifier prix Store</button><button class="btn btn-green" onclick="validateStore('${enc}')">✓ Valider</button><button class="btn btn-red" onclick="refuseStore('${enc}')">✕ Refuser</button><button class="btn btn-dark" onclick="deleteStore('${enc}')">🗑 Supprimer</button></div>`;
  openModal("commandModal");
 };
 window.editPrice=async(enc)=>{
