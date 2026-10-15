@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#050914">
 <title>JASON BUSINESS — VIP</title>
-
 <style>
 :root{
   --bg:#050914;
@@ -142,8 +141,8 @@ button{font-family:inherit}
   border:1px solid var(--border);
   border-radius:20px;
   background:linear-gradient(145deg,#111d31,#080f1d);
-  transition:transform .2s,border-color .2s;
-  animation:appear .45s ease both;
+  transition:transform.2s,border-color.2s;
+  animation:appear.45s ease both;
 }
 .vip-card:before{
   content:"";
@@ -192,12 +191,13 @@ button{font-family:inherit}
 }
 .price-label{font-size:11px;color:var(--muted)}
 .price{
-  margin:5px 0 15px;
+  margin:5px 0 5px;
   font-size:20px;
   font-weight:800;
   overflow-wrap:anywhere;
 }
 .price small{font-size:11px;color:var(--muted)}
+.price-final{font-size:12px;color:var(--gold);margin-bottom:12px;min-height:18px}
 .activate{
   width:100%;
   padding:12px 8px;
@@ -208,7 +208,7 @@ button{font-family:inherit}
   font-size:12px;
   font-weight:900;
   cursor:pointer;
-  transition:filter .2s,transform .2s;
+  transition:filter.2s,transform.2s;
 }
 .activate:active{transform:scale(.97)}
 .activate:disabled{opacity:.5;cursor:not-allowed}
@@ -252,12 +252,11 @@ button{font-family:inherit}
 }
 .toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:360px){
-  .vip-list{grid-template-columns:1fr}
-  .hero h1{font-size:24px}
+ .vip-list{grid-template-columns:1fr}
+ .hero h1{font-size:24px}
 }
 </style>
 </head>
-
 <body>
 
 <header class="header">
@@ -266,7 +265,7 @@ button{font-family:inherit}
     <strong>JASON BUSINESS</strong>
     <small>Programme VIP officiel</small>
   </div>
-  <div class="online">● En ligne</div>
+  <div class="online" id="onlineStatus">● Chargement</div>
 </header>
 
 <main class="container">
@@ -274,42 +273,45 @@ button{font-family:inherit}
     <div class="crown">👑</div>
     <h1>ESPACE <span>VIP</span></h1>
     <p>
-      Choisis ton niveau VIP et profite de réductions sur les
-      commandes éligibles de JASON BUSINESS.
+      Choisis ton niveau VIP et profite de réductions automatiques
+      sur tes prochaines activations.
     </p>
   </section>
 
   <section class="balance">
     <div>
-      <div class="balance-label">💰 TON SOLDE PRINCIPAL</div>
-      <div class="balance-amount" id="balance">0 FC</div>
+      <div class="balance-label">💰 TON SOLDE PRINCIPAL (Firebase)</div>
+      <div class="balance-amount" id="balance">Chargement...</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px" id="phoneDisplay"></div>
     </div>
     <div class="wallet-icon">👛</div>
   </section>
 
   <h2 class="section-title">Choisis ton <span>niveau VIP</span></h2>
-
   <section class="vip-list" id="vipList"></section>
 
   <section class="info">
     <strong>ℹ️ Informations importantes</strong>
     <ul>
-      <li>Ton solde doit couvrir le prix complet de l'activation.</li>
-      <li>Le prix du VIP est débité lors de l'activation.</li>
-      <li>Un seul niveau VIP est actif à la fois dans cette page.</li>
-      <li>La réduction concerne les commandes éligibles, pas le prix d'activation du VIP.</li>
-      <li>Les prix et pourcentages peuvent être modifiés dans le code.</li>
+      <li>Solde réel depuis Firebase : jasonBusiness/users/{ton numéro}</li>
+      <li>Si tu as déjà un VIP, le prix du nouveau VIP est <b>automatiquement réduit</b> selon ton % actuel.</li>
+      <li>Exemple : tu as Bronze -3% → Or à 20000 FC te coûte 19400 FC</li>
+      <li>Le VIP actif est enregistré dans Firebase et visible dans ton admin.</li>
     </ul>
   </section>
 </main>
 
 <div class="toast" id="toast"></div>
 
-<script>
-/*
-  CONFIGURATION VIP
-  Modifie ici les prix et les réductions.
-*/
+<script type="module">
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, onValue, update, runTransaction, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
+const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
+const db=getDatabase(app);
+const ROOT="jasonBusiness";
+
 const VIP_LEVELS = [
   {id:"bronze", name:"Bronze", icon:"🥉", price:5000, discount:3, color:"#cd8955"},
   {id:"argent", name:"Argent", icon:"🥈", price:10000, discount:5, color:"#cbd5e1"},
@@ -319,106 +321,56 @@ const VIP_LEVELS = [
   {id:"giga", name:"Giga", icon:"👑", price:100000, discount:20, color:"#4ade80"}
 ];
 
-/*
-  MODE DE DÉMONSTRATION :
-  Cette page lit le solde depuis localStorage.
-  Elle n'est pas une preuve de paiement sécurisée.
-  Pour une vraie plateforme, l'activation et le débit
-  doivent être validés sur le serveur / dans Firebase.
-*/
-
-const ACCOUNT_KEY = "jasonBusiness_vip_account";
-const VIP_KEY = "jasonBusiness_vip_active";
-
 function getPhone(){
-  return localStorage.getItem("jasonBusinessUserPhone")
-      || localStorage.getItem("userPhone")
-      || "";
+  return (localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("telephone")||"").trim();
+}
+function formatFC(n){ return Math.round(Number(n)||0).toLocaleString("fr-FR")+" FC"; }
+function showToast(msg){
+  const el=document.getElementById("toast"); el.textContent=msg; el.classList.add("show");
+  clearTimeout(window.tT); window.tT=setTimeout(()=>el.classList.remove("show"),3500);
+}
+let currentUserData=null;
+let currentBalance=0;
+let activeVipId=null;
+
+const phone=getPhone();
+document.getElementById("phoneDisplay").textContent=phone?`📱 ${phone}`:"⚠️ Aucun numéro trouvé - connecte-toi d'abord";
+document.getElementById("onlineStatus").textContent=phone?"● En ligne":"● Hors ligne";
+
+if(!phone){
+  document.getElementById("balance").textContent="0 FC";
+  render(0,null);
+}else{
+  const userRef=ref(db, `${ROOT}/users/${phone}`);
+  onValue(userRef, snap=>{
+    const data=snap.val()||{};
+    currentUserData=data;
+    currentBalance=Number(data.solde_principal??data.solde??0)||0;
+    document.getElementById("balance").textContent=formatFC(currentBalance);
+    const activeLevel=data.vipLevel||data.vipId||null;
+    activeVipId=VIP_LEVELS.find(v=>v.name.toLowerCase()===String(activeLevel).toLowerCase())?.id || data.vipId || null;
+    if(data.vipDiscount) {
+      // si déjà stocké
+      const found=VIP_LEVELS.find(v=>v.discount===Number(data.vipDiscount));
+      if(found) activeVipId=found.id;
+    }
+    render(currentBalance, activeVipId, data);
+  });
 }
 
-function readAccount(){
-  const phone = getPhone();
-
-  // Essaie de lire un objet utilisateur déjà enregistré.
-  const possibleKeys = [
-    "jasonBusinessUser",
-    "jasonBusiness_user",
-    "user"
-  ];
-
-  for(const key of possibleKeys){
-    try{
-      const obj = JSON.parse(localStorage.getItem(key) || "null");
-      if(obj && typeof obj === "object"){
-        const bal = Number(
-          obj.solde_principal ?? obj.balance ?? obj.solde ?? NaN
-        );
-        if(Number.isFinite(bal)){
-          return {source:"user", key, obj, balance:bal};
-        }
-      }
-    }catch(e){}
-  }
-
-  // Compte local de démonstration, distinct par téléphone.
-  const saved = localStorage.getItem(ACCOUNT_KEY + (phone || "_demo"));
-  if(saved !== null){
-    const n = Number(saved);
-    return {
-      source:"demo",
-      key:ACCOUNT_KEY + (phone || "_demo"),
-      obj:null,
-      balance:Number.isFinite(n) ? n : 0
-    };
-  }
-
-  // Si aucun solde local connu, afficher 0 FC.
-  return {
-    source:"demo",
-    key:ACCOUNT_KEY + (phone || "_demo"),
-    obj:null,
-    balance:0
-  };
+function getCurrentDiscount(){
+  if(!currentUserData) return 0;
+  return Number(currentUserData.vipDiscount??VIP_LEVELS.find(v=>v.id===activeVipId)?.discount??0)||0;
 }
 
-function getActiveVip(){
-  const phone = getPhone();
-  try{
-    return JSON.parse(localStorage.getItem(VIP_KEY + (phone || "_demo")) || "null");
-  }catch(e){
-    return null;
-  }
-}
-
-function saveActiveVip(vip){
-  const phone = getPhone();
-  localStorage.setItem(VIP_KEY + (phone || "_demo"), JSON.stringify(vip));
-}
-
-function formatFC(amount){
-  return Math.round(amount).toLocaleString("fr-FR") + " FC";
-}
-
-function showToast(message){
-  const el = document.getElementById("toast");
-  el.textContent = message;
-  el.classList.add("show");
-  clearTimeout(window.toastTimer);
-  window.toastTimer = setTimeout(()=>el.classList.remove("show"),3000);
-}
-
-function render(){
-  const account = readAccount();
-  const active = getActiveVip();
-
-  document.getElementById("balance").textContent = formatFC(account.balance);
-
-  document.getElementById("vipList").innerHTML = VIP_LEVELS.map((vip,index)=>{
-    const isActive = active && active.id === vip.id;
-
+function render(balance, activeId, userData){
+  const currentDiscount=getCurrentDiscount();
+  document.getElementById("vipList").innerHTML=VIP_LEVELS.map((vip,index)=>{
+    const isActive=activeId===vip.id;
+    const finalPrice=isActive?vip.price:Math.max(0, Math.round(vip.price*(1-currentDiscount/100)));
+    const economy=vip.price-finalPrice;
     return `
-      <article class="vip-card ${isActive ? "active" : ""}"
-        style="--tier-color:${vip.color};animation-delay:${index * 55}ms">
+      <article class="vip-card ${isActive? "active" : ""}" style="--tier-color:${vip.color};animation-delay:${index * 55}ms">
         <div class="vip-top">
           <div class="vip-icon">${vip.icon}</div>
           <div>
@@ -429,84 +381,35 @@ function render(){
         <div class="discount">-${vip.discount}% de réduction</div>
         <div class="price-label">Prix d'activation</div>
         <div class="price">${formatFC(vip.price)}</div>
-        ${
-          isActive
-          ? `<div class="active-label">✓ TON VIP EST ACTIF</div>`
-          : `<button class="activate" onclick="activateVip('${vip.id}')">
-              ACTIVER ${vip.name.toUpperCase()}
-            </button>`
-        }
-      </article>
-    `;
+        <div class="price-final">${isActive?"":currentDiscount>0?`Avec ton VIP -${currentDiscount}% → <b style="color:#22c55e">${formatFC(finalPrice)}</b> (économie ${formatFC(economy)})`:`Prix final : ${formatFC(finalPrice)}`}</div>
+        ${isActive?`<div class="active-label">✓ TON VIP EST ACTIF</div>`:`<button class="activate" onclick="activateVip('${vip.id}')">ACTIVER ${vip.name.toUpperCase()} - ${formatFC(finalPrice)}</button>`}
+      </article>`;
   }).join("");
 }
 
-function activateVip(id){
-  const vip = VIP_LEVELS.find(v=>v.id === id);
-  if(!vip) return;
+window.activateVip=async(id)=>{
+  const vip=VIP_LEVELS.find(v=>v.id===id); if(!vip) return;
+  const phone=getPhone(); if(!phone){ showToast("Connecte-toi d'abord"); return; }
+  const currentDiscount=getCurrentDiscount();
+  const finalPrice=Math.max(0, Math.round(vip.price*(1-currentDiscount/100)));
+  if(activeVipId===id){ showToast("Déjà actif"); return; }
+  if(currentBalance<finalPrice){ showToast(`Solde insuffisant. Il te manque ${formatFC(finalPrice-currentBalance)}`); return; }
+  const ok=confirm(`Activer VIP ${vip.name}?\n\nPrix de base: ${formatFC(vip.price)}\nTon discount actuel: -${currentDiscount}%\nPrix final à payer: ${formatFC(finalPrice)}\n\nDébit depuis ton solde Firebase.`); if(!ok) return;
+  try{
+    // transaction solde
+    const soldeRef=ref(db, `${ROOT}/users/${phone}/solde_principal`);
+    const snap=await get(soldeRef);
+    const bal=Number(snap.val()||0);
+    if(bal<finalPrice){ showToast("Solde insuffisant dans Firebase"); return; }
+    await runTransaction(soldeRef, curr=>{ const c=Number(curr||0); if(c<finalPrice) return; return c-finalPrice; });
+    await update(ref(db, `${ROOT}/users/${phone}`), {
+      vip:true, isVip:true, vipStatus:"Actif", vipLevel:vip.name, vipId:vip.id, vipDiscount:vip.discount, vipPricePaid:finalPrice, vipActivatedAt:Date.now(), vipOriginalPrice:vip.price
+    });
+    showToast(`VIP ${vip.name} activé! Tu as payé ${formatFC(finalPrice)} au lieu de ${formatFC(vip.price)}`);
+  }catch(e){ console.error(e); showToast("Erreur Firebase: "+e.message); }
+};
 
-  const current = getActiveVip();
-  if(current && current.id === vip.id){
-    showToast("Ce niveau VIP est déjà actif.");
-    return;
-  }
-
-  const account = readAccount();
-
-  if(account.balance < vip.price){
-    showToast(
-      "Solde insuffisant. Il te manque " +
-      formatFC(vip.price - account.balance) + "."
-    );
-    return;
-  }
-
-  const confirmed = confirm(
-    "Confirmer l'activation du VIP " + vip.name + " ?\n\n" +
-    "Prix : " + formatFC(vip.price) + "\n" +
-    "Réduction : " + vip.discount + "%\n\n" +
-    "Le montant sera déduit de ton solde local."
-  );
-
-  if(!confirmed) return;
-
-  const newBalance = account.balance - vip.price;
-
-  // Débit local : démonstration uniquement.
-  if(account.source === "user" && account.obj){
-    if("solde_principal" in account.obj){
-      account.obj.solde_principal = newBalance;
-    }else if("balance" in account.obj){
-      account.obj.balance = newBalance;
-    }else{
-      account.obj.solde = newBalance;
-    }
-    localStorage.setItem(account.key, JSON.stringify(account.obj));
-  }else{
-    localStorage.setItem(account.key, String(newBalance));
-  }
-
-  saveActiveVip({
-    id:vip.id,
-    name:vip.name,
-    discount:vip.discount,
-    price:vip.price,
-    activatedAt:new Date().toISOString()
-  });
-
-  render();
-  showToast("VIP " + vip.name + " activé ! Réduction de " + vip.discount + "%.");
-}
-
-function goBack(){
-  if(history.length > 1){
-    history.back();
-  }else{
-    location.href = "dashboard.html";
-  }
-}
-
-render();
+window.goBack=()=>{ if(history.length>1) history.back(); else location.href="dashboard.html"; };
 </script>
 </body>
 </html>
