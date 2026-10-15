@@ -2,95 +2,212 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta name="theme-color" content="#050914">
-<title>JASON BUSINESS — ADMIN</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JASON BUSINESS — ADMIN SERVICES</title>
 <style>
-:root{--bg:#050914;--panel:#0b1220;--border:rgba(255,255,255,.08);--text:#f5f7fb;--muted:#8e9aad;--blue:#3b82f6;--green:#22c55e;--red:#ef4444;--orange:#f59e0b;--purple:#a855f7;--gold:#d8aa45}
-*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Segoe UI,Arial,sans-serif}
-body{background:radial-gradient(circle at top,#101d35 0,var(--bg) 45%,#02040a 100%);color:var(--text);min-height:100vh}
-#adminLogin{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at top,#172744,#030711 70%);z-index:9999}
-.login-box{width:100%;max-width:400px;background:rgba(11,18,32,.96);border:1px solid var(--border);border-radius:24px;padding:30px;box-shadow:0 25px 80px rgba(0,0,0,.55)}
-.login-logo{text-align:center;font-size:25px;font-weight:900;letter-spacing:1px;margin-bottom:7px}.login-subtitle{text-align:center;color:var(--muted);font-size:12px;margin-bottom:25px}
-.input{width:100%;background:#070d18;border:1px solid var(--border);color:white;border-radius:13px;padding:14px;outline:none;margin-bottom:12px}.input:focus{border-color:var(--gold)}
-.login-btn{width:100%;border:0;border-radius:13px;padding:14px;background:var(--gold);color:#111;font-weight:900;cursor:pointer}.login-error{color:#ff6b6b;text-align:center;font-size:12px;min-height:18px;margin-top:12px}
-#adminPanel{display:none;min-height:100vh}
-.header{height:68px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:rgba(5,9,20,.96);backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
-.brand{font-size:17px;font-weight:900}.brand span{color:var(--gold)}.status{font-size:11px;color:var(--muted)}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:6px;box-shadow:0 0 8px var(--green)}
-.logout{border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.08);color:#ff6b6b;border-radius:10px;padding:8px 12px;cursor:pointer;font-weight:700;font-size:11px}
-.layout{display:flex;min-height:calc(100vh - 68px)}.sidebar{width:230px;flex-shrink:0;padding:14px 10px;background:rgba(7,12,23,.95);border-right:1px solid var(--border)}
-.menu-btn{width:100%;display:flex;align-items:center;gap:9px;padding:13px 11px;margin-bottom:5px;border:0;border-radius:12px;background:transparent;color:#a8b3c5;text-align:left;font-weight:700;font-size:12px;cursor:pointer}.menu-btn.active,.menu-btn:hover{background:rgba(216,170,69,.12);color:#fff}.menu-count{margin-left:auto;background:var(--red);color:white;border-radius:20px;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:10px;padding:0 5px}
-.content{flex:1;min-width:0;padding:20px}.page{display:none}.page.active{display:block}.page-title{font-size:24px;font-weight:900;margin-bottom:6px}.page-subtitle{font-size:12px;color:var(--muted);margin-bottom:20px}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px}.stat-card,.quick-card,.panel{background:linear-gradient(145deg,rgba(16,26,43,.96),rgba(8,14,26,.96));border:1px solid var(--border);border-radius:17px}
-.stat-card{padding:17px;min-height:105px}.stat-icon{font-size:22px;margin-bottom:9px}.stat-label{font-size:11px;color:var(--muted)}.stat-value{font-size:21px;font-weight:900;margin-top:6px;overflow-wrap:anywhere}
-.panel{overflow:hidden;margin-bottom:18px}.panel-head{padding:15px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--border)}.panel-title{font-weight:900}.panel-description{font-size:11px;color:var(--muted);margin-top:5px}
-.search{width:100%;max-width:300px;background:#070d18;border:1px solid var(--border);border-radius:10px;color:white;padding:11px;outline:none}
-.table-wrap{width:100%;overflow-x:auto}table{width:100%;min-width:1100px;border-collapse:collapse}
-th{font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:#8794a8;text-align:left;padding:13px;border-bottom:1px solid var(--border);white-space:nowrap}
-td{font-size:12px;padding:13px;border-bottom:1px solid rgba(255,255,255,.045);vertical-align:middle;max-width:200px;overflow:hidden;text-overflow:ellipsis}tr:hover td{background:rgba(255,255,255,.02)}
-.btn{border:0;border-radius:8px;padding:7px 9px;color:white;font-size:10px;font-weight:800;cursor:pointer;margin:2px;white-space:nowrap}.btn-blue{background:var(--blue)}.btn-green{background:var(--green)}.btn-red{background:var(--red)}.btn-orange{background:var(--orange)}.btn-purple{background:var(--purple)}.btn-dark{background:#263246}.btn-gold{background:var(--gold);color:#111}
-.badge{display:inline-flex;align-items:center;gap:4px;border-radius:20px;padding:5px 8px;font-size:10px;font-weight:800;white-space:nowrap}.badge-pending{color:#ffc95a;background:rgba(245,158,11,.12)}.badge-ok{color:#54e889;background:rgba(34,197,94,.12)}.badge-no{color:#ff7777;background:rgba(239,68,68,.12)}.badge-vip{color:#d39aff;background:rgba(168,85,247,.14)}.badge-blue{color:#70a9ff;background:rgba(59,130,246,.13)}.badge-self{color:var(--gold);background:rgba(216,170,69,.15)}
-.empty{padding:28px;text-align:center;color:var(--muted);font-size:13px}
-#toastContainer{position:fixed;right:12px;top:78px;z-index:10000;width:min(320px,calc(100% - 24px));display:flex;flex-direction:column;gap:8px}.toast{padding:12px;background:#111b2d;border:1px solid var(--border);border-radius:11px;font-size:12px;box-shadow:0 15px 40px rgba(0,0,0,.4)}.toast.success{border-color:rgba(34,197,94,.35)}.toast.error{border-color:rgba(239,68,68,.35)}
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.72);backdrop-filter:blur(7px);z-index:5000}.modal.show{display:flex}.modal-box{width:100%;max-width:650px;max-height:90vh;overflow-y:auto;background:#0b1220;border:1px solid var(--border);border-radius:20px;box-shadow:0 30px 100px rgba(0,0,0,.7)}.modal-header{display:flex;align-items:center;justify-content:space-between;padding:17px;border-bottom:1px solid var(--border)}.modal-title{font-weight:900;font-size:16px}.close{width:34px;height:34px;border:0;border-radius:10px;background:rgba(255,255,255,.06);color:white;font-size:20px;cursor:pointer}.modal-content{padding:18px}
-.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.detail-item{background:rgba(255,255,255,.035);border:1px solid var(--border);border-radius:12px;padding:12px}.detail-item small{display:block;color:var(--muted);font-size:10px;margin-bottom:6px}.detail-item strong{display:block;font-size:13px;word-break:break-word}
-.link{color:var(--blue);text-decoration:none;word-break:break-all}
-@media(max-width:850px){.layout{display:block}.sidebar{width:100%;display:flex;overflow-x:auto;padding:8px;border-right:0;border-bottom:1px solid var(--border)}.menu-btn{width:auto;flex-shrink:0;margin:0 4px;padding:11px}.content{padding:14px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.panel-head{align-items:flex-start;flex-direction:column}.search{max-width:none}.detail-grid{grid-template-columns:1fr}}
+:root{--bg:#050914;--panel:#0b1220;--border:rgba(255,255,255,.08);--text:#f5f7fb;--muted:#8e9aad;--gold:#d8aa45;--green:#22c55e;--red:#ef4444;--blue:#3b82f6}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}
+body{background:#050914;color:var(--text);min-height:100vh}
+#adminLogin{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;background:#050914;z-index:9999}
+.login-box{width:100%;max-width:380px;background:#0b1220;border:1px solid var(--border);border-radius:20px;padding:28px}
+.login-logo{text-align:center;font-size:22px;font-weight:900;margin-bottom:6px}.login-subtitle{text-align:center;color:var(--muted);font-size:11px;margin-bottom:20px}
+.input{width:100%;background:#070d18;border:1px solid var(--border);color:white;border-radius:12px;padding:13px;outline:none;margin-bottom:10px}
+.login-btn{width:100%;border:0;border-radius:12px;padding:13px;background:var(--gold);color:#111;font-weight:900;cursor:pointer}.login-error{color:#ff6b6b;text-align:center;font-size:11px;margin-top:10px;min-height:16px}
+#adminPanel{display:none}
+.header{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:#050914f0;border-bottom:1px solid var(--border);position:sticky;top:0}
+.brand{font-weight:900}.brand span{color:var(--gold)}
+.logout{border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.08);color:#ff6b6b;border-radius:9px;padding:7px 11px;cursor:pointer;font-size:11px;font-weight:700}
+.layout{display:flex;min-height:calc(100vh - 64px)}.sidebar{width:220px;padding:12px 10px;background:#070c17;border-right:1px solid var(--border)}
+.menu-btn{width:100%;display:flex;align-items:center;gap:8px;padding:12px 10px;margin-bottom:4px;border:0;border-radius:11px;background:transparent;color:#a8b3c5;text-align:left;font-weight:700;font-size:12px;cursor:pointer}
+.menu-btn.active,.menu-btn:hover{background:rgba(216,170,69,.12);color:#fff}
+.menu-count{margin-left:auto;background:var(--red);color:white;border-radius:20px;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:10px;padding:0 5px}
+.content{flex:1;padding:18px}.page{display:none}.page.active{display:block}
+.page-title{font-size:22px;font-weight:900;margin-bottom:4px}.page-subtitle{font-size:11px;color:var(--muted);margin-bottom:16px}
+.panel{background:#0b1220;border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:16px}
+.panel-head{padding:14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.panel-title{font-weight:900;font-size:14px}
+.table-wrap{overflow-x:auto}table{width:100%;min-width:700px;border-collapse:collapse}
+th{font-size:10px;color:#8e9aad;text-transform:uppercase;padding:12px;text-align:left;border-bottom:1px solid var(--border)}
+td{font-size:12px;padding:12px;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:middle}
+.service-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:10px;background:rgba(216,170,69,.12);border:1px solid rgba(216,170,69,.2);font-size:18px}
+.btn{border:0;border-radius:8px;padding:7px 11px;font-size:11px;font-weight:800;cursor:pointer;color:white;margin:2px}
+.btn-gold{background:var(--gold);color:#111}.btn-blue{background:var(--blue)}.btn-green{background:var(--green)}.btn-red{background:var(--red)}
+.badge{padding:5px 9px;border-radius:20px;font-size:10px;font-weight:800}
+.badge-pending{color:#ffc95a;background:rgba(245,158,11,.12)}.badge-ok{color:#54e889;background:rgba(34,197,94,.12)}
+.price-input{width:110px;background:#070d18;border:1px solid var(--border);border-radius:8px;color:var(--gold);padding:8px;font-weight:900;font-size:13px;outline:none;text-align:center}
+.price-input:focus{border-color:var(--gold)}
+#toastContainer{position:fixed;right:12px;top:72px;z-index:10000;display:flex;flex-direction:column;gap:8px;width:min(300px,calc(100% - 24px))}
+.toast{padding:11px;background:#111b2d;border:1px solid var(--border);border-radius:10px;font-size:12px}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.7);z-index:5000}.modal.show{display:flex}
+.modal-box{width:100%;max-width:500px;background:#0b1220;border:1px solid var(--border);border-radius:18px;overflow:hidden}
+.modal-header{padding:14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}.modal-title{font-weight:900}
+.close{width:32px;height:32px;border:0;border-radius:9px;background:rgba(255,255,255,.06);color:white;font-size:18px;cursor:pointer}
+.modal-content{padding:16px}
+@media(max-width:800px){.layout{display:block}.sidebar{width:100%;display:flex;overflow-x:auto}.menu-btn{width:auto;flex-shrink:0}}
 </style>
 </head>
 <body>
-<div id="adminLogin"><div class="login-box"><div class="login-logo">JASON BUSINESS</div><div class="login-subtitle">🔐 ADMIN</div><input type="password" id="adminPassword" class="input" placeholder="Mot de passe"><button id="loginAdmin" class="login-btn">🔓 Ouvrir</button><div id="loginError" class="login-error"></div></div></div>
+<div id="adminLogin"><div class="login-box"><div class="login-logo">JASON BUSINESS</div><div class="login-subtitle">🔐 ADMIN - GESTION SERVICES</div><input type="password" id="adminPassword" class="input" placeholder="Mot de passe admin"><button id="loginAdmin" class="login-btn">🔓 Ouvrir</button><div id="loginError" class="login-error"></div></div></div>
+
 <div id="adminPanel">
-<header class="header"><div class="brand">JASON <span>BUSINESS</span></div><div style="display:flex;align-items:center;gap:10px"><div class="status"><span class="dot"></span>Connecté</div><button class="logout" id="adminLogout">Déconnexion</button></div></header>
+<header class="header"><div class="brand">JASON <span>BUSINESS</span></div><button class="logout" id="adminLogout">Déconnexion</button></header>
 <div class="layout">
 <aside class="sidebar">
-<button class="menu-btn active" data-page="dashboard">📊 Dashboard</button>
-<button class="menu-btn" data-page="users">👥 Utilisateurs</button>
+<button class="menu-btn active" data-page="services">⚙️ Services & Prix</button>
 <button class="menu-btn" data-page="commands">🛒 Commandes <span class="menu-count" id="menuCommands">0</span></button>
-<button class="menu-btn" data-page="recharges">💳 Recharges <span class="menu-count" id="menuRecharges">0</span></button>
-<button class="menu-btn" data-page="withdrawals">💸 Retraits <span class="menu-count" id="menuWithdrawals">0</span></button>
+<button class="menu-btn" data-page="users">👥 Utilisateurs</button>
 </aside>
 <main class="content">
-<section class="page active" id="page-dashboard"><div class="page-title">📊 Dashboard</div><div class="page-subtitle">Commandes avec prix modifiable</div><div class="stats"><div class="stat-card"><div class="stat-icon">👥</div><div class="stat-label">Utilisateurs</div><div class="stat-value" id="statUsers">0</div></div><div class="stat-card"><div class="stat-icon">💰</div><div class="stat-label">Soldes</div><div class="stat-value" id="totalBalance">0 FC</div></div><div class="stat-card"><div class="stat-icon">🛒</div><div class="stat-label">Commandes</div><div class="stat-value" id="statCommands">0</div></div></div></section>
-<section class="page" id="page-users"><div class="page-title">👥 Utilisateurs</div><div class="panel"><div class="panel-head"><div><div class="panel-title">Liste</div></div><input class="search" id="userSearch" placeholder="🔎 Rechercher"></div><div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Solde</th><th>Points</th><th>MDP</th><th>Actions</th></tr></thead><tbody id="usersTable"></tbody></table></div></div></section>
-<section class="page" id="page-commands"><div class="page-title">🛒 Commandes - Prix modifiable</div><div class="panel"><div class="panel-head"><div><div class="panel-title">Toutes les commandes</div><div class="panel-description">Plateforme, lien, quantité, prix que tu peux modifier</div></div><input class="search" id="commandSearch" placeholder="🔎 Rechercher"></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Plateforme</th><th>Service</th><th>Lien</th><th>Qté</th><th>Prix</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div></div></section>
-<section class="page" id="page-recharges"><div class="page-title">💳 Recharges</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="rechargesTable"></tbody></table></div></div></section>
-<section class="page" id="page-withdrawals"><div class="page-title">💸 Retraits</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsTable"></tbody></table></div></div></section>
+
+<!-- PAGE SERVICES - C'EST CE QUE TU VEUX BOSS -->
+<section class="page active" id="page-services">
+<div class="page-title">⚙️ Tous les services & Prix</div>
+<div class="page-subtitle">Ici tu modifies seulement le prix. Le bouton service montre tout.</div>
+
+<div class="panel">
+<div class="panel-head"><div class="panel-title">Liste des services - Modifier prix</div><button class="btn btn-gold" onclick="saveAllPrices()">💾 Sauver tout</button></div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Icon</th><th>Service</th><th>Description</th><th>Prix actuel</th><th>Nouveau prix</th><th>Action</th></tr></thead>
+<tbody id="servicesTable"></tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section class="page" id="page-commands">
+<div class="page-title">🛒 Commandes</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Service</th><th>Plateforme</th><th>Lien</th><th>Qté</th><th>Prix payé</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div></div>
+</section>
+
+<section class="page" id="page-users">
+<div class="page-title">👥 Utilisateurs</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Solde</th><th>Points</th></tr></thead><tbody id="usersTable"></tbody></table></div></div>
+</section>
+
 </main>
 </div>
 </div>
-<div class="modal" id="userModal"><div class="modal-box"><div class="modal-header"><div class="modal-title">👤 Utilisateur</div><button class="close" onclick="closeModal('userModal')">×</button></div><div class="modal-content" id="userDetails"></div></div></div>
-<div class="modal" id="commandModal"><div class="modal-box"><div class="modal-header"><div class="modal-title">🛒 Détails + Modifier prix</div><button class="close" onclick="closeModal('commandModal')">×</button></div><div class="modal-content" id="commandDetails"></div></div></div>
+
+<div class="modal" id="serviceModal"><div class="modal-box"><div class="modal-header"><div class="modal-title" id="serviceModalTitle">Modifier prix</div><button class="close" onclick="closeModal('serviceModal')">×</button></div><div class="modal-content" id="serviceModalContent"></div></div></div>
+<div class="modal" id="commandModal"><div class="modal-box"><div class="modal-header"><div class="modal-title">Commande</div><button class="close" onclick="closeModal('commandModal')">×</button></div><div class="modal-content" id="commandDetails"></div></div></div>
 <div id="toastContainer"></div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, onValue, update, remove, push, runTransaction, get, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-const firebaseConfig = { apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U", authDomain:"starlink-investit.firebaseapp.com", databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com", projectId:"starlink-investit", storageBucket:"starlink-investit.firebasestorage.app", messagingSenderId:"807081599583", appId:"1:807081599583:web:e00ec3959bc4acdae031ea" };
-const fbApp = initializeApp(firebaseConfig); const db = getDatabase(fbApp);
-const ROOT="jasonBusiness"; const PATHS={ users:`${ROOT}/users`, commands:`${ROOT}/demandes_commandes`, recharges:`${ROOT}/demandes_recharges`, withdrawals:`${ROOT}/demandes_retraits` };
+import { getDatabase, ref, onValue, update, get, set, remove, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
+const app=initializeApp(firebaseConfig); const db=getDatabase(app);
+const ROOT="jasonBusiness"; const PATHS={services:`${ROOT}/services_prices`, commands:`${ROOT}/demandes_commandes`, users:`${ROOT}/users`};
+
+// LOGIN
 const loginBox=document.getElementById("adminLogin"), adminPanel=document.getElementById("adminPanel");
 function showAdmin(){loginBox.style.display="none";adminPanel.style.display="block";}
-async function loginAdmin(){const pw=document.getElementById("adminPassword").value.trim(); const err=document.getElementById("loginError"), btn=document.getElementById("loginAdmin"); if(!pw){err.textContent="Entre le mot de passe";return;} btn.disabled=true; btn.textContent="⏳..."; err.textContent=""; try{const r=await fetch("/api/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:pw})}); const txt=await r.text(); let data; try{data=JSON.parse(txt)}catch{throw new Error(txt)} if(!r.ok||!data.token){err.textContent=data.error||"❌ Incorrect";return;} localStorage.setItem("jasonBusinessAdminToken",data.token); showAdmin(); toast("🔓 Admin ouvert");}catch(e){err.textContent="❌ Serveur";} finally{btn.disabled=false; btn.textContent="🔓 Ouvrir";}}
-document.getElementById("loginAdmin").addEventListener("click",loginAdmin); document.getElementById("adminPassword").addEventListener("keydown",e=>{if(e.key==="Enter") loginAdmin();}); document.getElementById("adminLogout").addEventListener("click",()=>{localStorage.removeItem("jasonBusinessAdminToken"); location.reload();});
-const saved=localStorage.getItem("jasonBusinessAdminToken"); if(saved){ fetch("/api/admin/session",{headers:{Authorization:`Bearer ${saved}`}}).then(r=>{if(r.ok) showAdmin(); else localStorage.removeItem("jasonBusinessAdminToken");}).catch(()=>localStorage.removeItem("jasonBusinessAdminToken")); }
-const $=id=>document.getElementById(id); const money=v=>Math.floor(Number(v)||0).toLocaleString("fr-FR"); const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c])); const getPhone=d=>d.telephone??d.userPhone??d.phone??d.numero??"";
-const getBal=d=>Number(d.solde_principal??d.solde??0)||0; const getPass=d=>d.password??d.mot_de_passe??"—"; const getStatus=d=>d.statut??d.status??"En attente"; const isPending=s=>String(s||"").toLowerCase().includes("attente");
-const badge=s=>{const v=String(s||"En attente"); const low=v.toLowerCase(); if(low.includes("valid")) return `<span class="badge badge-ok">✓ ${esc(v)}</span>`; if(low.includes("refus")) return `<span class="badge badge-no">✕ ${esc(v)}</span>`; return `<span class="badge badge-pending">⏳ ${esc(v)}</span>`;}
-function toast(m,type="success"){const c=$("toastContainer"); const el=document.createElement("div"); el.className=`toast ${type}`; el.textContent=m; c.appendChild(el); setTimeout(()=>el.remove(),3500);}
-window.closeModal=id=>document.getElementById(id).classList.remove("show"); window.openModal=id=>document.getElementById(id).classList.add("show");
+async function loginAdmin(){const pw=document.getElementById("adminPassword").value.trim(); const err=document.getElementById("loginError"); if(!pw){err.textContent="Entre MDP";return;} try{const r=await fetch("/api/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:pw})}); const d=await r.json(); if(!r.ok||!d.token){err.textContent=d.error||"Incorrect";return;} localStorage.setItem("jasonBusinessAdminToken",d.token); showAdmin(); toast("Admin ouvert");}catch{err.textContent="Serveur indisponible";}}
+document.getElementById("loginAdmin").addEventListener("click",loginAdmin);
+document.getElementById("adminLogout").addEventListener("click",()=>{localStorage.removeItem("jasonBusinessAdminToken"); location.reload();});
+const saved=localStorage.getItem("jasonBusinessAdminToken"); if(saved){fetch("/api/admin/session",{headers:{Authorization:`Bearer ${saved}`}}).then(r=>{if(r.ok) showAdmin();}).catch(()=>{});}
+
+const $=id=>document.getElementById(id);
+const money=v=>Math.floor(Number(v)||0).toLocaleString("fr-FR");
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const getPhone=d=>d.telephone??d.userPhone??d.phone??"";
+const getStatus=d=>d.statut??d.status??"En attente";
+const isPending=s=>String(s||"").toLowerCase().includes("attente");
+function toast(m){const c=$("toastContainer"); const el=document.createElement("div"); el.className="toast"; el.textContent=m; c.appendChild(el); setTimeout(()=>el.remove(),3000);}
+window.closeModal=id=>document.getElementById(id).classList.remove("show");
+window.openModal=id=>document.getElementById(id).classList.add("show");
 function openPage(p){document.querySelectorAll(".menu-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===p)); document.querySelectorAll(".page").forEach(s=>s.classList.toggle("active",s.id==="page-"+p));}
 document.querySelectorAll(".menu-btn").forEach(b=>b.addEventListener("click",()=>openPage(b.dataset.page)));
-let usersCache={}, commandsCache={};
-onValue(ref(db,PATHS.users),snap=>{ usersCache={}; const tbody=$("usersTable"); tbody.innerHTML=""; let count=0,total=0; snap.forEach(child=>{ const phone=child.key; const d=child.val()||{}; usersCache[phone]=d; count++; const bal=getBal(d); total+=bal; const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(phone)}</td><td>${esc(d.nom??"Utilisateur")}</td><td>${money(bal)} FC</td><td>${money(d.points_fidelite??0)}</td><td><code style="color:#d8aa45">${esc(getPass(d))}</code></td><td><button class="btn btn-blue" onclick="viewUser('${encodeURIComponent(phone)}')">👁</button></td>`; tbody.appendChild(tr);}); $("statUsers").textContent=count; $("totalBalance").textContent=money(total)+" FC"; });
-window.viewUser=function(enc){ const phone=decodeURIComponent(enc); const d=usersCache[phone]||{}; $("userDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>Numéro</small><strong>${esc(phone)}</strong></div><div class="detail-item"><small>Solde</small><strong>${money(getBal(d))} FC</strong></div><div class="detail-item" style="border-color:#d8aa45"><small>MDP</small><strong style="color:#d8aa45">${esc(getPass(d))}</strong></div></div>`; openModal("userModal"); };
-onValue(ref(db,PATHS.commands),snap=>{ commandsCache={}; const tbody=$("commandsTable"); tbody.innerHTML=""; let pending=0; const entries=[]; snap.forEach(ch=>{entries.push({id:ch.key,val:ch.val()||{}})}); entries.sort((a,b)=>(Number(b.val.createdAt)||0)-(Number(a.val.createdAt)||0)); entries.forEach(({id,val:d})=>{ commandsCache[id]=d; const st=getStatus(d); if(isPending(st)) pending++; const amt=Number(d.montant??d.prix??0)||0; const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</td><td><b>${esc(getPhone(d)||"—")}</b></td><td><b style="color:#d8aa45">${esc(d.plateforme??"—")}</b></td><td>${esc(d.type_service??d.service??"—")}</td><td><a href="${esc(d.lien??"")}" target="_blank" class="link">${esc((d.lien??"").slice(0,30))}</a></td><td>${esc(d.quantite??"—")}</td><td><b style="color:#d8aa45">${money(amt)} FC</b></td><td>${badge(st)}</td><td><button class="btn btn-blue" onclick="viewCommand('${encodeURIComponent(id)}')">👁</button><button class="btn btn-gold" onclick="editPrice('${encodeURIComponent(id)}')">💰 Prix</button>${isPending(st)?`<button class="btn btn-green" onclick="validateCommand('${encodeURIComponent(id)}')">✓</button>`:`<button class="btn btn-dark" onclick="deleteCommand('${encodeURIComponent(id)}')">🗑</button>`}</td>`; tbody.appendChild(tr);}); $("statCommands").textContent=pending; $("menuCommands").textContent=pending; });
-window.viewCommand=function(enc){ const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const amt=Number(d.montant??d.prix??0)||0; $("commandDetails").innerHTML=`<div class="detail-grid"><div class="detail-item"><small>Client</small><strong>${esc(getPhone(d))}</strong></div><div class="detail-item"><small>Plateforme</small><strong style="color:#d8aa45">${esc(d.plateforme??"—")}</strong></div><div class="detail-item" style="grid-column:span 2"><small>Lien</small><strong><a href="${esc(d.lien??"")}" target="_blank" class="link">${esc(d.lien??"—")}</a></strong></div><div class="detail-item"><small>Quantité</small><strong>${esc(d.quantite??"—")}</strong></div><div class="detail-item"><small>Prix</small><strong style="color:#d8aa45;font-size:18px">${money(amt)} FC</strong></div><div class="detail-item"><small>Service</small><strong>${esc(d.type_service??d.service??"—")}</strong></div><div class="detail-item" style="grid-column:span 2"><small>Données complètes</small><strong style="white-space:pre-wrap;font-size:11px">${esc(JSON.stringify(d,null,2).slice(0,1500))}</strong></div></div><hr style="margin:16px 0;border:0;border-top:1px solid rgba(255,255,255,.08)"><div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn btn-gold" onclick="editPrice('${enc}')">💰 Modifier prix</button><button class="btn btn-green" onclick="validateCommand('${enc}')">✓ Valider</button><button class="btn btn-orange" onclick="copyLink('${enc}')">🔗 Copier lien</button><button class="btn btn-red" onclick="deleteCommand('${enc}')">🗑 Supprimer</button></div>`; openModal("commandModal"); };
-window.editPrice=async(enc)=>{ const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const current=Number(d.montant??d.prix??0)||0; const input=prompt(`💰 Modifier prix\nClient: ${getPhone(d)}\nService: ${d.plateforme??""} ${d.type_service??""}\nPrix actuel: ${current} FC\nNouveau prix:`, String(current)); if(input===null) return; const newPrice=Number(input.replace(/[^0-9]/g,"")); if(isNaN(newPrice)){toast("Prix invalide","error");return;} const diff=newPrice-current; const phone=getPhone(d); if(!confirm(`Confirmer?\n${money(current)} → ${money(newPrice)} FC\nDiff: ${diff>0?"+":""}${money(diff)} FC`)) return; try{ await update(ref(db,`${PATHS.commands}/${id}`),{prix:newPrice,montant:newPrice,priceEdited:true,oldPrice:current,newPrice:newPrice,editedAt:Date.now()}); if(phone&&diff!==0){ const userRef=ref(db,`${PATHS.users}/${phone}/solde_principal`); const snap=await get(userRef); let bal=Number(snap.exists()?snap.val():0)||0; let newBal=bal-diff; if(newBal<0){toast("Solde insuffisant","error"); await update(ref(db,`${PATHS.commands}/${id}`),{prix:current,montant:current}); return;} await set(userRef,newBal);} toast(`✅ Prix: ${money(current)} → ${money(newPrice)} FC`); if($("commandModal").classList.contains("show")) viewCommand(enc);}catch(e){toast("Erreur","error");}};
-window.copyLink=(enc)=>{ const id=decodeURIComponent(enc); const d=commandsCache[id]||{}; const lien=d.lien??""; if(!lien){toast("Pas de lien","error");return;} navigator.clipboard.writeText(lien).then(()=>toast("🔗 Copié")); };
-window.validateCommand=async(enc)=>{ const id=decodeURIComponent(enc); try{ const r=await runTransaction(ref(db,`${PATHS.commands}/${id}`),c=>{if(!c) return; if(!isPending(getStatus(c))) return; return {...c,statut:"Validée",dateValidation:new Date().toISOString()};}); if(!r.committed){toast("Déjà traitée","error");return;} toast("✅ Validée"); closeModal("commandModal");}catch{toast("Erreur","error");}};
-window.deleteCommand=async(enc)=>{ const id=decodeURIComponent(enc); if(!confirm("Supprimer?")) return; try{ await remove(ref(db,`${PATHS.commands}/${id}`)); toast("🗑 Supprimée"); closeModal("commandModal");}catch{toast("Erreur","error");}};
-onValue(ref(db,PATHS.recharges),snap=>{ const tbody=$("rechargesTable"); tbody.innerHTML=""; let pending=0; snap.forEach(ch=>{ const d=ch.val()||{}; if(isPending(getStatus(d))) pending++; const amt=Number(d.montant??0)||0; const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(d.date??"—")}</td><td>${esc(getPhone(d))}</td><td>${money(amt)} FC</td><td>${badge(getStatus(d))}</td><td><button class="btn btn-green">✓</button></td>`; tbody.appendChild(tr);}); $("menuRecharges").textContent=pending; });
-onValue(ref(db,PATHS.withdrawals),snap=>{ const tbody=$("withdrawalsTable"); tbody.innerHTML=""; let pending=0; snap.forEach(ch=>{ const d=ch.val()||{}; if(isPending(getStatus(d))) pending++; const amt=Number(d.montant??0)||0; const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(d.date??"—")}</td><td>${esc(getPhone(d))}</td><td>${money(amt)} FC</td><td>${badge(getStatus(d))}</td><td><button class="btn btn-green">✓</button></td>`; tbody.appendChild(tr);}); $("menuWithdrawals").textContent=pending; });
+
+// SERVICES PAR DÉFAUT - TU MODIFIES SEULEMENT LE PRIX ICI BOSS
+const defaultServices=[
+{id:"boost", icon:"📈", name:"Boostage réseaux", desc:"Followers, likes, vues", price:10},
+{id:"app", icon:"📱", name:"Application mobile", desc:"Nom, icône, site", price:10000},
+{id:"site", icon:"🌐", name:"Site web", desc:"Portfolio, boutique, vitrine", price:15000},
+{id:"chatbot", icon:"🤖", name:"Chatbot", desc:"Nom, fonctionnalités, créateur", price:7000},
+{id:"music", icon:"🎵", name:"Chanson", desc:"Paroles + style musical", price:500},
+{id:"ads", icon:"📣", name:"Publicité", desc:"Titre, texte, lien", price:1000}
+];
+
+let servicesCache={};
+onValue(ref(db,PATHS.services),snap=>{
+  const data=snap.val()||{};
+  defaultServices.forEach(s=>{ if(data[s.id]!==undefined) s.price=Number(data[s.id])||s.price; });
+  renderServices();
+});
+
+function renderServices(){
+  const tbody=$("servicesTable"); tbody.innerHTML="";
+  defaultServices.forEach(s=>{
+    servicesCache[s.id]=s;
+    const tr=document.createElement("tr");
+    tr.innerHTML=`
+    <td><div class="service-icon">${s.icon}</div></td>
+    <td><b>${esc(s.name)}</b></td>
+    <td style="color:#8e9aad;font-size:11px">${esc(s.desc)}</td>
+    <td><b style="color:#d8aa45">${money(s.price)} FC</b></td>
+    <td><input class="price-input" id="price-${s.id}" type="number" value="${s.price}" min="0"></td>
+    <td><button class="btn btn-gold" onclick="savePrice('${s.id}')">💰 Modifier</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+window.savePrice=async(id)=>{
+  const input=$("price-"+id); const newPrice=Number(input.value)||0;
+  if(newPrice<0){toast("Prix invalide");return;}
+  try{
+    await update(ref(db,PATHS.services),{[id]:newPrice});
+    const s=defaultServices.find(x=>x.id===id); if(s) s.price=newPrice;
+    toast(`✅ ${s.name}: ${money(newPrice)} FC modifié`);
+    renderServices();
+  }catch(e){toast("Erreur sauvegarde");}
+};
+
+window.saveAllPrices=async()=>{
+  const updates={};
+  defaultServices.forEach(s=>{
+    const el=$("price-"+s.id);
+    if(el) updates[s.id]=Number(el.value)||0;
+  });
+  if(!confirm("Sauver tous les prix?\n"+Object.entries(updates).map(([k,v])=>`${k}: ${money(v)} FC`).join("\n"))) return;
+  try{
+    await update(ref(db,PATHS.services),updates);
+    Object.entries(updates).forEach(([id,price])=>{ const s=defaultServices.find(x=>x.id===id); if(s) s.price=price; });
+    toast("✅ Tous les prix sauvés");
+    renderServices();
+  }catch{toast("Erreur");}
+};
+
+// COMMANDES
+let commandsCache={};
+onValue(ref(db,PATHS.commands),snap=>{
+  commandsCache={}; const tbody=$("commandsTable"); tbody.innerHTML=""; let pending=0;
+  const list=[]; snap.forEach(c=>list.push({id:c.key,val:c.val()||{}})); list.sort((a,b)=>(b.val.createdAt||0)-(a.val.createdAt||0));
+  list.forEach(({id,val:d})=>{
+    commandsCache[id]=d; if(isPending(getStatus(d))) pending++;
+    const amt=Number(d.montant??d.prix??0)||0;
+    const tr=document.createElement("tr");
+    tr.innerHTML=`<td>${esc(d.date??new Date(d.createdAt||0).toLocaleString())}</td><td>${esc(getPhone(d))}</td><td>${esc(d.service??d.type_service??"—")}</td><td>${esc(d.plateforme??"—")}</td><td><a href="${esc(d.lien??"")}" target="_blank" style="color:#3b82f6">${esc((d.lien??"").slice(0,25))}</a></td><td>${esc(d.quantite??"—")}</td><td style="color:#d8aa45;font-weight:900">${money(amt)} FC</td><td>${esc(getStatus(d))}</td><td><button class="btn btn-blue" onclick="viewCommand('${encodeURIComponent(id)}')">👁</button></td>`;
+    tbody.appendChild(tr);
+  });
+  $("menuCommands").textContent=pending;
+});
+
+window.viewCommand=function(enc){
+  const id=decodeURIComponent(enc); const d=commandsCache[id]||{};
+  $("commandDetails").innerHTML=`<div style="font-size:12px;line-height:1.8;white-space:pre-wrap">${esc(JSON.stringify(d,null,2))}</div>`;
+  openModal("commandModal");
+};
+
+onValue(ref(db,PATHS.users),snap=>{
+  const tbody=$("usersTable"); tbody.innerHTML="";
+  snap.forEach(c=>{
+    const d=c.val()||{};
+    const tr=document.createElement("tr");
+    tr.innerHTML=`<td>${esc(c.key)}</td><td>${money(d.solde_principal??0)} FC</td><td>${money(d.points_fidelite??0)}</td>`;
+    tbody.appendChild(tr);
+  });
+});
 </script>
 </body>
 </html>
