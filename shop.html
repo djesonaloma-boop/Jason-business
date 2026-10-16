@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,569 +6,170 @@
 <meta name="theme-color" content="#050914">
 <meta name="description" content="JASON BUSINESS — Boutique numérique">
 <title>JASON BUSINESS — Boutique</title>
-
 <style>
-:root{
- --bg:#050914;--panel:#0b1425;--panel2:#101e32;
- --blue:#00d4ff;--gold:#d8aa45;--green:#22c55e;
- --text:#f4f7ff;--muted:#94a3b8;--border:rgba(216,170,69,.25);
- --pink:#ff76ad
-}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
-body{
- margin:0;color:var(--text);font-family:Arial,sans-serif;
- background:radial-gradient(ellipse at 15% 0%,#103a5b55,transparent 38%),
- radial-gradient(ellipse at 100% 45%,#d8aa451b,transparent 35%),var(--bg);
- overflow-x:hidden
-}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
-.ambient{position:fixed;z-index:0;width:180px;height:180px;border-radius:50%;filter:blur(75px);opacity:.15;pointer-events:none;animation:floatLight 13s ease-in-out infinite alternate}
-.ambient.one{top:8%;left:-100px;background:var(--blue)}
-.ambient.two{right:-110px;top:48%;background:var(--gold);animation-delay:-5s}
-.ambient.three{left:25%;bottom:-140px;background:#0077ff;animation-delay:-8s}
+:root{--bg:#050914;--panel:#0b1425;--panel2:#101e32;--blue:#00d4ff;--gold:#d8aa45;--green:#22c55e;--text:#f4f7ff;--muted:#94a3b8;--border:rgba(216,170,69,.25);--pink:#ff76ad}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html{scroll-behavior:smooth}
+body{margin:0;color:var(--text);font-family:Arial,sans-serif;background:radial-gradient(ellipse at 15% 0%,#103a5b55,transparent 38%),radial-gradient(ellipse at 100% 45%,#d8aa451b,transparent 35%),var(--bg);overflow-x:hidden;padding-bottom:90px}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.ambient{position:fixed;z-index:0;width:180px;height:180px;border-radius:50%;filter:blur(75px);opacity:.15;pointer-events:none;animation:floatLight 13s ease-in-out infinite alternate}.ambient.one{top:8%;left:-100px;background:var(--blue)}.ambient.two{right:-110px;top:48%;background:var(--gold);animation-delay:-5s}.ambient.three{left:25%;bottom:-140px;background:#0077ff;animation-delay:-8s}
 @keyframes floatLight{to{transform:translate3d(30px,35px,0) scale(1.2)}}
-#romanticEffects{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;contain:strict}
-.floating-heart{position:absolute;bottom:-40px;left:var(--x);color:var(--pink);opacity:0;font-size:var(--size);animation:heartFloat var(--duration) linear var(--delay) infinite}
+#romanticEffects{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;contain:strict}.floating-heart{position:absolute;bottom:-40px;left:var(--x);color:var(--pink);opacity:0;font-size:var(--size);animation:heartFloat var(--duration) linear var(--delay) infinite}
 @keyframes heartFloat{0%{transform:translateY(0);opacity:0}12%{opacity:.4}100%{transform:translate3d(var(--drift),-110vh,0) rotate(25deg);opacity:0}}
-.sparkle{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);animation:twinkle var(--duration) ease-in-out var(--delay) infinite alternate}
-@keyframes twinkle{to{opacity:.8;transform:scale(1.7)}}
+.sparkle{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);animation:twinkle var(--duration) ease-in-out var(--delay) infinite alternate}@keyframes twinkle{to{opacity:.8;transform:scale(1.7)}}
 header,main,footer,.overlay{position:relative;z-index:1}
 header{position:sticky;top:0;z-index:10;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px;background:#050914ed;border-bottom:1px solid var(--border);backdrop-filter:blur(20px)}
-.brand{display:flex;align-items:center;gap:10px;min-width:0}
-.logo{width:43px;height:43px;flex-shrink:0;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#fff0bd,var(--gold),#946515);color:#07111d;font-weight:900;font-size:18px;box-shadow:0 0 22px #d8aa4533}
-.brand h1{font-size:14px;margin:0 0 4px;letter-spacing:.7px}
-.brand small{font-size:10px;color:var(--muted)}
-.btn{position:relative;overflow:hidden;border:1px solid #d8aa4570;border-radius:9px;padding:8px 10px;min-height:32px;color:var(--text);background:linear-gradient(135deg,#14243a,#0b1425);font-size:10px;font-weight:700;letter-spacing:.2px;box-shadow:0 0 7px #d8aa4520;transition:.25s}
-.btn:hover{border-color:#ffe6a0;transform:translateY(-2px);box-shadow:0 0 14px #d8aa4540}
-.btn:active{transform:scale(.97)}
-.gold{background:linear-gradient(120deg,#ffe9b4,#d8aa45,#f4cf77);color:#10131a;border-color:#ffe6a0}
-.green{background:linear-gradient(120deg,#86efac,#22c55e);color:#052e16;border-color:#86efac}
-.blue{border-color:#00d4ff88;background:linear-gradient(120deg,#10344a,#0b1425)}
-main{max-width:900px;margin:auto;padding:17px 13px 80px}
-.hero{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:25px;padding:24px 19px;background:radial-gradient(ellipse at top right,#00d4ff18,transparent 60%),linear-gradient(135deg,#14243b,#080e1b);margin-bottom:25px;box-shadow:0 18px 45px #0003;animation:fadeUp .65s ease both}
-.hero:after{content:"✦";position:absolute;right:19px;top:15px;color:#d8aa4560;font-size:35px;animation:spin 12s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}
-.tag{font-size:10px;color:var(--gold);letter-spacing:1.5px;font-weight:bold}
-.hero h2{font-size:27px;line-height:1.3;margin:14px 0 8px}
-.hero h2 span{color:var(--gold)}
-.hero p{font-size:12px;line-height:1.9;color:var(--muted);max-width:570px}
-.hero .btn{margin-top:7px}
-.section-title{font-size:17px;margin:24px 2px 13px}
-.section-title:after{content:"";display:block;width:52px;height:2px;margin-top:8px;background:linear-gradient(90deg,var(--gold),var(--blue),transparent)}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.card{position:relative;overflow:hidden;display:flex;flex-direction:column;padding:16px 12px;border-radius:19px;border:1px solid var(--border);background:linear-gradient(145deg,#111f33f7,#09111efc);min-width:0;transition:.28s;animation:fadeUp .7s ease both;box-shadow:0 9px 24px #0002}
-.card:hover{transform:translateY(-4px);border-color:#d8aa4580;box-shadow:0 16px 35px #0004}
-.card-icon{width:45px;height:45px;border-radius:14px;display:grid;place-items:center;font-size:23px;background:linear-gradient(135deg,#d8aa4520,#00d4ff0c);border:1px solid var(--border);margin-bottom:12px}
-.card h3{font-size:14px;margin:0 0 8px;line-height:1.5}
-.card p{font-size:11px;color:var(--muted);line-height:1.8;min-height:40px;flex:1}
-.muted{color:var(--muted);font-size:11px;line-height:1.8}
-.total{padding:13px;border:1px solid var(--border);border-radius:13px;display:flex;justify-content:space-between;align-items:center;gap:8px;background:linear-gradient(120deg,#d8aa4510,#00d4ff05);margin:13px 0;font-size:12px}
-.total strong{color:var(--gold);font-size:18px;text-align:right}
-.card>.btn{width:100%;margin-top:auto;min-height:34px}
-.overlay{display:none;position:fixed;inset:0;z-index:30;background:#000c;backdrop-filter:blur(9px);align-items:flex-end;justify-content:center;padding:0}
-.overlay.show{display:flex;animation:fadeOverlay .2s ease}
-@keyframes fadeOverlay{from{opacity:0}to{opacity:1}}
-.modal{width:min(100%,620px);max-height:92vh;overflow:auto;background:radial-gradient(ellipse at top right,#00d4ff10,transparent 45%),#08111f;border:1px solid var(--border);border-radius:23px 23px 0 0;padding:18px;box-shadow:0 -12px 55px #0006;animation:modalUp .28s ease}
-@keyframes modalUp{from{transform:translateY(28px);opacity:.6}to{transform:translateY(0);opacity:1}}
-.modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px;position:sticky;top:-18px;z-index:2;background:#08111ff5;padding:9px 0 12px;border-bottom:1px solid #d8aa4520}
-.modal-head h2{font-size:17px;margin:0;line-height:1.5}
-.close{flex-shrink:0;width:32px;height:32px;border:1px solid var(--border);border-radius:9px;background:#132035;color:white;font-size:19px}
-.field{margin:14px 0}
-.field label{display:block;font-size:12px;margin-bottom:8px;color:#dce6f5}
-.field input,.field textarea,.field select{width:100%;padding:13px;border-radius:12px;border:1px solid #293850;background:#0c192b;color:white;outline:none}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold);box-shadow:0 0 0 3px #d8aa4512}
-.field input[type=file]{padding:10px;font-size:11px}
-.field textarea{min-height:100px;resize:vertical;line-height:1.7}
-.field select option{background:#0c192b;color:white}
-.field small{display:block;color:var(--muted);font-size:10px;line-height:1.7;margin-top:6px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.platforms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
-.platform{min-width:0;padding:9px 3px;border:1px solid #28374d;border-radius:10px;background:#0d192b;color:white;font-size:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;transition:.2s}
-.platform img{width:25px;height:25px;object-fit:contain}
-.platform.active{border-color:var(--gold);background:#d8aa4518;box-shadow:0 0 8px #d8aa4540}
-.status{font-size:12px;line-height:1.8;margin:12px 0;white-space:pre-wrap;overflow-wrap:anywhere}
-.ok{color:#86efac}.error{color:#fda4af}.info{color:#93c5fd}
-.preview{width:85px;height:85px;border-radius:14px;object-fit:cover;border:1px solid var(--border);display:none;margin-top:10px;background:#0c192b}
-.history-item{padding:13px;margin:10px 0;background:#0d192b;border:1px solid #28374d;border-radius:13px;font-size:11px;line-height:1.8;overflow-wrap:anywhere;animation:fadeUp .3s ease both}
-.history-item strong{color:var(--gold)}
-.history-item .muted{margin:3px 0}
-#qrResult{display:flex;justify-content:center;padding:15px;background:#fff;border-radius:12px;min-height:30px;margin:12px auto;max-width:280px}
-#qrResult canvas,#qrResult img{max-width:100%;height:auto}
-.result-preview{padding:13px;border:1px solid #293850;border-radius:12px;background:#0c192b;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.8}
-footer{text-align:center;padding:22px 15px;border-top:1px solid var(--border);font-size:10px;color:var(--muted);line-height:1.8;background:linear-gradient(180deg,transparent,#d8aa4505)}
-footer span{color:var(--gold)}
-button:disabled{opacity:.6;cursor:wait;transform:none!important}
-@media(min-width:620px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.overlay{align-items:center;padding:16px}.modal{border-radius:23px;max-height:88vh}main{padding-top:22px}.hero{padding:30px 26px}}
-@media(max-width:360px){.grid{gap:8px}.card{padding:12px 9px}.brand h1{font-size:12px}.row{grid-template-columns:1fr}.hero h2{font-size:24px}.total strong{font-size:15px}.modal{padding:14px}.platforms{gap:5px}.platform{font-size:9px}header{padding:10px}header>.btn{padding:7px 8px;font-size:10px;min-height:30px}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}.logo{width:43px;height:43px;flex-shrink:0;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#fff0bd,var(--gold),#946515);color:#07111d;font-weight:900;font-size:18px;box-shadow:0 0 22px #d8aa4533}.brand h1{font-size:14px;margin:0 0 4px;letter-spacing:.7px}.brand small{font-size:10px;color:var(--muted)}
+.btn{position:relative;overflow:hidden;border:1px solid #d8aa4570;border-radius:9px;padding:9px 10px;min-height:34px;color:var(--text);background:linear-gradient(135deg,#14243a,#0b1425);font-size:10px;font-weight:700;letter-spacing:.2px;box-shadow:0 0 7px #d8aa4520;transition:.25s}.btn:hover{border-color:#ffe6a0;transform:translateY(-2px);box-shadow:0 0 14px #d8aa4540}.btn:active{transform:scale(.97)}.gold{background:linear-gradient(120deg,#ffe9b4,#d8aa45,#f4cf77);color:#10131a;border-color:#ffe6a0}.green{background:linear-gradient(120deg,#86efac,#22c55e);color:#052e16;border-color:#86efac}.blue{border-color:#00d4ff88;background:linear-gradient(120deg,#10344a,#0b1425)}
+main{max-width:900px;margin:auto;padding:17px 13px 80px}.hero{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:25px;padding:24px 19px;background:radial-gradient(ellipse at top right,#00d4ff18,transparent 60%),linear-gradient(135deg,#14243b,#080e1b);margin-bottom:25px;box-shadow:0 18px 45px #0003;animation:fadeUp .65s ease both}.hero:after{content:"✦";position:absolute;right:19px;top:15px;color:#d8aa4560;font-size:35px;animation:spin 12s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}@keyframes fadeUp{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}
+.tag{font-size:10px;color:var(--gold);letter-spacing:1.5px;font-weight:bold}.hero h2{font-size:27px;line-height:1.3;margin:14px 0 8px}.hero h2 span{color:var(--gold)}.hero p{font-size:12px;line-height:1.9;color:var(--muted);max-width:570px}
+.section-title{font-size:17px;margin:24px 2px 13px}.section-title:after{content:"";display:block;width:52px;height:2px;margin-top:8px;background:linear-gradient(90deg,var(--gold),var(--blue),transparent)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{position:relative;overflow:hidden;display:flex;flex-direction:column;padding:16px 12px;border-radius:19px;border:1px solid var(--border);background:linear-gradient(145deg,#111f33f7,#09111efc);min-width:0;transition:.28s;animation:fadeUp .7s ease both;box-shadow:0 9px 24px #0002}.card:hover{transform:translateY(-4px);border-color:#d8aa4580;box-shadow:0 16px 35px #0004}.card-icon{width:45px;height:45px;border-radius:14px;display:grid;place-items:center;font-size:23px;background:linear-gradient(135deg,#d8aa4520,#00d4ff0c);border:1px solid var(--border);margin-bottom:12px}.card h3{font-size:14px;margin:0 0 8px;line-height:1.5}.card p{font-size:11px;color:var(--muted);line-height:1.8;min-height:40px;flex:1}.muted{color:var(--muted);font-size:11px;line-height:1.8}.total{padding:13px;border:1px solid var(--border);border-radius:13px;display:flex;justify-content:space-between;align-items:center;gap:8px;background:linear-gradient(120deg,#d8aa4510,#00d4ff05);margin:13px 0;font-size:12px}.total strong{color:var(--gold);font-size:16px;text-align:right;overflow-wrap:anywhere}.card>.btn{width:100%;margin-top:auto;min-height:36px}
+.overlay{display:none;position:fixed;inset:0;z-index:80;background:#000c;backdrop-filter:blur(9px);align-items:flex-end;justify-content:center;padding:0}.overlay.show{display:flex;animation:fadeOverlay .2s ease}@keyframes fadeOverlay{from{opacity:0}to{opacity:1}}.modal{width:min(100%,620px);max-height:92vh;overflow:auto;background:radial-gradient(ellipse at top right,#00d4ff10,transparent 45%),#08111f;border:1px solid var(--border);border-radius:23px 23px 0 0;padding:18px 18px 35px;box-shadow:0 -12px 55px #0006;animation:modalUp .28s ease}@keyframes modalUp{from{transform:translateY(28px);opacity:.6}to{transform:translateY(0);opacity:1}}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px;position:sticky;top:-18px;z-index:2;background:#08111ff5;padding:9px 0 12px;border-bottom:1px solid #d8aa4520}.modal-head h2{font-size:17px;margin:0;line-height:1.5}.close{flex-shrink:0;width:32px;height:32px;border:1px solid var(--border);border-radius:9px;background:#132035;color:white;font-size:19px}
+.field{margin:14px 0}.field label{display:block;font-size:12px;margin-bottom:8px;color:#dce6f5}.field input,.field textarea,.field select{width:100%;padding:13px;border-radius:12px;border:1px solid #293850;background:#0c192b;color:white;outline:none}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold);box-shadow:0 0 0 3px #d8aa4512}.field textarea{resize:vertical;min-height:85px}.field small{display:block;color:var(--muted);font-size:10px;line-height:1.7;margin-top:6px}
+.platforms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.platform{min-width:0;padding:9px 3px;border:1px solid #28374d;border-radius:10px;background:#0d192b;color:white;font-size:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;transition:.2s}.platform img{width:25px;height:25px;object-fit:contain}.platform.active{border-color:var(--gold);background:#d8aa4518;box-shadow:0 0 8px #d8aa4540}
+.status{font-size:12px;line-height:1.8;margin:12px 0;white-space:pre-wrap;overflow-wrap:anywhere}.ok{color:#86efac}.error{color:#fda4af}.info{color:#93c5fd}.preview{width:85px;height:85px;border-radius:14px;object-fit:cover;border:1px solid var(--border);display:none;margin-top:10px;background:#0c192b}#qrResult{display:flex;justify-content:center;padding:15px;background:#fff;border-radius:12px;min-height:30px;margin:12px auto;max-width:280px}#qrResult canvas,#qrResult img{max-width:100%;height:auto}.result-preview{padding:13px;border:1px solid #293850;border-radius:12px;background:#0c192b;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.8}
+footer{text-align:center;padding:22px 15px;border-top:1px solid var(--border);font-size:10px;color:var(--muted);line-height:1.8;background:linear-gradient(180deg,transparent,#d8aa4505)}footer span{color:var(--gold)}button:disabled{opacity:.6;cursor:wait}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:10;background:#070e1ef5;border-top:1px solid rgba(216,170,69,.25);backdrop-filter:blur(20px);display:grid;grid-template-columns:1fr 1fr 1fr 1fr;padding:8px 4px calc(8px + env(safe-area-inset-bottom))}.nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;color:#94a3b8;text-decoration:none;font-size:10px;font-weight:700;padding:6px;border-radius:12px}.nav-item .icon{font-size:22px}.nav-item.active{color:#00d4ff}.solde-badge{padding:7px 10px;border-radius:20px;background:linear-gradient(120deg,#00d4ff20,#d8aa4520);border:1px solid #00d4ff55;font-size:11px;font-weight:800;color:#00d4ff;white-space:nowrap}
+.site-catalog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:10px}.site-option{min-width:0;min-height:112px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;text-align:center;color:var(--text);background:linear-gradient(145deg,#13243a,#09111e);border:1px solid var(--border);border-radius:14px;transition:transform .2s,border-color .2s,background .2s}.site-option:active{transform:scale(.97)}.site-option.active{border-color:var(--gold);background:linear-gradient(145deg,#d8aa4528,#00d4ff0b);box-shadow:0 0 14px #d8aa4520}.site-option .site-emoji{font-size:27px}.site-option .site-name{font-size:11px;font-weight:800;line-height:1.5}.site-option .site-price{font-size:11px;color:var(--gold);font-weight:900}.history-item{padding:12px;border:1px solid #293850;border-radius:12px;background:#0c192b;margin:8px 0;overflow-wrap:anywhere}
+@media(min-width:620px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.overlay{align-items:center;padding:16px}.modal{border-radius:23px;max-height:88vh}main{padding-top:22px}.hero{padding:30px 26px}.site-catalog{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:370px){header{padding:9px}.brand{gap:6px}.brand h1{font-size:11px}.brand small{font-size:9px}.logo{width:36px;height:36px}.header-actions{gap:4px!important}.header-actions .btn{padding:7px 6px;font-size:9px}.solde-badge{font-size:9px;padding:6px}}
 </style>
 </head>
 <body>
-<div id="romanticEffects" aria-hidden="true"></div>
-<div class="ambient one"></div><div class="ambient two"></div><div class="ambient three"></div>
-
+<div id="romanticEffects" aria-hidden="true"></div><div class="ambient one"></div><div class="ambient two"></div><div class="ambient three"></div>
 <header>
  <div class="brand"><div class="logo">JB</div><div><h1>JASON BUSINESS</h1><small>Boutique numérique</small></div></div>
- <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">
-  <button class="btn blue" id="apiBtn">⚡ API</button>
-  <button class="btn" id="historyBtn">📋 Mes demandes</button>
+ <div class="header-actions" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;align-items:center">
+  <div id="soldeDisplay" class="solde-badge">💰 20 000 FC</div><button class="btn blue" id="apiBtn">⚡ API</button><button class="btn" id="historyBtn">📋 Demandes</button>
  </div>
 </header>
-
 <main>
- <section class="hero">
-  <div class="tag">✦ TON ESPACE NUMÉRIQUE</div>
-  <h2>Crée ton projet.<br><span>Réalise tes idées.</span></h2>
-  <p>Commandez une application, un site web, un chatbot, créez votre chanson, préparez votre publicité gratuite, boostez vos réseaux ou générez un QR code.</p>
-  <button class="btn gold" id="exploreBtn">Découvrir les services ↓</button>
- </section>
+ <section class="hero"><div class="tag">✦ TON ESPACE NUMÉRIQUE</div><h2>Crée ton projet.<br><span>Réalise tes idées.</span></h2><p>Commande une application, un site web, un chatbot, crée une chanson, prépare une publicité gratuite, booste tes réseaux ou génère un QR code.</p><button class="btn gold" id="exploreBtn">Découvrir les services ↓</button></section>
  <h2 class="section-title" id="services">Nos services</h2>
  <section class="grid">
-  <article class="card"><div class="card-icon">📈</div><h3>Boostage réseaux sociaux</h3><p>Choisissez un réseau, un service et indiquez votre budget. La quantité estimée est calculée automatiquement.</p><div class="total"><span>Budget minimum</span><strong>100 FC</strong></div><button class="btn gold" data-open="boostModal">Calculer mon boost</button></article>
+  <article class="card"><div class="card-icon">📈</div><h3>Boostage réseaux sociaux</h3><p>Abonnés, likes et vues avec calcul du prix selon la quantité choisie.</p><div class="total"><span>Tarif dès</span><strong>200 FC</strong></div><button class="btn gold" data-open="boostModal">Calculer mon boost</button></article>
   <article class="card"><div class="card-icon">📱</div><h3>Application mobile</h3><p>Nom, icône, lien du site, description et numéro WhatsApp.</p><div class="total"><span>Prix</span><strong>10 000 FC</strong></div><button class="btn" data-open="appModal">Commander</button></article>
-  <article class="card"><div class="card-icon">🌐</div><h3>Création de site web</h3><p>Portfolio, boutique en ligne, site vitrine, blog et autres projets.</p><div class="total"><span>Prix</span><strong>15 000 FC</strong></div><button class="btn" data-open="siteModal">Commander</button></article>
-  <article class="card"><div class="card-icon">🤖</div><h3>Création de chatbot</h3><p>Définissez le nom, les fonctionnalités, le créateur et la description.</p><div class="total"><span>Prix</span><strong>7 000 FC</strong></div><button class="btn" data-open="chatModal">Créer mon chatbot</button></article>
-  <article class="card"><div class="card-icon">🎵</div><h3>Créer une chanson</h3><p>Préparez vos paroles et utilisez l'API musicale pour demander la génération.</p><div class="total"><span>Prix indicatif</span><strong>500 FC</strong></div><button class="btn gold" data-open="musicModal">Créer ma chanson</button></article>
-  <article class="card"><div class="card-icon">📣</div><h3>Publicité gratuite</h3><p>Préparez votre annonce et demandez la génération via l'API publicitaire.</p><div class="total"><span>Prix de création</span><strong>GRATUIT</strong></div><button class="btn green" data-open="adsModal">Créer ma publicité</button></article>
-  <article class="card"><div class="card-icon">▦</div><h3>Générateur QR code</h3><p>Créez gratuitement un QR code à partir d'un lien ou d'un texte.</p><div class="total"><span>Prix</span><strong>GRATUIT</strong></div><button class="btn blue" data-open="qrModal">Créer mon QR code</button></article>
+  <article class="card"><div class="card-icon">🌐</div><h3>Création de site web</h3><p>24 modèles avec prix individuels et formulaire de commande complet.</p><div class="total"><span>À partir de</span><strong>10 000 FC</strong></div><button class="btn gold" data-open="siteModal">Choisir un site</button></article>
+  <article class="card"><div class="card-icon">🤖</div><h3>Création de chatbot</h3><p>Nom, fonctionnalités, créateur, description et contact.</p><div class="total"><span>Prix</span><strong>7 000 FC</strong></div><button class="btn" data-open="chatModal">Créer mon chatbot</button></article>
+  <article class="card"><div class="card-icon">🎵</div><h3>Créer une chanson</h3><p>Soumets tes paroles et ton style musical via le service API.</p><div class="total"><span>Prix</span><strong>5 000 FC</strong></div><button class="btn gold" data-open="musicModal">Créer ma chanson</button></article>
+  <article class="card"><div class="card-icon">📣</div><h3>Publicité gratuite</h3><p>Prépare une annonce et demande sa génération via l'API publicitaire.</p><div class="total"><span>Prix</span><strong>GRATUIT</strong></div><button class="btn green" data-open="adsModal">Créer ma publicité</button></article>
+  <article class="card"><div class="card-icon">▦</div><h3>Générateur QR code</h3><p>Crée gratuitement un QR code depuis un lien ou un texte.</p><div class="total"><span>Prix</span><strong>GRATUIT</strong></div><button class="btn blue" data-open="qrModal">Créer mon QR code</button></article>
  </section>
 </main>
-<footer><span>JASON BUSINESS</span> · Services numériques<br>Une idée aujourd'hui, un projet demain.</footer>
-
-<!-- BOOSTAGE -->
-<div class="overlay" id="boostModal" role="dialog" aria-modal="true" aria-labelledby="boostTitle"><section class="modal">
- <div class="modal-head"><h2 id="boostTitle">📈 Boostage des réseaux sociaux</h2><button class="close" data-close="boostModal">×</button></div>
- <p class="muted">Sélectionnez votre plateforme, le service et le lien. Entrez uniquement le montant de votre budget : la quantité estimée se calcule automatiquement. Tarif indicatif : 100 FC pour 100 unités.</p>
- <div class="platforms" id="platformGrid"></div>
- <form id="boostForm">
-  <div class="field"><label for="boostPlatform">Plateforme sélectionnée</label><input id="boostPlatform" name="platform" readonly required></div>
-  <div class="field"><label for="boostType">Service souhaité</label><select id="boostType" name="type" required><option value="followers">Followers / abonnés</option><option value="likes">Likes</option><option value="views">Vues</option></select></div>
-  <div class="field"><label for="boostLink">Lien public du compte ou de la publication *</label><input id="boostLink" name="link" type="url" required placeholder="https://..."></div>
-  <div class="field"><label for="boostBudget">Votre budget en FC *</label><input id="boostBudget" name="budget" type="number" min="100" max="100000000" step="1" value="100" required><small>La quantité est estimée au tarif indicatif de 1 FC par unité. Le tarif réel peut varier selon le réseau et le service.</small></div>
-  <div class="field"><label for="boostPhone">Votre numéro de téléphone *</label><input id="boostPhone" name="phone" type="tel" required placeholder="Ex. +243..."></div>
-  <div class="total"><span>Quantité estimée</span><strong id="boostQuantity">100 unités</strong></div>
-  <div class="total"><span>Votre budget</span><strong id="boostPrice">100 FC</strong></div>
-  <button class="btn gold" type="submit" style="width:100%">📤 Envoyer vers Admin</button><div class="status" id="boostStatus" aria-live="polite"></div>
- </form>
+<footer><span>JASON BUSINESS</span> · Services numériques<br>Une idée aujourd'hui, un projet demain.<br>Créé par Jason Aloma 🇨🇩</footer>
+<div class="overlay" id="boostModal" role="dialog" aria-modal="true"><section class="modal">
+ <div class="modal-head"><h2>📈 Boostage des réseaux sociaux</h2><button class="close" data-close="boostModal">×</button></div>
+ <p class="muted">Tarifs par unité : abonnés 50 FC, likes 35 FC, vues 20 FC. Minimum 10 unités.</p><div class="platforms" id="platformGrid"></div>
+ <form id="boostForm"><div class="field"><label>Plateforme sélectionnée</label><input id="boostPlatform" name="platform" readonly required></div>
+ <div class="field"><label>Service souhaité</label><select id="boostType" name="type" required><option value="followers">Followers / abonnés</option><option value="likes">Likes</option><option value="views">Vues</option></select></div>
+ <div class="field"><label>Lien public *</label><input id="boostLink" name="link" type="url" required placeholder="https://..."></div>
+ <div class="field"><label>Quantité souhaitée (min 10) *</label><input id="boostBudget" name="budget" type="number" min="10" step="1" value="10" required></div>
+ <div class="field"><label>Votre téléphone *</label><input id="boostPhone" name="phone" type="tel" required placeholder="+243..."></div>
+ <div class="total"><span>Quantité</span><strong id="boostQuantity">10 unités</strong></div><div class="total"><span>Prix total</span><strong id="boostPrice">500 FC</strong></div>
+ <button class="btn gold" type="submit" style="width:100%">📤 Envoyer la commande</button><div class="status" id="boostStatus" aria-live="polite"></div></form>
 </section></div>
 
-<!-- APPLICATION -->
-<div class="overlay" id="appModal" role="dialog" aria-modal="true" aria-labelledby="appTitle"><section class="modal">
- <div class="modal-head"><h2 id="appTitle">📱 Commander une application</h2><button class="close" data-close="appModal">×</button></div>
- <form id="appForm">
-  <div class="field"><label for="appName">Nom de l'application *</label><input id="appName" name="appName" required maxlength="100"></div>
-  <div class="field"><label for="appIcon">Icône de l'application *</label><input id="appIcon" name="appIcon" type="file" accept="image/*" required><img id="appIconPreview" class="preview" alt="Aperçu de l'icône"><small>Le fichier est prévisualisé. Son stockage permanent nécessite un service d'upload.</small></div>
-  <div class="field"><label for="appUrl">Lien du site *</label><input id="appUrl" name="appUrl" type="url" required placeholder="https://..."></div>
-  <div class="field"><label for="appDescription">Description *</label><textarea id="appDescription" name="description" required maxlength="3000"></textarea></div>
-  <div class="field"><label for="appWhatsapp">Numéro WhatsApp *</label><input id="appWhatsapp" name="whatsapp" type="tel" required placeholder="+243..."></div>
-  <div class="total"><span>Prix</span><strong>10 000 FC</strong></div><button class="btn gold" type="submit" style="width:100%">📤 Envoyer vers Admin</button><div class="status" id="appStatus"></div>
- </form>
-</section></div>
+<div class="overlay" id="appModal" role="dialog" aria-modal="true"><section class="modal"><div class="modal-head"><h2>📱 Commander une application</h2><button class="close" data-close="appModal">×</button></div>
+<form id="appForm"><div class="field"><label>Nom de l'application *</label><input id="appName" name="appName" required maxlength="100"></div><div class="field"><label>Icône *</label><input id="appIcon" name="appIconFile" type="file" accept="image/*" required><img id="appIconPreview" class="preview" alt="Aperçu de l'icône"></div><div class="field"><label>Lien du site *</label><input id="appUrl" name="appUrl" type="url" required placeholder="https://..."></div><div class="field"><label>Description *</label><textarea id="appDescription" name="description" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="appWhatsapp" name="whatsapp" type="tel" required placeholder="+243..."></div><div class="total"><span>Prix</span><strong>10 000 FC</strong></div><button class="btn gold" type="submit" style="width:100%">📤 Commander — 10 000 FC</button><div class="status" id="appStatus" aria-live="polite"></div></form></section></div>
 
-<!-- SITE WEB -->
-<div class="overlay" id="siteModal" role="dialog" aria-modal="true" aria-labelledby="siteTitle"><section class="modal">
- <div class="modal-head"><h2 id="siteTitle">🌐 Commander un site web</h2><button class="close" data-close="siteModal">×</button></div>
- <form id="siteForm">
-  <div class="field"><label for="siteName">Nom du site *</label><input id="siteName" name="siteName" required maxlength="100"></div>
-  <div class="field"><label for="siteType">Type de site *</label><select id="siteType" name="siteType" required><option>Portfolio</option><option>Boutique en ligne</option><option>Site vitrine</option><option>Blog</option><option>Site éducatif</option><option>Autre</option></select></div>
-  <div class="field"><label for="siteDescription">Description du projet *</label><textarea id="siteDescription" name="description" required maxlength="3000"></textarea></div>
-  <div class="field"><label for="siteWhatsapp">Numéro WhatsApp *</label><input id="siteWhatsapp" name="whatsapp" type="tel" required placeholder="+243..."></div>
-  <div class="total"><span>Prix</span><strong>15 000 FC</strong></div><button class="btn gold" type="submit" style="width:100%">📤 Envoyer vers Admin</button><div class="status" id="siteStatus"></div>
- </form>
-</section></div>
+<div class="overlay" id="siteModal" role="dialog" aria-modal="true"><section class="modal"><div class="modal-head"><h2>🌐 Commander mon site web</h2><button class="close" data-close="siteModal">×</button></div><p class="muted">Choisis un modèle, vérifie le tarif et décris ton projet.</p><div class="field"><label>Catalogue de sites (24 choix)</label><div id="siteCatalog" class="site-catalog"></div></div>
+<form id="siteForm"><input type="hidden" id="siteType" name="siteType" required><input type="hidden" id="sitePrice" name="price" required>
+<div class="total"><span>Site sélectionné</span><strong id="selectedSiteName">Aucun</strong></div><div class="total"><span>Prix de création</span><strong id="selectedSitePrice">0 FC</strong></div>
+<div class="field"><label>Nom du site *</label><input id="siteName" name="siteName" required maxlength="100" placeholder="Ex. Jason Store"></div><div class="field"><label>Description du projet *</label><textarea id="siteDescription" name="description" required rows="4" placeholder="Décris le projet et son objectif..."></textarea></div><div class="field"><label>Fonctionnalités souhaitées *</label><textarea id="siteFeatures" name="features" required rows="3" placeholder="Ex. catalogue, connexion, formulaire, espace admin..."></textarea></div><div class="field"><label>Numéro WhatsApp *</label><input id="siteWhatsapp" name="whatsapp" type="tel" required placeholder="+243..."></div><div class="field"><label>Référence ou exemple (facultatif)</label><input id="siteReference" name="reference" type="url" placeholder="https://exemple.com"></div><button class="btn gold" id="siteSubmitBtn" type="submit" style="width:100%;min-height:45px">📤 Commander le site</button><div class="status" id="siteStatus" aria-live="polite"></div></form></section></div>
 
-<!-- CHATBOT -->
-<div class="overlay" id="chatModal" role="dialog" aria-modal="true" aria-labelledby="chatTitle"><section class="modal">
- <div class="modal-head"><h2 id="chatTitle">🤖 Créer mon chatbot</h2><button class="close" data-close="chatModal">×</button></div>
- <form id="chatForm">
-  <div class="field"><label for="chatName">Nom du chatbot *</label><input id="chatName" name="chatName" required maxlength="100"></div>
-  <div class="field"><label for="chatFeatures">Fonctionnalités souhaitées *</label><textarea id="chatFeatures" name="features" required maxlength="3000"></textarea></div>
-  <div class="field"><label for="chatCreator">Nom du créateur ou de la marque *</label><input id="chatCreator" name="creator" required maxlength="100"></div>
-  <div class="field"><label for="chatDescription">Description *</label><textarea id="chatDescription" name="description" required maxlength="3000"></textarea></div>
-  <div class="field"><label for="chatWhatsapp">Numéro WhatsApp *</label><input id="chatWhatsapp" name="whatsapp" type="tel" required placeholder="+243..."></div>
-  <div class="total"><span>Prix</span><strong>7 000 FC</strong></div><button class="btn gold" type="submit" style="width:100%">📤 Envoyer vers Admin</button><div class="status" id="chatStatus"></div>
- </form>
-</section></div>
+<div class="overlay" id="chatModal" role="dialog" aria-modal="true"><section class="modal"><div class="modal-head"><h2>🤖 Créer mon chatbot</h2><button class="close" data-close="chatModal">×</button></div><form id="chatForm"><div class="field"><label>Nom du chatbot *</label><input id="chatName" name="chatName" required></div><div class="field"><label>Fonctionnalités *</label><textarea id="chatFeatures" name="features" required></textarea></div><div class="field"><label>Créateur *</label><input id="chatCreator" name="creator" required value="Jason Aloma"></div><div class="field"><label>Description *</label><textarea id="chatDescription" name="description" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="chatWhatsapp" name="whatsapp" type="tel" required></div><div class="total"><span>Prix</span><strong>7 000 FC</strong></div><button class="btn gold" type="submit" style="width:100%">📤 Commander — 7 000 FC</button><div class="status" id="chatStatus" aria-live="polite"></div></form></section></div>
 
-<!-- CHANSON : sans WhatsApp -->
-<div class="overlay" id="musicModal" role="dialog" aria-modal="true" aria-labelledby="musicTitle"><section class="modal">
- <div class="modal-head"><h2 id="musicTitle">🎵 Créer ma chanson</h2><button class="close" data-close="musicModal">×</button></div>
- <p class="muted">Écrivez votre titre, vos paroles et le style musical. La demande sera envoyée à l'API musicale. La disponibilité de la génération dépend de la réponse de l'API.</p>
- <form id="musicForm">
-  <div class="field"><label for="musicTitleInput">Titre de la chanson *</label><input id="musicTitleInput" name="title" required maxlength="150"></div>
-  <div class="field"><label for="musicLyrics">Paroles *</label><textarea id="musicLyrics" name="lyrics" required maxlength="10000" style="min-height:180px" placeholder="Écrivez vos paroles ici..."></textarea></div>
-  <div class="field"><label for="musicStyle">Style musical *</label><select id="musicStyle" name="style" required><option>Afrobeat</option><option>Afropop</option><option>Rumba congolaise</option><option>Ndombolo</option><option>Gospel</option><option>Hip-hop</option><option>Rap</option><option>Acoustique</option></select></div>
-  <div class="total"><span>Prix indicatif</span><strong>500 FC</strong></div>
-  <button class="btn gold" id="generateSongBtn" type="submit" style="width:100%">🎶 Générer ma chanson</button>
-  <div class="status" id="musicStatus" aria-live="polite"></div><div id="musicResult"></div>
- </form>
-</section></div>
+<div class="overlay" id="musicModal" role="dialog" aria-modal="true"><section class="modal"><div class="modal-head"><h2>🎵 Créer ma chanson — 5 000 FC</h2><button class="close" data-close="musicModal">×</button></div><p class="muted">Le prix sera débité du solde local de cette boutique après une réponse réussie de l'API.</p><form id="musicForm"><div class="field"><label>Titre *</label><input id="musicTitleInput" name="title" required></div><div class="field"><label>Paroles *</label><textarea id="musicLyrics" name="lyrics" required style="min-height:180px"></textarea></div><div class="field"><label>Style *</label><select id="musicStyle" name="style" required><option>Afrobeat</option><option>Afropop</option><option>Rumba congolaise</option><option>Ndombolo</option><option>Gospel</option><option>Hip-hop</option><option>Rap</option></select></div><div class="total"><span>Prix</span><strong>5 000 FC</strong></div><button class="btn gold" id="generateSongBtn" type="submit" style="width:100%">🎶 Générer la chanson</button><div class="status" id="musicStatus" aria-live="polite"></div><div id="musicResult"></div></form></section></div>
 
-<!-- PUBLICITÉ GRATUITE : sans WhatsApp -->
-<div class="overlay" id="adsModal" role="dialog" aria-modal="true" aria-labelledby="adsTitle"><section class="modal">
- <div class="modal-head"><h2 id="adsTitle">📣 Créer ma publicité gratuite</h2><button class="close" data-close="adsModal">×</button></div>
- <p class="muted">Préparez votre annonce gratuitement. Le bouton enverra votre demande à l'API publicitaire. La création finale dépend de la réponse du service.</p>
- <form id="adsForm">
-  <div class="field"><label for="adsTitleInput">Titre de la publicité *</label><input id="adsTitleInput" name="title" required maxlength="150" placeholder="Titre accrocheur"></div>
-  <div class="field"><label for="adsText">Texte publicitaire *</label><textarea id="adsText" name="text" required maxlength="3000" placeholder="Présentez votre produit ou votre service..."></textarea></div>
-  <div class="field"><label for="adsUrl">Lien à promouvoir *</label><input id="adsUrl" name="url" type="url" required placeholder="https://..."></div>
-  <div class="total"><span>Prix de création</span><strong>GRATUIT</strong></div>
-  <button class="btn green" type="submit" style="width:100%">✨ Créer ma publicité gratuitement</button>
-  <div class="status" id="adStatus" aria-live="polite"></div><div id="adsResult"></div>
- </form>
-</section></div>
+<div class="overlay" id="adsModal" role="dialog" aria-modal="true"><section class="modal"><div class="modal-head"><h2>📣 Créer ma publicité gratuite</h2><button class="close" data-close="adsModal">×</button></div><form id="adsForm"><div class="field"><label>Titre *</label><input id="adsTitleInput" name="title" required></div><div class="field"><label>Texte *</label><textarea id="adsText" name="text" required></textarea></div><div class="field"><label>Lien *</label><input id="adsUrl" name="url" type="url" required placeholder="https://..."></div><div class="total"><span>Prix</span><strong>GRATUIT</strong></div><button class="btn green" type="submit" style="width:100%">✨ Créer ma publicité</button><div class="status" id="adStatus" aria-live="polite"></div><div id="adsResult"></div></form></section></div>
 
-<!-- QR CODE GRATUIT -->
-<div class="overlay" id="qrModal" role="dialog" aria-modal="true" aria-labelledby="qrTitle"><section class="modal">
- <div class="modal-head"><h2 id="qrTitle">▦ Générateur de QR code gratuit</h2><button class="close" data-close="qrModal">×</button></div>
- <p class="muted">Entrez un lien de site, un numéro ou un texte. Générez et téléchargez gratuitement votre QR code.</p>
- <div class="field"><label for="qrText">Lien ou texte à encoder *</label><textarea id="qrText" required placeholder="https://votre-site.com"></textarea></div>
- <button class="btn gold" id="generateQrBtn" style="width:100%">Générer le QR code</button>
- <div id="qrStatus" class="status" aria-live="polite"></div><div id="qrResult"></div>
- <button class="btn green" id="downloadQrBtn" style="width:100%" disabled>Télécharger le QR code PNG</button>
-</section></div>
+<div class="overlay" id="qrModal" role="dialog" aria-modal="true"><section class="modal"><div class="modal-head"><h2>▦ Générateur QR code</h2><button class="close" data-close="qrModal">×</button></div><div class="field"><label>Lien ou texte *</label><textarea id="qrText" required placeholder="https://votre-site.com"></textarea></div><button class="btn gold" id="generateQrBtn" type="button" style="width:100%">Générer le QR code</button><div id="qrStatus" class="status" aria-live="polite"></div><div id="qrResult"></div><button class="btn green" id="downloadQrBtn" type="button" style="width:100%" disabled>Télécharger PNG</button></section></div>
 
-<!-- HISTORIQUE -->
-<div class="overlay" id="historyModal" role="dialog" aria-modal="true" aria-labelledby="historyTitle"><section class="modal">
- <div class="modal-head"><h2 id="historyTitle">📋 Mes demandes</h2><button class="close" data-close="historyModal">×</button></div>
- <p class="muted">Historique local sur cet appareil. Il ne garantit pas le statut actuel côté administrateur.</p>
- <div id="historyList"></div><button class="btn" id="clearHistory" style="width:100%;margin-top:12px">Effacer l'historique local</button>
-</section></div>
+<div class="overlay" id="historyModal" role="dialog" aria-modal="true"><section class="modal"><div class="modal-head"><h2>📋 Mes demandes</h2><button class="close" data-close="historyModal">×</button></div><div id="historyList"></div><button class="btn" id="clearHistory" style="width:100%;margin-top:12px">Réinitialiser le solde de démonstration</button></section></div>
+
+<nav class="bottom-nav" id="bottomNav"><a href="dashboard.html" class="nav-item"><span class="icon">📊</span><span>Dash</span></a><a href="boutique.html" class="nav-item active"><span class="icon">🛒</span><span>Shop</span></a><a href="equipe.html" class="nav-item"><span class="icon">👥</span><span>Équipe</span></a><a href="profil.html" class="nav-item"><span class="icon">👤</span><span>Profil</span></a></nav>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script type="module">
 import {initializeApp,getApps,getApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {getDatabase,ref,push,set} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-const firebaseConfig={
- apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
- authDomain:"starlink-investit.firebaseapp.com",
- databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
- projectId:"starlink-investit",
- storageBucket:"starlink-investit.firebasestorage.app",
- messagingSenderId:"807081599583",
- appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
-};
-const app=getApps().length?getApp():initializeApp(firebaseConfig);
-const db=getDatabase(app);
-const ROOT="jasonBusiness";
-const $=id=>document.getElementById(id);
-const MUSIC_API="https://davbot-outils.vercel.app/api/media/music";
-const ADS_API="https://davbot-outils.vercel.app/api/publicite/ads";
-const HISTORY_KEY="jasonBusinessBoutiqueOrdersV3";
-
-(function createDecorations(){
- const box=$("romanticEffects");
- if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
- for(let i=0;i<9;i++){
-  const h=document.createElement("span");h.className="floating-heart";
-  h.textContent=i%3===0?"♥":i%3===1?"♡":"✦";
-  h.style.setProperty("--x",(5+Math.random()*90)+"%");
-  h.style.setProperty("--size",(10+Math.random()*12)+"px");
-  h.style.setProperty("--duration",(18+Math.random()*18)+"s");
-  h.style.setProperty("--delay",(-Math.random()*30)+"s");
-  h.style.setProperty("--drift",(-35+Math.random()*70)+"px");box.append(h);
- }
- for(let i=0;i<24;i++){
-  const s=document.createElement("i");s.className="sparkle";
-  s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";
-  s.style.setProperty("--duration",(2+Math.random()*4)+"s");
-  s.style.setProperty("--delay",(-Math.random()*5)+"s");box.append(s);
- }
-})();
-
-function show(id){$(id).classList.add("show");document.body.style.overflow="hidden"}
-function hide(id){$(id).classList.remove("show");if(!document.querySelector(".overlay.show"))document.body.style.overflow=""}
+const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
+const app=getApps().length?getApp():initializeApp(firebaseConfig);const db=getDatabase(app);
+const ROOT="jasonBusiness";const $=id=>document.getElementById(id);
+const MUSIC_API="https://davbot-outils.vercel.app/api/media/music";const ADS_API="https://davbot-outils.vercel.app/api/publicite/ads";
+const HISTORY_KEY="jasonBusinessBoutiqueOrdersV3";const BALANCE_KEY="jasonBusinessSoldeV4";
+function formatFC(n){return Number(n).toLocaleString("fr-FR")+" FC"}
+function getBalance(){let b=localStorage.getItem(BALANCE_KEY);if(b===null){b="20000";localStorage.setItem(BALANCE_KEY,b)}return Math.max(0,Number(b)||0)}
+function setBalance(v){v=Math.max(0,Number(v)||0);localStorage.setItem(BALANCE_KEY,String(v));$("soldeDisplay").textContent="💰 "+formatFC(v);if($("soldeInMusic"))$("soldeInMusic").textContent=formatFC(v);if($("soldeInBoost"))$("soldeInBoost").textContent=formatFC(v)}
+function deductBalance(n){const b=getBalance();if(b<n)return false;setBalance(b-n);return true}setBalance(getBalance());
+(function decorations(){const box=$("romanticEffects");if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;for(let i=0;i<9;i++){const h=document.createElement("span");h.className="floating-heart";h.textContent=i%3===0?"♥":i%3===1?"♡":"✦";h.style.setProperty("--x",(5+Math.random()*90)+"%");h.style.setProperty("--size",(10+Math.random()*12)+"px");h.style.setProperty("--duration",(18+Math.random()*18)+"s");h.style.setProperty("--delay",(-Math.random()*30)+"s");h.style.setProperty("--drift",(-35+Math.random()*70)+"px");box.append(h)}for(let i=0;i<24;i++){const s=document.createElement("i");s.className="sparkle";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.setProperty("--duration",(2+Math.random()*4)+"s");s.style.setProperty("--delay",(-Math.random()*5)+"s");box.append(s)}})();
+function show(id){$(id).classList.add("show");document.body.style.overflow="hidden";$("bottomNav").style.display="none"}
+function hide(id){$(id).classList.remove("show");if(!document.querySelector(".overlay.show")){document.body.style.overflow="";$("bottomNav").style.display="grid"}}
 document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>show(b.dataset.open)));
 document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>hide(b.dataset.close)));
 document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)hide(o.id)}));
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){const o=document.querySelector(".overlay.show");if(o)hide(o.id)}});
-$("exploreBtn").onclick=()=>$("services").scrollIntoView({behavior:"smooth"});
-$("apiBtn").onclick=()=>{window.location.href="api.html"};
-
-function setStatus(id,message,type="info"){
- const el=$(id);el.textContent=message;el.className="status "+type;
-}
-function readHistory(){
- try{const a=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]");return Array.isArray(a)?a:[]}catch{return []}
-}
-function saveOrder(type,data){
- const items=readHistory();
- const clean={...data};delete clean.appIconFile;
- items.unshift({type,date:new Date().toLocaleString("fr-FR"),data:clean});
- try{localStorage.setItem(HISTORY_KEY,JSON.stringify(items.slice(0,100)))}catch(e){console.warn(e)}
-}
-async function pushCommande(path,payload){
- const newRef=push(ref(db,path));
- await set(newRef,{...payload,createdAt:Date.now(),date:new Date().toLocaleString("fr-FR"),statut:"En attente",source:"boutique"});
- return newRef.key;
-}
-function validUrl(value){
- try{const u=new URL(value);return u.protocol==="https:"||u.protocol==="http:"}catch{return false}
-}
-
-/* 15 plateformes avec logos */
-const platforms=[
- ["Facebook","https://cdn.simpleicons.org/facebook/1877F2"],
- ["Instagram","https://cdn.simpleicons.org/instagram/E4405F"],
- ["TikTok","https://cdn.simpleicons.org/tiktok/ffffff"],
- ["YouTube","https://cdn.simpleicons.org/youtube/FF0033"],
- ["WhatsApp","https://cdn.simpleicons.org/whatsapp/25D366"],
- ["Telegram","https://cdn.simpleicons.org/telegram/26A5E4"],
- ["Snapchat","https://cdn.simpleicons.org/snapchat/FFFC00"],
- ["X","https://cdn.simpleicons.org/x/ffffff"],
- ["Threads","https://cdn.simpleicons.org/threads/ffffff"],
- ["Pinterest","https://cdn.simpleicons.org/pinterest/E60023"],
- ["LinkedIn","https://cdn.simpleicons.org/linkedin/0A66C2"],
- ["Reddit","https://cdn.simpleicons.org/reddit/FF4500"],
- ["Discord","https://cdn.simpleicons.org/discord/5865F2"],
- ["Twitch","https://cdn.simpleicons.org/twitch/9146FF"],
- ["Spotify","https://cdn.simpleicons.org/spotify/1DB954"]
-];
+$("exploreBtn").onclick=()=>$("services").scrollIntoView({behavior:"smooth"});$("apiBtn").onclick=()=>location.href="api.html";
+function setStatus(id,msg,type="info"){const el=$(id);el.textContent=msg;el.className="status "+type}
+function readHistory(){try{const a=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]");return Array.isArray(a)?a:[]}catch{return []}}
+function saveOrder(type,data){const clean={...data};delete clean.appIconFile;const items=readHistory();items.unshift({type,date:new Date().toLocaleString("fr-FR"),data:clean});try{localStorage.setItem(HISTORY_KEY,JSON.stringify(items.slice(0,100)))}catch(e){console.warn(e)}}
+async function pushCommande(path,payload){const r=push(ref(db,path));await set(r,{...payload,createdAt:Date.now(),date:new Date().toLocaleString("fr-FR"),statut:"En attente",source:"boutique"});return r.key}
+function validUrl(value){try{const u=new URL(value);return u.protocol==="https:"||u.protocol==="http:"}catch{return false}}
+const platforms=[["Facebook","https://cdn.simpleicons.org/facebook/1877F2"],["Instagram","https://cdn.simpleicons.org/instagram/E4405F"],["TikTok","https://cdn.simpleicons.org/tiktok/ffffff"],["YouTube","https://cdn.simpleicons.org/youtube/FF0033"],["WhatsApp","https://cdn.simpleicons.org/whatsapp/25D366"],["Telegram","https://cdn.simpleicons.org/telegram/26A5E4"],["Snapchat","https://cdn.simpleicons.org/snapchat/FFFC00"],["X","https://cdn.simpleicons.org/x/ffffff"],["Threads","https://cdn.simpleicons.org/threads/ffffff"],["Pinterest","https://cdn.simpleicons.org/pinterest/E60023"],["LinkedIn","https://cdn.simpleicons.org/linkedin/0A66C2"],["Reddit","https://cdn.simpleicons.org/reddit/FF4500"],["Discord","https://cdn.simpleicons.org/discord/5865F2"],["Twitch","https://cdn.simpleicons.org/twitch/9146FF"],["Spotify","https://cdn.simpleicons.org/spotify/1DB954"]];
 let chosenPlatform="Facebook";
-function buildPlatforms(){
- const grid=$("platformGrid");grid.innerHTML="";
- platforms.forEach(([name,src])=>{
-  const b=document.createElement("button");b.type="button";b.className="platform";b.dataset.name=name;
-  b.setAttribute("aria-pressed",String(name===chosenPlatform));
-  const img=document.createElement("img");img.src=src;img.alt=name;img.loading="lazy";img.onerror=()=>{img.alt="Logo indisponible"};
-  const label=document.createElement("span");label.textContent=name;b.append(img,label);
-  b.addEventListener("click",()=>{
-   chosenPlatform=name;$("boostPlatform").value=name;
-   grid.querySelectorAll(".platform").forEach(x=>{
-    const active=x.dataset.name===name;x.classList.toggle("active",active);x.setAttribute("aria-pressed",String(active));
-   });
-   calculateBoost();
-  });grid.append(b);
- });
- const selected=grid.querySelector(`[data-name="${chosenPlatform}"]`);
- if(selected)selected.classList.add("active");
- $("boostPlatform").value=chosenPlatform;
-}
+function buildPlatforms(){const grid=$("platformGrid");grid.innerHTML="";platforms.forEach(([name,src])=>{const b=document.createElement("button");b.type="button";b.className="platform";b.dataset.name=name;const img=document.createElement("img");img.src=src;img.alt=name;img.loading="lazy";const label=document.createElement("span");label.textContent=name;b.append(img,label);b.addEventListener("click",()=>{chosenPlatform=name;$("boostPlatform").value=name;grid.querySelectorAll(".platform").forEach(x=>x.classList.toggle("active",x.dataset.name===name));calculateBoost()});grid.append(b)});const selected=grid.querySelector(`[data-name="${chosenPlatform}"]`);if(selected)selected.classList.add("active");$("boostPlatform").value=chosenPlatform}
 buildPlatforms();
+function calculateBoost(){const qty=Math.max(10,Math.floor(Number($("boostBudget").value)||10));const type=$("boostType").value;const per=type==="followers"?50:type==="likes"?35:20;const total=qty*per;$("boostPrice").textContent=formatFC(total);$("boostQuantity").textContent=qty.toLocaleString("fr-FR")+" unités";return {quantity:qty,total,pricePerUnit:per}}
+$("boostType").addEventListener("change",calculateBoost);$("boostBudget").addEventListener("input",calculateBoost);calculateBoost();
 
-/* Budget en FC => estimation de quantité, selon le tarif indicatif actuel */
-function calculateBoost(){
- const budget=Math.max(0,Number($("boostBudget").value)||0);
- const qty=Math.floor(budget); // tarif indicatif : 1 FC par unité
- $("boostPrice").textContent=budget.toLocaleString("fr-FR")+" FC";
- $("boostQuantity").textContent=qty.toLocaleString("fr-FR")+" unités";
- return {budget,quantity:qty};
-}
-$("boostType").addEventListener("change",calculateBoost);
-$("boostBudget").addEventListener("input",calculateBoost);
-calculateBoost();
+$("boostForm").addEventListener("submit",async e=>{e.preventDefault();const form=e.currentTarget;if(!form.reportValidity())return;const d=Object.fromEntries(new FormData(form).entries());const calc=calculateBoost();if(getBalance()<calc.total){setStatus("boostStatus","Solde local insuffisant : "+formatFC(getBalance())+" disponible, "+formatFC(calc.total)+" nécessaire.","error");return}const btn=form.querySelector('[type="submit"]');btn.disabled=true;setStatus("boostStatus","Enregistrement de la commande...","info");try{await pushCommande(`${ROOT}/store_commandes`,{produit:"Boostage "+d.platform,plateforme:d.platform,type_service:d.type,lien:d.link,quantite:calc.quantity,prix_unitaire:calc.pricePerUnit,prix:calc.total,montant:calc.total,telephone:d.phone,devise:"FC"});deductBalance(calc.total);saveOrder("Boostage "+d.platform,{type:d.type,quantity:calc.quantity,price:calc.total,phone:d.phone});setStatus("boostStatus","Commande enregistrée, en attente de traitement. Débit local : "+formatFC(calc.total)+". Solde restant : "+formatFC(getBalance()),"ok");form.reset();chosenPlatform="Facebook";buildPlatforms();calculateBoost()}catch(err){setStatus("boostStatus","Erreur Firebase : "+err.message,"error")}finally{btn.disabled=false}});
 
-$("boostForm").addEventListener("submit",async e=>{
- e.preventDefault();const form=e.currentTarget;if(!form.reportValidity())return;
- const d=Object.fromEntries(new FormData(form).entries());
- if(!validUrl(d.link)){setStatus("boostStatus","❌ Entrez un lien public valide.","error");return}
- const calc=calculateBoost();
- if(calc.budget<100){setStatus("boostStatus","❌ Le budget minimum est de 100 FC.","error");return}
- const btn=form.querySelector('[type="submit"]');btn.disabled=true;
- setStatus("boostStatus","⏳ Enregistrement de la demande...","info");
- try{
-  await pushCommande(`${ROOT}/demandes_commandes`,{
-   telephone:d.phone,userPhone:d.phone,plateforme:d.platform,type_service:d.type,
-   service:d.type,lien:d.link,link:d.link,budget:calc.budget,
-   quantite_estimee:calc.quantity,montant:calc.budget,prix:calc.budget,
-   tarif_indicatif:"100 FC pour 100 unités",source:"boutique"
-  });
-  saveOrder("Boostage",{platform:d.platform,type:d.type,link:d.link,budget:calc.budget,quantityEstimated:calc.quantity,phone:d.phone});
-  setStatus("boostStatus","✅ Demande enregistrée. Quantité estimée : "+calc.quantity.toLocaleString("fr-FR")+" unités. Vérifiez le tarif et la disponibilité auprès de l'administrateur avant tout paiement.","ok");
-  form.reset();chosenPlatform="Facebook";buildPlatforms();calculateBoost();
- }catch(err){console.error(err);setStatus("boostStatus","❌ Envoi impossible. Vérifiez la connexion et les règles Firebase.","error")}
- finally{btn.disabled=false}
-});
+$("appIcon").addEventListener("change",()=>{const file=$("appIcon").files[0],preview=$("appIconPreview");if(!file){preview.style.display="none";return}if(!file.type.startsWith("image/")){setStatus("appStatus","Choisis un fichier image valide.","error");return}preview.src=URL.createObjectURL(file);preview.style.display="block"});
+$("appForm").addEventListener("submit",async e=>{e.preventDefault();const form=e.currentTarget;if(!form.reportValidity())return;const price=10000;if(getBalance()<price){setStatus("appStatus","Solde local insuffisant : "+formatFC(getBalance())+" disponible.","error");return}const d=Object.fromEntries(new FormData(form).entries());const file=$("appIcon").files[0];const btn=form.querySelector('[type="submit"]');btn.disabled=true;setStatus("appStatus","Enregistrement de la commande...","info");try{await pushCommande(`${ROOT}/store_commandes`,{produit:"Création application",nom_application:d.appName,lien_site:d.appUrl,description:d.description,telephone:d.whatsapp,nom_fichier_icone:file?file.name:"",prix:price,montant:price,devise:"FC"});deductBalance(price);saveOrder("Application",{name:d.appName,url:d.appUrl,description:d.description,whatsapp:d.whatsapp,iconName:file?file.name:"",price});setStatus("appStatus","Commande enregistrée, en attente de traitement. Débit local : "+formatFC(price)+". Solde restant : "+formatFC(getBalance()),"ok");form.reset();$("appIconPreview").style.display="none"}catch(err){setStatus("appStatus","Erreur Firebase : "+err.message,"error")}finally{btn.disabled=false}});
 
-/* Aperçu icône application */
-$("appIcon").addEventListener("change",e=>{
- const file=e.target.files?.[0],preview=$("appIconPreview");
- if(!file){preview.style.display="none";return}
- if(!file.type.startsWith("image/")){e.target.value="";setStatus("appStatus","❌ Choisissez une image valide.","error");return}
- if(file.size>5*1024*1024){e.target.value="";setStatus("appStatus","❌ L'image doit peser moins de 5 Mo.","error");return}
- const reader=new FileReader();reader.onload=()=>{preview.src=reader.result;preview.style.display="block"};
- reader.onerror=()=>setStatus("appStatus","❌ Impossible de lire l'image.","error");reader.readAsDataURL(file);
-});
+$("chatForm").addEventListener("submit",async e=>{e.preventDefault();const form=e.currentTarget;if(!form.reportValidity())return;const price=7000;if(getBalance()<price){setStatus("chatStatus","Solde local insuffisant : "+formatFC(getBalance())+" disponible.","error");return}const d=Object.fromEntries(new FormData(form).entries());const btn=form.querySelector('[type="submit"]');btn.disabled=true;setStatus("chatStatus","Enregistrement de la commande...","info");try{await pushCommande(`${ROOT}/store_commandes`,{produit:"Création chatbot — "+d.chatName,nom_chatbot:d.chatName,fonctionnalites:d.features,createur:d.creator,description:d.description,telephone:d.whatsapp,prix:price,montant:price,devise:"FC"});deductBalance(price);saveOrder("Chatbot",{name:d.chatName,features:d.features,creator:d.creator,whatsapp:d.whatsapp,price});setStatus("chatStatus","Commande enregistrée, en attente de traitement. Débit local : "+formatFC(price)+". Solde restant : "+formatFC(getBalance()),"ok");form.reset();$("chatCreator").value="Jason Aloma"}catch(err){setStatus("chatStatus","Erreur Firebase : "+err.message,"error")}finally{btn.disabled=false}});
 
-async function handleStoreForm(formId,statusId,typeLabel,price,extraMap){
- $(formId).addEventListener("submit",async e=>{
-  e.preventDefault();const form=e.currentTarget;if(!form.reportValidity())return;
-  const fd=new FormData(form),data=Object.fromEntries(fd.entries());
-  const iconFile=formId==="appForm"?fd.get("appIcon"):null;
-  if(formId==="appForm"&&iconFile&&iconFile.size>5*1024*1024){setStatus(statusId,"❌ L'icône doit peser moins de 5 Mo.","error");return}
-  const btn=form.querySelector('[type="submit"]');btn.disabled=true;
-  setStatus(statusId,"⏳ Envoi de la commande vers Firebase...","info");
-  try{
-   const phone=data.whatsapp||data.phone||"";
-   const productName=data.appName||data.siteName||data.chatName||data.title||"";
-   const payload={
-    telephone:phone,client:phone,produit:typeLabel+" - "+productName,product:typeLabel,
-    quantite:1,montant:price,prix:price,
-    adresse:data.appUrl||data.siteType||data.creator||data.style||data.url||"",
-    description:data.description||data.features||data.text||data.lyrics||"",
-    lien:data.appUrl||data.url||"",...extraMap(data)
-   };
-   if(formId==="appForm"){
-    payload.appName=data.appName;payload.appUrl=data.appUrl;
-    payload.appIconName=iconFile?.name||"";payload.appIconType=iconFile?.type||"";
-    payload.appIconSize=iconFile?.size||0;payload.noteIcon="Fichier à téléverser séparément.";
-   }
-   await pushCommande(`${ROOT}/store_commandes`,payload);
-   const hist={...data};if(iconFile)hist.appIconFile=iconFile.name;
-   saveOrder(typeLabel,hist);
-   setStatus(statusId,formId==="appForm"?
-    "✅ Demande enregistrée dans Admin > Store. Le fichier de l'icône n'est pas téléversé automatiquement.":
-    "✅ Demande enregistrée dans Admin > Store.","ok");
-   form.reset();
-   if(formId==="appForm"){$("appIconPreview").style.display="none";$("appIconPreview").removeAttribute("src")}
-  }catch(err){console.error(err);setStatus(statusId,"❌ Envoi impossible. Vérifiez la connexion et les règles Firebase.","error")}
-  finally{btn.disabled=false}
- });
-}
-handleStoreForm("appForm","appStatus","Application 10000 FC",10000,d=>({appName:d.appName,appUrl:d.appUrl,description:d.description}));
-handleStoreForm("siteForm","siteStatus","Site Web 15000 FC",15000,d=>({siteName:d.siteName,siteType:d.siteType,description:d.description}));
-handleStoreForm("chatForm","chatStatus","Chatbot 7000 FC",7000,d=>({chatName:d.chatName,creator:d.creator,features:d.features,description:d.description}));
+const siteCatalog=[
+{name:"Portfolio personnel",icon:"👨‍💻",price:10000},
+{name:"Site vitrine",icon:"🏢",price:15000},
+{name:"Boutique en ligne",icon:"🛒",price:30000},
+{name:"Blog personnel",icon:"✍️",price:10000},
+{name:"Site d'actualités",icon:"📰",price:25000},
+{name:"Site d'église",icon:"⛪",price:15000},
+{name:"Site d'école",icon:"🎓",price:20000},
+{name:"Site de restaurant",icon:"🍽️",price:15000},
+{name:"Site d'hôtel",icon:"🏨",price:20000},
+{name:"Site immobilier",icon:"🏠",price:25000},
+{name:"Agence digitale",icon:"💻",price:20000},
+{name:"Site de musique",icon:"🎵",price:20000},
+{name:"Site de vidéos",icon:"🎬",price:20000},
+{name:"Site de photographie",icon:"📸",price:15000},
+{name:"Site de mariage",icon:"💍",price:12000},
+{name:"Site d'association",icon:"🤝",price:12000},
+{name:"Site de clinique",icon:"🏥",price:20000},
+{name:"Cabinet juridique",icon:"⚖️",price:20000},
+{name:"Site de voyage",icon:"✈️",price:20000},
+{name:"Site de formation",icon:"📚",price:20000},
+{name:"Petites annonces",icon:"📢",price:25000},
+{name:"Site de recrutement",icon:"💼",price:25000},
+{name:"Site de réservation",icon:"📅",price:30000},
+{name:"E-commerce avancé",icon:"🛍️",price:50000}
+];
+let selectedSite=null;
+function renderSiteCatalog(){const box=$("siteCatalog");box.innerHTML="";siteCatalog.forEach(site=>{const b=document.createElement("button");b.type="button";b.className="site-option";const emoji=document.createElement("span");emoji.className="site-emoji";emoji.textContent=site.icon;const name=document.createElement("span");name.className="site-name";name.textContent=site.name;const price=document.createElement("span");price.className="site-price";price.textContent=formatFC(site.price);b.append(emoji,name,price);b.addEventListener("click",()=>{selectedSite=site;box.querySelectorAll(".site-option").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("siteType").value=site.name;$("sitePrice").value=String(site.price);$("selectedSiteName").textContent=site.name;$("selectedSitePrice").textContent=formatFC(site.price);$("siteSubmitBtn").textContent="📤 Commander — "+formatFC(site.price);setStatus("siteStatus",site.name+" sélectionné. Complète les informations.","ok")});box.appendChild(b)})}
+renderSiteCatalog();
+$("siteForm").addEventListener("submit",async e=>{e.preventDefault();const form=e.currentTarget;if(!form.reportValidity())return;if(!selectedSite){setStatus("siteStatus","Choisis d'abord un type de site.","error");return}const data=Object.fromEntries(new FormData(form).entries());const price=selectedSite.price;if(data.siteType!==selectedSite.name||Number(data.price)!==price){setStatus("siteStatus","Sélection invalide. Choisis à nouveau le site.","error");return}if(data.reference&&!validUrl(data.reference)){setStatus("siteStatus","Le lien de référence doit être une URL valide.","error");return}if(getBalance()<price){setStatus("siteStatus",`Solde insuffisant : ${formatFC(getBalance())} disponible, ${formatFC(price)} nécessaire.`,"error");return}const btn=$("siteSubmitBtn");btn.disabled=true;setStatus("siteStatus","Enregistrement de la commande dans Firebase...","info");try{await pushCommande(`${ROOT}/store_commandes`,{produit:"Création site web — "+data.siteType,nom_site:data.siteName,type_site:data.siteType,description:data.description,fonctionnalites:data.features,telephone:data.whatsapp,whatsapp:data.whatsapp,reference:data.reference||"",prix:price,montant:price,devise:"FC",source:"boutique"});if(!deductBalance(price)){setStatus("siteStatus","Commande enregistrée, mais le solde local n'a pas été débité. Contacte le support.","error");return}saveOrder("Site web — "+data.siteType,{siteName:data.siteName,siteType:data.siteType,description:data.description,features:data.features,whatsapp:data.whatsapp,reference:data.reference||"",price});setStatus("siteStatus",`Commande enregistrée. Débit local : ${formatFC(price)}. Solde restant : ${formatFC(getBalance())}. Statut : en attente.`,"ok");form.reset();selectedSite=null;$("selectedSiteName").textContent="Aucun";$("selectedSitePrice").textContent="0 FC";$("siteSubmitBtn").textContent="📤 Commander le site";$("siteCatalog").querySelectorAll(".site-option").forEach(x=>x.classList.remove("active"))}catch(err){setStatus("siteStatus","Erreur Firebase : "+err.message,"error")}finally{btn.disabled=false}});
 
-/* Appels API : format JSON envoyé ; affichage de la réponse si elle est lisible */
-async function callJsonApi(url,payload){
- const response=await fetch(url,{
-  method:"POST",
-  headers:{"Content-Type":"application/json","Accept":"application/json"},
-  body:JSON.stringify(payload)
- });
- const text=await response.text();
- let data;
- try{data=JSON.parse(text)}catch{data={raw:text}}
- if(!response.ok){
-  const message=data?.message||data?.error||("Erreur HTTP "+response.status);
-  throw new Error(message);
- }
- return data;
-}
-function showApiResult(containerId,data){
- const box=$(containerId);box.innerHTML="";
- const pre=document.createElement("div");pre.className="result-preview";
- const link=findMediaUrl(data);
- if(link){
-  const a=document.createElement("a");a.href=link;a.target="_blank";a.rel="noopener noreferrer";
-  a.textContent="Ouvrir le résultat généré";a.className="btn blue";a.style.display="inline-block";a.style.marginBottom="10px";
-  box.append(a);
-  if(/\.(mp3|wav|ogg|m4a)(\?|$)/i.test(link)){
-   const audio=document.createElement("audio");audio.controls=true;audio.src=link;audio.style.width="100%";box.append(audio);
-  }
-  if(/\.(png|jpe?g|webp)(\?|$)/i.test(link)){
-   const img=document.createElement("img");img.src=link;img.alt="Résultat";img.style.maxWidth="100%";img.style.borderRadius="12px";box.append(img);
-  }
- }
- pre.textContent=JSON.stringify(data,null,2).slice(0,8000);
- box.append(pre);
-}
-function findMediaUrl(obj){
- if(!obj||typeof obj!=="object")return "";
- for(const [key,value] of Object.entries(obj)){
-  if(typeof value==="string"&&/^https?:\/\//i.test(value)&&/(url|audio|music|media|file|download|image|result|video)/i.test(key))return value;
- }
- for(const value of Object.values(obj)){if(value&&typeof value==="object"){const found=findMediaUrl(value);if(found)return found}}
- return "";
-}
+async function callJsonApi(url,payload){const response=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});const raw=await response.text();let data;try{data=JSON.parse(raw)}catch{data={message:raw}}if(!response.ok)throw new Error(data?.message||"Erreur HTTP "+response.status);return data}
+function showApiResult(containerId,data){const box=$(containerId);box.innerHTML="";if(data&&typeof data==="object"){const audioUrl=data.audioUrl||data.audio_url||data.audio||data.url;const pre=document.createElement("div");pre.className="result-preview";pre.textContent=JSON.stringify(data,null,2).slice(0,8000);box.append(pre);if(typeof audioUrl==="string"&&/^https?:\/\//i.test(audioUrl)){const audio=document.createElement("audio");audio.controls=true;audio.src=audioUrl;audio.style.width="100%";audio.style.marginTop="12px";box.append(audio);const a=document.createElement("a");a.href=audioUrl;a.download="jason-business-chanson.mp3";a.textContent="Télécharger la chanson";a.className="btn green";a.style.display="block";a.style.textAlign="center";a.style.marginTop="10px";box.append(a)}}else{const pre=document.createElement("div");pre.className="result-preview";pre.textContent=String(data);box.append(pre)}}
 
-/* Génération chanson via API. Pas de numéro WhatsApp. */
-$("musicForm").addEventListener("submit",async e=>{
- e.preventDefault();const form=e.currentTarget;if(!form.reportValidity())return;
- const data=Object.fromEntries(new FormData(form).entries());
- const btn=$("generateSongBtn");btn.disabled=true;$("musicResult").innerHTML="";
- setStatus("musicStatus","⏳ Envoi à l'API musicale...","info");
- try{
-  const result=await callJsonApi(MUSIC_API,{
-   title:data.title,lyrics:data.lyrics,style:data.style,
-   prompt:data.lyrics,musicStyle:data.style
-  });
-  showApiResult("musicResult",result);
-  saveOrder("Chanson - API",{title:data.title,style:data.style,lyrics:data.lyrics});
-  setStatus("musicStatus","✅ L'API a répondu. Consultez le résultat ci-dessous. La génération dépend du service distant.","ok");
- }catch(err){
-  console.error(err);
-  setStatus("musicStatus","⚠️ Impossible de confirmer la génération. L'API peut attendre un autre format ou bloquer les requêtes depuis le navigateur. Détail : "+err.message,"error");
- }finally{btn.disabled=false}
-});
-
-/* Publicité gratuite via API. Aucun WhatsApp et aucun prix. */
-$("adsForm").addEventListener("submit",async e=>{
- e.preventDefault();const form=e.currentTarget;if(!form.reportValidity())return;
- const data=Object.fromEntries(new FormData(form).entries());
- if(!validUrl(data.url)){setStatus("adStatus","❌ Entrez un lien HTTP ou HTTPS valide.","error");return}
- const btn=form.querySelector('[type="submit"]');btn.disabled=true;$("adsResult").innerHTML="";
- setStatus("adStatus","⏳ Création de votre publicité gratuite...","info");
- try{
-  const result=await callJsonApi(ADS_API,{
-   title:data.title,text:data.text,url:data.url,
-   description:data.text,link:data.url
-  });
-  showApiResult("adsResult",result);
-  saveOrder("Publicité gratuite",{title:data.title,text:data.text,url:data.url,prix:0});
-  setStatus("adStatus","✅ L'API a répondu à votre demande gratuite. Consultez le résultat ci-dessous.","ok");
- }catch(err){
-  console.error(err);
-  setStatus("adStatus","⚠️ La publicité n'a pas pu être confirmée. Vérifiez que l'API accepte les requêtes POST depuis le navigateur et le format des champs. Détail : "+err.message,"error");
- }finally{btn.disabled=false}
-});
-
-/* QR code gratuit */
+$("musicForm").addEventListener("submit",async e=>{e.preventDefault();const form=e.currentTarget;if(!form.reportValidity())return;const price=5000;if(getBalance()<price){setStatus("musicStatus",`Solde insuffisant : ${formatFC(getBalance())} disponible, ${formatFC(price)} nécessaire.`,"error");return}const data=Object.fromEntries(new FormData(form).entries());const btn=$("generateSongBtn");btn.disabled=true;$("musicResult").innerHTML="";setStatus("musicStatus","Génération de la chanson...","info");try{const result=await callJsonApi(MUSIC_API,{title:data.title,lyrics:data.lyrics,style:data.style});await pushCommande(`${ROOT}/store_commandes`,{produit:"Chanson — "+data.title,description:data.lyrics,style:data.style,prix:price,montant:price,devise:"FC"});if(!deductBalance(price)){setStatus("musicStatus","Résultat obtenu, mais solde local non débité. Contacte le support.","error");showApiResult("musicResult",result);return}showApiResult("musicResult",result);saveOrder("Chanson",{title:data.title,style:data.style,price});setStatus("musicStatus",`Chanson générée. Débit local : ${formatFC(price)}. Solde restant : ${formatFC(getBalance())}.`,"ok")}catch(err){setStatus("musicStatus","Échec : "+err.message+". Aucun débit local effectué.","error")}finally{btn.disabled=false}});
+$("adsForm").addEventListener("submit",async e=>{e.preventDefault();const form=e.currentTarget;if(!form.reportValidity())return;const data=Object.fromEntries(new FormData(form).entries());if(!validUrl(data.url)){setStatus("adStatus","Lien invalide.","error");return}const btn=form.querySelector('[type="submit"]');btn.disabled=true;setStatus("adStatus","Création gratuite en cours...","info");try{const result=await callJsonApi(ADS_API,{title:data.title,text:data.text,url:data.url});showApiResult("adsResult",result);saveOrder("Publicité gratuite",data);setStatus("adStatus","Publicité créée gratuitement.","ok")}catch(err){setStatus("adStatus","Erreur API : "+err.message,"error")}finally{btn.disabled=false}});
 let qrReady=false;
-$("generateQrBtn").addEventListener("click",()=>{
- const value=$("qrText").value.trim(),box=$("qrResult");
- box.innerHTML="";qrReady=false;$("downloadQrBtn").disabled=true;
- if(!value){setStatus("qrStatus","Entrez un lien ou un texte.","error");return}
- if(typeof QRCode==="undefined"){setStatus("qrStatus","La bibliothèque QR code ne s'est pas chargée. Vérifiez votre connexion Internet.","error");return}
- try{
-  new QRCode(box,{text:value,width:220,height:220,colorDark:"#050914",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});
-  qrReady=true;$("downloadQrBtn").disabled=false;
-  setStatus("qrStatus","✅ QR code créé gratuitement.","ok");
- }catch(err){setStatus("qrStatus","Impossible de créer ce QR code.","error")}
-});
-$("downloadQrBtn").addEventListener("click",()=>{
- const box=$("qrResult"),canvas=box.querySelector("canvas"),img=box.querySelector("img");
- let url="";
- if(canvas)url=canvas.toDataURL("image/png");
- else if(img){
-  const image=new Image();image.crossOrigin="anonymous";image.onload=()=>{
-   const c=document.createElement("canvas");c.width=image.naturalWidth;c.height=image.naturalHeight;
-   c.getContext("2d").drawImage(image,0,0);downloadCanvas(c.toDataURL("image/png"));
-  };image.onerror=()=>setStatus("qrStatus","Impossible de préparer le téléchargement. Réessayez de générer le QR code.","error");
-  image.src=img.src;return;
- }
- if(url)downloadCanvas(url);
-});
-function downloadCanvas(url){
- const a=document.createElement("a");a.href=url;a.download="jason-business-qr.png";
- document.body.append(a);a.click();a.remove();
-}
-
-/* Historique */
-function renderHistory(){
- const box=$("historyList"),items=readHistory();box.innerHTML="";
- if(!items.length){const empty=document.createElement("div");empty.className="history-item";empty.textContent="Aucune demande enregistrée sur cet appareil.";box.append(empty)}
- else items.forEach(item=>{
-  const div=document.createElement("div");div.className="history-item";
-  const title=document.createElement("strong");title.textContent=item.type||"Demande";div.append(title);
-  const date=document.createElement("div");date.className="muted";date.textContent=item.date||"Date inconnue";div.append(date);
-  const details=document.createElement("div");details.style.marginTop="7px";
-  details.textContent=Object.entries(item.data||{}).filter(([k])=>k!=="appIconFile").map(([k,v])=>k+": "+String(v).slice(0,150)).join(" · ");
-  div.append(details);box.append(div);
- });
- show("historyModal");
-}
-$("historyBtn").addEventListener("click",renderHistory);
-$("clearHistory").addEventListener("click",()=>{
- if(confirm("Effacer uniquement l'historique local de cet appareil ?")){
-  localStorage.removeItem(HISTORY_KEY);renderHistory();
- }
-});
+$("generateQrBtn").addEventListener("click",()=>{const value=$("qrText").value.trim(),box=$("qrResult");box.innerHTML="";qrReady=false;$("downloadQrBtn").disabled=true;if(!value){setStatus("qrStatus","Entre un lien ou un texte.","error");return}if(!window.QRCode){setStatus("qrStatus","La bibliothèque QR est indisponible. Vérifie Internet.","error");return}try{new QRCode(box,{text:value,width:220,height:220,colorDark:"#050914",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});qrReady=true;$("downloadQrBtn").disabled=false;setStatus("qrStatus","QR code créé gratuitement.","ok")}catch{setStatus("qrStatus","Impossible de créer le QR code.","error")}});
+$("downloadQrBtn").addEventListener("click",()=>{if(!qrReady)return;const canvas=$("qrResult").querySelector("canvas");const img=$("qrResult").querySelector("img");let url;if(canvas)url=canvas.toDataURL("image/png");else if(img){const a=document.createElement("a");a.href=img.src;a.download="jason-business-qr.png";a.click();return}if(url){const a=document.createElement("a");a.href=url;a.download="jason-business-qr.png";a.click()}});
+function renderHistory(){const box=$("historyList");box.innerHTML="";const balance=document.createElement("div");balance.className="history-item";const strong=document.createElement("strong");strong.textContent="💰 Solde local actuel";const info=document.createElement("div");info.className="muted";info.textContent=formatFC(getBalance());balance.append(strong,info);box.append(balance);const items=readHistory();if(!items.length){const empty=document.createElement("div");empty.className="history-item";empty.textContent="Aucune demande enregistrée localement.";box.append(empty)}else items.forEach(item=>{const div=document.createElement("div");div.className="history-item";const title=document.createElement("strong");title.textContent=item.type||"Commande";const date=document.createElement("div");date.className="muted";date.textContent=item.date||"";div.append(title,date);if(item.data){const detail=document.createElement("div");detail.className="muted";detail.textContent=Object.entries(item.data).filter(([k])=>!["lyrics","description","features"].includes(k)).map(([k,v])=>k+": "+String(v)).join(" · ");div.append(detail)}box.append(div)}) ;show("historyModal")}
+$("historyBtn").addEventListener("click",renderHistory);$("clearHistory").addEventListener("click",()=>{if(confirm("Réinitialiser le solde local de démonstration à 20 000 FC ? Cela ne crédite aucun argent réel.")){setBalance(20000);renderHistory()}});
 </script>
 </body>
 </html>
