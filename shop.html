@@ -10,17 +10,11 @@
 
 <style>
 :root{
- --bg:#050914;
- --panel:#0b1425;
- --panel2:#101e32;
- --blue:#00d4ff;
- --gold:#d8aa45;
- --green:#22c55e;
- --text:#f4f7ff;
- --muted:#94a3b8;
+ --bg:#050914;--panel:#0b1425;--panel2:#101e32;
+ --blue:#00d4ff;--gold:#d8aa45;--green:#22c55e;
+ --text:#f4f7ff;--muted:#94a3b8;
  --border:rgba(216,170,69,.25);
- --blueGlow:rgba(0,212,255,.12);
- --pink:#ff76ad;
+ --blueGlow:rgba(0,212,255,.12);--pink:#ff76ad;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
@@ -54,15 +48,15 @@ textarea:focus-visible,a:focus-visible{
  to{transform:translate3d(30px,35px,0) scale(1.2)}
 }
 
-/* Petites particules décoratives */
+/* Cœurs et étoiles */
 #romanticEffects{
  position:fixed;inset:0;overflow:hidden;pointer-events:none;
  z-index:0;contain:strict
 }
 .floating-heart{
  position:absolute;bottom:-40px;left:var(--x);
- color:var(--pink);opacity:0;
- font-size:var(--size);filter:drop-shadow(0 0 8px #ff76ad55);
+ color:var(--pink);opacity:0;font-size:var(--size);
+ filter:drop-shadow(0 0 8px #ff76ad55);
  animation:heartFloat var(--duration) linear var(--delay) infinite;
 }
 @keyframes heartFloat{
@@ -87,8 +81,7 @@ header{
  display:flex;justify-content:space-between;align-items:center;gap:8px;
  background:rgba(5,9,20,.92);
  border-bottom:1px solid var(--border);
- backdrop-filter:blur(20px);
- box-shadow:0 7px 24px rgba(0,0,0,.18)
+ backdrop-filter:blur(20px);box-shadow:0 7px 24px rgba(0,0,0,.18)
 }
 .brand{display:flex;align-items:center;gap:10px;min-width:0}
 .logo{
@@ -104,28 +97,46 @@ header{
 }
 .brand h1{font-size:14px;margin:0 0 4px;letter-spacing:.7px}
 .brand small{font-size:10px;color:var(--muted)}
+
+/* BOUTONS PETITS ET LUMINEUX */
 .btn{
  position:relative;overflow:hidden;
- border:1px solid var(--border);border-radius:12px;padding:11px 13px;
- color:var(--text);background:linear-gradient(135deg,#14243a,#0b1425);
- font-size:12px;font-weight:bold;
+ border:1px solid rgba(216,170,69,.45);
+ border-radius:9px;padding:8px 10px;
+ min-height:32px;
+ color:var(--text);
+ background:linear-gradient(135deg,#14243a,#0b1425);
+ font-size:10px;font-weight:700;letter-spacing:.2px;
+ box-shadow:0 0 7px rgba(216,170,69,.12),
+ inset 0 0 5px rgba(255,255,255,.025);
  transition:transform .25s,border-color .25s,box-shadow .25s;
 }
 .btn::after{
- content:"";position:absolute;top:-50%;left:-100%;width:55%;height:200%;
- transform:rotate(22deg);
- background:linear-gradient(90deg,transparent,#ffffff1a,transparent);
+ content:"";position:absolute;top:-50%;left:-100%;
+ width:55%;height:200%;transform:rotate(22deg);
+ background:linear-gradient(90deg,transparent,#ffffff28,transparent);
  transition:left .6s;pointer-events:none
 }
 .btn:hover::after{left:150%}
-.btn:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 7px 22px #0004}
-.btn:active{transform:scale(.97)}
-.gold{
- background:linear-gradient(125deg,#ffe9b4,var(--gold),#c48a26);
- color:#10131a;border:0;
- box-shadow:0 6px 20px #d8aa4518
+.btn:hover{
+ border-color:#ffe6a0;transform:translateY(-2px);
+ box-shadow:0 0 8px rgba(216,170,69,.35),
+ 0 0 18px rgba(0,212,255,.12)
 }
-.gold:hover{box-shadow:0 8px 28px #d8aa4545}
+.btn:active{
+ transform:scale(.96);
+ box-shadow:0 0 12px rgba(216,170,69,.35)
+}
+.gold{
+ background:linear-gradient(120deg,#ffe9b4,#d8aa45,#f4cf77);
+ color:#10131a;border:1px solid #ffe6a0;
+ box-shadow:0 0 8px rgba(216,170,69,.25),
+ inset 0 1px 2px rgba(255,255,255,.4)
+}
+.gold:hover{
+ box-shadow:0 0 12px rgba(216,170,69,.55),
+ 0 0 24px rgba(216,170,69,.2)
+}
 
 main{max-width:900px;margin:auto;padding:17px 13px 80px}
 .hero{
@@ -135,14 +146,12 @@ main{max-width:900px;margin:auto;padding:17px 13px 80px}
   radial-gradient(ellipse at top right,#00d4ff18,transparent 60%),
   radial-gradient(ellipse at bottom left,#ff76ad0c,transparent 55%),
   linear-gradient(135deg,#14243b,#080e1b);
- margin-bottom:25px;
- box-shadow:0 18px 45px #0003, inset 0 1px #ffffff08;
+ margin-bottom:25px;box-shadow:0 18px 45px #0003,inset 0 1px #ffffff08;
  animation:fadeUp .65s ease both
 }
 .hero::before{
  content:"✦";position:absolute;right:19px;top:15px;
- color:#d8aa4560;font-size:35px;
- animation:starSpin 12s linear infinite
+ color:#d8aa4560;font-size:35px;animation:starSpin 12s linear infinite
 }
 .hero::after{
  content:"";position:absolute;top:0;left:-120%;width:65%;height:100%;
@@ -162,8 +171,7 @@ main{max-width:900px;margin:auto;padding:17px 13px 80px}
  background:linear-gradient(90deg,#ffe6a0,var(--gold),#fff0c5,var(--gold));
  background-size:220% auto;color:var(--gold);
  -webkit-background-clip:text;background-clip:text;
- -webkit-text-fill-color:transparent;
- animation:goldText 5s linear infinite
+ -webkit-text-fill-color:transparent;animation:goldText 5s linear infinite
 }
 @keyframes goldText{to{background-position:220% center}}
 .hero p{font-size:12px;line-height:1.9;color:var(--muted);max-width:570px}
@@ -176,14 +184,12 @@ main{max-width:900px;margin:auto;padding:17px 13px 80px}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .card{
  position:relative;overflow:hidden;display:flex;flex-direction:column;
- padding:16px 12px;border-radius:19px;
- border:1px solid var(--border);
+ padding:16px 12px;border-radius:19px;border:1px solid var(--border);
  background:
   radial-gradient(ellipse at top right,#00d4ff08,transparent 60%),
   linear-gradient(145deg,rgba(17,31,51,.97),rgba(9,17,30,.98));
  min-width:0;transition:transform .28s,border-color .28s,box-shadow .28s;
- animation:fadeUp .7s ease both;
- box-shadow:0 9px 24px #00000012
+ animation:fadeUp .7s ease both;box-shadow:0 9px 24px #00000012
 }
 .card:nth-child(2){animation-delay:.05s}
 .card:nth-child(3){animation-delay:.1s}
@@ -210,8 +216,7 @@ main{max-width:900px;margin:auto;padding:17px 13px 80px}
  width:45px;height:45px;border-radius:14px;display:grid;place-items:center;
  font-size:23px;background:linear-gradient(135deg,#d8aa4520,#00d4ff0c);
  border:1px solid var(--border);margin-bottom:12px;
- transition:transform .3s,box-shadow .3s;
- box-shadow:inset 0 1px #ffffff09
+ transition:transform .3s,box-shadow .3s;box-shadow:inset 0 1px #ffffff09
 }
 .card:hover .card-icon{
  transform:translateY(-3px) rotate(-5deg) scale(1.06);
@@ -227,7 +232,8 @@ main{max-width:900px;margin:auto;padding:17px 13px 80px}
  margin:13px 0;font-size:12px
 }
 .total strong{color:var(--gold);font-size:18px;text-align:right}
-.card>.btn{width:100%;margin-top:auto;min-height:42px}
+/* Boutons des cartes plus petits */
+.card>.btn{width:100%;margin-top:auto;min-height:34px}
 
 /* Fenêtres modales */
 .overlay{
@@ -243,8 +249,7 @@ main{max-width:900px;margin:auto;padding:17px 13px 80px}
   radial-gradient(ellipse at top right,#00d4ff10,transparent 45%),
   radial-gradient(ellipse at bottom left,#ff76ad08,transparent 40%),
   #08111f;
- border:1px solid var(--border);
- border-radius:23px 23px 0 0;padding:18px;
+ border:1px solid var(--border);border-radius:23px 23px 0 0;padding:18px;
  box-shadow:0 -12px 55px #0006;
  animation:modalUp .28s cubic-bezier(.2,.8,.2,1);
  scrollbar-width:thin;scrollbar-color:#d8aa4560 #08111f
@@ -256,16 +261,19 @@ main{max-width:900px;margin:auto;padding:17px 13px 80px}
 .modal-head{
  display:flex;align-items:center;justify-content:space-between;gap:10px;
  margin-bottom:15px;position:sticky;top:-18px;z-index:2;
- background:#08111ff5;padding:9px 0 12px;
- border-bottom:1px solid #d8aa4520
+ background:#08111ff5;padding:9px 0 12px;border-bottom:1px solid #d8aa4520
 }
 .modal-head h2{font-size:17px;margin:0;line-height:1.5}
 .close{
- flex-shrink:0;width:37px;height:37px;border:1px solid var(--border);
- border-radius:11px;background:#132035;color:white;font-size:22px;
- transition:background .2s,transform .2s
+ flex-shrink:0;width:32px;height:32px;border:1px solid var(--border);
+ border-radius:9px;background:#132035;color:white;font-size:19px;
+ box-shadow:0 0 9px rgba(0,212,255,.12);
+ transition:background .2s,transform .2s,box-shadow .2s
 }
-.close:hover{background:#263850;transform:rotate(90deg)}
+.close:hover{
+ background:#263850;transform:rotate(90deg);
+ box-shadow:0 0 13px rgba(0,212,255,.25)
+}
 .field{margin:14px 0}
 .field label{display:block;font-size:12px;margin-bottom:8px;color:#dce6f5}
 .field input,.field textarea,.field select{
@@ -283,32 +291,28 @@ main{max-width:900px;margin:auto;padding:17px 13px 80px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .platforms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 .platform{
- min-width:0;padding:11px 3px;border:1px solid #28374d;border-radius:12px;
+ min-width:0;padding:8px 3px;border:1px solid #28374d;border-radius:10px;
  background:#0d192b;color:white;font-size:10px;display:flex;
  flex-direction:column;align-items:center;justify-content:center;gap:7px;
+ box-shadow:0 0 7px rgba(0,212,255,.04);
  transition:transform .2s,border-color .2s,background .2s,box-shadow .2s
 }
 .platform img{width:25px;height:25px;object-fit:contain}
 .platform.active{
  border-color:var(--gold);background:#d8aa4518;
- box-shadow:0 0 15px #d8aa4510
+ box-shadow:0 0 8px rgba(216,170,69,.25),inset 0 0 8px rgba(216,170,69,.08)
 }
 .platform:active{transform:scale(.96)}
-.status{
- font-size:12px;line-height:1.8;margin:12px 0;
- white-space:pre-wrap;overflow-wrap:anywhere
-}
+.status{font-size:12px;line-height:1.8;margin:12px 0;white-space:pre-wrap;overflow-wrap:anywhere}
 .ok{color:#86efac}.error{color:#fda4af}.info{color:#93c5fd}
 .preview{
  width:85px;height:85px;border-radius:14px;object-fit:cover;
- border:1px solid var(--border);display:none;margin-top:10px;
- background:#0c192b
+ border:1px solid var(--border);display:none;margin-top:10px;background:#0c192b
 }
 .history-item{
  padding:13px;margin:10px 0;background:#0d192b;
  border:1px solid #28374d;border-radius:13px;
- font-size:11px;line-height:1.8;overflow-wrap:anywhere;
- animation:fadeUp .3s ease both
+ font-size:11px;line-height:1.8;overflow-wrap:anywhere;animation:fadeUp .3s ease both
 }
 .history-item strong{color:var(--gold)}
 .history-item .muted{margin:3px 0}
@@ -343,7 +347,7 @@ button:disabled{opacity:.6;cursor:wait;transform:none!important}
  .platforms{gap:5px}
  .platform{font-size:9px}
  header{padding:10px}
- header>.btn{padding:10px 8px;font-size:10px}
+ header>.btn{padding:7px 8px;font-size:10px;min-height:30px}
 }
 @media(prefers-reduced-motion:reduce){
  *,*::before,*::after{
@@ -673,9 +677,8 @@ button:disabled{opacity:.6;cursor:wait;transform:none!important}
 <script type="module">
 import { initializeApp, getApps, getApp }
  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
- getDatabase, ref, push, set
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, push, set }
+ from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
  apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
@@ -692,11 +695,10 @@ const db = getDatabase(app);
 const ROOT = "jasonBusiness";
 const $ = id => document.getElementById(id);
 
-/* Décoration uniquement : les cœurs et étoiles ne touchent pas aux commandes. */
+/* Décoration uniquement */
 (function createRomanticEffects(){
  const container=$("romanticEffects");
  if(!container) return;
-
  const reduceMotion=window.matchMedia &&
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
  if(reduceMotion) return;
@@ -712,7 +714,6 @@ const $ = id => document.getElementById(id);
   heart.style.setProperty("--drift",(-35+Math.random()*70)+"px");
   container.appendChild(heart);
  }
-
  for(let i=0;i<24;i++){
   const sparkle=document.createElement("i");
   sparkle.className="sparkle";
@@ -758,7 +759,6 @@ function setStatus(id,message,type="info"){
 }
 
 const HISTORY_KEY="jasonBusinessBoutiqueOrdersV3";
-
 function readHistory(){
  try{
   const data=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]");
@@ -772,20 +772,15 @@ function saveOrder(type,data){
  items.unshift({type,date:new Date().toLocaleString("fr-FR"),data:safeData});
  try{
   localStorage.setItem(HISTORY_KEY,JSON.stringify(items.slice(0,100)));
- }catch(error){
-  console.warn("Historique local indisponible :",error);
- }
+ }catch(error){console.warn("Historique local indisponible :",error)}
 }
 
-/* Les fichiers d'icône ne sont pas envoyés en Base64. */
 async function pushCommande(path,payload){
  const newRef=push(ref(db,path));
  const safePayload={
-  ...payload,
-  createdAt:Date.now(),
+  ...payload,createdAt:Date.now(),
   date:new Date().toLocaleString("fr-FR"),
-  statut:"En attente",
-  source:"boutique"
+  statut:"En attente",source:"boutique"
  };
  await set(newRef,safePayload);
  return newRef.key;
@@ -803,7 +798,6 @@ const platforms=[
 ];
 
 let chosenPlatform="Facebook";
-
 function buildPlatforms(){
  const grid=$("platformGrid");
  grid.innerHTML="";
@@ -815,14 +809,11 @@ function buildPlatforms(){
   button.setAttribute("aria-pressed",name===chosenPlatform?"true":"false");
 
   const img=document.createElement("img");
-  img.src=src;
-  img.alt="";
-  img.loading="lazy";
-  img.onerror=()=>{img.style.display="none";};
+  img.src=src;img.alt="";img.loading="lazy";
+  img.onerror=()=>{img.style.display="none"};
 
   const label=document.createElement("span");
   label.textContent=name;
-
   button.append(img,label);
   button.addEventListener("click",()=>{
    chosenPlatform=name;
@@ -842,7 +833,6 @@ function buildPlatforms(){
 }
 buildPlatforms();
 
-/* Tarification indicative : 100 FC par tranche de 100 unités. */
 function calculateBoost(){
  const qty=Math.max(0,Number($("boostQty").value)||0);
  const total=Math.max(100,Math.ceil(qty/100)*100);
@@ -865,32 +855,21 @@ $("boostForm").addEventListener("submit",async event=>{
  event.preventDefault();
  const form=event.currentTarget;
  if(!form.reportValidity()) return;
-
  const data=Object.fromEntries(new FormData(form).entries());
  if(!isValidHttpUrl(data.link)){
   setStatus("boostStatus","❌ Entrez un lien public valide.","error");
   return;
  }
-
  const button=form.querySelector('button[type="submit"]');
  const price=calculateBoost();
  button.disabled=true;
  setStatus("boostStatus","⏳ Envoi de la demande vers Firebase...","info");
-
  try{
   await pushCommande(`${ROOT}/demandes_commandes`,{
-   telephone:data.phone,
-   userPhone:data.phone,
-   plateforme:data.platform,
-   type_service:data.type,
-   service:data.type,
-   lien:data.link,
-   link:data.link,
-   quantite:Number(data.quantity),
-   montant:price,
-   prix:price,
-   selfBoost:true,
-   source:"boutique"
+   telephone:data.phone,userPhone:data.phone,
+   plateforme:data.platform,type_service:data.type,service:data.type,
+   lien:data.link,link:data.link,quantite:Number(data.quantity),
+   montant:price,prix:price,selfBoost:true,source:"boutique"
   });
   saveOrder("Boostage",data);
   setStatus("boostStatus","✅ Demande enregistrée. Vérifiez avec l'administrateur le tarif et la disponibilité du service.","ok");
@@ -901,40 +880,29 @@ $("boostForm").addEventListener("submit",async event=>{
  }catch(error){
   console.error(error);
   setStatus("boostStatus","❌ Envoi impossible. Vérifiez votre connexion et les règles Firebase.","error");
- }finally{
-  button.disabled=false;
- }
+ }finally{button.disabled=false}
 });
 
-/* Aperçu de l'icône sélectionnée */
+/* Aperçu de l'icône */
 $("appIcon").addEventListener("change",event=>{
  const file=event.target.files?.[0];
  const preview=$("appIconPreview");
  if(!file){
-  preview.style.display="none";
-  preview.removeAttribute("src");
-  return;
+  preview.style.display="none";preview.removeAttribute("src");return;
  }
  if(!file.type.startsWith("image/")){
-  event.target.value="";
-  preview.style.display="none";
-  setStatus("appStatus","❌ Choisissez un fichier image valide.","error");
-  return;
+  event.target.value="";preview.style.display="none";
+  setStatus("appStatus","❌ Choisissez un fichier image valide.","error");return;
  }
  if(file.size>5*1024*1024){
-  event.target.value="";
-  preview.style.display="none";
-  setStatus("appStatus","❌ L'image doit peser moins de 5 Mo.","error");
-  return;
+  event.target.value="";preview.style.display="none";
+  setStatus("appStatus","❌ L'image doit peser moins de 5 Mo.","error");return;
  }
  const reader=new FileReader();
  reader.onload=()=>{
-  preview.src=reader.result;
-  preview.style.display="block";
+  preview.src=reader.result;preview.style.display="block";
  };
- reader.onerror=()=>{
-  setStatus("appStatus","❌ Impossible de lire cette image.","error");
- };
+ reader.onerror=()=>setStatus("appStatus","❌ Impossible de lire cette image.","error");
  reader.readAsDataURL(file);
 });
 
@@ -943,14 +911,12 @@ async function handleStoreForm(formId,statusId,typeLabel,price,extraMap){
   event.preventDefault();
   const form=event.currentTarget;
   if(!form.reportValidity()) return;
-
   const formData=new FormData(form);
   const data=Object.fromEntries(formData.entries());
   const iconFile=formId==="appForm"?formData.get("appIcon"):null;
 
-  if(formId==="appForm" && iconFile && iconFile.size>5*1024*1024){
-   setStatus(statusId,"❌ L'icône doit peser moins de 5 Mo.","error");
-   return;
+  if(formId==="appForm"&&iconFile&&iconFile.size>5*1024*1024){
+   setStatus(statusId,"❌ L'icône doit peser moins de 5 Mo.","error");return;
   }
 
   const button=form.querySelector('button[type="submit"]');
@@ -960,15 +926,10 @@ async function handleStoreForm(formId,statusId,typeLabel,price,extraMap){
   try{
    const phone=data.whatsapp||data.phone||"";
    const productName=data.appName||data.siteName||data.chatName||data.title||"";
-
    const payload={
-    telephone:phone,
-    client:phone,
-    produit:typeLabel+" - "+productName,
-    product:typeLabel,
-    quantite:1,
-    montant:price,
-    prix:price,
+    telephone:phone,client:phone,
+    produit:typeLabel+" - "+productName,product:typeLabel,
+    quantite:1,montant:price,prix:price,
     adresse:data.appUrl||data.siteType||data.creator||data.style||data.url||"",
     description:data.description||data.features||data.text||data.lyrics||"",
     lien:data.appUrl||data.url||"",
@@ -985,13 +946,11 @@ async function handleStoreForm(formId,statusId,typeLabel,price,extraMap){
    }
 
    await pushCommande(`${ROOT}/store_commandes`,payload);
-
    const historyData={...data};
    if(iconFile) historyData.appIconFile=iconFile.name;
    saveOrder(typeLabel,historyData);
 
-   setStatus(
-    statusId,
+   setStatus(statusId,
     formId==="appForm"
      ? "✅ Demande enregistrée dans Admin > Store. Attention : le fichier de l'icône n'est pas encore téléversé ; seul son nom et ses informations ont été enregistrés."
      : "✅ Demande enregistrée dans Admin > Store. L'administrateur pourra examiner les détails.",
@@ -1006,38 +965,25 @@ async function handleStoreForm(formId,statusId,typeLabel,price,extraMap){
   }catch(error){
    console.error(error);
    setStatus(statusId,"❌ Envoi impossible. Vérifiez votre connexion et les règles Firebase.","error");
-  }finally{
-   button.disabled=false;
-  }
+  }finally{button.disabled=false}
  });
 }
 
-handleStoreForm(
- "appForm","appStatus","Application 10000 FC",10000,
- data=>({appName:data.appName,appUrl:data.appUrl,description:data.description})
-);
-handleStoreForm(
- "siteForm","siteStatus","Site Web 15000 FC",15000,
- data=>({siteName:data.siteName,siteType:data.siteType,description:data.description})
-);
-handleStoreForm(
- "chatForm","chatStatus","Chatbot 7000 FC",7000,
- data=>({chatName:data.chatName,creator:data.creator,features:data.features,description:data.description})
-);
-handleStoreForm(
- "musicForm","musicStatus","Chanson 500 FC",500,
- data=>({title:data.title,style:data.style,lyrics:data.lyrics})
-);
-handleStoreForm(
- "adsForm","adStatus","Publicité 1000 FC",1000,
- data=>({title:data.title,text:data.text,url:data.url})
-);
+handleStoreForm("appForm","appStatus","Application 10000 FC",10000,
+ data=>({appName:data.appName,appUrl:data.appUrl,description:data.description}));
+handleStoreForm("siteForm","siteStatus","Site Web 15000 FC",15000,
+ data=>({siteName:data.siteName,siteType:data.siteType,description:data.description}));
+handleStoreForm("chatForm","chatStatus","Chatbot 7000 FC",7000,
+ data=>({chatName:data.chatName,creator:data.creator,features:data.features,description:data.description}));
+handleStoreForm("musicForm","musicStatus","Chanson 500 FC",500,
+ data=>({title:data.title,style:data.style,lyrics:data.lyrics}));
+handleStoreForm("adsForm","adStatus","Publicité 1000 FC",1000,
+ data=>({title:data.title,text:data.text,url:data.url}));
 
 function renderHistory(){
  const box=$("historyList");
  const items=readHistory();
  box.innerHTML="";
-
  if(!items.length){
   const empty=document.createElement("div");
   empty.className="history-item";
@@ -1047,26 +993,20 @@ function renderHistory(){
   items.forEach(item=>{
    const div=document.createElement("div");
    div.className="history-item";
-
    const title=document.createElement("strong");
    title.textContent=item.type||"Demande";
    div.append(title);
-
    const date=document.createElement("div");
    date.className="muted";
    date.textContent=item.date||"Date inconnue";
    div.append(date);
-
    const details=document.createElement("div");
    details.style.marginTop="7px";
-
    const entries=Object.entries(item.data||{})
     .filter(([key])=>key!=="appIconFile")
     .map(([key,value])=>key+": "+String(value).slice(0,150));
-
    details.textContent=entries.join(" · ");
    div.append(details);
-
    if(item.data?.appIconFile){
     const iconInfo=document.createElement("div");
     iconInfo.className="muted";
