@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -19,14 +20,16 @@
  --muted:#94a3b8;
  --border:rgba(216,170,69,.25);
  --blueGlow:rgba(0,212,255,.12);
+ --pink:#ff76ad;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
 body{
  margin:0;color:var(--text);font-family:Arial,sans-serif;
  background:
-  radial-gradient(ellipse at top right,#07304a55,transparent 42%),
-  radial-gradient(ellipse at bottom left,#d8aa4518,transparent 38%),
+  radial-gradient(ellipse at 15% 0%,#103a5b55,transparent 38%),
+  radial-gradient(ellipse at 100% 45%,#d8aa451b,transparent 35%),
+  radial-gradient(ellipse at 20% 100%,#ff76ad0c,transparent 35%),
   var(--bg);
  overflow-x:hidden;
 }
@@ -37,10 +40,10 @@ textarea:focus-visible,a:focus-visible{
  outline:2px solid var(--blue);outline-offset:3px
 }
 
-/* Lumières animées */
+/* Ambiance lumineuse */
 .ambient{
  position:fixed;z-index:0;width:180px;height:180px;
- border-radius:50%;filter:blur(75px);opacity:.12;
+ border-radius:50%;filter:blur(75px);opacity:.15;
  pointer-events:none;animation:floatLight 13s ease-in-out infinite alternate
 }
 .ambient.one{top:8%;left:-100px;background:var(--blue)}
@@ -50,98 +53,170 @@ textarea:focus-visible,a:focus-visible{
  from{transform:translate3d(0,0,0) scale(1)}
  to{transform:translate3d(30px,35px,0) scale(1.2)}
 }
-header,main,footer,.overlay{position:relative;z-index:1}
 
+/* Petites particules décoratives */
+#romanticEffects{
+ position:fixed;inset:0;overflow:hidden;pointer-events:none;
+ z-index:0;contain:strict
+}
+.floating-heart{
+ position:absolute;bottom:-40px;left:var(--x);
+ color:var(--pink);opacity:0;
+ font-size:var(--size);filter:drop-shadow(0 0 8px #ff76ad55);
+ animation:heartFloat var(--duration) linear var(--delay) infinite;
+}
+@keyframes heartFloat{
+ 0%{transform:translate3d(0,0,0) rotate(-12deg) scale(.7);opacity:0}
+ 12%{opacity:.4}
+ 75%{opacity:.24}
+ 100%{transform:translate3d(var(--drift),-110vh,0) rotate(25deg) scale(1.1);opacity:0}
+}
+.sparkle{
+ position:absolute;width:3px;height:3px;border-radius:50%;
+ background:var(--gold);box-shadow:0 0 10px var(--gold);
+ animation:twinkle var(--duration) ease-in-out var(--delay) infinite alternate;
+}
+@keyframes twinkle{
+ from{opacity:.12;transform:scale(.5)}
+ to{opacity:.8;transform:scale(1.7)}
+}
+
+header,main,footer,.overlay{position:relative;z-index:1}
 header{
  position:sticky;top:0;z-index:10;padding:12px 14px;
  display:flex;justify-content:space-between;align-items:center;gap:8px;
- background:rgba(5,9,20,.94);
+ background:rgba(5,9,20,.92);
  border-bottom:1px solid var(--border);
- backdrop-filter:blur(18px);
- box-shadow:0 7px 24px rgba(0,0,0,.12)
+ backdrop-filter:blur(20px);
+ box-shadow:0 7px 24px rgba(0,0,0,.18)
 }
 .brand{display:flex;align-items:center;gap:10px;min-width:0}
 .logo{
  width:43px;height:43px;flex-shrink:0;display:grid;place-items:center;
- border-radius:14px;background:linear-gradient(135deg,#ffe8ac,var(--gold),#946515);
+ border-radius:14px;background:linear-gradient(135deg,#fff0bd,var(--gold),#946515);
  color:#07111d;font-weight:900;font-size:18px;
- box-shadow:0 0 22px rgba(216,170,69,.13);
+ box-shadow:0 0 22px rgba(216,170,69,.2);
  animation:logoGlow 4s ease-in-out infinite
 }
 @keyframes logoGlow{
- 0%,100%{box-shadow:0 0 12px rgba(216,170,69,.12)}
- 50%{box-shadow:0 0 25px rgba(216,170,69,.28)}
+ 0%,100%{box-shadow:0 0 12px #d8aa4520;transform:rotate(0)}
+ 50%{box-shadow:0 0 28px #d8aa4550;transform:rotate(-3deg)}
 }
-.brand h1{font-size:14px;margin:0 0 4px;letter-spacing:.5px}
+.brand h1{font-size:14px;margin:0 0 4px;letter-spacing:.7px}
 .brand small{font-size:10px;color:var(--muted)}
 .btn{
+ position:relative;overflow:hidden;
  border:1px solid var(--border);border-radius:12px;padding:11px 13px;
  color:var(--text);background:linear-gradient(135deg,#14243a,#0b1425);
- font-size:12px;font-weight:bold;transition:transform .25s,border-color .25s,box-shadow .25s;
+ font-size:12px;font-weight:bold;
+ transition:transform .25s,border-color .25s,box-shadow .25s;
 }
-.btn:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 7px 20px #0003}
+.btn::after{
+ content:"";position:absolute;top:-50%;left:-100%;width:55%;height:200%;
+ transform:rotate(22deg);
+ background:linear-gradient(90deg,transparent,#ffffff1a,transparent);
+ transition:left .6s;pointer-events:none
+}
+.btn:hover::after{left:150%}
+.btn:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 7px 22px #0004}
 .btn:active{transform:scale(.97)}
 .gold{
- background:linear-gradient(125deg,#ffe4a3,var(--gold));
+ background:linear-gradient(125deg,#ffe9b4,var(--gold),#c48a26);
  color:#10131a;border:0;
- box-shadow:0 6px 20px rgba(216,170,69,.10)
+ box-shadow:0 6px 20px #d8aa4518
 }
-.gold:hover{box-shadow:0 8px 25px rgba(216,170,69,.22)}
+.gold:hover{box-shadow:0 8px 28px #d8aa4545}
 
 main{max-width:900px;margin:auto;padding:17px 13px 80px}
 .hero{
  position:relative;overflow:hidden;
- border:1px solid var(--border);border-radius:23px;padding:24px 19px;
+ border:1px solid var(--border);border-radius:25px;padding:24px 19px;
  background:
-  radial-gradient(ellipse at top right,rgba(0,212,255,.10),transparent 60%),
+  radial-gradient(ellipse at top right,#00d4ff18,transparent 60%),
+  radial-gradient(ellipse at bottom left,#ff76ad0c,transparent 55%),
   linear-gradient(135deg,#14243b,#080e1b);
  margin-bottom:25px;
- box-shadow:0 15px 40px rgba(0,0,0,.17);
- animation:fadeUp .65s ease both;
+ box-shadow:0 18px 45px #0003, inset 0 1px #ffffff08;
+ animation:fadeUp .65s ease both
+}
+.hero::before{
+ content:"✦";position:absolute;right:19px;top:15px;
+ color:#d8aa4560;font-size:35px;
+ animation:starSpin 12s linear infinite
 }
 .hero::after{
  content:"";position:absolute;top:0;left:-120%;width:65%;height:100%;
- background:linear-gradient(100deg,transparent,rgba(255,255,255,.055),transparent);
+ background:linear-gradient(100deg,transparent,#ffffff0d,transparent);
  transform:skewX(-20deg);animation:heroShine 8s ease-in-out infinite;
  pointer-events:none
 }
 @keyframes heroShine{0%,65%{left:-120%}100%{left:160%}}
+@keyframes starSpin{to{transform:rotate(360deg)}}
 @keyframes fadeUp{
  from{opacity:0;transform:translateY(13px)}
  to{opacity:1;transform:translateY(0)}
 }
 .tag{font-size:10px;color:var(--gold);letter-spacing:1.5px;font-weight:bold}
 .hero h2{font-size:27px;line-height:1.3;margin:14px 0 8px}
-.hero h2 span{color:var(--gold);text-shadow:0 0 20px #d8aa451c}
+.hero h2 span{
+ background:linear-gradient(90deg,#ffe6a0,var(--gold),#fff0c5,var(--gold));
+ background-size:220% auto;color:var(--gold);
+ -webkit-background-clip:text;background-clip:text;
+ -webkit-text-fill-color:transparent;
+ animation:goldText 5s linear infinite
+}
+@keyframes goldText{to{background-position:220% center}}
 .hero p{font-size:12px;line-height:1.9;color:var(--muted);max-width:570px}
 .hero .btn{margin-top:7px}
 .section-title{font-size:17px;margin:24px 2px 13px}
+.section-title::after{
+ content:"";display:block;width:52px;height:2px;margin-top:8px;
+ border-radius:4px;background:linear-gradient(90deg,var(--gold),var(--blue),transparent)
+}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .card{
  position:relative;overflow:hidden;display:flex;flex-direction:column;
  padding:16px 12px;border-radius:19px;
  border:1px solid var(--border);
- background:linear-gradient(145deg,rgba(17,31,51,.97),rgba(9,17,30,.97));
+ background:
+  radial-gradient(ellipse at top right,#00d4ff08,transparent 60%),
+  linear-gradient(145deg,rgba(17,31,51,.97),rgba(9,17,30,.98));
  min-width:0;transition:transform .28s,border-color .28s,box-shadow .28s;
- animation:fadeUp .7s ease both
+ animation:fadeUp .7s ease both;
+ box-shadow:0 9px 24px #00000012
 }
+.card:nth-child(2){animation-delay:.05s}
+.card:nth-child(3){animation-delay:.1s}
+.card:nth-child(4){animation-delay:.15s}
+.card:nth-child(5){animation-delay:.2s}
+.card:nth-child(6){animation-delay:.25s}
 .card::before{
  content:"";position:absolute;inset:0;opacity:0;
- background:radial-gradient(ellipse at top left,rgba(0,212,255,.08),transparent 70%);
+ background:radial-gradient(ellipse at top left,#00d4ff13,transparent 70%);
  transition:opacity .3s;pointer-events:none
 }
+.card::after{
+ content:"";position:absolute;top:0;left:-100%;height:1px;width:65%;
+ background:linear-gradient(90deg,transparent,var(--gold),transparent);
+ transition:left .6s;pointer-events:none
+}
 .card:hover{
- transform:translateY(-4px);border-color:#d8aa4580;
- box-shadow:0 13px 30px rgba(0,0,0,.2)
+ transform:translateY(-5px);border-color:#d8aa4580;
+ box-shadow:0 16px 35px #0004,0 0 18px #d8aa450b
 }
 .card:hover::before{opacity:1}
+.card:hover::after{left:130%}
 .card-icon{
  width:45px;height:45px;border-radius:14px;display:grid;place-items:center;
- font-size:23px;background:linear-gradient(135deg,#d8aa4518,#00d4ff09);
+ font-size:23px;background:linear-gradient(135deg,#d8aa4520,#00d4ff0c);
  border:1px solid var(--border);margin-bottom:12px;
- transition:transform .3s
+ transition:transform .3s,box-shadow .3s;
+ box-shadow:inset 0 1px #ffffff09
 }
-.card:hover .card-icon{transform:translateY(-2px) rotate(-3deg)}
+.card:hover .card-icon{
+ transform:translateY(-3px) rotate(-5deg) scale(1.06);
+ box-shadow:0 0 20px #d8aa451a
+}
 .card h3{font-size:14px;margin:0 0 8px;line-height:1.5}
 .card p{font-size:11px;color:var(--muted);line-height:1.8;min-height:40px;flex:1}
 .muted{color:var(--muted);font-size:11px;line-height:1.8}
@@ -157,7 +232,7 @@ main{max-width:900px;margin:auto;padding:17px 13px 80px}
 /* Fenêtres modales */
 .overlay{
  display:none;position:fixed;inset:0;z-index:30;
- background:rgba(0,0,0,.76);backdrop-filter:blur(7px);
+ background:rgba(0,0,0,.78);backdrop-filter:blur(9px);
  align-items:flex-end;justify-content:center;padding:0
 }
 .overlay.show{display:flex;animation:fadeOverlay .2s ease}
@@ -165,12 +240,14 @@ main{max-width:900px;margin:auto;padding:17px 13px 80px}
 .modal{
  width:min(100%,620px);max-height:92vh;overflow:auto;
  background:
-  radial-gradient(ellipse at top right,rgba(0,212,255,.07),transparent 45%),
+  radial-gradient(ellipse at top right,#00d4ff10,transparent 45%),
+  radial-gradient(ellipse at bottom left,#ff76ad08,transparent 40%),
   #08111f;
  border:1px solid var(--border);
  border-radius:23px 23px 0 0;padding:18px;
- box-shadow:0 -12px 55px rgba(0,0,0,.35);
- animation:modalUp .28s ease
+ box-shadow:0 -12px 55px #0006;
+ animation:modalUp .28s cubic-bezier(.2,.8,.2,1);
+ scrollbar-width:thin;scrollbar-color:#d8aa4560 #08111f
 }
 @keyframes modalUp{
  from{transform:translateY(28px);opacity:.6}
@@ -179,7 +256,8 @@ main{max-width:900px;margin:auto;padding:17px 13px 80px}
 .modal-head{
  display:flex;align-items:center;justify-content:space-between;gap:10px;
  margin-bottom:15px;position:sticky;top:-18px;z-index:2;
- background:#08111ff2;padding:9px 0 12px;border-bottom:1px solid rgba(216,170,69,.12)
+ background:#08111ff5;padding:9px 0 12px;
+ border-bottom:1px solid #d8aa4520
 }
 .modal-head h2{font-size:17px;margin:0;line-height:1.5}
 .close{
@@ -196,8 +274,9 @@ main{max-width:900px;margin:auto;padding:17px 13px 80px}
  transition:border-color .2s,box-shadow .2s
 }
 .field input:focus,.field textarea:focus,.field select:focus{
- border-color:var(--gold);box-shadow:0 0 0 3px rgba(216,170,69,.07)
+ border-color:var(--gold);box-shadow:0 0 0 3px #d8aa4512
 }
+.field input[type=file]{padding:10px;font-size:11px}
 .field textarea{min-height:100px;resize:vertical;line-height:1.7}
 .field select option{background:#0c192b;color:white}
 .field small{display:block;color:var(--muted);font-size:10px;line-height:1.7;margin-top:6px}
@@ -207,10 +286,13 @@ main{max-width:900px;margin:auto;padding:17px 13px 80px}
  min-width:0;padding:11px 3px;border:1px solid #28374d;border-radius:12px;
  background:#0d192b;color:white;font-size:10px;display:flex;
  flex-direction:column;align-items:center;justify-content:center;gap:7px;
- transition:transform .2s,border-color .2s,background .2s
+ transition:transform .2s,border-color .2s,background .2s,box-shadow .2s
 }
 .platform img{width:25px;height:25px;object-fit:contain}
-.platform.active{border-color:var(--gold);background:#d8aa4518;box-shadow:0 0 15px #d8aa4510}
+.platform.active{
+ border-color:var(--gold);background:#d8aa4518;
+ box-shadow:0 0 15px #d8aa4510
+}
 .platform:active{transform:scale(.96)}
 .status{
  font-size:12px;line-height:1.8;margin:12px 0;
@@ -225,16 +307,24 @@ main{max-width:900px;margin:auto;padding:17px 13px 80px}
 .history-item{
  padding:13px;margin:10px 0;background:#0d192b;
  border:1px solid #28374d;border-radius:13px;
- font-size:11px;line-height:1.8;overflow-wrap:anywhere
+ font-size:11px;line-height:1.8;overflow-wrap:anywhere;
+ animation:fadeUp .3s ease both
 }
 .history-item strong{color:var(--gold)}
 .history-item .muted{margin:3px 0}
 audio{width:100%;margin-top:12px}
 footer{
  text-align:center;padding:22px 15px;border-top:1px solid var(--border);
- font-size:10px;color:var(--muted);line-height:1.8
+ font-size:10px;color:var(--muted);line-height:1.8;
+ background:linear-gradient(180deg,transparent,#d8aa4505)
 }
 footer span{color:var(--gold)}
+footer::before{
+ content:"✦  ♥  ✦";display:block;margin-bottom:10px;
+ letter-spacing:7px;color:#d8aa4570;font-size:13px
+}
+button:disabled{opacity:.6;cursor:wait;transform:none!important}
+
 @media(min-width:620px){
  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
  .overlay{align-items:center;padding:16px}
@@ -252,6 +342,8 @@ footer span{color:var(--gold)}
  .modal{padding:14px}
  .platforms{gap:5px}
  .platform{font-size:9px}
+ header{padding:10px}
+ header>.btn{padding:10px 8px;font-size:10px}
 }
 @media(prefers-reduced-motion:reduce){
  *,*::before,*::after{
@@ -265,6 +357,7 @@ footer span{color:var(--gold)}
 </head>
 
 <body>
+<div id="romanticEffects" aria-hidden="true"></div>
 <div class="ambient one"></div>
 <div class="ambient two"></div>
 <div class="ambient three"></div>
@@ -297,7 +390,6 @@ footer span{color:var(--gold)}
    <div class="total"><span>Prix indicatif</span><strong id="boostCardPrice">100 FC</strong></div>
    <button class="btn gold" data-open="boostModal">Créer ma demande</button>
   </article>
-
   <article class="card">
    <div class="card-icon">📱</div>
    <h3>Application mobile</h3>
@@ -305,7 +397,6 @@ footer span{color:var(--gold)}
    <div class="total"><span>Prix</span><strong>10 000 FC</strong></div>
    <button class="btn" data-open="appModal">Commander</button>
   </article>
-
   <article class="card">
    <div class="card-icon">🌐</div>
    <h3>Création de site web</h3>
@@ -313,7 +404,6 @@ footer span{color:var(--gold)}
    <div class="total"><span>Prix</span><strong>15 000 FC</strong></div>
    <button class="btn" data-open="siteModal">Commander</button>
   </article>
-
   <article class="card">
    <div class="card-icon">🤖</div>
    <h3>Création de chatbot</h3>
@@ -321,7 +411,6 @@ footer span{color:var(--gold)}
    <div class="total"><span>Prix</span><strong>7 000 FC</strong></div>
    <button class="btn" data-open="chatModal">Créer mon chatbot</button>
   </article>
-
   <article class="card">
    <div class="card-icon">🎵</div>
    <h3>Créer une chanson</h3>
@@ -329,7 +418,6 @@ footer span{color:var(--gold)}
    <div class="total"><span>Prix</span><strong>500 FC</strong></div>
    <button class="btn gold" data-open="musicModal">Créer ma chanson</button>
   </article>
-
   <article class="card">
    <div class="card-icon">📣</div>
    <h3>Publicité</h3>
@@ -604,6 +692,38 @@ const db = getDatabase(app);
 const ROOT = "jasonBusiness";
 const $ = id => document.getElementById(id);
 
+/* Décoration uniquement : les cœurs et étoiles ne touchent pas aux commandes. */
+(function createRomanticEffects(){
+ const container=$("romanticEffects");
+ if(!container) return;
+
+ const reduceMotion=window.matchMedia &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ if(reduceMotion) return;
+
+ for(let i=0;i<9;i++){
+  const heart=document.createElement("span");
+  heart.className="floating-heart";
+  heart.textContent=i%3===0?"♥":(i%3===1?"♡":"✦");
+  heart.style.setProperty("--x",(5+Math.random()*90)+"%");
+  heart.style.setProperty("--size",(10+Math.random()*12)+"px");
+  heart.style.setProperty("--duration",(18+Math.random()*18)+"s");
+  heart.style.setProperty("--delay",(-Math.random()*30)+"s");
+  heart.style.setProperty("--drift",(-35+Math.random()*70)+"px");
+  container.appendChild(heart);
+ }
+
+ for(let i=0;i<24;i++){
+  const sparkle=document.createElement("i");
+  sparkle.className="sparkle";
+  sparkle.style.left=(Math.random()*100)+"%";
+  sparkle.style.top=(Math.random()*100)+"%";
+  sparkle.style.setProperty("--duration",(2+Math.random()*4)+"s");
+  sparkle.style.setProperty("--delay",(-Math.random()*5)+"s");
+  container.appendChild(sparkle);
+ }
+})();
+
 function show(id){
  $(id).classList.add("show");
  document.body.style.overflow="hidden";
@@ -657,8 +777,7 @@ function saveOrder(type,data){
  }
 }
 
-/* Les fichiers d'icône ne sont pas envoyés comme données Base64.
-   Pour les stocker durablement, connecter Firebase Storage ou un backend d'upload. */
+/* Les fichiers d'icône ne sont pas envoyés en Base64. */
 async function pushCommande(path,payload){
  const newRef=push(ref(db,path));
  const safePayload={
@@ -723,8 +842,7 @@ function buildPlatforms(){
 }
 buildPlatforms();
 
-/* Tarification indicative : 100 FC par tranche de 100 unités,
-   avec un minimum de 100 FC. À ajuster selon les tarifs réels. */
+/* Tarification indicative : 100 FC par tranche de 100 unités. */
 function calculateBoost(){
  const qty=Math.max(0,Number($("boostQty").value)||0);
  const total=Math.max(100,Math.ceil(qty/100)*100);
