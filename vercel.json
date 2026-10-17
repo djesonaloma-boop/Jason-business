@@ -22,18 +22,29 @@
     },
     {
       "src": "/",
-      "dest": "/index.html"
+      "dest": "/index.html",
+      "headers": {
+        "Permissions-Policy": "microphone=*, camera=*, display-capture=*",
+        "Cross-Origin-Opener-Policy": "same-origin-allow-popups"
+      }
     },
     {
       "src": "/(.*)\\.(js|css|png|jpg|jpeg|apk|svg|webp|ico|json)",
       "dest": "/$1.$2",
       "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
+        "Cache-Control": "public, max-age=31536000, immutable",
+        "Permissions-Policy": "microphone=*, camera=*, display-capture=*"
       }
     },
     {
       "src": "/(.*)",
-      "dest": "/$1"
+      "dest": "/$1",
+      "headers": {
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "Permissions-Policy": "microphone=*, camera=*, display-capture=*",
+        "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
+        "Cross-Origin-Embedder-Policy": "credentialless"
+      }
     }
   ]
 }
