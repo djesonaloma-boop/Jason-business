@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>JASON BUSINESS - Publications & Stories</title>
+<title>JASON BUSINESS - Auto Feed</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial;background:#050a14;color:white}
 header{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;background:#050a14;border-bottom:1px solid #0f203f;position:sticky;top:0;z-index:10}
@@ -14,50 +14,49 @@ header{height:52px;display:flex;align-items:center;justify-content:space-between
 .tab.active{opacity:1;color:#00d2ff;border-bottom-color:#00d2ff}
 .wrap{max-width:600px;margin:0 auto}
 .box{background:#0b1425;padding:12px;border-bottom:1px solid #0f203f}
-textarea{width:100%;min-height:70px;padding:12px;border-radius:12px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none;font-size:14px}
-.row{display:flex;gap:8px;margin-top:10px;align-items:center;flex-wrap:wrap}
-.tbtn{padding:8px 14px;border-radius:20px;border:1px solid #293850;background:#0c192b;color:white;font-size:12px;cursor:pointer}
-.tbtn.blue{background:linear-gradient(135deg,#00d2ff,#0077ff);border:0;font-weight:800;color:white}
+textarea{width:100%;min-height:65px;padding:12px;border-radius:12px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none;font-size:14px}
+.row{display:flex;gap:8px;margin-top:10px;align-items:center}
+.tbtn{padding:10px 16px;border-radius:20px;border:1px solid #293850;background:#0c192b;color:white;font-size:12px;cursor:pointer;flex:1;text-align:center}
+.tbtn.blue{background:linear-gradient(135deg,#00d2ff,#0077ff);border:0;font-weight:800}
 .colors{display:flex;gap:6px;margin-top:8px}
 .color{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2px solid transparent}
 .color.active{border-color:white}
-#preview{margin-top:10px;display:none}
-#preview img{width:100%;max-height:300px;object-fit:contain;border-radius:12px;background:#000}
+.status{font-size:11px;opacity:.7;margin-top:8px;text-align:center}
 
-/* STORIES BAR */
 .stories{display:flex;gap:10px;overflow-x:auto;padding:10px 12px;background:#0b1425;border-bottom:1px solid #0f203f}
 .s-item{flex-shrink:0;width:64px;text-align:center;cursor:pointer}
-.s-circle{width:60px;height:60px;border-radius:50%;padding:2px;background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);display:grid;place-items:center;position:relative}
+.s-circle{width:60px;height:60px;border-radius:50%;padding:2px;background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);display:grid;place-items:center}
 .s-circle div{width:100%;height:100%;border-radius:50%;background:#0b1425;display:grid;place-items:center;font-weight:900;overflow:hidden;border:2px solid #0b1425}
 .s-circle img{width:100%;height:100%;object-fit:cover}
-.s-circle.text-story div{color:white;font-size:11px;padding:4px;text-align:center;line-height:1.1}
 .s-name{font-size:9px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.s-add .s-circle{background:#1a2a44}
 
-/* FEED */
-.post{background:#0b1425;border-bottom:1px solid #0f203f;margin-top:6px}
+.post{background:#0b1425;border-bottom:1px solid #0f203f;margin-top:6px;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .post-head{padding:10px 12px;display:flex;gap:10px;align-items:center}
 .av{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#00d2ff,#0077ff);display:grid;place-items:center;font-weight:900}
 .post-name{font-weight:700;font-size:13px} .post-time{font-size:10px;opacity:.5}
-.post-text{padding:10px 12px;white-space:pre-wrap;font-size:14px;line-height:1.4}
-.post-text.bg{padding:40px 20px;text-align:center;font-size:20px;font-weight:800;min-height:180px;display:grid;place-items:center;border-radius:0}
-.post-img{width:100%;max-height:520px;object-fit:contain;background:#000;display:block}
-.del{margin-left:auto;background:transparent;border:0;color:#ff4757;font-size:16px;cursor:pointer}
+.post-text{padding:10px 12px;white-space:pre-wrap;font-size:14px}
+.post-text.bg{padding:40px 20px;text-align:center;font-size:22px;font-weight:800;min-height:200px;display:grid;place-items:center}
+.post-img{width:100%;max-height:600px;object-fit:contain;background:#000;display:block}
+.actions{display:flex;justify-content:space-around;border-top:1px solid #0f203f}
+.act{flex:1;background:transparent;border:0;color:#8da0b8;padding:10px;font-size:12px;cursor:pointer}
+.act.liked{color:#00d2ff;font-weight:800}
+.comments{padding:8px 12px;background:#070e1e}
+.cmt{font-size:12px;padding:5px 0;display:flex;gap:6px}
+.cmt b{color:#00d2ff;font-size:11px}
+.cmt-input{display:flex;gap:6px;padding:8px 12px;background:#070e1e;border-top:1px solid #0f203f}
+.cmt-input input{flex:1;padding:9px 14px;border-radius:20px;border:1px solid #293850;background:#0c192b;color:white;outline:none;font-size:12px}
+.del{margin-left:auto;background:transparent;border:0;color:#ff4757;cursor:pointer}
 
-/* VIEWER */
 #viewer{position:fixed;inset:0;background:#000;display:none;z-index:9999;flex-direction:column}
 #viewer.show{display:flex}
-#viewerTop{display:flex;justify-content:space-between;padding:12px;align-items:center}
+#viewerTop{display:flex;justify-content:space-between;padding:12px}
 #viewerContent{flex:1;display:grid;place-items:center;padding:10px}
-#viewerContent img{max-width:100%;max-height:80vh;object-fit:contain}
-#viewerText{width:90%;max-width:400px;min-height:60%;display:grid;place-items:center;text-align:center;font-size:24px;font-weight:900;padding:20px;border-radius:20px}
+#viewerContent img{max-width:100%;max-height:80vh}
 </style>
 </head>
 <body>
-<header>
-  <div class="brand">JASON BUSINESS</div>
-  <div style="display:flex;gap:6px"><a href="chat.html" class="btn">💬 Chat</a><a href="dashboard.html" class="btn">Dash</a></div>
-</header>
+<header><div class="brand">JASON BUSINESS</div><div style="display:flex;gap:6px"><a href="chat.html" class="btn">💬 Chat</a><a href="dashboard.html" class="btn">Dash</a></div></header>
 
 <div class="tabs">
   <div class="tab active" data-tab="pubs">📢 PUBLICATIONS</div>
@@ -65,223 +64,208 @@ textarea{width:100%;min-height:70px;padding:12px;border-radius:12px;border:1px s
 </div>
 
 <div class="wrap">
-  <!-- STORIES BAR -->
   <div class="stories" id="storiesBar">
-    <div class="s-item s-add" onclick="document.getElementById('storyFile').click()">
-      <div class="s-circle"><div>+</div></div>
+    <div class="s-item" onclick="document.getElementById('storyFile').click()">
+      <div class="s-circle" style="background:#1a2a44"><div>+</div></div>
       <div class="s-name">Ta story</div>
     </div>
   </div>
 
-  <!-- BOX PUBLICATION -->
   <div class="box" id="pubBox">
-    <textarea id="pubText" placeholder="Écris une note..."></textarea>
+    <textarea id="pubText" placeholder="Écris une note... (optionnel si tu mets photo)"></textarea>
     <div class="colors" id="pubColors"></div>
-    <div id="preview"><img id="previewImg"><div style="text-align:right;margin-top:6px"><button class="tbtn" onclick="clearImage()">✕ Retirer photo</button></div></div>
     <div class="row">
-      <label class="tbtn">🖼️ Photo <input type="file" id="pubFile" accept="image/*" hidden></label>
-      <button class="tbtn blue" id="btnPub" style="margin-left:auto">Publier</button>
+      <label class="tbtn" id="photoBtn">🖼️ Choisir Photo - Publie auto
+        <input type="file" id="pubFile" accept="image/*" hidden>
+      </label>
+      <button class="tbtn blue" id="btnPub">📝 Publier Note</button>
     </div>
-    <div style="font-size:10px;opacity:.5;margin-top:6px">Note = texte coloré • Photo = image seule ou avec texte</div>
+    <div class="status" id="status"></div>
   </div>
 
-  <!-- BOX STORY -->
   <div class="box" id="storyBox" style="display:none">
-    <textarea id="storyText" placeholder="Note pour ta story 24h..."></textarea>
+    <textarea id="storyText" placeholder="Note pour story 24h..."></textarea>
     <div class="colors" id="storyColors"></div>
     <div class="row">
-      <label class="tbtn">🖼️ Photo Story <input type="file" id="storyFile" accept="image/*" hidden></label>
-      <button class="tbtn blue" id="btnStory" style="margin-left:auto">Publier en Story</button>
+      <label class="tbtn">🖼️ Photo Story Auto
+        <input type="file" id="storyFile" accept="image/*" hidden>
+      </label>
+      <button class="tbtn blue" id="btnStory">Publier Story Note</button>
     </div>
-    <div style="font-size:10px;opacity:.5;margin-top:6px">Ta story s'efface automatiquement après 24h</div>
   </div>
 
-  <!-- FEED -->
   <div id="feed"></div>
 </div>
 
-<!-- VIEWER STORY -->
-<div id="viewer">
-  <div id="viewerTop"><span id="viewerName"></span><button onclick="closeViewer()" style="background:transparent;border:0;color:white;font-size:22px">✕</button></div>
-  <div id="viewerContent"></div>
-  <div style="padding:12px;text-align:center;font-size:11px;opacity:.6" id="viewerTime"></div>
-</div>
+<div id="viewer"><div id="viewerTop"><span id="viewerName"></span><button onclick="closeViewer()" style="background:transparent;border:0;color:white;font-size:22px">✕</button></div><div id="viewerContent"></div></div>
 
 <script type="module">
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, onValue, push, set, remove, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, onValue, push, set, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
 const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.appspot.com",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
 const app=getApps().length?getApp():initializeApp(firebaseConfig);
 const db=getDatabase(app); const storage=getStorage(app);
 const $=id=>document.getElementById(id);
-
-const myPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||"0847500590";
+const myPhone=localStorage.getItem("jasonBusinessUserPhone")||"0847500590";
 const myName=localStorage.getItem("jasonBusinessUserName")||myPhone;
 
-const bgColors=["#0b1425","#FF4757","#2ed573","#1e90ff","#ffa502","#a55eea","#3742fa","#2f3542","#ff6b81","#70a1ff"];
-let selectedPubColor=bgColors[0], selectedStoryColor=bgColors[1];
-let pubImageUrl="", storyImageUrl="";
+const bgColors=["#0b1425","#FF4757","#2ed573","#1e90ff","#ffa502","#a55eea","#3742fa","#ff6b81"];
+let selPub=bgColors[0], selStory=bgColors[1];
 
-function makeColors(container, type){
-  container.innerHTML="";
-  bgColors.forEach((c,i)=>{
+function makeColors(cont,type){
+  cont.innerHTML=""; bgColors.forEach((c,i)=>{
     const d=document.createElement("div"); d.className="color"+(i===0?" active":""); d.style.background=c;
-    d.onclick=()=>{
-      container.querySelectorAll(".color").forEach(x=>x.classList.remove("active"));
-      d.classList.add("active");
-      if(type==="pub") selectedPubColor=c;
-      else selectedStoryColor=c;
-    };
-    container.appendChild(d);
+    d.onclick=()=>{ cont.querySelectorAll(".color").forEach(x=>x.classList.remove("active")); d.classList.add("active"); if(type==="pub") selPub=c; else selStory=c; };
+    cont.appendChild(d);
   });
 }
-makeColors($("pubColors"),"pub");
-makeColors($("storyColors"),"story");
+makeColors($("pubColors"),"pub"); makeColors($("storyColors"),"story");
 
-// IMAGE UPLOAD
-$("pubFile").onchange=async e=>{
-  const file=e.target.files[0]; if(!file) return;
-  $("preview").style.display="block"; $("previewImg").src=URL.createObjectURL(file);
-  const path=`publications/${myPhone}/${Date.now()}_${file.name}`;
-  const refS=sRef(storage,path); await uploadBytes(refS,file); pubImageUrl=await getDownloadURL(refS);
-};
-window.clearImage=()=>{ pubImageUrl=""; $("preview").style.display="none"; $("pubFile").value=""; };
-$("storyFile").onchange=async e=>{
-  const file=e.target.files[0]; if(!file) return;
-  const path=`stories/${myPhone}/${Date.now()}_${file.name}`;
-  const refS=sRef(storage,path); await uploadBytes(refS,file); storyImageUrl=await getDownloadURL(refS);
-  // publie direct photo story
-  await push(ref(db,"jasonBusiness/stories"),{from:myPhone,name:myName,type:"photo",photo:storyImageUrl,createdAt:Date.now(),expiresAt:Date.now()+86400000});
-  storyImageUrl=""; e.target.value=""; alert("✅ Story photo publiée pour 24h");
-};
-
-// TABS
 document.querySelectorAll(".tab").forEach(t=>{
   t.onclick=()=>{
-    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
-    t.classList.add("active");
-    const tab=t.dataset.tab;
-    $("pubBox").style.display=tab==="pubs"?"block":"none";
-    $("storyBox").style.display=tab==="stories"?"block":"none";
-    $("storiesBar").style.display=tab==="stories"?"flex":"flex";
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active")); t.classList.add("active");
+    $("pubBox").style.display=t.dataset.tab==="pubs"?"block":"none";
+    $("storyBox").style.display=t.dataset.tab==="stories"?"block":"none";
     render();
   };
 });
 
-// PUBLICATION NOTE / PHOTO
-$("btnPub").onclick=async()=>{
+// ===== PUBLICATION AUTO QUAND PHOTO CHOISIE =====
+$("pubFile").onchange=async e=>{
+  const f=e.target.files[0]; if(!f) return;
   const text=$("pubText").value.trim();
-  if(!text && !pubImageUrl) return alert("Écris une note ou ajoute une photo");
-  await push(ref(db,"jasonBusiness/publications"),{
-    from:myPhone,name:myName,
-    type: pubImageUrl ? "photo" : "note",
-    text:text, image:pubImageUrl, bg:selectedPubColor,
-    createdAt:Date.now()
-  });
-  $("pubText").value=""; clearImage();
+  
+  $("status").textContent="⏳ Upload photo en cours...";
+  $("photoBtn").style.opacity="0.5";
+  
+  try{
+    const path=`publications/${myPhone}/${Date.now()}_${f.name.replace(/[^a-z0-9.]/gi,'_')}`;
+    const rs=sRef(storage,path);
+    await uploadBytes(rs,f);
+    const url=await getDownloadURL(rs);
+    
+    $("status").textContent="⏳ Publication pour tout le monde...";
+    
+    // PUBLIE AUTOMATIQUEMENT POUR TOUS
+    await push(ref(db,"jasonBusiness/publications"),{
+      from:myPhone, name:myName,
+      type:"photo",
+      text:text,
+      image:url,
+      bg:selPub,
+      createdAt:Date.now(),
+      likes:{}
+    });
+    
+    $("status").textContent="✅ Photo publiée ! Tout le monde la voit maintenant";
+    $("pubText").value="";
+    e.target.value="";
+    
+    setTimeout(()=>{$("status").textContent=""; $("photoBtn").style.opacity="1";},3000);
+    
+  }catch(err){
+    $("status").textContent="❌ Erreur: "+err.message+" - Active STORAGE dans Firebase";
+    $("photoBtn").style.opacity="1";
+    console.error(err);
+    alert("ERREUR: "+err.message+"\n\n1. Va sur Firebase Console\n2. Storage > Commencer > Mode test\n3. Réessaie");
+  }
+};
+
+// PUBLICATION NOTE (bouton)
+$("btnPub").onclick=async()=>{
+  const txt=$("pubText").value.trim();
+  if(!txt) return alert("Écris une note");
+  await push(ref(db,"jasonBusiness/publications"),{from:myPhone,name:myName,type:"note",text:txt,bg:selPub,createdAt:Date.now(),likes:{}});
+  $("pubText").value="";
+};
+
+// STORY AUTO PHOTO
+$("storyFile").onchange=async e=>{
+  const f=e.target.files[0]; if(!f) return;
+  try{
+    $("status").textContent="⏳ Story photo...";
+    const path=`stories/${myPhone}/${Date.now()}_${f.name.replace(/[^a-z0-9.]/gi,'_')}`;
+    const rs=sRef(storage,path);
+    await uploadBytes(rs,f);
+    const url=await getDownloadURL(rs);
+    await push(ref(db,"jasonBusiness/stories"),{from:myPhone,name:myName,type:"photo",photo:url,createdAt:Date.now(),expiresAt:Date.now()+86400000});
+    $("status").textContent="✅ Story publiée 24h";
+    setTimeout(()=>$("status").textContent="",3000);
+  }catch(err){ alert("Erreur story: "+err.message); }
+  e.target.value="";
 };
 
 // STORY NOTE
 $("btnStory").onclick=async()=>{
-  const text=$("storyText").value.trim();
-  if(!text) return alert("Écris une note pour ta story");
-  await push(ref(db,"jasonBusiness/stories"),{
-    from:myPhone,name:myName,
-    type:"note", text:text, bg:selectedStoryColor,
-    createdAt:Date.now(), expiresAt:Date.now()+86400000
-  });
-  $("storyText").value=""; alert("✅ Story note publiée pour 24h");
+  const txt=$("storyText").value.trim(); if(!txt) return alert("Écris ta note");
+  await push(ref(db,"jasonBusiness/stories"),{from:myPhone,name:myName,type:"note",text:txt,bg:selStory,createdAt:Date.now(),expiresAt:Date.now()+86400000});
+  $("storyText").value=""; alert("✅ Story note 24h");
 };
 
-// DATA
-let allPubs={}, allStories={}, allUsers={};
-onValue(ref(db,"jasonBusiness/users"),s=>{allUsers=s.val()||{}});
+let allPubs={}, allStories={};
 onValue(ref(db,"jasonBusiness/publications"),s=>{allPubs=s.val()||{}; render();});
 onValue(ref(db,"jasonBusiness/stories"),s=>{
   allStories=s.val()||{};
-  // nettoie expirés
-  Object.entries(allStories).forEach(([id,st])=>{ if(st.expiresAt < Date.now()) remove(ref(db,"jasonBusiness/stories/"+id)); });
+  Object.entries(allStories).forEach(([id,st])=>{ if(st.expiresAt<Date.now()) remove(ref(db,"jasonBusiness/stories/"+id)); });
   renderStories(); render();
 });
 
 function renderStories(){
-  const bar=$("storiesBar");
-  const add=bar.firstElementChild;
-  bar.innerHTML=""; bar.appendChild(add);
+  const bar=$("storiesBar"); const add=bar.firstElementChild; bar.innerHTML=""; bar.appendChild(add);
   Object.entries(allStories).forEach(([id,st])=>{
-    if(st.expiresAt < Date.now()) return;
+    if(st.expiresAt<Date.now()) return;
     const div=document.createElement("div"); div.className="s-item";
-    if(st.type==="photo"){
-      div.innerHTML=`<div class="s-circle"><div><img src="${st.photo}"></div></div><div class="s-name">${st.from===myPhone?"Toi":st.from.slice(-4)}</div>`;
-    }else{
-      div.innerHTML=`<div class="s-circle text-story"><div style="background:${st.bg}">${(st.text||"").slice(0,12)}</div></div><div class="s-name">${st.from===myPhone?"Toi":st.from.slice(-4)}</div>`;
-    }
-    div.onclick=()=>openViewer(id,"story");
-    bar.appendChild(div);
+    div.innerHTML=st.type==="photo"?`<div class="s-circle"><div><img src="${st.photo}"></div></div><div class="s-name">${st.from===myPhone?"Toi":st.from.slice(-4)}</div>`:`<div class="s-circle"><div style="background:${st.bg}">${(st.text||"").slice(0,8)}</div></div><div class="s-name">${st.from===myPhone?"Toi":st.from.slice(-4)}</div>`;
+    div.onclick=()=>openViewer(id,"story"); bar.appendChild(div);
   });
 }
 
 function render(){
   const feed=$("feed"); feed.innerHTML="";
-  const activeTab=document.querySelector(".tab.active").dataset.tab;
-
-  if(activeTab==="pubs"){
-    const sorted=Object.entries(allPubs).sort((a,b)=>b[1].createdAt - a[1].createdAt);
-    if(sorted.length===0){ feed.innerHTML="<div style='padding:30px;text-align:center;opacity:.5'>Aucune publication. Sois le premier !</div>"; return; }
-    sorted.forEach(([id,p])=>{
-      const div=document.createElement("div"); div.className="post";
-      const time=new Date(p.createdAt).toLocaleString();
-      let content="";
-      if(p.type==="photo" && p.image){
-        content=`${p.text?`<div class="post-text">${esc(p.text)}</div>`:""}<img class="post-img" src="${p.image}" onclick="openViewer('${id}','pub')">`;
-      }else{
-        content=`<div class="post-text bg" style="background:${p.bg||'#0b1425'}">${esc(p.text)}</div>`;
-      }
-      div.innerHTML=`
-        <div class="post-head"><div class="av">${p.from.slice(-2)}</div><div><div class="post-name">${p.name||p.from}</div><div class="post-time">${time}</div></div>${p.from===myPhone?`<button class="del" onclick="delPub('${id}')">🗑️</button>`:""}</div>
-        ${content}
-      `;
-      feed.appendChild(div);
-    });
-  }else{
-    const sorted=Object.entries(allStories).sort((a,b)=>b[1].createdAt - a[1].createdAt);
-    if(sorted.length===0){ feed.innerHTML="<div style='padding:30px;text-align:center;opacity:.5'>Aucune story. Publie une note ou photo, ça reste 24h</div>"; return; }
+  const tab=document.querySelector(".tab.active").dataset.tab;
+  if(tab==="stories"){
+    const sorted=Object.entries(allStories).sort((a,b)=>b[1].createdAt-a[1].createdAt);
+    if(sorted.length===0){feed.innerHTML="<div style='padding:30px;text-align:center;opacity:.5'>Aucune story</div>";return;}
     sorted.forEach(([id,s])=>{
       const div=document.createElement("div"); div.className="post";
-      let content="";
-      if(s.type==="photo") content=`<img class="post-img" src="${s.photo}" onclick="openViewer('${id}','story')">`;
-      else content=`<div class="post-text bg" style="background:${s.bg}">${esc(s.text)}</div>`;
-      div.innerHTML=`
-        <div class="post-head"><div class="av">${s.from.slice(-2)}</div><div><div class="post-name">${s.name} • Story 24h</div><div class="post-time">Expire: ${new Date(s.expiresAt).toLocaleString()}</div></div>${s.from===myPhone?`<button class="del" onclick="delStory('${id}')">🗑️</button>`:""}</div>
-        ${content}
-      `;
+      const content=s.type==="photo"?`<img class="post-img" src="${s.photo}" onclick="openViewer('${id}','story')">`:`<div class="post-text bg" style="background:${s.bg}">${esc(s.text)}</div>`;
+      div.innerHTML=`<div class="post-head"><div class="av">${s.from.slice(-2)}</div><div><div class="post-name">${s.name} • 24h</div><div class="post-time">${new Date(s.expiresAt).toLocaleString()}</div></div></div>${content}`;
       feed.appendChild(div);
+    }); return;
+  }
+  const sorted=Object.entries(allPubs).sort((a,b)=>b[1].createdAt-a[1].createdAt);
+  if(sorted.length===0){feed.innerHTML="<div style='padding:30px;text-align:center;opacity:.5'>Aucune publication<br>Publie une photo, tout le monde la verra direct</div>";return;}
+  sorted.forEach(([id,p])=>{
+    const likes=p.likes?Object.keys(p.likes).length:0; const liked=p.likes && p.likes[myPhone];
+    const div=document.createElement("div"); div.className="post";
+    const content=p.type==="photo"?`${p.text?`<div class="post-text">${esc(p.text)}</div>`:""}<img class="post-img" src="${p.image}" onclick="openViewer('${id}','pub')">`:`<div class="post-text bg" style="background:${p.bg}">${esc(p.text)}</div>`;
+    div.innerHTML=`
+      <div class="post-head"><div class="av">${p.from.slice(-2)}</div><div><div class="post-name">${p.name||p.from}</div><div class="post-time">${new Date(p.createdAt).toLocaleString()} • Visible par tous</div></div>${p.from===myPhone?`<button class="del" onclick="delPub('${id}')">🗑️</button>`:""}</div>
+      ${content}
+      <div class="actions">
+        <button class="act ${liked?'liked':''}" onclick="likePub('${id}')">${liked?'💙':'🤍'} J'aime ${likes>0?`(${likes})`:""}</button>
+        <button class="act" onclick="document.getElementById('cmt-${id}').focus()">💬 Commenter</button>
+        <button class="act" onclick="sharePub('${id}')">↗️ Partager</button>
+      </div>
+      <div class="comments" id="cmts-${id}"></div>
+      <div class="cmt-input"><input id="cmt-${id}" placeholder="Commenter..." onkeydown="if(event.key==='Enter')sendCmt('${id}')"><button class="btn" onclick="sendCmt('${id}')">Envoyer</button></div>
+    `;
+    feed.appendChild(div);
+    onValue(ref(db,`jasonBusiness/comments/${id}`),snap=>{
+      const cmts=snap.val()||{}; const cont=document.getElementById(`cmts-${id}`); if(!cont) return;
+      cont.innerHTML=Object.values(cmts).map(c=>`<div class="cmt"><b>${c.name}:</b> <span>${esc(c.text)}</span></div>`).join("")||"";
     });
-  }
+  });
 }
-function esc(t){return String(t||"").replace(/</g,"&lt;")}
-
+function esc(s){return String(s||"").replace(/</g,"&lt;")}
+window.likePub=async(id)=>{ const p=allPubs[id]; if(p.likes && p.likes[myPhone]) await remove(ref(db,`jasonBusiness/publications/${id}/likes/${myPhone}`)); else await set(ref(db,`jasonBusiness/publications/${id}/likes/${myPhone}`),true); };
 window.delPub=async(id)=>{ if(confirm("Supprimer ?")) await remove(ref(db,"jasonBusiness/publications/"+id)); };
-window.delStory=async(id)=>{ if(confirm("Supprimer story ?")) await remove(ref(db,"jasonBusiness/stories/"+id)); };
-
-window.openViewer=(id,type)=>{
-  const data=type==="story"?allStories[id]:allPubs[id];
-  if(!data) return;
-  $("viewer").classList.add("show");
-  $("viewerName").textContent=data.name||data.from;
-  $("viewerTime").textContent=new Date(data.createdAt).toLocaleString() + (data.expiresAt? " - expire "+new Date(data.expiresAt).toLocaleString():"");
-  const cont=$("viewerContent");
-  if(data.type==="photo" || data.image || data.photo){
-    const src=data.image||data.photo;
-    cont.innerHTML=`<img src="${src}">`;
-  }else{
-    cont.innerHTML=`<div id="viewerText" style="background:${data.bg}">${esc(data.text)}</div>`;
-  }
-};
-window.closeViewer=()=>{ $("viewer").classList.remove("show"); };
-
+window.sendCmt=async(id)=>{ const input=document.getElementById(`cmt-${id}`); const txt=input.value.trim(); if(!txt) return; await push(ref(db,`jasonBusiness/comments/${id}`),{from:myPhone,name:myName,text:txt,createdAt:Date.now()}); input.value=""; };
+window.sharePub=async(id)=>{ const p=allPubs[id]; const txt=`${p.name}: ${p.text}\n${location.href}`; if(navigator.share){try{await navigator.share({title:"JASON BUSINESS",text:txt})}catch{}} else{await navigator.clipboard.writeText(txt); alert("Lien copié !");} };
+window.openViewer=(id,type)=>{ const d=type==="story"?allStories[id]:allPubs[id]; $("viewer").classList.add("show"); $("viewerName").textContent=d.name||d.from; const cont=$("viewerContent"); if(d.type==="photo"||d.image||d.photo) cont.innerHTML=`<img src="${d.image||d.photo}">`; else cont.innerHTML=`<div style="background:${d.bg};padding:40px;border-radius:20px;font-size:24px;font-weight:900;min-height:50vh;display:grid;place-items:center">${esc(d.text)}</div>`; };
+window.closeViewer=()=>{$("viewer").classList.remove("show");};
 </script>
 </body>
 </html>
