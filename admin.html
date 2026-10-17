@@ -71,7 +71,7 @@ td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:
 <div id="adminLogin">
  <div class="login-box">
   <div class="login-logo">JASON BUSINESS</div>
-  <div class="login-subtitle">🔐 PANNEAU D'ADMINISTRATION — Code 10092007</div>
+  <div class="login-subtitle">🔐 PANNEAU D'ADMINISTRATION</div>
   <input type="text" inputmode="numeric" autocomplete="off" id="adminPassword" class="input" placeholder="Mot de passe administrateur">
   <button id="loginAdmin" class="login-btn" type="button">🔓 Ouvrir l'administration</button>
   <div id="loginError" class="login-error"></div>
@@ -127,9 +127,9 @@ td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:
 <div id="toastContainer"></div>
 
 <script>
-const ADMIN_CODE="10092007";
+const ADMIN_CODE="1009200700";
 function showAdmin(){document.getElementById("adminLogin").style.display="none";document.getElementById("adminPanel").style.display="block";localStorage.setItem("jasonAdmin","ok"); if(window._start) window._start();}
-function doLogin(){const pw=(document.getElementById("adminPassword").value||"").trim(); const err=document.getElementById("loginError"); if(pw===ADMIN_CODE) showAdmin(); else err.textContent="❌ Code incorrect - tape 10092007";}
+function doLogin(){const pw=(document.getElementById("adminPassword").value||"").trim(); const err=document.getElementById("loginError"); if(pw===ADMIN_CODE) showAdmin(); else err.textContent="❌ Code incorrect";}
 document.addEventListener("DOMContentLoaded",()=>{
  document.getElementById("loginAdmin").onclick=doLogin;
  document.getElementById("adminPassword").onkeydown=e=>{if(e.key==="Enter") doLogin();};
@@ -165,7 +165,6 @@ const badge=s=>{const l=String(s||"").toLowerCase(); if(l.includes("valid")||l.i
 function toast(m){const c=$("toastContainer"); const el=document.createElement("div"); el.className="toast"; el.textContent=m; c.appendChild(el); setTimeout(()=>el.remove(),3500);}
 function openPage(p){document.querySelectorAll(".menu-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===p)); document.querySelectorAll(".page").forEach(s=>s.classList.toggle("active",s.id==="page-"+p));}
 document.querySelectorAll(".menu-btn").forEach(b=>b.addEventListener("click",()=>openPage(b.dataset.page)));
-
 window._start=()=>{
  if(started) return; started=true;
  onValue(ref(db, USERS_PATH), snap=>{
@@ -180,7 +179,6 @@ window._start=()=>{
  onValue(ref(db, `${ROOT}/store_commandes`), s=>{ s.forEach(ch=>{ commandsCache[ch.key]=ch.val()||{}; }); renderCommands(); });
  onValue(ref(db, PRICES_PATH), s=>{ pricesCache=s.val()||{}; renderPrices(); $("apiInfo").textContent=s.exists()?"Tarifs chargés":"Aucun tarif";});
 };
-
 function scanNestedInUsers(){
  let nestedR=0, nestedW=0;
  Object.entries(usersCache).forEach(([phone, data])=>{
@@ -190,7 +188,6 @@ function scanNestedInUsers(){
  $("diagInfo").innerHTML=`Scan Firebase : Users ${Object.keys(usersCache).length} | Recharges ${Object.keys(rechargesCache).length} (${nestedR} dans users/) | Retraits ${Object.keys(withdrawalsCache).length} (${nestedW} dans users/) | Commandes ${Object.keys(commandsCache).length}`;
  renderRecharges(); renderWithdrawals();
 }
-
 function renderUsers(){
  const tbody=$("usersTable"); tbody.innerHTML="";
  Object.entries(usersCache).forEach(([phone,d])=>{
@@ -203,80 +200,51 @@ function renderUsers(){
  });
  if(!Object.keys(usersCache).length) tbody.innerHTML='<tr><td colspan="6" class="empty">Aucun utilisateur</td></tr>';
 }
-
 window.copyPass=(phone)=>{ const d=usersCache[phone]||{}; const pass=getPass(d); navigator.clipboard.writeText(pass); toast("🔑 Mot de passe copié: "+pass); };
-window.viewClientCommands=(phone)=>{ openPage("commands"); const tbody=$("commandsTable"); const rows=tbody.querySelectorAll("tr"); rows.forEach(r=>{ if(r.textContent.includes(phone)) r.style.background="#3b82f615"; }); toast("📦 Commandes de "+phone); };
+window.viewClientCommands=(phone)=>{ openPage("commands"); toast("📦 Commandes de "+phone); };
 window.sendMessageToClient=async(phone)=>{
  const msg=prompt("💬 Message à envoyer à "+phone+" :","Bonjour, votre commande est en traitement...");
  if(!msg) return;
  const payload={telephone:phone,message:msg,from:"Admin Jason",date:new Date().toLocaleString("fr-FR"),createdAt:Date.now(),statut:"Non lu",lu:false};
- try{
-  await push(ref(db, `${ROOT}/messages/${phone}`), payload);
-  await push(ref(db, `${ROOT}/notifications/${phone}`), payload);
-  await push(ref(db, `${USERS_PATH}/${phone}/messages`), payload);
-  await push(ref(db, `${USERS_PATH}/${phone}/notifications`), payload);
-  toast("✅ Message envoyé à "+phone);
- }catch(e){ toast("❌ Erreur: "+e.message); }
+ await push(ref(db, `${ROOT}/messages/${phone}`), payload);
+ toast("✅ Message envoyé à "+phone);
 };
-
 function renderVip(){
  const tbody=$("vipTable"); tbody.innerHTML="";
- Object.entries(usersCache).forEach(([phone,d])=>{ const active=isVip(d); const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(phone)}</td><td>${esc(getName(d))}</td><td><select class="small-select" data-level="${esc(phone)}">${["Aucun","Bronze","Silver","Gold","Platinum","Diamond"].map(l=>`<option value="${l}" ${vipLevel(d)===l?"selected":""}>${l}</option>`).join("")}</select></td><td>${active?'<span class="badge badge-success">Actif</span>':'<span class="badge badge-danger">Inactif</span>'}</td><td><button class="btn btn-purple" onclick="saveVip('${esc(phone)}')">💾</button><button class="btn ${active?"btn-red":"btn-green"}" onclick="toggleVip('${esc(phone)}')">${active?"Désactiver":"Activer"}</button><button class="btn btn-blue" onclick="sendMessageToClient('${esc(phone)}')">💬</button></td>`; tbody.appendChild(tr); });
+ Object.entries(usersCache).forEach(([phone,d])=>{ const active=isVip(d); const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(phone)}</td><td>${esc(getName(d))}</td><td><select class="small-select" data-level="${esc(phone)}">${["Aucun","Bronze","Silver","Gold","Platinum","Diamond"].map(l=>`<option value="${l}" ${vipLevel(d)===l?"selected":""}>${l}</option>`).join("")}</select></td><td>${active?'<span class="badge badge-success">Actif</span>':'<span class="badge badge-danger">Inactif</span>'}</td><td><button class="btn btn-purple" onclick="saveVip('${esc(phone)}')">💾</button><button class="btn ${active?"btn-red":"btn-green"}" onclick="toggleVip('${esc(phone)}')">${active?"Désactiver":"Activer"}</button></td>`; tbody.appendChild(tr); });
 }
 window.deleteUser=async(phone)=>{ if(!confirm("Supprimer "+phone+"?")) return; await remove(ref(db, `${USERS_PATH}/${phone}`)); toast("Supprimé"); };
 window.saveVip=async(phone)=>{ const sel=document.querySelector(`[data-level="${CSS.escape(phone)}"]`); const level=sel?.value||"Aucun"; await update(ref(db, `${USERS_PATH}/${phone}`), {vipLevel:level, vipStatus:level!=="Aucun"?"Actif":"Inactif", vip:level!=="Aucun", isVip:level!=="Aucun"}); toast("VIP enregistré"); };
 window.toggleVip=async(phone)=>{ const d=usersCache[phone]||{}; const active=!isVip(d); const level=active?(vipLevel(d)==="Aucun"?"Bronze":vipLevel(d)):"Aucun"; await update(ref(db, `${USERS_PATH}/${phone}`), {vip:active, isVip:active, vipStatus:active?"Actif":"Inactif", vipLevel:level}); toast(active?"Activé":"Désactivé"); };
-
 function renderCommands(){
  const tbody=$("commandsTable"); tbody.innerHTML=""; let pending=0;
- Object.entries(commandsCache).forEach(([id,d])=>{
-  if(isPending(getStatus(d))) pending++;
-  const phone=getPhone(d);
-  const detail=`${esc(d.plateforme||"") } ${esc(d.type_service||d.service||"")} ${esc(d.lien||d.link||"")}`.slice(0,120);
-  const tr=document.createElement("tr");
-  tr.innerHTML=`<td>${esc(phone)}<br><span style="font-size:9px;color:#8e9aad">${esc(d._src||id.slice(0,8))}</span></td><td>${esc(d.produit||d.service||"Service")}</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${detail}</td><td>${money(d.montant||d.prix||0)} FC</td><td>${badge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateCommand('${id}')">✓ Valider</button><button class="btn btn-red" onclick="refuseCommand('${id}')">✕ Refuser</button>`: "Traité"} <button class="btn btn-blue" onclick="sendMessageToClient('${esc(phone)}')">💬</button></td>`;
-  tbody.appendChild(tr);
- });
+ Object.entries(commandsCache).forEach(([id,d])=>{ if(isPending(getStatus(d))) pending++; const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(getPhone(d))}</td><td>${esc(d.produit||d.service||"Service")}</td><td>${esc((d.lien||"").slice(0,120))}</td><td>${money(d.montant||0)} FC</td><td>${badge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateCommand('${id}')">✓</button><button class="btn btn-red" onclick="refuseCommand('${id}')">✕</button>`: "Traité"}</td>`; tbody.appendChild(tr); });
  $("statCommands").textContent=pending; $("menuCommands").textContent=pending;
- if(!Object.keys(commandsCache).length) tbody.innerHTML='<tr><td colspan="6" class="empty">Aucune commande — boutique vide</td></tr>';
 }
 function renderRecharges(){
  const tbody=$("rechargesTable"); tbody.innerHTML=""; let pending=0;
- Object.entries(rechargesCache).forEach(([key,d])=>{ if(isPending(getStatus(d))) pending++; const tr=document.createElement("tr"); tr.innerHTML=`<td style="font-size:9px;color:#8e9aad">${esc(d._src||"")}</td><td>${esc(getPhone(d)||"—")}</td><td><b style="color:#22c55e">${money(d.montant||0)} FC</b></td><td>${esc(d.methode||"—")}</td><td>${badge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateRecharge('${esc(key)}')">✓ Valider</button><button class="btn btn-red" onclick="refuseRecharge('${esc(key)}')">✕ Refuser</button>`:`<button class="btn" style="background:#ffffff14" onclick="deleteRecharge('${esc(key)}')">🗑</button>`} <button class="btn btn-blue" onclick="sendMessageToClient('${esc(getPhone(d))}')">💬</button></td>`; tbody.appendChild(tr); });
+ Object.entries(rechargesCache).forEach(([key,d])=>{ if(isPending(getStatus(d))) pending++; const tr=document.createElement("tr"); tr.innerHTML=`<td style="font-size:9px">${esc(d._src||"")}</td><td>${esc(getPhone(d))}</td><td><b style="color:#22c55e">${money(d.montant||0)} FC</b></td><td>${esc(d.methode||"—")}</td><td>${badge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateRecharge('${esc(key)}')">✓</button><button class="btn btn-red" onclick="refuseRecharge('${esc(key)}')">✕</button>`: "—"}</td>`; tbody.appendChild(tr); });
  $("statRecharges").textContent=pending; $("menuRecharges").textContent=pending;
- if(!Object.keys(rechargesCache).length) tbody.innerHTML='<tr><td colspan="6" class="empty">Aucune recharge</td></tr>';
 }
 function renderWithdrawals(){
  const tbody=$("withdrawalsTable"); tbody.innerHTML=""; let pending=0;
- Object.entries(withdrawalsCache).forEach(([key,d])=>{ if(isPending(getStatus(d))) pending++; const tr=document.createElement("tr"); tr.innerHTML=`<td style="font-size:9px;color:#8e9aad">${esc(d._src||"")}</td><td>${esc(getPhone(d)||"—")}</td><td>${money(d.montant||0)} FC</td><td>${esc(d.methode||"—")}</td><td>${badge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateWithdrawal('${esc(key)}')">✓ Payé</button><button class="btn btn-red" onclick="refuseWithdrawal('${esc(key)}')">✕ Refuser</button>`:`<button class="btn" style="background:#ffffff14" onclick="deleteWithdrawal('${esc(key)}')">🗑</button>`} <button class="btn btn-blue" onclick="sendMessageToClient('${esc(getPhone(d))}')">💬</button></td>`; tbody.appendChild(tr); });
+ Object.entries(withdrawalsCache).forEach(([key,d])=>{ if(isPending(getStatus(d))) pending++; const tr=document.createElement("tr"); tr.innerHTML=`<td style="font-size:9px">${esc(d._src||"")}</td><td>${esc(getPhone(d))}</td><td>${money(d.montant||0)} FC</td><td>${esc(d.methode||"—")}</td><td>${badge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateWithdrawal('${esc(key)}')">✓</button><button class="btn btn-red" onclick="refuseWithdrawal('${esc(key)}')">✕</button>`: "—"}</td>`; tbody.appendChild(tr); });
  $("statWithdrawals").textContent=pending; $("menuWithdrawals").textContent=pending;
- if(!Object.keys(withdrawalsCache).length) tbody.innerHTML='<tr><td colspan="6" class="empty">Aucun retrait</td></tr>';
 }
-
-window.validateCommand=async(id)=>{ await update(ref(db, `${ROOT}/demandes_commandes/${id}`), {statut:"Validée"}); const alt=ref(db, `${ROOT}/store_commandes/${id}`); const snap=await get(alt); if(snap.exists()) await update(alt, {statut:"Validée"}); toast("Validée"); };
-window.refuseCommand=async(id)=>{ const d=commandsCache[id]||{}; const phone=getPhone(d), amt=Number(d.montant||d.prix||0); if(!confirm("Refuser et rembourser?")) return; await update(ref(db, `${ROOT}/demandes_commandes/${id}`), {statut:"Refusée"}); await update(ref(db, `${ROOT}/store_commandes/${id}`), {statut:"Refusée"}); if(phone&&amt>0) await runTransaction(ref(db, `${USERS_PATH}/${phone}/solde_principal`), c=>(Number(c)||0)+amt); toast("Refusée + remboursée"); };
-
-window.validateRecharge=async(key)=>{ const d=rechargesCache[key]||{}; const phone=getPhone(d); const amt=Number(d.montant||0); const full=d._full; if(!phone||amt<=0) return toast("Invalide"); if(!confirm(`Créditer ${money(amt)} à ${phone}?`)) return; await runTransaction(ref(db, `${USERS_PATH}/${phone}/solde_principal`), c=>(Number(c)||0)+amt); await update(ref(db, full), {statut:"Validée"}); toast("✅ Crédité"); };
-window.refuseRecharge=async(key)=>{ const d=rechargesCache[key]||{}; if(!confirm("Refuser?")) return; await update(ref(db, d._full), {statut:"Refusée"}); toast("Refusée"); };
-window.deleteRecharge=async(key)=>{ const d=rechargesCache[key]||{}; await remove(ref(db, d._full)); delete rechargesCache[key]; renderRecharges(); };
-window.validateWithdrawal=async(key)=>{ const d=withdrawalsCache[key]||{}; if(!confirm("Marquer payé?")) return; await update(ref(db, d._full), {statut:"Payé"}); toast("Payé"); };
-window.refuseWithdrawal=async(key)=>{ const d=withdrawalsCache[key]||{}; const phone=getPhone(d), amt=Number(d.montant||0); if(!confirm(`Refuser et rembourser ${money(amt)} à ${phone}?`)) return; await update(ref(db, d._full), {statut:"Refusée — Remboursée"}); if(phone&&amt>0) await runTransaction(ref(db, `${USERS_PATH}/${phone}/solde_principal`), c=>(Number(c)||0)+amt); toast("Remboursé"); };
-window.deleteWithdrawal=async(key)=>{ const d=withdrawalsCache[key]||{}; await remove(ref(db, d._full)); delete withdrawalsCache[key]; renderWithdrawals(); };
-window.createTestRecharge=async()=>{ const phone=prompt("Numéro client","0820000000"); if(!phone) return; const amt=prompt("Montant","5000"); if(!amt) return; await push(ref(db, `${ROOT}/demandes_recharges`), {telephone:phone, montant:Number(amt), methode:"M-Pesa", transaction:"TEST"+Date.now(), date:new Date().toLocaleString("fr-FR"), createdAt:Date.now(), statut:"En attente"}); toast("✅ Test dépôt créé"); };
-window.createTestWithdrawal=async()=>{ const phone=prompt("Numéro client","0820000000"); if(!phone) return; const amt=prompt("Montant","2000"); if(!amt) return; await push(ref(db, `${ROOT}/demandes_retraits`), {telephone:phone, montant:Number(amt), methode:"Airtel", numero:phone, date:new Date().toLocaleString("fr-FR"), createdAt:Date.now(), statut:"En attente"}); toast("✅ Test retrait créé"); };
-
+window.validateCommand=async(id)=>{ await update(ref(db, `${ROOT}/demandes_commandes/${id}`), {statut:"Validée"}); toast("Validée"); };
+window.refuseCommand=async(id)=>{ await update(ref(db, `${ROOT}/demandes_commandes/${id}`), {statut:"Refusée"}); toast("Refusée"); };
+window.validateRecharge=async(key)=>{ const d=rechargesCache[key]||{}; const phone=getPhone(d); const amt=Number(d.montant||0); await runTransaction(ref(db, `${USERS_PATH}/${phone}/solde_principal`), c=>(Number(c)||0)+amt); await update(ref(db, d._full), {statut:"Validée"}); toast("✅ Crédité"); };
+window.refuseRecharge=async(key)=>{ const d=rechargesCache[key]||{}; await update(ref(db, d._full), {statut:"Refusée"}); toast("Refusée"); };
+window.validateWithdrawal=async(key)=>{ const d=withdrawalsCache[key]||{}; await update(ref(db, d._full), {statut:"Payé"}); toast("Payé"); };
+window.refuseWithdrawal=async(key)=>{ const d=withdrawalsCache[key]||{}; const phone=getPhone(d), amt=Number(d.montant||0); await update(ref(db, d._full), {statut:"Refusée — Remboursée"}); if(phone&&amt>0) await runTransaction(ref(db, `${USERS_PATH}/${phone}/solde_principal`), c=>(Number(c)||0)+amt); toast("Remboursé"); };
 function renderPrices(){
  const grid=$("priceGrid"); grid.innerHTML="";
  Object.entries(defaultPrices).forEach(([key,fallback])=>{
-  const stored=pricesCache[key]||{}; const label=stored.label||fallback.label; const price=stored.price??fallback.price; const desc=stored.description||fallback.description;
-  const card=document.createElement("div"); card.className="price-card"; card.innerHTML=`<h3>${esc(label)}</h3><p>${esc(desc)}</p><div class="price-row"><label>Prix FC</label><input class="price-input" type="number" value="${Number(price)||0}" data-price-key="${key}"></div>`;
-  grid.appendChild(card);
+  const stored=pricesCache[key]||{}; const price=stored.price??fallback.price;
+  grid.innerHTML+=`<div class="price-card"><h3>${esc(stored.label||fallback.label)}</h3><div class="price-row"><label>Prix FC</label><input class="price-input" type="number" value="${Number(price)||0}" data-price-key="${key}"></div></div>`;
  });
 }
-$("savePrices").addEventListener("click", async()=>{ const next={}; for(const [k,f] of Object.entries(defaultPrices)){ const inp=document.querySelector(`[data-price-key="${k}"]`); next[k]={label:pricesCache[k]?.label||f.label, description:pricesCache[k]?.description||f.description, price:Math.floor(Number(inp.value)||0), updatedAt:Date.now()}; } await set(ref(db, PRICES_PATH), next); toast("Tarifs enregistrés"); });
-$("reloadPrices").addEventListener("click", async()=>{ const snap=await get(ref(db, PRICES_PATH)); pricesCache=snap.val()||{}; renderPrices(); toast("Rechargé"); });
-$("userSearch").addEventListener("input", ()=>{ const s=$("userSearch").value.toLowerCase(); document.querySelectorAll("#usersTable tr").forEach(tr=>{ tr.style.display=(tr.dataset.search||"").includes(s)?"":"none"; }); });
-$("vipSearch").addEventListener("input", ()=>{ const s=$("vipSearch").value.toLowerCase(); document.querySelectorAll("#vipTable tr").forEach(tr=>{ tr.style.display=tr.textContent.toLowerCase().includes(s)?"":"none"; }); });
+$("savePrices").addEventListener("click", async()=>{ const next={}; for(const [k,f] of Object.entries(defaultPrices)){ const inp=document.querySelector(`[data-price-key="${k}"]`); next[k]={label:f.label, price:Math.floor(Number(inp.value)||0)}; } await set(ref(db, PRICES_PATH), next); toast("Tarifs enregistrés"); });
 if(localStorage.getItem("jasonAdmin")==="ok") window._start();
 </script>
 </body>
