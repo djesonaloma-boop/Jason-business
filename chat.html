@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>JASON BUSINESS - TEST VOCAL LOCAL</title>
+<title>JASON BUSINESS</title>
 <style>
 :root{--blue:#00d2ff;--border:rgba(0,210,255,.18)}*{box-sizing:border-box}body{margin:0;font-family:Arial;color:white;background:#050a14;display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
 header{height:52px;display:flex;justify-content:space-between;align-items:center;padding:0 12px;background:#050a14;border-bottom:1px solid var(--border)}
@@ -25,139 +25,179 @@ header{height:52px;display:flex;justify-content:space-between;align-items:center
 .msg{max-width:78%;padding:8px 10px;border-radius:16px;font-size:12.5px;white-space:pre-wrap;word-break:break-word}
 .msg.me{align-self:flex-end;background:linear-gradient(135deg,#00d2ff,#0077ff);border-bottom-right-radius:6px}
 .msg.other{align-self:flex-start;background:rgba(255,255,255,.1);border-bottom-left-radius:6px}
-.msg audio{margin-top:6px;width:210px}
+.msg .photo-wrap{margin-top:6px;border-radius:12px;overflow:hidden;max-width:160px;background:#000}
+.msg .photo-wrap img{width:100%;max-height:160px;object-fit:cover}
+.msg audio{margin-top:6px;width:200px}
 .input-area{padding:6px 8px;background:#0a1425;border-top:1px solid var(--border)}
 .rec-bar{display:none;align-items:center;justify-content:space-between;padding:8px 12px;background:#ff47571a;border:1px solid #ff4757aa;border-radius:20px;margin-bottom:6px}
 .rec-bar.show{display:flex}
 .input{display:flex;gap:6px;align-items:center}
 .input textarea{flex:1;min-height:38px;max-height:80px;padding:9px 12px;border-radius:18px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none;font-size:13px}
-.tbtn{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:1px solid #293850;background:#0c192b;color:white;display:grid;place-items:center;font-size:18px;cursor:pointer}
-.tbtn.hold{background:#ff4757!important;transform:scale(1.15)}
-.send{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:0;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;font-size:18px;cursor:pointer}
+.tbtn{width:40px;height:40px;flex-shrink:0;border-radius:50%;border:1px solid #293850;background:#0c192b;color:white;display:grid;place-items:center;font-size:18px;cursor:pointer}
+.tbtn.hold{background:#ff4757!important;animation:blink 1s infinite}
+.send{width:40px;height:40px;flex-shrink:0;border-radius:50%;border:0;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;font-size:18px;cursor:pointer}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
 @media(max-width:800px){.left{position:absolute;inset:0;z-index:20;width:100%}.left.hide{display:none}}
 </style>
 </head>
 <body>
-<header><div class="brand">JASON BUSINESS — TEST LOCAL VOCAL</div><div style="display:flex;gap:6px"><button class="btn" id="btnShowLeft">☰</button><button class="btn" onclick="location.reload()">Reload</button></div></header>
+<header><div class="brand">JASON BUSINESS — <span id="myPhoneShow"></span></div><div style="display:flex;gap:6px"><button class="btn" id="btnShowLeft">☰</button><a href="dashboard.html" class="btn">Dash</a></div></header>
 <div class="wrap">
 <aside class="left" id="leftPanel">
-<div class="tabs"><div class="tab active">💬 Chats</div></div>
-<div class="search"><input placeholder="🔍 El mago"></div>
-<div class="list"><div class="item active"><div class="av">EM</div><div class="info"><div class="name">El mago</div><div class="prev">Test vocal local</div></div></div></div>
+<div class="tabs"><div class="tab active" data-tab="chats">💬 Chats</div><div class="tab" data-tab="users">👥 Utilisateurs</div><div class="tab" data-tab="requests">🔔 Demandes <span id="reqCount" style="background:#ff4757;color:white;padding:1px 5px;border-radius:10px;font-size:9px;display:none">0</span></div></div>
+<div class="add-box" style="padding:8px 10px;display:flex;gap:6px;border-bottom:1px solid var(--border)"><input id="manualPhone" placeholder="+243..."><button class="btn" id="btnAddManual">+</button></div>
+<div class="search"><input id="search" placeholder="🔍 Rechercher..."></div>
+<div class="list" id="list"></div>
 </aside>
 <section class="right">
-<div class="top"><div style="display:flex;align-items:center;gap:8px"><div class="av">EM</div><div><h3 style="margin:0;font-size:13px">El mago</h3><small id="status" style="font-size:10px;opacity:.6">Test sans Firebase</small></div></div></div>
-<div class="msgs" id="msgs">
-<div class="msg other">Clique 🎤 en bas pour tester<br>Pas de Firebase, juste local</div>
-</div>
+<div class="top"><div style="display:flex;align-items:center;gap:8px"><div class="av" id="chatAvatar">JB</div><div><h3 id="chatName" style="margin:0;font-size:13px">Sélectionne un chat</h3><small id="chatPhone" style="font-size:10px;opacity:.6">Messenger</small></div></div><div style="display:flex;gap:5px"><button class="btn" id="voiceCallBtn">📞</button><button class="btn" id="videoCallBtn">🎥</button></div></div>
+<div class="msgs" id="msgs"></div>
 <div class="input-area">
-<div id="recBar" class="rec-bar"><div style="display:flex;align-items:center;gap:8px"><div style="width:10px;height:10px;background:#ff4757;border-radius:50%"></div><div id="recTime" style="font-weight:800;color:#ff6b7a">00:00</div><div style="font-size:11px">🔴 Enregistrement LOCAL</div></div><div style="display:flex;gap:6px"><button id="recCancel" type="button" style="padding:5px 10px;border-radius:10px;border:1px solid #ff4757;background:#ff475722;color:#ff6b7a">Annuler</button><button id="recSend" type="button" style="padding:5px 12px;border-radius:10px;border:0;background:#00d2ff;font-weight:800">Envoyer</button></div></div>
+<div id="recBar" class="rec-bar"><div style="display:flex;align-items:center;gap:8px"><div style="width:10px;height:10px;background:#ff4757;border-radius:50%;animation:blink 1s infinite"></div><div id="recTime" style="font-weight:800;color:#ff6b7a">00:00</div><div style="font-size:11px">🔴 Enregistrement</div></div><div style="display:flex;gap:6px"><button id="recCancel" type="button" style="padding:5px 10px;border-radius:10px;border:1px solid #ff4757;background:#ff475722;color:#ff6b7a">Annuler</button><button id="recSend" type="button" style="padding:5px 12px;border-radius:10px;border:0;background:#00d2ff;font-weight:800">Envoyer</button></div></div>
 <div class="input">
 <label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*" hidden></label>
-<button type="button" id="recordBtn" class="tbtn" onclick="toggleVocal()">🎤</button>
-<textarea id="msgInput" placeholder="Écris un message..." rows="1"></textarea>
-<button type="button" class="send" id="sendBtn">➤</button>
+<button type="button" id="recordBtn" class="tbtn" onclick="window._startVocal()">🎤</button>
+<textarea id="msgInput" placeholder="Écris un message..." disabled rows="1"></textarea>
+<button type="button" class="send" id="sendBtn" disabled>➤</button>
 </div>
-<div id="hint" style="text-align:center;font-size:10px;opacity:.6;margin-top:4px">TEST LOCAL — Clique 🎤 → parle → re-clique ⏹️ → audio s'affiche</div>
+<div id="hint" style="text-align:center;font-size:9px;opacity:.5;margin-top:4px">Clique 🎤 pour parler • Re-clique pour envoyer</div>
 </div>
 </section>
 </div>
 
-<script>
+<script type="module">
+import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, onValue, push, set, get, remove, update, onDisconnect } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.appspot.com",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
+const app=getApps().length?getApp():initializeApp(firebaseConfig);
+const db=getDatabase(app); const storage=getStorage(app);
 const $=id=>document.getElementById(id);
-let isRecording=false, mediaRecorder=null, audioChunks=[], recordStream=null, timerInt=null, recSec=0;
+const myPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("phone");
+if(!myPhone){location.replace("login.html")}
+$("myPhoneShow").textContent=myPhone;
 
-function fmt(s){const m=String(Math.floor(s/60)).padStart(2,'0');const sec=String(s%60).padStart(2,'0');return `${m}:${sec}`}
+let tab="chats", activeChat=null, allUsers={}, myRequests={}, myChats={}, manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]");
+let presenceCache={}; let isRecording=false, mediaRecorder=null, audioChunks=[], recordStream=null, timerInt=null, recSec=0;
 
-function addMsg(html, me=true){
-  const c=$("msgs");
-  const div=document.createElement("div");
-  div.className="msg "+(me?"me":"other");
-  div.innerHTML=html+`<div style="font-size:8px;opacity:.6;margin-top:4px;text-align:right">${new Date().toLocaleTimeString()} ✓✓</div>`;
-  c.appendChild(div);
-  c.scrollTop=c.scrollHeight;
-}
+function esc(s){return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")}
+function timeStr(ts){if(!ts)return"";return new Date(ts).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}
+function getChatId(a,b){return [a,b].sort().join("_")}
+const presenceRef=ref(db,`jasonBusiness/presence/${myPhone}`); set(presenceRef,{online:true,lastSeen:Date.now()}); onDisconnect(presenceRef).set({online:false,lastSeen:Date.now()}); setInterval(()=>set(presenceRef,{online:true,lastSeen:Date.now()}),30000);
+onValue(ref(db,"jasonBusiness/presence"),s=>{presenceCache=s.val()||{};render()});
+function isOnline(ph){const p=presenceCache[ph];return p&&p.online&&(Date.now()-p.lastSeen<90000)}
 
-async function toggleVocal(){
-  console.log("CLICK MIC", isRecording);
-  if(!isRecording){
-    try{
-      $("hint").textContent="Demande permission micro...";
-      const stream = await navigator.mediaDevices.getUserMedia({audio:true});
-      recordStream=stream;
-      let mime="audio/webm;codecs=opus";
-      if(!MediaRecorder.isTypeSupported(mime)) mime="audio/webm";
-      if(!MediaRecorder.isTypeSupported(mime)) mime="audio/mp4";
-      if(!MediaRecorder.isTypeSupported(mime)) mime="";
-      mediaRecorder = mime ? new MediaRecorder(stream,{mimeType:mime}) : new MediaRecorder(stream);
-      audioChunks=[]; recSec=0;
-      
-      mediaRecorder.ondataavailable=e=>{if(e.data.size>0) audioChunks.push(e.data)};
-      
-      mediaRecorder.onstop=()=>{
-        clearInterval(timerInt);
-        $("recBar").classList.remove("show");
-        $("recordBtn").classList.remove("hold");
-        $("recordBtn").textContent="🎤";
-        $("hint").textContent="Traitement...";
-        const blob=new Blob(audioChunks,{type:mediaRecorder.mimeType||"audio/webm"});
-        console.log("BLOB LOCAL", blob.size, blob.type);
-        if(blob.size<800){ $("hint").textContent="Trop court, reparle"; try{stream.getTracks().forEach(t=>t.stop())}catch{}; isRecording=false; return }
-        
-        // SANS FIREBASE - juste URL locale
-        const url=URL.createObjectURL(blob);
-        addMsg(`🎤 Vocal LOCAL TEST (${(blob.size/1024).toFixed(1)}ko)<br><audio controls src="${url}" style="width:210px;margin-top:6px"></audio>`, true);
-        $("hint").textContent="✅ Vocal local affiché ! Si tu entends, ton micro marche. Le problème était Firebase.";
-        $("status").textContent="✅ Micro OK - "+blob.size+" bytes";
-        try{stream.getTracks().forEach(t=>t.stop())}catch{};
-        isRecording=false;
-      };
-      
-      mediaRecorder.start(100);
-      isRecording=true;
-      $("recBar").classList.add("show");
-      $("recordBtn").classList.add("hold");
-      $("recordBtn").textContent="⏹️";
-      $("recTime").textContent="00:00";
-      $("hint").textContent="🔴 Enregistrement LOCAL... Re-clique ⏹️ pour arrêter";
-      timerInt=setInterval(()=>{recSec++;$("recTime").textContent=fmt(recSec); if(recSec>=20){try{mediaRecorder.stop()}catch{}}},1000);
-      
-    }catch(err){
-      console.error(err);
-      alert("Micro bloqué: "+err.name+"\n"+err.message+"\n\n1. Paramètres Android > Applis > Chrome > Autorisations > Micro > Autoriser\n2. Cadenas 🔒 en haut Chrome > Autoriser micro\n3. Recharge la page");
-      $("hint").textContent="❌ Micro bloqué - voir alerte";
-      isRecording=false;
-    }
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");tab=t.dataset.tab;render()});
+$("search").oninput=()=>render(); $("btnShowLeft").onclick=()=>$("leftPanel").classList.remove("hide");
+onValue(ref(db,"jasonBusiness/users"),s=>{if(s.exists()){allUsers=s.val()||{};render()}});
+onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),s=>{myRequests=s.val()||{};const inc=Object.values(myRequests).filter(r=>r.type==="incoming"&&r.status==="pending").length;$("reqCount").textContent=inc;$("reqCount").style.display=inc>0?"inline-block":"none";render()});
+onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),s=>{myChats=s.val()||{};render()});
+$("btnAddManual").onclick=()=>{const p=$("manualPhone").value.trim();if(!p||p.length<8)return;if(!manualUsers.includes(p))manualUsers.push(p);localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));$("manualPhone").value="";render()};
+function getCombinedUsers(){const c={...allUsers};manualUsers.forEach(p=>{if(!c[p])c[p]={telephone:p}});return c}
+function getUserPhoto(ph){const u=allUsers[ph]||{};return u.photo||u.photoProfil||u.avatar||""}
+function render(){
+  const q=($("search").value||"").toLowerCase(); const cont=$("list"); cont.innerHTML=""; const users=getCombinedUsers();
+  if(tab==="users"){
+    Object.entries(users).forEach(([phone,u])=>{
+      if(phone===myPhone) return; if(q&&!phone.toLowerCase().includes(q))return;
+      const chatId=getChatId(myPhone,phone); const isFriend=myChats[chatId]?.status==="accepted"; const hasSent=myRequests[phone]?.type==="outgoing"; const photo=getUserPhoto(phone);
+      const div=document.createElement("div"); div.className="item"; div.innerHTML=`<div class="av">${photo?`<img src="${photo}">`:esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(u.nom||phone)}</div><div class="prev">${esc(phone)}</div></div><div>${isFriend?"💬":hasSent?"⏳":"+"}</div>`;
+      div.onclick=()=>{if(isFriend)openChat(phone);else if(!hasSent)sendRequest(phone)}; cont.appendChild(div);
+    });
+  }else if(tab==="requests"){
+    const reqs=Object.entries(myRequests).filter(([_,r])=>r.type==="incoming"); if(reqs.length===0){cont.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucune demande</div>`;return}
+    reqs.forEach(([phone])=>{const div=document.createElement("div");div.className="item";div.innerHTML=`<div class="av">${esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(phone)}</div><div class="prev">Veut discuter</div></div>`;const b=document.createElement("button");b.className="btn";b.textContent="Accepter";b.onclick=()=>acceptRequest(phone);div.appendChild(b);cont.appendChild(div)});
   }else{
-    try{mediaRecorder.stop()}catch{}
+    const list=Object.entries(myChats).filter(([_,c])=>c.status==="accepted").sort((a,b)=>(b[1].lastTime||0)-(a[1].lastTime||0));
+    if(list.length===0){cont.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucun chat</div>`;return}
+    list.forEach(([chatId,chat])=>{const other=chatId.split("_").find(p=>p!==myPhone);if(!other)return;const photo=getUserPhoto(other);const div=document.createElement("div");div.className="item"+(activeChat===other?" active":"");div.innerHTML=`<div class="av">${photo?`<img src="${photo}">`:esc(other.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[other]?.nom||other)}</div><div class="prev">${esc((chat.lastMsg||"").slice(0,35))}</div></div><div style="font-size:9px">${timeStr(chat.lastTime)}</div>`;div.onclick=()=>openChat(other);cont.appendChild(div)});
   }
 }
+async function sendRequest(toPhone){await set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${toPhone}`),{phone:toPhone,type:"outgoing",status:"pending",createdAt:Date.now()});await set(ref(db,`jasonBusiness/chat_requests/${toPhone}/${myPhone}`),{phone:myPhone,type:"incoming",status:"pending",createdAt:Date.now()})}
+async function acceptRequest(fromPhone){const chatId=getChatId(myPhone,fromPhone);await set(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{with:fromPhone,status:"accepted",lastMsg:"✅ Accepté",lastTime:Date.now(),unread:0});await set(ref(db,`jasonBusiness/user_chats/${fromPhone}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:"✅ Accepté",lastTime:Date.now(),unread:1});await remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${fromPhone}`));await remove(ref(db,`jasonBusiness/chat_requests/${fromPhone}/${myPhone}`));tab="chats";document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelector('[data-tab="chats"]').classList.add("active");render();setTimeout(()=>openChat(fromPhone),300)}
+function openChat(other){activeChat=other;const photo=getUserPhoto(other);const name=allUsers[other]?.nom||other;$("chatName").textContent=name;$("chatPhone").textContent=isOnline(other)?other+" • En ligne 🟢":"Hors ligne";if(photo)$("chatAvatar").innerHTML=`<img src="${photo}" style="width:100%;height:100%;object-fit:cover;border-radius:12px">`;else $("chatAvatar").textContent=other.slice(-2);$("msgInput").disabled=false;$("sendBtn").disabled=false;if(window.innerWidth<=800)$("leftPanel").classList.add("hide");const chatId=getChatId(myPhone,other);onValue(ref(db,`jasonBusiness/messages/${chatId}`),snap=>{const data=snap.val()||{};const msgs=Object.values(data).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));renderMessages(msgs);update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{unread:0}).catch(()=>{})});render()}
+function renderMessages(msgs){const c=$("msgs");if(msgs.length===0){c.innerHTML=`<div style="flex:1;display:grid;place-items:center;opacity:.6;padding:20px">Début avec ${esc(allUsers[activeChat]?.nom||activeChat)}</div>`;return}c.innerHTML="";msgs.forEach(m=>{const isMe=m.from===myPhone;const div=document.createElement("div");div.className="msg "+(isMe?"me":"other");let html=esc(m.text||"");if(m.photo)html+=`<div class="photo-wrap"><img src="${m.photo}" onclick="window.open(this.src,'_blank')"></div>`;if(m.audio)html+=`<audio controls src="${m.audio}"></audio>`;html+=`<div style="font-size:8px;opacity:.6;margin-top:4px;text-align:right">${timeStr(m.createdAt)} ${isMe?"✓✓":""}</div>`;div.innerHTML=html;c.appendChild(div)});c.scrollTop=c.scrollHeight}
+async function sendText(){const text=$("msgInput").value.trim();if(!text||!activeChat)return;$("msgInput").value="";const chatId=getChatId(myPhone,activeChat);const nr=push(ref(db,`jasonBusiness/messages/${chatId}`));await set(nr,{from:myPhone,to:activeChat,text,createdAt:Date.now()});const u=((await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}/unread`))).val()||0)+1;await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:text,lastTime:Date.now()});const oe=await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`));if(!oe.exists())await set(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:text,lastTime:Date.now(),unread:u});else await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:text,lastTime:Date.now(),unread:u})}
+$("sendBtn").onclick=sendText; $("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText()}});
+$("photoInput").onchange=e=>{const file=e.target.files[0];if(!file||!activeChat)return;const r=new FileReader();r.onload=async()=>{const chatId=getChatId(myPhone,activeChat);const nr=push(ref(db,`jasonBusiness/messages/${chatId}`));await set(nr,{from:myPhone,to:activeChat,text:"📷 Photo",photo:r.result,createdAt:Date.now()});await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:"📷 Photo",lastTime:Date.now()});const u=((await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}/unread`))).val()||0)+1;await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:"📷 Photo",lastTime:Date.now(),unread:u})};r.readAsDataURL(file);e.target.value=""};
+
+// ===== FIX VOCAL DEFINITIF =====
+function fmt(s){const m=String(Math.floor(s/60)).padStart(2,'0');const sec=String(s%60).padStart(2,'0');return `${m}:${sec}`}
+
+window._startVocal = async function(){
+  console.log("MIC CLICK", activeChat, isRecording);
+  if(!activeChat){alert("Ouvre d'abord le chat El mago");return}
+  if(isRecording){
+    try{mediaRecorder.stop()}catch{}
+    return;
+  }
+  try{
+    // Force la demande de permission
+    const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+    recordStream = stream;
+    let mime="audio/webm;codecs=opus";
+    if(!MediaRecorder.isTypeSupported(mime)) mime="audio/webm";
+    if(!MediaRecorder.isTypeSupported(mime)) mime="audio/mp4";
+    if(!MediaRecorder.isTypeSupported(mime)) mime="";
+    mediaRecorder = mime ? new MediaRecorder(stream,{mimeType:mime}) : new MediaRecorder(stream);
+    audioChunks=[]; recSec=0;
+    mediaRecorder.ondataavailable = e=>{ if(e.data.size>0) audioChunks.push(e.data) };
+    mediaRecorder.onstop = async()=>{
+      clearInterval(timerInt);
+      $("recBar").classList.remove("show");
+      $("recordBtn").classList.remove("hold");
+      $("recordBtn").textContent="🎤";
+      $("hint").textContent="Clique pour parler • Re-clique pour envoyer";
+      const blob = new Blob(audioChunks,{type:mediaRecorder.mimeType||"audio/webm"});
+      console.log("BLOB", blob.size);
+      if(blob.size < 800){ alert("Trop court"); stream.getTracks().forEach(t=>t.stop()); isRecording=false; return }
+      try{
+        $("chatPhone").textContent="⏳ Envoi vocal...";
+        $("hint").textContent="⏳ Envoi...";
+        const chatId=getChatId(myPhone,activeChat);
+        const path=`vocals/${chatId}/${Date.now()}.webm`;
+        const refS=sRef(storage,path);
+        await uploadBytes(refS,blob);
+        const url=await getDownloadURL(refS);
+        const nr=push(ref(db,`jasonBusiness/messages/${chatId}`));
+        await set(nr,{from:myPhone,to:activeChat,text:"🎤 Vocal",audio:url,createdAt:Date.now()});
+        await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now()});
+        const u=((await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}/unread`))).val()||0)+1;
+        await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now(),unread:u});
+        $("chatPhone").textContent="Hors ligne";
+        $("hint").textContent="✅ Vocal envoyé !";
+      }catch(e){
+        console.error(e);
+        alert("Erreur Storage: "+e.code+" "+e.message+"\nActive Storage: Firebase Console > Storage > Get Started > mode test + règles allow read,write");
+        $("hint").textContent="❌ Erreur Storage - active Storage";
+      }
+      try{stream.getTracks().forEach(t=>t.stop())}catch{};
+      isRecording=false;
+    };
+    mediaRecorder.start(100);
+    isRecording=true;
+    $("recBar").classList.add("show");
+    $("recordBtn").classList.add("hold");
+    $("recordBtn").textContent="⏹️";
+    $("recTime").textContent="00:00";
+    $("hint").textContent="🔴 Enregistrement... Clique ⏹️ pour envoyer";
+    timerInt=setInterval(()=>{ recSec++; $("recTime").textContent=fmt(recSec); if(recSec>=20){ try{mediaRecorder.stop()}catch{}} },1000);
+  }catch(err){
+    console.error(err);
+    alert("Micro bloqué: "+err.name+"\n"+err.message+"\n\n1. Va dans Paramètres Android > Applis > Chrome > Autorisations > Micro > Autoriser\n2. Dans Chrome, cadenas 🔒 > Paramètres site > Micro > Autoriser\n3. Recharge en HTTPS");
+    isRecording=false;
+  }
+};
 
 $("recSend").onclick=()=>{ if(isRecording) try{mediaRecorder.stop()}catch{} };
 $("recCancel").onclick=()=>{
   if(!isRecording) return;
   try{mediaRecorder.stop()}catch{}
   audioChunks=[];
-  setTimeout(()=>{ try{recordStream.getTracks().forEach(t=>t.stop())}catch{}; isRecording=false; $("recBar").classList.remove("show"); $("recordBtn").classList.remove("hold"); $("recordBtn").textContent="🎤"; $("hint").textContent="Annulé"; },100);
+  setTimeout(()=>{ try{recordStream.getTracks().forEach(t=>t.stop())}catch{}; isRecording=false; $("recBar").classList.remove("show"); $("recordBtn").classList.remove("hold"); $("recordBtn").textContent="🎤"; },100);
   clearInterval(timerInt);
 };
-
-$("sendBtn").onclick=()=>{
-  const t=$("msgInput").value.trim();
-  if(!t) return;
-  addMsg(t, true);
-  $("msgInput").value="";
-};
-
-$("photoInput").onchange=e=>{
-  const file=e.target.files[0];
-  if(!file) return;
-  const url=URL.createObjectURL(file);
-  addMsg(`📷 Photo LOCAL<br><img src="${url}" style="max-width:160px;border-radius:12px;margin-top:6px">`, true);
-  e.target.value="";
-};
-
-$("btnShowLeft").onclick=()=>$("leftPanel").classList.toggle("hide");
 </script>
 </body>
 </html>
