@@ -6,25 +6,27 @@
 <meta name="theme-color" content="#050a14">
 <title>JASON BUSINESS — Dashboard</title>
 <style>
-:root{--blue:#00d2ff;--dark:#050a14;--green:#00e676;--gold:#ffd700}
+:root{--blue:#00d2ff;--dark:#050a14;--green:#00e676;--red:#ff4757;--gold:#ffd700}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
 body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:white;background:radial-gradient(ellipse at 10% 5%,rgba(0,210,255,.12),transparent 35%),linear-gradient(rgba(3,8,18,.80),rgba(3,8,18,.96)),url("IMG_0870.jpeg") center/cover fixed;padding-bottom:100px;overflow-x:hidden}
 .jb-overlay{min-height:100vh;background:radial-gradient(circle at top,rgba(0,210,255,.075),transparent 40%)}
-.jb-header{position:relative;padding:24px 20px 22px;background:linear-gradient(135deg,rgba(0,210,255,.13),rgba(5,10,20,.80) 55%,rgba(255,215,0,.055));border-bottom:1px solid rgba(0,210,255,.32);backdrop-filter:blur(22px)}
+.jb-header{position:relative;overflow:hidden;padding:24px 20px 22px;background:linear-gradient(135deg,rgba(0,210,255,.13),rgba(5,10,20,.80) 55%,rgba(255,215,0,.055));border-bottom:1px solid rgba(0,210,255,.32);backdrop-filter:blur(22px);box-shadow:0 12px 35px rgba(0,0,0,.22)}
+.jb-header::after{content:"";position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.065),transparent);transform:skewX(-20deg);animation:jbHeaderShine 8s ease-in-out infinite;pointer-events:none}
+@keyframes jbHeaderShine{0%,60%{left:-100%}100%{left:160%}}
 .jb-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.jb-brand{font-size:20px;font-weight:900;letter-spacing:2px;color:var(--blue)}
-.jb-status{font-size:10px;color:var(--green);padding:7px 11px;border-radius:20px;background:rgba(0,230,118,.09);border:1px solid rgba(0,230,118,.28)}
+.jb-brand{font-size:20px;font-weight:900;letter-spacing:2px;color:var(--blue);text-shadow:0 0 16px rgba(0,210,255,.40)}
+.jb-status{font-size:10px;color:var(--green);padding:7px 11px;border-radius:20px;background:rgba(0,230,118,.09);border:1px solid rgba(0,230,118,.28);white-space:nowrap}
 .jb-user-box{margin-top:20px}
 .jb-user-box small{font-size:10px;opacity:.60;letter-spacing:1px}
 .jb-user-box h2{margin:7px 0 0;font-size:20px;word-break:break-all}
 #jbDashboardStatus{text-align:center;min-height:20px;padding:10px 20px;font-size:11px;color:#ffeb3b}
-.jb-balance-card{position:relative;overflow:hidden;margin:20px;padding:24px;border-radius:25px;background:linear-gradient(145deg,rgba(0,210,255,.17),rgba(5,10,20,.82) 55%,rgba(0,119,255,.09));border:1px solid rgba(0,210,255,.42);box-shadow:0 18px 45px rgba(0,0,0,.35);backdrop-filter:blur(20px)}
+.jb-balance-card{position:relative;overflow:hidden;margin:20px;padding:24px;border-radius:25px;background:linear-gradient(145deg,rgba(0,210,255,.17),rgba(5,10,20,.82) 55%,rgba(0,119,255,.09));border:1px solid rgba(0,210,255,.42);backdrop-filter:blur(20px)}
+.jb-balance-title{font-size:11px;opacity:.68;text-transform:uppercase;letter-spacing:1.3px}
 .jb-balance{margin:9px 0;font-size:36px;font-weight:900;color:var(--blue)}
 .jb-currency{font-size:13px;opacity:.75}
 .jb-balance-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:22px}
 .jb-money-box{padding:13px 5px;text-align:center;border-radius:15px;background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.018));border:1px solid rgba(255,255,255,.09)}
-.jb-icon{font-size:20px}
 .jb-money-box small{display:block;margin-top:6px;font-size:8px;opacity:.60;text-transform:uppercase}
 .jb-money-box b{display:block;margin-top:5px;font-size:11px}
 .jb-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px}
@@ -42,7 +44,7 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 .jb-section-title h3{margin:0;font-size:16px}
 .jb-section-title a{color:var(--blue);font-size:10px;text-decoration:none;font-weight:bold}
 .jb-service-card{display:flex;align-items:center;gap:13px;margin-bottom:11px;padding:14px;border-radius:18px;background:linear-gradient(115deg,rgba(255,255,255,.065),rgba(255,255,255,.025));border:1px solid rgba(0,210,255,.14);backdrop-filter:blur(15px);cursor:pointer}
-.jb-service-card:active{transform:scale(.975);border-color:rgba(0,210,255,.65)}
+.jb-service-card:active{transform:scale(.975)}
 .jb-service-icon{width:46px;height:46px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:14px;font-size:22px;background:linear-gradient(145deg,rgba(0,210,255,.13),rgba(0,119,255,.035));border:1px solid rgba(0,210,255,.23)}
 .jb-service-info{flex:1;min-width:0}
 .jb-service-name{font-size:13px;font-weight:bold}
@@ -56,51 +58,47 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 .jb-invest-date{margin-top:8px;font-size:9px;opacity:.52}
 .jb-invest-status{margin-top:7px;font-size:9px;color:var(--green)}
 .jb-empty{padding:26px 15px;text-align:center;border-radius:17px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.055);font-size:11px;opacity:.65}
+
+/* BOUTON CHAT FLOTTANT BAS DROITE */
+.jb-fab-chat{
+position:fixed;
+right:16px;
+bottom:86px;
+z-index:9999;
+width:58px;
+height:58px;
+border-radius:18px;
+display:grid;
+place-items:center;
+font-size:26px;
+background:linear-gradient(135deg,#00d2ff,#0077ff);
+color:white;
+border:1px solid rgba(255,255,255,.25);
+box-shadow:0 10px 30px rgba(0,210,255,.40),0 0 0 8px rgba(0,210,255,.08);
+cursor:pointer;
+animation:jbFabFloat 3s ease-in-out infinite;
+}
+.jb-fab-chat:active{transform:scale(.92)}
+@keyframes jbFabFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.jb-fab-badge{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 6px;border-radius:20px;background:#ff4757;color:white;font-size:10px;font-weight:900;display:grid;place-items:center;box-shadow:0 2px 8px rgba(255,71,87,.6);animation:badgePulse 1.5s infinite}
+@keyframes badgePulse{0%{box-shadow:0 0 0 0 rgba(255,71,87,.6)}70%{box-shadow:0 0 0 10px rgba(255,71,87,0)}100%{box-shadow:0 0 0 0 rgba(255,71,87,0)}}
+
 .jb-navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:11px 0 calc(11px + env(safe-area-inset-bottom));background:rgba(5,10,20,.96);border-top:1px solid rgba(0,210,255,.25);backdrop-filter:blur(22px)}
 .jb-nav-link{flex:1;color:white;opacity:.48;text-decoration:none;text-align:center;font-size:10px;border:0;background:none;cursor:pointer}
 .jb-nav-link.active{color:var(--blue);opacity:1;font-weight:bold}
+.jb-nav-link.active::before{content:"";position:absolute;top:-11px;left:28%;width:44%;height:2px;border-radius:5px;background:var(--blue)}
 .jb-nav-icon{margin-bottom:4px;font-size:19px}
 .jb-loading{position:fixed;z-index:9999;inset:0;display:flex;align-items:center;justify-content:center;background:#050a14}
 .jb-loader{width:42px;height:42px;border-radius:50%;border:3px solid rgba(255,255,255,.09);border-top-color:var(--blue);animation:jbSpin .8s linear infinite}
 @keyframes jbSpin{to{transform:rotate(360deg)}}
-
-/* BOUTON CHAT FLOTTANT */
-.jb-fab-chat{
-position:fixed;right:16px;bottom:88px;z-index:1001;width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:26px;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;border:1px solid rgba(255,255,255,.25);box-shadow:0 10px 30px rgba(0,210,255,.40),0 0 0 8px rgba(0,210,255,.08);cursor:pointer;transition:transform .2s;animation:jbFabFloat 3s ease-in-out infinite}
-.jb-fab-chat:active{transform:scale(.92)}
-@keyframes jbFabFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-.jb-fab-badge{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 6px;border-radius:20px;background:#ff4757;color:white;font-size:10px;font-weight:900;display:none;place-items:center;box-shadow:0 2px 8px rgba(255,71,87,.5)}
-.jb-fab-badge.show{display:grid}
-
-/* FENÊTRE CHAT */
-.jb-chat-overlay{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);align-items:flex-end;justify-content:center;padding:0}
-.jb-chat-overlay.show{display:flex}
-.jb-chat-window{width:100%;max-width:440px;height:82vh;max-height:650px;background:#08111f;border:1px solid rgba(0,210,255,.25);border-radius:24px 24px 0 0;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 -12px 50px rgba(0,0,0,.5);animation:chatUp .3s ease}
-@keyframes chatUp{from{transform:translateY(40px);opacity:.6}to{transform:translateY(0);opacity:1}}
-.jb-chat-header{padding:16px 16px 14px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,rgba(0,210,255,.15),rgba(5,10,20,.9));border-bottom:1px solid rgba(0,210,255,.20)}
-.jb-chat-header h3{margin:0;font-size:15px;display:flex;align-items:center;gap:8px}
-.jb-chat-header small{font-size:10px;opacity:.6;display:block;margin-top:3px}
-.jb-chat-close{width:32px;height:32px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:#132035;color:white;font-size:18px;cursor:pointer}
-.jb-chat-messages{flex:1;overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:10px;background:radial-gradient(ellipse at top,rgba(0,210,255,.06),transparent 50%),#070e1e}
-.jb-msg{max-width:78%;padding:10px 12px;border-radius:16px;font-size:12px;line-height:1.5;animation:msgIn .25s ease}
-@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.jb-msg.client{align-self:flex-end;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;border-bottom-right-radius:6px;box-shadow:0 4px 12px rgba(0,210,255,.15)}
-.jb-msg.admin{align-self:flex-start;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);color:white;border-bottom-left-radius:6px}
-.jb-msg-time{font-size:8px;opacity:.6;margin-top:5px;text-align:right}
-.jb-chat-input{padding:10px 10px calc(10px + env(safe-area-inset-bottom));display:flex;gap:8px;background:#0a1425;border-top:1px solid rgba(0,210,255,.15)}
-.jb-chat-input input{flex:1;padding:12px 14px;border-radius:22px;border:1px solid #293850;background:#0c192b;color:white;outline:none;font-size:13px}
-.jb-chat-input input:focus{border-color:var(--blue)}
-.jb-chat-send{width:44px;height:44px;border-radius:50%;border:0;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;font-size:18px;cursor:pointer;box-shadow:0 4px 12px rgba(0,210,255,.3)}
-.jb-chat-send:active{transform:scale(.92)}
-@media(min-width:620px){.jb-chat-overlay{align-items:center;padding:16px}.jb-chat-window{border-radius:20px;height:72vh}}
 </style>
 </head>
 <body>
 <div id="jbLoading" class="jb-loading"><div style="text-align:center"><div class="jb-loader"></div><div style="margin-top:12px;color:var(--blue);font-size:11px;letter-spacing:3px">JASON BUSINESS</div></div></div>
 <div class="jb-overlay">
-<header class="jb-header"><div class="jb-top"><div class="jb-brand">JASON BUSINESS</div><div class="jb-status">● EN LIGNE</div></div><div class="jb-user-box"><small>BIENVENUE</small><h2 id="jbUserPhone">Chargement...</h2></div></header>
+<header class="jb-header"><div class="jb-top"><div class="jb-brand">JASON BUSINESS</div><div class="jb-status">● EN LIGNE</div></div><div class="jb-user-box"><small>BIENVENUE SUR VOTRE ESPACE</small><h2 id="jbUserPhone">Chargement...</h2></div></header>
 <div id="jbDashboardStatus"></div>
-<section class="jb-balance-card"><div style="font-size:11px;opacity:.68">Solde principal</div><div class="jb-balance"><span id="jbMainBalance">0</span><span class="jb-currency"> FC</span></div><div class="jb-balance-grid"><div class="jb-money-box"><div class="jb-icon">💰</div><small>Commissions</small><b id="jbCommissionBalance">0 FC</b></div><div class="jb-money-box"><div class="jb-icon">📈</div><small>Gains</small><b id="jbGainBalance">0 FC</b></div><div class="jb-money-box"><div class="jb-icon">💎</div><small>Total</small><b id="jbTotalBalance">0 FC</b></div></div></section>
+<section class="jb-balance-card"><div class="jb-balance-title">Solde principal</div><div class="jb-balance"><span id="jbMainBalance">0</span><span class="jb-currency"> FC</span></div><div class="jb-balance-grid"><div class="jb-money-box"><div class="jb-icon">💰</div><small>Commissions</small><b id="jbCommissionBalance">0 FC</b></div><div class="jb-money-box"><div class="jb-icon">📈</div><small>Gains</small><b id="jbGainBalance">0 FC</b></div><div class="jb-money-box"><div class="jb-icon">💎</div><small>Total</small><b id="jbTotalBalance">0 FC</b></div></div></section>
 <div class="jb-actions"><a href="recharge.html" class="jb-action jb-recharge">📥 RECHARGER</a><a href="retrait.html" class="jb-action jb-withdraw">📤 RETIRER</a></div>
 <section class="jb-points-card"><div class="jb-points-top"><div><div class="jb-points-title">⭐ POINTS DE FIDÉLITÉ</div><div style="font-size:10px;opacity:.65">100 points = <b style="color:var(--gold)">50 FC</b></div></div><div id="jbLoyaltyPoints" class="jb-points-number">0</div></div><button id="jbConvertPoints" disabled>💱 CONVERTIR MES POINTS</button></section>
 <section class="jb-section"><div class="jb-section-title"><h3>🛍️ Nos services</h3><a href="shop.html">VOIR TOUT →</a></div>
@@ -110,35 +108,16 @@ position:fixed;right:16px;bottom:88px;z-index:1001;width:58px;height:58px;border
 <div class="jb-service-card" onclick="openService('chatbot')"><div class="jb-service-icon">🤖</div><div class="jb-service-info"><div class="jb-service-name">Chatbot</div><div class="jb-service-desc">Assistant et automatisation intelligente</div></div><div class="jb-service-arrow">›</div></div>
 <div class="jb-service-card" onclick="openService('music')"><div class="jb-service-icon">🎵</div><div class="jb-service-info"><div class="jb-service-name">Chanson</div><div class="jb-service-desc">Création musicale personnalisée</div></div><div class="jb-service-arrow">›</div></div>
 <div class="jb-service-card" onclick="openService('ads')"><div class="jb-service-icon">📣</div><div class="jb-service-info"><div class="jb-service-name">Publicité</div><div class="jb-service-desc">Promotion sur réseaux</div></div><div class="jb-service-arrow">›</div></div>
+<div class="jb-service-card" onclick="openService('logo')"><div class="jb-service-icon">🎨</div><div class="jb-service-info"><div class="jb-service-name">Logo</div><div class="jb-service-desc">Création de votre identité visuelle</div></div><div class="jb-service-arrow">›</div></div>
 </section>
 <section class="jb-section"><div class="jb-section-title"><h3>⚡ Mes activités</h3><a href="shop.html">COMMANDER →</a></div><div id="jbInvestments"><div class="jb-empty">Chargement...</div></div></section>
 </div>
 
-<!-- BOUTON CHAT FLOTTANT -->
-<button class="jb-fab-chat" id="jbFabChat" aria-label="Chat support">
+<!-- BOUTON CHAT FLOTTANT EN BAS À DROITE -->
+<button class="jb-fab-chat" id="jbFabChat" onclick="goPage('chat.html')" aria-label="Chat">
   💬
-  <span class="jb-fab-badge" id="jbChatBadge">0</span>
+  <span class="jb-fab-badge" id="jbChatBadge">1</span>
 </button>
-
-<!-- FENÊTRE CHAT -->
-<div class="jb-chat-overlay" id="jbChatOverlay">
-  <div class="jb-chat-window">
-    <div class="jb-chat-header">
-      <div>
-        <h3>💬 Support JASON BUSINESS <span style="color:#00e676;font-size:10px">● En ligne</span></h3>
-        <small id="jbChatPhone">Chargement...</small>
-      </div>
-      <button class="jb-chat-close" id="jbChatClose">×</button>
-    </div>
-    <div class="jb-chat-messages" id="jbChatMessages">
-      <div class="jb-msg admin">👋 Bonjour ! Bienvenue chez JASON BUSINESS 🇨🇩<br>Comment puis-je vous aider aujourd'hui ?</div>
-    </div>
-    <div class="jb-chat-input">
-      <input type="text" id="jbChatInput" placeholder="Écris ton message..." maxlength="500">
-      <button class="jb-chat-send" id="jbChatSend">➤</button>
-    </div>
-  </div>
-</div>
 
 <nav class="jb-navbar">
   <button onclick="goPage('dashboard.html')" class="jb-nav-link active"><div class="jb-nav-icon">📊</div>Dashboard</button>
@@ -154,7 +133,7 @@ function openService(type){localStorage.setItem("jb_open_service",type);window.l
 </script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, onValue, push, set, runTransaction, onChildAdded } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 const jbFirebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
 const jbApp=initializeApp(jbFirebaseConfig);
 const jbDatabase=getDatabase(jbApp);
@@ -162,15 +141,11 @@ const jbPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getIt
 if(!jbPhone){window.location.replace("login.html");throw new Error("Session");}
 localStorage.setItem("jasonBusinessUserPhone",jbPhone);
 const jbUserReference=ref(jbDatabase,"jasonBusiness/users/"+jbPhone);
-const jbChatRef=ref(jbDatabase,`jasonBusiness/chats/${jbPhone}/messages`);
-const $=id=>document.getElementById(id);
 function jbFormatFC(v){return Math.floor(Number(v)||0).toLocaleString("fr-FR");}
-function jbFormatDate(v){if(!v)return "";const d=new Date(v);return d.toLocaleDateString("fr-FR");}
+function jbFormatDate(v){if(!v)return "";const d=new Date(v);if(isNaN(d.getTime()))return "";return d.toLocaleDateString("fr-FR");}
 function jbEscapeHTML(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");}
-
-// DASHBOARD SOLDE
 function jbRenderInvestments(investments){
-const container=$("jbInvestments");container.innerHTML="";
+const container=document.getElementById("jbInvestments");container.innerHTML="";
 if(!investments||Object.keys(investments).length===0){container.innerHTML=`<div class="jb-empty">📦 Aucune activité<br><br>Va dans la boutique.</div>`;return;}
 Object.entries(investments).reverse().forEach(([id,item])=>{
 if(!item||typeof item!=="object")return;
@@ -182,90 +157,41 @@ container.appendChild(card);
 });
 }
 onValue(jbUserReference,snapshot=>{
-$("jbLoading").style.display="none";
+document.getElementById("jbLoading").style.display="none";
 if(!snapshot.exists()){window.location.replace("login.html");return;}
 const user=snapshot.val()||{};
-$("jbUserPhone").textContent=user.telephone||jbPhone;
-$("jbChatPhone").textContent=user.telephone||jbPhone;
+document.getElementById("jbUserPhone").textContent=user.telephone||jbPhone;
 const principal=Number(user.solde_principal||user.solde||0);const commissions=Number(user.solde_commissions||0);const gains=Number(user.solde_gains||0);const total=principal+commissions+gains;
-$("jbMainBalance").textContent=jbFormatFC(principal);
-$("jbCommissionBalance").textContent=jbFormatFC(commissions)+" FC";
-$("jbGainBalance").textContent=jbFormatFC(gains)+" FC";
-$("jbTotalBalance").textContent=jbFormatFC(total)+" FC";
-const points=Number(user.points_fidelite??user.points??0);
-$("jbLoyaltyPoints").textContent=jbFormatFC(points);
-$("jbConvertPoints").disabled=points<100;
+document.getElementById("jbMainBalance").textContent=jbFormatFC(principal);
+document.getElementById("jbCommissionBalance").textContent=jbFormatFC(commissions)+" FC";
+document.getElementById("jbGainBalance").textContent=jbFormatFC(gains)+" FC";
+document.getElementById("jbTotalBalance").textContent=jbFormatFC(total)+" FC";
+const points=Number(user.points_fidelite??0);
+document.getElementById("jbLoyaltyPoints").textContent=jbFormatFC(points);
+document.getElementById("jbConvertPoints").disabled=points<100;
 jbRenderInvestments(user.mes_investissements);
+// Badge chat si messages non lus
+const chats=user.chats||{};
+const unread=Number(user.chat_unread||0);
+const badge=document.getElementById("jbChatBadge");
+if(unread>0){badge.textContent=unread>9?"9+":unread;badge.style.display="grid";}else{badge.style.display="none";}
 });
-
-// CHAT SYSTEM
-const chatOverlay=$("jbChatOverlay");
-const fabChat=$("jbFabChat");
-const chatClose=$("jbChatClose");
-const chatMessages=$("jbChatMessages");
-const chatInput=$("jbChatInput");
-const chatSend=$("jbChatSend");
-const chatBadge=$("jbChatBadge");
-let unread=0;
-let chatOpen=false;
-
-function openChat(){chatOverlay.classList.add("show");chatOpen=true;unread=0;chatBadge.classList.remove("show");chatInput.focus();chatMessages.scrollTop=chatMessages.scrollHeight;}
-function closeChat(){chatOverlay.classList.remove("show");chatOpen=false;}
-fabChat.onclick=openChat;
-chatClose.onclick=closeChat;
-chatOverlay.addEventListener("click",e=>{if(e.target===chatOverlay)closeChat();});
-
-function addMessage(text,from,time){
-  const div=document.createElement("div");
-  div.className=`jb-msg ${from}`;
-  const t=time? new Date(time).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}) : new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
-  div.innerHTML=`${jbEscapeHTML(text)}<div class="jb-msg-time">${t}</div>`;
-  chatMessages.appendChild(div);
-  chatMessages.scrollTop=chatMessages.scrollHeight;
-  if(!chatOpen && from==="admin"){
-    unread++;chatBadge.textContent=unread>9?"9+":unread;chatBadge.classList.add("show");
-  }
-}
-
-async function sendMessage(){
-  const text=chatInput.value.trim();
-  if(!text)return;
-  chatInput.value="";
-  const msgRef=push(jbChatRef);
-  await set(msgRef,{text,from:"client",sender:jbPhone,createdAt:Date.now(),date:new Date().toLocaleString("fr-FR"),lu:false});
-  addMessage(text,"client",Date.now());
-}
-chatSend.onclick=sendMessage;
-chatInput.addEventListener("keydown",e=>{if(e.key==="Enter")sendMessage();});
-
-// ECOUTE MESSAGES ADMIN EN TEMPS RÉEL
-onChildAdded(jbChatRef,snap=>{
-  const m=snap.val();
-  if(!m)return;
-  // évite doublon du message qu'on vient d'envoyer
-  const exists=[...chatMessages.querySelectorAll(".jb-msg")].some(el=>el.textContent.includes(m.text?.slice(0,15)));
-  if(m.from==="admin"){
-    addMessage(m.text,"admin",m.createdAt);
-  }
+document.getElementById("jbConvertPoints").addEventListener("click",async()=>{
+const button=document.getElementById("jbConvertPoints");button.disabled=true;
+try{
+const snap=await new Promise((res,rej)=>{onValue(jbUserReference,res,e=>rej(e),{onlyOnce:true})});
+if(!snap.exists())return;
+const user=snap.val()||{};const currentPoints=Number(user.points_fidelite??0);
+if(currentPoints<100){alert("❌ Minimum 100 points");return;}
+const conv=Math.floor(currentPoints/100)*100;const amount=(conv/100)*50;
+if(!confirm(`Convertir ${conv} points en ${amount} FC ?`))return;
+const tr=await runTransaction(jbUserReference,curr=>{
+if(!curr)return;const fp=Number(curr.points_fidelite??0);if(fp<conv)return;
+curr.points_fidelite=fp-conv;curr.solde_principal=Number(curr.solde_principal||0)+amount;return curr;
 });
-
-// CONVERSION POINTS
-$("jbConvertPoints").addEventListener("click",async()=>{
-  const button=$("jbConvertPoints");button.disabled=true;
-  try{
-    const snap=await new Promise((res,rej)=>{onValue(jbUserReference,res,e=>rej(e),{onlyOnce:true})});
-    if(!snap.exists())return;
-    const user=snap.val()||{};const currentPoints=Number(user.points_fidelite??0);
-    if(currentPoints<100){alert("❌ Minimum 100 points");return;}
-    const conv=Math.floor(currentPoints/100)*100;const amount=(conv/100)*50;
-    if(!confirm(`Convertir ${jbFormatFC(conv)} points en ${jbFormatFC(amount)} FC ?`))return;
-    const tr=await runTransaction(jbUserReference,curr=>{
-      if(!curr)return;const fp=Number(curr.points_fidelite??0);if(fp<conv)return;
-      curr.points_fidelite=fp-conv;curr.solde_principal=Number(curr.solde_principal||0)+amount;return curr;
-    });
-    if(!tr.committed){alert("❌ Échec");return;}
-    alert(`✅ ${jbFormatFC(conv)} points → ${jbFormatFC(amount)} FC`);
-  }catch(e){alert("⚠️ Erreur");}finally{button.disabled=false;}
+if(!tr.committed){alert("❌ Échec");return;}
+alert(`✅ ${conv} points → ${amount} FC`);
+}catch(e){alert("⚠️ Erreur");}finally{button.disabled=false;}
 });
 </script>
 </body>
