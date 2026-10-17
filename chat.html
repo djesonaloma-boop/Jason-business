@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>JASON BUSINESS — Chat</title>
 <style>
-:root{--blue:#00d2ff;--dark:#050a14;--green:#00e676;--red:#ff4757;--border:rgba(0,210,255,.18)}
+:root{--blue:#00d2ff;--dark:#050a14;--red:#ff4757;--border:rgba(0,210,255,.18)}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:white;background:#050a14;display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
 header{height:56px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:0 14px;background:#050a14;border-bottom:1px solid var(--border)}
 .brand{font-weight:900;color:var(--blue)}.btn{padding:7px 10px;border-radius:9px;border:1px solid rgba(0,210,255,.25);background:rgba(0,210,255,.08);color:var(--blue);font-size:11px;cursor:pointer}
@@ -24,52 +24,80 @@ header{height:56px;flex-shrink:0;display:flex;justify-content:space-between;alig
 .info{flex:1;min-width:0}.name{font-size:13px;font-weight:700;overflow:hidden;text-overflow:ellipsis}.prev{font-size:11px;opacity:.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .right{flex:1;display:flex;flex-direction:column;background:#070e1e;overflow:hidden;min-width:0}
 .top{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,10,20,.95);flex-shrink:0}
-.msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px; -webkit-overflow-scrolling:touch}
-.msg{max-width:75%;padding:8px 10px;border-radius:16px;font-size:12.5px;white-space:pre-wrap;word-break:break-word;line-height:1.4}
+.msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:75%;padding:8px 10px;border-radius:16px;font-size:12.5px;white-space:pre-wrap;word-break:break-word}
 .msg.me{align-self:flex-end;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;border-bottom-right-radius:6px}
 .msg.other{align-self:flex-start;background:rgba(255,255,255,.1);border-bottom-left-radius:6px}
-
-/* FIX PHOTO TROP GROSSE - ICI */
-.msg .photo-wrap{margin-top:6px;border-radius:12px;overflow:hidden;max-width:180px;max-height:200px;background:#000;display:block}
-.msg .photo-wrap img{width:100%;height:auto;max-width:180px;max-height:200px;object-fit:cover;display:block;cursor:pointer}
+.msg .photo-wrap{margin-top:6px;border-radius:12px;overflow:hidden;max-width:160px;max-height:160px;background:#000;display:block;border:1px solid rgba(255,255,255,.15)}
+.msg .photo-wrap img{width:100%;height:auto;max-width:160px;max-height:160px;object-fit:cover;display:block}
 .msg audio{margin-top:6px;width:200px;max-width:100%}
-
-/* FIX INPUT TOUJOURS VISIBLE EN BAS */
-.input{padding:8px 8px calc(8px + env(safe-area-inset-bottom));display:flex;gap:6px;align-items:flex-end;background:#0a1425;border-top:1px solid var(--border);flex-shrink:0;position:sticky;bottom:0}
-.input textarea{flex:1;min-height:40px;max-height:90px;padding:10px 12px;border-radius:18px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none;font-size:13px;line-height:1.3}
+.input{padding:8px 8px calc(8px + env(safe-area-inset-bottom));display:flex;gap:6px;align-items:flex-end;background:#0a1425;border-top:1px solid var(--border);flex-shrink:0}
+.input textarea{flex:1;min-height:40px;max-height:90px;padding:10px 12px;border-radius:18px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none;font-size:13px}
 .tbtn{width:40px;height:40px;flex-shrink:0;border-radius:50%;border:1px solid #293850;background:#0c192b;color:white;display:grid;place-items:center;cursor:pointer}
+.tbtn.recording{background:#ff4757!important;border-color:#ff4757!important;animation:pulse 1s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,71,87,.7)}70%{box-shadow:0 0 0 10px rgba(255,71,87,0)}100%{box-shadow:0 0 0 0 rgba(255,71,87,0)}}
 .send{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:0;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;font-size:18px;cursor:pointer}
-
 .debug{padding:8px 10px;background:#ffeb3b22;border:1px solid #ffeb3b44;color:#ffeb3b;font-size:10px;border-radius:8px;margin:6px}
 .add-box{padding:8px 10px;display:flex;gap:6px;border-bottom:1px solid var(--border);flex-shrink:0}
 .empty{flex:1;display:grid;place-items:center;text-align:center;opacity:.6;padding:20px;font-size:12px}
-.call-overlay{display:none;position:fixed;inset:0;z-index:5000;background:#050a14;align-items:center;justify-content:center;flex-direction:column;padding:20px}
+
+/* APPEL FIXE - STYLE WHATSAPP */
+.call-overlay{display:none;position:fixed;inset:0;z-index:9999;background:radial-gradient(ellipse at center,#10203f 0%,#050a14 70%);align-items:center;justify-content:center;flex-direction:column;padding:20px}
 .call-overlay.show{display:flex}
-.call-overlay video{width:100%;max-width:400px;height:220px;background:#000;border-radius:16px;margin:6px;object-fit:cover}
-@media(max-width:800px){.wrap{flex-direction:column}.left{position:absolute;inset:0;z-index:20;width:100%}.left.hide{display:none}.right{flex:1}.msg{max-width:82%}.msg .photo-wrap{max-width:160px;max-height:170px}}
+.call-avatar{width:110px;height:110px;border-radius:30px;background:linear-gradient(135deg,#00d2ff,#0077ff);display:grid;place-items:center;font-size:40px;font-weight:900;margin-bottom:14px;box-shadow:0 0 0 6px rgba(0,210,255,.1),0 0 40px rgba(0,210,255,.3)}
+.call-avatar img{width:100%;height:100%;object-fit:cover;border-radius:30px}
+.call-name{font-size:18px;font-weight:800;margin:6px 0}
+.call-timer{font-size:13px;opacity:.7;margin-bottom:10px}
+.call-videos{position:relative;width:100%;max-width:380px;height:520px;background:#000;border-radius:20px;overflow:hidden;border:1px solid var(--border);display:none}
+.call-videos.show{display:block}
+.call-videos video#remoteVideo{width:100%;height:100%;object-fit:cover;background:#000}
+.call-videos video#localVideo{position:absolute;right:12px;bottom:12px;width:90px;height:130px;border-radius:12px;border:2px solid white;object-fit:cover;background:#111;box-shadow:0 8px 20px rgba(0,0,0,.5)}
+.call-actions{display:flex;gap:14px;margin-top:18px}
+.cbtn{width:56px;height:56px;border-radius:50%;border:0;display:grid;place-items:center;font-size:22px;cursor:pointer}
+.cbtn.mute{background:rgba(255,255,255,.12);color:white;border:1px solid rgba(255,255,255,.15)}
+.cbtn.hang{background:#ff4757;color:white;box-shadow:0 0 20px rgba(255,71,87,.4)}
+.cbtn.cam{background:rgba(255,255,255,.12);color:white;border:1px solid rgba(255,255,255,.15)}
+.cbtn:active{transform:scale(.92)}
+
+@media(max-width:800px){.wrap{flex-direction:column}.left{position:absolute;inset:0;z-index:20;width:100%}.left.hide{display:none}.msg{max-width:82%}}
 </style>
 </head>
 <body>
 <header>
   <div class="brand">💬 JASON CHAT — <span id="myPhoneShow">...</span></div>
-  <div style="display:flex;gap:6px"><button class="btn" id="btnShowLeft">☰ Chats</button><a href="dashboard.html" class="btn">Dashboard</a></div>
+  <div style="display:flex;gap:6px"><button class="btn" id="btnShowLeft">☰</button><a href="dashboard.html" class="btn">Dashboard</a></div>
 </header>
 <div class="wrap">
   <aside class="left" id="leftPanel">
     <div class="tabs"><div class="tab active" data-tab="chats">💬 Chats</div><div class="tab" data-tab="users">👥 Utilisateurs</div><div class="tab" data-tab="requests">🔔 Demandes <span id="reqCount" style="background:#ff4757;color:white;padding:1px 5px;border-radius:10px;font-size:9px;display:none">0</span></div></div>
-    <div class="add-box"><input id="manualPhone" placeholder="+243... Ajouter numéro"><button class="btn" id="btnAddManual">+</button></div>
+    <div class="add-box"><input id="manualPhone" placeholder="+243... Ajouter"><button class="btn" id="btnAddManual">+</button></div>
     <div class="search"><input id="search" placeholder="🔍 Rechercher..."></div>
     <div id="debugArea"></div>
     <div class="list" id="list"></div>
   </aside>
-  <section class="right" id="rightPanel">
-    <div class="top"><div style="display:flex;align-items:center;gap:8px"><div class="av" id="chatAvatar" style="width:36px;height:36px;font-size:12px">JB</div><div><h3 id="chatName" style="margin:0;font-size:14px">Sélectionne un chat</h3><small id="chatPhone" style="font-size:11px;opacity:.6">Messenger Jason Business</small></div></div><div style="display:flex;gap:6px"><button class="btn" id="voiceCallBtn">📞</button><button class="btn" id="videoCallBtn">🎥</button></div></div>
-    <div class="msgs" id="msgs"><div class="empty">👥 Va dans Utilisateurs → envoie demande → quand il accepte, entre dans la conversation</div></div>
-    <div class="input"><label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*" hidden></label><button class="tbtn" id="recordBtn">🎤</button><textarea id="msgInput" placeholder="Écris un message..." disabled rows="1"></textarea><button class="send" id="sendBtn" disabled>➤</button></div>
+  <section class="right">
+    <div class="top"><div style="display:flex;align-items:center;gap:8px"><div class="av" id="chatAvatar" style="width:36px;height:36px;font-size:12px">JB</div><div><h3 id="chatName" style="margin:0;font-size:14px">Sélectionne un chat</h3><small id="chatPhone" style="font-size:11px;opacity:.6">Messenger</small></div></div><div style="display:flex;gap:6px"><button class="btn" id="voiceCallBtn">📞 Vocal</button><button class="btn" id="videoCallBtn">🎥 Vidéo</button></div></div>
+    <div class="msgs" id="msgs"><div class="empty">Entre dans une conversation pour appeler</div></div>
+    <div class="input"><label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*" hidden></label><button class="tbtn" id="recordBtn" title="Appuie pour enregistrer vocal">🎤</button><textarea id="msgInput" placeholder="Écris un message..." disabled rows="1"></textarea><button class="send" id="sendBtn" disabled>➤</button></div>
   </section>
 </div>
 
-<div class="call-overlay" id="callOverlay"><h2 id="callStatus">📞 Appel...</h2><video id="localVideo" autoplay muted playsinline></video><video id="remoteVideo" autoplay playsinline></video><div style="display:flex;gap:12px;margin-top:14px"><button class="btn" id="muteBtn">🎤 Mute</button><button class="btn" style="background:#ff4757;color:white" id="hangBtn">📵 Raccrocher</button><button class="btn" id="camBtn">🎥 Cam</button></div></div>
+<!-- CALL OVERLAY FIXE -->
+<div class="call-overlay" id="callOverlay">
+  <div id="callAvatarBox" class="call-avatar">JB</div>
+  <div id="callName" class="call-name">El mago</div>
+  <div id="callStatus" class="call-timer">📞 Appel vocal...</div>
+  <div id="callVideos" class="call-videos">
+    <video id="remoteVideo" autoplay playsinline></video>
+    <video id="localVideo" autoplay muted playsinline></video>
+  </div>
+  <div class="call-actions">
+    <button class="cbtn mute" id="muteBtn">🎤</button>
+    <button class="cbtn hang" id="hangBtn">📵</button>
+    <button class="cbtn cam" id="camBtn">🎥</button>
+  </div>
+  <div style="margin-top:14px;font-size:10px;opacity:.5">Micro et caméra demandent autorisation HTTPS</div>
+</div>
 
 <script type="module">
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -85,12 +113,13 @@ if(!myPhone){location.replace("login.html");throw new Error("no phone")}
 $("myPhoneShow").textContent=myPhone;
 
 let tab="chats", activeChat=null, allUsers={}, myRequests={}, myChats={}, manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]");
-let pc=null, localStream=null, currentCallId=null;
+let pc=null, localStream=null, currentCallId=null, callTimerInt=null, callSec=0;
+let mediaRecorder=null, audioChunks=[], isRecording=false;
 
 function esc(s){return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")}
 function timeStr(ts){if(!ts) return ""; return new Date(ts).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}
 function getChatId(a,b){return [a,b].sort().join("_")}
-function showDebug(msg){$("debugArea").innerHTML=`<div class="debug">DEBUG: ${esc(msg)}</div>`}
+function showDebug(msg){$("debugArea").innerHTML=`<div class="debug">${esc(msg)}</div>`}
 
 document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");tab=t.dataset.tab;render();});
 $("search").oninput=()=>render();
@@ -101,11 +130,10 @@ async function loadUsers(){
     const snap1=await get(ref(db,"jasonBusiness/users"));
     if(snap1.exists()){ allUsers=snap1.val()||{}; showDebug(`✅ ${Object.keys(allUsers).length} users`); render(); return; }
   }catch(e){}
-  showDebug(`⚠️ Mode manuel: ${myPhone}`);
-  allUsers={}; render();
+  showDebug(`Mode manuel: ${myPhone}`); allUsers={}; render();
 }
 loadUsers();
-onValue(ref(db,"jasonBusiness/users"),snap=>{ if(snap.exists()){ allUsers=snap.val()||{}; showDebug(`✅ Live: ${Object.keys(allUsers).length} users`); render(); }});
+onValue(ref(db,"jasonBusiness/users"),snap=>{ if(snap.exists()){ allUsers=snap.val()||{}; render(); }});
 onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),snap=>{
   myRequests=snap.val()||{};
   const inc=Object.values(myRequests).filter(r=>r.type==="incoming"&&r.status==="pending").length;
@@ -133,26 +161,22 @@ function render(){
   const container=$("list"); container.innerHTML="";
   const users=getCombinedUsers();
   if(tab==="users"){
-    const entries=Object.entries(users);
-    if(entries.length===0){ container.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucun utilisateur</div>`; return; }
-    entries.forEach(([phone,u])=>{
+    Object.entries(users).forEach(([phone,u])=>{
       if(phone===myPhone) return;
       if(q && !phone.toLowerCase().includes(q)) return;
       const chatId=getChatId(myPhone,phone);
       const isFriend=myChats[chatId]?.status==="accepted";
-      const hasSent=myRequests[phone]?.status==="pending" && myRequests[phone]?.type==="outgoing";
+      const hasSent=myRequests[phone]?.type==="outgoing";
       const photo=getUserPhoto(phone);
-      const div=document.createElement("div");
-      div.className="item";
-      div.innerHTML=`<div class="av">${photo?`<img src="${photo}">`:esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(u.nom||u.name||phone)}</div><div class="prev">${esc(phone)} • ${isFriend?"✅ Ami":hasSent?"⏳ Envoyée":"👤 Utilisateur"}</div></div><div>${isFriend?"💬":hasSent?"⏳":"+"}</div>`;
-      div.onclick=()=>{ if(isFriend){ openChat(phone); } else if(!hasSent){ sendRequest(phone); } };
+      const div=document.createElement("div"); div.className="item";
+      div.innerHTML=`<div class="av">${photo?`<img src="${photo}">`:esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(u.nom||u.name||phone)}</div><div class="prev">${esc(phone)} • ${isFriend?"✅ Ami":hasSent?"⏳ Envoyée":"👤"}</div></div><div>${isFriend?"💬":hasSent?"⏳":"+"}</div>`;
+      div.onclick=()=>{ if(isFriend) openChat(phone); else if(!hasSent) sendRequest(phone); };
       container.appendChild(div);
     });
-  }
-  else if(tab==="requests"){
+  }else if(tab==="requests"){
     const reqs=Object.entries(myRequests).filter(([_,r])=>r.type==="incoming");
     if(reqs.length===0){container.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucune demande</div>`;return}
-    reqs.forEach(([phone,r])=>{
+    reqs.forEach(([phone])=>{
       const photo=getUserPhoto(phone);
       const div=document.createElement("div"); div.className="item";
       div.innerHTML=`<div class="av">${photo?`<img src="${photo}">`:esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[phone]?.nom||phone)}</div><div class="prev">Veut discuter</div></div>`;
@@ -162,16 +186,14 @@ function render(){
     });
     container.querySelectorAll("[data-a]").forEach(b=>b.onclick=(e)=>{e.stopPropagation(); acceptRequest(b.dataset.a);});
     container.querySelectorAll("[data-r]").forEach(b=>b.onclick=(e)=>{e.stopPropagation(); refuseRequest(b.dataset.r);});
-  }
-  else{
+  }else{
     const chatsList=Object.entries(myChats).filter(([_,c])=>c.status==="accepted").sort((a,b)=>(b[1].lastTime||0)-(a[1].lastTime||0));
     if(chatsList.length===0){container.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucun chat</div>`;return}
     chatsList.forEach(([chatId,chat])=>{
       const other=chatId.split("_").find(p=>p!==myPhone); if(!other) return;
-      if(q&&!other.toLowerCase().includes(q) && !(allUsers[other]?.nom||"").toLowerCase().includes(q)) return;
       const photo=getUserPhoto(other);
       const div=document.createElement("div"); div.className="item"+(activeChat===other?" active":"");
-      div.innerHTML=`<div class="av">${photo?`<img src="${photo}">`:esc(other.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[other]?.nom||other)}</div><div class="prev">${esc((chat.lastMsg||"").slice(0,35))||"Nouveau chat"}</div></div><div style="font-size:9px;text-align:right"><div>${timeStr(chat.lastTime)}</div>${chat.unread?`<div style="background:#ff4757;color:white;padding:2px 6px;border-radius:10px;margin-top:3px;display:inline-block">${chat.unread}</div>`:""}</div>`;
+      div.innerHTML=`<div class="av">${photo?`<img src="${photo}">`:esc(other.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[other]?.nom||other)}</div><div class="prev">${esc((chat.lastMsg||"").slice(0,35))||"Nouveau"}</div></div><div style="font-size:9px;text-align:right"><div>${timeStr(chat.lastTime)}</div>${chat.unread?`<div style="background:#ff4757;padding:2px 6px;border-radius:10px;margin-top:3px">${chat.unread}</div>`:""}</div>`;
       div.onclick=()=>openChat(other); container.appendChild(div);
     });
   }
@@ -184,8 +206,8 @@ async function sendRequest(toPhone){
 }
 async function acceptRequest(fromPhone){
   const chatId=getChatId(myPhone,fromPhone);
-  await set(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{with:fromPhone,status:"accepted",lastMsg:"✅ Ami accepté",lastTime:Date.now(),unread:0});
-  await set(ref(db,`jasonBusiness/user_chats/${fromPhone}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:"✅ Ami accepté",lastTime:Date.now(),unread:1});
+  await set(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{with:fromPhone,status:"accepted",lastMsg:"✅ Accepté",lastTime:Date.now(),unread:0});
+  await set(ref(db,`jasonBusiness/user_chats/${fromPhone}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:"✅ Accepté",lastTime:Date.now(),unread:1});
   await remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${fromPhone}`));
   await remove(ref(db,`jasonBusiness/chat_requests/${fromPhone}/${myPhone}`));
   tab="chats"; document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active")); document.querySelector('[data-tab="chats"]').classList.add("active"); render(); setTimeout(()=>openChat(fromPhone),300);
@@ -204,7 +226,6 @@ function openChat(otherPhone){
   if(photo){ $("chatAvatar").innerHTML=`<img src="${photo}" style="width:100%;height:100%;object-fit:cover;border-radius:12px">`; }
   else{ $("chatAvatar").textContent=otherPhone.slice(-2); }
   $("msgInput").disabled=false; $("sendBtn").disabled=false;
-  $("msgInput").placeholder="Message à "+name+"...";
   if(window.innerWidth<=800){ $("leftPanel").classList.add("hide"); }
   const chatId=getChatId(myPhone,otherPhone);
   onValue(ref(db,`jasonBusiness/messages/${chatId}`),snap=>{
@@ -214,31 +235,23 @@ function openChat(otherPhone){
   });
   render();
 }
-
 function renderMessages(msgs){
   const c=$("msgs");
-  if(msgs.length===0){
-    c.innerHTML=`<div style="flex:1;display:grid;place-items:center;opacity:.6;padding:20px;text-align:center">💬 Début avec ${esc(allUsers[activeChat]?.nom||activeChat)}</div>`;
-    return;
-  }
+  if(msgs.length===0){ c.innerHTML=`<div style="flex:1;display:grid;place-items:center;opacity:.6;padding:20px">💬 Début avec ${esc(allUsers[activeChat]?.nom||activeChat)}</div>`; return; }
   c.innerHTML="";
   msgs.forEach(m=>{
     const isMe=m.from===myPhone;
     const div=document.createElement("div"); div.className="msg "+(isMe?"me":"other");
     let html=esc(m.text||"");
-    if(m.photo){
-      html+=`<div class="photo-wrap"><img src="${m.photo}" onclick="window.open(this.src,'_blank')"></div>`;
-    }
-    if(m.audio) html+=`<audio controls src="${m.audio}" style="width:200px;margin-top:6px"></audio>`;
+    if(m.photo){ html+=`<div class="photo-wrap"><img src="${m.photo}" onclick="window.open(this.src,'_blank')"></div>`; }
+    if(m.audio){ html+=`<audio controls src="${m.audio}" style="width:200px;margin-top:6px"></audio>`; }
     html+=`<div style="font-size:8px;opacity:.6;margin-top:4px;text-align:right">${timeStr(m.createdAt)} ${isMe?"✓✓":""}</div>`;
     div.innerHTML=html; c.appendChild(div);
   });
   c.scrollTop=c.scrollHeight;
 }
-
 async function sendText(){
-  const text=$("msgInput").value.trim();
-  if(!text||!activeChat) return;
+  const text=$("msgInput").value.trim(); if(!text||!activeChat) return;
   $("msgInput").value="";
   const chatId=getChatId(myPhone,activeChat);
   const newRef=push(ref(db,`jasonBusiness/messages/${chatId}`));
@@ -247,26 +260,14 @@ async function sendText(){
   const unread=(unreadSnap.val()||0)+1;
   await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:text,lastTime:Date.now()});
   const otherExists=await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`));
-  if(!otherExists.exists()){
-    await set(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:text,lastTime:Date.now(),unread});
-  }else{
-    await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:text,lastTime:Date.now(),unread});
-  }
-  autoResize();
+  if(!otherExists.exists()){ await set(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:text,lastTime:Date.now(),unread}); }
+  else{ await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:text,lastTime:Date.now(),unread}); }
 }
-function autoResize(){
-  const ta=$("msgInput");
-  ta.style.height="auto";
-  ta.style.height=Math.min(ta.scrollHeight,90)+"px";
-}
-$("msgInput").addEventListener("input",autoResize);
 $("sendBtn").onclick=sendText;
 $("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText()}});
 
 $("photoInput").onchange=e=>{
-  const file=e.target.files[0];
-  if(!file||!activeChat) return;
-  if(file.size>5*1024*1024){alert("Image trop grande max 5Mo");return}
+  const file=e.target.files[0]; if(!file||!activeChat) return;
   const reader=new FileReader();
   reader.onload=async()=>{
     const chatId=getChatId(myPhone,activeChat);
@@ -275,79 +276,167 @@ $("photoInput").onchange=e=>{
     await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:"📷 Photo",lastTime:Date.now()});
     await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:"📷 Photo",lastTime:Date.now(),unread:1});
   };
-  reader.readAsDataURL(file);
-  e.target.value="";
+  reader.readAsDataURL(file); e.target.value="";
 };
 
-let mediaRecorder=null, audioChunks=[], isRecording=false;
+// === VOCAL FIXE QUI MARCHE ===
 $("recordBtn").onclick=async()=>{
-  if(!activeChat){alert("Choisis un chat");return}
+  if(!activeChat){alert("Entre dans une conversation d'abord");return}
   if(!isRecording){
     try{
       const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-      mediaRecorder=new MediaRecorder(stream); audioChunks=[];
-      mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
+      mediaRecorder=new MediaRecorder(stream, {mimeType: 'audio/webm'});
+      audioChunks=[];
+      mediaRecorder.ondataavailable=e=>{ if(e.data.size>0) audioChunks.push(e.data); };
       mediaRecorder.onstop=async()=>{
         const blob=new Blob(audioChunks,{type:"audio/webm"});
-        const r=new FileReader();
-        r.onload=async()=>{
+        if(blob.size<1000){ alert("Vocal trop court"); stream.getTracks().forEach(t=>t.stop()); return; }
+        const reader=new FileReader();
+        reader.onload=async()=>{
           const chatId=getChatId(myPhone,activeChat);
           const newRef=push(ref(db,`jasonBusiness/messages/${chatId}`));
-          await set(newRef,{from:myPhone,to:activeChat,text:"🎤 Vocal",audio:r.result,createdAt:Date.now()});
+          await set(newRef,{from:myPhone,to:activeChat,text:"🎤 Vocal",audio:reader.result,createdAt:Date.now()});
           await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now()});
           await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now(),unread:1});
         };
-        r.readAsDataURL(blob); stream.getTracks().forEach(t=>t.stop());
+        reader.readAsDataURL(blob);
+        stream.getTracks().forEach(t=>t.stop());
+        isRecording=false;
+        $("recordBtn").textContent="🎤";
+        $("recordBtn").classList.remove("recording");
+        $("recordBtn").title="Appuie pour enregistrer vocal";
       };
-      mediaRecorder.start(); isRecording=true; $("recordBtn").textContent="⏹️"; $("recordBtn").style.background="#ff4757";
-    }catch(err){alert("Micro refusé")}
-  }else{ mediaRecorder.stop(); isRecording=false; $("recordBtn").textContent="🎤"; $("recordBtn").style.background=""; }
+      mediaRecorder.start();
+      isRecording=true;
+      $("recordBtn").textContent="⏹️";
+      $("recordBtn").classList.add("recording");
+      $("recordBtn").title="Appuie pour arrêter et envoyer";
+      setTimeout(()=>{ if(isRecording && mediaRecorder.state==="recording"){ mediaRecorder.stop(); } }, 60000);
+    }catch(err){
+      alert("Micro refusé. Autorise le micro dans les paramètres du navigateur et utilise HTTPS.\nErreur: "+err.message);
+      console.error(err);
+    }
+  }else{
+    if(mediaRecorder && mediaRecorder.state==="recording"){ mediaRecorder.stop(); }
+  }
 };
+
+// === APPEL FIXE: VOCAL = AVATAR, VIDEO = VRAIE VIDEO ===
+function startTimer(){
+  callSec=0;
+  callTimerInt=setInterval(()=>{
+    callSec++;
+    const m=String(Math.floor(callSec/60)).padStart(2,'0');
+    const s=String(callSec%60).padStart(2,'0');
+    $("callStatus").textContent=`⏱️ ${m}:${s}`;
+  },1000);
+}
+function stopTimer(){ clearInterval(callTimerInt); callSec=0; }
+
+async function startCall(isVideo){
+  if(!activeChat){alert("Entre dans une conversation d'abord");return}
+  const otherName=allUsers[activeChat]?.nom||activeChat;
+  const otherPhoto=getUserPhoto(activeChat);
+  
+  currentCallId=getChatId(myPhone,activeChat)+"_"+Date.now();
+  $("callOverlay").classList.add("show");
+  $("callName").textContent=otherName;
+  $("callAvatarBox").innerHTML=otherPhoto?`<img src="${otherPhoto}">`:esc(otherName.slice(0,2).toUpperCase());
+  
+  if(isVideo){
+    $("callVideos").classList.add("show");
+    $("callAvatarBox").style.display="none";
+    $("callStatus").textContent="🎥 Appel vidéo en cours...";
+  }else{
+    $("callVideos").classList.remove("show");
+    $("callAvatarBox").style.display="grid";
+    $("callStatus").textContent="📞 Appel vocal... en attente";
+  }
+
+  try{
+    localStream=await navigator.mediaDevices.getUserMedia({video:isVideo,audio:true});
+  }catch(e){
+    alert("⚠️ Autorise caméra/micro et utilise HTTPS (Vercel en HTTPS obligatoire). Erreur: "+e.message);
+    $("callOverlay").classList.remove("show");
+    return;
+  }
+  
+  $("localVideo").srcObject=localStream;
+  if(isVideo) $("localVideo").style.display="block"; else $("localVideo").style.display="none";
+
+  pc=new RTCPeerConnection({iceServers:[{urls:"stun:stun.l.google.com:19302"}]});
+  localStream.getTracks().forEach(t=>pc.addTrack(t,localStream));
+  pc.onicecandidate=e=>{ if(e.candidate) push(ref(db,`jasonBusiness/calls/${currentCallId}/candidates/${myPhone}`),e.candidate.toJSON()); };
+  pc.ontrack=e=>{ $("remoteVideo").srcObject=e.streams[0]; if(isVideo){ $("callVideos").classList.add("show"); } startTimer(); $("callStatus").textContent="✅ Connecté"; };
+  pc.onconnectionstatechange=()=>{ if(pc.connectionState==="connected"){ startTimer(); $("callStatus").textContent="✅ En communication"; } };
+
+  const offer=await pc.createOffer(); await pc.setLocalDescription(offer);
+  await set(ref(db,`jasonBusiness/calls/${currentCallId}`),{from:myPhone,to:activeChat,isVideo,offer:{type:offer.type,sdp:offer.sdp},createdAt:Date.now(),status:"ringing"});
+
+  onValue(ref(db,`jasonBusiness/calls/${currentCallId}/answer`),async snap=>{
+    const ans=snap.val(); if(ans&&pc){ try{ await pc.setRemoteDescription(new RTCSessionDescription(ans)); }catch{} }
+  });
+  onValue(ref(db,`jasonBusiness/calls/${currentCallId}/candidates/${activeChat}`),snap=>{
+    const cands=snap.val()||{}; Object.values(cands).forEach(async c=>{ try{ await pc.addIceCandidate(new RTCIceCandidate(c)); }catch{} });
+  });
+  onValue(ref(db,`jasonBusiness/calls/${currentCallId}/status`),snap=>{ if(snap.val()==="ended"){ endCall(); } });
+}
+
+function endCall(){
+  stopTimer();
+  $("callOverlay").classList.remove("show");
+  $("callVideos").classList.remove("show");
+  $("callAvatarBox").style.display="grid";
+  if(pc){pc.close();pc=null}
+  if(localStream){localStream.getTracks().forEach(t=>t.stop());localStream=null}
+  if(currentCallId){update(ref(db,`jasonBusiness/calls/${currentCallId}`),{status:"ended"}); setTimeout(()=>remove(ref(db,`jasonBusiness/calls/${currentCallId}`)),2000); currentCallId=null}
+  $("localVideo").srcObject=null; $("remoteVideo").srcObject=null;
+}
 
 $("voiceCallBtn").onclick=()=>startCall(false);
 $("videoCallBtn").onclick=()=>startCall(true);
-async function startCall(isVideo){
-  if(!activeChat){alert("Entre dans une conversation d'abord");return}
-  const callId=getChatId(myPhone,activeChat)+"_"+Date.now(); currentCallId=callId;
-  $("callOverlay").classList.add("show");
-  $("callStatus").textContent=(isVideo?"🎥 Vidéo":"📞 Vocal")+" vers "+(allUsers[activeChat]?.nom||activeChat);
-  try{ localStream=await navigator.mediaDevices.getUserMedia({video:isVideo,audio:true}); }
-  catch(e){alert("Caméra/micro refusé");return;}
-  $("localVideo").srcObject=localStream;
-  pc=new RTCPeerConnection({iceServers:[{urls:"stun:stun.l.google.com:19302"}]});
-  localStream.getTracks().forEach(t=>pc.addTrack(t,localStream));
-  pc.onicecandidate=e=>{ if(e.candidate) push(ref(db,`jasonBusiness/calls/${callId}/candidates/${myPhone}`),e.candidate.toJSON()); };
-  pc.ontrack=e=>{$("remoteVideo").srcObject=e.streams[0]};
-  const offer=await pc.createOffer(); await pc.setLocalDescription(offer);
-  await set(ref(db,`jasonBusiness/calls/${callId}`),{from:myPhone,to:activeChat,isVideo,offer:{type:offer.type,sdp:offer.sdp},createdAt:Date.now(),status:"ringing"});
-  onValue(ref(db,`jasonBusiness/calls/${callId}/answer`),async snap=>{ const ans=snap.val(); if(ans&&pc){ try{ await pc.setRemoteDescription(new RTCSessionDescription(ans)); }catch{} } });
-}
-$("hangBtn").onclick=()=>{
-  $("callOverlay").classList.remove("show");
-  if(pc){pc.close();pc=null} if(localStream){localStream.getTracks().forEach(t=>t.stop());localStream=null}
-  if(currentCallId){update(ref(db,`jasonBusiness/calls/${currentCallId}`),{status:"ended"});currentCallId=null}
-  $("localVideo").srcObject=null; $("remoteVideo").srcObject=null;
+$("hangBtn").onclick=endCall;
+$("muteBtn").onclick=()=>{
+  if(localStream){ const a=localStream.getAudioTracks()[0]; if(a){ a.enabled=!a.enabled; $("muteBtn").textContent=a.enabled?"🎤":"🔇"; $("muteBtn").style.background=a.enabled?"rgba(255,255,255,.12)":"#ff4757"; } }
 };
-$("muteBtn").onclick=()=>{ if(localStream){ const a=localStream.getAudioTracks()[0]; if(a){ a.enabled=!a.enabled; $("muteBtn").textContent=a.enabled?"🎤 Mute":"🔇"; } } };
-$("camBtn").onclick=()=>{ if(localStream){ const v=localStream.getVideoTracks()[0]; if(v){ v.enabled=!v.enabled; } } };
+$("camBtn").onclick=()=>{
+  if(localStream){ const v=localStream.getVideoTracks()[0]; if(v){ v.enabled=!v.enabled; $("camBtn").style.background=v.enabled?"rgba(255,255,255,.12)":"#ff4757"; } }
+};
 
+// Recevoir appels
 onValue(ref(db,"jasonBusiness/calls"),async snap=>{
   const calls=snap.val()||{};
   for(const [callId,call] of Object.entries(calls)){
     if(call.to===myPhone&&call.status==="ringing"&&!currentCallId){
-      if(confirm(`📞 Appel ${call.isVideo?"vidéo":"vocal"} de ${allUsers[call.from]?.nom||call.from} — Accepter ?`)){
-        currentCallId=callId; $("callOverlay").classList.add("show"); $("callStatus").textContent="Appel de "+(allUsers[call.from]?.nom||call.from);
-        try{ localStream=await navigator.mediaDevices.getUserMedia({video:call.isVideo,audio:true}); } catch(e){ continue; }
+      const callerName=allUsers[call.from]?.nom||call.from;
+      if(confirm(`📞 Appel ${call.isVideo?"vidéo 🎥":"vocal 📞"} de ${callerName}\nAccepter ?`)){
+        currentCallId=callId;
+        $("callOverlay").classList.add("show");
+        $("callName").textContent=callerName;
+        const callerPhoto=getUserPhoto(call.from);
+        $("callAvatarBox").innerHTML=callerPhoto?`<img src="${callerPhoto}">`:esc(callerName.slice(0,2).toUpperCase());
+        
+        if(call.isVideo){ $("callVideos").classList.add("show"); $("callAvatarBox").style.display="none"; $("callStatus").textContent="🎥 Appel vidéo..."; }
+        else{ $("callVideos").classList.remove("show"); $("callAvatarBox").style.display="grid"; $("callStatus").textContent="📞 Appel vocal..."; }
+
+        try{ localStream=await navigator.mediaDevices.getUserMedia({video:call.isVideo,audio:true}); }
+        catch(e){ alert("Permission refusée: "+e.message); await update(ref(db,`jasonBusiness/calls/${callId}`),{status:"ended"}); endCall(); continue; }
+
         $("localVideo").srcObject=localStream;
         pc=new RTCPeerConnection({iceServers:[{urls:"stun:stun.l.google.com:19302"}]});
         localStream.getTracks().forEach(t=>pc.addTrack(t,localStream));
         pc.onicecandidate=e=>{ if(e.candidate) push(ref(db,`jasonBusiness/calls/${callId}/candidates/${myPhone}`),e.candidate.toJSON()); };
-        pc.ontrack=e=>{$("remoteVideo").srcObject=e.streams[0]};
+        pc.ontrack=e=>{ $("remoteVideo").srcObject=e.streams[0]; startTimer(); $("callStatus").textContent="✅ Connecté"; };
         await pc.setRemoteDescription(new RTCSessionDescription(call.offer));
         const answer=await pc.createAnswer(); await pc.setLocalDescription(answer);
         await set(ref(db,`jasonBusiness/calls/${callId}/answer`),{type:answer.type,sdp:answer.sdp});
         await update(ref(db,`jasonBusiness/calls/${callId}`),{status:"accepted"});
-      }else{ await update(ref(db,`jasonBusiness/calls/${callId}`),{status:"ended"}); }
+        onValue(ref(db,`jasonBusiness/calls/${callId}/candidates/${call.from}`),s=>{
+          const cands=s.val()||{}; Object.values(cands).forEach(async c=>{ try{ await pc.addIceCandidate(new RTCIceCandidate(c)); }catch{} });
+        });
+      }else{
+        await update(ref(db,`jasonBusiness/calls/${callId}`),{status:"ended"});
+      }
     }
   }
 });
