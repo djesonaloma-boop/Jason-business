@@ -6,7 +6,7 @@
 <title>JASON CHAT - Vocal Fix Ultime</title>
 <style>
 :root{--blue:#00d2ff;--border:rgba(0,210,255,.18)}*{box-sizing:border-box}body{margin:0;font-family:Arial;color:white;background:#050a14;display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
-header{height:56px;display:flex;justify-content:space-between;align-items:center;padding:0 14px;background:#050a14;border-bottom:1px solid var(--border)}
+header{height:56px;display:flex;justify-space-between;align-items:center;padding:0 14px;background:#050a14;border-bottom:1px solid var(--border)}
 .brand{font-weight:900;color:var(--blue)}.btn{padding:7px 10px;border-radius:9px;border:1px solid rgba(0,210,255,.25);background:rgba(0,210,255,.08);color:var(--blue);font-size:11px;cursor:pointer}
 .wrap{display:flex;flex:1;overflow:hidden}
 .left{width:360px;background:#0b1425;border-right:1px solid var(--border);display:flex;flex-direction:column}
@@ -79,7 +79,7 @@ if(!myPhone){location.replace("login.html")}
 $("myPhoneShow").textContent=myPhone;
 
 let tab="chats", activeChat=null, allUsers={}, myRequests={}, myChats={}, manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]");
-let presenceCache={}; let isRecording=false, mediaRecorder=null, audioChunks=[], recordStream=null, timerInt=null, recSec=0;
+let presenceCache={}; let isRecording=false, mediaRecorder=null, audioChunks=[], recordStream=null, timerInt=null, recSec=0, cancelFlag=false;
 
 function esc(s){return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")}
 function timeStr(ts){if(!ts)return"";return new Date(ts).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}
@@ -93,7 +93,7 @@ $("search").oninput=()=>render(); $("btnShowLeft").onclick=()=>$("leftPanel").cl
 onValue(ref(db,"jasonBusiness/users"),s=>{if(s.exists()){allUsers=s.val()||{};render()}});
 onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),s=>{myRequests=s.val()||{};const inc=Object.values(myRequests).filter(r=>r.type==="incoming"&&r.status==="pending").length;$("reqCount").textContent=inc;$("reqCount").style.display=inc>0?"inline-block":"none";render()});
 onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),s=>{myChats=s.val()||{};render()});
-$("btnAddManual").onclick=()=>{const p=$("manualPhone").value.trim();if(!p||p.length<8)return;if(!manualUsers.includes(p))manualUsers.push(p);localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));$("manualPhone").value="";render()};
+$("btnAddManual").onclick=()=>{const p=$("manualPhone").value.trim();if(!p\vert{}\vert{}p.length<8)return;if(!manualUsers.includes(p))manualUsers.push(p);localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));$("manualPhone").value="";render()};
 function getCombinedUsers(){const c={...allUsers};manualUsers.forEach(p=>{if(!c[p])c[p]={telephone:p}});return c}
 function getUserPhoto(ph){const u=allUsers[ph]||{};return u.photo||u.photoProfil||u.avatar||""}
 
@@ -120,56 +120,86 @@ async function sendRequest(toPhone){await set(ref(db,`jasonBusiness/chat_request
 async function acceptRequest(fromPhone){const chatId=getChatId(myPhone,fromPhone);await set(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{with:fromPhone,status:"accepted",lastMsg:"✅ Accepté",lastTime:Date.now(),unread:0});await set(ref(db,`jasonBusiness/user_chats/${fromPhone}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:"✅ Accepté",lastTime:Date.now(),unread:1});await remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${fromPhone}`));await remove(ref(db,`jasonBusiness/chat_requests/${fromPhone}/${myPhone}`));tab="chats";document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelector('[data-tab="chats"]').classList.add("active");render();setTimeout(()=>openChat(fromPhone),300)}
 function openChat(other){activeChat=other;const photo=getUserPhoto(other);const name=allUsers[other]?.nom||other;$("chatName").textContent=name;$("chatPhone").textContent=isOnline(other)?other+" • En ligne 🟢":"Hors ligne";if(photo)$("chatAvatar").innerHTML=`<img src="${photo}" style="width:100%;height:100%;object-fit:cover;border-radius:12px">`;else $("chatAvatar").textContent=other.slice(-2);$("msgInput").disabled=false;$("sendBtn").disabled=false;if(window.innerWidth<=800)$("leftPanel").classList.add("hide");const chatId=getChatId(myPhone,other);onValue(ref(db,`jasonBusiness/messages/${chatId}`),snap=>{const data=snap.val()||{};const msgs=Object.values(data).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));renderMessages(msgs);update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{unread:0}).catch(()=>{})});render()}
 function renderMessages(msgs){const c=$("msgs");if(msgs.length===0){c.innerHTML=`<div style="flex:1;display:grid;place-items:center;opacity:.6;padding:20px">Début avec ${esc(allUsers[activeChat]?.nom||activeChat)}</div>`;return}c.innerHTML="";msgs.forEach(m=>{const isMe=m.from===myPhone;const div=document.createElement("div");div.className="msg "+(isMe?"me":"other");let html=esc(m.text||"");if(m.photo)html+=`<div class="photo-wrap"><img src="${m.photo}" onclick="window.open(this.src,'_blank')"></div>`;if(m.audio)html+=`<audio controls src="${m.audio}"></audio>`;html+=`<div style="font-size:8px;opacity:.6;margin-top:4px;text-align:right">${timeStr(m.createdAt)} ${isMe?"✓✓":""}</div>`;div.innerHTML=html;c.appendChild(div)});c.scrollTop=c.scrollHeight}
-async function sendText(){const text=$("msgInput").value.trim();if(!text||!activeChat)return;$("msgInput").value="";const chatId=getChatId(myPhone,activeChat);const nr=push(ref(db,`jasonBusiness/messages/${chatId}`));await set(nr,{from:myPhone,to:activeChat,text,createdAt:Date.now()});const u=((await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}/unread`))).val()||0)+1;await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:text,lastTime:Date.now()});const oe=await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`));if(!oe.exists())await set(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:text,lastTime:Date.now(),unread:u});else await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:text,lastTime:Date.now(),unread:u})}
+async function sendText(){const text=$("msgInput").value.trim();if(!text\vert{}\vert{}!activeChat)return;$("msgInput").value="";const chatId=getChatId(myPhone,activeChat);const nr=push(ref(db,`jasonBusiness/messages/${chatId}`));await set(nr,{from:myPhone,to:activeChat,text,createdAt:Date.now()});const u=((await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}/unread`))).val()||0)+1;await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:text,lastTime:Date.now()});const oe=await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`));if(!oe.exists())await set(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:text,lastTime:Date.now(),unread:u});else await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:text,lastTime:Date.now(),unread:u})}
 $("sendBtn").onclick=sendText; $("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText()}});
 $("photoInput").onchange=e=>{const file=e.target.files[0];if(!file||!activeChat)return;if(file.size>4*1024*1024){alert("Max 4Mo");return}const r=new FileReader();r.onload=async()=>{const chatId=getChatId(myPhone,activeChat);const nr=push(ref(db,`jasonBusiness/messages/${chatId}`));await set(nr,{from:myPhone,to:activeChat,text:"📷 Photo",photo:r.result,createdAt:Date.now()});await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:"📷 Photo",lastTime:Date.now()});const u=((await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}/unread`))).val()||0)+1;await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:"📷 Photo",lastTime:Date.now(),unread:u})};r.readAsDataURL(file);e.target.value=""};
 
-// ===== VOCAL SANS VAGUE - 100% CLICABLE =====
+// ===== VOCAL OPTIMISÉ ET SÉCURISÉ =====
 function fmt(s){const m=String(Math.floor(s/60)).padStart(2,'0');const sec=String(s%60).padStart(2,'0');return `${m}:${sec}`}
 
 async function startVocal(){
   if(!activeChat){alert("Ouvre un chat d'abord");return}
   if(isRecording) return;
+  cancelFlag = false;
   try{
-    console.log("Demande micro...");
     recordStream=await navigator.mediaDevices.getUserMedia({audio:true});
-    let mime="audio/webm;codecs=opus"; if(!MediaRecorder.isTypeSupported(mime)) mime="audio/webm"; if(!MediaRecorder.isTypeSupported(mime)) mime="audio/mp4"; if(!MediaRecorder.isTypeSupported(mime)) mime="";
-    mediaRecorder = mime?new MediaRecorder(recordStream,{mimeType:mime}):new MediaRecorder(recordStream);
+    let options = {};
+    if (MediaRecorder.isTypeSupported("audio/webm;codecs=opus")) options = { mimeType: "audio/webm;codecs=opus" };
+    else if (MediaRecorder.isTypeSupported("audio/webm")) options = { mimeType: "audio/webm" };
+    else if (MediaRecorder.isTypeSupported("audio/mp4")) options = { mimeType: "audio/mp4" };
+
+    mediaRecorder = new MediaRecorder(recordStream, options);
     audioChunks=[]; recSec=0;
-    mediaRecorder.ondataavailable=e=>{if(e.data.size>0)audioChunks.push(e.data)};
+    
+    mediaRecorder.ondataavailable=e=>{if(e.data&&e.data.size>0)audioChunks.push(e.data)};
     mediaRecorder.onstop=async()=>{
       clearInterval(timerInt);
       $("recBar").classList.remove("show");
       $("recordBtn").classList.remove("hold");
       $("recordBtn").textContent="🎤";
       $("hint").textContent="Clique 🎤 pour parler • Re-clique ⏹️ pour envoyer";
+      
+      if(cancelFlag){
+        try{recordStream.getTracks().forEach(t=>t.stop())}catch{};
+        isRecording=false;
+        return;
+      }
+
       const blob=new Blob(audioChunks,{type:mediaRecorder.mimeType||"audio/webm"});
-      console.log("BLOB",blob.size);
-      if(blob.size<1000){alert("Trop court"); try{recordStream.getTracks().forEach(t=>t.stop())}catch{}; isRecording=false; return}
+      if(blob.size<500){
+        alert("Enregistrement trop court");
+        try{recordStream.getTracks().forEach(t=>t.stop())}catch{};
+        isRecording=false;
+        return;
+      }
+
+      $("chatPhone").textContent="⏳ Envoi vocal...";
+      $("hint").textContent="⏳ Envoi en cours, attends...";
+      const chatId=getChatId(myPhone,activeChat);
+
       try{
-        $("chatPhone").textContent="⏳ Envoi vocal...";
-        $("hint").textContent="⏳ Envoi en cours, attends...";
-        const chatId=getChatId(myPhone,activeChat);
-        const path=`vocals/${chatId}/${Date.now()}.webm`;
-        const refS=sRef(storage,path);
-        await uploadBytes(refS,blob);
-        const url=await getDownloadURL(refS);
+        let audioUrl = "";
+        try {
+          const path=`vocals/${chatId}/${Date.now()}.webm`;
+          const refS=sRef(storage,path);
+          await uploadBytes(refS,blob);
+          audioUrl = await getDownloadURL(refS);
+        } catch(stErr) {
+          console.warn("Storage échoué, conversion Base64 fallback...", stErr);
+          audioUrl = await new Promise((res)=>{
+            const reader = new FileReader();
+            reader.onloadend = () => res(reader.result);
+            reader.readAsDataURL(blob);
+          });
+        }
+
         const nr=push(ref(db,`jasonBusiness/messages/${chatId}`));
-        await set(nr,{from:myPhone,to:activeChat,text:"🎤 Vocal",audio:url,createdAt:Date.now()});
+        await set(nr,{from:myPhone,to:activeChat,text:"🎤 Vocal",audio:audioUrl,createdAt:Date.now()});
         await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now()});
         const u=((await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}/unread`))).val()||0)+1;
         await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now(),unread:u});
+        
         $("chatPhone").textContent=isOnline(activeChat)?activeChat+" • En ligne 🟢":"Hors ligne";
         $("hint").textContent="✅ Vocal envoyé !";
         setTimeout(()=>{$("hint").textContent="Clique 🎤 pour parler • Re-clique ⏹️ pour envoyer"},2000);
       }catch(e){
         console.error(e);
-        alert("ERREUR STORAGE: "+e.message+"\nActive Firebase Storage: console.firebase.google.com > Storage > Get Started > test mode");
-        $("chatPhone").textContent="❌ Erreur Storage";
-        $("hint").textContent="❌ Active Storage dans Firebase Console";
+        alert("Erreur d'envoi du vocal: "+e.message);
+        $("chatPhone").textContent="❌ Erreur d'envoi";
       }
       try{recordStream.getTracks().forEach(t=>t.stop())}catch{}; isRecording=false;
     };
+
     mediaRecorder.start(100);
     isRecording=true;
     $("recBar").classList.add("show");
@@ -177,31 +207,29 @@ async function startVocal(){
     $("recordBtn").textContent="⏹️";
     $("recTime").textContent="00:00";
     $("hint").textContent="🔴 En cours... Clique ⏹️ pour arrêter et envoyer";
-    timerInt=setInterval(()=>{recSec++;$("recTime").textContent=fmt(recSec); if(recSec>=20){try{mediaRecorder.stop()}catch{}}},1000);
+    timerInt=setInterval(()=>{recSec++;$("recTime").textContent=fmt(recSec); if(recSec>=60){stopVocal()}},1000);
   }catch(err){
     console.error(err);
-    alert("Micro bloqué: "+err.message+"\n1. Cadenas 🔒 en haut à gauche\n2. Autorisations -> Micro -> Autoriser\n3. Recharge HTTPS");
+    alert("Accès microphone refusé ou non supporté : "+err.message);
     isRecording=false;
     $("recordBtn").textContent="🎤";
     $("recBar").classList.remove("show");
   }
 }
+
 function stopVocal(){
   if(!isRecording) return;
   try{mediaRecorder.stop()}catch{isRecording=false}
 }
 
 $("recordBtn").addEventListener("click", ()=>{
-  console.log("CLICK MIC", isRecording);
   if(!isRecording) startVocal(); else stopVocal();
 });
 $("recSend").onclick=()=>stopVocal();
 $("recCancel").onclick=()=>{
   if(!isRecording) return;
-  try{mediaRecorder.stop()}catch{}
-  audioChunks=[];
-  setTimeout(()=>{try{recordStream.getTracks().forEach(t=>t.stop())}catch{}; isRecording=false; $("recBar").classList.remove("show"); $("recordBtn").classList.remove("hold"); $("recordBtn").textContent="🎤";},100);
-  clearInterval(timerInt);
+  cancelFlag = true;
+  stopVocal();
 };
 </script>
 </body>
