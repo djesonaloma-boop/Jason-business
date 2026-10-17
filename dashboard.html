@@ -4,1182 +4,269 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#050a14">
-<meta name="description" content="JASON BUSINESS — Tableau de bord">
 <title>JASON BUSINESS — Dashboard</title>
-
 <style>
-:root{
---blue:#00d2ff;
---blue2:#0077ff;
---dark:#050a14;
---green:#00e676;
---red:#ff4757;
---gold:#ffd700;
---glass:rgba(255,255,255,.055);
---romantic:rgba(0,210,255,.15);
-}
-
-*{
-box-sizing:border-box;
--webkit-tap-highlight-color:transparent;
-}
-
-html{
-scroll-behavior:smooth;
-}
-
-body{
-margin:0;
-min-height:100vh;
-font-family:"Segoe UI",Arial,sans-serif;
-color:white;
-background:
-radial-gradient(ellipse at 10% 5%,rgba(0,210,255,.12),transparent 35%),
-radial-gradient(ellipse at 90% 25%,rgba(255,215,0,.075),transparent 32%),
-linear-gradient(rgba(3,8,18,.80),rgba(3,8,18,.96)),
-url("IMG_0870.jpeg") center/cover fixed;
-padding-bottom:100px;
-overflow-x:hidden;
-}
-
-/* PARTICULES LUMINEUSES */
-body::before{
-content:"";
-position:fixed;
-inset:-50%;
-z-index:-1;
-pointer-events:none;
-background:
-radial-gradient(circle,rgba(0,210,255,.10) 1px,transparent 2px),
-radial-gradient(circle,rgba(255,215,0,.08) 1px,transparent 2px);
-background-size:47px 47px,71px 71px;
-animation:jbParticles 35s linear infinite;
-}
-
-@keyframes jbParticles{
-0%{transform:translate3d(0,0,0) rotate(0deg)}
-100%{transform:translate3d(35px,45px,0) rotate(5deg)}
-}
-
-.jb-overlay{
-min-height:100vh;
-background:
-radial-gradient(circle at top,rgba(0,210,255,.075),transparent 40%);
-}
-
-/* EN-TÊTE */
-.jb-header{
-position:relative;
-overflow:hidden;
-padding:24px 20px 22px;
-background:
-linear-gradient(135deg,rgba(0,210,255,.13),rgba(5,10,20,.80) 55%,rgba(255,215,0,.055));
-border-bottom:1px solid rgba(0,210,255,.32);
-backdrop-filter:blur(22px);
--webkit-backdrop-filter:blur(22px);
-box-shadow:0 12px 35px rgba(0,0,0,.22);
-}
-
-.jb-header::after{
-content:"";
-position:absolute;
-top:0;
-left:-100%;
-width:60%;
-height:100%;
-background:linear-gradient(90deg,transparent,rgba(255,255,255,.065),transparent);
-transform:skewX(-20deg);
-animation:jbHeaderShine 8s ease-in-out infinite;
-pointer-events:none;
-}
-
-@keyframes jbHeaderShine{
-0%,60%{left:-100%}
-100%{left:160%}
-}
-
-.jb-top{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px;
-}
-
-.jb-brand{
-font-size:20px;
-font-weight:900;
-letter-spacing:2px;
-color:var(--blue);
-text-shadow:0 0 16px rgba(0,210,255,.40);
-animation:jbBrandGlow 4s ease-in-out infinite;
-}
-
-@keyframes jbBrandGlow{
-0%,100%{text-shadow:0 0 8px rgba(0,210,255,.25)}
-50%{text-shadow:0 0 22px rgba(0,210,255,.70)}
-}
-
-.jb-status{
-font-size:10px;
-color:var(--green);
-padding:7px 11px;
-border-radius:20px;
-background:rgba(0,230,118,.09);
-border:1px solid rgba(0,230,118,.28);
-box-shadow:0 0 15px rgba(0,230,118,.06);
-white-space:nowrap;
-}
-
-.jb-user-box{
-margin-top:20px;
-animation:jbFadeUp .8s ease both;
-}
-
-.jb-user-box small{
-font-size:10px;
-opacity:.60;
-letter-spacing:1px;
-}
-
-.jb-user-box h2{
-margin:7px 0 0;
-font-size:20px;
-word-break:break-all;
-text-shadow:0 3px 18px rgba(0,210,255,.15);
-}
-
-#jbDashboardStatus{
-text-align:center;
-min-height:20px;
-padding:10px 20px;
-font-size:11px;
-color:#ffeb3b;
-}
-
-/* CARTE DU SOLDE */
-.jb-balance-card{
-position:relative;
-overflow:hidden;
-margin:20px;
-padding:24px;
-border-radius:25px;
-background:
-linear-gradient(145deg,rgba(0,210,255,.17),rgba(5,10,20,.82) 55%,rgba(0,119,255,.09));
-border:1px solid rgba(0,210,255,.42);
-box-shadow:
-0 18px 45px rgba(0,0,0,.35),
-0 0 28px rgba(0,210,255,.08),
-inset 0 1px 0 rgba(255,255,255,.08);
-backdrop-filter:blur(20px);
--webkit-backdrop-filter:blur(20px);
-animation:jbCardFloat 6s ease-in-out infinite;
-}
-
-.jb-balance-card::before{
-content:"";
-position:absolute;
-top:-90px;
-right:-70px;
-width:190px;
-height:190px;
-border-radius:50%;
-background:radial-gradient(circle,rgba(0,210,255,.16),transparent 70%);
-pointer-events:none;
-animation:jbOrb 7s ease-in-out infinite alternate;
-}
-
-.jb-balance-card::after{
-content:"";
-position:absolute;
-left:0;
-top:0;
-width:100%;
-height:1px;
-background:linear-gradient(90deg,transparent,var(--blue),var(--gold),transparent);
-opacity:.75;
-}
-
-@keyframes jbCardFloat{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-3px)}
-}
-
-@keyframes jbOrb{
-from{transform:translate(0,0) scale(.85)}
-to{transform:translate(-25px,20px) scale(1.2)}
-}
-
-.jb-balance-title{
-position:relative;
-font-size:11px;
-opacity:.68;
-text-transform:uppercase;
-letter-spacing:1.3px;
-}
-
-.jb-balance{
-position:relative;
-margin:9px 0;
-font-size:36px;
-font-weight:900;
-color:var(--blue);
-text-shadow:0 0 17px rgba(0,210,255,.38);
-overflow-wrap:anywhere;
-}
-
-.jb-currency{
-font-size:13px;
-opacity:.75;
-}
-
-.jb-balance-description{
-font-size:10px;
-opacity:.52;
-}
-
-.jb-balance-grid{
-display:grid;
-grid-template-columns:repeat(3,minmax(0,1fr));
-gap:8px;
-margin-top:22px;
-}
-
-.jb-money-box{
-padding:13px 5px;
-text-align:center;
-border-radius:15px;
-background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.018));
-border:1px solid rgba(255,255,255,.09);
-transition:transform .3s,border-color .3s,background .3s;
-}
-
-.jb-money-box:active{
-transform:scale(.96);
-border-color:rgba(0,210,255,.45);
-background:rgba(0,210,255,.08);
-}
-
-.jb-icon{
-font-size:20px;
-filter:drop-shadow(0 0 8px rgba(0,210,255,.15));
-}
-
-.jb-money-box small{
-display:block;
-margin-top:6px;
-font-size:8px;
-opacity:.60;
-text-transform:uppercase;
-}
-
-.jb-money-box b{
-display:block;
-margin-top:5px;
-font-size:11px;
-overflow-wrap:anywhere;
-}
-
-/* BOUTONS */
-.jb-actions{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-margin:20px;
-}
-
-.jb-action{
-position:relative;
-overflow:hidden;
-padding:16px 10px;
-border-radius:15px;
-text-align:center;
-text-decoration:none;
-font-size:12px;
-font-weight:900;
-transition:transform .25s,box-shadow .25s;
-}
-
-.jb-action::after{
-content:"";
-position:absolute;
-top:0;
-left:-120%;
-width:60%;
-height:100%;
-transform:skewX(-20deg);
-background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);
-transition:left .6s;
-}
-
-.jb-action:active{
-transform:scale(.96);
-}
-
-.jb-action:active::after{
-left:150%;
-}
-
-.jb-recharge{
-color:#001018;
-background:linear-gradient(120deg,var(--blue),#00a8ff,var(--blue));
-background-size:200% 100%;
-box-shadow:0 7px 22px rgba(0,210,255,.13);
-animation:jbButtonGlow 5s ease infinite;
-}
-
-.jb-withdraw{
-color:#ff777f;
-background:linear-gradient(135deg,rgba(255,71,87,.12),rgba(255,71,87,.035));
-border:1px solid rgba(255,71,87,.35);
-box-shadow:0 7px 22px rgba(255,71,87,.04);
-}
-
-@keyframes jbButtonGlow{
-0%,100%{background-position:0% 50%}
-50%{background-position:100% 50%}
-}
-
-/* POINTS DE FIDÉLITÉ */
-.jb-points-card{
-position:relative;
-overflow:hidden;
-margin:20px;
-padding:20px;
-border-radius:21px;
-background:
-linear-gradient(135deg,rgba(255,215,0,.09),rgba(5,10,20,.72),rgba(255,215,0,.035));
-border:1px solid rgba(255,215,0,.27);
-box-shadow:0 12px 30px rgba(0,0,0,.18);
-backdrop-filter:blur(16px);
--webkit-backdrop-filter:blur(16px);
-}
-
-.jb-points-card::before{
-content:"";
-position:absolute;
-right:-50px;
-top:-65px;
-width:140px;
-height:140px;
-border-radius:50%;
-background:radial-gradient(circle,rgba(255,215,0,.11),transparent 70%);
-pointer-events:none;
-}
-
-.jb-points-top{
-position:relative;
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:15px;
-}
-
-.jb-points-title{
-color:var(--gold);
-font-size:12px;
-font-weight:bold;
-letter-spacing:.4px;
-}
-
-.jb-points-value{
-margin-top:8px;
-font-size:10px;
-opacity:.65;
-}
-
-.jb-points-value b{
-color:var(--gold);
-}
-
-.jb-points-number{
-color:var(--gold);
-font-size:25px;
-font-weight:900;
-text-shadow:0 0 16px rgba(255,215,0,.22);
-}
-
-#jbConvertPoints{
-position:relative;
-width:100%;
-margin-top:16px;
-padding:14px;
-border:0;
-border-radius:13px;
-background:linear-gradient(120deg,#ffd700,#ffeb80,#ffd700);
-background-size:200% 100%;
-color:#151000;
-font-weight:900;
-font-size:11px;
-letter-spacing:.5px;
-cursor:pointer;
-box-shadow:0 7px 20px rgba(255,215,0,.12);
-transition:transform .25s,box-shadow .25s;
-}
-
-#jbConvertPoints:active{
-transform:scale(.97);
-}
-
-#jbConvertPoints:disabled{
-opacity:.40;
-cursor:not-allowed;
-box-shadow:none;
-}
-
-/* SECTIONS */
-.jb-section{
-padding:0 20px;
-}
-
-.jb-section-title{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px;
-margin:29px 0 16px;
-}
-
-.jb-section-title h3{
-margin:0;
-font-size:16px;
-letter-spacing:.2px;
-}
-
-.jb-section-title a{
-color:var(--blue);
-font-size:10px;
-text-decoration:none;
-font-weight:bold;
-white-space:nowrap;
-transition:color .2s;
-}
-
-.jb-section-title a:active{
-color:var(--gold);
-}
-
-/* SERVICES */
-.jb-service-card{
-position:relative;
-overflow:hidden;
-display:flex;
-align-items:center;
-gap:13px;
-margin-bottom:11px;
-padding:14px;
-border-radius:18px;
-background:
-linear-gradient(115deg,rgba(255,255,255,.065),rgba(255,255,255,.025));
-border:1px solid rgba(0,210,255,.14);
-backdrop-filter:blur(15px);
--webkit-backdrop-filter:blur(15px);
-cursor:pointer;
-transition:transform .25s,border-color .25s,background .25s,box-shadow .25s;
-animation:jbFadeUp .65s ease both;
-}
-
-.jb-service-card:nth-child(2){animation-delay:.05s}
-.jb-service-card:nth-child(3){animation-delay:.10s}
-.jb-service-card:nth-child(4){animation-delay:.15s}
-.jb-service-card:nth-child(5){animation-delay:.20s}
-.jb-service-card:nth-child(6){animation-delay:.25s}
-.jb-service-card:nth-child(7){animation-delay:.30s}
-.jb-service-card:nth-child(8){animation-delay:.35s}
-
-.jb-service-card::after{
-content:"";
-position:absolute;
-top:0;
-left:-120%;
-width:55%;
-height:100%;
-background:linear-gradient(90deg,transparent,rgba(255,255,255,.035),transparent);
-transform:skewX(-20deg);
-transition:left .7s;
-pointer-events:none;
-}
-
-.jb-service-card:active{
-transform:scale(.975);
-border-color:rgba(0,210,255,.65);
-background:rgba(0,210,255,.08);
-box-shadow:0 6px 22px rgba(0,210,255,.07);
-}
-
-.jb-service-card:active::after{
-left:150%;
-}
-
-.jb-service-icon{
-width:46px;
-height:46px;
-flex-shrink:0;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:14px;
-font-size:22px;
-background:linear-gradient(145deg,rgba(0,210,255,.13),rgba(0,119,255,.035));
-border:1px solid rgba(0,210,255,.23);
-box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
-transition:transform .3s;
-}
-
-.jb-service-card:active .jb-service-icon{
-transform:rotate(-5deg) scale(1.06);
-}
-
-.jb-service-info{
-flex:1;
-min-width:0;
-}
-
-.jb-service-name{
-font-size:13px;
-font-weight:bold;
-}
-
-.jb-service-desc{
-margin-top:5px;
-font-size:9px;
-line-height:1.5;
-opacity:.57;
-}
-
-.jb-service-price{
-font-size:11px;
-font-weight:bold;
-color:var(--blue);
-white-space:nowrap;
-text-shadow:0 0 10px rgba(0,210,255,.14);
-}
-
-/* ACTIVITÉS */
-.jb-invest-card{
-margin-bottom:11px;
-padding:16px;
-border-radius:17px;
-background:linear-gradient(135deg,rgba(0,230,118,.07),rgba(255,255,255,.02));
-border:1px solid rgba(0,230,118,.17);
-backdrop-filter:blur(12px);
--webkit-backdrop-filter:blur(12px);
-animation:jbFadeUp .5s ease both;
-}
-
-.jb-invest-row{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px;
-}
-
-.jb-invest-name{
-font-size:12px;
-font-weight:bold;
-overflow-wrap:anywhere;
-}
-
-.jb-invest-gain{
-color:var(--green);
-font-size:11px;
-font-weight:bold;
-white-space:nowrap;
-}
-
-.jb-invest-date{
-margin-top:8px;
-font-size:9px;
-opacity:.52;
-}
-
-.jb-invest-status{
-margin-top:7px;
-font-size:9px;
-color:var(--green);
-}
-
-.jb-empty{
-padding:26px 15px;
-text-align:center;
-border-radius:17px;
-background:rgba(255,255,255,.035);
-border:1px solid rgba(255,255,255,.055);
-font-size:11px;
-line-height:1.7;
-opacity:.65;
-}
-
-/* NAVIGATION BASSE */
-.jb-navbar{
-position:fixed;
-z-index:1000;
-bottom:0;
-left:0;
-width:100%;
-display:flex;
-justify-content:space-around;
-gap:2px;
-padding:11px 0 calc(11px + env(safe-area-inset-bottom));
-background:rgba(5,10,20,.96);
-border-top:1px solid rgba(0,210,255,.25);
-backdrop-filter:blur(22px);
--webkit-backdrop-filter:blur(22px);
-box-shadow:0 -10px 30px rgba(0,0,0,.20);
-}
-
-.jb-nav-link{
-position:relative;
-min-width:0;
-flex:1;
-color:white;
-opacity:.48;
-text-decoration:none;
-text-align:center;
-font-size:10px;
-border:0;
-background:none;
-cursor:pointer;
-transition:color .25s,opacity .25s,transform .25s;
-}
-
-.jb-nav-link.active{
-color:var(--blue);
-opacity:1;
-font-weight:bold;
-}
-
-.jb-nav-link.active::before{
-content:"";
-position:absolute;
-top:-11px;
-left:28%;
-width:44%;
-height:2px;
-border-radius:5px;
-background:var(--blue);
-box-shadow:0 0 12px rgba(0,210,255,.65);
-}
-
-.jb-nav-link:active{
-transform:translateY(-2px);
-}
-
-.jb-nav-icon{
-margin-bottom:4px;
-font-size:19px;
-transition:transform .25s;
-}
-
-.jb-nav-link.active .jb-nav-icon{
-filter:drop-shadow(0 0 6px rgba(0,210,255,.20));
-}
-
-/* CHARGEMENT */
-.jb-loading{
-position:fixed;
-z-index:9999;
-inset:0;
-display:flex;
-align-items:center;
-justify-content:center;
-background:
-radial-gradient(circle at center,rgba(0,210,255,.09),transparent 40%),
-#050a14;
-transition:opacity .4s;
-}
-
-.jb-loading-box{
-text-align:center;
-}
-
-.jb-loader{
-width:42px;
-height:42px;
-margin:auto;
-border-radius:50%;
-border:3px solid rgba(255,255,255,.09);
-border-top-color:var(--blue);
-border-right-color:var(--gold);
-animation:jbSpin .8s linear infinite;
-box-shadow:0 0 20px rgba(0,210,255,.08);
-}
-
-.jb-loading-text{
-margin-top:15px;
-font-size:11px;
-font-weight:bold;
-letter-spacing:3px;
-color:var(--blue);
-animation:jbTextPulse 1.5s ease-in-out infinite;
-}
-
-@keyframes jbSpin{
-to{transform:rotate(360deg)}
-}
-
-@keyframes jbTextPulse{
-0%,100%{opacity:.5}
-50%{opacity:1}
-}
-
-@keyframes jbFadeUp{
-from{opacity:0;transform:translateY(12px)}
-to{opacity:1;transform:translateY(0)}
-}
-
-/* PETITS ÉCRANS */
-@media(max-width:360px){
-.jb-brand{font-size:16px;letter-spacing:1px}
-.jb-balance{font-size:29px}
-.jb-balance-card{margin:15px;padding:19px}
-.jb-actions{margin:15px}
-.jb-points-card{margin:15px;padding:17px}
-.jb-section{padding:0 15px}
-.jb-service-card{gap:10px;padding:12px}
-.jb-service-icon{width:41px;height:41px;font-size:20px}
-.jb-service-price{font-size:10px}
-.jb-navbar{padding-top:10px}
-.jb-nav-link{font-size:9px}
-.jb-nav-icon{font-size:18px}
-}
-
-@media(prefers-reduced-motion:reduce){
-*,*::before,*::after{
-animation-duration:.01ms!important;
-animation-iteration-count:1!important;
-scroll-behavior:auto!important;
-transition-duration:.01ms!important;
-}
-}
+:root{--blue:#00d2ff;--dark:#050a14;--green:#00e676;--gold:#ffd700}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:white;background:radial-gradient(ellipse at 10% 5%,rgba(0,210,255,.12),transparent 35%),linear-gradient(rgba(3,8,18,.80),rgba(3,8,18,.96)),url("IMG_0870.jpeg") center/cover fixed;padding-bottom:100px;overflow-x:hidden}
+.jb-overlay{min-height:100vh;background:radial-gradient(circle at top,rgba(0,210,255,.075),transparent 40%)}
+.jb-header{position:relative;padding:24px 20px 22px;background:linear-gradient(135deg,rgba(0,210,255,.13),rgba(5,10,20,.80) 55%,rgba(255,215,0,.055));border-bottom:1px solid rgba(0,210,255,.32);backdrop-filter:blur(22px)}
+.jb-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.jb-brand{font-size:20px;font-weight:900;letter-spacing:2px;color:var(--blue)}
+.jb-status{font-size:10px;color:var(--green);padding:7px 11px;border-radius:20px;background:rgba(0,230,118,.09);border:1px solid rgba(0,230,118,.28)}
+.jb-user-box{margin-top:20px}
+.jb-user-box small{font-size:10px;opacity:.60;letter-spacing:1px}
+.jb-user-box h2{margin:7px 0 0;font-size:20px;word-break:break-all}
+#jbDashboardStatus{text-align:center;min-height:20px;padding:10px 20px;font-size:11px;color:#ffeb3b}
+.jb-balance-card{position:relative;overflow:hidden;margin:20px;padding:24px;border-radius:25px;background:linear-gradient(145deg,rgba(0,210,255,.17),rgba(5,10,20,.82) 55%,rgba(0,119,255,.09));border:1px solid rgba(0,210,255,.42);box-shadow:0 18px 45px rgba(0,0,0,.35);backdrop-filter:blur(20px)}
+.jb-balance{margin:9px 0;font-size:36px;font-weight:900;color:var(--blue)}
+.jb-currency{font-size:13px;opacity:.75}
+.jb-balance-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:22px}
+.jb-money-box{padding:13px 5px;text-align:center;border-radius:15px;background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.018));border:1px solid rgba(255,255,255,.09)}
+.jb-icon{font-size:20px}
+.jb-money-box small{display:block;margin-top:6px;font-size:8px;opacity:.60;text-transform:uppercase}
+.jb-money-box b{display:block;margin-top:5px;font-size:11px}
+.jb-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px}
+.jb-action{padding:16px 10px;border-radius:15px;text-align:center;text-decoration:none;font-size:12px;font-weight:900}
+.jb-recharge{color:#001018;background:linear-gradient(120deg,var(--blue),#00a8ff,var(--blue))}
+.jb-withdraw{color:#ff777f;background:linear-gradient(135deg,rgba(255,71,87,.12),rgba(255,71,87,.035));border:1px solid rgba(255,71,87,.35)}
+.jb-points-card{margin:20px;padding:20px;border-radius:21px;background:linear-gradient(135deg,rgba(255,215,0,.09),rgba(5,10,20,.72));border:1px solid rgba(255,215,0,.27)}
+.jb-points-top{display:flex;justify-content:space-between;align-items:center;gap:15px}
+.jb-points-title{color:var(--gold);font-size:12px;font-weight:bold}
+.jb-points-number{color:var(--gold);font-size:25px;font-weight:900}
+#jbConvertPoints{width:100%;margin-top:16px;padding:14px;border:0;border-radius:13px;background:linear-gradient(120deg,#ffd700,#ffeb80,#ffd700);color:#151000;font-weight:900;font-size:11px}
+#jbConvertPoints:disabled{opacity:.4}
+.jb-section{padding:0 20px}
+.jb-section-title{display:flex;justify-content:space-between;align-items:center;margin:29px 0 16px}
+.jb-section-title h3{margin:0;font-size:16px}
+.jb-section-title a{color:var(--blue);font-size:10px;text-decoration:none;font-weight:bold}
+.jb-service-card{display:flex;align-items:center;gap:13px;margin-bottom:11px;padding:14px;border-radius:18px;background:linear-gradient(115deg,rgba(255,255,255,.065),rgba(255,255,255,.025));border:1px solid rgba(0,210,255,.14);backdrop-filter:blur(15px);cursor:pointer}
+.jb-service-card:active{transform:scale(.975);border-color:rgba(0,210,255,.65)}
+.jb-service-icon{width:46px;height:46px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:14px;font-size:22px;background:linear-gradient(145deg,rgba(0,210,255,.13),rgba(0,119,255,.035));border:1px solid rgba(0,210,255,.23)}
+.jb-service-info{flex:1;min-width:0}
+.jb-service-name{font-size:13px;font-weight:bold}
+.jb-service-desc{margin-top:5px;font-size:9px;opacity:.57}
+.jb-service-price{display:none!important}
+.jb-service-arrow{margin-left:auto;font-size:14px;color:var(--blue);opacity:.6}
+.jb-invest-card{margin-bottom:11px;padding:16px;border-radius:17px;background:linear-gradient(135deg,rgba(0,230,118,.07),rgba(255,255,255,.02));border:1px solid rgba(0,230,118,.17)}
+.jb-invest-row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.jb-invest-name{font-size:12px;font-weight:bold}
+.jb-invest-gain{color:var(--green);font-size:11px;font-weight:bold}
+.jb-invest-date{margin-top:8px;font-size:9px;opacity:.52}
+.jb-invest-status{margin-top:7px;font-size:9px;color:var(--green)}
+.jb-empty{padding:26px 15px;text-align:center;border-radius:17px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.055);font-size:11px;opacity:.65}
+.jb-navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:11px 0 calc(11px + env(safe-area-inset-bottom));background:rgba(5,10,20,.96);border-top:1px solid rgba(0,210,255,.25);backdrop-filter:blur(22px)}
+.jb-nav-link{flex:1;color:white;opacity:.48;text-decoration:none;text-align:center;font-size:10px;border:0;background:none;cursor:pointer}
+.jb-nav-link.active{color:var(--blue);opacity:1;font-weight:bold}
+.jb-nav-icon{margin-bottom:4px;font-size:19px}
+.jb-loading{position:fixed;z-index:9999;inset:0;display:flex;align-items:center;justify-content:center;background:#050a14}
+.jb-loader{width:42px;height:42px;border-radius:50%;border:3px solid rgba(255,255,255,.09);border-top-color:var(--blue);animation:jbSpin .8s linear infinite}
+@keyframes jbSpin{to{transform:rotate(360deg)}}
+
+/* BOUTON CHAT FLOTTANT */
+.jb-fab-chat{
+position:fixed;right:16px;bottom:88px;z-index:1001;width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:26px;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;border:1px solid rgba(255,255,255,.25);box-shadow:0 10px 30px rgba(0,210,255,.40),0 0 0 8px rgba(0,210,255,.08);cursor:pointer;transition:transform .2s;animation:jbFabFloat 3s ease-in-out infinite}
+.jb-fab-chat:active{transform:scale(.92)}
+@keyframes jbFabFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.jb-fab-badge{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 6px;border-radius:20px;background:#ff4757;color:white;font-size:10px;font-weight:900;display:none;place-items:center;box-shadow:0 2px 8px rgba(255,71,87,.5)}
+.jb-fab-badge.show{display:grid}
+
+/* FENÊTRE CHAT */
+.jb-chat-overlay{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);align-items:flex-end;justify-content:center;padding:0}
+.jb-chat-overlay.show{display:flex}
+.jb-chat-window{width:100%;max-width:440px;height:82vh;max-height:650px;background:#08111f;border:1px solid rgba(0,210,255,.25);border-radius:24px 24px 0 0;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 -12px 50px rgba(0,0,0,.5);animation:chatUp .3s ease}
+@keyframes chatUp{from{transform:translateY(40px);opacity:.6}to{transform:translateY(0);opacity:1}}
+.jb-chat-header{padding:16px 16px 14px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,rgba(0,210,255,.15),rgba(5,10,20,.9));border-bottom:1px solid rgba(0,210,255,.20)}
+.jb-chat-header h3{margin:0;font-size:15px;display:flex;align-items:center;gap:8px}
+.jb-chat-header small{font-size:10px;opacity:.6;display:block;margin-top:3px}
+.jb-chat-close{width:32px;height:32px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:#132035;color:white;font-size:18px;cursor:pointer}
+.jb-chat-messages{flex:1;overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:10px;background:radial-gradient(ellipse at top,rgba(0,210,255,.06),transparent 50%),#070e1e}
+.jb-msg{max-width:78%;padding:10px 12px;border-radius:16px;font-size:12px;line-height:1.5;animation:msgIn .25s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.jb-msg.client{align-self:flex-end;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;border-bottom-right-radius:6px;box-shadow:0 4px 12px rgba(0,210,255,.15)}
+.jb-msg.admin{align-self:flex-start;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);color:white;border-bottom-left-radius:6px}
+.jb-msg-time{font-size:8px;opacity:.6;margin-top:5px;text-align:right}
+.jb-chat-input{padding:10px 10px calc(10px + env(safe-area-inset-bottom));display:flex;gap:8px;background:#0a1425;border-top:1px solid rgba(0,210,255,.15)}
+.jb-chat-input input{flex:1;padding:12px 14px;border-radius:22px;border:1px solid #293850;background:#0c192b;color:white;outline:none;font-size:13px}
+.jb-chat-input input:focus{border-color:var(--blue)}
+.jb-chat-send{width:44px;height:44px;border-radius:50%;border:0;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;font-size:18px;cursor:pointer;box-shadow:0 4px 12px rgba(0,210,255,.3)}
+.jb-chat-send:active{transform:scale(.92)}
+@media(min-width:620px){.jb-chat-overlay{align-items:center;padding:16px}.jb-chat-window{border-radius:20px;height:72vh}}
 </style>
 </head>
-
 <body>
-
-<div id="jbLoading" class="jb-loading">
-  <div class="jb-loading-box">
-    <div class="jb-loader"></div>
-    <div class="jb-loading-text">JASON BUSINESS</div>
-  </div>
-</div>
-
+<div id="jbLoading" class="jb-loading"><div style="text-align:center"><div class="jb-loader"></div><div style="margin-top:12px;color:var(--blue);font-size:11px;letter-spacing:3px">JASON BUSINESS</div></div></div>
 <div class="jb-overlay">
-
-<header class="jb-header">
-  <div class="jb-top">
-    <div class="jb-brand">JASON BUSINESS</div>
-    <div class="jb-status">● EN LIGNE</div>
-  </div>
-  <div class="jb-user-box">
-    <small>BIENVENUE SUR VOTRE ESPACE</small>
-    <h2 id="jbUserPhone">Chargement...</h2>
-  </div>
-</header>
-
+<header class="jb-header"><div class="jb-top"><div class="jb-brand">JASON BUSINESS</div><div class="jb-status">● EN LIGNE</div></div><div class="jb-user-box"><small>BIENVENUE</small><h2 id="jbUserPhone">Chargement...</h2></div></header>
 <div id="jbDashboardStatus"></div>
-
-<section class="jb-balance-card">
-  <div class="jb-balance-title">Solde principal</div>
-  <div class="jb-balance">
-    <span id="jbMainBalance">0</span>
-    <span class="jb-currency"> FC</span>
-  </div>
-  <div class="jb-balance-description">Disponible pour vos commandes</div>
-
-  <div class="jb-balance-grid">
-    <div class="jb-money-box">
-      <div class="jb-icon">💰</div>
-      <small>Commissions</small>
-      <b id="jbCommissionBalance">0 FC</b>
-    </div>
-    <div class="jb-money-box">
-      <div class="jb-icon">📈</div>
-      <small>Gains</small>
-      <b id="jbGainBalance">0 FC</b>
-    </div>
-    <div class="jb-money-box">
-      <div class="jb-icon">💎</div>
-      <small>Total</small>
-      <b id="jbTotalBalance">0 FC</b>
-    </div>
-  </div>
+<section class="jb-balance-card"><div style="font-size:11px;opacity:.68">Solde principal</div><div class="jb-balance"><span id="jbMainBalance">0</span><span class="jb-currency"> FC</span></div><div class="jb-balance-grid"><div class="jb-money-box"><div class="jb-icon">💰</div><small>Commissions</small><b id="jbCommissionBalance">0 FC</b></div><div class="jb-money-box"><div class="jb-icon">📈</div><small>Gains</small><b id="jbGainBalance">0 FC</b></div><div class="jb-money-box"><div class="jb-icon">💎</div><small>Total</small><b id="jbTotalBalance">0 FC</b></div></div></section>
+<div class="jb-actions"><a href="recharge.html" class="jb-action jb-recharge">📥 RECHARGER</a><a href="retrait.html" class="jb-action jb-withdraw">📤 RETIRER</a></div>
+<section class="jb-points-card"><div class="jb-points-top"><div><div class="jb-points-title">⭐ POINTS DE FIDÉLITÉ</div><div style="font-size:10px;opacity:.65">100 points = <b style="color:var(--gold)">50 FC</b></div></div><div id="jbLoyaltyPoints" class="jb-points-number">0</div></div><button id="jbConvertPoints" disabled>💱 CONVERTIR MES POINTS</button></section>
+<section class="jb-section"><div class="jb-section-title"><h3>🛍️ Nos services</h3><a href="shop.html">VOIR TOUT →</a></div>
+<div class="jb-service-card" onclick="openService('boost')"><div class="jb-service-icon">📈</div><div class="jb-service-info"><div class="jb-service-name">Boostage</div><div class="jb-service-desc">Followers, likes, vues</div></div><div class="jb-service-arrow">›</div></div>
+<div class="jb-service-card" onclick="openService('app')"><div class="jb-service-icon">📱</div><div class="jb-service-info"><div class="jb-service-name">Application</div><div class="jb-service-desc">Création d'application mobile</div></div><div class="jb-service-arrow">›</div></div>
+<div class="jb-service-card" onclick="openService('site')"><div class="jb-service-icon">🌐</div><div class="jb-service-info"><div class="jb-service-name">Site web</div><div class="jb-service-desc">Site moderne et professionnel</div></div><div class="jb-service-arrow">›</div></div>
+<div class="jb-service-card" onclick="openService('chatbot')"><div class="jb-service-icon">🤖</div><div class="jb-service-info"><div class="jb-service-name">Chatbot</div><div class="jb-service-desc">Assistant et automatisation intelligente</div></div><div class="jb-service-arrow">›</div></div>
+<div class="jb-service-card" onclick="openService('music')"><div class="jb-service-icon">🎵</div><div class="jb-service-info"><div class="jb-service-name">Chanson</div><div class="jb-service-desc">Création musicale personnalisée</div></div><div class="jb-service-arrow">›</div></div>
+<div class="jb-service-card" onclick="openService('ads')"><div class="jb-service-icon">📣</div><div class="jb-service-info"><div class="jb-service-name">Publicité</div><div class="jb-service-desc">Promotion sur réseaux</div></div><div class="jb-service-arrow">›</div></div>
 </section>
-
-<div class="jb-actions">
-  <a href="recharge.html" class="jb-action jb-recharge">📥 RECHARGER</a>
-  <a href="retrait.html" class="jb-action jb-withdraw">📤 RETIRER</a>
+<section class="jb-section"><div class="jb-section-title"><h3>⚡ Mes activités</h3><a href="shop.html">COMMANDER →</a></div><div id="jbInvestments"><div class="jb-empty">Chargement...</div></div></section>
 </div>
 
-<section class="jb-points-card">
-  <div class="jb-points-top">
-    <div>
-      <div class="jb-points-title">⭐ POINTS DE FIDÉLITÉ</div>
-      <div class="jb-points-value">100 points = <b>50 FC</b></div>
+<!-- BOUTON CHAT FLOTTANT -->
+<button class="jb-fab-chat" id="jbFabChat" aria-label="Chat support">
+  💬
+  <span class="jb-fab-badge" id="jbChatBadge">0</span>
+</button>
+
+<!-- FENÊTRE CHAT -->
+<div class="jb-chat-overlay" id="jbChatOverlay">
+  <div class="jb-chat-window">
+    <div class="jb-chat-header">
+      <div>
+        <h3>💬 Support JASON BUSINESS <span style="color:#00e676;font-size:10px">● En ligne</span></h3>
+        <small id="jbChatPhone">Chargement...</small>
+      </div>
+      <button class="jb-chat-close" id="jbChatClose">×</button>
     </div>
-    <div id="jbLoyaltyPoints" class="jb-points-number">0</div>
-  </div>
-  <button id="jbConvertPoints" disabled>💱 CONVERTIR MES POINTS</button>
-</section>
-
-<section class="jb-section">
-  <div class="jb-section-title">
-    <h3>🛍️ Nos services</h3>
-    <a href="shop.html">VOIR TOUT →</a>
-  </div>
-
-  <div class="jb-service-card" onclick="openService('boost')">
-    <div class="jb-service-icon">📈</div>
-    <div class="jb-service-info">
-      <div class="jb-service-name">Boostage</div>
-      <div class="jb-service-desc">Followers, likes, vues</div>
+    <div class="jb-chat-messages" id="jbChatMessages">
+      <div class="jb-msg admin">👋 Bonjour ! Bienvenue chez JASON BUSINESS 🇨🇩<br>Comment puis-je vous aider aujourd'hui ?</div>
     </div>
-    <div class="jb-service-price">10 FC</div>
-  </div>
-
-  <div class="jb-service-card" onclick="openService('app')">
-    <div class="jb-service-icon">📱</div>
-    <div class="jb-service-info">
-      <div class="jb-service-name">Application</div>
-      <div class="jb-service-desc">Création d'application mobile</div>
+    <div class="jb-chat-input">
+      <input type="text" id="jbChatInput" placeholder="Écris ton message..." maxlength="500">
+      <button class="jb-chat-send" id="jbChatSend">➤</button>
     </div>
-    <div class="jb-service-price">10 000 FC</div>
   </div>
-
-  <div class="jb-service-card" onclick="openService('site')">
-    <div class="jb-service-icon">🌐</div>
-    <div class="jb-service-info">
-      <div class="jb-service-name">Site web</div>
-      <div class="jb-service-desc">Site moderne et professionnel</div>
-    </div>
-    <div class="jb-service-price">15 000 FC</div>
-  </div>
-
-  <div class="jb-service-card" onclick="openService('chatbot')">
-    <div class="jb-service-icon">🤖</div>
-    <div class="jb-service-info">
-      <div class="jb-service-name">Chatbot</div>
-      <div class="jb-service-desc">Assistant et automatisation intelligente</div>
-    </div>
-    <div class="jb-service-price">7 000 FC</div>
-  </div>
-
-  <div class="jb-service-card" onclick="openService('music')">
-    <div class="jb-service-icon">🎵</div>
-    <div class="jb-service-info">
-      <div class="jb-service-name">Chanson</div>
-      <div class="jb-service-desc">Création musicale personnalisée</div>
-    </div>
-    <div class="jb-service-price">500 FC</div>
-  </div>
-
-  <div class="jb-service-card" onclick="openService('ads')">
-    <div class="jb-service-icon">📣</div>
-    <div class="jb-service-info">
-      <div class="jb-service-name">Publicité</div>
-      <div class="jb-service-desc">Promotion sur réseaux</div>
-    </div>
-    <div class="jb-service-price">1 000 FC</div>
-  </div>
-
-  <div class="jb-service-card" onclick="openService('logo')">
-    <div class="jb-service-icon">🎨</div>
-    <div class="jb-service-info">
-      <div class="jb-service-name">Logo</div>
-      <div class="jb-service-desc">Création de votre identité visuelle</div>
-    </div>
-    <div class="jb-service-price">3 000 FC</div>
-  </div>
-</section>
-
-<section class="jb-section">
-  <div class="jb-section-title">
-    <h3>⚡ Mes activités</h3>
-    <a href="shop.html">COMMANDER →</a>
-  </div>
-  <div id="jbInvestments">
-    <div class="jb-empty">Chargement...</div>
-  </div>
-</section>
-
 </div>
 
 <nav class="jb-navbar">
-  <button onclick="goPage('dashboard.html')" class="jb-nav-link active">
-    <div class="jb-nav-icon">📊</div>Dashboard
-  </button>
-  <button onclick="goPage('shop.html')" class="jb-nav-link">
-    <div class="jb-nav-icon">🛍️</div>Boutique
-  </button>
-  <button onclick="goPage('store.html')" class="jb-nav-link">
-    <div class="jb-nav-icon">🛒</div>Store
-  </button>
-  <button onclick="goPage('equipe.html')" class="jb-nav-link">
-    <div class="jb-nav-icon">👥</div>Équipe
-  </button>
-  <button onclick="goPage('profil.html')" class="jb-nav-link">
-    <div class="jb-nav-icon">👤</div>Profil
-  </button>
+  <button onclick="goPage('dashboard.html')" class="jb-nav-link active"><div class="jb-nav-icon">📊</div>Dashboard</button>
+  <button onclick="goPage('shop.html')" class="jb-nav-link"><div class="jb-nav-icon">🛍️</div>Boutique</button>
+  <button onclick="goPage('store.html')" class="jb-nav-link"><div class="jb-nav-icon">🛒</div>Store</button>
+  <button onclick="goPage('equipe.html')" class="jb-nav-link"><div class="jb-nav-icon">👥</div>Équipe</button>
+  <button onclick="goPage('profil.html')" class="jb-nav-link"><div class="jb-nav-icon">👤</div>Profil</button>
 </nav>
 
 <script>
-function goPage(p){
-  window.location.href=p;
-}
-
-function openService(type){
-  localStorage.setItem("jb_open_service",type);
-  window.location.href="shop.html";
-}
+function goPage(p){window.location.href=p}
+function openService(type){localStorage.setItem("jb_open_service",type);window.location.href="shop.html"}
 </script>
-
 <script type="module">
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-
-import {
-getDatabase,
-ref,
-onValue,
-runTransaction
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-const jbFirebaseConfig={
-apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
-authDomain:"starlink-investit.firebaseapp.com",
-databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
-projectId:"starlink-investit",
-storageBucket:"starlink-investit.firebasestorage.app",
-messagingSenderId:"807081599583",
-appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
-};
-
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, onValue, push, set, runTransaction, onChildAdded } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+const jbFirebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
 const jbApp=initializeApp(jbFirebaseConfig);
 const jbDatabase=getDatabase(jbApp);
-
-const jbCurrentUser=
-localStorage.getItem("jasonBusinessUserPhone")||
-localStorage.getItem("userPhone")||
-localStorage.getItem("jasonPhone")||
-localStorage.getItem("phone");
-
-const jbPhone=jbCurrentUser;
-
-if(!jbPhone){
-window.location.replace("login.html");
-throw new Error("Session introuvable.");
-}
-
+const jbPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("phone");
+if(!jbPhone){window.location.replace("login.html");throw new Error("Session");}
 localStorage.setItem("jasonBusinessUserPhone",jbPhone);
-localStorage.setItem("userPhone",jbPhone);
-localStorage.setItem("jasonBusinessLogged","true");
+const jbUserReference=ref(jbDatabase,"jasonBusiness/users/"+jbPhone);
+const jbChatRef=ref(jbDatabase,`jasonBusiness/chats/${jbPhone}/messages`);
+const $=id=>document.getElementById(id);
+function jbFormatFC(v){return Math.floor(Number(v)||0).toLocaleString("fr-FR");}
+function jbFormatDate(v){if(!v)return "";const d=new Date(v);return d.toLocaleDateString("fr-FR");}
+function jbEscapeHTML(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");}
 
-const jbUserReference=ref(
-jbDatabase,
-"jasonBusiness/users/"+jbPhone
-);
-
-function jbFormatFC(v){
-return Math.floor(Number(v)||0).toLocaleString("fr-FR");
-}
-
-function jbFormatDate(v){
-if(!v)return "Date inconnue";
-const d=new Date(v);
-if(Number.isNaN(d.getTime()))return "Date inconnue";
-return d.toLocaleDateString("fr-FR",{
-day:"2-digit",
-month:"2-digit",
-year:"numeric"
-});
-}
-
-function jbEscapeHTML(v){
-return String(v??"")
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
-}
-
+// DASHBOARD SOLDE
 function jbRenderInvestments(investments){
-const container=document.getElementById("jbInvestments");
-container.innerHTML="";
-
-if(!investments||
-typeof investments!=="object"||
-Object.keys(investments).length===0){
-container.innerHTML=`
-<div class="jb-empty">
-📦 Aucune activité pour le moment.
-<br><br>
-Découvrez nos services dans la boutique.
-</div>`;
-return;
-}
-
+const container=$("jbInvestments");container.innerHTML="";
+if(!investments||Object.keys(investments).length===0){container.innerHTML=`<div class="jb-empty">📦 Aucune activité<br><br>Va dans la boutique.</div>`;return;}
 Object.entries(investments).reverse().forEach(([id,item])=>{
 if(!item||typeof item!=="object")return;
-
-const card=document.createElement("div");
-card.className="jb-invest-card";
-
-const name=item.nom||item.service||item.name||"Service";
-const gain=Number(item.gainJournalier??item.gain??0);
-const date=item.dateAchat||item.date||item.createdAt;
-const status=item.statut||item.status||"actif";
-
-card.innerHTML=`
-<div class="jb-invest-row">
-  <div class="jb-invest-name">⚡ ${jbEscapeHTML(name)}</div>
-  <div class="jb-invest-gain">${jbFormatFC(gain)} FC</div>
-</div>
-<div class="jb-invest-date">
-  Activé le ${jbEscapeHTML(jbFormatDate(date))}
-</div>
-<div class="jb-invest-status">
-  ● ${jbEscapeHTML(status)}
-</div>`;
-
+const card=document.createElement("div");card.className="jb-invest-card";
+const name=item.nom||item.service||item.name||"Service";const gain=Number(item.gainJournalier??item.gain??0);
+const date=item.dateAchat||item.date||item.createdAt;const status=item.statut||item.status||"actif";
+card.innerHTML=`<div class="jb-invest-row"><div class="jb-invest-name">⚡ ${jbEscapeHTML(name)}</div><div class="jb-invest-gain">${jbFormatFC(gain)} FC</div></div><div style="font-size:9px;opacity:.52;margin-top:8px">Activé le ${jbEscapeHTML(jbFormatDate(date))}</div><div style="font-size:9px;color:#00e676;margin-top:7px">● ${jbEscapeHTML(status)}</div>`;
 container.appendChild(card);
 });
 }
-
 onValue(jbUserReference,snapshot=>{
-document.getElementById("jbLoading").style.display="none";
-
-if(!snapshot.exists()){
-localStorage.removeItem("jasonBusinessUserPhone");
-localStorage.removeItem("userPhone");
-localStorage.removeItem("jasonBusinessLogged");
-window.location.replace("login.html");
-return;
-}
-
+$("jbLoading").style.display="none";
+if(!snapshot.exists()){window.location.replace("login.html");return;}
 const user=snapshot.val()||{};
-
-document.getElementById("jbUserPhone").textContent=
-user.telephone||jbPhone;
-
-const principal=Number(user.solde_principal||user.solde||0);
-const commissions=Number(user.solde_commissions||0);
-const gains=Number(user.solde_gains||0);
-const total=principal+commissions+gains;
-
-document.getElementById("jbMainBalance").textContent=
-jbFormatFC(principal);
-
-document.getElementById("jbCommissionBalance").textContent=
-jbFormatFC(commissions)+" FC";
-
-document.getElementById("jbGainBalance").textContent=
-jbFormatFC(gains)+" FC";
-
-document.getElementById("jbTotalBalance").textContent=
-jbFormatFC(total)+" FC";
-
-const points=Number(
-user.points_fidelite??
-user.points??
-user.loyaltyPoints??0
-);
-
-document.getElementById("jbLoyaltyPoints").textContent=
-jbFormatFC(points);
-
-document.getElementById("jbConvertPoints").disabled=points<100;
-
+$("jbUserPhone").textContent=user.telephone||jbPhone;
+$("jbChatPhone").textContent=user.telephone||jbPhone;
+const principal=Number(user.solde_principal||user.solde||0);const commissions=Number(user.solde_commissions||0);const gains=Number(user.solde_gains||0);const total=principal+commissions+gains;
+$("jbMainBalance").textContent=jbFormatFC(principal);
+$("jbCommissionBalance").textContent=jbFormatFC(commissions)+" FC";
+$("jbGainBalance").textContent=jbFormatFC(gains)+" FC";
+$("jbTotalBalance").textContent=jbFormatFC(total)+" FC";
+const points=Number(user.points_fidelite??user.points??0);
+$("jbLoyaltyPoints").textContent=jbFormatFC(points);
+$("jbConvertPoints").disabled=points<100;
 jbRenderInvestments(user.mes_investissements);
-
-},error=>{
-document.getElementById("jbLoading").style.display="none";
-console.error("Erreur Firebase:",error);
-document.getElementById("jbDashboardStatus").textContent=
-"Impossible de charger les données. Vérifiez votre connexion.";
 });
 
-document.getElementById("jbConvertPoints").addEventListener(
-"click",async()=>{
-const button=document.getElementById("jbConvertPoints");
-button.disabled=true;
+// CHAT SYSTEM
+const chatOverlay=$("jbChatOverlay");
+const fabChat=$("jbFabChat");
+const chatClose=$("jbChatClose");
+const chatMessages=$("jbChatMessages");
+const chatInput=$("jbChatInput");
+const chatSend=$("jbChatSend");
+const chatBadge=$("jbChatBadge");
+let unread=0;
+let chatOpen=false;
 
-try{
-const snapshot=await new Promise((resolve,reject)=>{
-onValue(
-jbUserReference,
-resolve,
-error=>reject(error),
-{onlyOnce:true}
-);
+function openChat(){chatOverlay.classList.add("show");chatOpen=true;unread=0;chatBadge.classList.remove("show");chatInput.focus();chatMessages.scrollTop=chatMessages.scrollHeight;}
+function closeChat(){chatOverlay.classList.remove("show");chatOpen=false;}
+fabChat.onclick=openChat;
+chatClose.onclick=closeChat;
+chatOverlay.addEventListener("click",e=>{if(e.target===chatOverlay)closeChat();});
+
+function addMessage(text,from,time){
+  const div=document.createElement("div");
+  div.className=`jb-msg ${from}`;
+  const t=time? new Date(time).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}) : new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+  div.innerHTML=`${jbEscapeHTML(text)}<div class="jb-msg-time">${t}</div>`;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop=chatMessages.scrollHeight;
+  if(!chatOpen && from==="admin"){
+    unread++;chatBadge.textContent=unread>9?"9+":unread;chatBadge.classList.add("show");
+  }
+}
+
+async function sendMessage(){
+  const text=chatInput.value.trim();
+  if(!text)return;
+  chatInput.value="";
+  const msgRef=push(jbChatRef);
+  await set(msgRef,{text,from:"client",sender:jbPhone,createdAt:Date.now(),date:new Date().toLocaleString("fr-FR"),lu:false});
+  addMessage(text,"client",Date.now());
+}
+chatSend.onclick=sendMessage;
+chatInput.addEventListener("keydown",e=>{if(e.key==="Enter")sendMessage();});
+
+// ECOUTE MESSAGES ADMIN EN TEMPS RÉEL
+onChildAdded(jbChatRef,snap=>{
+  const m=snap.val();
+  if(!m)return;
+  // évite doublon du message qu'on vient d'envoyer
+  const exists=[...chatMessages.querySelectorAll(".jb-msg")].some(el=>el.textContent.includes(m.text?.slice(0,15)));
+  if(m.from==="admin"){
+    addMessage(m.text,"admin",m.createdAt);
+  }
 });
 
-if(!snapshot.exists()){
-alert("❌ Compte introuvable.");
-return;
-}
-
-const user=snapshot.val()||{};
-
-const currentPoints=Number(
-user.points_fidelite??
-user.points??
-user.loyaltyPoints??0
-);
-
-if(currentPoints<100){
-alert("❌ Il faut au minimum 100 points.");
-return;
-}
-
-const convertiblePoints=Math.floor(currentPoints/100)*100;
-const amount=(convertiblePoints/100)*50;
-
-if(!confirm(
-"Convertir "+jbFormatFC(convertiblePoints)+
-" points en "+jbFormatFC(amount)+" FC ?"
-))return;
-
-const transaction=await runTransaction(
-jbUserReference,
-currentData=>{
-if(!currentData)return;
-
-const freshPoints=Number(
-currentData.points_fidelite??
-currentData.points??
-currentData.loyaltyPoints??0
-);
-
-if(freshPoints<convertiblePoints)return;
-
-currentData.points_fidelite=freshPoints-convertiblePoints;
-
-currentData.solde_principal=
-Number(currentData.solde_principal||0)+amount;
-
-return currentData;
-}
-);
-
-if(!transaction.committed){
-alert("❌ La conversion n'a pas été effectuée.");
-return;
-}
-
-alert(
-"✅ Conversion réussie !\n\n"+
-jbFormatFC(convertiblePoints)+" points → "+
-jbFormatFC(amount)+" FC"
-);
-
-}catch(e){
-console.error("Erreur conversion:",e);
-alert("⚠️ Erreur conversion. Réessayez.");
-}finally{
-button.disabled=false;
-}
+// CONVERSION POINTS
+$("jbConvertPoints").addEventListener("click",async()=>{
+  const button=$("jbConvertPoints");button.disabled=true;
+  try{
+    const snap=await new Promise((res,rej)=>{onValue(jbUserReference,res,e=>rej(e),{onlyOnce:true})});
+    if(!snap.exists())return;
+    const user=snap.val()||{};const currentPoints=Number(user.points_fidelite??0);
+    if(currentPoints<100){alert("❌ Minimum 100 points");return;}
+    const conv=Math.floor(currentPoints/100)*100;const amount=(conv/100)*50;
+    if(!confirm(`Convertir ${jbFormatFC(conv)} points en ${jbFormatFC(amount)} FC ?`))return;
+    const tr=await runTransaction(jbUserReference,curr=>{
+      if(!curr)return;const fp=Number(curr.points_fidelite??0);if(fp<conv)return;
+      curr.points_fidelite=fp-conv;curr.solde_principal=Number(curr.solde_principal||0)+amount;return curr;
+    });
+    if(!tr.committed){alert("❌ Échec");return;}
+    alert(`✅ ${jbFormatFC(conv)} points → ${jbFormatFC(amount)} FC`);
+  }catch(e){alert("⚠️ Erreur");}finally{button.disabled=false;}
 });
 </script>
-
 </body>
 </html>
