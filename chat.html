@@ -2,208 +2,227 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#050a14">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>JASON BUSINESS — Chat</title>
 <style>
-:root{--blue:#00d2ff;--dark:#050a14;--green:#00e676;--red:#ff4757;--gold:#ffd700;--border:rgba(0,210,255,.18);--panel:#0b1425}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:white;background:#050a14;display:flex;flex-direction:column;overflow:hidden}
-header{height:56px;display:flex;justify-content:space-between;align-items:center;padding:0 14px;background:rgba(5,10,20,.96);border-bottom:1px solid var(--border);backdrop-filter:blur(20px)}
-.brand{font-weight:900;color:var(--blue);letter-spacing:1px}
-.btn{padding:7px 10px;border-radius:9px;border:1px solid rgba(0,210,255,.25);background:rgba(0,210,255,.08);color:var(--blue);font-size:11px;cursor:pointer}
-.btn.red{border-color:rgba(255,71,87,.3);color:#ff8a95;background:rgba(255,71,87,.08)}
-.btn.gold{background:linear-gradient(120deg,#ffe9b4,#d8aa45);color:#10131a;border-color:#ffe6a0;font-weight:800}
+:root{--blue:#00d2ff;--dark:#050a14;--green:#00e676;--red:#ff4757;--border:rgba(0,210,255,.18)}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:white;background:#050a14;display:flex;flex-direction:column;overflow:hidden}
+header{height:56px;display:flex;justify-content:space-between;align-items:center;padding:0 14px;background:#050a14;border-bottom:1px solid var(--border)}
+.brand{font-weight:900;color:var(--blue)}.btn{padding:7px 10px;border-radius:9px;border:1px solid rgba(0,210,255,.25);background:rgba(0,210,255,.08);color:var(--blue);font-size:11px;cursor:pointer}
 .wrap{display:grid;grid-template-columns:360px 1fr;height:calc(100vh - 56px)}
 .left{background:#0b1425;border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
-.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-bottom:1px solid var(--border)}
+.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border)}
 .tab{padding:12px 4px;text-align:center;font-size:11px;font-weight:700;cursor:pointer;opacity:.5;border-bottom:2px solid transparent}
 .tab.active{opacity:1;color:var(--blue);border-bottom-color:var(--blue)}
 .search{padding:10px;border-bottom:1px solid var(--border)}
-.search input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #293850;background:#0c192b;color:white;outline:none}
+.search input,.add-box input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #293850;background:#0c192b;color:white;outline:none}
 .list{flex:1;overflow-y:auto;padding:6px}
 .item{padding:10px;border-radius:12px;display:flex;gap:10px;align-items:center;cursor:pointer;margin-bottom:4px;border:1px solid transparent}
-.item:hover{background:rgba(0,210,255,.06);border-color:rgba(0,210,255,.15)}
-.item.active{background:linear-gradient(135deg,rgba(0,210,255,.14),rgba(0,210,255,.04));border-color:var(--blue)}
-.av{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;flex-shrink:0}
-.info{flex:1;min-width:0}
-.name{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.prev{font-size:11px;opacity:.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.meta{font-size:9px;opacity:.5;text-align:right}
-.right{display:flex;flex-direction:column;background:radial-gradient(ellipse at top,rgba(0,210,255,.06),transparent 50%),#070e1e}
+.item:hover{background:rgba(0,210,255,.06)}.item.active{background:rgba(0,210,255,.14);border-color:var(--blue)}
+.av{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900}
+.info{flex:1;min-width:0}.name{font-size:13px;font-weight:700;overflow:hidden;text-overflow:ellipsis}.prev{font-size:11px;opacity:.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.right{display:flex;flex-direction:column;background:#070e1e}
 .top{padding:12px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,10,20,.85)}
-.top h3{margin:0;font-size:14px}
-.top small{font-size:11px;opacity:.6}
-.call-btns{display:flex;gap:6px}
-.icon-btn{width:38px;height:38px;border-radius:10px;border:1px solid rgba(0,210,255,.25);background:rgba(0,210,255,.08);color:var(--blue);display:grid;place-items:center;cursor:pointer;font-size:16px}
-.icon-btn:active{transform:scale(.92)}
-.msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background-image:url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");background-size:360px;opacity:1}
-.msg{max-width:75%;padding:9px 11px;border-radius:16px;font-size:12.5px;line-height:1.5;white-space:pre-wrap;word-break:break-word;animation:fade .2s ease}
-@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:75%;padding:9px 11px;border-radius:16px;font-size:12.5px;white-space:pre-wrap;word-break:break-word}
 .msg.me{align-self:flex-end;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;border-bottom-right-radius:6px}
-.msg.other{align-self:flex-start;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);border-bottom-left-radius:6px}
-.msg img{max-width:220px;border-radius:10px;display:block;margin-top:6px;cursor:pointer}
-.msg audio{margin-top:6px;width:200px}
-.time{font-size:8px;opacity:.6;margin-top:4px;text-align:right}
-.input{padding:10px;display:flex;gap:6px;align-items:flex-end;background:#0a1425;border-top:1px solid var(--border)}
-.input textarea{flex:1;min-height:42px;max-height:110px;padding:10px 12px;border-radius:18px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none;font-size:13px}
-.tools{display:flex;gap:6px}
+.msg.other{align-self:flex-start;background:rgba(255,255,255,.1);border-bottom-left-radius:6px}
+.input{padding:10px;display:flex;gap:6px;background:#0a1425;border-top:1px solid var(--border)}
+.input textarea{flex:1;min-height:42px;max-height:110px;padding:10px 12px;border-radius:18px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none}
 .tbtn{width:40px;height:40px;border-radius:50%;border:1px solid #293850;background:#0c192b;color:white;display:grid;place-items:center;cursor:pointer}
-.tbtn:active{transform:scale(.92)}
 .send{width:42px;height:42px;border-radius:50%;border:0;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;font-size:18px;cursor:pointer}
-
-/* CALL OVERLAY */
-.call-overlay{display:none;position:fixed;inset:0;z-index:5000;background:radial-gradient(ellipse at center,rgba(0,210,255,.15),#050a14);align-items:center;justify-content:center;flex-direction:column;padding:20px}
+.debug{padding:8px 10px;background:#ffeb3b22;border:1px solid #ffeb3b44;color:#ffeb3b;font-size:10px;border-radius:8px;margin:6px}
+.add-box{padding:8px 10px;display:flex;gap:6px;border-bottom:1px solid var(--border)}
+.empty{flex:1;display:grid;place-items:center;text-align:center;opacity:.6;padding:20px;font-size:12px}
+.call-overlay{display:none;position:fixed;inset:0;z-index:5000;background:#050a14;align-items:center;justify-content:center;flex-direction:column;padding:20px}
 .call-overlay.show{display:flex}
-.call-videos{width:100%;max-width:420px;display:grid;gap:12px}
-.call-videos video{width:100%;height:240px;background:#000;border-radius:16px;border:1px solid var(--border);object-fit:cover}
-.call-actions{display:flex;gap:12px;margin-top:18px}
-.call-actions .icon-btn{width:54px;height:54px;border-radius:50%;font-size:22px}
-.hang{background:var(--red)!important;color:white!important;border-color:var(--red)!important}
-.empty{flex:1;display:grid;place-items:center;text-align:center;opacity:.6;padding:20px}
-@media(max-width:800px){.wrap{grid-template-columns:1fr}.left{position:absolute;inset:0;z-index:20;display:none}.left.show{display:flex}.mobile{display:block!important}}
-.mobile{display:none}
+.call-overlay video{width:100%;max-width:400px;height:240px;background:#000;border-radius:16px;margin:6px}
+@media(max-width:800px){.wrap{grid-template-columns:1fr}.left{position:absolute;inset:0;z-index:20;display:none}.left.show{display:flex}}
 </style>
 </head>
 <body>
 <header>
-  <div style="display:flex;gap:8px;align-items:center"><div class="brand">💬 JASON CHAT</div><button class="btn" id="btnUsersMobile" style="display:none">☰</button></div>
-  <div style="display:flex;gap:6px"><div style="font-size:10px;color:var(--green)">● En ligne</div><a href="dashboard.html" class="btn">← Dashboard</a></div>
+  <div class="brand">💬 JASON CHAT — <span id="myPhoneShow">...</span></div>
+  <div><a href="dashboard.html" class="btn">← Dashboard</a></div>
 </header>
 <div class="wrap">
-  <aside class="left" id="leftPanel">
+  <aside class="left show" id="leftPanel">
     <div class="tabs"><div class="tab active" data-tab="chats">💬 Chats</div><div class="tab" data-tab="users">👥 Utilisateurs</div><div class="tab" data-tab="requests">🔔 Demandes <span id="reqCount" style="background:#ff4757;color:white;padding:1px 5px;border-radius:10px;font-size:9px;display:none">0</span></div></div>
-    <div class="search"><input id="search" placeholder="🔍 Rechercher numéro..."></div>
-    <div class="list" id="list"></div>
+    
+    <!-- AJOUT MANUEL SI LISTE VIDE -->
+    <div class="add-box">
+      <input id="manualPhone" placeholder="+243... Ajouter numéro">
+      <button class="btn" id="btnAddManual">+</button>
+    </div>
+
+    <div class="search"><input id="search" placeholder="🔍 Rechercher..."></div>
+    <div id="debugArea"></div>
+    <div class="list" id="list"><div style="padding:20px;text-align:center;opacity:.5">Chargement...</div></div>
   </aside>
-  <section class="right" id="rightPanel">
-    <div class="top">
-      <div><h3 id="chatName">Sélectionne un chat</h3><small id="chatPhone">Jason Business Messenger</small></div>
-      <div class="call-btns">
-        <button class="icon-btn" id="voiceCallBtn" title="Appel vocal">📞</button>
-        <button class="icon-btn" id="videoCallBtn" title="Appel vidéo">🎥</button>
-        <button class="icon-btn" id="backBtn" style="display:none">←</button>
-      </div>
-    </div>
-    <div class="msgs" id="msgs"><div class="empty"><div><h2>💬 WhatsApp Style</h2><p style="font-size:12px">Vois les utilisateurs Jason Business, envoie une demande, discute, vocal, photo, appel vocal/vidéo comme Messenger.</p></div></div></div>
-    <div class="input">
-      <div class="tools">
-        <label class="tbtn" title="Photo">🖼️<input type="file" id="photoInput" accept="image/*" hidden></label>
-        <button class="tbtn" id="recordBtn" title="Vocal">🎤</button>
-      </div>
-      <textarea id="msgInput" placeholder="Message..." disabled></textarea>
-      <button class="send" id="sendBtn" disabled>➤</button>
-    </div>
+  <section class="right">
+    <div class="top"><div><h3 id="chatName" style="margin:0;font-size:14px">Sélectionne un chat</h3><small id="chatPhone">Messenger Jason Business</small></div><div style="display:flex;gap:6px"><button class="btn" id="voiceCallBtn">📞</button><button class="btn" id="videoCallBtn">🎥</button></div></div>
+    <div class="msgs" id="msgs"><div class="empty">👥 Va dans Utilisateurs pour voir les comptes Jason Business<br><br>Si vide, ajoute le numéro manuellement en haut.</div></div>
+    <div class="input"><label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*" hidden></label><button class="tbtn" id="recordBtn">🎤</button><textarea id="msgInput" placeholder="Message..." disabled></textarea><button class="send" id="sendBtn" disabled>➤</button></div>
   </section>
 </div>
 
-<!-- CALL -->
-<div class="call-overlay" id="callOverlay">
-  <h2 id="callStatus">📞 Appel en cours...</h2>
-  <div class="call-videos">
-    <video id="localVideo" autoplay muted playsinline></video>
-    <video id="remoteVideo" autoplay playsinline></video>
-  </div>
-  <div class="call-actions">
-    <button class="icon-btn" id="muteBtn">🎤</button>
-    <button class="icon-btn hang" id="hangBtn">📵</button>
-    <button class="icon-btn" id="camBtn">🎥</button>
-  </div>
-</div>
+<div class="call-overlay" id="callOverlay"><h2 id="callStatus">📞 Appel...</h2><video id="localVideo" autoplay muted playsinline></video><video id="remoteVideo" autoplay playsinline></video><div style="display:flex;gap:12px;margin-top:14px"><button class="btn" id="muteBtn">🎤 Mute</button><button class="btn" style="background:#ff4757;color:white" id="hangBtn">📵 Raccrocher</button><button class="btn" id="camBtn">🎥 Cam</button></div></div>
 
 <script type="module">
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, onValue, push, set, get, remove, update, onChildAdded } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, onValue, push, set, get, remove, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
 const app=getApps().length?getApp():initializeApp(firebaseConfig);
 const db=getDatabase(app);
 
 const $=id=>document.getElementById(id);
-const myPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone");
+const myPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("phone");
 if(!myPhone){location.replace("login.html");throw new Error("no phone")}
-let tab="chats";
-let activeChat=null; // phone of other
-let allUsers={};
-let myRequests={};
-let myChats={};
-let pc=null;
-let localStream=null;
-let currentCallId=null;
+$("myPhoneShow").textContent=myPhone;
+
+let tab="chats", activeChat=null, allUsers={}, myRequests={}, myChats={}, manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]");
+let pc=null, localStream=null, currentCallId=null;
 
 function esc(s){return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")}
-function timeStr(ts){const d=new Date(ts);return d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}
+function timeStr(ts){return new Date(ts).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}
+function getChatId(a,b){return [a,b].sort().join("_")}
+function showDebug(msg){$("debugArea").innerHTML=`<div class="debug">DEBUG: ${esc(msg)}</div>`}
 
-// TABS
-document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");tab=t.dataset.tab;render();});
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");tab=t.dataset.tab;render()});
 $("search").oninput=()=>render();
 
-// LOAD USERS
-onValue(ref(db,"jasonBusiness/users"),snap=>{
-  allUsers=snap.val()||{};
+// 1. ESSAIE 3 CHEMINS POUR TROUVER LES USERS
+async function loadUsers(){
+  showDebug("Chargement users...");
+  try{
+    // Chemin 1: jasonBusiness/users
+    const snap1=await get(ref(db,"jasonBusiness/users"));
+    if(snap1.exists()){
+      allUsers=snap1.val()||{};
+      showDebug(`✅ ${Object.keys(allUsers).length} users trouvés dans jasonBusiness/users`);
+      render(); return;
+    }
+  }catch(e){ console.log("path1 error",e.message); }
+
+  try{
+    // Chemin 2: users
+    const snap2=await get(ref(db,"users"));
+    if(snap2.exists()){
+      allUsers=snap2.val()||{};
+      showDebug(`✅ ${Object.keys(allUsers).length} users trouvés dans users`);
+      render(); return;
+    }
+  }catch(e){}
+
+  try{
+    // Chemin 3: jasonBusiness/allUsers list
+    const snap3=await get(ref(db,"jasonBusiness/allUsers"));
+    if(snap3.exists()){
+      const arr=snap3.val();
+      if(Array.isArray(arr)){
+        arr.forEach(p=>allUsers[p]={telephone:p});
+      }else{
+        allUsers=arr;
+      }
+      showDebug(`✅ ${Object.keys(allUsers).length} users trouvés dans allUsers`);
+      render(); return;
+    }
+  }catch(e){}
+
+  // Si tout échoue -> mode manuel
+  showDebug(`⚠️ Aucun user lisible (règles Firebase bloquent). Ajoute manuellement les numéros en haut. Ton téléphone: ${myPhone}`);
+  allUsers={};
   render();
+}
+loadUsers();
+
+// Ecoute temps réel aussi pour users (si règles permettent)
+onValue(ref(db,"jasonBusiness/users"),snap=>{
+  if(snap.exists()){
+    allUsers=snap.val()||{};
+    showDebug(`✅ Live: ${Object.keys(allUsers).length} users`);
+    render();
+  }
+},err=>{
+  showDebug(`❌ Permission refusée: ${err.message} — Utilise ajout manuel`);
 });
-// LOAD REQUESTS
+
 onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),snap=>{
   myRequests=snap.val()||{};
-  const incoming=Object.values(myRequests).filter(r=>r.type==="incoming"&&r.status==="pending").length;
-  $("reqCount").textContent=incoming;
-  $("reqCount").style.display=incoming>0?"inline-block":"none";
+  const inc=Object.values(myRequests).filter(r=>r.type==="incoming"&&r.status==="pending").length;
+  $("reqCount").textContent=inc;
+  $("reqCount").style.display=inc>0?"inline-block":"none";
   render();
 });
-// LOAD MY CHATS LIST
 onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),snap=>{
   myChats=snap.val()||{};
   render();
 });
 
-function getChatId(a,b){return [a,b].sort().join("_")}
+// AJOUT MANUEL
+$("btnAddManual").onclick=()=>{
+  const p=$("manualPhone").value.trim();
+  if(!p||p.length<8){alert("Numéro invalide");return}
+  if(!manualUsers.includes(p)) manualUsers.push(p);
+  localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));
+  $("manualPhone").value="";
+  render();
+  alert("✅ "+p+" ajouté — tu peux maintenant lui envoyer une demande");
+};
+
+function getCombinedUsers(){
+  const combined={...allUsers};
+  manualUsers.forEach(p=>{ if(!combined[p]) combined[p]={telephone:p, manuel:true} });
+  return combined;
+}
 
 function render(){
   const q=($("search").value||"").toLowerCase();
   const container=$("list");
   container.innerHTML="";
+  const users= getCombinedUsers();
 
   if(tab==="users"){
-    Object.entries(allUsers).forEach(([phone,u])=>{
-      if(phone===myPhone)return;
-      if(q&&!phone.toLowerCase().includes(q))return;
+    const entries=Object.entries(users);
+    if(entries.length===0){
+      container.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucun utilisateur trouvé.<br><br>1. Vérifie que tu as d'autres comptes créés<br>2. Ou ajoute un numéro manuellement en haut<br><br>Ton numéro: ${esc(myPhone)}</div>`;
+      return;
+    }
+    entries.forEach(([phone,u])=>{
+      if(phone===myPhone) return;
+      if(q && !phone.toLowerCase().includes(q)) return;
       const chatId=getChatId(myPhone,phone);
       const isFriend=myChats[chatId]?.status==="accepted";
-      const hasSent=myRequests[phone]?.status==="pending"&&myRequests[phone]?.type==="outgoing";
+      const hasSent=myRequests[phone]?.status==="pending";
       const div=document.createElement("div");
       div.className="item";
-      div.innerHTML=`<div class="av">${phone.slice(-2)}</div><div class="info"><div class="name">${esc(phone)}</div><div class="prev">${isFriend?"✅ Ami — Discuter":hasSent?"⏳ Demande envoyée":u.solde_principal?esc(u.solde_principal)+" FC • Utilisateur":"Utilisateur Jason Business"}</div></div><div class="meta">${isFriend?"💬":hasSent?"⏳":"👤"}</div>`;
-      div.onclick=()=>{
-        if(isFriend){openChat(phone)}else if(!hasSent){sendRequest(phone)}
-      };
+      div.innerHTML=`<div class="av">${phone.slice(-2)}</div><div class="info"><div class="name">${esc(phone)} ${u.manuel?"(manuel)":""}</div><div class="prev">${isFriend?"✅ Ami":hasSent?"⏳ Demande envoyée":"👤 Utilisateur Jason"}</div></div><div>${isFriend?"💬":hasSent?"⏳":"+"}</div>`;
+      div.onclick=()=>{ if(isFriend) openChat(phone); else if(!hasSent) sendRequest(phone); };
       container.appendChild(div);
     });
   }
   else if(tab==="requests"){
     const reqs=Object.entries(myRequests).filter(([_,r])=>r.type==="incoming");
-    if(reqs.length===0){container.innerHTML=`<div style="padding:20px;text-align:center;opacity:.5;font-size:12px">Aucune demande</div>`;return}
+    if(reqs.length===0){container.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucune demande</div>`;return}
     reqs.forEach(([phone,r])=>{
-      if(q&&!phone.toLowerCase().includes(q))return;
       const div=document.createElement("div");
       div.className="item";
-      div.innerHTML=`<div class="av">${phone.slice(-2)}</div><div class="info"><div class="name">${esc(phone)}</div><div class="prev">Veut discuter avec toi</div></div><div style="display:flex;gap:4px"><button class="btn gold" data-accept="${phone}">Accepter</button><button class="btn red" data-refuse="${phone}">Refuser</button></div>`;
+      div.innerHTML=`<div class="av">${phone.slice(-2)}</div><div class="info"><div class="name">${esc(phone)}</div><div class="prev">Veut discuter</div></div><div style="display:flex;gap:4px"><button class="btn" style="background:#ffd700;color:#000" data-a="${phone}">Accepter</button><button class="btn" style="background:#ff475722" data-r="${phone}">Refuser</button></div>`;
       container.appendChild(div);
     });
-    container.querySelectorAll("[data-accept]").forEach(b=>b.onclick=(e)=>{e.stopPropagation();acceptRequest(b.dataset.accept)});
-    container.querySelectorAll("[data-refuse]").forEach(b=>b.onclick=(e)=>{e.stopPropagation();refuseRequest(b.dataset.refuse)});
+    container.querySelectorAll("[data-a]").forEach(b=>b.onclick=(e)=>{e.stopPropagation();acceptRequest(b.dataset.a)});
+    container.querySelectorAll("[data-r]").forEach(b=>b.onclick=(e)=>{e.stopPropagation();refuseRequest(b.dataset.r)});
   }
   else{
-    // chats
     const chatsList=Object.entries(myChats).filter(([_,c])=>c.status==="accepted").sort((a,b)=>(b[1].lastTime||0)-(a[1].lastTime||0));
-    if(chatsList.length===0){container.innerHTML=`<div style="padding:20px;text-align:center;opacity:.5;font-size:12px">Aucun chat<br><br>Va dans Utilisateurs pour envoyer une demande.</div>`;return}
+    if(chatsList.length===0){container.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucun chat<br>Va dans Utilisateurs → envoyer demande</div>`;return}
     chatsList.forEach(([chatId,chat])=>{
       const other=chatId.split("_").find(p=>p!==myPhone);
       if(q&&!other.toLowerCase().includes(q))return;
       const div=document.createElement("div");
       div.className="item"+(activeChat===other?" active":"");
-      const unread=chat.unread||0;
-      div.innerHTML=`<div class="av">${other.slice(-2)}</div><div class="info"><div class="name">${esc(other)}</div><div class="prev">${esc((chat.lastMsg||"").slice(0,35))}</div></div><div class="meta"><div>${timeStr(chat.lastTime||Date.now())}</div>${unread>0?`<div style="background:#ff4757;color:white;padding:2px 6px;border-radius:10px;font-size:10px;margin-top:4px">${unread}</div>`:""}</div>`;
+      div.innerHTML=`<div class="av">${other.slice(-2)}</div><div class="info"><div class="name">${esc(other)}</div><div class="prev">${esc((chat.lastMsg||"").slice(0,35))}</div></div><div style="font-size:9px">${timeStr(chat.lastTime)}${chat.unread?`<div style="background:#ff4757;padding:2px 6px;border-radius:10px;margin-top:3px">${chat.unread}</div>`:""}</div>`;
       div.onclick=()=>openChat(other);
       container.appendChild(div);
     });
@@ -211,74 +230,58 @@ function render(){
 }
 
 async function sendRequest(toPhone){
-  if(!confirm(`Envoyer demande à ${toPhone} ?`))return;
-  const myRef=ref(db,`jasonBusiness/chat_requests/${myPhone}/${toPhone}`);
-  const otherRef=ref(db,`jasonBusiness/chat_requests/${toPhone}/${myPhone}`);
-  await set(myRef,{phone:toPhone,type:"outgoing",status:"pending",createdAt:Date.now()});
-  await set(otherRef,{phone:myPhone,type:"incoming",status:"pending",createdAt:Date.now()});
+  if(!confirm(`Envoyer demande à ${toPhone} ?`)) return;
+  await set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${toPhone}`),{phone:toPhone,type:"outgoing",status:"pending",createdAt:Date.now()});
+  await set(ref(db,`jasonBusiness/chat_requests/${toPhone}/${myPhone}`),{phone:myPhone,type:"incoming",status:"pending",createdAt:Date.now()});
   alert("✅ Demande envoyée à "+toPhone);
 }
-
 async function acceptRequest(fromPhone){
   const chatId=getChatId(myPhone,fromPhone);
-  await set(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{with:fromPhone,status:"accepted",lastMsg:"Demande acceptée",lastTime:Date.now(),unread:0});
-  await set(ref(db,`jasonBusiness/user_chats/${fromPhone}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:"Demande acceptée",lastTime:Date.now(),unread:0});
+  await set(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{with:fromPhone,status:"accepted",lastMsg:"Accepté",lastTime:Date.now(),unread:0});
+  await set(ref(db,`jasonBusiness/user_chats/${fromPhone}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:"Accepté",lastTime:Date.now(),unread:0});
   await remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${fromPhone}`));
   await remove(ref(db,`jasonBusiness/chat_requests/${fromPhone}/${myPhone}`));
   openChat(fromPhone);
 }
-
 async function refuseRequest(fromPhone){
   await remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${fromPhone}`));
   await remove(ref(db,`jasonBusiness/chat_requests/${fromPhone}/${myPhone}`));
 }
 
-// OPEN CHAT
-let msgsUnsub=null;
 function openChat(otherPhone){
   activeChat=otherPhone;
   $("chatName").textContent=otherPhone;
-  $("chatPhone").textContent="En ligne • Jason Business";
+  $("chatPhone").textContent="En ligne";
   $("msgInput").disabled=false;
   $("sendBtn").disabled=false;
-  if(window.innerWidth<800){$("leftPanel").style.display="none";$("backBtn").style.display="grid"}
-  render();
   const chatId=getChatId(myPhone,otherPhone);
-  const msgsRef=ref(db,`jasonBusiness/messages/${chatId}`);
-
-  onValue(msgsRef,snap=>{
+  onValue(ref(db,`jasonBusiness/messages/${chatId}`),snap=>{
     const data=snap.val()||{};
     const msgs=Object.values(data).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
     renderMessages(msgs);
-    // mark read
     update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{unread:0});
   });
 }
-
 function renderMessages(msgs){
-  const container=$("msgs");
-  if(msgs.length===0){container.innerHTML=`<div class="empty"><div><h2>💬 Nouvelle discussion</h2><p style="font-size:12px">Dis bonjour à ${esc(activeChat)} !<br>Photos, vocaux, appels vocaux et vidéo comme Messenger.</p></div></div>`;return}
-  container.innerHTML="";
+  const c=$("msgs");
+  if(msgs.length===0){c.innerHTML=`<div style="flex:1;display:grid;place-items:center;opacity:.6">Nouvelle discussion avec ${esc(activeChat)}<br>Photos, vocaux, appels</div>`;return}
+  c.innerHTML="";
   msgs.forEach(m=>{
     const isMe=m.from===myPhone;
     const div=document.createElement("div");
     div.className="msg "+(isMe?"me":"other");
-    let content=esc(m.text||"");
-    if(m.photo){
-      content+=`<img src="${m.photo}" onclick="window.open(this.src)">`;
-    }
-    if(m.audio){
-      content+=`<audio controls src="${m.audio}"></audio>`;
-    }
-    div.innerHTML=`${content}<div class="time">${timeStr(m.createdAt)} ${isMe?"✓✓":""}</div>`;
-    container.appendChild(div);
+    let html=esc(m.text||"");
+    if(m.photo) html+=`<br><img src="${m.photo}" style="max-width:200px;border-radius:10px;margin-top:6px" onclick="window.open(this.src)">`;
+    if(m.audio) html+=`<br><audio controls src="${m.audio}" style="width:200px;margin-top:6px"></audio>`;
+    html+=`<div style="font-size:8px;opacity:.6;margin-top:4px;text-align:right">${timeStr(m.createdAt)}</div>`;
+    div.innerHTML=html;
+    c.appendChild(div);
   });
-  container.scrollTop=container.scrollHeight;
+  c.scrollTop=c.scrollHeight;
 }
-
 async function sendText(){
   const text=$("msgInput").value.trim();
-  if(!text||!activeChat)return;
+  if(!text||!activeChat) return;
   $("msgInput").value="";
   const chatId=getChatId(myPhone,activeChat);
   const newRef=push(ref(db,`jasonBusiness/messages/${chatId}`));
@@ -288,20 +291,18 @@ async function sendText(){
   await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:text,lastTime:Date.now()});
   await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:text,lastTime:Date.now(),unread});
 }
-
 $("sendBtn").onclick=sendText;
 $("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText()}});
 
-// PHOTO
-$("photoInput").onchange=async e=>{
+// Photo
+$("photoInput").onchange=e=>{
   const file=e.target.files[0];
-  if(!file||!activeChat)return;
+  if(!file||!activeChat) return;
   const reader=new FileReader();
   reader.onload=async()=>{
-    const base64=reader.result;
     const chatId=getChatId(myPhone,activeChat);
     const newRef=push(ref(db,`jasonBusiness/messages/${chatId}`));
-    await set(newRef,{from:myPhone,to:activeChat,text:"📷 Photo",photo:base64,createdAt:Date.now()});
+    await set(newRef,{from:myPhone,to:activeChat,text:"📷 Photo",photo:reader.result,createdAt:Date.now()});
     await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:"📷 Photo",lastTime:Date.now()});
     await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:"📷 Photo",lastTime:Date.now(),unread:1});
   };
@@ -309,158 +310,93 @@ $("photoInput").onchange=async e=>{
   e.target.value="";
 };
 
-// VOCAL
-let mediaRecorder=null;
-let audioChunks=[];
-let isRecording=false;
+// Vocal
+let mediaRecorder=null, audioChunks=[], isRecording=false;
 $("recordBtn").onclick=async()=>{
-  if(!activeChat){alert("Choisis un chat d'abord");return}
+  if(!activeChat){alert("Choisis un chat");return}
   if(!isRecording){
-    try{
-      const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-      mediaRecorder=new MediaRecorder(stream);
-      audioChunks=[];
-      mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
-      mediaRecorder.onstop=async()=>{
-        const blob=new Blob(audioChunks,{type:"audio/webm"});
-        const reader=new FileReader();
-        reader.onload=async()=>{
-          const base64=reader.result;
-          const chatId=getChatId(myPhone,activeChat);
-          const newRef=push(ref(db,`jasonBusiness/messages/${chatId}`));
-          await set(newRef,{from:myPhone,to:activeChat,text:"🎤 Vocal",audio:base64,createdAt:Date.now()});
-          await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now()});
-          await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now(),unread:1});
-        };
-        reader.readAsDataURL(blob);
-        stream.getTracks().forEach(t=>t.stop());
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    mediaRecorder=new MediaRecorder(stream);
+    audioChunks=[];
+    mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
+    mediaRecorder.onstop=async()=>{
+      const blob=new Blob(audioChunks,{type:"audio/webm"});
+      const r=new FileReader();
+      r.onload=async()=>{
+        const chatId=getChatId(myPhone,activeChat);
+        const newRef=push(ref(db,`jasonBusiness/messages/${chatId}`));
+        await set(newRef,{from:myPhone,to:activeChat,text:"🎤 Vocal",audio:r.result,createdAt:Date.now()});
+        await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now()});
+        await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now(),unread:1});
       };
-      mediaRecorder.start();
-      isRecording=true;
-      $("recordBtn").textContent="⏹️";
-      $("recordBtn").style.background="#ff4757";
-    }catch(err){alert("Micro non autorisé: "+err.message)}
+      r.readAsDataURL(blob);
+      stream.getTracks().forEach(t=>t.stop());
+    };
+    mediaRecorder.start();
+    isRecording=true;
+    $("recordBtn").textContent="⏹️";
   }else{
     mediaRecorder.stop();
     isRecording=false;
     $("recordBtn").textContent="🎤";
-    $("recordBtn").style.background="";
   }
 };
 
-// APPELS VOCAL / VIDEO
+// Appels simples (WebRTC)
 $("voiceCallBtn").onclick=()=>startCall(false);
 $("videoCallBtn").onclick=()=>startCall(true);
-
 async function startCall(isVideo){
-  if(!activeChat){alert("Choisis un chat d'abord");return}
+  if(!activeChat){alert("Choisis un chat");return}
   const callId=getChatId(myPhone,activeChat)+"_"+Date.now();
   currentCallId=callId;
   $("callOverlay").classList.add("show");
-  $("callStatus").textContent=isVideo?"🎥 Appel vidéo vers "+activeChat:"📞 Appel vocal vers "+activeChat;
-
+  $("callStatus").textContent=(isVideo?"🎥 Vidéo":"📞 Vocal")+" vers "+activeChat;
   localStream=await navigator.mediaDevices.getUserMedia({video:isVideo,audio:true});
   $("localVideo").srcObject=localStream;
-  if(!isVideo){$("localVideo").style.display="none"}else{$("localVideo").style.display="block"}
-
   pc=new RTCPeerConnection({iceServers:[{urls:"stun:stun.l.google.com:19302"}]});
   localStream.getTracks().forEach(t=>pc.addTrack(t,localStream));
-  pc.onicecandidate=e=>{
-    if(e.candidate){
-      push(ref(db,`jasonBusiness/calls/${callId}/candidates/${myPhone}`),e.candidate.toJSON());
-    }
-  };
+  pc.onicecandidate=e=>{ if(e.candidate) push(ref(db,`jasonBusiness/calls/${callId}/candidates/${myPhone}`),e.candidate.toJSON()); };
   pc.ontrack=e=>{$("remoteVideo").srcObject=e.streams[0]};
-
   const offer=await pc.createOffer();
   await pc.setLocalDescription(offer);
   await set(ref(db,`jasonBusiness/calls/${callId}`),{from:myPhone,to:activeChat,isVideo,offer:{type:offer.type,sdp:offer.sdp},createdAt:Date.now(),status:"ringing"});
-
-  // écoute réponse
   onValue(ref(db,`jasonBusiness/calls/${callId}/answer`),async snap=>{
     const ans=snap.val();
-    if(ans&&pc&&!pc.currentRemoteDescription){
-      await pc.setRemoteDescription(new RTCSessionDescription(ans));
-    }
-  });
-  onValue(ref(db,`jasonBusiness/calls/${callId}/candidates/${activeChat}`),snap=>{
-    const cands=snap.val()||{};
-    Object.values(cands).forEach(async c=>{
-      try{await pc.addIceCandidate(new RTCIceCandidate(c))}catch{}
-    });
-  });
-  onValue(ref(db,`jasonBusiness/calls/${callId}/status`),snap=>{
-    if(snap.val()==="ended"){endCall()}
+    if(ans&&pc&&!pc.currentRemoteDescription) await pc.setRemoteDescription(new RTCSessionDescription(ans));
   });
 }
-
-// RECEVOIR APPELS
+$("hangBtn").onclick=()=>{
+  $("callOverlay").classList.remove("show");
+  if(pc){pc.close();pc=null}
+  if(localStream){localStream.getTracks().forEach(t=>t.stop());localStream=null}
+  if(currentCallId){update(ref(db,`jasonBusiness/calls/${currentCallId}`),{status:"ended"});currentCallId=null}
+};
+// Recevoir appels
 onValue(ref(db,"jasonBusiness/calls"),async snap=>{
   const calls=snap.val()||{};
   for(const [callId,call] of Object.entries(calls)){
     if(call.to===myPhone&&call.status==="ringing"&&!currentCallId){
-      if(confirm(`📞 Appel ${call.isVideo?"vidéo":"vocal"} de ${call.from}\nAccepter ?`)){
+      if(confirm(`📞 Appel ${call.isVideo?"vidéo":"vocal"} de ${call.from} — Accepter ?`)){
         currentCallId=callId;
         $("callOverlay").classList.add("show");
-        $("callStatus").textContent="📞 Appel de "+call.from;
+        $("callStatus").textContent="Appel de "+call.from;
         localStream=await navigator.mediaDevices.getUserMedia({video:call.isVideo,audio:true});
         $("localVideo").srcObject=localStream;
-        $("localVideo").style.display=call.isVideo?"block":"none";
-
         pc=new RTCPeerConnection({iceServers:[{urls:"stun:stun.l.google.com:19302"}]});
         localStream.getTracks().forEach(t=>pc.addTrack(t,localStream));
-        pc.onicecandidate=e=>{
-          if(e.candidate){
-            push(ref(db,`jasonBusiness/calls/${callId}/candidates/${myPhone}`),e.candidate.toJSON());
-          }
-        };
+        pc.onicecandidate=e=>{ if(e.candidate) push(ref(db,`jasonBusiness/calls/${callId}/candidates/${myPhone}`),e.candidate.toJSON()); };
         pc.ontrack=e=>{$("remoteVideo").srcObject=e.streams[0]};
         await pc.setRemoteDescription(new RTCSessionDescription(call.offer));
         const answer=await pc.createAnswer();
         await pc.setLocalDescription(answer);
         await set(ref(db,`jasonBusiness/calls/${callId}/answer`),{type:answer.type,sdp:answer.sdp});
         await update(ref(db,`jasonBusiness/calls/${callId}`),{status:"accepted"});
-
-        onValue(ref(db,`jasonBusiness/calls/${callId}/candidates/${call.from}`),s=>{
-          const cands=s.val()||{};
-          Object.values(cands).forEach(async c=>{try{await pc.addIceCandidate(new RTCIceCandidate(c))}catch{}});
-        });
       }else{
         await update(ref(db,`jasonBusiness/calls/${callId}`),{status:"ended"});
       }
     }
   }
 });
-
-function endCall(){
-  $("callOverlay").classList.remove("show");
-  if(pc){pc.close();pc=null}
-  if(localStream){localStream.getTracks().forEach(t=>t.stop());localStream=null}
-  if(currentCallId){
-    update(ref(db,`jasonBusiness/calls/${currentCallId}`),{status:"ended"});
-    setTimeout(()=>remove(ref(db,`jasonBusiness/calls/${currentCallId}`)),2000);
-    currentCallId=null;
-  }
-  $("localVideo").srcObject=null;
-  $("remoteVideo").srcObject=null;
-}
-$("hangBtn").onclick=endCall;
-$("muteBtn").onclick=()=>{
-  if(localStream){
-    const audio=localStream.getAudioTracks()[0];
-    if(audio){audio.enabled=!audio.enabled;$("muteBtn").textContent=audio.enabled?"🎤":"🔇"}
-  }
-};
-$("camBtn").onclick=()=>{
-  if(localStream){
-    const video=localStream.getVideoTracks()[0];
-    if(video){video.enabled=!video.enabled;$("camBtn").textContent=video.enabled?"🎥":"📷"}
-  }
-};
-
-// MOBILE
-$("backBtn").onclick=()=>{ $("leftPanel").style.display="flex"; $("backBtn").style.display="none"; };
-$("btnUsersMobile").onclick=()=>{ $("leftPanel").style.display="flex"; };
 </script>
 </body>
 </html>
