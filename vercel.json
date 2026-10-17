@@ -1,6 +1,25 @@
 {
   "version": 2,
   "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Permissions-Policy",
+          "value": "microphone=*, camera=*, display-capture=*, geolocation=*"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin-allow-popups"
+        },
+        {
+          "key": "Cross-Origin-Embedder-Policy",
+          "value": "unsafe-none"
+        }
+      ]
+    }
+  ],
   "builds": [
     {
       "src": "api/[...path].js",
@@ -22,29 +41,11 @@
     },
     {
       "src": "/",
-      "dest": "/index.html",
-      "headers": {
-        "Permissions-Policy": "microphone=*, camera=*, display-capture=*",
-        "Cross-Origin-Opener-Policy": "same-origin-allow-popups"
-      }
-    },
-    {
-      "src": "/(.*)\\.(js|css|png|jpg|jpeg|apk|svg|webp|ico|json)",
-      "dest": "/$1.$2",
-      "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable",
-        "Permissions-Policy": "microphone=*, camera=*, display-capture=*"
-      }
+      "dest": "/index.html"
     },
     {
       "src": "/(.*)",
-      "dest": "/$1",
-      "headers": {
-        "Cache-Control": "no-cache, no-store, must-revalidate",
-        "Permissions-Policy": "microphone=*, camera=*, display-capture=*",
-        "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
-        "Cross-Origin-Embedder-Policy": "credentialless"
-      }
+      "dest": "/$1"
     }
   ]
 }
