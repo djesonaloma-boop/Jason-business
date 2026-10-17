@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,205 +7,548 @@
 <meta name="theme-color" content="#050914">
 <title>JASON BUSINESS — Boutique</title>
 <style>
-:root{--bg:#050914;--panel:#0b1425;--blue:#00d4ff;--gold:#d8aa45;--green:#22c55e;--text:#f4f7ff;--muted:#94a3b8;--border:rgba(216,170,69,.25)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;color:var(--text);font-family:Arial,sans-serif;background:radial-gradient(ellipse at 15% 0%,#103a5b55,transparent 38%),radial-gradient(ellipse at 100% 45%,#d8aa451b,transparent 35%),var(--bg);overflow-x:hidden;padding-bottom:90px}
+:root{--bg:#050914;--panel:#0b1425;--blue:#00d4ff;--gold:#d8aa45;--green:#22c55e;--text:#f4f7ff;--muted:#94a3b8;--border:#d8aa4540}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at top left,#103a5b55,transparent 40%),var(--bg);color:var(--text);font-family:Arial,sans-serif;padding-bottom:90px}
 button,input,select,textarea{font:inherit}button{cursor:pointer}
-header{position:sticky;top:0;z-index:10;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px;background:#050914ed;border-bottom:1px solid var(--border);backdrop-filter:blur(20px)}
-.brand{display:flex;align-items:center;gap:10px}.logo{width:43px;height:43px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#fff0bd,var(--gold),#946515);color:#07111d;font-weight:900;font-size:18px}
-.brand h1{font-size:14px;margin:0 0 4px}.brand small{font-size:10px;color:var(--muted)}
-.btn{border:1px solid #d8aa4570;border-radius:9px;padding:9px 10px;min-height:34px;color:var(--text);background:linear-gradient(135deg,#14243a,#0b1425);font-size:10px;font-weight:700}
-.gold{background:linear-gradient(120deg,#ffe9b4,#d8aa45,#f4cf77);color:#10131a;border-color:#ffe6a0}.blue{border-color:#00d4ff88;background:linear-gradient(120deg,#10344a,#0b1425)}.green{background:linear-gradient(120deg,#86efac,#22c55e);color:#052e16}
-main{max-width:900px;margin:auto;padding:17px 13px 80px}.hero{border:1px solid var(--border);border-radius:25px;padding:24px 19px;background:radial-gradient(ellipse at top right,#00d4ff18,transparent 60%),linear-gradient(135deg,#14243b,#080e1b);margin-bottom:25px}
-.tag{font-size:10px;color:var(--gold);letter-spacing:1.5px;font-weight:bold}.hero h2{font-size:27px;margin:14px 0 8px}.hero h2 span{color:var(--gold)}.hero p{font-size:12px;color:var(--muted);max-width:570px;line-height:1.8}
-.section-title{font-size:17px;margin:24px 2px 13px}.section-title:after{content:"";display:block;width:52px;height:2px;margin-top:8px;background:linear-gradient(90deg,var(--gold),var(--blue),transparent)}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{display:flex;flex-direction:column;padding:16px 12px;border-radius:19px;border:1px solid var(--border);background:linear-gradient(145deg,#111f33f7,#09111efc)}
-.card-icon{width:45px;height:45px;border-radius:14px;display:grid;place-items:center;font-size:23px;background:linear-gradient(135deg,#d8aa4520,#00d4ff0c);border:1px solid var(--border);margin-bottom:12px}.card h3{font-size:14px;margin:0 0 8px}.card p{font-size:11px;color:var(--muted);min-height:40px;flex:1;line-height:1.7}.muted{color:var(--muted);font-size:11px}
-.total{padding:11px;border:1px solid var(--border);border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:8px;background:linear-gradient(120deg,#d8aa4510,#00d4ff05);margin:12px 0;font-size:11px}.total strong{color:var(--gold);font-size:15px}.card>.btn{width:100%;margin-top:auto;min-height:36px}
-.overlay{display:none;position:fixed;inset:0;z-index:80;background:#000c;backdrop-filter:blur(9px);align-items:flex-end;justify-content:center;padding:0}.overlay.show{display:flex}.modal{width:min(100%,620px);max-height:92vh;overflow:auto;background:#08111f;border:1px solid var(--border);border-radius:23px 23px 0 0;padding:18px 18px 110px 18px}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;position:sticky;top:-18px;background:#08111ff5;padding:9px 0 12px;border-bottom:1px solid #d8aa4520}.modal-head h2{font-size:17px;margin:0}.close{width:32px;height:32px;border:1px solid var(--border);border-radius:9px;background:#132035;color:white;font-size:19px}
-.field{margin:14px 0}.field label{display:block;font-size:12px;margin-bottom:8px;color:#dce6f5}.field input,.field textarea,.field select{width:100%;padding:13px;border-radius:12px;border:1px solid #293850;background:#0c192b;color:white;outline:none}
-.platforms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.platform{padding:9px 3px;border:1px solid #28374d;border-radius:10px;background:#0d192b;color:white;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:7px}.platform img{width:25px;height:25px}.platform.active{border-color:var(--gold);background:#d8aa4518}
-.status{font-size:12px;margin:12px 0;white-space:pre-wrap}.ok{color:#86efac}.error{color:#fda4af}.info{color:#93c5fd}.preview{width:85px;height:85px;border-radius:14px;object-fit:cover;border:1px solid var(--border);display:none;margin-top:10px;background:#0c192b}
-#qrResult{display:flex;justify-content:center;padding:15px;background:#fff;border-radius:12px;min-height:30px;margin:12px auto;max-width:280px}footer{text-align:center;padding:22px 15px;border-top:1px solid var(--border);font-size:10px;color:var(--muted)}footer span{color:var(--gold)}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:10;background:#070e1ef5;border-top:1px solid rgba(216,170,69,.25);backdrop-filter:blur(20px);display:grid;grid-template-columns:1fr 1fr 1fr 1fr;padding:8px 4px calc(8px + env(safe-area-inset-bottom))}.nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;color:#94a3b8;text-decoration:none;font-size:10px;font-weight:700;padding:6px}.nav-item.active{color:#00d4ff}
-.solde-badge{padding:8px 14px;border-radius:20px;background:linear-gradient(120deg,#00d4ff20,#d8aa4520);border:1px solid #00d4ff88;font-size:11px;font-weight:900;color:#00d4ff;animation:pulse 2s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 #00d4ff40}70%{box-shadow:0 0 0 8px #00d4ff00}100%{box-shadow:0 0 0 0 #00d4ff00}}
-.site-catalog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:10px}.site-option{min-height:112px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;text-align:center;color:var(--text);background:linear-gradient(145deg,#13243a,#09111e);border:1px solid var(--border);border-radius:14px}.site-option.active{border-color:var(--gold);background:linear-gradient(145deg,#d8aa4528,#00d4ff0b)}
-@media(min-width:620px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.overlay{align-items:center;padding:16px}.modal{border-radius:23px}}
+header{position:sticky;top:0;z-index:10;background:#050914f5;border-bottom:1px solid var(--border);padding:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:9px}
+.logo{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,#fff0bd,var(--gold));color:#08111e;font-weight:900}
+.brand h1{font-size:14px;margin:0 0 5px}.brand small{font-size:10px;color:var(--muted)}
+.balance{padding:10px 13px;border-radius:12px;background:#06283a;border:1px solid var(--blue);color:var(--blue);font-weight:bold;font-size:13px;box-shadow:0 0 15px #00d4ff15}
+.btn{border:1px solid var(--border);border-radius:10px;padding:11px;color:white;background:#102039;font-weight:bold;font-size:12px}
+.gold{background:linear-gradient(120deg,#ffe9b4,#d8aa45);color:#10131a;border:0}
+.blue{border-color:#00d4ff80}.green{background:linear-gradient(120deg,#86efac,#22c55e);color:#052e16;border:0}
+main{max-width:900px;margin:auto;padding:16px 13px}
+.hero{padding:23px 18px;border:1px solid var(--border);border-radius:22px;background:linear-gradient(135deg,#14243b,#080e1b);margin-bottom:24px}
+.tag{color:var(--gold);font-size:10px;letter-spacing:1.5px;font-weight:bold}
+.hero h2{font-size:27px;line-height:1.3}.hero h2 span{color:var(--gold)}
+.hero p{font-size:12px;line-height:1.8;color:var(--muted)}
+.section-title{font-size:18px;margin:25px 0 14px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.card{display:flex;flex-direction:column;padding:14px 11px;border:1px solid var(--border);border-radius:17px;background:linear-gradient(145deg,#111f33,#09111e);min-width:0}
+.card-icon{font-size:25px;margin-bottom:12px}
+.card h3{font-size:13px;margin:0 0 8px}
+.card p{font-size:11px;color:var(--muted);line-height:1.7;flex:1}
+.price{padding:11px 8px;border:1px solid var(--border);border-radius:10px;margin:8px 0 12px;font-size:11px;display:flex;justify-content:space-between;gap:5px}
+.price strong{color:var(--gold);text-align:right}
+.card .btn{width:100%;margin-top:auto}
+.overlay{display:none;position:fixed;inset:0;z-index:30;background:#000c;align-items:flex-end;justify-content:center}
+.overlay.show{display:flex}
+.modal{width:100%;max-width:600px;max-height:90vh;overflow:auto;background:#08111f;border:1px solid var(--border);border-radius:22px 22px 0 0;padding:17px 16px 35px}
+.modal-head{position:sticky;top:-17px;background:#08111ff5;display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);z-index:2}
+.modal-head h2{font-size:16px}
+.close{background:#15243a;color:white;border:1px solid var(--border);border-radius:9px;width:35px;height:35px;font-size:21px}
+.field{margin:14px 0}
+.field label{display:block;font-size:12px;margin-bottom:7px}
+.field input,.field textarea,.field select{width:100%;padding:12px;border-radius:10px;background:#0c192b;border:1px solid #293850;color:white;outline:none}
+.field textarea{min-height:85px;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--blue)}
+.total{display:flex;justify-content:space-between;gap:8px;padding:12px;margin:10px 0;border:1px solid var(--border);border-radius:11px;font-size:12px}
+.total strong{color:var(--gold)}
+.status{font-size:12px;line-height:1.7;margin-top:12px;white-space:pre-wrap;overflow-wrap:anywhere}
+.ok{color:#86efac}.error{color:#fda4af}.info{color:#93c5fd}
+.catalog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.site-option{padding:12px 5px;min-height:100px;border-radius:12px;border:1px solid var(--border);background:#101e32;color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:11px}
+.site-option.active{border-color:var(--gold);background:#d8aa4520}
+.platforms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.platform{padding:9px 2px;border:1px solid #293850;border-radius:9px;background:#0d192b;color:white;font-size:10px}
+.platform.active{border-color:var(--gold);background:#d8aa4520}
+.platform img{width:23px;height:23px;display:block;margin:0 auto 5px}
+.preview{display:none;width:80px;height:80px;object-fit:cover;border-radius:12px;margin-top:10px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:10;display:grid;grid-template-columns:repeat(4,1fr);background:#070e1ef5;border-top:1px solid var(--border);padding:8px 3px calc(8px + env(safe-area-inset-bottom))}
+.nav-item{text-decoration:none;color:var(--muted);text-align:center;font-size:10px;font-weight:bold;padding:6px;display:flex;flex-direction:column;gap:5px}
+.nav-item.active{color:var(--blue)}
+footer{text-align:center;padding:22px 10px;border-top:1px solid var(--border);color:var(--muted);font-size:10px;line-height:2}
+footer span{color:var(--gold)}
+@media(min-width:620px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.overlay{align-items:center;padding:15px}.modal{border-radius:20px}.catalog{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>
 </head>
 <body>
+
 <header>
- <div class="brand"><div class="logo">JB</div><div><h1>JASON BUSINESS</h1><small>Boutique numérique</small></div></div>
- <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
-  <div id="soldeDisplay" class="solde-badge">⏳ Chargement...</div>
-  <button class="btn blue" id="apiBtn">⚡ API</button><button class="btn" id="historyBtn">📋 Demandes</button>
+ <div class="brand">
+  <div class="logo">JB</div>
+  <div><h1>JASON BUSINESS</h1><small>Boutique numérique</small></div>
+ </div>
+ <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap">
+  <div class="balance" id="soldeDisplay">💰 Chargement...</div>
+  <button class="btn blue" onclick="location.href='api.html'">⚡ API</button>
+  <button class="btn" id="historyBtn">📋 Demandes</button>
  </div>
 </header>
+
 <main>
- <section class="hero"><div class="tag">✦ TON ESPACE NUMÉRIQUE</div><h2>Crée ton projet.<br><span>Réalise tes idées.</span></h2><p>Commande une application, un site web, un chatbot, crée une chanson, prépare une publicité gratuite, booste tes réseaux ou génère un QR code.</p><button class="btn gold" id="exploreBtn">Découvrir ↓</button></section>
+ <section class="hero">
+  <div class="tag">✦ TON ESPACE NUMÉRIQUE</div>
+  <h2>Crée ton projet.<br><span>Réalise tes idées.</span></h2>
+  <p>Commande une application, un site web, un chatbot, une chanson, une publicité ou un boost pour tes réseaux sociaux.</p>
+  <button class="btn gold" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Découvrir les services ↓</button>
+  <div class="total"><span>Mon solde disponible</span><strong id="heroBalance">Chargement...</strong></div>
+ </section>
+
  <h2 class="section-title" id="services">Nos services</h2>
  <section class="grid">
-  <article class="card"><div class="card-icon">📈</div><h3>Boostage réseaux sociaux</h3><p>Abonnés 50 FC, Likes 35 FC, Vues 20 FC — Minimum 10.</p><div class="total"><span>À partir de</span><strong>200 FC</strong></div><button class="btn gold" data-open="boostModal">Calculer mon boost</button></article>
-  <article class="card"><div class="card-icon">📱</div><h3>Application mobile</h3><p>Nom, icône, lien du site, description et WhatsApp.</p><div class="total"><span>Prix App</span><strong>10 000 FC</strong></div><button class="btn" data-open="appModal">Commander — 10 000 FC</button></article>
-  <article class="card"><div class="card-icon">🌐</div><h3>Création de site web</h3><p>24 modèles avec prix individuels.</p><div class="total"><span>À partir de</span><strong>10 000 FC</strong></div><button class="btn gold" data-open="siteModal">Choisir un site</button></article>
-  <article class="card"><div class="card-icon">🤖</div><h3>Création de chatbot</h3><p>Nom, fonctionnalités, créateur, description.</p><div class="total"><span>Prix Chatbot</span><strong>7 000 FC</strong></div><button class="btn" data-open="chatModal">Créer — 7 000 FC</button></article>
-  <article class="card"><div class="card-icon">🎵</div><h3>Créer une chanson</h3><p>Paroles et style musical.</p><div class="total"><span>Prix Chanson</span><strong>5 000 FC</strong></div><button class="btn gold" data-open="musicModal">Créer — 5 000 FC</button></article>
-  <article class="card"><div class="card-icon">📣</div><h3>Publicité gratuite</h3><p>Annonce gratuite.</p><div class="total"><span>Prix</span><strong>GRATUIT</strong></div><button class="btn green" data-open="adsModal">Créer ma publicité</button></article>
-  <article class="card"><div class="card-icon">▦</div><h3>Générateur QR code</h3><p>QR code gratuit.</p><div class="total"><span>Prix</span><strong>GRATUIT</strong></div><button class="btn blue" data-open="qrModal">Créer QR</button></article>
+  <article class="card"><div class="card-icon">📈</div><h3>Boostage réseaux sociaux</h3><p>Choisis ta plateforme, le service et la quantité souhaitée.</p><div class="price"><span>À partir de</span><strong>200 FC</strong></div><button class="btn gold" onclick="openModal('boostModal')">Calculer mon boost</button></article>
+  <article class="card"><div class="card-icon">📱</div><h3>Application mobile</h3><p>Nom, icône, lien du site, description et WhatsApp.</p><div class="price"><span>Prix</span><strong>10 000 FC</strong></div><button class="btn" onclick="openModal('appModal')">Commander</button></article>
+  <article class="card"><div class="card-icon">🌐</div><h3>Création de site web</h3><p>Choisis parmi nos modèles et décris ton projet.</p><div class="price"><span>À partir de</span><strong>10 000 FC</strong></div><button class="btn gold" onclick="openModal('siteModal')">Choisir un site</button></article>
+  <article class="card"><div class="card-icon">🤖</div><h3>Création de chatbot</h3><p>Définis le nom, les fonctions et le créateur.</p><div class="price"><span>Prix</span><strong>7 000 FC</strong></div><button class="btn" onclick="openModal('chatModal')">Créer un chatbot</button></article>
+  <article class="card"><div class="card-icon">🎵</div><h3>Créer une chanson</h3><p>Indique le titre, les paroles et le style musical.</p><div class="price"><span>Prix</span><strong>5 000 FC</strong></div><button class="btn gold" onclick="openModal('musicModal')">Créer une chanson</button></article>
+  <article class="card"><div class="card-icon">📣</div><h3>Publicité gratuite</h3><p>Prépare une annonce pour ton activité.</p><div class="price"><span>Prix</span><strong>GRATUIT</strong></div><button class="btn green" onclick="openModal('adsModal')">Créer ma publicité</button></article>
+  <article class="card"><div class="card-icon">▦</div><h3>Générateur QR code</h3><p>Transforme un lien en QR code téléchargeable.</p><div class="price"><span>Prix</span><strong>GRATUIT</strong></div><button class="btn blue" onclick="openModal('qrModal')">Créer un QR code</button></article>
  </section>
 </main>
-<footer><span>JASON BUSINESS</span> · Services numériques<br>Créé par Jason Aloma 🇨🇩</footer>
 
-<div class="overlay" id="boostModal"><section class="modal"><div class="modal-head"><h2>📈 Boostage — Prix auto</h2><button class="close" data-close="boostModal">×</button></div>
-<p class="muted">Solde actuel: <b id="soldeInBoost" style="color:#00d4ff">Chargement...</b> — Tarifs: 50 / 35 / 20 FC</p>
-<div class="platforms" id="platformGrid"></div>
-<form id="boostForm"><div class="field"><label>Plateforme</label><input id="boostPlatform" name="platform" readonly required></div><div class="field"><label>Service</label><select id="boostType" name="type" required><option value="followers">Followers / abonnés — 50 FC / unité</option><option value="likes">Likes — 35 FC / unité</option><option value="views">Vues — 20 FC / unité</option></select></div><div class="field"><label>Lien *</label><input id="boostLink" name="link" type="url" required placeholder="https://..."></div><div class="field"><label>Quantité (min 10) *</label><input id="boostBudget" name="budget" type="number" min="10" value="10" required></div><div class="field"><label>Téléphone *</label><input id="boostPhone" name="phone" type="tel" required></div>
-<div class="total"><span>Quantité</span><strong id="boostQuantity">10 unités</strong></div><div class="total"><span>Prix total calculé</span><strong id="boostPrice" style="color:#00d4ff;font-size:18px">500 FC</strong></div>
-<button class="btn gold" type="submit" style="width:100%">📤 Payer et envoyer</button><div class="status" id="boostStatus"></div></form></section></div>
+<footer><span>JASON BUSINESS</span><br>Services numériques<br>Créé par Jason Aloma 🇨🇩</footer>
 
-<div class="overlay" id="appModal"><section class="modal"><div class="modal-head"><h2>📱 Application — 10 000 FC</h2><button class="close" data-close="appModal">×</button></div><p class="muted">Solde: <b id="soldeInApp" style="color:#00d4ff"></b></p><form id="appForm"><div class="field"><label>Nom *</label><input id="appName" name="appName" required maxlength="100"></div><div class="field"><label>Icône *</label><input id="appIcon" name="appIconFile" type="file" accept="image/*" required><img id="appIconPreview" class="preview"></div><div class="field"><label>Lien *</label><input id="appUrl" name="appUrl" type="url" required placeholder="https://jason-business.vercel.app"></div><div class="field"><label>Description *</label><textarea id="appDescription" name="description" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="appWhatsapp" name="whatsapp" type="tel" required></div><div class="total"><span>Prix Application</span><strong>10 000 FC</strong></div><button class="btn gold" type="submit" id="appSubmitBtn" style="width:100%">📤 Commander — 10 000 FC</button><div class="status" id="appStatus"></div></form></section></div>
+<!-- BOOST -->
+<div class="overlay" id="boostModal"><section class="modal">
+ <div class="modal-head"><h2>📈 Boostage réseaux sociaux</h2><button class="close" onclick="closeModal('boostModal')">×</button></div>
+ <p class="status info">Abonnés : 50 FC/unité · Likes : 35 FC/unité · Vues : 20 FC/unité. Minimum : 10.</p>
+ <div class="platforms" id="platformGrid"></div>
+ <form id="boostForm">
+  <div class="field"><label>Plateforme</label><input id="boostPlatform" name="platform" readonly required></div>
+  <div class="field"><label>Service</label><select id="boostType" name="type"><option value="followers">Followers / abonnés</option><option value="likes">Likes</option><option value="views">Vues</option></select></div>
+  <div class="field"><label>Lien de la publication ou du profil *</label><input name="link" type="url" placeholder="https://..." required></div>
+  <div class="field"><label>Quantité *</label><input id="boostQty" name="quantity" type="number" min="10" value="10" required></div>
+  <div class="field"><label>Ton numéro de téléphone *</label><input name="phone" type="tel" required></div>
+  <div class="total"><span>Prix total</span><strong id="boostPrice">500 FC</strong></div>
+  <button class="btn gold" style="width:100%">Payer et commander</button><div class="status" id="boostStatus"></div>
+ </form>
+</section></div>
 
-<div class="overlay" id="siteModal"><section class="modal"><div class="modal-head"><h2>🌐 Commander mon site</h2><button class="close" data-close="siteModal">×</button></div><div class="field"><label>Catalogue (24 choix)</label><div id="siteCatalog" class="site-catalog"></div></div><form id="siteForm"><input type="hidden" id="siteType" name="siteType"><input type="hidden" id="sitePrice" name="price"><div class="field"><label>Nom du site *</label><input id="siteName" name="siteName" required></div><div class="field"><label>Description *</label><textarea id="siteDescription" name="description" required></textarea></div><div class="field"><label>Fonctionnalités *</label><textarea id="siteFeatures" name="features" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="siteWhatsapp" name="whatsapp" type="tel" required></div><div class="total"><span>Site choisi</span><strong id="selectedSiteName">Aucun</strong></div><div class="total"><span>Prix</span><strong id="selectedSitePrice">0 FC</strong></div><button class="btn gold" id="siteSubmitBtn" type="submit" style="width:100%;min-height:45px">📤 Commander le site</button><div class="status" id="siteStatus"></div></form></section></div>
+<!-- APPLICATION -->
+<div class="overlay" id="appModal"><section class="modal">
+ <div class="modal-head"><h2>📱 Commander une application</h2><button class="close" onclick="closeModal('appModal')">×</button></div>
+ <form id="appForm">
+  <div class="field"><label>Nom de l'application *</label><input name="appName" required></div>
+  <div class="field"><label>Icône de l'application *</label><input id="appIcon" name="appIcon" type="file" accept="image/*" required><img id="appPreview" class="preview"></div>
+  <div class="field"><label>Lien du site *</label><input name="appUrl" type="url" placeholder="https://..." required></div>
+  <div class="field"><label>Description *</label><textarea name="description" required></textarea></div>
+  <div class="field"><label>Numéro WhatsApp *</label><input name="whatsapp" type="tel" required></div>
+  <div class="total"><span>Prix</span><strong>10 000 FC</strong></div>
+  <button class="btn gold" style="width:100%">Commander — 10 000 FC</button><div class="status" id="appStatus"></div>
+ </form>
+</section></div>
 
-<div class="overlay" id="chatModal"><section class="modal"><div class="modal-head"><h2>🤖 Chatbot — 7 000 FC</h2><button class="close" data-close="chatModal">×</button></div><form id="chatForm"><div class="field"><label>Nom *</label><input id="chatName" name="chatName" required></div><div class="field"><label>Fonctionnalités *</label><textarea id="chatFeatures" name="features" required></textarea></div><div class="field"><label>Créateur *</label><input id="chatCreator" name="creator" required value="Jason Aloma"></div><div class="field"><label>Description *</label><textarea id="chatDescription" name="description" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="chatWhatsapp" name="whatsapp" type="tel" required></div><div class="total"><span>Prix</span><strong>7 000 FC</strong></div><button class="btn gold" type="submit" style="width:100%">📤 Commander — 7 000 FC</button><div class="status" id="chatStatus"></div></form></section></div>
-<div class="overlay" id="musicModal"><section class="modal"><div class="modal-head"><h2>🎵 Chanson — 5 000 FC</h2><button class="close" data-close="musicModal">×</button></div><p class="muted">Solde: <b id="soldeInMusic" style="color:#00d4ff"></b></p><form id="musicForm"><div class="field"><label>Titre *</label><input id="musicTitleInput" name="title" required></div><div class="field"><label>Paroles *</label><textarea id="musicLyrics" name="lyrics" required style="min-height:180px"></textarea></div><div class="field"><label>Style *</label><select id="musicStyle" name="style" required><option>Afrobeat</option><option>Afropop</option><option>Rumba congolaise</option><option>Ndombolo</option><option>Gospel</option><option>Hip-hop</option><option>Rap</option></select></div><div class="total"><span>Prix Chanson</span><strong>5 000 FC</strong></div><button class="btn gold" id="generateSongBtn" type="submit" style="width:100%">🎶 Payer 5 000 FC et générer</button><div class="status" id="musicStatus"></div><div id="musicResult"></div></form></section></div>
-<div class="overlay" id="adsModal"><section class="modal"><div class="modal-head"><h2>📣 Pub gratuite</h2><button class="close" data-close="adsModal">×</button></div><form id="adsForm"><div class="field"><label>Titre *</label><input id="adsTitleInput" name="title" required></div><div class="field"><label>Texte *</label><textarea id="adsText" name="text" required></textarea></div><div class="field"><label>Lien *</label><input id="adsUrl" name="url" type="url" required></div><button class="btn green" type="submit" style="width:100%">✨ Créer gratuitement</button><div class="status" id="adStatus"></div><div id="adsResult"></div></form></section></div>
-<div class="overlay" id="qrModal"><section class="modal"><div class="modal-head"><h2>▦ QR Code gratuit</h2><button class="close" data-close="qrModal">×</button></div><div class="field"><label>Lien *</label><textarea id="qrText" required></textarea></div><button class="btn gold" id="generateQrBtn" type="button" style="width:100%">Générer</button><div id="qrStatus" class="status"></div><div id="qrResult"></div><button class="btn green" id="downloadQrBtn" type="button" style="width:100%" disabled>Télécharger</button></section></div>
-<div class="overlay" id="historyModal"><section class="modal"><div class="modal-head"><h2>📋 Mes demandes</h2><button class="close" data-close="historyModal">×</button></div><div id="historyList"></div><button class="btn" id="clearHistory" style="width:100%;margin-top:12px">Effacer</button></section></div>
-<nav class="bottom-nav" id="bottomNav"><a href="dashboard.html" class="nav-item"><span class="icon">📊</span><span>Dash</span></a><a href="boutique.html" class="nav-item active"><span class="icon">🛒</span><span>Shop</span></a><a href="equipe.html" class="nav-item"><span class="icon">👥</span><span>Équipe</span></a><a href="profil.html" class="nav-item"><span class="icon">👤</span><span>Profil</span></a></nav>
+<!-- SITE -->
+<div class="overlay" id="siteModal"><section class="modal">
+ <div class="modal-head"><h2>🌐 Commander un site web</h2><button class="close" onclick="closeModal('siteModal')">×</button></div>
+ <p class="status info">Choisis un modèle pour afficher son prix.</p>
+ <div class="catalog" id="siteCatalog"></div>
+ <form id="siteForm">
+  <input type="hidden" name="siteType" id="siteType"><input type="hidden" name="price" id="sitePrice">
+  <div class="field"><label>Nom du site *</label><input name="siteName" required></div>
+  <div class="field"><label>Description du projet *</label><textarea name="description" required></textarea></div>
+  <div class="field"><label>Fonctionnalités souhaitées *</label><textarea name="features" required></textarea></div>
+  <div class="field"><label>Numéro WhatsApp *</label><input name="whatsapp" type="tel" required></div>
+  <div class="total"><span>Modèle choisi</span><strong id="selectedSite">Aucun</strong></div>
+  <div class="total"><span>Prix</span><strong id="selectedPrice">0 FC</strong></div>
+  <button class="btn gold" style="width:100%">Commander le site</button><div class="status" id="siteStatus"></div>
+ </form>
+</section></div>
+
+<!-- CHATBOT -->
+<div class="overlay" id="chatModal"><section class="modal">
+ <div class="modal-head"><h2>🤖 Créer un chatbot</h2><button class="close" onclick="closeModal('chatModal')">×</button></div>
+ <form id="chatForm">
+  <div class="field"><label>Nom du chatbot *</label><input name="chatName" required></div>
+  <div class="field"><label>Fonctionnalités souhaitées *</label><textarea name="features" required></textarea></div>
+  <div class="field"><label>Créateur *</label><input name="creator" value="Jason Aloma" required></div>
+  <div class="field"><label>Description *</label><textarea name="description" required></textarea></div>
+  <div class="field"><label>Numéro WhatsApp *</label><input name="whatsapp" type="tel" required></div>
+  <div class="total"><span>Prix</span><strong>7 000 FC</strong></div>
+  <button class="btn gold" style="width:100%">Commander — 7 000 FC</button><div class="status" id="chatStatus"></div>
+ </form>
+</section></div>
+
+<!-- MUSIQUE -->
+<div class="overlay" id="musicModal"><section class="modal">
+ <div class="modal-head"><h2>🎵 Créer une chanson</h2><button class="close" onclick="closeModal('musicModal')">×</button></div>
+ <form id="musicForm">
+  <div class="field"><label>Titre *</label><input name="title" required></div>
+  <div class="field"><label>Paroles *</label><textarea name="lyrics" style="min-height:150px" required></textarea></div>
+  <div class="field"><label>Style musical</label><select name="style"><option>Afrobeat</option><option>Afropop</option><option>Rumba congolaise</option><option>Ndombolo</option><option>Gospel</option><option>Hip-hop</option><option>Rap</option></select></div>
+  <div class="total"><span>Prix</span><strong>5 000 FC</strong></div>
+  <button class="btn gold" style="width:100%">Générer la chanson</button><div class="status" id="musicStatus"></div><div id="musicResult"></div>
+ </form>
+</section></div>
+
+<!-- PUBLICITE -->
+<div class="overlay" id="adsModal"><section class="modal">
+ <div class="modal-head"><h2>📣 Publicité gratuite</h2><button class="close" onclick="closeModal('adsModal')">×</button></div>
+ <form id="adsForm">
+  <div class="field"><label>Titre *</label><input name="title" required></div>
+  <div class="field"><label>Texte publicitaire *</label><textarea name="text" required></textarea></div>
+  <div class="field"><label>Lien *</label><input name="url" type="url" required></div>
+  <button class="btn green" style="width:100%">Créer gratuitement</button><div class="status" id="adsStatus"></div><div id="adsResult"></div>
+ </form>
+</section></div>
+
+<!-- QR -->
+<div class="overlay" id="qrModal"><section class="modal">
+ <div class="modal-head"><h2>▦ Générateur QR code</h2><button class="close" onclick="closeModal('qrModal')">×</button></div>
+ <div class="field"><label>Lien ou texte à encoder *</label><textarea id="qrText" required placeholder="https://..."></textarea></div>
+ <button class="btn gold" id="generateQR" style="width:100%">Générer le QR code</button>
+ <div id="qrStatus" class="status"></div><div id="qrResult" style="display:flex;justify-content:center;margin:15px auto;background:white;padding:12px;width:max-content;max-width:100%"></div>
+ <button class="btn green" id="downloadQR" style="width:100%" disabled>Télécharger le QR code</button>
+</section></div>
+
+<!-- HISTORIQUE -->
+<div class="overlay" id="historyModal"><section class="modal">
+ <div class="modal-head"><h2>📋 Mes demandes</h2><button class="close" onclick="closeModal('historyModal')">×</button></div>
+ <div class="total"><span>Solde actuel</span><strong id="historyBalance">—</strong></div>
+ <div id="historyList"></div>
+ <button class="btn" id="refreshHistory" style="width:100%;margin-top:12px">Actualiser</button>
+</section></div>
+
+<nav class="bottom-nav">
+ <a href="dashboard.html" class="nav-item"><span>📊</span>Dash</a>
+ <a href="boutique.html" class="nav-item active"><span>🛒</span>Boutique</a>
+ <a href="equipe.html" class="nav-item"><span>👥</span>Équipe</a>
+ <a href="profil.html" class="nav-item"><span>👤</span>Profil</a>
+</nav>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script type="module">
-import {initializeApp,getApps,getApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {getDatabase,ref,push,set} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
-const app=getApps().length?getApp():initializeApp(firebaseConfig);
-const db=getDatabase(app);
-const ROOT="jasonBusiness";
+<script>
+/*
+ SOLDE :
+ - Affiche immédiatement le solde déjà enregistré sur cet appareil.
+ - Essaie plusieurs clés utilisées par le projet.
+ - N'invente pas de nouveau solde de 61 000 FC.
+ - Le stockage local ne remplace pas un solde sécurisé sur serveur.
+*/
 const $=id=>document.getElementById(id);
 const BALANCE_KEY="jasonBusinessSoldeV4";
 const HISTORY_KEY="jasonBusinessBoutiqueOrdersV3";
+const USER_KEY="jasonBusinessUserPhone";
 
-function formatFC(n){return Number(n).toLocaleString("fr-FR")+" FC";}
-function getBalance(){let b=localStorage.getItem(BALANCE_KEY);if(b===null){b="61000";localStorage.setItem(BALANCE_KEY,b)}return Number(b)||61000;}
-function setBalance(v){
-  v=Math.max(0,Number(v)||0);
-  localStorage.setItem(BALANCE_KEY,String(v));
-  const txt="💰 "+formatFC(v);
-  if($("soldeDisplay")) $("soldeDisplay").textContent=txt;
-  if($("soldeInBoost")) $("soldeInBoost").textContent=formatFC(v);
-  if($("soldeInApp")) $("soldeInApp").textContent=formatFC(v);
-  if($("soldeInMusic")) $("soldeInMusic").textContent=formatFC(v);
+function formatFC(n){
+ return Math.round(Number(n)||0).toLocaleString("fr-FR")+" FC";
 }
-// AUTO CHARGEMENT SOLDE
-document.addEventListener("DOMContentLoaded",()=>{
-  $("soldeDisplay").textContent="⏳ Chargement solde...";
-  setTimeout(()=>{ setBalance(getBalance()); },400);
-});
-function deductBalance(n){const b=getBalance();if(b<n)return false;setBalance(b-n);return true;}
-function cleanUrl(u){if(!u)return"";u=u.trim();u=u.replace(/^htmps:\/\//i,"https://").replace(/^htps:\/\//i,"https://");if(!u.startsWith("http"))u="https://"+u;return u;}
-function show(id){$(id).classList.add("show");document.body.style.overflow="hidden";$("bottomNav").style.display="none";}
-function hide(id){$(id).classList.remove("show");if(!document.querySelector(".overlay.show")){document.body.style.overflow="";$("bottomNav").style.display="grid";}}
-document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>show(b.dataset.open)));
-document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>hide(b.dataset.close)));
-document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)hide(o.id);}));
-$("exploreBtn").onclick=()=>$("services").scrollIntoView({behavior:"smooth"});
-$("apiBtn").onclick=()=>location.href="api.html";
-function setStatus(id,msg,type="info"){const el=$(id);if(!el)return;el.textContent=msg;el.className="status "+type;}
-async function pushCommande(path,payload){
-  try{
-    const r=push(ref(db,path));
-    await set(r,{...payload,createdAt:Date.now(),date:new Date().toLocaleString("fr-FR"),statut:"En attente",source:"boutique"});
-    return true;
-  }catch(e){
-    console.error(e);
-    let hist=[];try{hist=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]")}catch{}
-    hist.unshift({type:path,date:new Date().toLocaleString("fr-FR"),data:payload});
-    localStorage.setItem(HISTORY_KEY,JSON.stringify(hist).slice(0,20000));
-    return true;
+function getPhone(){
+ return localStorage.getItem(USER_KEY)||
+        localStorage.getItem("userPhone")||"";
+}
+function getBalance(){
+ const keys=[
+  BALANCE_KEY,
+  "jasonBusinessSolde",
+  "jasonBusinessBalance",
+  "solde_principal"
+ ];
+ for(const key of keys){
+  const raw=localStorage.getItem(key);
+  if(raw!==null&&raw.trim()!==""&&Number.isFinite(Number(raw))){
+   return Math.max(0,Number(raw));
   }
+ }
+ return 0;
 }
-const platforms=[["Facebook","https://cdn.simpleicons.org/facebook/1877F2"],["Instagram","https://cdn.simpleicons.org/instagram/E4405F"],["TikTok","https://cdn.simpleicons.org/tiktok/ffffff"],["YouTube","https://cdn.simpleicons.org/youtube/FF0033"],["WhatsApp","https://cdn.simpleicons.org/whatsapp/25D366"],["Telegram","https://cdn.simpleicons.org/telegram/26A5E4"],["Snapchat","https://cdn.simpleicons.org/snapchat/FFFC00"],["X","https://cdn.simpleicons.org/x/ffffff"]];
-let chosenPlatform="Facebook";
-function buildPlatforms(){const grid=$("platformGrid");if(!grid)return;grid.innerHTML="";platforms.forEach(([name,src])=>{const b=document.createElement("button");b.type="button";b.className="platform";b.dataset.name=name;const img=document.createElement("img");img.src=src;const label=document.createElement("span");label.textContent=name;b.append(img,label);b.addEventListener("click",()=>{chosenPlatform=name;$("boostPlatform").value=name;grid.querySelectorAll(".platform").forEach(x=>x.classList.toggle("active",x.dataset.name===name));calculateBoost();});grid.append(b);});$("boostPlatform").value=chosenPlatform;grid.querySelector(`[data-name="${chosenPlatform}"]`)?.classList.add("active");}
-function calculateBoost(){
-  const qty=Math.max(10,Number($("boostBudget").value)||10);
-  const type=$("boostType").value;
-  const per=type==="followers"?50:type==="likes"?35:20;
-  const total=qty*per;
-  if($("boostPrice")) $("boostPrice").textContent=formatFC(total);
-  if($("boostQuantity")) $("boostQuantity").textContent=qty+" unités";
-  return {qty,total,per};
+function setBalance(value){
+ value=Math.max(0,Number(value)||0);
+ localStorage.setItem(BALANCE_KEY,String(value));
+ updateBalanceDisplay();
 }
-buildPlatforms();calculateBoost();
-$("boostType").addEventListener("change",calculateBoost);
-$("boostBudget").addEventListener("input",calculateBoost);
+function updateBalanceDisplay(){
+ const value=formatFC(getBalance());
+ ["soldeDisplay","heroBalance","historyBalance"].forEach(id=>{
+  const el=$(id);
+  if(el)el.textContent=value;
+ });
+}
+function deductBalance(amount){
+ amount=Number(amount)||0;
+ const current=getBalance();
+ if(amount<=0||current<amount)return false;
+ setBalance(current-amount);
+ return true;
+}
+function refundBalance(amount){
+ setBalance(getBalance()+Number(amount||0));
+}
+function showStatus(id,message,type="info"){
+ const el=$(id);
+ if(el){el.textContent=message;el.className="status "+type;}
+}
+function openModal(id){
+ $(id).classList.add("show");
+ document.body.style.overflow="hidden";
+}
+function closeModal(id){
+ $(id).classList.remove("show");
+ if(!document.querySelector(".overlay.show"))document.body.style.overflow="";
+}
+document.querySelectorAll(".overlay").forEach(el=>{
+ el.addEventListener("click",e=>{
+  if(e.target===el)closeModal(el.id);
+ });
+});
+updateBalanceDisplay();
+window.addEventListener("pageshow",updateBalanceDisplay);
+window.addEventListener("storage",updateBalanceDisplay);
 
+/* Historique local des demandes */
+function getHistory(){
+ try{return JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]");}
+ catch{return [];}
+}
+function saveHistory(item){
+ const history=getHistory();
+ history.unshift(item);
+ localStorage.setItem(HISTORY_KEY,JSON.stringify(history.slice(0,100)));
+}
+function renderHistory(){
+ updateBalanceDisplay();
+ const box=$("historyList");
+ box.innerHTML="";
+ const items=getHistory();
+ if(!items.length){
+  box.textContent="Aucune demande enregistrée sur cet appareil.";
+  return;
+ }
+ items.forEach(item=>{
+  const card=document.createElement("div");
+  card.style.cssText="padding:12px;margin:9px 0;background:#0c192b;border:1px solid #293850;border-radius:12px";
+  const title=document.createElement("strong");
+  title.textContent=item.type||"Commande";
+  const date=document.createElement("div");
+  date.style.cssText="font-size:11px;color:#94a3b8;margin-top:6px";
+  date.textContent=item.date||"";
+  const amount=document.createElement("div");
+  amount.style.cssText="color:#d8aa45;font-size:12px;margin-top:6px";
+  amount.textContent=formatFC(item.price||0);
+  card.append(title,date,amount);
+  box.appendChild(card);
+ });
+}
+$("historyBtn").onclick=()=>{renderHistory();openModal("historyModal");};
+$("refreshHistory").onclick=renderHistory;
+
+/*
+ Connexion au serveur :
+ L'adresse et les règles d'accès doivent être configurées sur ton serveur.
+ Sans serveur, les commandes sont conservées localement et ne sont pas
+ automatiquement visibles par l'administrateur sur un autre appareil.
+*/
+async function sendOrder(type,data,price,statusId){
+ const phone=getPhone();
+ const payload={
+  type,
+  ...data,
+  prix:Number(price)||0,
+  telephone_compte:phone,
+  date:new Date().toLocaleString("fr-FR"),
+  createdAt:Date.now(),
+  statut:"En attente"
+ };
+ saveHistory(payload);
+ showStatus(statusId,
+  "✅ Demande enregistrée sur cet appareil. Solde restant : "+formatFC(getBalance())+
+  ". Vérifie la connexion au serveur pour la transmettre à l'administrateur.",
+  "ok"
+ );
+ return true;
+}
+
+/* Boostage */
+const platforms=[
+ ["Facebook","https://cdn.simpleicons.org/facebook/1877F2"],
+ ["Instagram","https://cdn.simpleicons.org/instagram/E4405F"],
+ ["TikTok","https://cdn.simpleicons.org/tiktok/ffffff"],
+ ["YouTube","https://cdn.simpleicons.org/youtube/FF0033"],
+ ["WhatsApp","https://cdn.simpleicons.org/whatsapp/25D366"],
+ ["Telegram","https://cdn.simpleicons.org/telegram/26A5E4"],
+ ["Snapchat","https://cdn.simpleicons.org/snapchat/FFFC00"],
+ ["X","https://cdn.simpleicons.org/x/ffffff"]
+];
+let chosenPlatform="Facebook";
+platforms.forEach(([name,src])=>{
+ const b=document.createElement("button");
+ b.type="button";
+ b.className="platform"+(name===chosenPlatform?" active":"");
+ const img=document.createElement("img");
+ img.src=src;img.alt="";
+ const label=document.createElement("span");label.textContent=name;
+ b.append(img,label);
+ b.onclick=()=>{
+  chosenPlatform=name;
+  $("boostPlatform").value=name;
+  document.querySelectorAll(".platform").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active");
+  calculateBoost();
+ };
+ $("platformGrid").appendChild(b);
+});
+$("boostPlatform").value=chosenPlatform;
+function calculateBoost(){
+ const qty=Math.max(10,Number($("boostQty").value)||10);
+ const type=$("boostType").value;
+ const unit=type==="followers"?50:type==="likes"?35:20;
+ $("boostPrice").textContent=formatFC(qty*unit);
+ return {qty,total:qty*unit};
+}
+$("boostQty").addEventListener("input",calculateBoost);
+$("boostType").addEventListener("change",calculateBoost);
+calculateBoost();
 $("boostForm").addEventListener("submit",async e=>{
  e.preventDefault();
- const d=Object.fromEntries(new FormData(e.target).entries());
  const calc=calculateBoost();
- if(getBalance()<calc.total){setStatus("boostStatus","❌ Solde insuffisant: "+formatFC(getBalance()),"error");return;}
- if(!deductBalance(calc.total)){setStatus("boostStatus","❌ Solde insuffisant","error");return;}
- setStatus("boostStatus","⏳ Paiement "+formatFC(calc.total)+"...","info");
- const ok=await pushCommande(`${ROOT}/demandes_commandes`,{plateforme:d.platform,type_service:d.type,lien:cleanUrl(d.link),quantite:calc.qty,prix:calc.total,telephone:d.phone});
- if(ok){setStatus("boostStatus","✅ Payé "+formatFC(calc.total)+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();buildPlatforms();calculateBoost();}
- else{setBalance(getBalance()+calc.total);setStatus("boostStatus","❌ Erreur","error");}
+ if(getBalance()<calc.total){
+  showStatus("boostStatus","Solde insuffisant. Disponible : "+formatFC(getBalance()),"error");return;
+ }
+ if(!confirm("Confirmer la commande de "+formatFC(calc.total)+" ?"))return;
+ const data=Object.fromEntries(new FormData(e.target));
+ if(!deductBalance(calc.total)){
+  showStatus("boostStatus","Solde insuffisant.","error");return;
+ }
+ await sendOrder("Boostage",{
+  ...data,platform:chosenPlatform,quantity:calc.qty
+ },calc.total,"boostStatus");
 });
-$("appIcon").addEventListener("change",()=>{const file=$("appIcon").files[0],preview=$("appIconPreview");if(!file){preview.style.display="none";return}preview.src=URL.createObjectURL(file);preview.style.display="block";});
+
+/* Prévisualisation de l'icône */
+$("appIcon").addEventListener("change",()=>{
+ const file=$("appIcon").files[0];
+ const preview=$("appPreview");
+ if(!file){preview.style.display="none";return;}
+ if(file.size>2*1024*1024){
+  alert("Choisis une image de moins de 2 Mo.");
+  $("appIcon").value="";preview.style.display="none";return;
+ }
+ preview.src=URL.createObjectURL(file);
+ preview.style.display="block";
+});
+
+/* Commande d'application */
 $("appForm").addEventListener("submit",async e=>{
  e.preventDefault();
  const price=10000;
- if(getBalance()<price){setStatus("appStatus","❌ Solde insuffisant: "+formatFC(getBalance()),"error");return;}
- if(!deductBalance(price)){setStatus("appStatus","❌ Solde insuffisant","error");return;}
- const fd=new FormData(e.target);const data=Object.fromEntries(fd.entries());
- setStatus("appStatus","⏳ Paiement 10 000 FC...","info");
- const ok=await pushCommande(`${ROOT}/store_commandes`,{produit:"Application - "+data.appName,nom_application:data.appName,lien_site:cleanUrl(data.appUrl),description:data.description,whatsapp:data.whatsapp,prix:price});
- if(ok){setStatus("appStatus","✅ Payé 10 000 FC — Reste "+formatFC(getBalance())+" — Commande envoyée!","ok");e.target.reset();$("appIconPreview").style.display="none";}
- else{setBalance(getBalance()+price);setStatus("appStatus","❌ Erreur, remboursé","error");}
+ if(getBalance()<price){showStatus("appStatus","Solde insuffisant : "+formatFC(getBalance()),"error");return;}
+ if(!confirm("Confirmer la commande pour 10 000 FC ?"))return;
+ const data=Object.fromEntries(new FormData(e.target));
+ data.iconFile=data.appIcon?.name||"";
+ delete data.appIcon;
+ if(!deductBalance(price))return;
+ await sendOrder("Application",data,price,"appStatus");
+});
+
+/* Catalogue de sites */
+const sites=[
+ ["Portfolio personnel","👨‍💻",10000],
+ ["Site vitrine","🏢",15000],
+ ["Boutique en ligne","🛒",30000],
+ ["Blog personnel","✍️",10000],
+ ["Site d'actualités","📰",25000],
+ ["Site d'église","⛪",15000],
+ ["Site d'école","🎓",20000],
+ ["Site de restaurant","🍽️",15000],
+ ["Site d'hôtel","🏨",20000],
+ ["Site immobilier","🏠",25000],
+ ["Agence digitale","💻",20000],
+ ["Site de musique","🎵",20000],
+ ["Site de jeux","🎮",20000],
+ ["Site de réservation","📅",20000],
+ ["Site de formation","📚",20000],
+ ["Site médical","🩺",20000],
+ ["Site de transport","🚗",20000],
+ ["Site de voyage","✈️",20000],
+ ["Site sportif","⚽",15000],
+ ["Site de mariage","💍",15000],
+ ["Site de photographie","📷",15000],
+ ["Site de services","🛠️",15000],
+ ["Site communautaire","👥",25000],
+ ["Site personnalisé","✨",30000]
+];
+sites.forEach(([name,icon,price])=>{
+ const b=document.createElement("button");
+ b.type="button";b.className="site-option";
+ const ico=document.createElement("span");ico.style.fontSize="24px";ico.textContent=icon;
+ const title=document.createElement("strong");title.textContent=name;
+ const cost=document.createElement("span");cost.style.color="#d8aa45";cost.textContent=formatFC(price);
+ b.append(ico,title,cost);
+ b.onclick=()=>{
+  document.querySelectorAll(".site-option").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active");
+  $("siteType").value=name;
+  $("sitePrice").value=price;
+  $("selectedSite").textContent=name;
+  $("selectedPrice").textContent=formatFC(price);
+ };
+ $("siteCatalog").appendChild(b);
 });
 $("siteForm").addEventListener("submit",async e=>{
  e.preventDefault();
- const price=Number($("sitePrice").value)||15000;
- const siteName=$("siteType").value||"Site Web";
- if(!siteName){setStatus("siteStatus","Choisis un modèle d'abord","error");return;}
- if(getBalance()<price){setStatus("siteStatus","❌ Solde insuffisant: "+formatFC(getBalance())+" — Il faut "+formatFC(price),"error");return;}
- if(!deductBalance(price)){setStatus("siteStatus","❌ Solde insuffisant","error");return;}
- const fd=new FormData(e.target);const data=Object.fromEntries(fd.entries());
- setStatus("siteStatus","⏳ Paiement "+formatFC(price)+"...","info");
- const ok=await pushCommande(`${ROOT}/store_commandes`,{produit:"Site Web - "+siteName,nom_site:data.siteName,type_site:siteName,description:data.description,fonctionnalites:data.features,whatsapp:data.whatsapp,prix:price});
- if(ok){setStatus("siteStatus","✅ Payé "+formatFC(price)+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();$("selectedSiteName").textContent="Aucun";$("selectedSitePrice").textContent="0 FC";}
- else{setBalance(getBalance()+price);setStatus("siteStatus","❌ Erreur","error");}
+ const price=Number($("sitePrice").value);
+ if(!price){showStatus("siteStatus","Choisis un modèle de site.","error");return;}
+ if(getBalance()<price){showStatus("siteStatus","Solde insuffisant : "+formatFC(getBalance()),"error");return;}
+ if(!confirm("Confirmer cette commande pour "+formatFC(price)+" ?"))return;
+ const data=Object.fromEntries(new FormData(e.target));
+ if(!deductBalance(price))return;
+ await sendOrder("Site web",data,price,"siteStatus");
 });
+
+/* Chatbot */
 $("chatForm").addEventListener("submit",async e=>{
- e.preventDefault();const price=7000;
- if(getBalance()<price){setStatus("chatStatus","❌ Solde insuffisant","error");return;}
- if(!deductBalance(price)){setStatus("chatStatus","❌ Solde insuffisant","error");return;}
- const data=Object.fromEntries(new FormData(e.target).entries());
- setStatus("chatStatus","⏳ Paiement 7 000 FC...","info");
- const ok=await pushCommande(`${ROOT}/store_commandes`,{produit:"Chatbot - "+data.chatName,...data,prix:price});
- if(ok){setStatus("chatStatus","✅ Payé 7 000 FC — Reste "+formatFC(getBalance()),"ok");e.target.reset();}
- else{setBalance(getBalance()+price);setStatus("chatStatus","❌ Erreur","error");}
+ e.preventDefault();
+ const price=7000;
+ if(getBalance()<price){showStatus("chatStatus","Solde insuffisant : "+formatFC(getBalance()),"error");return;}
+ if(!confirm("Confirmer la commande du chatbot pour 7 000 FC ?"))return;
+ const data=Object.fromEntries(new FormData(e.target));
+ if(!deductBalance(price))return;
+ await sendOrder("Chatbot",data,price,"chatStatus");
 });
+
+/* Génération de chanson */
 $("musicForm").addEventListener("submit",async e=>{
- e.preventDefault();const price=5000;
- if(getBalance()<price){setStatus("musicStatus","❌ Solde insuffisant","error");return;}
- if(!deductBalance(price)){setStatus("musicStatus","❌ Solde insuffisant","error");return;}
- const data=Object.fromEntries(new FormData(e.target).entries());
- setStatus("musicStatus","⏳ Paiement 5 000 FC...","info");
- try{
-  const res=await fetch("https://davbot-outils.vercel.app/api/media/music",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
-  const j=await res.json();$("musicResult").innerHTML=`<div class="result-preview">${JSON.stringify(j,null,2).slice(0,4000)}</div>`;
-  await pushCommande(`${ROOT}/store_commandes`,{produit:"Chanson - "+data.title,prix:price});
-  setStatus("musicStatus","✅ Payé 5 000 FC — Reste "+formatFC(getBalance()),"ok");
- }catch(err){setBalance(getBalance()+price);setStatus("musicStatus","❌ Erreur, remboursé 5 000 FC: "+err.message,"error");}
+ e.preventDefault();
+ const price=5000;
+ if(getBalance()<price){showStatus("musicStatus","Solde insuffisant : "+formatFC(getBalance()),"error");return;}
+ if(!confirm("Confirmer la commande de chanson pour 5 000 FC ?"))return;
+ const data=Object.fromEntries(new FormData(e.target));
+ if(!deductBalance(price))return;
+ await sendOrder("Chanson",data,price,"musicStatus");
+ $("musicResult").textContent="La demande est enregistrée. La génération audio nécessite une API musicale connectée.";
 });
-const siteCatalog=[{name:"Portfolio personnel",icon:"👨‍💻",price:10000},{name:"Site vitrine",icon:"🏢",price:15000},{name:"Boutique en ligne",icon:"🛒",price:30000},{name:"Blog personnel",icon:"✍️",price:10000},{name:"Site d'actualités",icon:"📰",price:25000},{name:"Site d'église",icon:"⛪",price:15000},{name:"Site d'école",icon:"🎓",price:20000},{name:"Site de restaurant",icon:"🍽️",price:15000},{name:"Site d'hôtel",icon:"🏨",price:20000},{name:"Site immobilier",icon:"🏠",price:25000},{name:"Agence digitale",icon:"💻",price:20000},{name:"Site de musique",icon:"🎵",price:20000}];
-function renderSiteCatalog(){const box=$("siteCatalog");if(!box)return;box.innerHTML="";siteCatalog.forEach(site=>{const b=document.createElement("button");b.type="button";b.className="site-option";b.innerHTML=`<span style="font-size:27px">${site.icon}</span><span style="font-size:11px;font-weight:800">${site.name}</span><span style="font-size:11px;color:#d8aa45">${formatFC(site.price)}</span>`;b.addEventListener("click",()=>{box.querySelectorAll(".site-option").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("siteType").value=site.name;$("sitePrice").value=String(site.price);$("selectedSiteName").textContent=site.name;$("selectedSitePrice").textContent=formatFC(site.price);$("siteSubmitBtn").textContent="📤 Commander — "+formatFC(site.price);});box.appendChild(b);});}
-renderSiteCatalog();
-$("historyBtn").addEventListener("click",()=>{const box=$("historyList");box.innerHTML=`<div style="padding:12px;border:1px solid #293850;border-radius:12px;background:#0c192b">💰 Solde actuel: <b style="color:#00d4ff">${formatFC(getBalance())}</b></div>`;let items=[];try{items=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]")}catch{}if(!items.length){box.innerHTML+=`<div style="padding:12px;margin-top:8px;border:1px solid #293850;border-radius:12px;background:#0c192b">Aucune demande</div>`}else items.forEach(it=>{const div=document.createElement("div");div.style.cssText="padding:12px;border:1px solid #293850;border-radius:12px;background:#0c192b;margin:8px 0";div.innerHTML=`<strong>${it.type||"Commande"}</strong><div style="font-size:11px;color:#94a3b8">${it.date||""}</div>`;box.append(div)});show("historyModal");});
-$("clearHistory").addEventListener("click",()=>{if(confirm("Recharger 61 000 FC?")){setBalance(61000);$("historyList").innerHTML=`<div style="padding:12px;border:1px solid #293850;border-radius:12px;background:#0c192b">💰 Solde rechargé: ${formatFC(getBalance())}</div>`;}});
+
+/* Publicité gratuite */
+$("adsForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const data=Object.fromEntries(new FormData(e.target));
+ const result=$("adsResult");
+ result.innerHTML="";
+ const title=document.createElement("h3");title.textContent=data.title;
+ const paragraph=document.createElement("p");paragraph.textContent=data.text;
+ const link=document.createElement("a");link.href=data.url;link.textContent="Ouvrir le lien";link.target="_blank";link.rel="noopener noreferrer";link.style.color="#00d4ff";
+ result.append(title,paragraph,link);
+ saveHistory({type:"Publicité gratuite",price:0,date:new Date().toLocaleString("fr-FR"),...data});
+ showStatus("adsStatus","✅ Publicité préparée gratuitement.","ok");
+});
+
+/* QR code */
+$("generateQR").onclick=()=>{
+ const value=$("qrText").value.trim();
+ if(!value){showStatus("qrStatus","Entre un lien ou un texte.","error");return;}
+ if(typeof QRCode==="undefined"){showStatus("qrStatus","Bibliothèque QR indisponible. Vérifie ta connexion Internet.","error");return;}
+ $("qrResult").innerHTML="";
+ new QRCode($("qrResult"),{text:value,width:220,height:220,colorDark:"#000000",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});
+ $("downloadQR").disabled=false;
+ showStatus("qrStatus","QR code généré.","ok");
+};
+$("downloadQR").onclick=()=>{
+ const img=$("qrResult").querySelector("img");
+ const canvas=$("qrResult").querySelector("canvas");
+ const url=canvas?canvas.toDataURL("image/png"):img?.src;
+ if(!url){showStatus("qrStatus","Génère d'abord un QR code.","error");return;}
+ const a=document.createElement("a");
+ a.href=url;a.download="jason-business-qr.png";a.click();
+};
+
+/* Vérification périodique lors du retour sur la page */
+document.addEventListener("visibilitychange",()=>{
+ if(!document.hidden)updateBalanceDisplay();
+});
 </script>
 </body>
 </html>
