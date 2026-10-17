@@ -2,241 +2,208 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#050a14">
-<title>JASON BUSINESS — Dashboard</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#050914">
+<title>JASON BUSINESS — Shop</title>
 <style>
-:root{--blue:#00d2ff;--blue2:#0077ff;--dark:#050a14;--green:#00e676;--red:#ff4757;--gold:#ffd700;--glass:rgba(255,255,255,.055)}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
-body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:white;background:radial-gradient(ellipse at 10% 5%,rgba(0,210,255,.12),transparent 35%),radial-gradient(ellipse at 90% 25%,rgba(255,215,0,.075),transparent 32%),linear-gradient(rgba(3,8,18,.80),rgba(3,8,18,.96)),url("IMG_0870.jpeg") center/cover fixed;padding-bottom:100px;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:-50%;z-index:-1;pointer-events:none;background:radial-gradient(circle,rgba(0,210,255,.10) 1px,transparent 2px),radial-gradient(circle,rgba(255,215,0,.08) 1px,transparent 2px);background-size:47px 47px,71px 71px;animation:jbParticles 35s linear infinite}
-@keyframes jbParticles{0%{transform:translate3d(0,0,0) rotate(0deg)}100%{transform:translate3d(35px,45px,0) rotate(5deg)}}
-.jb-overlay{min-height:100vh;background:radial-gradient(circle at top,rgba(0,210,255,.075),transparent 40%)}
-.jb-header{position:relative;overflow:hidden;padding:24px 20px 22px;background:linear-gradient(135deg,rgba(0,210,255,.13),rgba(5,10,20,.80) 55%,rgba(255,215,0,.055));border-bottom:1px solid rgba(0,210,255,.32);backdrop-filter:blur(22px);box-shadow:0 12px 35px rgba(0,0,0,.22)}
-.jb-header::after{content:"";position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.065),transparent);transform:skewX(-20deg);animation:jbHeaderShine 8s ease-in-out infinite;pointer-events:none}
-@keyframes jbHeaderShine{0%,60%{left:-100%}100%{left:160%}}
-.jb-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.jb-brand{font-size:20px;font-weight:900;letter-spacing:2px;color:var(--blue);text-shadow:0 0 16px rgba(0,210,255,.40);animation:jbBrandGlow 4s ease-in-out infinite}
-@keyframes jbBrandGlow{0%,100%{text-shadow:0 0 8px rgba(0,210,255,.25)}50%{text-shadow:0 0 22px rgba(0,210,255,.70)}}
-.jb-status{font-size:10px;color:var(--green);padding:7px 11px;border-radius:20px;background:rgba(0,230,118,.09);border:1px solid rgba(0,230,118,.28);white-space:nowrap}
-.jb-user-box{margin-top:20px;animation:jbFadeUp .8s ease both}
-.jb-user-box small{font-size:10px;opacity:.60;letter-spacing:1px}
-.jb-user-box h2{margin:7px 0 0;font-size:20px;word-break:break-all}
-#jbDashboardStatus{text-align:center;min-height:20px;padding:10px 20px;font-size:11px;color:#ffeb3b}
-.jb-balance-card{position:relative;overflow:hidden;margin:20px;padding:24px;border-radius:25px;background:linear-gradient(145deg,rgba(0,210,255,.17),rgba(5,10,20,.82) 55%,rgba(0,119,255,.09));border:1px solid rgba(0,210,255,.42);box-shadow:0 18px 45px rgba(0,0,0,.35),0 0 28px rgba(0,210,255,.08),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(20px);animation:jbCardFloat 6s ease-in-out infinite}
-.jb-balance-card::before{content:"";position:absolute;top:-90px;right:-70px;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle,rgba(0,210,255,.16),transparent 70%);pointer-events:none;animation:jbOrb 7s ease-in-out infinite alternate}
-.jb-balance-card::after{content:"";position:absolute;left:0;top:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--blue),var(--gold),transparent);opacity:.75}
-@keyframes jbCardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-@keyframes jbOrb{from{transform:translate(0,0) scale(.85)}to{transform:translate(-25px,20px) scale(1.2)}}
-.jb-balance-title{font-size:11px;opacity:.68;text-transform:uppercase;letter-spacing:1.3px}
-.jb-balance{margin:9px 0;font-size:36px;font-weight:900;color:var(--blue);text-shadow:0 0 17px rgba(0,210,255,.38);overflow-wrap:anywhere}
-.jb-currency{font-size:13px;opacity:.75}
-.jb-balance-description{font-size:10px;opacity:.52}
-.jb-balance-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:22px}
-.jb-money-box{padding:13px 5px;text-align:center;border-radius:15px;background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.018));border:1px solid rgba(255,255,255,.09)}
-.jb-money-box:active{transform:scale(.96);border-color:rgba(0,210,255,.45);background:rgba(0,210,255,.08)}
-.jb-icon{font-size:20px}
-.jb-money-box small{display:block;margin-top:6px;font-size:8px;opacity:.60;text-transform:uppercase}
-.jb-money-box b{display:block;margin-top:5px;font-size:11px;overflow-wrap:anywhere}
-.jb-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px}
-.jb-action{position:relative;overflow:hidden;padding:16px 10px;border-radius:15px;text-align:center;text-decoration:none;font-size:12px;font-weight:900;transition:transform .25s}
-.jb-action:active{transform:scale(.96)}
-.jb-recharge{color:#001018;background:linear-gradient(120deg,var(--blue),#00a8ff,var(--blue));background-size:200% 100%;box-shadow:0 7px 22px rgba(0,210,255,.13);animation:jbButtonGlow 5s ease infinite}
-.jb-withdraw{color:#ff777f;background:linear-gradient(135deg,rgba(255,71,87,.12),rgba(255,71,87,.035));border:1px solid rgba(255,71,87,.35)}
-@keyframes jbButtonGlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.jb-points-card{position:relative;overflow:hidden;margin:20px;padding:20px;border-radius:21px;background:linear-gradient(135deg,rgba(255,215,0,.09),rgba(5,10,20,.72),rgba(255,215,0,.035));border:1px solid rgba(255,215,0,.27);backdrop-filter:blur(16px)}
-.jb-points-top{display:flex;justify-content:space-between;align-items:center;gap:15px}
-.jb-points-title{color:var(--gold);font-size:12px;font-weight:bold}
-.jb-points-value{margin-top:8px;font-size:10px;opacity:.65}
-.jb-points-value b{color:var(--gold)}
-.jb-points-number{color:var(--gold);font-size:25px;font-weight:900}
-#jbConvertPoints{width:100%;margin-top:16px;padding:14px;border:0;border-radius:13px;background:linear-gradient(120deg,#ffd700,#ffeb80,#ffd700);color:#151000;font-weight:900;font-size:11px;cursor:pointer;box-shadow:0 7px 20px rgba(255,215,0,.12)}
-#jbConvertPoints:disabled{opacity:.40}
-.jb-section{padding:0 20px}
-.jb-section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:29px 0 16px}
-.jb-section-title h3{margin:0;font-size:16px}
-.jb-section-title a{color:var(--blue);font-size:10px;text-decoration:none;font-weight:bold}
-.jb-service-card{position:relative;overflow:hidden;display:flex;align-items:center;gap:13px;margin-bottom:11px;padding:14px;border-radius:18px;background:linear-gradient(115deg,rgba(255,255,255,.065),rgba(255,255,255,.025));border:1px solid rgba(0,210,255,.14);backdrop-filter:blur(15px);cursor:pointer;transition:transform .25s,border-color .25s;animation:jbFadeUp .65s ease both}
-.jb-service-card:active{transform:scale(.975);border-color:rgba(0,210,255,.65);background:rgba(0,210,255,.08)}
-.jb-service-icon{width:46px;height:46px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:14px;font-size:22px;background:linear-gradient(145deg,rgba(0,210,255,.13),rgba(0,119,255,.035));border:1px solid rgba(0,210,255,.23)}
-.jb-service-info{flex:1;min-width:0}
-.jb-service-name{font-size:13px;font-weight:bold}
-.jb-service-desc{margin-top:5px;font-size:9px;line-height:1.5;opacity:.57}
-/* PRIX CACHÉS DANS LES SERVICES */
-.jb-service-price{display:none!important}
-.jb-service-arrow{margin-left:auto;font-size:14px;color:var(--blue);opacity:.6}
-.jb-invest-card{margin-bottom:11px;padding:16px;border-radius:17px;background:linear-gradient(135deg,rgba(0,230,118,.07),rgba(255,255,255,.02));border:1px solid rgba(0,230,118,.17);backdrop-filter:blur(12px);animation:jbFadeUp .5s ease both}
-.jb-invest-row{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.jb-invest-name{font-size:12px;font-weight:bold;overflow-wrap:anywhere}
-.jb-invest-gain{color:var(--green);font-size:11px;font-weight:bold;white-space:nowrap}
-.jb-invest-date{margin-top:8px;font-size:9px;opacity:.52}
-.jb-invest-status{margin-top:7px;font-size:9px;color:var(--green)}
-.jb-empty{padding:26px 15px;text-align:center;border-radius:17px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.055);font-size:11px;line-height:1.7;opacity:.65}
-
-/* BOUTON FLOTTANT BAS DROITE */
-.jb-fab{
-position:fixed;
-right:16px;
-bottom:86px;
-z-index:999;
-width:56px;
-height:56px;
-border-radius:18px;
-display:grid;
-place-items:center;
-font-size:24px;
-background:linear-gradient(135deg,#00d2ff,#0077ff);
-color:white;
-border:1px solid rgba(255,255,255,.25);
-box-shadow:0 10px 30px rgba(0,210,255,.35),0 0 0 1px rgba(0,210,255,.15) inset;
-cursor:pointer;
-transition:transform .25s,box-shadow .25s;
-animation:jbFabFloat 3s ease-in-out infinite;
-}
-.jb-fab:active{transform:scale(.92)}
-@keyframes jbFabFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-.jb-fab-dot{
-position:absolute;
-top:-2px;
-right:-2px;
-width:12px;
-height:12px;
-border-radius:50%;
-background:#00e676;
-border:2px solid #050a14;
-box-shadow:0 0 10px #00e676;
-}
-
-.jb-navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;gap:2px;padding:11px 0 calc(11px + env(safe-area-inset-bottom));background:rgba(5,10,20,.96);border-top:1px solid rgba(0,210,255,.25);backdrop-filter:blur(22px)}
-.jb-nav-link{position:relative;min-width:0;flex:1;color:white;opacity:.48;text-decoration:none;text-align:center;font-size:10px;border:0;background:none;cursor:pointer}
-.jb-nav-link.active{color:var(--blue);opacity:1;font-weight:bold}
-.jb-nav-link.active::before{content:"";position:absolute;top:-11px;left:28%;width:44%;height:2px;border-radius:5px;background:var(--blue);box-shadow:0 0 12px rgba(0,210,255,.65)}
-.jb-nav-icon{margin-bottom:4px;font-size:19px}
-.jb-loading{position:fixed;z-index:9999;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at center,rgba(0,210,255,.09),transparent 40%),#050a14}
-.jb-loader{width:42px;height:42px;margin:auto;border-radius:50%;border:3px solid rgba(255,255,255,.09);border-top-color:var(--blue);border-right-color:var(--gold);animation:jbSpin .8s linear infinite}
-.jb-loading-text{margin-top:15px;font-size:11px;font-weight:bold;letter-spacing:3px;color:var(--blue);animation:jbTextPulse 1.5s ease-in-out infinite}
-@keyframes jbSpin{to{transform:rotate(360deg)}}
-@keyframes jbTextPulse{0%,100%{opacity:.5}50%{opacity:1}}
-@keyframes jbFadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:360px){.jb-brand{font-size:16px}.jb-balance{font-size:29px}.jb-balance-card{margin:15px;padding:19px}.jb-actions{margin:15px}.jb-points-card{margin:15px;padding:17px}.jb-section{padding:0 15px}.jb-fab{width:52px;height:52px;right:12px;bottom:82px}}
+:root{--bg:#050914;--panel:#0b1425;--blue:#00d4ff;--gold:#d8aa45;--green:#22c55e;--text:#f4f7ff;--muted:#94a3b8;--border:rgba(216,170,69,.25)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html{scroll-behavior:smooth}
+body{margin:0;color:var(--text);font-family:Arial,sans-serif;background:radial-gradient(ellipse at 15% 0%,#103a5b55,transparent 38%),radial-gradient(ellipse at 100% 45%,#d8aa451b,transparent 35%),var(--bg);overflow-x:hidden;padding-bottom:90px}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+header{position:sticky;top:0;z-index:10;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px;background:#050914ed;border-bottom:1px solid var(--border);backdrop-filter:blur(20px)}
+.brand{display:flex;align-items:center;gap:10px}.logo{width:43px;height:43px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#fff0bd,var(--gold),#946515);color:#07111d;font-weight:900;font-size:18px}
+.brand h1{font-size:14px;margin:0 0 4px}.brand small{font-size:10px;color:var(--muted)}
+.btn{border:1px solid #d8aa4570;border-radius:9px;padding:9px 10px;min-height:34px;color:var(--text);background:linear-gradient(135deg,#14243a,#0b1425);font-size:10px;font-weight:700}
+.gold{background:linear-gradient(120deg,#ffe9b4,#d8aa45,#f4cf77);color:#10131a;border-color:#ffe6a0}.blue{border-color:#00d4ff88;background:linear-gradient(120deg,#10344a,#0b1425)}.green{background:linear-gradient(120deg,#86efac,#22c55e);color:#052e16}
+main{max-width:900px;margin:auto;padding:17px 13px 80px}.hero{border:1px solid var(--border);border-radius:25px;padding:24px 19px;background:radial-gradient(ellipse at top right,#00d4ff18,transparent 60%),linear-gradient(135deg,#14243b,#080e1b);margin-bottom:25px}
+.tag{font-size:10px;color:var(--gold);letter-spacing:1.5px;font-weight:bold}.hero h2{font-size:27px;margin:14px 0 8px;line-height:1.3}.hero h2 span{color:var(--gold)}.hero p{font-size:12px;color:var(--muted);line-height:1.8;max-width:570px}
+.section-title{font-size:17px;margin:24px 2px 13px}.section-title:after{content:"";display:block;width:52px;height:2px;margin-top:8px;background:linear-gradient(90deg,var(--gold),var(--blue),transparent)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{display:flex;flex-direction:column;padding:16px 12px;border-radius:19px;border:1px solid var(--border);background:linear-gradient(145deg,#111f33f7,#09111efc)}
+.card-icon{width:45px;height:45px;border-radius:14px;display:grid;place-items:center;font-size:23px;background:linear-gradient(135deg,#d8aa4520,#00d4ff0c);border:1px solid var(--border);margin-bottom:12px}.card h3{font-size:14px;margin:0 0 8px}.card p{font-size:11px;color:var(--muted);min-height:40px;flex:1;line-height:1.7}
+.total{padding:11px;border:1px solid var(--border);border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:8px;background:linear-gradient(120deg,#d8aa4510,#00d4ff05);margin:12px 0;font-size:11px}.total strong{color:var(--gold);font-size:13px;text-align:right}.card>.btn{width:100%;margin-top:auto;min-height:36px}
+.overlay{display:none;position:fixed;inset:0;z-index:80;background:#000c;backdrop-filter:blur(9px);align-items:flex-end;justify-content:center;padding:0}.overlay.show{display:flex}.modal{width:min(100%,620px);max-height:92vh;overflow:auto;background:#08111f;border:1px solid var(--border);border-radius:23px 23px 0 0;padding:18px 18px 110px 18px}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;position:sticky;top:-18px;background:#08111ff5;padding:9px 0 12px;border-bottom:1px solid #d8aa4520}.modal-head h2{font-size:17px;margin:0}.close{width:32px;height:32px;border:1px solid var(--border);border-radius:9px;background:#132035;color:white;font-size:19px}
+.field{margin:14px 0}.field label{display:block;font-size:12px;margin-bottom:8px;color:#dce6f5}.field input,.field textarea,.field select{width:100%;padding:13px;border-radius:12px;border:1px solid #293850;background:#0c192b;color:white;outline:none}
+.platforms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.platform{padding:9px 3px;border:1px solid #28374d;border-radius:10px;background:#0d192b;color:white;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:7px}.platform img{width:25px;height:25px}.platform.active{border-color:var(--gold);background:#d8aa4518}
+.status{font-size:12px;margin:12px 0;white-space:pre-wrap;line-height:1.7}.ok{color:#86efac}.error{color:#fda4af}.info{color:#93c5fd}.preview{width:85px;height:85px;border-radius:14px;object-fit:cover;border:1px solid var(--border);display:none;margin-top:10px;background:#0c192b}
+#qrResult{display:flex;justify-content:center;padding:15px;background:#fff;border-radius:12px;min-height:30px;margin:12px auto;max-width:280px}
+footer{text-align:center;padding:22px 15px;border-top:1px solid var(--border);font-size:10px;color:var(--muted)}footer span{color:var(--gold)}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:10;background:#070e1ef5;border-top:1px solid rgba(216,170,69,.25);backdrop-filter:blur(20px);display:grid;grid-template-columns:1fr 1fr 1fr 1fr;padding:8px 4px calc(8px + env(safe-area-inset-bottom))}.nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;color:#94a3b8;text-decoration:none;font-size:10px;font-weight:700;padding:6px}.nav-item.active{color:#00d4ff}
+.solde-badge{padding:8px 14px;border-radius:20px;background:linear-gradient(120deg,#00d4ff20,#d8aa4520);border:1px solid #00d4ff88;font-size:11px;font-weight:900;color:#00d4ff;animation:pulse 2s infinite;white-space:nowrap}
+.vip-badge{padding:5px 10px;border-radius:20px;background:linear-gradient(120deg,#d8aa45,#f4cf77);color:#10131a;font-size:10px;font-weight:900;margin-left:6px}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #00d4ff40}70%{box-shadow:0 0 0 8px #00d4ff00}100%{box-shadow:0 0 0 0 #00d4ff00}}
+.site-catalog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:10px}.site-option{min-height:112px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;text-align:center;color:var(--text);background:linear-gradient(145deg,#13243a,#09111e);border:1px solid var(--border);border-radius:14px}.site-option.active{border-color:var(--gold);background:linear-gradient(145deg,#d8aa4528,#00d4ff0b)}
+@media(min-width:620px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.overlay{align-items:center;padding:16px}.modal{border-radius:23px}}
 </style>
 </head>
 <body>
-<div id="jbLoading" class="jb-loading"><div class="jb-loading-box"><div class="jb-loader"></div><div class="jb-loading-text">JASON BUSINESS</div></div></div>
-<div class="jb-overlay">
-<header class="jb-header">
-  <div class="jb-top"><div class="jb-brand">JASON BUSINESS</div><div class="jb-status">● EN LIGNE</div></div>
-  <div class="jb-user-box"><small>BIENVENUE SUR VOTRE ESPACE</small><h2 id="jbUserPhone">Chargement...</h2></div>
+<header>
+ <div class="brand"><div class="logo">JB</div><div><h1>JASON BUSINESS</h1><small>Shop numérique</small></div></div>
+ <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+  <div id="soldeDisplay" class="solde-badge">⏳ Chargement solde...</div>
+  <button class="btn blue" id="apiBtn">⚡ API</button><button class="btn" id="historyBtn">📋 Demandes</button>
+ </div>
 </header>
-<div id="jbDashboardStatus"></div>
-<section class="jb-balance-card">
-  <div class="jb-balance-title">Solde principal</div>
-  <div class="jb-balance"><span id="jbMainBalance">0</span><span class="jb-currency"> FC</span></div>
-  <div class="jb-balance-description">Disponible pour vos commandes</div>
-  <div class="jb-balance-grid">
-    <div class="jb-money-box"><div class="jb-icon">💰</div><small>Commissions</small><b id="jbCommissionBalance">0 FC</b></div>
-    <div class="jb-money-box"><div class="jb-icon">📈</div><small>Gains</small><b id="jbGainBalance">0 FC</b></div>
-    <div class="jb-money-box"><div class="jb-icon">💎</div><small>Total</small><b id="jbTotalBalance">0 FC</b></div>
-  </div>
-</section>
-<div class="jb-actions">
-  <a href="recharge.html" class="jb-action jb-recharge">📥 RECHARGER</a>
-  <a href="retrait.html" class="jb-action jb-withdraw">📤 RETIRER</a>
-</div>
-<section class="jb-points-card">
-  <div class="jb-points-top"><div><div class="jb-points-title">⭐ POINTS DE FIDÉLITÉ</div><div class="jb-points-value">100 points = <b>50 FC</b></div></div><div id="jbLoyaltyPoints" class="jb-points-number">0</div></div>
-  <button id="jbConvertPoints" disabled>💱 CONVERTIR MES POINTS</button>
-</section>
-<section class="jb-section">
-  <div class="jb-section-title"><h3>🛍️ Nos services</h3><a href="shop.html">VOIR TOUT →</a></div>
-  <div class="jb-service-card" onclick="openService('boost')"><div class="jb-service-icon">📈</div><div class="jb-service-info"><div class="jb-service-name">Boostage</div><div class="jb-service-desc">Followers, likes, vues</div></div><div class="jb-service-arrow">›</div></div>
-  <div class="jb-service-card" onclick="openService('app')"><div class="jb-service-icon">📱</div><div class="jb-service-info"><div class="jb-service-name">Application</div><div class="jb-service-desc">Création d'application mobile</div></div><div class="jb-service-arrow">›</div></div>
-  <div class="jb-service-card" onclick="openService('site')"><div class="jb-service-icon">🌐</div><div class="jb-service-info"><div class="jb-service-name">Site web</div><div class="jb-service-desc">Site moderne et professionnel</div></div><div class="jb-service-arrow">›</div></div>
-  <div class="jb-service-card" onclick="openService('chatbot')"><div class="jb-service-icon">🤖</div><div class="jb-service-info"><div class="jb-service-name">Chatbot</div><div class="jb-service-desc">Assistant et automatisation intelligente</div></div><div class="jb-service-arrow">›</div></div>
-  <div class="jb-service-card" onclick="openService('music')"><div class="jb-service-icon">🎵</div><div class="jb-service-info"><div class="jb-service-name">Chanson</div><div class="jb-service-desc">Création musicale personnalisée</div></div><div class="jb-service-arrow">›</div></div>
-  <div class="jb-service-card" onclick="openService('ads')"><div class="jb-service-icon">📣</div><div class="jb-service-info"><div class="jb-service-name">Publicité</div><div class="jb-service-desc">Promotion sur réseaux</div></div><div class="jb-service-arrow">›</div></div>
-  <div class="jb-service-card" onclick="openService('logo')"><div class="jb-service-icon">🎨</div><div class="jb-service-info"><div class="jb-service-name">Logo</div><div class="jb-service-desc">Création de votre identité visuelle</div></div><div class="jb-service-arrow">›</div></div>
-</section>
-<section class="jb-section">
-  <div class="jb-section-title"><h3>⚡ Mes activités</h3><a href="shop.html">COMMANDER →</a></div>
-  <div id="jbInvestments"><div class="jb-empty">Chargement...</div></div>
-</section>
-</div>
+<main>
+ <section class="hero"><div class="tag">✦ TON ESPACE NUMÉRIQUE</div><h2>Crée ton projet.<br><span>Réalise tes idées.</span></h2><p>Commande une application, un site web, un chatbot, crée une chanson, booste tes réseaux ou génère un QR code gratuit.</p><button class="btn gold" id="exploreBtn">Découvrir ↓</button></section>
+ <h2 class="section-title" id="services">Nos services</h2>
+ <section class="grid">
+  <article class="card"><div class="card-icon">📈</div><h3>Boostage réseaux sociaux</h3><p>Abonnés 50 FC, Likes 35 FC, Vues 20 FC — Min 10.</p><div class="total"><span>À partir de</span><strong id="priceBoostCard">200 FC</strong></div><button class="btn gold" data-open="boostModal">Calculer mon boost</button></article>
+  <article class="card"><div class="card-icon">📱</div><h3>Application mobile</h3><p>Nom, icône, lien, description et WhatsApp.</p><div class="total"><span>Prix App</span><strong id="priceAppCard">10 000 FC</strong></div><button class="btn" data-open="appModal">Commander — 10 000 FC</button></article>
+  <article class="card"><div class="card-icon">🌐</div><h3>Création de site web</h3><p>24 modèles avec prix.</p><div class="total"><span>À partir de</span><strong id="priceSiteCard">10 000 FC</strong></div><button class="btn gold" data-open="siteModal">Choisir un site</button></article>
+  <article class="card"><div class="card-icon">🤖</div><h3>Création de chatbot</h3><p>Nom, fonctionnalités, créateur, description.</p><div class="total"><span>Prix Chatbot</span><strong id="priceChatCard">7 000 FC</strong></div><button class="btn" data-open="chatModal">Créer — 7 000 FC</button></article>
+  <article class="card"><div class="card-icon">🎵</div><h3>Créer une chanson</h3><p>Paroles et style musical.</p><div class="total"><span>Prix Chanson</span><strong id="priceMusicCard">5 000 FC</strong></div><button class="btn gold" data-open="musicModal">Créer — 5 000 FC</button></article>
+  <article class="card"><div class="card-icon">📣</div><h3>Publicité gratuite</h3><p>Annonce gratuite.</p><div class="total"><span>Prix</span><strong>GRATUIT</strong></div><button class="btn green" data-open="adsModal">Créer ma publicité</button></article>
+  <article class="card"><div class="card-icon">▦</div><h3>Générateur QR code</h3><p>QR code gratuit.</p><div class="total"><span>Prix</span><strong>GRATUIT</strong></div><button class="btn blue" data-open="qrModal">Créer QR</button></article>
+ </section>
+</main>
+<footer><span>JASON BUSINESS</span> · Services numériques<br>Créé par Jason Aloma 🇨🇩</footer>
 
-<!-- BOUTON FLOTTANT PRO EN BAS À DROITE -->
-<button class="jb-fab" onclick="goPage('shop.html')" aria-label="Boutique">
-  🛒
-  <span class="jb-fab-dot"></span>
-</button>
+<div class="overlay" id="boostModal"><section class="modal"><div class="modal-head"><h2>📈 Boostage — Prix auto + VIP</h2><button class="close" data-close="boostModal">×</button></div><p class="muted">Solde: <b id="soldeInBoost" style="color:#00d4ff">Chargement...</b></p><div class="platforms" id="platformGrid"></div><form id="boostForm"><div class="field"><label>Plateforme</label><input id="boostPlatform" name="platform" readonly required></div><div class="field"><label>Service</label><select id="boostType" name="type" required><option value="followers">Followers — 50 FC / unité</option><option value="likes">Likes — 35 FC / unité</option><option value="views">Vues — 20 FC / unité</option></select></div><div class="field"><label>Lien public *</label><input id="boostLink" name="link" type="url" required placeholder="https://..."></div><div class="field"><label>Quantité (min 10) *</label><input id="boostBudget" name="budget" type="number" min="10" value="10" required></div><div class="field"><label>Téléphone *</label><input id="boostPhone" name="phone" type="tel" required></div><div class="total"><span>Quantité</span><strong id="boostQuantity">10 unités</strong></div><div class="total"><span>Prix total</span><strong id="boostPrice" style="color:#00d4ff;font-size:18px">500 FC</strong></div><button class="btn gold" type="submit" style="width:100%">📤 Payer et envoyer</button><div class="status" id="boostStatus"></div></form></section></div>
 
-<nav class="jb-navbar">
-  <button onclick="goPage('dashboard.html')" class="jb-nav-link active"><div class="jb-nav-icon">📊</div>Dashboard</button>
-  <button onclick="goPage('shop.html')" class="jb-nav-link"><div class="jb-nav-icon">🛍️</div>Boutique</button>
-  <button onclick="goPage('store.html')" class="jb-nav-link"><div class="jb-nav-icon">🛒</div>Store</button>
-  <button onclick="goPage('equipe.html')" class="jb-nav-link"><div class="jb-nav-icon">👥</div>Équipe</button>
-  <button onclick="goPage('profil.html')" class="jb-nav-link"><div class="jb-nav-icon">👤</div>Profil</button>
-</nav>
+<div class="overlay" id="appModal"><section class="modal"><div class="modal-head"><h2>📱 Application — 10 000 FC</h2><button class="close" data-close="appModal">×</button></div><p class="muted">Solde: <b id="soldeInApp" style="color:#00d4ff"></b></p><form id="appForm"><div class="field"><label>Nom *</label><input id="appName" name="appName" required maxlength="100"></div><div class="field"><label>Icône *</label><input id="appIcon" name="appIconFile" type="file" accept="image/*" required><img id="appIconPreview" class="preview"></div><div class="field"><label>Lien du site *</label><input id="appUrl" name="appUrl" type="url" required placeholder="https://jason-business.vercel.app"></div><div class="field"><label>Description *</label><textarea id="appDescription" name="description" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="appWhatsapp" name="whatsapp" type="tel" required></div><div class="total"><span>Prix Application</span><strong id="priceApp">10 000 FC</strong></div><button class="btn gold" type="submit" id="appSubmitBtn" style="width:100%">📤 Commander — 10 000 FC</button><div class="status" id="appStatus"></div></form></section></div>
 
-<script>
-function goPage(p){window.location.href=p}
-function openService(type){localStorage.setItem("jb_open_service",type);window.location.href="shop.html"}
-</script>
+<div class="overlay" id="siteModal"><section class="modal"><div class="modal-head"><h2>🌐 Commander mon site</h2><button class="close" data-close="siteModal">×</button></div><div class="field"><label>Catalogue (24 choix)</label><div id="siteCatalog" class="site-catalog"></div></div><form id="siteForm"><input type="hidden" id="siteType" name="siteType"><input type="hidden" id="sitePrice" name="price"><div class="field"><label>Nom du site *</label><input id="siteName" name="siteName" required></div><div class="field"><label>Description *</label><textarea id="siteDescription" name="description" required></textarea></div><div class="field"><label>Fonctionnalités *</label><textarea id="siteFeatures" name="features" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="siteWhatsapp" name="whatsapp" type="tel" required></div><div class="total"><span>Site choisi</span><strong id="selectedSiteName">Aucun</strong></div><div class="total"><span>Prix</span><strong id="selectedSitePrice">0 FC</strong></div><button class="btn gold" id="siteSubmitBtn" type="submit" style="width:100%;min-height:45px">📤 Commander le site</button><div class="status" id="siteStatus"></div></form></section></div>
+
+<div class="overlay" id="chatModal"><section class="modal"><div class="modal-head"><h2>🤖 Chatbot — 7 000 FC</h2><button class="close" data-close="chatModal">×</button></div><form id="chatForm"><div class="field"><label>Nom *</label><input id="chatName" name="chatName" required></div><div class="field"><label>Fonctionnalités *</label><textarea id="chatFeatures" name="features" required></textarea></div><div class="field"><label>Créateur *</label><input id="chatCreator" name="creator" required value="Jason Aloma"></div><div class="field"><label>Description *</label><textarea id="chatDescription" name="description" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="chatWhatsapp" name="whatsapp" type="tel" required></div><div class="total"><span>Prix</span><strong id="priceChat">7 000 FC</strong></div><button class="btn gold" type="submit" style="width:100%">📤 Commander — 7 000 FC</button><div class="status" id="chatStatus"></div></form></section></div>
+
+<div class="overlay" id="musicModal"><section class="modal"><div class="modal-head"><h2>🎵 Chanson — 5 000 FC</h2><button class="close" data-close="musicModal">×</button></div><p class="muted">Solde: <b id="soldeInMusic" style="color:#00d4ff"></b></p><form id="musicForm"><div class="field"><label>Titre *</label><input id="musicTitleInput" name="title" required></div><div class="field"><label>Paroles *</label><textarea id="musicLyrics" name="lyrics" required style="min-height:180px"></textarea></div><div class="field"><label>Style *</label><select id="musicStyle" name="style" required><option>Afrobeat</option><option>Afropop</option><option>Rumba congolaise</option><option>Ndombolo</option><option>Gospel</option><option>Hip-hop</option><option>Rap</option></select></div><div class="total"><span>Prix</span><strong id="priceMusic">5 000 FC</strong></div><button class="btn gold" id="generateSongBtn" type="submit" style="width:100%">🎶 Payer 5 000 FC et générer</button><div class="status" id="musicStatus"></div><div id="musicResult"></div></form></section></div>
+
+<div class="overlay" id="adsModal"><section class="modal"><div class="modal-head"><h2>📣 Pub gratuite</h2><button class="close" data-close="adsModal">×</button></div><form id="adsForm"><div class="field"><label>Titre *</label><input id="adsTitleInput" name="title" required></div><div class="field"><label>Texte *</label><textarea id="adsText" name="text" required></textarea></div><div class="field"><label>Lien *</label><input id="adsUrl" name="url" type="url" required></div><button class="btn green" type="submit" style="width:100%">✨ Créer gratuitement</button><div class="status" id="adStatus"></div><div id="adsResult"></div></form></section></div>
+<div class="overlay" id="qrModal"><section class="modal"><div class="modal-head"><h2>▦ QR Code</h2><button class="close" data-close="qrModal">×</button></div><div class="field"><label>Lien *</label><textarea id="qrText" required></textarea></div><button class="btn gold" id="generateQrBtn" type="button" style="width:100%">Générer</button><div id="qrStatus" class="status"></div><div id="qrResult"></div><button class="btn green" id="downloadQrBtn" type="button" style="width:100%" disabled>Télécharger</button></section></div>
+<div class="overlay" id="historyModal"><section class="modal"><div class="modal-head"><h2>📋 Mes demandes</h2><button class="close" data-close="historyModal">×</button></div><div id="historyList"></div><button class="btn" id="clearHistory" style="width:100%;margin-top:12px">Recharger 61 000 FC</button></section></div>
+
+<nav class="bottom-nav" id="bottomNav"><a href="dashboard.html" class="nav-item"><span class="icon">📊</span><span>Dash</span></a><a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span>Shop</span></a><a href="equipe.html" class="nav-item"><span class="icon">👥</span><span>Équipe</span></a><a href="profil.html" class="nav-item"><span class="icon">👤</span><span>Profil</span></a></nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-const jbFirebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
-const jbApp=initializeApp(jbFirebaseConfig);
-const jbDatabase=getDatabase(jbApp);
-const jbCurrentUser=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("jasonPhone")||localStorage.getItem("phone");
-const jbPhone=jbCurrentUser;
-if(!jbPhone){window.location.replace("login.html");throw new Error("Session introuvable.");}
-localStorage.setItem("jasonBusinessUserPhone",jbPhone);
-localStorage.setItem("userPhone",jbPhone);
-localStorage.setItem("jasonBusinessLogged","true");
-const jbUserReference=ref(jbDatabase,"jasonBusiness/users/"+jbPhone);
-function jbFormatFC(v){return Math.floor(Number(v)||0).toLocaleString("fr-FR");}
-function jbFormatDate(v){if(!v)return "Date inconnue";const d=new Date(v);if(Number.isNaN(d.getTime()))return "Date inconnue";return d.toLocaleDateString("fr-FR",{day:"2-digit",month:"2-digit",year:"numeric"});}
-function jbEscapeHTML(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");}
-function jbRenderInvestments(investments){
-const container=document.getElementById("jbInvestments");container.innerHTML="";
-if(!investments||typeof investments!=="object"||Object.keys(investments).length===0){container.innerHTML=`<div class="jb-empty">📦 Aucune activité pour le moment.<br><br>Découvrez nos services dans la boutique.</div>`;return;}
-Object.entries(investments).reverse().forEach(([id,item])=>{if(!item||typeof item!=="object")return;const card=document.createElement("div");card.className="jb-invest-card";const name=item.nom||item.service||item.name||"Service";const gain=Number(item.gainJournalier??item.gain??0);const date=item.dateAchat||item.date||item.createdAt;const status=item.statut||item.status||"actif";card.innerHTML=`<div class="jb-invest-row"><div class="jb-invest-name">⚡ ${jbEscapeHTML(name)}</div><div class="jb-invest-gain">${jbFormatFC(gain)} FC</div></div><div class="jb-invest-date">Activé le ${jbEscapeHTML(jbFormatDate(date))}</div><div class="jb-invest-status">● ${jbEscapeHTML(status)}</div>`;container.appendChild(card);});
+import {initializeApp,getApps,getApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {getDatabase,ref,push,set,get} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
+const app=getApps().length?getApp():initializeApp(firebaseConfig);
+const db=getDatabase(app);
+const ROOT="jasonBusiness";const $=id=>document.getElementById(id);
+const BALANCE_KEY="jasonBusinessSoldeV4";const HISTORY_KEY="jasonBusinessBoutiqueOrdersV3";const VIP_KEY="jasonBusinessVip30";
+const VIP_DISCOUNTS={Bronze:10,Silver:15,Gold:20,Platinum:25,Diamond:30,Aucun:0};
+function formatFC(n){return Number(n).toLocaleString("fr-FR")+" FC";}
+function getVipInfo(){try{const raw=localStorage.getItem(VIP_KEY);if(!raw)return null;const v=JSON.parse(raw);if(!v.expiresAt||Date.now()>v.expiresAt){localStorage.removeItem(VIP_KEY);return null;}return v;}catch{return null;}}
+function getVipDiscount(){const v=getVipInfo();return v? (VIP_DISCOUNTS[v.level]||0):0;}
+function getVipLevel(){const v=getVipInfo();return v? v.level:"Aucun";}
+function activateVip(level){const discount=VIP_DISCOUNTS[level]||0;const expiresAt=Date.now()+(30*24*60*60*1000);const data={level,discount,expiresAt,startAt:Date.now()};localStorage.setItem(VIP_KEY,JSON.stringify(data));setBalance(getBalance());updateAllPrices();return data;}
+window.activateVip=activateVip;
+function applyDiscount(price){const disc=getVipDiscount();if(disc<=0)return {original:price,final:price,discount:0};const final=Math.floor(price*(1-disc/100));return {original:price,final,discount:disc};}
+function formatPriceVIP(price){const p=applyDiscount(price);if(p.discount<=0)return `${p.final.toLocaleString("fr-FR")} FC`;return `<span style="text-decoration:line-through;color:#94a3b8;font-size:10px">${p.original.toLocaleString("fr-FR")} FC</span> <span style="color:#22c55e;font-weight:900">${p.final.toLocaleString("fr-FR")} FC -${p.discount}%</span>`;}
+function formatPricePureVIP(price){const p=applyDiscount(price);if(p.discount<=0)return `${p.final.toLocaleString("fr-FR")} FC`;return `${p.final.toLocaleString("fr-FR")} FC (-${p.discount}%)`;}
+function getBalance(){let b=localStorage.getItem(BALANCE_KEY);if(b===null){b="61000";localStorage.setItem(BALANCE_KEY,b)}return Number(b)||61000;}
+function setBalance(v){v=Math.max(0,Number(v)||0);localStorage.setItem(BALANCE_KEY,String(v));const vip=getVipInfo();let txt=vip? `💰 ${formatFC(v)} <span class="vip-badge">👑 ${vip.level} -${vip.discount}% ${Math.ceil((vip.expiresAt-Date.now())/86400000)}j</span>`:`💰 ${formatFC(v)}`;if($("soldeDisplay"))$("soldeDisplay").innerHTML=txt;const sub=vip? `${formatFC(v)} <span style="color:#22c55e">VIP ${vip.level} -${vip.discount}%</span>`:`${formatFC(v)}`;if($("soldeInBoost"))$("soldeInBoost").innerHTML=sub;if($("soldeInApp"))$("soldeInApp").innerHTML=sub;if($("soldeInMusic"))$("soldeInMusic").innerHTML=sub;}
+function deductBalance(n){const b=getBalance();if(b<n)return false;setBalance(b-n);return true;}
+function cleanUrl(u){if(!u)return"";u=u.trim();u=u.replace(/^htmps:\/\//i,"https://").replace(/^htps:\/\//i,"https://");if(!u.startsWith("http"))u="https://"+u;return u;}
+function show(id){$(id).classList.add("show");document.body.style.overflow="hidden";$("bottomNav").style.display="none";}
+function hide(id){$(id).classList.remove("show");if(!document.querySelector(".overlay.show")){document.body.style.overflow="";$("bottomNav").style.display="grid";}}
+document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>show(b.dataset.open)));
+document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>hide(b.dataset.close)));
+document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)hide(o.id);}));
+$("exploreBtn").onclick=()=>$("services").scrollIntoView({behavior:"smooth"});$("apiBtn").onclick=()=>location.href="api.html";
+function setStatus(id,msg,type="info"){const el=$(id);if(!el)return;el.textContent=msg;el.className="status "+type;}
+async function pushCommande(path,payload){try{const r=push(ref(db,path));await set(r,{...payload,createdAt:Date.now(),date:new Date().toLocaleString("fr-FR"),statut:"En attente",source:"shop",vipLevel:getVipLevel(),vipDiscount:getVipDiscount()});return true;}catch(e){let hist=[];try{hist=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]")}catch{}hist.unshift({type:path,date:new Date().toLocaleString("fr-FR"),data:payload});localStorage.setItem(HISTORY_KEY,JSON.stringify(hist).slice(0,20000));return true;}}
+const platforms=[["Facebook","https://cdn.simpleicons.org/facebook/1877F2"],["Instagram","https://cdn.simpleicons.org/instagram/E4405F"],["TikTok","https://cdn.simpleicons.org/tiktok/ffffff"],["YouTube","https://cdn.simpleicons.org/youtube/FF0033"],["WhatsApp","https://cdn.simpleicons.org/whatsapp/25D366"],["Telegram","https://cdn.simpleicons.org/telegram/26A5E4"],["Snapchat","https://cdn.simpleicons.org/snapchat/FFFC00"],["X","https://cdn.simpleicons.org/x/ffffff"]];
+let chosenPlatform="Facebook";
+function buildPlatforms(){const grid=$("platformGrid");if(!grid)return;grid.innerHTML="";platforms.forEach(([name,src])=>{const b=document.createElement("button");b.type="button";b.className="platform";b.dataset.name=name;const img=document.createElement("img");img.src=src;const label=document.createElement("span");label.textContent=name;b.append(img,label);b.addEventListener("click",()=>{chosenPlatform=name;$("boostPlatform").value=name;grid.querySelectorAll(".platform").forEach(x=>x.classList.toggle("active",x.dataset.name===name));calculateBoost();});grid.append(b);});$("boostPlatform").value=chosenPlatform;grid.querySelector(`[data-name="${chosenPlatform}"]`)?.classList.add("active");}
+function calculateBoost(){const qty=Math.max(10,Number($("boostBudget").value)||10);const type=$("boostType").value;const per=type==="followers"?50:type==="likes"?35:20;const original=qty*per;const p=applyDiscount(original);if($("boostPrice"))$("boostPrice").innerHTML=formatPriceVIP(original);if($("boostQuantity"))$("boostQuantity").textContent=qty+" unités";return {qty,total:p.final,original:original,per,discount:p.discount};}
+function updateAllPrices(){
+  calculateBoost();
+  if($("priceAppCard")) $("priceAppCard").innerHTML=formatPriceVIP(10000);
+  if($("priceApp")) $("priceApp").innerHTML=formatPriceVIP(10000);
+  if($("priceSiteCard")) $("priceSiteCard").innerHTML=`À partir de ${formatPricePureVIP(10000)}`;
+  if($("priceChatCard")) $("priceChatCard").innerHTML=formatPriceVIP(7000);
+  if($("priceChat")) $("priceChat").innerHTML=formatPriceVIP(7000);
+  if($("priceMusicCard")) $("priceMusicCard").innerHTML=formatPriceVIP(5000);
+  if($("priceMusic")) $("priceMusic").innerHTML=formatPriceVIP(5000);
+  if($("priceBoostCard")) $("priceBoostCard").innerHTML=formatPricePureVIP(200);
+  const appBtn=$("appSubmitBtn"); if(appBtn){const p=applyDiscount(10000);appBtn.textContent=`📤 Commander — ${p.final.toLocaleString("fr-FR")} FC${p.discount?` (-${p.discount}%)`:""}`;}
 }
-onValue(jbUserReference,snapshot=>{
-document.getElementById("jbLoading").style.display="none";
-if(!snapshot.exists()){localStorage.removeItem("jasonBusinessUserPhone");localStorage.removeItem("userPhone");localStorage.removeItem("jasonBusinessLogged");window.location.replace("login.html");return;}
-const user=snapshot.val()||{};
-document.getElementById("jbUserPhone").textContent=user.telephone||jbPhone;
-const principal=Number(user.solde_principal||user.solde||0);const commissions=Number(user.solde_commissions||0);const gains=Number(user.solde_gains||0);const total=principal+commissions+gains;
-document.getElementById("jbMainBalance").textContent=jbFormatFC(principal);
-document.getElementById("jbCommissionBalance").textContent=jbFormatFC(commissions)+" FC";
-document.getElementById("jbGainBalance").textContent=jbFormatFC(gains)+" FC";
-document.getElementById("jbTotalBalance").textContent=jbFormatFC(total)+" FC";
-const points=Number(user.points_fidelite??user.points??user.loyaltyPoints??0);
-document.getElementById("jbLoyaltyPoints").textContent=jbFormatFC(points);
-document.getElementById("jbConvertPoints").disabled=points<100;
-jbRenderInvestments(user.mes_investissements);
-},error=>{
-document.getElementById("jbLoading").style.display="none";console.error("Erreur Firebase:",error);document.getElementById("jbDashboardStatus").textContent="Impossible de charger les données. Vérifiez votre connexion.";
+buildPlatforms();calculateBoost();
+$("boostType").addEventListener("change",()=>{calculateBoost();});
+$("boostBudget").addEventListener("input",()=>{calculateBoost();});
+document.addEventListener("DOMContentLoaded",()=>{
+  $("soldeDisplay").textContent="⏳ Chargement solde...";
+  setTimeout(()=>{
+    setBalance(getBalance());updateAllPrices();
+    try{
+      const phone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone");
+      if(phone){
+        get(ref(db, `jasonBusiness/users/${phone}`)).then(snap=>{
+          const d=snap.val();
+          if(d && d.vip && d.vipLevel && d.vipLevel!=="Aucun"){
+            const expires=d.vipExpires||0;
+            if(expires>Date.now()){
+              localStorage.setItem(VIP_KEY,JSON.stringify({level:d.vipLevel,discount:d.vipDiscount||VIP_DISCOUNTS[d.vipLevel]||0,expiresAt:expires,startAt:d.vipStart||Date.now()}));
+              setBalance(getBalance());updateAllPrices();
+            }
+          }
+        });
+      }
+    }catch{}
+  },400);
 });
-document.getElementById("jbConvertPoints").addEventListener("click",async()=>{
-const button=document.getElementById("jbConvertPoints");button.disabled=true;
-try{
-const snapshot=await new Promise((resolve,reject)=>{onValue(jbUserReference,resolve,error=>reject(error),{onlyOnce:true});});
-if(!snapshot.exists()){alert("❌ Compte introuvable.");return;}
-const user=snapshot.val()||{};
-const currentPoints=Number(user.points_fidelite??user.points??user.loyaltyPoints??0);
-if(currentPoints<100){alert("❌ Il faut au minimum 100 points.");return;}
-const convertiblePoints=Math.floor(currentPoints/100)*100;const amount=(convertiblePoints/100)*50;
-if(!confirm("Convertir "+jbFormatFC(convertiblePoints)+" points en "+jbFormatFC(amount)+" FC ?"))return;
-const transaction=await runTransaction(jbUserReference,currentData=>{
-if(!currentData)return;const freshPoints=Number(currentData.points_fidelite??currentData.points??currentData.loyaltyPoints??0);
-if(freshPoints<convertiblePoints)return;currentData.points_fidelite=freshPoints-convertiblePoints;currentData.solde_principal=Number(currentData.solde_principal||0)+amount;return currentData;});
-if(!transaction.committed){alert("❌ La conversion n'a pas été effectuée.");return;}
-alert("✅ Conversion réussie !\n\n"+jbFormatFC(convertiblePoints)+" points → "+jbFormatFC(amount)+" FC");
-}catch(e){console.error("Erreur conversion:",e);alert("⚠️ Erreur conversion. Réessayez.");}finally{button.disabled=false;}
+$("boostForm").addEventListener("submit",async e=>{
+ e.preventDefault();const d=Object.fromEntries(new FormData(e.target).entries());const calc=calculateBoost();
+ if(getBalance()<calc.total){setStatus("boostStatus","❌ Solde insuffisant: "+formatFC(getBalance())+" — Il faut "+formatFC(calc.total),"error");return;}
+ if(!deductBalance(calc.total)){setStatus("boostStatus","❌ Solde insuffisant","error");return;}
+ setStatus("boostStatus","⏳ Paiement "+formatFC(calc.total)+(calc.discount?` (-${calc.discount}%)`:"")+"...","info");
+ const ok=await pushCommande(`${ROOT}/demandes_commandes`,{plateforme:d.platform,type_service:d.type,lien:cleanUrl(d.link),quantite:calc.qty,prix:calc.total,prix_original:calc.original,remise:calc.discount,telephone:d.phone});
+ if(ok){setStatus("boostStatus","✅ Payé "+formatFC(calc.total)+(calc.discount?` (-${calc.discount}% VIP)`:"")+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();buildPlatforms();calculateBoost();}
+ else{setBalance(getBalance()+calc.total);setStatus("boostStatus","❌ Erreur","error");}
 });
+$("appIcon").addEventListener("change",()=>{const file=$("appIcon").files[0],preview=$("appIconPreview");if(!file){preview.style.display="none";return}preview.src=URL.createObjectURL(file);preview.style.display="block";});
+$("appForm").addEventListener("submit",async e=>{
+ e.preventDefault();const p=applyDiscount(10000);
+ if(getBalance()<p.final){setStatus("appStatus","❌ Solde insuffisant: "+formatFC(getBalance())+" — Il faut "+formatFC(p.final),"error");return;}
+ if(!deductBalance(p.final)){setStatus("appStatus","❌ Solde insuffisant","error");return;}
+ const fd=new FormData(e.target);const data=Object.fromEntries(fd.entries());
+ setStatus("appStatus","⏳ Paiement "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
+ const ok=await pushCommande(`${ROOT}/store_commandes`,{produit:"Application - "+data.appName,nom_application:data.appName,lien_site:cleanUrl(data.appUrl),description:data.description,whatsapp:data.whatsapp,prix:p.final,prix_original:p.original,remise:p.discount});
+ if(ok){setStatus("appStatus","✅ Payé "+formatFC(p.final)+(p.discount?` (-${p.discount}% VIP)`:"")+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();$("appIconPreview").style.display="none";}
+ else{setBalance(getBalance()+p.final);setStatus("appStatus","❌ Erreur","error");}
+});
+$("siteForm").addEventListener("submit",async e=>{
+ e.preventDefault();const basePrice=Number($("sitePrice").value)||15000;const siteName=$("siteType").value||"Site Web";if(!siteName){setStatus("siteStatus","Choisis un modèle d'abord","error");return;}const p=applyDiscount(basePrice);
+ if(getBalance()<p.final){setStatus("siteStatus","❌ Solde insuffisant: "+formatFC(getBalance())+" — Il faut "+formatFC(p.final),"error");return;}
+ if(!deductBalance(p.final)){setStatus("siteStatus","❌ Solde insuffisant","error");return;}
+ const fd=new FormData(e.target);const data=Object.fromEntries(fd.entries());
+ setStatus("siteStatus","⏳ Paiement "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
+ const ok=await pushCommande(`${ROOT}/store_commandes`,{produit:"Site Web - "+siteName,nom_site:data.siteName,type_site:siteName,description:data.description,fonctionnalites:data.features,whatsapp:data.whatsapp,prix:p.final,prix_original:p.original,remise:p.discount});
+ if(ok){setStatus("siteStatus","✅ Payé "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();$("selectedSiteName").textContent="Aucun";$("selectedSitePrice").textContent="0 FC";}
+ else{setBalance(getBalance()+p.final);setStatus("siteStatus","❌ Erreur","error");}
+});
+$("chatForm").addEventListener("submit",async e=>{
+ e.preventDefault();const p=applyDiscount(7000);
+ if(getBalance()<p.final){setStatus("chatStatus","❌ Solde insuffisant","error");return;}
+ if(!deductBalance(p.final)){setStatus("chatStatus","❌ Solde insuffisant","error");return;}
+ const data=Object.fromEntries(new FormData(e.target).entries());
+ setStatus("chatStatus","⏳ Paiement "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
+ const ok=await pushCommande(`${ROOT}/store_commandes`,{produit:"Chatbot - "+data.chatName,...data,prix:p.final,prix_original:p.original,remise:p.discount});
+ if(ok){setStatus("chatStatus","✅ Payé "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();}
+ else{setBalance(getBalance()+p.final);setStatus("chatStatus","❌ Erreur","error");}
+});
+$("musicForm").addEventListener("submit",async e=>{
+ e.preventDefault();const p=applyDiscount(5000);
+ if(getBalance()<p.final){setStatus("musicStatus","❌ Solde insuffisant","error");return;}
+ if(!deductBalance(p.final)){setStatus("musicStatus","❌ Solde insuffisant","error");return;}
+ const data=Object.fromEntries(new FormData(e.target).entries());
+ setStatus("musicStatus","⏳ Paiement "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
+ try{
+  const res=await fetch("https://davbot-outils.vercel.app/api/media/music",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+  const j=await res.json();$("musicResult").innerHTML=`<div style="padding:13px;border:1px solid #293850;border-radius:12px;background:#0c192b;white-space:pre-wrap">${JSON.stringify(j,null,2).slice(0,4000)}</div>`;
+  await pushCommande(`${ROOT}/store_commandes`,{produit:"Chanson - "+data.title,prix:p.final,prix_original:p.original,remise:p.discount});
+  setStatus("musicStatus","✅ Payé "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+" — Reste "+formatFC(getBalance()),"ok");
+ }catch(err){setBalance(getBalance()+p.final);setStatus("musicStatus","❌ Erreur, remboursé "+formatFC(p.final)+": "+err.message,"error");}
+});
+const siteCatalog=[{name:"Portfolio personnel",icon:"👨‍💻",price:10000},{name:"Site vitrine",icon:"🏢",price:15000},{name:"Boutique en ligne",icon:"🛒",price:30000},{name:"Blog personnel",icon:"✍️",price:10000},{name:"Site d'actualités",icon:"📰",price:25000},{name:"Site d'église",icon:"⛪",price:15000},{name:"Site d'école",icon:"🎓",price:20000},{name:"Site de restaurant",icon:"🍽️",price:15000},{name:"Site d'hôtel",icon:"🏨",price:20000},{name:"Site immobilier",icon:"🏠",price:25000},{name:"Agence digitale",icon:"💻",price:20000},{name:"Site de musique",icon:"🎵",price:20000}];
+function renderSiteCatalog(){const box=$("siteCatalog");if(!box)return;box.innerHTML="";siteCatalog.forEach(site=>{const b=document.createElement("button");b.type="button";b.className="site-option";const p=applyDiscount(site.price);b.innerHTML=`<span style="font-size:27px">${site.icon}</span><span style="font-size:11px;font-weight:800">${site.name}</span><span style="font-size:11px;color:#d8aa45">${formatPriceVIP(site.price)}</span>`;b.addEventListener("click",()=>{box.querySelectorAll(".site-option").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("siteType").value=site.name;$("sitePrice").value=String(site.price);$("selectedSiteName").textContent=site.name;$("selectedSitePrice").innerHTML=formatPriceVIP(site.price);$("siteSubmitBtn").innerHTML=`📤 Commander — ${formatPricePureVIP(site.price)}`;});box.appendChild(b);});}
+renderSiteCatalog();
+$("historyBtn").addEventListener("click",()=>{const box=$("historyList");const vip=getVipInfo();box.innerHTML=`<div style="padding:12px;border:1px solid #293850;border-radius:12px;background:#0c192b">💰 Solde: <b style="color:#00d4ff">${formatFC(getBalance())}</b>${vip?` <span style="color:#22c55e">👑 ${vip.level} -${vip.discount}% — ${Math.ceil((vip.expiresAt-Date.now())/86400000)}j restants</span>`:""}</div>`;let items=[];try{items=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]")}catch{}if(!items.length){box.innerHTML+=`<div style="padding:12px;margin-top:8px;border:1px solid #293850;border-radius:12px;background:#0c192b">Aucune demande</div>`}else items.forEach(it=>{const div=document.createElement("div");div.style.cssText="padding:12px;border:1px solid #293850;border-radius:12px;background:#0c192b;margin:8px 0";div.innerHTML=`<strong>${it.type||"Commande"}</strong><div style="font-size:11px;color:#94a3b8">${it.date||""}</div>`;box.append(div)});show("historyModal");});
+$("clearHistory").addEventListener("click",()=>{if(confirm("Recharger 61 000 FC?")){setBalance(61000);$("historyList").innerHTML=`<div style="padding:12px;border:1px solid #293850;border-radius:12px;background:#0c192b">💰 Solde rechargé: ${formatFC(getBalance())}</div>`;}});
 </script>
 </body>
 </html>
