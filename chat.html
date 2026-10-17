@@ -19,7 +19,8 @@ header{height:56px;display:flex;justify-content:space-between;align-items:center
 .list{flex:1;overflow-y:auto;padding:6px}
 .item{padding:10px;border-radius:12px;display:flex;gap:10px;align-items:center;cursor:pointer;margin-bottom:4px;border:1px solid transparent}
 .item:hover{background:rgba(0,210,255,.06)}.item.active{background:rgba(0,210,255,.14);border-color:var(--blue)}
-.av{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900}
+.av{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;overflow:hidden}
+.av img{width:100%;height:100%;object-fit:cover}
 .info{flex:1;min-width:0}.name{font-size:13px;font-weight:700;overflow:hidden;text-overflow:ellipsis}.prev{font-size:11px;opacity:.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .right{display:flex;flex-direction:column;background:#070e1e}
 .top{padding:12px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,10,20,.85)}
@@ -37,32 +38,26 @@ header{height:56px;display:flex;justify-content:space-between;align-items:center
 .call-overlay{display:none;position:fixed;inset:0;z-index:5000;background:#050a14;align-items:center;justify-content:center;flex-direction:column;padding:20px}
 .call-overlay.show{display:flex}
 .call-overlay video{width:100%;max-width:400px;height:240px;background:#000;border-radius:16px;margin:6px}
-@media(max-width:800px){.wrap{grid-template-columns:1fr}.left{position:absolute;inset:0;z-index:20;display:none}.left.show{display:flex}}
+@media(max-width:800px){.wrap{grid-template-columns:1fr}.left{position:absolute;inset:0;z-index:20}.left.hide{display:none}.back{margin-left:8px}}
 </style>
 </head>
 <body>
 <header>
   <div class="brand">💬 JASON CHAT — <span id="myPhoneShow">...</span></div>
-  <div><a href="dashboard.html" class="btn">← Dashboard</a></div>
+  <div style="display:flex;gap:6px"><button class="btn" id="btnShowLeft">☰ Chats</button><a href="dashboard.html" class="btn">← Dashboard</a></div>
 </header>
 <div class="wrap">
-  <aside class="left show" id="leftPanel">
+  <aside class="left" id="leftPanel">
     <div class="tabs"><div class="tab active" data-tab="chats">💬 Chats</div><div class="tab" data-tab="users">👥 Utilisateurs</div><div class="tab" data-tab="requests">🔔 Demandes <span id="reqCount" style="background:#ff4757;color:white;padding:1px 5px;border-radius:10px;font-size:9px;display:none">0</span></div></div>
-    
-    <!-- AJOUT MANUEL SI LISTE VIDE -->
-    <div class="add-box">
-      <input id="manualPhone" placeholder="+243... Ajouter numéro">
-      <button class="btn" id="btnAddManual">+</button>
-    </div>
-
+    <div class="add-box"><input id="manualPhone" placeholder="+243... Ajouter numéro"><button class="btn" id="btnAddManual">+</button></div>
     <div class="search"><input id="search" placeholder="🔍 Rechercher..."></div>
     <div id="debugArea"></div>
     <div class="list" id="list"><div style="padding:20px;text-align:center;opacity:.5">Chargement...</div></div>
   </aside>
-  <section class="right">
-    <div class="top"><div><h3 id="chatName" style="margin:0;font-size:14px">Sélectionne un chat</h3><small id="chatPhone">Messenger Jason Business</small></div><div style="display:flex;gap:6px"><button class="btn" id="voiceCallBtn">📞</button><button class="btn" id="videoCallBtn">🎥</button></div></div>
-    <div class="msgs" id="msgs"><div class="empty">👥 Va dans Utilisateurs pour voir les comptes Jason Business<br><br>Si vide, ajoute le numéro manuellement en haut.</div></div>
-    <div class="input"><label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*" hidden></label><button class="tbtn" id="recordBtn">🎤</button><textarea id="msgInput" placeholder="Message..." disabled></textarea><button class="send" id="sendBtn" disabled>➤</button></div>
+  <section class="right" id="rightPanel">
+    <div class="top"><div style="display:flex;align-items:center;gap:8px"><div class="av" id="chatAvatar" style="width:36px;height:36px;font-size:12px">JB</div><div><h3 id="chatName" style="margin:0;font-size:14px">Sélectionne un chat</h3><small id="chatPhone">Messenger Jason Business</small></div></div><div style="display:flex;gap:6px"><button class="btn" id="voiceCallBtn">📞</button><button class="btn" id="videoCallBtn">🎥</button></div></div>
+    <div class="msgs" id="msgs"><div class="empty">👥 Va dans Utilisateurs → envoie demande → quand il accepte, clique sur son nom ici pour entrer dans la conversation<br><br>Photos, vocaux, appels vocal/vidéo comme Messenger</div></div>
+    <div class="input"><label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*" hidden></label><button class="tbtn" id="recordBtn">🎤</button><textarea id="msgInput" placeholder="Écris un message..." disabled></textarea><button class="send" id="sendBtn" disabled>➤</button></div>
   </section>
 </div>
 
@@ -83,70 +78,44 @@ $("myPhoneShow").textContent=myPhone;
 
 let tab="chats", activeChat=null, allUsers={}, myRequests={}, myChats={}, manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]");
 let pc=null, localStream=null, currentCallId=null;
+let currentMsgListener=null;
 
 function esc(s){return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")}
-function timeStr(ts){return new Date(ts).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}
+function timeStr(ts){if(!ts) return ""; return new Date(ts).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}
 function getChatId(a,b){return [a,b].sort().join("_")}
 function showDebug(msg){$("debugArea").innerHTML=`<div class="debug">DEBUG: ${esc(msg)}</div>`}
 
-document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");tab=t.dataset.tab;render()});
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  t.classList.add("active");
+  tab=t.dataset.tab;
+  render();
+});
 $("search").oninput=()=>render();
+$("btnShowLeft").onclick=()=>{ $("leftPanel").classList.remove("hide"); };
 
-// 1. ESSAIE 3 CHEMINS POUR TROUVER LES USERS
 async function loadUsers(){
   showDebug("Chargement users...");
   try{
-    // Chemin 1: jasonBusiness/users
     const snap1=await get(ref(db,"jasonBusiness/users"));
     if(snap1.exists()){
       allUsers=snap1.val()||{};
-      showDebug(`✅ ${Object.keys(allUsers).length} users trouvés dans jasonBusiness/users`);
+      showDebug(`✅ ${Object.keys(allUsers).length} users trouvés`);
       render(); return;
     }
-  }catch(e){ console.log("path1 error",e.message); }
-
-  try{
-    // Chemin 2: users
-    const snap2=await get(ref(db,"users"));
-    if(snap2.exists()){
-      allUsers=snap2.val()||{};
-      showDebug(`✅ ${Object.keys(allUsers).length} users trouvés dans users`);
-      render(); return;
-    }
-  }catch(e){}
-
-  try{
-    // Chemin 3: jasonBusiness/allUsers list
-    const snap3=await get(ref(db,"jasonBusiness/allUsers"));
-    if(snap3.exists()){
-      const arr=snap3.val();
-      if(Array.isArray(arr)){
-        arr.forEach(p=>allUsers[p]={telephone:p});
-      }else{
-        allUsers=arr;
-      }
-      showDebug(`✅ ${Object.keys(allUsers).length} users trouvés dans allUsers`);
-      render(); return;
-    }
-  }catch(e){}
-
-  // Si tout échoue -> mode manuel
-  showDebug(`⚠️ Aucun user lisible (règles Firebase bloquent). Ajoute manuellement les numéros en haut. Ton téléphone: ${myPhone}`);
-  allUsers={};
-  render();
+  }catch(e){ console.log(e.message); }
+  showDebug(`⚠️ Aucun user lisible, utilise ajout manuel. Ton numéro: ${myPhone}`);
+  allUsers={}; render();
 }
 loadUsers();
 
-// Ecoute temps réel aussi pour users (si règles permettent)
 onValue(ref(db,"jasonBusiness/users"),snap=>{
   if(snap.exists()){
     allUsers=snap.val()||{};
     showDebug(`✅ Live: ${Object.keys(allUsers).length} users`);
     render();
   }
-},err=>{
-  showDebug(`❌ Permission refusée: ${err.message} — Utilise ajout manuel`);
-});
+},err=>{ showDebug(`❌ Permission: ${err.message}`); });
 
 onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),snap=>{
   myRequests=snap.val()||{};
@@ -160,7 +129,6 @@ onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),snap=>{
   render();
 });
 
-// AJOUT MANUEL
 $("btnAddManual").onclick=()=>{
   const p=$("manualPhone").value.trim();
   if(!p||p.length<8){alert("Numéro invalide");return}
@@ -168,7 +136,7 @@ $("btnAddManual").onclick=()=>{
   localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));
   $("manualPhone").value="";
   render();
-  alert("✅ "+p+" ajouté — tu peux maintenant lui envoyer une demande");
+  alert("✅ "+p+" ajouté");
 };
 
 function getCombinedUsers(){
@@ -177,16 +145,21 @@ function getCombinedUsers(){
   return combined;
 }
 
+function getUserPhoto(phone){
+  const u=allUsers[phone]||{};
+  return u.photo||u.photoProfil||u.avatar||"";
+}
+
 function render(){
   const q=($("search").value||"").toLowerCase();
   const container=$("list");
   container.innerHTML="";
-  const users= getCombinedUsers();
+  const users=getCombinedUsers();
 
   if(tab==="users"){
     const entries=Object.entries(users);
     if(entries.length===0){
-      container.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucun utilisateur trouvé.<br><br>1. Vérifie que tu as d'autres comptes créés<br>2. Ou ajoute un numéro manuellement en haut<br><br>Ton numéro: ${esc(myPhone)}</div>`;
+      container.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucun utilisateur<br>Ajoute manuellement en haut<br>${esc(myPhone)}</div>`;
       return;
     }
     entries.forEach(([phone,u])=>{
@@ -194,11 +167,15 @@ function render(){
       if(q && !phone.toLowerCase().includes(q)) return;
       const chatId=getChatId(myPhone,phone);
       const isFriend=myChats[chatId]?.status==="accepted";
-      const hasSent=myRequests[phone]?.status==="pending";
+      const hasSent=myRequests[phone]?.status==="pending" && myRequests[phone]?.type==="outgoing";
+      const photo=getUserPhoto(phone);
       const div=document.createElement("div");
       div.className="item";
-      div.innerHTML=`<div class="av">${phone.slice(-2)}</div><div class="info"><div class="name">${esc(phone)} ${u.manuel?"(manuel)":""}</div><div class="prev">${isFriend?"✅ Ami":hasSent?"⏳ Demande envoyée":"👤 Utilisateur Jason"}</div></div><div>${isFriend?"💬":hasSent?"⏳":"+"}</div>`;
-      div.onclick=()=>{ if(isFriend) openChat(phone); else if(!hasSent) sendRequest(phone); };
+      div.innerHTML=`<div class="av">${photo?`<img src="${photo}">`:esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(u.nom||u.name||phone)}</div><div class="prev">${esc(phone)} • ${isFriend?"✅ Ami":hasSent?"⏳ Envoyée":"👤 Utilisateur"}</div></div><div>${isFriend?"💬":hasSent?"⏳":"+"}</div>`;
+      div.onclick=()=>{
+        if(isFriend){ openChat(phone); }
+        else if(!hasSent){ sendRequest(phone); }
+      };
       container.appendChild(div);
     });
   }
@@ -206,23 +183,30 @@ function render(){
     const reqs=Object.entries(myRequests).filter(([_,r])=>r.type==="incoming");
     if(reqs.length===0){container.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucune demande</div>`;return}
     reqs.forEach(([phone,r])=>{
+      const photo=getUserPhoto(phone);
       const div=document.createElement("div");
       div.className="item";
-      div.innerHTML=`<div class="av">${phone.slice(-2)}</div><div class="info"><div class="name">${esc(phone)}</div><div class="prev">Veut discuter</div></div><div style="display:flex;gap:4px"><button class="btn" style="background:#ffd700;color:#000" data-a="${phone}">Accepter</button><button class="btn" style="background:#ff475722" data-r="${phone}">Refuser</button></div>`;
+      div.innerHTML=`<div class="av">${photo?`<img src="${photo}">`:esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[phone]?.nom||phone)}</div><div class="prev">Veut discuter</div></div>`;
+      const btns=document.createElement("div");
+      btns.style.display="flex"; btns.style.gap="4px";
+      btns.innerHTML=`<button class="btn" style="background:#ffd700;color:#000" data-a="${phone}">Accepter</button><button class="btn" style="background:#ff475722;color:#ff6b7a" data-r="${phone}">Refuser</button>`;
+      div.appendChild(btns);
       container.appendChild(div);
     });
-    container.querySelectorAll("[data-a]").forEach(b=>b.onclick=(e)=>{e.stopPropagation();acceptRequest(b.dataset.a)});
-    container.querySelectorAll("[data-r]").forEach(b=>b.onclick=(e)=>{e.stopPropagation();refuseRequest(b.dataset.r)});
+    container.querySelectorAll("[data-a]").forEach(b=>b.onclick=(e)=>{e.stopPropagation(); acceptRequest(b.dataset.a);});
+    container.querySelectorAll("[data-r]").forEach(b=>b.onclick=(e)=>{e.stopPropagation(); refuseRequest(b.dataset.r);});
   }
   else{
     const chatsList=Object.entries(myChats).filter(([_,c])=>c.status==="accepted").sort((a,b)=>(b[1].lastTime||0)-(a[1].lastTime||0));
-    if(chatsList.length===0){container.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucun chat<br>Va dans Utilisateurs → envoyer demande</div>`;return}
+    if(chatsList.length===0){container.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucun chat<br>Accepte une demande ou va dans Utilisateurs</div>`;return}
     chatsList.forEach(([chatId,chat])=>{
       const other=chatId.split("_").find(p=>p!==myPhone);
-      if(q&&!other.toLowerCase().includes(q))return;
+      if(!other) return;
+      if(q&&!other.toLowerCase().includes(q) && !(allUsers[other]?.nom||"").toLowerCase().includes(q)) return;
+      const photo=getUserPhoto(other);
       const div=document.createElement("div");
       div.className="item"+(activeChat===other?" active":"");
-      div.innerHTML=`<div class="av">${other.slice(-2)}</div><div class="info"><div class="name">${esc(other)}</div><div class="prev">${esc((chat.lastMsg||"").slice(0,35))}</div></div><div style="font-size:9px">${timeStr(chat.lastTime)}${chat.unread?`<div style="background:#ff4757;padding:2px 6px;border-radius:10px;margin-top:3px">${chat.unread}</div>`:""}</div>`;
+      div.innerHTML=`<div class="av">${photo?`<img src="${photo}">`:esc(other.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[other]?.nom||other)}</div><div class="prev">${esc((chat.lastMsg||"").slice(0,35))||"Nouveau chat"}</div></div><div style="font-size:9px;text-align:right"><div>${timeStr(chat.lastTime)}</div>${chat.unread?`<div style="background:#ff4757;color:white;padding:2px 6px;border-radius:10px;margin-top:3px;display:inline-block">${chat.unread}</div>`:""}</div>`;
       div.onclick=()=>openChat(other);
       container.appendChild(div);
     });
@@ -233,38 +217,70 @@ async function sendRequest(toPhone){
   if(!confirm(`Envoyer demande à ${toPhone} ?`)) return;
   await set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${toPhone}`),{phone:toPhone,type:"outgoing",status:"pending",createdAt:Date.now()});
   await set(ref(db,`jasonBusiness/chat_requests/${toPhone}/${myPhone}`),{phone:myPhone,type:"incoming",status:"pending",createdAt:Date.now()});
-  alert("✅ Demande envoyée à "+toPhone);
+  alert("✅ Demande envoyée");
 }
+
 async function acceptRequest(fromPhone){
   const chatId=getChatId(myPhone,fromPhone);
-  await set(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{with:fromPhone,status:"accepted",lastMsg:"Accepté",lastTime:Date.now(),unread:0});
-  await set(ref(db,`jasonBusiness/user_chats/${fromPhone}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:"Accepté",lastTime:Date.now(),unread:0});
+  await set(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{with:fromPhone,status:"accepted",lastMsg:"✅ Ami accepté - Dis bonjour!",lastTime:Date.now(),unread:0});
+  await set(ref(db,`jasonBusiness/user_chats/${fromPhone}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:"✅ Ami accepté - Dis bonjour!",lastTime:Date.now(),unread:1});
   await remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${fromPhone}`));
   await remove(ref(db,`jasonBusiness/chat_requests/${fromPhone}/${myPhone}`));
-  openChat(fromPhone);
+  // FIX: switch to chats tab and open
+  tab="chats";
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  document.querySelector('[data-tab="chats"]').classList.add("active");
+  render();
+  setTimeout(()=>openChat(fromPhone),300);
 }
+
 async function refuseRequest(fromPhone){
   await remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${fromPhone}`));
   await remove(ref(db,`jasonBusiness/chat_requests/${fromPhone}/${myPhone}`));
 }
 
+// FIX PRINCIPAL: openChat qui entre vraiment
 function openChat(otherPhone){
+  console.log("openChat",otherPhone);
   activeChat=otherPhone;
-  $("chatName").textContent=otherPhone;
-  $("chatPhone").textContent="En ligne";
+  const photo=getUserPhoto(otherPhone);
+  const name=allUsers[otherPhone]?.nom||otherPhone;
+  
+  $("chatName").textContent=name;
+  $("chatPhone").textContent=otherPhone+" • En ligne • Tape un message";
+  if(photo){ $("chatAvatar").innerHTML=`<img src="${photo}" style="width:100%;height:100%;object-fit:cover;border-radius:12px">`; }
+  else{ $("chatAvatar").textContent=otherPhone.slice(-2); }
+
   $("msgInput").disabled=false;
   $("sendBtn").disabled=false;
+  $("msgInput").placeholder="Message à "+name+"...";
+  $("msgInput").focus();
+
+  // Sur mobile, cache la liste
+  if(window.innerWidth<=800){ $("leftPanel").classList.add("hide"); }
+
   const chatId=getChatId(myPhone,otherPhone);
+
+  // Nettoie ancien listener
+  if(currentMsgListener){ /* onValue n'a pas off simple, on laisse mais on écrase */ }
+
   onValue(ref(db,`jasonBusiness/messages/${chatId}`),snap=>{
     const data=snap.val()||{};
     const msgs=Object.values(data).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
     renderMessages(msgs);
-    update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{unread:0});
+    // Marque lu
+    update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{unread:0}).catch(()=>{});
   });
+
+  render();
 }
+
 function renderMessages(msgs){
   const c=$("msgs");
-  if(msgs.length===0){c.innerHTML=`<div style="flex:1;display:grid;place-items:center;opacity:.6">Nouvelle discussion avec ${esc(activeChat)}<br>Photos, vocaux, appels</div>`;return}
+  if(msgs.length===0){
+    c.innerHTML=`<div style="flex:1;display:grid;place-items:center;opacity:.6;padding:20px;text-align:center">💬 Début de conversation avec ${esc(allUsers[activeChat]?.nom||activeChat)}<br><br>Envoie un message, une photo, un vocal, ou lance un appel 📞 🎥</div>`;
+    return;
+  }
   c.innerHTML="";
   msgs.forEach(m=>{
     const isMe=m.from===myPhone;
@@ -273,12 +289,13 @@ function renderMessages(msgs){
     let html=esc(m.text||"");
     if(m.photo) html+=`<br><img src="${m.photo}" style="max-width:200px;border-radius:10px;margin-top:6px" onclick="window.open(this.src)">`;
     if(m.audio) html+=`<br><audio controls src="${m.audio}" style="width:200px;margin-top:6px"></audio>`;
-    html+=`<div style="font-size:8px;opacity:.6;margin-top:4px;text-align:right">${timeStr(m.createdAt)}</div>`;
+    html+=`<div style="font-size:8px;opacity:.6;margin-top:4px;text-align:right">${timeStr(m.createdAt)} ${isMe?"✓✓":""}</div>`;
     div.innerHTML=html;
     c.appendChild(div);
   });
   c.scrollTop=c.scrollHeight;
 }
+
 async function sendText(){
   const text=$("msgInput").value.trim();
   if(!text||!activeChat) return;
@@ -290,11 +307,15 @@ async function sendText(){
   const unread=(unreadSnap.val()||0)+1;
   await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:text,lastTime:Date.now()});
   await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:text,lastTime:Date.now(),unread});
+  // Si le chat n'existe pas encore côté autre, on le crée
+  const otherExists=await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`));
+  if(!otherExists.exists()){
+    await set(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:text,lastTime:Date.now(),unread});
+  }
 }
 $("sendBtn").onclick=sendText;
 $("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText()}});
 
-// Photo
 $("photoInput").onchange=e=>{
   const file=e.target.files[0];
   if(!file||!activeChat) return;
@@ -310,48 +331,52 @@ $("photoInput").onchange=e=>{
   e.target.value="";
 };
 
-// Vocal
 let mediaRecorder=null, audioChunks=[], isRecording=false;
 $("recordBtn").onclick=async()=>{
-  if(!activeChat){alert("Choisis un chat");return}
+  if(!activeChat){alert("Choisis un chat d'abord");return}
   if(!isRecording){
-    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-    mediaRecorder=new MediaRecorder(stream);
-    audioChunks=[];
-    mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
-    mediaRecorder.onstop=async()=>{
-      const blob=new Blob(audioChunks,{type:"audio/webm"});
-      const r=new FileReader();
-      r.onload=async()=>{
-        const chatId=getChatId(myPhone,activeChat);
-        const newRef=push(ref(db,`jasonBusiness/messages/${chatId}`));
-        await set(newRef,{from:myPhone,to:activeChat,text:"🎤 Vocal",audio:r.result,createdAt:Date.now()});
-        await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now()});
-        await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now(),unread:1});
+    try{
+      const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+      mediaRecorder=new MediaRecorder(stream);
+      audioChunks=[];
+      mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
+      mediaRecorder.onstop=async()=>{
+        const blob=new Blob(audioChunks,{type:"audio/webm"});
+        const r=new FileReader();
+        r.onload=async()=>{
+          const chatId=getChatId(myPhone,activeChat);
+          const newRef=push(ref(db,`jasonBusiness/messages/${chatId}`));
+          await set(newRef,{from:myPhone,to:activeChat,text:"🎤 Vocal",audio:r.result,createdAt:Date.now()});
+          await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now()});
+          await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now(),unread:1});
+        };
+        r.readAsDataURL(blob);
+        stream.getTracks().forEach(t=>t.stop());
       };
-      r.readAsDataURL(blob);
-      stream.getTracks().forEach(t=>t.stop());
-    };
-    mediaRecorder.start();
-    isRecording=true;
-    $("recordBtn").textContent="⏹️";
+      mediaRecorder.start();
+      isRecording=true;
+      $("recordBtn").textContent="⏹️";
+      $("recordBtn").style.background="#ff4757";
+    }catch(err){alert("Micro refusé: "+err.message)}
   }else{
     mediaRecorder.stop();
     isRecording=false;
     $("recordBtn").textContent="🎤";
+    $("recordBtn").style.background="";
   }
 };
 
-// Appels simples (WebRTC)
 $("voiceCallBtn").onclick=()=>startCall(false);
 $("videoCallBtn").onclick=()=>startCall(true);
 async function startCall(isVideo){
-  if(!activeChat){alert("Choisis un chat");return}
+  if(!activeChat){alert("Choisis un chat d'abord - entre dans une conversation");return}
   const callId=getChatId(myPhone,activeChat)+"_"+Date.now();
   currentCallId=callId;
   $("callOverlay").classList.add("show");
-  $("callStatus").textContent=(isVideo?"🎥 Vidéo":"📞 Vocal")+" vers "+activeChat;
-  localStream=await navigator.mediaDevices.getUserMedia({video:isVideo,audio:true});
+  $("callStatus").textContent=(isVideo?"🎥 Vidéo":"📞 Vocal")+" vers "+(allUsers[activeChat]?.nom||activeChat);
+  try{
+    localStream=await navigator.mediaDevices.getUserMedia({video:isVideo,audio:true});
+  }catch(e){alert("Caméra/micro refusé: "+e.message); return;}
   $("localVideo").srcObject=localStream;
   pc=new RTCPeerConnection({iceServers:[{urls:"stun:stun.l.google.com:19302"}]});
   localStream.getTracks().forEach(t=>pc.addTrack(t,localStream));
@@ -362,7 +387,7 @@ async function startCall(isVideo){
   await set(ref(db,`jasonBusiness/calls/${callId}`),{from:myPhone,to:activeChat,isVideo,offer:{type:offer.type,sdp:offer.sdp},createdAt:Date.now(),status:"ringing"});
   onValue(ref(db,`jasonBusiness/calls/${callId}/answer`),async snap=>{
     const ans=snap.val();
-    if(ans&&pc&&!pc.currentRemoteDescription) await pc.setRemoteDescription(new RTCSessionDescription(ans));
+    if(ans&&pc&&pc.signalingState!=="closed"){ try{ await pc.setRemoteDescription(new RTCSessionDescription(ans)); }catch{} }
   });
 }
 $("hangBtn").onclick=()=>{
@@ -370,17 +395,25 @@ $("hangBtn").onclick=()=>{
   if(pc){pc.close();pc=null}
   if(localStream){localStream.getTracks().forEach(t=>t.stop());localStream=null}
   if(currentCallId){update(ref(db,`jasonBusiness/calls/${currentCallId}`),{status:"ended"});currentCallId=null}
+  $("localVideo").srcObject=null; $("remoteVideo").srcObject=null;
 };
-// Recevoir appels
+$("muteBtn").onclick=()=>{
+  if(localStream){ const a=localStream.getAudioTracks()[0]; if(a){ a.enabled=!a.enabled; $("muteBtn").textContent=a.enabled?"🎤 Mute":"🔇 Unmute"; } }
+};
+$("camBtn").onclick=()=>{
+  if(localStream){ const v=localStream.getVideoTracks()[0]; if(v){ v.enabled=!v.enabled; } }
+};
+
 onValue(ref(db,"jasonBusiness/calls"),async snap=>{
   const calls=snap.val()||{};
   for(const [callId,call] of Object.entries(calls)){
     if(call.to===myPhone&&call.status==="ringing"&&!currentCallId){
-      if(confirm(`📞 Appel ${call.isVideo?"vidéo":"vocal"} de ${call.from} — Accepter ?`)){
+      if(confirm(`📞 Appel ${call.isVideo?"vidéo":"vocal"} de ${allUsers[call.from]?.nom||call.from} — Accepter ?`)){
         currentCallId=callId;
         $("callOverlay").classList.add("show");
-        $("callStatus").textContent="Appel de "+call.from;
-        localStream=await navigator.mediaDevices.getUserMedia({video:call.isVideo,audio:true});
+        $("callStatus").textContent="Appel de "+(allUsers[call.from]?.nom||call.from);
+        try{ localStream=await navigator.mediaDevices.getUserMedia({video:call.isVideo,audio:true}); }
+        catch(e){ alert(e.message); continue; }
         $("localVideo").srcObject=localStream;
         pc=new RTCPeerConnection({iceServers:[{urls:"stun:stun.l.google.com:19302"}]});
         localStream.getTracks().forEach(t=>pc.addTrack(t,localStream));
@@ -391,6 +424,10 @@ onValue(ref(db,"jasonBusiness/calls"),async snap=>{
         await pc.setLocalDescription(answer);
         await set(ref(db,`jasonBusiness/calls/${callId}/answer`),{type:answer.type,sdp:answer.sdp});
         await update(ref(db,`jasonBusiness/calls/${callId}`),{status:"accepted"});
+        onValue(ref(db,`jasonBusiness/calls/${callId}/candidates/${call.from}`),s=>{
+          const cands=s.val()||{};
+          Object.values(cands).forEach(async c=>{ try{ await pc.addIceCandidate(new RTCIceCandidate(c)); }catch{} });
+        });
       }else{
         await update(ref(db,`jasonBusiness/calls/${callId}`),{status:"ended"});
       }
