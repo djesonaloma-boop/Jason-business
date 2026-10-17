@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>JASON BUSINESS - Publications</title>
+<style>
+:root{--blue:#00d2ff;--border:rgba(0,210,255,.18);--bg:#050a14}
+*{box-sizing:border-box}body{margin:0;font-family:Arial;color:white;background:var(--bg)}
+header{height:54px;display:flex;justify-content:space-between;align-items:center;padding:0 12px;background:#050a14;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.brand{font-weight:900;color:var(--blue)} .btn{padding:7px 12px;border-radius:10px;border:1px solid rgba(0,210,255,.25);background:rgba(0,210,255,.08);color:var(--blue);font-size:11px;text-decoration:none;font-weight:700}
+.wrap{max-width:600px;margin:0 auto;width:100%}
+/* STORIES 24H */
+.stories-bar{display:flex;gap:10px;overflow-x:auto;padding:10px 12px;border-bottom:1px solid var(--border);background:#0b1425}
+.story-add,.story-item{flex-shrink:0;width:62px;text-align:center;cursor:pointer}
+.story-circle{width:60px;height:60px;border-radius:50%;padding:2px;background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);display:grid;place-items:center}
+.story-circle img,.story-circle div{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#0b1425;display:grid;place-items:center;font-weight:900;border:2px solid #0b1425}
+.story-add .story-circle{background:#293850}
+.story-name{font-size:9px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#storyViewer{position:fixed;inset:0;background:#000;display:none;z-index:9999;flex-direction:column}
+#storyViewer.show{display:flex}
+.progress{height:3px;background:rgba(255,255,255,.3);margin:4px;display:flex;gap:2px}
+.progress div{flex:1;background:rgba(255,255,255,.3)} .progress div.fill{background:white}
+.story-view-img{flex:1;display:grid;place-items:center} .story-view-img img{max-width:100%;max-height:80vh;object-fit:contain}
+/* PUBLISH */
+.publish-box{background:#0b1425;border-bottom:1px solid var(--border);padding:12px}
+.publish-box textarea{width:100%;min-height:60px;padding:10px;border-radius:12px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none}
+.publish-actions{display:flex;gap:8px;margin-top:8px;align-items:center}
+.tbtn{padding:8px 12px;border-radius:20px;border:1px solid #293850;background:#0c192b;color:white;cursor:pointer;font-size:12px}
+.send-pub{margin-left:auto;background:linear-gradient(135deg,#00d2ff,#0077ff);border:0;color:white;font-weight:800}
+/* FEED */
+.post{background:#0b1425;border-bottom:1px solid var(--border);margin-bottom:6px}
+.post-head{padding:10px 12px;display:flex;gap:10px;align-items:center}
+.post-av{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#00d2ff,#0077ff);display:grid;place-items:center;font-weight:900;overflow:hidden}
+.post-av img{width:100%;height:100%;object-fit:cover}
+.post-name{font-weight:700;font-size:13px} .post-time{font-size:10px;opacity:.5}
+.post-text{padding:0 12px 10px;white-space:pre-wrap;font-size:13px;line-height:1.4}
+.post-img{width:100%;max-height:500px;object-fit:contain;background:#000;display:block}
+.post-actions{display:flex;justify-content:space-around;padding:8px;border-top:1px solid var(--border)}
+.act-btn{flex:1;background:transparent;border:0;color:#8da0b8;font-size:12px;padding:8px;cursor:pointer;display:flex;justify-content:center;gap:6px;align-items:center}
+.act-btn.liked{color:var(--blue);font-weight:800}
+.comments{background:#070e1e;padding:8px 12px}
+.comment{font-size:12px;padding:4px 0;display:flex;gap:6px} .comment b{font-size:11px;color:var(--blue)}
+.comment-input{display:flex;gap:6px;margin-top:8px} .comment-input input{flex:1;padding:8px 12px;border-radius:20px;border:1px solid #293850;background:#0c192b;color:white;outline:none}
+</style>
+</head>
+<body>
+<header><div class="brand">JASON BUSINESS — Publications</div><div style="display:flex;gap:6px"><a href="chat.html" class="btn">💬 Chat</a><a href="index.html" class="btn">🏠 Accueil</a></div></header>
+
+<div class="wrap">
+<!-- STORIES 24H -->
+<div class="stories-bar" id="storiesBar">
+  <div class="story-add" onclick="document.getElementById('storyInput').click()">
+    <div class="story-circle"><div>＋</div></div>
+    <div class="story-name">Ta Story</div>
+  </div>
+</div>
+<input type="file" id="storyInput" accept="image/*" hidden>
+
+<!-- PUBLISH -->
+<div class="publish-box">
+  <textarea id="pubText" placeholder="Quoi de neuf ? Publie une photo ou une note..."></textarea>
+  <div class="publish-actions">
+    <label class="tbtn">🖼️ Photo<input type="file" id="pubImage" accept="image/*" hidden></label>
+    <span id="pubImageName" style="font-size:10px;opacity:.6"></span>
+    <button class="tbtn send-pub" id="btnPublish">Publier</button>
+  </div>
+</div>
+
+<!-- FEED -->
+<div id="feed"></div>
+</div>
+
+<!-- STORY VIEWER -->
+<div id="storyViewer">
+  <div class="progress" id="storyProgress"></div>
+  <div style="display:flex;justify-content:space-between;padding:12px"><span id="storyUser"></span><button onclick="closeStory()" style="background:transparent;border:0;color:white;font-size:20px">✕</button></div>
+  <div class="story-view-img"><img id="storyViewImg"></div>
+  <div style="padding:12px;text-align:center;font-size:12px" id="storyViewTime"></div>
+</div>
+
+<script type="module">
+import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, onValue, push, set, get, remove, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.appspot.com",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
+const app=getApps().length?getApp():initializeApp(firebaseConfig);
+const db=getDatabase(app); const storage=getStorage(app);
+const $=id=>document.getElementById(id);
+const myPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||"0847500590";
+const myName=localStorage.getItem("jasonBusinessUserName")||myPhone;
+let allUsers={}, storiesCache={}, pubsCache={};
+
+// USERS
+onValue(ref(db,"jasonBusiness/users"),s=>{allUsers=s.val()||{}});
+
+// STORIES 24H LOGIC
+$("storyInput").onchange=async e=>{
+  const file=e.target.files[0]; if(!file) return;
+  const path=`stories/${myPhone}/${Date.now()}_${file.name}`;
+  const refS=sRef(storage,path); await uploadBytes(refS,file); const url=await getDownloadURL(refS);
+  await push(ref(db,"jasonBusiness/stories"),{from:myPhone,name:myName,photo:url,createdAt:Date.now(),expiresAt:Date.now()+86400000});
+  e.target.value="";
+};
+onValue(ref(db,"jasonBusiness/stories"),snap=>{
+  storiesCache=snap.val()||{};
+  const bar=$("storiesBar");
+  // garde le bouton Ajouter
+  const addBtn=bar.firstElementChild;
+  bar.innerHTML=""; bar.appendChild(addBtn);
+  Object.entries(storiesCache).forEach(([id,st])=>{
+    if(st.expiresAt < Date.now()){ remove(ref(db,"jasonBusiness/stories/"+id)); return; }
+    const div=document.createElement("div"); div.className="story-item";
+    div.innerHTML=`<div class="story-circle"><img src="${st.photo}"></div><div class="story-name">${st.from===myPhone?"Toi":(allUsers[st.from]?.nom||st.from).slice(0,8)}</div>`;
+    div.onclick=()=>openStory(id);
+    bar.appendChild(div);
+  });
+});
+let currentStoryId=null, storyTimer=null;
+window.openStory=(id)=>{
+  const st=storiesCache[id]; if(!st) return;
+  currentStoryId=id;
+  $("storyViewer").classList.add("show");
+  $("storyViewImg").src=st.photo;
+  $("storyUser").textContent=allUsers[st.from]?.nom||st.from;
+  $("storyViewTime").textContent=new Date(st.createdAt).toLocaleString()+" - expire dans "+Math.ceil((st.expiresAt-Date.now())/3600000)+"h";
+  // progress
+  $("storyProgress").innerHTML="<div class='fill' style='width:100%'></div>";
+  clearTimeout(storyTimer);
+  storyTimer=setTimeout(closeStory,5000);
+};
+window.closeStory=()=>{ $("storyViewer").classList.remove("show"); clearTimeout(storyTimer); };
+
+// PUBLICATIONS
+let pendingImageUrl="";
+$("pubImage").onchange=async e=>{
+  const file=e.target.files[0]; if(!file) return;
+  $("pubImageName").textContent="⏳ Upload...";
+  const path=`publications/${myPhone}/${Date.now()}_${file.name}`;
+  const refS=sRef(storage,path); await uploadBytes(refS,file); pendingImageUrl=await getDownloadURL(refS);
+  $("pubImageName").textContent="✅ Photo prête";
+};
+$("btnPublish").onclick=async()=>{
+  const text=$("pubText").value.trim(); if(!text && !pendingImageUrl) return alert("Écris quelque chose ou ajoute une photo");
+  const data={from:myPhone,name:myName,text, image:pendingImageUrl||"", createdAt:Date.now(), likes:{}, commentsCount:0};
+  await push(ref(db,"jasonBusiness/publications"),data);
+  $("pubText").value=""; pendingImageUrl=""; $("pubImageName").textContent=""; $("pubImage").value="";
+};
+
+onValue(ref(db,"jasonBusiness/publications"),snap=>{
+  pubsCache=snap.val()||{};
+  renderFeed();
+});
+
+function renderFeed(){
+  const feed=$("feed"); feed.innerHTML="";
+  const sorted=Object.entries(pubsCache).sort((a,b)=>b[1].createdAt - a[1].createdAt);
+  sorted.forEach(([id,post])=>{
+    const isLiked=post.likes && post.likes[myPhone];
+    const likesCount=post.likes?Object.keys(post.likes).length:0;
+    const div=document.createElement("div"); div.className="post";
+    div.innerHTML=`
+      <div class="post-head">
+        <div class="post-av">${allUsers[post.from]?.photo?`<img src="${allUsers[post.from].photo}">`:post.from.slice(-2)}</div>
+        <div><div class="post-name">${post.name||post.from}</div><div class="post-time">${new Date(post.createdAt).toLocaleString()}</div></div>
+        ${post.from===myPhone?`<button onclick="deletePost('${id}')" style="margin-left:auto;background:transparent;border:0;color:#ff4757">🗑️</button>`:""}
+      </div>
+      ${post.text?`<div class="post-text">${post.text.replace(/</g,"&lt;")}</div>`:""}
+      ${post.image?`<img class="post-img" src="${post.image}" onclick="window.open(this.src,'_blank')">`:""}
+      <div class="post-actions">
+        <button class="act-btn ${isLiked?'liked':''}" onclick="likePost('${id}')">${isLiked?'💙':'🤍'} ${likesCount} J'aime</button>
+        <button class="act-btn" onclick="focusComment('${id}')">💬 Commenter</button>
+        <button class="act-btn" onclick="sharePost('${id}')">↗️ Partager</button>
+      </div>
+      <div class="comments" id="comments-${id}"><div style="font-size:10px;opacity:.5">Chargement commentaires...</div></div>
+      <div class="comment-input"><input id="input-${id}" placeholder="Écrire un commentaire..." onkeydown="if(event.key==='Enter')commentPost('${id}')"><button class="btn" onclick="commentPost('${id}')">Envoyer</button></div>
+    `;
+    feed.appendChild(div);
+    // load comments
+    onValue(ref(db,`jasonBusiness/publication_comments/${id}`),s=>{
+      const comments=s.val()||{};
+      const cont=document.getElementById(`comments-${id}`);
+      if(!cont) return;
+      cont.innerHTML=Object.values(comments).map(c=>`<div class="comment"><b>${c.name}:</b> <span>${c.text.replace(/</g,"&lt;")}</span></div>`).join("")||"<div style='font-size:10px;opacity:.4'>Aucun commentaire</div>";
+    });
+  });
+}
+window.likePost=async(id)=>{
+  const post=pubsCache[id]; if(!post) return;
+  if(post.likes && post.likes[myPhone]){ await remove(ref(db,`jasonBusiness/publications/${id}/likes/${myPhone}`)); }
+  else{ await set(ref(db,`jasonBusiness/publications/${id}/likes/${myPhone}`),true); }
+};
+window.deletePost=async(id)=>{ if(confirm("Supprimer ?")) await remove(ref(db,"jasonBusiness/publications/"+id)); };
+window.commentPost=async(id)=>{
+  const input=document.getElementById(`input-${id}`); const text=input.value.trim(); if(!text) return;
+  await push(ref(db,`jasonBusiness/publication_comments/${id}`),{from:myPhone,name:myName,text,createdAt:Date.now()});
+  input.value="";
+};
+window.focusComment=(id)=>{ document.getElementById(`input-${id}`).focus(); };
+window.sharePost=async(id)=>{
+  const post=pubsCache[id]; const url=location.href;
+  const shareText=`${post.name}: ${post.text}\nVoir sur JASON BUSINESS`;
+  if(navigator.share){ try{ await navigator.share({title:"JASON BUSINESS",text:shareText,url}); }catch{} }
+  else{ await navigator.clipboard.writeText(shareText+"\n"+url); alert("Lien copié !"); }
+};
+</script>
+</body>
+</html>
