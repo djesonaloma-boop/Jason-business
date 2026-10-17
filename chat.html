@@ -6,8 +6,10 @@
 <title>JASON BUSINESS - Chat</title>
 <style>
 :root{--blue:#00d2ff;--border:rgba(0,210,255,.18)}*{box-sizing:border-box}body{margin:0;font-family:Arial;color:white;background:#050a14;display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
-header{height:52px;display:flex;justify-content:space-between;align-items:center;padding:0 12px;background:#050a14;border-bottom:1px solid var(--border)}
-.brand{font-weight:900;color:var(--blue);font-size:13px}.btn{padding:6px 10px;border-radius:9px;border:1px solid rgba(0,210,255,.25);background:rgba(0,210,255,.08);color:var(--blue);font-size:11px;cursor:pointer;text-decoration:none}
+header{height:54px;display:flex;justify-content:space-between;align-items:center;padding:0 14px;background:#050a14;border-bottom:1px solid var(--border)}
+.brand{font-weight:900;color:var(--blue);font-size:14px}
+.btn{padding:8px 12px;border-radius:10px;border:1px solid rgba(0,210,255,.25);background:rgba(0,210,255,.08);color:var(--blue);font-size:11px;cursor:pointer;text-decoration:none;font-weight:700;text-align:center}
+.btn-full{flex:1}
 .wrap{display:flex;flex:1;overflow:hidden}
 .left{width:360px;background:#0b1425;border-right:1px solid var(--border);display:flex;flex-direction:column}
 .tabs{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border)}
@@ -19,16 +21,19 @@ header{height:52px;display:flex;justify-content:space-between;align-items:center
 .av{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;overflow:hidden}
 .av img{width:100%;height:100%;object-fit:cover}
 .info{flex:1;min-width:0} .name{font-size:13px;font-weight:700} .prev{font-size:11px;opacity:.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bottom-nav{padding:10px;display:flex;gap:8px;border-top:1px solid var(--border);background:#0b1425}
 .right{flex:1;display:flex;flex-direction:column;background:#070e1e;overflow:hidden}
-.top{padding:10px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,10,20,.95)}
+.top{padding:10px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,10,20,.95);cursor:pointer}
 .msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
-.msg{max-width:78%;padding:8px 10px;border-radius:16px;font-size:12.5px;white-space:pre-wrap;word-break:break-word;position:relative}
+.msg{max-width:78%;padding:8px 12px;border-radius:18px;font-size:13px;white-space:pre-wrap;word-break:break-word;position:relative;line-height:1.3}
 .msg.me{align-self:flex-end;background:linear-gradient(135deg,#00d2ff,#0077ff);border-bottom-right-radius:6px}
 .msg.other{align-self:flex-start;background:rgba(255,255,255,.1);border-bottom-left-radius:6px}
-.msg .photo-wrap{margin-top:6px;border-radius:12px;overflow:hidden;max-width:220px;background:#000;position:relative}
-.msg .photo-wrap img,.msg .photo-wrap video{width:100%;max-height:240px;object-fit:cover;display:block}
-.msg .dl{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.7);color:white;padding:4px 8px;border-radius:8px;font-size:10px;text-decoration:none;border:1px solid rgba(255,255,255,.3)}
+.msg .photo-wrap{margin-top:6px;border-radius:12px;overflow:hidden;max-width:230px;background:#000;position:relative}
+.msg .photo-wrap img,.msg .photo-wrap video{width:100%;max-height:260px;object-fit:cover;display:block}
+.msg .dl{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.7);color:white;padding:4px 8px;border-radius:8px;font-size:10px;text-decoration:none}
 .msg audio{margin-top:6px;width:210px}
+.msg .meta{display:flex;justify-content:flex-end;align-items:center;gap:4px;margin-top:4px;font-size:10px;opacity:.85}
+.msg .status.read{color:#00e5ff;font-weight:800}
 .msg .actions{display:none;gap:4px;position:absolute;top:-12px;right:8px;background:#0b1425;border:1px solid var(--border);border-radius:12px;padding:2px;z-index:5}
 .msg.me:hover .actions{display:flex}
 .msg .act{padding:4px 8px;border-radius:8px;background:rgba(255,255,255,.1);cursor:pointer;font-size:11px;border:0;color:white}
@@ -36,22 +41,17 @@ header{height:52px;display:flex;justify-content:space-between;align-items:center
 .rec-bar{display:none;align-items:center;justify-content:space-between;padding:8px 12px;background:#ff47571a;border:1px solid #ff4757aa;border-radius:20px;margin-bottom:6px}
 .rec-bar.show{display:flex}
 .input{display:flex;gap:6px;align-items:center}
-.input textarea{flex:1;min-height:38px;max-height:80px;padding:9px 12px;border-radius:18px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none;font-size:13px}
-.tbtn{width:40px;height:40px;flex-shrink:0;border-radius:50%;border:1px solid #293850;background:#0c192b;color:white;display:grid;place-items:center;font-size:18px;cursor:pointer}
+.input textarea{flex:1;min-height:40px;max-height:80px;padding:10px 14px;border-radius:20px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none;font-size:13px}
+.tbtn{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:1px solid #293850;background:#0c192b;color:white;display:grid;place-items:center;font-size:18px;cursor:pointer}
 .tbtn.hold{background:#ff4757!important}
-.send{width:40px;height:40px;flex-shrink:0;border-radius:50%;border:0;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;font-size:18px;cursor:pointer}
+.send{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:0;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;font-size:18px;cursor:pointer}
 @media(max-width:800px){.left{position:absolute;inset:0;z-index:20;width:100%}.left.hide{display:none}}
 </style>
 </head>
 <body>
 <header>
-  <div class="brand">JASON BUSINESS — <span id="myPhoneShow"></span></div>
-  <div style="display:flex;gap:6px">
-    <a href="index.html" class="btn">🏠 Accueil</a>
-    <a href="publications.html" class="btn">📢 Publications</a>
-    <button class="btn" id="btnShowLeft">☰</button>
-    <a href="dashboard.html" class="btn">Dash</a>
-  </div>
+  <div class="brand">jason business — <span id="myPhoneShow" style="font-size:11px;opacity:.7"></span></div>
+  <a href="dashboard.html" class="btn">Dash</a>
 </header>
 <div class="wrap">
 <aside class="left" id="leftPanel">
@@ -59,19 +59,26 @@ header{height:52px;display:flex;justify-content:space-between;align-items:center
 <div class="add-box" style="padding:8px 10px;display:flex;gap:6px;border-bottom:1px solid var(--border)"><input id="manualPhone" placeholder="+243..."><button class="btn" id="btnAddManual">+</button></div>
 <div class="search"><input id="search" placeholder="🔍 Rechercher..."></div>
 <div class="list" id="list"></div>
+
+<!-- BOUTONS ICI EN BAS COMME TU VEUX -->
+<div class="bottom-nav">
+  <a href="index.html" class="btn btn-full">🏠 Accueil</a>
+  <a href="publications.html" class="btn btn-full">📢 Publications</a>
+</div>
+
 </aside>
 <section class="right">
-<div class="top"><div style="display:flex;align-items:center;gap:8px"><div class="av" id="chatAvatar">JB</div><div><h3 id="chatName" style="margin:0;font-size:13px">Sélectionne un chat</h3><small id="chatPhone" style="font-size:10px;opacity:.6">Messenger</small></div></div></div>
+<div class="top" id="topBar"><div style="display:flex;align-items:center;gap:10px"><div class="av" id="chatAvatar">JB</div><div><h3 id="chatName" style="margin:0;font-size:14px">Sélectionne un chat</h3><small id="chatPhone" style="font-size:11px;opacity:.6">Clique ici pour revenir</small></div></div></div>
 <div class="msgs" id="msgs"></div>
 <div class="input-area">
-<div id="recBar" class="rec-bar"><div style="display:flex;align-items:center;gap:8px"><div style="width:10px;height:10px;background:#ff4757;border-radius:50%"></div><div id="recTime" style="font-weight:800;color:#ff6b7a">00:00</div><div>🔴 Enregistrement...</div></div><div style="display:flex;gap:6px"><button id="recCancel" style="padding:5px 10px;border-radius:10px;border:1px solid #ff4757;background:#ff475722;color:#ff6b7a;font-size:11px">Annuler</button><button id="recSend" style="padding:5px 12px;border-radius:10px;border:0;background:#00d2ff;font-weight:800;font-size:11px">Envoyer</button></div></div>
+<div id="recBar" class="rec-bar"><div style="display:flex;align-items:center;gap:8px"><div style="width:10px;height:10px;background:#ff4757;border-radius:50%"></div><div id="recTime" style="font-weight:800;color:#ff6b7a">00:00</div><div>🔴</div></div><div style="display:flex;gap:6px"><button id="recCancel" style="padding:5px 10px;border-radius:10px;border:1px solid #ff4757;background:#ff475722;color:#ff6b7a;font-size:11px">Annuler</button><button id="recSend" style="padding:5px 12px;border-radius:10px;border:0;background:#00d2ff;font-weight:800;font-size:11px">Envoyer</button></div></div>
 <div class="input">
 <label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*,video/*" hidden></label>
 <button type="button" id="recordBtn" class="tbtn">🎤</button>
 <textarea id="msgInput" placeholder="Écris un message..." disabled rows="1"></textarea>
 <button type="button" class="send" id="sendBtn" disabled>➤</button>
 </div>
-<div id="hint" style="text-align:center;font-size:9px;opacity:.5;margin-top:4px">🖼️ photo/vidéo • 🎤 vocal • double-clic = supprimer</div>
+<div id="hint" style="text-align:center;font-size:9px;opacity:.5;margin-top:4px">🖼️ photo • 🎤 vocal • double-clic = supprimer</div>
 </div>
 </section>
 </div>
@@ -92,11 +99,12 @@ let presenceCache={};
 function esc(s){return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")}
 function timeStr(ts){if(!ts)return"";return new Date(ts).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}
 function getChatId(a,b){return [a,b].sort().join("_")}
-const presenceRef=ref(db,`jasonBusiness/presence/${myPhone}`); set(presenceRef,{online:true,lastSeen:Date.now()}); onDisconnect(presenceRef).set({online:false,lastSeen:Date.now()}); setInterval(()=>set(presenceRef,{online:true,lastSeen:Date.now()}),30000);
+const presenceRef=ref(db,`jasonBusiness/presence/${myPhone}`); set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:null}); onDisconnect(presenceRef).set({online:false,lastSeen:Date.now()}); setInterval(()=>set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:activeChat}),30000);
 onValue(ref(db,"jasonBusiness/presence"),s=>{presenceCache=s.val()||{};render()});
 function isOnline(ph){const p=presenceCache[ph];return p&&p.online&&(Date.now()-p.lastSeen<90000)}
 document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");tab=t.dataset.tab;render()});
-$("search").oninput=()=>render(); $("btnShowLeft").onclick=()=>$("leftPanel").classList.remove("hide");
+$("search").oninput=()=>render();
+$("topBar").onclick=()=>{ if(window.innerWidth<=800) $("leftPanel").classList.remove("hide"); };
 onValue(ref(db,"jasonBusiness/users"),s=>{if(s.exists()){allUsers=s.val()||{};render()}});
 onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),s=>{myRequests=s.val()||{};const inc=Object.values(myRequests).filter(r=>r.type==="incoming"&&r.status==="pending").length;$("reqCount").textContent=inc;$("reqCount").style.display=inc>0?"inline-block":"none";render()});
 onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),s=>{myChats=s.val()||{};render()});
@@ -111,29 +119,95 @@ function render(){
     const reqs=Object.entries(myRequests).filter(([_,r])=>r.type==="incoming"); if(reqs.length===0){cont.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucune demande</div>`;return}
     reqs.forEach(([phone])=>{const div=document.createElement("div");div.className="item";div.innerHTML=`<div class="av">${esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(phone)}</div><div class="prev">Veut discuter</div></div>`;const b=document.createElement("button");b.className="btn";b.textContent="Accepter";b.onclick=()=>acceptRequest(phone);div.appendChild(b);cont.appendChild(div)});
   }else{
-    const list=Object.entries(myChats).filter(([_,c])=>c.status==="accepted").sort((a,b)=>(b[1].lastTime||0)-(a[1].lastTime||0)); if(list.length===0){cont.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucun chat</div>`;return}
+    const list=Object.entries(myChats).filter(([_,c])=>c.status==="accepted").sort((a,b)=>(b[1].lastTime||0)-(a[1].lastTime||0));
+    if(list.length===0){cont.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucun chat</div>`;return}
     list.forEach(([chatId,chat])=>{const other=chatId.split("_").find(p=>p!==myPhone);if(!other)return;const photo=getUserPhoto(other);const div=document.createElement("div");div.className="item"+(activeChat===other?" active":"");div.innerHTML=`<div class="av">${photo?`<img src="${photo}">`:esc(other.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[other]?.nom||other)}</div><div class="prev">${esc((chat.lastMsg||"").slice(0,35))}</div></div><div style="font-size:9px">${timeStr(chat.lastTime)}</div>`;div.onclick=()=>openChat(other);cont.appendChild(div)});
   }
 }
 async function sendRequest(toPhone){await set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${toPhone}`),{phone:toPhone,type:"outgoing",status:"pending",createdAt:Date.now()});await set(ref(db,`jasonBusiness/chat_requests/${toPhone}/${myPhone}`),{phone:myPhone,type:"incoming",status:"pending",createdAt:Date.now()})}
 async function acceptRequest(fromPhone){const chatId=getChatId(myPhone,fromPhone);await set(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{with:fromPhone,status:"accepted",lastMsg:"✅ Accepté",lastTime:Date.now(),unread:0});await set(ref(db,`jasonBusiness/user_chats/${fromPhone}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:"✅ Accepté",lastTime:Date.now(),unread:1});await remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${fromPhone}`));await remove(ref(db,`jasonBusiness/chat_requests/${fromPhone}/${myPhone}`));tab="chats";document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelector('[data-tab="chats"]').classList.add("active");render();setTimeout(()=>openChat(fromPhone),300)}
 function openChat(other){
-  activeChat=other; const photo=getUserPhoto(other); const name=allUsers[other]?.nom||other; $("chatName").textContent=name; $("chatPhone").textContent=isOnline(other)?other+" • En ligne 🟢":"Hors ligne"; if(photo)$("chatAvatar").innerHTML=`<img src="${photo}" style="width:100%;height:100%;object-fit:cover;border-radius:12px">`; else $("chatAvatar").textContent=other.slice(-2); $("msgInput").disabled=false; $("sendBtn").disabled=false; if(window.innerWidth<=800)$("leftPanel").classList.add("hide"); const chatId=getChatId(myPhone,other); onValue(ref(db,`jasonBusiness/messages/${chatId}`),snap=>{const data=snap.val()||{}; const msgs=Object.entries(data).map(([k,v])=>({...v,_key:k})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0)); renderMessages(msgs); update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{unread:0}).catch(()=>{}) }); render();
+  activeChat=other;
+  const photo=getUserPhoto(other); const name=allUsers[other]?.nom||other;
+  $("chatName").textContent=name; $("chatPhone").textContent=isOnline(other)?other+" • En ligne 🟢":"Hors ligne";
+  if(photo)$("chatAvatar").innerHTML=`<img src="${photo}" style="width:100%;height:100%;object-fit:cover;border-radius:12px">`; else $("chatAvatar").textContent=other.slice(-2);
+  $("msgInput").disabled=false; $("sendBtn").disabled=false;
+  if(window.innerWidth<=800)$("leftPanel").classList.add("hide");
+  set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:other});
+  const chatId=getChatId(myPhone,other);
+  onValue(ref(db,`jasonBusiness/messages/${chatId}`),snap=>{
+    const data=snap.val()||{}; 
+    const msgs=Object.entries(data).map(([k,v])=>({...v,_key:k})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+    renderMessages(msgs);
+    markAsRead(chatId, msgs);
+    update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{unread:0}).catch(()=>{})
+  });
+  render();
+}
+async function markAsRead(chatId, msgs){
+  const toUpdate = msgs.filter(m=>m.to===myPhone && m.status!=="read");
+  for(const m of toUpdate){
+    await update(ref(db,`jasonBusiness/messages/${chatId}/${m._key}`),{status:"read",readAt:Date.now()});
+  }
 }
 function renderMessages(msgs){
-  const c=$("msgs"); if(msgs.length===0){ c.innerHTML=`<div style="flex:1;display:grid;place-items:center;opacity:.6;padding:20px">Début avec ${esc(allUsers[activeChat]?.nom||activeChat)}</div>`; return } c.innerHTML="";
-  msgs.forEach(m=>{const isMe=m.from===myPhone; const div=document.createElement("div"); div.className="msg "+(isMe?"me":"other"); let html=esc(m.text||""); if(m.photo){const isVid=m.type==="video"||m.photo.includes(".mp4"); if(isVid) html+=`<div class="photo-wrap"><video src="${m.photo}" controls></video><a class="dl" href="${m.photo}" download target="_blank">⬇️ Télécharger</a></div>`; else html+=`<div class="photo-wrap"><img src="${m.photo}" onclick="window.open(this.src,'_blank')"><a class="dl" href="${m.photo}" download target="_blank">⬇️ Télécharger</a></div>`;} if(m.audio) html+=`<audio controls src="${m.audio}"></audio>`; html+=`<div style="font-size:8px;opacity:.6;margin-top:4px;text-align:right">${timeStr(m.createdAt)} ${isMe?"✓✓":""}</div>`; div.innerHTML=html; if(isMe){const acts=document.createElement("div"); acts.className="actions"; acts.innerHTML=`<button class="act" onclick="window.delMsg('${getChatId(myPhone,activeChat)}','${m._key}')">🗑️ Supprimer</button>`; div.appendChild(acts); div.ondblclick=()=>{ if(confirm("Supprimer ce message ?")) window.delMsg(getChatId(myPhone,activeChat),m._key) };} c.appendChild(div); }); c.scrollTop=c.scrollHeight;
+  const c=$("msgs");
+  if(msgs.length===0){ c.innerHTML=`<div style="flex:1;display:grid;place-items:center;opacity:.6;padding:20px">Début avec ${esc(allUsers[activeChat]?.nom||activeChat)}</div>`; return }
+  c.innerHTML="";
+  msgs.forEach(m=>{
+    const isMe=m.from===myPhone; 
+    const div=document.createElement("div"); div.className="msg "+(isMe?"me":"other");
+    let html=esc(m.text||"");
+    if(m.photo){
+      const isVid=m.type==="video"||String(m.photo).includes(".mp4");
+      if(isVid) html+=`<div class="photo-wrap"><video src="${m.photo}" controls></video><a class="dl" href="${m.photo}" download target="_blank">⬇️</a></div>`;
+      else html+=`<div class="photo-wrap"><img src="${m.photo}" onclick="window.open(this.src,'_blank')"><a class="dl" href="${m.photo}" download target="_blank">⬇️</a></div>`;
+    }
+    if(m.audio) html+=`<audio controls src="${m.audio}"></audio>`;
+    let statusHtml="";
+    if(isMe){ statusHtml=m.status==="read"?`<span class="status read">✓✓ lu</span>`:`<span>✓</span>`; }
+    html+=`<div class="meta"><span>${timeStr(m.createdAt)}</span> ${statusHtml}</div>`;
+    div.innerHTML=html;
+    if(isMe){
+      const acts=document.createElement("div"); acts.className="actions";
+      acts.innerHTML=`<button class="act" onclick="window.delMsg('${getChatId(myPhone,activeChat)}','${m._key}')">🗑️</button>`;
+      div.appendChild(acts);
+      div.ondblclick=()=>{ if(confirm("Supprimer ?")) window.delMsg(getChatId(myPhone,activeChat),m._key) };
+    }
+    c.appendChild(div);
+  });
+  c.scrollTop=c.scrollHeight;
 }
-window.delMsg=async(chatId,key)=>{if(!confirm("Supprimer définitivement ?")) return; await remove(ref(db,`jasonBusiness/messages/${chatId}/${key}`)); await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:"🗑️ Message supprimé",lastTime:Date.now()});}
+window.delMsg=async(chatId,key)=>{if(!confirm("Supprimer ?")) return; await remove(ref(db,`jasonBusiness/messages/${chatId}/${key}`)); await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:"🗑️ Supprimé",lastTime:Date.now()});}
 async function sendText(){
-  const text=$("msgInput").value.trim(); if(!text||!activeChat) return; $("msgInput").value=""; const chatId=getChatId(myPhone,activeChat); const nr=push(ref(db,`jasonBusiness/messages/${chatId}`)); await set(nr,{from:myPhone,to:activeChat,text,createdAt:Date.now()}); const u=((await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}/unread`))).val()||0)+1; await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:text,lastTime:Date.now()}); const oe=await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`)); if(!oe.exists()) await set(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:text,lastTime:Date.now(),unread:u}); else await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:text,lastTime:Date.now(),unread:u});
+  const text=$("msgInput").value.trim(); if(!text||!activeChat) return; $("msgInput").value="";
+  const chatId=getChatId(myPhone,activeChat); const nr=push(ref(db,`jasonBusiness/messages/${chatId}`));
+  await set(nr,{from:myPhone,to:activeChat,text,createdAt:Date.now(),status:"sent"});
+  const u=((await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}/unread`))).val()||0)+1;
+  await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:text,lastTime:Date.now()});
+  const oe=await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`));
+  if(!oe.exists()) await set(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:text,lastTime:Date.now(),unread:u});
+  else await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:text,lastTime:Date.now(),unread:u});
 }
-$("sendBtn").onclick=sendText; $("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText()}});
-$("photoInput").onchange=async e=>{const file=e.target.files[0]; if(!file||!activeChat) return; const chatId=getChatId(myPhone,activeChat); $("hint").textContent="⏳ Upload "+file.name+"..."; try{const path=`files/${chatId}/${Date.now()}_${file.name}`; const refS=sRef(storage,path); await uploadBytes(refS,file); const url=await getDownloadURL(refS); const isVid=file.type.startsWith("video"); const nr=push(ref(db,`jasonBusiness/messages/${chatId}`)); await set(nr,{from:myPhone,to:activeChat,text:isVid?"🎬 Vidéo":"📷 Photo",photo:url,type:isVid?"video":"image",createdAt:Date.now()}); await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:isVid?"🎬 Vidéo":"📷 Photo",lastTime:Date.now()}); const u=((await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}/unread`))).val()||0)+1; await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:isVid?"🎬 Vidéo":"📷 Photo",lastTime:Date.now(),unread:u}); $("hint").textContent="✅ Envoyé !";}catch(err){ alert("Erreur: "+err.message)} e.target.value="";};
+$("sendBtn").onclick=sendText; 
+$("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText()}});
+$("photoInput").onchange=async e=>{
+  const file=e.target.files[0]; if(!file||!activeChat) return;
+  const chatId=getChatId(myPhone,activeChat); $("hint").textContent="⏳ "+file.name+"...";
+  try{
+    const path=`files/${chatId}/${Date.now()}_${file.name}`; const refS=sRef(storage,path); await uploadBytes(refS,file); const url=await getDownloadURL(refS);
+    const isVid=file.type.startsWith("video"); const nr=push(ref(db,`jasonBusiness/messages/${chatId}`));
+    await set(nr,{from:myPhone,to:activeChat,text:isVid?"🎬 Vidéo":"📷 Photo",photo:url,type:isVid?"video":"image",createdAt:Date.now(),status:"sent"});
+    await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:isVid?"🎬 Vidéo":"📷 Photo",lastTime:Date.now()});
+    const u=((await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}/unread`))).val()||0)+1;
+    await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:isVid?"🎬 Vidéo":"📷 Photo",lastTime:Date.now(),unread:u});
+    $("hint").textContent="✅ Envoyé !";
+  }catch(err){ alert("Erreur: "+err.message) } e.target.value="";
+};
 let isRecording=false, mediaRecorder=null, audioChunks=[], recordStream=null, timerInt=null, recSec=0;
 function fmt(s){const m=String(Math.floor(s/60)).padStart(2,'0');const sec=String(s%60).padStart(2,'0');return `${m}:${sec}`}
 async function toggleVocal(){
-  if(!activeChat){ alert("Ouvre d'abord un chat"); return }
+  if(!activeChat){ alert("Ouvre un chat"); return }
   const btn=$("recordBtn"); const hint=$("hint"); const recTime=$("recTime"); const recBar=$("recBar");
   if(!isRecording){
     try{
@@ -147,8 +221,8 @@ async function toggleVocal(){
         const blob=new Blob(audioChunks,{type:mediaRecorder.mimeType||"audio/webm"});
         if(blob.size<500){ hint.textContent="Trop court"; try{recordStream.getTracks().forEach(t=>t.stop())}catch{}; isRecording=false; return }
         try{
-          hint.textContent="⏳ Envoi vocal..."; const chatId=getChatId(myPhone,activeChat); const path=`vocals/${chatId}/${Date.now()}.webm`; const refS=sRef(storage,path); await uploadBytes(refS,blob); const url=await getDownloadURL(refS); const nr=push(ref(db,`jasonBusiness/messages/${chatId}`)); await set(nr,{from:myPhone,to:activeChat,text:"🎤 Vocal",audio:url,createdAt:Date.now()}); await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now()}); const u=((await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}/unread`))).val()||0)+1; await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now(),unread:u}); hint.textContent="✅ Vocal envoyé !";
-        }catch(e){ alert("Erreur Storage: "+e.message) }
+          hint.textContent="⏳ Envoi vocal..."; const chatId=getChatId(myPhone,activeChat); const path=`vocals/${chatId}/${Date.now()}.webm`; const refS=sRef(storage,path); await uploadBytes(refS,blob); const url=await getDownloadURL(refS); const nr=push(ref(db,`jasonBusiness/messages/${chatId}`)); await set(nr,{from:myPhone,to:activeChat,text:"🎤 Vocal",audio:url,createdAt:Date.now(),status:"sent"}); await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now()}); const u=((await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}/unread`))).val()||0)+1; await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now(),unread:u}); hint.textContent="✅ Vocal !";
+        }catch(e){ alert("Erreur: "+e.message) }
         try{recordStream.getTracks().forEach(t=>t.stop())}catch{}; isRecording=false;
       };
       mediaRecorder.start(100); isRecording=true; recBar.classList.add("show"); btn.classList.add("hold"); btn.textContent="⏹️"; recTime.textContent="00:00"; hint.textContent="🔴 Enregistrement...";
@@ -158,11 +232,7 @@ async function toggleVocal(){
 }
 $("recordBtn").addEventListener("click", toggleVocal);
 $("recSend").addEventListener("click", ()=>{ if(isRecording) try{mediaRecorder.stop()}catch{} });
-$("recCancel").addEventListener("click", ()=>{
-  if(!isRecording) return; try{mediaRecorder.stop()}catch{}; audioChunks=[];
-  setTimeout(()=>{ try{recordStream.getTracks().forEach(t=>t.stop())}catch{}; isRecording=false; $("recBar").classList.remove("show"); $("recordBtn").classList.remove("hold"); $("recordBtn").textContent="🎤"; $("hint").textContent="Annulé"; },100);
-  clearInterval(timerInt);
-});
+$("recCancel").addEventListener("click", ()=>{ if(!isRecording) return; try{mediaRecorder.stop()}catch{}; audioChunks=[]; setTimeout(()=>{ try{recordStream.getTracks().forEach(t=>t.stop())}catch{}; isRecording=false; $("recBar").classList.remove("show"); $("recordBtn").classList.remove("hold"); $("recordBtn").textContent="🎤"; $("hint").textContent="Annulé"; },100); clearInterval(timerInt); });
 </script>
 </body>
 </html>
