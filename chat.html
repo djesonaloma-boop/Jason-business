@@ -3,46 +3,49 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>JASON CHAT - Vocal Fix Ultime</title>
+<title>JASON BUSINESS - Chat</title>
 <style>
-:root{--blue:#00d2ff;--border:rgba(0,210,255,.18)}*{box-sizing:border-box}body{margin:0;font-family:Arial;color:white;background:#050a14;display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
-header{height:56px;display:flex;justify-space-between;align-items:center;padding:0 14px;background:#050a14;border-bottom:1px solid var(--border)}
+:root{--blue:#00d2ff;--border:rgba(0,210,255,.18)}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:white;background:#050a14;display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
+header{height:56px;display:flex;justify-content:space-between;align-items:center;padding:0 14px;background:#050a14;border-bottom:1px solid var(--border)}
 .brand{font-weight:900;color:var(--blue)}.btn{padding:7px 10px;border-radius:9px;border:1px solid rgba(0,210,255,.25);background:rgba(0,210,255,.08);color:var(--blue);font-size:11px;cursor:pointer}
 .wrap{display:flex;flex:1;overflow:hidden}
-.left{width:360px;background:#0b1425;border-right:1px solid var(--border);display:flex;flex-direction:column}
+.left{width:360px;background:#0b1425;border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
 .tabs{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border)}
 .tab{padding:12px 4px;text-align:center;font-size:11px;font-weight:700;cursor:pointer;opacity:.5;border-bottom:2px solid transparent}
 .tab.active{opacity:1;color:var(--blue);border-bottom-color:var(--blue)}
 .search{padding:10px;border-bottom:1px solid var(--border)} .search input,.add-box input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #293850;background:#0c192b;color:white;outline:none}
-.list{flex:1;overflow-y:auto;padding:6px} .item{padding:10px;border-radius:12px;display:flex;gap:10px;align-items:center;cursor:pointer;margin-bottom:4px}
-.item.active{background:rgba(0,210,255,.14);border:1px solid var(--blue)}
-.av{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;overflow:hidden;position:relative}
+.list{flex:1;overflow-y:auto;padding:6px} .item{padding:10px;border-radius:12px;display:flex;gap:10px;align-items:center;cursor:pointer;margin-bottom:4px;border:1px solid transparent}
+.item:hover{background:rgba(0,210,255,.06)} .item.active{background:rgba(0,210,255,.14);border-color:var(--blue)}
+.av{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;overflow:hidden;flex-shrink:0;position:relative}
 .av img{width:100%;height:100%;object-fit:cover} .online-dot{position:absolute;right:-2px;bottom:-2px;width:12px;height:12px;background:#00e676;border:2px solid #0b1425;border-radius:50%}
 .info{flex:1;min-width:0} .name{font-size:13px;font-weight:700} .prev{font-size:11px;opacity:.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.right{flex:1;display:flex;flex-direction:column;background:#070e1e;overflow:hidden}
-.top{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,10,20,.95)}
+.right{flex:1;display:flex;flex-direction:column;background:#070e1e;overflow:hidden;min-width:0}
+.top{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,10,20,.95);flex-shrink:0}
 .msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
-.msg{max-width:78%;padding:8px 10px;border-radius:16px;font-size:13px;white-space:pre-wrap;word-break:break-word}
-.msg.me{align-self:flex-end;background:linear-gradient(135deg,#00d2ff,#0077ff);border-bottom-right-radius:6px}
+.msg{max-width:78%;padding:8px 10px;border-radius:16px;font-size:12.5px;white-space:pre-wrap;word-break:break-word}
+.msg.me{align-self:flex-end;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;border-bottom-right-radius:6px}
 .msg.other{align-self:flex-start;background:rgba(255,255,255,.1);border-bottom-left-radius:6px}
-.msg .photo-wrap{margin-top:6px;border-radius:12px;overflow:hidden;max-width:160px;background:#000;display:block}
-.msg .photo-wrap img{width:100%;max-height:160px;object-fit:cover}
-.msg audio{margin-top:6px;width:220px}
-.input-area{padding:8px;background:#0a1425;border-top:1px solid var(--border)}
-.rec-bar{display:none;align-items:center;justify-content:space-between;padding:10px 14px;background:#ff47571a;border:1px solid #ff475766;border-radius:24px;margin-bottom:8px}
-.rec-bar.show{display:flex} .rec-left{display:flex;align-items:center;gap:8px}
-.rec-dot{width:10px;height:10px;background:#ff4757;border-radius:50%;animation:blink 1s infinite} @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-.rec-time{font-weight:800;color:#ff6b7a}
-.input{display:flex;gap:8px;align-items:center}
-.input textarea{flex:1;min-height:42px;padding:11px 14px;border-radius:20px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none;font-size:13px}
-.tbtn{width:46px;height:46px;border-radius:50%;border:1px solid #293850;background:#0c192b;color:white;display:grid;place-items:center;font-size:22px;cursor:pointer;flex-shrink:0}
-.tbtn.hold{background:#ff4757!important;transform:scale(1.15);box-shadow:0 0 15px #ff4757aa}
-.send{width:46px;height:46px;border-radius:50%;border:0;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;font-size:20px;cursor:pointer;flex-shrink:0}
+.msg .photo-wrap{margin-top:6px;border-radius:12px;overflow:hidden;max-width:160px;max-height:160px;background:#000;display:block;border:1px solid rgba(255,255,255,.15)}
+.msg .photo-wrap img{width:100%;height:auto;max-width:160px;max-height:160px;object-fit:cover;display:block}
+.msg audio{margin-top:6px;width:210px;max-width:100%}
+/* INPUT COMME TON SCREENSHOT */
+.input-area{padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:#0a1425;border-top:1px solid var(--border);flex-shrink:0}
+.rec-bar{display:none;align-items:center;gap:10px;padding:8px 10px;background:#111d33;border:1px solid rgba(255,71,87,.35);border-radius:24px;margin-bottom:6px}
+.rec-bar.show{display:flex}
+.rec-left{display:flex;align-items:center;gap:8px}
+.rec-dot{width:10px;height:10px;background:#ff4757;border-radius:50%;animation:blink 1s infinite}
+.rec-time{font-size:13px;font-weight:700;color:#ff6b7a;min-width:42px}
+.input{display:flex;gap:6px;align-items:center}
+.input textarea{flex:1;min-height:40px;max-height:90px;padding:10px 12px;border-radius:18px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none;font-size:13px}
+.tbtn{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:1px solid #293850;background:#0c192b;color:white;display:grid;place-items:center;cursor:pointer;font-size:18px;touch-action:manipulation}
+.tbtn.hold{background:#ff4757!important;border-color:#ff4757!important;transform:scale(1.15);box-shadow:0 0 15px rgba(255,71,87,.6)}
+.send{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:0;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;font-size:18px;cursor:pointer}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 @media(max-width:800px){.left{position:absolute;inset:0;z-index:20;width:100%}.left.hide{display:none}}
 </style>
 </head>
 <body>
-<header><div class="brand">💬 JASON CHAT — <span id="myPhoneShow">...</span></div><div style="display:flex;gap:6px"><button class="btn" id="btnShowLeft">☰</button><a href="dashboard.html" class="btn">Dash</a></div></header>
+<header><div class="brand">💬 JASON BUSINESS — <span id="myPhoneShow">...</span></div><div style="display:flex;gap:6px"><button class="btn" id="btnShowLeft">☰</button><a href="dashboard.html" class="btn">Dash</a></div></header>
 <div class="wrap">
   <aside class="left" id="leftPanel">
     <div class="tabs"><div class="tab active" data-tab="chats">💬 Chats</div><div class="tab" data-tab="users">👥 Utilisateurs</div><div class="tab" data-tab="requests">🔔 Demandes <span id="reqCount" style="background:#ff4757;color:white;padding:1px 5px;border-radius:10px;font-size:9px;display:none">0</span></div></div>
@@ -52,23 +55,27 @@ header{height:56px;display:flex;justify-space-between;align-items:center;padding
   </aside>
   <section class="right">
     <div class="top"><div style="display:flex;align-items:center;gap:8px"><div class="av" id="chatAvatar" style="width:36px;height:36px">JB</div><div><h3 id="chatName" style="margin:0;font-size:14px">Sélectionne un chat</h3><small id="chatPhone" style="font-size:11px;opacity:.6">Messenger</small></div></div><div style="display:flex;gap:6px"><button class="btn" id="voiceCallBtn">📞</button><button class="btn" id="videoCallBtn">🎥</button></div></div>
-    <div class="msgs" id="msgs"></div>
+    <div class="msgs" id="msgs"><div style="flex:1;display:grid;place-items:center;opacity:.6;padding:20px;text-align:center">Sélectionne El mago → Clique 🎤 pour vocal</div></div>
     <div class="input-area">
-      <div id="recBar" class="rec-bar"><div class="rec-left"><div class="rec-dot"></div><div id="recTime">00:00</div><div style="margin-left:8px;font-size:12px">🔴 Enregistrement... Clique ⏹️ pour envoyer</div></div><div style="display:flex;gap:6px"><button type="button" id="recCancel" style="padding:6px 10px;border-radius:12px;border:1px solid #ff4757;background:#ff475722;color:#ff6b7a">Annuler</button><button type="button" id="recSend" style="padding:6px 12px;border-radius:12px;border:0;background:var(--blue);color:#001018;font-weight:800">Envoyer ➤</button></div></div>
+      <div id="recBar" class="rec-bar">
+        <div class="rec-left"><div class="rec-dot"></div><div id="recTime" class="rec-time">00:00</div><div style="font-size:11px;margin-left:6px">🔴 Enregistrement...</div></div>
+        <div style="display:flex;gap:6px"><button type="button" id="recCancel" style="padding:5px 10px;border-radius:10px;border:1px solid #ff4757;background:#ff475722;color:#ff6b7a;font-size:11px">Annuler</button><button type="button" id="recSend" style="padding:5px 10px;border-radius:10px;border:0;background:var(--blue);color:#001018;font-weight:700;font-size:11px">Envoyer ➤</button></div>
+      </div>
       <div class="input">
         <label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*" hidden></label>
         <button type="button" id="recordBtn" class="tbtn">🎤</button>
         <textarea id="msgInput" placeholder="Écris un message..." disabled rows="1"></textarea>
         <button type="button" class="send" id="sendBtn" disabled>➤</button>
       </div>
-      <div id="hint" style="text-align:center;font-size:10px;opacity:.5;margin-top:4px">Clique 🎤 pour parler • Re-clique ⏹️ pour envoyer</div>
+      <div style="text-align:center;font-size:9px;opacity:.4;padding-top:4px" id="hint">Clique pour parler • Re-clique pour envoyer</div>
     </div>
   </section>
 </div>
+
 <script type="module">
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, onValue, push, set, get, remove, update, onDisconnect } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
 const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
 const app=getApps().length?getApp():initializeApp(firebaseConfig);
@@ -79,7 +86,7 @@ if(!myPhone){location.replace("login.html")}
 $("myPhoneShow").textContent=myPhone;
 
 let tab="chats", activeChat=null, allUsers={}, myRequests={}, myChats={}, manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]");
-let presenceCache={}; let isRecording=false, mediaRecorder=null, audioChunks=[], recordStream=null, timerInt=null, recSec=0, cancelFlag=false;
+let presenceCache={}; let isRecording=false, mediaRecorder=null, audioChunks=[], recordStream=null, timerInt=null, recSec=0;
 
 function esc(s){return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")}
 function timeStr(ts){if(!ts)return"";return new Date(ts).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}
@@ -93,7 +100,7 @@ $("search").oninput=()=>render(); $("btnShowLeft").onclick=()=>$("leftPanel").cl
 onValue(ref(db,"jasonBusiness/users"),s=>{if(s.exists()){allUsers=s.val()||{};render()}});
 onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),s=>{myRequests=s.val()||{};const inc=Object.values(myRequests).filter(r=>r.type==="incoming"&&r.status==="pending").length;$("reqCount").textContent=inc;$("reqCount").style.display=inc>0?"inline-block":"none";render()});
 onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),s=>{myChats=s.val()||{};render()});
-$("btnAddManual").onclick=()=>{const p=$("manualPhone").value.trim();if(!p\vert{}\vert{}p.length<8)return;if(!manualUsers.includes(p))manualUsers.push(p);localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));$("manualPhone").value="";render()};
+$("btnAddManual").onclick=()=>{const p=$("manualPhone").value.trim();if(!p||p.length<8)return;if(!manualUsers.includes(p))manualUsers.push(p);localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));$("manualPhone").value="";render()};
 function getCombinedUsers(){const c={...allUsers};manualUsers.forEach(p=>{if(!c[p])c[p]={telephone:p}});return c}
 function getUserPhoto(ph){const u=allUsers[ph]||{};return u.photo||u.photoProfil||u.avatar||""}
 
@@ -120,116 +127,74 @@ async function sendRequest(toPhone){await set(ref(db,`jasonBusiness/chat_request
 async function acceptRequest(fromPhone){const chatId=getChatId(myPhone,fromPhone);await set(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{with:fromPhone,status:"accepted",lastMsg:"✅ Accepté",lastTime:Date.now(),unread:0});await set(ref(db,`jasonBusiness/user_chats/${fromPhone}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:"✅ Accepté",lastTime:Date.now(),unread:1});await remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${fromPhone}`));await remove(ref(db,`jasonBusiness/chat_requests/${fromPhone}/${myPhone}`));tab="chats";document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelector('[data-tab="chats"]').classList.add("active");render();setTimeout(()=>openChat(fromPhone),300)}
 function openChat(other){activeChat=other;const photo=getUserPhoto(other);const name=allUsers[other]?.nom||other;$("chatName").textContent=name;$("chatPhone").textContent=isOnline(other)?other+" • En ligne 🟢":"Hors ligne";if(photo)$("chatAvatar").innerHTML=`<img src="${photo}" style="width:100%;height:100%;object-fit:cover;border-radius:12px">`;else $("chatAvatar").textContent=other.slice(-2);$("msgInput").disabled=false;$("sendBtn").disabled=false;if(window.innerWidth<=800)$("leftPanel").classList.add("hide");const chatId=getChatId(myPhone,other);onValue(ref(db,`jasonBusiness/messages/${chatId}`),snap=>{const data=snap.val()||{};const msgs=Object.values(data).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));renderMessages(msgs);update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{unread:0}).catch(()=>{})});render()}
 function renderMessages(msgs){const c=$("msgs");if(msgs.length===0){c.innerHTML=`<div style="flex:1;display:grid;place-items:center;opacity:.6;padding:20px">Début avec ${esc(allUsers[activeChat]?.nom||activeChat)}</div>`;return}c.innerHTML="";msgs.forEach(m=>{const isMe=m.from===myPhone;const div=document.createElement("div");div.className="msg "+(isMe?"me":"other");let html=esc(m.text||"");if(m.photo)html+=`<div class="photo-wrap"><img src="${m.photo}" onclick="window.open(this.src,'_blank')"></div>`;if(m.audio)html+=`<audio controls src="${m.audio}"></audio>`;html+=`<div style="font-size:8px;opacity:.6;margin-top:4px;text-align:right">${timeStr(m.createdAt)} ${isMe?"✓✓":""}</div>`;div.innerHTML=html;c.appendChild(div)});c.scrollTop=c.scrollHeight}
-async function sendText(){const text=$("msgInput").value.trim();if(!text\vert{}\vert{}!activeChat)return;$("msgInput").value="";const chatId=getChatId(myPhone,activeChat);const nr=push(ref(db,`jasonBusiness/messages/${chatId}`));await set(nr,{from:myPhone,to:activeChat,text,createdAt:Date.now()});const u=((await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}/unread`))).val()||0)+1;await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:text,lastTime:Date.now()});const oe=await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`));if(!oe.exists())await set(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:text,lastTime:Date.now(),unread:u});else await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:text,lastTime:Date.now(),unread:u})}
+async function sendText(){const text=$("msgInput").value.trim();if(!text||!activeChat)return;$("msgInput").value="";const chatId=getChatId(myPhone,activeChat);const nr=push(ref(db,`jasonBusiness/messages/${chatId}`));await set(nr,{from:myPhone,to:activeChat,text,createdAt:Date.now()});const u=((await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}/unread`))).val()||0)+1;await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:text,lastTime:Date.now()});const oe=await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`));if(!oe.exists())await set(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{with:myPhone,status:"accepted",lastMsg:text,lastTime:Date.now(),unread:u});else await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:text,lastTime:Date.now(),unread:u})}
 $("sendBtn").onclick=sendText; $("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText()}});
 $("photoInput").onchange=e=>{const file=e.target.files[0];if(!file||!activeChat)return;if(file.size>4*1024*1024){alert("Max 4Mo");return}const r=new FileReader();r.onload=async()=>{const chatId=getChatId(myPhone,activeChat);const nr=push(ref(db,`jasonBusiness/messages/${chatId}`));await set(nr,{from:myPhone,to:activeChat,text:"📷 Photo",photo:r.result,createdAt:Date.now()});await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:"📷 Photo",lastTime:Date.now()});const u=((await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}/unread`))).val()||0)+1;await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:"📷 Photo",lastTime:Date.now(),unread:u})};r.readAsDataURL(file);e.target.value=""};
 
-// ===== VOCAL OPTIMISÉ ET SÉCURISÉ =====
+// ===== VOCAL FIX DEFINITIF - GARDE APPARENCE =====
 function fmt(s){const m=String(Math.floor(s/60)).padStart(2,'0');const sec=String(s%60).padStart(2,'0');return `${m}:${sec}`}
 
 async function startVocal(){
-  if(!activeChat){alert("Ouvre un chat d'abord");return}
+  if(!activeChat){alert("Ouvre El mago d'abord");return}
   if(isRecording) return;
-  cancelFlag = false;
   try{
     recordStream=await navigator.mediaDevices.getUserMedia({audio:true});
-    let options = {};
-    if (MediaRecorder.isTypeSupported("audio/webm;codecs=opus")) options = { mimeType: "audio/webm;codecs=opus" };
-    else if (MediaRecorder.isTypeSupported("audio/webm")) options = { mimeType: "audio/webm" };
-    else if (MediaRecorder.isTypeSupported("audio/mp4")) options = { mimeType: "audio/mp4" };
-
-    mediaRecorder = new MediaRecorder(recordStream, options);
+    let mime="audio/webm;codecs=opus"; if(!MediaRecorder.isTypeSupported(mime)) mime="audio/webm"; if(!MediaRecorder.isTypeSupported(mime)) mime="audio/mp4"; if(!MediaRecorder.isTypeSupported(mime)) mime="";
+    mediaRecorder = mime?new MediaRecorder(recordStream,{mimeType:mime}):new MediaRecorder(recordStream);
     audioChunks=[]; recSec=0;
-    
-    mediaRecorder.ondataavailable=e=>{if(e.data&&e.data.size>0)audioChunks.push(e.data)};
+    mediaRecorder.ondataavailable=e=>{if(e.data.size>0)audioChunks.push(e.data)};
     mediaRecorder.onstop=async()=>{
       clearInterval(timerInt);
       $("recBar").classList.remove("show");
       $("recordBtn").classList.remove("hold");
       $("recordBtn").textContent="🎤";
-      $("hint").textContent="Clique 🎤 pour parler • Re-clique ⏹️ pour envoyer";
-      
-      if(cancelFlag){
-        try{recordStream.getTracks().forEach(t=>t.stop())}catch{};
-        isRecording=false;
-        return;
-      }
-
+      $("hint").textContent="Clique pour parler • Re-clique pour envoyer";
       const blob=new Blob(audioChunks,{type:mediaRecorder.mimeType||"audio/webm"});
-      if(blob.size<500){
-        alert("Enregistrement trop court");
-        try{recordStream.getTracks().forEach(t=>t.stop())}catch{};
-        isRecording=false;
-        return;
-      }
-
-      $("chatPhone").textContent="⏳ Envoi vocal...";
-      $("hint").textContent="⏳ Envoi en cours, attends...";
-      const chatId=getChatId(myPhone,activeChat);
-
+      if(blob.size<800){alert("Trop court"); try{recordStream.getTracks().forEach(t=>t.stop())}catch{}; isRecording=false; return}
       try{
-        let audioUrl = "";
-        try {
-          const path=`vocals/${chatId}/${Date.now()}.webm`;
-          const refS=sRef(storage,path);
-          await uploadBytes(refS,blob);
-          audioUrl = await getDownloadURL(refS);
-        } catch(stErr) {
-          console.warn("Storage échoué, conversion Base64 fallback...", stErr);
-          audioUrl = await new Promise((res)=>{
-            const reader = new FileReader();
-            reader.onloadend = () => res(reader.result);
-            reader.readAsDataURL(blob);
-          });
-        }
-
+        $("chatPhone").textContent="⏳ Envoi vocal...";
+        $("hint").textContent="⏳ Envoi...";
+        const chatId=getChatId(myPhone,activeChat);
+        const path=`vocals/${chatId}/${Date.now()}.webm`;
+        const refS=storageRef(storage,path);
+        await uploadBytes(refS,blob);
+        const url=await getDownloadURL(refS);
         const nr=push(ref(db,`jasonBusiness/messages/${chatId}`));
-        await set(nr,{from:myPhone,to:activeChat,text:"🎤 Vocal",audio:audioUrl,createdAt:Date.now()});
+        await set(nr,{from:myPhone,to:activeChat,text:"🎤 Vocal",audio:url,createdAt:Date.now()});
         await update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now()});
         const u=((await get(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}/unread`))).val()||0)+1;
         await update(ref(db,`jasonBusiness/user_chats/${activeChat}/${chatId}`),{lastMsg:"🎤 Vocal",lastTime:Date.now(),unread:u});
-        
-        $("chatPhone").textContent=isOnline(activeChat)?activeChat+" • En ligne 🟢":"Hors ligne";
-        $("hint").textContent="✅ Vocal envoyé !";
-        setTimeout(()=>{$("hint").textContent="Clique 🎤 pour parler • Re-clique ⏹️ pour envoyer"},2000);
+        $("chatPhone").textContent="Hors ligne"; $("hint").textContent="✅ Vocal envoyé !";
+        setTimeout(()=>{$("hint").textContent="Clique pour parler • Re-clique pour envoyer"},2000);
       }catch(e){
-        console.error(e);
-        alert("Erreur d'envoi du vocal: "+e.message);
-        $("chatPhone").textContent="❌ Erreur d'envoi";
+        alert("Erreur Storage: "+e.message+"\nActive Storage dans Firebase Console > Storage > Get Started > test mode");
+        $("hint").textContent="❌ Active Storage Firebase";
       }
       try{recordStream.getTracks().forEach(t=>t.stop())}catch{}; isRecording=false;
     };
-
     mediaRecorder.start(100);
     isRecording=true;
     $("recBar").classList.add("show");
     $("recordBtn").classList.add("hold");
     $("recordBtn").textContent="⏹️";
     $("recTime").textContent="00:00";
-    $("hint").textContent="🔴 En cours... Clique ⏹️ pour arrêter et envoyer";
-    timerInt=setInterval(()=>{recSec++;$("recTime").textContent=fmt(recSec); if(recSec>=60){stopVocal()}},1000);
+    $("hint").textContent="🔴 Enregistrement... Clique ⏹️ pour envoyer";
+    timerInt=setInterval(()=>{recSec++;$("recTime").textContent=fmt(recSec); if(recSec>=20){try{mediaRecorder.stop()}catch{}}},1000);
   }catch(err){
-    console.error(err);
-    alert("Accès microphone refusé ou non supporté : "+err.message);
-    isRecording=false;
-    $("recordBtn").textContent="🎤";
-    $("recBar").classList.remove("show");
+    alert("Micro bloqué: "+err.message+"\n1. Cadenas 🔒 en haut\n2. Autoriser Micro\n3. Recharge HTTPS");
+    isRecording=false; $("recordBtn").textContent="🎤"; $("recBar").classList.remove("show");
   }
 }
+function stopVocal(){ if(!isRecording) return; try{mediaRecorder.stop()}catch{isRecording=false} }
 
-function stopVocal(){
-  if(!isRecording) return;
-  try{mediaRecorder.stop()}catch{isRecording=false}
-}
-
-$("recordBtn").addEventListener("click", ()=>{
-  if(!isRecording) startVocal(); else stopVocal();
-});
+$("recordBtn").addEventListener("click", ()=>{ if(!isRecording) startVocal(); else stopVocal(); });
 $("recSend").onclick=()=>stopVocal();
 $("recCancel").onclick=()=>{
   if(!isRecording) return;
-  cancelFlag = true;
-  stopVocal();
+  try{mediaRecorder.stop()}catch{}
+  audioChunks=[];
+  setTimeout(()=>{try{recordStream.getTracks().forEach(t=>t.stop())}catch{}; isRecording=false; $("recBar").classList.remove("show"); $("recordBtn").classList.remove("hold"); $("recordBtn").textContent="🎤";},100);
+  clearInterval(timerInt);
 };
 </script>
 </body>
