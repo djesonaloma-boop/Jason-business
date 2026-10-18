@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>JASON BUSINESS - Auto Feed FIX</title>
+<title>JASON BUSINESS - Photo Video Note Optionnelle</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial;background:#050a14;color:white}
 header{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;background:#050a14;border-bottom:1px solid #0f203f;position:sticky;top:0;z-index:10}
@@ -22,22 +22,31 @@ textarea{width:100%;min-height:65px;padding:12px;border-radius:12px;border:1px s
 .color{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2px solid transparent}
 .color.active{border-color:white}
 .status{font-size:11px;opacity:.7;margin-top:8px;text-align:center}
-
+#previewBox{display:none;background:#070e1e;border:1px solid #00d2ff55;border-radius:16px;padding:10px;margin-top:10px;animation:fadeIn .2s}
+#previewBox.show{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.preview-media{position:relative;border-radius:12px;overflow:hidden;background:#000;max-height:380px;display:grid;place-items:center}
+.preview-media img,.preview-media video{width:100%;max-height:360px;object-fit:contain;display:block}
+.preview-text-overlay{position:absolute;left:0;right:0;bottom:0;padding:30px 12px 14px;background:linear-gradient(transparent,rgba(0,0,0,.85));font-size:18px;font-weight:800;text-align:center;white-space:pre-wrap;word-break:break-word;min-height:40px}
+.preview-actions{display:flex;gap:8px;margin-top:8px}
+.preview-actions button{flex:1;padding:11px;border-radius:12px;border:0;font-weight:800;cursor:pointer;font-size:13px}
+.btnSend{background:linear-gradient(135deg,#00d2ff,#0077ff);color:white}
+.btnCancel{background:#1a2a44;color:white;border:1px solid #293850!important}
 .stories{display:flex;gap:10px;overflow-x:auto;padding:10px 12px;background:#0b1425;border-bottom:1px solid #0f203f}
 .s-item{flex-shrink:0;width:64px;text-align:center;cursor:pointer}
 .s-circle{width:60px;height:60px;border-radius:50%;padding:2px;background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);display:grid;place-items:center}
 .s-circle div{width:100%;height:100%;border-radius:50%;background:#0b1425;display:grid;place-items:center;font-weight:900;overflow:hidden;border:2px solid #0b1425}
 .s-circle img{width:100%;height:100%;object-fit:cover}
 .s-name{font-size:9px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
 .post{background:#0b1425;border-bottom:1px solid #0f203f;margin-top:6px;animation:fadeIn .3s}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .post-head{padding:10px 12px;display:flex;gap:10px;align-items:center}
 .av{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#00d2ff,#0077ff);display:grid;place-items:center;font-weight:900}
 .post-name{font-weight:700;font-size:13px} .post-time{font-size:10px;opacity:.5}
 .post-text{padding:10px 12px;white-space:pre-wrap;font-size:14px}
 .post-text.bg{padding:40px 20px;text-align:center;font-size:22px;font-weight:800;min-height:200px;display:grid;place-items:center}
-.post-img{width:100%;max-height:600px;object-fit:contain;background:#000;display:block}
+.post-media-wrap{position:relative;background:#000;width:100%;max-height:600px;overflow:hidden}
+.post-media-wrap img,.post-media-wrap video{width:100%;max-height:600px;object-fit:contain;display:block}
+.post-media-overlay{position:absolute;left:0;right:0;bottom:0;padding:32px 12px 14px;background:linear-gradient(transparent,rgba(0,0,0,.85));font-size:19px;font-weight:800;text-align:center;white-space:pre-wrap;word-break:break-word}
 .actions{display:flex;justify-content:space-around;border-top:1px solid #0f203f}
 .act{flex:1;background:transparent;border:0;color:#8da0b8;padding:10px;font-size:12px;cursor:pointer}
 .act.liked{color:#00d2ff;font-weight:800}
@@ -51,7 +60,7 @@ textarea{width:100%;min-height:65px;padding:12px;border-radius:12px;border:1px s
 #viewer.show{display:flex}
 #viewerTop{display:flex;justify-content:space-between;padding:12px}
 #viewerContent{flex:1;display:grid;place-items:center;padding:10px}
-#viewerContent img{max-width:100%;max-height:80vh}
+#viewerContent img,#viewerContent video{max-width:100%;max-height:80vh}
 </style>
 </head>
 <body>
@@ -71,23 +80,31 @@ textarea{width:100%;min-height:65px;padding:12px;border-radius:12px;border:1px s
   </div>
 
   <div class="box" id="pubBox">
-    <textarea id="pubText" placeholder="Écris une note... (optionnel si tu mets photo)"></textarea>
+    <textarea id="pubText" placeholder="Écris une note AU-DESSUS (optionnel, pas obligatoire)..."></textarea>
     <div class="colors" id="pubColors"></div>
     <div class="row">
-      <label class="tbtn" id="photoBtn">🖼️ Choisir Photo - Publie auto
-        <input type="file" id="pubFile" accept="image/*" hidden>
+      <label class="tbtn" id="photoBtn">🖼️📹 Photo/Vidéo (auto preview ICI)
+        <input type="file" id="pubFile" accept="image/*,video/*" hidden>
       </label>
-      <button class="tbtn blue" id="btnPub">📝 Publier Note</button>
+      <button class="tbtn blue" id="btnPub">📝 Publier Note Seule</button>
     </div>
     <div class="status" id="status"></div>
+    <div id="previewBox">
+      <div class="preview-media" id="previewMedia"></div>
+      <div class="preview-actions">
+        <button class="btnCancel" id="cancelPreview">✕ Annuler</button>
+        <button class="btnSend" id="confirmPreview">➤ Publier Maintenant</button>
+      </div>
+      <div style="font-size:10px;opacity:.5;text-align:center;margin-top:6px">Note optionnelle - Tu peux publier sans note</div>
+    </div>
   </div>
 
   <div class="box" id="storyBox" style="display:none">
-    <textarea id="storyText" placeholder="Note pour story 24h..."></textarea>
+    <textarea id="storyText" placeholder="Note au dessus (optionnel)..."></textarea>
     <div class="colors" id="storyColors"></div>
     <div class="row">
-      <label class="tbtn">🖼️ Photo Story Auto
-        <input type="file" id="storyFile" accept="image/*" hidden>
+      <label class="tbtn">🖼️📹 Story Photo/Vidéo (note optionnelle)
+        <input type="file" id="storyFile" accept="image/*,video/*" hidden>
       </label>
       <button class="tbtn blue" id="btnStory">Publier Story Note</button>
     </div>
@@ -111,11 +128,12 @@ const myName=localStorage.getItem("jasonBusinessUserName")||myPhone;
 
 const bgColors=["#0b1425","#FF4757","#2ed573","#1e90ff","#ffa502","#a55eea","#3742fa","#ff6b81"];
 let selPub=bgColors[0], selStory=bgColors[1];
+let pendingFileBase64=null, pendingFileType=null;
 
 function makeColors(cont,type){
   cont.innerHTML=""; bgColors.forEach((c,i)=>{
     const d=document.createElement("div"); d.className="color"+(i===0?" active":""); d.style.background=c;
-    d.onclick=()=>{ cont.querySelectorAll(".color").forEach(x=>x.classList.remove("active")); d.classList.add("active"); if(type==="pub") selPub=c; else selStory=c; };
+    d.onclick=()=>{ cont.querySelectorAll(".color").forEach(x=>x.classList.remove("active")); d.classList.add("active"); if(type==="pub") selPub=c; else selStory=c; updatePreviewOverlay(); };
     cont.appendChild(d);
   });
 }
@@ -130,63 +148,105 @@ document.querySelectorAll(".tab").forEach(t=>{
   };
 });
 
-// ===== PUBLICATION PHOTO AUTO EN BASE64 - PLUS DE BLOCAGE =====
+function esc(s){return String(s||"").replace(/</g,"&lt;")}
+function updatePreviewOverlay(){
+  const text=$("pubText").value.trim();
+  const overlay=document.getElementById("overlayText");
+  if(overlay){ 
+    overlay.textContent=text; 
+    overlay.style.display=text?"block":"none";
+    if(text && selPub!=="#0b1425") overlay.style.background=selPub;
+    else overlay.style.background="linear-gradient(transparent,rgba(0,0,0,.85))";
+  }
+}
+$("pubText").addEventListener("input", updatePreviewOverlay);
+
 $("pubFile").onchange=async e=>{
   const f=e.target.files[0]; if(!f) return;
-  if(f.size>4*1024*1024){ alert("Photo trop grosse (4Mo max). Fais une capture d'écran ou choisis plus petite."); e.target.value=""; return; }
-  const text=$("pubText").value.trim();
-  $("status").textContent="⏳ Conversion photo...";
-  $("photoBtn").style.opacity="0.5";
+  const isVideo=f.type.startsWith("video/");
+  const limit=isVideo?15*1024*1024:4*1024*1024;
+  if(f.size>limit){ alert(isVideo?"Vidéo max 15Mo - Coupe-la":"Photo max 4Mo"); e.target.value=""; return; }
+  $("status").textContent="⏳ Chargement "+(isVideo?"vidéo":"photo")+"...";
   const reader=new FileReader();
   reader.readAsDataURL(f);
-  reader.onloadend=async()=>{
-    try{
-      $("status").textContent="⏳ Publication pour tout le monde...";
-      await push(ref(db,"jasonBusiness/publications"),{
-        from:myPhone, name:myName,
-        type:"photo",
-        text:text,
-        image:reader.result,
-        bg:selPub,
-        createdAt:Date.now(),
-        likes:{}
-      });
-      $("status").textContent="✅ Photo publiée ! Tout le monde la voit";
-      $("pubText").value="";
-      setTimeout(()=>{ $("status").textContent=""; $("photoBtn").style.opacity="1"; },3000);
-    }catch(err){ $("status").textContent="❌ Erreur: "+err.message; $("photoBtn").style.opacity="1"; }
-    e.target.value="";
+  reader.onloadend=()=>{
+    pendingFileBase64=reader.result;
+    pendingFileType=isVideo?"video":"photo";
+    const mediaDiv=$("previewMedia");
+    const text=$("pubText").value.trim();
+    const bgStyle = selPub!=="#0b1425"?`background:${selPub}`:"";
+    if(isVideo){
+      mediaDiv.innerHTML=`<video src="${reader.result}" controls muted playsinline></video><div id="overlayText" class="preview-text-overlay" style="${bgStyle};display:${text?"block":"none"}">${esc(text)}</div>`;
+    }else{
+      mediaDiv.innerHTML=`<img src="${reader.result}"><div id="overlayText" class="preview-text-overlay" style="${bgStyle};display:${text?"block":"none"}">${esc(text)}</div>`;
+    }
+    $("previewBox").classList.add("show");
+    $("status").textContent="👁️ Preview ICI - Note optionnelle au dessus";
+    $("previewBox").scrollIntoView({behavior:"smooth"});
   };
+  e.target.value="";
 };
 
-// PUBLICATION NOTE
+$("cancelPreview").onclick=()=>{
+  pendingFileBase64=null; pendingFileType=null;
+  $("previewBox").classList.remove("show");
+  $("previewMedia").innerHTML="";
+  $("status").textContent="";
+};
+
+$("confirmPreview").onclick=async()=>{
+  if(!pendingFileBase64) return;
+  const text=$("pubText").value.trim();
+  $("confirmPreview").disabled=true;
+  $("confirmPreview").textContent="⏳ Publication...";
+  try{
+    await push(ref(db,"jasonBusiness/publications"),{
+      from:myPhone, name:myName,
+      type:pendingFileType,
+      text:text,
+      image:pendingFileType==="photo"?pendingFileBase64:null,
+      video:pendingFileType==="video"?pendingFileBase64:null,
+      bg:text?selPub:"#0b1425",
+      createdAt:Date.now(),
+      likes:{}
+    });
+    $("status").textContent=text?"✅ Publié avec note au dessus":"✅ Photo/Vidéo publiée (sans note)";
+    $("pubText").value="";
+    $("previewBox").classList.remove("show");
+    $("previewMedia").innerHTML="";
+    pendingFileBase64=null;
+    setTimeout(()=>$("status").textContent="",3000);
+  }catch(err){ alert(err.message); }
+  finally{ $("confirmPreview").disabled=false; $("confirmPreview").textContent="➤ Publier Maintenant"; }
+};
+
 $("btnPub").onclick=async()=>{
   const txt=$("pubText").value.trim();
-  if(!txt) return alert("Écris une note");
+  if(pendingFileBase64) return alert("Tu as une photo/vidéo en preview - Clique 'Publier Maintenant' en bas");
+  if(!txt) return alert("Écris une note OU choisis photo/vidéo");
   await push(ref(db,"jasonBusiness/publications"),{from:myPhone,name:myName,type:"note",text:txt,bg:selPub,createdAt:Date.now(),likes:{}});
   $("pubText").value="";
 };
 
-// STORY PHOTO AUTO BASE64
 $("storyFile").onchange=async e=>{
   const f=e.target.files[0]; if(!f) return;
-  if(f.size>4*1024*1024){ alert("Story trop grosse (4Mo max)"); e.target.value=""; return; }
-  $("status").textContent="⏳ Story photo...";
+  const isVideo=f.type.startsWith("video/");
+  if(f.size>(isVideo?15*1024*1024:4*1024*1024)){ alert("Trop gros"); e.target.value=""; return; }
   const reader=new FileReader();
   reader.readAsDataURL(f);
   reader.onloadend=async()=>{
     try{
-      await push(ref(db,"jasonBusiness/stories"),{from:myPhone,name:myName,type:"photo",photo:reader.result,createdAt:Date.now(),expiresAt:Date.now()+86400000});
-      $("status").textContent="✅ Story publiée 24h";
+      const text=$("storyText").value.trim();
+      await push(ref(db,"jasonBusiness/stories"),{from:myPhone,name:myName,type:isVideo?"video":"photo",photo:!isVideo?reader.result:null,video:isVideo?reader.result:null,text:text,bg:selStory,createdAt:Date.now(),expiresAt:Date.now()+86400000});
+      $("status").textContent="✅ Story publiée (note optionnelle)";
       setTimeout(()=>$("status").textContent="",3000);
-    }catch(err){ alert("Erreur story: "+err.message); }
+    }catch(err){ alert(err.message); }
     e.target.value="";
   };
 };
 
-// STORY NOTE
 $("btnStory").onclick=async()=>{
-  const txt=$("storyText").value.trim(); if(!txt) return alert("Écris ta note");
+  const txt=$("storyText").value.trim(); if(!txt) return alert("Écris ta note pour story");
   await push(ref(db,"jasonBusiness/stories"),{from:myPhone,name:myName,type:"note",text:txt,bg:selStory,createdAt:Date.now(),expiresAt:Date.now()+86400000});
   $("storyText").value=""; alert("✅ Story note 24h");
 };
@@ -204,7 +264,7 @@ function renderStories(){
   Object.entries(allStories).forEach(([id,st])=>{
     if(st.expiresAt<Date.now()) return;
     const div=document.createElement("div"); div.className="s-item";
-    div.innerHTML=st.type==="photo"?`<div class="s-circle"><div><img src="${st.photo}"></div></div><div class="s-name">${st.from===myPhone?"Toi":st.from.slice(-4)}</div>`:`<div class="s-circle"><div style="background:${st.bg}">${(st.text||"").slice(0,8)}</div></div><div class="s-name">${st.from===myPhone?"Toi":st.from.slice(-4)}</div>`;
+    div.innerHTML=`<div class="s-circle"><div>${st.photo?`<img src="${st.photo}">`:st.video?`🎥`:esc((st.text||"").slice(0,8))}</div></div><div class="s-name">${st.from===myPhone?"Toi":st.from.slice(-4)}</div>`;
     div.onclick=()=>openViewer(id,"story"); bar.appendChild(div);
   });
 }
@@ -214,22 +274,28 @@ function render(){
   const tab=document.querySelector(".tab.active").dataset.tab;
   if(tab==="stories"){
     const sorted=Object.entries(allStories).sort((a,b)=>b[1].createdAt-a[1].createdAt);
-    if(sorted.length===0){feed.innerHTML="<div style='padding:30px;text-align:center;opacity:.5'>Aucune story</div>";return;}
+    if(!sorted.length){feed.innerHTML="<div style='padding:30px;text-align:center;opacity:.5'>Aucune story</div>";return;}
     sorted.forEach(([id,s])=>{
       const div=document.createElement("div"); div.className="post";
-      const content=s.type==="photo"?`<img class="post-img" src="${s.photo}" onclick="openViewer('${id}','story')">`:`<div class="post-text bg" style="background:${s.bg}">${esc(s.text)}</div>`;
+      let content="";
+      if(s.type==="photo") content=`<div class="post-media-wrap"><img src="${s.photo}">${s.text?`<div class="post-media-overlay" style="background:${s.bg}">${esc(s.text)}</div>`:""}</div>`;
+      else if(s.type==="video") content=`<div class="post-media-wrap"><video src="${s.video}" controls></video>${s.text?`<div class="post-media-overlay" style="background:${s.bg}">${esc(s.text)}</div>`:""}</div>`;
+      else content=`<div class="post-text bg" style="background:${s.bg}">${esc(s.text)}</div>`;
       div.innerHTML=`<div class="post-head"><div class="av">${s.from.slice(-2)}</div><div><div class="post-name">${s.name} • 24h</div><div class="post-time">${new Date(s.expiresAt).toLocaleString()}</div></div></div>${content}`;
       feed.appendChild(div);
     }); return;
   }
   const sorted=Object.entries(allPubs).sort((a,b)=>b[1].createdAt-a[1].createdAt);
-  if(sorted.length===0){feed.innerHTML="<div style='padding:30px;text-align:center;opacity:.5'>Aucune publication<br>Publie une photo, tout le monde la verra direct</div>";return;}
+  if(!sorted.length){feed.innerHTML="<div style='padding:30px;text-align:center;opacity:.5'>Aucune publication<br>Photo/vidéo + note au dessus (note optionnelle)</div>";return;}
   sorted.forEach(([id,p])=>{
     const likes=p.likes?Object.keys(p.likes).length:0; const liked=p.likes && p.likes[myPhone];
     const div=document.createElement("div"); div.className="post";
-    const content=p.type==="photo"?`${p.text?`<div class="post-text">${esc(p.text)}</div>`:""}<img class="post-img" src="${p.image}" onclick="openViewer('${id}','pub')">`:`<div class="post-text bg" style="background:${p.bg}">${esc(p.text)}</div>`;
+    let content="";
+    if(p.type==="photo") content=`<div class="post-media-wrap"><img src="${p.image}" onclick="openViewer('${id}','pub')">${p.text?`<div class="post-media-overlay" style="background:${p.bg!=="#0b1425"?p.bg:""}">${esc(p.text)}</div>`:""}</div>`;
+    else if(p.type==="video") content=`<div class="post-media-wrap"><video src="${p.video}" controls></video>${p.text?`<div class="post-media-overlay" style="background:${p.bg!=="#0b1425"?p.bg:""}">${esc(p.text)}</div>`:""}</div>`;
+    else content=`<div class="post-text bg" style="background:${p.bg}">${esc(p.text)}</div>`;
     div.innerHTML=`
-      <div class="post-head"><div class="av">${p.from.slice(-2)}</div><div><div class="post-name">${p.name||p.from}</div><div class="post-time">${new Date(p.createdAt).toLocaleString()} • Visible par tous</div></div>${p.from===myPhone?`<button class="del" onclick="delPub('${id}')">🗑️</button>`:""}</div>
+      <div class="post-head"><div class="av">${p.from.slice(-2)}</div><div><div class="post-name">${p.name||p.from}</div><div class="post-time">${new Date(p.createdAt).toLocaleString()}</div></div>${p.from===myPhone?`<button class="del" onclick="delPub('${id}')">🗑️</button>`:""}</div>
       ${content}
       <div class="actions">
         <button class="act ${liked?'liked':''}" onclick="likePub('${id}')">${liked?'💙':'🤍'} J'aime ${likes>0?`(${likes})`:""}</button>
@@ -246,12 +312,11 @@ function render(){
     });
   });
 }
-function esc(s){return String(s||"").replace(/</g,"&lt;")}
 window.likePub=async(id)=>{ const p=allPubs[id]; if(p.likes && p.likes[myPhone]) await remove(ref(db,`jasonBusiness/publications/${id}/likes/${myPhone}`)); else await set(ref(db,`jasonBusiness/publications/${id}/likes/${myPhone}`),true); };
 window.delPub=async(id)=>{ if(confirm("Supprimer ?")) await remove(ref(db,"jasonBusiness/publications/"+id)); };
 window.sendCmt=async(id)=>{ const input=document.getElementById(`cmt-${id}`); const txt=input.value.trim(); if(!txt) return; await push(ref(db,`jasonBusiness/comments/${id}`),{from:myPhone,name:myName,text:txt,createdAt:Date.now()}); input.value=""; };
 window.sharePub=async(id)=>{ const p=allPubs[id]; const txt=`${p.name}: ${p.text}\n${location.href}`; if(navigator.share){try{await navigator.share({title:"JASON BUSINESS",text:txt})}catch{}} else{await navigator.clipboard.writeText(txt); alert("Lien copié !");} };
-window.openViewer=(id,type)=>{ const d=type==="story"?allStories[id]:allPubs[id]; $("viewer").classList.add("show"); $("viewerName").textContent=d.name||d.from; const cont=$("viewerContent"); if(d.type==="photo"||d.image||d.photo) cont.innerHTML=`<img src="${d.image||d.photo}">`; else cont.innerHTML=`<div style="background:${d.bg};padding:40px;border-radius:20px;font-size:24px;font-weight:900;min-height:50vh;display:grid;place-items:center">${esc(d.text)}</div>`; };
+window.openViewer=(id,type)=>{ const d=type==="story"?allStories[id]:allPubs[id]; $("viewer").classList.add("show"); $("viewerName").textContent=d.name||d.from; const cont=$("viewerContent"); if(d.type==="photo"||d.image||d.photo) cont.innerHTML=`<img src="${d.image||d.photo}">`; else if(d.type==="video"||d.video) cont.innerHTML=`<video src="${d.video}" controls autoplay></video>`; else cont.innerHTML=`<div style="background:${d.bg};padding:40px;border-radius:20px;font-size:24px;font-weight:900;min-height:50vh;display:grid;place-items:center">${esc(d.text)}</div>`; };
 window.closeViewer=()=>{$("viewer").classList.remove("show");};
 </script>
 </body>
