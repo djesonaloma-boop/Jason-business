@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#050a14">
-<title>JASON BUSINESS - Chat Compteur 1 2 3</title>
+<title>JASON BUSINESS - Chat Scroll Anciens</title>
 <style>
 :root{--blue:#00d2ff;--border:rgba(0,210,255,.18)}
 *{box-sizing:border-box}
@@ -21,13 +21,13 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
 .search{padding:10px;border-bottom:1px solid var(--border)}
 .search input,.add-box input{width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid #293850;background:#0c192b;color:white;outline:none}
 .list{flex:1;min-height:0;overflow-y:auto;padding:6px}
-.item{padding:12px;border-radius:14px;display:flex;gap:10px;align-items:center;cursor:pointer;margin-bottom:4px;border:1px solid transparent;position:relative}
+.item{padding:12px;border-radius:14px;display:flex;gap:10px;align-items:center;cursor:pointer;margin-bottom:4px;border:1px solid transparent}
 .item.active{background:rgba(0,210,255,.14);border-color:var(--blue)}
 .item.has-unread{background:rgba(255,71,87,.08);border-color:rgba(255,71,87,.2)}
 .av{width:46px;height:46px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;overflow:hidden}
 .av img{width:100%;height:100%;object-fit:cover}
 .info{flex:1;min-width:0}
-.name{font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px}
+.name{font-size:14px;font-weight:700}
 .prev{font-size:12px;opacity:.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
 .right-info{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0}
 .time{font-size:11px;opacity:.5}
@@ -36,7 +36,9 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
 .bottom-nav{padding:10px;display:flex;gap:8px;border-top:1px solid var(--border);background:#0b1425}
 .right{flex:1;min-width:0;display:flex;flex-direction:column;background:#070e1e;overflow:hidden}
 .top{flex-shrink:0;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,10,20,.95);cursor:pointer}
-.msgs{flex:1;min-height:0;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.msgs{flex:1;min-height:0;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+.load-more{display:none;padding:8px 12px;background:#0b1425;border:1px solid var(--border);border-radius:20px;margin:0 auto 10px;font-size:11px;color:var(--blue);cursor:pointer;text-align:center}
+.load-more.show{display:block}
 .msg{max-width:78%;padding:8px 12px;border-radius:18px;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere;position:relative;line-height:1.4}
 .msg.me{align-self:flex-end;background:linear-gradient(135deg,#00d2ff,#0077ff);border-bottom-right-radius:6px;color:white}
 .msg.other{align-self:flex-start;background:rgba(255,255,255,.1);border-bottom-left-radius:6px}
@@ -64,6 +66,8 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
 .btnSend{background:linear-gradient(135deg,#00d2ff,#0077ff);color:white}
 .btnCancel{background:#1a2a44;color:white;border:1px solid #293850!important}
 #photoCaption{margin-top:8px;width:100%;min-height:40px;padding:8px 12px;border-radius:12px;border:1px solid #293850;background:#0c192b;color:white;font-size:12px;resize:none;outline:none}
+.scroll-down{position:absolute;bottom:80px;right:20px;width:36px;height:36px;border-radius:50%;background:#00d2ff;color:#000;display:none;place-items:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.5);z-index:10;font-weight:800}
+.scroll-down.show{display:grid}
 @media(max-width:800px){.left{position:absolute;inset:54px 0 0;width:100%;z-index:20}.left.hide{display:none}.right{width:100%}.msg{max-width:88%}.msg-actions{display:flex;opacity:.9}}
 </style>
 </head>
@@ -81,14 +85,18 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
  <div class="list" id="list"></div>
  <div class="bottom-nav"><a href="index.html" class="btn btn-full">🏠 Accueil</a><a href="publications.html" class="btn btn-full">📢 Publications</a></div>
 </aside>
-<section class="right">
+<section class="right" style="position:relative">
  <div class="top" id="topBar"><div style="display:flex;align-items:center;gap:10px;min-width:0"><div class="av" id="chatAvatar">JB</div><div style="min-width:0"><h3 id="chatName" style="margin:0;font-size:14px">Sélectionne un chat</h3><small id="chatPhone" style="font-size:11px;opacity:.6">Clique ici pour revenir</small></div></div></div>
- <div class="msgs" id="msgs"><div style="margin:auto;opacity:.5;text-align:center">💬 Sélectionne un contact</div></div>
+ <div class="msgs" id="msgs">
+   <button id="loadMoreBtn" class="load-more">⬆️ Voir anciens messages</button>
+   <div id="msgsInner" style="display:flex;flex-direction:column;gap:8px"></div>
+ </div>
+ <div id="scrollDown" class="scroll-down">↓</div>
  <div class="input-area">
   <div id="photoPreview"><img id="previewImg" src=""><textarea id="photoCaption" placeholder="Légende..."></textarea><div class="preview-actions"><button class="btnCancel" id="cancelPhoto">✕ Annuler</button><button class="btnSend" id="confirmPhoto">➤ Envoyer</button></div></div>
   <div id="recBar" class="rec-bar"><div style="display:flex;align-items:center;gap:8px"><div style="width:10px;height:10px;background:#ff4757;border-radius:50%"></div><div id="recTime" style="font-weight:800;color:#ff6b7a">00:00</div><div style="font-size:11px">🔴 Enregistrement</div></div><div style="display:flex;gap:6px"><button id="recCancel" style="padding:6px 9px;border-radius:10px;border:1px solid #ff4757;background:#ff475722;color:#ff6b7a;font-size:11px">Annuler</button><button id="recSend" style="padding:6px 10px;border-radius:10px;border:0;background:#00d2ff;font-weight:800;font-size:11px">Envoyer</button></div></div>
   <div class="input"><label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*" hidden></label><button type="button" id="recordBtn" class="tbtn" disabled>🎙️</button><textarea id="msgInput" placeholder="Écris un message..." disabled rows="1"></textarea><button type="button" class="send" id="sendBtn" disabled>➤</button></div>
-  <div id="hint" style="text-align:center;font-size:9px;opacity:.6;margin-top:4px">✓ Envoyé • ✓✓ Reçu • ✓✓ Lu bleu = vraiment lu</div>
+  <div id="hint" style="text-align:center;font-size:9px;opacity:.6;margin-top:4px">Scroll en haut = anciens messages • 1,2,3 = non lus</div>
  </div>
 </section>
 </div>
@@ -103,6 +111,7 @@ const myPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getIt
 if(!myPhone){location.replace("login.html");throw new Error("Non connecté");}
 $("myPhoneShow").textContent=myPhone;
 let tab="chats",activeChat=null,allUsers={},myRequests={},myChats={},presenceCache={},manualUsers=[],messageUnsubscribe=null,recording=false,cancelled=false,mediaRecorder=null,audioChunks=[],recordStream=null,timerInt=null,recSec=0,busySending=false,pendingPhotoBase64=null;
+let allMessages=[], displayLimit=30;
 try{manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]");}catch{manualUsers=[];}
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function timeStr(ts){return ts?new Date(ts).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}):"";}
@@ -120,7 +129,6 @@ onValue(ref(db,"jasonBusiness/users"),s=>{allUsers=s.val()||{};render();});
 onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),s=>{myRequests=s.val()||{};const n=Object.values(myRequests).filter(r=>r.type==="incoming"&&r.status==="pending").length;$("reqCount").textContent=n;$("reqCount").style.display=n?"inline-block":"none";render();});
 onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),s=>{
   myChats=s.val()||{};
-  // TOTAL NON LUS POUR LE TAB CHATS
   const totalUnread=Object.values(myChats).reduce((sum,c)=>sum+(Number(c.unread)||0),0);
   $("totalUnread").textContent=totalUnread>99?'99+':totalUnread;
   $("totalUnread").style.display=totalUnread>0?"inline-block":"none";
@@ -155,25 +163,17 @@ function render(){
     const unread=Number(chat.unread)||0;
     const div=document.createElement("div");
     div.className="item"+(activeChat===other?" active":"")+(unread>0?" has-unread":"");
-    div.innerHTML=`
-      <div class="av">${photo?`<img src="${esc(photo)}">`:esc(other.slice(-2))}</div>
-      <div class="info">
-        <div class="name">${esc(allUsers[other]?.nom||other)} ${unread>0?`• <span style="color:#ff4757">${unread} nouveau</span>`:""}</div>
-        <div class="prev" style="${unread>0?'font-weight:700;opacity:1;color:white':''}">${esc((chat.lastMsg||"").slice(0,55))}</div>
-      </div>
-      <div class="right-info">
-        <div class="time">${timeStr(chat.lastTime)}</div>
-        ${unread>0?`<div class="unread-badge">${unread>99?'99+':unread}</div>`:""}
-      </div>`;
-    div.onclick=()=>openChat(other);
-    cont.appendChild(div);
+    div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(other.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[other]?.nom||other)}</div><div class="prev" style="${unread>0?'font-weight:700;color:white':''}">${esc((chat.lastMsg||"").slice(0,50))}</div></div><div class="right-info"><div class="time">${timeStr(chat.lastTime)}</div>${unread>0?`<div class="unread-badge">${unread>99?'99+':unread}</div>`:""}</div>`;
+    div.onclick=()=>openChat(other);cont.appendChild(div);
   });
  }
 }
 async function sendRequest(to){try{await Promise.all([set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${to}`),{phone:to,type:"outgoing",status:"pending",createdAt:Date.now()}),set(ref(db,`jasonBusiness/chat_requests/${to}/${myPhone}`),{phone:myPhone,type:"incoming",status:"pending",createdAt:Date.now()})]);alert("Demande envoyée !");}catch(e){alert(e.message);}}
 async function acceptRequest(from){try{const id=getChatId(myPhone,from);await Promise.all([set(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{with:from,status:"accepted",lastMsg:"Discussion acceptée",lastTime:Date.now(),unread:0}),set(ref(db,`jasonBusiness/user_chats/${from}/${id}`),{with:myPhone,status:"accepted",lastMsg:"Discussion acceptée",lastTime:Date.now(),unread:1}),remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${from}`)),remove(ref(db,`jasonBusiness/chat_requests/${from}/${myPhone}`))]);document.querySelector('[data-tab="chats"]').click();openChat(from);}catch(e){alert(e.message);}}
+
 function openChat(other){
- activeChat=other;if(messageUnsubscribe){messageUnsubscribe();messageUnsubscribe=null;}
+ activeChat=other; allMessages=[]; displayLimit=30;
+ if(messageUnsubscribe){messageUnsubscribe();messageUnsubscribe=null;}
  const photo=getUserPhoto(other);$("chatName").textContent=allUsers[other]?.nom||other;$("chatPhone").textContent=isOnline(other)?other+" • En ligne 🟢":"Hors ligne";$("chatAvatar").innerHTML=photo?`<img src="${esc(photo)}">`:esc(other.slice(-2));
  $("msgInput").disabled=false;$("sendBtn").disabled=false;$("recordBtn").disabled=false;
  if(innerWidth<=800)$("leftPanel").classList.add("hide");
@@ -181,55 +181,92 @@ function openChat(other){
  const id=getChatId(myPhone,other),messagesRef=ref(db,`jasonBusiness/messages/${id}`);
  const unsub=onValue(messagesRef,s=>{
    if(activeChat!==other)return;
-   const arr=Object.entries(s.val()||{}).map(([key,v])=>({...v,_key:key})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
-   renderMessages(arr);
-   markAsRead(id,arr).catch(()=>{});
-   markAsDelivered(id,arr).catch(()=>{});
+   allMessages=Object.entries(s.val()||{}).map(([key,v])=>({...v,_key:key})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+   renderMessages();
+   markAsRead(id,allMessages).catch(()=>{});
+   markAsDelivered(id,allMessages).catch(()=>{});
    update(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{unread:0}).catch(()=>{});
  });
  messageUnsubscribe=unsub;render();$("msgInput").focus();
 }
 async function markAsRead(id,arr){
   const changes={};
-  arr.forEach(m=>{
-    if(m.to===myPhone && m.from!==myPhone && m.from===activeChat && m.status!=="read"){
-      changes[`jasonBusiness/messages/${id}/${m._key}/status`]="read";
-      changes[`jasonBusiness/messages/${id}/${m._key}/readAt`]=Date.now();
-    }
-  });
+  arr.forEach(m=>{ if(m.to===myPhone && m.from!==myPhone && m.from===activeChat && m.status!=="read"){ changes[`jasonBusiness/messages/${id}/${m._key}/status`]="read"; changes[`jasonBusiness/messages/${id}/${m._key}/readAt`]=Date.now(); } });
   if(Object.keys(changes).length) await update(ref(db),changes);
 }
 async function markAsDelivered(id,arr){
   const changes={};
-  arr.forEach(m=>{
-    if(m.to===myPhone && m.from!==myPhone && m.status==="sent"){
-      changes[`jasonBusiness/messages/${id}/${m._key}/status`]="delivered";
-    }
-  });
+  arr.forEach(m=>{ if(m.to===myPhone && m.from!==myPhone && m.status==="sent"){ changes[`jasonBusiness/messages/${id}/${m._key}/status`]="delivered"; } });
   if(Object.keys(changes).length) await update(ref(db),changes);
 }
-function renderMessages(arr){
- const c=$("msgs");c.innerHTML="";if(!arr.length){c.innerHTML='<div style="margin:auto;opacity:.6;padding:20px;text-align:center">Début conversation</div>';return;}
- arr.forEach(m=>{
-  const mine=m.from===myPhone,div=document.createElement("div");div.className="msg "+(mine?"me":"other");
-  if(mine){
-    const acts=document.createElement("div");acts.className="msg-actions";
-    const btnDel=document.createElement("button");btnDel.className="del";btnDel.textContent="🗑️ Retirer";btnDel.onclick=()=>deleteMessage(m._key);acts.appendChild(btnDel);div.appendChild(acts);
-    let pressTimer;div.addEventListener("touchstart",()=>{pressTimer=setTimeout(()=>{if(confirm("Retirer ?"))deleteMessage(m._key);},600);});div.addEventListener("touchend",()=>clearTimeout(pressTimer));div.addEventListener("touchmove",()=>clearTimeout(pressTimer));
+
+// RENDU AVEC SCROLL ANCIENS MESSAGES
+function renderMessages(){
+  const container=$("msgs");
+  const inner=$("msgsInner");
+  const wasAtBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 150;
+  const prevHeight = container.scrollHeight;
+
+  const total=allMessages.length;
+  const start=Math.max(0,total-displayLimit);
+  const toShow=allMessages.slice(start);
+
+  $("loadMoreBtn").classList.toggle("show", start>0);
+  $("loadMoreBtn").textContent=`⬆️ Voir anciens messages (${start} restants)`;
+
+  inner.innerHTML="";
+  if(total===0){ inner.innerHTML='<div style="margin:auto;opacity:.6;padding:20px;text-align:center">Début conversation<br>Scroll en haut pour voir anciens</div>'; return; }
+
+  toShow.forEach(m=>{
+    const mine=m.from===myPhone,div=document.createElement("div");div.className="msg "+(mine?"me":"other");
+    if(mine){
+      const acts=document.createElement("div");acts.className="msg-actions";
+      const btnDel=document.createElement("button");btnDel.className="del";btnDel.textContent="🗑️ Retirer";btnDel.onclick=()=>deleteMessage(m._key);acts.appendChild(btnDel);div.appendChild(acts);
+      let pressTimer;div.addEventListener("touchstart",()=>{pressTimer=setTimeout(()=>{if(confirm("Retirer ?"))deleteMessage(m._key);},600);});div.addEventListener("touchend",()=>clearTimeout(pressTimer));div.addEventListener("touchmove",()=>clearTimeout(pressTimer));
+    }
+    if(m.text && !m.deleted){const t=document.createElement("div");t.textContent=m.text;div.appendChild(t);}
+    if(m.photo && !m.deleted){const w=document.createElement("div");w.className="photo-wrap";const img=document.createElement("img");img.src=m.photo;w.appendChild(img);div.appendChild(w);}
+    if(m.audio && !m.deleted){const a=document.createElement("audio");a.controls=true;a.src=m.audio;div.appendChild(a);}
+    if(m.deleted){const t=document.createElement("div");t.style.fontStyle="italic";t.style.opacity=".7";t.textContent="🚫 Message retiré";div.appendChild(t);}
+    const meta=document.createElement("div");meta.className="meta";const time=document.createElement("span");time.textContent=timeStr(m.createdAt);meta.appendChild(time);
+    if(mine && !m.deleted){
+      const st=document.createElement("span");
+      if(m.status==="read"){st.className="status read";st.textContent="✓✓ Lu";}else if(m.status==="delivered"){st.textContent="✓✓";}else{st.textContent="✓";}
+      meta.appendChild(st);
+    }
+    div.appendChild(meta);inner.appendChild(div);
+  });
+
+  // Garde position si on charge anciens, sinon scroll en bas
+  if(wasAtBottom || displayLimit===30){
+    container.scrollTop=container.scrollHeight;
+  }else{
+    container.scrollTop=container.scrollHeight - prevHeight + container.scrollTop;
   }
-  if(m.text && !m.deleted){const t=document.createElement("div");t.textContent=m.text;div.appendChild(t);}
-  if(m.photo && !m.deleted){const w=document.createElement("div");w.className="photo-wrap";const img=document.createElement("img");img.src=m.photo;w.appendChild(img);div.appendChild(w);}
-  if(m.audio && !m.deleted){const a=document.createElement("audio");a.controls=true;a.src=m.audio;div.appendChild(a);}
-  if(m.deleted){const t=document.createElement("div");t.style.fontStyle="italic";t.style.opacity=".7";t.textContent="🚫 Message retiré";div.appendChild(t);}
-  const meta=document.createElement("div");meta.className="meta";const time=document.createElement("span");time.textContent=timeStr(m.createdAt);meta.appendChild(time);
-  if(mine && !m.deleted){
-    const st=document.createElement("span");
-    if(m.status==="read"){st.className="status read";st.textContent="✓✓ Lu";}else if(m.status==="delivered"){st.textContent="✓✓";}else{st.textContent="✓";}
-    meta.appendChild(st);
-  }
-  div.appendChild(meta);c.appendChild(div);
- });c.scrollTop=c.scrollHeight;
+  checkScrollDown();
 }
+
+$("loadMoreBtn").onclick=()=>{
+  displayLimit+=30;
+  renderMessages();
+};
+
+$("msgs").addEventListener("scroll",()=>{
+  checkScrollDown();
+  // Auto charge quand on arrive tout en haut
+  if($("msgs").scrollTop<50 && allMessages.length>displayLimit){
+    displayLimit+=20;
+    renderMessages();
+  }
+});
+
+function checkScrollDown(){
+  const c=$("msgs");
+  const show=c.scrollHeight - c.scrollTop - c.clientHeight > 300;
+  $("scrollDown").classList.toggle("show",show);
+}
+$("scrollDown").onclick=()=>{ $("msgs").scrollTop=$("msgs").scrollHeight; };
+
 async function deleteMessage(msgKey){
   if(!activeChat || !msgKey) return;
   if(!confirm("🗑️ Retirer ce message pour tout le monde ?")) return;
