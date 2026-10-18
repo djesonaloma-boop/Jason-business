@@ -3,15 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#050a14">
-<title>JASON BUSINESS - Chat</title>
+<title>JASON BUSINESS - Chat FIX VOCAL</title>
 <style>
 :root{--blue:#00d2ff;--border:rgba(0,210,255,.18)}
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial;color:white;background:#050a14;display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
 header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:0 14px;background:#050a14;border-bottom:1px solid var(--border)}
 .brand{font-weight:900;color:var(--blue);font-size:14px}
-.btn{padding:8px 12px;border-radius:10px;border:1px solid rgba(0,210,255,.25);background:rgba(0,210,255,.08);color:var(--blue);font-size:11px;cursor:pointer;text-decoration:none;font-weight:700;text-align:center}
+.btn{padding:8px 12px;border-radius:10px;border:1px solid rgba(0,210,255,.25);background:rgba(0,210,255,.08);color:var(--blue);font-size:11px;cursor:pointer;text-decoration:none;font-weight:700}
 .btn-full{flex:1}
 .wrap{display:flex;flex:1;min-height:0;overflow:hidden}
 .left{width:360px;flex-shrink:0;background:#0b1425;border-right:1px solid var(--border);display:flex;flex-direction:column;min-height:0}
@@ -19,10 +18,10 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
 .tab{padding:12px 4px;text-align:center;font-size:11px;font-weight:700;cursor:pointer;opacity:.5;border-bottom:2px solid transparent}
 .tab.active{opacity:1;color:var(--blue);border-bottom-color:var(--blue)}
 .search{padding:10px;border-bottom:1px solid var(--border)}
-.search input,.add-box input{width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid #293850;background:#0c192b;color:white;outline:none}
-.list{flex:1;min-height:0;overflow-y:auto;padding:6px}
-.item{padding:10px;border-radius:12px;display:flex;gap:10px;align-items:center;cursor:pointer;margin-bottom:4px;border:1px solid transparent}
-.item.active{background:rgba(0,210,255,.14);border-color:var(--blue)}
+.search input,.add-box input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #293850;background:#0c192b;color:white;outline:none}
+.list{flex:1;overflow-y:auto;padding:6px}
+.item{padding:10px;border-radius:12px;display:flex;gap:10px;align-items:center;cursor:pointer;margin-bottom:4px}
+.item.active{background:rgba(0,210,255,.14);border:1px solid var(--blue)}
 .av{width:42px;height:42px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;overflow:hidden}
 .av img{width:100%;height:100%;object-fit:cover}
 .info{flex:1;min-width:0}
@@ -33,153 +32,85 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
 .top{flex-shrink:0;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,10,20,.95);cursor:pointer}
 .msgs{flex:1;min-height:0;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
 .msg{max-width:78%;padding:8px 12px;border-radius:18px;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere;position:relative;line-height:1.4}
-.msg.me{align-self:flex-end;background:linear-gradient(135deg,#00d2ff,#0077ff);border-bottom-right-radius:6px;color:white}
+.msg.me{align-self:flex-end;background:linear-gradient(135deg,#00d2ff,#0077ff);border-bottom-right-radius:6px}
 .msg.other{align-self:flex-start;background:rgba(255,255,255,.1);border-bottom-left-radius:6px}
 .photo-wrap{margin-top:6px;border-radius:12px;overflow:hidden;max-width:230px;background:#000;position:relative}
 .photo-wrap img,.photo-wrap video{width:100%;max-height:260px;object-fit:contain;display:block}
 .dl{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.7);color:white;padding:6px 9px;border-radius:8px;font-size:12px;text-decoration:none}
 .msg audio{margin-top:6px;width:min(230px,65vw);display:block}
-.meta{display:flex;justify-content:flex-end;align-items:center;gap:4px;margin-top:4px;font-size:10px;opacity:.85}
+.meta{display:flex;justify-content:flex-end;gap:4px;margin-top:4px;font-size:10px;opacity:.85}
 .status.read{color:#b9ffff;font-weight:800}
-.actions{display:none;gap:4px;position:absolute;top:-15px;right:8px;background:#0b1425;border:1px solid var(--border);border-radius:12px;padding:2px;z-index:5}
-.msg.me:hover .actions{display:flex}
-.act{padding:5px 8px;border-radius:8px;background:#14253b;cursor:pointer;font-size:11px;border:0;color:white}
-.input-area{flex-shrink:0;padding:6px 8px;background:#0a1425;border-top:1px solid var(--border);padding-bottom:max(6px,env(safe-area-inset-bottom))}
+.input-area{flex-shrink:0;padding:6px 8px;background:#0a1425;border-top:1px solid var(--border)}
 .rec-bar{display:none;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;background:#ff47571a;border:1px solid #ff4757aa;border-radius:20px;margin-bottom:6px}
 .rec-bar.show{display:flex}
 .input{display:flex;gap:6px;align-items:center}
-.photo-label{flex-shrink:0}
-.input textarea{flex:1;min-width:0;min-height:40px;max-height:100px;padding:10px 14px;border-radius:20px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none;font-size:13px;font-family:Arial}
-.input textarea:disabled{opacity:.5}
 .tbtn{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:1px solid #293850;background:#0c192b;color:white;display:grid;place-items:center;font-size:18px;cursor:pointer}
-.tbtn:disabled,.send:disabled{opacity:.35;cursor:not-allowed}
 .tbtn.hold{background:#ff4757!important;border-color:#ff4757;animation:pulse 1s infinite}
 @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
 .send{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:0;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;font-size:18px;cursor:pointer}
-#hint{overflow-wrap:anywhere}
-@media(max-width:800px){
- .left{position:absolute;inset:54px 0 0;width:100%;z-index:20}
- .left.hide{display:none}
- .right{width:100%}
- .msg{max-width:88%}
-}
+@media(max-width:800px){ .left{position:absolute;inset:54px 0 0;width:100%;z-index:20} .left.hide{display:none} .right{width:100%} .msg{max-width:88%} }
 </style>
 </head>
 <body>
-<header>
- <div class="brand">jason business — <span id="myPhoneShow" style="font-size:11px;opacity:.7"></span></div>
- <a href="dashboard.html" class="btn">Dash</a>
-</header>
-
+<header><div class="brand">jason business — <span id="myPhoneShow" style="font-size:11px;opacity:.7"></span></div><a href="dashboard.html" class="btn">Dash</a></header>
 <div class="wrap">
 <aside class="left" id="leftPanel">
- <div class="tabs">
-  <div class="tab active" data-tab="chats">💬 Chats</div>
-  <div class="tab" data-tab="users">👥 Utilisateurs</div>
-  <div class="tab" data-tab="requests">🔔 Demandes <span id="reqCount" style="background:#ff4757;color:white;padding:1px 5px;border-radius:10px;font-size:9px;display:none">0</span></div>
- </div>
- <div class="add-box" style="padding:8px 10px;display:flex;gap:6px;border-bottom:1px solid var(--border)">
-  <input id="manualPhone" placeholder="+243...">
-  <button class="btn" id="btnAddManual">+</button>
- </div>
- <div class="search"><input id="search" placeholder="🔍 Rechercher..."></div>
- <div class="list" id="list"></div>
- <div class="bottom-nav">
-  <a href="index.html" class="btn btn-full">🏠 Accueil</a>
-  <a href="publications.html" class="btn btn-full">📢 Publications</a>
- </div>
+<div class="tabs"><div class="tab active" data-tab="chats">💬 Chats</div><div class="tab" data-tab="users">👥 Utilisateurs</div><div class="tab" data-tab="requests">🔔 Demandes <span id="reqCount" style="background:#ff4757;color:white;padding:1px 5px;border-radius:10px;font-size:9px;display:none">0</span></div></div>
+<div class="add-box" style="padding:8px 10px;display:flex;gap:6px;border-bottom:1px solid var(--border)"><input id="manualPhone" placeholder="+243..."><button class="btn" id="btnAddManual">+</button></div>
+<div class="search"><input id="search" placeholder="🔍 Rechercher..."></div>
+<div class="list" id="list"></div>
+<div class="bottom-nav"><a href="index.html" class="btn btn-full">🏠 Accueil</a><a href="publications.html" class="btn btn-full">📢 Publications</a></div>
 </aside>
-
 <section class="right">
- <div class="top" id="topBar">
-  <div style="display:flex;align-items:center;gap:10px;min-width:0">
-   <div class="av" id="chatAvatar">JB</div>
-   <div style="min-width:0">
-    <h3 id="chatName" style="margin:0;font-size:14px;overflow:hidden;text-overflow:ellipsis">Sélectionne un chat</h3>
-    <small id="chatPhone" style="font-size:11px;opacity:.6">Clique ici pour revenir</small>
-   </div>
-  </div>
- </div>
-
- <div class="msgs" id="msgs">
-  <div style="margin:auto;opacity:.5;text-align:center">💬 Sélectionne un contact pour commencer</div>
- </div>
-
- <div class="input-area">
-  <div id="recBar" class="rec-bar">
-   <div style="display:flex;align-items:center;gap:8px;min-width:0">
-    <div style="width:10px;height:10px;background:#ff4757;border-radius:50%;flex-shrink:0"></div>
-    <div id="recTime" style="font-weight:800;color:#ff6b7a">00:00</div>
-    <div style="font-size:11px">🔴 Enregistrement</div>
-   </div>
-   <div style="display:flex;gap:6px;flex-shrink:0">
-    <button id="recCancel" style="padding:6px 9px;border-radius:10px;border:1px solid #ff4757;background:#ff475722;color:#ff6b7a;font-size:11px">Annuler</button>
-    <button id="recSend" style="padding:6px 10px;border-radius:10px;border:0;background:#00d2ff;font-weight:800;font-size:11px">Envoyer</button>
-   </div>
-  </div>
-  <div class="input">
-   <label class="tbtn photo-label" title="Ouvrir la galerie">🖼️
-    <input type="file" id="photoInput" accept="image/*,video/*" hidden>
-   </label>
-   <button type="button" id="recordBtn" class="tbtn" title="Appuie pour enregistrer" disabled>🎙️</button>
-   <textarea id="msgInput" placeholder="Écris un message..." disabled rows="1"></textarea>
-   <button type="button" class="send" id="sendBtn" disabled>➤</button>
-  </div>
-  <div id="hint" style="text-align:center;font-size:9px;opacity:.6;margin-top:4px">🖼️ Galerie • 🎙️ Vocal (appuie) • ➤ Texte</div>
- </div>
+<div class="top" id="topBar"><div style="display:flex;align-items:center;gap:10px"><div class="av" id="chatAvatar">JB</div><div><h3 id="chatName" style="margin:0;font-size:14px">Sélectionne un chat</h3><small id="chatPhone" style="font-size:11px;opacity:.6">Clique ici pour revenir</small></div></div></div>
+<div class="msgs" id="msgs"><div style="margin:auto;opacity:.5;text-align:center">💬 Sélectionne un contact</div></div>
+<div class="input-area">
+<div id="recBar" class="rec-bar"><div style="display:flex;align-items:center;gap:8px"><div style="width:10px;height:10px;background:#ff4757;border-radius:50%"></div><div id="recTime" style="font-weight:800;color:#ff6b7a">00:00</div><div style="font-size:11px">🔴 Enregistrement</div></div><div style="display:flex;gap:6px"><button id="recCancel" style="padding:6px 9px;border-radius:10px;border:1px solid #ff4757;background:#ff475722;color:#ff6b7a;font-size:11px">Annuler</button><button id="recSend" style="padding:6px 10px;border-radius:10px;border:0;background:#00d2ff;font-weight:800;font-size:11px">Envoyer</button></div></div>
+<div class="input"><label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*,video/*" hidden></label><button type="button" id="recordBtn" class="tbtn" disabled>🎙️</button><textarea id="msgInput" placeholder="Écris un message..." disabled rows="1"></textarea><button type="button" class="send" id="sendBtn" disabled>➤</button></div>
+<div id="hint" style="text-align:center;font-size:9px;opacity:.6;margin-top:4px">🖼️ Galerie • 🎙️ Vocal • ➤ Texte - VOCAL FIXÉ</div>
+</div>
 </section>
 </div>
-
 <script type="module">
 import {initializeApp,getApps,getApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {getDatabase,ref,onValue,push,set,get,remove,update,onDisconnect} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 import {getStorage,ref as sRef,uploadBytes,getDownloadURL} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
-
 const firebaseConfig={
  apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
  authDomain:"starlink-investit.firebaseapp.com",
  databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
  projectId:"starlink-investit",
- storageBucket:"starlink-investit.appspot.com",
+ storageBucket:"starlink-investit.firebasestorage.app",
  messagingSenderId:"807081599583",
  appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
 };
-
 const app=getApps().length?getApp():initializeApp(firebaseConfig);
 const db=getDatabase(app),storage=getStorage(app);
 const $=id=>document.getElementById(id);
 const myPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("phone");
-
 if(!myPhone){location.replace("login.html");throw new Error("Non connecté");}
 $("myPhoneShow").textContent=myPhone;
-
 let tab="chats",activeChat=null,allUsers={},myRequests={},myChats={},presenceCache={},manualUsers=[];
 let messageUnsubscribe=null,recording=false,cancelled=false,mediaRecorder=null,audioChunks=[],recordStream=null,timerInt=null,recSec=0,busySending=false;
-
-try{manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]");if(!Array.isArray(manualUsers))manualUsers=[];}catch{manualUsers=[];}
-
+try{manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]");}catch{manualUsers=[];}
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function timeStr(ts){return ts?new Date(ts).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}):"";}
 function getChatId(a,b){return [a,b].sort().join("_");}
 function isOnline(ph){const p=presenceCache[ph];return !!(p&&p.online&&Date.now()-(p.lastSeen||0)<90000);}
 function getUserPhoto(ph){const u=allUsers[ph]||{};return u.photo||u.photoProfil||u.avatar||"";}
-function setHint(s){$("hint").textContent=s;console.log(s);}
+function setHint(s){$("hint").textContent=s;}
 function stopTracks(){if(recordStream){recordStream.getTracks().forEach(t=>{try{t.stop()}catch{}});recordStream=null;}}
-
 const presenceRef=ref(db,`jasonBusiness/presence/${myPhone}`);
 set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:null}).catch(()=>{});
 onDisconnect(presenceRef).set({online:false,lastSeen:Date.now(),activeChat:null}).catch(()=>{});
 setInterval(()=>set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:activeChat}).catch(()=>{}),30000);
-onValue(ref(db,".info/connected"),s=>{if(s.val()===true)onDisconnect(presenceRef).set({online:false,lastSeen:Date.now(),activeChat:null}).catch(()=>{});});
 onValue(ref(db,"jasonBusiness/presence"),s=>{presenceCache=s.val()||{};render();if(activeChat)$("chatPhone").textContent=isOnline(activeChat)?activeChat+" • En ligne 🟢":"Hors ligne";});
 onValue(ref(db,"jasonBusiness/users"),s=>{allUsers=s.val()||{};render();});
 onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),s=>{myRequests=s.val()||{};const n=Object.values(myRequests).filter(r=>r.type==="incoming"&&r.status==="pending").length;$("reqCount").textContent=n;$("reqCount").style.display=n?"inline-block":"none";render();});
 onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),s=>{myChats=s.val()||{};render();});
-
 document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");tab=t.dataset.tab;render();});
 $("search").oninput=render;
 $("topBar").onclick=()=>{if(innerWidth<=800)$("leftPanel").classList.remove("hide");};
-
 $("btnAddManual").onclick=()=>{
  const p=$("manualPhone").value.trim();
  if(!p||p.length<8)return alert("Numéro invalide");
@@ -187,9 +118,7 @@ $("btnAddManual").onclick=()=>{
  if(!manualUsers.includes(p))manualUsers.push(p);
  localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));$("manualPhone").value="";render();
 };
-
 function getCombinedUsers(){const c={...allUsers};manualUsers.forEach(p=>{if(!c[p])c[p]={telephone:p};});return c;}
-
 function render(){
  const q=($("search").value||"").toLowerCase(),cont=$("list");cont.innerHTML="";
  const users=getCombinedUsers();
@@ -198,11 +127,8 @@ function render(){
    if(phone===myPhone)return;
    if(q&&!phone.toLowerCase().includes(q)&&!String(u.nom||"").toLowerCase().includes(q))return;
    const id=getChatId(myPhone,phone),friend=myChats[id]?.status==="accepted",sent=myRequests[phone]?.type==="outgoing"&&myRequests[phone]?.status==="pending",photo=getUserPhoto(phone);
-   const div=document.createElement("div");div.className="item";
-   div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(u.nom||phone)}</div><div class="prev">${esc(phone)}</div></div><div>${friend?"💬":sent?"⏳":"+"}</div>`;
-   div.onclick=()=>friend?openChat(phone):!sent&&sendRequest(phone);cont.appendChild(div);
+   const div=document.createElement("div");div.className="item";div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(u.nom||phone)}</div><div class="prev">${esc(phone)}</div></div><div>${friend?"💬":sent?"⏳":"+"}</div>`;div.onclick=()=>friend?openChat(phone):!sent&&sendRequest(phone);cont.appendChild(div);
   });
-  if(!cont.children.length)cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucun utilisateur</div>';
  }else if(tab==="requests"){
   const reqs=Object.entries(myRequests).filter(([_,r])=>r.type==="incoming"&&r.status==="pending");
   if(!reqs.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucune demande</div>';return;}
@@ -210,222 +136,84 @@ function render(){
  }else{
   const list=Object.entries(myChats).filter(([_,c])=>c.status==="accepted").sort((a,b)=>(b[1].lastTime||0)-(a[1].lastTime||0));
   if(!list.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucun chat. Va dans Utilisateurs.</div>';return;}
-  list.forEach(([id,chat])=>{const other=id.split("_").find(p=>p!==myPhone);if(!other)return;if(q&&!other.toLowerCase().includes(q)&&!String(allUsers[other]?.nom||"").toLowerCase().includes(q))return;const photo=getUserPhoto(other);const div=document.createElement("div");div.className="item"+(activeChat===other?" active":"");div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(other.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[other]?.nom||other)}</div><div class="prev">${esc((chat.lastMsg||"").slice(0,60))}</div></div><div style="font-size:9px">${timeStr(chat.lastTime)}</div>`;div.onclick=()=>openChat(other);cont.appendChild(div);});
+  list.forEach(([id,chat])=>{const other=id.split("_").find(p=>p!==myPhone);if(!other)return;const photo=getUserPhoto(other);const div=document.createElement("div");div.className="item"+(activeChat===other?" active":"");div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(other.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[other]?.nom||other)}</div><div class="prev">${esc((chat.lastMsg||"").slice(0,60))}</div></div><div style="font-size:9px">${timeStr(chat.lastTime)}</div>`;div.onclick=()=>openChat(other);cont.appendChild(div);});
  }
 }
-
-async function sendRequest(to){
- try{
-  await Promise.all([
-   set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${to}`),{phone:to,type:"outgoing",status:"pending",createdAt:Date.now()}),
-   set(ref(db,`jasonBusiness/chat_requests/${to}/${myPhone}`),{phone:myPhone,type:"incoming",status:"pending",createdAt:Date.now()})
-  ]);alert("Demande envoyée !");
- }catch(e){alert("Erreur: "+e.message);}
-}
-
-async function acceptRequest(from){
- try{
-  const id=getChatId(myPhone,from);
-  await Promise.all([
-   set(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{with:from,status:"accepted",lastMsg:"Discussion acceptée",lastTime:Date.now(),unread:0}),
-   set(ref(db,`jasonBusiness/user_chats/${from}/${id}`),{with:myPhone,status:"accepted",lastMsg:"Discussion acceptée",lastTime:Date.now(),unread:1}),
-   remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${from}`)),
-   remove(ref(db,`jasonBusiness/chat_requests/${from}/${myPhone}`))
-  ]);
-  document.querySelector('[data-tab="chats"]').click();openChat(from);
- }catch(e){alert("Erreur: "+e.message);}
-}
-
+async function sendRequest(to){try{await Promise.all([set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${to}`),{phone:to,type:"outgoing",status:"pending",createdAt:Date.now()}),set(ref(db,`jasonBusiness/chat_requests/${to}/${myPhone}`),{phone:myPhone,type:"incoming",status:"pending",createdAt:Date.now()})]);alert("Demande envoyée !");}catch(e){alert(e.message);}}
+async function acceptRequest(from){try{const id=getChatId(myPhone,from);await Promise.all([set(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{with:from,status:"accepted",lastMsg:"Discussion acceptée",lastTime:Date.now(),unread:0}),set(ref(db,`jasonBusiness/user_chats/${from}/${id}`),{with:myPhone,status:"accepted",lastMsg:"Discussion acceptée",lastTime:Date.now(),unread:1}),remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${from}`)),remove(ref(db,`jasonBusiness/chat_requests/${from}/${myPhone}`))]);document.querySelector('[data-tab="chats"]').click();openChat(from);}catch(e){alert(e.message);}}
 function openChat(other){
- activeChat=other;
- if(messageUnsubscribe){messageUnsubscribe();messageUnsubscribe=null;}
- const photo=getUserPhoto(other);
- $("chatName").textContent=allUsers[other]?.nom||other;
- $("chatPhone").textContent=isOnline(other)?other+" • En ligne 🟢":"Hors ligne";
- $("chatAvatar").innerHTML=photo?`<img src="${esc(photo)}">`:esc(other.slice(-2));
+ activeChat=other;if(messageUnsubscribe){messageUnsubscribe();messageUnsubscribe=null;}
+ const photo=getUserPhoto(other);$("chatName").textContent=allUsers[other]?.nom||other;$("chatPhone").textContent=isOnline(other)?other+" • En ligne 🟢":"Hors ligne";$("chatAvatar").innerHTML=photo?`<img src="${esc(photo)}">`:esc(other.slice(-2));
  $("msgInput").disabled=false;$("sendBtn").disabled=false;$("recordBtn").disabled=false;
  if(innerWidth<=800)$("leftPanel").classList.add("hide");
  set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:other}).catch(()=>{});
  const id=getChatId(myPhone,other),messagesRef=ref(db,`jasonBusiness/messages/${id}`);
- const unsub=onValue(messagesRef,s=>{
-  if(activeChat!==other)return;
-  const arr=Object.entries(s.val()||{}).map(([key,v])=>({...v,_key:key})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
-  renderMessages(arr);
-  markAsRead(id,arr).catch(()=>{});
-  update(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{unread:0}).catch(()=>{});
- },e=>setHint("Erreur: "+e.message));
+ const unsub=onValue(messagesRef,s=>{if(activeChat!==other)return;const arr=Object.entries(s.val()||{}).map(([key,v])=>({...v,_key:key})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));renderMessages(arr);markAsRead(id,arr).catch(()=>{});update(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{unread:0}).catch(()=>{});},e=>setHint("Erreur: "+e.message));
  messageUnsubscribe=unsub;render();$("msgInput").focus();
 }
-
-async function markAsRead(id,arr){
- const changes={};
- arr.forEach(m=>{if(m.to===myPhone&&m.status!=="read"){changes[`jasonBusiness/messages/${id}/${m._key}/status`]="read";changes[`jasonBusiness/messages/${id}/${m._key}/readAt`]=Date.now();}});
- if(Object.keys(changes).length)await update(ref(db),changes);
-}
-
+async function markAsRead(id,arr){const changes={};arr.forEach(m=>{if(m.to===myPhone&&m.status!=="read"){changes[`jasonBusiness/messages/${id}/${m._key}/status`]="read";changes[`jasonBusiness/messages/${id}/${m._key}/readAt`]=Date.now();}});if(Object.keys(changes).length)await update(ref(db),changes);}
 function renderMessages(arr){
- const c=$("msgs");c.innerHTML="";
- if(!arr.length){c.innerHTML='<div style="margin:auto;opacity:.6;padding:20px;text-align:center">Début conversation. Envoie ton premier message!</div>';return;}
+ const c=$("msgs");c.innerHTML="";if(!arr.length){c.innerHTML='<div style="margin:auto;opacity:.6;padding:20px;text-align:center">Début conversation.</div>';return;}
  arr.forEach(m=>{
   const mine=m.from===myPhone,div=document.createElement("div");div.className="msg "+(mine?"me":"other");
   if(m.text){const t=document.createElement("div");t.textContent=m.text;div.appendChild(t);}
-  if(m.photo){
-   const w=document.createElement("div");w.className="photo-wrap";
-   const media=document.createElement(m.type==="video"?"video":"img");
-   if(m.type==="video"){media.controls=true;media.playsInline=true;}else{media.alt="Photo";media.loading="lazy";media.onclick=()=>window.open(m.photo,"_blank","noopener");}
-   media.src=m.photo;w.appendChild(media);
-   const a=document.createElement("a");a.className="dl";a.href=m.photo;a.target="_blank";a.rel="noopener";a.textContent="⬇️";w.appendChild(a);div.appendChild(w);
-  }
+  if(m.photo){const w=document.createElement("div");w.className="photo-wrap";const media=document.createElement(m.type==="video"?"video":"img");if(m.type==="video"){media.controls=true;media.playsInline=true;}else{media.loading="lazy";media.onclick=()=>window.open(m.photo,"_blank");}media.src=m.photo;w.appendChild(media);const a=document.createElement("a");a.className="dl";a.href=m.photo;a.target="_blank";a.textContent="⬇️";w.appendChild(a);div.appendChild(w);}
   if(m.audio){const a=document.createElement("audio");a.controls=true;a.preload="metadata";a.src=m.audio;div.appendChild(a);}
-  const meta=document.createElement("div");meta.className="meta";
-  const time=document.createElement("span");time.textContent=timeStr(m.createdAt);meta.appendChild(time);
-  if(mine){const st=document.createElement("span");st.className=m.status==="read"?"status read":"";st.textContent=m.status==="read"?"✓✓ Lu":"✓";meta.appendChild(st);}
-  div.appendChild(meta);
-  if(mine){const acts=document.createElement("div");acts.className="actions";const b=document.createElement("button");b.className="act";b.textContent="🗑️";b.onclick=()=>deleteMessage(getChatId(myPhone,activeChat),m._key);acts.appendChild(b);div.appendChild(acts);}
-  c.appendChild(div);
- });
- c.scrollTop=c.scrollHeight;
+  const meta=document.createElement("div");meta.className="meta";const time=document.createElement("span");time.textContent=timeStr(m.createdAt);meta.appendChild(time);if(mine){const st=document.createElement("span");st.className=m.status==="read"?"status read":"";st.textContent=m.status==="read"?"✓✓ Lu":"✓";meta.appendChild(st);}div.appendChild(meta);c.appendChild(div);
+ });c.scrollTop=c.scrollHeight;
 }
-
-async function deleteMessage(id,key){
- if(!confirm("Supprimer pour tous?"))return;
- try{await remove(ref(db,`jasonBusiness/messages/${id}/${key}`));}catch(e){alert(e.message);}
-}
-
 async function publishMessage(other,fields,lastMsg){
  const id=getChatId(myPhone,other),now=Date.now();
  await set(push(ref(db,`jasonBusiness/messages/${id}`)),{...fields,from:myPhone,to:other,createdAt:now,status:"sent"});
  const a=ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),b=ref(db,`jasonBusiness/user_chats/${other}/${id}`);
- const [sa,sb]=await Promise.all([get(a),get(b)]);
- const da=sa.val()||{},dbb=sb.val()||{};
- await Promise.all([
-  set(a,{...da,with:other,status:"accepted",lastMsg,lastTime:now,unread:0}),
-  set(b,{...dbb,with:myPhone,status:"accepted",lastMsg,lastTime:now,unread:(Number(dbb.unread)||0)+1})
- ]);
+ const [sa,sb]=await Promise.all([get(a),get(b)]);const da=sa.val()||{},dbb=sb.val()||{};
+ await Promise.all([set(a,{...da,with:other,status:"accepted",lastMsg,lastTime:now,unread:0}),set(b,{...dbb,with:myPhone,status:"accepted",lastMsg,lastTime:now,unread:(Number(dbb.unread)||0)+1})]);
 }
-
-async function sendText(){
- if(busySending)return;
- const text=$("msgInput").value.trim();if(!text||!activeChat)return;
- const other=activeChat;busySending=true;$("sendBtn").disabled=true;
- try{$("msgInput").value="";await publishMessage(other,{text},text);setHint("✅ Envoyé");}
- catch(e){$("msgInput").value=text;alert("Erreur: "+e.message);}
- finally{busySending=false;$("sendBtn").disabled=!activeChat;$("msgInput").focus();}
-}
+async function sendText(){if(busySending)return;const text=$("msgInput").value.trim();if(!text||!activeChat)return;const other=activeChat;busySending=true;$("sendBtn").disabled=true;try{$("msgInput").value="";await publishMessage(other,{text},text);setHint("✅ Envoyé");}catch(e){$("msgInput").value=text;alert(e.message);}finally{busySending=false;$("sendBtn").disabled=!activeChat;$("msgInput").focus();}}
 $("sendBtn").onclick=sendText;
 $("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText();}});
-
 $("photoInput").addEventListener("change",async e=>{
- const file=e.target.files?.[0];if(!file)return;
- if(!activeChat){alert("Ouvre un chat d'abord");e.target.value="";return;}
- if(file.size>50*1024*1024){alert("50Mo max");e.target.value="";return;}
+ const file=e.target.files?.[0];if(!file)return;if(!activeChat){alert("Ouvre un chat");e.target.value="";return;}
+ if(file.size>20*1024*1024){alert("20Mo max");e.target.value="";return;}
  const other=activeChat,isVideo=file.type.startsWith("video/");
- $("photoInput").disabled=true;setHint("⏳ Envoi "+(isVideo?"vidéo":"photo")+"...");
- try{
-  const name=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
-  const path=`files/${getChatId(myPhone,other)}/${Date.now()}_${name}`;
-  const fr=sRef(storage,path);await uploadBytes(fr,file);const url=await getDownloadURL(fr);
-  await publishMessage(other,{photo:url,type:isVideo?"video":"image",text:isVideo?"🎬 Vidéo":"📷 Photo"},isVideo?"🎬 Vidéo":"📷 Photo");
-  setHint("✅ Envoyé!");
- }catch(err){alert("Erreur photo: "+err.message+"\nVérifie Firebase Storage Rules!");setHint("❌ Storage bloqué");}
- finally{e.target.value="";$("photoInput").disabled=false;}
+ $("photoInput").disabled=true;setHint("⏳ Photo...");
+ try{const name=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");const path=`files/${getChatId(myPhone,other)}/${Date.now()}_${name}`;const fr=sRef(storage,path);await uploadBytes(fr,file);const url=await getDownloadURL(fr);await publishMessage(other,{photo:url,type:isVideo?"video":"image",text:isVideo?"🎬 Vidéo":"📷 Photo"},isVideo?"🎬 Vidéo":"📷 Photo");setHint("✅ Envoyé!");}catch(err){alert("Erreur photo: "+err.message+"\nVa sur Firebase Storage → Rules → allow read, write: if true");setHint("❌ Storage bloqué");}finally{e.target.value="";$("photoInput").disabled=false;}
 });
-
-// ======== VOCAL CORRIGÉ POUR APK ========
+// === VOCAL FIX SANS STORAGE ===
 function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");}
-function clearRecordingUI(){
- clearInterval(timerInt);timerInt=null;$("recBar").classList.remove("show");
- $("recordBtn").classList.remove("hold");$("recordBtn").textContent="🎙️";
- $("recordBtn").disabled=!activeChat;$("photoInput").disabled=false;
-}
+function clearRecordingUI(){clearInterval(timerInt);timerInt=null;$("recBar").classList.remove("show");$("recordBtn").classList.remove("hold");$("recordBtn").textContent="🎙️";$("recordBtn").disabled=!activeChat;}
 function stopRecorder(){if(mediaRecorder&&mediaRecorder.state!=="inactive"){try{mediaRecorder.stop();}catch{}}}
-
 async function toggleVocal(){
- if(recording){ stopRecorder(); return; }
- if(!activeChat){ alert("Sélectionne un chat"); return; }
- if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
-   alert("🎙️ Microphone non disponible.\n\nDans ton APK:\n1. Va sur web2apkpro.com\n2. Active ✅ Enable Microphone / Record Audio\n3. Re-génère l'APK\n\nEt sur Android:\nParamètres → Apps → Jason Business → Autorisations → Microphone → Autoriser");
-   return;
- }
+ if(recording){stopRecorder();return;}
+ if(!activeChat){alert("Sélectionne un chat");return;}
+ if(!navigator.mediaDevices?.getUserMedia){alert("Micro non supporté. Dans web2apkpro active Microphone + regénère APK + Android → Apps → Jason Business → Permissions → Microphone Autoriser");return;}
  try{
-  setHint("🎙️ Demande micro...");
-  recordStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  audioChunks=[]; recSec=0; cancelled=false; recording=true;
-
-  // Choisir le meilleur format supporté
-  let mimeType = "";
-  if(MediaRecorder.isTypeSupported("audio/webm;codecs=opus")) mimeType="audio/webm;codecs=opus";
-  else if(MediaRecorder.isTypeSupported("audio/webm")) mimeType="audio/webm";
-  else if(MediaRecorder.isTypeSupported("audio/mp4")) mimeType="audio/mp4";
-  
-  mediaRecorder = mimeType ? new MediaRecorder(recordStream, {mimeType}) : new MediaRecorder(recordStream);
-  const other = activeChat;
-
-  mediaRecorder.ondataavailable = e => { if(e.data && e.data.size>0) audioChunks.push(e.data); };
-  
-  mediaRecorder.onstop = async () => {
-    const wasCancelled = cancelled;
-    const chunks = [...audioChunks];
-    recording=false; 
-    clearInterval(timerInt);
-    clearRecordingUI();
-    stopTracks();
-    audioChunks=[];
-
-    if(wasCancelled){ setHint("Annulé"); return; }
-    if(!chunks.length){ setHint("Aucun son capturé"); return; }
-
-    const blob = new Blob(chunks, {type: mediaRecorder.mimeType || "audio/webm"});
-    if(blob.size < 800){ setHint("Trop court, réessaie"); return; }
-
-    $("sendBtn").disabled=true; $("recordBtn").disabled=true;
-    setHint("⏳ Envoi vocal... "+Math.round(blob.size/1024)+"ko");
-
-    try{
-      const ext = blob.type.includes("mp4") ? "mp4" : "webm";
-      const ar = sRef(storage, `vocals/${getChatId(myPhone,other)}/${Date.now()}.${ext}`);
-      await uploadBytes(ar, blob, {contentType: blob.type});
-      const url = await getDownloadURL(ar);
-      await publishMessage(other, {audio:url, type:"audio", text:"🎙️ Vocal"}, "🎙️ Vocal");
-      setHint("✅ Vocal envoyé!");
-    }catch(err){
-      console.error(err);
-      alert("❌ Échec envoi vocal:\n"+err.message+"\n\nVÉRIFIE:\n1. Firebase Storage Rules = allow read, write: if true\n2. Tu es connecté à internet\n3. Recharge la page");
-      setHint("❌ Erreur Storage");
-    }finally{
-      $("sendBtn").disabled=false; $("recordBtn").disabled=!activeChat;
-    }
+  setHint("🎙️ Micro...");
+  recordStream=await navigator.mediaDevices.getUserMedia({audio:true});
+  audioChunks=[];recSec=0;cancelled=false;recording=true;
+  let mimeType="";if(MediaRecorder.isTypeSupported("audio/webm;codecs=opus"))mimeType="audio/webm;codecs=opus";else if(MediaRecorder.isTypeSupported("audio/webm"))mimeType="audio/webm";else if(MediaRecorder.isTypeSupported("audio/mp4"))mimeType="audio/mp4";
+  mediaRecorder=mimeType?new MediaRecorder(recordStream,{mimeType}):new MediaRecorder(recordStream);
+  const other=activeChat;
+  mediaRecorder.ondataavailable=e=>{if(e.data&&e.data.size>0)audioChunks.push(e.data);};
+  mediaRecorder.onstop=async()=>{
+    const wasCancelled=cancelled;const chunks=[...audioChunks];recording=false;clearInterval(timerInt);clearRecordingUI();stopTracks();audioChunks=[];
+    if(wasCancelled||!chunks.length){setHint("Annulé");return;}
+    const blob=new Blob(chunks,{type:mediaRecorder.mimeType||"audio/webm"});
+    if(blob.size<800){setHint("Trop court");return;}
+    setHint("⏳ Envoi...");
+    const reader=new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend=async()=>{
+      try{const base64Audio=reader.result;await publishMessage(other,{audio:base64Audio,type:"audio",text:"🎙️ Vocal"},"🎙️ Vocal");setHint("✅ Vocal envoyé!");}catch(err){alert("Erreur: "+err.message);setHint("❌ Erreur");}
+    };
   };
-
   mediaRecorder.start(200);
-  $("recBar").classList.add("show");
-  $("recordBtn").classList.add("hold");
-  $("recordBtn").textContent="⏹️";
-  $("photoInput").disabled=true;
-  $("recTime").textContent="00:00";
-  setHint("🔴 Enregistrement... Appuie sur Envoyer quand fini");
-  timerInt=setInterval(()=>{ recSec++; $("recTime").textContent=fmt(recSec); if(recSec>=120) stopRecorder(); },1000);
-
- }catch(err){
-  recording=false; stopTracks(); clearRecordingUI();
-  console.error(err);
-  if(err.name==="NotAllowedError") alert("🚫 Micro refusé!\nAndroid → Paramètres → Apps → Jason Business → Permissions → Microphone → Autoriser");
-  else if(err.name==="NotFoundError") alert("Aucun micro trouvé sur ce téléphone");
-  else alert("Erreur micro: "+err.name+" - "+err.message);
-  setHint("Micro bloqué");
- }
+  $("recBar").classList.add("show");$("recordBtn").classList.add("hold");$("recordBtn").textContent="⏹️";$("recTime").textContent="00:00";setHint("🔴 Enregistrement...");timerInt=setInterval(()=>{recSec++;$("recTime").textContent=fmt(recSec);if(recSec>=60)stopRecorder();},1000);
+ }catch(err){recording=false;stopTracks();clearRecordingUI();if(err.name==="NotAllowedError")alert("🚫 Micro refusé! Paramètres → Apps → Jason Business → Autorisations → Microphone → Autoriser");else alert("Erreur micro: "+err.message);setHint("Micro bloqué");}
 }
-
-$("recordBtn").addEventListener("click", toggleVocal);
-$("recSend").addEventListener("click", ()=>{ if(recording) stopRecorder(); });
-$("recCancel").addEventListener("click", ()=>{
-  if(!recording) return;
-  cancelled=true; 
-  audioChunks=[];
-  stopRecorder();
-  setHint("Annulé");
-});
-window.addEventListener("beforeunload",()=>{ if(messageUnsubscribe) messageUnsubscribe(); clearInterval(timerInt); stopTracks(); });
+$("recordBtn").addEventListener("click",toggleVocal);
+$("recSend").addEventListener("click",()=>{if(recording)stopRecorder();});
+$("recCancel").addEventListener("click",()=>{if(!recording)return;cancelled=true;audioChunks=[];stopRecorder();setHint("Annulé");});
 </script>
 </body>
 </html>
