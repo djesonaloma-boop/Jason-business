@@ -58,23 +58,15 @@ footer{text-align:center;padding:22px 15px;border-top:1px solid var(--border);fo
  </section>
 </main>
 <footer><span>JASON BUSINESS</span> · Services numériques<br>Créé par Jason Aloma 🇨🇩</footer>
-
 <div class="overlay" id="boostModal"><section class="modal"><div class="modal-head"><h2>📈 Boostage — Prix auto + VIP</h2><button class="close" data-close="boostModal">×</button></div><p class="muted">Solde: <b id="soldeInBoost" style="color:#00d4ff">Chargement...</b></p><div class="platforms" id="platformGrid"></div><form id="boostForm"><div class="field"><label>Plateforme</label><input id="boostPlatform" name="platform" readonly required></div><div class="field"><label>Service</label><select id="boostType" name="type" required><option value="followers">Followers — 50 FC / unité</option><option value="likes">Likes — 35 FC / unité</option><option value="views">Vues — 20 FC / unité</option></select></div><div class="field"><label>Lien public *</label><input id="boostLink" name="link" type="url" required placeholder="https://..."></div><div class="field"><label>Quantité (min 10) *</label><input id="boostBudget" name="budget" type="number" min="10" value="10" required></div><div class="field"><label>Téléphone *</label><input id="boostPhone" name="phone" type="tel" required></div><div class="total"><span>Quantité</span><strong id="boostQuantity">10 unités</strong></div><div class="total"><span>Prix total</span><strong id="boostPrice" style="color:#00d4ff;font-size:18px">500 FC</strong></div><button class="btn gold" type="submit" style="width:100%">📤 Payer et envoyer</button><div class="status" id="boostStatus"></div></form></section></div>
-
 <div class="overlay" id="appModal"><section class="modal"><div class="modal-head"><h2>📱 Application — 10 000 FC</h2><button class="close" data-close="appModal">×</button></div><p class="muted">Solde: <b id="soldeInApp" style="color:#00d4ff"></b></p><form id="appForm"><div class="field"><label>Nom *</label><input id="appName" name="appName" required maxlength="100"></div><div class="field"><label>Icône *</label><input id="appIcon" name="appIconFile" type="file" accept="image/*" required><img id="appIconPreview" class="preview"></div><div class="field"><label>Lien du site *</label><input id="appUrl" name="appUrl" type="url" required placeholder="https://jason-business.vercel.app"></div><div class="field"><label>Description *</label><textarea id="appDescription" name="description" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="appWhatsapp" name="whatsapp" type="tel" required></div><div class="total"><span>Prix Application</span><strong id="priceApp">10 000 FC</strong></div><button class="btn gold" type="submit" id="appSubmitBtn" style="width:100%">📤 Commander — 10 000 FC</button><div class="status" id="appStatus"></div></form></section></div>
-
 <div class="overlay" id="siteModal"><section class="modal"><div class="modal-head"><h2>🌐 Commander mon site</h2><button class="close" data-close="siteModal">×</button></div><div class="field"><label>Catalogue (24 choix)</label><div id="siteCatalog" class="site-catalog"></div></div><form id="siteForm"><input type="hidden" id="siteType" name="siteType"><input type="hidden" id="sitePrice" name="price"><div class="field"><label>Nom du site *</label><input id="siteName" name="siteName" required></div><div class="field"><label>Description *</label><textarea id="siteDescription" name="description" required></textarea></div><div class="field"><label>Fonctionnalités *</label><textarea id="siteFeatures" name="features" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="siteWhatsapp" name="whatsapp" type="tel" required></div><div class="total"><span>Site choisi</span><strong id="selectedSiteName">Aucun</strong></div><div class="total"><span>Prix</span><strong id="selectedSitePrice">0 FC</strong></div><button class="btn gold" id="siteSubmitBtn" type="submit" style="width:100%;min-height:45px">📤 Commander le site</button><div class="status" id="siteStatus"></div></form></section></div>
-
 <div class="overlay" id="chatModal"><section class="modal"><div class="modal-head"><h2>🤖 Chatbot — 7 000 FC</h2><button class="close" data-close="chatModal">×</button></div><form id="chatForm"><div class="field"><label>Nom *</label><input id="chatName" name="chatName" required></div><div class="field"><label>Fonctionnalités *</label><textarea id="chatFeatures" name="features" required></textarea></div><div class="field"><label>Créateur *</label><input id="chatCreator" name="creator" required value="Jason Aloma"></div><div class="field"><label>Description *</label><textarea id="chatDescription" name="description" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="chatWhatsapp" name="whatsapp" type="tel" required></div><div class="total"><span>Prix</span><strong id="priceChat">7 000 FC</strong></div><button class="btn gold" type="submit" style="width:100%">📤 Commander — 7 000 FC</button><div class="status" id="chatStatus"></div></form></section></div>
-
 <div class="overlay" id="musicModal"><section class="modal"><div class="modal-head"><h2>🎵 Chanson — 5 000 FC</h2><button class="close" data-close="musicModal">×</button></div><p class="muted">Solde: <b id="soldeInMusic" style="color:#00d4ff"></b></p><form id="musicForm"><div class="field"><label>Titre *</label><input id="musicTitleInput" name="title" required></div><div class="field"><label>Paroles *</label><textarea id="musicLyrics" name="lyrics" required style="min-height:180px"></textarea></div><div class="field"><label>Style *</label><select id="musicStyle" name="style" required><option>Afrobeat</option><option>Afropop</option><option>Rumba congolaise</option><option>Ndombolo</option><option>Gospel</option><option>Hip-hop</option><option>Rap</option></select></div><div class="total"><span>Prix</span><strong id="priceMusic">5 000 FC</strong></div><button class="btn gold" id="generateSongBtn" type="submit" style="width:100%">🎶 Payer 5 000 FC et générer</button><div class="status" id="musicStatus"></div><div id="musicResult"></div></form></section></div>
-
 <div class="overlay" id="adsModal"><section class="modal"><div class="modal-head"><h2>📣 Pub gratuite</h2><button class="close" data-close="adsModal">×</button></div><form id="adsForm"><div class="field"><label>Titre *</label><input id="adsTitleInput" name="title" required></div><div class="field"><label>Texte *</label><textarea id="adsText" name="text" required></textarea></div><div class="field"><label>Lien *</label><input id="adsUrl" name="url" type="url" required></div><button class="btn green" type="submit" style="width:100%">✨ Créer gratuitement</button><div class="status" id="adStatus"></div><div id="adsResult"></div></form></section></div>
 <div class="overlay" id="qrModal"><section class="modal"><div class="modal-head"><h2>▦ QR Code</h2><button class="close" data-close="qrModal">×</button></div><div class="field"><label>Lien *</label><textarea id="qrText" required></textarea></div><button class="btn gold" id="generateQrBtn" type="button" style="width:100%">Générer</button><div id="qrStatus" class="status"></div><div id="qrResult"></div><button class="btn green" id="downloadQrBtn" type="button" style="width:100%" disabled>Télécharger</button></section></div>
 <div class="overlay" id="historyModal"><section class="modal"><div class="modal-head"><h2>📋 Mes demandes</h2><button class="close" data-close="historyModal">×</button></div><div id="historyList"></div><button class="btn" id="clearHistory" style="width:100%;margin-top:12px">Actualiser solde</button></section></div>
-
 <nav class="bottom-nav" id="bottomNav"><a href="dashboard.html" class="nav-item"><span class="icon">📊</span><span>Dash</span></a><a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span>Shop</span></a><a href="equipe.html" class="nav-item"><span class="icon">👥</span><span>Équipe</span></a><a href="profil.html" class="nav-item"><span class="icon">👤</span><span>Profil</span></a></nav>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script type="module">
 import {initializeApp,getApps,getApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -87,12 +79,10 @@ const $=id=>document.getElementById(id);
 const HISTORY_KEY="jasonBusinessBoutiqueOrdersV3";
 const VIP_KEY="jasonBusinessVip30";
 const VIP_DISCOUNTS={Bronze:10,Silver:15,Gold:20,Platinum:25,Diamond:30,Aucun:0};
-
 let currentBalance = 0;
 let currentUserRef = null;
 let currentPhone = localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("phone")||"";
 if(currentPhone){ currentUserRef = ref(db, `jasonBusiness/users/${currentPhone}`); }
-
 function formatFC(n){return Number(n).toLocaleString("fr-FR")+" FC";}
 function getVipInfo(){try{const raw=localStorage.getItem(VIP_KEY);if(!raw)return null;const v=JSON.parse(raw);if(!v.expiresAt||Date.now()>v.expiresAt){localStorage.removeItem(VIP_KEY);return null;}return v;}catch{return null;}}
 function getVipDiscount(){const v=getVipInfo();return v? (VIP_DISCOUNTS[v.level]||0):0;}
@@ -102,7 +92,6 @@ window.activateVip=activateVip;
 function applyDiscount(price){const disc=getVipDiscount();if(disc<=0)return {original:price,final:price,discount:0};const final=Math.floor(price*(1-disc/100));return {original:price,final,discount:disc};}
 function formatPriceVIP(price){const p=applyDiscount(price);if(p.discount<=0)return `${p.final.toLocaleString("fr-FR")} FC`;return `<span style="text-decoration:line-through;color:#94a3b8;font-size:10px">${p.original.toLocaleString("fr-FR")} FC</span> <span style="color:#22c55e;font-weight:900">${p.final.toLocaleString("fr-FR")} FC -${p.discount}%</span>`;}
 function formatPricePureVIP(price){const p=applyDiscount(price);if(p.discount<=0)return `${p.final.toLocaleString("fr-FR")} FC`;return `${p.final.toLocaleString("fr-FR")} FC (-${p.discount}%)`;}
-
 function renderBalance(total){
   currentBalance = Number(total)||0;
   const vip=getVipInfo();
@@ -113,44 +102,35 @@ function renderBalance(total){
   if($("soldeInApp")) $("soldeInApp").innerHTML=sub;
   if($("soldeInMusic")) $("soldeInMusic").innerHTML=sub;
 }
-
 function getBalance(){ return currentBalance; }
-
 async function setBalanceFirebase(newTotal){
-  // si Firebase connecté, on écrit dans solde_principal
   if(currentUserRef){
-    // on garde la logique simple: on met à jour solde_principal
-    // on calcule la différence entre ancien total et nouveau
-    // Mais pour simplifier, on fait un transaction qui set le total dans solde_principal
     try{
       await runTransaction(currentUserRef, curr=>{
         if(!curr) return;
         const comm = Number(curr.solde_commissions||0);
         const gains = Number(curr.solde_gains||0);
-        // On veut que total = newTotal => principal = newTotal - comm - gains
         curr.solde_principal = Math.max(0, Number(newTotal) - comm - gains);
+        if(curr.solde!==undefined) curr.solde = curr.solde_principal;
         return curr;
       });
       return true;
     }catch(e){ console.log(e); return false; }
   } else {
-    // fallback localStorage ancien système
     localStorage.setItem("jasonBusinessSoldeV4", String(newTotal));
     renderBalance(newTotal);
     return true;
   }
 }
-
 async function deductBalance(amount){
   amount = Number(amount)||0;
   if(currentBalance < amount) return false;
-  const newTotal = currentBalance - amount;
+  renderBalance(currentBalance - amount);
+  const newTotal = currentBalance;
   const ok = await setBalanceFirebase(newTotal);
-  if(!ok) return false;
-  // l'affichage sera mis à jour par onValue
+  if(!ok) { renderBalance(newTotal + amount); return false; }
   return true;
 }
-
 function cleanUrl(u){if(!u)return"";u=u.trim();u=u.replace(/^htmps:\/\//i,"https://").replace(/^htps:\/\//i,"https://");if(!u.startsWith("http"))u="https://"+u;return u;}
 function show(id){$(id).classList.add("show");document.body.style.overflow="hidden";$("bottomNav").style.display="none";}
 function hide(id){$(id).classList.remove("show");if(!document.querySelector(".overlay.show")){document.body.style.overflow="";$("bottomNav").style.display="grid";}}
@@ -177,8 +157,6 @@ function updateAllPrices(){
   const appBtn=$("appSubmitBtn"); if(appBtn){const p=applyDiscount(10000);appBtn.textContent=`📤 Commander — ${p.final.toLocaleString("fr-FR")} FC${p.discount?` (-${p.discount}%)`:""}`;}
 }
 buildPlatforms();calculateBoost();
-
-// ====== CONNEXION SOLDE TEMPS RÉEL FIREBASE ======
 if(currentUserRef){
   $("soldeDisplay").innerHTML = "⏳ Chargement...";
   onValue(currentUserRef, snap=>{
@@ -190,29 +168,20 @@ if(currentUserRef){
     const total=principal+commissions+gains;
     renderBalance(total);
     updateAllPrices();
-    if(d.vip && d.vipLevel && d.vipLevel!=="Aucun"){
-      const expires=d.vipExpires||0;
-      if(expires>Date.now()){
-        localStorage.setItem(VIP_KEY,JSON.stringify({level:d.vipLevel,discount:d.vipDiscount||VIP_DISCOUNTS[d.vipLevel]||0,expiresAt:expires,startAt:d.vipStart||Date.now()}));
-        renderBalance(total);
-      }
-    }
   });
 } else {
-  // pas connecté -> ancien solde local pour test
   let b=localStorage.getItem("jasonBusinessSoldeV4");
   if(b===null){b="61000";localStorage.setItem("jasonBusinessSoldeV4",b)}
   renderBalance(Number(b)||0);
   updateAllPrices();
 }
-
 $("boostForm").addEventListener("submit",async e=>{
  e.preventDefault();const d=Object.fromEntries(new FormData(e.target).entries());const calc=calculateBoost();
  if(getBalance()<calc.total){setStatus("boostStatus","❌ Solde insuffisant: "+formatFC(getBalance())+" — Il faut "+formatFC(calc.total),"error");return;}
  if(!await deductBalance(calc.total)){setStatus("boostStatus","❌ Solde insuffisant","error");return;}
  setStatus("boostStatus","⏳ Paiement "+formatFC(calc.total)+(calc.discount?` (-${calc.discount}%)`:"")+"...","info");
  const ok=await pushCommande(`${ROOT}/demandes_commandes`,{plateforme:d.platform,type_service:d.type,lien:cleanUrl(d.link),quantite:calc.qty,prix:calc.total,prix_original:calc.original,remise:calc.discount,telephone:d.phone});
- if(ok){setStatus("boostStatus","✅ Payé "+formatFC(calc.total)+(calc.discount?` (-${calc.discount}% VIP)`:"")+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();buildPlatforms();calculateBoost();}
+ if(ok){setStatus("boostStatus","✅ Payé "+formatFC(calc.total)+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();buildPlatforms();calculateBoost();}
  else{await setBalanceFirebase(getBalance()+calc.total);setStatus("boostStatus","❌ Erreur","error");}
 });
 $("appIcon").addEventListener("change",()=>{const file=$("appIcon").files[0],preview=$("appIconPreview");if(!file){preview.style.display="none";return}preview.src=URL.createObjectURL(file);preview.style.display="block";});
@@ -223,7 +192,7 @@ $("appForm").addEventListener("submit",async e=>{
  const fd=new FormData(e.target);const data=Object.fromEntries(fd.entries());
  setStatus("appStatus","⏳ Paiement "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
  const ok=await pushCommande(`${ROOT}/store_commandes`,{produit:"Application - "+data.appName,nom_application:data.appName,lien_site:cleanUrl(data.appUrl),description:data.description,whatsapp:data.whatsapp,prix:p.final,prix_original:p.original,remise:p.discount});
- if(ok){setStatus("appStatus","✅ Payé "+formatFC(p.final)+(p.discount?` (-${p.discount}% VIP)`:"")+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();$("appIconPreview").style.display="none";}
+ if(ok){setStatus("appStatus","✅ Payé "+formatFC(p.final)+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();$("appIconPreview").style.display="none";}
  else{await setBalanceFirebase(getBalance()+p.final);setStatus("appStatus","❌ Erreur","error");}
 });
 $("siteForm").addEventListener("submit",async e=>{
@@ -233,7 +202,7 @@ $("siteForm").addEventListener("submit",async e=>{
  const fd=new FormData(e.target);const data=Object.fromEntries(fd.entries());
  setStatus("siteStatus","⏳ Paiement "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
  const ok=await pushCommande(`${ROOT}/store_commandes`,{produit:"Site Web - "+siteName,nom_site:data.siteName,type_site:siteName,description:data.description,fonctionnalites:data.features,whatsapp:data.whatsapp,prix:p.final,prix_original:p.original,remise:p.discount});
- if(ok){setStatus("siteStatus","✅ Payé "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();$("selectedSiteName").textContent="Aucun";$("selectedSitePrice").textContent="0 FC";}
+ if(ok){setStatus("siteStatus","✅ Payé "+formatFC(p.final)+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();$("selectedSiteName").textContent="Aucun";$("selectedSitePrice").textContent="0 FC";}
  else{await setBalanceFirebase(getBalance()+p.final);setStatus("siteStatus","❌ Erreur","error");}
 });
 $("chatForm").addEventListener("submit",async e=>{
@@ -243,7 +212,7 @@ $("chatForm").addEventListener("submit",async e=>{
  const data=Object.fromEntries(new FormData(e.target).entries());
  setStatus("chatStatus","⏳ Paiement "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
  const ok=await pushCommande(`${ROOT}/store_commandes`,{produit:"Chatbot - "+data.chatName,...data,prix:p.final,prix_original:p.original,remise:p.discount});
- if(ok){setStatus("chatStatus","✅ Payé "+formatFC(p.final)+(p.discount?` (-${p.discount}% VIP)`:"")+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();}
+ if(ok){setStatus("chatStatus","✅ Payé "+formatFC(p.final)+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();}
  else{await setBalanceFirebase(getBalance()+p.final);setStatus("chatStatus","❌ Erreur","error");}
 });
 $("musicForm").addEventListener("submit",async e=>{
@@ -256,7 +225,7 @@ $("musicForm").addEventListener("submit",async e=>{
   const res=await fetch("https://davbot-outils.vercel.app/api/media/music",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
   const j=await res.json();$("musicResult").innerHTML=`<div style="padding:13px;border:1px solid #293850;border-radius:12px;background:#0c192b;white-space:pre-wrap">${JSON.stringify(j,null,2).slice(0,4000)}</div>`;
   await pushCommande(`${ROOT}/store_commandes`,{produit:"Chanson - "+data.title,prix:p.final,prix_original:p.original,remise:p.discount});
-  setStatus("musicStatus","✅ Payé "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+" — Reste "+formatFC(getBalance()),"ok");
+  setStatus("musicStatus","✅ Payé "+formatFC(p.final)+" — Reste "+formatFC(getBalance()),"ok");
  }catch(err){await setBalanceFirebase(getBalance()+p.final);setStatus("musicStatus","❌ Erreur, remboursé "+formatFC(p.final)+": "+err.message,"error");}
 });
 const siteCatalog=[{name:"Portfolio personnel",icon:"👨‍💻",price:10000},{name:"Site vitrine",icon:"🏢",price:15000},{name:"Boutique en ligne",icon:"🛒",price:30000},{name:"Blog personnel",icon:"✍️",price:10000},{name:"Site d'actualités",icon:"📰",price:25000},{name:"Site d'église",icon:"⛪",price:15000},{name:"Site d'école",icon:"🎓",price:20000},{name:"Site de restaurant",icon:"🍽️",price:15000},{name:"Site d'hôtel",icon:"🏨",price:20000},{name:"Site immobilier",icon:"🏠",price:25000},{name:"Agence digitale",icon:"💻",price:20000},{name:"Site de musique",icon:"🎵",price:20000}];
