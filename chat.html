@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#050a14">
-<title>JASON BUSINESS - Chat FIX Lu Vrai</title>
+<title>JASON BUSINESS - Chat Compteur 1 2 3</title>
 <style>
 :root{--blue:#00d2ff;--border:rgba(0,210,255,.18)}
 *{box-sizing:border-box}
@@ -16,18 +16,23 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
 .wrap{display:flex;flex:1;min-height:0;overflow:hidden}
 .left{width:360px;flex-shrink:0;background:#0b1425;border-right:1px solid var(--border);display:flex;flex-direction:column;min-height:0}
 .tabs{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border)}
-.tab{padding:12px 4px;text-align:center;font-size:11px;font-weight:700;cursor:pointer;opacity:.5;border-bottom:2px solid transparent}
+.tab{padding:12px 4px;text-align:center;font-size:11px;font-weight:700;cursor:pointer;opacity:.5;border-bottom:2px solid transparent;position:relative}
 .tab.active{opacity:1;color:var(--blue);border-bottom-color:var(--blue)}
 .search{padding:10px;border-bottom:1px solid var(--border)}
 .search input,.add-box input{width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid #293850;background:#0c192b;color:white;outline:none}
 .list{flex:1;min-height:0;overflow-y:auto;padding:6px}
-.item{padding:10px;border-radius:12px;display:flex;gap:10px;align-items:center;cursor:pointer;margin-bottom:4px;border:1px solid transparent}
+.item{padding:12px;border-radius:14px;display:flex;gap:10px;align-items:center;cursor:pointer;margin-bottom:4px;border:1px solid transparent;position:relative}
 .item.active{background:rgba(0,210,255,.14);border-color:var(--blue)}
-.av{width:42px;height:42px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;overflow:hidden}
+.item.has-unread{background:rgba(255,71,87,.08);border-color:rgba(255,71,87,.2)}
+.av{width:46px;height:46px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;overflow:hidden}
 .av img{width:100%;height:100%;object-fit:cover}
 .info{flex:1;min-width:0}
-.name{font-size:13px;font-weight:700}
-.prev{font-size:11px;opacity:.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.name{font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px}
+.prev{font-size:12px;opacity:.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.right-info{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0}
+.time{font-size:11px;opacity:.5}
+.unread-badge{background:#ff4757;color:white;font-size:12px;font-weight:900;min-width:22px;height:22px;border-radius:11px;display:grid;place-items:center;padding:0 7px;box-shadow:0 2px 8px rgba(255,71,87,.5);animation:pop .3s}
+@keyframes pop{0%{transform:scale(0)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
 .bottom-nav{padding:10px;display:flex;gap:8px;border-top:1px solid var(--border);background:#0b1425}
 .right{flex:1;min-width:0;display:flex;flex-direction:column;background:#070e1e;overflow:hidden}
 .top{flex-shrink:0;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,10,20,.95);cursor:pointer}
@@ -35,145 +40,70 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
 .msg{max-width:78%;padding:8px 12px;border-radius:18px;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere;position:relative;line-height:1.4}
 .msg.me{align-self:flex-end;background:linear-gradient(135deg,#00d2ff,#0077ff);border-bottom-right-radius:6px;color:white}
 .msg.other{align-self:flex-start;background:rgba(255,255,255,.1);border-bottom-left-radius:6px}
-.photo-wrap{margin-top:6px;border-radius:12px;overflow:hidden;max-width:230px;background:#000;position:relative}
+.photo-wrap{margin-top:6px;border-radius:12px;overflow:hidden;max-width:230px;background:#000}
 .photo-wrap img{width:100%;max-height:260px;object-fit:contain;display:block}
 .msg audio{margin-top:6px;width:min(230px,65vw);display:block}
 .meta{display:flex;justify-content:flex-end;align-items:center;gap:6px;margin-top:4px;font-size:10px;opacity:.85}
 .status.read{color:#b9ffff;font-weight:800}
-.status.delivered{color:white;opacity:.9}
-.status.sent{opacity:.6}
 .msg-actions{position:absolute;top:-14px;right:8px;display:none;gap:4px;background:#0b1425;border:1px solid var(--border);border-radius:10px;padding:3px;z-index:5}
 .msg:hover .msg-actions{display:flex}
 .msg-actions button{padding:5px 8px;border-radius:8px;border:0;background:#14253b;color:white;font-size:11px;cursor:pointer}
 .msg-actions button.del{background:#ff4757}
-.input-area{flex-shrink:0;padding:6px 8px;background:#0a1425;border-top:1px solid var(--border);padding-bottom:max(6px,env(safe-area-inset-bottom))}
+.input-area{flex-shrink:0;padding:6px 8px;background:#0a1425;border-top:1px solid var(--border)}
 .rec-bar{display:none;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;background:#ff47571a;border:1px solid #ff4757aa;border-radius:20px;margin-bottom:6px}
 .rec-bar.show{display:flex}
 .input{display:flex;gap:6px;align-items:center}
-.photo-label{flex-shrink:0}
-.input textarea{flex:1;min-width:0;min-height:40px;max-height:100px;padding:10px 14px;border-radius:20px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none;font-size:13px;font-family:Arial}
-.input textarea:disabled{opacity:.5}
+.input textarea{flex:1;min-width:0;min-height:40px;max-height:100px;padding:10px 14px;border-radius:20px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none;font-size:13px}
 .tbtn{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:1px solid #293850;background:#0c192b;color:white;display:grid;place-items:center;font-size:18px;cursor:pointer}
-.tbtn:disabled,.send:disabled{opacity:.35;cursor:not-allowed}
-.tbtn.hold{background:#ff4757!important;border-color:#ff4757;animation:pulse 1s infinite}
-@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
 .send{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:0;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;font-size:18px;cursor:pointer}
-#hint{overflow-wrap:anywhere}
-#photoPreview{display:none;background:#0b1425;border:1px solid #00d2ff55;border-radius:16px;padding:10px;margin-bottom:8px;animation:fadeIn .2s}
+#photoPreview{display:none;background:#0b1425;border:1px solid #00d2ff55;border-radius:16px;padding:10px;margin-bottom:8px}
 #photoPreview.show{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 #photoPreview img{width:100%;max-height:200px;object-fit:contain;border-radius:12px;background:#000;display:block}
 .preview-actions{display:flex;gap:8px;margin-top:8px}
-.preview-actions button{flex:1;padding:10px;border-radius:12px;border:0;font-weight:800;cursor:pointer;font-size:13px}
+.preview-actions button{flex:1;padding:10px;border-radius:12px;border:0;font-weight:800;cursor:pointer}
 .btnSend{background:linear-gradient(135deg,#00d2ff,#0077ff);color:white}
 .btnCancel{background:#1a2a44;color:white;border:1px solid #293850!important}
 #photoCaption{margin-top:8px;width:100%;min-height:40px;padding:8px 12px;border-radius:12px;border:1px solid #293850;background:#0c192b;color:white;font-size:12px;resize:none;outline:none}
-@media(max-width:800px){
- .left{position:absolute;inset:54px 0 0;width:100%;z-index:20}
- .left.hide{display:none}
- .right{width:100%}
- .msg{max-width:88%}
- .msg-actions{display:flex;opacity:.9}
-}
+@media(max-width:800px){.left{position:absolute;inset:54px 0 0;width:100%;z-index:20}.left.hide{display:none}.right{width:100%}.msg{max-width:88%}.msg-actions{display:flex;opacity:.9}}
 </style>
 </head>
 <body>
-<header>
- <div class="brand">jason business — <span id="myPhoneShow" style="font-size:11px;opacity:.7"></span></div>
- <a href="dashboard.html" class="btn">Dash</a>
-</header>
-
+<header><div class="brand">jason business — <span id="myPhoneShow" style="font-size:11px;opacity:.7"></span></div><a href="dashboard.html" class="btn">Dash</a></header>
 <div class="wrap">
 <aside class="left" id="leftPanel">
  <div class="tabs">
-  <div class="tab active" data-tab="chats">💬 Chats</div>
+  <div class="tab active" data-tab="chats">💬 Chats <span id="totalUnread" style="background:#ff4757;color:white;padding:2px 6px;border-radius:10px;font-size:10px;display:none">0</span></div>
   <div class="tab" data-tab="users">👥 Utilisateurs</div>
   <div class="tab" data-tab="requests">🔔 Demandes <span id="reqCount" style="background:#ff4757;color:white;padding:1px 5px;border-radius:10px;font-size:9px;display:none">0</span></div>
  </div>
- <div class="add-box" style="padding:8px 10px;display:flex;gap:6px;border-bottom:1px solid var(--border)">
-  <input id="manualPhone" placeholder="+243...">
-  <button class="btn" id="btnAddManual">+</button>
- </div>
+ <div class="add-box" style="padding:8px 10px;display:flex;gap:6px;border-bottom:1px solid var(--border)"><input id="manualPhone" placeholder="+243..."><button class="btn" id="btnAddManual">+</button></div>
  <div class="search"><input id="search" placeholder="🔍 Rechercher..."></div>
  <div class="list" id="list"></div>
- <div class="bottom-nav">
-  <a href="index.html" class="btn btn-full">🏠 Accueil</a>
-  <a href="publications.html" class="btn btn-full">📢 Publications</a>
- </div>
+ <div class="bottom-nav"><a href="index.html" class="btn btn-full">🏠 Accueil</a><a href="publications.html" class="btn btn-full">📢 Publications</a></div>
 </aside>
-
 <section class="right">
- <div class="top" id="topBar">
-  <div style="display:flex;align-items:center;gap:10px;min-width:0">
-   <div class="av" id="chatAvatar">JB</div>
-   <div style="min-width:0">
-    <h3 id="chatName" style="margin:0;font-size:14px;overflow:hidden;text-overflow:ellipsis">Sélectionne un chat</h3>
-    <small id="chatPhone" style="font-size:11px;opacity:.6">Clique ici pour revenir</small>
-   </div>
-  </div>
- </div>
-
- <div class="msgs" id="msgs">
-  <div style="margin:auto;opacity:.5;text-align:center">💬 Sélectionne un contact</div>
- </div>
-
+ <div class="top" id="topBar"><div style="display:flex;align-items:center;gap:10px;min-width:0"><div class="av" id="chatAvatar">JB</div><div style="min-width:0"><h3 id="chatName" style="margin:0;font-size:14px">Sélectionne un chat</h3><small id="chatPhone" style="font-size:11px;opacity:.6">Clique ici pour revenir</small></div></div></div>
+ <div class="msgs" id="msgs"><div style="margin:auto;opacity:.5;text-align:center">💬 Sélectionne un contact</div></div>
  <div class="input-area">
-  <div id="photoPreview">
-    <img id="previewImg" src="">
-    <textarea id="photoCaption" placeholder="Légende (optionnel)..."></textarea>
-    <div class="preview-actions">
-      <button class="btnCancel" id="cancelPhoto">✕ Annuler</button>
-      <button class="btnSend" id="confirmPhoto">➤ Envoyer</button>
-    </div>
-  </div>
-
-  <div id="recBar" class="rec-bar">
-   <div style="display:flex;align-items:center;gap:8px;min-width:0">
-    <div style="width:10px;height:10px;background:#ff4757;border-radius:50%;flex-shrink:0"></div>
-    <div id="recTime" style="font-weight:800;color:#ff6b7a">00:00</div>
-    <div style="font-size:11px">🔴 Enregistrement</div>
-   </div>
-   <div style="display:flex;gap:6px;flex-shrink:0">
-    <button id="recCancel" style="padding:6px 9px;border-radius:10px;border:1px solid #ff4757;background:#ff475722;color:#ff6b7a;font-size:11px">Annuler</button>
-    <button id="recSend" style="padding:6px 10px;border-radius:10px;border:0;background:#00d2ff;font-weight:800;font-size:11px">Envoyer</button>
-   </div>
-  </div>
-  <div class="input">
-   <label class="tbtn photo-label">🖼️<input type="file" id="photoInput" accept="image/*" hidden></label>
-   <button type="button" id="recordBtn" class="tbtn" disabled>🎙️</button>
-   <textarea id="msgInput" placeholder="Écris un message..." disabled rows="1"></textarea>
-   <button type="button" class="send" id="sendBtn" disabled>➤</button>
-  </div>
+  <div id="photoPreview"><img id="previewImg" src=""><textarea id="photoCaption" placeholder="Légende..."></textarea><div class="preview-actions"><button class="btnCancel" id="cancelPhoto">✕ Annuler</button><button class="btnSend" id="confirmPhoto">➤ Envoyer</button></div></div>
+  <div id="recBar" class="rec-bar"><div style="display:flex;align-items:center;gap:8px"><div style="width:10px;height:10px;background:#ff4757;border-radius:50%"></div><div id="recTime" style="font-weight:800;color:#ff6b7a">00:00</div><div style="font-size:11px">🔴 Enregistrement</div></div><div style="display:flex;gap:6px"><button id="recCancel" style="padding:6px 9px;border-radius:10px;border:1px solid #ff4757;background:#ff475722;color:#ff6b7a;font-size:11px">Annuler</button><button id="recSend" style="padding:6px 10px;border-radius:10px;border:0;background:#00d2ff;font-weight:800;font-size:11px">Envoyer</button></div></div>
+  <div class="input"><label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*" hidden></label><button type="button" id="recordBtn" class="tbtn" disabled>🎙️</button><textarea id="msgInput" placeholder="Écris un message..." disabled rows="1"></textarea><button type="button" class="send" id="sendBtn" disabled>➤</button></div>
   <div id="hint" style="text-align:center;font-size:9px;opacity:.6;margin-top:4px">✓ Envoyé • ✓✓ Reçu • ✓✓ Lu bleu = vraiment lu</div>
  </div>
 </section>
 </div>
-
 <script type="module">
 import {initializeApp,getApps,getApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {getDatabase,ref,onValue,push,set,get,remove,update,onDisconnect} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-const firebaseConfig={
- apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
- authDomain:"starlink-investit.firebaseapp.com",
- databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
- projectId:"starlink-investit",
- storageBucket:"starlink-investit.firebasestorage.app",
- messagingSenderId:"807081599583",
- appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
-};
-
+const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
 const app=getApps().length?getApp():initializeApp(firebaseConfig);
 const db=getDatabase(app);
 const $=id=>document.getElementById(id);
 const myPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("phone");
 if(!myPhone){location.replace("login.html");throw new Error("Non connecté");}
 $("myPhoneShow").textContent=myPhone;
-
-let tab="chats",activeChat=null,allUsers={},myRequests={},myChats={},presenceCache={},manualUsers=[];
-let messageUnsubscribe=null,recording=false,cancelled=false,mediaRecorder=null,audioChunks=[],recordStream=null,timerInt=null,recSec=0,busySending=false,pendingPhotoBase64=null;
+let tab="chats",activeChat=null,allUsers={},myRequests={},myChats={},presenceCache={},manualUsers=[],messageUnsubscribe=null,recording=false,cancelled=false,mediaRecorder=null,audioChunks=[],recordStream=null,timerInt=null,recSec=0,busySending=false,pendingPhotoBase64=null;
 try{manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]");}catch{manualUsers=[];}
-
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function timeStr(ts){return ts?new Date(ts).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}):"";}
 function getChatId(a,b){return [a,b].sort().join("_");}
@@ -181,7 +111,6 @@ function isOnline(ph){const p=presenceCache[ph];return !!(p&&p.online&&Date.now(
 function getUserPhoto(ph){const u=allUsers[ph]||{};return u.photo||u.photoProfil||u.avatar||"";}
 function setHint(s){$("hint").textContent=s;}
 function stopTracks(){if(recordStream){recordStream.getTracks().forEach(t=>{try{t.stop()}catch{}});recordStream=null;}}
-
 const presenceRef=ref(db,`jasonBusiness/presence/${myPhone}`);
 set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:null}).catch(()=>{});
 onDisconnect(presenceRef).set({online:false,lastSeen:Date.now(),activeChat:null}).catch(()=>{});
@@ -189,18 +118,18 @@ setInterval(()=>set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:acti
 onValue(ref(db,"jasonBusiness/presence"),s=>{presenceCache=s.val()||{};render();if(activeChat)$("chatPhone").textContent=isOnline(activeChat)?activeChat+" • En ligne 🟢":"Hors ligne";});
 onValue(ref(db,"jasonBusiness/users"),s=>{allUsers=s.val()||{};render();});
 onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),s=>{myRequests=s.val()||{};const n=Object.values(myRequests).filter(r=>r.type==="incoming"&&r.status==="pending").length;$("reqCount").textContent=n;$("reqCount").style.display=n?"inline-block":"none";render();});
-onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),s=>{myChats=s.val()||{};render();});
-
+onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),s=>{
+  myChats=s.val()||{};
+  // TOTAL NON LUS POUR LE TAB CHATS
+  const totalUnread=Object.values(myChats).reduce((sum,c)=>sum+(Number(c.unread)||0),0);
+  $("totalUnread").textContent=totalUnread>99?'99+':totalUnread;
+  $("totalUnread").style.display=totalUnread>0?"inline-block":"none";
+  render();
+});
 document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");tab=t.dataset.tab;render();});
 $("search").oninput=render;
 $("topBar").onclick=()=>{if(innerWidth<=800)$("leftPanel").classList.remove("hide");};
-$("btnAddManual").onclick=()=>{
- const p=$("manualPhone").value.trim();
- if(!p||p.length<8)return alert("Numéro invalide");
- if(p===myPhone)return alert("Pas ton propre numéro");
- if(!manualUsers.includes(p))manualUsers.push(p);
- localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));$("manualPhone").value="";render();
-};
+$("btnAddManual").onclick=()=>{const p=$("manualPhone").value.trim();if(!p||p.length<8)return alert("Numéro invalide");if(p===myPhone)return alert("Pas ton propre numéro");if(!manualUsers.includes(p))manualUsers.push(p);localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));$("manualPhone").value="";render();};
 function getCombinedUsers(){const c={...allUsers};manualUsers.forEach(p=>{if(!c[p])c[p]={telephone:p};});return c;}
 function render(){
  const q=($("search").value||"").toLowerCase(),cont=$("list");cont.innerHTML="";
@@ -220,13 +149,29 @@ function render(){
  }else{
   const list=Object.entries(myChats).filter(([_,c])=>c.status==="accepted").sort((a,b)=>(b[1].lastTime||0)-(a[1].lastTime||0));
   if(!list.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucun chat. Va dans Utilisateurs.</div>';return;}
-  list.forEach(([id,chat])=>{const other=id.split("_").find(p=>p!==myPhone);if(!other)return;const photo=getUserPhoto(other);const div=document.createElement("div");div.className="item"+(activeChat===other?" active":"");div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(other.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[other]?.nom||other)}</div><div class="prev">${esc((chat.lastMsg||"").slice(0,60))}</div></div><div style="font-size:9px">${timeStr(chat.lastTime)}</div>`;div.onclick=()=>openChat(other);cont.appendChild(div);});
+  list.forEach(([id,chat])=>{
+    const other=id.split("_").find(p=>p!==myPhone);if(!other)return;
+    const photo=getUserPhoto(other);
+    const unread=Number(chat.unread)||0;
+    const div=document.createElement("div");
+    div.className="item"+(activeChat===other?" active":"")+(unread>0?" has-unread":"");
+    div.innerHTML=`
+      <div class="av">${photo?`<img src="${esc(photo)}">`:esc(other.slice(-2))}</div>
+      <div class="info">
+        <div class="name">${esc(allUsers[other]?.nom||other)} ${unread>0?`• <span style="color:#ff4757">${unread} nouveau</span>`:""}</div>
+        <div class="prev" style="${unread>0?'font-weight:700;opacity:1;color:white':''}">${esc((chat.lastMsg||"").slice(0,55))}</div>
+      </div>
+      <div class="right-info">
+        <div class="time">${timeStr(chat.lastTime)}</div>
+        ${unread>0?`<div class="unread-badge">${unread>99?'99+':unread}</div>`:""}
+      </div>`;
+    div.onclick=()=>openChat(other);
+    cont.appendChild(div);
+  });
  }
 }
 async function sendRequest(to){try{await Promise.all([set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${to}`),{phone:to,type:"outgoing",status:"pending",createdAt:Date.now()}),set(ref(db,`jasonBusiness/chat_requests/${to}/${myPhone}`),{phone:myPhone,type:"incoming",status:"pending",createdAt:Date.now()})]);alert("Demande envoyée !");}catch(e){alert(e.message);}}
 async function acceptRequest(from){try{const id=getChatId(myPhone,from);await Promise.all([set(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{with:from,status:"accepted",lastMsg:"Discussion acceptée",lastTime:Date.now(),unread:0}),set(ref(db,`jasonBusiness/user_chats/${from}/${id}`),{with:myPhone,status:"accepted",lastMsg:"Discussion acceptée",lastTime:Date.now(),unread:1}),remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${from}`)),remove(ref(db,`jasonBusiness/chat_requests/${from}/${myPhone}`))]);document.querySelector('[data-tab="chats"]').click();openChat(from);}catch(e){alert(e.message);}}
-
-// OUVERTURE CHAT
 function openChat(other){
  activeChat=other;if(messageUnsubscribe){messageUnsubscribe();messageUnsubscribe=null;}
  const photo=getUserPhoto(other);$("chatName").textContent=allUsers[other]?.nom||other;$("chatPhone").textContent=isOnline(other)?other+" • En ligne 🟢":"Hors ligne";$("chatAvatar").innerHTML=photo?`<img src="${esc(photo)}">`:esc(other.slice(-2));
@@ -244,8 +189,6 @@ function openChat(other){
  });
  messageUnsubscribe=unsub;render();$("msgInput").focus();
 }
-
-// MARQUE COMME LU SEULEMENT SI C'EST UN MESSAGE REÇU ET QUE JE SUIS DANS LE CHAT
 async function markAsRead(id,arr){
   const changes={};
   arr.forEach(m=>{
@@ -256,73 +199,43 @@ async function markAsRead(id,arr){
   });
   if(Object.keys(changes).length) await update(ref(db),changes);
 }
-
-// MARQUE COMME REÇU (DELIVERED) QUAND JE SUIS EN LIGNE MÊME SANS OUVRIR LE CHAT
 async function markAsDelivered(id,arr){
   const changes={};
   arr.forEach(m=>{
     if(m.to===myPhone && m.from!==myPhone && m.status==="sent"){
       changes[`jasonBusiness/messages/${id}/${m._key}/status`]="delivered";
-      changes[`jasonBusiness/messages/${id}/${m._key}/deliveredAt`]=Date.now();
     }
   });
   if(Object.keys(changes).length) await update(ref(db),changes);
 }
-
 function renderMessages(arr){
- const c=$("msgs");c.innerHTML="";if(!arr.length){c.innerHTML='<div style="margin:auto;opacity:.6;padding:20px;text-align:center">Début conversation.<br>✓ = Envoyé • ✓✓ = Reçu • ✓✓ Lu bleu = Vraiment lu</div>';return;}
+ const c=$("msgs");c.innerHTML="";if(!arr.length){c.innerHTML='<div style="margin:auto;opacity:.6;padding:20px;text-align:center">Début conversation</div>';return;}
  arr.forEach(m=>{
   const mine=m.from===myPhone,div=document.createElement("div");div.className="msg "+(mine?"me":"other");
-  
   if(mine){
     const acts=document.createElement("div");acts.className="msg-actions";
-    const btnDel=document.createElement("button");btnDel.className="del";btnDel.textContent="🗑️ Retirer";
-    btnDel.onclick=()=>deleteMessage(m._key);
-    acts.appendChild(btnDel);
-    div.appendChild(acts);
-    let pressTimer;
-    div.addEventListener("touchstart",()=>{ pressTimer=setTimeout(()=>{ if(confirm("Retirer ce message ?")) deleteMessage(m._key); },600); });
-    div.addEventListener("touchend",()=>clearTimeout(pressTimer));
-    div.addEventListener("touchmove",()=>clearTimeout(pressTimer));
+    const btnDel=document.createElement("button");btnDel.className="del";btnDel.textContent="🗑️ Retirer";btnDel.onclick=()=>deleteMessage(m._key);acts.appendChild(btnDel);div.appendChild(acts);
+    let pressTimer;div.addEventListener("touchstart",()=>{pressTimer=setTimeout(()=>{if(confirm("Retirer ?"))deleteMessage(m._key);},600);});div.addEventListener("touchend",()=>clearTimeout(pressTimer));div.addEventListener("touchmove",()=>clearTimeout(pressTimer));
   }
-
   if(m.text && !m.deleted){const t=document.createElement("div");t.textContent=m.text;div.appendChild(t);}
   if(m.photo && !m.deleted){const w=document.createElement("div");w.className="photo-wrap";const img=document.createElement("img");img.src=m.photo;w.appendChild(img);div.appendChild(w);}
   if(m.audio && !m.deleted){const a=document.createElement("audio");a.controls=true;a.src=m.audio;div.appendChild(a);}
   if(m.deleted){const t=document.createElement("div");t.style.fontStyle="italic";t.style.opacity=".7";t.textContent="🚫 Message retiré";div.appendChild(t);}
-  
-  const meta=document.createElement("div");meta.className="meta";
-  const time=document.createElement("span");time.textContent=timeStr(m.createdAt);meta.appendChild(time);
-  
+  const meta=document.createElement("div");meta.className="meta";const time=document.createElement("span");time.textContent=timeStr(m.createdAt);meta.appendChild(time);
   if(mine && !m.deleted){
     const st=document.createElement("span");
-    if(m.status==="read"){
-      st.className="status read";
-      st.textContent="✓✓ Lu";
-    }else if(m.status==="delivered"){
-      st.className="status delivered";
-      st.textContent="✓✓";
-    }else{
-      st.className="status sent";
-      st.textContent="✓";
-    }
+    if(m.status==="read"){st.className="status read";st.textContent="✓✓ Lu";}else if(m.status==="delivered"){st.textContent="✓✓";}else{st.textContent="✓";}
     meta.appendChild(st);
   }
-  
   div.appendChild(meta);c.appendChild(div);
  });c.scrollTop=c.scrollHeight;
 }
-
 async function deleteMessage(msgKey){
   if(!activeChat || !msgKey) return;
   if(!confirm("🗑️ Retirer ce message pour tout le monde ?")) return;
   const id=getChatId(myPhone,activeChat);
-  try{
-    await remove(ref(db,`jasonBusiness/messages/${id}/${msgKey}`));
-    setHint("✅ Message retiré");
-  }catch(e){ alert("Erreur: "+e.message); }
+  try{await remove(ref(db,`jasonBusiness/messages/${id}/${msgKey}`));setHint("✅ Message retiré");}catch(e){alert("Erreur: "+e.message);}
 }
-
 async function publishMessage(other,fields,lastMsg){
  const id=getChatId(myPhone,other),now=Date.now();
  const newRef=push(ref(db,`jasonBusiness/messages/${id}`));
@@ -331,54 +244,25 @@ async function publishMessage(other,fields,lastMsg){
  const [sa,sb]=await Promise.all([get(a),get(b)]);const da=sa.val()||{},dbb=sb.val()||{};
  await Promise.all([set(a,{...da,with:other,status:"accepted",lastMsg,lastTime:now,unread:0}),set(b,{...dbb,with:myPhone,status:"accepted",lastMsg,lastTime:now,unread:(Number(dbb.unread)||0)+1})]);
 }
-
 async function sendText(){if(busySending)return;const text=$("msgInput").value.trim();if(!text||!activeChat)return;const other=activeChat;busySending=true;$("sendBtn").disabled=true;try{$("msgInput").value="";await publishMessage(other,{text},text);setHint("✓ Envoyé");}catch(e){$("msgInput").value=text;alert(e.message);}finally{busySending=false;$("sendBtn").disabled=!activeChat;$("msgInput").focus();}}
 $("sendBtn").onclick=sendText;
 $("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText();}});
-
 $("photoInput").addEventListener("change",async e=>{
  const file=e.target.files?.[0];if(!file)return;
  if(!activeChat){alert("Ouvre un chat d'abord");e.target.value="";return;}
- if(file.size>4*1024*1024){alert("Photo trop grosse (4Mo max).");e.target.value="";return;}
+ if(file.size>4*1024*1024){alert("Photo trop grosse");e.target.value="";return;}
  setHint("⏳ Chargement...");
- const reader=new FileReader();
- reader.readAsDataURL(file);
- reader.onloadend=()=>{
-   pendingPhotoBase64=reader.result;
-   $("previewImg").src=reader.result;
-   $("photoPreview").classList.add("show");
-   $("photoCaption").value="";
-   setHint("👁️ Photo prête ICI");
- };
+ const reader=new FileReader();reader.readAsDataURL(file);
+ reader.onloadend=()=>{pendingPhotoBase64=reader.result;$("previewImg").src=reader.result;$("photoPreview").classList.add("show");$("photoCaption").value="";setHint("👁️ Photo prête ICI");};
  e.target.value="";
 });
-$("cancelPhoto").onclick=()=>{
- pendingPhotoBase64=null;
- $("photoPreview").classList.remove("show");
- $("previewImg").src="";
- $("photoCaption").value="";
- setHint("Annulé");
-};
+$("cancelPhoto").onclick=()=>{pendingPhotoBase64=null;$("photoPreview").classList.remove("show");$("previewImg").src="";$("photoCaption").value="";setHint("Annulé");};
 $("confirmPhoto").onclick=async()=>{
  if(!pendingPhotoBase64 || !activeChat) return;
- const other=activeChat;
- const caption=$("photoCaption").value.trim();
- $("confirmPhoto").disabled=true;
- $("confirmPhoto").textContent="⏳ Envoi...";
- try{
-  await publishMessage(other,{photo:pendingPhotoBase64,type:"image",text:caption},caption||"📷 Photo");
-  $("photoPreview").classList.remove("show");
-  pendingPhotoBase64=null;
-  $("photoCaption").value="";
-  $("previewImg").src="";
-  setHint("✅ Photo envoyée!");
- }catch(err){ alert("Erreur: "+err.message); setHint("❌ Erreur"); }
- finally{
-  $("confirmPhoto").disabled=false;
-  $("confirmPhoto").textContent="➤ Envoyer";
- }
+ const other=activeChat;const caption=$("photoCaption").value.trim();
+ $("confirmPhoto").disabled=true;$("confirmPhoto").textContent="⏳ Envoi...";
+ try{await publishMessage(other,{photo:pendingPhotoBase64,type:"image",text:caption},caption||"📷 Photo");$("photoPreview").classList.remove("show");pendingPhotoBase64=null;$("photoCaption").value="";$("previewImg").src="";setHint("✅ Photo envoyée!");}catch(err){alert("Erreur: "+err.message);}finally{$("confirmPhoto").disabled=false;$("confirmPhoto").textContent="➤ Envoyer";}
 };
-
 function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");}
 function clearRecordingUI(){clearInterval(timerInt);timerInt=null;$("recBar").classList.remove("show");$("recordBtn").classList.remove("hold");$("recordBtn").textContent="🎙️";$("recordBtn").disabled=!activeChat;}
 function stopRecorder(){if(mediaRecorder&&mediaRecorder.state!=="inactive"){try{mediaRecorder.stop();}catch{}}}
@@ -387,27 +271,21 @@ async function toggleVocal(){
  if(!activeChat){alert("Sélectionne un chat");return;}
  if(!navigator.mediaDevices?.getUserMedia){alert("Micro non supporté.");return;}
  try{
-  setHint("🎙️ Micro...");
-  recordStream=await navigator.mediaDevices.getUserMedia({audio:true});
-  audioChunks=[];recSec=0;cancelled=false;recording=true;
-  mediaRecorder=new MediaRecorder(recordStream);
+  setHint("🎙️ Micro...");recordStream=await navigator.mediaDevices.getUserMedia({audio:true});
+  audioChunks=[];recSec=0;cancelled=false;recording=true;mediaRecorder=new MediaRecorder(recordStream);
   const other=activeChat;
   mediaRecorder.ondataavailable=e=>{if(e.data&&e.data.size>0)audioChunks.push(e.data);};
   mediaRecorder.onstop=async()=>{
     const wasCancelled=cancelled;const chunks=[...audioChunks];recording=false;clearInterval(timerInt);clearRecordingUI();stopTracks();audioChunks=[];
     if(wasCancelled||!chunks.length){setHint("Annulé");return;}
-    const blob=new Blob(chunks,{type:"audio/webm"});
-    if(blob.size<800){setHint("Trop court");return;}
+    const blob=new Blob(chunks,{type:"audio/webm"});if(blob.size<800){setHint("Trop court");return;}
     setHint("⏳ Envoi vocal...");
-    const reader=new FileReader();
-    reader.readAsDataURL(blob);
-    reader.onloadend=async()=>{
-      try{await publishMessage(other,{audio:reader.result,type:"audio",text:"🎙️ Vocal"},"🎙️ Vocal");setHint("✅ Vocal envoyé!");}catch(err){alert("Erreur: "+err.message);setHint("❌ Erreur");}
-    };
+    const reader=new FileReader();reader.readAsDataURL(blob);
+    reader.onloadend=async()=>{try{await publishMessage(other,{audio:reader.result,type:"audio",text:"🎙️ Vocal"},"🎙️ Vocal");setHint("✅ Vocal envoyé!");}catch(err){alert("Erreur: "+err.message);}};
   };
   mediaRecorder.start(200);
   $("recBar").classList.add("show");$("recordBtn").classList.add("hold");$("recordBtn").textContent="⏹️";$("recTime").textContent="00:00";setHint("🔴 Enregistrement...");timerInt=setInterval(()=>{recSec++;$("recTime").textContent=fmt(recSec);if(recSec>=60)stopRecorder();},1000);
- }catch(err){recording=false;stopTracks();clearRecordingUI();if(err.name==="NotAllowedError")alert("🚫 Micro refusé! Paramètres → Apps → Microphone → Autoriser");else alert("Erreur: "+err.message);setHint("Micro bloqué");}
+ }catch(err){recording=false;stopTracks();clearRecordingUI();if(err.name==="NotAllowedError")alert("🚫 Micro refusé!");else alert("Erreur: "+err.message);setHint("Micro bloqué");}
 }
 $("recordBtn").addEventListener("click",toggleVocal);
 $("recSend").addEventListener("click",()=>{if(recording)stopRecorder();});
