@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#050a14">
-<title>JASON BUSINESS - Chat Preview ICI</title>
+<title>JASON BUSINESS - Chat Retirer Message</title>
 <style>
 :root{--blue:#00d2ff;--border:rgba(0,210,255,.18)}
 *{box-sizing:border-box}
@@ -32,14 +32,19 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
 .right{flex:1;min-width:0;display:flex;flex-direction:column;background:#070e1e;overflow:hidden}
 .top{flex-shrink:0;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,10,20,.95);cursor:pointer}
 .msgs{flex:1;min-height:0;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
-.msg{max-width:78%;padding:8px 12px;border-radius:18px;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere;position:relative;line-height:1.4}
+.msg{max-width:78%;padding:8px 12px;border-radius:18px;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere;position:relative;line-height:1.4;group}
 .msg.me{align-self:flex-end;background:linear-gradient(135deg,#00d2ff,#0077ff);border-bottom-right-radius:6px;color:white}
 .msg.other{align-self:flex-start;background:rgba(255,255,255,.1);border-bottom-left-radius:6px}
 .photo-wrap{margin-top:6px;border-radius:12px;overflow:hidden;max-width:230px;background:#000;position:relative}
 .photo-wrap img{width:100%;max-height:260px;object-fit:contain;display:block}
 .msg audio{margin-top:6px;width:min(230px,65vw);display:block}
-.meta{display:flex;justify-content:flex-end;align-items:center;gap:4px;margin-top:4px;font-size:10px;opacity:.85}
+.meta{display:flex;justify-content:flex-end;align-items:center;gap:6px;margin-top:4px;font-size:10px;opacity:.85}
 .status.read{color:#b9ffff;font-weight:800}
+/* BOUTON SUPPRIMER */
+.msg-actions{position:absolute;top:-14px;right:8px;display:none;gap:4px;background:#0b1425;border:1px solid var(--border);border-radius:10px;padding:3px;z-index:5}
+.msg:hover .msg-actions{display:flex}
+.msg-actions button{padding:5px 8px;border-radius:8px;border:0;background:#14253b;color:white;font-size:11px;cursor:pointer}
+.msg-actions button.del{background:#ff4757}
 .input-area{flex-shrink:0;padding:6px 8px;background:#0a1425;border-top:1px solid var(--border);padding-bottom:max(6px,env(safe-area-inset-bottom))}
 .rec-bar{display:none;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;background:#ff47571a;border:1px solid #ff4757aa;border-radius:20px;margin-bottom:6px}
 .rec-bar.show{display:flex}
@@ -53,8 +58,6 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
 @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
 .send{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:0;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;font-size:18px;cursor:pointer}
 #hint{overflow-wrap:anywhere}
-
-/* PREVIEW PHOTO ICI SEULEMENT */
 #photoPreview{display:none;background:#0b1425;border:1px solid #00d2ff55;border-radius:16px;padding:10px;margin-bottom:8px;animation:fadeIn .2s}
 #photoPreview.show{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -64,12 +67,12 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
 .btnSend{background:linear-gradient(135deg,#00d2ff,#0077ff);color:white}
 .btnCancel{background:#1a2a44;color:white;border:1px solid #293850!important}
 #photoCaption{margin-top:8px;width:100%;min-height:40px;padding:8px 12px;border-radius:12px;border:1px solid #293850;background:#0c192b;color:white;font-size:12px;resize:none;outline:none}
-
 @media(max-width:800px){
  .left{position:absolute;inset:54px 0 0;width:100%;z-index:20}
  .left.hide{display:none}
  .right{width:100%}
  .msg{max-width:88%}
+ .msg-actions{display:flex;opacity:.9}
 }
 </style>
 </head>
@@ -114,7 +117,6 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
  </div>
 
  <div class="input-area">
-  <!-- PHOTO PREVIEW ICI SEULEMENT -->
   <div id="photoPreview">
     <img id="previewImg" src="">
     <textarea id="photoCaption" placeholder="Légende (optionnel)..."></textarea>
@@ -141,7 +143,7 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
    <textarea id="msgInput" placeholder="Écris un message..." disabled rows="1"></textarea>
    <button type="button" class="send" id="sendBtn" disabled>➤</button>
   </div>
-  <div id="hint" style="text-align:center;font-size:9px;opacity:.6;margin-top:4px">✅ Photo se montre ICI seulement avant envoi</div>
+  <div id="hint" style="text-align:center;font-size:9px;opacity:.6;margin-top:4px">Appuie longtemps sur ton message pour retirer 🗑️</div>
  </div>
 </section>
 </div>
@@ -233,16 +235,48 @@ function openChat(other){
  messageUnsubscribe=unsub;render();$("msgInput").focus();
 }
 async function markAsRead(id,arr){const changes={};arr.forEach(m=>{if(m.to===myPhone&&m.status!=="read"){changes[`jasonBusiness/messages/${id}/${m._key}/status`]="read";changes[`jasonBusiness/messages/${id}/${m._key}/readAt`]=Date.now();}});if(Object.keys(changes).length)await update(ref(db),changes);}
+
 function renderMessages(arr){
- const c=$("msgs");c.innerHTML="";if(!arr.length){c.innerHTML='<div style="margin:auto;opacity:.6;padding:20px;text-align:center">Début conversation.</div>';return;}
+ const c=$("msgs");c.innerHTML="";if(!arr.length){c.innerHTML='<div style="margin:auto;opacity:.6;padding:20px;text-align:center">Début conversation.<br>Appuie longtemps sur ton message pour retirer</div>';return;}
  arr.forEach(m=>{
   const mine=m.from===myPhone,div=document.createElement("div");div.className="msg "+(mine?"me":"other");
-  if(m.text){const t=document.createElement("div");t.textContent=m.text;div.appendChild(t);}
-  if(m.photo){const w=document.createElement("div");w.className="photo-wrap";const img=document.createElement("img");img.src=m.photo;img.loading="lazy";w.appendChild(img);div.appendChild(w);}
-  if(m.audio){const a=document.createElement("audio");a.controls=true;a.src=m.audio;div.appendChild(a);}
-  const meta=document.createElement("div");meta.className="meta";const time=document.createElement("span");time.textContent=timeStr(m.createdAt);meta.appendChild(time);if(mine){const st=document.createElement("span");st.className=m.status==="read"?"status read":"";st.textContent=m.status==="read"?"✓✓ Lu":"✓";meta.appendChild(st);}div.appendChild(meta);c.appendChild(div);
+  
+  // BOUTON RETIRER - seulement tes messages
+  if(mine){
+    const acts=document.createElement("div");acts.className="msg-actions";
+    const btnDel=document.createElement("button");btnDel.className="del";btnDel.textContent="🗑️ Retirer";
+    btnDel.onclick=()=>deleteMessage(m._key);
+    acts.appendChild(btnDel);
+    div.appendChild(acts);
+    
+    // Appui long sur mobile pour retirer
+    let pressTimer;
+    div.addEventListener("touchstart",()=>{ pressTimer=setTimeout(()=>{ if(confirm("Retirer ce message ?")) deleteMessage(m._key); },600); });
+    div.addEventListener("touchend",()=>clearTimeout(pressTimer));
+  }
+
+  if(m.text && !m.deleted){const t=document.createElement("div");t.textContent=m.text;div.appendChild(t);}
+  if(m.photo && !m.deleted){const w=document.createElement("div");w.className="photo-wrap";const img=document.createElement("img");img.src=m.photo;img.loading="lazy";w.appendChild(img);div.appendChild(w);}
+  if(m.audio && !m.deleted){const a=document.createElement("audio");a.controls=true;a.src=m.audio;div.appendChild(a);}
+  if(m.deleted){const t=document.createElement("div");t.style.fontStyle="italic";t.style.opacity=".7";t.textContent="🚫 Message retiré";div.appendChild(t);}
+  
+  const meta=document.createElement("div");meta.className="meta";const time=document.createElement("span");time.textContent=timeStr(m.createdAt);meta.appendChild(time);if(mine && !m.deleted){const st=document.createElement("span");st.className=m.status==="read"?"status read":"";st.textContent=m.status==="read"?"✓✓ Lu":"✓";meta.appendChild(st);}div.appendChild(meta);c.appendChild(div);
  });c.scrollTop=c.scrollHeight;
 }
+
+async function deleteMessage(msgKey){
+  if(!activeChat || !msgKey) return;
+  if(!confirm("🗑️ Retirer ce message pour tout le monde ?")) return;
+  const id=getChatId(myPhone,activeChat);
+  try{
+    // Option 1: Supprimer complètement
+    await remove(ref(db,`jasonBusiness/messages/${id}/${msgKey}`));
+    setHint("✅ Message retiré");
+    // Option 2: Si tu veux garder "Message retiré" au lieu de supprimer, utilise ça:
+    // await update(ref(db,`jasonBusiness/messages/${id}/${msgKey}`),{deleted:true,text:"",photo:null,audio:null,deletedAt:Date.now()});
+  }catch(e){ alert("Erreur: "+e.message); }
+}
+
 async function publishMessage(other,fields,lastMsg){
  const id=getChatId(myPhone,other),now=Date.now();
  await set(push(ref(db,`jasonBusiness/messages/${id}`)),{...fields,from:myPhone,to:other,createdAt:now,status:"sent"});
@@ -254,11 +288,10 @@ async function sendText(){if(busySending)return;const text=$("msgInput").value.t
 $("sendBtn").onclick=sendText;
 $("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText();}});
 
-// ===== PHOTO MONTRE SEULEMENT ICI - AVANT ENVOI =====
 $("photoInput").addEventListener("change",async e=>{
  const file=e.target.files?.[0];if(!file)return;
  if(!activeChat){alert("Ouvre un chat d'abord");e.target.value="";return;}
- if(file.size>4*1024*1024){alert("Photo trop grosse (4Mo max). Choisis plus petite.");e.target.value="";return;}
+ if(file.size>4*1024*1024){alert("Photo trop grosse (4Mo max).");e.target.value="";return;}
  setHint("⏳ Chargement...");
  const reader=new FileReader();
  reader.readAsDataURL(file);
@@ -267,12 +300,10 @@ $("photoInput").addEventListener("change",async e=>{
    $("previewImg").src=reader.result;
    $("photoPreview").classList.add("show");
    $("photoCaption").value="";
-   setHint("👁️ Photo prête ICI - Ajoute légende puis Envoyer");
+   setHint("👁️ Photo prête ICI - Légende optionnelle");
  };
- reader.onerror=()=>{alert("Impossible de lire");};
  e.target.value="";
 });
-
 $("cancelPhoto").onclick=()=>{
  pendingPhotoBase64=null;
  $("photoPreview").classList.remove("show");
@@ -280,7 +311,6 @@ $("cancelPhoto").onclick=()=>{
  $("photoCaption").value="";
  setHint("Annulé");
 };
-
 $("confirmPhoto").onclick=async()=>{
  if(!pendingPhotoBase64 || !activeChat) return;
  const other=activeChat;
@@ -301,14 +331,13 @@ $("confirmPhoto").onclick=async()=>{
  }
 };
 
-// ===== VOCAL EN BASE64 =====
 function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");}
 function clearRecordingUI(){clearInterval(timerInt);timerInt=null;$("recBar").classList.remove("show");$("recordBtn").classList.remove("hold");$("recordBtn").textContent="🎙️";$("recordBtn").disabled=!activeChat;}
 function stopRecorder(){if(mediaRecorder&&mediaRecorder.state!=="inactive"){try{mediaRecorder.stop();}catch{}}}
 async function toggleVocal(){
  if(recording){stopRecorder();return;}
  if(!activeChat){alert("Sélectionne un chat");return;}
- if(!navigator.mediaDevices?.getUserMedia){alert("Micro non supporté. Active Microphone dans web2apkpro");return;}
+ if(!navigator.mediaDevices?.getUserMedia){alert("Micro non supporté.");return;}
  try{
   setHint("🎙️ Micro...");
   recordStream=await navigator.mediaDevices.getUserMedia({audio:true});
@@ -330,7 +359,7 @@ async function toggleVocal(){
   };
   mediaRecorder.start(200);
   $("recBar").classList.add("show");$("recordBtn").classList.add("hold");$("recordBtn").textContent="⏹️";$("recTime").textContent="00:00";setHint("🔴 Enregistrement...");timerInt=setInterval(()=>{recSec++;$("recTime").textContent=fmt(recSec);if(recSec>=60)stopRecorder();},1000);
- }catch(err){recording=false;stopTracks();clearRecordingUI();if(err.name==="NotAllowedError")alert("🚫 Micro refusé! Paramètres → Apps → Jason Business → Microphone → Autoriser");else alert("Erreur: "+err.message);setHint("Micro bloqué");}
+ }catch(err){recording=false;stopTracks();clearRecordingUI();if(err.name==="NotAllowedError")alert("🚫 Micro refusé! Paramètres → Apps → Microphone → Autoriser");else alert("Erreur: "+err.message);setHint("Micro bloqué");}
 }
 $("recordBtn").addEventListener("click",toggleVocal);
 $("recSend").addEventListener("click",()=>{if(recording)stopRecorder();});
