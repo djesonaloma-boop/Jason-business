@@ -40,7 +40,7 @@ footer{text-align:center;padding:22px 15px;border-top:1px solid var(--border);fo
 <header>
  <div class="brand"><div class="logo">JB</div><div><h1>JASON BUSINESS</h1><small>Shop numérique</small></div></div>
  <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
-  <div id="soldeDisplay" class="solde-badge">⏳ Chargement solde...</div>
+  <div id="soldeDisplay" class="solde-badge">⏳ Chargement...</div>
   <button class="btn blue" id="apiBtn">⚡ API</button><button class="btn" id="historyBtn">📋 Demandes</button>
  </div>
 </header>
@@ -71,32 +71,86 @@ footer{text-align:center;padding:22px 15px;border-top:1px solid var(--border);fo
 
 <div class="overlay" id="adsModal"><section class="modal"><div class="modal-head"><h2>📣 Pub gratuite</h2><button class="close" data-close="adsModal">×</button></div><form id="adsForm"><div class="field"><label>Titre *</label><input id="adsTitleInput" name="title" required></div><div class="field"><label>Texte *</label><textarea id="adsText" name="text" required></textarea></div><div class="field"><label>Lien *</label><input id="adsUrl" name="url" type="url" required></div><button class="btn green" type="submit" style="width:100%">✨ Créer gratuitement</button><div class="status" id="adStatus"></div><div id="adsResult"></div></form></section></div>
 <div class="overlay" id="qrModal"><section class="modal"><div class="modal-head"><h2>▦ QR Code</h2><button class="close" data-close="qrModal">×</button></div><div class="field"><label>Lien *</label><textarea id="qrText" required></textarea></div><button class="btn gold" id="generateQrBtn" type="button" style="width:100%">Générer</button><div id="qrStatus" class="status"></div><div id="qrResult"></div><button class="btn green" id="downloadQrBtn" type="button" style="width:100%" disabled>Télécharger</button></section></div>
-<div class="overlay" id="historyModal"><section class="modal"><div class="modal-head"><h2>📋 Mes demandes</h2><button class="close" data-close="historyModal">×</button></div><div id="historyList"></div><button class="btn" id="clearHistory" style="width:100%;margin-top:12px">Recharger 61 000 FC</button></section></div>
+<div class="overlay" id="historyModal"><section class="modal"><div class="modal-head"><h2>📋 Mes demandes</h2><button class="close" data-close="historyModal">×</button></div><div id="historyList"></div><button class="btn" id="clearHistory" style="width:100%;margin-top:12px">Actualiser solde</button></section></div>
 
 <nav class="bottom-nav" id="bottomNav"><a href="dashboard.html" class="nav-item"><span class="icon">📊</span><span>Dash</span></a><a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span>Shop</span></a><a href="equipe.html" class="nav-item"><span class="icon">👥</span><span>Équipe</span></a><a href="profil.html" class="nav-item"><span class="icon">👤</span><span>Profil</span></a></nav>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script type="module">
 import {initializeApp,getApps,getApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {getDatabase,ref,push,set,get} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import {getDatabase,ref,push,set,get,onValue,runTransaction} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
 const app=getApps().length?getApp():initializeApp(firebaseConfig);
 const db=getDatabase(app);
-const ROOT="jasonBusiness";const $=id=>document.getElementById(id);
-const BALANCE_KEY="jasonBusinessSoldeV4";const HISTORY_KEY="jasonBusinessBoutiqueOrdersV3";const VIP_KEY="jasonBusinessVip30";
+const ROOT="jasonBusiness";
+const $=id=>document.getElementById(id);
+const HISTORY_KEY="jasonBusinessBoutiqueOrdersV3";
+const VIP_KEY="jasonBusinessVip30";
 const VIP_DISCOUNTS={Bronze:10,Silver:15,Gold:20,Platinum:25,Diamond:30,Aucun:0};
+
+let currentBalance = 0;
+let currentUserRef = null;
+let currentPhone = localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("phone")||"";
+if(currentPhone){ currentUserRef = ref(db, `jasonBusiness/users/${currentPhone}`); }
+
 function formatFC(n){return Number(n).toLocaleString("fr-FR")+" FC";}
 function getVipInfo(){try{const raw=localStorage.getItem(VIP_KEY);if(!raw)return null;const v=JSON.parse(raw);if(!v.expiresAt||Date.now()>v.expiresAt){localStorage.removeItem(VIP_KEY);return null;}return v;}catch{return null;}}
 function getVipDiscount(){const v=getVipInfo();return v? (VIP_DISCOUNTS[v.level]||0):0;}
 function getVipLevel(){const v=getVipInfo();return v? v.level:"Aucun";}
-function activateVip(level){const discount=VIP_DISCOUNTS[level]||0;const expiresAt=Date.now()+(30*24*60*60*1000);const data={level,discount,expiresAt,startAt:Date.now()};localStorage.setItem(VIP_KEY,JSON.stringify(data));setBalance(getBalance());updateAllPrices();return data;}
+function activateVip(level){const discount=VIP_DISCOUNTS[level]||0;const expiresAt=Date.now()+(30*24*60*60*1000);const data={level,discount,expiresAt,startAt:Date.now()};localStorage.setItem(VIP_KEY,JSON.stringify(data));renderBalance(currentBalance);updateAllPrices();return data;}
 window.activateVip=activateVip;
 function applyDiscount(price){const disc=getVipDiscount();if(disc<=0)return {original:price,final:price,discount:0};const final=Math.floor(price*(1-disc/100));return {original:price,final,discount:disc};}
 function formatPriceVIP(price){const p=applyDiscount(price);if(p.discount<=0)return `${p.final.toLocaleString("fr-FR")} FC`;return `<span style="text-decoration:line-through;color:#94a3b8;font-size:10px">${p.original.toLocaleString("fr-FR")} FC</span> <span style="color:#22c55e;font-weight:900">${p.final.toLocaleString("fr-FR")} FC -${p.discount}%</span>`;}
 function formatPricePureVIP(price){const p=applyDiscount(price);if(p.discount<=0)return `${p.final.toLocaleString("fr-FR")} FC`;return `${p.final.toLocaleString("fr-FR")} FC (-${p.discount}%)`;}
-function getBalance(){let b=localStorage.getItem(BALANCE_KEY);if(b===null){b="61000";localStorage.setItem(BALANCE_KEY,b)}return Number(b)||61000;}
-function setBalance(v){v=Math.max(0,Number(v)||0);localStorage.setItem(BALANCE_KEY,String(v));const vip=getVipInfo();let txt=vip? `💰 ${formatFC(v)} <span class="vip-badge">👑 ${vip.level} -${vip.discount}% ${Math.ceil((vip.expiresAt-Date.now())/86400000)}j</span>`:`💰 ${formatFC(v)}`;if($("soldeDisplay"))$("soldeDisplay").innerHTML=txt;const sub=vip? `${formatFC(v)} <span style="color:#22c55e">VIP ${vip.level} -${vip.discount}%</span>`:`${formatFC(v)}`;if($("soldeInBoost"))$("soldeInBoost").innerHTML=sub;if($("soldeInApp"))$("soldeInApp").innerHTML=sub;if($("soldeInMusic"))$("soldeInMusic").innerHTML=sub;}
-function deductBalance(n){const b=getBalance();if(b<n)return false;setBalance(b-n);return true;}
+
+function renderBalance(total){
+  currentBalance = Number(total)||0;
+  const vip=getVipInfo();
+  let txt=vip? `💰 ${formatFC(currentBalance)} <span class="vip-badge">👑 ${vip.level} -${vip.discount}% ${Math.ceil((vip.expiresAt-Date.now())/86400000)}j</span>`:`💰 ${formatFC(currentBalance)}`;
+  if($("soldeDisplay")) $("soldeDisplay").innerHTML=txt;
+  const sub=vip? `${formatFC(currentBalance)} <span style="color:#22c55e">VIP ${vip.level} -${vip.discount}%</span>`:`${formatFC(currentBalance)}`;
+  if($("soldeInBoost")) $("soldeInBoost").innerHTML=sub;
+  if($("soldeInApp")) $("soldeInApp").innerHTML=sub;
+  if($("soldeInMusic")) $("soldeInMusic").innerHTML=sub;
+}
+
+function getBalance(){ return currentBalance; }
+
+async function setBalanceFirebase(newTotal){
+  // si Firebase connecté, on écrit dans solde_principal
+  if(currentUserRef){
+    // on garde la logique simple: on met à jour solde_principal
+    // on calcule la différence entre ancien total et nouveau
+    // Mais pour simplifier, on fait un transaction qui set le total dans solde_principal
+    try{
+      await runTransaction(currentUserRef, curr=>{
+        if(!curr) return;
+        const comm = Number(curr.solde_commissions||0);
+        const gains = Number(curr.solde_gains||0);
+        // On veut que total = newTotal => principal = newTotal - comm - gains
+        curr.solde_principal = Math.max(0, Number(newTotal) - comm - gains);
+        return curr;
+      });
+      return true;
+    }catch(e){ console.log(e); return false; }
+  } else {
+    // fallback localStorage ancien système
+    localStorage.setItem("jasonBusinessSoldeV4", String(newTotal));
+    renderBalance(newTotal);
+    return true;
+  }
+}
+
+async function deductBalance(amount){
+  amount = Number(amount)||0;
+  if(currentBalance < amount) return false;
+  const newTotal = currentBalance - amount;
+  const ok = await setBalanceFirebase(newTotal);
+  if(!ok) return false;
+  // l'affichage sera mis à jour par onValue
+  return true;
+}
+
 function cleanUrl(u){if(!u)return"";u=u.trim();u=u.replace(/^htmps:\/\//i,"https://").replace(/^htps:\/\//i,"https://");if(!u.startsWith("http"))u="https://"+u;return u;}
 function show(id){$(id).classList.add("show");document.body.style.overflow="hidden";$("bottomNav").style.display="none";}
 function hide(id){$(id).classList.remove("show");if(!document.querySelector(".overlay.show")){document.body.style.overflow="";$("bottomNav").style.display="grid";}}
@@ -105,7 +159,7 @@ document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",
 document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)hide(o.id);}));
 $("exploreBtn").onclick=()=>$("services").scrollIntoView({behavior:"smooth"});$("apiBtn").onclick=()=>location.href="api.html";
 function setStatus(id,msg,type="info"){const el=$(id);if(!el)return;el.textContent=msg;el.className="status "+type;}
-async function pushCommande(path,payload){try{const r=push(ref(db,path));await set(r,{...payload,createdAt:Date.now(),date:new Date().toLocaleString("fr-FR"),statut:"En attente",source:"shop",vipLevel:getVipLevel(),vipDiscount:getVipDiscount()});return true;}catch(e){let hist=[];try{hist=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]")}catch{}hist.unshift({type:path,date:new Date().toLocaleString("fr-FR"),data:payload});localStorage.setItem(HISTORY_KEY,JSON.stringify(hist).slice(0,20000));return true;}}
+async function pushCommande(path,payload){try{const r=push(ref(db,path));await set(r,{...payload,createdAt:Date.now(),date:new Date().toLocaleString("fr-FR"),statut:"En attente",source:"shop",vipLevel:getVipLevel(),vipDiscount:getVipDiscount(),userPhone:currentPhone});return true;}catch(e){let hist=[];try{hist=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]")}catch{}hist.unshift({type:path,date:new Date().toLocaleString("fr-FR"),data:payload});localStorage.setItem(HISTORY_KEY,JSON.stringify(hist).slice(0,20000));return true;}}
 const platforms=[["Facebook","https://cdn.simpleicons.org/facebook/1877F2"],["Instagram","https://cdn.simpleicons.org/instagram/E4405F"],["TikTok","https://cdn.simpleicons.org/tiktok/ffffff"],["YouTube","https://cdn.simpleicons.org/youtube/FF0033"],["WhatsApp","https://cdn.simpleicons.org/whatsapp/25D366"],["Telegram","https://cdn.simpleicons.org/telegram/26A5E4"],["Snapchat","https://cdn.simpleicons.org/snapchat/FFFC00"],["X","https://cdn.simpleicons.org/x/ffffff"]];
 let chosenPlatform="Facebook";
 function buildPlatforms(){const grid=$("platformGrid");if(!grid)return;grid.innerHTML="";platforms.forEach(([name,src])=>{const b=document.createElement("button");b.type="button";b.className="platform";b.dataset.name=name;const img=document.createElement("img");img.src=src;const label=document.createElement("span");label.textContent=name;b.append(img,label);b.addEventListener("click",()=>{chosenPlatform=name;$("boostPlatform").value=name;grid.querySelectorAll(".platform").forEach(x=>x.classList.toggle("active",x.dataset.name===name));calculateBoost();});grid.append(b);});$("boostPlatform").value=chosenPlatform;grid.querySelector(`[data-name="${chosenPlatform}"]`)?.classList.add("active");}
@@ -123,73 +177,79 @@ function updateAllPrices(){
   const appBtn=$("appSubmitBtn"); if(appBtn){const p=applyDiscount(10000);appBtn.textContent=`📤 Commander — ${p.final.toLocaleString("fr-FR")} FC${p.discount?` (-${p.discount}%)`:""}`;}
 }
 buildPlatforms();calculateBoost();
-$("boostType").addEventListener("change",()=>{calculateBoost();});
-$("boostBudget").addEventListener("input",()=>{calculateBoost();});
-document.addEventListener("DOMContentLoaded",()=>{
-  $("soldeDisplay").textContent="⏳ Chargement solde...";
-  setTimeout(()=>{
-    setBalance(getBalance());updateAllPrices();
-    try{
-      const phone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone");
-      if(phone){
-        get(ref(db, `jasonBusiness/users/${phone}`)).then(snap=>{
-          const d=snap.val();
-          if(d && d.vip && d.vipLevel && d.vipLevel!=="Aucun"){
-            const expires=d.vipExpires||0;
-            if(expires>Date.now()){
-              localStorage.setItem(VIP_KEY,JSON.stringify({level:d.vipLevel,discount:d.vipDiscount||VIP_DISCOUNTS[d.vipLevel]||0,expiresAt:expires,startAt:d.vipStart||Date.now()}));
-              setBalance(getBalance());updateAllPrices();
-            }
-          }
-        });
+
+// ====== CONNEXION SOLDE TEMPS RÉEL FIREBASE ======
+if(currentUserRef){
+  $("soldeDisplay").innerHTML = "⏳ Chargement...";
+  onValue(currentUserRef, snap=>{
+    if(!snap.exists()){ renderBalance(0); return; }
+    const d=snap.val();
+    const principal=Number(d.solde_principal||d.solde||0);
+    const commissions=Number(d.solde_commissions||0);
+    const gains=Number(d.solde_gains||0);
+    const total=principal+commissions+gains;
+    renderBalance(total);
+    updateAllPrices();
+    if(d.vip && d.vipLevel && d.vipLevel!=="Aucun"){
+      const expires=d.vipExpires||0;
+      if(expires>Date.now()){
+        localStorage.setItem(VIP_KEY,JSON.stringify({level:d.vipLevel,discount:d.vipDiscount||VIP_DISCOUNTS[d.vipLevel]||0,expiresAt:expires,startAt:d.vipStart||Date.now()}));
+        renderBalance(total);
       }
-    }catch{}
-  },400);
-});
+    }
+  });
+} else {
+  // pas connecté -> ancien solde local pour test
+  let b=localStorage.getItem("jasonBusinessSoldeV4");
+  if(b===null){b="61000";localStorage.setItem("jasonBusinessSoldeV4",b)}
+  renderBalance(Number(b)||0);
+  updateAllPrices();
+}
+
 $("boostForm").addEventListener("submit",async e=>{
  e.preventDefault();const d=Object.fromEntries(new FormData(e.target).entries());const calc=calculateBoost();
  if(getBalance()<calc.total){setStatus("boostStatus","❌ Solde insuffisant: "+formatFC(getBalance())+" — Il faut "+formatFC(calc.total),"error");return;}
- if(!deductBalance(calc.total)){setStatus("boostStatus","❌ Solde insuffisant","error");return;}
+ if(!await deductBalance(calc.total)){setStatus("boostStatus","❌ Solde insuffisant","error");return;}
  setStatus("boostStatus","⏳ Paiement "+formatFC(calc.total)+(calc.discount?` (-${calc.discount}%)`:"")+"...","info");
  const ok=await pushCommande(`${ROOT}/demandes_commandes`,{plateforme:d.platform,type_service:d.type,lien:cleanUrl(d.link),quantite:calc.qty,prix:calc.total,prix_original:calc.original,remise:calc.discount,telephone:d.phone});
  if(ok){setStatus("boostStatus","✅ Payé "+formatFC(calc.total)+(calc.discount?` (-${calc.discount}% VIP)`:"")+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();buildPlatforms();calculateBoost();}
- else{setBalance(getBalance()+calc.total);setStatus("boostStatus","❌ Erreur","error");}
+ else{await setBalanceFirebase(getBalance()+calc.total);setStatus("boostStatus","❌ Erreur","error");}
 });
 $("appIcon").addEventListener("change",()=>{const file=$("appIcon").files[0],preview=$("appIconPreview");if(!file){preview.style.display="none";return}preview.src=URL.createObjectURL(file);preview.style.display="block";});
 $("appForm").addEventListener("submit",async e=>{
  e.preventDefault();const p=applyDiscount(10000);
  if(getBalance()<p.final){setStatus("appStatus","❌ Solde insuffisant: "+formatFC(getBalance())+" — Il faut "+formatFC(p.final),"error");return;}
- if(!deductBalance(p.final)){setStatus("appStatus","❌ Solde insuffisant","error");return;}
+ if(!await deductBalance(p.final)){setStatus("appStatus","❌ Solde insuffisant","error");return;}
  const fd=new FormData(e.target);const data=Object.fromEntries(fd.entries());
  setStatus("appStatus","⏳ Paiement "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
  const ok=await pushCommande(`${ROOT}/store_commandes`,{produit:"Application - "+data.appName,nom_application:data.appName,lien_site:cleanUrl(data.appUrl),description:data.description,whatsapp:data.whatsapp,prix:p.final,prix_original:p.original,remise:p.discount});
  if(ok){setStatus("appStatus","✅ Payé "+formatFC(p.final)+(p.discount?` (-${p.discount}% VIP)`:"")+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();$("appIconPreview").style.display="none";}
- else{setBalance(getBalance()+p.final);setStatus("appStatus","❌ Erreur","error");}
+ else{await setBalanceFirebase(getBalance()+p.final);setStatus("appStatus","❌ Erreur","error");}
 });
 $("siteForm").addEventListener("submit",async e=>{
  e.preventDefault();const basePrice=Number($("sitePrice").value)||15000;const siteName=$("siteType").value||"Site Web";if(!siteName){setStatus("siteStatus","Choisis un modèle d'abord","error");return;}const p=applyDiscount(basePrice);
  if(getBalance()<p.final){setStatus("siteStatus","❌ Solde insuffisant: "+formatFC(getBalance())+" — Il faut "+formatFC(p.final),"error");return;}
- if(!deductBalance(p.final)){setStatus("siteStatus","❌ Solde insuffisant","error");return;}
+ if(!await deductBalance(p.final)){setStatus("siteStatus","❌ Solde insuffisant","error");return;}
  const fd=new FormData(e.target);const data=Object.fromEntries(fd.entries());
  setStatus("siteStatus","⏳ Paiement "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
  const ok=await pushCommande(`${ROOT}/store_commandes`,{produit:"Site Web - "+siteName,nom_site:data.siteName,type_site:siteName,description:data.description,fonctionnalites:data.features,whatsapp:data.whatsapp,prix:p.final,prix_original:p.original,remise:p.discount});
  if(ok){setStatus("siteStatus","✅ Payé "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();$("selectedSiteName").textContent="Aucun";$("selectedSitePrice").textContent="0 FC";}
- else{setBalance(getBalance()+p.final);setStatus("siteStatus","❌ Erreur","error");}
+ else{await setBalanceFirebase(getBalance()+p.final);setStatus("siteStatus","❌ Erreur","error");}
 });
 $("chatForm").addEventListener("submit",async e=>{
  e.preventDefault();const p=applyDiscount(7000);
  if(getBalance()<p.final){setStatus("chatStatus","❌ Solde insuffisant","error");return;}
- if(!deductBalance(p.final)){setStatus("chatStatus","❌ Solde insuffisant","error");return;}
+ if(!await deductBalance(p.final)){setStatus("chatStatus","❌ Solde insuffisant","error");return;}
  const data=Object.fromEntries(new FormData(e.target).entries());
  setStatus("chatStatus","⏳ Paiement "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
  const ok=await pushCommande(`${ROOT}/store_commandes`,{produit:"Chatbot - "+data.chatName,...data,prix:p.final,prix_original:p.original,remise:p.discount});
- if(ok){setStatus("chatStatus","✅ Payé "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();}
- else{setBalance(getBalance()+p.final);setStatus("chatStatus","❌ Erreur","error");}
+ if(ok){setStatus("chatStatus","✅ Payé "+formatFC(p.final)+(p.discount?` (-${p.discount}% VIP)`:"")+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();}
+ else{await setBalanceFirebase(getBalance()+p.final);setStatus("chatStatus","❌ Erreur","error");}
 });
 $("musicForm").addEventListener("submit",async e=>{
  e.preventDefault();const p=applyDiscount(5000);
  if(getBalance()<p.final){setStatus("musicStatus","❌ Solde insuffisant","error");return;}
- if(!deductBalance(p.final)){setStatus("musicStatus","❌ Solde insuffisant","error");return;}
+ if(!await deductBalance(p.final)){setStatus("musicStatus","❌ Solde insuffisant","error");return;}
  const data=Object.fromEntries(new FormData(e.target).entries());
  setStatus("musicStatus","⏳ Paiement "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
  try{
@@ -197,13 +257,13 @@ $("musicForm").addEventListener("submit",async e=>{
   const j=await res.json();$("musicResult").innerHTML=`<div style="padding:13px;border:1px solid #293850;border-radius:12px;background:#0c192b;white-space:pre-wrap">${JSON.stringify(j,null,2).slice(0,4000)}</div>`;
   await pushCommande(`${ROOT}/store_commandes`,{produit:"Chanson - "+data.title,prix:p.final,prix_original:p.original,remise:p.discount});
   setStatus("musicStatus","✅ Payé "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+" — Reste "+formatFC(getBalance()),"ok");
- }catch(err){setBalance(getBalance()+p.final);setStatus("musicStatus","❌ Erreur, remboursé "+formatFC(p.final)+": "+err.message,"error");}
+ }catch(err){await setBalanceFirebase(getBalance()+p.final);setStatus("musicStatus","❌ Erreur, remboursé "+formatFC(p.final)+": "+err.message,"error");}
 });
 const siteCatalog=[{name:"Portfolio personnel",icon:"👨‍💻",price:10000},{name:"Site vitrine",icon:"🏢",price:15000},{name:"Boutique en ligne",icon:"🛒",price:30000},{name:"Blog personnel",icon:"✍️",price:10000},{name:"Site d'actualités",icon:"📰",price:25000},{name:"Site d'église",icon:"⛪",price:15000},{name:"Site d'école",icon:"🎓",price:20000},{name:"Site de restaurant",icon:"🍽️",price:15000},{name:"Site d'hôtel",icon:"🏨",price:20000},{name:"Site immobilier",icon:"🏠",price:25000},{name:"Agence digitale",icon:"💻",price:20000},{name:"Site de musique",icon:"🎵",price:20000}];
 function renderSiteCatalog(){const box=$("siteCatalog");if(!box)return;box.innerHTML="";siteCatalog.forEach(site=>{const b=document.createElement("button");b.type="button";b.className="site-option";const p=applyDiscount(site.price);b.innerHTML=`<span style="font-size:27px">${site.icon}</span><span style="font-size:11px;font-weight:800">${site.name}</span><span style="font-size:11px;color:#d8aa45">${formatPriceVIP(site.price)}</span>`;b.addEventListener("click",()=>{box.querySelectorAll(".site-option").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("siteType").value=site.name;$("sitePrice").value=String(site.price);$("selectedSiteName").textContent=site.name;$("selectedSitePrice").innerHTML=formatPriceVIP(site.price);$("siteSubmitBtn").innerHTML=`📤 Commander — ${formatPricePureVIP(site.price)}`;});box.appendChild(b);});}
 renderSiteCatalog();
-$("historyBtn").addEventListener("click",()=>{const box=$("historyList");const vip=getVipInfo();box.innerHTML=`<div style="padding:12px;border:1px solid #293850;border-radius:12px;background:#0c192b">💰 Solde: <b style="color:#00d4ff">${formatFC(getBalance())}</b>${vip?` <span style="color:#22c55e">👑 ${vip.level} -${vip.discount}% — ${Math.ceil((vip.expiresAt-Date.now())/86400000)}j restants</span>`:""}</div>`;let items=[];try{items=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]")}catch{}if(!items.length){box.innerHTML+=`<div style="padding:12px;margin-top:8px;border:1px solid #293850;border-radius:12px;background:#0c192b">Aucune demande</div>`}else items.forEach(it=>{const div=document.createElement("div");div.style.cssText="padding:12px;border:1px solid #293850;border-radius:12px;background:#0c192b;margin:8px 0";div.innerHTML=`<strong>${it.type||"Commande"}</strong><div style="font-size:11px;color:#94a3b8">${it.date||""}</div>`;box.append(div)});show("historyModal");});
-$("clearHistory").addEventListener("click",()=>{if(confirm("Recharger 61 000 FC?")){setBalance(61000);$("historyList").innerHTML=`<div style="padding:12px;border:1px solid #293850;border-radius:12px;background:#0c192b">💰 Solde rechargé: ${formatFC(getBalance())}</div>`;}});
+$("historyBtn").addEventListener("click",()=>{const box=$("historyList");const vip=getVipInfo();box.innerHTML=`<div style="padding:12px;border:1px solid #293850;border-radius:12px;background:#0c192b">💰 Solde réel Firebase: <b style="color:#00d4ff">${formatFC(getBalance())}</b>${vip?` <span style="color:#22c55e">👑 ${vip.level} -${vip.discount}% — ${Math.ceil((vip.expiresAt-Date.now())/86400000)}j restants</span>`:""}</div>`;let items=[];try{items=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]")}catch{}if(!items.length){box.innerHTML+=`<div style="padding:12px;margin-top:8px;border:1px solid #293850;border-radius:12px;background:#0c192b">Aucune demande locale</div>`}else items.forEach(it=>{const div=document.createElement("div");div.style.cssText="padding:12px;border:1px solid #293850;border-radius:12px;background:#0c192b;margin:8px 0";div.innerHTML=`<strong>${it.type||"Commande"}</strong><div style="font-size:11px;color:#94a3b8">${it.date||""}</div>`;box.append(div)});show("historyModal");});
+$("clearHistory").addEventListener("click",()=>{ location.reload(); });
 </script>
 </body>
 </html>
