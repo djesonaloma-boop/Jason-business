@@ -4,982 +4,533 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#050a14">
-<title>JASON BUSINESS - Chat</title>
+<meta name="theme-color" content="#050914">
+<title>JASON BUSINESS — Messenger</title>
 
 <style>
-:root{--blue:#00d2ff;--border:rgba(0,210,255,.18)}
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial;color:white;background:#050a14;display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
-header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:0 14px;background:#050a14;border-bottom:1px solid var(--border)}
-.brand{font-weight:900;color:var(--blue);font-size:14px}
-.btn{padding:8px 12px;border-radius:10px;border:1px solid rgba(0,210,255,.25);background:rgba(0,210,255,.08);color:var(--blue);font-size:11px;cursor:pointer;text-decoration:none;font-weight:700;text-align:center}
-.btn-full{flex:1}
-.wrap{display:flex;flex:1;min-height:0;overflow:hidden}
-.left{width:360px;flex-shrink:0;background:#0b1425;border-right:1px solid var(--border);display:flex;flex-direction:column;min-height:0}
-.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border)}
-.tab{padding:12px 4px;text-align:center;font-size:11px;font-weight:700;cursor:pointer;opacity:.5;border-bottom:2px solid transparent}
-.tab.active{opacity:1;color:var(--blue);border-bottom-color:var(--blue)}
-.search{padding:10px;border-bottom:1px solid var(--border)}
-.search input,.add-box input{width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid #293850;background:#0c192b;color:white;outline:none}
-.list{flex:1;min-height:0;overflow-y:auto;padding:6px}
-.item{padding:10px;border-radius:12px;display:flex;gap:10px;align-items:center;cursor:pointer;margin-bottom:4px;border:1px solid transparent}
-.item.active{background:rgba(0,210,255,.14);border-color:var(--blue)}
-.av{width:42px;height:42px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;overflow:hidden}
-.av img{width:100%;height:100%;object-fit:cover}
-.info{flex:1;min-width:0}
-.name{font-size:13px;font-weight:700}
-.prev{font-size:11px;opacity:.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bottom-nav{padding:10px;display:flex;gap:8px;border-top:1px solid var(--border);background:#0b1425}
-.right{flex:1;min-width:0;display:flex;flex-direction:column;background:#070e1e;overflow:hidden}
-.top{flex-shrink:0;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,10,20,.95);cursor:pointer}
-.msgs{flex:1;min-height:0;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
-.msg{max-width:78%;padding:8px 12px;border-radius:18px;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere;position:relative;line-height:1.4}
-.msg.me{align-self:flex-end;background:linear-gradient(135deg,#00d2ff,#0077ff);border-bottom-right-radius:6px}
-.msg.other{align-self:flex-start;background:rgba(255,255,255,.1);border-bottom-left-radius:6px}
-.photo-wrap{margin-top:6px;border-radius:12px;overflow:hidden;max-width:230px;background:#000;position:relative}
-.photo-wrap img,.photo-wrap video{width:100%;max-height:260px;object-fit:contain;display:block}
-.dl{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.7);color:white;padding:6px 9px;border-radius:8px;font-size:12px;text-decoration:none}
-.msg audio{margin-top:6px;width:min(230px,65vw);display:block}
-.meta{display:flex;justify-content:flex-end;align-items:center;gap:4px;margin-top:4px;font-size:10px;opacity:.85}
-.status.read{color:#b9ffff;font-weight:800}
-.actions{display:none;gap:4px;position:absolute;top:-15px;right:8px;background:#0b1425;border:1px solid var(--border);border-radius:12px;padding:2px;z-index:5}
-.msg.me:hover .actions{display:flex}
-.act{padding:5px 8px;border-radius:8px;background:#14253b;cursor:pointer;font-size:11px;border:0;color:white}
-.input-area{flex-shrink:0;padding:6px 8px;background:#0a1425;border-top:1px solid var(--border);padding-bottom:max(6px,env(safe-area-inset-bottom))}
-.rec-bar{display:none;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;background:#ff47571a;border:1px solid #ff4757aa;border-radius:20px;margin-bottom:6px}
-.rec-bar.show{display:flex}
-.input{display:flex;gap:6px;align-items:center}
-.photo-label{flex-shrink:0}
-.input textarea{flex:1;min-width:0;min-height:40px;max-height:100px;padding:10px 14px;border-radius:20px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none;font-size:13px;font-family:Arial}
-.input textarea:disabled{opacity:.5}
-.tbtn{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:1px solid #293850;background:#0c192b;color:white;display:grid;place-items:center;font-size:18px;cursor:pointer}
-.tbtn:disabled,.send:disabled{opacity:.35;cursor:not-allowed}
-.tbtn.hold{background:#ff4757!important;border-color:#ff4757}
-.send{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:0;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;font-size:18px;cursor:pointer}
-#hint{overflow-wrap:anywhere}
-@media(max-width:800px){
- .left{position:absolute;inset:54px 0 0;width:100%;z-index:20}
- .left.hide{display:none}
- .right{width:100%}
- .msg{max-width:88%}
+:root{
+ --bg:#050914;
+ --panel:#0b1425;
+ --panel2:#101e32;
+ --blue:#00d4ff;
+ --gold:#d8aa45;
+ --text:#f4f8ff;
+ --muted:#91a3bb;
+ --border:#1b3049;
 }
+*{box-sizing:border-box}
+body{
+ margin:0;background:var(--bg);color:var(--text);
+ font-family:Arial,Helvetica,sans-serif;height:100dvh;
+ display:flex;flex-direction:column;overflow:hidden
+}
+header{
+ height:66px;flex-shrink:0;background:var(--panel);
+ border-bottom:1px solid var(--border);
+ display:flex;align-items:center;padding:0 14px;gap:12px
+}
+.logo{
+ width:42px;height:42px;border-radius:14px;
+ display:grid;place-items:center;
+ background:linear-gradient(135deg,#00d4ff,#1268a8);
+ color:#00101a;font-weight:900;font-size:18px
+}
+.headinfo{flex:1;min-width:0}
+.headinfo strong{font-size:15px;display:block}
+.headinfo small{color:#20dca2;font-size:11px;display:block;margin-top:5px}
+.headinfo small.offline{color:var(--muted)}
+.headbtn{
+ border:1px solid var(--border);background:var(--panel2);
+ color:white;border-radius:12px;padding:10px;font-size:18px
+}
+#messages{
+ flex:1;overflow-y:auto;padding:16px 12px 22px;
+ display:flex;flex-direction:column;gap:12px;
+ background:
+ radial-gradient(ellipse at top,#0a1b30 0%,transparent 65%),
+ var(--bg)
+}
+.welcome{text-align:center;color:var(--muted);font-size:12px;margin:12px 0}
+.message{max-width:82%;display:flex;flex-direction:column;gap:5px}
+.message.mine{align-self:flex-end;align-items:flex-end}
+.message.theirs{align-self:flex-start;align-items:flex-start}
+.bubble{
+ background:var(--panel2);border:1px solid var(--border);
+ border-radius:16px 16px 16px 4px;padding:11px 13px;
+ font-size:14px;line-height:1.5;overflow-wrap:anywhere
+}
+.mine .bubble{
+ background:#073449;border-color:#07526b;
+ border-radius:16px 16px 4px 16px
+}
+.bubble img,.bubble video{
+ display:block;max-width:100%;max-height:300px;border-radius:10px
+}
+.bubble audio{width:min(250px,65vw);height:42px}
+.meta{font-size:10px;color:var(--muted);padding:0 4px}
+#recordStatus{
+ display:none;text-align:center;padding:9px;color:#ff7070;
+ background:#21121b;font-size:12px
+}
+#preview{
+ display:none;padding:8px 12px;background:var(--panel);
+ border-top:1px solid var(--border)
+}
+#preview img{max-height:90px;max-width:120px;border-radius:8px}
+.composer{
+ padding:10px;display:flex;align-items:flex-end;gap:7px;
+ background:var(--panel);border-top:1px solid var(--border);
+ padding-bottom:max(10px,env(safe-area-inset-bottom))
+}
+.tool{
+ flex-shrink:0;width:42px;height:44px;border:1px solid var(--border);
+ background:var(--panel2);color:var(--blue);
+ border-radius:13px;font-size:20px;display:grid;place-items:center
+}
+.tool:active{transform:scale(.94)}
+#micBtn.recording{
+ color:white;background:#bd253b;border-color:#ff6577;
+ animation:pulse 1s infinite
+}
+@keyframes pulse{50%{box-shadow:0 0 0 5px #bd253b30}}
+#textInput{
+ min-width:0;flex:1;max-height:110px;min-height:44px;
+ resize:none;background:#07101e;color:white;
+ border:1px solid var(--border);border-radius:14px;
+ padding:12px;font-size:14px;outline:none;font-family:inherit
+}
+#textInput:focus{border-color:var(--blue)}
+#sendBtn{
+ width:44px;height:44px;flex-shrink:0;border:0;border-radius:14px;
+ background:linear-gradient(135deg,var(--blue),#1689d2);
+ color:#00121b;font-size:19px;font-weight:bold
+}
+#sendBtn:disabled{opacity:.4}
+.hint{text-align:center;color:var(--muted);font-size:10px;padding:0 0 7px;background:var(--panel)}
+#contactPanel{
+ display:none;padding:14px;background:var(--panel);
+ border-bottom:1px solid var(--border)
+}
+#contactPanel input{
+ width:100%;background:#07101e;color:white;padding:12px;
+ border:1px solid var(--border);border-radius:10px;margin-bottom:8px
+}
+#contactPanel button{
+ background:var(--blue);color:#00121b;border:0;
+ border-radius:9px;padding:10px;font-weight:bold
+}
+#fileInput{display:none}
 </style>
 </head>
 
 <body>
 <header>
- <div class="brand">jason business — <span id="myPhoneShow" style="font-size:11px;opacity:.7"></span></div>
- <a href="dashboard.html" class="btn">Dash</a>
+ <div class="logo">JB</div>
+ <div class="headinfo">
+  <strong>JASON BUSINESS</strong>
+  <small id="status">● Messenger vocal</small>
+ </div>
+ <button class="headbtn" id="contactBtn" aria-label="Configurer le contact">⋮</button>
 </header>
 
-<div class="wrap">
-<aside class="left" id="leftPanel">
- <div class="tabs">
-  <div class="tab active" data-tab="chats">💬 Chats</div>
-  <div class="tab" data-tab="users">👥 Utilisateurs</div>
-  <div class="tab" data-tab="requests">🔔 Demandes <span id="reqCount" style="background:#ff4757;color:white;padding:1px 5px;border-radius:10px;font-size:9px;display:none">0</span></div>
- </div>
-
- <div class="add-box" style="padding:8px 10px;display:flex;gap:6px;border-bottom:1px solid var(--border)">
-  <input id="manualPhone" placeholder="+243...">
-  <button class="btn" id="btnAddManual">+</button>
- </div>
-
- <div class="search"><input id="search" placeholder="🔍 Rechercher..."></div>
- <div class="list" id="list"></div>
-
- <div class="bottom-nav">
-  <a href="index.html" class="btn btn-full">🏠 Accueil</a>
-  <a href="publications.html" class="btn btn-full">📢 Publications</a>
- </div>
-</aside>
-
-<section class="right">
- <div class="top" id="topBar">
-  <div style="display:flex;align-items:center;gap:10px;min-width:0">
-   <div class="av" id="chatAvatar">JB</div>
-   <div style="min-width:0">
-    <h3 id="chatName" style="margin:0;font-size:14px;overflow:hidden;text-overflow:ellipsis">Sélectionne un chat</h3>
-    <small id="chatPhone" style="font-size:11px;opacity:.6">Clique ici pour revenir</small>
-   </div>
-  </div>
- </div>
-
- <div class="msgs" id="msgs">
-  <div style="margin:auto;opacity:.5;text-align:center">💬 Sélectionne un contact pour commencer</div>
- </div>
-
- <div class="input-area">
-  <div id="recBar" class="rec-bar">
-   <div style="display:flex;align-items:center;gap:8px;min-width:0">
-    <div style="width:10px;height:10px;background:#ff4757;border-radius:50%;flex-shrink:0"></div>
-    <div id="recTime" style="font-weight:800;color:#ff6b7a">00:00</div>
-    <div style="font-size:11px">🔴 Enregistrement</div>
-   </div>
-   <div style="display:flex;gap:6px;flex-shrink:0">
-    <button id="recCancel" style="padding:6px 9px;border-radius:10px;border:1px solid #ff4757;background:#ff475722;color:#ff6b7a;font-size:11px">Annuler</button>
-    <button id="recSend" style="padding:6px 10px;border-radius:10px;border:0;background:#00d2ff;font-weight:800;font-size:11px">Envoyer</button>
-   </div>
-  </div>
-
-  <div class="input">
-   <label class="tbtn photo-label" id="photoLabel" style="cursor:pointer" title="Envoyer une photo ou une vidéo">🖼️
-    <input type="file" id="photoInput" accept="image/*,video/*" hidden>
-   </label>
-   <button type="button" id="recordBtn" class="tbtn" title="Enregistrer un vocal" disabled>🎤</button>
-   <textarea id="msgInput" placeholder="Écris un message..." disabled rows="1"></textarea>
-   <button type="button" class="send" id="sendBtn" disabled>➤</button>
-  </div>
-  <div id="hint" style="text-align:center;font-size:9px;opacity:.5;margin-top:4px">🖼️ photo/vidéo • 🎤 vocal • ➤ message écrit</div>
- </div>
-</section>
+<div id="contactPanel">
+ <input id="myPhone" placeholder="Ton numéro de téléphone">
+ <input id="friendPhone" placeholder="Numéro du destinataire">
+ <button id="connectBtn">Ouvrir la conversation</button>
+ <p style="font-size:11px;color:var(--muted)">Configure les deux numéros pour démarrer une conversation.</p>
 </div>
 
-<script type="module">
-import {initializeApp,getApps,getApp}
- from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+<div id="messages">
+ <div class="welcome">Bienvenue sur JASON BUSINESS Messenger 💙</div>
+ <div class="welcome">Configure les numéros avec ⋮ pour commencer.</div>
+</div>
 
-import {
- getDatabase,ref,onValue,push,set,get,remove,update,onDisconnect,off
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+<div id="recordStatus">🔴 Enregistrement en cours… appuie sur 🎙️ pour terminer</div>
+<div id="preview"><img id="previewImg" alt="Photo à envoyer"><button id="cancelPhoto" class="tool">✕</button></div>
 
-import {
- getStorage,ref as sRef,uploadBytes,getDownloadURL
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+<div class="composer">
+ <button class="tool" id="photoBtn" aria-label="Envoyer une photo">📷</button>
+ <input type="file" id="fileInput" accept="image/*">
+ <button class="tool" id="micBtn" aria-label="Enregistrer un message vocal">🎙️</button>
+ <textarea id="textInput" rows="1" placeholder="Écrire un message…"></textarea>
+ <button id="sendBtn" aria-label="Envoyer">➤</button>
+</div>
+<div class="hint">JASON BUSINESS • Web · Design · Digital · IA</div>
 
-const firebaseConfig={
- apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
- authDomain:"starlink-investit.firebaseapp.com",
- databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
- projectId:"starlink-investit",
- storageBucket:"starlink-investit.appspot.com",
- messagingSenderId:"807081599583",
- appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
-};
+<script>
+"use strict";
 
-const app=getApps().length?getApp():initializeApp(firebaseConfig);
-const db=getDatabase(app);
-const storage=getStorage(app);
-const $=id=>document.getElementById(id);
+const $ = id => document.getElementById(id);
+const messages = $("messages");
+const textInput = $("textInput");
+const sendBtn = $("sendBtn");
+const micBtn = $("micBtn");
+const recordStatus = $("recordStatus");
+const fileInput = $("fileInput");
+const preview = $("preview");
+const previewImg = $("previewImg");
 
-const myPhone=
- localStorage.getItem("jasonBusinessUserPhone")||
- localStorage.getItem("userPhone")||
- localStorage.getItem("phone");
+let recorder = null;
+let recordingStream = null;
+let audioChunks = [];
+let selectedPhoto = null;
+let recording = false;
+let myNumber = "";
+let friendNumber = "";
+let firebaseReady = false;
+let db = null;
+let storage = null;
+let unsubscribe = null;
+let localMessages = [];
+let lastRemoteKey = "";
 
-if(!myPhone){
- location.replace("login.html");
- throw new Error("Utilisateur non connecté");
+function cleanPhone(value){
+ return value.trim().replace(/[^\d+]/g,"");
 }
 
-$("myPhoneShow").textContent=myPhone;
-
-let tab="chats";
-let activeChat=null;
-let allUsers={};
-let myRequests={};
-let myChats={};
-let presenceCache={};
-let manualUsers=[];
-
-try{
- manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]");
- if(!Array.isArray(manualUsers))manualUsers=[];
-}catch{manualUsers=[]}
-
-let messageUnsubscribe=null;
-let recording=false;
-let stopping=false;
-let cancelled=false;
-let mediaRecorder=null;
-let audioChunks=[];
-let recordStream=null;
-let timerInt=null;
-let recSec=0;
-let busySending=false;
-
-function esc(s){
- return String(s??"").replace(/[&<>"']/g,c=>({
-  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
- }[c]));
+function timeNow(){
+ return new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
 }
 
-function timeStr(ts){
- if(!ts)return"";
- return new Date(ts).toLocaleTimeString("fr-FR",{
-  hour:"2-digit",minute:"2-digit"
- });
-}
+function showMessage(type, content, time=timeNow(), sender=""){
+ const wrap=document.createElement("div");
+ wrap.className="message "+(type==="mine"?"mine":"theirs");
+ const bubble=document.createElement("div");
+ bubble.className="bubble";
 
-function getChatId(a,b){
- return [a,b].sort().join("_");
-}
-
-function isOnline(ph){
- const p=presenceCache[ph];
- return !!(p&&p.online&&Date.now()-(p.lastSeen||0)<90000);
-}
-
-function getUserPhoto(ph){
- const u=allUsers[ph]||{};
- return u.photo||u.photoProfil||u.avatar||"";
-}
-
-function setHint(message){
- $("hint").textContent=message;
-}
-
-function stopTracks(){
- if(recordStream){
-  recordStream.getTracks().forEach(track=>{
-   try{track.stop()}catch{}
-  });
-  recordStream=null;
- }
-}
-
-const presenceRef=ref(db,`jasonBusiness/presence/${myPhone}`);
-
-set(presenceRef,{
- online:true,lastSeen:Date.now(),activeChat:null
-}).catch(err=>console.error("Présence:",err));
-
-onDisconnect(presenceRef).set({
- online:false,lastSeen:Date.now(),activeChat:null
-});
-
-setInterval(()=>{
- set(presenceRef,{
-  online:true,lastSeen:Date.now(),activeChat:activeChat
- }).catch(()=>{});
-},30000);
-
-onValue(ref(db,".info/connected"),snap=>{
- if(snap.val()===true){
-  onDisconnect(presenceRef).set({
-   online:false,lastSeen:Date.now(),activeChat:null
-  }).catch(()=>{});
- }
-});
-
-onValue(ref(db,"jasonBusiness/presence"),snap=>{
- presenceCache=snap.val()||{};
- render();
- if(activeChat){
-  $("chatPhone").textContent=isOnline(activeChat)
-   ?activeChat+" • En ligne 🟢"
-   :"Hors ligne";
- }
-});
-
-onValue(ref(db,"jasonBusiness/users"),snap=>{
- allUsers=snap.val()||{};
- render();
-});
-
-onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),snap=>{
- myRequests=snap.val()||{};
- const inc=Object.values(myRequests).filter(r=>
-  r.type==="incoming"&&r.status==="pending"
- ).length;
- $("reqCount").textContent=inc;
- $("reqCount").style.display=inc>0?"inline-block":"none";
- render();
-});
-
-onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),snap=>{
- myChats=snap.val()||{};
- render();
-});
-
-document.querySelectorAll(".tab").forEach(t=>{
- t.onclick=()=>{
-  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
-  t.classList.add("active");
-  tab=t.dataset.tab;
-  render();
- };
-});
-
-$("search").oninput=render;
-
-$("topBar").onclick=()=>{
- if(window.innerWidth<=800){
-  $("leftPanel").classList.remove("hide");
- }
-};
-
-$("btnAddManual").onclick=()=>{
- const p=$("manualPhone").value.trim();
- if(!p||p.length<8){
-  alert("Entre un numéro de téléphone valide.");
-  return;
- }
- if(p===myPhone){
-  alert("Tu ne peux pas ajouter ton propre numéro.");
-  return;
- }
- if(!manualUsers.includes(p))manualUsers.push(p);
- localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));
- $("manualPhone").value="";
- render();
-};
-
-function getCombinedUsers(){
- const c={...allUsers};
- manualUsers.forEach(p=>{
-  if(!c[p])c[p]={telephone:p};
- });
- return c;
-}
-
-function render(){
- const q=($("search").value||"").toLowerCase();
- const cont=$("list");
- cont.innerHTML="";
- const users=getCombinedUsers();
-
- if(tab==="users"){
-  Object.entries(users).forEach(([phone,u])=>{
-   if(phone===myPhone)return;
-   if(q&&!phone.toLowerCase().includes(q)&&
-      !String(u.nom||"").toLowerCase().includes(q))return;
-
-   const chatId=getChatId(myPhone,phone);
-   const isFriend=myChats[chatId]?.status==="accepted";
-   const hasSent=myRequests[phone]?.type==="outgoing"&&
-                  myRequests[phone]?.status==="pending";
-   const photo=getUserPhoto(phone);
-   const div=document.createElement("div");
-   div.className="item";
-   div.innerHTML=`
-    <div class="av">${photo?`<img src="${esc(photo)}">`:esc(phone.slice(-2))}</div>
-    <div class="info">
-     <div class="name">${esc(u.nom||phone)}</div>
-     <div class="prev">${esc(phone)}</div>
-    </div>
-    <div>${isFriend?"💬":hasSent?"⏳":"+"}</div>`;
-
-   div.onclick=()=>{
-    if(isFriend)openChat(phone);
-    else if(!hasSent)sendRequest(phone);
-   };
-   cont.appendChild(div);
-  });
-
-  if(!cont.children.length)cont.innerHTML=
-   `<div style="padding:20px;text-align:center;opacity:.6">Aucun utilisateur trouvé</div>`;
-
- }else if(tab==="requests"){
-  const reqs=Object.entries(myRequests).filter(([_,r])=>
-   r.type==="incoming"&&r.status==="pending"
-  );
-
-  if(!reqs.length){
-   cont.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucune demande</div>`;
-   return;
-  }
-
-  reqs.forEach(([phone])=>{
-   const div=document.createElement("div");
-   div.className="item";
-   div.innerHTML=`
-    <div class="av">${esc(phone.slice(-2))}</div>
-    <div class="info">
-     <div class="name">${esc(allUsers[phone]?.nom||phone)}</div>
-     <div class="prev">Veut discuter</div>
-    </div>`;
-
-   const b=document.createElement("button");
-   b.className="btn";
-   b.textContent="Accepter";
-   b.onclick=()=>acceptRequest(phone);
-   div.appendChild(b);
-   cont.appendChild(div);
-  });
-
- }else{
-  const list=Object.entries(myChats)
-   .filter(([_,c])=>c.status==="accepted")
-   .sort((a,b)=>(b[1].lastTime||0)-(a[1].lastTime||0));
-
-  if(!list.length){
-   cont.innerHTML=`<div style="padding:20px;text-align:center;opacity:.6">Aucun chat. Va dans Utilisateurs pour commencer.</div>`;
-   return;
-  }
-
-  list.forEach(([chatId,chat])=>{
-   const other=chatId.split("_").find(p=>p!==myPhone);
-   if(!other)return;
-   if(q&&!other.toLowerCase().includes(q)&&
-      !String(allUsers[other]?.nom||"").toLowerCase().includes(q))return;
-
-   const photo=getUserPhoto(other);
-   const div=document.createElement("div");
-   div.className="item"+(activeChat===other?" active":"");
-   div.innerHTML=`
-    <div class="av">${photo?`<img src="${esc(photo)}">`:esc(other.slice(-2))}</div>
-    <div class="info">
-     <div class="name">${esc(allUsers[other]?.nom||other)}</div>
-     <div class="prev">${esc((chat.lastMsg||"").slice(0,60))}</div>
-    </div>
-    <div style="font-size:9px">${timeStr(chat.lastTime)}</div>`;
-   div.onclick=()=>openChat(other);
-   cont.appendChild(div);
-  });
- }
-}
-
-async function sendRequest(toPhone){
- try{
-  await set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${toPhone}`),{
-   phone:toPhone,type:"outgoing",status:"pending",createdAt:Date.now()
-  });
-
-  await set(ref(db,`jasonBusiness/chat_requests/${toPhone}/${myPhone}`),{
-   phone:myPhone,type:"incoming",status:"pending",createdAt:Date.now()
-  });
-
-  alert("Demande envoyée !");
- }catch(e){
-  alert("Impossible d'envoyer la demande : "+e.message);
- }
-}
-
-async function acceptRequest(fromPhone){
- try{
-  const chatId=getChatId(myPhone,fromPhone);
-
-  await set(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{
-   with:fromPhone,status:"accepted",lastMsg:"✅ Discussion acceptée",
-   lastTime:Date.now(),unread:0
-  });
-
-  await set(ref(db,`jasonBusiness/user_chats/${fromPhone}/${chatId}`),{
-   with:myPhone,status:"accepted",lastMsg:"✅ Discussion acceptée",
-   lastTime:Date.now(),unread:1
-  });
-
-  await remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${fromPhone}`));
-  await remove(ref(db,`jasonBusiness/chat_requests/${fromPhone}/${myPhone}`));
-
-  document.querySelector('[data-tab="chats"]').click();
-  setTimeout(()=>openChat(fromPhone),200);
- }catch(e){
-  alert("Erreur : "+e.message);
- }
-}
-
-function openChat(other){
- activeChat=other;
-
- if(messageUnsubscribe){
-  messageUnsubscribe();
-  messageUnsubscribe=null;
- }
-
- const photo=getUserPhoto(other);
- $("chatName").textContent=allUsers[other]?.nom||other;
- $("chatPhone").textContent=isOnline(other)?other+" • En ligne 🟢":"Hors ligne";
-
- $("chatAvatar").innerHTML="";
- if(photo){
+ if(content.kind==="text"){
+  bubble.textContent=content.text;
+ }else if(content.kind==="image"){
   const img=document.createElement("img");
-  img.src=photo;
-  img.alt="";
-  $("chatAvatar").appendChild(img);
+  img.src=content.url;img.alt="Photo reçue";
+  img.addEventListener("click",()=>window.open(content.url,"_blank"));
+  bubble.appendChild(img);
+ }else if(content.kind==="audio"){
+  const audio=document.createElement("audio");
+  audio.controls=true;audio.preload="metadata";audio.src=content.url;
+  bubble.appendChild(audio);
  }else{
-  $("chatAvatar").textContent=other.slice(-2);
+  bubble.textContent="Message";
  }
-
- $("msgInput").disabled=false;
- $("sendBtn").disabled=false;
- $("recordBtn").disabled=false;
- $("photoInput").disabled=false;
-
- if(window.innerWidth<=800)$("leftPanel").classList.add("hide");
-
- set(presenceRef,{
-  online:true,lastSeen:Date.now(),activeChat:other
- }).catch(()=>{});
-
- const chatId=getChatId(myPhone,other);
- const messagesRef=ref(db,`jasonBusiness/messages/${chatId}`);
-
- const unsubscribe=onValue(messagesRef,snap=>{
-  if(activeChat!==other)return;
-
-  const data=snap.val()||{};
-  const msgs=Object.entries(data)
-   .map(([k,v])=>({...v,_key:k}))
-   .sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
-
-  renderMessages(msgs);
-  markAsRead(chatId,msgs).catch(console.error);
-  update(ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`),{
-   unread:0
-  }).catch(()=>{});
- },err=>{
-  setHint("Erreur de lecture : "+err.message);
- });
-
- messageUnsubscribe=()=>unsubscribe();
- render();
- $("msgInput").focus();
+ const meta=document.createElement("div");
+ meta.className="meta";
+ meta.textContent=(sender?sender+" · ":"")+time;
+ wrap.append(bubble,meta);
+ messages.appendChild(wrap);
+ messages.scrollTop=messages.scrollHeight;
 }
 
-async function markAsRead(chatId,msgs){
- const changes={};
- msgs.forEach(m=>{
-  if(m.to===myPhone&&m.status!=="read"){
-   changes[`jasonBusiness/messages/${chatId}/${m._key}/status`]="read";
-   changes[`jasonBusiness/messages/${chatId}/${m._key}/readAt`]=Date.now();
-  }
- });
- if(Object.keys(changes).length)await update(ref(db),changes);
+function addLocalMessage(type, content){
+ showMessage(type,content);
 }
 
-function renderMessages(msgs){
- const c=$("msgs");
- c.innerHTML="";
-
- if(!msgs.length){
-  const empty=document.createElement("div");
-  empty.style.cssText="margin:auto;opacity:.6;padding:20px;text-align:center";
-  empty.textContent="Début de la conversation. Envoie ton premier message !";
-  c.appendChild(empty);
-  return;
+async function requestMicrophone(){
+ if(!window.isSecureContext){
+  alert("Le microphone exige une page HTTPS. Héberge ton application sur Vercel puis ouvre son adresse HTTPS.");
+  return null;
  }
-
- msgs.forEach(m=>{
-  const isMe=m.from===myPhone;
-  const div=document.createElement("div");
-  div.className="msg "+(isMe?"me":"other");
-
-  if(m.text){
-   const text=document.createElement("div");
-   text.textContent=m.text;
-   div.appendChild(text);
-  }
-
-  if(m.photo){
-   const wrap=document.createElement("div");
-   wrap.className="photo-wrap";
-
-   let media;
-   if(m.type==="video"){
-    media=document.createElement("video");
-    media.controls=true;
-    media.playsInline=true;
-   }else{
-    media=document.createElement("img");
-    media.alt="Photo reçue";
-    media.loading="lazy";
-    media.onclick=()=>window.open(m.photo,"_blank","noopener");
-   }
-   media.src=m.photo;
-   wrap.appendChild(media);
-
-   const dl=document.createElement("a");
-   dl.className="dl";
-   dl.href=m.photo;
-   dl.target="_blank";
-   dl.rel="noopener";
-   dl.download="";
-   dl.textContent="⬇️";
-   wrap.appendChild(dl);
-   div.appendChild(wrap);
-  }
-
-  if(m.audio){
-   const audio=document.createElement("audio");
-   audio.controls=true;
-   audio.preload="metadata";
-   audio.src=m.audio;
-   audio.style.maxWidth="100%";
-   div.appendChild(audio);
-  }
-
-  const meta=document.createElement("div");
-  meta.className="meta";
-
-  const time=document.createElement("span");
-  time.textContent=timeStr(m.createdAt);
-  meta.appendChild(time);
-
-  if(isMe){
-   const status=document.createElement("span");
-   status.className=m.status==="read"?"status read":"";
-   status.textContent=m.status==="read"?"✓✓ Lu":"✓";
-   meta.appendChild(status);
-  }
-
-  div.appendChild(meta);
-
-  if(isMe){
-   const acts=document.createElement("div");
-   acts.className="actions";
-   const del=document.createElement("button");
-   del.className="act";
-   del.textContent="🗑️";
-   del.title="Supprimer ce message";
-   del.onclick=()=>deleteMessage(getChatId(myPhone,activeChat),m._key);
-   acts.appendChild(del);
-   div.appendChild(acts);
-
-   div.ondblclick=()=>{
-    if(confirm("Supprimer ce message ?")){
-     deleteMessage(getChatId(myPhone,activeChat),m._key);
-    }
-   };
-  }
-
-  c.appendChild(div);
- });
-
- c.scrollTop=c.scrollHeight;
-}
-
-async function deleteMessage(chatId,key){
- if(!confirm("Supprimer ce message pour tous les participants ?"))return;
-
+ if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+  alert("Ce navigateur ne permet pas l'accès au microphone. Ouvre la page dans Chrome avec une adresse HTTPS.");
+  return null;
+ }
  try{
-  await remove(ref(db,`jasonBusiness/messages/${chatId}/${key}`));
-  setHint("Message supprimé.");
- }catch(e){
-  alert("Suppression impossible : "+e.message);
- }
-}
-
-async function publishMessage(other,fields,lastMsg){
- const chatId=getChatId(myPhone,other);
- const msgRef=push(ref(db,`jasonBusiness/messages/${chatId}`));
- const now=Date.now();
-
- await set(msgRef,{
-  ...fields,
-  from:myPhone,
-  to:other,
-  createdAt:now,
-  status:"sent"
- });
-
- const myChatRef=ref(db,`jasonBusiness/user_chats/${myPhone}/${chatId}`);
- const otherChatRef=ref(db,`jasonBusiness/user_chats/${other}/${chatId}`);
-
- const [mySnap,otherSnap]=await Promise.all([
-  get(myChatRef),get(otherChatRef)
- ]);
-
- const myData=mySnap.val()||{};
- const otherData=otherSnap.val()||{};
-
- await Promise.all([
-  set(myChatRef,{
-   ...myData,
-   with:other,
-   status:"accepted",
-   lastMsg:lastMsg,
-   lastTime:now,
-   unread:0
-  }),
-  set(otherChatRef,{
-   ...otherData,
-   with:myPhone,
-   status:"accepted",
-   lastMsg:lastMsg,
-   lastTime:now,
-   unread:(Number(otherData.unread)||0)+1
-  })
- ]);
-}
-
-async function sendText(){
- if(busySending)return;
- const text=$("msgInput").value.trim();
-
- if(!text||!activeChat)return;
-
- const other=activeChat;
- busySending=true;
- $("sendBtn").disabled=true;
-
- try{
-  $("msgInput").value="";
-  await publishMessage(other,{text},text);
-  setHint("✅ Message envoyé");
- }catch(e){
-  $("msgInput").value=text;
-  alert("Envoi impossible : "+e.message);
-  setHint("❌ Échec de l'envoi");
- }finally{
-  busySending=false;
-  $("sendBtn").disabled=!activeChat;
-  $("msgInput").focus();
- }
-}
-
-$("sendBtn").onclick=sendText;
-
-$("msgInput").addEventListener("keydown",e=>{
- if(e.key==="Enter"&&!e.shiftKey){
-  e.preventDefault();
-  sendText();
- }
-});
-
-$("photoInput").onchange=async e=>{
- const file=e.target.files?.[0];
- if(!file)return;
-
- if(!activeChat){
-  alert("Ouvre d'abord une conversation.");
-  e.target.value="";
-  return;
- }
-
- if(!file.type.startsWith("image/")&&!file.type.startsWith("video/")){
-  alert("Choisis une photo ou une vidéo.");
-  e.target.value="";
-  return;
- }
-
- if(file.size>50*1024*1024){
-  alert("Le fichier est trop volumineux. Taille maximale : 50 Mo.");
-  e.target.value="";
-  return;
- }
-
- const other=activeChat;
- const isVid=file.type.startsWith("video/");
- $("photoInput").disabled=true;
- $("recordBtn").disabled=true;
- $("sendBtn").disabled=true;
- setHint("⏳ Envoi du fichier : "+file.name);
-
- try{
-  const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
-  const path=`files/${getChatId(myPhone,other)}/${Date.now()}_${safeName}`;
-  const fileRef=sRef(storage,path);
-
-  await uploadBytes(fileRef,file,{contentType:file.type});
-  const url=await getDownloadURL(fileRef);
-
-  await publishMessage(other,{
-   text:isVid?"🎬 Vidéo":"📷 Photo",
-   photo:url,
-   type:isVid?"video":"image"
-  },isVid?"🎬 Vidéo":"📷 Photo");
-
-  setHint("✅ "+(isVid?"Vidéo":"Photo")+" envoyée !");
- }catch(err){
-  console.error(err);
-  alert("Impossible d'envoyer le fichier : "+err.message);
-  setHint("❌ Échec de l'envoi. Vérifie Firebase Storage.");
- }finally{
-  $("photoInput").value="";
-  $("photoInput").disabled=false;
-  $("recordBtn").disabled=!activeChat;
-  $("sendBtn").disabled=!activeChat;
- }
-};
-
-function fmt(s){
- return String(Math.floor(s/60)).padStart(2,"0")+":"+
-        String(s%60).padStart(2,"0");
-}
-
-function clearRecordingUI(){
- clearInterval(timerInt);
- timerInt=null;
- $("recBar").classList.remove("show");
- $("recordBtn").classList.remove("hold");
- $("recordBtn").textContent="🎤";
- $("recordBtn").disabled=!activeChat;
- $("photoInput").disabled=false;
-}
-
-function finishRecorder(){
- if(mediaRecorder&&mediaRecorder.state!=="inactive"){
-  try{mediaRecorder.stop()}catch(e){console.error(e)}
- }
-}
-
-async function toggleVocal(){
- if(recording){
-  finishRecorder();
-  return;
- }
-
- if(!activeChat){
-  alert("Ouvre d'abord une conversation.");
-  return;
- }
-
- if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder){
-  alert("Ton navigateur ne permet pas d'enregistrer un vocal. Ouvre le site en HTTPS dans Chrome.");
-  return;
- }
-
- try{
-  setHint("🎤 Demande d'autorisation du microphone...");
-
-  recordStream=await navigator.mediaDevices.getUserMedia({
+  return await navigator.mediaDevices.getUserMedia({
    audio:{
     echoCancellation:true,
     noiseSuppression:true,
     autoGainControl:true
    }
   });
-
-  const formats=[
-   "audio/webm;codecs=opus",
-   "audio/webm",
-   "audio/mp4",
-   "audio/ogg;codecs=opus"
-  ];
-
-  const mime=formats.find(type=>
-   MediaRecorder.isTypeSupported(type)
-  );
-
-  mediaRecorder=mime
-   ?new MediaRecorder(recordStream,{mimeType:mime})
-   :new MediaRecorder(recordStream);
-
-  audioChunks=[];
-  recSec=0;
-  cancelled=false;
-  stopping=false;
-  recording=true;
-
-  const recorder=mediaRecorder;
-  const other=activeChat;
-
-  recorder.ondataavailable=e=>{
-   if(e.data&&e.data.size>0)audioChunks.push(e.data);
-  };
-
-  recorder.onerror=e=>{
-   console.error("Erreur MediaRecorder",e);
-   setHint("❌ Erreur d'enregistrement vocal");
-  };
-
-  recorder.onstop=async()=>{
-   clearInterval(timerInt);
-   const wasCancelled=cancelled;
-   const chunks=[...audioChunks];
-   const blobType=recorder.mimeType||"audio/webm";
-   const blob=new Blob(chunks,{type:blobType});
-
-   recording=false;
-   stopping=false;
-   clearRecordingUI();
-   stopTracks();
-
-   if(wasCancelled){
-    audioChunks=[];
-    setHint("Enregistrement annulé.");
-    return;
-   }
-
-   if(blob.size<500){
-    setHint("Vocal trop court. Réessaie.");
-    return;
-   }
-
-   if(!other){
-    setHint("Ouvre une conversation avant d'envoyer.");
-    return;
-   }
-
-   $("sendBtn").disabled=true;
-   $("recordBtn").disabled=true;
-   $("photoInput").disabled=true;
-   setHint("⏳ Envoi du message vocal...");
-
-   try{
-    const ext=blobType.includes("mp4")?"mp4":
-              blobType.includes("ogg")?"ogg":"webm";
-
-    const path=`vocals/${getChatId(myPhone,other)}/${Date.now()}.${ext}`;
-    const audioRef=sRef(storage,path);
-
-    await uploadBytes(audioRef,blob,{contentType:blobType});
-    const url=await getDownloadURL(audioRef);
-
-    await publishMessage(other,{
-     text:"🎤 Message vocal",
-     audio:url,
-     type:"audio"
-    },"🎤 Message vocal");
-
-    setHint("✅ Message vocal envoyé !");
-   }catch(err){
-    console.error(err);
-    alert("Échec de l'envoi vocal : "+err.message);
-    setHint("❌ Erreur. Vérifie Firebase Storage.");
-   }finally{
-    audioChunks=[];
-    $("sendBtn").disabled=!activeChat;
-    $("recordBtn").disabled=!activeChat;
-    $("photoInput").disabled=false;
-   }
-  };
-
-  recorder.start(250);
-
-  $("recBar").classList.add("show");
-  $("recordBtn").classList.add("hold");
-  $("recordBtn").textContent="⏹️";
-  $("photoInput").disabled=true;
-  $("sendBtn").disabled=true;
-  $("recTime").textContent="00:00";
-  setHint("🔴 Enregistrement en cours...");
-
-  timerInt=setInterval(()=>{
-   recSec++;
-   $("recTime").textContent=fmt(recSec);
-   if(recSec>=120)finishRecorder();
-  },1000);
-
- }catch(err){
-  console.error(err);
-  recording=false;
-  stopTracks();
-  clearRecordingUI();
-
-  if(err.name==="NotAllowedError"||err.name==="PermissionDeniedError"){
-   alert("Accès au microphone refusé. Autorise le microphone dans les paramètres du navigateur.");
+ }catch(error){
+  console.error("Microphone:",error);
+  if(error.name==="NotAllowedError" || error.name==="PermissionDeniedError"){
+   alert("Accès au microphone refusé. Autorise le microphone pour ce site dans ton navigateur Android, puis réessaie.");
+  }else if(error.name==="NotFoundError"){
+   alert("Aucun microphone disponible sur cet appareil.");
   }else{
-   alert("Impossible de démarrer le microphone : "+err.message);
+   alert("Impossible d'ouvrir le microphone : "+error.message);
   }
-
-  setHint("Microphone indisponible.");
+  return null;
  }
 }
 
-$("recordBtn").addEventListener("click",toggleVocal);
+function chooseRecorderType(){
+ if(!window.MediaRecorder) return "";
+ const types=[
+  "audio/webm;codecs=opus",
+  "audio/webm",
+  "audio/mp4"
+ ];
+ return types.find(type=>MediaRecorder.isTypeSupported(type)) || "";
+}
 
-$("recSend").addEventListener("click",()=>{
- if(recording)finishRecorder();
-});
+async function toggleRecording(){
+ if(recording){
+  try{recorder?.stop();}catch(e){console.error(e);}
+  return;
+ }
+ const stream=await requestMicrophone();
+ if(!stream) return;
 
-$("recCancel").addEventListener("click",()=>{
- if(!recording)return;
- cancelled=true;
+ if(!window.MediaRecorder){
+  stream.getTracks().forEach(track=>track.stop());
+  alert("L'enregistrement vocal n'est pas pris en charge par ce navigateur. Essaie avec Chrome à jour.");
+  return;
+ }
+
+ recordingStream=stream;
  audioChunks=[];
- finishRecorder();
- setHint("Annulation...");
+ try{
+  const mimeType=chooseRecorderType();
+  recorder=mimeType
+   ? new MediaRecorder(stream,{mimeType})
+   : new MediaRecorder(stream);
+
+  recorder.ondataavailable=event=>{
+   if(event.data && event.data.size>0) audioChunks.push(event.data);
+  };
+
+  recorder.onerror=event=>{
+   console.error("Erreur d'enregistrement",event);
+   alert("Une erreur est survenue pendant l'enregistrement vocal.");
+   stopRecordingUI();
+  };
+
+  recorder.onstop=async()=>{
+   const blob=new Blob(audioChunks,{
+    type:recorder.mimeType || "audio/webm"
+   });
+   stopRecordingUI();
+   if(blob.size===0){
+    alert("Aucun son enregistré. Réessaie.");
+    return;
+   }
+   await sendAudio(blob);
+  };
+
+  recorder.start(250);
+  recording=true;
+  micBtn.classList.add("recording");
+  micBtn.textContent="■";
+  recordStatus.style.display="block";
+ }catch(error){
+  console.error(error);
+  stream.getTracks().forEach(track=>track.stop());
+  recordingStream=null;
+  alert("Impossible de démarrer l'enregistrement vocal.");
+ }
+}
+
+function stopRecordingUI(){
+ recording=false;
+ micBtn.classList.remove("recording");
+ micBtn.textContent="🎙️";
+ recordStatus.style.display="none";
+ if(recordingStream){
+  recordingStream.getTracks().forEach(track=>track.stop());
+  recordingStream=null;
+ }
+}
+
+async function sendAudio(blob){
+ const extension=blob.type.includes("mp4")?"m4a":"webm";
+ if(firebaseReady && storage && myNumber && friendNumber){
+  try{
+   const path=`jasonBusiness/chatMedia/${Date.now()}_${myNumber}.${extension}`;
+   const ref=storage.ref().child(path);
+   await ref.put(blob,{contentType:blob.type});
+   const url=await ref.getDownloadURL();
+   await saveRemoteMessage({kind:"audio",url});
+   return;
+  }catch(error){
+   console.error(error);
+   alert("L'envoi du vocal a échoué. Vérifie Firebase Storage et ses règles.");
+   return;
+  }
+ }
+ const url=URL.createObjectURL(blob);
+ addLocalMessage("mine",{kind:"audio",url});
+ alert("Vocal enregistré localement. Pour l'envoyer à un autre téléphone, connecte Firebase et configure la conversation.");
+}
+
+async function sendText(){
+ const text=textInput.value.trim();
+ if(!text) return;
+ textInput.value="";
+ textInput.style.height="44px";
+ if(firebaseReady && myNumber && friendNumber){
+  try{
+   await saveRemoteMessage({kind:"text",text});
+   return;
+  }catch(error){
+   console.error(error);
+   alert("Impossible d'envoyer le message. Vérifie les règles Firebase.");
+   return;
+  }
+ }
+ addLocalMessage("mine",{kind:"text",text});
+}
+
+async function sendPhoto(file){
+ if(!file) return;
+ if(!file.type.startsWith("image/")){
+  alert("Choisis un fichier image.");
+  return;
+ }
+ if(file.size>10*1024*1024){
+  alert("La photo doit faire moins de 10 Mo.");
+  return;
+ }
+
+ if(firebaseReady && storage && myNumber && friendNumber){
+  try{
+   const path=`jasonBusiness/chatMedia/${Date.now()}_${myNumber}_${file.name.replace(/[^\w.-]/g,"_")}`;
+   const ref=storage.ref().child(path);
+   await ref.put(file,{contentType:file.type});
+   const url=await ref.getDownloadURL();
+   await saveRemoteMessage({kind:"image",url});
+   clearPhoto();
+   return;
+  }catch(error){
+   console.error(error);
+   alert("L'envoi de la photo a échoué. Vérifie Firebase Storage et ses règles.");
+   return;
+  }
+ }
+ const url=URL.createObjectURL(file);
+ addLocalMessage("mine",{kind:"image",url});
+ clearPhoto();
+ alert("Photo affichée localement. Pour l'envoyer à un autre téléphone, configure Firebase.");
+}
+
+function clearPhoto(){
+ selectedPhoto=null;
+ fileInput.value="";
+ preview.style.display="none";
+ previewImg.src="";
+}
+
+$("photoBtn").addEventListener("click",()=>fileInput.click());
+
+fileInput.addEventListener("change",()=>{
+ const file=fileInput.files && fileInput.files[0];
+ if(!file) return;
+ selectedPhoto=file;
+ previewImg.src=URL.createObjectURL(file);
+ preview.style.display="flex";
+ preview.style.alignItems="center";
+ preview.style.gap="12px";
 });
 
-window.addEventListener("beforeunload",()=>{
- if(messageUnsubscribe)messageUnsubscribe();
- clearInterval(timerInt);
- stopTracks();
+$("cancelPhoto").addEventListener("click",clearPhoto);
+
+sendBtn.addEventListener("click",async()=>{
+ if(selectedPhoto){
+  const photo=selectedPhoto;
+  await sendPhoto(photo);
+ }else{
+  await sendText();
+ }
 });
 
+textInput.addEventListener("keydown",event=>{
+ if(event.key==="Enter" && !event.shiftKey){
+  event.preventDefault();
+  sendBtn.click();
+ }
+});
+
+textInput.addEventListener("input",()=>{
+ textInput.style.height="44px";
+ textInput.style.height=Math.min(textInput.scrollHeight,110)+"px";
+});
+
+micBtn.addEventListener("click",toggleRecording);
+
+$("contactBtn").addEventListener("click",()=>{
+ const panel=$("contactPanel");
+ panel.style.display=panel.style.display==="block"?"none":"block";
+});
+
+$("connectBtn").addEventListener("click",async()=>{
+ myNumber=cleanPhone($("myPhone").value);
+ friendNumber=cleanPhone($("friendPhone").value);
+ if(!myNumber || !friendNumber){
+  alert("Entre ton numéro et celui du destinataire.");
+  return;
+ }
+ if(myNumber===friendNumber){
+  alert("Entre un numéro différent pour le destinataire.");
+  return;
+ }
+ if(!firebaseReady){
+  alert("La conversation locale est prête, mais Firebase n'est pas configuré dans cette version. Ajoute ta configuration Firebase pour synchroniser les messages entre téléphones.");
+  return;
+ }
+ await connectConversation();
+});
+
+function conversationId(a,b){
+ return [a,b].sort().join("_").replace(/[.#$[\]/]/g,"_");
+}
+
+/*
+ Pour les messages entre deux téléphones, ajoute ta configuration Firebase
+ dans le bloc prévu ci-dessous. N'utilise pas de mots de passe privés ici.
+*/
+async function connectConversation(){
+ if(!db) return;
+ const id=conversationId(myNumber,friendNumber);
+ const ref=db.ref("jasonBusiness/chats/"+id+"/messages");
+ if(unsubscribe) ref.off("child_added",unsubscribe);
+ const seen=new Set();
+ unsubscribe=snapshot=>{
+  const data=snapshot.val();
+  if(!data || seen.has(snapshot.key)) return;
+  seen.add(snapshot.key);
+  if(data.sender===myNumber) return;
+  showMessage("theirs",data, data.time || timeNow(),data.sender || friendNumber);
+ };
+ ref.on("child_added",unsubscribe,error=>{
+  console.error(error);
+  alert("Erreur de lecture Firebase. Vérifie les règles de la base de données.");
+ });
+ $("contactPanel").style.display="none";
+ $("status").textContent="● Connecté";
+ $("status").classList.remove("offline");
+ messages.innerHTML='<div class="welcome">Conversation ouverte 💙</div>';
+}
+
+async function saveRemoteMessage(content){
+ if(!db || !myNumber || !friendNumber) throw new Error("Conversation non configurée");
+ const id=conversationId(myNumber,friendNumber);
+ await db.ref("jasonBusiness/chats/"+id+"/messages").push({
+  ...content,
+  sender:myNumber,
+  time:timeNow(),
+  timestamp:Date.now()
+ });
+}
+
+/*
+ FIREBASE :
+ Ajoute le SDK Firebase App, Database et Storage et initialise firebase
+ avec la configuration de TON projet avant ce script.
+*/
+try{
+ if(window.firebase && firebase.apps && firebase.apps.length){
+  db=firebase.database();
+  storage=firebase.storage();
+  firebaseReady=!!(db && storage);
+ }
+}catch(error){
+ console.warn("Firebase non initialisé :",error);
+}
+
+if(!firebaseReady){
+ $("status").textContent="● Mode local — Firebase à connecter";
+ $("status").classList.add("offline");
+}
 </script>
 </body>
 </html>
