@@ -95,7 +95,7 @@ td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:
   </aside>
   <main class="content">
    <section class="page active" id="page-dashboard">
-    <div class="page-title">📊 Dashboard</div><div class="page-subtitle">Vue générale — Fix recharge/retrait : scan multi-chemins Firebase</div>
+    <div class="page-title">📊 Dashboard</div><div class="page-subtitle">Vue générale — FIX: commandes visibles partout</div>
     <div class="stats">
      <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-label">Utilisateurs</div><div class="stat-value" id="statUsers">0</div></div>
      <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-label">Solde total</div><div class="stat-value" id="totalBalance">0 FC</div></div>
@@ -104,7 +104,7 @@ td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:
      <div class="stat-card"><div class="stat-icon">💸</div><div class="stat-label">Retraits en attente</div><div class="stat-value" id="statWithdrawals">0</div></div>
      <div class="stat-card"><div class="stat-icon">👑</div><div class="stat-label">Membres VIP actifs</div><div class="stat-value" id="statVip">0</div></div>
     </div>
-    <div class="panel"><div class="panel-head"><strong>Diagnostic Firebase</strong></div><div class="section-note" id="diagInfo">Connexion...</div></div>
+    <div class="panel"><div class="panel-head"><strong>Diagnostic Firebase - Où sont les commandes ?</strong><button class="btn btn-blue" onclick="scanAllNow()">🔍 Re-scanner</button></div><div class="section-note" id="diagInfo">Connexion...</div></div>
    </section>
    <section class="page" id="page-users">
     <div class="page-title">👥 Utilisateurs — Tu vois tout</div>
@@ -115,7 +115,13 @@ td{padding:13px;border-bottom:1px solid #ffffff0b;font-size:12px;vertical-align:
      </div>
     </div>
    </section>
-   <section class="page" id="page-commands"><div class="page-title">🛒 Commandes — Boutique + Boostage</div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Client</th><th>Service</th><th>Détail</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div></div></section>
+   <section class="page" id="page-commands">
+    <div class="page-title">🛒 Commandes — FIX: Tu vois TOUT maintenant</div>
+    <div class="panel">
+     <div class="panel-head"><strong>Toutes les commandes (6 sources + dans users/)</strong><input id="commandSearch" class="toolbar-input" placeholder="🔎 Filtrer par téléphone ou service..." style="max-width:260px"><button class="btn btn-blue" onclick="renderCommands()">↻ Actualiser</button></div>
+     <div class="table-wrap"><table><thead><tr><th>Source</th><th>Client</th><th>Service</th><th>Détail / Lien</th><th>Montant</th><th>Date</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="commandsTable"></tbody></table></div>
+    </div>
+   </section>
    <section class="page" id="page-recharges"><div class="page-title">💳 Recharges — Tu vois tout maintenant</div><div class="panel"><div class="panel-head"><strong>Dépôts (tous chemins Firebase)</strong><button class="btn btn-blue" onclick="createTestRecharge()">+ Test Dépôt</button></div><div class="table-wrap"><table><thead><tr><th>Source</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="rechargesTable"></tbody></table></div></div></section>
    <section class="page" id="page-withdrawals"><div class="page-title">💸 Retraits — Tu vois tout maintenant</div><div class="panel"><div class="panel-head"><strong>Retraits (tous chemins)</strong><button class="btn btn-purple" onclick="createTestWithdrawal()">+ Test Retrait</button></div><div class="table-wrap"><table><thead><tr><th>Source</th><th>Client</th><th>Montant</th><th>Méthode</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="withdrawalsTable"></tbody></table></div></div></section>
    <section class="page" id="page-vip"><div class="page-title">👑 Gestion VIP</div><div class="panel"><div class="panel-head"><strong>Clients VIP</strong><input id="vipSearch" class="toolbar-input" placeholder="🔎 Rechercher"></div><div class="table-wrap"><table><thead><tr><th>Numéro</th><th>Nom</th><th>Niveau</th><th>Statut</th><th>Actions</th></tr></thead><tbody id="vipTable"></tbody></table></div></div></section>
@@ -135,6 +141,10 @@ document.addEventListener("DOMContentLoaded",()=>{
  document.getElementById("adminPassword").onkeydown=e=>{if(e.key==="Enter") doLogin();};
  document.getElementById("adminLogout").onclick=()=>{localStorage.removeItem("jasonAdmin"); location.reload();};
  if(localStorage.getItem("jasonAdmin")==="ok"){document.getElementById("adminLogin").style.display="none";document.getElementById("adminPanel").style.display="block";}
+ document.getElementById("userSearch")?.addEventListener("input", e=>{
+   const q=e.target.value.toLowerCase(); document.querySelectorAll("#usersTable tr").forEach(tr=>{ tr.style.display = tr.dataset.search?.includes(q) ? "" : "none"; });
+ });
+ document.getElementById("commandSearch")?.addEventListener("input", ()=>renderCommands());
 });
 </script>
 
@@ -152,7 +162,7 @@ let usersCache={}, commandsCache={}, rechargesCache={}, withdrawalsCache={}, pri
 let started=false;
 const $=id=>document.getElementById(id);
 const money=v=>Math.floor(Number(v)||0).toLocaleString("fr-FR");
-const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","&quot;":"&#039;"}[c]));
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
 const getPhone=d=>String(d.telephone??d.userPhone??d.phone??d.numero??d.user??d.client??"").trim();
 const getName=d=>d.nom||d.name||"Utilisateur";
 const getPass=d=>d.motDePasse||d.mot_de_passe||d.password||d.pass||d.mdp||"—";
@@ -165,29 +175,72 @@ const badge=s=>{const l=String(s||"").toLowerCase(); if(l.includes("valid")||l.i
 function toast(m){const c=$("toastContainer"); const el=document.createElement("div"); el.className="toast"; el.textContent=m; c.appendChild(el); setTimeout(()=>el.remove(),3500);}
 function openPage(p){document.querySelectorAll(".menu-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===p)); document.querySelectorAll(".page").forEach(s=>s.classList.toggle("active",s.id==="page-"+p));}
 document.querySelectorAll(".menu-btn").forEach(b=>b.addEventListener("click",()=>openPage(b.dataset.page)));
+window.openPage=openPage;
+
 window._start=()=>{
  if(started) return; started=true;
  onValue(ref(db, USERS_PATH), snap=>{
   usersCache={}; let total=0,balance=0,vipCount=0; snap.forEach(ch=>{const d=ch.val()||{}; usersCache[ch.key]=d; total++; balance+=getBal(d); if(isVip(d)) vipCount++;});
   $("statUsers").textContent=total; $("totalBalance").textContent=money(balance)+" FC"; $("statVip").textContent=vipCount; $("menuVip").textContent=vipCount; renderUsers(); renderVip(); scanNestedInUsers();
  });
- const rechargePaths=[`${ROOT}/demandes_recharges`,`${ROOT}/recharges`,`demandes_recharges`,`${ROOT}/depots`,`${ROOT}/store_commandes`,`${ROOT}/demandes_commandes`];
+
+ const commandePaths=[
+   `${ROOT}/demandes_commandes`,
+   `${ROOT}/store_commandes`,
+   `${ROOT}/commandes`,
+   `${ROOT}/shop_commandes`,
+   `demandes_commandes`,
+   `store_commandes`
+ ];
+ commandePaths.forEach(p=>{
+   onValue(ref(db, p), s=>{
+     if(!s.exists()) return;
+     s.forEach(ch=>{
+       const id=ch.key;
+       const val=ch.val()||{};
+       const uniqueKey=p+"|"+id;
+       commandsCache[uniqueKey]={...val, _src:p, _full:`${p}/${id}`, _id:id};
+     });
+     renderCommands();
+   });
+ });
+
+ const rechargePaths=[`${ROOT}/demandes_recharges`,`${ROOT}/recharges`,`demandes_recharges`,`${ROOT}/depots`];
  const retraitPaths=[`${ROOT}/demandes_retraits`,`${ROOT}/retraits`,`demandes_retraits`];
- rechargePaths.forEach(p=> onValue(ref(db,p), s=>{ if(p.includes("commandes")||p.includes("store")) return; if(s.size===0){ Object.keys(rechargesCache).forEach(k=>{ if(rechargesCache[k]._src===p) delete rechargesCache[k];}); renderRecharges(); return;} s.forEach(ch=>{ rechargesCache[ch.key]={...ch.val(), _src:p, _full:`${p}/${ch.key}`};}); renderRecharges(); }));
- retraitPaths.forEach(p=> onValue(ref(db,p), s=>{ if(s.size===0){ Object.keys(withdrawalsCache).forEach(k=>{ if(withdrawalsCache[k]._src===p) delete withdrawalsCache[k];}); renderWithdrawals(); return;} s.forEach(ch=>{ withdrawalsCache[ch.key]={...ch.val(), _src:p, _full:`${p}/${ch.key}`};}); renderWithdrawals(); }));
- onValue(ref(db, `${ROOT}/demandes_commandes`), s=>{ commandsCache={}; s.forEach(ch=>commandsCache[ch.key]=ch.val()||{}); renderCommands();});
- onValue(ref(db, `${ROOT}/store_commandes`), s=>{ s.forEach(ch=>{ commandsCache[ch.key]=ch.val()||{}; }); renderCommands(); });
+ rechargePaths.forEach(p=> onValue(ref(db,p), s=>{ if(!s.exists()){ Object.keys(rechargesCache).forEach(k=>{ if(rechargesCache[k]._src===p) delete rechargesCache[k];}); renderRecharges(); return;} s.forEach(ch=>{ rechargesCache[ch.key]={...ch.val(), _src:p, _full:`${p}/${ch.key}`};}); renderRecharges(); }));
+ retraitPaths.forEach(p=> onValue(ref(db,p), s=>{ if(!s.exists()){ Object.keys(withdrawalsCache).forEach(k=>{ if(withdrawalsCache[k]._src===p) delete withdrawalsCache[k];}); renderWithdrawals(); return;} s.forEach(ch=>{ withdrawalsCache[ch.key]={...ch.val(), _src:p, _full:`${p}/${ch.key}`};}); renderWithdrawals(); }));
  onValue(ref(db, PRICES_PATH), s=>{ pricesCache=s.val()||{}; renderPrices(); $("apiInfo").textContent=s.exists()?"Tarifs chargés":"Aucun tarif";});
 };
+
 function scanNestedInUsers(){
- let nestedR=0, nestedW=0;
+ let nestedR=0, nestedW=0, nestedC=0;
  Object.entries(usersCache).forEach(([phone, data])=>{
-  ["demandes_recharges","recharges","depot"].forEach(k=>{ if(data[k] && typeof data[k]==="object"){ Object.entries(data[k]).forEach(([id,val])=>{ if(typeof val==="object" && val.montant){ const key=phone+"_"+k+"_"+id; rechargesCache[key]={...val, telephone:val.telephone||phone, _src:`${USERS_PATH}/${phone}/${k}`, _full:`${USERS_PATH}/${phone}/${k}/${id}`}; nestedR++; }}); }});
-  ["demandes_retraits","retraits"].forEach(k=>{ if(data[k] && typeof data[k]==="object"){ Object.entries(data[k]).forEach(([id,val])=>{ if(typeof val==="object" && val.montant){ const key=phone+"_"+k+"_"+id; withdrawalsCache[key]={...val, telephone:val.telephone||phone, _src:`${USERS_PATH}/${phone}/${k}`, _full:`${USERS_PATH}/${phone}/${k}/${id}`}; nestedW++; }}); }});
+  if(!data || typeof data!=="object") return;
+  ["demandes_recharges","recharges","depot","depots"].forEach(k=>{ if(data[k] && typeof data[k]==="object"){ Object.entries(data[k]).forEach(([id,val])=>{ if(val && typeof val==="object" && (val.montant||val.amount)){ const key=phone+"_"+k+"_"+id; rechargesCache[key]={...val, telephone:val.telephone||phone, _src:`${USERS_PATH}/${phone}/${k}`, _full:`${USERS_PATH}/${phone}/${k}/${id}`}; nestedR++; }}); }});
+  ["demandes_retraits","retraits"].forEach(k=>{ if(data[k] && typeof data[k]==="object"){ Object.entries(data[k]).forEach(([id,val])=>{ if(val && typeof val==="object" && val.montant){ const key=phone+"_"+k+"_"+id; withdrawalsCache[key]={...val, telephone:val.telephone||phone, _src:`${USERS_PATH}/${phone}/${k}`, _full:`${USERS_PATH}/${phone}/${k}/${id}`}; nestedW++; }}); }});
+  ["demandes_commandes","store_commandes","commandes","shop_commandes","commandes_client","mes_commandes"].forEach(k=>{
+    if(data[k] && typeof data[k]==="object"){
+      Object.entries(data[k]).forEach(([id,val])=>{
+        if(val && typeof val==="object"){
+          const uniqueKey=`${USERS_PATH}/${phone}/${k}|${id}`;
+          commandsCache[uniqueKey]={...val, telephone:val.telephone||phone, _src:`${USERS_PATH}/${phone}/${k}`, _full:`${USERS_PATH}/${phone}/${k}/${id}`, _id:id};
+          nestedC++;
+        }
+      });
+    }
+  });
  });
- $("diagInfo").innerHTML=`Scan Firebase : Users ${Object.keys(usersCache).length} | Recharges ${Object.keys(rechargesCache).length} (${nestedR} dans users/) | Retraits ${Object.keys(withdrawalsCache).length} (${nestedW} dans users/) | Commandes ${Object.keys(commandsCache).length}`;
- renderRecharges(); renderWithdrawals();
+ const diag=`Scan Firebase :<br>
+  • Users: ${Object.keys(usersCache).length}<br>
+  • Commandes totales: ${Object.keys(commandsCache).length} (dont ${nestedC} dans users/)<br>
+  • Recharges: ${Object.keys(rechargesCache).length} (${nestedR} dans users/)<br>
+  • Retraits: ${Object.keys(withdrawalsCache).length} (${nestedW} dans users/)<br><br>
+  <b style="color:#54e889">Si client dit "j'ai commandé mais tu ne vois rien", clique sur 🛒 Commandes et cherche son numéro. Maintenant tu vois tout.</b>`;
+ $("diagInfo").innerHTML=diag;
+ renderRecharges(); renderWithdrawals(); renderCommands();
 }
+window.scanAllNow=()=>{ scanNestedInUsers(); toast("🔍 Re-scan fait"); };
+
 function renderUsers(){
  const tbody=$("usersTable"); tbody.innerHTML="";
  Object.entries(usersCache).forEach(([phone,d])=>{
@@ -201,7 +254,7 @@ function renderUsers(){
  if(!Object.keys(usersCache).length) tbody.innerHTML='<tr><td colspan="6" class="empty">Aucun utilisateur</td></tr>';
 }
 window.copyPass=(phone)=>{ const d=usersCache[phone]||{}; const pass=getPass(d); navigator.clipboard.writeText(pass); toast("🔑 Mot de passe copié: "+pass); };
-window.viewClientCommands=(phone)=>{ openPage("commands"); toast("📦 Commandes de "+phone); };
+window.viewClientCommands=(phone)=>{ openPage("commands"); $("commandSearch").value=phone; renderCommands(); toast("📦 Commandes de "+phone); };
 window.sendMessageToClient=async(phone)=>{
  const msg=prompt("💬 Message à envoyer à "+phone+" :","Bonjour, votre commande est en traitement...");
  if(!msg) return;
@@ -216,10 +269,22 @@ function renderVip(){
 window.deleteUser=async(phone)=>{ if(!confirm("Supprimer "+phone+"?")) return; await remove(ref(db, `${USERS_PATH}/${phone}`)); toast("Supprimé"); };
 window.saveVip=async(phone)=>{ const sel=document.querySelector(`[data-level="${CSS.escape(phone)}"]`); const level=sel?.value||"Aucun"; await update(ref(db, `${USERS_PATH}/${phone}`), {vipLevel:level, vipStatus:level!=="Aucun"?"Actif":"Inactif", vip:level!=="Aucun", isVip:level!=="Aucun"}); toast("VIP enregistré"); };
 window.toggleVip=async(phone)=>{ const d=usersCache[phone]||{}; const active=!isVip(d); const level=active?(vipLevel(d)==="Aucun"?"Bronze":vipLevel(d)):"Aucun"; await update(ref(db, `${USERS_PATH}/${phone}`), {vip:active, isVip:active, vipStatus:active?"Actif":"Inactif", vipLevel:level}); toast(active?"Activé":"Désactivé"); };
+
 function renderCommands(){
- const tbody=$("commandsTable"); tbody.innerHTML=""; let pending=0;
- Object.entries(commandsCache).forEach(([id,d])=>{ if(isPending(getStatus(d))) pending++; const tr=document.createElement("tr"); tr.innerHTML=`<td>${esc(getPhone(d))}</td><td>${esc(d.produit||d.service||"Service")}</td><td>${esc((d.lien||"").slice(0,120))}</td><td>${money(d.montant||0)} FC</td><td>${badge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateCommand('${id}')">✓</button><button class="btn btn-red" onclick="refuseCommand('${id}')">✕</button>`: "Traité"}</td>`; tbody.appendChild(tr); });
- $("statCommands").textContent=pending; $("menuCommands").textContent=pending;
+ const tbody=$("commandsTable"); const q=($("commandSearch")?.value||"").toLowerCase(); tbody.innerHTML=""; let pending=0, shown=0;
+ const all=Object.values(commandsCache).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+ all.forEach(d=>{
+   const phone=getPhone(d); const service=d.produit||d.service||d.type_service||d.type||"Service"; const detail=d.lien||d.nom_site||d.nom_application||d.chatName||d.title||JSON.stringify(d).slice(0,120);
+   const searchText=(phone+" "+service+" "+detail+" "+(d._src||"")).toLowerCase();
+   if(q && !searchText.includes(q)) return;
+   if(isPending(getStatus(d))) pending++; shown++;
+   const date=d.date||(d.createdAt? new Date(d.createdAt).toLocaleString("fr-FR"):"");
+   const tr=document.createElement("tr");
+   tr.innerHTML=`<td style="font-size:9px;color:#7f8da2">${esc((d._src||"").slice(0,40))}</td><td><b>${esc(phone)}</b></td><td>${esc(service)}</td><td style="max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(detail)}">${esc(detail)}</td><td><b style="color:#d8aa45">${money(d.montant||d.prix||d.price||0)} FC</b></td><td style="font-size:10px;color:#94a3b8">${esc(date)}</td><td>${badge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateCommandByFull('${esc(d._full)}')">✓ Valider</button><button class="btn btn-red" onclick="refuseCommandByFull('${esc(d._full)}')">✕ Refuser</button><button class="btn btn-blue" onclick="viewDetail('${esc(d._full)}')">👁</button>`:`<button class="btn btn-blue" onclick="viewDetail('${esc(d._full)}')">👁</button>`}</td>`;
+   tbody.appendChild(tr);
+ });
+ if(!shown) tbody.innerHTML=`<tr><td colspan="8" class="empty">Aucune commande trouvée ${q?`pour "${esc(q)}"`:""}.<br><br>Va dans Firebase Console > jasonBusiness/demandes_commandes et vérifie.</td></tr>`;
+ $("statCommands").textContent=pending; $("menuCommands").textContent=Object.keys(commandsCache).length;
 }
 function renderRecharges(){
  const tbody=$("rechargesTable"); tbody.innerHTML=""; let pending=0;
@@ -231,9 +296,16 @@ function renderWithdrawals(){
  Object.entries(withdrawalsCache).forEach(([key,d])=>{ if(isPending(getStatus(d))) pending++; const tr=document.createElement("tr"); tr.innerHTML=`<td style="font-size:9px">${esc(d._src||"")}</td><td>${esc(getPhone(d))}</td><td>${money(d.montant||0)} FC</td><td>${esc(d.methode||"—")}</td><td>${badge(getStatus(d))}</td><td>${isPending(getStatus(d))?`<button class="btn btn-green" onclick="validateWithdrawal('${esc(key)}')">✓</button><button class="btn btn-red" onclick="refuseWithdrawal('${esc(key)}')">✕</button>`: "—"}</td>`; tbody.appendChild(tr); });
  $("statWithdrawals").textContent=pending; $("menuWithdrawals").textContent=pending;
 }
+window.validateCommandByFull=async(full)=>{ await update(ref(db, full), {statut:"Validée", status:"Validée"}); toast("✅ Commande validée"); };
+window.refuseCommandByFull=async(full)=>{ await update(ref(db, full), {statut:"Refusée", status:"Refusée"}); toast("❌ Refusée"); };
+window.viewDetail=async(full)=>{
+ const snap=await get(ref(db, full));
+ if(!snap.exists()){ toast("Non trouvé"); return; }
+ alert("DÉTAIL COMMANDE:\n"+JSON.stringify(snap.val(), null, 2).slice(0,2000));
+};
 window.validateCommand=async(id)=>{ await update(ref(db, `${ROOT}/demandes_commandes/${id}`), {statut:"Validée"}); toast("Validée"); };
 window.refuseCommand=async(id)=>{ await update(ref(db, `${ROOT}/demandes_commandes/${id}`), {statut:"Refusée"}); toast("Refusée"); };
-window.validateRecharge=async(key)=>{ const d=rechargesCache[key]||{}; const phone=getPhone(d); const amt=Number(d.montant||0); await runTransaction(ref(db, `${USERS_PATH}/${phone}/solde_principal`), c=>(Number(c)||0)+amt); await update(ref(db, d._full), {statut:"Validée"}); toast("✅ Crédité"); };
+window.validateRecharge=async(key)=>{ const d=rechargesCache[key]||{}; const phone=getPhone(d); const amt=Number(d.montant||0); if(phone&&amt>0) await runTransaction(ref(db, `${USERS_PATH}/${phone}/solde_principal`), c=>(Number(c)||0)+amt); await update(ref(db, d._full), {statut:"Validée"}); toast("✅ Crédité"); };
 window.refuseRecharge=async(key)=>{ const d=rechargesCache[key]||{}; await update(ref(db, d._full), {statut:"Refusée"}); toast("Refusée"); };
 window.validateWithdrawal=async(key)=>{ const d=withdrawalsCache[key]||{}; await update(ref(db, d._full), {statut:"Payé"}); toast("Payé"); };
 window.refuseWithdrawal=async(key)=>{ const d=withdrawalsCache[key]||{}; const phone=getPhone(d), amt=Number(d.montant||0); await update(ref(db, d._full), {statut:"Refusée — Remboursée"}); if(phone&&amt>0) await runTransaction(ref(db, `${USERS_PATH}/${phone}/solde_principal`), c=>(Number(c)||0)+amt); toast("Remboursé"); };
