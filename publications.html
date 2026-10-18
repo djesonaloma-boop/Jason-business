@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>JASON BUSINESS - Auto Feed</title>
+<title>JASON BUSINESS - Auto Feed FIX</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial;background:#050a14;color:white}
 header{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;background:#050a14;border-bottom:1px solid #0f203f;position:sticky;top:0;z-index:10}
@@ -47,7 +47,6 @@ textarea{width:100%;min-height:65px;padding:12px;border-radius:12px;border:1px s
 .cmt-input{display:flex;gap:6px;padding:8px 12px;background:#070e1e;border-top:1px solid #0f203f}
 .cmt-input input{flex:1;padding:9px 14px;border-radius:20px;border:1px solid #293850;background:#0c192b;color:white;outline:none;font-size:12px}
 .del{margin-left:auto;background:transparent;border:0;color:#ff4757;cursor:pointer}
-
 #viewer{position:fixed;inset:0;background:#000;display:none;z-index:9999;flex-direction:column}
 #viewer.show{display:flex}
 #viewerTop{display:flex;justify-content:space-between;padding:12px}
@@ -102,11 +101,10 @@ textarea{width:100%;min-height:65px;padding:12px;border-radius:12px;border:1px s
 <script type="module">
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, onValue, push, set, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.appspot.com",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
+const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
 const app=getApps().length?getApp():initializeApp(firebaseConfig);
-const db=getDatabase(app); const storage=getStorage(app);
+const db=getDatabase(app);
 const $=id=>document.getElementById(id);
 const myPhone=localStorage.getItem("jasonBusinessUserPhone")||"0847500590";
 const myName=localStorage.getItem("jasonBusinessUserName")||myPhone;
@@ -132,48 +130,36 @@ document.querySelectorAll(".tab").forEach(t=>{
   };
 });
 
-// ===== PUBLICATION AUTO QUAND PHOTO CHOISIE =====
+// ===== PUBLICATION PHOTO AUTO EN BASE64 - PLUS DE BLOCAGE =====
 $("pubFile").onchange=async e=>{
   const f=e.target.files[0]; if(!f) return;
+  if(f.size>4*1024*1024){ alert("Photo trop grosse (4Mo max). Fais une capture d'écran ou choisis plus petite."); e.target.value=""; return; }
   const text=$("pubText").value.trim();
-  
-  $("status").textContent="⏳ Upload photo en cours...";
+  $("status").textContent="⏳ Conversion photo...";
   $("photoBtn").style.opacity="0.5";
-  
-  try{
-    const path=`publications/${myPhone}/${Date.now()}_${f.name.replace(/[^a-z0-9.]/gi,'_')}`;
-    const rs=sRef(storage,path);
-    await uploadBytes(rs,f);
-    const url=await getDownloadURL(rs);
-    
-    $("status").textContent="⏳ Publication pour tout le monde...";
-    
-    // PUBLIE AUTOMATIQUEMENT POUR TOUS
-    await push(ref(db,"jasonBusiness/publications"),{
-      from:myPhone, name:myName,
-      type:"photo",
-      text:text,
-      image:url,
-      bg:selPub,
-      createdAt:Date.now(),
-      likes:{}
-    });
-    
-    $("status").textContent="✅ Photo publiée ! Tout le monde la voit maintenant";
-    $("pubText").value="";
+  const reader=new FileReader();
+  reader.readAsDataURL(f);
+  reader.onloadend=async()=>{
+    try{
+      $("status").textContent="⏳ Publication pour tout le monde...";
+      await push(ref(db,"jasonBusiness/publications"),{
+        from:myPhone, name:myName,
+        type:"photo",
+        text:text,
+        image:reader.result,
+        bg:selPub,
+        createdAt:Date.now(),
+        likes:{}
+      });
+      $("status").textContent="✅ Photo publiée ! Tout le monde la voit";
+      $("pubText").value="";
+      setTimeout(()=>{ $("status").textContent=""; $("photoBtn").style.opacity="1"; },3000);
+    }catch(err){ $("status").textContent="❌ Erreur: "+err.message; $("photoBtn").style.opacity="1"; }
     e.target.value="";
-    
-    setTimeout(()=>{$("status").textContent=""; $("photoBtn").style.opacity="1";},3000);
-    
-  }catch(err){
-    $("status").textContent="❌ Erreur: "+err.message+" - Active STORAGE dans Firebase";
-    $("photoBtn").style.opacity="1";
-    console.error(err);
-    alert("ERREUR: "+err.message+"\n\n1. Va sur Firebase Console\n2. Storage > Commencer > Mode test\n3. Réessaie");
-  }
+  };
 };
 
-// PUBLICATION NOTE (bouton)
+// PUBLICATION NOTE
 $("btnPub").onclick=async()=>{
   const txt=$("pubText").value.trim();
   if(!txt) return alert("Écris une note");
@@ -181,20 +167,21 @@ $("btnPub").onclick=async()=>{
   $("pubText").value="";
 };
 
-// STORY AUTO PHOTO
+// STORY PHOTO AUTO BASE64
 $("storyFile").onchange=async e=>{
   const f=e.target.files[0]; if(!f) return;
-  try{
-    $("status").textContent="⏳ Story photo...";
-    const path=`stories/${myPhone}/${Date.now()}_${f.name.replace(/[^a-z0-9.]/gi,'_')}`;
-    const rs=sRef(storage,path);
-    await uploadBytes(rs,f);
-    const url=await getDownloadURL(rs);
-    await push(ref(db,"jasonBusiness/stories"),{from:myPhone,name:myName,type:"photo",photo:url,createdAt:Date.now(),expiresAt:Date.now()+86400000});
-    $("status").textContent="✅ Story publiée 24h";
-    setTimeout(()=>$("status").textContent="",3000);
-  }catch(err){ alert("Erreur story: "+err.message); }
-  e.target.value="";
+  if(f.size>4*1024*1024){ alert("Story trop grosse (4Mo max)"); e.target.value=""; return; }
+  $("status").textContent="⏳ Story photo...";
+  const reader=new FileReader();
+  reader.readAsDataURL(f);
+  reader.onloadend=async()=>{
+    try{
+      await push(ref(db,"jasonBusiness/stories"),{from:myPhone,name:myName,type:"photo",photo:reader.result,createdAt:Date.now(),expiresAt:Date.now()+86400000});
+      $("status").textContent="✅ Story publiée 24h";
+      setTimeout(()=>$("status").textContent="",3000);
+    }catch(err){ alert("Erreur story: "+err.message); }
+    e.target.value="";
+  };
 };
 
 // STORY NOTE
