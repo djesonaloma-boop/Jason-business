@@ -3,42 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>JASON BUSINESS - Photo Video Note Optionnelle</title>
+<title>JASON BUSINESS - Super Social</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial;background:#050a14;color:white}
 header{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;background:#050a14;border-bottom:1px solid #0f203f;position:sticky;top:0;z-index:10}
 .brand{font-weight:900;color:#00d2ff}
-.btn{padding:7px 12px;border-radius:10px;border:1px solid #00d2ff44;background:#00d2ff14;color:#00d2ff;font-size:11px;text-decoration:none;font-weight:700}
-.tabs{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #0f203f;background:#0b1425}
-.tab{padding:13px;text-align:center;font-size:12px;font-weight:800;cursor:pointer;opacity:.5;border-bottom:2px solid transparent}
+.btn{padding:7px 12px;border-radius:10px;border:1px solid #00d2ff44;background:#00d2ff14;color:#00d2ff;font-size:11px;text-decoration:none;font-weight:700;cursor:pointer}
+.tabs{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid #0f203f;background:#0b1425}
+.tab{padding:11px 2px;text-align:center;font-size:10px;font-weight:800;cursor:pointer;opacity:.5;border-bottom:2px solid transparent}
 .tab.active{opacity:1;color:#00d2ff;border-bottom-color:#00d2ff}
-.wrap{max-width:600px;margin:0 auto}
+.wrap{max-width:650px;margin:0 auto}
 .box{background:#0b1425;padding:12px;border-bottom:1px solid #0f203f}
-textarea{width:100%;min-height:65px;padding:12px;border-radius:12px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none;font-size:14px}
+textarea,input[type=text]{width:100%;padding:12px;border-radius:12px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none;font-size:14px;margin-top:6px}
 .row{display:flex;gap:8px;margin-top:10px;align-items:center}
-.tbtn{padding:10px 16px;border-radius:20px;border:1px solid #293850;background:#0c192b;color:white;font-size:12px;cursor:pointer;flex:1;text-align:center}
+.tbtn{padding:10px 12px;border-radius:20px;border:1px solid #293850;background:#0c192b;color:white;font-size:11px;cursor:pointer;flex:1;text-align:center}
 .tbtn.blue{background:linear-gradient(135deg,#00d2ff,#0077ff);border:0;font-weight:800}
+.tbtn.green{background:linear-gradient(135deg,#2ed573,#1e90ff);border:0;font-weight:800}
 .colors{display:flex;gap:6px;margin-top:8px}
 .color{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2px solid transparent}
 .color.active{border-color:white}
 .status{font-size:11px;opacity:.7;margin-top:8px;text-align:center}
-#previewBox{display:none;background:#070e1e;border:1px solid #00d2ff55;border-radius:16px;padding:10px;margin-top:10px;animation:fadeIn .2s}
+#previewBox{display:none;background:#070e1e;border:1px solid #00d2ff55;border-radius:16px;padding:10px;margin-top:10px}
 #previewBox.show{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .preview-media{position:relative;border-radius:12px;overflow:hidden;background:#000;max-height:380px;display:grid;place-items:center}
 .preview-media img,.preview-media video{width:100%;max-height:360px;object-fit:contain;display:block}
-.preview-text-overlay{position:absolute;left:0;right:0;bottom:0;padding:30px 12px 14px;background:linear-gradient(transparent,rgba(0,0,0,.85));font-size:18px;font-weight:800;text-align:center;white-space:pre-wrap;word-break:break-word;min-height:40px}
+.preview-text-overlay{position:absolute;left:0;right:0;bottom:0;padding:30px 12px 14px;background:linear-gradient(transparent,rgba(0,0,0,.85));font-size:18px;font-weight:800;text-align:center;white-space:pre-wrap}
 .preview-actions{display:flex;gap:8px;margin-top:8px}
-.preview-actions button{flex:1;padding:11px;border-radius:12px;border:0;font-weight:800;cursor:pointer;font-size:13px}
-.btnSend{background:linear-gradient(135deg,#00d2ff,#0077ff);color:white}
-.btnCancel{background:#1a2a44;color:white;border:1px solid #293850!important}
 .stories{display:flex;gap:10px;overflow-x:auto;padding:10px 12px;background:#0b1425;border-bottom:1px solid #0f203f}
-.s-item{flex-shrink:0;width:64px;text-align:center;cursor:pointer}
+.s-item{flex-shrink:0;width:66px;text-align:center;cursor:pointer;position:relative}
 .s-circle{width:60px;height:60px;border-radius:50%;padding:2px;background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);display:grid;place-items:center}
-.s-circle div{width:100%;height:100%;border-radius:50%;background:#0b1425;display:grid;place-items:center;font-weight:900;overflow:hidden;border:2px solid #0b1425}
+.s-circle.seen{background:#293850}
+.s-circle div{width:100%;height:100%;border-radius:50%;background:#0b1425;display:grid;place-items:center;font-weight:900;overflow:hidden;border:2px solid #0b1425;position:relative}
 .s-circle img{width:100%;height:100%;object-fit:cover}
 .s-name{font-size:9px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s-badge{position:absolute;top:-2px;right:0;background:#00d2ff;color:#000;font-size:8px;font-weight:800;padding:2px 5px;border-radius:10px}
+.s-views{font-size:8px;opacity:.6}
 .post{background:#0b1425;border-bottom:1px solid #0f203f;margin-top:6px;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .post-head{padding:10px 12px;display:flex;gap:10px;align-items:center}
 .av{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#00d2ff,#0077ff);display:grid;place-items:center;font-weight:900}
 .post-name{font-weight:700;font-size:13px} .post-time{font-size:10px;opacity:.5}
@@ -46,29 +47,41 @@ textarea{width:100%;min-height:65px;padding:12px;border-radius:12px;border:1px s
 .post-text.bg{padding:40px 20px;text-align:center;font-size:22px;font-weight:800;min-height:200px;display:grid;place-items:center}
 .post-media-wrap{position:relative;background:#000;width:100%;max-height:600px;overflow:hidden}
 .post-media-wrap img,.post-media-wrap video{width:100%;max-height:600px;object-fit:contain;display:block}
-.post-media-overlay{position:absolute;left:0;right:0;bottom:0;padding:32px 12px 14px;background:linear-gradient(transparent,rgba(0,0,0,.85));font-size:19px;font-weight:800;text-align:center;white-space:pre-wrap;word-break:break-word}
+.post-media-overlay{position:absolute;left:0;right:0;bottom:0;padding:32px 12px 14px;background:linear-gradient(transparent,rgba(0,0,0,.85));font-size:19px;font-weight:800;text-align:center;white-space:pre-wrap}
 .actions{display:flex;justify-content:space-around;border-top:1px solid #0f203f}
 .act{flex:1;background:transparent;border:0;color:#8da0b8;padding:10px;font-size:12px;cursor:pointer}
 .act.liked{color:#00d2ff;font-weight:800}
+.act.loved{color:#ff4757;font-weight:800}
+.poll{background:#070e1e;border:1px solid #1e2f4a;border-radius:12px;padding:10px;margin:10px 12px}
+.poll-opt{padding:10px;border:1px solid #293850;border-radius:10px;margin-top:6px;cursor:pointer;display:flex;justify-content:space-between}
+.poll-opt.voted{border-color:#00d2ff;background:#00d2ff14}
+.poll-bar{height:4px;background:#00d2ff;border-radius:10px;margin-top:4px}
 .comments{padding:8px 12px;background:#070e1e}
 .cmt{font-size:12px;padding:5px 0;display:flex;gap:6px}
 .cmt b{color:#00d2ff;font-size:11px}
 .cmt-input{display:flex;gap:6px;padding:8px 12px;background:#070e1e;border-top:1px solid #0f203f}
 .cmt-input input{flex:1;padding:9px 14px;border-radius:20px;border:1px solid #293850;background:#0c192b;color:white;outline:none;font-size:12px}
 .del{margin-left:auto;background:transparent;border:0;color:#ff4757;cursor:pointer}
+.group-card{background:#0c192b;border:1px solid #1e2f4a;border-radius:14px;padding:12px;margin-bottom:8px}
 #viewer{position:fixed;inset:0;background:#000;display:none;z-index:9999;flex-direction:column}
 #viewer.show{display:flex}
-#viewerTop{display:flex;justify-content:space-between;padding:12px}
-#viewerContent{flex:1;display:grid;place-items:center;padding:10px}
-#viewerContent img,#viewerContent video{max-width:100%;max-height:80vh}
+#viewerTop{display:flex;justify-content:space-between;align-items:center;padding:12px;background:#0b1425}
+#viewerContent{flex:1;display:grid;place-items:center;padding:10px;position:relative}
+#viewerContent img,#viewerContent video{max-width:100%;max-height:70vh}
+#viewerActions{display:flex;gap:8px;padding:12px;background:#0b1425;border-top:1px solid #0f203f}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;z-index:10000;place-items:center;padding:20px}
+#modal.show{display:grid}
+.modalBox{background:#0b1425;border:1px solid #0f203f;border-radius:16px;padding:16px;width:100%;max-width:400px;max-height:80vh;overflow-y:auto}
 </style>
 </head>
 <body>
-<header><div class="brand">JASON BUSINESS</div><div style="display:flex;gap:6px"><a href="chat.html" class="btn">💬 Chat</a><a href="dashboard.html" class="btn">Dash</a></div></header>
+<header><div class="brand">JASON BUSINESS SOCIAL</div><div style="display:flex;gap:6px"><a href="chat.html" class="btn">💬 Chat</a><a href="dashboard.html" class="btn">Dash</a></div></header>
 
 <div class="tabs">
-  <div class="tab active" data-tab="pubs">📢 PUBLICATIONS</div>
-  <div class="tab" data-tab="stories">🔥 STORIES 24H</div>
+  <div class="tab active" data-tab="pubs">📢 Feed</div>
+  <div class="tab" data-tab="stories">🔥 Stories</div>
+  <div class="tab" data-tab="groups">👥 Groupes</div>
+  <div class="tab" data-tab="polls">📊 Sondages</div>
 </div>
 
 <div class="wrap">
@@ -80,44 +93,62 @@ textarea{width:100%;min-height:65px;padding:12px;border-radius:12px;border:1px s
   </div>
 
   <div class="box" id="pubBox">
-    <textarea id="pubText" placeholder="Écris une note AU-DESSUS (optionnel, pas obligatoire)..."></textarea>
+    <textarea id="pubText" placeholder="Quoi de neuf ? (note au dessus optionnelle)"></textarea>
     <div class="colors" id="pubColors"></div>
     <div class="row">
-      <label class="tbtn" id="photoBtn">🖼️📹 Photo/Vidéo (auto preview ICI)
+      <label class="tbtn">🖼️📹 Photo/Vidéo
         <input type="file" id="pubFile" accept="image/*,video/*" hidden>
       </label>
-      <button class="tbtn blue" id="btnPub">📝 Publier Note Seule</button>
+      <button class="tbtn green" id="btnPollCreate">📊 Sondage</button>
+      <button class="tbtn blue" id="btnPub">📝 Publier</button>
     </div>
     <div class="status" id="status"></div>
-    <div id="previewBox">
-      <div class="preview-media" id="previewMedia"></div>
-      <div class="preview-actions">
-        <button class="btnCancel" id="cancelPreview">✕ Annuler</button>
-        <button class="btnSend" id="confirmPreview">➤ Publier Maintenant</button>
-      </div>
-      <div style="font-size:10px;opacity:.5;text-align:center;margin-top:6px">Note optionnelle - Tu peux publier sans note</div>
+    <div id="previewBox"><div class="preview-media" id="previewMedia"></div><div class="row"><button class="tbtn" id="cancelPreview">✕ Annuler</button><button class="tbtn blue" id="confirmPreview">➤ Publier Maintenant</button></div></div>
+    
+    <div id="pollBox" style="display:none;background:#070e1e;border:1px solid #00d2ff44;border-radius:12px;padding:10px;margin-top:10px">
+      <input type="text" id="pollQuestion" placeholder="Question du sondage ?">
+      <input type="text" id="pollOpt1" placeholder="Option 1">
+      <input type="text" id="pollOpt2" placeholder="Option 2">
+      <input type="text" id="pollOpt3" placeholder="Option 3 (optionnel)">
+      <div class="row"><button class="tbtn" onclick="document.getElementById('pollBox').style.display='none'">Annuler</button><button class="tbtn blue" id="btnPublishPoll">Publier Sondage</button></div>
     </div>
   </div>
 
+  <div class="box" id="groupBox" style="display:none">
+    <input type="text" id="groupName" placeholder="Nom du groupe">
+    <textarea id="groupDesc" placeholder="Description du groupe" style="min-height:50px"></textarea>
+    <button class="tbtn blue" id="btnCreateGroup" style="width:100%;margin-top:8px">➕ Créer Groupe</button>
+    <div id="groupsList" style="margin-top:12px"></div>
+  </div>
+
   <div class="box" id="storyBox" style="display:none">
-    <textarea id="storyText" placeholder="Note au dessus (optionnel)..."></textarea>
+    <textarea id="storyText" placeholder="Note story (optionnel)"></textarea>
     <div class="colors" id="storyColors"></div>
     <div class="row">
-      <label class="tbtn">🖼️📹 Story Photo/Vidéo (note optionnelle)
+      <label class="tbtn">🖼️📹 Story + Note
         <input type="file" id="storyFile" accept="image/*,video/*" hidden>
       </label>
-      <button class="tbtn blue" id="btnStory">Publier Story Note</button>
+      <button class="tbtn blue" id="btnStory">Publier Story</button>
     </div>
   </div>
 
   <div id="feed"></div>
 </div>
 
-<div id="viewer"><div id="viewerTop"><span id="viewerName"></span><button onclick="closeViewer()" style="background:transparent;border:0;color:white;font-size:22px">✕</button></div><div id="viewerContent"></div></div>
+<div id="viewer">
+  <div id="viewerTop"><span id="viewerName"></span><div style="display:flex;gap:8px;align-items:center"><span id="viewerViews" style="font-size:11px;opacity:.7"></span><button onclick="closeViewer()" style="background:transparent;border:0;color:white;font-size:22px">✕</button></div></div>
+  <div id="viewerContent"></div>
+  <div id="viewerActions">
+    <button class="tbtn" id="viewerLike">🤍 J'aime</button>
+    <button class="tbtn blue" id="viewerSeenList">👁️ Vu par</button>
+  </div>
+</div>
+
+<div id="modal" onclick="if(event.target.id==='modal')closeModal()"><div class="modalBox" id="modalContent"></div></div>
 
 <script type="module">
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, onValue, push, set, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, onValue, push, set, remove, update, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
 const app=getApps().length?getApp():initializeApp(firebaseConfig);
@@ -127,144 +158,128 @@ const myPhone=localStorage.getItem("jasonBusinessUserPhone")||"0847500590";
 const myName=localStorage.getItem("jasonBusinessUserName")||myPhone;
 
 const bgColors=["#0b1425","#FF4757","#2ed573","#1e90ff","#ffa502","#a55eea","#3742fa","#ff6b81"];
-let selPub=bgColors[0], selStory=bgColors[1];
-let pendingFileBase64=null, pendingFileType=null;
+let selPub=bgColors[0], selStory=bgColors[1], pendingFileBase64=null, pendingFileType=null, currentViewId=null, currentViewType=null;
+let allPubs={}, allStories={}, allGroups={}, storyViews={}, storyLikes={}, currentGroupFilter=null;
 
 function makeColors(cont,type){
   cont.innerHTML=""; bgColors.forEach((c,i)=>{
     const d=document.createElement("div"); d.className="color"+(i===0?" active":""); d.style.background=c;
-    d.onclick=()=>{ cont.querySelectorAll(".color").forEach(x=>x.classList.remove("active")); d.classList.add("active"); if(type==="pub") selPub=c; else selStory=c; updatePreviewOverlay(); };
+    d.onclick=()=>{ cont.querySelectorAll(".color").forEach(x=>x.classList.remove("active")); d.classList.add("active"); if(type==="pub") selPub=c; else selStory=c; };
     cont.appendChild(d);
   });
 }
 makeColors($("pubColors"),"pub"); makeColors($("storyColors"),"story");
-
 document.querySelectorAll(".tab").forEach(t=>{
   t.onclick=()=>{
     document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active")); t.classList.add("active");
-    $("pubBox").style.display=t.dataset.tab==="pubs"?"block":"none";
-    $("storyBox").style.display=t.dataset.tab==="stories"?"block":"none";
+    const tab=t.dataset.tab;
+    $("pubBox").style.display=tab==="pubs"||tab==="polls"?"block":"none";
+    $("storyBox").style.display=tab==="stories"?"block":"none";
+    $("groupBox").style.display=tab==="groups"?"block":"none";
     render();
+    if(tab==="groups") renderGroups();
   };
 });
-
 function esc(s){return String(s||"").replace(/</g,"&lt;")}
-function updatePreviewOverlay(){
-  const text=$("pubText").value.trim();
-  const overlay=document.getElementById("overlayText");
-  if(overlay){ 
-    overlay.textContent=text; 
-    overlay.style.display=text?"block":"none";
-    if(text && selPub!=="#0b1425") overlay.style.background=selPub;
-    else overlay.style.background="linear-gradient(transparent,rgba(0,0,0,.85))";
-  }
-}
-$("pubText").addEventListener("input", updatePreviewOverlay);
 
-$("pubFile").onchange=async e=>{
+// PREVIEW
+$("pubFile").onchange=e=>{
   const f=e.target.files[0]; if(!f) return;
   const isVideo=f.type.startsWith("video/");
-  const limit=isVideo?15*1024*1024:4*1024*1024;
-  if(f.size>limit){ alert(isVideo?"Vidéo max 15Mo - Coupe-la":"Photo max 4Mo"); e.target.value=""; return; }
-  $("status").textContent="⏳ Chargement "+(isVideo?"vidéo":"photo")+"...";
-  const reader=new FileReader();
-  reader.readAsDataURL(f);
-  reader.onloadend=()=>{
-    pendingFileBase64=reader.result;
-    pendingFileType=isVideo?"video":"photo";
-    const mediaDiv=$("previewMedia");
-    const text=$("pubText").value.trim();
-    const bgStyle = selPub!=="#0b1425"?`background:${selPub}`:"";
-    if(isVideo){
-      mediaDiv.innerHTML=`<video src="${reader.result}" controls muted playsinline></video><div id="overlayText" class="preview-text-overlay" style="${bgStyle};display:${text?"block":"none"}">${esc(text)}</div>`;
-    }else{
-      mediaDiv.innerHTML=`<img src="${reader.result}"><div id="overlayText" class="preview-text-overlay" style="${bgStyle};display:${text?"block":"none"}">${esc(text)}</div>`;
-    }
+  if(f.size>(isVideo?15*1024*1024:4*1024*1024)){alert("Trop gros");return;}
+  const r=new FileReader(); r.readAsDataURL(f);
+  r.onloadend=()=>{
+    pendingFileBase64=r.result; pendingFileType=isVideo?"video":"photo";
+    const txt=$("pubText").value.trim();
+    $("previewMedia").innerHTML=isVideo?`<video src="${r.result}" controls muted></video><div class="preview-text-overlay">${esc(txt)}</div>`:`<img src="${r.result}"><div class="preview-text-overlay">${esc(txt)}</div>`;
     $("previewBox").classList.add("show");
-    $("status").textContent="👁️ Preview ICI - Note optionnelle au dessus";
-    $("previewBox").scrollIntoView({behavior:"smooth"});
-  };
-  e.target.value="";
+  }; e.target.value="";
 };
-
-$("cancelPreview").onclick=()=>{
-  pendingFileBase64=null; pendingFileType=null;
-  $("previewBox").classList.remove("show");
-  $("previewMedia").innerHTML="";
-  $("status").textContent="";
-};
-
+$("cancelPreview").onclick=()=>{pendingFileBase64=null;$("previewBox").classList.remove("show");};
 $("confirmPreview").onclick=async()=>{
   if(!pendingFileBase64) return;
-  const text=$("pubText").value.trim();
-  $("confirmPreview").disabled=true;
-  $("confirmPreview").textContent="⏳ Publication...";
-  try{
-    await push(ref(db,"jasonBusiness/publications"),{
-      from:myPhone, name:myName,
-      type:pendingFileType,
-      text:text,
-      image:pendingFileType==="photo"?pendingFileBase64:null,
-      video:pendingFileType==="video"?pendingFileBase64:null,
-      bg:text?selPub:"#0b1425",
-      createdAt:Date.now(),
-      likes:{}
-    });
-    $("status").textContent=text?"✅ Publié avec note au dessus":"✅ Photo/Vidéo publiée (sans note)";
-    $("pubText").value="";
-    $("previewBox").classList.remove("show");
-    $("previewMedia").innerHTML="";
-    pendingFileBase64=null;
-    setTimeout(()=>$("status").textContent="",3000);
-  }catch(err){ alert(err.message); }
-  finally{ $("confirmPreview").disabled=false; $("confirmPreview").textContent="➤ Publier Maintenant"; }
+  const txt=$("pubText").value.trim();
+  await push(ref(db,"jasonBusiness/publications"),{from:myPhone,name:myName,type:pendingFileType,text:txt,image:pendingFileType==="photo"?pendingFileBase64:null,video:pendingFileType==="video"?pendingFileBase64:null,bg:selPub,createdAt:Date.now(),likes:{},groupId:currentGroupFilter||null});
+  $("pubText").value="";$("previewBox").classList.remove("show");pendingFileBase64=null;$("status").textContent="✅ Publié";setTimeout(()=>$("status").textContent="",2000);
 };
-
 $("btnPub").onclick=async()=>{
   const txt=$("pubText").value.trim();
-  if(pendingFileBase64) return alert("Tu as une photo/vidéo en preview - Clique 'Publier Maintenant' en bas");
-  if(!txt) return alert("Écris une note OU choisis photo/vidéo");
-  await push(ref(db,"jasonBusiness/publications"),{from:myPhone,name:myName,type:"note",text:txt,bg:selPub,createdAt:Date.now(),likes:{}});
+  if(!txt && !pendingFileBase64) return alert("Écris ou choisis photo");
+  if(pendingFileBase64) return $("confirmPreview").click();
+  await push(ref(db,"jasonBusiness/publications"),{from:myPhone,name:myName,type:"note",text:txt,bg:selPub,createdAt:Date.now(),likes:{},groupId:currentGroupFilter||null});
   $("pubText").value="";
 };
 
-$("storyFile").onchange=async e=>{
+// SONDAGE
+$("btnPollCreate").onclick=()=>{ $("pollBox").style.display="block"; };
+$("btnPublishPoll").onclick=async()=>{
+  const q=$("pollQuestion").value.trim(), o1=$("pollOpt1").value.trim(), o2=$("pollOpt2").value.trim(), o3=$("pollOpt3").value.trim();
+  if(!q||!o1||!o2) return alert("Question + 2 options minimum");
+  const opts={}; if(o1) opts[0]={text:o1,votes:{}}; if(o2) opts[1]={text:o2,votes:{}}; if(o3) opts[2]={text:o3,votes:{}};
+  await push(ref(db,"jasonBusiness/publications"),{from:myPhone,name:myName,type:"poll",text:q,bg:selPub,createdAt:Date.now(),likes:{},pollOptions:opts,groupId:currentGroupFilter||null});
+  $("pollBox").style.display="none"; $("pollQuestion").value=""; $("pollOpt1").value=""; $("pollOpt2").value=""; $("pollOpt3").value="";
+};
+
+// GROUPE
+$("btnCreateGroup").onclick=async()=>{
+  const n=$("groupName").value.trim(), d=$("groupDesc").value.trim();
+  if(!n) return alert("Nom du groupe");
+  await push(ref(db,"jasonBusiness/groups"),{name:n,desc:d,owner:myPhone,createdAt:Date.now(),members:{[myPhone]:true}});
+  $("groupName").value=""; $("groupDesc").value=""; alert("✅ Groupe créé");
+};
+async function joinGroup(id){ await set(ref(db,`jasonBusiness/groups/${id}/members/${myPhone}`),true); alert("✅ Rejoint"); }
+function openGroup(id){ currentGroupFilter=id; document.querySelector('[data-tab="pubs"]').click(); render(); }
+
+// STORIES AVEC VUES + LIKES
+$("storyFile").onchange=e=>{
   const f=e.target.files[0]; if(!f) return;
   const isVideo=f.type.startsWith("video/");
-  if(f.size>(isVideo?15*1024*1024:4*1024*1024)){ alert("Trop gros"); e.target.value=""; return; }
-  const reader=new FileReader();
-  reader.readAsDataURL(f);
-  reader.onloadend=async()=>{
-    try{
-      const text=$("storyText").value.trim();
-      await push(ref(db,"jasonBusiness/stories"),{from:myPhone,name:myName,type:isVideo?"video":"photo",photo:!isVideo?reader.result:null,video:isVideo?reader.result:null,text:text,bg:selStory,createdAt:Date.now(),expiresAt:Date.now()+86400000});
-      $("status").textContent="✅ Story publiée (note optionnelle)";
-      setTimeout(()=>$("status").textContent="",3000);
-    }catch(err){ alert(err.message); }
-    e.target.value="";
-  };
+  if(f.size>(isVideo?15*1024*1024:4*1024*1024)){alert("Trop gros");return;}
+  const r=new FileReader(); r.readAsDataURL(f);
+  r.onloadend=async()=>{
+    await push(ref(db,"jasonBusiness/stories"),{from:myPhone,name:myName,type:isVideo?"video":"photo",photo:!isVideo?r.result:null,video:isVideo?r.result:null,text:$("storyText").value.trim(),bg:selStory,createdAt:Date.now(),expiresAt:Date.now()+86400000});
+    $("status").textContent="✅ Story publiée";
+  }; e.target.value="";
 };
-
 $("btnStory").onclick=async()=>{
-  const txt=$("storyText").value.trim(); if(!txt) return alert("Écris ta note pour story");
+  const txt=$("storyText").value.trim(); if(!txt) return alert("Note");
   await push(ref(db,"jasonBusiness/stories"),{from:myPhone,name:myName,type:"note",text:txt,bg:selStory,createdAt:Date.now(),expiresAt:Date.now()+86400000});
-  $("storyText").value=""; alert("✅ Story note 24h");
+  $("storyText").value="";
 };
 
-let allPubs={}, allStories={};
+// LISTENERS
 onValue(ref(db,"jasonBusiness/publications"),s=>{allPubs=s.val()||{}; render();});
 onValue(ref(db,"jasonBusiness/stories"),s=>{
   allStories=s.val()||{};
   Object.entries(allStories).forEach(([id,st])=>{ if(st.expiresAt<Date.now()) remove(ref(db,"jasonBusiness/stories/"+id)); });
   renderStories(); render();
 });
+onValue(ref(db,"jasonBusiness/groups"),s=>{allGroups=s.val()||{}; renderGroups();});
+onValue(ref(db,"jasonBusiness/story_views"),s=>{storyViews=s.val()||{}; renderStories();});
+onValue(ref(db,"jasonBusiness/story_likes"),s=>{storyLikes=s.val()||{}; renderStories();});
+
+function renderGroups(){
+  const cont=$("groupsList"); if(!cont) return;
+  cont.innerHTML="<h4 style='margin:10px 0'>Groupes disponibles</h4>";
+  Object.entries(allGroups).forEach(([id,g])=>{
+    const isMember=g.members && g.members[myPhone];
+    const div=document.createElement("div"); div.className="group-card";
+    div.innerHTML=`<div style="font-weight:800">${esc(g.name)}</div><div style="font-size:11px;opacity:.6">${esc(g.desc||"")}</div><div style="font-size:10px;margin-top:4px">${Object.keys(g.members||{}).length} membres</div><div class="row"><button class="tbtn ${isMember?'blue':''}" onclick="${isMember?`openGroup('${id}')`:`joinGroup('${id}')`}">${isMember?'📂 Ouvrir':'➕ Rejoindre'}</button>${g.owner===myPhone?`<button class="tbtn" onclick="delGroup('${id}')">🗑️</button>`:""}</div>`;
+    cont.appendChild(div);
+  });
+}
+window.delGroup=async(id)=>{ if(confirm("Supprimer groupe ?")) await remove(ref(db,"jasonBusiness/groups/"+id)); };
+window.joinGroup=joinGroup; window.openGroup=openGroup;
 
 function renderStories(){
   const bar=$("storiesBar"); const add=bar.firstElementChild; bar.innerHTML=""; bar.appendChild(add);
   Object.entries(allStories).forEach(([id,st])=>{
     if(st.expiresAt<Date.now()) return;
+    const views=storyViews[id]?Object.keys(storyViews[id]).length:0;
+    const likes=storyLikes[id]?Object.keys(storyLikes[id]).length:0;
+    const seen=storyViews[id] && storyViews[id][myPhone];
     const div=document.createElement("div"); div.className="s-item";
-    div.innerHTML=`<div class="s-circle"><div>${st.photo?`<img src="${st.photo}">`:st.video?`🎥`:esc((st.text||"").slice(0,8))}</div></div><div class="s-name">${st.from===myPhone?"Toi":st.from.slice(-4)}</div>`;
+    div.innerHTML=`<div class="s-circle ${seen?'seen':''}"><div>${st.photo?`<img src="${st.photo}">`:st.video?`🎥`:esc((st.text||"").slice(0,6))}</div></div><div class="s-name">${st.from===myPhone?"Toi":st.from.slice(-4)}</div><div class="s-views">👁️${views} ❤️${likes}</div>${st.from===myPhone&&views>0?`<div class="s-badge">${views} vu</div>`:""}`;
     div.onclick=()=>openViewer(id,"story"); bar.appendChild(div);
   });
 }
@@ -276,30 +291,37 @@ function render(){
     const sorted=Object.entries(allStories).sort((a,b)=>b[1].createdAt-a[1].createdAt);
     if(!sorted.length){feed.innerHTML="<div style='padding:30px;text-align:center;opacity:.5'>Aucune story</div>";return;}
     sorted.forEach(([id,s])=>{
+      const views=storyViews[id]?Object.keys(storyViews[id]).length:0;
+      const likes=storyLikes[id]?Object.keys(storyLikes[id]).length:0;
       const div=document.createElement("div"); div.className="post";
-      let content="";
-      if(s.type==="photo") content=`<div class="post-media-wrap"><img src="${s.photo}">${s.text?`<div class="post-media-overlay" style="background:${s.bg}">${esc(s.text)}</div>`:""}</div>`;
-      else if(s.type==="video") content=`<div class="post-media-wrap"><video src="${s.video}" controls></video>${s.text?`<div class="post-media-overlay" style="background:${s.bg}">${esc(s.text)}</div>`:""}</div>`;
-      else content=`<div class="post-text bg" style="background:${s.bg}">${esc(s.text)}</div>`;
-      div.innerHTML=`<div class="post-head"><div class="av">${s.from.slice(-2)}</div><div><div class="post-name">${s.name} • 24h</div><div class="post-time">${new Date(s.expiresAt).toLocaleString()}</div></div></div>${content}`;
+      let content=s.type==="photo"?`<div class="post-media-wrap"><img src="${s.photo}"></div>`:s.type==="video"?`<div class="post-media-wrap"><video src="${s.video}" controls></video></div>`:`<div class="post-text bg" style="background:${s.bg}">${esc(s.text)}</div>`;
+      if(s.text && s.type!=="note") content+=`<div class="post-media-overlay" style="background:${s.bg}">${esc(s.text)}</div>`;
+      div.innerHTML=`<div class="post-head"><div class="av">${s.from.slice(-2)}</div><div><div class="post-name">${s.name} • 24h</div><div class="post-time">👁️ ${views} vues • ❤️ ${likes} • ${new Date(s.expiresAt).toLocaleString()}</div></div></div>${content}<div class="actions"><button class="act ${storyLikes[id]&&storyLikes[id][myPhone]?'loved':''}" onclick="likeStory('${id}')">❤️ J'aime (${likes})</button><button class="act" onclick="showViewers('${id}','story')">👁️ Vu par ${views}</button></div>`;
       feed.appendChild(div);
     }); return;
   }
-  const sorted=Object.entries(allPubs).sort((a,b)=>b[1].createdAt-a[1].createdAt);
-  if(!sorted.length){feed.innerHTML="<div style='padding:30px;text-align:center;opacity:.5'>Aucune publication<br>Photo/vidéo + note au dessus (note optionnelle)</div>";return;}
-  sorted.forEach(([id,p])=>{
+  // FEED NORMAL + GROUPES + POLLS
+  let list=Object.entries(allPubs).sort((a,b)=>b[1].createdAt-a[1].createdAt);
+  if(currentGroupFilter) list=list.filter(([_,p])=>p.groupId===currentGroupFilter);
+  if(currentGroupFilter) feed.innerHTML=`<div class="box" style="display:flex;justify-content:space-between"><b>Groupe: ${esc(allGroups[currentGroupFilter]?.name||"")}</b><button class="btn" onclick="currentGroupFilter=null;render();">✕ Tout voir</button></div>`;
+  if(!list.length){feed.innerHTML+="<div style='padding:30px;text-align:center;opacity:.5'>Aucune publication</div>";return;}
+  list.forEach(([id,p])=>{
     const likes=p.likes?Object.keys(p.likes).length:0; const liked=p.likes && p.likes[myPhone];
     const div=document.createElement("div"); div.className="post";
     let content="";
     if(p.type==="photo") content=`<div class="post-media-wrap"><img src="${p.image}" onclick="openViewer('${id}','pub')">${p.text?`<div class="post-media-overlay" style="background:${p.bg!=="#0b1425"?p.bg:""}">${esc(p.text)}</div>`:""}</div>`;
-    else if(p.type==="video") content=`<div class="post-media-wrap"><video src="${p.video}" controls></video>${p.text?`<div class="post-media-overlay" style="background:${p.bg!=="#0b1425"?p.bg:""}">${esc(p.text)}</div>`:""}</div>`;
+    else if(p.type==="video") content=`<div class="post-media-wrap"><video src="${p.video}" controls></video>${p.text?`<div class="post-media-overlay">${esc(p.text)}</div>`:""}</div>`;
+    else if(p.type==="poll"){
+      const total=Object.values(p.pollOptions||{}).reduce((s,o)=>s+Object.keys(o.votes||{}).length,0);
+      content=`<div class="post-text" style="font-weight:800">${esc(p.text)}</div><div class="poll">${Object.entries(p.pollOptions||{}).map(([k,opt])=>{const v=Object.keys(opt.votes||{}).length; const pct=total?Math.round(v/total*100):0; const myVote=opt.votes&&opt.votes[myPhone]; return `<div class="poll-opt ${myVote?'voted':''}" onclick="votePoll('${id}','${k}')"><span>${esc(opt.text)}</span><span>${v} (${pct}%)</span></div><div class="poll-bar" style="width:${pct}%"></div>`;}).join("")}<div style="font-size:10px;opacity:.5;margin-top:6px">${total} votes</div></div>`;
+    }
     else content=`<div class="post-text bg" style="background:${p.bg}">${esc(p.text)}</div>`;
     div.innerHTML=`
-      <div class="post-head"><div class="av">${p.from.slice(-2)}</div><div><div class="post-name">${p.name||p.from}</div><div class="post-time">${new Date(p.createdAt).toLocaleString()}</div></div>${p.from===myPhone?`<button class="del" onclick="delPub('${id}')">🗑️</button>`:""}</div>
+      <div class="post-head"><div class="av">${p.from.slice(-2)}</div><div><div class="post-name">${p.name||p.from} ${p.groupId?`• 👥 ${esc(allGroups[p.groupId]?.name||"Groupe")}`:""}</div><div class="post-time">${new Date(p.createdAt).toLocaleString()}</div></div>${p.from===myPhone?`<button class="del" onclick="delPub('${id}')">🗑️</button>`:""}</div>
       ${content}
       <div class="actions">
         <button class="act ${liked?'liked':''}" onclick="likePub('${id}')">${liked?'💙':'🤍'} J'aime ${likes>0?`(${likes})`:""}</button>
-        <button class="act" onclick="document.getElementById('cmt-${id}').focus()">💬 Commenter</button>
+        <button class="act" onclick="document.getElementById('cmt-${id}')?.focus()">💬 Commenter</button>
         <button class="act" onclick="sharePub('${id}')">↗️ Partager</button>
       </div>
       <div class="comments" id="cmts-${id}"></div>
@@ -312,12 +334,69 @@ function render(){
     });
   });
 }
+
 window.likePub=async(id)=>{ const p=allPubs[id]; if(p.likes && p.likes[myPhone]) await remove(ref(db,`jasonBusiness/publications/${id}/likes/${myPhone}`)); else await set(ref(db,`jasonBusiness/publications/${id}/likes/${myPhone}`),true); };
 window.delPub=async(id)=>{ if(confirm("Supprimer ?")) await remove(ref(db,"jasonBusiness/publications/"+id)); };
 window.sendCmt=async(id)=>{ const input=document.getElementById(`cmt-${id}`); const txt=input.value.trim(); if(!txt) return; await push(ref(db,`jasonBusiness/comments/${id}`),{from:myPhone,name:myName,text:txt,createdAt:Date.now()}); input.value=""; };
 window.sharePub=async(id)=>{ const p=allPubs[id]; const txt=`${p.name}: ${p.text}\n${location.href}`; if(navigator.share){try{await navigator.share({title:"JASON BUSINESS",text:txt})}catch{}} else{await navigator.clipboard.writeText(txt); alert("Lien copié !");} };
-window.openViewer=(id,type)=>{ const d=type==="story"?allStories[id]:allPubs[id]; $("viewer").classList.add("show"); $("viewerName").textContent=d.name||d.from; const cont=$("viewerContent"); if(d.type==="photo"||d.image||d.photo) cont.innerHTML=`<img src="${d.image||d.photo}">`; else if(d.type==="video"||d.video) cont.innerHTML=`<video src="${d.video}" controls autoplay></video>`; else cont.innerHTML=`<div style="background:${d.bg};padding:40px;border-radius:20px;font-size:24px;font-weight:900;min-height:50vh;display:grid;place-items:center">${esc(d.text)}</div>`; };
-window.closeViewer=()=>{$("viewer").classList.remove("show");};
+
+window.votePoll=async(pubId,optKey)=>{
+  const snap=await get(ref(db,`jasonBusiness/publications/${pubId}/pollOptions`));
+  const opts=snap.val()||{};
+  // retire ancien vote
+  for(const k in opts){ if(opts[k].votes && opts[k].votes[myPhone]) await remove(ref(db,`jasonBusiness/publications/${pubId}/pollOptions/${k}/votes/${myPhone}`)); }
+  await set(ref(db,`jasonBusiness/publications/${pubId}/pollOptions/${optKey}/votes/${myPhone}`),true);
+};
+
+window.likeStory=async(id)=>{
+  const liked=storyLikes[id] && storyLikes[id][myPhone];
+  if(liked) await remove(ref(db,`jasonBusiness/story_likes/${id}/${myPhone}`));
+  else await set(ref(db,`jasonBusiness/story_likes/${id}/${myPhone}`),{name:myName,time:Date.now()});
+  updateViewerActions();
+};
+
+window.showViewers=async(id,type)=>{
+  let viewsRef, likesRef;
+  if(type==="story"){ viewsRef=`jasonBusiness/story_views/${id}`; likesRef=`jasonBusiness/story_likes/${id}`; }
+  else { viewsRef=`jasonBusiness/pub_views/${id}`; likesRef=`jasonBusiness/publications/${id}/likes`; }
+  const [vSnap,lSnap]=await Promise.all([get(ref(db,viewsRef)), get(ref(db,likesRef))]);
+  const views=vSnap.val()||{}; const likes=lSnap.val()||{};
+  let html=`<h3>👁️ Vu par ${Object.keys(views).length}</h3>`;
+  html+=Object.entries(views).map(([phone,data])=>`<div class="cmt"><b>${esc(data.name||phone)}:</b> <span>${new Date(data.time).toLocaleString()}</span></div>`).join("")||"<div style='opacity:.5'>Personne n'a encore vu</div>";
+  html+=`<h3 style="margin-top:12px">❤️ Aimé par ${Object.keys(likes).length}</h3>`;
+  html+=Object.entries(likes).map(([phone,data])=>`<div class="cmt"><b>${esc(data.name||phone||phone)}:</b> <span>❤️</span></div>`).join("")||"<div style='opacity:.5'>Pas encore de like</div>";
+  html+=`<button class="tbtn blue" style="width:100%;margin-top:12px" onclick="closeModal()">Fermer</button>`;
+  $("modalContent").innerHTML=html; $("modal").classList.add("show");
+};
+
+window.closeModal=()=>{$("modal").classList.remove("show");};
+window.openViewer=async(id,type)=>{
+  currentViewId=id; currentViewType=type;
+  const d=type==="story"?allStories[id]:allPubs[id]; if(!d) return;
+  $("viewer").classList.add("show"); $("viewerName").textContent=d.name||d.from;
+  const cont=$("viewerContent");
+  if(d.type==="photo"||d.image||d.photo) cont.innerHTML=`<img src="${d.image||d.photo}">`;
+  else if(d.type==="video"||d.video) cont.innerHTML=`<video src="${d.video}" controls autoplay></video>`;
+  else cont.innerHTML=`<div style="background:${d.bg};padding:40px;border-radius:20px;font-size:24px;font-weight:900;min-height:50vh;display:grid;place-items:center">${esc(d.text)}</div>`;
+  
+  // VUE AUTOMATIQUE QUAND ON ENTRE CHEZ TOI
+  if(d.from!==myPhone){
+    await set(ref(db,`jasonBusiness/story_views/${id}/${myPhone}`),{name:myName,time:Date.now()});
+  }
+  updateViewerActions();
+};
+function updateViewerActions(){
+  if(!currentViewId) return;
+  const views=storyViews[currentViewId]?Object.keys(storyViews[currentViewId]).length:0;
+  const likes=storyLikes[currentViewId]?Object.keys(storyLikes[currentViewId]).length:0;
+  const liked=storyLikes[currentViewId] && storyLikes[currentViewId][myPhone];
+  $("viewerViews").textContent=`👁️ ${views} • ❤️ ${likes}`;
+  $("viewerLike").textContent=liked?"❤️ Aimé":"🤍 J'aime";
+  $("viewerLike").className=liked?"tbtn loved":"tbtn";
+}
+$("viewerLike").onclick=()=>{ if(currentViewId) likeStory(currentViewId); };
+$("viewerSeenList").onclick=()=>{ if(currentViewId) showViewers(currentViewId,currentViewType); };
+window.closeViewer=()=>{$("viewer").classList.remove("show"); currentViewId=null;};
 </script>
 </body>
 </html>
