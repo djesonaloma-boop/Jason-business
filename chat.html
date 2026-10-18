@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -54,7 +53,8 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
 .input textarea:disabled{opacity:.5}
 .tbtn{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:1px solid #293850;background:#0c192b;color:white;display:grid;place-items:center;font-size:18px;cursor:pointer}
 .tbtn:disabled,.send:disabled{opacity:.35;cursor:not-allowed}
-.tbtn.hold{background:#ff4757!important;border-color:#ff4757}
+.tbtn.hold{background:#ff4757!important;border-color:#ff4757;animation:pulse 1s infinite}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
 .send{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:0;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;font-size:18px;cursor:pointer}
 #hint{overflow-wrap:anywhere}
 @media(max-width:800px){
@@ -121,11 +121,11 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
    <label class="tbtn photo-label" title="Ouvrir la galerie">🖼️
     <input type="file" id="photoInput" accept="image/*,video/*" hidden>
    </label>
-   <button type="button" id="recordBtn" class="tbtn" title="Enregistrer un vocal" disabled>🎙️</button>
+   <button type="button" id="recordBtn" class="tbtn" title="Appuie pour enregistrer" disabled>🎙️</button>
    <textarea id="msgInput" placeholder="Écris un message..." disabled rows="1"></textarea>
    <button type="button" class="send" id="sendBtn" disabled>➤</button>
   </div>
-  <div id="hint" style="text-align:center;font-size:9px;opacity:.5;margin-top:4px">🖼️ Galerie • 🎙️ Message vocal • ➤ Message écrit</div>
+  <div id="hint" style="text-align:center;font-size:9px;opacity:.6;margin-top:4px">🖼️ Galerie • 🎙️ Vocal (appuie) • ➤ Texte</div>
  </div>
 </section>
 </div>
@@ -150,7 +150,7 @@ const db=getDatabase(app),storage=getStorage(app);
 const $=id=>document.getElementById(id);
 const myPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("phone");
 
-if(!myPhone){location.replace("login.html");throw new Error("Utilisateur non connecté");}
+if(!myPhone){location.replace("login.html");throw new Error("Non connecté");}
 $("myPhoneShow").textContent=myPhone;
 
 let tab="chats",activeChat=null,allUsers={},myRequests={},myChats={},presenceCache={},manualUsers=[];
@@ -163,12 +163,12 @@ function timeStr(ts){return ts?new Date(ts).toLocaleTimeString("fr-FR",{hour:"2-
 function getChatId(a,b){return [a,b].sort().join("_");}
 function isOnline(ph){const p=presenceCache[ph];return !!(p&&p.online&&Date.now()-(p.lastSeen||0)<90000);}
 function getUserPhoto(ph){const u=allUsers[ph]||{};return u.photo||u.photoProfil||u.avatar||"";}
-function setHint(s){$("hint").textContent=s;}
+function setHint(s){$("hint").textContent=s;console.log(s);}
 function stopTracks(){if(recordStream){recordStream.getTracks().forEach(t=>{try{t.stop()}catch{}});recordStream=null;}}
 
 const presenceRef=ref(db,`jasonBusiness/presence/${myPhone}`);
-set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:null}).catch(console.error);
-onDisconnect(presenceRef).set({online:false,lastSeen:Date.now(),activeChat:null}).catch(console.error);
+set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:null}).catch(()=>{});
+onDisconnect(presenceRef).set({online:false,lastSeen:Date.now(),activeChat:null}).catch(()=>{});
 setInterval(()=>set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:activeChat}).catch(()=>{}),30000);
 onValue(ref(db,".info/connected"),s=>{if(s.val()===true)onDisconnect(presenceRef).set({online:false,lastSeen:Date.now(),activeChat:null}).catch(()=>{});});
 onValue(ref(db,"jasonBusiness/presence"),s=>{presenceCache=s.val()||{};render();if(activeChat)$("chatPhone").textContent=isOnline(activeChat)?activeChat+" • En ligne 🟢":"Hors ligne";});
@@ -182,8 +182,8 @@ $("topBar").onclick=()=>{if(innerWidth<=800)$("leftPanel").classList.remove("hid
 
 $("btnAddManual").onclick=()=>{
  const p=$("manualPhone").value.trim();
- if(!p||p.length<8)return alert("Entre un numéro valide.");
- if(p===myPhone)return alert("Tu ne peux pas ajouter ton propre numéro.");
+ if(!p||p.length<8)return alert("Numéro invalide");
+ if(p===myPhone)return alert("Pas ton propre numéro");
  if(!manualUsers.includes(p))manualUsers.push(p);
  localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));$("manualPhone").value="";render();
 };
@@ -202,14 +202,14 @@ function render(){
    div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(u.nom||phone)}</div><div class="prev">${esc(phone)}</div></div><div>${friend?"💬":sent?"⏳":"+"}</div>`;
    div.onclick=()=>friend?openChat(phone):!sent&&sendRequest(phone);cont.appendChild(div);
   });
-  if(!cont.children.length)cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucun utilisateur trouvé</div>';
+  if(!cont.children.length)cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucun utilisateur</div>';
  }else if(tab==="requests"){
   const reqs=Object.entries(myRequests).filter(([_,r])=>r.type==="incoming"&&r.status==="pending");
   if(!reqs.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucune demande</div>';return;}
   reqs.forEach(([phone])=>{const div=document.createElement("div");div.className="item";div.innerHTML=`<div class="av">${esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[phone]?.nom||phone)}</div><div class="prev">Veut discuter</div></div>`;const b=document.createElement("button");b.className="btn";b.textContent="Accepter";b.onclick=()=>acceptRequest(phone);div.appendChild(b);cont.appendChild(div);});
  }else{
   const list=Object.entries(myChats).filter(([_,c])=>c.status==="accepted").sort((a,b)=>(b[1].lastTime||0)-(a[1].lastTime||0));
-  if(!list.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucun chat. Va dans Utilisateurs pour commencer.</div>';return;}
+  if(!list.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucun chat. Va dans Utilisateurs.</div>';return;}
   list.forEach(([id,chat])=>{const other=id.split("_").find(p=>p!==myPhone);if(!other)return;if(q&&!other.toLowerCase().includes(q)&&!String(allUsers[other]?.nom||"").toLowerCase().includes(q))return;const photo=getUserPhoto(other);const div=document.createElement("div");div.className="item"+(activeChat===other?" active":"");div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(other.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[other]?.nom||other)}</div><div class="prev">${esc((chat.lastMsg||"").slice(0,60))}</div></div><div style="font-size:9px">${timeStr(chat.lastTime)}</div>`;div.onclick=()=>openChat(other);cont.appendChild(div);});
  }
 }
@@ -220,7 +220,7 @@ async function sendRequest(to){
    set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${to}`),{phone:to,type:"outgoing",status:"pending",createdAt:Date.now()}),
    set(ref(db,`jasonBusiness/chat_requests/${to}/${myPhone}`),{phone:myPhone,type:"incoming",status:"pending",createdAt:Date.now()})
   ]);alert("Demande envoyée !");
- }catch(e){alert("Impossible d'envoyer la demande : "+e.message);}
+ }catch(e){alert("Erreur: "+e.message);}
 }
 
 async function acceptRequest(from){
@@ -233,7 +233,7 @@ async function acceptRequest(from){
    remove(ref(db,`jasonBusiness/chat_requests/${from}/${myPhone}`))
   ]);
   document.querySelector('[data-tab="chats"]').click();openChat(from);
- }catch(e){alert("Erreur : "+e.message);}
+ }catch(e){alert("Erreur: "+e.message);}
 }
 
 function openChat(other){
@@ -251,9 +251,9 @@ function openChat(other){
   if(activeChat!==other)return;
   const arr=Object.entries(s.val()||{}).map(([key,v])=>({...v,_key:key})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
   renderMessages(arr);
-  markAsRead(id,arr).catch(console.error);
+  markAsRead(id,arr).catch(()=>{});
   update(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{unread:0}).catch(()=>{});
- },e=>setHint("Erreur de lecture : "+e.message));
+ },e=>setHint("Erreur: "+e.message));
  messageUnsubscribe=unsub;render();$("msgInput").focus();
 }
 
@@ -265,16 +265,16 @@ async function markAsRead(id,arr){
 
 function renderMessages(arr){
  const c=$("msgs");c.innerHTML="";
- if(!arr.length){c.innerHTML='<div style="margin:auto;opacity:.6;padding:20px;text-align:center">Début de la conversation. Envoie ton premier message !</div>';return;}
+ if(!arr.length){c.innerHTML='<div style="margin:auto;opacity:.6;padding:20px;text-align:center">Début conversation. Envoie ton premier message!</div>';return;}
  arr.forEach(m=>{
   const mine=m.from===myPhone,div=document.createElement("div");div.className="msg "+(mine?"me":"other");
   if(m.text){const t=document.createElement("div");t.textContent=m.text;div.appendChild(t);}
   if(m.photo){
    const w=document.createElement("div");w.className="photo-wrap";
    const media=document.createElement(m.type==="video"?"video":"img");
-   if(m.type==="video"){media.controls=true;media.playsInline=true;}else{media.alt="Photo reçue";media.loading="lazy";media.onclick=()=>window.open(m.photo,"_blank","noopener");}
+   if(m.type==="video"){media.controls=true;media.playsInline=true;}else{media.alt="Photo";media.loading="lazy";media.onclick=()=>window.open(m.photo,"_blank","noopener");}
    media.src=m.photo;w.appendChild(media);
-   const a=document.createElement("a");a.className="dl";a.href=m.photo;a.target="_blank";a.rel="noopener";a.download="";a.textContent="⬇️";w.appendChild(a);div.appendChild(w);
+   const a=document.createElement("a");a.className="dl";a.href=m.photo;a.target="_blank";a.rel="noopener";a.textContent="⬇️";w.appendChild(a);div.appendChild(w);
   }
   if(m.audio){const a=document.createElement("audio");a.controls=true;a.preload="metadata";a.src=m.audio;div.appendChild(a);}
   const meta=document.createElement("div");meta.className="meta";
@@ -288,8 +288,8 @@ function renderMessages(arr){
 }
 
 async function deleteMessage(id,key){
- if(!confirm("Supprimer ce message pour tous les participants ?"))return;
- try{await remove(ref(db,`jasonBusiness/messages/${id}/${key}`));}catch(e){alert("Suppression impossible : "+e.message);}
+ if(!confirm("Supprimer pour tous?"))return;
+ try{await remove(ref(db,`jasonBusiness/messages/${id}/${key}`));}catch(e){alert(e.message);}
 }
 
 async function publishMessage(other,fields,lastMsg){
@@ -308,8 +308,8 @@ async function sendText(){
  if(busySending)return;
  const text=$("msgInput").value.trim();if(!text||!activeChat)return;
  const other=activeChat;busySending=true;$("sendBtn").disabled=true;
- try{$("msgInput").value="";await publishMessage(other,{text},text);setHint("✅ Message envoyé");}
- catch(e){$("msgInput").value=text;alert("Envoi impossible : "+e.message);}
+ try{$("msgInput").value="";await publishMessage(other,{text},text);setHint("✅ Envoyé");}
+ catch(e){$("msgInput").value=text;alert("Erreur: "+e.message);}
  finally{busySending=false;$("sendBtn").disabled=!activeChat;$("msgInput").focus();}
 }
 $("sendBtn").onclick=sendText;
@@ -317,83 +317,115 @@ $("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.
 
 $("photoInput").addEventListener("change",async e=>{
  const file=e.target.files?.[0];if(!file)return;
- if(!activeChat){alert("Ouvre d'abord une conversation.");e.target.value="";return;}
- if(!file.type.startsWith("image/")&&!file.type.startsWith("video/")){alert("Choisis une photo ou une vidéo.");e.target.value="";return;}
- if(file.size>50*1024*1024){alert("Fichier trop volumineux. Maximum 50 Mo.");e.target.value="";return;}
+ if(!activeChat){alert("Ouvre un chat d'abord");e.target.value="";return;}
+ if(file.size>50*1024*1024){alert("50Mo max");e.target.value="";return;}
  const other=activeChat,isVideo=file.type.startsWith("video/");
- $("photoInput").disabled=true;$("recordBtn").disabled=true;$("sendBtn").disabled=true;
- setHint("⏳ Envoi de "+(isVideo?"la vidéo...":"la photo..."));
+ $("photoInput").disabled=true;setHint("⏳ Envoi "+(isVideo?"vidéo":"photo")+"...");
  try{
   const name=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
   const path=`files/${getChatId(myPhone,other)}/${Date.now()}_${name}`;
-  const fr=sRef(storage,path);await uploadBytes(fr,file,{contentType:file.type});
-  const url=await getDownloadURL(fr);
-  await publishMessage(other,{text:isVideo?"🎬 Vidéo":"📷 Photo",photo:url,type:isVideo?"video":"image"},isVideo?"🎬 Vidéo":"📷 Photo");
-  setHint("✅ "+(isVideo?"Vidéo":"Photo")+" envoyée !");
- }catch(err){console.error(err);alert("Échec de l'envoi : "+err.message);setHint("❌ Vérifie Firebase Storage.");}
- finally{$("photoInput").value="";$("photoInput").disabled=false;$("recordBtn").disabled=!activeChat;$("sendBtn").disabled=!activeChat;}
+  const fr=sRef(storage,path);await uploadBytes(fr,file);const url=await getDownloadURL(fr);
+  await publishMessage(other,{photo:url,type:isVideo?"video":"image",text:isVideo?"🎬 Vidéo":"📷 Photo"},isVideo?"🎬 Vidéo":"📷 Photo");
+  setHint("✅ Envoyé!");
+ }catch(err){alert("Erreur photo: "+err.message+"\nVérifie Firebase Storage Rules!");setHint("❌ Storage bloqué");}
+ finally{e.target.value="";$("photoInput").disabled=false;}
 });
 
+// ======== VOCAL CORRIGÉ POUR APK ========
 function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");}
 function clearRecordingUI(){
  clearInterval(timerInt);timerInt=null;$("recBar").classList.remove("show");
  $("recordBtn").classList.remove("hold");$("recordBtn").textContent="🎙️";
  $("recordBtn").disabled=!activeChat;$("photoInput").disabled=false;
 }
-function stopRecorder(){if(mediaRecorder&&mediaRecorder.state!=="inactive"){try{mediaRecorder.stop();}catch(e){console.error(e);}}}
+function stopRecorder(){if(mediaRecorder&&mediaRecorder.state!=="inactive"){try{mediaRecorder.stop();}catch{}}}
 
 async function toggleVocal(){
- if(recording){stopRecorder();return;}
- if(!activeChat){alert("Sélectionne un contact avant d'enregistrer.");return;}
- if(!window.isSecureContext){alert("Le microphone nécessite une adresse HTTPS. Ouvre ton site hébergé sur Vercel.");return;}
- if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder){alert("Enregistrement indisponible. Ouvre cette page dans Chrome avec HTTPS.");return;}
-
+ if(recording){ stopRecorder(); return; }
+ if(!activeChat){ alert("Sélectionne un chat"); return; }
+ if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+   alert("🎙️ Microphone non disponible.\n\nDans ton APK:\n1. Va sur web2apkpro.com\n2. Active ✅ Enable Microphone / Record Audio\n3. Re-génère l'APK\n\nEt sur Android:\nParamètres → Apps → Jason Business → Autorisations → Microphone → Autoriser");
+   return;
+ }
  try{
-  setHint("🎙️ Autorisation du microphone...");
-  recordStream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true}});
-  const types=["audio/webm;codecs=opus","audio/webm","audio/mp4","audio/ogg;codecs=opus"];
-  const mime=types.find(t=>MediaRecorder.isTypeSupported(t));
-  mediaRecorder=mime?new MediaRecorder(recordStream,{mimeType:mime}):new MediaRecorder(recordStream);
-  audioChunks=[];recSec=0;cancelled=false;recording=true;
-  const recorder=mediaRecorder,other=activeChat;
-  recorder.ondataavailable=e=>{if(e.data&&e.data.size)audioChunks.push(e.data);};
-  recorder.onerror=e=>{console.error(e);setHint("Erreur d'enregistrement.");};
-  recorder.onstop=async()=>{
-   clearInterval(timerInt);const discard=cancelled;
-   const blob=new Blob(audioChunks,{type:recorder.mimeType||"audio/webm"});
-   recording=false;clearRecordingUI();stopTracks();
-   if(discard){audioChunks=[];setHint("Enregistrement annulé.");return;}
-   if(blob.size<500){setHint("Vocal trop court. Réessaie.");return;}
-   if(!other)return;
-   $("sendBtn").disabled=true;$("recordBtn").disabled=true;$("photoInput").disabled=true;
-   setHint("⏳ Envoi du message vocal...");
-   try{
-    const ext=blob.type.includes("mp4")?"mp4":blob.type.includes("ogg")?"ogg":"webm";
-    const ar=sRef(storage,`vocals/${getChatId(myPhone,other)}/${Date.now()}.${ext}`);
-    await uploadBytes(ar,blob,{contentType:blob.type});
-    const url=await getDownloadURL(ar);
-    await publishMessage(other,{text:"🎙️ Message vocal",audio:url,type:"audio"},"🎙️ Message vocal");
-    setHint("✅ Vocal envoyé !");
-   }catch(err){console.error(err);alert("Échec de l'envoi vocal : "+err.message);setHint("❌ Vérifie Firebase Storage.");}
-   finally{audioChunks=[];$("sendBtn").disabled=!activeChat;$("recordBtn").disabled=!activeChat;$("photoInput").disabled=false;}
+  setHint("🎙️ Demande micro...");
+  recordStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  audioChunks=[]; recSec=0; cancelled=false; recording=true;
+
+  // Choisir le meilleur format supporté
+  let mimeType = "";
+  if(MediaRecorder.isTypeSupported("audio/webm;codecs=opus")) mimeType="audio/webm;codecs=opus";
+  else if(MediaRecorder.isTypeSupported("audio/webm")) mimeType="audio/webm";
+  else if(MediaRecorder.isTypeSupported("audio/mp4")) mimeType="audio/mp4";
+  
+  mediaRecorder = mimeType ? new MediaRecorder(recordStream, {mimeType}) : new MediaRecorder(recordStream);
+  const other = activeChat;
+
+  mediaRecorder.ondataavailable = e => { if(e.data && e.data.size>0) audioChunks.push(e.data); };
+  
+  mediaRecorder.onstop = async () => {
+    const wasCancelled = cancelled;
+    const chunks = [...audioChunks];
+    recording=false; 
+    clearInterval(timerInt);
+    clearRecordingUI();
+    stopTracks();
+    audioChunks=[];
+
+    if(wasCancelled){ setHint("Annulé"); return; }
+    if(!chunks.length){ setHint("Aucun son capturé"); return; }
+
+    const blob = new Blob(chunks, {type: mediaRecorder.mimeType || "audio/webm"});
+    if(blob.size < 800){ setHint("Trop court, réessaie"); return; }
+
+    $("sendBtn").disabled=true; $("recordBtn").disabled=true;
+    setHint("⏳ Envoi vocal... "+Math.round(blob.size/1024)+"ko");
+
+    try{
+      const ext = blob.type.includes("mp4") ? "mp4" : "webm";
+      const ar = sRef(storage, `vocals/${getChatId(myPhone,other)}/${Date.now()}.${ext}`);
+      await uploadBytes(ar, blob, {contentType: blob.type});
+      const url = await getDownloadURL(ar);
+      await publishMessage(other, {audio:url, type:"audio", text:"🎙️ Vocal"}, "🎙️ Vocal");
+      setHint("✅ Vocal envoyé!");
+    }catch(err){
+      console.error(err);
+      alert("❌ Échec envoi vocal:\n"+err.message+"\n\nVÉRIFIE:\n1. Firebase Storage Rules = allow read, write: if true\n2. Tu es connecté à internet\n3. Recharge la page");
+      setHint("❌ Erreur Storage");
+    }finally{
+      $("sendBtn").disabled=false; $("recordBtn").disabled=!activeChat;
+    }
   };
-  recorder.start(250);
-  $("recBar").classList.add("show");$("recordBtn").classList.add("hold");$("recordBtn").textContent="⏹️";
-  $("photoInput").disabled=true;$("sendBtn").disabled=true;$("recTime").textContent="00:00";
-  setHint("🔴 Enregistrement en cours...");
-  timerInt=setInterval(()=>{$("recTime").textContent=fmt(++recSec);if(recSec>=120)stopRecorder();},1000);
+
+  mediaRecorder.start(200);
+  $("recBar").classList.add("show");
+  $("recordBtn").classList.add("hold");
+  $("recordBtn").textContent="⏹️";
+  $("photoInput").disabled=true;
+  $("recTime").textContent="00:00";
+  setHint("🔴 Enregistrement... Appuie sur Envoyer quand fini");
+  timerInt=setInterval(()=>{ recSec++; $("recTime").textContent=fmt(recSec); if(recSec>=120) stopRecorder(); },1000);
+
  }catch(err){
-  console.error(err);recording=false;stopTracks();clearRecordingUI();
-  if(err.name==="NotAllowedError"||err.name==="PermissionDeniedError")alert("Autorisation du microphone refusée. Autorise le microphone pour ce site dans Chrome ou Android.");
-  else alert("Impossible de démarrer le microphone : "+err.message);
-  setHint("Microphone indisponible.");
+  recording=false; stopTracks(); clearRecordingUI();
+  console.error(err);
+  if(err.name==="NotAllowedError") alert("🚫 Micro refusé!\nAndroid → Paramètres → Apps → Jason Business → Permissions → Microphone → Autoriser");
+  else if(err.name==="NotFoundError") alert("Aucun micro trouvé sur ce téléphone");
+  else alert("Erreur micro: "+err.name+" - "+err.message);
+  setHint("Micro bloqué");
  }
 }
 
-$("recordBtn").addEventListener("click",toggleVocal);
-$("recSend").addEventListener("click",()=>{if(recording)stopRecorder();});
-$("recCancel").addEventListener("click",()=>{if(!recording)return;cancelled=true;audioChunks=[];stopRecorder();});
-window.addEventListener("beforeunload",()=>{if(messageUnsubscribe)messageUnsubscribe();clearInterval(timerInt);stopTracks();});
+$("recordBtn").addEventListener("click", toggleVocal);
+$("recSend").addEventListener("click", ()=>{ if(recording) stopRecorder(); });
+$("recCancel").addEventListener("click", ()=>{
+  if(!recording) return;
+  cancelled=true; 
+  audioChunks=[];
+  stopRecorder();
+  setHint("Annulé");
+});
+window.addEventListener("beforeunload",()=>{ if(messageUnsubscribe) messageUnsubscribe(); clearInterval(timerInt); stopTracks(); });
 </script>
 </body>
 </html>
