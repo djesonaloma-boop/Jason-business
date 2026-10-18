@@ -190,8 +190,17 @@ $("appForm").addEventListener("submit",async e=>{
  if(getBalance()<p.final){setStatus("appStatus","❌ Solde insuffisant: "+formatFC(getBalance())+" — Il faut "+formatFC(p.final),"error");return;}
  if(!await deductBalance(p.final)){setStatus("appStatus","❌ Solde insuffisant","error");return;}
  const fd=new FormData(e.target);const data=Object.fromEntries(fd.entries());
- setStatus("appStatus","⏳ Paiement "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
- const ok=await pushCommande(`${ROOT}/store_commandes`,{produit:"Application - "+data.appName,nom_application:data.appName,lien_site:cleanUrl(data.appUrl),description:data.description,whatsapp:data.whatsapp,prix:p.final,prix_original:p.original,remise:p.discount});
+ setStatus("appStatus","⏳ Upload icône + Paiement "+formatFC(p.final)+"...","info");
+ const file = $("appIcon").files[0];
+ let iconUrl = "";
+ if(file){
+   iconUrl = await new Promise((resolve)=>{
+     const reader = new FileReader();
+     reader.onload = ev=>resolve(ev.target.result);
+     reader.readAsDataURL(file);
+   });
+ }
+ const ok=await pushCommande(`${ROOT}/store_commandes`,{produit:"Application - "+data.appName,nom_application:data.appName,lien_site:cleanUrl(data.appUrl),description:data.description,whatsapp:data.whatsapp,prix:p.final,prix_original:p.original,remise:p.discount,iconUrl:iconUrl,appIconUrl:iconUrl});
  if(ok){setStatus("appStatus","✅ Payé "+formatFC(p.final)+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();$("appIconPreview").style.display="none";}
  else{await setBalanceFirebase(getBalance()+p.final);setStatus("appStatus","❌ Erreur","error");}
 });
