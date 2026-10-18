@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#050a14">
-<title>JASON BUSINESS - Chat Scroll Anciens</title>
+<title>JASON BUSINESS - Fix Scroll Haut</title>
 <style>
 :root{--blue:#00d2ff;--border:rgba(0,210,255,.18)}
 *{box-sizing:border-box}
@@ -31,15 +31,14 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
 .prev{font-size:12px;opacity:.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
 .right-info{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0}
 .time{font-size:11px;opacity:.5}
-.unread-badge{background:#ff4757;color:white;font-size:12px;font-weight:900;min-width:22px;height:22px;border-radius:11px;display:grid;place-items:center;padding:0 7px;box-shadow:0 2px 8px rgba(255,71,87,.5);animation:pop .3s}
-@keyframes pop{0%{transform:scale(0)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+.unread-badge{background:#ff4757;color:white;font-size:12px;font-weight:900;min-width:22px;height:22px;border-radius:11px;display:grid;place-items:center;padding:0 7px}
 .bottom-nav{padding:10px;display:flex;gap:8px;border-top:1px solid var(--border);background:#0b1425}
-.right{flex:1;min-width:0;display:flex;flex-direction:column;background:#070e1e;overflow:hidden}
+.right{flex:1;min-width:0;display:flex;flex-direction:column;background:#070e1e;overflow:hidden;position:relative}
 .top{flex-shrink:0;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(5,10,20,.95);cursor:pointer}
-.msgs{flex:1;min-height:0;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
-.load-more{display:none;padding:8px 12px;background:#0b1425;border:1px solid var(--border);border-radius:20px;margin:0 auto 10px;font-size:11px;color:var(--blue);cursor:pointer;text-align:center}
+.msgs{flex:1;min-height:0;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.load-more{padding:8px 16px;background:#0b1425;border:1px solid var(--border);border-radius:20px;margin:0 auto 12px;font-size:12px;color:var(--blue);cursor:pointer;display:none}
 .load-more.show{display:block}
-.msg{max-width:78%;padding:8px 12px;border-radius:18px;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere;position:relative;line-height:1.4}
+.msg{max-width:78%;padding:8px 12px;border-radius:18px;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere;position:relative;line-height:1.4;flex-shrink:0}
 .msg.me{align-self:flex-end;background:linear-gradient(135deg,#00d2ff,#0077ff);border-bottom-right-radius:6px;color:white}
 .msg.other{align-self:flex-start;background:rgba(255,255,255,.1);border-bottom-left-radius:6px}
 .photo-wrap{margin-top:6px;border-radius:12px;overflow:hidden;max-width:230px;background:#000}
@@ -66,7 +65,7 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
 .btnSend{background:linear-gradient(135deg,#00d2ff,#0077ff);color:white}
 .btnCancel{background:#1a2a44;color:white;border:1px solid #293850!important}
 #photoCaption{margin-top:8px;width:100%;min-height:40px;padding:8px 12px;border-radius:12px;border:1px solid #293850;background:#0c192b;color:white;font-size:12px;resize:none;outline:none}
-.scroll-down{position:absolute;bottom:80px;right:20px;width:36px;height:36px;border-radius:50%;background:#00d2ff;color:#000;display:none;place-items:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.5);z-index:10;font-weight:800}
+.scroll-down{position:absolute;bottom:80px;right:16px;width:40px;height:40px;border-radius:50%;background:#00d2ff;color:#000;display:none;place-items:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.5);z-index:10;font-weight:900;font-size:18px}
 .scroll-down.show{display:grid}
 @media(max-width:800px){.left{position:absolute;inset:54px 0 0;width:100%;z-index:20}.left.hide{display:none}.right{width:100%}.msg{max-width:88%}.msg-actions{display:flex;opacity:.9}}
 </style>
@@ -85,18 +84,15 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
  <div class="list" id="list"></div>
  <div class="bottom-nav"><a href="index.html" class="btn btn-full">🏠 Accueil</a><a href="publications.html" class="btn btn-full">📢 Publications</a></div>
 </aside>
-<section class="right" style="position:relative">
+<section class="right">
  <div class="top" id="topBar"><div style="display:flex;align-items:center;gap:10px;min-width:0"><div class="av" id="chatAvatar">JB</div><div style="min-width:0"><h3 id="chatName" style="margin:0;font-size:14px">Sélectionne un chat</h3><small id="chatPhone" style="font-size:11px;opacity:.6">Clique ici pour revenir</small></div></div></div>
- <div class="msgs" id="msgs">
-   <button id="loadMoreBtn" class="load-more">⬆️ Voir anciens messages</button>
-   <div id="msgsInner" style="display:flex;flex-direction:column;gap:8px"></div>
- </div>
+ <div class="msgs" id="msgs"></div>
  <div id="scrollDown" class="scroll-down">↓</div>
  <div class="input-area">
   <div id="photoPreview"><img id="previewImg" src=""><textarea id="photoCaption" placeholder="Légende..."></textarea><div class="preview-actions"><button class="btnCancel" id="cancelPhoto">✕ Annuler</button><button class="btnSend" id="confirmPhoto">➤ Envoyer</button></div></div>
   <div id="recBar" class="rec-bar"><div style="display:flex;align-items:center;gap:8px"><div style="width:10px;height:10px;background:#ff4757;border-radius:50%"></div><div id="recTime" style="font-weight:800;color:#ff6b7a">00:00</div><div style="font-size:11px">🔴 Enregistrement</div></div><div style="display:flex;gap:6px"><button id="recCancel" style="padding:6px 9px;border-radius:10px;border:1px solid #ff4757;background:#ff475722;color:#ff6b7a;font-size:11px">Annuler</button><button id="recSend" style="padding:6px 10px;border-radius:10px;border:0;background:#00d2ff;font-weight:800;font-size:11px">Envoyer</button></div></div>
   <div class="input"><label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*" hidden></label><button type="button" id="recordBtn" class="tbtn" disabled>🎙️</button><textarea id="msgInput" placeholder="Écris un message..." disabled rows="1"></textarea><button type="button" class="send" id="sendBtn" disabled>➤</button></div>
-  <div id="hint" style="text-align:center;font-size:9px;opacity:.6;margin-top:4px">Scroll en haut = anciens messages • 1,2,3 = non lus</div>
+  <div id="hint" style="text-align:center;font-size:9px;opacity:.6;margin-top:4px">Scroll en haut pour voir anciens messages</div>
  </div>
 </section>
 </div>
@@ -111,7 +107,7 @@ const myPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getIt
 if(!myPhone){location.replace("login.html");throw new Error("Non connecté");}
 $("myPhoneShow").textContent=myPhone;
 let tab="chats",activeChat=null,allUsers={},myRequests={},myChats={},presenceCache={},manualUsers=[],messageUnsubscribe=null,recording=false,cancelled=false,mediaRecorder=null,audioChunks=[],recordStream=null,timerInt=null,recSec=0,busySending=false,pendingPhotoBase64=null;
-let allMessages=[], displayLimit=30;
+let allMessages=[], displayLimit=40, firstOpen=true, isUserScrolling=false;
 try{manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]");}catch{manualUsers=[];}
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function timeStr(ts){return ts?new Date(ts).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}):"";}
@@ -172,7 +168,7 @@ async function sendRequest(to){try{await Promise.all([set(ref(db,`jasonBusiness/
 async function acceptRequest(from){try{const id=getChatId(myPhone,from);await Promise.all([set(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{with:from,status:"accepted",lastMsg:"Discussion acceptée",lastTime:Date.now(),unread:0}),set(ref(db,`jasonBusiness/user_chats/${from}/${id}`),{with:myPhone,status:"accepted",lastMsg:"Discussion acceptée",lastTime:Date.now(),unread:1}),remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${from}`)),remove(ref(db,`jasonBusiness/chat_requests/${from}/${myPhone}`))]);document.querySelector('[data-tab="chats"]').click();openChat(from);}catch(e){alert(e.message);}}
 
 function openChat(other){
- activeChat=other; allMessages=[]; displayLimit=30;
+ activeChat=other; allMessages=[]; displayLimit=40; firstOpen=true; isUserScrolling=false;
  if(messageUnsubscribe){messageUnsubscribe();messageUnsubscribe=null;}
  const photo=getUserPhoto(other);$("chatName").textContent=allUsers[other]?.nom||other;$("chatPhone").textContent=isOnline(other)?other+" • En ligne 🟢":"Hors ligne";$("chatAvatar").innerHTML=photo?`<img src="${esc(photo)}">`:esc(other.slice(-2));
  $("msgInput").disabled=false;$("sendBtn").disabled=false;$("recordBtn").disabled=false;
@@ -182,7 +178,7 @@ function openChat(other){
  const unsub=onValue(messagesRef,s=>{
    if(activeChat!==other)return;
    allMessages=Object.entries(s.val()||{}).map(([key,v])=>({...v,_key:key})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
-   renderMessages();
+   renderMessages(false);
    markAsRead(id,allMessages).catch(()=>{});
    markAsDelivered(id,allMessages).catch(()=>{});
    update(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{unread:0}).catch(()=>{});
@@ -200,64 +196,88 @@ async function markAsDelivered(id,arr){
   if(Object.keys(changes).length) await update(ref(db),changes);
 }
 
-// RENDU AVEC SCROLL ANCIENS MESSAGES
-function renderMessages(){
+function renderMessages(keepPosition=false){
   const container=$("msgs");
-  const inner=$("msgsInner");
-  const wasAtBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 150;
-  const prevHeight = container.scrollHeight;
+  const prevScrollHeight=container.scrollHeight;
+  const prevScrollTop=container.scrollTop;
+  const wasAtBottom = prevScrollHeight - prevScrollTop - container.clientHeight < 120;
 
   const total=allMessages.length;
   const start=Math.max(0,total-displayLimit);
   const toShow=allMessages.slice(start);
 
-  $("loadMoreBtn").classList.toggle("show", start>0);
-  $("loadMoreBtn").textContent=`⬆️ Voir anciens messages (${start} restants)`;
-
-  inner.innerHTML="";
-  if(total===0){ inner.innerHTML='<div style="margin:auto;opacity:.6;padding:20px;text-align:center">Début conversation<br>Scroll en haut pour voir anciens</div>'; return; }
+  let html="";
+  if(start>0){
+    html+=`<button id="loadMoreBtn" class="load-more show" onclick="loadMore()">⬆️ Voir ${start} anciens messages - Clique ici</button>`;
+  }
+  if(total===0){
+    html+='<div style="margin:auto;opacity:.6;padding:20px;text-align:center">Début conversation<br>Les anciens messages apparaîtront ici</div>';
+    container.innerHTML=html;
+    return;
+  }
 
   toShow.forEach(m=>{
-    const mine=m.from===myPhone,div=document.createElement("div");div.className="msg "+(mine?"me":"other");
+    const mine=m.from===myPhone;
+    let inner="";
     if(mine){
-      const acts=document.createElement("div");acts.className="msg-actions";
-      const btnDel=document.createElement("button");btnDel.className="del";btnDel.textContent="🗑️ Retirer";btnDel.onclick=()=>deleteMessage(m._key);acts.appendChild(btnDel);div.appendChild(acts);
-      let pressTimer;div.addEventListener("touchstart",()=>{pressTimer=setTimeout(()=>{if(confirm("Retirer ?"))deleteMessage(m._key);},600);});div.addEventListener("touchend",()=>clearTimeout(pressTimer));div.addEventListener("touchmove",()=>clearTimeout(pressTimer));
+      inner+=`<div class="msg-actions"><button class="del" onclick="deleteMessage('${m._key}')">🗑️ Retirer</button></div>`;
     }
-    if(m.text && !m.deleted){const t=document.createElement("div");t.textContent=m.text;div.appendChild(t);}
-    if(m.photo && !m.deleted){const w=document.createElement("div");w.className="photo-wrap";const img=document.createElement("img");img.src=m.photo;w.appendChild(img);div.appendChild(w);}
-    if(m.audio && !m.deleted){const a=document.createElement("audio");a.controls=true;a.src=m.audio;div.appendChild(a);}
-    if(m.deleted){const t=document.createElement("div");t.style.fontStyle="italic";t.style.opacity=".7";t.textContent="🚫 Message retiré";div.appendChild(t);}
-    const meta=document.createElement("div");meta.className="meta";const time=document.createElement("span");time.textContent=timeStr(m.createdAt);meta.appendChild(time);
+    if(m.text && !m.deleted) inner+=`<div>${esc(m.text)}</div>`;
+    if(m.photo && !m.deleted) inner+=`<div class="photo-wrap"><img src="${m.photo}"></div>`;
+    if(m.audio && !m.deleted) inner+=`<audio controls src="${m.audio}"></audio>`;
+    if(m.deleted) inner+=`<div style="font-style:italic;opacity:.7">🚫 Message retiré</div>`;
+    let statusHtml="";
     if(mine && !m.deleted){
-      const st=document.createElement("span");
-      if(m.status==="read"){st.className="status read";st.textContent="✓✓ Lu";}else if(m.status==="delivered"){st.textContent="✓✓";}else{st.textContent="✓";}
-      meta.appendChild(st);
+      if(m.status==="read") statusHtml=`<span class="status read">✓✓ Lu</span>`;
+      else if(m.status==="delivered") statusHtml=`<span>✓✓</span>`;
+      else statusHtml=`<span>✓</span>`;
     }
-    div.appendChild(meta);inner.appendChild(div);
+    inner+=`<div class="meta"><span>${timeStr(m.createdAt)}</span>${statusHtml}</div>`;
+    html+=`<div class="msg ${mine?'me':'other'}" data-key="${m._key}">${inner}</div>`;
   });
 
-  // Garde position si on charge anciens, sinon scroll en bas
-  if(wasAtBottom || displayLimit===30){
+  container.innerHTML=html;
+
+  if(keepPosition){
+    const newScrollHeight=container.scrollHeight;
+    container.scrollTop = prevScrollTop + (newScrollHeight - prevScrollHeight);
+  }else if(firstOpen){
     container.scrollTop=container.scrollHeight;
-  }else{
-    container.scrollTop=container.scrollHeight - prevHeight + container.scrollTop;
+    firstOpen=false;
+  }else if(wasAtBottom){
+    container.scrollTop=container.scrollHeight;
   }
+
+  // Attache events tactiles pour retirer
+  container.querySelectorAll('.msg.me').forEach(el=>{
+    let pressTimer;
+    el.addEventListener('touchstart',()=>{ pressTimer=setTimeout(()=>{ if(confirm('Retirer ?')) deleteMessage(el.dataset.key); },600); });
+    el.addEventListener('touchend',()=>clearTimeout(pressTimer));
+    el.addEventListener('touchmove',()=>clearTimeout(pressTimer));
+  });
+
   checkScrollDown();
 }
 
-$("loadMoreBtn").onclick=()=>{
+window.loadMore=()=>{
+  const container=$("msgs");
+  const oldHeight=container.scrollHeight;
   displayLimit+=30;
-  renderMessages();
+  renderMessages(true);
 };
 
 $("msgs").addEventListener("scroll",()=>{
-  checkScrollDown();
-  // Auto charge quand on arrive tout en haut
-  if($("msgs").scrollTop<50 && allMessages.length>displayLimit){
+  const c=$("msgs");
+  if(c.scrollTop<80 && allMessages.length>displayLimit){
+    // charge auto quand on arrive en haut
+    const oldHeight=c.scrollHeight;
     displayLimit+=20;
-    renderMessages();
+    renderMessages(true);
   }
+  checkScrollDown();
+  // détecte si l'utilisateur scrolle manuellement
+  const isAtBottom = c.scrollHeight - c.scrollTop - c.clientHeight < 120;
+  isUserScrolling = !isAtBottom;
 });
 
 function checkScrollDown(){
@@ -265,7 +285,7 @@ function checkScrollDown(){
   const show=c.scrollHeight - c.scrollTop - c.clientHeight > 300;
   $("scrollDown").classList.toggle("show",show);
 }
-$("scrollDown").onclick=()=>{ $("msgs").scrollTop=$("msgs").scrollHeight; };
+$("scrollDown").onclick=()=>{ $("msgs").scrollTop=$("msgs").scrollHeight; isUserScrolling=false; };
 
 async function deleteMessage(msgKey){
   if(!activeChat || !msgKey) return;
@@ -281,7 +301,7 @@ async function publishMessage(other,fields,lastMsg){
  const [sa,sb]=await Promise.all([get(a),get(b)]);const da=sa.val()||{},dbb=sb.val()||{};
  await Promise.all([set(a,{...da,with:other,status:"accepted",lastMsg,lastTime:now,unread:0}),set(b,{...dbb,with:myPhone,status:"accepted",lastMsg,lastTime:now,unread:(Number(dbb.unread)||0)+1})]);
 }
-async function sendText(){if(busySending)return;const text=$("msgInput").value.trim();if(!text||!activeChat)return;const other=activeChat;busySending=true;$("sendBtn").disabled=true;try{$("msgInput").value="";await publishMessage(other,{text},text);setHint("✓ Envoyé");}catch(e){$("msgInput").value=text;alert(e.message);}finally{busySending=false;$("sendBtn").disabled=!activeChat;$("msgInput").focus();}}
+async function sendText(){if(busySending)return;const text=$("msgInput").value.trim();if(!text||!activeChat)return;const other=activeChat;busySending=true;$("sendBtn").disabled=true;try{$("msgInput").value="";await publishMessage(other,{text},text);setHint("✓ Envoyé");$("msgs").scrollTop=$("msgs").scrollHeight;}catch(e){$("msgInput").value=text;alert(e.message);}finally{busySending=false;$("sendBtn").disabled=!activeChat;$("msgInput").focus();}}
 $("sendBtn").onclick=sendText;
 $("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText();}});
 $("photoInput").addEventListener("change",async e=>{
@@ -298,7 +318,7 @@ $("confirmPhoto").onclick=async()=>{
  if(!pendingPhotoBase64 || !activeChat) return;
  const other=activeChat;const caption=$("photoCaption").value.trim();
  $("confirmPhoto").disabled=true;$("confirmPhoto").textContent="⏳ Envoi...";
- try{await publishMessage(other,{photo:pendingPhotoBase64,type:"image",text:caption},caption||"📷 Photo");$("photoPreview").classList.remove("show");pendingPhotoBase64=null;$("photoCaption").value="";$("previewImg").src="";setHint("✅ Photo envoyée!");}catch(err){alert("Erreur: "+err.message);}finally{$("confirmPhoto").disabled=false;$("confirmPhoto").textContent="➤ Envoyer";}
+ try{await publishMessage(other,{photo:pendingPhotoBase64,type:"image",text:caption},caption||"📷 Photo");$("photoPreview").classList.remove("show");pendingPhotoBase64=null;$("photoCaption").value="";$("previewImg").src="";setHint("✅ Photo envoyée!");$("msgs").scrollTop=$("msgs").scrollHeight;}catch(err){alert("Erreur: "+err.message);}finally{$("confirmPhoto").disabled=false;$("confirmPhoto").textContent="➤ Envoyer";}
 };
 function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");}
 function clearRecordingUI(){clearInterval(timerInt);timerInt=null;$("recBar").classList.remove("show");$("recordBtn").classList.remove("hold");$("recordBtn").textContent="🎙️";$("recordBtn").disabled=!activeChat;}
@@ -318,7 +338,7 @@ async function toggleVocal(){
     const blob=new Blob(chunks,{type:"audio/webm"});if(blob.size<800){setHint("Trop court");return;}
     setHint("⏳ Envoi vocal...");
     const reader=new FileReader();reader.readAsDataURL(blob);
-    reader.onloadend=async()=>{try{await publishMessage(other,{audio:reader.result,type:"audio",text:"🎙️ Vocal"},"🎙️ Vocal");setHint("✅ Vocal envoyé!");}catch(err){alert("Erreur: "+err.message);}};
+    reader.onloadend=async()=>{try{await publishMessage(other,{audio:reader.result,type:"audio",text:"🎙️ Vocal"},"🎙️ Vocal");setHint("✅ Vocal envoyé!");$("msgs").scrollTop=$("msgs").scrollHeight;}catch(err){alert("Erreur: "+err.message);}};
   };
   mediaRecorder.start(200);
   $("recBar").classList.add("show");$("recordBtn").classList.add("hold");$("recordBtn").textContent="⏹️";$("recTime").textContent="00:00";setHint("🔴 Enregistrement...");timerInt=setInterval(()=>{recSec++;$("recTime").textContent=fmt(recSec);if(recSec>=60)stopRecorder();},1000);
