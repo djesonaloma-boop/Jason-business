@@ -16,7 +16,11 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 @keyframes jbHeaderShine{0%,60%{left:-100%}100%{left:160%}}
 .jb-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .jb-brand{font-size:20px;font-weight:900;letter-spacing:2px;color:var(--blue);text-shadow:0 0 16px rgba(0,210,255,.40)}
+.jb-top-right{display:flex;align-items:center;gap:8px}
 .jb-status{font-size:10px;color:var(--green);padding:7px 11px;border-radius:20px;background:rgba(0,230,118,.09);border:1px solid rgba(0,230,118,.28);white-space:nowrap}
+/* PETIT BOUTON PARAMETRES PRO */
+.jb-settings-btn{width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.75);font-size:14px;cursor:pointer;transition:all .2s}
+.jb-settings-btn:active{transform:scale(.92);background:rgba(0,210,255,.15);border-color:rgba(0,210,255,.3);color:var(--blue)}
 .jb-user-box{margin-top:20px}
 .jb-user-box small{font-size:10px;opacity:.60;letter-spacing:1px}
 .jb-user-box h2{margin:7px 0 0;font-size:20px;word-break:break-all}
@@ -49,7 +53,6 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 .jb-service-info{flex:1;min-width:0}
 .jb-service-name{font-size:13px;font-weight:bold}
 .jb-service-desc{margin-top:5px;font-size:9px;opacity:.57}
-.jb-service-price{display:none!important}
 .jb-service-arrow{margin-left:auto;font-size:14px;color:var(--blue);opacity:.6}
 .jb-invest-card{margin-bottom:11px;padding:16px;border-radius:17px;background:linear-gradient(135deg,rgba(0,230,118,.07),rgba(255,255,255,.02));border:1px solid rgba(0,230,118,.17)}
 .jb-invest-row{display:flex;justify-content:space-between;align-items:center;gap:10px}
@@ -58,6 +61,8 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 .jb-invest-date{margin-top:8px;font-size:9px;opacity:.52}
 .jb-invest-status{margin-top:7px;font-size:9px;color:var(--green)}
 .jb-empty{padding:26px 15px;text-align:center;border-radius:17px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.055);font-size:11px;opacity:.65}
+.jb-footer{margin:30px 20px 10px;padding:18px;text-align:center;border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.06);font-size:10px;color:rgba(255,255,255,.55);line-height:1.6;letter-spacing:.3px}
+.jb-footer b{color:var(--blue)}
 .jb-fab-chat{position:fixed;right:16px;bottom:86px;z-index:9999;width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:26px;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;border:1px solid rgba(255,255,255,.25);box-shadow:0 10px 30px rgba(0,210,255,.40),0 0 0 8px rgba(0,210,255,.08);cursor:pointer;animation:jbFabFloat 3s ease-in-out infinite}
 .jb-fab-chat:active{transform:scale(.92)}
 @keyframes jbFabFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
@@ -76,7 +81,16 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 <body>
 <div id="jbLoading" class="jb-loading"><div style="text-align:center"><div class="jb-loader"></div><div style="margin-top:12px;color:var(--blue);font-size:11px;letter-spacing:3px">JASON BUSINESS</div></div></div>
 <div class="jb-overlay">
-<header class="jb-header"><div class="jb-top"><div class="jb-brand">JASON BUSINESS</div><div class="jb-status">● EN LIGNE</div></div><div class="jb-user-box"><small>BIENVENUE SUR VOTRE ESPACE</small><h2 id="jbUserPhone">Chargement...</h2></div></header>
+<header class="jb-header">
+<div class="jb-top">
+<div class="jb-brand">JASON BUSINESS</div>
+<div class="jb-top-right">
+<div class="jb-status">● EN LIGNE</div>
+<button class="jb-settings-btn" onclick="goPage('parametres.html')" title="Paramètres">⚙️</button>
+</div>
+</div>
+<div class="jb-user-box"><small>BIENVENUE SUR VOTRE ESPACE</small><h2 id="jbUserPhone">Chargement...</h2></div>
+</header>
 <div id="jbDashboardStatus"></div>
 <section class="jb-balance-card"><div class="jb-balance-title">Solde principal</div><div class="jb-balance"><span id="jbMainBalance">0</span><span class="jb-currency"> FC</span></div><div class="jb-balance-grid"><div class="jb-money-box"><div class="jb-icon">💰</div><small>Commissions</small><b id="jbCommissionBalance">0 FC</b></div><div class="jb-money-box"><div class="jb-icon">📈</div><small>Gains</small><b id="jbGainBalance">0 FC</b></div><div class="jb-money-box"><div class="jb-icon">💎</div><small>Total</small><b id="jbTotalBalance">0 FC</b></div></div></section>
 <div class="jb-actions"><a href="recharge.html" class="jb-action jb-recharge">📥 RECHARGER</a><a href="retrait.html" class="jb-action jb-withdraw">📤 RETIRER</a></div>
@@ -84,7 +98,7 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 
 <section class="jb-section"><div class="jb-section-title"><h3>🛍️ Nos services</h3><a href="shop.html">VOIR TOUT →</a></div>
 
-<!-- ✅ BOUTON VERS createur-direct.html -->
+<!-- ✅ CLASSEMENT PRO - SANS LOGO -->
 <div class="jb-service-card" onclick="goPage('createur-direct.html')" style="background:linear-gradient(115deg,rgba(0,210,255,.18),rgba(0,119,255,.10));border:1px solid rgba(0,210,255,.42);box-shadow:0 0 22px rgba(0,210,255,.18)">
   <div class="jb-service-icon" style="background:linear-gradient(145deg,#00d2ff,#0077ff);color:white">🚀</div>
   <div class="jb-service-info">
@@ -94,16 +108,28 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
   <div class="jb-service-arrow">›</div>
 </div>
 
-<div class="jb-service-card" onclick="openService('boost')"><div class="jb-service-icon">📈</div><div class="jb-service-info"><div class="jb-service-name">Boostage</div><div class="jb-service-desc">Followers, likes, vues</div></div><div class="jb-service-arrow">›</div></div>
-<div class="jb-service-card" onclick="openService('app')"><div class="jb-service-icon">📱</div><div class="jb-service-info"><div class="jb-service-name">Application</div><div class="jb-service-desc">Création d'application mobile</div></div><div class="jb-service-arrow">›</div></div>
 <div class="jb-service-card" onclick="openService('site')"><div class="jb-service-icon">🌐</div><div class="jb-service-info"><div class="jb-service-name">Site web</div><div class="jb-service-desc">Site moderne et professionnel</div></div><div class="jb-service-arrow">›</div></div>
+
+<div class="jb-service-card" onclick="openService('app')"><div class="jb-service-icon">📱</div><div class="jb-service-info"><div class="jb-service-name">Application</div><div class="jb-service-desc">Création d'application mobile sur mesure</div></div><div class="jb-service-arrow">›</div></div>
+
 <div class="jb-service-card" onclick="openService('chatbot')"><div class="jb-service-icon">🤖</div><div class="jb-service-info"><div class="jb-service-name">Chatbot</div><div class="jb-service-desc">Assistant et automatisation intelligente</div></div><div class="jb-service-arrow">›</div></div>
+
+<div class="jb-service-card" onclick="openService('boost')"><div class="jb-service-icon">📈</div><div class="jb-service-info"><div class="jb-service-name">Boostage</div><div class="jb-service-desc">Followers, likes, vues - Croissance rapide</div></div><div class="jb-service-arrow">›</div></div>
+
+<div class="jb-service-card" onclick="openService('ads')"><div class="jb-service-icon">📣</div><div class="jb-service-info"><div class="jb-service-name">Publicité</div><div class="jb-service-desc">Promotion sur réseaux sociaux</div></div><div class="jb-service-arrow">›</div></div>
+
 <div class="jb-service-card" onclick="openService('music')"><div class="jb-service-icon">🎵</div><div class="jb-service-info"><div class="jb-service-name">Chanson</div><div class="jb-service-desc">Création musicale personnalisée</div></div><div class="jb-service-arrow">›</div></div>
-<div class="jb-service-card" onclick="openService('ads')"><div class="jb-service-icon">📣</div><div class="jb-service-info"><div class="jb-service-name">Publicité</div><div class="jb-service-desc">Promotion sur réseaux</div></div><div class="jb-service-arrow">›</div></div>
-<div class="jb-service-card" onclick="openService('logo')"><div class="jb-service-icon">🎨</div><div class="jb-service-info"><div class="jb-service-name">Logo</div><div class="jb-service-desc">Création de votre identité visuelle</div></div><div class="jb-service-arrow">›</div></div>
+
 </section>
 
 <section class="jb-section"><div class="jb-section-title"><h3>⚡ Mes activités</h3><a href="shop.html">COMMANDER →</a></div><div id="jbInvestments"><div class="jb-empty">Chargement...</div></div></section>
+
+<div class="jb-footer">
+✅ <b>JASON BUSINESS</b> — Plateforme officielle<br>
+Sécurisé • Rapide • Professionnel<br>
+Version 2.0 Pro — 2026
+</div>
+
 </div>
 
 <button class="jb-fab-chat" id="jbFabChat" onclick="goPage('chat.html')" aria-label="Chat">💬<span class="jb-fab-badge" id="jbChatBadge">1</span></button>
