@@ -8,12 +8,18 @@
 <style>
 :root{--bg:#050914;--panel:#0b1425;--blue:#00d4ff;--gold:#d8aa45;--green:#22c55e;--text:#f4f7ff;--muted:#94a3b8;--border:rgba(216,170,69,.25)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html{scroll-behavior:smooth}
-body{margin:0;color:var(--text);font-family:Arial,sans-serif;background:radial-gradient(ellipse at 15% 0%,#103a5b55,transparent 38%),radial-gradient(ellipse at 100% 45%,#d8aa451b,transparent 35%),var(--bg);overflow-x:hidden;padding-bottom:90px}
+body{margin:0;color:var(--text);font-family:Arial,sans-serif;background:radial-gradient(ellipse at 15% 0%,#103a5b55,transparent 38%),radial-gradient(ellipse at 100% 45%,#d8aa451b,transparent 35%),var(--bg);overflow-x:hidden;padding-bottom:90px;transition:background .3s,color .3s}
+body.light{--bg:#f2f6fb;--panel:#ffffff;--text:#0b1220;--muted:#5a6a85;--border:rgba(0,0,0,.08);background:#f2f6fb}
+body.light header{background:#fffffff5;border-bottom:1px solid rgba(0,0,0,.08)}
+body.light .card{background:linear-gradient(145deg,#ffffff,#f8fbff);border:1px solid rgba(0,0,0,.06);box-shadow:0 6px 18px rgba(0,0,0,.04)}
+body.light .hero{background:linear-gradient(135deg,#ffffff,#eef4ff);border:1px solid rgba(0,0,0,.06)}
+body.light .total{background:#f8fbff}
 button,input,select,textarea{font:inherit}button{cursor:pointer}
 header{position:sticky;top:0;z-index:10;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px;background:#050914ed;border-bottom:1px solid var(--border);backdrop-filter:blur(20px)}
 .brand{display:flex;align-items:center;gap:10px}.logo{width:43px;height:43px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#fff0bd,var(--gold),#946515);color:#07111d;font-weight:900;font-size:18px}
 .brand h1{font-size:14px;margin:0 0 4px}.brand small{font-size:10px;color:var(--muted)}
 .btn{border:1px solid #d8aa4570;border-radius:9px;padding:9px 10px;min-height:34px;color:var(--text);background:linear-gradient(135deg,#14243a,#0b1425);font-size:10px;font-weight:700}
+body.light .btn{background:#ffffff;color:#0b1220;border-color:rgba(0,0,0,.08)}
 .gold{background:linear-gradient(120deg,#ffe9b4,#d8aa45,#f4cf77);color:#10131a;border-color:#ffe6a0}.blue{border-color:#00d4ff88;background:linear-gradient(120deg,#10344a,#0b1425)}.green{background:linear-gradient(120deg,#86efac,#22c55e);color:#052e16}
 main{max-width:900px;margin:auto;padding:17px 13px 80px}.hero{border:1px solid var(--border);border-radius:25px;padding:24px 19px;background:radial-gradient(ellipse at top right,#00d4ff18,transparent 60%),linear-gradient(135deg,#14243b,#080e1b);margin-bottom:25px}
 .tag{font-size:10px;color:var(--gold);letter-spacing:1.5px;font-weight:bold}.hero h2{font-size:27px;margin:14px 0 8px;line-height:1.3}.hero h2 span{color:var(--gold)}.hero p{font-size:12px;color:var(--muted);line-height:1.8;max-width:570px}
@@ -22,8 +28,10 @@ main{max-width:900px;margin:auto;padding:17px 13px 80px}.hero{border:1px solid v
 .card-icon{width:45px;height:45px;border-radius:14px;display:grid;place-items:center;font-size:23px;background:linear-gradient(135deg,#d8aa4520,#00d4ff0c);border:1px solid var(--border);margin-bottom:12px}.card h3{font-size:14px;margin:0 0 8px}.card p{font-size:11px;color:var(--muted);min-height:40px;flex:1;line-height:1.7}
 .total{padding:11px;border:1px solid var(--border);border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:8px;background:linear-gradient(120deg,#d8aa4510,#00d4ff05);margin:12px 0;font-size:11px}.total strong{color:var(--gold);font-size:13px;text-align:right}.card>.btn{width:100%;margin-top:auto;min-height:36px}
 .overlay{display:none;position:fixed;inset:0;z-index:80;background:#000c;backdrop-filter:blur(9px);align-items:flex-end;justify-content:center;padding:0}.overlay.show{display:flex}.modal{width:min(100%,620px);max-height:92vh;overflow:auto;background:#08111f;border:1px solid var(--border);border-radius:23px 23px 0 0;padding:18px 18px 110px 18px}
+body.light .modal{background:#ffffff}
 .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;position:sticky;top:-18px;background:#08111ff5;padding:9px 0 12px;border-bottom:1px solid #d8aa4520}.modal-head h2{font-size:17px;margin:0}.close{width:32px;height:32px;border:1px solid var(--border);border-radius:9px;background:#132035;color:white;font-size:19px}
 .field{margin:14px 0}.field label{display:block;font-size:12px;margin-bottom:8px;color:#dce6f5}.field input,.field textarea,.field select{width:100%;padding:13px;border-radius:12px;border:1px solid #293850;background:#0c192b;color:white;outline:none}
+body.light .field input,body.light .field textarea,body.light .field select{background:#f8fbff;color:#0b1220;border-color:rgba(0,0,0,.08)}
 .platforms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.platform{padding:9px 3px;border:1px solid #28374d;border-radius:10px;background:#0d192b;color:white;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:7px}.platform img{width:25px;height:25px}.platform.active{border-color:var(--gold);background:#d8aa4518}
 .status{font-size:12px;margin:12px 0;white-space:pre-wrap;line-height:1.7}.ok{color:#86efac}.error{color:#fda4af}.info{color:#93c5fd}.preview{width:85px;height:85px;border-radius:14px;object-fit:cover;border:1px solid var(--border);display:none;margin-top:10px;background:#0c192b}
 #qrResult{display:flex;justify-content:center;padding:15px;background:#fff;border-radius:12px;min-height:30px;margin:12px auto;max-width:280px}
@@ -38,28 +46,30 @@ footer{text-align:center;padding:22px 15px;border-top:1px solid var(--border);fo
 </head>
 <body>
 <header>
- <div class="brand"><div class="logo">JB</div><div><h1>JASON BUSINESS</h1><small>Shop numérique</small></div></div>
+ <div class="brand"><div class="logo">JB</div><div><h1>JASON BUSINESS</h1><small data-i18n="shop_sub">Shop numérique</small></div></div>
  <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
   <div id="soldeDisplay" class="solde-badge">⏳ Chargement...</div>
-  <button class="btn blue" id="apiBtn">⚡ API</button><button class="btn" id="historyBtn">📋 Demandes</button>
+  <button class="btn blue" id="apiBtn">⚡ API</button><button class="btn" id="historyBtn" data-i18n="requests">📋 Demandes</button>
  </div>
 </header>
 <main>
- <section class="hero"><div class="tag">✦ TON ESPACE NUMÉRIQUE</div><h2>Crée ton projet.<br><span>Réalise tes idées.</span></h2><p>Commande une application, un site web, un chatbot, crée une chanson, booste tes réseaux ou génère un QR code gratuit.</p><button class="btn gold" id="exploreBtn">Découvrir ↓</button></section>
- <h2 class="section-title" id="services">Nos services</h2>
+ <section class="hero"><div class="tag">✦ TON ESPACE NUMÉRIQUE</div><h2 data-i18n="hero_title">Crée ton projet.<br><span>Réalise tes idées.</span></h2><p data-i18n="hero_desc">Commande une application, un site web, un chatbot, crée une chanson, booste tes réseaux ou génère un QR code gratuit.</p><button class="btn gold" id="exploreBtn" data-i18n="discover">Découvrir ↓</button></section>
+ <h2 class="section-title" id="services" data-i18n="our_services">Nos services</h2>
  <section class="grid">
-  <article class="card"><div class="card-icon">📈</div><h3>Boostage réseaux sociaux</h3><p>Abonnés 50 FC, Likes 35 FC, Vues 20 FC — Min 10.</p><div class="total"><span>À partir de</span><strong id="priceBoostCard">200 FC</strong></div><button class="btn gold" data-open="boostModal">Calculer mon boost</button></article>
-  <article class="card"><div class="card-icon">📱</div><h3>Application mobile</h3><p>Nom, icône, lien, description et WhatsApp.</p><div class="total"><span>Prix App</span><strong id="priceAppCard">10 000 FC</strong></div><button class="btn" data-open="appModal">Commander — 10 000 FC</button></article>
-  <article class="card"><div class="card-icon">🌐</div><h3>Création de site web</h3><p>24 modèles avec prix.</p><div class="total"><span>À partir de</span><strong id="priceSiteCard">10 000 FC</strong></div><button class="btn gold" data-open="siteModal">Choisir un site</button></article>
-  <article class="card"><div class="card-icon">🤖</div><h3>Création de chatbot</h3><p>Nom, fonctionnalités, créateur, description.</p><div class="total"><span>Prix Chatbot</span><strong id="priceChatCard">7 000 FC</strong></div><button class="btn" data-open="chatModal">Créer — 7 000 FC</button></article>
-  <article class="card"><div class="card-icon">🎵</div><h3>Créer une chanson</h3><p>Paroles et style musical.</p><div class="total"><span>Prix Chanson</span><strong id="priceMusicCard">5 000 FC</strong></div><button class="btn gold" data-open="musicModal">Créer — 5 000 FC</button></article>
-  <article class="card"><div class="card-icon">📣</div><h3>Publicité gratuite</h3><p>Annonce gratuite.</p><div class="total"><span>Prix</span><strong>GRATUIT</strong></div><button class="btn green" data-open="adsModal">Créer ma publicité</button></article>
-  <article class="card"><div class="card-icon">▦</div><h3>Générateur QR code</h3><p>QR code gratuit.</p><div class="total"><span>Prix</span><strong>GRATUIT</strong></div><button class="btn blue" data-open="qrModal">Créer QR</button></article>
+  <article class="card"><div class="card-icon">📈</div><h3 data-i18n="boost_title">Boostage réseaux sociaux</h3><p data-i18n="boost_desc">Abonnés 50 FC, Likes 35 FC, Vues 20 FC — Min 10.</p><div class="total"><span data-i18n="from">À partir de</span><strong id="priceBoostCard">200 FC</strong></div><button class="btn gold" data-open="boostModal" data-i18n="calc_boost">Calculer mon boost</button></article>
+  <article class="card"><div class="card-icon">📱</div><h3 data-i18n="app_title">Application mobile</h3><p data-i18n="app_desc">Nom, icône, lien, description et WhatsApp.</p><div class="total"><span data-i18n="app_price_label">Prix App</span><strong id="priceAppCard">10 000 FC</strong></div><button class="btn" data-open="appModal" id="btnAppCard">Commander — 10 000 FC</button></article>
+  <article class="card"><div class="card-icon">🌐</div><h3 data-i18n="site_title">Création de site web</h3><p data-i18n="site_desc">24 modèles avec prix.</p><div class="total"><span data-i18n="from">À partir de</span><strong id="priceSiteCard">10 000 FC</strong></div><button class="btn gold" data-open="siteModal" data-i18n="choose_site">Choisir un site</button></article>
+  <article class="card"><div class="card-icon">🤖</div><h3 data-i18n="chatbot_title">Création de chatbot</h3><p data-i18n="chatbot_desc">Nom, fonctionnalités, créateur, description.</p><div class="total"><span data-i18n="chatbot_price_label">Prix Chatbot</span><strong id="priceChatCard">7 000 FC</strong></div><button class="btn" data-open="chatModal" id="btnChatCard">Créer — 7 000 FC</button></article>
+  <article class="card"><div class="card-icon">🎵</div><h3 data-i18n="song_title">Créer une chanson</h3><p data-i18n="song_desc">Paroles et style musical.</p><div class="total"><span data-i18n="song_price_label">Prix Chanson</span><strong id="priceMusicCard">5 000 FC</strong></div><button class="btn gold" data-open="musicModal" id="btnMusicCard">Créer — 5 000 FC</button></article>
+  <article class="card"><div class="card-icon">📣</div><h3 data-i18n="ads_title">Publicité gratuite</h3><p data-i18n="ads_desc">Annonce gratuite.</p><div class="total"><span data-i18n="price">Prix</span><strong data-i18n="free">GRATUIT</strong></div><button class="btn green" data-open="adsModal" data-i18n="create_ads">Créer ma publicité</button></article>
+  <article class="card"><div class="card-icon">▦</div><h3 data-i18n="qr_title">Générateur QR code</h3><p data-i18n="qr_desc">QR code gratuit.</p><div class="total"><span data-i18n="price">Prix</span><strong data-i18n="free">GRATUIT</strong></div><button class="btn blue" data-open="qrModal" data-i18n="create_qr">Créer QR</button></article>
+  <!-- BOUTON APK BUILDER -->
+  <article class="card" style="border-color:#00d4ff88;box-shadow:0 0 20px rgba(0,212,255,.15)"><div class="card-icon" style="background:linear-gradient(135deg,#00d4ff,#0077ff);color:white">🚀</div><h3>Créateur APK Pro</h3><p>Logo + Code HTML + Lien - 15 000 FC</p><div class="total"><span>Prix</span><strong id="priceApkCard">15 000 FC</strong></div><button class="btn blue" onclick="location.href='createur-direct.html'" style="width:100%">🚀 Créer APK - 15 000 FC</button></article>
  </section>
 </main>
-<footer><span>JASON BUSINESS</span> · Services numériques<br>Créé par Jason Aloma 🇨🇩</footer>
-<div class="overlay" id="boostModal"><section class="modal"><div class="modal-head"><h2>📈 Boostage — Prix auto + VIP</h2><button class="close" data-close="boostModal">×</button></div><p class="muted">Solde: <b id="soldeInBoost" style="color:#00d4ff">Chargement...</b></p><div class="platforms" id="platformGrid"></div><form id="boostForm"><div class="field"><label>Plateforme</label><input id="boostPlatform" name="platform" readonly required></div><div class="field"><label>Service</label><select id="boostType" name="type" required><option value="followers">Followers — 50 FC / unité</option><option value="likes">Likes — 35 FC / unité</option><option value="views">Vues — 20 FC / unité</option></select></div><div class="field"><label>Lien public *</label><input id="boostLink" name="link" type="url" required placeholder="https://..."></div><div class="field"><label>Quantité (min 10) *</label><input id="boostBudget" name="budget" type="number" min="10" value="10" required></div><div class="field"><label>Téléphone *</label><input id="boostPhone" name="phone" type="tel" required></div><div class="total"><span>Quantité</span><strong id="boostQuantity">10 unités</strong></div><div class="total"><span>Prix total</span><strong id="boostPrice" style="color:#00d4ff;font-size:18px">500 FC</strong></div><button class="btn gold" type="submit" style="width:100%">📤 Payer et envoyer</button><div class="status" id="boostStatus"></div></form></section></div>
-<div class="overlay" id="appModal"><section class="modal"><div class="modal-head"><h2>📱 Application — 10 000 FC</h2><button class="close" data-close="appModal">×</button></div><p class="muted">Solde: <b id="soldeInApp" style="color:#00d4ff"></b></p><form id="appForm"><div class="field"><label>Nom *</label><input id="appName" name="appName" required maxlength="100"></div><div class="field"><label>Icône *</label><input id="appIcon" name="appIconFile" type="file" accept="image/*" required><img id="appIconPreview" class="preview"></div><div class="field"><label>Lien du site *</label><input id="appUrl" name="appUrl" type="url" required placeholder="https://jason-business.vercel.app"></div><div class="field"><label>Description *</label><textarea id="appDescription" name="description" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="appWhatsapp" name="whatsapp" type="tel" required></div><div class="total"><span>Prix Application</span><strong id="priceApp">10 000 FC</strong></div><button class="btn gold" type="submit" id="appSubmitBtn" style="width:100%">📤 Commander — 10 000 FC</button><div class="status" id="appStatus"></div></form></section></div>
+<footer><span>JASON BUSINESS</span> · <span data-i18n="footer_services">Services numériques</span><br><span data-i18n="created_by">Créé par Jason Aloma 🇨🇩</span> • <span id="footerSettings">FR • FC • Sombre</span><br>✅ Version 2.0 Pro</footer>
+<div class="overlay" id="boostModal"><section class="modal"><div class="modal-head"><h2>📈 Boostage</h2><button class="close" data-close="boostModal">×</button></div><p class="muted">Solde: <b id="soldeInBoost" style="color:#00d4ff">Chargement...</b></p><div class="platforms" id="platformGrid"></div><form id="boostForm"><div class="field"><label>Plateforme</label><input id="boostPlatform" name="platform" readonly required></div><div class="field"><label>Service</label><select id="boostType" name="type" required><option value="followers">Followers — 50 FC / unité</option><option value="likes">Likes — 35 FC / unité</option><option value="views">Vues — 20 FC / unité</option></select></div><div class="field"><label>Lien public *</label><input id="boostLink" name="link" type="url" required placeholder="https://..."></div><div class="field"><label>Quantité (min 10) *</label><input id="boostBudget" name="budget" type="number" min="10" value="10" required></div><div class="field"><label>Téléphone *</label><input id="boostPhone" name="phone" type="tel" required></div><div class="total"><span>Quantité</span><strong id="boostQuantity">10 unités</strong></div><div class="total"><span>Prix total</span><strong id="boostPrice" style="color:#00d4ff;font-size:18px">500 FC</strong></div><button class="btn gold" type="submit" style="width:100%">📤 Payer et envoyer</button><div class="status" id="boostStatus"></div></form></section></div>
+<div class="overlay" id="appModal"><section class="modal"><div class="modal-head"><h2>📱 Application — 10 000 FC</h2><button class="close" data-close="appModal">×</button></div><p class="muted">Solde: <b id="soldeInApp" style="color:#00d4ff"></b></p><form id="appForm"><div class="field"><label>Nom *</label><input id="appName" name="appName" required maxlength="100"></div><div class="field"><label>Icône *</label><input id="appIcon" name="appIconFile" type="file" accept="image/*" required><img id="appIconPreview" class="preview"></div><div class="field"><label>Lien du site *</label><input id="appUrl" name="appUrl" type="url" required placeholder="https://..."></div><div class="field"><label>Description *</label><textarea id="appDescription" name="description" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="appWhatsapp" name="whatsapp" type="tel" required></div><div class="total"><span>Prix Application</span><strong id="priceApp">10 000 FC</strong></div><button class="btn gold" type="submit" id="appSubmitBtn" style="width:100%">📤 Commander — 10 000 FC</button><div class="status" id="appStatus"></div></form></section></div>
 <div class="overlay" id="siteModal"><section class="modal"><div class="modal-head"><h2>🌐 Commander mon site</h2><button class="close" data-close="siteModal">×</button></div><div class="field"><label>Catalogue (24 choix)</label><div id="siteCatalog" class="site-catalog"></div></div><form id="siteForm"><input type="hidden" id="siteType" name="siteType"><input type="hidden" id="sitePrice" name="price"><div class="field"><label>Nom du site *</label><input id="siteName" name="siteName" required></div><div class="field"><label>Description *</label><textarea id="siteDescription" name="description" required></textarea></div><div class="field"><label>Fonctionnalités *</label><textarea id="siteFeatures" name="features" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="siteWhatsapp" name="whatsapp" type="tel" required></div><div class="total"><span>Site choisi</span><strong id="selectedSiteName">Aucun</strong></div><div class="total"><span>Prix</span><strong id="selectedSitePrice">0 FC</strong></div><button class="btn gold" id="siteSubmitBtn" type="submit" style="width:100%;min-height:45px">📤 Commander le site</button><div class="status" id="siteStatus"></div></form></section></div>
 <div class="overlay" id="chatModal"><section class="modal"><div class="modal-head"><h2>🤖 Chatbot — 7 000 FC</h2><button class="close" data-close="chatModal">×</button></div><form id="chatForm"><div class="field"><label>Nom *</label><input id="chatName" name="chatName" required></div><div class="field"><label>Fonctionnalités *</label><textarea id="chatFeatures" name="features" required></textarea></div><div class="field"><label>Créateur *</label><input id="chatCreator" name="creator" required value="Jason Aloma"></div><div class="field"><label>Description *</label><textarea id="chatDescription" name="description" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="chatWhatsapp" name="whatsapp" type="tel" required></div><div class="total"><span>Prix</span><strong id="priceChat">7 000 FC</strong></div><button class="btn gold" type="submit" style="width:100%">📤 Commander — 7 000 FC</button><div class="status" id="chatStatus"></div></form></section></div>
 <div class="overlay" id="musicModal"><section class="modal"><div class="modal-head"><h2>🎵 Chanson — 5 000 FC</h2><button class="close" data-close="musicModal">×</button></div><p class="muted">Solde: <b id="soldeInMusic" style="color:#00d4ff"></b></p><form id="musicForm"><div class="field"><label>Titre *</label><input id="musicTitleInput" name="title" required></div><div class="field"><label>Paroles *</label><textarea id="musicLyrics" name="lyrics" required style="min-height:180px"></textarea></div><div class="field"><label>Style *</label><select id="musicStyle" name="style" required><option>Afrobeat</option><option>Afropop</option><option>Rumba congolaise</option><option>Ndombolo</option><option>Gospel</option><option>Hip-hop</option><option>Rap</option></select></div><div class="total"><span>Prix</span><strong id="priceMusic">5 000 FC</strong></div><button class="btn gold" id="generateSongBtn" type="submit" style="width:100%">🎶 Payer 5 000 FC et générer</button><div class="status" id="musicStatus"></div><div id="musicResult"></div></form></section></div>
@@ -71,6 +81,41 @@ footer{text-align:center;padding:22px 15px;border-top:1px solid var(--border);fo
 <script type="module">
 import {initializeApp,getApps,getApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {getDatabase,ref,push,set,get,onValue,runTransaction} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+// ===== PARAMETRES CONNECTES =====
+const jbLang = localStorage.getItem("jb_lang")||"fr";
+const jbMoney = localStorage.getItem("jb_money")||"fc";
+const jbTheme = localStorage.getItem("jb_theme")||"dark";
+const USD_RATE = 2800;
+
+const i18n = {
+ fr:{shop_sub:"Shop numérique",requests:"📋 Demandes",hero_title:"Crée ton projet.<br><span>Réalise tes idées.</span>",hero_desc:"Commande une application, un site web, un chatbot, crée une chanson, booste tes réseaux ou génère un QR code gratuit.",discover:"Découvrir ↓",our_services:"Nos services",boost_title:"Boostage réseaux sociaux",boost_desc:"Abonnés 50 FC, Likes 35 FC, Vues 20 FC — Min 10.",from:"À partir de",calc_boost:"Calculer mon boost",app_title:"Application mobile",app_desc:"Nom, icône, lien, description et WhatsApp.",app_price_label:"Prix App",site_title:"Création de site web",site_desc:"24 modèles avec prix.",choose_site:"Choisir un site",chatbot_title:"Création de chatbot",chatbot_desc:"Nom, fonctionnalités, créateur, description.",chatbot_price_label:"Prix Chatbot",song_title:"Créer une chanson",song_desc:"Paroles et style musical.",song_price_label:"Prix Chanson",ads_title:"Publicité gratuite",ads_desc:"Annonce gratuite.",price:"Prix",free:"GRATUIT",create_ads:"Créer ma publicité",qr_title:"Générateur QR code",qr_desc:"QR code gratuit.",create_qr:"Créer QR",footer_services:"Services numériques",created_by:"Créé par Jason Aloma 🇨🇩"},
+ en:{shop_sub:"Digital Shop",requests:"📋 Requests",hero_title:"Create your project.<br><span>Make ideas real.</span>",hero_desc:"Order an app, website, chatbot, create a song, boost your socials or generate a free QR code.",discover:"Discover ↓",our_services:"Our services",boost_title:"Social Media Boost",boost_desc:"Followers 50 FC, Likes 35 FC, Views 20 FC — Min 10.",from:"From",calc_boost:"Calculate boost",app_title:"Mobile Application",app_desc:"Name, icon, link, description and WhatsApp.",app_price_label:"App Price",site_title:"Website Creation",site_desc:"24 templates with prices.",choose_site:"Choose a website",chatbot_title:"Chatbot Creation",chatbot_desc:"Name, features, creator, description.",chatbot_price_label:"Chatbot Price",song_title:"Create a Song",song_desc:"Lyrics and music style.",song_price_label:"Song Price",ads_title:"Free Advertising",ads_desc:"Free ad.",price:"Price",free:"FREE",create_ads:"Create my ad",qr_title:"QR Code Generator",qr_desc:"Free QR code.",create_qr:"Create QR",footer_services:"Digital Services",created_by:"Created by Jason Aloma 🇨🇩"}
+};
+
+function applyLanguage(){
+ const dict = i18n[jbLang]||i18n.fr;
+ document.querySelectorAll("[data-i18n]").forEach(el=>{
+  const k=el.getAttribute("data-i18n");
+  if(dict[k]) el.innerHTML=dict[k];
+ });
+ document.getElementById("footerSettings").textContent=`${jbLang.toUpperCase()} • ${jbMoney.toUpperCase()} • ${jbTheme==="light"?"Lumineux":"Sombre"}`;
+}
+function applyTheme(){
+ if(jbTheme==="light") document.body.classList.add("light");
+ else document.body.classList.remove("light");
+}
+function formatPriceFC(priceFC){
+ if(jbMoney==="usd"){
+  const usd=(priceFC/USD_RATE).toFixed(2);
+  return `${usd} USD`;
+ }
+ return `${Number(priceFC).toLocaleString("fr-FR")} FC`;
+}
+applyLanguage();
+applyTheme();
+
+// ===== FIREBASE ORIGINAL CODE =====
 const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
 const app=getApps().length?getApp():initializeApp(firebaseConfig);
 const db=getDatabase(app);
@@ -83,21 +128,21 @@ let currentBalance = 0;
 let currentUserRef = null;
 let currentPhone = localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("phone")||"";
 if(currentPhone){ currentUserRef = ref(db, `jasonBusiness/users/${currentPhone}`); }
-function formatFC(n){return Number(n).toLocaleString("fr-FR")+" FC";}
+function formatFC(n){return formatPriceFC(n);}
 function getVipInfo(){try{const raw=localStorage.getItem(VIP_KEY);if(!raw)return null;const v=JSON.parse(raw);if(!v.expiresAt||Date.now()>v.expiresAt){localStorage.removeItem(VIP_KEY);return null;}return v;}catch{return null;}}
 function getVipDiscount(){const v=getVipInfo();return v? (VIP_DISCOUNTS[v.level]||0):0;}
 function getVipLevel(){const v=getVipInfo();return v? v.level:"Aucun";}
 function activateVip(level){const discount=VIP_DISCOUNTS[level]||0;const expiresAt=Date.now()+(30*24*60*60*1000);const data={level,discount,expiresAt,startAt:Date.now()};localStorage.setItem(VIP_KEY,JSON.stringify(data));renderBalance(currentBalance);updateAllPrices();return data;}
 window.activateVip=activateVip;
 function applyDiscount(price){const disc=getVipDiscount();if(disc<=0)return {original:price,final:price,discount:0};const final=Math.floor(price*(1-disc/100));return {original:price,final,discount:disc};}
-function formatPriceVIP(price){const p=applyDiscount(price);if(p.discount<=0)return `${p.final.toLocaleString("fr-FR")} FC`;return `<span style="text-decoration:line-through;color:#94a3b8;font-size:10px">${p.original.toLocaleString("fr-FR")} FC</span> <span style="color:#22c55e;font-weight:900">${p.final.toLocaleString("fr-FR")} FC -${p.discount}%</span>`;}
-function formatPricePureVIP(price){const p=applyDiscount(price);if(p.discount<=0)return `${p.final.toLocaleString("fr-FR")} FC`;return `${p.final.toLocaleString("fr-FR")} FC (-${p.discount}%)`;}
+function formatPriceVIP(price){const p=applyDiscount(price);if(p.discount<=0)return `${formatPriceFC(p.final)}`;return `<span style="text-decoration:line-through;color:#94a3b8;font-size:10px">${formatPriceFC(p.original)}</span> <span style="color:#22c55e;font-weight:900">${formatPriceFC(p.final)} -${p.discount}%</span>`;}
+function formatPricePureVIP(price){const p=applyDiscount(price);if(p.discount<=0)return `${formatPriceFC(p.final)}`;return `${formatPriceFC(p.final)} (-${p.discount}%)`;}
 function renderBalance(total){
   currentBalance = Number(total)||0;
   const vip=getVipInfo();
-  let txt=vip? `💰 ${formatFC(currentBalance)} <span class="vip-badge">👑 ${vip.level} -${vip.discount}% ${Math.ceil((vip.expiresAt-Date.now())/86400000)}j</span>`:`💰 ${formatFC(currentBalance)}`;
+  let txt=vip? `💰 ${formatPriceFC(currentBalance)} <span class="vip-badge">👑 ${vip.level} -${vip.discount}% ${Math.ceil((vip.expiresAt-Date.now())/86400000)}j</span>`:`💰 ${formatPriceFC(currentBalance)}`;
   if($("soldeDisplay")) $("soldeDisplay").innerHTML=txt;
-  const sub=vip? `${formatFC(currentBalance)} <span style="color:#22c55e">VIP ${vip.level} -${vip.discount}%</span>`:`${formatFC(currentBalance)}`;
+  const sub=vip? `${formatPriceFC(currentBalance)} <span style="color:#22c55e">VIP ${vip.level} -${vip.discount}%</span>`:`${formatPriceFC(currentBalance)}`;
   if($("soldeInBoost")) $("soldeInBoost").innerHTML=sub;
   if($("soldeInApp")) $("soldeInApp").innerHTML=sub;
   if($("soldeInMusic")) $("soldeInMusic").innerHTML=sub;
@@ -124,11 +169,12 @@ async function setBalanceFirebase(newTotal){
 }
 async function deductBalance(amount){
   amount = Number(amount)||0;
-  if(currentBalance < amount) return false;
-  renderBalance(currentBalance - amount);
+  const realAmount = amount;
+  if(currentBalance < realAmount) return false;
+  renderBalance(currentBalance - realAmount);
   const newTotal = currentBalance;
   const ok = await setBalanceFirebase(newTotal);
-  if(!ok) { renderBalance(newTotal + amount); return false; }
+  if(!ok) { renderBalance(newTotal + realAmount); return false; }
   return true;
 }
 function cleanUrl(u){if(!u)return"";u=u.trim();u=u.replace(/^htmps:\/\//i,"https://").replace(/^htps:\/\//i,"https://");if(!u.startsWith("http"))u="https://"+u;return u;}
@@ -154,7 +200,8 @@ function updateAllPrices(){
   if($("priceMusicCard")) $("priceMusicCard").innerHTML=formatPriceVIP(5000);
   if($("priceMusic")) $("priceMusic").innerHTML=formatPriceVIP(5000);
   if($("priceBoostCard")) $("priceBoostCard").innerHTML=formatPricePureVIP(200);
-  const appBtn=$("appSubmitBtn"); if(appBtn){const p=applyDiscount(10000);appBtn.textContent=`📤 Commander — ${p.final.toLocaleString("fr-FR")} FC${p.discount?` (-${p.discount}%)`:""}`;}
+  if($("priceApkCard")) $("priceApkCard").innerHTML=formatPriceVIP(15000);
+  const appBtn=$("appSubmitBtn"); if(appBtn){const p=applyDiscount(10000);appBtn.textContent=`📤 Commander — ${formatPriceFC(p.final)}${p.discount?` (-${p.discount}%)`:""}`;}
 }
 buildPlatforms();calculateBoost();
 if(currentUserRef){
@@ -177,20 +224,20 @@ if(currentUserRef){
 }
 $("boostForm").addEventListener("submit",async e=>{
  e.preventDefault();const d=Object.fromEntries(new FormData(e.target).entries());const calc=calculateBoost();
- if(getBalance()<calc.total){setStatus("boostStatus","❌ Solde insuffisant: "+formatFC(getBalance())+" — Il faut "+formatFC(calc.total),"error");return;}
+ if(getBalance()<calc.total){setStatus("boostStatus","❌ Solde insuffisant: "+formatPriceFC(getBalance())+" — Il faut "+formatPriceFC(calc.total),"error");return;}
  if(!await deductBalance(calc.total)){setStatus("boostStatus","❌ Solde insuffisant","error");return;}
- setStatus("boostStatus","⏳ Paiement "+formatFC(calc.total)+(calc.discount?` (-${calc.discount}%)`:"")+"...","info");
+ setStatus("boostStatus","⏳ Paiement "+formatPriceFC(calc.total)+(calc.discount?` (-${calc.discount}%)`:"")+"...","info");
  const ok=await pushCommande(`${ROOT}/demandes_commandes`,{plateforme:d.platform,type_service:d.type,lien:cleanUrl(d.link),quantite:calc.qty,prix:calc.total,prix_original:calc.original,remise:calc.discount,telephone:d.phone});
- if(ok){setStatus("boostStatus","✅ Payé "+formatFC(calc.total)+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();buildPlatforms();calculateBoost();}
+ if(ok){setStatus("boostStatus","✅ Payé "+formatPriceFC(calc.total)+" — Reste "+formatPriceFC(getBalance()),"ok");e.target.reset();buildPlatforms();calculateBoost();}
  else{await setBalanceFirebase(getBalance()+calc.total);setStatus("boostStatus","❌ Erreur","error");}
 });
 $("appIcon").addEventListener("change",()=>{const file=$("appIcon").files[0],preview=$("appIconPreview");if(!file){preview.style.display="none";return}preview.src=URL.createObjectURL(file);preview.style.display="block";});
 $("appForm").addEventListener("submit",async e=>{
  e.preventDefault();const p=applyDiscount(10000);
- if(getBalance()<p.final){setStatus("appStatus","❌ Solde insuffisant: "+formatFC(getBalance())+" — Il faut "+formatFC(p.final),"error");return;}
+ if(getBalance()<p.final){setStatus("appStatus","❌ Solde insuffisant: "+formatPriceFC(getBalance())+" — Il faut "+formatPriceFC(p.final),"error");return;}
  if(!await deductBalance(p.final)){setStatus("appStatus","❌ Solde insuffisant","error");return;}
  const fd=new FormData(e.target);const data=Object.fromEntries(fd.entries());
- setStatus("appStatus","⏳ Upload icône + Paiement "+formatFC(p.final)+"...","info");
+ setStatus("appStatus","⏳ Upload icône + Paiement "+formatPriceFC(p.final)+"...","info");
  const file = $("appIcon").files[0];
  let iconUrl = "";
  if(file){
@@ -201,17 +248,17 @@ $("appForm").addEventListener("submit",async e=>{
    });
  }
  const ok=await pushCommande(`${ROOT}/store_commandes`,{produit:"Application - "+data.appName,nom_application:data.appName,lien_site:cleanUrl(data.appUrl),description:data.description,whatsapp:data.whatsapp,prix:p.final,prix_original:p.original,remise:p.discount,iconUrl:iconUrl,appIconUrl:iconUrl});
- if(ok){setStatus("appStatus","✅ Payé "+formatFC(p.final)+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();$("appIconPreview").style.display="none";}
+ if(ok){setStatus("appStatus","✅ Payé "+formatPriceFC(p.final)+" — Reste "+formatPriceFC(getBalance()),"ok");e.target.reset();$("appIconPreview").style.display="none";}
  else{await setBalanceFirebase(getBalance()+p.final);setStatus("appStatus","❌ Erreur","error");}
 });
 $("siteForm").addEventListener("submit",async e=>{
  e.preventDefault();const basePrice=Number($("sitePrice").value)||15000;const siteName=$("siteType").value||"Site Web";if(!siteName){setStatus("siteStatus","Choisis un modèle d'abord","error");return;}const p=applyDiscount(basePrice);
- if(getBalance()<p.final){setStatus("siteStatus","❌ Solde insuffisant: "+formatFC(getBalance())+" — Il faut "+formatFC(p.final),"error");return;}
+ if(getBalance()<p.final){setStatus("siteStatus","❌ Solde insuffisant: "+formatPriceFC(getBalance())+" — Il faut "+formatPriceFC(p.final),"error");return;}
  if(!await deductBalance(p.final)){setStatus("siteStatus","❌ Solde insuffisant","error");return;}
  const fd=new FormData(e.target);const data=Object.fromEntries(fd.entries());
- setStatus("siteStatus","⏳ Paiement "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
+ setStatus("siteStatus","⏳ Paiement "+formatPriceFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
  const ok=await pushCommande(`${ROOT}/store_commandes`,{produit:"Site Web - "+siteName,nom_site:data.siteName,type_site:siteName,description:data.description,fonctionnalites:data.features,whatsapp:data.whatsapp,prix:p.final,prix_original:p.original,remise:p.discount});
- if(ok){setStatus("siteStatus","✅ Payé "+formatFC(p.final)+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();$("selectedSiteName").textContent="Aucun";$("selectedSitePrice").textContent="0 FC";}
+ if(ok){setStatus("siteStatus","✅ Payé "+formatPriceFC(p.final)+" — Reste "+formatPriceFC(getBalance()),"ok");e.target.reset();$("selectedSiteName").textContent="Aucun";$("selectedSitePrice").textContent="0 FC";}
  else{await setBalanceFirebase(getBalance()+p.final);setStatus("siteStatus","❌ Erreur","error");}
 });
 $("chatForm").addEventListener("submit",async e=>{
@@ -219,9 +266,9 @@ $("chatForm").addEventListener("submit",async e=>{
  if(getBalance()<p.final){setStatus("chatStatus","❌ Solde insuffisant","error");return;}
  if(!await deductBalance(p.final)){setStatus("chatStatus","❌ Solde insuffisant","error");return;}
  const data=Object.fromEntries(new FormData(e.target).entries());
- setStatus("chatStatus","⏳ Paiement "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
+ setStatus("chatStatus","⏳ Paiement "+formatPriceFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
  const ok=await pushCommande(`${ROOT}/store_commandes`,{produit:"Chatbot - "+data.chatName,...data,prix:p.final,prix_original:p.original,remise:p.discount});
- if(ok){setStatus("chatStatus","✅ Payé "+formatFC(p.final)+" — Reste "+formatFC(getBalance()),"ok");e.target.reset();}
+ if(ok){setStatus("chatStatus","✅ Payé "+formatPriceFC(p.final)+" — Reste "+formatPriceFC(getBalance()),"ok");e.target.reset();}
  else{await setBalanceFirebase(getBalance()+p.final);setStatus("chatStatus","❌ Erreur","error");}
 });
 $("musicForm").addEventListener("submit",async e=>{
@@ -229,18 +276,18 @@ $("musicForm").addEventListener("submit",async e=>{
  if(getBalance()<p.final){setStatus("musicStatus","❌ Solde insuffisant","error");return;}
  if(!await deductBalance(p.final)){setStatus("musicStatus","❌ Solde insuffisant","error");return;}
  const data=Object.fromEntries(new FormData(e.target).entries());
- setStatus("musicStatus","⏳ Paiement "+formatFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
+ setStatus("musicStatus","⏳ Paiement "+formatPriceFC(p.final)+(p.discount?` (-${p.discount}%)`:"")+"...","info");
  try{
   const res=await fetch("https://davbot-outils.vercel.app/api/media/music",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
   const j=await res.json();$("musicResult").innerHTML=`<div style="padding:13px;border:1px solid #293850;border-radius:12px;background:#0c192b;white-space:pre-wrap">${JSON.stringify(j,null,2).slice(0,4000)}</div>`;
   await pushCommande(`${ROOT}/store_commandes`,{produit:"Chanson - "+data.title,prix:p.final,prix_original:p.original,remise:p.discount});
-  setStatus("musicStatus","✅ Payé "+formatFC(p.final)+" — Reste "+formatFC(getBalance()),"ok");
- }catch(err){await setBalanceFirebase(getBalance()+p.final);setStatus("musicStatus","❌ Erreur, remboursé "+formatFC(p.final)+": "+err.message,"error");}
+  setStatus("musicStatus","✅ Payé "+formatPriceFC(p.final)+" — Reste "+formatPriceFC(getBalance()),"ok");
+ }catch(err){await setBalanceFirebase(getBalance()+p.final);setStatus("musicStatus","❌ Erreur, remboursé "+formatPriceFC(p.final)+": "+err.message,"error");}
 });
 const siteCatalog=[{name:"Portfolio personnel",icon:"👨‍💻",price:10000},{name:"Site vitrine",icon:"🏢",price:15000},{name:"Boutique en ligne",icon:"🛒",price:30000},{name:"Blog personnel",icon:"✍️",price:10000},{name:"Site d'actualités",icon:"📰",price:25000},{name:"Site d'église",icon:"⛪",price:15000},{name:"Site d'école",icon:"🎓",price:20000},{name:"Site de restaurant",icon:"🍽️",price:15000},{name:"Site d'hôtel",icon:"🏨",price:20000},{name:"Site immobilier",icon:"🏠",price:25000},{name:"Agence digitale",icon:"💻",price:20000},{name:"Site de musique",icon:"🎵",price:20000}];
 function renderSiteCatalog(){const box=$("siteCatalog");if(!box)return;box.innerHTML="";siteCatalog.forEach(site=>{const b=document.createElement("button");b.type="button";b.className="site-option";const p=applyDiscount(site.price);b.innerHTML=`<span style="font-size:27px">${site.icon}</span><span style="font-size:11px;font-weight:800">${site.name}</span><span style="font-size:11px;color:#d8aa45">${formatPriceVIP(site.price)}</span>`;b.addEventListener("click",()=>{box.querySelectorAll(".site-option").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("siteType").value=site.name;$("sitePrice").value=String(site.price);$("selectedSiteName").textContent=site.name;$("selectedSitePrice").innerHTML=formatPriceVIP(site.price);$("siteSubmitBtn").innerHTML=`📤 Commander — ${formatPricePureVIP(site.price)}`;});box.appendChild(b);});}
 renderSiteCatalog();
-$("historyBtn").addEventListener("click",()=>{const box=$("historyList");const vip=getVipInfo();box.innerHTML=`<div style="padding:12px;border:1px solid #293850;border-radius:12px;background:#0c192b">💰 Solde réel Firebase: <b style="color:#00d4ff">${formatFC(getBalance())}</b>${vip?` <span style="color:#22c55e">👑 ${vip.level} -${vip.discount}% — ${Math.ceil((vip.expiresAt-Date.now())/86400000)}j restants</span>`:""}</div>`;let items=[];try{items=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]")}catch{}if(!items.length){box.innerHTML+=`<div style="padding:12px;margin-top:8px;border:1px solid #293850;border-radius:12px;background:#0c192b">Aucune demande locale</div>`}else items.forEach(it=>{const div=document.createElement("div");div.style.cssText="padding:12px;border:1px solid #293850;border-radius:12px;background:#0c192b;margin:8px 0";div.innerHTML=`<strong>${it.type||"Commande"}</strong><div style="font-size:11px;color:#94a3b8">${it.date||""}</div>`;box.append(div)});show("historyModal");});
+$("historyBtn").addEventListener("click",()=>{const box=$("historyList");const vip=getVipInfo();box.innerHTML=`<div style="padding:12px;border:1px solid #293850;border-radius:12px;background:#0c192b">💰 Solde réel Firebase: <b style="color:#00d4ff">${formatPriceFC(getBalance())}</b>${vip?` <span style="color:#22c55e">👑 ${vip.level} -${vip.discount}% — ${Math.ceil((vip.expiresAt-Date.now())/86400000)}j restants</span>`:""}<br><small>Lang: ${jbLang.toUpperCase()} • Devise: ${jbMoney.toUpperCase()} • Thème: ${jbTheme}</small></div>`;let items=[];try{items=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]")}catch{}if(!items.length){box.innerHTML+=`<div style="padding:12px;margin-top:8px;border:1px solid #293850;border-radius:12px;background:#0c192b">Aucune demande locale</div>`}else items.forEach(it=>{const div=document.createElement("div");div.style.cssText="padding:12px;border:1px solid #293850;border-radius:12px;background:#0c192b;margin:8px 0";div.innerHTML=`<strong>${it.type||"Commande"}</strong><div style="font-size:11px;color:#94a3b8">${it.date||""}</div>`;box.append(div)});show("historyModal");});
 $("clearHistory").addEventListener("click",()=>{ location.reload(); });
 </script>
 </body>
