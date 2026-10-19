@@ -18,7 +18,8 @@ button,input,textarea{font:inherit}
 button{cursor:pointer}
 .app{height:100dvh;display:flex;flex-direction:column;max-width:1100px;margin:auto;background:var(--bg)}
 header{height:66px;flex-shrink:0;display:flex;align-items:center;gap:12px;padding:0 15px;background:var(--panel);border-bottom:1px solid var(--border)}
-.logo{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0077ff,#00d4ff);font-weight:900;color:#031020}
+.logo{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0077ff,#00d4ff);font-weight:900;color:#031020;overflow:hidden}
+.logo img{width:100%;height:100%;object-fit:cover}
 .brand{flex:1;min-width:0}
 .brand h1{font-size:16px;margin:0 0 4px;letter-spacing:.4px}
 .brand p{font-size:11px;margin:0;color:var(--muted)}
@@ -33,7 +34,8 @@ header{height:66px;flex-shrink:0;display:flex;align-items:center;gap:12px;paddin
 .list{flex:1;overflow-y:auto}
 .person{display:flex;align-items:center;gap:11px;padding:13px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.035)}
 .person:active,.person.selected{background:rgba(0,212,255,.08)}
-.avatar{width:43px;height:43px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;background:linear-gradient(135deg,#0077ff,#00d4ff);color:#001323;font-weight:bold}
+.avatar{width:43px;height:43px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;background:linear-gradient(135deg,#0077ff,#00d4ff);color:#001323;font-weight:bold;overflow:hidden;position:relative}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
 .personinfo{min-width:0;flex:1}
 .personinfo strong{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .personinfo small{display:block;color:var(--muted);font-size:11px;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -43,12 +45,15 @@ header{height:66px;flex-shrink:0;display:flex;align-items:center;gap:12px;paddin
 .chatname{flex:1;min-width:0}
 .chatname strong{font-size:14px}
 .chatname small{display:block;font-size:11px;color:var(--muted);margin-top:4px}
-.iconbtn{width:38px;height:38px;border:1px solid var(--border);background:var(--panel2);color:var(--blue);border-radius:12px;font-size:18px}
 .messages{flex:1;overflow-y:auto;padding:16px 13px 22px;display:flex;flex-direction:column;gap:11px;scroll-behavior:smooth}
 .empty{margin:auto;text-align:center;color:var(--muted);font-size:13px;line-height:1.8;padding:25px}
 .empty .big{font-size:43px;margin-bottom:8px}
-.msgrow{width:100%;display:flex;flex-direction:column;align-items:flex-start}
+.msgrow{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
 .msgrow.mine{align-items:flex-end}
+.msgrow.other{flex-direction:row;align-items:flex-end;gap:8px}
+.msgrow.other .bubble{max-width:75%}
+.msg-av{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;background:var(--other);font-size:10px;font-weight:bold;overflow:hidden;border:1px solid var(--border)}
+.msg-av img{width:100%;height:100%;object-fit:cover}
 .bubble{max-width:min(82%,440px);min-width:35px;padding:10px 12px;border-radius:17px;background:var(--other);border:1px solid var(--border);font-size:14px;line-height:1.5;overflow-wrap:anywhere;white-space:pre-wrap}
 .mine .bubble{background:linear-gradient(135deg,#075fce,#0875dd);border-color:rgba(0,212,255,.16);border-bottom-right-radius:5px}
 .msgrow:not(.mine) .bubble{border-bottom-left-radius:5px}
@@ -70,16 +75,16 @@ header{height:66px;flex-shrink:0;display:flex;align-items:center;gap:12px;paddin
 .recbar span{flex:1}
 .recbar button{border:0;border-radius:9px;padding:9px 12px;background:var(--red);color:white}
 .recbar .cancel{background:#27364b}
-.notice{display:none;margin:8px 0 0;font-size:12px;color:#ff9eaa;overflow-wrap:anywhere}
+.notice{display:none;margin:8px 0 0;font-size:12px;color:#ff9eaa}
 .notice.show{display:block}
-.mobileback{display:none}
+.mobileback{display:none;width:38px;height:38px;border:1px solid var(--border);background:var(--panel2);color:var(--blue);border-radius:12px;font-size:18px}
 footer{padding:9px;text-align:center;color:#52647c;font-size:10px;border-top:1px solid var(--border)}
 @media(max-width:700px){
  .sidebar{width:100%;border-right:0}
  .chatarea{display:none;width:100%}
  .app.chat-open .sidebar{display:none}
  .app.chat-open .chatarea{display:flex}
- .mobileback{display:block}
+ .mobileback{display:grid;place-items:center}
  header{height:59px}
  .messages{padding:12px 10px}
  .bubble{max-width:88%}
@@ -89,34 +94,34 @@ footer{padding:9px;text-align:center;color:#52647c;font-size:10px;border-top:1px
 <body>
 <div class="app" id="app">
 <header>
- <div class="logo">JB</div>
+ <div class="logo" id="myLogo">JB</div>
  <div class="brand">
   <h1>JASON BUSINESS <span style="color:var(--blue)">MESSENGER</span></h1>
   <p>Messagerie numérique • Jason Aloma 🇨🇩</p>
  </div>
- <div class="status" id="connectionStatus">Connexion…</div>
+ <div class="status" id="connectionStatus">En ligne</div>
 </header>
 <div class="layout">
  <aside class="sidebar">
-  <div class="searchbox"><input id="searchInput" placeholder="Rechercher une conversation…" autocomplete="off"></div>
+  <div class="searchbox"><input id="searchInput" placeholder="Rechercher une conversation…"></div>
   <div class="tabs">
    <button class="tab active" data-tab="chats">Messages</button>
    <button class="tab" data-tab="users">Utilisateurs</button>
    <button class="tab" data-tab="requests">Demandes</button>
   </div>
-  <div class="list" id="peopleList"><div class="empty"><div class="big">💬</div>Chargement des conversations…</div></div>
+  <div class="list" id="peopleList"><div class="empty"><div class="big">💬</div>Chargement…</div></div>
   <footer>JASON BUSINESS • Jason Aloma 🇨🇩</footer>
  </aside>
  <main class="chatarea">
   <div class="chathead">
-   <button class="iconbtn mobileback" id="backBtn">‹</button>
+   <button class="mobileback" id="backBtn">‹</button>
    <div class="avatar" id="chatAvatar">JB</div>
    <div class="chatname"><strong id="chatTitle">Choisis une conversation</strong><small id="chatSubtitle">Tes messages apparaîtront ici</small></div>
   </div>
-  <div class="messages" id="messages"><div class="empty"><div class="big">💬</div>Sélectionne un contact pour commencer à discuter.</div></div>
+  <div class="messages" id="messages"><div class="empty"><div class="big">💬</div>Sélectionne un contact pour discuter.</div></div>
   <div class="composer">
    <div class="preview" id="photoPreview"></div>
-   <div class="recbar" id="recBar"><span id="recLabel">🔴 Enregistrement en cours…</span><button class="cancel" id="cancelRecBtn">Annuler</button><button id="stopRecBtn">Terminer</button></div>
+   <div class="recbar" id="recBar"><span id="recLabel">🔴 Enregistrement…</span><button class="cancel" id="cancelRecBtn">Annuler</button><button id="stopRecBtn">Terminer</button></div>
    <div class="inputrow">
     <button class="attach" id="photoBtn">＋</button>
     <input id="photoInput" type="file" accept="image/*" multiple hidden>
@@ -136,152 +141,184 @@ const firebaseConfig={ apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U", authDom
 const $=id=>document.getElementById(id);
 const firebaseApp=initializeApp(firebaseConfig);
 const db=getDatabase(firebaseApp);
-let myPhone="",myRawPhone="",myName="Moi";
+let myPhone="",myRawPhone="",myName="Moi",myPhoto="";
 let currentTab="chats",activeChat=null,activeChatId=null;
 let users={},chatRecords={},requestRecords={};
-let messageUnsubs=[],messageSets={};
+let messageUnsubs=[],messageCache={};
 let pendingPhotos=[],recorder=null,recordChunks=[],recordStream=null;
 let recordingCancelled=false,recordingStartedAt=0,recordTimer=null;
 let sending=false;
-function normalizePhone(value){let p=String(value||"").trim().replace(/[^\d+]/g,"");if(p.startsWith("+"))p=p.slice(1);if(p.startsWith("243"))p="0"+p.slice(3);if(p.length===9&&!p.startsWith("0"))p="0"+p;return p;}
+let loadTimeout=null;
+
+function normalizePhone(v){let p=String(v||"").replace(/\D/g,"");if(p.startsWith("243"))p="0"+p.slice(3);if(p.length===9&&!p.startsWith("0"))p="0"+p;return p;}
 function getChatId(a,b){return[normalizePhone(a),normalizePhone(b)].sort().join("_");}
-function setNotice(m,error=true){const n=$("notice");n.textContent=m;n.style.color=error?"#ff9eaa":"#20c879";n.classList.add("show");}
-function clearNotice(){$("notice").textContent="";$("notice").classList.remove("show");}
-function timeText(v){let d;if(typeof v==="number")d=new Date(v);else d=new Date(v||0);if(!d.getTime()||d.getTime()<1000)return"";return d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});}
-function safeDate(v){return Number(v||0)||0;}
-function initials(name){return String(name||"?").trim().split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase();}
-function getDisplayName(phone){const n=normalizePhone(phone);const u=users[n]||users[phone]||{};return u.nom||u.name||u.username||n||"Utilisateur";}
-function getAllChatIds(other){const a=normalizePhone(myPhone),b=normalizePhone(other);const ids=new Set([getChatId(a,b)]);const rawVariants=[myRawPhone,myPhone,a,other,b].filter(Boolean);for(const x of rawVariants){for(const y of rawVariants){if(normalizePhone(x)===a&&normalizePhone(y)===b){ids.add([String(x),String(y)].sort().join("_"));}}}return[...ids];}
-async function init(){
- try{
-  myRawPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("phone")||"";
-  myPhone=normalizePhone(myRawPhone);
-  if(!myPhone){$("connectionStatus").textContent="Compte requis";return;}
-  $("connectionStatus").textContent="En ligne";
-  try{
-   const snap=await get(ref(db,"jasonBusiness/users"));
-   if(snap.exists()){
-    const all=snap.val()||{};
-    for(const [key,val] of Object.entries(all)){users[normalizePhone(key)]=val||{};users[key]=val||{};}
-    const mine=users[myPhone]||users[myRawPhone]||{};myName=mine.nom||mine.name||"Moi";
-   }
-  }catch(e){}
-  listenChats();listenRequests();renderPeople();
- }catch(e){$("connectionStatus").textContent="Erreur";setNotice("Erreur: "+e.message);}
+function setNotice(m,ok=false){const n=$("notice");n.textContent=m;n.style.color=ok?"#20c879":"#ff9eaa";n.classList.add("show");setTimeout(()=>n.classList.remove("show"),3000);}
+function timeText(v){let d=new Date(Number(v||0));if(!d.getTime())return"";return d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});}
+function initials(n){return String(n||"?").split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase();}
+
+// ✅ NOUVEAU: Récupère photo de profil
+function getUserPhoto(phone){
+ const n=normalizePhone(phone);
+ const u=users[n]||users[phone]||{};
+ return u.photo||u.photoProfil||u.avatar||u.image||u.profilePhoto||"";
 }
-function listenChats(){
- onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),snap=>{chatRecords=snap.val()||{};renderPeople();},err=>setNotice(err.message));
- if(myRawPhone!==myPhone){
-  onValue(ref(db,`jasonBusiness/user_chats/${myRawPhone}`),snap=>{
-   chatRecords={...chatRecords,...(snap.val()||{})};renderPeople();
-  },()=>{});
+function getDisplayName(phone){const n=normalizePhone(phone);const u=users[n]||users[phone]||{};return u.nom||u.name||u.username||n;}
+function avatarHTML(name,photo,size="43px"){
+ if(photo){
+  return `<img src="${photo}" alt="${name}" loading="lazy" onerror="this.style.display='none'">`;
+ }else{
+  return initials(name);
  }
 }
-function listenRequests(){onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),snap=>{requestRecords=snap.val()||{};renderPeople();},()=>{});}
+
+async function init(){
+ myRawPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("phone")||"";
+ myPhone=normalizePhone(myRawPhone);
+ if(!myPhone){$("connectionStatus").textContent="Compte requis";return;}
+ try{
+  const snap=await get(ref(db,"jasonBusiness/users"));
+  if(snap.exists()){
+   const all=snap.val()||{};
+   for(const [k,v] of Object.entries(all)){users[normalizePhone(k)]=v||{};users[k]=v||{};}
+   const mine=users[myPhone]||users[myRawPhone]||{};myName=mine.nom||mine.name||"Moi";myPhoto=getUserPhoto(myPhone)||getUserPhoto(myRawPhone)||"";
+   // Affiche MA photo en haut
+   if(myPhoto){$("myLogo").innerHTML=`<img src="${myPhoto}" alt="Moi">`; }
+  }
+ }catch(e){}
+ listenChats();listenRequests();renderPeople();
+ $("connectionStatus").textContent="En ligne";
+}
+function listenChats(){
+ const variants=[myPhone,myRawPhone].filter((v,i,a)=>a.indexOf(v)===i);
+ variants.forEach(v=>{
+  onValue(ref(db,`jasonBusiness/user_chats/${v}`),snap=>{
+   const data=snap.val()||{};
+   Object.entries(data).forEach(([id,rec])=>{
+    const normId=getChatId(myPhone, rec.with||id.split("_").find(x=>normalizePhone(x)!==myPhone)||"");
+    if(!chatRecords[normId]||(rec.lastTime||0)>(chatRecords[normId].lastTime||0)) chatRecords[normId]=rec;
+   });
+   renderPeople();
+  },()=>{});
+ });
+}
+function listenRequests(){onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),snap=>{requestRecords=snap.val()||{};renderPeople();});}
 function peopleForTab(){
  const search=$("searchInput").value.trim().toLowerCase();const out=[];
  if(currentTab==="chats"){
   for(const [key,record] of Object.entries(chatRecords)){
    if(!record)continue;
-   const other=normalizePhone(record.with||record.phone||key.split("_").find(x=>normalizePhone(x)!==myPhone)||"");
+   const other=normalizePhone(record.with||key.split("_").find(x=>normalizePhone(x)!==myPhone)||"");
    if(!other||other===myPhone)continue;
    const name=getDisplayName(other);
-   if((name+" "+other).toLowerCase().includes(search))out.push({phone:other,name,record});
+   if((name+" "+other).toLowerCase().includes(search))out.push({phone:other,name,photo:getUserPhoto(other),record});
   }
  }else if(currentTab==="users"){
   const seen=new Set();
-  for(const [key,u] of Object.entries(users)){
-   const phone=normalizePhone(key);if(!phone||phone===myPhone||seen.has(phone))continue;seen.add(phone);
-   const name=u.nom||u.name||u.username||phone;
-   if((name+" "+phone).toLowerCase().includes(search))out.push({phone,name,record:{}});
+  for(const [k,u] of Object.entries(users)){
+   const phone=normalizePhone(k);if(!phone||phone===myPhone||seen.has(phone))continue;seen.add(phone);
+   const name=u.nom||u.name||phone;
+   if((name+" "+phone).toLowerCase().includes(search))out.push({phone,name,photo:getUserPhoto(phone),record:{}});
   }
   out.sort((a,b)=>a.name.localeCompare(b.name));
  }else{
-  for(const [key,r] of Object.entries(requestRecords)){
-   const phone=normalizePhone(r.from||r.phone||key);if(!phone||phone===myPhone)continue;
+  for(const [k,r] of Object.entries(requestRecords)){
+   const phone=normalizePhone(r.from||r.phone||k);if(!phone||phone===myPhone)continue;
    const name=getDisplayName(phone);
-   if((name+" "+phone).toLowerCase().includes(search))out.push({phone,name,record:r});
+   if((name+" "+phone).toLowerCase().includes(search))out.push({phone,name,photo:getUserPhoto(phone),record:r});
   }
  }
  return out;
 }
 function renderPeople(){
  const list=$("peopleList");const people=peopleForTab();
- if(!people.length){list.innerHTML=`<div class="empty"><div class="big">${currentTab==="users"?"👥":"💬"}</div>${currentTab==="users"?"Aucun autre utilisateur.":"Aucune conversation."}</div>`;return;}
+ if(!people.length){list.innerHTML=`<div class="empty"><div class="big">💬</div>Aucune conversation</div>`;return;}
  list.innerHTML="";
  for(const p of people){
   const row=document.createElement("div");row.className="person"+(activeChat===p.phone?" selected":"");
-  const avatar=document.createElement("div");avatar.className="avatar";avatar.textContent=initials(p.name);
+  const av=document.createElement("div");av.className="avatar";
+  if(p.photo){const img=document.createElement("img");img.src=p.photo;img.loading="lazy";img.onerror=()=>{av.textContent=initials(p.name);};av.appendChild(img);}else{av.textContent=initials(p.name);}
   const info=document.createElement("div");info.className="personinfo";
-  const name=document.createElement("strong");name.textContent=p.name;
-  const small=document.createElement("small");small.textContent=p.record.lastMsg||p.phone;
-  info.append(name,small);row.append(avatar,info);
+  const nm=document.createElement("strong");nm.textContent=p.name;
+  const sm=document.createElement("small");sm.textContent=p.record.lastMsg||p.phone;
+  info.append(nm,sm);row.append(av,info);
   row.addEventListener("click",()=>openChat(p.phone,p.name));
   list.appendChild(row);
  }
 }
-function clearMessageListeners(){for(const stop of messageUnsubs){try{stop()}catch{}}messageUnsubs=[];messageSets={};}
+function clearListeners(){for(const f of messageUnsubs){try{f()}catch{}}messageUnsubs=[];messageCache={};if(loadTimeout){clearTimeout(loadTimeout);loadTimeout=null;}}
 function openChat(phone,name){
- activeChat=normalizePhone(phone);activeChatId=getChatId(myPhone,activeChat);
+ activeChat=normalizePhone(phone);
+ activeChatId=getChatId(myPhone,activeChat);
+ const photo=getUserPhoto(phone);
  $("chatTitle").textContent=name||getDisplayName(activeChat);
- $("chatAvatar").textContent=initials(name||getDisplayName(activeChat));
+ $("chatAvatar").innerHTML=photo?`<img src="${photo}" alt="${name}">`:initials(name||getDisplayName(activeChat));
  $("chatSubtitle").textContent=activeChat;
  $("messageInput").disabled=false;$("sendBtn").disabled=false;
  document.getElementById("app").classList.add("chat-open");
- clearNotice();clearMessageListeners();
- $("messages").innerHTML='<div class="empty">Chargement des messages…</div>';
- const ids=getAllChatIds(activeChat);
- for(const chatId of ids){
-  const path=`jasonBusiness/messages/${chatId}`;
-  const messagesRef=ref(db,path);
-  const stop=onValue(messagesRef,snap=>{messageSets[chatId]=snap.val()||{};renderMessages();},err=>setNotice(err.message));
-  messageUnsubs.push(()=>off(messagesRef,"value",stop));
- }
+ clearListeners();
+ $("messages").innerHTML='<div class="empty"><div class="big">⏳</div>Chargement des messages...</div>';
+ loadTimeout=setTimeout(()=>{if(Object.keys(messageCache).length===0){renderMessages(true);}},3000);
+ const chatId=getChatId(myPhone,activeChat);
+ const path=`jasonBusiness/messages/${chatId}`;
+ const messagesRef=ref(db,path);
+ const stop=onValue(messagesRef,snap=>{
+  messageCache=snap.val()||{};
+  if(loadTimeout){clearTimeout(loadTimeout);loadTimeout=null;}
+  renderMessages();
+ },err=>{
+  if(loadTimeout){clearTimeout(loadTimeout);loadTimeout=null;}
+  renderMessages(true);
+ });
+ messageUnsubs.push(()=>off(messagesRef,"value",stop));
  renderPeople();
 }
-function mergeMessages(){
- const merged=new Map();
- for(const [chatId,items] of Object.entries(messageSets)){
-  for(const [key,m] of Object.entries(items||{})){
-   if(!m)continue;
-   const stable=m.id||key;
-   const signature=String(m.sender||m.from||"")+"|"+String(m.createdAt||m.timestamp||"")+"|"+String(m.text||m.photo||m.audio||"").slice(0,100);
-   const unique=stable+"|"+signature;
-   merged.set(unique,{...m,id:m.id||key,_chatId:chatId});
-  }
- }
- return [...merged.values()].sort((a,b)=>safeDate(a.createdAt||a.timestamp)-safeDate(b.createdAt||b.timestamp));
-}
-function renderMessages(){
+function renderMessages(forceEmpty=false){
  const container=$("messages");
- if(!activeChat)return;
- const msgs=mergeMessages();
- if(!msgs.length){container.innerHTML='<div class="empty"><div class="big">👋</div>Pas encore de message.<br>Envoie le premier !</div>';return;}
+ const entries=Object.entries(messageCache||{});
+ if(!entries.length){
+  if(forceEmpty||!loadTimeout){
+   container.innerHTML='<div class="empty"><div class="big">👋</div>Pas encore de message.<br>Envoie le premier !</div>';
+  }
+  return;
+ }
+ const msgs=entries.map(([k,v])=>({...v,id:k})).sort((a,b)=>(Number(a.createdAt||a.timestamp||0)-Number(b.createdAt||b.timestamp||0)));
  container.innerHTML="";
  for(const m of msgs){
-  const sender=normalizePhone(m.sender||m.from||"");const mine=sender===myPhone;
-  const row=document.createElement("div");row.className="msgrow"+(mine?" mine":"");
+  const sender=normalizePhone(m.sender||m.from||"");
+  const mine=sender===myPhone;
+  const row=document.createElement("div");row.className="msgrow"+(mine?" mine":" other");
+  const photoOther=!mine?getUserPhoto(sender):"";
+  if(!mine){
+   const av=document.createElement("div");av.className="msg-av";
+   if(photoOther){const img=document.createElement("img");img.src=photoOther;img.loading="lazy";av.appendChild(img);}else{av.textContent=initials(getDisplayName(sender));}
+   row.appendChild(av);
+  }
   const bubble=document.createElement("div");bubble.className="bubble";
-  const text=m.text||m.message||"";
-  if(text){const d=document.createElement("div");d.textContent=text;bubble.appendChild(d);}
-  const photo=m.photo||m.image||"";
-  if(photo){const img=document.createElement("img");img.src=photo;img.loading="lazy";img.addEventListener("click",()=>{const o=document.createElement("div");o.style.cssText="position:fixed;inset:0;z-index:999;background:#000e;display:flex;align-items:center;justify-content:center;padding:15px";const i=document.createElement("img");i.src=photo;i.style.cssText="max-width:100%;max-height:90dvh;object-fit:contain";o.appendChild(i);o.addEventListener("click",()=>o.remove());document.body.appendChild(o);});bubble.appendChild(img);}
-  const audio=m.audio||m.voice||"";
-  if(audio){const a=document.createElement("audio");a.controls=true;a.src=audio;bubble.appendChild(a);}
-  if(!text&&!photo&&!audio){const f=document.createElement("div");f.textContent="Message";bubble.appendChild(f);}
-  const meta=document.createElement("div");meta.className="msgmeta";meta.textContent=timeText(m.createdAt||m.timestamp)+(mine?"  ✓✓":"");
-  row.append(bubble,meta);container.appendChild(row);
+  if(m.text){const d=document.createElement("div");d.textContent=m.text;bubble.appendChild(d);}
+  if(m.photo){const img=document.createElement("img");img.src=m.photo;img.loading="lazy";img.onclick=()=>{const o=document.createElement("div");o.style.cssText="position:fixed;inset:0;z-index:999;background:#000e;display:flex;align-items:center;justify-content:center";const i=document.createElement("img");i.src=m.photo;i.style.cssText="max-width:100%;max-height:90dvh";o.appendChild(i);o.onclick=()=>o.remove();document.body.appendChild(o);};bubble.appendChild(img);}
+  if(m.audio){const a=document.createElement("audio");a.controls=true;a.src=m.audio;bubble.appendChild(a);}
+  if(!m.text&&!m.photo&&!m.audio){bubble.textContent="Message";}
+  const meta=document.createElement("div");meta.className="msgmeta";meta.textContent=timeText(m.createdAt||m.timestamp)+(mine?" ✓✓":"");
+  if(mine){
+   row.append(bubble,meta);
+  }else{
+   const col=document.createElement("div");col.style.display="flex";col.style.flexDirection="column";
+   col.append(bubble,meta);
+   row.appendChild(col);
+  }
+  container.appendChild(row);
  }
  container.scrollTop=container.scrollHeight;
 }
 async function sendPayload(payload){
- if(!myPhone||!activeChat) throw new Error("Choisis une conversation");
- const now=Date.now();const chatId=getChatId(myPhone,activeChat);
+ if(!myPhone||!activeChat) throw new Error("Choisis un contact");
+ const now=Date.now();
+ const chatId=getChatId(myPhone,activeChat);
  const messageRef=push(ref(db,`jasonBusiness/messages/${chatId}`));
- const message={...payload,id:messageRef.key,sender:myPhone,from:myPhone,senderName:myName,createdAt:now,timestamp:now,serverTime:serverTimestamp()};
+ const message={...payload,id:messageRef.key,sender:myPhone,from:myPhone,senderName:myName,senderPhoto:myPhoto,createdAt:now,timestamp:now,serverTime:serverTimestamp()};
  await set(messageRef,message);
- if(!messageSets[chatId])messageSets[chatId]={};
- messageSets[chatId][messageRef.key]=message;
+ if(!messageCache) messageCache={};
+ messageCache[messageRef.key]=message;
  renderMessages();
  const preview=payload.text||(payload.photo?"📷 Photo":payload.audio?"🎙 Vocal":"Message");
  const updates={};
@@ -294,22 +331,19 @@ async function sendText(){
  if(sending) return;
  const input=$("messageInput");const text=input.value.trim();if(!text)return;
  if(!activeChat){setNotice("Choisis un contact");return;}
- sending=true;$("sendBtn").disabled=true;clearNotice();
- try{await sendPayload({text,type:"text"});input.value="";input.style.height="auto";}catch(e){setNotice(e.message);}finally{sending=false;$("sendBtn").disabled=!activeChat;}
+ sending=true;$("sendBtn").disabled=true;
+ try{await sendPayload({text,type:"text"});input.value="";input.style.height="auto";setNotice("Envoyé ✓",true);}catch(e){setNotice(e.message);}finally{sending=false;$("sendBtn").disabled=!activeChat;}
 }
 $("sendBtn").addEventListener("click",sendText);
 $("messageInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText();}});
 $("messageInput").addEventListener("input",e=>{e.target.style.height="auto";e.target.style.height=Math.min(e.target.scrollHeight,110)+"px";});
-$("photoBtn").addEventListener("click",()=>{if(!activeChat){setNotice("Choisis une conversation");return;}$("photoInput").click();});
+$("photoBtn").addEventListener("click",()=>{if(!activeChat){setNotice("Choisis conversation");return;}$("photoInput").click();});
 $("photoInput").addEventListener("change",async e=>{
  const files=[...e.target.files||[]];e.target.value="";if(!files.length)return;
  for(const file of files){
-  if(!file.type.startsWith("image/")){setNotice("Images seulement");continue;}
   if(file.size>900*1024){setNotice("Photo >900Ko");continue;}
-  try{
-   const data=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>rej(new Error("lecture"));r.readAsDataURL(file);});
-   pendingPhotos.push({name:file.name,data});
-  }catch(err){setNotice(err.message);}
+  const data=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>rej(new Error("lecture"));r.readAsDataURL(file);});
+  pendingPhotos.push({name:file.name,data});
  }
  renderPhotoPreview();
 });
@@ -318,26 +352,26 @@ function renderPhotoPreview(){
  pendingPhotos.forEach((p,i)=>{
   const item=document.createElement("div");item.className="previewitem";
   const img=document.createElement("img");img.src=p.data;
-  const rm=document.createElement("button");rm.textContent="×";rm.addEventListener("click",()=>{pendingPhotos.splice(i,1);renderPhotoPreview();});
+  const rm=document.createElement("button");rm.textContent="×";rm.onclick=()=>{pendingPhotos.splice(i,1);renderPhotoPreview();};
   item.append(img,rm);box.appendChild(item);
  });
  if(pendingPhotos.length){
-  const btn=document.createElement("button");btn.textContent="Envoyer "+pendingPhotos.length+" photo(s)";btn.style.cssText="border:0;border-radius:10px;padding:10px;background:#0077ff;color:white;flex-shrink:0";btn.addEventListener("click",sendPhotos);box.appendChild(btn);
+  const btn=document.createElement("button");btn.textContent="Envoyer "+pendingPhotos.length+" photo(s)";btn.style.cssText="border:0;border-radius:10px;padding:10px;background:#0077ff;color:white;flex-shrink:0";btn.onclick=sendPhotos;box.appendChild(btn);
  }
 }
 async function sendPhotos(){
  if(!activeChat||!pendingPhotos.length) return;
  const photos=[...pendingPhotos];
- try{for(const p of photos){await sendPayload({photo:p.data,type:"photo",fileName:p.name});}pendingPhotos=[];renderPhotoPreview();setNotice("Photo(s) envoyée(s)",false);}catch(e){setNotice(e.message);}
+ try{for(const p of photos){await sendPayload({photo:p.data,type:"photo"});}pendingPhotos=[];renderPhotoPreview();setNotice("Photo(s) envoyée(s)",true);}catch(e){setNotice(e.message);}
 }
 $("micBtn").addEventListener("click",startRecording);
 async function startRecording(){
- if(!activeChat){setNotice("Choisis une conversation");return;}
- if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder){setNotice("Vocal non supporté - Chrome HTTPS requis");return;}
+ if(!activeChat){setNotice("Choisis conversation");return;}
+ if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder){setNotice("Vocal non supporté - Chrome HTTPS");return;}
  try{
   recordStream=await navigator.mediaDevices.getUserMedia({audio:true});
   recordChunks=[];recordingCancelled=false;recordingStartedAt=Date.now();
-  let opts={};const types=["audio/webm;codecs=opus","audio/webm","audio/mp4","audio/ogg;codecs=opus"];const sup=types.find(t=>MediaRecorder.isTypeSupported(t));if(sup)opts.mimeType=sup;
+  let opts={};const types=["audio/webm;codecs=opus","audio/webm","audio/mp4"];const sup=types.find(t=>MediaRecorder.isTypeSupported(t));if(sup)opts.mimeType=sup;
   recorder=new MediaRecorder(recordStream,opts);
   recorder.ondataavailable=e=>{if(e.data&&e.data.size)recordChunks.push(e.data);};
   recorder.onstop=async()=>{
@@ -347,14 +381,12 @@ async function startRecording(){
    const blob=new Blob(recordChunks,{type:recorder?.mimeType||"audio/webm"});recordChunks=[];
    if(!blob.size){setNotice("Aucun son");return;}
    if(blob.size>700*1024){setNotice("Vocal trop lourd");return;}
-   try{
-    const data=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>rej(new Error("lecture"));r.readAsDataURL(blob);});
-    await sendPayload({audio:data,type:"audio",audioType:blob.type,duration:Math.round((Date.now()-recordingStartedAt)/1000)});
-    setNotice("Vocal envoyé",false);
-   }catch(err){setNotice(err.message);}
+   const data=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>rej(new Error("lecture"));r.readAsDataURL(blob);});
+   await sendPayload({audio:data,type:"audio"});
+   setNotice("Vocal envoyé ✓",true);
   };
-  recorder.start(250);$("recBar").classList.add("show");$("micBtn").textContent="🔴";$("recLabel").textContent="🔴 Enregistrement… 0 s";
-  recordTimer=setInterval(()=>{const s=Math.floor((Date.now()-recordingStartedAt)/1000);$("recLabel").textContent="🔴 Enregistrement… "+s+" s";if(s>=30)stopRecording();},500);
+  recorder.start(250);$("recBar").classList.add("show");$("micBtn").textContent="🔴";$("recLabel").textContent="🔴 0 s";
+  recordTimer=setInterval(()=>{const s=Math.floor((Date.now()-recordingStartedAt)/1000);$("recLabel").textContent="🔴 "+s+" s";if(s>=30)stopRecording();},500);
  }catch(e){setNotice("Micro refusé");if(recordStream)recordStream.getTracks().forEach(t=>t.stop());}
 }
 function stopRecording(){if(recorder&&recorder.state!=="inactive")recorder.stop();}
