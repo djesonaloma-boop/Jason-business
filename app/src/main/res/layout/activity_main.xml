@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="#050914">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="66dp"
+        android:background="#0b1425" android:gravity="center_vertical" android:padding="15dp">
+        <TextView android:id="@+id/myLogo" android:layout_width="43dp" android:layout_height="43dp"
+            android:background="#0077ff" android:text="JB" android:textStyle="bold"
+            android:gravity="center" android:textColor="#031020"/>
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+            android:orientation="vertical" android:layout_marginStart="12dp">
+            <TextView android:text="JASON BUSINESS MESSENGER" android:textColor="#f4f7fb" android:textSize="16sp" android:textStyle="bold"/>
+            <TextView android:text="Messagerie numérique • Jason Aloma 🇨🇩" android:textColor="#93a4ba" android:textSize="11sp"/>
+        </LinearLayout>
+        <TextView android:id="@+id/connectionStatus" android:text="En ligne" android:textColor="#20c879" android:textSize="11sp"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="horizontal">
+        <LinearLayout android:layout_width="310dp" android:layout_height="match_parent" android:background="#0b1425" android:orientation="vertical">
+            <EditText android:id="@+id/searchInput" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_margin="12dp" android:background="#101e33" android:hint="Rechercher..." android:textColor="#f4f7fb" android:padding="12dp"/>
+            <androidx.recyclerview.widget.RecyclerView android:id="@+id/peopleList" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="#050914">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="62dp" android:background="#0b1425" android:gravity="center_vertical" android:padding="10dp">
+                <TextView android:id="@+id/chatAvatar" android:layout_width="38dp" android:layout_height="38dp" android:background="#0077ff" android:text="JB" android:gravity="center" android:textStyle="bold"/>
+                <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginStart="10dp">
+                    <TextView android:id="@+id/chatTitle" android:text="Choisis conversation" android:textColor="#f4f7fb" android:textSize="14sp" android:textStyle="bold"/>
+                    <TextView android:id="@+id/chatSubtitle" android:text="Tes messages ici" android:textColor="#93a4ba" android:textSize="11sp"/>
+                </LinearLayout>
+                <ImageButton android:id="@+id/voiceCallBtn" android:layout_width="40dp" android:layout_height="40dp" android:background="?attr/selectableItemBackgroundBorderless" android:src="@android:drawable/ic_menu_call"/>
+                <ImageButton android:id="@+id/videoCallBtn" android:layout_width="40dp" android:layout_height="40dp" android:background="?attr/selectableItemBackgroundBorderless" android:src="@android:drawable/ic_menu_camera"/>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView android:id="@+id/messagesList" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:padding="13dp"/>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="#0b1425" android:padding="10dp" android:orientation="horizontal" android:gravity="bottom">
+                <Button android:id="@+id/photoBtn" android:text="+" android:layout_width="39dp" android:layout_height="42dp" android:backgroundTint="#101e33" android:textColor="#00d4ff"/>
+                <EditText android:id="@+id/messageInput" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:layout_marginStart="7dp" android:background="#101e33" android:hint="Écris..." android:textColor="#f4f7fb" android:padding="12dp"/>
+                <Button android:id="@+id/sendBtn" android:text="➤" android:layout_width="44dp" android:layout_height="42dp" android:layout_marginStart="7dp" android:backgroundTint="#00d4ff"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
