@@ -4,1006 +4,417 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="theme-color" content="#050a14">
-<meta name="description" content="JASON BUSINESS — Mon réseau et mes points de fidélité">
-<title>JASON BUSINESS - Mon Réseau</title>
-
+<title>JASON BUSINESS - JASON CARTE</title>
 <style>
-:root{
-  --blue:#00d2ff;
-  --blue2:#0077ff;
-  --dark:#050a14;
-  --gold:#ffd700;
-  --green:#00e676;
-  --red:#ff4757;
-  --glass:rgba(255,255,255,.055);
-  --border:rgba(255,255,255,.10);
-}
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  font-family:'Segoe UI',Arial,sans-serif;
-  background:var(--dark) url('IMG_0870.jpeg') no-repeat center center fixed;
-  background-size:cover;
-  color:#fff;
-  padding-bottom:100px;
-  overflow-x:hidden;
-}
-button,input{font-family:inherit}
-button{-webkit-user-select:none;user-select:none}
-button:focus-visible,a:focus-visible,input:focus-visible{
-  outline:2px solid var(--blue);
-  outline-offset:3px;
-}
-.overlay{
-  min-height:100vh;
-  padding:20px 15px 35px;
-  background:
-    radial-gradient(ellipse at 10% 0%,rgba(0,210,255,.10),transparent 42%),
-    radial-gradient(ellipse at 90% 25%,rgba(255,215,0,.07),transparent 38%),
-    rgba(5,10,20,.93);
-}
-.container{width:100%;max-width:650px;margin:auto}
+:root{--blue:#00d2ff;--blue2:#0077ff;--dark:#050a14;--gold:#ffd700;--green:#00e676;--red:#ff4757;--glass:rgba(255,255,255,.06);--border:rgba(255,255,255,.10);--text:#fff;--muted:#b5c5da}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--dark) url('IMG_0870.jpeg') no-repeat center center fixed;background-size:cover;color:#fff;padding-bottom:110px;overflow-x:hidden}
+body.light{--dark:#f2f6fb;--text:#0b1220;--muted:#5a6a85;--glass:rgba(0,0,0,.04);background:radial-gradient(ellipse at 10% 5%,rgba(0,210,255,.08),transparent 35%),linear-gradient(rgba(242,246,251,.92),rgba(242,246,251,.98)),url("IMG_0870.jpeg") center/cover fixed;color:var(--text)}
+.overlay{min-height:100vh;padding:16px;background:radial-gradient(ellipse at 10% 0%,rgba(0,210,255,.10),transparent 42%),rgba(5,10,20,.93)}
+body.light .overlay{background:radial-gradient(ellipse at 10% 0%,rgba(0,210,255,.08),transparent 42%),rgba(242,246,251,.88)}
+.container{width:100%;max-width:680px;margin:auto}
+.top-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.brand{color:var(--blue);font-size:15px;font-weight:900;letter-spacing:2px}
+.online{font-size:10px;color:var(--green);padding:7px 11px;border-radius:20px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.25)}
+.page-title{text-align:center;font-size:22px;letter-spacing:2px;margin:10px 0 6px}.page-title span{display:block;color:var(--blue);font-size:11px;letter-spacing:4px;margin-top:6px}
+.subtitle{text-align:center;font-size:11px;color:var(--muted);margin-bottom:20px;line-height:1.6}
 
-/* Lumières flottantes */
-.ambient{
-  position:fixed;
-  z-index:0;
-  width:150px;height:150px;
-  border-radius:50%;
-  pointer-events:none;
-  filter:blur(65px);
-  opacity:.15;
-  animation:ambientMove 12s ease-in-out infinite alternate;
-}
-.ambient.one{top:12%;left:-80px;background:var(--blue)}
-.ambient.two{right:-90px;top:48%;background:var(--gold);animation-delay:-5s}
-@keyframes ambientMove{
-  from{transform:translate3d(0,0,0) scale(1)}
-  to{transform:translate3d(30px,35px,0) scale(1.25)}
-}
-.container,.navbar{position:relative;z-index:1}
+/* FORMULAIRE CARTE */
+.jb-card-form{margin:14px 0;padding:18px;border-radius:20px;background:linear-gradient(145deg,rgba(0,210,255,.10),rgba(5,10,20,.75));border:1px solid rgba(0,210,255,.22);backdrop-filter:blur(18px)}
+body.light .jb-card-form{background:linear-gradient(145deg,rgba(255,255,255,.85),rgba(255,255,255,.65));border:1px solid rgba(0,0,0,.06);box-shadow:0 6px 20px rgba(0,0,0,.05)}
+.jb-title{font-size:11px;font-weight:900;letter-spacing:1px;color:var(--blue);margin-bottom:12px;text-transform:uppercase}
+.jb-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.jb-field{margin-bottom:10px}.jb-field label{display:block;font-size:9px;color:var(--muted);margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.jb-input{width:100%;padding:11px;border-radius:11px;border:1px solid rgba(255,255,255,.10);background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));color:white;outline:none;font-size:12px}
+body.light .jb-input{background:#f8fbff;color:#0b1220;border-color:rgba(0,0,0,.08)}
+.jb-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,210,255,.08)}
 
-.top-header{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:10px;margin-bottom:22px;
+/* CARTE ID FORMAT REEL */
+.card-preview-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;margin:18px 0}
+.id-card{
+  width:100%;max-width:340px;aspect-ratio:85.6/53.98;
+  border-radius:12px;overflow:hidden;position:relative;
+  background:linear-gradient(135deg,#0a1a35 0%,#102a5c 25%,#0d213f 50%,#091a33 100%);
+  border:1px solid rgba(0,210,255,.35);
+  box-shadow:0 10px 30px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.08) inset,0 0 25px rgba(0,210,255,.15);
+  color:white;display:flex;flex-direction:column;
 }
-.brand{
-  color:var(--blue);font-size:15px;font-weight:900;
-  letter-spacing:2px;text-shadow:0 0 16px rgba(0,210,255,.25);
-}
-.online{
-  font-size:10px;color:var(--green);padding:7px 11px;
-  border-radius:20px;background:rgba(0,230,118,.08);
-  border:1px solid rgba(0,230,118,.25);
-  box-shadow:0 0 18px rgba(0,230,118,.06);
-}
-.online::first-letter{color:var(--green)}
-.page-title{
-  text-align:center;font-size:25px;letter-spacing:2px;
-  margin:12px 0 7px;animation:fadeUp .65s ease both;
-}
-.page-title span{
-  display:block;color:var(--blue);font-size:12px;
-  letter-spacing:4px;margin-top:8px;
-}
-.subtitle{
-  text-align:center;font-size:11px;color:#d7e4f4;
-  opacity:.65;margin-bottom:25px;line-height:1.7;
-  animation:fadeUp .8s ease both;
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(12px)}
-  to{opacity:1;transform:translateY(0)}
-}
-.invite-card{
-  position:relative;overflow:hidden;
-  background:linear-gradient(145deg,rgba(0,210,255,.16),rgba(0,0,0,.68));
-  border:1px solid rgba(0,210,255,.48);
-  border-radius:25px;padding:25px 20px;text-align:center;
-  backdrop-filter:blur(15px);
-  box-shadow:0 15px 40px rgba(0,0,0,.32),0 0 22px rgba(0,210,255,.06);
-  animation:fadeUp .7s ease both;
-}
-.invite-card::before{
-  content:"";position:absolute;top:0;left:-120%;width:65%;height:100%;
-  background:linear-gradient(100deg,transparent,rgba(255,255,255,.07),transparent);
-  transform:skewX(-20deg);animation:shine 7s ease-in-out infinite;
-  pointer-events:none;
-}
-@keyframes shine{
-  0%,65%{left:-120%}
-  100%{left:160%}
-}
-.code-label{
-  margin:0;font-size:11px;opacity:.65;
-  text-transform:uppercase;letter-spacing:1px;
-}
-.code-display{
-  margin:14px 0 18px;color:var(--blue);font-size:27px;
-  font-weight:900;letter-spacing:3px;word-break:break-all;
-  text-shadow:0 0 15px rgba(0,210,255,.35);
-}
-.btn-share{
-  position:relative;width:100%;border:0;border-radius:14px;
-  padding:15px;background:linear-gradient(120deg,var(--blue),#76e8ff);
-  color:#001018;font-size:13px;font-weight:900;cursor:pointer;
-  box-shadow:0 8px 22px rgba(0,210,255,.14);
-  transition:transform .25s,box-shadow .25s;
-}
-.btn-share:active,.btn-convert:active{transform:scale(.97)}
-.btn-share:hover{box-shadow:0 8px 28px rgba(0,210,255,.28)}
-.copy-status{
-  display:none;color:var(--green);font-size:11px;
-  margin:10px 0 0;font-weight:bold;
-}
-.rule-card{
-  margin-top:18px;padding:18px;border-radius:19px;
-  background:linear-gradient(135deg,rgba(0,230,118,.075),rgba(255,255,255,.018));
-  border:1px solid rgba(0,230,118,.20);
-  animation:fadeUp .8s ease both;
-}
-.rule-title{color:var(--green);font-size:14px;font-weight:900;margin-bottom:9px}
-.rule-text{font-size:11px;line-height:1.9;color:#dce8e8;opacity:.8}
-.rule-text b{color:var(--gold)}
+.id-card::before{content:"";position:absolute;top:0;left:0;right:0;height:36%;background:linear-gradient(135deg,rgba(0,210,255,.12),transparent 60%);pointer-events:none}
+.id-top{height:38px;background:linear-gradient(90deg,#00d2ff,#0077ff);display:flex;align-items:center;justify-content:space-between;padding:0 12px;color:#001018;font-weight:900;font-size:10px;letter-spacing:1px}
+.id-body{display:flex;flex:1;padding:8px 10px;gap:10px}
+.id-photo{width:74px;height:86px;border-radius:8px;background:#000;border:2px solid rgba(255,255,255,.15);overflow:hidden;flex-shrink:0;display:grid;place-items:center;font-size:10px;color:#fff}
+.id-photo img{width:100%;height:100%;object-fit:cover}
+.id-infos{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.id-row{font-size:7.5px;line-height:1.3;display:flex;gap:4px}.id-row b{color:var(--blue);min-width:42px;font-size:7px;text-transform:uppercase;opacity:.9}.id-row span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600;color:#e8f0ff}
+.id-row.big span{font-size:8.5px;font-weight:900;color:white}
+.id-bottom{height:28px;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:6.5px;border-top:1px solid rgba(255,255,255,.08)}
+.id-qr{position:absolute;right:8px;bottom:32px;width:52px;height:52px;background:white;border-radius:6px;padding:3px;display:grid;place-items:center}
+.id-qr canvas,.id-qr img{width:100%!important;height:100%!important}
+.id-number{font-size:6px;color:var(--gold);letter-spacing:.5px}
 
-.stats-grid{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:11px;margin-top:18px;
-}
-.stat-box{
-  position:relative;overflow:hidden;
-  padding:18px 10px;border-radius:19px;text-align:center;
-  background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.018));
-  border:1px solid var(--border);backdrop-filter:blur(10px);
-  transition:transform .3s,border-color .3s,background .3s;
-  animation:fadeUp .8s ease both;
-}
-.stat-box:hover{transform:translateY(-3px);border-color:rgba(0,210,255,.35)}
-.stat-icon{font-size:23px;filter:drop-shadow(0 0 7px rgba(0,210,255,.15))}
-.stat-number{
-  margin-top:7px;color:var(--blue);font-size:23px;
-  font-weight:900;overflow-wrap:anywhere;
-}
-.stat-label{
-  margin-top:5px;font-size:9px;color:#d5e1f1;
-  opacity:.62;text-transform:uppercase;letter-spacing:.6px;
-}
-.section-title{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:10px;margin:27px 0 13px;
-}
-.section-title h3{margin:0;font-size:15px;font-weight:800}
-.section-title span{color:var(--blue);font-size:10px;opacity:.8;text-align:right}
-.level-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.level-box{
-  position:relative;overflow:hidden;padding:18px 5px;
-  border-radius:18px;text-align:center;
-  background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.015));
-  border:1px solid rgba(255,255,255,.09);
-  transition:transform .3s,border-color .3s;
-}
-.level-box:hover{transform:translateY(-3px);border-color:rgba(0,210,255,.4)}
-.level-tag{
-  display:inline-block;background:linear-gradient(120deg,var(--blue),#83edff);
-  color:#001018;padding:5px 9px;border-radius:8px;
-  font-size:10px;font-weight:900;
-}
-.level-box small{
-  display:block;margin-top:9px;font-size:9px;
-  opacity:.6;text-transform:uppercase;letter-spacing:.5px;
-}
-.level-box b{display:block;color:var(--blue);font-size:24px;margin-top:6px}
-.network-card{
-  padding:18px;border-radius:20px;
-  background:linear-gradient(140deg,rgba(0,210,255,.055),rgba(255,255,255,.025));
-  border:1px solid rgba(0,210,255,.16);
-  border-left:3px solid var(--blue);
-}
-.network-row{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:15px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.065);
-}
-.network-row:last-child{border-bottom:0}
-.network-row span:first-child{font-size:11px;color:#dce6f4;opacity:.72}
-.network-value{color:var(--blue);font-size:12px;font-weight:900;text-align:right}
+/* DOS CARTE */
+.id-card.back{background:linear-gradient(135deg,#0d213f,#0a1a35);padding:10px}
+.back-title{font-size:8px;font-weight:900;color:var(--blue);text-align:center;margin-bottom:6px;letter-spacing:1px}
+.back-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:6.5px}
+.back-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:6px}
+.back-item b{display:block;color:var(--gold);font-size:6px;margin-bottom:2px}
+.qr-big{width:86px;height:86px;background:white;border-radius:8px;padding:4px;margin:auto}
 
-.points-card{
-  position:relative;overflow:hidden;margin-top:21px;padding:20px;
-  border-radius:23px;
-  background:linear-gradient(145deg,rgba(255,215,0,.10),rgba(0,0,0,.62));
-  border:1px solid rgba(255,215,0,.30);
-  box-shadow:0 12px 35px rgba(0,0,0,.16);
-}
-.points-header{
-  display:flex;justify-content:space-between;align-items:center;gap:10px;
-}
-.points-title{color:var(--gold);font-size:15px;font-weight:900}
-.points-rate{color:var(--gold);font-size:10px;font-weight:bold;text-align:right}
-.points-balance{
-  margin-top:16px;padding:21px 12px;text-align:center;
-  border-radius:17px;background:rgba(255,215,0,.045);
-  border:1px dashed rgba(255,215,0,.32);
-}
-.points-label{font-size:9px;opacity:.6;letter-spacing:1px}
-.points-number{
-  color:var(--gold);font-size:34px;font-weight:900;margin-top:5px;
-  text-shadow:0 0 20px rgba(255,215,0,.13);
-}
-.points-value{margin-top:5px;font-size:11px;opacity:.7}
-.points-value b{color:var(--gold)}
-.convert-form{margin-top:19px}
-.convert-form label{display:block;font-size:11px;opacity:.75;margin-bottom:8px}
-.convert-form input{
-  width:100%;padding:15px;border-radius:13px;outline:none;
-  border:1px solid rgba(255,255,255,.13);
-  background:rgba(4,9,18,.9);color:white;font-size:15px;
-  transition:border-color .25s,box-shadow .25s;
-}
-.convert-form input:focus{
-  border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,215,0,.07);
-}
-.conversion-result{
-  margin-top:11px;padding:13px;border-radius:12px;
-  background:rgba(0,210,255,.055);border:1px solid rgba(0,210,255,.09);
-  text-align:center;font-size:12px;
-}
-.conversion-result b{color:var(--green)}
-.btn-convert{
-  width:100%;margin-top:12px;padding:15px;border:0;border-radius:14px;
-  background:linear-gradient(120deg,#ffd700,#ffb300);
-  color:#171000;font-size:13px;font-weight:900;cursor:pointer;
-  box-shadow:0 8px 22px rgba(255,215,0,.10);
-  transition:transform .25s,box-shadow .25s,opacity .25s;
-}
-.btn-convert:hover{box-shadow:0 8px 28px rgba(255,215,0,.2)}
-.btn-convert:disabled{opacity:.5;cursor:not-allowed}
-.convert-status{min-height:18px;margin-top:11px;text-align:center;font-size:11px;line-height:1.6}
-.success{color:var(--green)}.error{color:var(--red)}
+.jb-btn{width:100%;padding:12px;border-radius:12px;border:0;font-weight:900;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px}
+.jb-btn:active{transform:scale(.97)}
+.jb-btn-gold{color:#151000;background:linear-gradient(120deg,#ffd700,#ffeb80,#ffd700)}
+.jb-btn-blue{color:#001018;background:linear-gradient(120deg,var(--blue),#00a8ff)}
+.jb-btn-green{color:#001a08;background:linear-gradient(120deg,#00e676,#00c853)}
+.jb-btn-dark{background:rgba(255,255,255,.06);color:white;border:1px solid rgba(255,255,255,.1)}
+.jb-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
 
-.history-card,.members-card{
-  margin-top:0;padding:18px;border-radius:20px;
-  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
-  border:1px solid rgba(255,255,255,.075);
-}
-.history-item{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.065)}
-.history-item:last-child{border-bottom:0}
-.history-top{display:flex;justify-content:space-between;gap:10px}
-.history-points{color:var(--gold);font-size:12px;font-weight:bold}
-.history-amount{color:var(--green);font-size:12px;font-weight:bold;text-align:right}
-.history-date{margin-top:6px;font-size:9px;opacity:.55}
-.empty{text-align:center;padding:23px 10px;font-size:11px;line-height:1.8;opacity:.6}
-.member{
-  display:flex;align-items:center;gap:12px;
-  padding:13px 0;border-bottom:1px solid rgba(255,255,255,.065);
-}
-.member:last-child{border-bottom:0}
-.member-avatar{
-  flex-shrink:0;width:41px;height:41px;border-radius:50%;
-  display:flex;justify-content:center;align-items:center;
-  background:linear-gradient(145deg,rgba(0,210,255,.17),rgba(0,119,255,.06));
-  border:1px solid rgba(0,210,255,.28);
-}
-.member-info{flex:1;min-width:0}
-.member-name{
-  font-size:12px;font-weight:bold;overflow:hidden;
-  text-overflow:ellipsis;white-space:nowrap;
-}
-.member-date{margin-top:4px;font-size:9px;opacity:.55}
-.member-level{font-size:9px;color:var(--blue);white-space:nowrap}
-#jb_status{
-  text-align:center;min-height:18px;margin:17px 0;
-  font-size:10px;color:#ffeb3b;line-height:1.7;
-}
+/* ANCIENS STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
+.stat-box{padding:14px 10px;border-radius:16px;text-align:center;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08)}
+.stat-number{color:var(--blue);font-size:20px;font-weight:900}.stat-label{font-size:8px;color:var(--muted);text-transform:uppercase;margin-top:4px}
 
-.navbar{
-  position:fixed;z-index:1000;bottom:0;left:0;width:100%;
-  display:flex;justify-content:space-around;gap:4px;
-  padding:10px 0 calc(10px + env(safe-area-inset-bottom));
-  background:rgba(5,10,20,.97);
-  border-top:1px solid rgba(0,210,255,.24);
-  backdrop-filter:blur(18px);
-  box-shadow:0 -8px 28px rgba(0,0,0,.2);
-}
-.nav-link{
-  min-width:55px;flex:1;text-align:center;text-decoration:none;
-  color:white;opacity:.48;font-size:10px;transition:opacity .2s,color .2s;
-}
-.nav-link.active{color:var(--blue);opacity:1;font-weight:bold}
-.nav-icon{font-size:19px;margin-bottom:4px;transition:transform .25s}
-.nav-link.active .nav-icon{transform:translateY(-2px);filter:drop-shadow(0 0 6px rgba(0,210,255,.4))}
+.invite-card{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(0,210,255,.16),rgba(0,0,0,.68));border:1px solid rgba(0,210,255,.48);border-radius:20px;padding:18px;text-align:center;margin-top:14px}
+.code-display{margin:10px 0;color:var(--blue);font-size:22px;font-weight:900;letter-spacing:2px;word-break:break-all}
 
-@media(max-width:380px){
-  .overlay{padding:17px 12px 30px}
-  .level-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
-  .level-box{padding:15px 3px}
-  .level-box b{font-size:21px}
-  .points-header{align-items:flex-start}
-  .points-rate{font-size:9px}
-  .code-display{font-size:22px}
-  .section-title h3{font-size:13px}
-}
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    scroll-behavior:auto!important;
-    transition-duration:.01ms!important;
-  }
-}
+.navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:10px 0 calc(10px + env(safe-area-inset-bottom));background:rgba(5,10,20,.97);border-top:1px solid rgba(0,210,255,.24);backdrop-filter:blur(18px)}
+.nav-link{min-width:55px;flex:1;text-align:center;text-decoration:none;color:white;opacity:.48;font-size:10px}.nav-link.active{color:var(--blue);opacity:1;font-weight:bold}.nav-icon{font-size:19px;margin-bottom:4px}
+
+@media(max-width:400px){.jb-grid2{grid-template-columns:1fr}.id-card{max-width:320px}}
 </style>
 </head>
-
 <body>
-<div class="ambient one"></div>
-<div class="ambient two"></div>
-
 <div class="overlay">
 <div class="container">
 
-<div class="top-header">
-  <div class="brand">JASON BUSINESS</div>
-  <div class="online">● EN LIGNE</div>
+<div class="top-header"><div class="brand">JASON BUSINESS</div><div class="online">● EN LIGNE</div></div>
+
+<h1 class="page-title">JASON CARTE<span>CARTE D'IDENTITÉ PRO</span></h1>
+<div class="subtitle">Crée ta carte professionnelle avec QR code parrainage — Téléchargeable en PDF & Image</div>
+
+<!-- FORMULAIRE -->
+<div class="jb-card-form">
+<div class="jb-title">📝 Remplis tes informations (comme vraie carte)</div>
+<div class="jb-grid2">
+<div class="jb-field"><label>Photo de profil *</label><input type="file" id="photoInput" accept="image/*" class="jb-input"></div>
+<div class="jb-field"><label>Code parrainage (auto)</label><input id="codeInput" class="jb-input" readonly placeholder="Chargement..."></div>
+</div>
+<div class="jb-grid2">
+<div class="jb-field"><label>Nom *</label><input id="nom" class="jb-input" placeholder="Ex: ALOMA"></div>
+<div class="jb-field"><label>Post-nom *</label><input id="postnom" class="jb-input" placeholder="Ex: JASON"></div>
+</div>
+<div class="jb-grid2">
+<div class="jb-field"><label>Prénom *</label><input id="prenom" class="jb-input" placeholder="Ex: Jean"></div>
+<div class="jb-field"><label>Sexe *</label><select id="sexe" class="jb-input"><option value="M">Masculin</option><option value="F">Féminin</option></select></div>
+</div>
+<div class="jb-grid2">
+<div class="jb-field"><label>Lieu de naissance *</label><input id="lieuNaiss" class="jb-input" placeholder="Ex: Kinshasa"></div>
+<div class="jb-field"><label>Date de naissance *</label><input id="dateNaiss" type="date" class="jb-input"></div>
+</div>
+<div class="jb-field"><label>Adresse complète *</label><input id="adresse" class="jb-input" placeholder="Ex: Av. Liberation N°12, Gombe"></div>
+<div class="jb-grid2">
+<div class="jb-field"><label>Nationalité *</label><input id="nationalite" class="jb-input" value="Congolaise" placeholder="Congolaise"></div>
+<div class="jb-field"><label>Province *</label><input id="province" class="jb-input" placeholder="Ex: Kinshasa"></div>
+</div>
+<div class="jb-grid2">
+<div class="jb-field"><label>Territoire / Commune *</label><input id="territoire" class="jb-input" placeholder="Ex: Gombe / Capitaine"></div>
+<div class="jb-field"><label>Capitaine / Chef lieu</label><input id="capitaine" class="jb-input" placeholder="Ex: Kinshasa Capitale"></div>
+</div>
+<div class="jb-field"><label>Profession / Poste *</label><input id="poste" class="jb-input" placeholder="Ex: Entrepreneur - JASON BUSINESS"></div>
+
+<button class="jb-btn jb-btn-blue" id="generateCardBtn">✨ Générer ma carte</button>
+<div style="font-size:9px;color:var(--muted);margin-top:8px;text-align:center">Remplis tout puis génère — La carte sera petite comme vraie carte d'identité</div>
 </div>
 
-<h1 class="page-title">MON RÉSEAU
-  <span>JASON BUSINESS</span>
-</h1>
-<div class="subtitle">Développez votre réseau et gagnez des points</div>
+<!-- PREVIEW CARTES -->
+<div class="card-preview-wrap" id="cardPreviewWrap" style="display:none">
+<div style="font-size:11px;font-weight:900;color:var(--blue);letter-spacing:1px">RECTO - JASON CARTE</div>
 
-<div class="invite-card">
-  <p class="code-label">Votre code de parrainage</p>
-  <div id="jb_myCode" class="code-display">...</div>
-  <button id="jb_btnCopy" class="btn-share">📋 COPIER LE LIEN D'INVITATION</button>
-  <p id="jb_copyStatus" class="copy-status">✅ Lien d'invitation copié !</p>
+<!-- CARTE RECTO -->
+<div class="id-card" id="cardFront">
+<div class="id-top"><span>🇨🇩 RÉPUBLIQUE DÉMOCRATIQUE DU CONGO</span><span style="font-size:8px">JASON BUSINESS</span></div>
+<div class="id-body">
+<div class="id-photo" id="cardPhoto">PHOTO</div>
+<div class="id-infos">
+<div class="id-row big"><b>Nom:</b><span id="cNom">ALOMA</span></div>
+<div class="id-row"><b>Post-nom:</b><span id="cPostnom">JASON</span></div>
+<div class="id-row"><b>Prénom:</b><span id="cPrenom">Jean</span></div>
+<div class="id-row"><b>Sexe:</b><span id="cSexe">M</span><b style="margin-left:8px">Né le:</b><span id="cDateNaiss">01/01/2000</span></div>
+<div class="id-row"><b>Lieu:</b><span id="cLieuNaiss">Kinshasa</span></div>
+<div class="id-row"><b>Nationalité:</b><span id="cNationalite">Congolaise</span></div>
+<div class="id-row"><b>Adresse:</b><span id="cAdresse">Gombe, Kinshasa</span></div>
+<div class="id-row"><b>Province:</b><span id="cProvince">Kinshasa</span><b style="margin-left:8px">Territ:</b><span id="cTerritoire">Gombe</span></div>
+<div class="id-row"><b>Poste:</b><span id="cPoste" style="color:var(--gold)">Entrepreneur</span></div>
+</div>
+<div class="id-qr" id="qrFront"></div>
+</div>
+<div class="id-bottom">
+<span>Code: <b id="cCode" style="color:var(--blue)">JASON-123456</b></span>
+<span class="id-number">N° <span id="cNumber">JB-2026-001234</span> • Exp: 2029</span>
+</div>
 </div>
 
-<div class="rule-card">
-  <div class="rule-title">🎁 SYSTÈME DE FIDÉLITÉ</div>
-  <div class="rule-text">
-    Chaque nouveau membre directement invité vous rapporte <b>5 points</b>.<br>
-    Lorsque vous atteignez <b>100 points</b>, vous pouvez convertir vos points en argent.<br>
-    <b>100 points = 1 000 FC</b><br>
-    Soit <b>1 point = 10 FC</b>.
-  </div>
+<div style="font-size:11px;font-weight:900;color:var(--gold);letter-spacing:1px;margin-top:10px">VERSO - QR CODE PARRAINAGE</div>
+
+<!-- CARTE VERSO -->
+<div class="id-card back" id="cardBack">
+<div class="back-title">JASON BUSINESS — CARTE MEMBRE OFFICIELLE</div>
+<div style="display:flex;gap:10px">
+<div style="flex:1">
+<div class="back-grid">
+<div class="back-item"><b>Capitaine / Chef</b><span id="cCapitaine2">Kinshasa Capitale</span></div>
+<div class="back-item"><b>Province</b><span id="cProvince2">Kinshasa</span></div>
+<div class="back-item"><b>Date émission</b><span id="cEmission">19/10/2026</span></div>
+<div class="back-item"><b>Validité</b><span>3 ans - Jusqu'en 2029</span></div>
+<div class="back-item" style="grid-column:span 2"><b>Avantages membre</b><span>• Commissions • Points fidélité • Accès API • Boutique pro</span></div>
+<div class="back-item" style="grid-column:span 2"><b>Lien de parrainage</b><span id="cLink" style="font-size:5.5px;word-break:break-all">https://jasonbusiness.com/register?code=JASON-123456</span></div>
+</div>
+<div style="margin-top:8px;font-size:6px;text-align:center;opacity:.7">Scannez le QR code pour rejoindre avec mon code: <b id="cCode2" style="color:var(--blue)">JASON-123456</b><br>✅ JASON BUSINESS — Sécurisé • Rapide • Professionnel • Version 2.0 Pro</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+<div class="qr-big" id="qrBack"></div>
+<div style="font-size:6px;color:var(--gold);font-weight:900">SCANNEZ-MOI</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- BOUTONS TELECHARGEMENT -->
+<div class="jb-actions" id="downloadActions" style="display:none">
+<button class="jb-btn jb-btn-gold" id="downloadPngBtn">📸 Télécharger Image (PNG)</button>
+<button class="jb-btn jb-btn-green" id="downloadPdfBtn">📄 Télécharger PDF Carte</button>
+</div>
+<div class="jb-actions" style="display:none" id="downloadActions2">
+<button class="jb-btn jb-btn-dark" id="downloadBothBtn">📦 Télécharger Recto + Verso</button>
+<button class="jb-btn jb-btn-blue" id="shareCardBtn">📤 Partager ma carte</button>
+</div>
+</div>
+
+<div class="invite-card" style="margin-top:20px">
+<div style="font-size:10px;opacity:.6;text-transform:uppercase;letter-spacing:1px">Votre code de parrainage</div>
+<div id="jb_myCode" class="code-display">...</div>
+<button id="jb_btnCopy" class="jb-btn jb-btn-blue" style="margin-top:8px">📋 COPIER LE LIEN D'INVITATION</button>
+<div id="jb_copyStatus" style="display:none;color:var(--green);font-size:11px;margin-top:8px;font-weight:bold">✅ Lien copié!</div>
 </div>
 
 <div class="stats-grid">
-  <div class="stat-box">
-    <div class="stat-icon">👥</div>
-    <div class="stat-number" id="jb_totalTeam">0</div>
-    <div class="stat-label">Membres totaux</div>
-  </div>
-  <div class="stat-box">
-    <div class="stat-icon">⭐</div>
-    <div class="stat-number" id="jb_teamPoints">0</div>
-    <div class="stat-label">Points réseau</div>
-  </div>
-  <div class="stat-box">
-    <div class="stat-icon">💰</div>
-    <div class="stat-number" id="jb_totalGains">0</div>
-    <div class="stat-label">Commissions FC</div>
-  </div>
-  <div class="stat-box">
-    <div class="stat-icon">💎</div>
-    <div class="stat-number" id="jb_mainBalance">0</div>
-    <div class="stat-label">Solde FC</div>
-  </div>
+<div class="stat-box"><div class="stat-number" id="jb_totalTeam">0</div><div class="stat-label">Membres totaux</div></div>
+<div class="stat-box"><div class="stat-number" id="jb_teamPoints">0</div><div class="stat-label">Points réseau</div></div>
+<div class="stat-box"><div class="stat-number" id="jb_totalGains">0 FC</div><div class="stat-label">Commissions</div></div>
+<div class="stat-box"><div class="stat-number" id="jb_mainBalance">0 FC</div><div class="stat-label">Solde</div></div>
 </div>
 
-<div class="section-title">
-  <h3>📊 Niveaux du réseau</h3>
-  <span>Structure 3 niveaux</span>
-</div>
-<div class="level-grid">
-  <div class="level-box">
-    <span class="level-tag">25%</span>
-    <small>Niveau 1</small>
-    <b id="jb_lvl1Count">0</b>
-  </div>
-  <div class="level-box">
-    <span class="level-tag">3%</span>
-    <small>Niveau 2</small>
-    <b id="jb_lvl2Count">0</b>
-  </div>
-  <div class="level-box">
-    <span class="level-tag">1%</span>
-    <small>Niveau 3</small>
-    <b id="jb_lvl3Count">0</b>
-  </div>
-</div>
+<div id="jb_status" style="text-align:center;margin:16px 0;font-size:10px;color:#ffeb3b"></div>
 
-<div class="section-title"><h3>📈 Statistiques</h3></div>
-<div class="network-card">
-  <div class="network-row">
-    <span>Membres directs</span>
-    <span class="network-value" id="jb_directMembers">0</span>
-  </div>
-  <div class="network-row">
-    <span>Membres niveau 2</span>
-    <span class="network-value" id="jb_secondMembers">0</span>
-  </div>
-  <div class="network-row">
-    <span>Membres niveau 3</span>
-    <span class="network-value" id="jb_thirdMembers">0</span>
-  </div>
-  <div class="network-row">
-    <span>Points disponibles</span>
-    <span class="network-value" id="jb_pointsDisplay">0</span>
-  </div>
-  <div class="network-row">
-    <span>Valeur des points</span>
-    <span class="network-value" id="jb_pointsValue">0 FC</span>
-  </div>
-  <div class="network-row">
-    <span>Statut</span>
-    <span class="network-value" style="color:#00e676">Actif 🛰️</span>
-  </div>
-</div>
-
-<div class="points-card">
-  <div class="points-header">
-    <div class="points-title">⭐ Points de fidélité</div>
-    <div class="points-rate">100 POINTS = 1 000 FC</div>
-  </div>
-
-  <div class="points-balance">
-    <div class="points-label">POINTS DISPONIBLES</div>
-    <div class="points-number" id="jb_pointsBig">0</div>
-    <div class="points-value">Valeur actuelle : <b id="jb_pointsValueBig">0 FC</b></div>
-  </div>
-
-  <div class="convert-form">
-    <label for="jb_pointsInput">Nombre de points à convertir</label>
-    <input type="number" id="jb_pointsInput" min="100" step="100"
-      inputmode="numeric" placeholder="Exemple : 100">
-    <div class="conversion-result" id="jb_conversionResult">
-      100 points = <b>1 000 FC</b>
-    </div>
-    <button id="jb_btnConvert" class="btn-convert">⭐ CONVERTIR MES POINTS</button>
-    <div id="jb_convertStatus" class="convert-status" aria-live="polite"></div>
-  </div>
-</div>
-
-<div class="section-title"><h3>🧾 Historique des conversions</h3></div>
-<div class="history-card">
-  <div id="jb_history"><div class="empty">Chargement de l'historique...</div></div>
-</div>
-
-<div class="section-title">
-  <h3>👥 Mes membres directs</h3>
-  <span>Niveau 1</span>
-</div>
-<div class="members-card">
-  <div id="jb_members"><div class="empty">Chargement des membres...</div></div>
-</div>
-
-<div id="jb_status" aria-live="polite"></div>
 </div>
 </div>
 
 <nav class="navbar">
-  <a href="dashboard.html" class="nav-link">
-    <div class="nav-icon">📊</div>Dash
-  </a>
-  <a href="shop.html" class="nav-link">
-    <div class="nav-icon">🛒</div>Shop
-  </a>
-  <a href="equipe.html" class="nav-link active" aria-current="page">
-    <div class="nav-icon">👥</div>Équipe
-  </a>
-  <a href="profil.html" class="nav-link">
-    <div class="nav-icon">👤</div>Profil
-  </a>
+<a href="dashboard.html" class="nav-link"><div class="nav-icon">📊</div>Dash</a>
+<a href="shop.html" class="nav-link"><div class="nav-icon">🛒</div>Shop</a>
+<a href="equipe.html" class="nav-link active"><div class="nav-icon">👥</div>Équipe</a>
+<a href="profil.html" class="nav-link"><div class="nav-icon">👤</div>Profil</a>
 </nav>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <script type="module">
-import { initializeApp, getApps, getApp }
-  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
-  getDatabase, ref, onValue, get, runTransaction
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const jbFirebaseConfig = {
   apiKey: "AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
   authDomain: "starlink-investit.firebaseapp.com",
   databaseURL: "https://starlink-investit-default-rtdb.firebaseio.com",
-  projectId: "starlink-investit",
-  storageBucket: "starlink-investit.firebasestorage.app",
-  messagingSenderId: "807081599583",
-  appId: "1:807081599583:web:e00ec3959bc4acdae031ea"
+  projectId: "starlink-investit", storageBucket: "starlink-investit.firebasestorage.app",
+  messagingSenderId: "807081599583", appId: "1:807081599583:web:e00ec3959bc4acdae031ea"
 };
-
 const jbApp = getApps().length ? getApp() : initializeApp(jbFirebaseConfig);
 const jbDB = getDatabase(jbApp);
 const ROOT = "jasonBusiness";
+const jbUserPhone = localStorage.getItem("userPhone") || localStorage.getItem("jasonBusinessUserPhone") || localStorage.getItem("phone") || localStorage.getItem("jasonBusinessPhone") || "";
+const $ = id => document.getElementById(id);
+const jbTheme = localStorage.getItem("jb_theme")||"dark";
+if(jbTheme==="light") document.body.classList.add("light");
 
-const jbUserPhone =
-  localStorage.getItem("userPhone") ||
-  localStorage.getItem("jasonPhone") ||
-  localStorage.getItem("phone") ||
-  localStorage.getItem("jasonBusinessPhone");
-
-const jbStatus = document.getElementById("jb_status");
-
-let jbCurrentPoints = 0;
-let jbUserData = null;
-let jbDirectMembers = [];
 let jbInviteCode = "";
-let jbLatestConversionHistory = {};
+let userPhotoBase64 = "";
 
-function jbFormatNumber(v) {
-  return Math.floor(Number(v) || 0).toLocaleString("fr-FR");
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
+function formatDateFr(dateStr){
+  if(!dateStr) return "";
+  const d=new Date(dateStr);
+  if(isNaN(d.getTime())) return dateStr;
+  return d.toLocaleDateString("fr-FR");
 }
-function jbEscapeHTML(v) {
-  return String(v ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-function jbFormatDate(v) {
-  if (!v) return "Date inconnue";
-  const d = new Date(v);
-  if (Number.isNaN(d.getTime())) return "Date inconnue";
-  return d.toLocaleDateString("fr-FR", {
-    day: "2-digit", month: "2-digit", year: "numeric"
+
+// CHARGE CODE PARRAINAGE
+if(!jbUserPhone){ $("jb_status").innerText="⚠️ Session expirée"; setTimeout(()=>location.href="login.html",1200); }
+else{
+  const userRef = ref(jbDB, `${ROOT}/users/${jbUserPhone}`);
+  onValue(userRef, async snap=>{
+    if(!snap.exists()) return;
+    const data=snap.val()||{};
+    jbInviteCode = data.inviteCode || data.referralCode || data.codeParrainage || ("JASON-"+String(jbUserPhone).replace(/\D/g,"").slice(-6));
+    $("jb_myCode").innerText=jbInviteCode;
+    $("codeInput").value=jbInviteCode;
+    $("cCode").innerText=jbInviteCode;
+    $("cCode2").innerText=jbInviteCode;
+    $("cLink").innerText=`${location.origin}/register.html?inviteCode=${encodeURIComponent(jbInviteCode)}`;
+    const principal=Number(data.solde_principal||data.solde||0);
+    const comm=Number(data.solde_commissions||data.commissions||0);
+    $("jb_mainBalance").innerText=principal.toLocaleString("fr-FR")+" FC";
+    $("jb_totalGains").innerText=comm.toLocaleString("fr-FR")+" FC";
+    const lvl1=Number(data.count_lvl1||0), lvl2=Number(data.count_lvl2||0), lvl3=Number(data.count_lvl3||0);
+    $("jb_totalTeam").innerText=(lvl1+lvl2+lvl3).toString();
+    $("jb_teamPoints").innerText=((lvl1+lvl2+lvl3)*5).toString();
+    // Pré-remplir si déjà sauvegardé
+    const saved=JSON.parse(localStorage.getItem("jasonCarteData")||"{}");
+    if(saved.nom) { $("nom").value=saved.nom; $("postnom").value=saved.postnom||""; $("prenom").value=saved.prenom||""; $("sexe").value=saved.sexe||"M"; $("lieuNaiss").value=saved.lieuNaiss||""; $("dateNaiss").value=saved.dateNaiss||""; $("adresse").value=saved.adresse||""; $("nationalite").value=saved.nationalite||"Congolaise"; $("province").value=saved.province||""; $("territoire").value=saved.territoire||""; $("capitaine").value=saved.capitaine||""; $("poste").value=saved.poste||""; }
+    if(saved.photo){ userPhotoBase64=saved.photo; $("cardPhoto").innerHTML=`<img src="${saved.photo}">`; }
   });
 }
 
-if (!jbUserPhone) {
-  jbStatus.innerText = "⚠️ Session expirée. Redirection vers la connexion...";
-  document.getElementById("jb_members").innerHTML =
-    '<div class="empty">Connectez-vous pour consulter votre réseau.</div>';
-  setTimeout(() => {
-    window.location.href = "login.html";
-  }, 1200);
-} else {
-  const jbUserRef = ref(jbDB, `${ROOT}/users/${jbUserPhone}`);
-  const jbUsersRef = ref(jbDB, `${ROOT}/users`);
-  const jbFallbackUserRef = ref(jbDB, `users/${jbUserPhone}`);
-
-  onValue(jbUserRef, async (jbSnapshot) => {
-    let snap = jbSnapshot;
-
-    try {
-      if (!snap.exists()) {
-        const fallback = await get(jbFallbackUserRef);
-        if (fallback.exists()) snap = fallback;
-      }
-
-      if (!snap.exists()) {
-        jbStatus.innerText = "⏳ Compte en synchronisation...";
-        return;
-      }
-
-      jbUserData = snap.val() || {};
-      jbInviteCode =
-        jbUserData.inviteCode ||
-        jbUserData.referralCode ||
-        jbUserData.codeParrainage ||
-        ("JASON-" + String(jbUserPhone).replace(/\D/g, "").slice(-6));
-
-      document.getElementById("jb_myCode").innerText = jbInviteCode;
-
-      const principal = Number(
-        jbUserData.solde_principal ?? jbUserData.solde ?? 0
-      ) || 0;
-      const commissions = Number(
-        jbUserData.solde_commissions ?? jbUserData.commissions ?? 0
-      ) || 0;
-
-      document.getElementById("jb_mainBalance").innerText =
-        jbFormatNumber(principal);
-      document.getElementById("jb_totalGains").innerText =
-        jbFormatNumber(commissions);
-
-      let level1 = Number(jbUserData.count_lvl1 ?? 0) || 0;
-      let level2 = Number(jbUserData.count_lvl2 ?? 0) || 0;
-      let level3 = Number(jbUserData.count_lvl3 ?? 0) || 0;
-
-      if (level1 === 0 && level2 === 0 && level3 === 0) {
-        try {
-          const usersSnapshot = await get(jbUsersRef);
-          if (usersSnapshot.exists()) {
-            const network = jbCalculateNetwork(
-              usersSnapshot.val(), jbUserPhone, jbInviteCode
-            );
-            level1 = network.level1.length;
-            level2 = network.level2.length;
-            level3 = network.level3.length;
-            jbDirectMembers = network.level1;
-          }
-        } catch (error) {
-          console.error("Erreur de reconstruction du réseau :", error);
-        }
-      }
-
-      document.getElementById("jb_lvl1Count").innerText = jbFormatNumber(level1);
-      document.getElementById("jb_lvl2Count").innerText = jbFormatNumber(level2);
-      document.getElementById("jb_lvl3Count").innerText = jbFormatNumber(level3);
-
-      const totalTeam = level1 + level2 + level3;
-      document.getElementById("jb_totalTeam").innerText =
-        jbFormatNumber(totalTeam);
-      document.getElementById("jb_directMembers").innerText =
-        jbFormatNumber(level1);
-      document.getElementById("jb_secondMembers").innerText =
-        jbFormatNumber(level2);
-      document.getElementById("jb_thirdMembers").innerText =
-        jbFormatNumber(level3);
-
-      jbCurrentPoints = Number(
-        jbUserData.points_fidelite ??
-        jbUserData.points ??
-        jbUserData.loyaltyPoints ?? 0
-      ) || 0;
-
-      const pointsValue = jbCurrentPoints * 10;
-      document.getElementById("jb_teamPoints").innerText =
-        jbFormatNumber(totalTeam * 5);
-      document.getElementById("jb_pointsDisplay").innerText =
-        jbFormatNumber(jbCurrentPoints);
-      document.getElementById("jb_pointsBig").innerText =
-        jbFormatNumber(jbCurrentPoints);
-      document.getElementById("jb_pointsValue").innerText =
-        jbFormatNumber(pointsValue) + " FC";
-      document.getElementById("jb_pointsValueBig").innerText =
-        jbFormatNumber(pointsValue) + " FC";
-
-      jbLatestConversionHistory = jbUserData.points_conversion || {};
-      jbRenderHistory(jbLatestConversionHistory);
-
-      if (jbDirectMembers.length === 0) {
-        try {
-          const usersSnapshot = await get(jbUsersRef);
-          if (usersSnapshot.exists()) {
-            jbDirectMembers = jbFindDirectMembers(
-              usersSnapshot.val(), jbInviteCode, jbUserPhone
-            );
-          }
-        } catch (error) {
-          console.error("Erreur chargement membres :", error);
-        }
-      }
-
-      jbRenderMembers(jbDirectMembers);
-      jbStatus.innerText = "";
-    } catch (error) {
-      console.error(error);
-      jbStatus.innerText = "⚠️ Impossible de charger les données du compte.";
-    }
-  }, (error) => {
-    console.error(error);
-    jbStatus.innerText = "⚠️ Erreur de connexion Firebase.";
-  });
-}
-
-function jbGetParentCode(user) {
-  return user.inviteCodeParent ||
-    user.parrainCode ||
-    user.referralCodeUsed ||
-    user.invitedBy ||
-    user.sponsorCode ||
-    user.codeParrainage ||
-    user.referredBy ||
-    "";
-}
-
-function jbGetUserCode(user) {
-  return user.inviteCode || user.referralCode || user.codeParrainage || "";
-}
-
-function jbFindDirectMembers(users, code, ownPhone) {
-  const result = [];
-  Object.entries(users || {}).forEach(([phone, user]) => {
-    if (phone === ownPhone || !user || typeof user !== "object") return;
-    const parent = jbGetParentCode(user);
-    if (String(parent).toLowerCase() === String(code).toLowerCase()) {
-      result.push({ phone, data: user });
-    }
-  });
-  return result;
-}
-
-function jbCalculateNetwork(users, ownPhone, ownCode) {
-  const allUsers = users || {};
-  const level1 = [];
-  const level2 = [];
-  const level3 = [];
-
-  Object.entries(allUsers).forEach(([phone, user]) => {
-    if (phone === ownPhone || !user || typeof user !== "object") return;
-    if (String(jbGetParentCode(user)).toLowerCase() ===
-        String(ownCode).toLowerCase()) {
-      level1.push({ phone, data: user });
-    }
-  });
-
-  const level1Codes = level1
-    .map(member => jbGetUserCode(member.data))
-    .filter(Boolean);
-
-  Object.entries(allUsers).forEach(([phone, user]) => {
-    if (phone === ownPhone || !user || typeof user !== "object") return;
-    if (level1Codes.some(code =>
-      String(code).toLowerCase() ===
-      String(jbGetParentCode(user)).toLowerCase()
-    )) {
-      level2.push({ phone, data: user });
-    }
-  });
-
-  const level2Codes = level2
-    .map(member => jbGetUserCode(member.data))
-    .filter(Boolean);
-
-  Object.entries(allUsers).forEach(([phone, user]) => {
-    if (phone === ownPhone || !user || typeof user !== "object") return;
-    if (level2Codes.some(code =>
-      String(code).toLowerCase() ===
-      String(jbGetParentCode(user)).toLowerCase()
-    )) {
-      level3.push({ phone, data: user });
-    }
-  });
-
-  return { level1, level2, level3 };
-}
-
-function jbRenderMembers(members) {
-  const container = document.getElementById("jb_members");
-  container.innerHTML = "";
-
-  if (!members || members.length === 0) {
-    container.innerHTML =
-      '<div class="empty">👥 Aucun membre direct.<br><br>Partagez votre lien pour développer votre réseau.</div>';
-    return;
-  }
-
-  members.forEach(member => {
-    const data = member.data || {};
-    const name = data.nom || data.name || data.username ||
-      data.telephone || member.phone;
-    const date = data.createdAt || data.dateInscription || data.dateCreation;
-
-    const element = document.createElement("div");
-    element.className = "member";
-    element.innerHTML = `
-      <div class="member-avatar">👤</div>
-      <div class="member-info">
-        <div class="member-name">${jbEscapeHTML(name)}</div>
-        <div class="member-date">Inscrit le ${jbEscapeHTML(jbFormatDate(date))}</div>
-      </div>
-      <div class="member-level">NIVEAU 1</div>`;
-    container.appendChild(element);
-  });
-}
-
-function jbRenderHistory(history) {
-  const container = document.getElementById("jb_history");
-  container.innerHTML = "";
-
-  if (!history || Object.keys(history).length === 0) {
-    container.innerHTML =
-      '<div class="empty">🧾 Aucune conversion effectuée.</div>';
-    return;
-  }
-
-  const items = Object.entries(history).sort(([, a], [, b]) =>
-    String(b.date || "").localeCompare(String(a.date || ""))
-  );
-
-  items.forEach(([id, item]) => {
-    const element = document.createElement("div");
-    element.className = "history-item";
-    element.innerHTML = `
-      <div class="history-top">
-        <div class="history-points">⭐ ${jbFormatNumber(item.points)} points</div>
-        <div class="history-amount">+ ${jbFormatNumber(item.montant)} FC</div>
-      </div>
-      <div class="history-date">
-        ${jbEscapeHTML(jbFormatDate(item.date))} •
-        ${jbEscapeHTML(item.statut || "VALIDÉE")}
-      </div>`;
-    container.appendChild(element);
-  });
-}
-
-const jbPointsInput = document.getElementById("jb_pointsInput");
-const jbConversionResult = document.getElementById("jb_conversionResult");
-
-jbPointsInput.addEventListener("input", () => {
-  const points = Number(jbPointsInput.value) || 0;
-  if (points <= 0) {
-    jbConversionResult.innerHTML = "100 points = <b>1 000 FC</b>";
-    return;
-  }
-  jbConversionResult.innerHTML =
-    `${jbFormatNumber(points)} points = <b>${jbFormatNumber(points * 10)} FC</b>`;
+// PHOTO UPLOAD
+$("photoInput").addEventListener("change", e=>{
+  const file=e.target.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    userPhotoBase64=ev.target.result;
+    $("cardPhoto").innerHTML=`<img src="${userPhotoBase64}">`;
+  };
+  reader.readAsDataURL(file);
 });
 
-document.getElementById("jb_btnConvert").addEventListener("click", async () => {
-  const button = document.getElementById("jb_btnConvert");
-  const status = document.getElementById("jb_convertStatus");
-  const points = Number(jbPointsInput.value);
-
-  if (!jbUserPhone || !jbUserData) {
-    status.className = "convert-status error";
-    status.innerText = "⚠️ Votre compte n'est pas encore chargé.";
+// GENERER CARTE
+$("generateCardBtn").addEventListener("click", ()=>{
+  const nom=$("nom").value.trim(), postnom=$("postnom").value.trim(), prenom=$("prenom").value.trim();
+  const sexe=$("sexe").value, lieuNaiss=$("lieuNaiss").value.trim(), dateNaiss=$("dateNaiss").value;
+  const adresse=$("adresse").value.trim(), nationalite=$("nationalite").value.trim(), province=$("province").value.trim();
+  const territoire=$("territoire").value.trim(), capitaine=$("capitaine").value.trim(), poste=$("poste").value.trim();
+  
+  if(!nom||!postnom||!prenom||!lieuNaiss||!dateNaiss||!adresse||!province||!territoire||!poste){
+    alert("❌ Remplis tous les champs obligatoires (*) comme vraie carte!");
     return;
   }
-  if (!Number.isFinite(points) || points < 100) {
-    status.className = "convert-status error";
-    status.innerText = "❌ Minimum : 100 points.";
-    return;
-  }
-  if (!Number.isInteger(points) || points % 100 !== 0) {
-    status.className = "convert-status error";
-    status.innerText = "❌ Utilisez un multiple entier de 100 points.";
-    return;
-  }
-  if (points > jbCurrentPoints) {
-    status.className = "convert-status error";
-    status.innerText = "❌ Vous n'avez pas assez de points.";
+  if(!userPhotoBase64){
+    alert("❌ Ajoute ta photo de profil!");
     return;
   }
 
-  const amount = points * 10;
-  if (!confirm(
-    `Convertir ${jbFormatNumber(points)} points en ${jbFormatNumber(amount)} FC ?`
-  )) return;
+  // Sauvegarde
+  const data={nom,postnom,prenom,sexe,lieuNaiss,dateNaiss,adresse,nationalite,province,territoire,capitaine,poste,photo:userPhotoBase64,code:jbInviteCode};
+  localStorage.setItem("jasonCarteData", JSON.stringify(data));
 
-  button.disabled = true;
-  button.innerText = "⏳ CONVERSION...";
-  status.className = "convert-status";
-  status.innerText = "Traitement en cours...";
+  // Remplir carte
+  $("cNom").innerText=nom.toUpperCase();
+  $("cPostnom").innerText=postnom.toUpperCase();
+  $("cPrenom").innerText=prenom;
+  $("cSexe").innerText=sexe;
+  $("cDateNaiss").innerText=formatDateFr(dateNaiss);
+  $("cLieuNaiss").innerText=lieuNaiss;
+  $("cNationalite").innerText=nationalite;
+  $("cAdresse").innerText=adresse;
+  $("cProvince").innerText=province;
+  $("cTerritoire").innerText=territoire;
+  $("cCapitaine2").innerText=capitaine||province+" Capitale";
+  $("cProvince2").innerText=province;
+  $("cPoste").innerText=poste;
+  $("cCode").innerText=jbInviteCode;
+  $("cCode2").innerText=jbInviteCode;
+  $("cNumber").innerText=`JB-${new Date().getFullYear()}-${String(Math.floor(Math.random()*999999)).padStart(6,'0')}`;
+  $("cEmission").innerText=new Date().toLocaleDateString("fr-FR");
+  $("cLink").innerText=`${location.origin}/register.html?inviteCode=${jbInviteCode}`;
 
-  try {
-    const result = await runTransaction(
-      ref(jbDB, `${ROOT}/users/${jbUserPhone}`),
-      data => {
-        if (data === null) return;
+  // QR CODES
+  const qrLink=`${location.origin}/register.html?inviteCode=${encodeURIComponent(jbInviteCode)}`;
+  $("qrFront").innerHTML=""; $("qrBack").innerHTML="";
+  new QRCode($("qrFront"), {text:qrLink, width:48, height:48, correctLevel: QRCode.CorrectLevel.H});
+  new QRCode($("qrBack"), {text:qrLink, width:78, height:78, correctLevel: QRCode.CorrectLevel.H});
 
-        const available = Number(
-          data.points_fidelite ?? data.points ?? data.loyaltyPoints ?? 0
-        ) || 0;
-
-        if (available < points) return;
-
-        const balance = Number(
-          data.solde_principal ?? data.solde ?? 0
-        ) || 0;
-
-        data.points_fidelite = available - points;
-        data.solde_principal = balance + amount;
-
-        if (!data.points_conversion ||
-            typeof data.points_conversion !== "object") {
-          data.points_conversion = {};
-        }
-
-        const conversionId =
-          "JB-CONV-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
-
-        data.points_conversion[conversionId] = {
-          points,
-          montant: amount,
-          date: new Date().toISOString(),
-          statut: "VALIDEE"
-        };
-
-        return data;
-      },
-      { applyLocally: false }
-    );
-
-    if (!result.committed) {
-      throw new Error("CONVERSION_REFUSED");
-    }
-
-    jbCurrentPoints -= points;
-    jbUserData = result.snapshot.val() || jbUserData;
-    jbLatestConversionHistory = jbUserData.points_conversion || {};
-
-    document.getElementById("jb_pointsBig").innerText =
-      jbFormatNumber(jbCurrentPoints);
-    document.getElementById("jb_pointsDisplay").innerText =
-      jbFormatNumber(jbCurrentPoints);
-
-    const newValue = jbCurrentPoints * 10;
-    document.getElementById("jb_pointsValue").innerText =
-      jbFormatNumber(newValue) + " FC";
-    document.getElementById("jb_pointsValueBig").innerText =
-      jbFormatNumber(newValue) + " FC";
-
-    document.getElementById("jb_mainBalance").innerText =
-      jbFormatNumber(
-        Number(jbUserData.solde_principal ?? jbUserData.solde ?? 0)
-      );
-
-    jbRenderHistory(jbLatestConversionHistory);
-
-    status.className = "convert-status success";
-    status.innerText =
-      `✅ Conversion réussie : +${jbFormatNumber(amount)} FC`;
-    jbPointsInput.value = "";
-    jbConversionResult.innerHTML = "✅ Conversion effectuée avec succès.";
-  } catch (error) {
-    console.error(error);
-    status.className = "convert-status error";
-    status.innerText = error.message === "CONVERSION_REFUSED"
-      ? "❌ Conversion refusée : points insuffisants ou compte modifié."
-      : "⚠️ Erreur pendant la conversion. Réessayez.";
-  } finally {
-    button.disabled = false;
-    button.innerText = "⭐ CONVERTIR MES POINTS";
-  }
+  $("cardPreviewWrap").style.display="flex";
+  $("downloadActions").style.display="grid";
+  $("downloadActions2").style.display="grid";
+  $("cardPreviewWrap").scrollIntoView({behavior:"smooth"});
 });
 
-document.getElementById("jb_btnCopy").addEventListener("click", async () => {
-  const code = jbInviteCode ||
-    document.getElementById("jb_myCode").innerText;
-
-  if (!code || code === "...") {
-    alert("⏳ Votre code de parrainage n'est pas encore chargé.");
-    return;
-  }
-
-  const base = window.location.origin;
-  const link = `${base}/register.html?inviteCode=${encodeURIComponent(code)}`;
-  const message = `🚀 Rejoins JASON BUSINESS !\n\nUtilise mon lien d'inscription :\n${link}`;
-  const copyStatus = document.getElementById("jb_copyStatus");
-
-  try {
-    if (navigator.share) {
-      await navigator.share({
-        title: "JASON BUSINESS",
-        text: message,
-        url: link
-      });
-      copyStatus.style.display = "block";
-      copyStatus.innerText = "✅ Fenêtre de partage ouverte !";
-      setTimeout(() => copyStatus.style.display = "none", 3000);
-      return;
-    }
-
-    await jbCopyText(link);
-    copyStatus.style.display = "block";
-    copyStatus.innerText = "✅ Lien d'invitation copié !";
-    setTimeout(() => copyStatus.style.display = "none", 3000);
-  } catch (error) {
-    if (error.name === "AbortError") return;
-    try {
-      await jbCopyText(link);
-      alert("✅ Lien d'invitation copié !");
-    } catch {
-      prompt("Copiez votre lien d'invitation :", link);
-    }
-  }
+// TELECHARGEMENT PNG
+$("downloadPngBtn").addEventListener("click", async ()=>{
+  const front=$("cardFront");
+  const canvas=await html2canvas(front,{scale:3,backgroundColor:null,useCORS:true});
+  const link=document.createElement("a");
+  link.download=`JASON-CARTE-${$("nom").value}-${jbInviteCode}.png`;
+  link.href=canvas.toDataURL("image/png");
+  link.click();
 });
 
-async function jbCopyText(text) {
-  if (navigator.clipboard && window.isSecureContext) {
-    await navigator.clipboard.writeText(text);
-    return;
+$("downloadPdfBtn").addEventListener("click", async ()=>{
+  const {jsPDF}=window.jspdf;
+  const front=$("cardFront");
+  const back=$("cardBack");
+  const canvasFront=await html2canvas(front,{scale:3,backgroundColor:null,useCORS:true});
+  const canvasBack=await html2canvas(back,{scale:3,backgroundColor:null,useCORS:true});
+  
+  const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:[86,54]});
+  // Recto
+  pdf.addImage(canvasFront.toDataURL("image/png"),"PNG",0,0,86,54);
+  // Verso nouvelle page même taille
+  pdf.addPage([86,54],"landscape");
+  pdf.addImage(canvasBack.toDataURL("image/png"),"PNG",0,0,86,54);
+  
+  pdf.save(`JASON-CARTE-${$("nom").value}-${jbInviteCode}.pdf`);
+});
+
+$("downloadBothBtn").addEventListener("click", async ()=>{
+  const front=$("cardFront");
+  const back=$("cardBack");
+  const c1=await html2canvas(front,{scale:3,useCORS:true});
+  const c2=await html2canvas(back,{scale:3,useCORS:true});
+  const link1=document.createElement("a");
+  link1.download=`JASON-CARTE-RECTO-${jbInviteCode}.png`;
+  link1.href=c1.toDataURL("image/png");
+  link1.click();
+  setTimeout(()=>{
+    const link2=document.createElement("a");
+    link2.download=`JASON-CARTE-VERSO-${jbInviteCode}.png`;
+    link2.href=c2.toDataURL("image/png");
+    link2.click();
+  },500);
+});
+
+$("shareCardBtn").addEventListener("click", async ()=>{
+  const front=$("cardFront");
+  const canvas=await html2canvas(front,{scale:3,useCORS:true});
+  canvas.toBlob(async blob=>{
+    const file=new File([blob],`JASON-CARTE-${jbInviteCode}.png`,{type:"image/png"});
+    if(navigator.share && navigator.canShare({files:[file]})){
+      try{ await navigator.share({title:"Ma JASON CARTE",text:`Ma carte JASON BUSINESS - Code: ${jbInviteCode}`,files:[file]}); }catch{}
+    }else{
+      const link=document.createElement("a");
+      link.href=canvas.toDataURL("image/png");
+      link.download=`JASON-CARTE-${jbInviteCode}.png`;
+      link.click();
+      alert("✅ Carte téléchargée! Partage-la avec ton QR code!");
+    }
+  });
+});
+
+// COPY LIEN
+$("jb_btnCopy").addEventListener("click", async ()=>{
+  const code=jbInviteCode;
+  if(!code||code==="..."){alert("Code pas encore chargé");return;}
+  const link=`${location.origin}/register.html?inviteCode=${encodeURIComponent(code)}`;
+  const msg=`🚀 Rejoins JASON BUSINESS avec ma JASON CARTE!\n\nCode: ${code}\nLien: ${link}\n\nScanne mon QR code sur ma carte!`;
+  try{
+    if(navigator.share){ await navigator.share({title:"JASON BUSINESS - JASON CARTE",text:msg,url:link}); $("jb_copyStatus").style.display="block"; setTimeout(()=>$("jb_copyStatus").style.display="none",3000); return; }
+    await navigator.clipboard.writeText(link);
+    $("jb_copyStatus").style.display="block"; setTimeout(()=>$("jb_copyStatus").style.display="none",3000);
+  }catch{
+    prompt("Copiez le lien:", link);
   }
-
-  const temporary = document.createElement("textarea");
-  temporary.value = text;
-  temporary.style.position = "fixed";
-  temporary.style.opacity = "0";
-  document.body.appendChild(temporary);
-  temporary.select();
-  const copied = document.execCommand("copy");
-  temporary.remove();
-
-  if (!copied) throw new Error("COPY_FAILED");
-}
+});
 </script>
 </body>
 </html>
