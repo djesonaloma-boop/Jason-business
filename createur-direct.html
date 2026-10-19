@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#050a14">
-<title>JASON BUSINESS — Créateur APK</title>
+<title>JASON BUSINESS — Créateur APK Pro</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
 :root{--blue:#00d2ff;--dark:#050a14;--green:#00e676;--red:#ff4757;--gold:#ffd700}
@@ -15,18 +15,26 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 .jb-header{position:relative;overflow:hidden;padding:24px 20px 22px;background:linear-gradient(135deg,rgba(0,210,255,.13),rgba(5,10,20,.80) 55%,rgba(255,215,0,.055));border-bottom:1px solid rgba(0,210,255,.32);backdrop-filter:blur(22px)}
 .jb-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .jb-brand{font-size:20px;font-weight:900;letter-spacing:2px;color:var(--blue);text-shadow:0 0 16px rgba(0,210,255,.40)}
-.jb-status{font-size:10px;color:var(--green);padding:7px 11px;border-radius:20px;background:rgba(0,230,118,.09);border:1px solid rgba(0,230,118,.28)}
+.jb-status{font-size:10px;color:var(--gold);padding:7px 11px;border-radius:20px;background:rgba(255,215,0,.09);border:1px solid rgba(255,215,0,.28);white-space:nowrap}
 .jb-card{margin:18px 20px;padding:20px;border-radius:22px;background:linear-gradient(145deg,rgba(0,210,255,.13),rgba(5,10,20,.82) 55%,rgba(0,119,255,.07));border:1px solid rgba(0,210,255,.32);backdrop-filter:blur(20px)}
 .jb-title{font-size:12px;font-weight:900;letter-spacing:1px;color:var(--blue);margin-bottom:6px}
 .jb-desc{font-size:10px;opacity:.60;line-height:1.5}
 .jb-label{font-size:10px;font-weight:900;letter-spacing:1px;color:#b5c5da;margin:16px 0 8px;display:block;text-transform:uppercase}
 .jb-input{width:100%;background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.10);color:white;border-radius:14px;padding:14px;outline:none;font-size:13px}
 .jb-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,210,255,.14)}
+.jb-textarea{min-height:160px;font-family:monospace;font-size:12px;resize:vertical}
 .jb-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .jb-logo-box{margin-top:10px;padding:14px;border-radius:16px;background:linear-gradient(115deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px dashed rgba(0,210,255,.32);text-align:center;cursor:pointer;position:relative;overflow:hidden}
 .jb-logo-box input{position:absolute;inset:0;opacity:0;cursor:pointer}
 .jb-logo-preview{width:80px;height:80px;margin:10px auto 0;border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);display:grid;place-items:center;font-size:32px;overflow:hidden}
 .jb-logo-preview img{width:100%;height:100%;object-fit:cover}
+.jb-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.jb-tab{padding:12px;border-radius:12px;text-align:center;font-size:11px;font-weight:900;cursor:pointer;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:rgba(255,255,255,.6)}
+.jb-tab.active{background:linear-gradient(120deg,var(--blue),#00a8ff);color:#001018;border-color:var(--blue);box-shadow:0 6px 18px rgba(0,210,255,.25)}
+.jb-pane{display:none}
+.jb-pane.active{display:block}
+.jb-price{display:flex;justify-content:space-between;align-items:center;margin:16px 0;padding:12px 14px;border-radius:12px;background:linear-gradient(135deg,rgba(255,215,0,.09),rgba(255,215,0,.03));border:1px solid rgba(255,215,0,.28)}
+.jb-price b{color:var(--gold)}
 .jb-action{width:100%;padding:16px 10px;border-radius:15px;text-align:center;text-decoration:none;font-size:12px;font-weight:900;border:0;cursor:pointer;display:block;margin-top:10px}
 .jb-action:active{transform:scale(.97)}
 .jb-recharge{color:#001018;background:linear-gradient(120deg,var(--blue),#00a8ff,var(--blue));box-shadow:0 8px 22px rgba(0,210,255,.25)}
@@ -43,16 +51,36 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 </head>
 <body>
 <div class="jb-overlay">
-<header class="jb-header"><div class="jb-top"><div class="jb-brand">JASON BUSINESS</div><div class="jb-status">● APK BUILDER</div></div><div style="margin-top:18px"><small style="font-size:10px;opacity:.60;letter-spacing:1px">CRÉATEUR D'APK PRO</small><h2 style="margin:7px 0 0;font-size:20px">Avec Logo + Version</h2></div></header>
+<header class="jb-header"><div class="jb-top"><div class="jb-brand">JASON BUSINESS</div><div class="jb-status">💰 15 000 FC / APK</div></div><div style="margin-top:18px"><small style="font-size:10px;opacity:.60;letter-spacing:1px">CRÉATEUR D'APK PRO PAYANT</small><h2 style="margin:7px 0 0;font-size:20px">Avec Logo + Code</h2></div></header>
 
 <section class="jb-card">
-  <div class="jb-title">🚀 INFOS DE BASE</div>
-  <label class="jb-label">📱 Nom de l'app</label>
-  <input class="jb-input" id="appName" placeholder="Ma Boutique" value="Ma Boutique">
-  <label class="jb-label">🌐 URL https://</label>
-  <input class="jb-input" id="appUrl" placeholder="https://..." value="https://jason-business.vercel.app">
-  <label class="jb-label">📦 Package ID</label>
-  <input class="jb-input" id="appPackage" placeholder="com.maboutique.app" value="com.maboutique.app">
+  <div class="jb-title">💳 MODE DE CRÉATION</div>
+  <div class="jb-desc">Choisis comment tu veux créer ton app</div>
+  <div class="jb-tabs">
+    <div class="jb-tab active" id="tabLink" onclick="switchMode('link')">🌐 MODE LIEN</div>
+    <div class="jb-tab" id="tabCode" onclick="switchMode('code')">💻 MODE CODE HTML</div>
+  </div>
+
+  <!-- MODE LIEN -->
+  <div class="jb-pane active" id="paneLink">
+    <label class="jb-label">📱 Nom de l'app</label>
+    <input class="jb-input" id="appNameLink" placeholder="Ma Boutique">
+    <label class="jb-label">🌐 URL https:// (ton site)</label>
+    <input class="jb-input" id="appUrl" placeholder="https://exemple.com">
+    <label class="jb-label">📦 Package ID</label>
+    <input class="jb-input" id="appPackageLink" placeholder="com.maboutique.app">
+  </div>
+
+  <!-- MODE CODE HTML -->
+  <div class="jb-pane" id="paneCode">
+    <label class="jb-label">📱 Nom de l'app</label>
+    <input class="jb-input" id="appNameCode" placeholder="Ma Boutique">
+    <label class="jb-label">📦 Package ID</label>
+    <input class="jb-input" id="appPackageCode" placeholder="com.maboutique.app">
+    <label class="jb-label">💻 Colle ton code HTML complet ici</label>
+    <textarea class="jb-input jb-textarea" id="customCode" placeholder="<!DOCTYPE html><html><head>... ton code HTML complet ici ..."></textarea>
+    <div style="font-size:9px;opacity:.5;margin-top:6px">Tu sais coder? Colle ton site complet ici, il sera directement dans l'APK!</div>
+  </div>
 
   <div class="jb-title" style="margin-top:22px">🎨 LOGO & COULEURS</div>
   <label class="jb-label">🖼️ Logo de l'app (PNG / JPG)</label>
@@ -69,28 +97,29 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
     <div><label class="jb-label">🌑 Splash / Fond</label><input class="jb-input" type="color" id="splashColor" value="#050a14" style="height:52px;padding:6px"></div>
   </div>
 
-  <div class="jb-title" style="margin-top:22px">⚙️ VERSION & OPTIONS</div>
+  <div class="jb-title" style="margin-top:22px">⚙️ VERSION</div>
   <div class="jb-grid">
-    <div><label class="jb-label">🔢 Version Name (1.0)</label><input class="jb-input" id="versionName" value="1.0"></div>
-    <div><label class="jb-label">🔢 Version Code (1)</label><input class="jb-input" id="versionCode" value="1" type="number"></div>
+    <div><label class="jb-label">🔢 Version Name</label><input class="jb-input" id="versionName" value="1.0"></div>
+    <div><label class="jb-label">🔢 Version Code</label><input class="jb-input" id="versionCode" value="1" type="number"></div>
+  </div>
+  <div class="jb-grid">
+    <div><label class="jb-label">📱 Orientation</label><select class="jb-input" id="orientation"><option value="portrait">Portrait</option><option value="landscape">Landscape</option><option value="default">Auto</option></select></div>
+    <div><label class="jb-label">📶 Plein écran?</label><select class="jb-input" id="fullscreen"><option value="false">Non</option><option value="true">Oui</option></select></div>
   </div>
 
-  <div class="jb-grid">
-    <div><label class="jb-label">📱 Orientation</label><select class="jb-input" id="orientation"><option value="portrait">Portrait (vertical)</option><option value="landscape">Landscape (horizontal)</option><option value="default">Auto / Default</option></select></div>
-    <div><label class="jb-label">📶 Plein écran?</label><select class="jb-input" id="fullscreen"><option value="false">Non - Normal</option><option value="true">Oui - Fullscreen</option></select></div>
+  <div class="jb-price">
+    <div><small style="opacity:.6;font-size:9px">PRIX DE GÉNÉRATION</small><br><b style="font-size:16px">15 000 FC</b></div>
+    <div style="font-size:10px;opacity:.7;text-align:right">Solde: <span id="userSolde">...</span> FC<br><span style="color:var(--green)">Paiement sécurisé</span></div>
   </div>
 
-  <label class="jb-label">🔗 Permissions</label>
-  <select class="jb-input" id="perm"><option value="internet">Internet seulement (léger)</option><option value="full">Internet + Stockage + Caméra</option></select>
-
-  <button class="jb-action jb-recharge" onclick="genererApp()" style="margin-top:20px">🚀 GÉNÉRER MON APK AVEC LOGO</button>
+  <button class="jb-action jb-gold" onclick="genererApp()" id="btnGenerate" style="margin-top:12px">💳 PAYER 15 000 FC & GÉNÉRER MON APK</button>
 </section>
 
 <div class="jb-preview" id="previewBox">
-  <div style="font-size:12px;font-weight:900;color:var(--green)">✅ APK PRÊT AVEC TON LOGO!</div>
+  <div style="font-size:12px;font-weight:900;color:var(--green)">✅ APK PAYÉ & PRÊT!</div>
   <div id="previewInfo" style="font-size:11px;color:#b5c5da;margin-top:10px;line-height:1.6"></div>
   <button class="jb-action jb-green" onclick="downloadZIP()">📥 TÉLÉCHARGER PROJET COMPLET .ZIP</button>
-  <button class="jb-action jb-gold" onclick="goPWABuilder()">🌐 GÉNÉRER VRAI APK SUR PWABUILDER</button>
+  <button class="jb-action jb-recharge" id="btnPwa" onclick="goPWABuilder()">🌐 GÉNÉRER VRAI APK SUR PWABUILDER</button>
 </div>
 
 </div>
@@ -103,10 +132,37 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 
 <div class="jb-toast" id="toast"></div>
 
-<script>
-function goPage(p){window.location.href=p}
-function toast(m){const e=document.getElementById("toast");e.textContent=m;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),3000)}
-let zipBlob=null, appData=null, logoBase64=null, logoFile=null;
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+const jbFirebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
+const jbApp=initializeApp(jbFirebaseConfig);
+const jbDatabase=getDatabase(jbApp);
+const jbPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("phone");
+if(!jbPhone){window.location.replace("login.html");}
+const jbUserReference=ref(jbDatabase,"jasonBusiness/users/"+jbPhone);
+
+onValue(jbUserReference,snap=>{
+ if(!snap.exists()) return;
+ const u=snap.val()||{};
+ const solde=Number(u.solde_principal||u.solde||0);
+ document.getElementById("userSolde").textContent=Math.floor(solde).toLocaleString("fr-FR");
+ window.currentSolde=solde;
+});
+
+window.goPage=function(p){window.location.href=p}
+window.toast=function(m){const e=document.getElementById("toast");e.textContent=m;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),3000)}
+
+let zipBlob=null, appData=null, logoBase64=null, logoFile=null, currentMode='link';
+
+window.switchMode=function(mode){
+ currentMode=mode;
+ document.getElementById("tabLink").classList.toggle("active",mode==='link');
+ document.getElementById("tabCode").classList.toggle("active",mode==='code');
+ document.getElementById("paneLink").classList.toggle("active",mode==='link');
+ document.getElementById("paneCode").classList.toggle("active",mode==='code');
+ document.getElementById("btnPwa").style.display=mode==='link'?'block':'none';
+}
 
 document.getElementById("logoInput").addEventListener("change", function(e){
   const file=e.target.files[0]; if(!file) return;
@@ -118,67 +174,110 @@ document.getElementById("logoInput").addEventListener("change", function(e){
     document.getElementById("logoPreview").innerHTML=`<img src="${ev.target.result}">`;
   };
   reader.readAsDataURL(file);
-  toast("✅ Logo chargé: "+file.name);
+  toast("✅ Logo chargé");
 });
 
-function goPWABuilder(){
+window.goPWABuilder=function(){
   const url=document.getElementById("appUrl").value.trim();
+  if(!url){toast("⚠️ Pas d'URL en mode lien");return}
   window.open("https://www.pwabuilder.com/reportcard?site="+encodeURIComponent(url), "_blank");
 }
 
-async function genererApp(){
-  const name=document.getElementById("appName").value.trim();
-  const url=document.getElementById("appUrl").value.trim();
-  const pkg=document.getElementById("appPackage").value.trim();
+window.genererApp=async function(){
+  let name, pkg, url, customHtml;
+  if(currentMode==='link'){
+    name=document.getElementById("appNameLink").value.trim();
+    url=document.getElementById("appUrl").value.trim();
+    pkg=document.getElementById("appPackageLink").value.trim();
+    if(!name||!url||!pkg){toast("⚠️ Remplis Nom / URL / Package");return}
+    if(!url.startsWith("https://")){toast("⚠️ URL https:// obligatoire");return}
+  } else {
+    name=document.getElementById("appNameCode").value.trim();
+    pkg=document.getElementById("appPackageCode").value.trim();
+    customHtml=document.getElementById("customCode").value.trim();
+    if(!name||!pkg||!customHtml){toast("⚠️ Remplis Nom / Package / Code HTML");return}
+    if(customHtml.length<50){toast("⚠️ Code HTML trop court");return}
+  }
+
   const color=document.getElementById("appColor").value;
   const splash=document.getElementById("splashColor").value;
   const vName=document.getElementById("versionName").value.trim()||"1.0";
   const vCode=document.getElementById("versionCode").value.trim()||"1";
   const orient=document.getElementById("orientation").value;
   const full=document.getElementById("fullscreen").value;
-  const perm=document.getElementById("perm").value;
 
-  if(!name||!url||!pkg){toast("⚠️ Remplis Nom / URL / Package");return}
   if(!logoBase64){toast("⚠️ Choisis un logo d'abord!");return}
-  if(!url.startsWith("https://")){toast("⚠️ URL https:// obligatoire");return}
+  if(window.currentSolde===undefined){toast("⏳ Chargement solde...");return}
+  if(window.currentSolde<15000){toast("❌ Solde insuffisant! Il te faut 15 000 FC. Recharge!");return}
 
-  appData={name,url,pkg,color,splash,vName,vCode,orient,full,perm};
-  toast("⏳ Génération avec logo...");
+  if(!confirm(`Confirmer paiement de 15 000 FC pour générer l'APK "${name}" ?`)) return;
 
-  const zip=new JSZip();
-  const permissions=perm==="full"?`<uses-permission android:name="android.permission.INTERNET" /><uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /><uses-permission android:name="android.permission.CAMERA" />`:`<uses-permission android:name="android.permission.INTERNET" />`;
-  const orientationAttr=orient!=="default"?`android:screenOrientation="${orient}"`:"";
-  const theme=full==="true"?`@android:style/Theme.NoTitleBar.Fullscreen`:`@android:style/Theme.NoTitleBar`;
+  const btn=document.getElementById("btnGenerate");
+  btn.disabled=true; btn.textContent="⏳ PAIEMENT EN COURS...";
 
-  const manifestXml=`<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" package="${pkg}"> ${permissions} <application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="${name}" android:theme="${theme}"><activity android:name=".MainActivity" android:exported="true" ${orientationAttr}><intent-filter><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.LAUNCHER" /></intent-filter></activity></application></manifest>`;
-  const mainJava=`package ${pkg}; import android.os.Bundle; import android.webkit.WebView; import android.webkit.WebViewClient; import androidx.appcompat.app.AppCompatActivity; public class MainActivity extends AppCompatActivity { WebView webView; @Override protected void onCreate(Bundle savedInstanceState){ super.onCreate(savedInstanceState); webView=new WebView(this); setContentView(webView); webView.getSettings().setJavaScriptEnabled(true); webView.getSettings().setDomStorageEnabled(true); webView.setWebViewClient(new WebViewClient()); webView.loadUrl("${url}"); } @Override public void onBackPressed(){ if(webView.canGoBack()) webView.goBack(); else super.onBackPressed(); } }`;
-  const buildGradle=`plugins { id 'com.android.application' } android { namespace '${pkg}' compileSdk 34 defaultConfig { applicationId "${pkg}" minSdk 21 targetSdk 34 versionCode ${vCode} versionName "${vName}" } } dependencies { implementation 'androidx.appcompat:appcompat:1.6.1' }`;
-  const colorsXml=`<?xml version="1.0" encoding="utf-8"?><resources><color name="primary">${color}</color><color name="splash">${splash}</color></resources>`;
+  try{
+    const tr=await runTransaction(jbUserReference,curr=>{
+      if(!curr) return;
+      const solde=Number(curr.solde_principal||curr.solde||0);
+      if(solde<15000) return;
+      curr.solde_principal=solde-15000;
+      if(curr.solde!==undefined) curr.solde=curr.solde_principal;
+      return curr;
+    });
 
-  zip.file("AndroidManifest.xml",manifestXml);
-  zip.file("MainActivity.java",mainJava);
-  zip.file("build.gradle",buildGradle);
-  zip.file("colors.xml",colorsXml);
-  zip.file("README.txt",`APP: ${name}\nURL: ${url}\nPACKAGE: ${pkg}\nVERSION: ${vName} (${vCode})\nLOGO: Inclus\nORIENTATION: ${orient}\nVa sur PWABuilder.com pour générer le vrai APK!`);
-  // Ajoute le logo
-  const base64Data=logoBase64.split(",")[1];
-  zip.file("icon.png",base64Data,{base64:true});
-  zip.file("ic_launcher.png",base64Data,{base64:true});
+    if(!tr.committed){toast("❌ Paiement échoué - Solde insuffisant");btn.disabled=false;btn.textContent="💳 PAYER 15 000 FC & GÉNÉRER MON APK";return;}
 
-  zipBlob=await zip.generateAsync({type:"blob"});
-  document.getElementById("previewInfo").innerHTML=`<img src="${logoBase64}" style="width:50px;height:50px;border-radius:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,.2)"><br><b style="color:white">${name} v${vName} (${vCode})</b><br>📦 ${pkg}<br>🌐 ${url}<br>🎨 ${color}<br>📱 ${orient} | Fullscreen: ${full}<br>🖼️ Logo: ${logoFile.name}`;
-  document.getElementById("previewBox").style.display="block";
-  document.getElementById("previewBox").scrollIntoView({behavior:"smooth"});
-  toast("✅ Projet avec logo prêt!");
+    toast("✅ Paiement 15 000 FC réussi! Génération...");
+    
+    const zip=new JSZip();
+    const orientationAttr=orient!=="default"?`android:screenOrientation="${orient}"`:"";
+    const theme=full==="true"?`@android:style/Theme.NoTitleBar.Fullscreen`:`@android:style/Theme.NoTitleBar`;
+    const manifestXml=`<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" package="${pkg}"><uses-permission android:name="android.permission.INTERNET" /><application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="${name}" android:theme="${theme}"><activity android:name=".MainActivity" android:exported="true" ${orientationAttr}><intent-filter><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.LAUNCHER" /></intent-filter></activity></application></manifest>`;
+
+    let mainJava;
+    if(currentMode==='link'){
+      mainJava=`package ${pkg}; import android.os.Bundle; import android.webkit.WebView; import android.webkit.WebViewClient; import androidx.appcompat.app.AppCompatActivity; public class MainActivity extends AppCompatActivity { WebView webView; @Override protected void onCreate(Bundle savedInstanceState){ super.onCreate(savedInstanceState); webView=new WebView(this); setContentView(webView); webView.getSettings().setJavaScriptEnabled(true); webView.getSettings().setDomStorageEnabled(true); webView.setWebViewClient(new WebViewClient()); webView.loadUrl("${url}"); } @Override public void onBackPressed(){ if(webView.canGoBack()) webView.goBack(); else super.onBackPressed(); } }`;
+    } else {
+      const escapedHtml=customHtml.replace(/\\/g,"\\\\").replace(/"/g,'\\"').replace(/\n/g,"\\n").replace(/\r/g,"");
+      mainJava=`package ${pkg}; import android.os.Bundle; import android.webkit.WebView; import androidx.appcompat.app.AppCompatActivity; public class MainActivity extends AppCompatActivity { WebView webView; @Override protected void onCreate(Bundle savedInstanceState){ super.onCreate(savedInstanceState); webView=new WebView(this); setContentView(webView); webView.getSettings().setJavaScriptEnabled(true); String htmlContent="${escapedHtml}"; webView.loadDataWithBaseURL(null, htmlContent, "text/html", "UTF-8", null); } }`;
+    }
+
+    const buildGradle=`plugins { id 'com.android.application' } android { namespace '${pkg}' compileSdk 34 defaultConfig { applicationId "${pkg}" minSdk 21 targetSdk 34 versionCode ${vCode} versionName "${vName}" } } dependencies { implementation 'androidx.appcompat:appcompat:1.6.1' }`;
+    const colorsXml=`<?xml version="1.0" encoding="utf-8"?><resources><color name="primary">${color}</color><color name="splash">${splash}</color></resources>`;
+
+    zip.file("AndroidManifest.xml",manifestXml);
+    zip.file("MainActivity.java",mainJava);
+    zip.file("build.gradle",buildGradle);
+    zip.file("colors.xml",colorsXml);
+    if(currentMode==='code') zip.file("index.html",customHtml);
+    else zip.file("url.txt",url);
+
+    const base64Data=logoBase64.split(",")[1];
+    zip.file("icon.png",base64Data,{base64:true});
+    zip.file("ic_launcher.png",base64Data,{base64:true});
+
+    appData={name,pkg,vName,vCode,mode:currentMode,url:currentMode==='link'?url:'CODE HTML'};
+    zipBlob=await zip.generateAsync({type:"blob"});
+
+    document.getElementById("previewInfo").innerHTML=`<img src="${logoBase64}" style="width:50px;height:50px;border-radius:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,.2)"><br><b style="color:white">${name} v${vName}</b><br>📦 ${pkg}<br>${currentMode==='link'?'🌐 '+url:'💻 Mode CODE HTML'}<br>✅ Paiement: 15 000 FC débité<br>🖼️ Logo: ${logoFile.name}`;
+    document.getElementById("previewBox").style.display="block";
+    document.getElementById("previewBox").scrollIntoView({behavior:"smooth"});
+    btn.textContent="✅ APK GÉNÉRÉ - PAYÉ";
+    toast("✅ 15 000 FC payés! APK prêt!");
+
+  }catch(e){
+    console.error(e);
+    toast("⚠️ Erreur paiement"); btn.disabled=false; btn.textContent="💳 PAYER 15 000 FC & GÉNÉRER MON APK";
+  }
 }
 
-function downloadZIP(){
+window.downloadZIP=function(){
   if(!zipBlob){toast("⚠️ Génère d'abord");return}
   const a=document.createElement("a");
   a.href=URL.createObjectURL(zipBlob);
-  a.download=`${appData.name}_v${appData.vName}_LOGO.zip`;
+  a.download=`${appData.name}_v${appData.vName}_${appData.mode.toUpperCase()}.zip`;
   a.click();
-  toast("📥 ZIP avec logo téléchargé!");
+  toast("📥 ZIP téléchargé!");
 }
 </script>
 </body>
