@@ -4,77 +4,101 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="theme-color" content="#050a14">
-<title>JASON BUSINESS - CARTE DE MEMBRE</title>
+<title>JASON BUSINESS - Mon Réseau</title>
 <style>
-:root{--blue:#00d2ff;--blue2:#0077ff;--dark:#050a14;--gold:#ffd700;--green:#00e676;--red:#ff4757;--glass:rgba(255,255,255,.06);--border:rgba(255,255,255,.10);--text:#fff;--muted:#b5c5da}
+:root{--blue:#00d2ff;--dark:#050a14;--gold:#ffd700;--green:#00e676;--red:#ff4757;--glass:rgba(255,255,255,.05)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--dark) url('IMG_0870.jpeg') no-repeat center center fixed;background-size:cover;color:#fff;padding-bottom:110px;overflow-x:hidden}
-.overlay{min-height:100vh;padding:16px;background:radial-gradient(ellipse at 10% 0%,rgba(0,210,255,.10),transparent 42%),rgba(5,10,20,.93)}
-.container{width:100%;max-width:680px;margin:auto}
-.top-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--dark) url('IMG_0870.jpeg') no-repeat center center fixed;background-size:cover;color:white;padding-bottom:95px}
+button,input{font-family:inherit}button{-webkit-user-select:none;user-select:none}
+.overlay{min-height:100vh;background:rgba(5,10,20,.93);padding:20px}
+.container{width:100%;max-width:650px;margin:auto}
+.top-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
 .brand{color:var(--blue);font-size:15px;font-weight:900;letter-spacing:2px}
-.online{font-size:10px;color:var(--green);padding:7px 11px;border-radius:20px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.25)}
-.page-title{text-align:center;font-size:22px;letter-spacing:2px;margin:10px 0 6px}.page-title span{display:block;color:var(--blue);font-size:11px;letter-spacing:4px;margin-top:6px}
-.subtitle{text-align:center;font-size:11px;color:var(--muted);margin-bottom:16px;line-height:1.6}
+.online{font-size:10px;color:var(--green);padding:6px 10px;border-radius:20px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.25)}
+.page-title{text-align:center;font-size:23px;letter-spacing:2px;margin:10px 0 7px}
+.page-title span{display:block;color:var(--blue);font-size:12px;letter-spacing:3px;margin-top:7px}
+.subtitle{text-align:center;font-size:11px;opacity:.5;margin-bottom:25px}
+.invite-card{background:linear-gradient(145deg,rgba(0,210,255,.14),rgba(0,0,0,.65));border:1px solid rgba(0,210,255,.5);border-radius:25px;padding:25px 20px;text-align:center;backdrop-filter:blur(15px);box-shadow:0 15px 40px rgba(0,0,0,.35)}
+.code-label{margin:0;font-size:11px;opacity:.6;text-transform:uppercase;letter-spacing:1px}
+.code-display{margin:14px 0 18px;color:var(--blue);font-size:27px;font-weight:900;letter-spacing:3px;word-break:break-all;text-shadow:0 0 15px rgba(0,210,255,.45);text-transform:uppercase}
+.btn-share{width:100%;border:0;border-radius:14px;padding:15px;background:var(--blue);color:#001018;font-size:14px;font-weight:900;cursor:pointer}
+.btn-share:active{transform:scale(.97)}
+.copy-status{display:none;color:var(--green);font-size:11px;margin:10px 0 0;font-weight:bold}
 
-/* BOUTON CREER MA CARTE - NOUVEAU */
-.hero-top{margin:16px 0 20px;padding:18px;border-radius:20px;background:linear-gradient(135deg,rgba(0,210,255,.12),rgba(0,0,0,.6));border:1px solid rgba(0,210,255,.25);text-align:center}
-.hero-cards-demo{display:flex;justify-content:center;gap:12px;margin:12px 0;flex-wrap:wrap}
-.mini-card{width:130px;height:82px;border-radius:8px;background:linear-gradient(135deg,#0a1a35,#102a5c);border:1px solid rgba(0,210,255,.3);display:grid;place-items:center;font-size:7px;color:white}
-.btn-creer{margin-top:12px;padding:14px 24px;border-radius:14px;border:0;background:linear-gradient(120deg,#00d2ff,#0077ff);color:white;font-weight:900;font-size:12px;cursor:pointer;box-shadow:0 8px 25px rgba(0,210,255,.3)}
-.btn-creer:active{transform:scale(.97)}
+/* BOUTON CREER CARTE - NOUVEAU */
+.btn-carte{width:100%;margin-top:14px;padding:16px;border-radius:14px;border:0;background:linear-gradient(120deg,#ffd700,#ffeb80,#ffd700);color:#151000;font-size:12px;font-weight:900;cursor:pointer;box-shadow:0 8px 20px rgba(255,215,0,.2);display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-carte:active{transform:scale(.97)}
 
-.jb-card-form{margin:14px 0;padding:18px;border-radius:20px;background:linear-gradient(145deg,rgba(0,210,255,.10),rgba(5,10,20,.75));border:1px solid rgba(0,210,255,.22);backdrop-filter:blur(18px)}
-.jb-title{font-size:11px;font-weight:900;letter-spacing:1px;color:var(--blue);margin-bottom:12px;text-transform:uppercase}
-.jb-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.jb-field{margin-bottom:10px}.jb-field label{display:block;font-size:9px;color:var(--muted);margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
-.jb-input{width:100%;padding:11px;border-radius:11px;border:1px solid rgba(255,255,255,.10);background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));color:white;outline:none;font-size:12px;text-transform:uppercase}
-.jb-input::placeholder{text-transform:none;opacity:.5}
-.jb-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,210,255,.08)}
+.rule-card{margin-top:18px;padding:17px;border-radius:18px;background:rgba(0,230,118,.055);border:1px solid rgba(0,230,118,.20)}
+.rule-title{color:var(--green);font-size:14px;font-weight:900;margin-bottom:8px}
+.rule-text{font-size:11px;line-height:1.7;opacity:.7}.rule-text b{color:var(--gold)}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
+.stat-box{padding:17px 10px;border-radius:17px;text-align:center;background:var(--glass);border:1px solid rgba(255,255,255,.08)}
+.stat-icon{font-size:21px}.stat-number{margin-top:6px;color:var(--blue);font-size:22px;font-weight:900}.stat-label{margin-top:3px;font-size:9px;opacity:.55;text-transform:uppercase}
+.section-title{display:flex;align-items:center;justify-content:space-between;margin:25px 0 12px}.section-title h3{margin:0;font-size:16px}.section-title span{color:var(--blue);font-size:10px;opacity:.7}
+.level-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.level-box{position:relative;padding:17px 6px;border-radius:17px;text-align:center;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09)}
+.level-tag{display:inline-block;background:var(--blue);color:#000;padding:4px 7px;border-radius:6px;font-size:9px;font-weight:900}
+.level-box small{display:block;margin-top:8px;font-size:9px;opacity:.55;text-transform:uppercase}
+.level-box b{display:block;color:var(--blue);font-size:24px;margin-top:5px}
+.network-card{padding:18px;border-radius:20px;background:rgba(255,255,255,.04);border-left:4px solid var(--blue)}
+.network-row{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.network-row:last-child{border-bottom:0}.network-row span:first-child{font-size:12px;opacity:.7}.network-value{color:var(--blue);font-size:13px;font-weight:900;text-align:right}
+.points-card{margin-top:20px;padding:20px;border-radius:22px;background:linear-gradient(145deg,rgba(255,215,0,.09),rgba(0,0,0,.60));border:1px solid rgba(255,215,0,.3)}
+.points-header{display:flex;justify-content:space-between;align-items:center;gap:10px}.points-title{color:var(--gold);font-size:16px;font-weight:900}.points-rate{color:var(--gold);font-size:10px;font-weight:bold;text-align:right}
+.points-balance{margin-top:15px;padding:20px;text-align:center;border-radius:15px;background:rgba(255,215,0,.06);border:1px dashed rgba(255,215,0,.3)}
+.points-label{font-size:9px;opacity:.55}.points-number{color:var(--gold);font-size:32px;font-weight:900;margin-top:4px}.points-value{margin-top:4px;font-size:11px;opacity:.65}.points-value b{color:var(--gold)}
+.convert-form{margin-top:18px}.convert-form label{display:block;font-size:11px;opacity:.65;margin-bottom:7px}
+.convert-form input{width:100%;padding:15px;border-radius:13px;outline:none;border:1px solid rgba(255,255,255,.12);background:#070b12;color:white;font-size:15px}
+.convert-form input:focus{border-color:var(--gold)}
+.conversion-result{margin-top:10px;padding:12px;border-radius:11px;background:rgba(0,210,255,.06);text-align:center;font-size:12px}.conversion-result b{color:var(--green)}
+.btn-convert{width:100%;margin-top:11px;padding:15px;border:0;border-radius:13px;background:linear-gradient(135deg,#ffd700,#ffb300);color:#111;font-size:14px;font-weight:900;cursor:pointer}.btn-convert:active{transform:scale(.97)}.btn-convert:disabled{opacity:.5;cursor:not-allowed}
+.convert-status{min-height:18px;margin-top:10px;text-align:center;font-size:11px}.success{color:var(--green)}.error{color:var(--red)}
+.history-card{margin-top:20px;padding:18px;border-radius:20px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07)}
+.history-item{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06)}.history-item:last-child{border-bottom:0}.history-top{display:flex;justify-content:space-between;gap:10px}.history-points{color:var(--gold);font-size:12px;font-weight:bold}.history-amount{color:var(--green);font-size:12px;font-weight:bold}.history-date{margin-top:5px;font-size:9px;opacity:.45}.empty{text-align:center;padding:22px 10px;font-size:11px;opacity:.55}
+.members-card{margin-top:20px;padding:18px;border-radius:20px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07)}
+.member{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}.member:last-child{border-bottom:0}.member-avatar{width:40px;height:40px;border-radius:50%;display:flex;justify-content:center;align-items:center;background:rgba(0,210,255,.1);border:1px solid rgba(0,210,255,.25)}
+.member-info{flex:1;min-width:0}.member-name{font-size:12px;font-weight:bold;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-transform:uppercase}.member-date{margin-top:3px;font-size:9px;opacity:.45}.member-level{font-size:9px;color:var(--blue)}
+#jb_status{text-align:center;min-height:18px;margin:15px 0;font-size:10px;color:#ffeb3b}
 
-.card-preview-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;margin:18px 0}
-.id-card{
-  width:100%;max-width:340px;aspect-ratio:85.6/53.98;
-  border-radius:12px;overflow:hidden;position:relative;
-  background:linear-gradient(135deg,#0a1a35 0%,#102a5c 25%,#0d213f 50%,#091a33 100%);
-  border:1px solid rgba(0,210,255,.35);
-  box-shadow:0 10px 30px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.08) inset,0 0 25px rgba(0,210,255,.15);
-  color:white;display:flex;flex-direction:column;
-}
-.id-top{height:38px;background:linear-gradient(90deg,#00d2ff,#0077ff);display:flex;align-items:center;justify-content:space-between;padding:0 12px;color:#001018;font-weight:900;font-size:9px;letter-spacing:.5px}
-.id-body{display:flex;flex:1;padding:8px 10px;gap:10px}
-.id-photo{width:74px;height:86px;border-radius:8px;background:#000;border:2px solid rgba(255,255,255,.15);overflow:hidden;flex-shrink:0;display:grid;place-items:center;font-size:9px;color:#fff}
-.id-photo img{width:100%;height:100%;object-fit:cover}
-.id-infos{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
-.id-row{font-size:7.5px;line-height:1.3;display:flex;gap:4px}.id-row b{color:var(--blue);min-width:42px;font-size:7px;text-transform:uppercase;opacity:.9}.id-row span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:800;color:#e8f0ff;text-transform:uppercase}
-.id-row.big span{font-size:8.5px;font-weight:900}
-.id-bottom{height:28px;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:6.5px;border-top:1px solid rgba(255,255,255,.08)}
-.id-qr{position:absolute;right:8px;bottom:32px;width:52px;height:52px;background:white;border-radius:6px;padding:3px;display:grid;place-items:center}
-.id-qr canvas,.id-qr img{width:100%!important;height:100%!important}
-.id-card.back{background:linear-gradient(135deg,#eef2f9 0%,#ffffff 100%);color:#0b1220;padding:0;display:flex;flex-direction:column}
+/* CARTE DE MEMBRE - NOUVEAU SECTION */
+.carte-section{display:none;margin-top:30px;padding:20px;border-radius:22px;background:linear-gradient(145deg,rgba(0,210,255,.08),rgba(5,10,20,.9));border:1px solid rgba(0,210,255,.25)}
+.carte-section.show{display:block}
+.carte-title{font-size:13px;font-weight:900;color:var(--blue);margin-bottom:14px;text-transform:uppercase;letter-spacing:1px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-field{margin-bottom:10px}.form-field label{display:block;font-size:8px;color:#b5c5da;margin-bottom:4px;font-weight:700;text-transform:uppercase}
+.form-input{width:100%;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);color:white;font-size:12px;outline:none;text-transform:uppercase}
+.form-input::placeholder{text-transform:none;opacity:.5}
+.form-input:focus{border-color:var(--blue)}
+.card-preview-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;margin:18px 0}
+.id-card{width:100%;max-width:340px;aspect-ratio:1.6/1;border-radius:12px;overflow:hidden;position:relative;box-shadow:0 10px 30px rgba(0,0,0,.5);border:1px solid rgba(0,210,255,.3)}
+.front-top{height:28px;background:linear-gradient(90deg,#00d2ff,#0077ff);display:flex;align-items:center;justify-content:space-between;padding:0 10px;color:#001018;font-weight:900;font-size:8px}
+.front-body{display:flex;flex:1;padding:8px 10px;gap:10px;background:linear-gradient(135deg,#0a1a35,#102a5c,#0d213f)}
+.front-photo{width:68px;height:78px;border-radius:8px;background:#000;border:2px solid rgba(255,255,255,.15);overflow:hidden;display:grid;place-items:center;font-size:8px;color:#fff;flex-shrink:0}.front-photo img{width:100%;height:100%;object-fit:cover}
+.front-infos{flex:1;display:flex;flex-direction:column;gap:2px}.f-row{font-size:7px;display:flex;gap:3px}.f-row b{color:#6ec6ff;min-width:40px;font-size:6.5px}.f-row span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:800;color:#e8f0ff;text-transform:uppercase}
+.front-qr{position:absolute;right:8px;bottom:28px;width:50px;height:50px;background:white;border-radius:6px;padding:3px}
+.front-bottom{height:24px;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:space-between;padding:0 8px;font-size:6px;border-top:1px solid rgba(255,255,255,.08)}
+.back-card{background:linear-gradient(135deg,#eef2f9,#fff);color:#0b1220;display:flex;flex-direction:column}
 .back-top{height:22px;background:#0a1935;display:flex;align-items:center;justify-content:center;color:white;font-size:6.5px;font-weight:900;letter-spacing:1.5px}
-.back-body{padding:8px 10px;flex:1;display:flex;flex-direction:column;gap:6px}
+.back-body{padding:8px 10px;flex:1;display:flex;flex-direction:column;gap:5px}
 .back-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:6.5px}
-.back-item{background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.06);border-radius:6px;padding:6px}
-.back-item b{display:block;color:#5a6a85;font-size:5.5px;margin-bottom:2px;text-transform:uppercase}
-.back-item span{font-size:7px;font-weight:900;color:#0a1935;text-transform:uppercase}
-.sig-box{border-top:1px solid #0a1935;width:85px;margin-top:5px;padding-top:2px}
-.sig-text{font-family:'Brush Script MT','Segoe Script',cursive;font-size:14px;color:#0a1935;transform:rotate(-3deg);text-transform:none}
+.back-item{background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.06);border-radius:6px;padding:5px}
+.back-item b{display:block;color:#5a6a85;font-size:5.5px;margin-bottom:1px}.back-item span{font-size:7px;font-weight:900;color:#0a1935;text-transform:uppercase}
+.sig-box{border-top:1px solid #0a1935;width:80px;margin-top:4px;padding-top:2px}.sig-text{font-family:'Brush Script MT',cursive;font-size:13px;color:#0a1935;transform:rotate(-3deg);text-transform:none}
 .back-footer{margin-top:auto;background:rgba(10,25,53,.06);border-radius:6px;padding:5px 8px;display:flex;justify-content:space-between;font-size:5.5px;text-transform:uppercase}
 .back-line{height:5px;background:linear-gradient(90deg,#0077ff,#00d2ff,#ffd700)}
+.btn-card{width:100%;padding:12px;border-radius:12px;border:0;font-weight:900;font-size:11px;cursor:pointer;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-card:active{transform:scale(.97)}
+.btn-blue-card{color:#001018;background:linear-gradient(120deg,var(--blue),#00a8ff)}
+.btn-gold-card{color:#151000;background:linear-gradient(120deg,#ffd700,#ffeb80)}
+.btn-green-card{color:#001a08;background:linear-gradient(120deg,#00e676,#00c853)}
+.btn-dark-card{background:rgba(255,255,255,.06);color:white;border:1px solid rgba(255,255,255,.1)}
+.actions-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
 
-.jb-btn{width:100%;padding:12px;border-radius:12px;border:0;font-weight:900;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px}
-.jb-btn:active{transform:scale(.97)}
-.jb-btn-gold{color:#151000;background:linear-gradient(120deg,#ffd700,#ffeb80,#ffd700)}
-.jb-btn-blue{color:#001018;background:linear-gradient(120deg,var(--blue),#00a8ff)}
-.jb-btn-green{color:#001a08;background:linear-gradient(120deg,#00e676,#00c853)}
-.jb-btn-dark{background:rgba(255,255,255,.06);color:white;border:1px solid rgba(255,255,255,.1)}
-.jb-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.invite-card{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(0,210,255,.16),rgba(0,0,0,.68));border:1px solid rgba(0,210,255,.48);border-radius:20px;padding:18px;text-align:center;margin-top:14px}
-.code-display{margin:10px 0;color:var(--blue);font-size:22px;font-weight:900;letter-spacing:2px;word-break:break-all;text-transform:uppercase}
-.navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:10px 0 calc(10px + env(safe-area-inset-bottom));background:rgba(5,10,20,.97);border-top:1px solid rgba(0,210,255,.24);backdrop-filter:blur(18px)}
-.nav-link{min-width:55px;flex:1;text-align:center;text-decoration:none;color:white;opacity:.48;font-size:10px}.nav-link.active{color:var(--blue);opacity:1;font-weight:bold}.nav-icon{font-size:19px;margin-bottom:4px}
-@media(max-width:400px){.jb-grid2{grid-template-columns:1fr}.id-card{max-width:320px}}
+.navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:12px 0;background:rgba(5,10,20,.98);border-top:1px solid rgba(0,210,255,.28);backdrop-filter:blur(15px)}
+.nav-link{min-width:60px;text-align:center;text-decoration:none;color:white;opacity:.4;font-size:10px}.nav-link.active{color:var(--blue);opacity:1;font-weight:bold}.nav-icon{font-size:19px;margin-bottom:3px}
+@media(max-width:380px){.level-grid{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.code-display{font-size:22px}}
 </style>
 </head>
 <body>
@@ -82,112 +106,140 @@ body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--dark) url
 <div class="container">
 
 <div class="top-header"><div class="brand">JASON BUSINESS</div><div class="online">● EN LIGNE</div></div>
-<h1 class="page-title">CARTE DE MEMBRE<span>JASON BUSINESS - OFFICIELLE</span></h1>
-<div class="subtitle">CARTE D'IDENTITÉ MEMBRE - TOUT EN MAJUSCULES - TÉLÉCHARGEABLE</div>
+<h1 class="page-title">MON RÉSEAU<span>JASON BUSINESS</span></h1>
+<div class="subtitle">Développez votre réseau et gagnez des points</div>
 
-<!-- HERO AVEC BOUTON CREER MA CARTE -->
-<div class="hero-top">
-<div style="font-size:11px;font-weight:900;color:var(--blue);letter-spacing:1px">APERÇU CARTE DE MEMBRE</div>
-<div class="hero-cards-demo">
-<div class="mini-card">RECTO<br>🇨🇩 JASON BUSINESS<br>PHOTO + QR CODE</div>
-<div class="mini-card" style="background:linear-gradient(135deg,#eef2f9,#fff);color:#0a1935">VERSO<br>SIGNATURE<br>CONDITIONS</div>
-</div>
-<button class="btn-creer" onclick="document.getElementById('formSection').scrollIntoView({behavior:'smooth'})">✨ CRÉER MA CARTE DE MEMBRE ↓</button>
-<div style="font-size:8px;opacity:.5;margin-top:8px">CLIQUE POUR ALLER DIRECT AU FORMULAIRE</div>
+<div class="invite-card">
+<p class="code-label">Votre code de parrainage</p>
+<div id="jb_myCode" class="code-display">...</div>
+<button id="jb_btnCopy" class="btn-share">📋 COPIER LE LIEN D'INVITATION</button>
+<p id="jb_copyStatus" class="copy-status">✅ Lien d'invitation copié !</p>
+<button class="btn-carte" onclick="document.getElementById('carteSection').classList.add('show');document.getElementById('carteSection').scrollIntoView({behavior:'smooth'})">🪪 CRÉER MA CARTE DE MEMBRE</button>
 </div>
 
-<!-- FORMULAIRE -->
-<div class="jb-card-form" id="formSection">
-<div class="jb-title">📝 FORMULAIRE CARTE DE MEMBRE - TOUT EN MAJUSCULES</div>
-<div class="jb-grid2">
-<div class="jb-field"><label>Photo de profil *</label><input type="file" id="photoInput" accept="image/*" class="jb-input" style="text-transform:none"></div>
-<div class="jb-field"><label>Code parrainage (auto)</label><input id="codeInput" class="jb-input" readonly></div>
-</div>
-<div class="jb-grid2">
-<div class="jb-field"><label>Nom *</label><input id="nom" class="jb-input" placeholder="ALOMA"></div>
-<div class="jb-field"><label>Post-nom *</label><input id="postnom" class="jb-input" placeholder="EBUNDI"></div>
-</div>
-<div class="jb-grid2">
-<div class="jb-field"><label>Prénom *</label><input id="prenom" class="jb-input" placeholder="JASON"></div>
-<div class="jb-field"><label>Sexe *</label><select id="sexe" class="jb-input"><option value="M">MASCULIN</option><option value="F">FÉMININ</option></select></div>
-</div>
-<div class="jb-grid2">
-<div class="jb-field"><label>Lieu de naissance *</label><input id="lieuNaiss" class="jb-input" placeholder="KINSHASA"></div>
-<div class="jb-field"><label>Date de naissance *</label><input id="dateNaiss" type="date" class="jb-input" style="text-transform:none"></div>
-</div>
-<div class="jb-field"><label>Numéro téléphone * (OBLIGATOIRE)</label><input id="telephone" class="jb-input" placeholder="+243 812 345 678" style="text-transform:none"></div>
-<div class="jb-field"><label>Adresse complète *</label><input id="adresse" class="jb-input" placeholder="AV. LIBERATION N°12, GOMBE"></div>
-<div class="jb-grid2">
-<div class="jb-field"><label>Nationalité *</label><input id="nationalite" class="jb-input" value="CONGOLAISE"></div>
-<div class="jb-field"><label>Province *</label><input id="province" class="jb-input" placeholder="MONGALA"></div>
-</div>
-<div class="jb-grid2">
-<div class="jb-field"><label>Territoire / Commune *</label><input id="territoire" class="jb-input" placeholder="GOMBE"></div>
-<div class="jb-field"><label>Capitaine / Chef lieu</label><input id="capitaine" class="jb-input" placeholder="KINSHASA CAPITALE"></div>
-</div>
-<div class="jb-field"><label>Profession / Poste *</label><input id="poste" class="jb-input" placeholder="ENTREPRENEUR - JASON BUSINESS"></div>
-<button class="jb-btn jb-btn-blue" id="generateCardBtn">✨ GÉNÉRER MA CARTE DE MEMBRE (MAJUSCULES)</button>
-<div style="font-size:8px;color:var(--muted);margin-top:8px;text-align:center">TOUT SERA EN MAJUSCULES COMME VRAIE CARTE D'ÉTAT RDC</div>
+<div class="rule-card"><div class="rule-title">🎁 SYSTÈME DE FIDÉLITÉ</div><div class="rule-text">Chaque nouveau membre directement invité vous rapporte <b>5 points</b>.<br>Lorsque vous atteignez <b>100 points</b>, vous pouvez convertir vos points en argent.<br><b>100 points = 1 000 FC</b><br>Soit <b>1 point = 10 FC</b>.</div></div>
+
+<div class="stats-grid">
+<div class="stat-box"><div class="stat-icon">👥</div><div class="stat-number" id="jb_totalTeam">0</div><div class="stat-label">Membres totaux</div></div>
+<div class="stat-box"><div class="stat-icon">⭐</div><div class="stat-number" id="jb_teamPoints">0</div><div class="stat-label">Points réseau</div></div>
+<div class="stat-box"><div class="stat-icon">💰</div><div class="stat-number" id="jb_totalGains">0</div><div class="stat-label">Commissions FC</div></div>
+<div class="stat-box"><div class="stat-icon">💎</div><div class="stat-number" id="jb_mainBalance">0</div><div class="stat-label">Solde FC</div></div>
 </div>
 
-<!-- PREVIEW CARTES -->
+<div class="section-title"><h3>📊 Niveaux du réseau</h3><span>Structure 3 niveaux</span></div>
+<div class="level-grid">
+<div class="level-box"><span class="level-tag">25%</span><small>Niveau 1</small><b id="jb_lvl1Count">0</b></div>
+<div class="level-box"><span class="level-tag">3%</span><small>Niveau 2</small><b id="jb_lvl2Count">0</b></div>
+<div class="level-box"><span class="level-tag">1%</span><small>Niveau 3</small><b id="jb_lvl3Count">0</b></div>
+</div>
+
+<div class="section-title"><h3>📈 Statistiques</h3></div>
+<div class="network-card">
+<div class="network-row"><span>Membres directs</span><span class="network-value" id="jb_directMembers">0</span></div>
+<div class="network-row"><span>Membres niveau 2</span><span class="network-value" id="jb_secondMembers">0</span></div>
+<div class="network-row"><span>Membres niveau 3</span><span class="network-value" id="jb_thirdMembers">0</span></div>
+<div class="network-row"><span>Points disponibles</span><span class="network-value" id="jb_pointsDisplay">0</span></div>
+<div class="network-row"><span>Valeur des points</span><span class="network-value" id="jb_pointsValue">0 FC</span></div>
+<div class="network-row"><span>Statut</span><span class="network-value" style="color:#00e676;">Actif 🛰️</span></div>
+</div>
+
+<div class="points-card">
+<div class="points-header"><div class="points-title">⭐ Points de fidélité</div><div class="points-rate">100 POINTS = 1 000 FC</div></div>
+<div class="points-balance"><div class="points-label">POINTS DISPONIBLES</div><div class="points-number" id="jb_pointsBig">0</div><div class="points-value">Valeur actuelle : <b id="jb_pointsValueBig">0 FC</b></div></div>
+<div class="convert-form"><label for="jb_pointsInput">Nombre de points à convertir</label><input type="number" id="jb_pointsInput" min="100" step="100" inputmode="numeric" placeholder="Exemple : 100"><div class="conversion-result" id="jb_conversionResult">100 points = <b>1 000 FC</b></div><button id="jb_btnConvert" class="btn-convert">⭐ CONVERTIR MES POINTS</button><div id="jb_convertStatus" class="convert-status"></div></div>
+</div>
+
+<div class="section-title"><h3>🧾 Historique des conversions</h3></div>
+<div class="history-card"><div id="jb_history"><div class="empty">Chargement de l'historique...</div></div></div>
+
+<div class="section-title"><h3>👥 Mes membres directs</h3><span>Niveau 1</span></div>
+<div class="members-card"><div id="jb_members"><div class="empty">Chargement des membres...</div></div></div>
+
+<!-- CARTE DE MEMBRE SECTION - CACHÉE AU DÉBUT, VIDÉE -->
+<div class="carte-section" id="carteSection">
+<div class="carte-title">🪪 CRÉER MA CARTE DE MEMBRE - TOUT EN MAJUSCULES</div>
+<div style="font-size:9px;opacity:.6;margin-bottom:12px;text-align:center">AUCUNE IDENTITÉ AFFICHÉE - LE CLIENT REMPLIT LUI-MÊME - TOUT EN MAJUSCULES</div>
+
+<div class="form-grid">
+<div class="form-field"><label>Photo *</label><input type="file" id="photoInput" accept="image/*" class="form-input" style="text-transform:none"></div>
+<div class="form-field"><label>Code parrainage (auto)</label><input id="codeInput" class="form-input" readonly></div>
+</div>
+<div class="form-grid">
+<div class="form-field"><label>Nom *</label><input id="nom" class="form-input" placeholder="VOTRE NOM"></div>
+<div class="form-field"><label>Post-nom *</label><input id="postnom" class="form-input" placeholder="VOTRE POST-NOM"></div>
+</div>
+<div class="form-grid">
+<div class="form-field"><label>Prénom *</label><input id="prenom" class="form-input" placeholder="VOTRE PRÉNOM"></div>
+<div class="form-field"><label>Sexe *</label><select id="sexe" class="form-input"><option value="M">MASCULIN</option><option value="F">FÉMININ</option></select></div>
+</div>
+<div class="form-grid">
+<div class="form-field"><label>Lieu naissance *</label><input id="lieuNaiss" class="form-input" placeholder="VOTRE LIEU"></div>
+<div class="form-field"><label>Date naissance *</label><input id="dateNaiss" type="date" class="form-input" style="text-transform:none"></div>
+</div>
+<div class="form-field"><label>Numéro téléphone *</label><input id="telephone" class="form-input" placeholder="+243..." style="text-transform:none"></div>
+<div class="form-field"><label>Adresse complète *</label><input id="adresse" class="form-input" placeholder="VOTRE ADRESSE"></div>
+<div class="form-grid">
+<div class="form-field"><label>Nationalité *</label><input id="nationalite" class="form-input" value="CONGOLAISE"></div>
+<div class="form-field"><label>Province *</label><input id="province" class="form-input" placeholder="VOTRE PROVINCE"></div>
+</div>
+<div class="form-grid">
+<div class="form-field"><label>Territoire / Commune *</label><input id="territoire" class="form-input" placeholder="VOTRE TERRITOIRE"></div>
+<div class="form-field"><label>Capitaine / Chef lieu</label><input id="capitaine" class="form-input" placeholder="VOTRE CHEF LIEU"></div>
+</div>
+<div class="form-field"><label>Profession / Poste *</label><input id="poste" class="form-input" placeholder="VOTRE POSTE"></div>
+<button class="btn-card btn-blue-card" id="generateCardBtn">✨ GÉNÉRER MA CARTE DE MEMBRE</button>
+
 <div class="card-preview-wrap" id="cardPreviewWrap" style="display:none">
-<div style="font-size:11px;font-weight:900;color:var(--blue);letter-spacing:1px">RECTO - CARTE DE MEMBRE (TÉLÉCHARGE SEULEMENT ÇA)</div>
+<div style="font-size:10px;font-weight:900;color:var(--blue)">RECTO - CARTE DE MEMBRE</div>
 <div class="id-card" id="cardFront">
-<div class="id-top"><span>🇨🇩 CARTE DE MEMBRE - JASON BUSINESS</span><span style="font-size:8px">RDC</span></div>
-<div class="id-body">
-<div class="id-photo" id="cardPhoto">PHOTO</div>
-<div class="id-infos">
-<div class="id-row big"><b>Nom:</b><span id="cNom">ALOMA</span></div>
-<div class="id-row"><b>Post-nom:</b><span id="cPostnom">EBUNDI</span></div>
-<div class="id-row"><b>Prénom:</b><span id="cPrenom">JASON</span></div>
-<div class="id-row"><b>Sexe:</b><span id="cSexe">M</span><b style="margin-left:8px">Né le:</b><span id="cDateNaiss">10/09/2007</span></div>
-<div class="id-row"><b>Lieu:</b><span id="cLieuNaiss">KINSHASA</span></div>
-<div class="id-row"><b>Nationalité:</b><span id="cNationalite">CONGOLAISE</span></div>
-<div class="id-row"><b>Tél:</b><span id="cTelephone" style="color:var(--blue)">+243 812 345 678</span></div>
-<div class="id-row"><b>Adresse:</b><span id="cAdresse">AV.YOLO N°12B, GOMBE</span></div>
-<div class="id-row"><b>Province:</b><span id="cProvince">MONGALA</span></div>
-<div class="id-row"><b>Poste:</b><span id="cPoste" style="color:var(--gold)">JASON-BUSINESS</span></div>
+<div class="front-top"><span>🇨🇩 CARTE DE MEMBRE - JASON BUSINESS</span><span>RDC</span></div>
+<div class="front-body">
+<div class="front-photo" id="cardPhoto">PHOTO</div>
+<div class="front-infos">
+<div class="f-row"><b>Nom:</b><span id="cNom"></span></div>
+<div class="f-row"><b>Post-nom:</b><span id="cPostnom"></span></div>
+<div class="f-row"><b>Prénom:</b><span id="cPrenom"></span></div>
+<div class="f-row"><b>Sexe:</b><span id="cSexe"></span><b style="margin-left:6px">Né le:</b><span id="cDateNaiss"></span></div>
+<div class="f-row"><b>Lieu:</b><span id="cLieuNaiss"></span></div>
+<div class="f-row"><b>Nationalité:</b><span id="cNationalite"></span></div>
+<div class="f-row"><b>Tél:</b><span id="cTelephone" style="color:var(--blue)"></span></div>
+<div class="f-row"><b>Adresse:</b><span id="cAdresse"></span></div>
+<div class="f-row"><b>Province:</b><span id="cProvince"></span></div>
+<div class="f-row"><b>Poste:</b><span id="cPoste" style="color:var(--gold)"></span></div>
 </div>
-<div class="id-qr" id="qrFront"></div>
+<div class="front-qr" id="qrFront"></div>
 </div>
-<div class="id-bottom"><span>CODE: <b id="cCode" style="color:var(--blue)">JASON-3359</b></span><span>N° <span id="cNumber">JB-2026-001234</span> • EXP: 2029</span></div>
+<div class="front-bottom"><span>CODE: <b id="cCode" style="color:var(--blue)"></b></span><span>N° <span id="cNumber"></span> • EXP: 2029</span></div>
 </div>
 
-<div style="font-size:11px;font-weight:900;color:var(--gold);letter-spacing:1px;margin-top:10px">VERSO - SANS QR CODE, AVEC SIGNATURE OFFICIELLE</div>
-<div class="id-card back" id="cardBack">
+<div style="font-size:10px;font-weight:900;color:var(--gold);margin-top:8px">VERSO - AVEC SIGNATURE OFFICIELLE</div>
+<div class="id-card back-card" id="cardBack">
 <div class="back-top">JASON BUSINESS • RÉPUBLIQUE DÉMOCRATIQUE DU CONGO</div>
 <div class="back-body">
-<div style="font-size:5.5px;line-height:1.4;color:#1a2a4a"><b>CONDITIONS:</b> CETTE CARTE EST PROPRIÉTÉ DE JASON BUSINESS. STRICTEMENT PERSONNELLE ET INCESSIBLE. PERTE = CONTACTER SERVICE CLIENT. FALSIFICATION PUNIE PAR LA LOI.</div>
+<div style="font-size:5.5px;line-height:1.4"><b>CONDITIONS:</b> CETTE CARTE EST PROPRIÉTÉ DE JASON BUSINESS. STRICTEMENT PERSONNELLE ET INCESSIBLE.</div>
 <div class="back-grid">
-<div class="back-item"><b>Date d'émission</b><span id="cEmission">19/10/2026</span><div class="sig-box"><div style="font-size:5px;color:#5a6a85">SIGNATURE TITULAIRE</div><div style="height:16px"></div></div></div>
+<div class="back-item"><b>Date d'émission</b><span id="cEmission"></span><div class="sig-box"><div style="font-size:5px;color:#5a6a85">SIGNATURE TITULAIRE</div></div></div>
 <div class="back-item"><b>Validité</b><span>3 ANS - 2029</span><div class="sig-box"><div style="font-size:5px;color:#5a6a85">SIGNATURE JASON BUSINESS</div><div class="sig-text">Jason Business</div></div></div>
-<div class="back-item" style="grid-column:span 2"><b>Téléphone</b><span id="cTel2" style="color:#0077ff">+243 812 345 678</span></div>
-<div class="back-item" style="grid-column:span 2"><b>Avantages membre</b><span>COMMISSIONS • POINTS • API • BOUTIQUE PRO</span></div>
+<div class="back-item"><b>Téléphone</b><span id="cTel2" style="color:#0077ff"></span></div>
+<div class="back-item"><b>Province</b><span id="cProv2"></span></div>
 </div>
-<div class="back-footer"><span><b>JASON BUSINESS</b><br>KINSHASA, GOMBE</span><span style="text-align:right"><b>N° <span id="cNumber2">JB-2026-001234</span></b><br><span style="color:green">MEMBRE OFFICIEL ✓</span></span></div>
+<div class="back-footer"><span><b>JASON BUSINESS</b><br>KINSHASA, GOMBE</span><span><b id="cNum2"></b><br><span style="color:green">MEMBRE OFFICIEL ✓</span></span></div>
 </div>
 <div class="back-line"></div>
 </div>
 </div>
 
-<div class="jb-actions" id="downloadActions" style="display:none">
-<button class="jb-btn jb-btn-gold" id="downloadPngBtn">📸 TÉLÉCHARGER RECTO SEUL (ENCERCLÉ VERT)</button>
-<button class="jb-btn jb-btn-green" id="downloadPdfBtn">📄 PDF RECTO SEUL</button>
+<div class="actions-grid" id="downloadActions" style="display:none">
+<button class="btn-card btn-gold-card" id="downloadPngBtn">📸 TÉLÉCHARGER RECTO SEUL</button>
+<button class="btn-card btn-green-card" id="downloadPdfBtn">📄 PDF RECTO</button>
 </div>
-<div class="jb-actions" id="downloadActions2" style="display:none">
-<button class="jb-btn jb-btn-dark" id="downloadVersoBtn">📸 TÉLÉCHARGER VERSO SEUL</button>
-<button class="jb-btn jb-btn-blue" id="downloadBothBtn">📦 TÉLÉCHARGER LES DEUX (PDF COMPLET)</button>
+<div class="actions-grid" id="downloadActions2" style="display:none">
+<button class="btn-card btn-dark-card" id="downloadVersoBtn">📸 VERSO SEUL</button>
+<button class="btn-card btn-blue-card" id="downloadBothBtn">📦 LES DEUX (PDF)</button>
 </div>
-</div>
-
-<div class="invite-card" style="margin-top:20px">
-<div style="font-size:10px;opacity:.6;text-transform:uppercase">Votre code de parrainage</div>
-<div id="jb_myCode" class="code-display">...</div>
-<button id="jb_btnCopy" class="jb-btn jb-btn-blue" style="margin-top:8px">📋 COPIER LE LIEN D'INVITATION</button>
-<div id="jb_copyStatus" style="display:none;color:var(--green);font-size:11px;margin-top:8px;font-weight:bold">✅ Lien copié!</div>
 </div>
 
+<div id="jb_status"></div>
 </div>
 </div>
 
@@ -203,98 +255,97 @@ body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--dark) url
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script type="module">
 import {initializeApp,getApps,getApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {getDatabase,ref,onValue} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import {getDatabase,ref,onValue,get,runTransaction} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 const cfg={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
 const app=getApps().length?getApp():initializeApp(cfg);
 const db=getDatabase(app);
+const ROOT="jasonBusiness";
 const $=id=>document.getElementById(id);
-let inviteCode="",photoB64="";
-const phone=localStorage.getItem("userPhone")||localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("phone")||"";
-if(phone){
-const userRef=ref(db,`jasonBusiness/users/${phone}`);
-onValue(userRef,s=>{
-if(!s.exists())return;
-const d=s.val();
-inviteCode=d.inviteCode||d.referralCode||d.codeParrainage||("JASON-"+phone.replace(/\D/g,"").slice(-6));
+const userPhone=localStorage.getItem("userPhone")||localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("phone")||"";
+let inviteCode="",photoB64="",userData=null;
+let directMembers=[];
+
+// FORCE MAJUSCULES SAISIE
+["nom","postnom","prenom","lieuNaiss","adresse","nationalite","province","territoire","capitaine","poste"].forEach(id=>{
+const el=$(id); if(el) el.addEventListener("input",()=>el.value=el.value.toUpperCase());
+});
+
+function fmtN(v){return Math.floor(Number(v)||0).toLocaleString("fr-FR")}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function fmtDate(d){if(!d)return"";const dt=new Date(d);if(isNaN(dt))return d;return dt.toLocaleDateString("fr-FR")}
+
+if(!userPhone){
+$("jb_status").innerText="⚠️ Session expirée";
+setTimeout(()=>location.href="login.html",1200);
+}else{
+const userRef=ref(db,`${ROOT}/users/${userPhone}`);
+const usersRef=ref(db,`${ROOT}/users`);
+onValue(userRef,async snap=>{
+if(!snap.exists())return;
+const data=snap.val()||{};userData=data;
+inviteCode=data.inviteCode||data.referralCode||("JASON-"+userPhone.replace(/\D/g,"").slice(-6));
 $("jb_myCode").innerText=inviteCode.toUpperCase();
 $("codeInput").value=inviteCode.toUpperCase();
-const saved=JSON.parse(localStorage.getItem("jasonCarteData")||"{}");
-if(saved.nom){$("nom").value=saved.nom; $("postnom").value=saved.postnom; $("prenom").value=saved.prenom; $("sexe").value=saved.sexe; $("lieuNaiss").value=saved.lieuNaiss; $("dateNaiss").value=saved.dateNaiss; $("telephone").value=saved.telephone||""; $("adresse").value=saved.adresse; $("nationalite").value=saved.nationalite; $("province").value=saved.province; $("territoire").value=saved.territoire; $("capitaine").value=saved.capitaine; $("poste").value=saved.poste;}
-if(saved.photo){photoB64=saved.photo; $("cardPhoto").innerHTML=`<img src="${saved.photo}">`;}
+const principal=Number(data.solde_principal||data.solde||0);
+const comm=Number(data.solde_commissions||data.commissions||0);
+$("jb_mainBalance").innerText=fmtN(principal);
+$("jb_totalGains").innerText=fmtN(comm);
+let l1=Number(data.count_lvl1||0),l2=Number(data.count_lvl2||0),l3=Number(data.count_lvl3||0);
+try{
+const us=await get(usersRef);
+if(us.exists()){
+const net=calcNet(us.val(),userPhone,inviteCode);
+if(l1===0&&l2===0&&l3===0){l1=net.level1.length;l2=net.level2.length;l3=net.level3.length;directMembers=net.level1;}
+}
+}catch(e){}
+$("jb_lvl1Count").innerText=fmtN(l1);$("jb_lvl2Count").innerText=fmtN(l2);$("jb_lvl3Count").innerText=fmtN(l3);
+$("jb_totalTeam").innerText=fmtN(l1+l2+l3);
+$("jb_directMembers").innerText=fmtN(l1);$("jb_secondMembers").innerText=fmtN(l2);$("jb_thirdMembers").innerText=fmtN(l3);
+let pts=Number(data.points_fidelite||data.points||0)||0;
+$("jb_pointsDisplay").innerText=fmtN(pts);$("jb_pointsBig").innerText=fmtN(pts);
+$("jb_teamPoints").innerText=fmtN((l1+l2+l3)*5);
+$("jb_pointsValue").innerText=fmtN(pts*10)+" FC";$("jb_pointsValueBig").innerText=fmtN(pts*10)+" FC";
+renderHist(data.points_conversion||{});
+if(directMembers.length===0){
+try{const us=await get(usersRef);if(us.exists())directMembers=findDirect(us.val(),inviteCode,userPhone)}catch{}
+}
+renderMembers(directMembers);
 });
 }
-// FORCE MAJUSCULES
-["nom","postnom","prenom","lieuNaiss","adresse","nationalite","province","territoire","capitaine","poste"].forEach(id=>{
-const el=$(id);
-if(el) el.addEventListener("input",()=>{el.value=el.value.toUpperCase();});
-});
+
+function getParent(u){return u.inviteCodeParent||u.parrainCode||u.referralCodeUsed||u.invitedBy||""}
+function getCode(u){return u.inviteCode||u.referralCode||""}
+function findDirect(users,code,own){const r=[];Object.entries(users||{}).forEach(([ph,u])=>{if(ph===own||!u)return;if(String(getParent(u)).toLowerCase()===String(code).toLowerCase())r.push({phone:ph,data:u})});return r}
+function calcNet(users,own,ownCode){const all=users||{};const l1=[],l2=[],l3=[];Object.entries(all).forEach(([ph,u])=>{if(ph===own||!u)return;if(String(getParent(u)).toLowerCase()===String(ownCode).toLowerCase())l1.push({phone:ph,data:u})});const c1=l1.map(m=>getCode(m.data)).filter(Boolean);Object.entries(all).forEach(([ph,u])=>{if(ph===own||!u)return;if(c1.some(c=>String(c).toLowerCase()===String(getParent(u)).toLowerCase()))l2.push({phone:ph,data:u})});const c2=l2.map(m=>getCode(m.data)).filter(Boolean);Object.entries(all).forEach(([ph,u])=>{if(ph===own||!u)return;if(c2.some(c=>String(c).toLowerCase()===String(getParent(u)).toLowerCase()))l3.push({phone:ph,data:u})});return{level1:l1,level2:l2,level3:l3}}
+function renderMembers(members){const cont=$("jb_members");cont.innerHTML="";if(!members||!members.length){cont.innerHTML='<div class="empty">👥 Aucun membre direct.<br>Partagez votre lien pour développer votre réseau.</div>';return}members.forEach(m=>{const d=m.data||{};const name=d.nom||d.name||m.phone;const date=d.createdAt||d.dateInscription;const el=document.createElement("div");el.className="member";el.innerHTML=`<div class="member-avatar">👤</div><div class="member-info"><div class="member-name">${esc(name)}</div><div class="member-date">Inscrit le ${esc(fmtDate(date))}</div></div><div class="member-level">NIVEAU 1</div>`;cont.appendChild(el)})}
+function renderHist(hist){const cont=$("jb_history");cont.innerHTML="";if(!hist||!Object.keys(hist).length){cont.innerHTML='<div class="empty">🧾 Aucune conversion.</div>';return}Object.entries(hist).sort(([,a],[,b])=>String(b.date||"").localeCompare(String(a.date||""))).forEach(([id,it])=>{const el=document.createElement("div");el.className="history-item";el.innerHTML=`<div class="history-top"><div class="history-points">⭐ ${fmtN(it.points)} points</div><div class="history-amount">+ ${fmtN(it.montant)} FC</div></div><div class="history-date">${esc(fmtDate(it.date))} • ${esc(it.statut||"VALIDÉE")}</div>`;cont.appendChild(el)})}
+
 $("photoInput").addEventListener("change",e=>{
 const f=e.target.files[0];if(!f)return;
-const r=new FileReader();
-r.onload=ev=>{photoB64=ev.target.result; $("cardPhoto").innerHTML=`<img src="${photoB64}">`;};
-r.readAsDataURL(f);
+const r=new FileReader();r.onload=ev=>{photoB64=ev.target.result;$("cardPhoto").innerHTML=`<img src="${photoB64}">`;};r.readAsDataURL(f);
 });
+
 $("generateCardBtn").addEventListener("click",()=>{
 const nom=$("nom").value.trim().toUpperCase(),postnom=$("postnom").value.trim().toUpperCase(),prenom=$("prenom").value.trim().toUpperCase(),sexe=$("sexe").value.toUpperCase(),lieu=$("lieuNaiss").value.trim().toUpperCase(),date=$("dateNaiss").value,adresse=$("adresse").value.trim().toUpperCase(),nat=$("nationalite").value.trim().toUpperCase(),prov=$("province").value.trim().toUpperCase(),terr=$("territoire").value.trim().toUpperCase(),cap=$("capitaine").value.trim().toUpperCase(),poste=$("poste").value.trim().toUpperCase(),tel=$("telephone").value.trim();
-if(!nom||!postnom||!prenom||!lieu||!date||!adresse||!prov||!terr||!poste||!tel){alert("❌ REMPLIS TOUS LES CHAMPS * Y COMPRIS TÉLÉPHONE - TOUT EN MAJUSCULES!");return;}
+if(!nom||!postnom||!prenom||!lieu||!date||!adresse||!prov||!terr||!poste||!tel){alert("❌ REMPLIS TOUS LES CHAMPS * - TOUT EN MAJUSCULES!");return;}
 if(!photoB64){alert("❌ AJOUTE TA PHOTO!");return;}
-const data={nom,postnom,prenom,sexe,lieuNaiss:lieu,dateNaiss:date,telephone:tel,adresse,nationalite:nat,province:prov,territoire:terr,capitaine:cap,poste,photo:photoB64,code:inviteCode};
-localStorage.setItem("jasonCarteData",JSON.stringify(data));
-$("cNom").innerText=nom;
-$("cPostnom").innerText=postnom;
-$("cPrenom").innerText=prenom;
-$("cSexe").innerText=sexe;
-$("cDateNaiss").innerText=new Date(date).toLocaleDateString("fr-FR");
-$("cLieuNaiss").innerText=lieu;
-$("cNationalite").innerText=nat;
-$("cTelephone").innerText=tel;
-$("cTel2").innerText=tel;
-$("cAdresse").innerText=adresse;
-$("cProvince").innerText=prov;
-$("cPoste").innerText=poste;
-$("cCode").innerText=inviteCode.toUpperCase();
-$("cNumber").innerText=`JB-${new Date().getFullYear()}-${String(Math.floor(Math.random()*999999)).padStart(6,'0')}`;
-$("cNumber2").innerText=$("cNumber").innerText;
-$("cEmission").innerText=new Date().toLocaleDateString("fr-FR");
+localStorage.setItem("jasonCarteData",JSON.stringify({nom,postnom,prenom,sexe,lieuNaiss:lieu,dateNaiss:date,telephone:tel,adresse,nationalite:nat,province:prov,territoire:terr,capitaine:cap,poste,photo:photoB64,code:inviteCode}));
+$("cNom").innerText=nom; $("cPostnom").innerText=postnom; $("cPrenom").innerText=prenom; $("cSexe").innerText=sexe; $("cDateNaiss").innerText=fmtDate(date); $("cLieuNaiss").innerText=lieu; $("cNationalite").innerText=nat; $("cTelephone").innerText=tel; $("cTel2").innerText=tel; $("cAdresse").innerText=adresse; $("cProvince").innerText=prov; $("cProv2").innerText=prov; $("cPoste").innerText=poste; $("cCode").innerText=inviteCode.toUpperCase(); $("cNumber").innerText=`JB-${new Date().getFullYear()}-${String(Math.floor(Math.random()*999999)).padStart(6,'0')}`; $("cNum2").innerText=$("cNumber").innerText; $("cEmission").innerText=new Date().toLocaleDateString("fr-FR");
 const link=`${location.origin}/register.html?inviteCode=${encodeURIComponent(inviteCode)}`;
-$("qrFront").innerHTML="";
-new QRCode($("qrFront"),{text:link,width:48,height:48,correctLevel:QRCode.CorrectLevel.H});
-$("cardPreviewWrap").style.display="flex";
-$("downloadActions").style.display="grid";
-$("downloadActions2").style.display="grid";
-$("cardPreviewWrap").scrollIntoView({behavior:"smooth"});
+$("qrFront").innerHTML=""; new QRCode($("qrFront"),{text:link,width:48,height:48});
+$("cardPreviewWrap").style.display="flex"; $("downloadActions").style.display="grid"; $("downloadActions2").style.display="grid"; $("cardPreviewWrap").scrollIntoView({behavior:"smooth"});
 });
-async function dl(id,name){
-const el=$(id);
-const canvas=await html2canvas(el,{scale:4,backgroundColor:null,useCORS:true});
-const a=document.createElement("a");
-a.download=name;
-a.href=canvas.toDataURL("image/png");
-a.click();
-}
+
+async function dl(id,name){const el=$(id);const canvas=await html2canvas(el,{scale:4,backgroundColor:null,useCORS:true});const a=document.createElement("a");a.download=name;a.href=canvas.toDataURL("image/png");a.click();}
 $("downloadPngBtn").addEventListener("click",()=>dl("cardFront",`CARTE-MEMBRE-RECTO-${inviteCode}.png`));
 $("downloadVersoBtn").addEventListener("click",()=>dl("cardBack",`CARTE-MEMBRE-VERSO-${inviteCode}.png`));
-$("downloadPdfBtn").addEventListener("click",async()=>{
-const {jsPDF}=window.jspdf;
-const c=await html2canvas($("cardFront"),{scale:4,backgroundColor:null,useCORS:true});
-const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:[86,54]});
-pdf.addImage(c.toDataURL("image/png"),"PNG",0,0,86,54);
-pdf.save(`CARTE-MEMBRE-RECTO-${inviteCode}.pdf`);
-});
-$("downloadBothBtn").addEventListener("click",async()=>{
-const {jsPDF}=window.jspdf;
-const c1=await html2canvas($("cardFront"),{scale:4,backgroundColor:null,useCORS:true});
-const c2=await html2canvas($("cardBack"),{scale:4,backgroundColor:null,useCORS:true});
-const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:[86,54]});
-pdf.addImage(c1.toDataURL("image/png"),"PNG",0,0,86,54);
-pdf.addPage([86,54],"landscape");
-pdf.addImage(c2.toDataURL("image/png"),"PNG",0,0,86,54);
-pdf.save(`CARTE-MEMBRE-COMPLETE-${inviteCode}.pdf`);
-});
-$("jb_btnCopy").addEventListener("click",async()=>{
-const link=`${location.origin}/register.html?inviteCode=${encodeURIComponent(inviteCode)}`;
-try{await navigator.clipboard.writeText(link); $("jb_copyStatus").style.display="block"; setTimeout(()=>$("jb_copyStatus").style.display="none",3000);}catch{prompt("COPIE:",link);}
-});
+$("downloadPdfBtn").addEventListener("click",async()=>{const {jsPDF}=window.jspdf;const c=await html2canvas($("cardFront"),{scale:4,backgroundColor:null,useCORS:true});const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:[86,54]});pdf.addImage(c.toDataURL("image/png"),"PNG",0,0,86,54);pdf.save(`CARTE-MEMBRE-RECTO-${inviteCode}.pdf`);});
+$("downloadBothBtn").addEventListener("click",async()=>{const {jsPDF}=window.jspdf;const c1=await html2canvas($("cardFront"),{scale:4,backgroundColor:null,useCORS:true});const c2=await html2canvas($("cardBack"),{scale:4,backgroundColor:null,useCORS:true});const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:[86,54]});pdf.addImage(c1.toDataURL("image/png"),"PNG",0,0,86,54);pdf.addPage([86,54],"landscape");pdf.addImage(c2.toDataURL("image/png"),"PNG",0,0,86,54);pdf.save(`CARTE-MEMBRE-COMPLETE-${inviteCode}.pdf`);});
+
+// CONVERSION POINTS + COPY (ORIGINAL)
+$("jb_pointsInput").addEventListener("input",()=>{const p=Number($("jb_pointsInput").value)||0;if(p<=0){$("jb_conversionResult").innerHTML=`100 points = <b>1 000 FC</b>`;return}$("jb_conversionResult").innerHTML=`${fmtN(p)} points = <b>${fmtN(p*10)} FC</b>`});
+$("jb_btnConvert").addEventListener("click",async()=>{const btn=$("jb_btnConvert"),status=$("jb_convertStatus"),pts=Number($("jb_pointsInput").value);if(!userPhone||!userData){status.className="convert-status error";status.innerText="⚠️ Compte pas chargé";return}if(!pts||pts<100){status.className="convert-status error";status.innerText="❌ Minimum 100 points";return}if(pts%100!==0){status.className="convert-status error";status.innerText="❌ Multiple de 100";return}if(pts>(Number(userData.points_fidelite||0))){status.className="convert-status error";status.innerText="❌ Points insuffisants";return}const amount=pts*10;if(!confirm(`Convertir ${fmtN(pts)} points en ${fmtN(amount)} FC ?`))return;btn.disabled=true;btn.innerText="⏳ CONVERSION...";status.className="convert-status";status.innerText="Traitement...";try{const res=await runTransaction(ref(db,`${ROOT}/users/${userPhone}`),d=>{if(d===null)return;const avail=Number(d.points_fidelite||0);if(avail<pts)return;const bal=Number(d.solde_principal||0);d.points_fidelite=avail-pts;d.solde_principal=bal+amount;if(!d.points_conversion)d.points_conversion={};const id="JB-CONV-"+Date.now();d.points_conversion[id]={points:pts,montant:amount,date:new Date().toISOString(),statut:"VALIDEE"};return d},{applyLocally:false});if(!res.committed)throw new Error("REFUSED");$("jb_pointsInput").value="";status.className="convert-status success";status.innerText=`✅ +${fmtN(amount)} FC`; }catch(e){status.className="convert-status error";status.innerText="❌ Erreur conversion"}finally{btn.disabled=false;btn.innerText="⭐ CONVERTIR MES POINTS"}});
+$("jb_btnCopy").addEventListener("click",async()=>{const code=inviteCode;if(!code||code==="..."){alert("Code pas chargé");return}const link=`${location.origin}/register.html?inviteCode=${encodeURIComponent(code)}`;try{if(navigator.share){await navigator.share({title:"JASON BUSINESS",text:`Rejoins avec mon code ${code}`,url:link});$("jb_copyStatus").style.display="block";setTimeout(()=>$("jb_copyStatus").style.display="none",3000);return}await navigator.clipboard.writeText(link);$("jb_copyStatus").style.display="block";setTimeout(()=>$("jb_copyStatus").style.display="none",3000)}catch{prompt("Copie:",link)}});
 </script>
 </body>
 </html>
