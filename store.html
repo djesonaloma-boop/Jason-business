@@ -6,33 +6,39 @@
 <meta name="theme-color" content="#050914">
 <title>JASON STORE</title>
 <style>
-:root{--bg:#050914;--blue:#00d4ff;--blue2:#0077ff;--gold:#d8aa45;--green:#22c55e}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(ellipse at top,#172b4c 0%,#0a1426 42%,var(--bg) 100%);color:white;font-family:Arial,Helvetica,sans-serif;min-height:100vh;overflow-x:hidden}
+:root{--bg:#050914;--blue:#00d4ff;--gold:#d8aa45;--green:#22c55e;--muted:#8e9aad}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#172b4c 0%,#0a1426 42%,var(--bg) 100%);color:white;font-family:Arial,Helvetica,sans-serif;min-height:100vh}
 button,input{font-family:inherit}
-.container{max-width:1000px;margin:auto;padding:16px 14px 110px}
-.header{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 0}
+.container{max-width:1000px;margin:auto;padding:16px 14px 120px}
+.header{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
 .logo{font-weight:900;color:var(--blue);font-size:18px;letter-spacing:1px;text-shadow:0 0 18px #00d4ff55}
 .badge{font-size:10px;border:1px solid #22c55e66;background:linear-gradient(135deg,#22c55e20,#22c55e08);color:var(--green);padding:8px 12px;border-radius:20px;white-space:nowrap}
-.hero{position:relative;overflow:hidden;padding:19px 16px;border-radius:18px;background:linear-gradient(145deg,#1a3156,#101d33 60%,#0b1526);border:1px solid #00d4ff45;margin-bottom:16px;box-shadow:0 12px 35px #0004}
+.hero{padding:19px 16px;border-radius:18px;background:linear-gradient(145deg,#1a3156,#101d33 60%,#0b1526);border:1px solid #00d4ff45;margin-bottom:16px;box-shadow:0 12px 35px #0004}
 .hero h3{margin:0;font-size:17px;font-weight:900}
 .hero .subtitle{font-size:11px;color:#b5c5da;margin:8px 0 0;letter-spacing:1px}
 .hero .free-text{font-size:12px;color:var(--green);margin:12px 0 0}
-.search{display:block;width:100%;background:linear-gradient(135deg,#0b1729,#081222);border:1px solid #ffffff1b;color:white;border-radius:13px;padding:14px;margin:12px 0 16px;outline:none;font-size:13px}
+.param-card{padding:14px;border-radius:16px;background:linear-gradient(135deg,#0f213f,#0a1629);border:1px solid #00d4ff30;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.param-card .left b{display:block;font-size:12px;color:var(--blue)}
+.param-card .left span{font-size:10px;color:var(--muted)}
+.param-card .right{text-align:right}
+.param-card .right b{font-size:12px;color:var(--gold)}
+.param-card .right span{display:block;font-size:10px;color:var(--muted);margin-top:3px}
+.search{width:100%;background:linear-gradient(135deg,#0b1729,#081222);border:1px solid #ffffff1b;color:white;border-radius:13px;padding:14px;margin:12px 0 16px;outline:none;font-size:13px}
 #list{display:grid;gap:13px}
 .app-card{background:linear-gradient(145deg,#142642,#0c1627);border:1px solid #d8aa4566;border-radius:20px;padding:14px;display:flex;gap:14px;align-items:center;box-shadow:0 12px 28px #0003}
 .app-icon{width:78px;height:78px;border-radius:19px;background:#000;border:2px solid var(--gold);overflow:hidden;flex-shrink:0}
 .app-icon img{width:100%;height:100%;object-fit:cover}
 .app-info{flex:1;min-width:0}
 .app-name{font-size:15px;font-weight:900}
-.app-meta{font-size:11px;color:#8e9aad;margin-top:5px}
+.app-meta{font-size:11px;color:var(--muted);margin-top:5px}
 .app-desc{font-size:11px;color:#c5d2e5;margin-top:7px}
 .btn{border:0;border-radius:12px;padding:12px 15px;font-weight:900;font-size:12px;cursor:pointer}
 .btn-install{background:linear-gradient(110deg,#00d4ff,#0077ff);color:#001018}
 .btn-free{display:inline-block;background:#22c55e20;border:1px solid #22c55e40;color:#22c55e;padding:4px 7px;font-size:9px;border-radius:6px;margin-left:6px}
-.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:3000;background:#12213a;border:1px solid #d8aa4560;padding:12px 16px;border-radius:12px;font-size:12px;transition:opacity .25s,transform .25s}
+.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:3000;background:#12213a;border:1px solid #d8aa4560;padding:12px 16px;border-radius:12px;font-size:12px;transition:.25s}
 .toast.show{opacity:1;transform:translate(-50%,0)}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:rgba(5,9,20,.96);backdrop-filter:blur(18px);border-top:1px solid #ffffff14;padding:10px 4px calc(10px + env(safe-area-inset-bottom));z-index:9999}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:rgba(5,9,20,.98);backdrop-filter:blur(18px);border-top:1px solid #ffffff14;padding:10px 4px calc(10px + env(safe-area-inset-bottom));z-index:9999}
 .bottom-nav button{flex:1;background:none;border:0;color:#6b7a90;font-size:10px;font-weight:700;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer}
 .bottom-nav button span.icon{font-size:22px}
 .bottom-nav button.active{color:var(--blue)}
@@ -40,24 +46,49 @@ button,input{font-family:inherit}
 </head>
 <body>
 <div class="container">
-  <div class="header"><div class="logo">JASON STORE</div><div class="badge">● GRATUIT</div></div>
+  <div class="header"><div class="logo">JASON STORE</div><div class="badge" id="balanceBadge">● GRATUIT</div></div>
   <div class="hero"><h3>👑 Jason Business Officiel</h3><p class="subtitle">WEB • DESIGN • DIGITAL • IA</p><p class="free-text">✓ Application disponible gratuitement</p></div>
+
+  <!-- CONNECTÉ PARAMÈTRES -->
+  <div class="param-card" id="paramCard">
+    <div class="left"><b id="pPhone">📱 Chargement...</b><span id="pNom">Récupération profil...</span></div>
+    <div class="right"><b id="pSolde">0 FC</b><span id="pVip">VIP: ...</span></div>
+  </div>
+  <div class="param-card" style="padding:10px 14px">
+    <div class="left"><b>💎 INFOS PARAMÈTRES</b><span id="pPoints">Points: 0 • Solde principal</span></div>
+    <div class="right"><b id="pStatus" style="color:#22c55e">● En ligne</b></div>
+  </div>
+
   <input class="search" id="search" placeholder="Rechercher..." autocomplete="off">
   <div id="list"></div>
 </div>
+
 <div class="toast" id="toast"></div>
+
 <nav class="bottom-nav">
   <button onclick="goPage('dashboard.html')"><span class="icon">📊</span>Dashboard</button>
-  <button onclick="goPage('boutique.html')"><span class="icon">🛍️</span>Boutique</button>
+  <button onclick="goPage('shop.html')"><span class="icon">🛍️</span>Boutique</button>
   <button class="active" onclick="goPage('store.html')"><span class="icon">🛒</span>Store</button>
   <button onclick="goPage('service.html')"><span class="icon">🛠️</span>Service</button>
   <button onclick="goPage('profil.html')"><span class="icon">👤</span>Profil</button>
 </nav>
-<script>
-function goPage(p){ window.location.href=p; }
+
+<script type="module">
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
+const app=getApps().length?getApps()[0]:initializeApp(firebaseConfig);
+const db=getDatabase(app);
+const ROOT="jasonBusiness";
+
+function getPhone(){ return (localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("telephone")||"").trim(); }
+window.goPage=function(p){ window.location.href=p; }
 function toastMsg(m){ const el=document.getElementById("toast"); el.textContent=m; el.classList.add("show"); setTimeout(()=>el.classList.remove("show"),3000); }
+
 const ICON="./jason.png"; const APK="./jason.apk";
 const apps=[{name:"Jason Business 1.0",version:"1.0.0",size:"28 MB",desc:"Découvre Jason Business : WEB, DESIGN, DIGITAL et IA.",icon:ICON}];
+
 function render(){
   const list=document.getElementById("list");
   const q=document.getElementById("search").value.toLowerCase();
@@ -67,8 +98,44 @@ function render(){
     list.innerHTML+=`<div class="app-card"><div class="app-icon"><img src="${a.icon}" onerror="this.src='https://raw.githubusercontent.com/djesonaloma-boop/Jason-business/principal/jason.png'"></div><div class="app-info"><div class="app-name">${a.name} <span class="btn-free">GRATUIT</span></div><div class="app-meta">v${a.version} • ${a.size}</div><div class="app-desc">${a.desc}</div></div><button class="btn btn-install" onclick="downloadApp()">INSTALLER</button></div>`;
   });
 }
-function downloadApp(){ toastMsg("📥 Téléchargement..."); const a=document.createElement("a"); a.href=APK+"?t="+Date.now(); a.download="jason.apk"; document.body.appendChild(a); a.click(); a.remove(); }
+window.downloadApp=function(){ toastMsg("📥 Téléchargement..."); const a=document.createElement("a"); a.href=APK+"?t="+Date.now(); a.download="jason.apk"; document.body.appendChild(a); a.click(); a.remove(); }
 document.getElementById("search").addEventListener("input",render); render();
+
+// 🔥 CONNEXION PARAMÈTRES FIREBASE
+const phone=getPhone();
+if(!phone){
+  document.getElementById("pPhone").textContent="⚠️ Non connecté";
+  document.getElementById("pNom").textContent="Connecte-toi d'abord";
+  document.getElementById("pStatus").textContent="● Hors ligne";
+  document.getElementById("pStatus").style.color="#ff4444";
+} else {
+  document.getElementById("pPhone").textContent="📱 "+phone;
+  const userRef=ref(db, `${ROOT}/users/${phone}`);
+  const jasonRef=ref(db, `Jasonuser/${phone}`);
+  
+  onValue(userRef, snap=>{
+    if(snap.exists()){
+      const d=snap.val();
+      const solde=Number(d.solde_principal??d.solde??0);
+      const vip=d.vipLevel||d.vipProName||d.vipId||"Aucun VIP";
+      const points=Number(d.points_fidelite??d.points??0);
+      const nom=d.nom||d.name||"Utilisateur JASON";
+      
+      document.getElementById("pNom").textContent=nom;
+      document.getElementById("pSolde").textContent=Math.floor(solde).toLocaleString("fr-FR")+" FC";
+      document.getElementById("pVip").textContent="VIP: "+vip;
+      document.getElementById("pPoints").textContent=`Points: ${points} • Retraits: ${d.retraits||0}`;
+      document.getElementById("balanceBadge").textContent="● "+Math.floor(solde).toLocaleString("fr-FR")+" FC";
+    }
+  });
+  
+  onValue(jasonRef, snap=>{
+    if(snap.exists()){
+      const d=snap.val();
+      if(d.nom) document.getElementById("pNom").textContent=d.nom;
+    }
+  });
+}
 </script>
 </body>
 </html>
