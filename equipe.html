@@ -4,206 +4,194 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="theme-color" content="#050a14">
-<title>JASON BUSINESS - JASON CARTE</title>
+<title>JASON BUSINESS - JASON CARTE OFFICIELLE</title>
 <style>
-:root{--blue:#00d2ff;--blue2:#0077ff;--dark:#050a14;--gold:#ffd700;--green:#00e676;--red:#ff4757;--glass:rgba(255,255,255,.06);--border:rgba(255,255,255,.10);--text:#fff;--muted:#b5c5da}
+:root{--blue:#00d2ff;--dark:#050a14;--gold:#ffd700;--green:#00e676}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--dark) url('IMG_0870.jpeg') no-repeat center center fixed;background-size:cover;color:#fff;padding-bottom:110px;overflow-x:hidden}
-body.light{--dark:#f2f6fb;--text:#0b1220;--muted:#5a6a85;--glass:rgba(0,0,0,.04);background:radial-gradient(ellipse at 10% 5%,rgba(0,210,255,.08),transparent 35%),linear-gradient(rgba(242,246,251,.92),rgba(242,246,251,.98)),url("IMG_0870.jpeg") center/cover fixed;color:var(--text)}
-.overlay{min-height:100vh;padding:16px;background:radial-gradient(ellipse at 10% 0%,rgba(0,210,255,.10),transparent 42%),rgba(5,10,20,.93)}
-body.light .overlay{background:radial-gradient(ellipse at 10% 0%,rgba(0,210,255,.08),transparent 42%),rgba(242,246,251,.88)}
-.container{width:100%;max-width:680px;margin:auto}
-.top-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-.brand{color:var(--blue);font-size:15px;font-weight:900;letter-spacing:2px}
-.online{font-size:10px;color:var(--green);padding:7px 11px;border-radius:20px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.25)}
-.page-title{text-align:center;font-size:22px;letter-spacing:2px;margin:10px 0 6px}.page-title span{display:block;color:var(--blue);font-size:11px;letter-spacing:4px;margin-top:6px}
-.subtitle{text-align:center;font-size:11px;color:var(--muted);margin-bottom:20px;line-height:1.6}
+body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#050a14 url('IMG_0870.jpeg') center/cover fixed;color:#fff;padding-bottom:110px;overflow-x:hidden}
+.overlay{min-height:100vh;padding:16px;background:rgba(5,10,20,.94)}
+.container{max-width:700px;margin:auto}
+.top-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.brand{color:var(--blue);font-weight:900;letter-spacing:2px;font-size:14px}
+.online{font-size:10px;color:var(--green);padding:6px 10px;border-radius:20px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.25)}
+.page-title{text-align:center;font-size:22px;margin:10px 0}.page-title span{display:block;color:var(--blue);font-size:11px;letter-spacing:3px;margin-top:4px}
+.subtitle{text-align:center;font-size:11px;opacity:.6;margin-bottom:18px}
 
-/* FORMULAIRE CARTE */
-.jb-card-form{margin:14px 0;padding:18px;border-radius:20px;background:linear-gradient(145deg,rgba(0,210,255,.10),rgba(5,10,20,.75));border:1px solid rgba(0,210,255,.22);backdrop-filter:blur(18px)}
-body.light .jb-card-form{background:linear-gradient(145deg,rgba(255,255,255,.85),rgba(255,255,255,.65));border:1px solid rgba(0,0,0,.06);box-shadow:0 6px 20px rgba(0,0,0,.05)}
-.jb-title{font-size:11px;font-weight:900;letter-spacing:1px;color:var(--blue);margin-bottom:12px;text-transform:uppercase}
-.jb-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.jb-field{margin-bottom:10px}.jb-field label{display:block;font-size:9px;color:var(--muted);margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
-.jb-input{width:100%;padding:11px;border-radius:11px;border:1px solid rgba(255,255,255,.10);background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));color:white;outline:none;font-size:12px}
-body.light .jb-input{background:#f8fbff;color:#0b1220;border-color:rgba(0,0,0,.08)}
-.jb-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,210,255,.08)}
+/* FORM */
+.form-card{padding:16px;border-radius:18px;background:linear-gradient(145deg,rgba(0,210,255,.10),rgba(5,10,20,.8));border:1px solid rgba(0,210,255,.22);margin-bottom:16px}
+.form-title{font-size:11px;font-weight:900;color:var(--blue);margin-bottom:12px;letter-spacing:1px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.field{margin-bottom:8px}.field label{font-size:8px;color:#b5c5da;display:block;margin-bottom:4px;font-weight:700;text-transform:uppercase}
+.input{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);color:white;font-size:12px;outline:none}
+.input:focus{border-color:var(--blue)}
+.btn{width:100%;padding:12px;border-radius:12px;border:0;font-weight:900;font-size:11px;cursor:pointer;margin-top:6px}
+.btn-blue{color:#001018;background:linear-gradient(120deg,var(--blue),#00a8ff)}
+.btn-gold{color:#151000;background:linear-gradient(120deg,#ffd700,#ffeb80)}
+.btn-green{color:#001a08;background:linear-gradient(120deg,#00e676,#00c853)}
+.btn-dark{background:rgba(255,255,255,.08);color:white;border:1px solid rgba(255,255,255,.1)}
+.btn:active{transform:scale(.97)}
 
-/* CARTE ID FORMAT REEL */
-.card-preview-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;margin:18px 0}
-.id-card{
-  width:100%;max-width:340px;aspect-ratio:85.6/53.98;
-  border-radius:12px;overflow:hidden;position:relative;
-  background:linear-gradient(135deg,#0a1a35 0%,#102a5c 25%,#0d213f 50%,#091a33 100%);
-  border:1px solid rgba(0,210,255,.35);
-  box-shadow:0 10px 30px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.08) inset,0 0 25px rgba(0,210,255,.15);
+/* CARTE RECTO COMME IMAGE */
+.preview-wrap{display:none;flex-direction:column;gap:18px;align-items:center;margin:20px 0}
+.preview-wrap.show{display:flex}
+.id-card{width:100%;max-width:360px;aspect-ratio:1.6/1;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 15px 40px rgba(0,0,0,.6)}
+/* RECTO */
+#cardFront{
+  background:linear-gradient(135deg,#0f2a5e 0%,#123a7a 30%,#0e2d5e 70%,#0a2147 100%);
   color:white;display:flex;flex-direction:column;
 }
-.id-card::before{content:"";position:absolute;top:0;left:0;right:0;height:36%;background:linear-gradient(135deg,rgba(0,210,255,.12),transparent 60%);pointer-events:none}
-.id-top{height:38px;background:linear-gradient(90deg,#00d2ff,#0077ff);display:flex;align-items:center;justify-content:space-between;padding:0 12px;color:#001018;font-weight:900;font-size:10px;letter-spacing:1px}
-.id-body{display:flex;flex:1;padding:8px 10px;gap:10px}
-.id-photo{width:74px;height:86px;border-radius:8px;background:#000;border:2px solid rgba(255,255,255,.15);overflow:hidden;flex-shrink:0;display:grid;place-items:center;font-size:10px;color:#fff}
-.id-photo img{width:100%;height:100%;object-fit:cover}
-.id-infos{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
-.id-row{font-size:7.5px;line-height:1.3;display:flex;gap:4px}.id-row b{color:var(--blue);min-width:42px;font-size:7px;text-transform:uppercase;opacity:.9}.id-row span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600;color:#e8f0ff}
-.id-row.big span{font-size:8.5px;font-weight:900;color:white}
-.id-bottom{height:28px;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:6.5px;border-top:1px solid rgba(255,255,255,.08)}
-.id-qr{position:absolute;right:8px;bottom:32px;width:52px;height:52px;background:white;border-radius:6px;padding:3px;display:grid;place-items:center}
-.id-qr canvas,.id-qr img{width:100%!important;height:100%!important}
-.id-number{font-size:6px;color:var(--gold);letter-spacing:.5px}
+#cardFront::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.04) 0%,transparent 50%), url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L50 0 L0 50 Z' fill='rgba(255,255,255,.03)'/%3E%3C/svg%3E");pointer-events:none}
+.front-header{height:56px;background:linear-gradient(90deg,#0c2a5c,#0f3a7a);display:flex;align-items:center;gap:10px;padding:0 14px;border-bottom:1px solid rgba(255,215,0,.25);position:relative;z-index:1}
+.flag{width:52px;height:34px;border-radius:4px;background:linear-gradient(180deg,#00a1ff 0%,#00a1ff 35%,#ff0000 35%,#ff0000 65%,#ffd700 65%);border:1px solid rgba(255,255,255,.2);display:grid;place-items:center;font-size:14px;position:relative;overflow:hidden}
+.flag::after{content:"⭐";position:absolute;left:6px;top:3px;color:#ffd700;font-size:12px}
+.header-text{flex:1}
+.header-text b{display:block;font-size:10px;line-height:1.1;letter-spacing:.3px}
+.header-text span{display:block;font-size:12px;color:var(--gold);font-weight:900;letter-spacing:.5px;margin-top:1px}
+.front-body{display:flex;gap:10px;padding:12px 14px;flex:1;position:relative;z-index:1}
+.photo-box{width:92px;height:108px;border-radius:8px;background:#000;border:2px solid white;overflow:hidden;flex-shrink:0;display:grid;place-items:center;font-size:10px}
+.photo-box img{width:100%;height:100%;object-fit:cover}
+.infos{flex:1;min-width:0;font-size:8px;line-height:1.5}
+.infos .row{display:flex;gap:6px;margin-bottom:2px}
+.infos .row b{color:#7ab8ff;min-width:62px;font-size:7.5px;font-weight:700}
+.infos .row span{color:white;font-weight:700;font-size:8.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.infos .row.big span{font-size:9.5px}
+.qr-box{width:86px;height:86px;background:white;border-radius:6px;padding:4px;flex-shrink:0;align-self:center}
+.qr-box canvas{width:100%!important;height:100%!important}
+.front-footer{height:24px;background:linear-gradient(90deg,#0c2a5c,#123a7a);border-top:1px solid rgba(255,215,0,.4);display:flex;justify-content:space-between;align-items:center;padding:0 14px;font-size:7px;position:relative;z-index:1}
+.front-footer b{color:var(--gold)}
+.front-footer .code{color:var(--blue);font-weight:900}
 
-/* DOS CARTE */
-.id-card.back{background:linear-gradient(135deg,#0d213f,#0a1a35);padding:10px}
-.back-title{font-size:8px;font-weight:900;color:var(--blue);text-align:center;margin-bottom:6px;letter-spacing:1px}
-.back-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:6.5px}
-.back-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:6px}
-.back-item b{display:block;color:var(--gold);font-size:6px;margin-bottom:2px}
-.qr-big{width:86px;height:86px;background:white;border-radius:8px;padding:4px;margin:auto}
+/* VERSO COMME IMAGE */
+#cardBack{
+  background:#f3f1e8;color:#0a2147;display:flex;flex-direction:column;
+  border:1px solid rgba(0,0,0,.08);
+}
+.back-header{padding:10px 14px;border-bottom:2px solid #0a2147;text-align:center;font-size:9px;font-weight:900;letter-spacing:.8px;color:#0a2147}
+.back-body{padding:12px 14px;flex:1;display:flex;flex-direction:column;gap:10px}
+.conditions{font-size:7.5px;line-height:1.5;color:#0a2147}
+.conditions b{font-size:9px;color:#0a2147}
+.conditions li{margin-bottom:2px}
+.dates{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.date-box{border:1px solid #0a2147;border-radius:6px;padding:8px 10px}
+.date-box label{font-size:7px;color:#5a6a85;display:block}
+.date-box b{font-size:12px;color:#0a2147;display:block;margin-top:2px}
+.sigs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.sig{font-size:7px}
+.sig-line{margin-top:18px;border-top:1px solid #0a2147;width:90%;padding-top:4px;display:flex;justify-content:space-between}
+.cachet{width:72px;height:72px;border-radius:50%;border:2px solid #0f3a9c;color:#0f3a9c;display:grid;place-items:center;font-size:7px;font-weight:900;text-align:center;line-height:1.1;transform:rotate(-15deg);opacity:.85}
+.back-footer{height:28px;background:#0a2147;color:white;display:flex;align-items:center;justify-content:center;gap:8px;font-size:6.5px;padding:0 10px}
 
-.jb-btn{width:100%;padding:12px;border-radius:12px;border:0;font-weight:900;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px}
-.jb-btn:active{transform:scale(.97)}
-.jb-btn-gold{color:#151000;background:linear-gradient(120deg,#ffd700,#ffeb80,#ffd700)}
-.jb-btn-blue{color:#001018;background:linear-gradient(120deg,var(--blue),#00a8ff)}
-.jb-btn-green{color:#001a08;background:linear-gradient(120deg,#00e676,#00c853)}
-.jb-btn-dark{background:rgba(255,255,255,.06);color:white;border:1px solid rgba(255,255,255,.1)}
-.jb-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-
-/* ANCIENS STATS */
-.stats-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
-.stat-box{padding:14px 10px;border-radius:16px;text-align:center;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08)}
-.stat-number{color:var(--blue);font-size:20px;font-weight:900}.stat-label{font-size:8px;color:var(--muted);text-transform:uppercase;margin-top:4px}
-
-.invite-card{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(0,210,255,.16),rgba(0,0,0,.68));border:1px solid rgba(0,210,255,.48);border-radius:20px;padding:18px;text-align:center;margin-top:14px}
-.code-display{margin:10px 0;color:var(--blue);font-size:22px;font-weight:900;letter-spacing:2px;word-break:break-all}
-
-.navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:10px 0 calc(10px + env(safe-area-inset-bottom));background:rgba(5,10,20,.97);border-top:1px solid rgba(0,210,255,.24);backdrop-filter:blur(18px)}
-.nav-link{min-width:55px;flex:1;text-align:center;text-decoration:none;color:white;opacity:.48;font-size:10px}.nav-link.active{color:var(--blue);opacity:1;font-weight:bold}.nav-icon{font-size:19px;margin-bottom:4px}
-
-@media(max-width:400px){.jb-grid2{grid-template-columns:1fr}.id-card{max-width:320px}}
+.navbar{position:fixed;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:10px 0 calc(10px + env(safe-area-inset-bottom));background:rgba(5,10,20,.97);border-top:1px solid rgba(0,210,255,.24)}
+.nav-link{flex:1;text-align:center;text-decoration:none;color:white;opacity:.5;font-size:10px}.nav-link.active{color:var(--blue);opacity:1;font-weight:bold}.nav-icon{font-size:18px}
 </style>
 </head>
 <body>
 <div class="overlay">
 <div class="container">
-
 <div class="top-header"><div class="brand">JASON BUSINESS</div><div class="online">● EN LIGNE</div></div>
+<h1 class="page-title">JASON CARTE<div><span>CARTE D'IDENTITÉ OFFICIELLE</span></div></h1>
+<div class="subtitle">Comme l'image - Recto avec QR + Verso sans QR - Télécharge seulement ce que tu veux</div>
 
-<h1 class="page-title">JASON CARTE<span>CARTE D'IDENTITÉ PRO</span></h1>
-<div class="subtitle">Crée ta carte professionnelle avec QR code parrainage — Téléchargeable en PDF & Image</div>
-
-<!-- FORMULAIRE -->
-<div class="jb-card-form">
-<div class="jb-title">📝 Remplis tes informations (comme vraie carte)</div>
-<div class="jb-grid2">
-<div class="jb-field"><label>Photo de profil *</label><input type="file" id="photoInput" accept="image/*" class="jb-input"></div>
-<div class="jb-field"><label>Code parrainage (auto)</label><input id="codeInput" class="jb-input" readonly placeholder="Chargement..."></div>
+<div class="form-card">
+<div class="form-title">📝 Remplis comme vraie carte</div>
+<div class="grid2">
+<div class="field"><label>Photo *</label><input type="file" id="photoInput" accept="image/*" class="input"></div>
+<div class="field"><label>Code parrainage</label><input id="codeInput" class="input" readonly></div>
 </div>
-<div class="jb-grid2">
-<div class="jb-field"><label>Nom *</label><input id="nom" class="jb-input" placeholder="Ex: ALOMA"></div>
-<div class="jb-field"><label>Post-nom *</label><input id="postnom" class="jb-input" placeholder="Ex: JASON"></div>
+<div class="grid2">
+<div class="field"><label>Nom *</label><input id="nom" class="input" placeholder="ALOMA"></div>
+<div class="field"><label>Post-nom *</label><input id="postnom" class="input" placeholder="EBUNDI"></div>
 </div>
-<div class="jb-grid2">
-<div class="jb-field"><label>Prénom *</label><input id="prenom" class="jb-input" placeholder="Ex: Jean"></div>
-<div class="jb-field"><label>Sexe *</label><select id="sexe" class="jb-input"><option value="M">Masculin</option><option value="F">Féminin</option></select></div>
+<div class="grid2">
+<div class="field"><label>Prénom *</label><input id="prenom" class="input" placeholder="JASON"></div>
+<div class="field"><label>Sexe *</label><select id="sexe" class="input"><option value="M">M</option><option value="F">F</option></select></div>
 </div>
-<div class="jb-grid2">
-<div class="jb-field"><label>Lieu de naissance *</label><input id="lieuNaiss" class="jb-input" placeholder="Ex: Kinshasa"></div>
-<div class="jb-field"><label>Date de naissance *</label><input id="dateNaiss" type="date" class="jb-input"></div>
+<div class="grid2">
+<div class="field"><label>Lieu naissance *</label><input id="lieuNaiss" class="input" placeholder="Kinshasa"></div>
+<div class="field"><label>Date naissance *</label><input id="dateNaiss" type="date" class="input"></div>
 </div>
-<div class="jb-field"><label>Adresse complète *</label><input id="adresse" class="jb-input" placeholder="Ex: Av. Liberation N°12, Gombe"></div>
-<div class="jb-grid2">
-<div class="jb-field"><label>Nationalité *</label><input id="nationalite" class="jb-input" value="Congolaise" placeholder="Congolaise"></div>
-<div class="jb-field"><label>Province *</label><input id="province" class="jb-input" placeholder="Ex: Kinshasa"></div>
+<div class="field"><label>Adresse *</label><input id="adresse" class="input" placeholder="Av.yolo n°12b"></div>
+<div class="grid2">
+<div class="field"><label>Nationalité *</label><input id="nationalite" class="input" value="Congolaise"></div>
+<div class="field"><label>Province *</label><input id="province" class="input" placeholder="MONGALA"></div>
 </div>
-<div class="jb-grid2">
-<div class="jb-field"><label>Territoire / Commune *</label><input id="territoire" class="jb-input" placeholder="Ex: Gombe / Capitaine"></div>
-<div class="jb-field"><label>Capitaine / Chef lieu</label><input id="capitaine" class="jb-input" placeholder="Ex: Kinshasa Capitale"></div>
-</div>
-<div class="jb-field"><label>Profession / Poste *</label><input id="poste" class="jb-input" placeholder="Ex: Entrepreneur - JASON BUSINESS"></div>
-
-<button class="jb-btn jb-btn-blue" id="generateCardBtn">✨ Générer ma carte</button>
-<div style="font-size:9px;color:var(--muted);margin-top:8px;text-align:center">Remplis tout puis génère — La carte sera petite comme vraie carte d'identité</div>
+<div class="field"><label>Poste *</label><input id="poste" class="input" placeholder="JASON-BUSINESS"></div>
+<button class="btn btn-blue" id="generateBtn">✨ Générer ma carte comme image</button>
 </div>
 
-<!-- PREVIEW CARTES -->
-<div class="card-preview-wrap" id="cardPreviewWrap" style="display:none">
-<div style="font-size:11px;font-weight:900;color:var(--blue);letter-spacing:1px">RECTO - JASON CARTE</div>
+<div class="preview-wrap" id="previewWrap">
+<div style="font-size:10px;font-weight:900;color:var(--blue);letter-spacing:1px">RECTO - AVEC QR CODE (comme encerclé)</div>
 
-<!-- CARTE RECTO -->
 <div class="id-card" id="cardFront">
-<div class="id-top"><span>🇨🇩 RÉPUBLIQUE DÉMOCRATIQUE DU CONGO</span><span style="font-size:8px">JASON BUSINESS</span></div>
-<div class="id-body">
-<div class="id-photo" id="cardPhoto">PHOTO</div>
-<div class="id-infos">
-<div class="id-row big"><b>Nom:</b><span id="cNom">ALOMA</span></div>
-<div class="id-row"><b>Post-nom:</b><span id="cPostnom">JASON</span></div>
-<div class="id-row"><b>Prénom:</b><span id="cPrenom">Jean</span></div>
-<div class="id-row"><b>Sexe:</b><span id="cSexe">M</span><b style="margin-left:8px">Né le:</b><span id="cDateNaiss">01/01/2000</span></div>
-<div class="id-row"><b>Lieu:</b><span id="cLieuNaiss">Kinshasa</span></div>
-<div class="id-row"><b>Nationalité:</b><span id="cNationalite">Congolaise</span></div>
-<div class="id-row"><b>Adresse:</b><span id="cAdresse">Gombe, Kinshasa</span></div>
-<div class="id-row"><b>Province:</b><span id="cProvince">Kinshasa</span><b style="margin-left:8px">Territ:</b><span id="cTerritoire">Gombe</span></div>
-<div class="id-row"><b>Poste:</b><span id="cPoste" style="color:var(--gold)">Entrepreneur</span></div>
+<div class="front-header">
+<div class="flag"></div>
+<div class="header-text"><b>RÉPUBLIQUE DÉMOCRATIQUE DU CONGO</b><span>JASON BUSINESS</span></div>
 </div>
-<div class="id-qr" id="qrFront"></div>
+<div class="front-body">
+<div class="photo-box" id="photoBox">PHOTO</div>
+<div class="infos">
+<div class="row"><b>NOM:</b><span id="cNom">ALOMA</span></div>
+<div class="row"><b>POST-NOM:</b><span id="cPostNom">EBUNDI</span></div>
+<div class="row"><b>PRÉNOM:</b><span id="cPrenom">JASON</span></div>
+<div class="row"><b>SEXE:</b><span id="cSexe">M</span></div>
+<div class="row"><b>NÉ LE:</b><span id="cNeLe">10/09/2007</span></div>
+<div class="row"><b>LIEU:</b><span id="cLieu">Kinshasa</span></div>
+<div class="row"><b>NATIONALITÉ:</b><span id="cNat">Congolaise</span></div>
+<div class="row"><b>ADRESSE:</b><span id="cAdresse">Av.yolo n°12b</span></div>
+<div class="row"><b>PROVINCE:</b><span id="cProv">MONGALA</span></div>
+<div class="row"><b>POSTE:</b><span id="cPoste">JASON-BUSINESS</span></div>
 </div>
-<div class="id-bottom">
-<span>Code: <b id="cCode" style="color:var(--blue)">JASON-123456</b></span>
-<span class="id-number">N° <span id="cNumber">JB-2026-001234</span> • Exp: 2029</span>
+<div class="qr-box" id="qrFront"></div>
 </div>
-</div>
-
-<div style="font-size:11px;font-weight:900;color:var(--gold);letter-spacing:1px;margin-top:10px">VERSO - QR CODE PARRAINAGE</div>
-
-<!-- CARTE VERSO -->
-<div class="id-card back" id="cardBack">
-<div class="back-title">JASON BUSINESS — CARTE MEMBRE OFFICIELLE</div>
-<div style="display:flex;gap:10px">
-<div style="flex:1">
-<div class="back-grid">
-<div class="back-item"><b>Capitaine / Chef</b><span id="cCapitaine2">Kinshasa Capitale</span></div>
-<div class="back-item"><b>Province</b><span id="cProvince2">Kinshasa</span></div>
-<div class="back-item"><b>Date émission</b><span id="cEmission">19/10/2026</span></div>
-<div class="back-item"><b>Validité</b><span>3 ans - Jusqu'en 2029</span></div>
-<div class="back-item" style="grid-column:span 2"><b>Avantages membre</b><span>• Commissions • Points fidélité • Accès API • Boutique pro</span></div>
-<div class="back-item" style="grid-column:span 2"><b>Lien de parrainage</b><span id="cLink" style="font-size:5.5px;word-break:break-all">https://jasonbusiness.com/register?code=JASON-123456</span></div>
-</div>
-<div style="margin-top:8px;font-size:6px;text-align:center;opacity:.7">Scannez le QR code pour rejoindre avec mon code: <b id="cCode2" style="color:var(--blue)">JASON-123456</b><br>✅ JASON BUSINESS — Sécurisé • Rapide • Professionnel • Version 2.0 Pro</div>
-</div>
-<div style="display:flex;flex-direction:column;align-items:center;gap:6px">
-<div class="qr-big" id="qrBack"></div>
-<div style="font-size:6px;color:var(--gold);font-weight:900">SCANNEZ-MOI</div>
-</div>
-</div>
+<div class="front-footer">
+<span>Code: <b class="code" id="cCode">JASON-3359</b></span>
+<span>N° <b id="cNum">JB-2026-719293</b> • CARTE D'IDENTITÉ • JASON BUSINESS</span>
 </div>
 </div>
 
-<!-- BOUTONS TELECHARGEMENT -->
-<div class="jb-actions" id="downloadActions" style="display:none">
-<button class="jb-btn jb-btn-gold" id="downloadPngBtn">📸 Télécharger Image (PNG)</button>
-<button class="jb-btn jb-btn-green" id="downloadPdfBtn">📄 Télécharger PDF Carte</button>
+<div style="font-size:10px;font-weight:900;color:var(--gold);margin-top:10px;letter-spacing:1px">VERSO - SANS QR CODE (NOUVEAU DESIGN)</div>
+
+<div class="id-card" id="cardBack">
+<div class="back-header">RÉPUBLIQUE DÉMOCRATIQUE DU CONGO • JASON BUSINESS</div>
+<div class="back-body">
+<div class="conditions">
+<b>CONDITIONS D'UTILISATION</b>
+<ul style="margin:4px 0 0 14px;padding:0">
+<li>Cette carte est la propriété de JASON BUSINESS.</li>
+<li>Elle est strictement personnelle et non transférable.</li>
+<li>Toute falsification est passible de poursuites judiciaires.</li>
+<li>Le porteur doit présenter cette carte sur demande des autorités habilitées.</li>
+</ul>
 </div>
-<div class="jb-actions" style="display:none" id="downloadActions2">
-<button class="jb-btn jb-btn-dark" id="downloadBothBtn">📦 Télécharger Recto + Verso</button>
-<button class="jb-btn jb-btn-blue" id="shareCardBtn">📤 Partager ma carte</button>
+<div class="dates">
+<div class="date-box"><label>Date d'émission:</label><b id="cEmission">10/09/2024</b></div>
+<div class="date-box"><label>Validité: 3 ans</label><b id="cValid">10/09/2027</b></div>
+</div>
+<div class="sigs">
+<div class="sig">Signature du titulaire:
+<div class="sig-line"><span></span><span style="font-family:cursive;opacity:.6">signature</span></div>
+</div>
+<div class="sig">Cachet officiel:
+<div style="display:flex;gap:8px;align-items:center;margin-top:6px">
+<div class="cachet">JASON BUSINESS<br>JASON<br>R.D.C.<br>SERVICE OFFICIEL</div>
+</div>
+</div>
+</div>
+</div>
+<div class="back-footer">
+<span>CONTACT: +243 800 000 101</span> | <span>www.jasonbusiness.cd</span> | <span>support@jasonbusiness.cd</span>
 </div>
 </div>
 
-<div class="invite-card" style="margin-top:20px">
-<div style="font-size:10px;opacity:.6;text-transform:uppercase;letter-spacing:1px">Votre code de parrainage</div>
-<div id="jb_myCode" class="code-display">...</div>
-<button id="jb_btnCopy" class="jb-btn jb-btn-blue" style="margin-top:8px">📋 COPIER LE LIEN D'INVITATION</button>
-<div id="jb_copyStatus" style="display:none;color:var(--green);font-size:11px;margin-top:8px;font-weight:bold">✅ Lien copié!</div>
+<div style="width:100%;max-width:360px;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+<button class="btn btn-gold" id="dlFrontPng">📸 Télécharger RECTO SEUL</button>
+<button class="btn btn-blue" id="dlFrontPdf">📄 PDF RECTO SEUL</button>
 </div>
-
-<div class="stats-grid">
-<div class="stat-box"><div class="stat-number" id="jb_totalTeam">0</div><div class="stat-label">Membres totaux</div></div>
-<div class="stat-box"><div class="stat-number" id="jb_teamPoints">0</div><div class="stat-label">Points réseau</div></div>
-<div class="stat-box"><div class="stat-number" id="jb_totalGains">0 FC</div><div class="stat-label">Commissions</div></div>
-<div class="stat-box"><div class="stat-number" id="jb_mainBalance">0 FC</div><div class="stat-label">Solde</div></div>
+<div style="width:100%;max-width:360px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<button class="btn btn-dark" id="dlBackPng">📸 Télécharger VERSO SEUL</button>
+<button class="btn btn-green" id="dlBoth">📦 Télécharger RECTO+VERSO</button>
 </div>
-
-<div id="jb_status" style="text-align:center;margin:16px 0;font-size:10px;color:#ffeb3b"></div>
+</div>
 
 </div>
 </div>
@@ -221,199 +209,93 @@ body.light .jb-input{background:#f8fbff;color:#0b1220;border-color:rgba(0,0,0,.0
 
 <script type="module">
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+const cfg={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
+const app=getApps().length?getApp():initializeApp(cfg);
+const db=getDatabase(app);
+const $=id=>document.getElementById(id);
+const phone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||"";
+let inviteCode="JASON-3359";
+let photoB64="";
 
-const jbFirebaseConfig = {
-  apiKey: "AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
-  authDomain: "starlink-investit.firebaseapp.com",
-  databaseURL: "https://starlink-investit-default-rtdb.firebaseio.com",
-  projectId: "starlink-investit", storageBucket: "starlink-investit.firebasestorage.app",
-  messagingSenderId: "807081599583", appId: "1:807081599583:web:e00ec3959bc4acdae031ea"
-};
-const jbApp = getApps().length ? getApp() : initializeApp(jbFirebaseConfig);
-const jbDB = getDatabase(jbApp);
-const ROOT = "jasonBusiness";
-const jbUserPhone = localStorage.getItem("userPhone") || localStorage.getItem("jasonBusinessUserPhone") || localStorage.getItem("phone") || localStorage.getItem("jasonBusinessPhone") || "";
-const $ = id => document.getElementById(id);
-const jbTheme = localStorage.getItem("jb_theme")||"dark";
-if(jbTheme==="light") document.body.classList.add("light");
-
-let jbInviteCode = "";
-let userPhotoBase64 = "";
-
-function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
-function formatDateFr(dateStr){
-  if(!dateStr) return "";
-  const d=new Date(dateStr);
-  if(isNaN(d.getTime())) return dateStr;
-  return d.toLocaleDateString("fr-FR");
-}
-
-// CHARGE CODE PARRAINAGE
-if(!jbUserPhone){ $("jb_status").innerText="⚠️ Session expirée"; setTimeout(()=>location.href="login.html",1200); }
-else{
-  const userRef = ref(jbDB, `${ROOT}/users/${jbUserPhone}`);
-  onValue(userRef, async snap=>{
-    if(!snap.exists()) return;
-    const data=snap.val()||{};
-    jbInviteCode = data.inviteCode || data.referralCode || data.codeParrainage || ("JASON-"+String(jbUserPhone).replace(/\D/g,"").slice(-6));
-    $("jb_myCode").innerText=jbInviteCode;
-    $("codeInput").value=jbInviteCode;
-    $("cCode").innerText=jbInviteCode;
-    $("cCode2").innerText=jbInviteCode;
-    $("cLink").innerText=`${location.origin}/register.html?inviteCode=${encodeURIComponent(jbInviteCode)}`;
-    const principal=Number(data.solde_principal||data.solde||0);
-    const comm=Number(data.solde_commissions||data.commissions||0);
-    $("jb_mainBalance").innerText=principal.toLocaleString("fr-FR")+" FC";
-    $("jb_totalGains").innerText=comm.toLocaleString("fr-FR")+" FC";
-    const lvl1=Number(data.count_lvl1||0), lvl2=Number(data.count_lvl2||0), lvl3=Number(data.count_lvl3||0);
-    $("jb_totalTeam").innerText=(lvl1+lvl2+lvl3).toString();
-    $("jb_teamPoints").innerText=((lvl1+lvl2+lvl3)*5).toString();
-    // Pré-remplir si déjà sauvegardé
-    const saved=JSON.parse(localStorage.getItem("jasonCarteData")||"{}");
-    if(saved.nom) { $("nom").value=saved.nom; $("postnom").value=saved.postnom||""; $("prenom").value=saved.prenom||""; $("sexe").value=saved.sexe||"M"; $("lieuNaiss").value=saved.lieuNaiss||""; $("dateNaiss").value=saved.dateNaiss||""; $("adresse").value=saved.adresse||""; $("nationalite").value=saved.nationalite||"Congolaise"; $("province").value=saved.province||""; $("territoire").value=saved.territoire||""; $("capitaine").value=saved.capitaine||""; $("poste").value=saved.poste||""; }
-    if(saved.photo){ userPhotoBase64=saved.photo; $("cardPhoto").innerHTML=`<img src="${saved.photo}">`; }
-  });
-}
-
-// PHOTO UPLOAD
-$("photoInput").addEventListener("change", e=>{
-  const file=e.target.files[0];
-  if(!file) return;
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    userPhotoBase64=ev.target.result;
-    $("cardPhoto").innerHTML=`<img src="${userPhotoBase64}">`;
-  };
-  reader.readAsDataURL(file);
+onValue(ref(db,`jasonBusiness/users/${phone}`),snap=>{
+  if(!snap.exists())return;
+  const d=snap.val();
+  inviteCode=d.inviteCode||d.referralCode||`JASON-${String(phone).slice(-4)}`;
+  $("codeInput").value=inviteCode;
+  const saved=JSON.parse(localStorage.getItem("jasonCarteFinal")||"{}");
+  if(saved.nom){ $("nom").value=saved.nom; $("postnom").value=saved.postnom; $("prenom").value=saved.prenom; $("lieuNaiss").value=saved.lieuNaiss; $("dateNaiss").value=saved.dateNaiss; $("adresse").value=saved.adresse; $("nationalite").value=saved.nationalite; $("province").value=saved.province; $("poste").value=saved.poste; photoB64=saved.photo||""; if(photoB64) $("photoBox").innerHTML=`<img src="${photoB64}">`; }
 });
 
-// GENERER CARTE
-$("generateCardBtn").addEventListener("click", ()=>{
+$("photoInput").addEventListener("change",e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=ev=>{ photoB64=ev.target.result; $("photoBox").innerHTML=`<img src="${photoB64}">`; };
+  r.readAsDataURL(f);
+});
+
+$("generateBtn").addEventListener("click",()=>{
   const nom=$("nom").value.trim(), postnom=$("postnom").value.trim(), prenom=$("prenom").value.trim();
-  const sexe=$("sexe").value, lieuNaiss=$("lieuNaiss").value.trim(), dateNaiss=$("dateNaiss").value;
-  const adresse=$("adresse").value.trim(), nationalite=$("nationalite").value.trim(), province=$("province").value.trim();
-  const territoire=$("territoire").value.trim(), capitaine=$("capitaine").value.trim(), poste=$("poste").value.trim();
+  const lieu=$("lieuNaiss").value.trim(), date=$("dateNaiss").value, adresse=$("adresse").value.trim();
+  const nat=$("nationalite").value.trim(), prov=$("province").value.trim(), poste=$("poste").value.trim();
+  const sexe=$("sexe").value;
+  if(!nom||!postnom||!prenom||!lieu||!date||!adresse||!prov||!poste){alert("Remplis tout!");return;}
+  if(!photoB64){alert("Ajoute photo!");return;}
   
-  if(!nom||!postnom||!prenom||!lieuNaiss||!dateNaiss||!adresse||!province||!territoire||!poste){
-    alert("❌ Remplis tous les champs obligatoires (*) comme vraie carte!");
-    return;
-  }
-  if(!userPhotoBase64){
-    alert("❌ Ajoute ta photo de profil!");
-    return;
-  }
-
-  // Sauvegarde
-  const data={nom,postnom,prenom,sexe,lieuNaiss,dateNaiss,adresse,nationalite,province,territoire,capitaine,poste,photo:userPhotoBase64,code:jbInviteCode};
-  localStorage.setItem("jasonCarteData", JSON.stringify(data));
-
-  // Remplir carte
+  localStorage.setItem("jasonCarteFinal",JSON.stringify({nom,postnom,prenom,lieuNaiss:lieu,dateNaiss:date,adresse,nationalite:nat,province:prov,poste,photo:photoB64}));
+  
   $("cNom").innerText=nom.toUpperCase();
-  $("cPostnom").innerText=postnom.toUpperCase();
-  $("cPrenom").innerText=prenom;
+  $("cPostNom").innerText=postnom.toUpperCase();
+  $("cPrenom").innerText=prenom.toUpperCase();
   $("cSexe").innerText=sexe;
-  $("cDateNaiss").innerText=formatDateFr(dateNaiss);
-  $("cLieuNaiss").innerText=lieuNaiss;
-  $("cNationalite").innerText=nationalite;
+  $("cNeLe").innerText=new Date(date).toLocaleDateString("fr-FR");
+  $("cLieu").innerText=lieu;
+  $("cNat").innerText=nat;
   $("cAdresse").innerText=adresse;
-  $("cProvince").innerText=province;
-  $("cTerritoire").innerText=territoire;
-  $("cCapitaine2").innerText=capitaine||province+" Capitale";
-  $("cProvince2").innerText=province;
-  $("cPoste").innerText=poste;
-  $("cCode").innerText=jbInviteCode;
-  $("cCode2").innerText=jbInviteCode;
-  $("cNumber").innerText=`JB-${new Date().getFullYear()}-${String(Math.floor(Math.random()*999999)).padStart(6,'0')}`;
+  $("cProv").innerText=prov.toUpperCase();
+  $("cPoste").innerText=poste.toUpperCase();
+  $("cCode").innerText=inviteCode;
+  const num=`JB-${new Date().getFullYear()}-${Math.floor(Math.random()*900000+100000)}`;
+  $("cNum").innerText=num;
   $("cEmission").innerText=new Date().toLocaleDateString("fr-FR");
-  $("cLink").innerText=`${location.origin}/register.html?inviteCode=${jbInviteCode}`;
-
-  // QR CODES
-  const qrLink=`${location.origin}/register.html?inviteCode=${encodeURIComponent(jbInviteCode)}`;
-  $("qrFront").innerHTML=""; $("qrBack").innerHTML="";
-  new QRCode($("qrFront"), {text:qrLink, width:48, height:48, correctLevel: QRCode.CorrectLevel.H});
-  new QRCode($("qrBack"), {text:qrLink, width:78, height:78, correctLevel: QRCode.CorrectLevel.H});
-
-  $("cardPreviewWrap").style.display="flex";
-  $("downloadActions").style.display="grid";
-  $("downloadActions2").style.display="grid";
-  $("cardPreviewWrap").scrollIntoView({behavior:"smooth"});
+  const valid=new Date(); valid.setFullYear(valid.getFullYear()+3);
+  $("cValid").innerText=valid.toLocaleDateString("fr-FR");
+  
+  const link=`${location.origin}/register.html?inviteCode=${encodeURIComponent(inviteCode)}`;
+  $("qrFront").innerHTML="";
+  new QRCode($("qrFront"),{text:link,width:80,height:80,correctLevel:QRCode.CorrectLevel.H});
+  
+  $("previewWrap").classList.add("show");
+  $("previewWrap").scrollIntoView({behavior:"smooth"});
 });
 
-// TELECHARGEMENT PNG
-$("downloadPngBtn").addEventListener("click", async ()=>{
-  const front=$("cardFront");
-  const canvas=await html2canvas(front,{scale:3,backgroundColor:null,useCORS:true});
-  const link=document.createElement("a");
-  link.download=`JASON-CARTE-${$("nom").value}-${jbInviteCode}.png`;
-  link.href=canvas.toDataURL("image/png");
-  link.click();
-});
+async function dl(id,name){
+  const el=$(id);
+  const canvas=await html2canvas(el,{scale:4,useCORS:true,backgroundColor:null});
+  const a=document.createElement("a");
+  a.download=name;
+  a.href=canvas.toDataURL("image/png",1.0);
+  a.click();
+}
 
-$("downloadPdfBtn").addEventListener("click", async ()=>{
+$("dlFrontPng").addEventListener("click",()=>dl("cardFront",`JASON-CARTE-RECTO-${inviteCode}.png`));
+$("dlBackPng").addEventListener("click",()=>dl("cardBack",`JASON-CARTE-VERSO-${inviteCode}.png`));
+$("dlFrontPdf").addEventListener("click",async()=>{
   const {jsPDF}=window.jspdf;
-  const front=$("cardFront");
-  const back=$("cardBack");
-  const canvasFront=await html2canvas(front,{scale:3,backgroundColor:null,useCORS:true});
-  const canvasBack=await html2canvas(back,{scale:3,backgroundColor:null,useCORS:true});
-  
-  const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:[86,54]});
-  // Recto
-  pdf.addImage(canvasFront.toDataURL("image/png"),"PNG",0,0,86,54);
-  // Verso nouvelle page même taille
-  pdf.addPage([86,54],"landscape");
-  pdf.addImage(canvasBack.toDataURL("image/png"),"PNG",0,0,86,54);
-  
-  pdf.save(`JASON-CARTE-${$("nom").value}-${jbInviteCode}.pdf`);
+  const canvas=await html2canvas($("cardFront"),{scale:4,useCORS:true});
+  const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:[85.6,53.98]});
+  pdf.addImage(canvas.toDataURL("image/png"),"PNG",0,0,85.6,53.98);
+  pdf.save(`JASON-RECTO-${inviteCode}.pdf`);
 });
-
-$("downloadBothBtn").addEventListener("click", async ()=>{
-  const front=$("cardFront");
-  const back=$("cardBack");
-  const c1=await html2canvas(front,{scale:3,useCORS:true});
-  const c2=await html2canvas(back,{scale:3,useCORS:true});
-  const link1=document.createElement("a");
-  link1.download=`JASON-CARTE-RECTO-${jbInviteCode}.png`;
-  link1.href=c1.toDataURL("image/png");
-  link1.click();
-  setTimeout(()=>{
-    const link2=document.createElement("a");
-    link2.download=`JASON-CARTE-VERSO-${jbInviteCode}.png`;
-    link2.href=c2.toDataURL("image/png");
-    link2.click();
-  },500);
-});
-
-$("shareCardBtn").addEventListener("click", async ()=>{
-  const front=$("cardFront");
-  const canvas=await html2canvas(front,{scale:3,useCORS:true});
-  canvas.toBlob(async blob=>{
-    const file=new File([blob],`JASON-CARTE-${jbInviteCode}.png`,{type:"image/png"});
-    if(navigator.share && navigator.canShare({files:[file]})){
-      try{ await navigator.share({title:"Ma JASON CARTE",text:`Ma carte JASON BUSINESS - Code: ${jbInviteCode}`,files:[file]}); }catch{}
-    }else{
-      const link=document.createElement("a");
-      link.href=canvas.toDataURL("image/png");
-      link.download=`JASON-CARTE-${jbInviteCode}.png`;
-      link.click();
-      alert("✅ Carte téléchargée! Partage-la avec ton QR code!");
-    }
-  });
-});
-
-// COPY LIEN
-$("jb_btnCopy").addEventListener("click", async ()=>{
-  const code=jbInviteCode;
-  if(!code||code==="..."){alert("Code pas encore chargé");return;}
-  const link=`${location.origin}/register.html?inviteCode=${encodeURIComponent(code)}`;
-  const msg=`🚀 Rejoins JASON BUSINESS avec ma JASON CARTE!\n\nCode: ${code}\nLien: ${link}\n\nScanne mon QR code sur ma carte!`;
-  try{
-    if(navigator.share){ await navigator.share({title:"JASON BUSINESS - JASON CARTE",text:msg,url:link}); $("jb_copyStatus").style.display="block"; setTimeout(()=>$("jb_copyStatus").style.display="none",3000); return; }
-    await navigator.clipboard.writeText(link);
-    $("jb_copyStatus").style.display="block"; setTimeout(()=>$("jb_copyStatus").style.display="none",3000);
-  }catch{
-    prompt("Copiez le lien:", link);
-  }
+$("dlBoth").addEventListener("click",async()=>{
+  const {jsPDF}=window.jspdf;
+  const c1=await html2canvas($("cardFront"),{scale:4,useCORS:true});
+  const c2=await html2canvas($("cardBack"),{scale:4,useCORS:true});
+  const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:[85.6,53.98]});
+  pdf.addImage(c1.toDataURL("image/png"),"PNG",0,0,85.6,53.98);
+  pdf.addPage([85.6,53.98],"landscape");
+  pdf.addImage(c2.toDataURL("image/png"),"PNG",0,0,85.6,53.98);
+  pdf.save(`JASON-CARTE-COMPLETE-${inviteCode}.pdf`);
 });
 </script>
 </body>
