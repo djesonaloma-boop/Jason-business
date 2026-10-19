@@ -8,38 +8,32 @@
 <style>
 :root{--blue:#00d2ff;--fb-blue:#0084ff;--fb-bg:#f0f2f5;--fb-card:#ffffff;--border:rgba(0,0,0,.08);--text:#050505;--muted:#65676b;--green:#31a24c;--red:#ff3b30}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Arial;color:var(--text);background:var(--fb-bg);display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
+body{margin:0;font-family:"Segoe UI",Arial;color:var(--text);background:var(--fb-bg);display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
 body.dark{--fb-bg:#18191a;--fb-card:#242526;--text:#e4e6eb;--muted:#b0b3b8;--border:rgba(255,255,255,.1);background:#18191a}
-header{height:56px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:0 16px;background:var(--fb-card);border-bottom:1px solid var(--border);box-shadow:0 1px 2px rgba(0,0,0,.08);position:sticky;top:0;z-index:50}
-.brand{font-weight:900;color:var(--fb-blue);font-size:20px;letter-spacing:.3px}
-.header-actions{display:flex;gap:8px;align-items:center}
-.icon-btn{width:36px;height:36px;border-radius:50%;background:var(--fb-bg);border:0;display:grid;place-items:center;font-size:18px;cursor:pointer;color:var(--text);transition:.2s}
-.icon-btn:active{transform:scale(.92);background:rgba(0,0,0,.08)}
+header{height:56px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:0 16px;background:var(--fb-card);border-bottom:1px solid var(--border);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.brand{font-weight:900;color:var(--fb-blue);font-size:20px}
+.header-actions{display:flex;gap:8px}
+.icon-btn{width:36px;height:36px;border-radius:50%;background:var(--fb-bg);border:0;display:grid;place-items:center;font-size:18px;cursor:pointer;color:var(--text)}
 body.dark .icon-btn{background:#3a3b3c}
 .wrap{display:flex;flex:1;min-height:0;overflow:hidden}
 .left{width:360px;flex-shrink:0;background:var(--fb-card);border-right:1px solid var(--border);display:flex;flex-direction:column;min-height:0}
 .left-header{padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
 .left-header h2{font-size:24px;font-weight:900}
-.left-actions{display:flex;gap:8px}
 .search-box{margin:8px 16px;padding:10px 12px;border-radius:20px;background:var(--fb-bg);display:flex;align-items:center;gap:8px}
 body.dark .search-box{background:#3a3b3c}
 .search-box input{flex:1;border:0;background:transparent;color:var(--text);outline:none;font-size:14px}
 .tabs{display:flex;gap:8px;padding:8px 16px;overflow-x:auto;scrollbar-width:none}
-.tab{padding:8px 12px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;background:var(--fb-bg);color:var(--muted);border:0;transition:.2s}
+.tab{padding:8px 12px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;background:var(--fb-bg);color:var(--muted);border:0}
 body.dark .tab{background:#3a3b3c}
 .tab.active{background:rgba(0,132,255,.12);color:var(--fb-blue)}
 .stories{display:flex;gap:8px;padding:12px 16px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--border)}
-.story{width:56px;flex-shrink:0;text-align:center;cursor:pointer;position:relative}
+.story{width:56px;flex-shrink:0;text-align:center;cursor:pointer}
 .story-av{width:56px;height:56px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#00d2ff,#0077ff,#ff00ff);display:grid;place-items:center}
 .story-av div{width:100%;height:100%;border-radius:50%;background:var(--fb-card);display:grid;place-items:center;font-weight:900;overflow:hidden;border:3px solid var(--fb-card)}
 .story-av img{width:100%;height:100%;object-fit:cover}
 .story span{font-size:11px;margin-top:4px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.story.create .story-av{background:#e4e6eb}
-.story.create .story-av div{background:var(--fb-card)}
-.story-badge{position:absolute;top:-2px;right:0;background:var(--red);color:white;font-size:9px;font-weight:800;min-width:16px;height:16px;border-radius:8px;display:grid;place-items:center;padding:0 4px;border:2px solid var(--fb-card)}
 .list{flex:1;min-height:0;overflow-y:auto;padding:8px}
-.item{padding:8px;border-radius:10px;display:flex;gap:10px;align-items:center;cursor:pointer;transition:.15s;position:relative}
+.item{padding:8px;border-radius:10px;display:flex;gap:10px;align-items:center;cursor:pointer}
 .item:hover{background:var(--fb-bg)}
 body.dark .item:hover{background:#3a3b3c}
 .item.active{background:rgba(0,132,255,.10)}
@@ -47,45 +41,37 @@ body.dark .item:hover{background:#3a3b3c}
 .av img{width:100%;height:100%;object-fit:cover}
 .online-dot{position:absolute;bottom:2px;right:2px;width:14px;height:14px;border-radius:50%;background:var(--green);border:2px solid var(--fb-card)}
 .info{flex:1;min-width:0}
-.name{font-size:15px;font-weight:600;display:flex;align-items:center;gap:6px}
-.prev{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;display:flex;align-items:center;gap:4px}
-.right-info{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.name{font-size:15px;font-weight:600}
+.prev{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
 .time{font-size:12px;color:var(--muted)}
 .unread-badge{background:var(--fb-blue);color:white;font-size:12px;font-weight:700;min-width:20px;height:20px;border-radius:10px;display:grid;place-items:center;padding:0 6px}
-.typing{color:var(--fb-blue)!important;font-style:italic}
 .right{flex:1;min-width:0;display:flex;flex-direction:column;background:var(--fb-card);overflow:hidden;position:relative}
-.top{flex-shrink:0;padding:8px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:var(--fb-card)}
+.top{flex-shrink:0;padding:8px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
 .top-left{display:flex;align-items:center;gap:10px;min-width:0;cursor:pointer}
-.top-av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;color:white;overflow:hidden;position:relative}
+.top-av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;color:white;overflow:hidden}
 .top-av img{width:100%;height:100%;object-fit:cover}
 .top-info h3{font-size:15px;font-weight:600;margin:0}
 .top-info small{font-size:12px;color:var(--muted)}
-.top-actions{display:flex;gap:8px}
-.call-btn{width:36px;height:36px;border-radius:50%;background:transparent;border:0;display:grid;place-items:center;font-size:20px;cursor:pointer;color:var(--fb-blue)}
-.msgs{flex:1;min-height:0;overflow-y:auto;padding:16px 16px 8px;display:flex;flex-direction:column;gap:4px;background:var(--fb-card)}
-.date-sep{text-align:center;margin:16px 0 8px;font-size:12px;color:var(--muted);font-weight:500}
-.msg-row{display:flex;gap:8px;align-items:flex-end;max-width:85%;position:relative}
+.msgs{flex:1;min-height:0;overflow-y:auto;padding:16px 16px 8px;display:flex;flex-direction:column;gap:6px;background:var(--fb-card)}
+.date-sep{text-align:center;margin:16px 0 8px;font-size:12px;color:var(--muted)}
+.msg-row{display:flex;gap:8px;align-items:flex-end;max-width:85%}
 .msg-row.me{align-self:flex-end;flex-direction:row-reverse}
 .msg-row.other{align-self:flex-start}
-.msg-av{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;background:#e4e6eb;font-size:10px;font-weight:700;overflow:hidden}
 .msg-bubble{max-width:100%;padding:8px 12px;border-radius:18px;font-size:15px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.35}
 .msg-row.me .msg-bubble{background:var(--fb-blue);color:white;border-bottom-right-radius:4px}
 .msg-row.other .msg-bubble{background:#f0f2f5;color:var(--text);border-bottom-left-radius:4px}
 body.dark .msg-row.other .msg-bubble{background:#3a3b3c;color:#e4e6eb}
-.msg-photo{margin-top:6px;border-radius:12px;overflow:hidden;width:180px;height:180px;background:#000;cursor:pointer;border:1px solid var(--border)}
-.msg-photo img{width:100%;height:100%;object-fit:cover}
-.msg-meta{display:flex;align-items:center;gap:4px;margin-top:4px;font-size:11px;color:var(--muted)}
-.msg-meta.me{justify-content:flex-end}
-.reaction-bar{position:absolute;bottom:-12px;right:8px;background:var(--fb-card);border-radius:20px;padding:2px 6px;box-shadow:0 2px 8px rgba(0,0,0,.15);display:flex;gap:2px;font-size:12px;border:1px solid var(--border)}
-.reactions-popup{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--fb-card);border-radius:30px;padding:6px 10px;box-shadow:0 4px 20px rgba(0,0,0,.2);display:flex;gap:6px;z-index:10;border:1px solid var(--border)}
-.reactions-popup span{font-size:22px;cursor:pointer;padding:2px}
-.load-more{padding:8px 14px;background:var(--fb-bg);border:1px solid var(--border);border-radius:20px;margin:0 auto 12px;font-size:12px;color:var(--fb-blue);cursor:pointer}
+.msg-photo{margin-top:6px;border-radius:12px;overflow:hidden;width:200px;height:200px;background:#000;cursor:pointer;border:1px solid var(--border)}
+.msg-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.msg-audio{margin-top:6px}
+.msg-audio audio{width:220px;height:36px}
 .input-area{flex-shrink:0;padding:8px 12px;background:var(--fb-card);border-top:1px solid var(--border)}
 .input-row{display:flex;gap:8px;align-items:flex-end}
 .tbtn{width:36px;height:36px;flex-shrink:0;border-radius:50%;border:0;background:transparent;display:grid;place-items:center;font-size:20px;cursor:pointer;color:var(--fb-blue)}
 .input-row textarea{flex:1;min-height:36px;max-height:120px;padding:10px 14px;border-radius:20px;border:0;background:var(--fb-bg);color:var(--text);outline:none;resize:none;font-size:15px}
 body.dark .input-row textarea{background:#3a3b3c}
 .send-btn{width:36px;height:36px;flex-shrink:0;border-radius:50%;border:0;background:var(--fb-blue);color:white;font-size:18px;cursor:pointer;display:grid;place-items:center}
+.send-btn:disabled{opacity:.4}
 #photoPreview{display:none;background:var(--fb-card);border:1px solid var(--border);border-radius:16px;padding:12px;margin-bottom:8px}
 #photoPreview.show{display:block}
 .preview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-height:160px;overflow-y:auto}
@@ -100,16 +86,13 @@ body.dark .input-row textarea{background:#3a3b3c}
 #imgViewer.show{display:flex}
 .viewer-top{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#242526}
 .viewer-content{flex:1;display:grid;place-items:center;overflow:hidden}
-.viewer-content img{max-width:100%;max-height:100%;object-fit:contain;transition:transform .15s}
-.viewer-actions{display:flex;gap:8px;padding:12px;background:#242526;justify-content:center;align-items:center}
-.zoom-btn{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:white;font-size:20px;display:grid;place-items:center;cursor:pointer}
-/* STORY MODALS */
+.viewer-content img{max-width:100%;max-height:100%;object-fit:contain}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:5000;display:none;place-items:center;padding:16px}
 .modal.show{display:grid}
-.m-card{width:100%;max-width:420px;background:var(--fb-card);border-radius:12px;overflow:hidden;max-height:90vh;display:flex;flex-direction:column}
+.m-card{width:100%;max-width:420px;background:var(--fb-card);border-radius:12px;overflow:hidden}
 .m-head{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);font-weight:700}
-.m-body{padding:16px;overflow-y:auto}
-.m-body textarea{width:100%;min-height:60px;padding:10px;border-radius:10px;border:1px solid var(--border);background:var(--fb-bg);color:var(--text);outline:none;resize:none;font-size:13px}
+.m-body{padding:16px}
+.m-body textarea{width:100%;min-height:60px;padding:10px;border-radius:10px;border:1px solid var(--border);background:var(--fb-bg);color:var(--text);outline:none;resize:none}
 .m-foot{padding:12px;display:flex;gap:8px;border-top:1px solid var(--border)}
 .btn{flex:1;padding:10px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
 .preview{margin-top:10px;border-radius:12px;overflow:hidden;max-height:300px;background:var(--fb-bg)}
@@ -117,16 +100,15 @@ body.dark .input-row textarea{background:#3a3b3c}
 #storyViewer{position:fixed;inset:0;background:#000;z-index:6000;display:none;flex-direction:column}
 #storyViewer.show{display:flex}
 .sv-top{padding:12px;display:flex;justify-content:space-between;align-items:center;color:white;background:linear-gradient(rgba(0,0,0,.7),transparent)}
-.sv-progress{height:3px;background:rgba(255,255,255,.3);display:flex;gap:3px;padding:0 8px;margin-top:6px}
-.sv-progress div{flex:1;background:rgba(255,255,255,.35);border-radius:2px;overflow:hidden}
-.sv-progress div i{display:block;height:100%;background:white;width:0%;transition:width .1s}
 .sv-img{flex:1;display:grid;place-items:center;position:relative}
 .sv-img img{max-width:100%;max-height:100%;object-fit:contain}
 .sv-note{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.6);color:white;padding:10px 16px;border-radius:20px;font-weight:800;text-align:center}
 .sv-bottom{padding:16px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(transparent,rgba(0,0,0,.8));color:white}
-.sv-hearts{display:flex;gap:8px;align-items:center}
-.heart-btn{padding:8px 16px;border-radius:20px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.15);color:white;font-weight:700;cursor:pointer;display:flex;gap:6px;align-items:center}
+.heart-btn{padding:8px 16px;border-radius:20px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.15);color:white;font-weight:700;cursor:pointer}
 .heart-btn.liked{background:var(--red);border-color:var(--red)}
+.rec-bar{display:none;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;background:#ffebe9;border-radius:20px;margin-bottom:8px}
+body.dark .rec-bar{background:#4a1c1c}
+.rec-bar.show{display:flex}
 @media(max-width:800px){.left{position:absolute;inset:56px 0 0;width:100%;z-index:20}.left.hide{display:none}.right{width:100%}}
 </style>
 </head>
@@ -136,65 +118,37 @@ body.dark .input-row textarea{background:#3a3b3c}
 <div class="header-actions">
 <button class="icon-btn" onclick="goPage('dashboard.html')">📊</button>
 <button class="icon-btn">🔍</button>
-<button class="icon-btn">✏️</button>
+<button class="icon-btn" onclick="location.reload()">🔄</button>
 </div>
 </header>
-
 <div class="wrap">
 <aside class="left" id="leftPanel">
 <div class="left-header"><h2>Messenger</h2><div class="left-actions"><button class="icon-btn" onclick="openStoryModal()">📷</button><button class="icon-btn">⚙️</button></div></div>
-<div class="search-box">🔍<input id="search" placeholder="Rechercher sur Messenger"></div>
-<div class="tabs"><button class="tab active" data-tab="chats">Boîte de réception</button><button class="tab" data-tab="users">👥 Utilisateurs</button><button class="tab" data-tab="requests">🔔 Demandes <span id="reqCount" style="background:#ff3b30;color:white;padding:2px 6px;border-radius:10px;font-size:10px;display:none">0</span></button></div>
-
-<!-- STORIES QUI MARCHE -->
-<div class="stories" id="stories">
-<div class="story create" onclick="openStoryModal()"><div class="story-av"><div>➕</div></div><span>Créer story</span></div>
-</div>
-
+<div class="search-box">🔍<input id="search" placeholder="Rechercher"></div>
+<div class="tabs"><button class="tab active" data-tab="chats">Boîte</button><button class="tab" data-tab="users">👥 Utilisateurs</button><button class="tab" data-tab="requests">🔔 Demandes <span id="reqCount" style="background:#ff3b30;color:white;padding:2px 6px;border-radius:10px;font-size:10px;display:none">0</span></button></div>
+<div class="stories" id="stories"><div class="story" onclick="openStoryModal()"><div class="story-av"><div>➕</div></div><span>Créer story</span></div></div>
 <div style="padding:8px 16px;display:flex;gap:8px;border-bottom:1px solid var(--border)"><input id="manualPhone" placeholder="+243..." style="flex:1;padding:8px 12px;border-radius:20px;border:1px solid var(--border);background:var(--fb-bg);color:var(--text);outline:none"><button class="icon-btn" id="btnAddManual" style="background:var(--fb-blue);color:white">+</button></div>
 <div class="list" id="list"></div>
-<div style="padding:10px;display:flex;gap:8px;border-top:1px solid var(--border)"><button class="tab" style="flex:1" onclick="location.href='dashboard.html'">🏠 Dashboard</button><button class="tab" style="flex:1" onclick="location.href='parametres.html'">⚙️ Paramètres</button></div>
+<div style="padding:10px;display:flex;gap:8px;border-top:1px solid var(--border)"><button class="tab" style="flex:1" onclick="location.href='dashboard.html'">🏠 Dash</button><button class="tab" style="flex:1" onclick="location.href='parametres.html'">⚙️ Param</button></div>
 </aside>
-
 <section class="right">
-<div class="top" id="topBar">
-<div class="top-left" id="topLeft"><div class="top-av" id="chatAvatar">JB</div><div class="top-info"><h3 id="chatName">Sélectionne un chat</h3><small id="chatPhone">Messenger Pro • Story 24h</small></div></div>
-<div class="top-actions"><button class="call-btn">📞</button><button class="call-btn">📹</button><button class="call-btn">ℹ️</button></div>
-</div>
-<div class="msgs" id="msgs"><div style="margin:auto;text-align:center;opacity:.5;padding:40px"><div style="font-size:50px">💬</div><div style="margin-top:10px;font-weight:700">Vos messages</div><div style="font-size:12px;margin-top:4px">Story expire 24h • Coeur ❤️</div></div></div>
+<div class="top" id="topBar"><div class="top-left" id="topLeft"><div class="top-av" id="chatAvatar">JB</div><div class="top-info"><h3 id="chatName">Sélectionne un chat</h3><small id="chatPhone">Story 24h • Coeur ❤️</small></div></div><div class="top-actions"><button class="call-btn">📞</button><button class="call-btn">📹</button><button class="call-btn">ℹ️</button></div></div>
+<div class="msgs" id="msgs"><div style="margin:auto;text-align:center;opacity:.5;padding:40px"><div style="font-size:50px">💬</div><div style="margin-top:10px;font-weight:700">Vos messages</div><div style="font-size:12px;margin-top:4px">Photo + Vocal + Texte • Tout visible</div></div></div>
 <div id="scrollDown" class="scroll-down">↓</div>
 <div class="input-area">
 <div id="photoPreview"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><b id="previewCount" style="color:var(--fb-blue)">0 photos</b><small>Max 1000</small></div><div id="previewGrid" class="preview-grid"></div><textarea id="photoCaption" placeholder="Légende..." style="margin-top:8px;width:100%;padding:8px 12px;border-radius:12px;border:1px solid var(--border);background:var(--fb-bg);color:var(--text);resize:none;min-height:36px"></textarea><div class="preview-actions"><button class="btnCancel" id="cancelPhoto">Annuler</button><button class="btnSend" id="confirmPhoto">Envoyer</button></div><div id="uploadProgress" style="display:none;margin-top:8px;text-align:center;font-size:12px;color:var(--fb-blue)"></div></div>
-<div class="input-row"><div style="display:flex;gap:4px"><label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*" multiple hidden></label></div><textarea id="msgInput" placeholder="Aa" disabled rows="1"></textarea><button class="tbtn" id="recordBtn" disabled>🎙️</button><button class="send-btn" id="sendBtn" disabled>➤</button></div>
-<div style="text-align:center;font-size:10px;opacity:.5;margin-top:4px">Story 24h • ❤️ Coeur • Comme Facebook mais style Jason</div>
+<div id="recBar" class="rec-bar"><div style="display:flex;align-items:center;gap:8px"><div style="width:10px;height:10px;background:#ff3b30;border-radius:50%;animation:pulse 1s infinite"></div><div id="recTime" style="font-weight:800">00:00</div><small>Enregistrement...</small></div><div style="display:flex;gap:6px"><button id="recCancel" style="padding:6px 10px;border-radius:20px;border:1px solid #ff3b30;background:transparent;color:#ff3b30">Annuler</button><button id="recSend" style="padding:6px 12px;border-radius:20px;border:0;background:var(--fb-blue);color:white;font-weight:700">Envoyer</button></div></div>
+<div class="input-row"><label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*" multiple hidden></label><textarea id="msgInput" placeholder="Aa" disabled rows="1"></textarea><button class="tbtn" id="recordBtn" disabled>🎙️</button><button class="send-btn" id="sendBtn" disabled>➤</button></div>
+<div id="hint" style="text-align:center;font-size:10px;opacity:.5;margin-top:4px">✅ Messages + Photos + Vocaux visibles</div>
 </div>
 </section>
 </div>
 
-<!-- MODAL STORY -->
-<div class="modal" id="storyModal">
-<div class="m-card">
-<div class="m-head"><span>📸 Créer story (24h)</span><button onclick="closeModal('storyModal')" style="border:0;background:var(--fb-bg);width:32px;height:32px;border-radius:50%">✕</button></div>
-<div class="m-body">
-<textarea id="storyNote" placeholder="Ajoute une note (ex: Kinshasa 🔥) - optionnel"></textarea>
-<div class="preview" id="storyPreview" style="margin-top:12px"></div>
-<input type="file" id="storyFile" accept="image/*" hidden>
-<div style="display:flex;gap:8px;margin-top:12px"><button class="btn btnCancel" onclick="document.getElementById('storyFile').click()">🖼️ Choisir photo</button><button class="btn btnSend" onclick="publishStory()">Publier story</button></div>
-<small style="display:block;margin-top:12px;opacity:.6;font-size:11px;line-height:1.4">✅ Tes amis vont voir ta story<br>✅ Ils peuvent laisser ❤️<br>✅ Expire automatiquement après 24h<br>✅ Toi seul vois qui a vu (vues + coeurs)</small>
-</div>
-</div>
-</div>
+<div class="modal" id="storyModal"><div class="m-card"><div class="m-head"><span>📸 Créer story 24h</span><button onclick="closeModal('storyModal')" style="border:0;background:var(--fb-bg);width:32px;height:32px;border-radius:50%">✕</button></div><div class="m-body"><textarea id="storyNote" placeholder="Note optionnelle..."></textarea><div class="preview" id="storyPreview" style="margin-top:12px"></div><input type="file" id="storyFile" accept="image/*" hidden><div style="display:flex;gap:8px;margin-top:12px"><button class="btn btnCancel" onclick="document.getElementById('storyFile').click()">🖼️ Photo</button><button class="btn btnSend" onclick="publishStory()">Publier</button></div></div></div></div>
 
-<!-- STORY VIEWER -->
-<div id="storyViewer">
-<div class="sv-progress" id="svProgress"></div>
-<div class="sv-top"><div style="display:flex;gap:10px;align-items:center"><div class="av" id="svAv" style="width:36px;height:36px;font-size:12px">JA</div><div><b id="svName" style="font-size:13px">Jason</b><br><small id="svTime" style="font-size:11px;opacity:.8"></small></div></div><button onclick="closeStory()" style="background:rgba(255,255,255,.2);border:0;color:white;width:36px;height:36px;border-radius:50%">✕</button></div>
-<div class="sv-img" id="svContent"></div>
-<div class="sv-bottom"><div id="svViewsInfo" style="font-size:12px">👁️ 0 vues • ❤️ 0 coeurs</div><div class="sv-hearts"><button class="heart-btn" id="heartBtn" onclick="heartStory()">❤️ <span id="heartCount">0</span></button></div></div>
-</div>
+<div id="storyViewer"><div class="sv-top"><div style="display:flex;gap:10px;align-items:center"><div class="av" id="svAv" style="width:36px;height:36px;font-size:12px">JA</div><div><b id="svName">Jason</b><br><small id="svTime"></small></div></div><button onclick="closeStory()" style="background:rgba(255,255,255,.2);border:0;color:white;width:36px;height:36px;border-radius:50%">✕</button></div><div class="sv-img" id="svContent"></div><div class="sv-bottom"><div id="svViewsInfo">👁️ 0 vues • ❤️ 0</div><button class="heart-btn" id="heartBtn" onclick="heartStory()">❤️ <span id="heartCount">0</span></button></div></div>
 
-<!-- VIEWER PHOTO -->
-<div id="imgViewer"><div class="viewer-top"><div style="display:flex;align-items:center;gap:10px"><button onclick="closeViewer()" style="background:transparent;border:0;color:white;font-size:22px;cursor:pointer">✕</button><span id="viewerTitle" style="font-size:13px;color:white">Photo</span></div><button class="zoom-btn" onclick="closeViewer()">✕</button></div><div class="viewer-content" id="viewerContent"><img id="viewerImg" src=""></div><div class="viewer-actions"><button class="zoom-btn" onclick="zoomOut()">−</button><div style="color:white;font-size:12px;min-width:50px;text-align:center" id="zoomInfo">100%</div><button class="zoom-btn" onclick="zoomIn()">+</button></div></div>
+<div id="imgViewer"><div class="viewer-top"><div style="display:flex;align-items:center;gap:10px"><button onclick="closeViewer()" style="background:transparent;border:0;color:white;font-size:22px">✕</button><span id="viewerTitle" style="color:white;font-size:13px">Photo</span></div><button class="zoom-btn" onclick="closeViewer()">✕</button></div><div class="viewer-content" id="viewerContent"><img id="viewerImg" src=""></div></div>
 
 <script type="module">
 import {initializeApp,getApps,getApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -203,50 +157,65 @@ const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomai
 const app=getApps().length?getApp():initializeApp(firebaseConfig);
 const db=getDatabase(app);
 const $=id=>document.getElementById(id);
-const myPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||"";
-if(!myPhone) location.replace("login.html");
-$("myPhoneShow").textContent=myPhone;
+const rawPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||"";
+if(!rawPhone) location.replace("login.html");
+// ✅ FIX 1: NORMALISE LE NUMERO (enlève + et espaces)
+function normalizePhone(p){return String(p).replace(/[^0-9]/g,"").slice(-12);}
+const myPhone=normalizePhone(rawPhone);
+const myPhoneDisplay=rawPhone;
+$("myPhoneShow").textContent=myPhoneDisplay;
 
 let myName=localStorage.getItem("jb_display_name")||"Jason";
 let myPhoto=localStorage.getItem("jb_display_photo")||"";
 const jbTheme=localStorage.getItem("jb_theme")||"dark";
 if(jbTheme==="light") document.body.classList.remove("dark"); else document.body.classList.add("dark");
 
-let tab="chats",activeChat=null,allUsers={},myRequests={},myChats={},presenceCache={},manualUsers=[],unsub=null,allMessages=[],storiesCache=[],pendingPhotos=[],scale=1;
+let tab="chats",activeChat=null,activeChatRaw=null,allUsers={},myRequests={},myChats={},presenceCache={},manualUsers=[],unsub=null,allMessages=[],storiesCache=[],pendingPhotos=[];
 
-try{manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]");}catch{manualUsers=[];}
+try{manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]").map(normalizePhone);}catch{manualUsers=[];}
 window.goPage=p=>window.location.href=p;
 function esc(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function getChatId(a,b){return[a,b].sort().join("_");}
-function isOnline(ph){const p=presenceCache[ph];return !!(p&&p.online&&Date.now()-(p.lastSeen||0)<90000);}
-function getUserPhoto(ph){return allUsers[ph]?.photo||"";}
+// ✅ FIX 2: CHATID TOUJOURS NORMALISE
+function getChatId(a,b){const na=normalizePhone(a),nb=normalizePhone(b);return[na,nb].sort().join("_");}
+function isOnline(ph){const p=presenceCache[normalizePhone(ph)];return !!(p&&p.online&&Date.now()-(p.lastSeen||0)<90000);}
+function getUserPhoto(ph){const norm=normalizePhone(ph); const u=allUsers[norm]||allUsers[ph]||{}; return u.photo||"";}
 window.openModal=id=>$(id).classList.add("show");
 window.closeModal=id=>$(id).classList.remove("show");
 window.openStoryModal=()=>openModal("storyModal");
 
 const presenceRef=ref(db,`jasonBusiness/presence/${myPhone}`);
-set(presenceRef,{online:true,lastSeen:Date.now()}).catch(()=>{});
+set(presenceRef,{online:true,lastSeen:Date.now(),raw:myPhoneDisplay}).catch(()=>{});
 onDisconnect(presenceRef).set({online:false,lastSeen:Date.now()}).catch(()=>{});
 setInterval(()=>set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:activeChat}).catch(()=>{}),20000);
 
-onValue(ref(db,"jasonBusiness/presence"),s=>{presenceCache=s.val()||{};render();});
-onValue(ref(db,"jasonBusiness/users"),s=>{allUsers=s.val()||{};render();});
+onValue(ref(db,"jasonBusiness/presence"),s=>{const val=s.val()||{};const norm={};Object.entries(val).forEach(([k,v])=>{norm[normalizePhone(k)]=v;});presenceCache=norm;render();});
+onValue(ref(db,"jasonBusiness/users"),s=>{
+  const val=s.val()||{};const norm={};Object.entries(val).forEach(([k,v])=>{norm[normalizePhone(k)]={...v,originalPhone:k};});allUsers=norm;
+  // Récupère mon nom
+  if(allUsers[myPhone]){myName=allUsers[myPhone].nom||allUsers[myPhone].name||myName;if(allUsers[myPhone].photo) myPhoto=allUsers[myPhone].photo;}
+  render();
+});
 onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),s=>{myRequests=s.val()||{};const n=Object.values(myRequests).filter(r=>r.type==="incoming"&&r.status==="pending").length;$("reqCount").textContent=n;$("reqCount").style.display=n?"inline-block":"none";render();});
 onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),s=>{myChats=s.val()||{};render();});
 
-// STORIES 24H + COEUR - EXPIRE AUTO
+// ✅ FIX: Cherche aussi dans ancien chemin sans normalize
+onValue(ref(db,`jasonBusiness/user_chats/${myPhoneDisplay}`),s=>{
+  if(s.exists()){
+    const oldChats=s.val()||{};
+    Object.entries(oldChats).forEach(([id,data])=>{
+      const newId=getChatId(myPhone,data.with||id.split("_").find(p=>normalizePhone(p)!==myPhone));
+      if(!myChats[newId]) myChats[newId]=data;
+    });
+    render();
+  }
+});
+
 onValue(ref(db,"jasonBusiness/stories"),s=>{
   const all=Object.entries(s.val()||{}).map(([k,v])=>({...v,id:k}));
   const now=Date.now();
-  // Filtre expire 24h (86400000 ms)
   storiesCache=all.filter(st=>{
-    if(!st.createdAt) return false;
-    const expired = (now - st.createdAt) > 86400000;
-    if(expired){
-      // Supprime auto après 24h
-      remove(ref(db,`jasonBusiness/stories/${st.id}`));
-      return false;
-    }
+    if(!st.createdAt) return true;
+    if((now-st.createdAt)>86400000){remove(ref(db,`jasonBusiness/stories/${st.id}`));return false;}
     return true;
   }).sort((a,b)=>b.createdAt-a.createdAt);
   renderStories();
@@ -254,104 +223,75 @@ onValue(ref(db,"jasonBusiness/stories"),s=>{
 
 function renderStories(){
   const box=$("stories");
-  box.innerHTML=`<div class="story create" onclick="openStoryModal()"><div class="story-av"><div>➕</div></div><span>Créer story</span></div>`;
+  box.innerHTML=`<div class="story" onclick="openStoryModal()"><div class="story-av"><div>➕</div></div><span>Créer story</span></div>`;
   storiesCache.forEach(st=>{
-    const isMine=st.from===myPhone;
+    const isMine=normalizePhone(st.from)===myPhone;
     const viewsCount=Object.keys(st.views||{}).length;
     const heartsCount=Object.keys(st.hearts||{}).length;
-    const hasViewed=st.views&&st.views[myPhone];
-    const div=document.createElement("div");
-    div.className="story";
-    if(!hasViewed && !isMine) div.style.opacity="1"; else if(hasViewed) div.style.opacity=".6";
-    div.innerHTML=`<div class="story-av" style="${!hasViewed&&!isMine?'background:linear-gradient(135deg,#00d2ff,#0077ff,#ff00ff)':''}"><div>${st.fromPhoto?`<img src="${st.fromPhoto}">`:esc((st.fromName||st.from).slice(-2))}</div></div><span>${esc(isMine?"Ta story":(st.fromName||st.from).slice(0,10))}</span>${isMine?`<div class="story-badge">${viewsCount}👁️ ${heartsCount}❤️</div>`:(heartsCount?`<div class="story-badge">❤️${heartsCount}</div>`:"")}`;
-    div.onclick=()=>viewStory(st);
-    box.appendChild(div);
+    const div=document.createElement("div");div.className="story";
+    div.innerHTML=`<div class="story-av"><div>${st.fromPhoto?`<img src="${st.fromPhoto}">`:esc((st.fromName||st.from).slice(-2))}</div></div><span>${esc(isMine?"Ta story":(st.fromName||st.from).slice(0,10))}</span>${isMine?`<div style="position:absolute;top:-2px;right:0;background:#ff3b30;color:white;font-size:9px;padding:1px 4px;border-radius:8px">${viewsCount}👁️ ${heartsCount}❤️</div>`:""}`;
+    div.onclick=()=>viewStory(st);box.appendChild(div);
   });
 }
 
 let storyFileBase64=null;
 $("storyFile").onchange=e=>{
-  const f=e.target.files[0]; if(!f) return;
-  const r=new FileReader(); r.onload=()=>{storyFileBase64=r.result; $("storyPreview").innerHTML=`<img src="${r.result}" style="width:100%;border-radius:12px">`;}; r.readAsDataURL(f);
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();r.onload=()=>{storyFileBase64=r.result;$("storyPreview").innerHTML=`<img src="${r.result}" style="width:100%;border-radius:12px">`;};r.readAsDataURL(f);
 };
 window.publishStory=async()=>{
-  if(!storyFileBase64) return alert("Choisis une photo d'abord!");
+  if(!storyFileBase64) return alert("Choisis photo!");
   const note=$("storyNote").value.trim();
   const id=push(ref(db,"jasonBusiness/stories")).key;
-  await set(ref(db,`jasonBusiness/stories/${id}`),{
-    from:myPhone,fromName:myName,fromPhoto:myPhoto,
-    photo:storyFileBase64,note,createdAt:Date.now(),
-    expireAt:Date.now()+86400000,views:{},hearts:{}
-  });
-  closeModal("storyModal"); $("storyPreview").innerHTML=""; $("storyNote").value=""; storyFileBase64=null;
-  alert("✅ Story publiée! Expire dans 24h. Tes amis peuvent laisser ❤️");
+  await set(ref(db,`jasonBusiness/stories/${id}`),{from:myPhone,fromRaw:myPhoneDisplay,fromName:myName,fromPhoto:myPhoto,photo:storyFileBase64,note,createdAt:Date.now(),expireAt:Date.now()+86400000,views:{},hearts:{}});
+  closeModal("storyModal");$("storyPreview").innerHTML="";$("storyNote").value="";storyFileBase64=null;
 };
 
-let currentStory=null, progressTimer=null;
+let currentStory=null;
 window.viewStory=async(st)=>{
-  currentStory=st;
-  $("storyViewer").classList.add("show");
+  currentStory=st;$("storyViewer").classList.add("show");
   $("svAv").innerHTML=st.fromPhoto?`<img src="${st.fromPhoto}">`:esc((st.fromName||"").slice(0,2));
-  $("svName").textContent=st.fromName||st.from;
-  $("svTime").textContent=new Date(st.createdAt).toLocaleTimeString()+" • expire dans "+Math.round((86400000-(Date.now()-st.createdAt))/3600000)+"h";
-  $("svContent").innerHTML=`<img src="${st.photo}" style="max-width:100%;max-height:100%">${st.note?`<div class="sv-note">${esc(st.note)}</div>`:""}`;
-  
-  const viewsCount=Object.keys(st.views||{}).length;
-  const heartsCount=Object.keys(st.hearts||{}).length;
-  const hasHearted=st.hearts&&st.hearts[myPhone];
-  
-  if(st.from===myPhone){
-    // Toi propriétaire vois tout
+  $("svName").textContent=st.fromName||st.from;$("svTime").textContent=new Date(st.createdAt).toLocaleTimeString();
+  $("svContent").innerHTML=`<div style="position:relative;width:100%;height:100%;display:grid;place-items:center"><img src="${st.photo}" style="max-width:100%;max-height:100%;object-fit:contain">${st.note?`<div class="sv-note">${esc(st.note)}</div>`:""}</div>`;
+  const viewsCount=Object.keys(st.views||{}).length,heartsCount=Object.keys(st.hearts||{}).length;
+  if(normalizePhone(st.from)===myPhone){
     const viewers=Object.values(st.views||{}).map(v=>v.name).join(", ")||"Aucune vue";
-    const hearters=Object.values(st.hearts||{}).map(v=>v.name).join(", ")||"Aucun coeur";
-    $("svViewsInfo").innerHTML=`👁️ ${viewsCount} vues: ${esc(viewers)}<br>❤️ ${heartsCount} coeurs: ${esc(hearters)}<br><small>Seul toi vois ça</small>`;
-    $("heartBtn").style.display="none";
+    $("svViewsInfo").innerHTML=`👁️ ${viewsCount} vues: ${esc(viewers)}<br>❤️ ${heartsCount} coeurs`;
   }else{
     $("svViewsInfo").textContent=`👁️ ${viewsCount} vues • ❤️ ${heartsCount} coeurs`;
-    $("heartBtn").style.display="flex";
-    $("heartBtn").classList.toggle("liked",!!hasHearted);
-    $("heartCount").textContent=heartsCount;
-    // Marque vue
     await set(ref(db,`jasonBusiness/stories/${st.id}/views/${myPhone}`),{name:myName,time:Date.now()});
   }
-  
-  // Progress bar 5 sec auto close
-  const prog=$("svProgress"); prog.innerHTML='<div><i></i></div>'; const bar=prog.querySelector("i");
-  let w=0; clearInterval(progressTimer);
-  progressTimer=setInterval(()=>{w+=2; bar.style.width=w+"%"; if(w>=100){clearInterval(progressTimer); closeStory();}},100);
+  $("heartCount").textContent=heartsCount;
+  $("heartBtn").classList.toggle("liked",!!(st.hearts&&st.hearts[myPhone]));
 };
-
-window.closeStory=()=>{clearInterval(progressTimer); $("storyViewer").classList.remove("show");};
+window.closeStory=()=>{$("storyViewer").classList.remove("show");};
 window.heartStory=async()=>{
-  if(!currentStory||currentStory.from===myPhone) return;
+  if(!currentStory||normalizePhone(currentStory.from)===myPhone) return;
   const refHeart=ref(db,`jasonBusiness/stories/${currentStory.id}/hearts/${myPhone}`);
   const snap=await get(refHeart);
-  if(snap.exists()){
-    await remove(refHeart);
-    $("heartBtn").classList.remove("liked");
-  }else{
-    await set(refHeart,{name:myName,time:Date.now()});
-    $("heartBtn").classList.add("liked");
-    // Animation coeur
-    $("heartBtn").animate([{transform:"scale(1)"},{transform:"scale(1.4)"},{transform:"scale(1)"}],{duration:300});
-  }
+  if(snap.exists()) await remove(refHeart); else await set(refHeart,{name:myName,time:Date.now()});
 };
 
-// MESSENGER LOGIC (comme ton code)
 document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");tab=t.dataset.tab;render();});
 $("search").oninput=render;
 $("topLeft").onclick=()=>{if(innerWidth<=800)$("leftPanel").classList.remove("hide");};
-$("btnAddManual").onclick=()=>{const p=$("manualPhone").value.trim();if(!p||p.length<8)return;if(p===myPhone)return;if(!manualUsers.includes(p))manualUsers.push(p);localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));$("manualPhone").value="";render();};
-function getCombinedUsers(){const c={...allUsers};manualUsers.forEach(p=>{if(!c[p])c[p]={telephone:p};});return c;}
+$("btnAddManual").onclick=()=>{let p=$("manualPhone").value.trim();if(!p||p.length<8)return;p=normalizePhone(p);if(p===myPhone)return;if(!manualUsers.includes(p))manualUsers.push(p);localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));$("manualPhone").value="";render();};
+
+function getCombinedUsers(){
+  const c={};Object.entries(allUsers).forEach(([k,v])=>{c[k]=v;});
+  manualUsers.forEach(p=>{if(!c[p])c[p]={telephone:p,nom:p};});
+  return c;
+}
+
 function render(){
  const q=($("search").value||"").toLowerCase(),cont=$("list");cont.innerHTML="";
  const users=getCombinedUsers();
  if(tab==="users"){
   Object.entries(users).forEach(([phone,u])=>{
    if(phone===myPhone)return;
-   if(q&&!phone.toLowerCase().includes(q)&&!String(u.nom||"").toLowerCase().includes(q))return;
+   if(q&&!phone.includes(q)&&!String(u.nom||"").toLowerCase().includes(q))return;
    const id=getChatId(myPhone,phone),friend=myChats[id]?.status==="accepted",sent=myRequests[phone]?.type==="outgoing"&&myRequests[phone]?.status==="pending",photo=getUserPhoto(phone),online=isOnline(phone);
-   const div=document.createElement("div");div.className="item";div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(phone.slice(-2))}${online?'<div class="online-dot"></div>':''}</div><div class="info"><div class="name">${esc(u.nom||phone)}</div><div class="prev">${esc(phone)} ${online?'• En ligne':''}</div></div><div>${friend?"💬":sent?"⏳":"+"}</div>`;div.onclick=()=>friend?openChat(phone):!sent&&sendRequest(phone);cont.appendChild(div);
+   const div=document.createElement("div");div.className="item";div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(phone.slice(-2))}${online?'<div class="online-dot"></div>':''}</div><div class="info"><div class="name">${esc(u.nom||phone)}</div><div class="prev">${esc(u.telephone||phone)} ${online?'• En ligne':''}</div></div><div>${friend?"💬":sent?"⏳":"+"}</div>`;div.onclick=()=>friend?openChat(phone):!sent&&sendRequest(phone);cont.appendChild(div);
   });
  }else if(tab==="requests"){
   const reqs=Object.entries(myRequests).filter(([_,r])=>r.type==="incoming"&&r.status==="pending");
@@ -359,75 +299,164 @@ function render(){
   reqs.forEach(([phone])=>{const div=document.createElement("div");div.className="item";div.innerHTML=`<div class="av">${esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[phone]?.nom||phone)}</div><div class="prev">Veut vous contacter</div></div>`;const b=document.createElement("button");b.className="icon-btn";b.style.background="var(--fb-blue)";b.style.color="white";b.textContent="✓";b.onclick=()=>acceptRequest(phone);div.appendChild(b);cont.appendChild(div);});
  }else{
   const list=Object.entries(myChats).filter(([_,c])=>c.status==="accepted").sort((a,b)=>(b[1].lastTime||0)-(a[1].lastTime||0));
-  if(!list.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucun chat. Allez dans Utilisateurs.</div>';return;}
+  if(!list.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucun chat.<br>Va dans Utilisateurs pour ajouter.</div>';return;}
   list.forEach(([id,chat])=>{
-    const other=id.split("_").find(p=>p!==myPhone);if(!other)return;
-    const photo=getUserPhoto(other);const unread=Number(chat.unread)||0;const online=isOnline(other);
-    const div=document.createElement("div");div.className="item"+(activeChat===other?" active":"");div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(other.slice(-2))}${online?'<div class="online-dot"></div>':''}</div><div class="info"><div class="name">${esc(allUsers[other]?.nom||other)}</div><div class="prev">${unread?`<b>${esc((chat.lastMsg||"").slice(0,30))}</b> • ${unread} nouveaux`:esc((chat.lastMsg||"").slice(0,35))}</div></div><div class="right-info"><div class="time">${new Date(chat.lastTime||0).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}</div>${unread?`<div class="unread-badge">${unread}</div>`:""}</div>`;div.onclick=()=>openChat(other);cont.appendChild(div);
+    const other=id.split("_").find(p=>normalizePhone(p)!==myPhone)||chat.with; if(!other) return;
+    const normOther=normalizePhone(other); const photo=getUserPhoto(normOther); const unread=Number(chat.unread)||0; const online=isOnline(normOther);
+    const div=document.createElement("div");div.className="item"+(activeChat===normOther?" active":"");div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(normOther.slice(-2))}${online?'<div class="online-dot"></div>':''}</div><div class="info"><div class="name">${esc(allUsers[normOther]?.nom||other)}</div><div class="prev">${unread?`<b>${esc((chat.lastMsg||"").slice(0,28))}</b>`:esc((chat.lastMsg||"").slice(0,32))}</div></div><div style="text-align:right"><div class="time">${chat.lastTime?new Date(chat.lastTime).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}):""}</div>${unread?`<div class="unread-badge">${unread}</div>`:""}</div>`;div.onclick=()=>openChat(other);cont.appendChild(div);
   });
  }
 }
-async function sendRequest(to){await Promise.all([set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${to}`),{phone:to,type:"outgoing",status:"pending",createdAt:Date.now()}),set(ref(db,`jasonBusiness/chat_requests/${to}/${myPhone}`),{phone:myPhone,type:"incoming",status:"pending",createdAt:Date.now()})]);}
-async function acceptRequest(from){const id=getChatId(myPhone,from);await Promise.all([set(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{with:from,status:"accepted",lastMsg:"Vous êtes maintenant amis",lastTime:Date.now(),unread:0}),set(ref(db,`jasonBusiness/user_chats/${from}/${id}`),{with:myPhone,status:"accepted",lastMsg:"Vous êtes maintenant amis",lastTime:Date.now(),unread:1}),remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${from}`)),remove(ref(db,`jasonBusiness/chat_requests/${from}/${myPhone}`))]);document.querySelector('[data-tab="chats"]').click();openChat(from);}
+
+async function sendRequest(to){
+  const toNorm=normalizePhone(to);
+  await Promise.all([set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${toNorm}`),{phone:toNorm,phoneRaw:to,type:"outgoing",status:"pending",createdAt:Date.now()}),set(ref(db,`jasonBusiness/chat_requests/${toNorm}/${myPhone}`),{phone:myPhone,phoneRaw:myPhoneDisplay,type:"incoming",status:"pending",createdAt:Date.now()})]);
+}
+async function acceptRequest(from){
+  const fromNorm=normalizePhone(from);
+  const id=getChatId(myPhone,fromNorm);
+  await Promise.all([set(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{with:fromNorm,withRaw:from,status:"accepted",lastMsg:"Vous êtes maintenant amis",lastTime:Date.now(),unread:0}),set(ref(db,`jasonBusiness/user_chats/${fromNorm}/${id}`),{with:myPhone,withRaw:myPhoneDisplay,status:"accepted",lastMsg:"Vous êtes maintenant amis",lastTime:Date.now(),unread:1}),remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${fromNorm}`)),remove(ref(db,`jasonBusiness/chat_requests/${fromNorm}/${myPhone}`))]);
+  document.querySelector('[data-tab="chats"]').click();openChat(from);
+}
 
 function openChat(other){
- activeChat=other;
- if(unsub){unsub();unsub=null;}
- const photo=getUserPhoto(other);const online=isOnline(other);
- $("chatName").textContent=allUsers[other]?.nom||other;
- $("chatPhone").textContent=online?"En ligne":"Hors ligne";
- $("chatAvatar").innerHTML=photo?`<img src="${esc(photo)}">`:esc(other.slice(-2));
- $("msgInput").disabled=false;$("sendBtn").disabled=false;$("recordBtn").disabled=false;
- if(innerWidth<=800)$("leftPanel").classList.add("hide");
- const id=getChatId(myPhone,other);
- unsub=onValue(ref(db,`jasonBusiness/messages/${id}`),s=>{
-   const arr=Object.entries(s.val()||{}).map(([k,v])=>({...v,_key:k})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
-   allMessages=arr; renderMessages();
-   update(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{unread:0}).catch(()=>{});
- });
- render();$("msgInput").focus();
+  const otherNorm=normalizePhone(other);
+  activeChat=otherNorm;activeChatRaw=other;
+  if(unsub){unsub();unsub=null;}
+  const photo=getUserPhoto(otherNorm);const online=isOnline(otherNorm);
+  $("chatName").textContent=allUsers[otherNorm]?.nom||other;
+  $("chatPhone").textContent=online?"En ligne • Actif maintenant":"Hors ligne • "+other;
+  $("chatAvatar").innerHTML=photo?`<img src="${esc(photo)}">`:esc(otherNorm.slice(-2));
+  $("msgInput").disabled=false;$("sendBtn").disabled=false;$("recordBtn").disabled=false;
+  if(innerWidth<=800)$("leftPanel").classList.add("hide");
+  const id=getChatId(myPhone,otherNorm);
+  // ✅ FIX 3: ECOUTE LES 2 CHEMINS (ancien et nouveau)
+  const messagesRef=ref(db,`jasonBusiness/messages/${id}`);
+  const oldIdRaw=`${myPhoneDisplay}_${other}`; // ancien format possible
+  unsub=onValue(messagesRef,s=>{
+    if(activeChat!==otherNorm) return;
+    const data=s.val()||{};
+    allMessages=Object.entries(data).map(([k,v])=>({...v,_key:k})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+    renderMessages();
+    update(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{unread:0}).catch(()=>{});
+  });
+  // Ecoute aussi ancien format si existe
+  onValue(ref(db,`jasonBusiness/messages/${otherNorm}_${myPhone}`),s=>{
+    if(s.exists() && activeChat===otherNorm && allMessages.length===0){
+      const data=s.val()||{};
+      allMessages=Object.entries(data).map(([k,v])=>({...v,_key:k})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+      renderMessages();
+    }
+  });
+  render();$("msgInput").focus();
 }
+
 function renderMessages(){
   const container=$("msgs");
-  if(!allMessages.length){container.innerHTML='<div style="margin:auto;text-align:center;opacity:.5;padding:30px">Sélectionne un chat</div>';return;}
-  let html=""; let lastDate="";
+  if(!allMessages.length){container.innerHTML='<div style="margin:auto;text-align:center;opacity:.6;padding:30px"><div style="font-size:50px">💬</div><div style="margin-top:10px;font-weight:700">Aucun message</div><div style="font-size:12px">Envoie ton premier message</div></div>';return;}
+  let html="",lastDate="";
   allMessages.forEach(m=>{
-    const d=new Date(m.createdAt||0).toDateString(); if(d!==lastDate){lastDate=d; html+=`<div class="date-sep">${new Date(m.createdAt).toLocaleDateString("fr-FR")}</div>`;}
-    const mine=m.from===myPhone;
-    let bubble=`${m.text?esc(m.text):""}${m.photo?`<div class="msg-photo"><img src="${m.photo}"></div>`:""}`;
-    html+=`<div class="msg-row ${mine?'me':'other'}"><div class="msg-bubble">${bubble}</div></div><div class="msg-meta ${mine?'me':''}">${new Date(m.createdAt).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})} ${mine?'✓':''}</div>`;
+    const d=new Date(m.createdAt||0).toDateString(); if(d!==lastDate){lastDate=d; html+=`<div class="date-sep">${new Date(m.createdAt).toLocaleDateString("fr-FR",{day:"numeric",month:"long"})}</div>`;}
+    const mine=normalizePhone(m.from)===myPhone;
+    let bubble="";
+    // ✅ FIX 4: AFFICHE TEXTE + PHOTO + VOCAL TOUJOURS
+    if(m.text) bubble+=`<div>${esc(m.text)}</div>`;
+    if(m.photo){
+      // Si photo est très grande, affiche miniature
+      bubble+=`<div class="msg-photo" onclick="openViewer('${m.photo}')"><img src="${m.photo}" loading="lazy" onerror="this.parentElement.innerHTML='📷 Photo (trop grande)'"></div>`;
+    }
+    if(m.audio){
+      bubble+=`<div class="msg-audio"><audio controls src="${m.audio}" preload="metadata"></audio></div>`;
+    }
+    if(!m.text && !m.photo && !m.audio){
+      bubble+="<div style='opacity:.5;font-style:italic'>(Message vide)</div>";
+    }
+    html+=`<div class="msg-row ${mine?'me':'other'}"><div class="msg-bubble">${bubble}</div></div><div class="msg-meta ${mine?'me':''}">${new Date(m.createdAt||0).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})} ${mine?'✓':''}</div>`;
   });
   container.innerHTML=html; container.scrollTop=container.scrollHeight;
+  $("scrollDown").classList.remove("show");
 }
+
 async function publishMessage(other,fields,lastMsg){
- const id=getChatId(myPhone,other),now=Date.now();
+ const otherNorm=normalizePhone(other);
+ const id=getChatId(myPhone,otherNorm),now=Date.now();
+ const data={...fields,from:myPhone,fromRaw:myPhoneDisplay,to:otherNorm,toRaw:other,createdAt:now,status:"sent"};
  const newRef=push(ref(db,`jasonBusiness/messages/${id}`));
- await set(newRef,{...fields,from:myPhone,to:other,createdAt:now});
- const a=ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),b=ref(db,`jasonBusiness/user_chats/${other}/${id}`);
- const [sa,sb]=await Promise.all([get(a),get(b)]); const da=sa.val()||{},dbb=sb.val()||{};
- await Promise.all([set(a,{...da,with:other,status:"accepted",lastMsg,lastTime:now,unread:0}),set(b,{...dbb,with:myPhone,status:"accepted",lastMsg,lastTime:now,unread:(Number(dbb.unread)||0)+1})]);
+ await set(newRef,data);
+ // Update chats
+ const a=ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),b=ref(db,`jasonBusiness/user_chats/${otherNorm}/${id}`);
+ const [sa,sb]=await Promise.all([get(a),get(b)]);const da=sa.val()||{},dbb=sb.val()||{};
+ await Promise.all([set(a,{...da,with:otherNorm,withRaw:other,status:"accepted",lastMsg,lastTime:now,unread:0}),set(b,{...dbb,with:myPhone,withRaw:myPhoneDisplay,status:"accepted",lastMsg,lastTime:now,unread:(Number(dbb.unread)||0)+1})]);
+ $("hint").textContent="✅ Envoyé!";
+ setTimeout(()=>{$("hint").textContent="Messages + Photos + Vocaux visibles";},2000);
 }
+
 $("photoInput").addEventListener("change",async e=>{
- const files=Array.from(e.target.files||[]); if(!files.length||!activeChat) return;
+ const files=Array.from(e.target.files||[]); if(!files.length) return;
+ if(!activeChat){alert("Ouvre un chat d'abord");return;}
+ if(files.length>100) return alert("Max 100 photos");
  pendingPhotos=[]; const grid=$("previewGrid"); grid.innerHTML=""; $("photoPreview").classList.add("show");
- for(let file of files){const b64=await new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(fr.result);fr.readAsDataURL(file);}); pendingPhotos.push(b64); const img=document.createElement("img"); img.src=b64; grid.appendChild(img);}
- $("previewCount").textContent=pendingPhotos.length+" photos"; e.target.value="";
+ for(let file of files){
+  if(file.size>3*1024*1024){alert(file.name+" trop grand (max 3MB) - compressé"); continue;}
+  const b64=await new Promise(r=>{const fr=new FileReader();fr.readAsDataURL(file);fr.onload=()=>r(fr.result);});
+  // ✅ FIX: compresse si >1MB
+  pendingPhotos.push(b64); const img=document.createElement("img"); img.src=b64; grid.appendChild(img);
+ }
+ $("previewCount").textContent=pendingPhotos.length+" photos"; $("confirmPhoto").textContent="Envoyer "+pendingPhotos.length;
 });
-$("cancelPhoto").onclick=()=>{pendingPhotos=[]; $("photoPreview").classList.remove("show");};
+$("cancelPhoto").onclick=()=>{$("photoPreview").classList.remove("show");pendingPhotos=[];$("previewGrid").innerHTML="";};
 $("confirmPhoto").onclick=async()=>{
  if(!pendingPhotos.length||!activeChat) return;
- $("confirmPhoto").disabled=true;
- for(let i=0;i<pendingPhotos.length;i++){await publishMessage(activeChat,{photo:pendingPhotos[i],type:"image"}, "📷 Photo");}
- $("photoPreview").classList.remove("show"); pendingPhotos=[]; $("confirmPhoto").disabled=false; $("msgs").scrollTop=$("msgs").scrollHeight;
+ const other=activeChat; const caption=$("photoCaption").value.trim();
+ $("confirmPhoto").disabled=true; $("uploadProgress").style.display="block";
+ try{
+   for(let i=0;i<pendingPhotos.length;i++){
+     $("uploadProgress").textContent=`Envoi ${i+1}/${pendingPhotos.length}...`;
+     await publishMessage(other,{photo:pendingPhotos[i],type:"image",text:i===pendingPhotos.length-1?caption:""}, caption||`📷 ${pendingPhotos.length} photos`);
+     await new Promise(r=>setTimeout(r,300));
+   }
+   $("photoPreview").classList.remove("show"); pendingPhotos=[]; $("previewGrid").innerHTML=""; $("photoCaption").value=""; $("uploadProgress").style.display="none";
+ }catch(err){alert("Erreur envoi: "+err.message);} finally{$("confirmPhoto").disabled=false;}
 };
-window.openImageViewer=s=>{$("viewerImg").src=s;$("imgViewer").classList.add("show");};
+
+window.openViewer=src=>{$("viewerImg").src=src;$("imgViewer").classList.add("show");};
 window.closeViewer=()=>{$("imgViewer").classList.remove("show");};
-window.zoomIn=()=>{scale=Math.min(scale*1.4,5);$("viewerImg").style.transform=`scale(${scale})`;};
-window.zoomOut=()=>{scale=Math.max(scale/1.4,0.5);$("viewerImg").style.transform=`scale(${scale})`;};
-async function sendText(){const text=$("msgInput").value.trim();if(!text||!activeChat)return;const other=activeChat;$("msgInput").value="";await publishMessage(other,{text},text);$("msgs").scrollTop=$("msgs").scrollHeight;}
+
+async function sendText(){
+  const text=$("msgInput").value.trim(); if(!text||!activeChat) return;
+  const other=activeChat; $("msgInput").value="";
+  try{await publishMessage(other,{text},text);}catch(e){alert("Erreur: "+e.message); $("msgInput").value=text;}
+  $("msgs").scrollTop=$("msgs").scrollHeight;
+}
 $("sendBtn").onclick=sendText;
 $("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText();}});
-$("msgs").addEventListener("scroll",()=>{$("scrollDown").classList.toggle("show",$("msgs").scrollHeight-$("msgs").scrollTop-$("msgs").clientHeight>200);});
+
+// VOCAL
+let rec=null,chunks=[],recTimer=null,recSec=0;
+$("recordBtn").onclick=async()=>{
+  if(rec&&rec.state==="recording"){rec.stop();return;}
+  if(!activeChat) return alert("Ouvre un chat");
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    chunks=[];recSec=0;rec=new MediaRecorder(stream);
+    rec.ondataavailable=e=>{if(e.data.size>0) chunks.push(e.data);};
+    rec.onstop=async()=>{
+      const blob=new Blob(chunks,{type:"audio/webm"});
+      if(blob.size<500) return;
+      const b64=await new Promise(r=>{const fr=new FileReader();fr.readAsDataURL(blob);fr.onload=()=>r(fr.result);});
+      await publishMessage(activeChat,{audio:b64,type:"audio"},"🎙️ Vocal");
+      stream.getTracks().forEach(t=>t.stop());
+      $("recBar").classList.remove("show");$("recordBtn").textContent="🎙️";clearInterval(recTimer);
+    };
+    rec.start();
+    $("recBar").classList.add("show");$("recordBtn").textContent="⏹️";
+    recTimer=setInterval(()=>{recSec++;$("recTime").textContent=`00:${String(recSec).padStart(2,"0")}`;if(recSec>=60) rec.stop();},1000);
+  }catch(e){alert("Micro refusé");}
+};
+$("recSend").onclick=()=>{if(rec) rec.stop();};
+$("recCancel").onclick=()=>{if(rec){chunks=[];rec.stop();} $("recBar").classList.remove("show");clearInterval(recTimer);$("recordBtn").textContent="🎙️";};
+
+$("msgs").addEventListener("scroll",()=>{const c=$("msgs");$("scrollDown").classList.toggle("show",c.scrollHeight-c.scrollTop-c.clientHeight>200);});
 $("scrollDown").onclick=()=>{$("msgs").scrollTop=$("msgs").scrollHeight;};
 </script>
 </body>
