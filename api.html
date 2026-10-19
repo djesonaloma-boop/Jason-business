@@ -3,1035 +3,426 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#030812">
-<meta name="description" content="JASON BUSINESS — Boutique API et assistant de création d'API">
+<meta name="theme-color" content="#050a14">
 <title>JASON BUSINESS — API Center</title>
-
 <style>
-:root{
- --blue:#00d2ff;
- --blue2:#0077ff;
- --dark:#030812;
- --card:#091525;
- --card2:#0d192b;
- --border:rgba(0,210,255,.23);
- --green:#00e676;
- --gold:#d8aa45;
- --red:#ff4757;
- --muted:rgba(255,255,255,.65);
- --glass:rgba(255,255,255,.045);
-}
+:root{--blue:#00d2ff;--dark:#050a14;--green:#00e676;--red:#ff4757;--gold:#ffd700;--bg:#050a14;--card:rgba(255,255,255,.06);--text:#ffffff;--muted:#b5c5da}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
-body{
- background:
- radial-gradient(ellipse at 0% 0%,rgba(0,210,255,.13),transparent 35%),
- radial-gradient(ellipse at 100% 30%,rgba(216,170,69,.08),transparent 30%),
- linear-gradient(160deg,#030812,#06101e 55%,#030812);
- color:white;font-family:"Segoe UI",Arial,sans-serif;
- min-height:100vh;padding-bottom:95px;overflow-x:hidden;
-}
-body::before{
- content:"";position:fixed;inset:-40%;z-index:-1;pointer-events:none;
- background:
- radial-gradient(circle,rgba(0,210,255,.12) 1px,transparent 2px),
- radial-gradient(circle,rgba(216,170,69,.08) 1px,transparent 2px);
- background-size:47px 47px,73px 73px;
- animation:particles 35s linear infinite;
-}
-@keyframes particles{
- from{transform:translate(0,0)}
- to{transform:translate(45px,60px)}
-}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
- outline:2px solid var(--blue);outline-offset:3px;
-}
-
-/* HEADER */
-.header{
- padding:17px 16px;display:flex;align-items:center;
- justify-content:space-between;gap:12px;
- border-bottom:1px solid var(--border);
- background:rgba(3,8,18,.86);
- position:sticky;top:0;z-index:50;
- backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
- box-shadow:0 10px 35px #0003;
-}
-.brand{display:flex;align-items:center;gap:10px;min-width:0}
-.logo{
- width:45px;height:45px;flex-shrink:0;border-radius:15px;
- display:grid;place-items:center;font-weight:900;font-size:17px;
- background:linear-gradient(135deg,var(--blue),var(--blue2));
- color:#001018;
- box-shadow:0 0 23px #00d2ff26,inset 0 1px 0 #ffffff77;
- animation:logoGlow 4s ease-in-out infinite;
-}
-@keyframes logoGlow{
- 0%,100%{box-shadow:0 0 12px #00d2ff18}
- 50%{box-shadow:0 0 27px #00d2ff4a}
-}
-.brand h1{font-size:15px;letter-spacing:1px}
-.brand p{font-size:9px;color:var(--muted);margin-top:5px;line-height:1.5}
-.header-btn,.secondary-btn{
- background:linear-gradient(135deg,#10263b,#091525);
- color:white;border:1px solid var(--border);
- border-radius:12px;padding:10px 12px;white-space:nowrap;
- transition:.25s;
-}
-.header-btn:active,.secondary-btn:active{transform:scale(.96);border-color:var(--blue)}
-
-/* PAGE */
-.container{max-width:1100px;margin:auto;padding:22px 14px}
-.hero{
- padding:25px 20px;border-radius:24px;
- border:1px solid var(--border);
- background:
- radial-gradient(circle at 100% 0%,#00d2ff12,transparent 40%),
- linear-gradient(140deg,#102b49,#07111f 75%,#0c1727);
- margin-bottom:23px;overflow:hidden;position:relative;
- box-shadow:0 20px 55px #0003,inset 0 1px #ffffff09;
- animation:fadeUp .7s ease both;
-}
-.hero::before{
- content:"";position:absolute;width:200px;height:200px;
- right:-85px;top:-95px;border-radius:50%;
- background:radial-gradient(circle,#00d2ff1d,transparent 70%);
- animation:orb 7s ease-in-out infinite alternate;
-}
-.hero::after{
- content:"";position:absolute;left:-100%;top:0;width:65%;height:100%;
- background:linear-gradient(90deg,transparent,#ffffff08,transparent);
- transform:skewX(-20deg);animation:shine 10s ease-in-out infinite;
- pointer-events:none;
-}
-@keyframes orb{to{transform:translate(-20px,25px) scale(1.2)}}
-@keyframes shine{0%,65%{left:-100%}100%{left:150%}}
-.badge{
- display:inline-block;color:var(--blue);font-size:10px;
- letter-spacing:1px;padding:8px 11px;border-radius:30px;
- border:1px solid var(--border);background:#00d2ff0b;
- margin-bottom:15px;
-}
-.hero h2{font-size:clamp(25px,5vw,36px);line-height:1.25;position:relative}
-.hero h2 span{
- color:var(--blue);text-shadow:0 0 22px #00d2ff35;
-}
-.hero p{font-size:13px;line-height:1.9;color:var(--muted);margin-top:12px;position:relative}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:20px}
-.stat{
- padding:13px 8px;border:1px solid #ffffff0e;
- background:linear-gradient(145deg,#03081277,#ffffff04);
- border-radius:14px;backdrop-filter:blur(10px);
- transition:transform .25s,border-color .25s;
-}
-.stat:active{transform:scale(.97);border-color:var(--border)}
-.stat strong{display:block;color:var(--blue);font-size:17px;overflow-wrap:anywhere}
-.stat span{display:block;color:var(--muted);font-size:10px;margin-top:6px;line-height:1.5}
-
-/* ONGLETS */
-.tabs{
- display:flex;gap:8px;overflow-x:auto;padding:4px 0 13px;
- margin-bottom:16px;scrollbar-width:thin;
-}
-.tab{
- flex-shrink:0;padding:12px 15px;border-radius:13px;
- color:var(--muted);background:rgba(9,21,37,.85);
- border:1px solid var(--border);font-weight:700;font-size:12px;
- transition:background .25s,transform .25s,box-shadow .25s;
-}
-.tab:active{transform:scale(.96)}
-.tab.active{
- background:linear-gradient(135deg,var(--blue),var(--blue2));
- color:#001018;border-color:transparent;
- box-shadow:0 6px 23px #00d2ff22;
-}
-
-/* TITRES */
-.section-title{font-size:21px;margin:7px 0 9px;letter-spacing:.2px}
-.section-desc{font-size:12px;color:var(--muted);line-height:1.9;margin-bottom:18px}
-
-/* CARTES API */
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.card{
- background:
- radial-gradient(circle at 100% 0%,#00d2ff07,transparent 40%),
- linear-gradient(145deg,rgba(13,25,43,.97),rgba(6,15,28,.97));
- border:1px solid #ffffff10;border-radius:19px;padding:17px;
- display:flex;flex-direction:column;min-width:0;
- transition:transform .25s,border-color .25s,box-shadow .25s;
- animation:fadeUp .5s ease both;
- box-shadow:0 10px 28px #0000001b,inset 0 1px #ffffff06;
-}
-.card:hover{
- transform:translateY(-4px);border-color:#00d2ff55;
- box-shadow:0 16px 35px #0004,0 0 20px #00d2ff08;
-}
-.card-icon{
- width:47px;height:47px;border-radius:15px;
- display:grid;place-items:center;
- background:linear-gradient(145deg,#00d2ff18,#0077ff09);
- border:1px solid var(--border);font-size:23px;
- box-shadow:inset 0 1px #ffffff09;
-}
-.card h3{font-size:15px;margin-top:14px;line-height:1.5}
-.card p{font-size:11px;color:var(--muted);line-height:1.8;margin-top:8px;flex:1}
-.price{font-size:18px;font-weight:900;color:var(--green);margin:16px 0 5px;text-shadow:0 0 15px #00e67612}
-.price small{font-size:10px;color:var(--muted);font-weight:400;text-shadow:none}
-.endpoint{
- font-size:10px;word-break:break-all;color:var(--blue);
- padding:10px;background:#030812;border-radius:9px;
- margin-top:11px;border:1px solid #ffffff08;line-height:1.7;
-}
-.btn{
- width:100%;padding:12px;border:0;border-radius:12px;
- background:linear-gradient(120deg,var(--blue),var(--blue2));
- background-size:180% 100%;color:#001018;font-weight:900;
- font-size:12px;margin-top:12px;
- transition:transform .2s,box-shadow .2s,background-position .3s;
- box-shadow:0 5px 18px #00d2ff12;
-}
-.btn:active{transform:scale(.97);box-shadow:none}
-.btn.secondary{background:linear-gradient(135deg,#132941,#0a1728);color:white;border:1px solid var(--border);box-shadow:none}
-.btn.gold{background:linear-gradient(120deg,#f3d17c,var(--gold),#f3d17c);background-size:200% 100%;color:#171000;box-shadow:0 5px 18px #d8aa4518}
-.btn:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
-
-/* PANNEAUX ET FORMULAIRES */
-.panel{
- border:1px solid var(--border);border-radius:19px;padding:19px;
- background:linear-gradient(145deg,#0d192bf2,#07111fee);
- margin-top:17px;box-shadow:0 12px 35px #0002,inset 0 1px #ffffff06;
- backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-}
-.panel h3{font-size:16px;margin-bottom:11px}
-.field{margin-top:15px}
-.field label{display:block;color:var(--muted);font-size:11px;margin-bottom:8px}
-.field input,.field textarea,.field select{
- width:100%;padding:13px;border-radius:11px;color:white;
- background:#030812;border:1px solid #00d2ff20;outline:none;
- transition:border-color .2s,box-shadow .2s;
-}
-.field input:focus,.field textarea:focus,.field select:focus{
- border-color:var(--blue);box-shadow:0 0 0 3px #00d2ff0c;
-}
-.field textarea{min-height:120px;resize:vertical;line-height:1.7}
-.field select option{background:#091525;color:white}
-.field input::placeholder,.field textarea::placeholder{color:#ffffff50}
-.notice{
- padding:13px;border-radius:12px;background:#00d2ff08;
- border:1px solid var(--border);color:var(--muted);
- font-size:11px;line-height:1.9;margin-top:14px;
-}
-.notice.warning{background:#d8aa450b;border-color:#d8aa4544}
-.result{
- margin-top:14px;background:#030812;border:1px solid var(--border);
- border-radius:13px;padding:14px;white-space:pre-wrap;
- overflow-wrap:anywhere;font-size:12px;line-height:1.8;
- max-height:430px;overflow:auto;
-}
+body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:var(--text);background:radial-gradient(ellipse at 10% 5%,rgba(0,210,255,.12),transparent 35%),linear-gradient(rgba(3,8,18,.85),rgba(3,8,18,.96)),url("IMG_0870.jpeg") center/cover fixed;padding-bottom:110px;overflow-x:hidden;transition:background .3s,color .3s}
+body.light{--bg:#f2f6fb;--card:rgba(0,0,0,.04);--text:#0b1220;--muted:#5a6a85;background:radial-gradient(ellipse at 10% 5%,rgba(0,210,255,.08),transparent 35%),linear-gradient(rgba(242,246,251,.92),rgba(242,246,251,.98)),url("IMG_0870.jpeg") center/cover fixed}
+.jb-overlay{min-height:100vh;background:radial-gradient(circle at top,rgba(0,210,255,.075),transparent 40%)}
+.jb-header{position:relative;overflow:hidden;padding:20px 20px 18px;background:linear-gradient(135deg,rgba(0,210,255,.13),rgba(5,10,20,.80) 55%,rgba(255,215,0,.055));border-bottom:1px solid rgba(0,210,255,.32);backdrop-filter:blur(22px);display:flex;justify-content:space-between;align-items:center}
+body.light .jb-header{background:linear-gradient(135deg,rgba(0,210,255,.10),rgba(255,255,255,.85));border-bottom:1px solid rgba(0,0,0,.08)}
+.jb-brand{font-size:16px;font-weight:900;letter-spacing:1.5px;color:var(--blue)}
+.jb-back{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:white;cursor:pointer;font-size:16px}
+body.light .jb-back{background:rgba(0,0,0,.06);color:#0b1220}
+.jb-card{margin:14px 20px;padding:18px;border-radius:20px;background:linear-gradient(145deg,rgba(0,210,255,.10),rgba(5,10,20,.75));border:1px solid rgba(0,210,255,.22);backdrop-filter:blur(18px)}
+body.light .jb-card{background:linear-gradient(145deg,rgba(255,255,255,.85),rgba(255,255,255,.65));border:1px solid rgba(0,0,0,.06);box-shadow:0 6px 20px rgba(0,0,0,.05)}
+.jb-title{font-size:11px;font-weight:900;letter-spacing:1px;color:var(--blue);margin-bottom:12px;text-transform:uppercase}
+.jb-hero{margin:14px 20px;padding:22px;border-radius:20px;background:linear-gradient(135deg,rgba(0,210,255,.14),rgba(5,10,20,.82) 60%,rgba(255,215,0,.07));border:1px solid rgba(0,210,255,.30)}
+body.light .jb-hero{background:linear-gradient(135deg,rgba(0,210,255,.08),rgba(255,255,255,.85))}
+.jb-hero h2{font-size:20px;margin:10px 0 8px;line-height:1.3}.jb-hero h2 span{color:var(--blue)}.jb-hero p{font-size:11px;color:var(--muted);line-height:1.7}
+.jb-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.jb-stat{padding:12px 8px;border-radius:14px;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);text-align:center}
+body.light .jb-stat{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.06)}
+.jb-stat strong{display:block;color:var(--blue);font-size:16px}.jb-stat span{display:block;color:var(--muted);font-size:9px;margin-top:4px}
+.jb-tabs{display:flex;gap:8px;overflow-x:auto;padding:0 20px 12px;margin:16px 0 8px;scrollbar-width:none}
+.jb-tab{flex-shrink:0;padding:11px 14px;border-radius:12px;color:var(--muted);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-weight:700;font-size:11px;cursor:pointer;transition:.2s}
+.jb-tab.active{background:linear-gradient(135deg,var(--blue),#0077ff);color:#001018;border-color:transparent;box-shadow:0 6px 20px rgba(0,210,255,.2)}
+.jb-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 20px}
+.jb-api-card{display:flex;flex-direction:column;padding:14px;border-radius:18px;background:linear-gradient(115deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(0,210,255,.14);backdrop-filter:blur(15px);min-height:200px}
+body.light .jb-api-card{background:linear-gradient(115deg,rgba(255,255,255,.9),rgba(255,255,255,.6));border:1px solid rgba(0,0,0,.06);box-shadow:0 4px 15px rgba(0,0,0,.04)}
+.jb-api-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;font-size:20px;background:linear-gradient(145deg,rgba(0,210,255,.13),rgba(0,119,255,.04));border:1px solid rgba(0,210,255,.18)}
+.jb-api-name{font-size:12px;font-weight:900;margin-top:10px}
+.jb-api-desc{font-size:9px;opacity:.6;color:var(--muted);line-height:1.6;margin-top:6px;flex:1}
+.jb-price{margin-top:10px;padding:8px 10px;border-radius:10px;background:linear-gradient(120deg,rgba(255,215,0,.08),rgba(0,210,255,.05));border:1px solid rgba(255,215,0,.18);display:flex;justify-content:space-between;align-items:center;font-size:10px}
+.jb-price strong{color:var(--gold);font-size:11px}
+.jb-endpoint{font-size:9px;word-break:break-all;color:var(--blue);padding:8px;background:rgba(0,0,0,.25);border-radius:8px;margin-top:8px;border:1px solid rgba(255,255,255,.06);line-height:1.6;position:relative;overflow:hidden}
+body.light .jb-endpoint{background:rgba(0,0,0,.04)}
+.jb-endpoint.locked{filter:blur(6px);user-select:none;pointer-events:none}
+.jb-lock-overlay{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.55);border-radius:8px;font-size:10px;font-weight:900;color:var(--gold);letter-spacing:.5px}
+.jb-btn{width:100%;margin-top:10px;padding:11px;border-radius:11px;border:0;font-weight:900;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.jb-btn:active{transform:scale(.97)}
+.jb-btn-gold{color:#151000;background:linear-gradient(120deg,#ffd700,#ffeb80,#ffd700)}
+.jb-btn-blue{color:#001018;background:linear-gradient(120deg,var(--blue),#00a8ff)}
+.jb-btn-green{color:#001a08;background:linear-gradient(120deg,#00e676,#00c853)}
+.jb-btn-dark{background:rgba(255,255,255,.06);color:white;border:1px solid rgba(255,255,255,.1)}
+.jb-field{margin-top:12px}.jb-field label{display:block;color:var(--muted);font-size:10px;margin-bottom:6px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.jb-input{width:100%;padding:12px;border-radius:11px;color:white;background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.10);outline:none;font-size:12px}
+body.light .jb-input{background:#f8fbff;color:#0b1220;border-color:rgba(0,0,0,.08)}
+.jb-textarea{min-height:100px;resize:vertical;line-height:1.6}
+.jb-notice{padding:12px;border-radius:12px;background:rgba(0,210,255,.06);border:1px solid rgba(0,210,255,.15);color:var(--muted);font-size:10px;line-height:1.7;margin-top:12px}
+.jb-notice.warn{background:rgba(255,215,0,.06);border-color:rgba(255,215,0,.2)}
+.jb-result{margin-top:12px;background:rgba(0,0,0,.25);border:1px solid rgba(0,210,255,.15);border-radius:12px;padding:12px;white-space:pre-wrap;font-size:11px;line-height:1.7;max-height:350px;overflow:auto}
+body.light .jb-result{background:rgba(0,0,0,.04)}
 .hidden{display:none!important}
-.api-doc{margin-top:14px;border-top:1px solid var(--border);padding-top:14px}
-.api-doc h4{font-size:12px;color:var(--blue);margin:15px 0 8px}
-.api-doc p,.api-doc li{font-size:11px;color:var(--muted);line-height:1.9}
-.api-doc ul{padding-left:18px}
-pre{
- white-space:pre-wrap;overflow-wrap:anywhere;
- background:#02060c;color:#b8eaff;padding:13px;
- border:1px solid #ffffff10;border-radius:11px;
- font-size:10px;line-height:1.8;overflow:auto;margin-top:8px;
-}
-.doc-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.doc-actions button{flex:1;min-width:100px}
-
-/* MODALE */
-.modal{
- position:fixed;inset:0;background:#000c;z-index:200;
- display:none;align-items:center;justify-content:center;padding:15px;
- backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
-}
-.modal.show{display:flex;animation:modalFade .2s ease}
-@keyframes modalFade{from{opacity:0}to{opacity:1}}
-.modal-box{
- width:100%;max-width:480px;max-height:90vh;overflow:auto;
- background:linear-gradient(145deg,#102039,#07111f);
- border:1px solid #00d2ff40;border-radius:22px;padding:21px;
- box-shadow:0 25px 80px #0009,0 0 30px #00d2ff0b;
- animation:modalUp .3s ease;
-}
-@keyframes modalUp{from{transform:translateY(15px) scale(.98)}to{transform:translateY(0) scale(1)}}
-.modal-box h3{font-size:19px;margin-bottom:12px}
-.modal-box p{font-size:12px;color:var(--muted);line-height:1.9}
-.modal-actions{display:flex;gap:9px;margin-top:17px}
-.modal-actions button{flex:1}
-.checkline{display:flex;align-items:flex-start;gap:9px;font-size:11px;line-height:1.8;color:var(--muted);margin-top:14px}
-.checkline input{margin-top:4px;accent-color:var(--blue);flex-shrink:0}
-
-/* NOTIFICATIONS */
-#toastContainer{position:fixed;top:12px;left:12px;right:12px;z-index:500;pointer-events:none}
-.toast{
- padding:14px;background:#10243b;border:1px solid var(--border);
- border-radius:13px;margin-bottom:8px;font-size:12px;line-height:1.6;
- box-shadow:0 10px 30px #0005;animation:fadeUp .25s ease;
-}
-.toast.error{border-color:#ff475766}
-.toast.success{border-color:#00e67666}
-
-/* NAVIGATION */
-.bottom-nav{
- position:fixed;bottom:0;left:0;right:0;min-height:68px;z-index:80;
- display:flex;justify-content:space-around;align-items:center;
- padding:8px 0 calc(8px + env(safe-area-inset-bottom));
- background:rgba(3,8,18,.96);border-top:1px solid var(--border);
- backdrop-filter:blur(23px);-webkit-backdrop-filter:blur(23px);
- box-shadow:0 -8px 30px #0003;
-}
-.nav-link{
- position:relative;flex:1;color:var(--muted);text-decoration:none;
- display:flex;flex-direction:column;align-items:center;gap:4px;
- font-size:9px;font-weight:700;transition:color .2s,transform .2s;
-}
-.nav-link span{font-size:19px;transition:transform .2s}
-.nav-link.active{color:var(--blue)}
-.nav-link.active::before{
- content:"";position:absolute;top:-9px;width:28px;height:2px;
- border-radius:5px;background:var(--blue);box-shadow:0 0 12px #00d2ff77;
-}
-.nav-link:active{transform:translateY(-2px)}
-.nav-link.active span{filter:drop-shadow(0 0 6px #00d2ff44)}
-
-.footer{text-align:center;color:var(--muted);font-size:10px;line-height:2;padding:28px 10px}
-.footer strong{color:var(--blue)}
-
-@keyframes fadeUp{
- from{opacity:0;transform:translateY(12px)}
- to{opacity:1;transform:translateY(0)}
-}
-
-@media(max-width:850px){
- .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:520px){
- .header{padding:13px 11px}
- .brand h1{font-size:12px}
- .brand p{font-size:8px}
- .logo{width:39px;height:39px;border-radius:13px}
- .header-btn{font-size:10px;padding:9px}
- .container{padding:16px 11px}
- .grid{grid-template-columns:1fr;gap:12px}
- .card{padding:16px}
- .stats{gap:6px}
- .stat strong{font-size:15px}
- .stat span{font-size:9px}
- .hero{padding:21px 16px}
- .section-title{font-size:20px}
- .panel{padding:15px}
- .modal-box{padding:17px}
- .tabs{gap:7px}
- .tab{padding:11px 12px;font-size:11px}
- .bottom-nav{min-height:65px}
-}
-@media(prefers-reduced-motion:reduce){
- *,*::before,*::after{
-  animation-duration:.01ms!important;
-  animation-iteration-count:1!important;
-  scroll-behavior:auto!important;
-  transition-duration:.01ms!important;
- }
-}
+.jb-footer{margin:24px 20px 10px;padding:16px;text-align:center;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);font-size:9px;opacity:.5;line-height:1.6}
+.jb-footer b{color:var(--blue)}
+.jb-navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:11px 0 calc(11px + env(safe-area-inset-bottom));background:rgba(5,10,20,.96);border-top:1px solid rgba(0,210,255,.25);backdrop-filter:blur(22px)}
+body.light .jb-navbar{background:rgba(255,255,255,.94);border-top:1px solid rgba(0,0,0,.08)}
+.jb-nav-link{flex:1;color:white;opacity:.48;text-decoration:none;text-align:center;font-size:10px;border:0;background:none;cursor:pointer;position:relative}
+body.light .jb-nav-link{color:#0b1220}
+.jb-nav-link.active{color:var(--blue);opacity:1;font-weight:bold}
+.jb-nav-link.active::before{content:"";position:absolute;top:-11px;left:28%;width:44%;height:2px;border-radius:5px;background:var(--blue)}
+.jb-nav-icon{margin-bottom:4px;font-size:18px}
+.jb-toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:3000;background:rgba(18,33,58,.96);border:1px solid rgba(0,210,255,.32);padding:12px 16px;border-radius:12px;font-size:11px;transition:all .25s;max-width:90%;color:white}
+.jb-toast.show{opacity:1;transform:translate(-50%,0)}
+.jb-modal{position:fixed;inset:0;background:#000c;z-index:200;display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(8px)}
+.jb-modal.show{display:flex}
+.jb-modal-box{width:100%;max-width:460px;max-height:90vh;overflow:auto;background:linear-gradient(145deg,#102039,#07111f);border:1px solid rgba(0,210,255,.25);border-radius:20px;padding:20px;box-shadow:0 25px 80px #0009}
+body.light .jb-modal-box{background:linear-gradient(145deg,#ffffff,#f8fbff)}
+.jb-modal-box h3{font-size:15px;margin-bottom:10px;color:var(--blue)}
+.jb-modal-box p{font-size:11px;color:var(--muted);line-height:1.7}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#02060c;color:#b8eaff;padding:12px;border:1px solid rgba(255,255,255,.06);border-radius:10px;font-size:10px;line-height:1.7;overflow:auto;margin-top:8px}
+body.light pre{background:#f0f6ff;color:#0b1220}
+@media(max-width:520px){.jb-grid{grid-template-columns:1fr}.jb-stats{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
-
 <body>
-
-<header class="header">
- <div class="brand">
-  <div class="logo">JB</div>
-  <div>
-   <h1>JASON BUSINESS</h1>
-   <p>API CENTER • CRÉÉ PAR JASON ALOMA 🇨🇩</p>
-  </div>
- </div>
- <button class="header-btn" onclick="location.href='dashboard.html'">← Retour</button>
+<div class="jb-overlay">
+<header class="jb-header">
+<div style="display:flex;align-items:center;gap:12px">
+<button class="jb-back" onclick="goPage('dashboard.html')">‹</button>
+<div class="jb-brand">API CENTER</div>
+</div>
+<div style="display:flex;align-items:center;gap:8px">
+<div id="soldeDisplay" style="font-size:10px;font-weight:900;color:var(--blue);padding:6px 10px;border-radius:20px;background:rgba(0,210,255,.09);border:1px solid rgba(0,210,255,.2)">⏳...</div>
+<span style="font-size:9px;opacity:.4">v2.0 Pro</span>
+</div>
 </header>
 
-<main class="container">
-
-<section class="hero">
- <span class="badge">DÉVELOPPEMENT • API • INTELLIGENCE ARTIFICIELLE</span>
- <h2>Bienvenue dans <span>API Center</span></h2>
- <p>
-  Découvre les API disponibles, consulte leur documentation et utilise
-  JASON API BOT pour préparer la conception de ta propre API.
- </p>
- <div class="stats">
-  <div class="stat"><strong id="apiCount">12</strong><span>Endpoints référencés</span></div>
-  <div class="stat"><strong>API BOT</strong><span>Assistant de conception</span></div>
-  <div class="stat"><strong>FC</strong><span>Tarifs configurables</span></div>
- </div>
+<section class="jb-hero">
+<div style="font-size:9px;color:var(--gold);letter-spacing:1px;font-weight:bold">DÉVELOPPEMENT • API • IA</div>
+<h2>Bienvenue dans <span>API Center</span></h2>
+<p>Découvre les API, lis la doc gratuite, mais l'URL réelle se débloque après paiement 5000 FC. Sécurisé par JASON BUSINESS.</p>
+<div class="jb-stats">
+<div class="jb-stat"><strong id="apiCount">12</strong><span>Endpoints</span></div>
+<div class="jb-stat"><strong>5000 FC</strong><span>Prix fixe</span></div>
+<div class="jb-stat"><strong id="footerSettings">FR • FC</strong><span>Paramètres</span></div>
+</div>
 </section>
 
-<nav class="tabs">
- <button class="tab active" data-tab="catalog">🛒 Boutique API</button>
- <button class="tab" data-tab="bot">🤖 JASON API BOT</button>
- <button class="tab" data-tab="docs">📚 Documentation</button>
-</nav>
+<div class="jb-tabs">
+<button class="jb-tab active" data-tab="catalog">🛒 Boutique API</button>
+<button class="jb-tab" data-tab="bot">🤖 JASON API BOT</button>
+<button class="jb-tab" data-tab="docs">📚 Documentation</button>
+</div>
 
 <section id="catalogSection">
- <h2 class="section-title">🛒 Boutique d'API</h2>
- <p class="section-desc">
-  Consulte les services, leurs tarifs et leur documentation. Les prix sont
-  des tarifs de départ configurables par le propriétaire de JASON BUSINESS.
- </p>
- <div class="grid" id="apiGrid"></div>
- <div class="notice warning">
-  <strong>Important :</strong> payer un accès nécessite un système de paiement
-  et une validation côté serveur. Cette page ne débite pas Firebase et ne
-  confirme pas automatiquement un paiement.
- </div>
+<div class="jb-card">
+<div class="jb-title">🛒 Boutique d'API — Payant 5000 FC</div>
+<div style="font-size:10px;color:var(--muted);line-height:1.7">La doc est gratuite, mais l'URL réelle de l'API est floutée. Paye 5000 FC pour copier l'URL et utiliser l'API. Une fois payé, débloqué à vie!</div>
+</div>
+<div class="jb-grid" id="apiGrid"></div>
+<div class="jb-card">
+<div class="jb-notice warn"><strong>⚠️ Important:</strong> Paiement 5000 FC obligatoire pour voir l'URL réelle. Après paiement, solde débité depuis Firebase. Document visible gratuitement.</div>
+</div>
 </section>
 
 <section id="botSection" class="hidden">
- <h2 class="section-title">🤖 JASON API BOT</h2>
- <p class="section-desc">
-  Décris ton idée. L'assistant peut t'aider à préparer les endpoints,
-  les paramètres, les réponses JSON, la documentation et un exemple de code.
- </p>
-
- <div class="panel">
-  <h3>1. Décris ton projet d'API</h3>
-
-  <div class="field">
-   <label for="projectName">Nom du projet</label>
-   <input id="projectName" placeholder="Ex. : JASON PAYMENT API">
-  </div>
-
-  <div class="field">
-   <label for="apiType">Type d'API</label>
-   <select id="apiType">
-    <option value="API REST">API REST générale</option>
-    <option value="API de paiement">API de paiement</option>
-    <option value="API de gestion des utilisateurs">API utilisateurs</option>
-    <option value="API e-commerce">API e-commerce</option>
-    <option value="API IA">API d'intelligence artificielle</option>
-    <option value="API de stockage">API de stockage de fichiers</option>
-    <option value="API de notifications">API de notifications</option>
-    <option value="Autre">Autre type</option>
-   </select>
-  </div>
-
-  <div class="field">
-   <label for="apiDescription">Fonctions attendues</label>
-   <textarea id="apiDescription" placeholder="Ex. : créer un compte, se connecter, enregistrer les transactions, protéger les données et renvoyer des réponses JSON..."></textarea>
-  </div>
-
-  <div class="field">
-   <label for="apiLanguage">Technologie souhaitée</label>
-   <select id="apiLanguage">
-    <option value="Node.js et Express">Node.js + Express</option>
-    <option value="JavaScript côté serveur">JavaScript</option>
-    <option value="Python et Flask">Python + Flask</option>
-    <option value="PHP">PHP</option>
-    <option value="Technologie à choisir">Choisir pour moi</option>
-   </select>
-  </div>
-
-  <div class="field">
-   <label for="apiSecurity">Sécurité souhaitée</label>
-   <select id="apiSecurity">
-    <option value="Authentification sécurisée, validation des entrées et limitation des requêtes">Authentification et protections courantes</option>
-    <option value="API publique avec limitation des requêtes">API publique limitée</option>
-    <option value="Authentification par clé API conservée côté serveur">Clé API côté serveur</option>
-   </select>
-  </div>
-
-  <div class="notice">
-   Le tarif estimé pour la conception est affiché avant l'envoi à l'assistant.
-   La génération ne constitue pas automatiquement un déploiement en ligne.
-  </div>
-
-  <div class="panel">
-   <h3>Frais de conception</h3>
-   <div class="price" id="botPrice">5 000 FC <small>/ demande</small></div>
-   <p id="botPriceDescription" style="font-size:11px;color:var(--muted);line-height:1.8">
-    Tarif de départ configurable. Il doit être confirmé et payé par le moyen
-    de paiement que l'administrateur aura configuré.
-   </p>
-  </div>
-
-  <label class="checkline">
-   <input type="checkbox" id="confirmBotFee">
-   <span>J'ai lu le tarif affiché et je souhaite continuer vers la demande payante.</span>
-  </label>
-
-  <button class="btn gold" id="generateBtn" type="button">
-   💳 Continuer vers la demande
-  </button>
-
-  <div id="botStatus" class="notice hidden"></div>
-  <div id="botResult" class="result hidden"></div>
-
-  <div class="doc-actions">
-   <button class="btn secondary" id="copyBotResult" type="button">📋 Copier le résultat</button>
-  </div>
- </div>
+<div class="jb-card">
+<div class="jb-title">🤖 JASON API BOT — Créateur d'API</div>
+<div class="jb-field"><label>Nom du projet</label><input class="jb-input" id="projectName" placeholder="Ex: JASON PAYMENT API"></div>
+<div class="jb-field"><label>Type d'API</label><select class="jb-input" id="apiType"><option>API REST</option><option>API de paiement</option><option>API utilisateurs</option><option>API e-commerce</option><option>API IA</option><option>API de stockage</option></select></div>
+<div class="jb-field"><label>Fonctions attendues</label><textarea class="jb-input jb-textarea" id="apiDescription" placeholder="Ex: créer un compte, se connecter..."></textarea></div>
+<div class="jb-field"><label>Technologie</label><select class="jb-input" id="apiLanguage"><option>Node.js + Express</option><option>Python + Flask</option><option>PHP</option></select></div>
+<div class="jb-notice">Frais de conception: <b style="color:var(--gold)">5000 FC</b> — Tu payes avant que le BOT génère ton API.</div>
+<div style="margin-top:12px;display:flex;align-items:center;gap:8px"><input type="checkbox" id="confirmBotFee"><label style="font-size:10px;color:var(--muted)">J'ai lu le tarif 5000 FC et je veux continuer</label></div>
+<button class="jb-btn jb-btn-gold" id="generateBtn" style="margin-top:12px">💳 PAYER 5000 FC & GÉNÉRER MON API</button>
+<div id="botStatus" class="jb-notice hidden"></div>
+<div id="botResult" class="jb-result hidden"></div>
+<button class="jb-btn jb-btn-dark hidden" id="copyBotResult">📋 Copier le résultat</button>
+</div>
 </section>
 
 <section id="docsSection" class="hidden">
- <h2 class="section-title">📚 Documentation des API</h2>
- <p class="section-desc">
-  Sélectionne un endpoint pour consulter son adresse, son usage et un exemple
-  de requête. Les méthodes et paramètres exacts doivent être vérifiés avec
-  le serveur qui héberge chaque API.
- </p>
-
- <div class="field">
-  <label for="docSelect">Choisir une API</label>
-  <select id="docSelect"></select>
- </div>
-
- <div class="panel" id="docPanel"></div>
+<div class="jb-card">
+<div class="jb-title">📚 Documentation — Gratuit</div>
+<div class="jb-field"><label>Choisir une API</label><select class="jb-input" id="docSelect"></select></div>
+<div id="docPanel" style="margin-top:12px"></div>
+</div>
 </section>
 
-<footer class="footer">
- <strong>JASON BUSINESS — API CENTER</strong><br>
- Créé par Jason Aloma 🇨🇩 · Kinshasa, RDC<br>
- Les accès payants et les frais nécessitent une validation réelle côté serveur.
-</footer>
-
-</main>
-
-<nav class="bottom-nav">
- <a href="dashboard.html" class="nav-link"><span>📊</span>Dash</a>
- <a href="shop.html" class="nav-link"><span>🛒</span>Boutique</a>
- <a href="api.html" class="nav-link active"><span>🔌</span>API</a>
- <a href="profil.html" class="nav-link"><span>👤</span>Profil</a>
-</nav>
-
-<div id="toastContainer"></div>
-
-<div class="modal" id="paymentModal">
- <div class="modal-box">
-  <h3>💳 Demande d'accès payant</h3>
-  <p id="paymentMessage"></p>
-
-  <div class="notice warning">
-   Le paiement n'est pas encore intégré à cette page. Aucun montant ne sera
-   prélevé ici et aucun accès ne sera déclaré actif sans validation réelle.
-  </div>
-
-  <div class="field">
-   <label for="paymentContact">Ton contact (facultatif)</label>
-   <input id="paymentContact" placeholder="Numéro de téléphone ou e-mail">
-  </div>
-
-  <label class="checkline">
-   <input type="checkbox" id="paymentAccepted">
-   <span>Je confirme vouloir préparer cette demande au tarif indiqué.</span>
-  </label>
-
-  <div class="modal-actions">
-   <button class="btn secondary" id="cancelPayment" type="button">Annuler</button>
-   <button class="btn gold" id="confirmPayment" type="button">Confirmer la demande</button>
-  </div>
-
-  <div id="paymentResult" class="notice hidden"></div>
- </div>
+<div class="jb-footer">
+✅ <b>JASON BUSINESS — API CENTER</b><br>
+Créé par Jason Aloma 🇨🇩 • Kinshasa, RDC<br>
+Payant 5000 FC pour débloquer URL • Doc gratuite<br>
+<span id="footerLang">FR</span> • <span id="footerMoney">FC</span> • <span id="footerTheme">Sombre</span>
 </div>
 
-<script>
-"use strict";
+</div>
 
-/* CONFIGURATION */
-const BOT_CREATION_PRICE=5000;
-const API_BASE="https://davbot-outils.vercel.app";
+<nav class="jb-navbar">
+  <button onclick="goPage('dashboard.html')" class="jb-nav-link"><div class="jb-nav-icon">📊</div>Dash</button>
+  <button onclick="goPage('shop.html')" class="jb-nav-link"><div class="jb-nav-icon">🛍️</div>Boutique</button>
+  <button onclick="goPage('store.html')" class="jb-nav-link"><div class="jb-nav-icon">🛒</div>Store</button>
+  <button onclick="goPage('equipe.html')" class="jb-nav-link"><div class="jb-nav-icon">👥</div>Équipe</button>
+  <button onclick="goPage('profil.html')" class="jb-nav-link"><div class="jb-nav-icon">👤</div>Profil</button>
+</nav>
 
-const API_LIST=[
-{
- id:"ai",name:"Intelligence artificielle — AI",icon:"🤖",
- price:5000,endpoint:"/api/intelligence-artificielle/ai",method:"POST",
- description:"Envoie un message à l'assistant IA et peut transmettre un historique de conversation.",
- request:{message:"Bonjour, présente-toi.",history:[]},
- response:"La réponse JSON exacte dépend du serveur et du modèle configuré."
-},
-{
- id:"ask",name:"IA — Ask et analyse",icon:"🧠",
- price:7000,endpoint:"/api/intelligence-artificielle/ask",method:"POST",
- description:"Assistant IA avec paramètres facultatifs pour une image, des connaissances personnalisées, des règles et l'historique.",
- request:{message:"Analyse cette image.",image:"data:image/jpeg;base64,...",knowledge:"Ma connaissance personnalisée.",rules:"Réponds clairement.",history:[]},
- response:"L'image doit être transmise dans un format accepté par le serveur. Le résultat exact dépend de l'API."
-},
-{
- id:"translate",name:"API de traduction",icon:"🌍",
- price:3000,endpoint:"/api/intelligence-artificielle/translate",method:"POST",
- description:"Soumet un texte avec une langue source et une langue cible.",
- request:{text:"Bonjour tout le monde",source:"fr",target:"en"},
- response:"Le serveur doit renvoyer la traduction dans sa réponse JSON."
-},
-{
- id:"image-generate",name:"Génération d'images",icon:"🎨",
- price:10000,endpoint:"/api/genere-image/generate",method:"POST",
- description:"Soumet une description pour demander la génération d'une image.",
- request:{prompt:"Une ville futuriste à Kinshasa",size:"1024x1024",n:1},
- response:"Le serveur peut renvoyer des données ou des liens d'image selon son implémentation."
-},
-{
- id:"image-edit",name:"Image — création ou transformation",icon:"🖼️",
- price:10000,endpoint:"/api/genere-image/image",method:"POST",
- description:"Endpoint de création ou transformation d'image selon les fonctions activées sur le serveur.",
- request:{prompt:"Transformer cette image en affiche futuriste",size:"1024x1024",n:1},
- response:"Vérifie le format d'image requis par le serveur pour les transformations."
-},
-{
- id:"ads",name:"API Publicité",icon:"📢",
- price:5000,endpoint:"/api/publicite/ads",method:"À vérifier",
- description:"Endpoint lié aux fonctions de publicité. La méthode, les paramètres et les réponses doivent être confirmés dans la documentation du serveur.",
- request:null,response:"Schéma de réponse à obtenir auprès du serveur."
-},
-{
- id:"data",name:"API Data",icon:"🗄️",
- price:5000,endpoint:"/api/data",method:"À vérifier",
- description:"Endpoint de données. Les actions disponibles dépendent de la configuration du backend.",
- request:null,response:"Schéma de réponse à obtenir auprès du serveur."
-},
-{
- id:"storage",name:"API Storage",icon:"📁",
- price:5000,endpoint:"/api/storage",method:"À vérifier",
- description:"Endpoint de stockage. Les exigences d'authentification et les formats de fichiers doivent être vérifiés.",
- request:null,response:"Schéma de réponse à obtenir auprès du serveur."
-},
-{
- id:"admin-auth",name:"Authentification administrateur",icon:"🔐",
- price:8000,endpoint:"/api/admin-auth",method:"À vérifier",
- description:"Endpoint d'authentification administrateur. Ne transmets pas de mots de passe ou de secrets à une API sans vérifier sa sécurité.",
- request:null,response:"Schéma de réponse à obtenir auprès du serveur."
-},
-{
- id:"video",name:"Génération vidéo",icon:"🎬",
- price:15000,endpoint:"/api/media/video",method:"POST",
- description:"Soumets une description et une durée pour demander une vidéo.",
- request:{prompt:"Une ville futuriste de Kinshasa la nuit",duration:6},
- response:"Le serveur peut traiter la génération de manière asynchrone. Vérifie son format de résultat."
-},
-{
- id:"music",name:"Génération musicale",icon:"🎵",
- price:10000,endpoint:"/api/media/music",method:"POST",
- description:"Soumets une description musicale et une durée souhaitée.",
- request:{prompt:"Afrobeat énergique et mélodique",duration:15},
- response:"Le serveur peut renvoyer un statut de tâche ou une URL audio selon son fonctionnement."
-},
-{
- id:"hub",name:"API Hub — catalogue",icon:"🧩",
- price:3000,endpoint:"/api/hub",method:"POST",
- description:"Exemple fourni pour demander le catalogue du hub avec l'action catalog.",
- request:{action:"catalog"},
- response:"La structure réelle du catalogue dépend de la réponse du serveur."
+<div class="jb-toast" id="toast"></div>
+
+<div class="jb-modal" id="paymentModal">
+<div class="jb-modal-box">
+<h3>💳 Payer 5000 FC pour débloquer</h3>
+<p id="paymentMessage"></p>
+<div class="jb-notice warn" style="margin-top:12px">Tu vas payer 5000 FC depuis ton solde Firebase. Après paiement, l'URL réelle sera visible et copiable à vie. La doc reste gratuite.</div>
+<div class="jb-field"><label>Contact (facultatif)</label><input class="jb-input" id="paymentContact" placeholder="Téléphone ou email"></div>
+<div style="margin-top:12px;display:flex;align-items:center;gap:8px"><input type="checkbox" id="paymentAccepted"><label style="font-size:10px;color:var(--muted)">Je confirme payer 5000 FC</label></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px">
+<button class="jb-btn jb-btn-dark" id="cancelPayment">Annuler</button>
+<button class="jb-btn jb-btn-gold" id="confirmPayment">💳 Payer 5000 FC</button>
+</div>
+<div id="paymentResult" class="jb-notice hidden"></div>
+</div>
+</div>
+
+<script type="module">
+import {initializeApp,getApps,getApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {getDatabase,ref,onValue,runTransaction} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+// PARAMETRES CONNECTES
+const jbLang=localStorage.getItem("jb_lang")||"fr";
+const jbMoney=localStorage.getItem("jb_money")||"fc";
+const jbTheme=localStorage.getItem("jb_theme")||"dark";
+const USD_RATE=2800;
+if(jbTheme==="light") document.body.classList.add("light");
+document.getElementById("footerLang").textContent=jbLang.toUpperCase();
+document.getElementById("footerMoney").textContent=jbMoney.toUpperCase();
+document.getElementById("footerTheme").textContent=jbTheme==="light"?"Lumineux":"Sombre";
+document.getElementById("footerSettings").textContent=`${jbLang.toUpperCase()} • ${jbMoney.toUpperCase()}`;
+
+function formatFC(v){
+ const price=Math.floor(Number(v)||0);
+ if(jbMoney==="usd") return (price/USD_RATE).toFixed(2)+" USD";
+ return price.toLocaleString("fr-FR")+" FC";
 }
+function goPage(p){window.location.href=p}
+window.goPage=goPage;
+function toast(m){const e=document.getElementById("toast");e.textContent=m;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),3000)}
+
+const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
+const app=getApps().length?getApp():initializeApp(firebaseConfig);
+const db=getDatabase(app);
+let currentBalance=0;
+let currentUserRef=null;
+const currentPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("phone")||"";
+if(currentPhone) currentUserRef=ref(db,`jasonBusiness/users/${currentPhone}`);
+
+function renderBalance(total){
+ currentBalance=Number(total)||0;
+ document.getElementById("soldeDisplay").textContent=`💰 ${formatFC(currentBalance)}`;
+}
+if(currentUserRef){
+ onValue(currentUserRef,snap=>{
+  if(!snap.exists()){renderBalance(0);return;}
+  const d=snap.val();
+  const principal=Number(d.solde_principal||d.solde||0);
+  const comm=Number(d.solde_commissions||0);
+  const gains=Number(d.solde_gains||0);
+  renderBalance(principal+comm+gains);
+ });
+}else{
+ let b=localStorage.getItem("jasonBusinessSoldeV4");
+ if(b===null){b="61000";localStorage.setItem("jasonBusinessSoldeV4",b)}
+ renderBalance(Number(b));
+}
+async function deduct5000(){
+ if(currentBalance<5000){toast("❌ Solde insuffisant - Il faut 5000 FC");return false;}
+ if(currentUserRef){
+  try{
+   const res=await runTransaction(currentUserRef,curr=>{
+    if(!curr)return;
+    const total=Number(curr.solde_principal||curr.solde||0)+Number(curr.solde_commissions||0)+Number(curr.solde_gains||0);
+    if(total<5000)return;
+    curr.solde_principal=Math.max(0,Number(curr.solde_principal||0)-5000);
+    if(curr.solde!==undefined) curr.solde=curr.solde_principal;
+    return curr;
+   });
+   return res.committed;
+  }catch(e){return false;}
+ }else{
+  const newBal=currentBalance-5000;
+  localStorage.setItem("jasonBusinessSoldeV4",String(newBal));
+  renderBalance(newBal);
+  return true;
+ }
+}
+
+// API LIST
+const BOT_PRICE=5000;
+const API_BASE="https://davbot-outils.vercel.app";
+const API_LIST=[
+{id:"ai",name:"IA — Assistant AI",icon:"🤖",price:5000,endpoint:"/api/intelligence-artificielle/ai",method:"POST",desc:"Envoie un message à l'assistant IA avec historique.",req:{message:"Bonjour",history:[]},resp:"Réponse JSON du serveur"},
+{id:"ask",name:"IA — Ask & Analyse",icon:"🧠",price:5000,endpoint:"/api/intelligence-artificielle/ask",method:"POST",desc:"IA avec image, knowledge, rules et historique.",req:{message:"Analyse image",image:"base64..."},resp:"Résultat selon config serveur"},
+{id:"translate",name:"Traduction",icon:"🌍",price:5000,endpoint:"/api/intelligence-artificielle/translate",method:"POST",desc:"Texte avec langue source et cible.",req:{text:"Bonjour",source:"fr",target:"en"},resp:"Traduction dans JSON"},
+{id:"image-generate",name:"Génération Images",icon:"🎨",price:5000,endpoint:"/api/genere-image/generate",method:"POST",desc:"Description pour générer une image.",req:{prompt:"Ville futuriste Kinshasa"},resp:"URL ou base64 image"},
+{id:"image-edit",name:"Image Edit",icon:"🖼️",price:5000,endpoint:"/api/genere-image/image",method:"POST",desc:"Création ou transformation d'image.",req:{prompt:"Affiche futuriste"},resp:"Image transformée"},
+{id:"ads",name:"Publicité",icon:"📢",price:5000,endpoint:"/api/publicite/ads",method:"POST",desc:"Fonctions publicité - à vérifier",req:null,resp:"Schéma à obtenir"},
+{id:"data",name:"Data API",icon:"🗄️",price:5000,endpoint:"/api/data",method:"POST",desc:"Endpoint de données",req:null,resp:"Schéma serveur"},
+{id:"storage",name:"Storage",icon:"📁",price:5000,endpoint:"/api/storage",method:"POST",desc:"Stockage fichiers",req:null,resp:"Schéma serveur"},
+{id:"admin-auth",name:"Auth Admin",icon:"🔐",price:5000,endpoint:"/api/admin-auth",method:"POST",desc:"Authentification admin",req:null,resp:"Token ou session"},
+{id:"video",name:"Génération Vidéo",icon:"🎬",price:5000,endpoint:"/api/media/video",method:"POST",desc:"Description + durée pour vidéo",req:{prompt:"Kinshasa nuit",duration:6},resp:"URL vidéo"},
+{id:"music",name:"Génération Musique",icon:"🎵",price:5000,endpoint:"/api/media/music",method:"POST",desc:"Prompt musical + durée",req:{prompt:"Afrobeat énergique",duration:15},resp:"URL audio"},
+{id:"hub",name:"API Hub",icon:"🧩",price:5000,endpoint:"/api/hub",method:"POST",desc:"Catalogue hub",req:{action:"catalog"},resp:"Catalogue"}
 ];
 
-const $=id=>document.getElementById(id);
 let pendingPurchase=null;
 let lastBotResult="";
+const unlockedKey="jb_unlocked_apis";
+function getUnlocked(){try{return JSON.parse(localStorage.getItem(unlockedKey)||"[]")}catch{return[]}}
+function isUnlocked(id){return getUnlocked().includes(id)}
+function unlockApi(id){const list=getUnlocked();if(!list.includes(id)){list.push(id);localStorage.setItem(unlockedKey,JSON.stringify(list))}}
 
-function showToast(message,type="success"){
- const toast=document.createElement("div");
- toast.className="toast "+type;
- toast.textContent=message;
- $("toastContainer").appendChild(toast);
- setTimeout(()=>toast.remove(),4000);
-}
-
-function escapeHtml(value){
- return String(value).replace(/[&<>"']/g,char=>({
-  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
- }[char]));
-}
-
-function money(value){
- return Number(value).toLocaleString("fr-FR")+" FC";
-}
-
-/* NAVIGATION DES ONGLETS */
+const $=id=>document.getElementById(id);
 function setTab(name){
- document.querySelectorAll(".tab").forEach(button=>{
-  button.classList.toggle("active",button.dataset.tab===name);
- });
-
+ document.querySelectorAll(".jb-tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===name));
  $("catalogSection").classList.toggle("hidden",name!=="catalog");
  $("botSection").classList.toggle("hidden",name!=="bot");
  $("docsSection").classList.toggle("hidden",name!=="docs");
-
  window.scrollTo({top:0,behavior:"smooth"});
 }
+document.querySelectorAll(".jb-tab").forEach(b=>b.addEventListener("click",()=>setTab(b.dataset.tab)));
 
-document.querySelectorAll(".tab").forEach(button=>{
- button.addEventListener("click",()=>setTab(button.dataset.tab));
-});
-
-/* BOUTIQUE */
 function renderCatalog(){
  $("apiCount").textContent=API_LIST.length;
  $("apiGrid").innerHTML="";
-
- API_LIST.forEach((api,index)=>{
-  const card=document.createElement("article");
-  card.className="card";
-  card.style.animationDelay=(index*30)+"ms";
-
-  const icon=document.createElement("div");
-  icon.className="card-icon";
-  icon.textContent=api.icon;
-
-  const title=document.createElement("h3");
-  title.textContent=api.name;
-
-  const description=document.createElement("p");
-  description.textContent=api.description;
-
-  const endpoint=document.createElement("div");
-  endpoint.className="endpoint";
-  endpoint.textContent=api.method+" · "+api.endpoint;
-
-  const price=document.createElement("div");
-  price.className="price";
-  price.textContent=money(api.price);
-
-  const note=document.createElement("div");
-  note.style.cssText="font-size:10px;color:var(--muted)";
-  note.textContent="Tarif de départ · accès à valider";
-
-  const docButton=document.createElement("button");
-  docButton.className="btn secondary";
-  docButton.textContent="📚 Documentation";
-  docButton.addEventListener("click",()=>{
-   $("docSelect").value=api.id;
-   renderDocumentation(api.id);
-   setTab("docs");
-  });
-
-  const buyButton=document.createElement("button");
-  buyButton.className="btn gold";
-  buyButton.textContent="💳 Demander l'accès";
-  buyButton.addEventListener("click",()=>openPurchase(api));
-
-  card.append(icon,title,description,endpoint,price,note,docButton,buyButton);
+ API_LIST.forEach((api,i)=>{
+  const card=document.createElement("div");
+  card.className="jb-api-card";
+  const unlocked=isUnlocked(api.id);
+  const endpointFull=API_BASE+api.endpoint;
+  const displayEndpoint=unlocked?endpointFull:"https://•••••••••••••••/api/••••••••••";
+  card.innerHTML=`
+   <div class="jb-api-icon">${api.icon}</div>
+   <div class="jb-api-name">${api.name} ${unlocked?'✅':''}</div>
+   <div class="jb-api-desc">${api.desc}<br><br><b style="color:var(--blue)">📚 Doc:</b> Méthode ${api.method} - ${api.resp}<br><b style="color:var(--gold)">💰 Prix:</b> 5000 FC pour débloquer URL</div>
+   <div class="jb-price"><span>Accès URL</span><strong>${unlocked?formatFC(5000)+' ✅ Payé':formatFC(5000)}</strong></div>
+   <div class="jb-endpoint ${unlocked?'':'locked'}" id="ep-${api.id}">${displayEndpoint}${!unlocked?'<div class="jb-lock-overlay">🔒 PAYE 5000 FC POUR VOIR URL</div>':''}</div>
+   ${unlocked?`<button class="jb-btn jb-btn-dark" onclick="copyText('${endpointFull}')">📋 Copier URL</button><button class="jb-btn jb-btn-blue" onclick="viewDoc('${api.id}')">📚 Voir Doc Gratuite</button>`:`<button class="jb-btn jb-btn-gold" onclick="openPurchase('${api.id}')">💳 Payer 5000 FC & Débloquer URL</button><button class="jb-btn jb-btn-dark" onclick="viewDoc('${api.id}')">📚 Voir Doc (Gratuit - sans URL)</button>`}
+  `;
   $("apiGrid").appendChild(card);
  });
 }
-
-function openPurchase(api){
+window.viewDoc=function(id){
+ $("docSelect").value=id;
+ renderDocumentation(id);
+ setTab("docs");
+}
+window.openPurchase=function(id){
+ const api=API_LIST.find(a=>a.id===id);
+ if(!api) return;
  pendingPurchase={type:"api",item:api};
- $("paymentMessage").textContent=
-  "Tu souhaites demander l'accès à « "+api.name+
-  " » au tarif de "+money(api.price)+
-  ". La demande ne devient pas un accès actif tant que le paiement n'a pas été validé côté serveur.";
+ $("paymentMessage").textContent=`Tu vas débloquer l'URL réelle de "${api.name}" pour 5000 FC. La doc est gratuite, mais l'URL ${API_BASE+api.endpoint} sera visible seulement après paiement.`;
  $("paymentContact").value="";
  $("paymentAccepted").checked=false;
  $("paymentResult").classList.add("hidden");
  $("paymentModal").classList.add("show");
 }
+window.copyText=async function(text){
+ try{await navigator.clipboard.writeText(text);toast("✅ URL copiée!")}catch(e){
+  const area=document.createElement("textarea");area.value=text;document.body.appendChild(area);area.select();document.execCommand("copy");area.remove();toast("✅ URL copiée!");
+ }
+}
 
-/* DOCUMENTATION */
 function renderDocSelect(){
  $("docSelect").innerHTML="";
-
  API_LIST.forEach(api=>{
-  const option=document.createElement("option");
-  option.value=api.id;
-  option.textContent=api.name;
-  $("docSelect").appendChild(option);
+  const opt=document.createElement("option");opt.value=api.id;opt.textContent=api.name;$("docSelect").appendChild(opt);
  });
-
  renderDocumentation(API_LIST[0].id);
 }
-
 function renderDocumentation(id){
- const api=API_LIST.find(item=>item.id===id);
- if(!api)return;
-
- const endpoint=API_BASE+api.endpoint;
- const exampleBody=api.request
-  ?JSON.stringify(api.request,null,2)
-  :"{\n  // Paramètres à confirmer avec le serveur\n}";
-
- const fetchExample=api.request
- ?`const response = await fetch("${endpoint}", {
-  method: "${api.method}",
-  headers: {
-    "Content-Type": "application/json",
-    "Accept": "application/json"
-  },
-  body: JSON.stringify(${JSON.stringify(api.request)})
-});
-
-const data = await response.json();
-console.log(data);`
- :`// Méthode et paramètres à vérifier avant utilisation.
-// Endpoint : ${endpoint}`;
-
- const panel=$("docPanel");
-
- panel.innerHTML=`
-  <div class="card-icon">${escapeHtml(api.icon)}</div>
-  <h3 style="margin-top:13px">${escapeHtml(api.name)}</h3>
-  <p style="font-size:12px;color:var(--muted);line-height:1.8;margin-top:8px">${escapeHtml(api.description)}</p>
-
-  <div class="api-doc">
-   <h4>1. Adresse de l'API</h4>
-   <pre>${escapeHtml(endpoint)}</pre>
-
-   <h4>2. Méthode HTTP</h4>
-   <p>${escapeHtml(api.method)}</p>
-
-   <h4>3. En-têtes suggérés pour les requêtes JSON</h4>
-   <pre>Content-Type: application/json
-Accept: application/json</pre>
-
-   <h4>4. Exemple de corps JSON</h4>
-   <pre>${escapeHtml(exampleBody)}</pre>
-
-   <h4>5. Exemple JavaScript</h4>
-   <pre>${escapeHtml(fetchExample)}</pre>
-
-   <h4>6. Réponse attendue</h4>
-   <p>${escapeHtml(api.response)}</p>
-
-   <div class="notice warning">
-    Cette documentation décrit les exemples disponibles, pas une garantie de
-    fonctionnement. Vérifie la méthode HTTP, les paramètres, les permissions,
-    les limites et la structure réelle de la réponse auprès du backend.
-   </div>
-
-   <div class="doc-actions">
-    <button class="btn secondary" id="copyEndpoint" type="button">📋 Copier l'URL</button>
-    <button class="btn secondary" id="copyExample" type="button">📋 Copier l'exemple</button>
-   </div>
-  </div>`;
-
- $("copyEndpoint").addEventListener("click",()=>copyText(endpoint));
- $("copyExample").addEventListener("click",()=>copyText(fetchExample));
+ const api=API_LIST.find(a=>a.id===id);
+ if(!api) return;
+ const unlocked=isUnlocked(api.id);
+ const endpoint=unlocked?API_BASE+api.endpoint:"🔒 URL cachée - Paye 5000 FC pour voir (Doc gratuite)";
+ const exampleBody=api.req?JSON.stringify(api.req,null,2):"{\n  // Params à confirmer\n}";
+ $("docPanel").innerHTML=`
+  <div style="display:flex;align-items:center;gap:10px"><div class="jb-api-icon">${api.icon}</div><div><b>${api.name}</b><br><small style="color:var(--muted)">${api.desc}</small></div></div>
+  <div style="margin-top:14px"><b style="color:var(--blue);font-size:11px">1. ADRESSE API ${unlocked?'✅ Débloquée':'🔒 Bloquée'}</b><pre>${endpoint}</pre>${!unlocked?'<div class="jb-notice warn">🔒 URL réelle cachée. Paye 5000 FC dans Boutique pour débloquer. Doc visible gratuitement!</div>':''}</div>
+  <div style="margin-top:12px"><b style="color:var(--blue);font-size:11px">2. MÉTHODE</b><pre>${api.method}</pre></div>
+  <div style="margin-top:12px"><b style="color:var(--blue);font-size:11px">3. EXEMPLE JSON</b><pre>${exampleBody}</pre></div>
+  <div style="margin-top:12px"><b style="color:var(--blue);font-size:11px">4. RÉPONSE</b><pre>${api.resp}</pre></div>
+  <div style="margin-top:12px;display:flex;gap:8px">
+   ${unlocked?`<button class="jb-btn jb-btn-blue" style="flex:1" onclick="copyText('${API_BASE+api.endpoint}')">📋 Copier URL</button>`:`<button class="jb-btn jb-btn-gold" style="flex:1" onclick="openPurchase('${api.id}')">💳 Payer 5000 FC</button>`}
+   <button class="jb-btn jb-btn-dark" style="flex:1" onclick="copyText(\`${exampleBody.replace(/`/g,'\\`')}\`)">📋 Copier Exemple</button>
+  </div>
+ `;
 }
+$("docSelect").addEventListener("change",()=>renderDocumentation($("docSelect").value));
 
-$("docSelect").addEventListener("change",()=>{
- renderDocumentation($("docSelect").value);
-});
-
-/* MODALE DE DEMANDE */
-$("cancelPayment").addEventListener("click",()=>{
- $("paymentModal").classList.remove("show");
-});
-
-$("paymentModal").addEventListener("click",event=>{
- if(event.target===$("paymentModal")){
+$("cancelPayment").addEventListener("click",()=>$("paymentModal").classList.remove("show"));
+$("paymentModal").addEventListener("click",e=>{if(e.target===$("paymentModal")) $("paymentModal").classList.remove("show")});
+$("confirmPayment").addEventListener("click",async ()=>{
+ if(!$("paymentAccepted").checked){toast("❌ Confirme payer 5000 FC");return;}
+ if(!pendingPurchase) return;
+ $("confirmPayment").disabled=true;
+ $("confirmPayment").textContent="⏳ Paiement...";
+ const ok=await deduct5000();
+ if(!ok){toast("❌ Échec paiement - Solde insuffisant");$("confirmPayment").disabled=false;$("confirmPayment").textContent="💳 Payer 5000 FC";return;}
+ if(pendingPurchase.type==="api"){
+  unlockApi(pendingPurchase.item.id);
+  $("paymentResult").textContent=`✅ Payé 5000 FC! URL débloquée: ${API_BASE+pendingPurchase.item.endpoint} - Reste ${formatFC(currentBalance)}`;
+  $("paymentResult").classList.remove("hidden");
+  toast("✅ 5000 FC payés! URL débloquée!");
+  setTimeout(()=>{renderCatalog();renderDocumentation(pendingPurchase.item.id);$("paymentModal").classList.remove("show");},1500);
+ }else if(pendingPurchase.type==="bot"){
+  $("paymentResult").textContent=`✅ Payé 5000 FC! Génération de ton API en cours...`;
+  $("paymentResult").classList.remove("hidden");
+  await generateApiDesignAfterPayment();
   $("paymentModal").classList.remove("show");
  }
+ $("confirmPayment").disabled=false;
+ $("confirmPayment").textContent="💳 Payer 5000 FC";
 });
-
-$("confirmPayment").addEventListener("click",()=>{
- if(!$("paymentAccepted").checked){
-  showToast("Confirme d'abord que tu as lu le tarif.","error");
-  return;
- }
-
- if(!pendingPurchase)return;
-
- const item=pendingPurchase.item;
-
- $("paymentResult").classList.remove("hidden");
- $("paymentResult").textContent=
-  "Demande préparée pour "+item.name+" — "+money(item.price)+
-  ". Aucun paiement n'a été effectué. Configure le backend et le moyen de paiement pour enregistrer la demande et vérifier le règlement.";
-
- showToast("Le paiement reste à configurer côté serveur.","error");
-});
-
-/* JASON API BOT */
-function setBotStatus(message,isError=false){
- $("botStatus").classList.remove("hidden");
- $("botStatus").textContent=message;
- $("botStatus").style.borderColor=isError?"#ff475766":"var(--border)";
-}
 
 $("generateBtn").addEventListener("click",()=>{
- if(!$("confirmBotFee").checked){
-  showToast("Lis et confirme d'abord les frais de conception.","error");
-  return;
- }
-
+ if(!$("confirmBotFee").checked){toast("❌ Confirme frais 5000 FC");return;}
  const name=$("projectName").value.trim();
- const description=$("apiDescription").value.trim();
-
- if(!name||!description){
-  showToast("Indique le nom et les fonctions de ton API.","error");
-  return;
- }
-
- pendingPurchase={
-  type:"bot",
-  item:{
-   id:"api-bot",
-   name:"Conception d'API — "+name,
-   price:BOT_CREATION_PRICE,
-   projectName:name,
-   description:description,
-   apiType:$("apiType").value,
-   language:$("apiLanguage").value,
-   security:$("apiSecurity").value
-  }
- };
-
- $("paymentMessage").textContent=
-  "Tu demandes la conception de « "+name+
-  " » pour "+money(BOT_CREATION_PRICE)+
-  ". Confirme la demande. Le paiement doit être validé par un backend fiable avant que le service payant soit considéré comme réglé.";
-
+ const desc=$("apiDescription").value.trim();
+ if(!name||!desc){toast("❌ Nom + fonctions requis");return;}
+ pendingPurchase={type:"bot",item:{id:"bot",name:"Conception API - "+name,price:5000,projectName:name,description:desc,apiType:$("apiType").value,language:$("apiLanguage").value}};
+ $("paymentMessage").textContent=`Tu demandes la conception de "${name}" pour 5000 FC. Après paiement, le BOT va générer ton API.`;
  $("paymentContact").value="";
  $("paymentAccepted").checked=false;
  $("paymentResult").classList.add("hidden");
  $("paymentModal").classList.add("show");
 });
 
-/*
- * À relier à un backend après validation réelle du paiement.
- * Ne pas appeler cette fonction directement depuis un bouton public
- * pour contourner la vérification du paiement.
- */
 async function generateApiDesignAfterPayment(){
  const name=$("projectName").value.trim();
- const description=$("apiDescription").value.trim();
-
- const prompt=`
-Tu es un assistant technique qui aide à concevoir des API.
-Prépare un dossier de conception clair pour le projet suivant.
-
-Nom : ${name}
-Type : ${$("apiType").value}
-Fonctions demandées : ${description}
-Technologie : ${$("apiLanguage").value}
-Sécurité souhaitée : ${$("apiSecurity").value}
-
-Réponds en français avec :
-1. Résumé du projet
-2. Liste des endpoints et méthodes HTTP
-3. Paramètres et exemples JSON
-4. Exemples de réponses JSON
-5. Structure des fichiers du backend
-6. Code de départ cohérent avec la technologie choisie
-7. Instructions de test et de déploiement
-8. Risques de sécurité et variables d'environnement à configurer
-
-Ne prétends pas que l'API est déployée ou testée.
-N'inclus aucune clé secrète réelle.
-`;
-
+ const desc=$("apiDescription").value.trim();
+ const prompt=`Tu es assistant technique JASON BUSINESS. Prépare dossier conception pour: Nom: ${name}, Type: ${$("apiType").value}, Fonctions: ${desc}, Tech: ${$("apiLanguage").value}. Réponds en français avec: 1. Résumé 2. Endpoints 3. Params JSON 4. Réponses JSON 5. Structure fichiers 6. Code départ 7. Test & deploy 8. Sécurité. Ne dis pas que c'est déployé.`;
  $("generateBtn").disabled=true;
- $("generateBtn").textContent="⏳ Préparation en cours...";
- setBotStatus("Contact de l'assistant IA en cours…");
-
+ $("generateBtn").textContent="⏳ Génération...";
+ $("botStatus").classList.remove("hidden");
+ $("botStatus").textContent="🤖 Contact assistant IA...";
  try{
-  const response=await fetch(
-   API_BASE+"/api/intelligence-artificielle/ask",
-   {
-    method:"POST",
-    headers:{
-     "Content-Type":"application/json",
-     "Accept":"application/json"
-    },
-    body:JSON.stringify({
-     message:prompt,
-     knowledge:"Assistant technique JASON BUSINESS",
-     rules:"Réponds en français, fournis des exemples prudents et indique les étapes restant à réaliser.",
-     history:[]
-    })
-   }
-  );
-
-  const raw=await response.text();
-  let data;
-
-  try{
-   data=JSON.parse(raw);
-  }catch(error){
-   throw new Error("Le serveur a renvoyé une réponse qui n'est pas du JSON.");
-  }
-
-  if(!response.ok){
-   throw new Error(data.message||data.error||"Erreur HTTP "+response.status);
-  }
-
-  lastBotResult=extractResponseText(data);
-  if(!lastBotResult)lastBotResult=JSON.stringify(data,null,2);
-
-  $("botResult").textContent=lastBotResult;
+  const res=await fetch(API_BASE+"/api/intelligence-artificielle/ask",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:prompt,knowledge:"JASON BUSINESS",rules:"Français, prudent",history:[]})});
+  const raw=await res.text();
+  let data;try{data=JSON.parse(raw)}catch{throw new Error("Réponse non JSON serveur")}
+  if(!res.ok) throw new Error(data.message||"Erreur HTTP");
+  let txt=data.answer||data.response||data.message||data.text||JSON.stringify(data,null,2);
+  lastBotResult=txt;
+  $("botResult").textContent=txt;
   $("botResult").classList.remove("hidden");
-
-  setBotStatus("Réponse reçue. Il s'agit d'une proposition de conception, pas d'une API automatiquement déployée.");
-
- }catch(error){
-  console.error(error);
-  setBotStatus(
-   "Impossible de contacter l'assistant : "+error.message+
-   ". Vérifie le réseau, la disponibilité de l'API et ses règles CORS.",
-   true
-  );
+  $("copyBotResult").classList.remove("hidden");
+  $("botStatus").textContent="✅ Conception prête! (5000 FC payés)";
+  toast("✅ API générée! 5000 FC payés");
+ }catch(e){
+  $("botStatus").textContent="❌ Erreur: "+e.message;
+  toast("❌ Erreur génération");
  }finally{
   $("generateBtn").disabled=false;
-  $("generateBtn").textContent="💳 Continuer vers la demande";
+  $("generateBtn").textContent="💳 PAYER 5000 FC & GÉNÉRER MON API";
  }
 }
+$("copyBotResult").addEventListener("click",()=>{if(!lastBotResult){toast("❌ Rien à copier");return;}copyText(lastBotResult)});
 
-function extractResponseText(data){
- if(typeof data==="string")return data;
-
- const candidates=[
-  data.answer,data.response,data.message,data.text,data.result,data.content,
-  data.data?.answer,data.data?.response,data.data?.text,
-  data.choices?.[0]?.message?.content
- ];
-
- for(const value of candidates){
-  if(typeof value==="string"&&value.trim())return value;
- }
-
- return "";
-}
-
-/* COPIE */
-async function copyText(text){
- try{
-  await navigator.clipboard.writeText(text);
-  showToast("Texte copié.");
- }catch(error){
-  const area=document.createElement("textarea");
-  area.value=text;
-  area.style.position="fixed";
-  area.style.opacity="0";
-  document.body.appendChild(area);
-  area.select();
-
-  try{
-   document.execCommand("copy");
-   showToast("Texte copié.");
-  }catch(copyError){
-   showToast("Copie impossible sur cet appareil.","error");
-  }
-
-  area.remove();
- }
-}
-
-$("copyBotResult").addEventListener("click",()=>{
- if(!lastBotResult){
-  showToast("Aucun résultat à copier.","error");
-  return;
- }
- copyText(lastBotResult);
-});
-
-/* INITIALISATION */
 renderCatalog();
 renderDocSelect();
 </script>
-
 </body>
 </html>
