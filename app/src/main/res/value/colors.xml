@@ -1,34 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
-    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="JASON BUSINESS"
-        android:theme="@style/Theme.JasonBusiness"
-        android:usesCleartextTraffic="true"
-        tools:targetApi="31">
-        <activity android:name=".MainActivity" android:exported="true"
-            android:theme="@style/Theme.JasonBusiness.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".VideoCallActivity" android:exported="false"/>
-        <activity android:name=".VoiceCallActivity" android:exported="false"/>
-    </application>
-</manifest>
+<resources>
+    <color name="bg">#050914</color>
+    <color name="panel">#0b1425</color>
+    <color name="panel2">#101e33</color>
+    <color name="blue">#00d4ff</color>
+    <color name="text">#f4f7fb</color>
+    <color name="muted">#93a4ba</color>
+    <color name="mine">#075fce</color>
+    <color name="other">#15253b</color>
+    <color name="green">#20c879</color>
+</resources>
