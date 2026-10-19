@@ -32,7 +32,7 @@ h1{color:var(--blue);letter-spacing:3px;margin:0 0 6px;font-size:24px;line-heigh
 </head>
 <body>
 <div class="overlay-login"></div>
-<div class="card">
+<div class="card" id="welcomeCard">
 <div class="logo">JB</div>
 <h1>JASON BUSINESS</h1>
 <p class="subtitle">RÉPUBLIQUE DÉMOCRATIQUE DU CONGO</p>
@@ -44,12 +44,36 @@ h1{color:var(--blue);letter-spacing:3px;margin:0 0 6px;font-size:24px;line-heigh
 <div class="feat"><b>👥 5000+ MEMBRES</b><span>Réseau actif RDC</span></div>
 <div class="feat"><b>💰 COMMISSIONS</b><span>Jusqu'à 25%</span></div>
 </div>
-<button class="btn" onclick="goLogin()">🚀 CONTINUER →</button>
-<div class="security">✅ Plateforme officielle JASON BUSINESS • Version 2.0 Pro</div>
+<button class="btn" id="btnContinue">🚀 CONTINUER →</button>
+<div class="security" id="sessionInfo">✅ Plateforme officielle JASON BUSINESS • Version 2.0 Pro</div>
 <div class="foot">© 2026 JASON BUSINESS • KINSHASA, RDC</div>
 </div>
 <script>
-function goLogin(){let b=document.querySelector('.btn');b.innerText='⏳ CHARGEMENT...';setTimeout(()=>{window.location.href='login.html';},400);}
+// ✅ VÉRIFICATION SESSION - SI DÉJÀ CONNECTÉ → DASHBOARD DIRECT
+(function(){
+  const phone = localStorage.getItem("jasonBusinessUserPhone") || localStorage.getItem("userPhone") || localStorage.getItem("telephone");
+  const logged = localStorage.getItem("jasonBusinessLogged");
+  const loginTime = localStorage.getItem("jasonBusinessLoginTime");
+  
+  // Si session existe et a moins de 30 jours → va direct dashboard
+  if(phone && phone.length > 5 && logged === "true"){
+    const now = Date.now();
+    const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+    if(loginTime && (now - Number(loginTime)) < thirtyDays){
+      document.getElementById("sessionInfo").innerText = "✅ Session retrouvée • Redirection...";
+      document.getElementById("btnContinue").innerText = "⏳ REDIRECTION...";
+      setTimeout(()=>{ window.location.replace("dashboard.html"); }, 600);
+      return;
+    }
+  }
+})();
+
+function goLogin(){
+  let b=document.getElementById("btnContinue");
+  b.innerText='⏳ CHARGEMENT...';
+  setTimeout(()=>{ window.location.href='login.html'; }, 400);
+}
+document.getElementById("btnContinue").addEventListener("click", goLogin);
 </script>
 </body>
 </html>
