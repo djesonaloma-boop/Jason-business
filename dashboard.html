@@ -76,13 +76,70 @@ body.light .jb-nav-link{color:#0b1220}
 .jb-nav-link.active{color:var(--blue);opacity:1;font-weight:bold}
 .jb-nav-link.active::before{content:"";position:absolute;top:-11px;left:28%;width:44%;height:2px;border-radius:5px;background:var(--blue)}
 .jb-nav-icon{margin-bottom:4px;font-size:18px}
-.jb-loading{position:fixed;z-index:9999;inset:0;display:flex;align-items:center;justify-content:center;background:#050a14}
-.jb-loader{width:40px;height:40px;border-radius:50%;border:3px solid rgba(255,255,255,.09);border-top-color:var(--blue);animation:jbSpin .8s linear infinite}
+
+/* ✅ CHARGEMENT AU MILIEU VRAIMENT CENTRÉ */
+.jb-loading{
+  position:fixed;
+  z-index:99999;
+  top:0;left:0;right:0;bottom:0;
+  width:100vw;
+  height:100vh;
+  height:100dvh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:radial-gradient(ellipse at center,rgba(0,210,255,.18) 0%,rgba(5,10,20,.95) 65%);
+}
+.jb-loader-center{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  padding:36px 32px;
+  border-radius:24px;
+  background:rgba(11,20,37,.85);
+  border:1px solid rgba(0,210,255,.25);
+  box-shadow:0 25px 80px rgba(0,0,0,.6),0 0 40px rgba(0,210,255,.15);
+  backdrop-filter:blur(20px);
+  min-width:200px;
+  animation:cardPop .4s ease-out;
+}
+@keyframes cardPop{0%{transform:scale(.9);opacity:0}100%{transform:scale(1);opacity:1}}
+.jb-loader{
+  width:52px;height:52px;
+  border-radius:50%;
+  border:4px solid rgba(255,255,255,.08);
+  border-top-color:var(--blue);
+  border-right-color:var(--blue);
+  animation:jbSpin .75s linear infinite;
+  box-shadow:0 0 25px rgba(0,210,255,.35);
+}
+.jb-loader-text{
+  color:var(--blue);
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:4px;
+}
+.jb-loader-sub{
+  color:rgba(255,255,255,.45);
+  font-size:10px;
+  letter-spacing:1px;
+}
 @keyframes jbSpin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
-<div id="jbLoading" class="jb-loading"><div style="text-align:center"><div class="jb-loader"></div><div style="margin-top:12px;color:var(--blue);font-size:11px;letter-spacing:3px">JASON BUSINESS</div></div></div>
+
+<!-- ✅ CHARGEMENT AU MILIEU -->
+<div id="jbLoading" class="jb-loading">
+  <div class="jb-loader-center">
+    <div class="jb-loader"></div>
+    <div class="jb-loader-text">JASON BUSINESS</div>
+    <div class="jb-loader-sub">Chargement de votre espace...</div>
+  </div>
+</div>
+
 <div class="jb-overlay">
 <header class="jb-header">
 <div class="jb-top">
@@ -95,7 +152,6 @@ body.light .jb-nav-link{color:#0b1220}
 <div class="jb-user-box"><small data-i18n="welcome">BIENVENUE SUR VOTRE ESPACE</small><h2 id="jbUserPhone">Chargement...</h2><small id="settingsInfo" style="margin-top:6px;display:block;font-size:9px;opacity:.4">FR • FC • Sombre</small></div>
 </header>
 <div id="jbDashboardStatus"></div>
-
 <section class="jb-balance-card">
 <div class="jb-balance-title" data-i18n="main_balance">Solde principal</div>
 <div class="jb-balance"><span id="jbMainBalance">0</span><span class="jb-currency" id="mainCurrency"> FC</span></div>
@@ -105,29 +161,20 @@ body.light .jb-nav-link{color:#0b1220}
 <div class="jb-money-box"><div>💎</div><small data-i18n="total">Total</small><b id="jbTotalBalance">0 FC</b></div>
 </div>
 </section>
-
 <div class="jb-actions">
 <a href="recharge.html" class="jb-action jb-recharge" data-i18n="recharge">📥 RECHARGER</a>
 <a href="retrait.html" class="jb-action jb-withdraw" data-i18n="withdraw">📤 RETIRER</a>
 </div>
-
 <section class="jb-points-card">
 <div class="jb-points-top"><div><div class="jb-points-title">⭐ <span data-i18n="loyalty">POINTS DE FIDÉLITÉ</span></div><div style="font-size:10px;opacity:.65"><span data-i18n="points_desc">100 points =</span> <b style="color:var(--gold)" id="pointsValue">50 FC</b></div></div><div id="jbLoyaltyPoints" class="jb-points-number">0</div></div>
 <button id="jbConvertPoints" disabled>💱 <span data-i18n="convert_points">CONVERTIR MES POINTS</span></button>
 </section>
-
 <section class="jb-section">
 <div class="jb-section-title"><h3 data-i18n="our_services">🛍️ Nos services</h3><a href="shop.html" data-i18n="see_all">VOIR TOUT →</a></div>
-
 <div class="jb-service-card" onclick="goPage('createur-direct.html')" style="background:linear-gradient(115deg,rgba(0,210,255,.18),rgba(0,119,255,.10));border:1px solid rgba(0,210,255,.42);box-shadow:0 0 22px rgba(0,210,255,.18)">
   <div class="jb-service-icon" style="background:linear-gradient(145deg,#00d2ff,#0077ff);color:white">🚀</div>
-  <div class="jb-service-info">
-    <div class="jb-service-name">Créer une App <span style="font-size:8px;background:rgba(0,230,118,.14);border:1px solid rgba(0,230,118,.32);color:#00e676;padding:3px 7px;border-radius:20px;margin-left:6px">15K FC</span></div>
-    <div class="jb-service-desc" data-i18n="create_app_desc">Logo + Code HTML + Lien direct</div>
-  </div>
-  <div class="jb-service-arrow">›</div>
+  <div class="jb-service-info"><div class="jb-service-name">Créer une App <span style="font-size:8px;background:rgba(0,230,118,.14);border:1px solid rgba(0,230,118,.32);color:#00e676;padding:3px 7px;border-radius:20px;margin-left:6px">15K FC</span></div><div class="jb-service-desc" data-i18n="create_app_desc">Logo + Code HTML + Lien direct</div></div><div class="jb-service-arrow">›</div>
 </div>
-
 <div class="jb-service-card" onclick="openService('site')"><div class="jb-service-icon">🌐</div><div class="jb-service-info"><div class="jb-service-name" data-i18n="site_web">Site web</div><div class="jb-service-desc" data-i18n="site_desc">Site moderne et professionnel</div></div><div class="jb-service-arrow">›</div></div>
 <div class="jb-service-card" onclick="openService('app')"><div class="jb-service-icon">📱</div><div class="jb-service-info"><div class="jb-service-name" data-i18n="app">Application</div><div class="jb-service-desc" data-i18n="app_desc">Création d'application mobile sur mesure</div></div><div class="jb-service-arrow">›</div></div>
 <div class="jb-service-card" onclick="openService('chatbot')"><div class="jb-service-icon">🤖</div><div class="jb-service-info"><div class="jb-service-name" data-i18n="chatbot">Chatbot</div><div class="jb-service-desc" data-i18n="chatbot_desc">Assistant et automatisation intelligente</div></div><div class="jb-service-arrow">›</div></div>
@@ -135,19 +182,10 @@ body.light .jb-nav-link{color:#0b1220}
 <div class="jb-service-card" onclick="openService('ads')"><div class="jb-service-icon">📣</div><div class="jb-service-info"><div class="jb-service-name" data-i18n="ads">Publicité</div><div class="jb-service-desc" data-i18n="ads_desc">Promotion sur réseaux sociaux</div></div><div class="jb-service-arrow">›</div></div>
 <div class="jb-service-card" onclick="openService('music')"><div class="jb-service-icon">🎵</div><div class="jb-service-info"><div class="jb-service-name" data-i18n="song">Chanson</div><div class="jb-service-desc" data-i18n="song_desc">Création musicale personnalisée</div></div><div class="jb-service-arrow">›</div></div>
 </section>
-
 <section class="jb-section"><div class="jb-section-title"><h3 data-i18n="my_activities">⚡ Mes activités</h3><a href="shop.html" data-i18n="order">COMMANDER →</a></div><div id="jbInvestments"><div class="jb-empty">Chargement...</div></div></section>
-
-<div class="jb-footer">
-✅ <b>JASON BUSINESS</b> — Plateforme officielle<br>
-<span id="footerSettings">FR • FC • Sombre</span> • Sécurisé • 2026<br>
-Version 2.0 Pro — Connecté à Paramètres ⚙️
+<div class="jb-footer">✅ <b>JASON BUSINESS</b> — Plateforme officielle<br><span id="footerSettings">FR • FC • Sombre</span> • Sécurisé • 2026<br>Version 2.0 Pro — Connecté à Paramètres ⚙️</div>
 </div>
-
-</div>
-
 <button class="jb-fab-chat" id="jbFabChat" onclick="goPage('chat.html')" aria-label="Chat">💬<span class="jb-fab-badge" id="jbChatBadge">1</span></button>
-
 <nav class="jb-navbar">
   <button onclick="goPage('dashboard.html')" class="jb-nav-link active"><div class="jb-nav-icon">📊</div><span data-i18n="dash">Dashboard</span></button>
   <button onclick="goPage('shop.html')" class="jb-nav-link"><div class="jb-nav-icon">🛍️</div><span data-i18n="shop">Boutique</span></button>
@@ -155,15 +193,12 @@ Version 2.0 Pro — Connecté à Paramètres ⚙️
   <button onclick="goPage('equipe.html')" class="jb-nav-link"><div class="jb-nav-icon">👥</div>Équipe</button>
   <button onclick="goPage('profil.html')" class="jb-nav-link"><div class="jb-nav-icon">👤</div>Profil</button>
 </nav>
-
 <script>
 function goPage(p){window.location.href=p}
 function openService(type){localStorage.setItem("jb_open_service",type);window.location.href="shop.html"}
-
 const jbLang = localStorage.getItem("jb_lang")||"fr";
 const jbMoney = localStorage.getItem("jb_money")||"fc";
 const jbTheme = localStorage.getItem("jb_theme")||"dark";
-const USD_RATE = 2800;
 const i18nDict = {
  fr:{welcome:"BIENVENUE SUR VOTRE ESPACE",main_balance:"Solde principal",commissions:"Commissions",gains:"Gains",total:"Total",recharge:"📥 RECHARGER",withdraw:"📤 RETIRER",loyalty:"POINTS DE FIDÉLITÉ",points_desc:"100 points =",convert_points:"CONVERTIR MES POINTS",our_services:"🛍️ Nos services",see_all:"VOIR TOUT →",create_app_desc:"Logo + Code HTML + Lien direct",site_web:"Site web",site_desc:"Site moderne et professionnel",app:"Application",app_desc:"Création d'application mobile sur mesure",chatbot:"Chatbot",chatbot_desc:"Assistant et automatisation intelligente",boost:"Boostage",boost_desc:"Followers, likes, vues - Croissance rapide",ads:"Publicité",ads_desc:"Promotion sur réseaux sociaux",song:"Chanson",song_desc:"Création musicale personnalisée",my_activities:"⚡ Mes activités",order:"COMMANDER →",dash:"Dashboard",shop:"Boutique"},
  en:{welcome:"WELCOME TO YOUR SPACE",main_balance:"Main Balance",commissions:"Commissions",gains:"Earnings",total:"Total",recharge:"📥 RECHARGE",withdraw:"📤 WITHDRAW",loyalty:"LOYALTY POINTS",points_desc:"100 points =",convert_points:"CONVERT MY POINTS",our_services:"🛍️ Our services",see_all:"SEE ALL →",create_app_desc:"Logo + HTML Code + Direct Link",site_web:"Website",site_desc:"Modern and professional site",app:"Application",app_desc:"Custom mobile app creation",chatbot:"Chatbot",chatbot_desc:"Intelligent assistant and automation",boost:"Boost",boost_desc:"Followers, likes, views - Fast growth",ads:"Advertising",ads_desc:"Social media promotion",song:"Song",song_desc:"Custom music creation",my_activities:"⚡ My activities",order:"ORDER →",dash:"Dashboard",shop:"Shop"}
@@ -171,21 +206,11 @@ const i18nDict = {
 function applySettings(){
  if(jbTheme==="light") document.body.classList.add("light");
  const dict = i18nDict[jbLang]||i18nDict.fr;
- document.querySelectorAll("[data-i18n]").forEach(el=>{
-  const k=el.getAttribute("data-i18n");
-  if(dict[k]) el.textContent=dict[k];
- });
+ document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.getAttribute("data-i18n");if(dict[k]) el.textContent=dict[k];});
  document.getElementById("settingsInfo").textContent=`${jbLang.toUpperCase()} • ${jbMoney.toUpperCase()} • ${jbTheme==="light"?"Lumineux":"Sombre"}`;
  document.getElementById("footerSettings").textContent=`${jbLang.toUpperCase()} • ${jbMoney.toUpperCase()} • ${jbTheme==="light"?"Lumineux":"Sombre"}`;
 }
 applySettings();
-function formatMoneyFC(priceFC){
- if(jbMoney==="usd"){
-  const usd=(priceFC/USD_RATE).toFixed(2);
-  return `${usd} USD`;
- }
- return `${Math.floor(priceFC).toLocaleString("fr-FR")} FC`;
-}
 </script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -198,12 +223,7 @@ if(!jbPhone){window.location.replace("login.html");throw new Error("Session");}
 localStorage.setItem("jasonBusinessUserPhone",jbPhone);
 const jbUserReference=ref(jbDatabase,"jasonBusiness/users/"+jbPhone);
 const jbMoney = localStorage.getItem("jb_money")||"fc";
-const USD_RATE = 2800;
-function jbFormatFC(v){
- const price = Math.floor(Number(v)||0);
- if(jbMoney==="usd"){return (price/USD_RATE).toFixed(2)+" USD";}
- return price.toLocaleString("fr-FR");
-}
+function jbFormatFC(v){const price=Math.floor(Number(v)||0);if(jbMoney==="usd"){return (price/2800).toFixed(2)+" USD";}return price.toLocaleString("fr-FR");}
 function jbFormatDate(v){if(!v)return "";const d=new Date(v);if(isNaN(d.getTime()))return "";return d.toLocaleDateString("fr-FR");}
 function jbEscapeHTML(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");}
 function jbRenderInvestments(investments){
