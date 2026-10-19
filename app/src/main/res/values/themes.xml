@@ -1,0 +1,13 @@
+<resources>
+    <style name="Theme.JasonBusiness" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#0b1425</item>
+        <item name="android:statusBarColor">#050914</item>
+        <item name="android:navigationBarColor">#050914</item>
+        <item name="android:windowBackground">#050914</item>
+    </style>
+    <style name="Theme.JasonBusiness.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">#050914</item>
+    </style>
+</resources>
