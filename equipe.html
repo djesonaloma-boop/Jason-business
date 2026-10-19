@@ -6,64 +6,75 @@
 <meta name="theme-color" content="#050a14">
 <title>JASON BUSINESS - CARTE DE MEMBRE</title>
 <style>
-:root{--blue:#00d2ff;--dark:#050a14;--gold:#ffd700;--green:#00e676}
+:root{--blue:#00d2ff;--blue2:#0077ff;--dark:#050a14;--gold:#ffd700;--green:#00e676;--red:#ff4757;--glass:rgba(255,255,255,.06);--border:rgba(255,255,255,.10);--text:#fff;--muted:#b5c5da}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#050a14 url('IMG_0870.jpeg') center/cover fixed;color:#fff;padding-bottom:110px;overflow-x:hidden}
-.overlay{min-height:100vh;padding:16px;background:rgba(5,10,20,.94)}
-.container{max-width:700px;margin:auto}
-.top-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.brand{color:var(--blue);font-weight:900;letter-spacing:2px;font-size:14px}
-.online{font-size:10px;color:var(--green);padding:6px 10px;border-radius:20px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.25)}
-.page-title{text-align:center;font-size:21px;margin:10px 0;line-height:1.2}.page-title span{display:block;color:var(--blue);font-size:11px;letter-spacing:3px;margin-top:5px}
-.subtitle{text-align:center;font-size:10px;opacity:.6;margin-bottom:18px;line-height:1.6}
+body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--dark) url('IMG_0870.jpeg') no-repeat center center fixed;background-size:cover;color:#fff;padding-bottom:110px;overflow-x:hidden}
+.overlay{min-height:100vh;padding:16px;background:radial-gradient(ellipse at 10% 0%,rgba(0,210,255,.10),transparent 42%),rgba(5,10,20,.93)}
+.container{width:100%;max-width:680px;margin:auto}
+.top-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.brand{color:var(--blue);font-size:15px;font-weight:900;letter-spacing:2px}
+.online{font-size:10px;color:var(--green);padding:7px 11px;border-radius:20px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.25)}
+.page-title{text-align:center;font-size:22px;letter-spacing:2px;margin:10px 0 6px}.page-title span{display:block;color:var(--blue);font-size:11px;letter-spacing:4px;margin-top:6px}
+.subtitle{text-align:center;font-size:11px;color:var(--muted);margin-bottom:16px;line-height:1.6}
 
-/* HERO */
-.hero-cards{display:flex;flex-direction:column;align-items:center;gap:14px;margin:18px 0}
-.hero-label{font-size:11px;font-weight:900;letter-spacing:1px;color:var(--blue)}
-.btn-create{padding:14px 26px;border-radius:14px;border:0;background:linear-gradient(120deg,#00d2ff,#0077ff);color:white;font-weight:900;font-size:12px;cursor:pointer;box-shadow:0 8px 25px rgba(0,210,255,.25)}
-.btn-create:active{transform:scale(.97)}
+/* BOUTON CREER MA CARTE - NOUVEAU */
+.hero-top{margin:16px 0 20px;padding:18px;border-radius:20px;background:linear-gradient(135deg,rgba(0,210,255,.12),rgba(0,0,0,.6));border:1px solid rgba(0,210,255,.25);text-align:center}
+.hero-cards-demo{display:flex;justify-content:center;gap:12px;margin:12px 0;flex-wrap:wrap}
+.mini-card{width:130px;height:82px;border-radius:8px;background:linear-gradient(135deg,#0a1a35,#102a5c);border:1px solid rgba(0,210,255,.3);display:grid;place-items:center;font-size:7px;color:white}
+.btn-creer{margin-top:12px;padding:14px 24px;border-radius:14px;border:0;background:linear-gradient(120deg,#00d2ff,#0077ff);color:white;font-weight:900;font-size:12px;cursor:pointer;box-shadow:0 8px 25px rgba(0,210,255,.3)}
+.btn-creer:active{transform:scale(.97)}
 
-/* CARTES */
-.id-card{width:100%;max-width:360px;aspect-ratio:1.6/1;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 12px 35px rgba(0,0,0,.6)}
-.front-top{height:28px;background:linear-gradient(90deg,#00d2ff,#0077ff);display:flex;align-items:center;justify-content:space-between;padding:0 10px;color:#001018;font-weight:900;font-size:7.5px;letter-spacing:.5px}
-.front-body{display:flex;flex:1;padding:8px 10px;gap:10px}
-.front-photo{width:68px;height:78px;border-radius:8px;background:#111;border:2px solid rgba(255,255,255,.2);overflow:hidden;flex-shrink:0;display:grid;place-items:center;font-size:8px;color:#fff}
-.front-photo img{width:100%;height:100%;object-fit:cover}
-.front-infos{flex:1;min-width:0;display:flex;flex-direction:column;gap:2.2px}
-.f-row{font-size:7px;line-height:1.3;display:flex;gap:3px}.f-row b{color:#6ec6ff;min-width:42px;font-size:6.5px;text-transform:uppercase}.f-row span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:800;color:#e8f0ff;text-transform:uppercase}
-.f-row.big span{font-size:8.5px;font-weight:900}
-.front-qr{position:absolute;right:8px;bottom:30px;width:54px;height:54px;background:white;border-radius:6px;padding:3px;display:grid;place-items:center}
-.front-bottom{height:24px;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:space-between;padding:0 8px;font-size:6px;border-top:1px solid rgba(255,255,255,.08)}
+.jb-card-form{margin:14px 0;padding:18px;border-radius:20px;background:linear-gradient(145deg,rgba(0,210,255,.10),rgba(5,10,20,.75));border:1px solid rgba(0,210,255,.22);backdrop-filter:blur(18px)}
+.jb-title{font-size:11px;font-weight:900;letter-spacing:1px;color:var(--blue);margin-bottom:12px;text-transform:uppercase}
+.jb-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.jb-field{margin-bottom:10px}.jb-field label{display:block;font-size:9px;color:var(--muted);margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.jb-input{width:100%;padding:11px;border-radius:11px;border:1px solid rgba(255,255,255,.10);background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));color:white;outline:none;font-size:12px;text-transform:uppercase}
+.jb-input::placeholder{text-transform:none;opacity:.5}
+.jb-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,210,255,.08)}
+
+.card-preview-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;margin:18px 0}
+.id-card{
+  width:100%;max-width:340px;aspect-ratio:85.6/53.98;
+  border-radius:12px;overflow:hidden;position:relative;
+  background:linear-gradient(135deg,#0a1a35 0%,#102a5c 25%,#0d213f 50%,#091a33 100%);
+  border:1px solid rgba(0,210,255,.35);
+  box-shadow:0 10px 30px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.08) inset,0 0 25px rgba(0,210,255,.15);
+  color:white;display:flex;flex-direction:column;
+}
+.id-top{height:38px;background:linear-gradient(90deg,#00d2ff,#0077ff);display:flex;align-items:center;justify-content:space-between;padding:0 12px;color:#001018;font-weight:900;font-size:9px;letter-spacing:.5px}
+.id-body{display:flex;flex:1;padding:8px 10px;gap:10px}
+.id-photo{width:74px;height:86px;border-radius:8px;background:#000;border:2px solid rgba(255,255,255,.15);overflow:hidden;flex-shrink:0;display:grid;place-items:center;font-size:9px;color:#fff}
+.id-photo img{width:100%;height:100%;object-fit:cover}
+.id-infos{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.id-row{font-size:7.5px;line-height:1.3;display:flex;gap:4px}.id-row b{color:var(--blue);min-width:42px;font-size:7px;text-transform:uppercase;opacity:.9}.id-row span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:800;color:#e8f0ff;text-transform:uppercase}
+.id-row.big span{font-size:8.5px;font-weight:900}
+.id-bottom{height:28px;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:6.5px;border-top:1px solid rgba(255,255,255,.08)}
+.id-qr{position:absolute;right:8px;bottom:32px;width:52px;height:52px;background:white;border-radius:6px;padding:3px;display:grid;place-items:center}
+.id-qr canvas,.id-qr img{width:100%!important;height:100%!important}
+.id-card.back{background:linear-gradient(135deg,#eef2f9 0%,#ffffff 100%);color:#0b1220;padding:0;display:flex;flex-direction:column}
 .back-top{height:22px;background:#0a1935;display:flex;align-items:center;justify-content:center;color:white;font-size:6.5px;font-weight:900;letter-spacing:1.5px}
-.back-body{padding:8px 10px;flex:1;display:flex;flex-direction:column;gap:5px}
-.back-cond{font-size:5.5px;line-height:1.45;color:#1a2a4a}.back-cond b{color:#0a1935}
-.back-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.back-item{font-size:6px}.back-item b{display:block;color:#5a6a85;font-size:5.5px;text-transform:uppercase;margin-bottom:1px}.back-item span{font-size:7.5px;font-weight:900;color:#0a1935;text-transform:uppercase}
-.sig-box{border-top:1px solid #0a1935;width:88px;margin-top:6px;padding-top:3px}
-.sig-text{font-family:'Brush Script MT','Segoe Script',cursive;font-size:15px;color:#0a1935;transform:rotate(-3deg)}
-.back-footer{margin-top:auto;display:flex;justify-content:space-between;align-items:center;background:rgba(10,25,53,.06);border-radius:6px;padding:5px 8px;font-size:5.5px;text-transform:uppercase}
+.back-body{padding:8px 10px;flex:1;display:flex;flex-direction:column;gap:6px}
+.back-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:6.5px}
+.back-item{background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.06);border-radius:6px;padding:6px}
+.back-item b{display:block;color:#5a6a85;font-size:5.5px;margin-bottom:2px;text-transform:uppercase}
+.back-item span{font-size:7px;font-weight:900;color:#0a1935;text-transform:uppercase}
+.sig-box{border-top:1px solid #0a1935;width:85px;margin-top:5px;padding-top:2px}
+.sig-text{font-family:'Brush Script MT','Segoe Script',cursive;font-size:14px;color:#0a1935;transform:rotate(-3deg);text-transform:none}
+.back-footer{margin-top:auto;background:rgba(10,25,53,.06);border-radius:6px;padding:5px 8px;display:flex;justify-content:space-between;font-size:5.5px;text-transform:uppercase}
 .back-line{height:5px;background:linear-gradient(90deg,#0077ff,#00d2ff,#ffd700)}
 
-/* FORM */
-.form-card{padding:16px;border-radius:18px;background:linear-gradient(145deg,rgba(0,210,255,.10),rgba(5,10,20,.85));border:1px solid rgba(0,210,255,.22);margin:22px 0}
-.form-title{font-size:11px;font-weight:900;color:var(--blue);margin-bottom:12px;letter-spacing:1px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.field{margin-bottom:9px}.field label{font-size:8px;color:#b5c5da;display:block;margin-bottom:4px;font-weight:800;text-transform:uppercase;letter-spacing:.5px}
-.input{width:100%;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:white;font-size:12px;outline:none;text-transform:uppercase}
-.input::placeholder{text-transform:none;opacity:.5}
-.input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,210,255,.08)}
-.btn{width:100%;padding:12px;border-radius:12px;border:0;font-weight:900;font-size:11px;cursor:pointer;margin-top:6px}
-.btn-blue{color:#001018;background:linear-gradient(120deg,var(--blue),#00a8ff)}
-.btn-gold{color:#151000;background:linear-gradient(120deg,#ffd700,#ffeb80)}
-.btn-green{color:#001a08;background:linear-gradient(120deg,#00e676,#00c853)}
-.btn-dark{background:rgba(255,255,255,.08);color:white;border:1px solid rgba(255,255,255,.12)}
-.btn:active{transform:scale(.97)}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.invite-card{padding:16px;border-radius:18px;background:linear-gradient(145deg,rgba(0,210,255,.16),rgba(0,0,0,.68));border:1px solid rgba(0,210,255,.48);text-align:center;margin-top:16px}
-.code-display{margin:10px 0;color:var(--blue);font-size:20px;font-weight:900;letter-spacing:2px;text-transform:uppercase}
-.navbar{position:fixed;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:10px 0 calc(10px + env(safe-area-inset-bottom));background:rgba(5,10,20,.97);border-top:1px solid rgba(0,210,255,.24)}
-.nav-link{flex:1;text-align:center;text-decoration:none;color:white;opacity:.48;font-size:10px}.nav-link.active{color:var(--blue);opacity:1;font-weight:bold}.nav-icon{font-size:18px}
-@media(max-width:400px){.grid2{grid-template-columns:1fr}}
+.jb-btn{width:100%;padding:12px;border-radius:12px;border:0;font-weight:900;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px}
+.jb-btn:active{transform:scale(.97)}
+.jb-btn-gold{color:#151000;background:linear-gradient(120deg,#ffd700,#ffeb80,#ffd700)}
+.jb-btn-blue{color:#001018;background:linear-gradient(120deg,var(--blue),#00a8ff)}
+.jb-btn-green{color:#001a08;background:linear-gradient(120deg,#00e676,#00c853)}
+.jb-btn-dark{background:rgba(255,255,255,.06);color:white;border:1px solid rgba(255,255,255,.1)}
+.jb-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.invite-card{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(0,210,255,.16),rgba(0,0,0,.68));border:1px solid rgba(0,210,255,.48);border-radius:20px;padding:18px;text-align:center;margin-top:14px}
+.code-display{margin:10px 0;color:var(--blue);font-size:22px;font-weight:900;letter-spacing:2px;word-break:break-all;text-transform:uppercase}
+.navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:10px 0 calc(10px + env(safe-area-inset-bottom));background:rgba(5,10,20,.97);border-top:1px solid rgba(0,210,255,.24);backdrop-filter:blur(18px)}
+.nav-link{min-width:55px;flex:1;text-align:center;text-decoration:none;color:white;opacity:.48;font-size:10px}.nav-link.active{color:var(--blue);opacity:1;font-weight:bold}.nav-icon{font-size:19px;margin-bottom:4px}
+@media(max-width:400px){.jb-grid2{grid-template-columns:1fr}.id-card{max-width:320px}}
 </style>
 </head>
 <body>
@@ -72,119 +83,109 @@ body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#050a14 url('IM
 
 <div class="top-header"><div class="brand">JASON BUSINESS</div><div class="online">● EN LIGNE</div></div>
 <h1 class="page-title">CARTE DE MEMBRE<span>JASON BUSINESS - OFFICIELLE</span></h1>
-<div class="subtitle">CARTE D'IDENTITÉ MEMBRE PRO - TOUT EN MAJUSCULES - AVEC QR CODE PARRAINAGE</div>
+<div class="subtitle">CARTE D'IDENTITÉ MEMBRE - TOUT EN MAJUSCULES - TÉLÉCHARGEABLE</div>
 
-<!-- HERO EXEMPLE COMME IMAGE -->
-<div class="hero-cards">
-<div class="hero-label">APERÇU CARTE DE MEMBRE JASON BUSINESS</div>
-<div class="id-card" style="background:linear-gradient(135deg,#0f2a5e,#123a7a,#0a2147);color:white;display:flex;flex-direction:column">
-<div style="height:28px;background:linear-gradient(90deg,#00d2ff,#0077ff);display:flex;align-items:center;justify-content:space-between;padding:0 10px;color:#001018;font-weight:900;font-size:7.5px"><span>🇨🇩 CARTE DE MEMBRE - JASON BUSINESS</span><span>RDC</span></div>
-<div style="display:flex;flex:1;padding:8px 10px;gap:10px">
-<div style="width:68px;height:78px;border-radius:8px;background:#000;border:2px solid rgba(255,255,255,.2);overflow:hidden"><img src="https://i.pravatar.cc/100?img=15" style="width:100%;height:100%;object-fit:cover"></div>
-<div style="flex:1;display:flex;flex-direction:column;gap:2px;font-size:7px">
-<div><b style="color:#6ec6ff">NOM:</b> EBUNDI</div><div><b style="color:#6ec6ff">POST-NOM:</b> ALOMA</div><div><b style="color:#6ec6ff">PRÉNOM:</b> JASON</div><div><b style="color:#6ec6ff">SEXE:</b> M <b style="color:#6ec6ff;margin-left:5px">NÉ LE:</b> 10/09/2007</div><div><b style="color:#6ec6ff">TÉL:</b> <span style="color:#00d2ff">+243 812 345 678</span></div><div><b style="color:#6ec6ff">PROVINCE:</b> MONGALA</div>
+<!-- HERO AVEC BOUTON CREER MA CARTE -->
+<div class="hero-top">
+<div style="font-size:11px;font-weight:900;color:var(--blue);letter-spacing:1px">APERÇU CARTE DE MEMBRE</div>
+<div class="hero-cards-demo">
+<div class="mini-card">RECTO<br>🇨🇩 JASON BUSINESS<br>PHOTO + QR CODE</div>
+<div class="mini-card" style="background:linear-gradient(135deg,#eef2f9,#fff);color:#0a1935">VERSO<br>SIGNATURE<br>CONDITIONS</div>
 </div>
-<div style="position:absolute;right:8px;bottom:30px;width:54px;height:54px;background:white;border-radius:6px;padding:3px;display:grid;place-items:center;color:black;font-size:6px">QR CODE</div>
-</div>
-<div style="height:24px;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:space-between;padding:0 8px;font-size:6px"><span>CODE: <b style="color:#00d2ff">JASON-3359</b></span><span>N° JB-2026-719293 • EXP: 2029</span></div>
-</div>
-<div class="id-card" style="background:linear-gradient(135deg,#eef2f9,#fff);color:#0b1220;display:flex;flex-direction:column">
-<div style="height:22px;background:#0a1935;display:flex;align-items:center;justify-content:center;color:white;font-size:6.5px;font-weight:900;letter-spacing:1.5px">JASON BUSINESS • RÉPUBLIQUE DÉMOCRATIQUE DU CONGO</div>
-<div style="padding:8px 10px;flex:1;display:flex;flex-direction:column;gap:5px">
-<div style="font-size:5.5px;line-height:1.4"><b>CONDITIONS:</b> CARTE PROPRIÉTÉ DE JASON BUSINESS. PERSONNELLE ET INCESSIBLE. PERTE = CONTACTER SERVICE. FALSIFICATION PUNIE PAR LA LOI.</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><div style="font-size:5.5px;color:#5a6a85">DATE D'ÉMISSION</div><div style="font-size:7.5px;font-weight:900">19/10/2026</div><div style="margin-top:8px;border-top:1px solid #0a1935;width:80px;padding-top:2px;font-size:5px">SIGNATURE TITULAIRE</div></div><div><div style="font-size:5.5px;color:#5a6a85">VALIDITÉ</div><div style="font-size:7.5px;font-weight:900">3 ANS - 2029</div><div style="margin-top:6px"><div style="font-size:5px">SIGNATURE JASON BUSINESS</div><div style="font-family:'Brush Script MT',cursive;font-size:14px;transform:rotate(-3deg)">Jason Business</div></div></div></div>
-<div style="margin-top:auto;background:rgba(10,25,53,.06);border-radius:6px;padding:5px 8px;display:flex;justify-content:space-between;font-size:5.5px"><span>KINSHASA, GOMBE<br>CONTACT@JASONBUSINESS.CD</span><span style="text-align:right"><b>N° JB-2026-719293</b><br><span style="color:green">MEMBRE OFFICIEL ✓</span></span></div>
-</div><div style="height:5px;background:linear-gradient(90deg,#0077ff,#00d2ff,#ffd700)"></div>
-</div>
-<button class="btn-create" onclick="document.getElementById('formSection').scrollIntoView({behavior:'smooth'})">✨ CRÉER MA CARTE DE MEMBRE ↓</button>
+<button class="btn-creer" onclick="document.getElementById('formSection').scrollIntoView({behavior:'smooth'})">✨ CRÉER MA CARTE DE MEMBRE ↓</button>
+<div style="font-size:8px;opacity:.5;margin-top:8px">CLIQUE POUR ALLER DIRECT AU FORMULAIRE</div>
 </div>
 
-<!-- FORMULAIRE COMPLET -->
-<div class="form-card" id="formSection">
-<div class="form-title">📝 FORMULAIRE CARTE DE MEMBRE - TOUT EN MAJUSCULES</div>
-<div class="grid2">
-<div class="field"><label>Photo de profil *</label><input type="file" id="photoInput" accept="image/*" class="input" style="text-transform:none"></div>
-<div class="field"><label>Code parrainage (auto)</label><input id="codeInput" class="input" readonly style="text-transform:uppercase"></div>
+<!-- FORMULAIRE -->
+<div class="jb-card-form" id="formSection">
+<div class="jb-title">📝 FORMULAIRE CARTE DE MEMBRE - TOUT EN MAJUSCULES</div>
+<div class="jb-grid2">
+<div class="jb-field"><label>Photo de profil *</label><input type="file" id="photoInput" accept="image/*" class="jb-input" style="text-transform:none"></div>
+<div class="jb-field"><label>Code parrainage (auto)</label><input id="codeInput" class="jb-input" readonly></div>
 </div>
-<div class="grid2">
-<div class="field"><label>Nom *</label><input id="nom" class="input" placeholder="ALOMA"></div>
-<div class="field"><label>Post-nom *</label><input id="postnom" class="input" placeholder="EBUNDI"></div>
+<div class="jb-grid2">
+<div class="jb-field"><label>Nom *</label><input id="nom" class="jb-input" placeholder="ALOMA"></div>
+<div class="jb-field"><label>Post-nom *</label><input id="postnom" class="jb-input" placeholder="EBUNDI"></div>
 </div>
-<div class="grid2">
-<div class="field"><label>Prénom *</label><input id="prenom" class="input" placeholder="JASON"></div>
-<div class="field"><label>Sexe *</label><select id="sexe" class="input"><option value="M">MASCULIN</option><option value="F">FÉMININ</option></select></div>
+<div class="jb-grid2">
+<div class="jb-field"><label>Prénom *</label><input id="prenom" class="jb-input" placeholder="JASON"></div>
+<div class="jb-field"><label>Sexe *</label><select id="sexe" class="jb-input"><option value="M">MASCULIN</option><option value="F">FÉMININ</option></select></div>
 </div>
-<div class="grid2">
-<div class="field"><label>Lieu naissance *</label><input id="lieuNaiss" class="input" placeholder="KINSHASA"></div>
-<div class="field"><label>Date naissance *</label><input id="dateNaiss" type="date" class="input" style="text-transform:none"></div>
+<div class="jb-grid2">
+<div class="jb-field"><label>Lieu de naissance *</label><input id="lieuNaiss" class="jb-input" placeholder="KINSHASA"></div>
+<div class="jb-field"><label>Date de naissance *</label><input id="dateNaiss" type="date" class="jb-input" style="text-transform:none"></div>
 </div>
-<div class="field"><label>Numéro téléphone * (OBLIGATOIRE)</label><input id="telephone" class="input" placeholder="+243 812 345 678" style="text-transform:none"></div>
-<div class="field"><label>Adresse complète *</label><input id="adresse" class="input" placeholder="AV. LIBERATION N°12, GOMBE"></div>
-<div class="grid2">
-<div class="field"><label>Nationalité *</label><input id="nationalite" class="input" value="CONGOLAISE"></div>
-<div class="field"><label>Province *</label><input id="province" class="input" placeholder="MONGALA"></div>
+<div class="jb-field"><label>Numéro téléphone * (OBLIGATOIRE)</label><input id="telephone" class="jb-input" placeholder="+243 812 345 678" style="text-transform:none"></div>
+<div class="jb-field"><label>Adresse complète *</label><input id="adresse" class="jb-input" placeholder="AV. LIBERATION N°12, GOMBE"></div>
+<div class="jb-grid2">
+<div class="jb-field"><label>Nationalité *</label><input id="nationalite" class="jb-input" value="CONGOLAISE"></div>
+<div class="jb-field"><label>Province *</label><input id="province" class="jb-input" placeholder="MONGALA"></div>
 </div>
-<div class="grid2">
-<div class="field"><label>Territoire / Commune *</label><input id="territoire" class="input" placeholder="GOMBE"></div>
-<div class="field"><label>Capitaine / Chef lieu</label><input id="capitaine" class="input" placeholder="KINSHASA CAPITALE"></div>
+<div class="jb-grid2">
+<div class="jb-field"><label>Territoire / Commune *</label><input id="territoire" class="jb-input" placeholder="GOMBE"></div>
+<div class="jb-field"><label>Capitaine / Chef lieu</label><input id="capitaine" class="jb-input" placeholder="KINSHASA CAPITALE"></div>
 </div>
-<div class="field"><label>Profession / Poste *</label><input id="poste" class="input" placeholder="ENTREPRENEUR - JASON BUSINESS"></div>
-<button class="btn btn-blue" id="generateCardBtn">✨ GÉNÉRER MA CARTE DE MEMBRE (MAJUSCULES)</button>
-<div style="font-size:8px;opacity:.5;text-align:center;margin-top:6px">TOUT SERA AUTOMATIQUEMENT EN MAJUSCULES COMME VRAIE CARTE D'ÉTAT</div>
+<div class="jb-field"><label>Profession / Poste *</label><input id="poste" class="jb-input" placeholder="ENTREPRENEUR - JASON BUSINESS"></div>
+<button class="jb-btn jb-btn-blue" id="generateCardBtn">✨ GÉNÉRER MA CARTE DE MEMBRE (MAJUSCULES)</button>
+<div style="font-size:8px;color:var(--muted);margin-top:8px;text-align:center">TOUT SERA EN MAJUSCULES COMME VRAIE CARTE D'ÉTAT RDC</div>
 </div>
 
-<!-- CARTES GÉNÉRÉES -->
-<div class="hero-cards" id="cardPreviewWrap" style="display:none">
-<div class="hero-label">RECTO - CARTE DE MEMBRE (TÉLÉCHARGE SEULEMENT ÇA)</div>
+<!-- PREVIEW CARTES -->
+<div class="card-preview-wrap" id="cardPreviewWrap" style="display:none">
+<div style="font-size:11px;font-weight:900;color:var(--blue);letter-spacing:1px">RECTO - CARTE DE MEMBRE (TÉLÉCHARGE SEULEMENT ÇA)</div>
 <div class="id-card" id="cardFront">
-<div class="front-top"><span>🇨🇩 CARTE DE MEMBRE - JASON BUSINESS</span><span>RDC</span></div>
-<div class="front-body">
-<div class="front-photo" id="cardPhoto">PHOTO</div>
-<div class="front-infos">
-<div class="f-row big"><b>Nom:</b><span id="cNom">ALOMA</span></div>
-<div class="f-row"><b>Post-nom:</b><span id="cPostnom">EBUNDI</span></div>
-<div class="f-row"><b>Prénom:</b><span id="cPrenom">JASON</span></div>
-<div class="f-row"><b>Sexe:</b><span id="cSexe">M</span><b style="margin-left:6px">Né le:</b><span id="cDateNaiss">10/09/2007</span></div>
-<div class="f-row"><b>Lieu:</b><span id="cLieuNaiss">KINSHASA</span></div>
-<div class="f-row"><b>Nationalité:</b><span id="cNationalite">CONGOLAISE</span></div>
-<div class="f-row"><b>Tél:</b><span id="cTelephone" style="color:#00d2ff">+243 812 345 678</span></div>
-<div class="f-row"><b>Adresse:</b><span id="cAdresse">AV.YOLO N°12B</span></div>
-<div class="f-row"><b>Province:</b><span id="cProvince">MONGALA</span></div>
-<div class="f-row"><b>Poste:</b><span id="cPoste" style="color:#ffd700">JASON-BUSINESS</span></div>
+<div class="id-top"><span>🇨🇩 CARTE DE MEMBRE - JASON BUSINESS</span><span style="font-size:8px">RDC</span></div>
+<div class="id-body">
+<div class="id-photo" id="cardPhoto">PHOTO</div>
+<div class="id-infos">
+<div class="id-row big"><b>Nom:</b><span id="cNom">ALOMA</span></div>
+<div class="id-row"><b>Post-nom:</b><span id="cPostnom">EBUNDI</span></div>
+<div class="id-row"><b>Prénom:</b><span id="cPrenom">JASON</span></div>
+<div class="id-row"><b>Sexe:</b><span id="cSexe">M</span><b style="margin-left:8px">Né le:</b><span id="cDateNaiss">10/09/2007</span></div>
+<div class="id-row"><b>Lieu:</b><span id="cLieuNaiss">KINSHASA</span></div>
+<div class="id-row"><b>Nationalité:</b><span id="cNationalite">CONGOLAISE</span></div>
+<div class="id-row"><b>Tél:</b><span id="cTelephone" style="color:var(--blue)">+243 812 345 678</span></div>
+<div class="id-row"><b>Adresse:</b><span id="cAdresse">AV.YOLO N°12B, GOMBE</span></div>
+<div class="id-row"><b>Province:</b><span id="cProvince">MONGALA</span></div>
+<div class="id-row"><b>Poste:</b><span id="cPoste" style="color:var(--gold)">JASON-BUSINESS</span></div>
 </div>
-<div class="front-qr" id="qrFront"></div>
+<div class="id-qr" id="qrFront"></div>
 </div>
-<div class="front-bottom"><span>CODE: <b id="cCode" style="color:#00d2ff">JASON-3359</b></span><span>N° <span id="cNumber">JB-2026-001234</span> • EXP: 2029</span></div>
+<div class="id-bottom"><span>CODE: <b id="cCode" style="color:var(--blue)">JASON-3359</b></span><span>N° <span id="cNumber">JB-2026-001234</span> • EXP: 2029</span></div>
 </div>
 
-<div class="hero-label" style="color:var(--gold)">VERSO - SANS QR CODE, AVEC SIGNATURE</div>
-<div class="id-card" id="cardBack" style="background:linear-gradient(135deg,#eef2f9,#fff);color:#0b1220">
+<div style="font-size:11px;font-weight:900;color:var(--gold);letter-spacing:1px;margin-top:10px">VERSO - SANS QR CODE, AVEC SIGNATURE OFFICIELLE</div>
+<div class="id-card back" id="cardBack">
 <div class="back-top">JASON BUSINESS • RÉPUBLIQUE DÉMOCRATIQUE DU CONGO</div>
 <div class="back-body">
-<div class="back-cond"><b>CONDITIONS:</b> CETTE CARTE EST PROPRIÉTÉ DE JASON BUSINESS. STRICTEMENT PERSONNELLE ET INCESSIBLE. PERTE = CONTACTER SERVICE CLIENT. FALSIFICATION PUNIE PAR LA LOI.</div>
+<div style="font-size:5.5px;line-height:1.4;color:#1a2a4a"><b>CONDITIONS:</b> CETTE CARTE EST PROPRIÉTÉ DE JASON BUSINESS. STRICTEMENT PERSONNELLE ET INCESSIBLE. PERTE = CONTACTER SERVICE CLIENT. FALSIFICATION PUNIE PAR LA LOI.</div>
 <div class="back-grid">
-<div class="back-item"><b>Date d'émission</b><span id="cEmission">19/10/2026</span><div class="sig-box"><div style="font-size:5px;color:#5a6a85">SIGNATURE TITULAIRE</div><div style="height:18px"></div></div></div>
+<div class="back-item"><b>Date d'émission</b><span id="cEmission">19/10/2026</span><div class="sig-box"><div style="font-size:5px;color:#5a6a85">SIGNATURE TITULAIRE</div><div style="height:16px"></div></div></div>
 <div class="back-item"><b>Validité</b><span>3 ANS - 2029</span><div class="sig-box"><div style="font-size:5px;color:#5a6a85">SIGNATURE JASON BUSINESS</div><div class="sig-text">Jason Business</div></div></div>
+<div class="back-item" style="grid-column:span 2"><b>Téléphone</b><span id="cTel2" style="color:#0077ff">+243 812 345 678</span></div>
+<div class="back-item" style="grid-column:span 2"><b>Avantages membre</b><span>COMMISSIONS • POINTS • API • BOUTIQUE PRO</span></div>
 </div>
-<div class="back-footer"><span><b>JASON BUSINESS</b><br>TÉL: <span id="cTel2">+243...</span><br>KINSHASA, GOMBE</span><span style="text-align:right"><b>N° <span id="cNumber2">JB-2026-001234</span></b><br><span style="color:green">MEMBRE OFFICIEL ✓</span></span></div>
+<div class="back-footer"><span><b>JASON BUSINESS</b><br>KINSHASA, GOMBE</span><span style="text-align:right"><b>N° <span id="cNumber2">JB-2026-001234</span></b><br><span style="color:green">MEMBRE OFFICIEL ✓</span></span></div>
 </div>
 <div class="back-line"></div>
 </div>
-
-<div class="actions" id="downloadActions" style="display:none;width:100%;max-width:360px">
-<button class="btn btn-gold" id="downloadPngBtn">📸 TÉLÉCHARGER RECTO SEUL (ENCERCLÉ VERT)</button>
-<button class="btn btn-green" id="downloadPdfBtn">📄 PDF RECTO SEUL</button>
-</div>
-<div class="actions" id="downloadActions2" style="display:none;width:100%;max-width:360px">
-<button class="btn btn-dark" id="downloadVersoBtn">📸 TÉLÉCHARGER VERSO SEUL</button>
-<button class="btn btn-blue" id="downloadBothBtn">📦 TÉLÉCHARGER LES DEUX (PDF COMPLET)</button>
-</div>
 </div>
 
-<div class="invite-card">
-<div style="font-size:9px;opacity:.6">VOTRE CODE DE PARRAINAGE</div>
+<div class="jb-actions" id="downloadActions" style="display:none">
+<button class="jb-btn jb-btn-gold" id="downloadPngBtn">📸 TÉLÉCHARGER RECTO SEUL (ENCERCLÉ VERT)</button>
+<button class="jb-btn jb-btn-green" id="downloadPdfBtn">📄 PDF RECTO SEUL</button>
+</div>
+<div class="jb-actions" id="downloadActions2" style="display:none">
+<button class="jb-btn jb-btn-dark" id="downloadVersoBtn">📸 TÉLÉCHARGER VERSO SEUL</button>
+<button class="jb-btn jb-btn-blue" id="downloadBothBtn">📦 TÉLÉCHARGER LES DEUX (PDF COMPLET)</button>
+</div>
+</div>
+
+<div class="invite-card" style="margin-top:20px">
+<div style="font-size:10px;opacity:.6;text-transform:uppercase">Votre code de parrainage</div>
 <div id="jb_myCode" class="code-display">...</div>
-<button id="jb_btnCopy" class="btn btn-blue" style="margin-top:8px">📋 COPIER LIEN D'INVITATION</button>
+<button id="jb_btnCopy" class="jb-btn jb-btn-blue" style="margin-top:8px">📋 COPIER LE LIEN D'INVITATION</button>
+<div id="jb_copyStatus" style="display:none;color:var(--green);font-size:11px;margin-top:8px;font-weight:bold">✅ Lien copié!</div>
 </div>
 
 </div>
@@ -208,7 +209,7 @@ const app=getApps().length?getApp():initializeApp(cfg);
 const db=getDatabase(app);
 const $=id=>document.getElementById(id);
 let inviteCode="",photoB64="";
-const phone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("phone")||"";
+const phone=localStorage.getItem("userPhone")||localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("phone")||"";
 if(phone){
 const userRef=ref(db,`jasonBusiness/users/${phone}`);
 onValue(userRef,s=>{
@@ -218,28 +219,25 @@ inviteCode=d.inviteCode||d.referralCode||d.codeParrainage||("JASON-"+phone.repla
 $("jb_myCode").innerText=inviteCode.toUpperCase();
 $("codeInput").value=inviteCode.toUpperCase();
 const saved=JSON.parse(localStorage.getItem("jasonCarteData")||"{}");
-if(saved.nom){$("nom").value=saved.nom; $("postnom").value=saved.postnom; $("prenom").value=saved.prenom; $("sexe").value=saved.sexe; $("lieuNaiss").value=saved.lieuNaiss; $("dateNaiss").value=saved.dateNaiss; $("telephone").value=saved.telephone; $("adresse").value=saved.adresse; $("nationalite").value=saved.nationalite; $("province").value=saved.province; $("territoire").value=saved.territoire; $("capitaine").value=saved.capitaine; $("poste").value=saved.poste;}
+if(saved.nom){$("nom").value=saved.nom; $("postnom").value=saved.postnom; $("prenom").value=saved.prenom; $("sexe").value=saved.sexe; $("lieuNaiss").value=saved.lieuNaiss; $("dateNaiss").value=saved.dateNaiss; $("telephone").value=saved.telephone||""; $("adresse").value=saved.adresse; $("nationalite").value=saved.nationalite; $("province").value=saved.province; $("territoire").value=saved.territoire; $("capitaine").value=saved.capitaine; $("poste").value=saved.poste;}
 if(saved.photo){photoB64=saved.photo; $("cardPhoto").innerHTML=`<img src="${saved.photo}">`;}
 });
 }
-
 // FORCE MAJUSCULES
 ["nom","postnom","prenom","lieuNaiss","adresse","nationalite","province","territoire","capitaine","poste"].forEach(id=>{
 const el=$(id);
-if(el) el.addEventListener("input",()=>{ el.value=el.value.toUpperCase(); });
+if(el) el.addEventListener("input",()=>{el.value=el.value.toUpperCase();});
 });
-
 $("photoInput").addEventListener("change",e=>{
 const f=e.target.files[0];if(!f)return;
 const r=new FileReader();
 r.onload=ev=>{photoB64=ev.target.result; $("cardPhoto").innerHTML=`<img src="${photoB64}">`;};
 r.readAsDataURL(f);
 });
-
 $("generateCardBtn").addEventListener("click",()=>{
 const nom=$("nom").value.trim().toUpperCase(),postnom=$("postnom").value.trim().toUpperCase(),prenom=$("prenom").value.trim().toUpperCase(),sexe=$("sexe").value.toUpperCase(),lieu=$("lieuNaiss").value.trim().toUpperCase(),date=$("dateNaiss").value,adresse=$("adresse").value.trim().toUpperCase(),nat=$("nationalite").value.trim().toUpperCase(),prov=$("province").value.trim().toUpperCase(),terr=$("territoire").value.trim().toUpperCase(),cap=$("capitaine").value.trim().toUpperCase(),poste=$("poste").value.trim().toUpperCase(),tel=$("telephone").value.trim();
 if(!nom||!postnom||!prenom||!lieu||!date||!adresse||!prov||!terr||!poste||!tel){alert("❌ REMPLIS TOUS LES CHAMPS * Y COMPRIS TÉLÉPHONE - TOUT EN MAJUSCULES!");return;}
-if(!photoB64){alert("❌ AJOUTE TA PHOTO DE PROFIL!");return;}
+if(!photoB64){alert("❌ AJOUTE TA PHOTO!");return;}
 const data={nom,postnom,prenom,sexe,lieuNaiss:lieu,dateNaiss:date,telephone:tel,adresse,nationalite:nat,province:prov,territoire:terr,capitaine:cap,poste,photo:photoB64,code:inviteCode};
 localStorage.setItem("jasonCarteData",JSON.stringify(data));
 $("cNom").innerText=nom;
@@ -266,7 +264,6 @@ $("downloadActions").style.display="grid";
 $("downloadActions2").style.display="grid";
 $("cardPreviewWrap").scrollIntoView({behavior:"smooth"});
 });
-
 async function dl(id,name){
 const el=$(id);
 const canvas=await html2canvas(el,{scale:4,backgroundColor:null,useCORS:true});
@@ -275,14 +272,14 @@ a.download=name;
 a.href=canvas.toDataURL("image/png");
 a.click();
 }
-$("downloadPngBtn").addEventListener("click",()=>dl("cardFront",`JASON-CARTE-MEMBRE-RECTO-${inviteCode}.png`));
-$("downloadVersoBtn").addEventListener("click",()=>dl("cardBack",`JASON-CARTE-MEMBRE-VERSO-${inviteCode}.png`));
+$("downloadPngBtn").addEventListener("click",()=>dl("cardFront",`CARTE-MEMBRE-RECTO-${inviteCode}.png`));
+$("downloadVersoBtn").addEventListener("click",()=>dl("cardBack",`CARTE-MEMBRE-VERSO-${inviteCode}.png`));
 $("downloadPdfBtn").addEventListener("click",async()=>{
 const {jsPDF}=window.jspdf;
 const c=await html2canvas($("cardFront"),{scale:4,backgroundColor:null,useCORS:true});
 const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:[86,54]});
 pdf.addImage(c.toDataURL("image/png"),"PNG",0,0,86,54);
-pdf.save(`JASON-CARTE-MEMBRE-RECTO-${inviteCode}.pdf`);
+pdf.save(`CARTE-MEMBRE-RECTO-${inviteCode}.pdf`);
 });
 $("downloadBothBtn").addEventListener("click",async()=>{
 const {jsPDF}=window.jspdf;
@@ -292,11 +289,11 @@ const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:[86,54]});
 pdf.addImage(c1.toDataURL("image/png"),"PNG",0,0,86,54);
 pdf.addPage([86,54],"landscape");
 pdf.addImage(c2.toDataURL("image/png"),"PNG",0,0,86,54);
-pdf.save(`JASON-CARTE-MEMBRE-COMPLETE-${inviteCode}.pdf`);
+pdf.save(`CARTE-MEMBRE-COMPLETE-${inviteCode}.pdf`);
 });
 $("jb_btnCopy").addEventListener("click",async()=>{
 const link=`${location.origin}/register.html?inviteCode=${encodeURIComponent(inviteCode)}`;
-try{await navigator.clipboard.writeText(link);alert("✅ LIEN COPIÉ: "+link);}catch{prompt("COPIE:",link);}
+try{await navigator.clipboard.writeText(link); $("jb_copyStatus").style.display="block"; setTimeout(()=>$("jb_copyStatus").style.display="none",3000);}catch{prompt("COPIE:",link);}
 });
 </script>
 </body>
