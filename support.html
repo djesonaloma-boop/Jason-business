@@ -2,70 +2,83 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050a14">
-<title>JASON BUSINESS - Support IA PRO</title>
+<title>JASON BUSINESS - Support IA & Humain</title>
 <style>
-:root{--blue:#00d2ff;--dark:#050a14;--gold:#ffd700;--green:#00e676;--red:#ff4757;--panel:#0b1425}
-*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--dark) url('IMG_0870.jpeg') no-repeat center center fixed;background-size:cover;color:white;padding-bottom:95px}
-.overlay{min-height:100vh;background:rgba(5,10,20,.93);padding:20px}.container{width:100%;max-width:700px;margin:auto}
-.top-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.brand{color:var(--blue);font-size:15px;font-weight:900;letter-spacing:2px}.online{font-size:10px;color:var(--green);padding:6px 10px;border-radius:20px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.25)}
-.user-bar{padding:12px 14px;border-radius:12px;background:linear-gradient(135deg,#0f213f,#0a1629);border:1px solid #00d4ff30;display:flex;justify-content:space-between;align-items:center;font-size:11px;margin-bottom:14px}
+:root{--blue:#00d2ff;--dark:#050a14;--gold:#ffd700;--green:#00e676}
+*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--dark) url('IMG_0870.jpeg') center/cover fixed;color:white;padding-bottom:95px}
+.overlay{min-height:100vh;background:rgba(5,10,20,.93);padding:16px}
+.container{max-width:700px;margin:auto}
+.top-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.brand{color:var(--blue);font-size:15px;font-weight:900;letter-spacing:2px}
+.online{font-size:9px;color:var(--green);padding:6px 10px;border-radius:20px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.25)}
+.admin-banner{display:none;padding:14px;border-radius:14px;background:linear-gradient(135deg,rgba(255,215,0,.15),rgba(255,215,0,.05));border:1px solid rgba(255,215,0,.35);margin-bottom:12px;align-items:center;gap:12px}
+.admin-banner.show{display:flex}
+.admin-avatar{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#ffd700,#ff9500);display:grid;place-items:center;font-size:22px;color:#000;font-weight:900}
+.user-bar{padding:12px 14px;border-radius:12px;background:linear-gradient(135deg,#0f213f,#0a1629);border:1px solid #00d4ff30;display:flex;justify-content:space-between;align-items:center;font-size:11px;margin-bottom:12px}
 .card{padding:16px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);margin-top:12px}
-.card h3{margin:0 0 8px;font-size:14px}
-.card p{font-size:11px;opacity:.7;line-height:1.6;margin:0}
 .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
 .price-item{padding:10px;border-radius:10px;background:rgba(0,210,255,.06);border:1px solid rgba(0,210,255,.15);font-size:10px}
-.price-item b{color:var(--blue);display:block;margin-bottom:3px;font-size:11px}
-.price-item span{color:var(--gold);font-weight:900}
-
-#chatbotBtn{position:fixed;bottom:85px;right:16px;width:62px;height:62px;border-radius:20px;background:linear-gradient(135deg,var(--blue),#0077ff);border:1px solid rgba(255,255,255,.3);color:white;font-size:26px;box-shadow:0 10px 30px rgba(0,210,255,.45);z-index:2000;cursor:pointer;animation:float 3s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.price-item b{color:var(--blue);display:block;margin-bottom:3px}
+.jason-human{padding:16px;border-radius:16px;background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(0,210,255,.08));border:1px solid rgba(255,215,0,.35);margin-top:14px;display:flex;gap:14px;align-items:center}
+.jason-human img{width:56px;height:56px;border-radius:14px;border:2px solid var(--gold);object-fit:cover;background:#000}
+#chatbotBtn{position:fixed;bottom:85px;right:16px;width:62px;height:62px;border-radius:20px;background:linear-gradient(135deg,var(--blue),#0077ff);border:1px solid rgba(255,255,255,.3);color:white;font-size:26px;box-shadow:0 10px 30px rgba(0,210,255,.45);z-index:2000;cursor:pointer}
 #chatbotBox{position:fixed;bottom:155px;right:16px;left:16px;max-width:420px;margin-left:auto;background:#0b1220;border:1px solid rgba(0,210,255,.2);border-radius:22px;box-shadow:0 20px 60px rgba(0,0,0,.7);z-index:2000;display:none;flex-direction:column;overflow:hidden;max-height:78vh}
 #chatbotBox.show{display:flex}
-.chat-head{padding:14px 16px;background:linear-gradient(135deg,rgba(0,210,255,.12),rgba(0,119,255,.08));border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center}
-.chat-messages{padding:12px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:10px;max-height:400px;scroll-behavior:smooth}
-.msg{padding:11px 13px;border-radius:16px;font-size:12px;line-height:1.6;max-width:88%;word-break:break-word;animation:msgIn .3s ease}
-@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.chat-head{padding:14px 16px;background:linear-gradient(135deg,rgba(0,210,255,.12),rgba(255,215,0,.08));border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center}
+.chat-messages{padding:12px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:10px;max-height:400px}
+.msg{padding:11px 13px;border-radius:16px;font-size:12px;line-height:1.6;max-width:88%;word-break:break-word}
 .msg.bot{background:linear-gradient(145deg,#142642,#0c1627);border:1px solid rgba(255,255,255,.08);align-self:flex-start}
 .msg.user{background:linear-gradient(110deg,var(--blue),#0077ff);color:#001018;align-self:flex-end;font-weight:700}
+.msg.admin{background:linear-gradient(145deg,#2a2410,#1a1600);border:1px solid rgba(255,215,0,.4);align-self:flex-start}
 .msg.quick{background:transparent;padding:0;display:flex;flex-wrap:wrap;gap:6px}
-.quick-btn{padding:8px 11px;border-radius:20px;border:1px solid rgba(0,210,255,.35);background:rgba(0,210,255,.10);color:var(--blue);font-size:10px;font-weight:800;cursor:pointer;transition:.2s}
-.quick-btn:active{transform:scale(.95)}
+.quick-btn{padding:8px 11px;border-radius:20px;border:1px solid rgba(0,210,255,.35);background:rgba(0,210,255,.10);color:var(--blue);font-size:10px;font-weight:800;cursor:pointer}
 .chat-input-area{display:flex;gap:8px;padding:10px;border-top:1px solid rgba(255,255,255,.08);background:#070d18}
 .chat-input-area input{flex:1;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0b1220;color:white;outline:none;font-size:12px}
-.chat-send{width:44px;height:44px;border-radius:12px;border:0;background:linear-gradient(135deg,var(--blue),#0077ff);color:white;font-weight:900;cursor:pointer;font-size:16px}
-.typing{opacity:.6;font-size:11px;font-style:italic}
-.navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:12px 0 calc(12px + env(safe-area-inset-bottom));background:rgba(5,10,20,.98);border-top:1px solid rgba(0,210,255,.28);backdrop-filter:blur(20px)}
+.chat-send{width:44px;height:44px;border-radius:12px;border:0;background:linear-gradient(135deg,var(--blue),#0077ff);color:white;font-weight:900;cursor:pointer}
+.navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:12px 0;background:rgba(5,10,20,.98);border-top:1px solid rgba(0,210,255,.28)}
 .nav-link{min-width:60px;text-align:center;text-decoration:none;color:white;opacity:.4;font-size:10px}.nav-link.active{color:var(--blue);opacity:1;font-weight:bold}.nav-icon{font-size:19px;margin-bottom:3px}
 </style>
 </head>
 <body>
 <div class="overlay"><div class="container">
-<div class="top-header"><div class="brand">JASON BUSINESS</div><div class="online">● IA PRO 24H/24 CONNECTÉE</div></div>
+<div class="top-header"><div class="brand">JASON BUSINESS</div><div class="online">● IA + JASON ALOMA 24H/24</div></div>
+
+<!-- ADMIN BANNER - S'AFFICHE SEULEMENT POUR JASON ALOMA -->
+<div class="admin-banner" id="adminBanner">
+  <div class="admin-avatar">👑</div>
+  <div><b style="color:var(--gold)">MODE ADMINISTRATEUR - JASON ALOMA</b><br><span style="font-size:10px;opacity:.7">Tu es le créateur! Accès total, statistiques, gestion clients. Bot te reconnait comme Boss.</span></div>
+</div>
 
 <div class="user-bar" id="userBar">
   <div><b id="uPhone">📱 Chargement...</b><br><span id="uSolde" style="opacity:.6">Solde: ...</span></div>
-  <div style="text-align:right"><b id="uVip" style="color:var(--gold)">VIP: ...</b><br><span style="color:var(--green)">● En ligne</span></div>
+  <div style="text-align:right"><b id="uVip" style="color:var(--gold)">VIP: ...</b><br><span id="uRole" style="font-size:9px;color:var(--blue)">Rôle: ...</span></div>
+</div>
+
+<!-- SUPPORT HUMAIN JASON ALOMA - RESTAURÉ -->
+<div class="jason-human">
+  <img src="https://raw.githubusercontent.com/djesonaloma-boop/Jason-business/principal/jason.png" onerror="this.style.background='linear-gradient(135deg,#ffd700,#ff9500)';this.textContent='JA'" alt="Jason">
+  <div style="flex:1">
+    <b style="color:var(--gold);font-size:13px">👑 JASON ALOMA - Fondateur & Support Humain</b><br>
+    <span style="font-size:10px;opacity:.7;line-height:1.5">Créateur de JASON BUSINESS. Expert WEB, DESIGN, DIGITAL, IA. Disponible pour accompagnement personnalisé, devis, problèmes urgents.</span>
+    <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+      <a href="https://wa.me/243847500590?text=Bonjour%20Jason%20Aloma%20%F0%9F%91%91%20Je%20suis%20sur%20JASON%20BUSINESS" target="_blank" style="padding:8px 12px;background:#22c55e;color:white;border-radius:20px;text-decoration:none;font-size:10px;font-weight:800">💬 WhatsApp Perso</a>
+      <a href="tel:+243847500590" style="padding:8px 12px;background:rgba(0,210,255,.12);border:1px solid rgba(0,210,255,.3);color:var(--blue);border-radius:20px;text-decoration:none;font-size:10px;font-weight:800">📞 Appeler Jason</a>
+      <button onclick="askIA('Je veux parler à Jason Aloma en personne')" style="padding:8px 12px;background:rgba(255,215,0,.12);border:1px solid rgba(255,215,0,.3);color:var(--gold);border-radius:20px;font-size:10px;font-weight:800;cursor:pointer">👑 Contacter Boss</button>
+    </div>
+  </div>
 </div>
 
 <div class="card">
-<h3>🤖 Support IA PRO - Je connais tout!</h3>
-<p>Je connais tous tes services, prix, VIP, dépôts, retraits, points. Je dirige le client automatiquement.</p>
+<h3>🤖 Support IA PRO - Je connais tous tes prix boss!</h3>
+<p>Je dirige le client, je donne prix exact, fonctionnalité, VIP. Si client bloqué → je propose Jason Aloma humain.</p>
 <div class="price-grid">
-  <div class="price-item"><b>🌐 Site Web</b><span>15 000 - 80 000 FC</span><br>Moderne, pro, livraison 3 jours</div>
-  <div class="price-item"><b>📱 Application</b><span>50 000 - 250 000 FC</span><br>Android, iOS, sur mesure</div>
-  <div class="price-item"><b>🚀 Créer une App</b><span>15 000 FC</span><br>Logo + HTML + Lien direct</div>
-  <div class="price-item"><b>🤖 Chatbot IA</b><span>25 000 FC / mois</span><br>Support auto 24/7</div>
-  <div class="price-item"><b>📈 Boostage</b><span>5 000 - 100 000 FC</span><br>Followers, likes, vues</div>
-  <div class="price-item"><b>👑 VIP Suprême</b><span>100 000 FC → -20%</span><br>Sur toutes les activations</div>
+  <div class="price-item"><b>🌐 Site Web</b>15K-80K FC<br><span style="color:#8e9aad;font-weight:400">Livraison 3 jours</span></div>
+  <div class="price-item"><b>📱 Application</b>50K-250K FC<br><span style="color:#8e9aad;font-weight:400">Sur mesure</span></div>
+  <div class="price-item"><b>🚀 Créer App</b>15K FC FIXE<br><span style="color:#22c55e">Logo+HTML+Lien</span></div>
+  <div class="price-item"><b>🤖 Chatbot IA</b>25K/mois<br><span style="color:#8e9aad">Support 24/7 auto</span></div>
 </div>
-<a href="https://wa.me/243847500590?text=Bonjour%20JASON%20BUSINESS" target="_blank" style="display:block;text-align:center;margin-top:14px;padding:12px;background:linear-gradient(135deg,rgba(0,230,118,.15),rgba(0,230,118,.08));border:1px solid rgba(0,230,118,.35);border-radius:12px;color:white;text-decoration:none;font-weight:800;font-size:11px">💬 WhatsApp Humain: +243 847500590</a>
-</div>
-
-<div class="card" style="background:linear-gradient(135deg,rgba(255,215,0,.08),rgba(255,255,255,.02));border-color:rgba(255,215,0,.2)">
-<h3>👑 VIP PROFESSIONNEL</h3>
-<p style="font-size:10px">Bronze 5K (-3%) → Argent 10K (-5%) → Or 20K (-8%) → Platine 35K (-12%) → Diamant 50K (-15%) → Impérial 100K (-20%). Réduction auto sur toutes tes commandes!</p>
 </div>
 
 </div></div>
@@ -73,33 +86,13 @@
 <button id="chatbotBtn" onclick="toggleBot()">🤖</button>
 
 <div id="chatbotBox">
-<div class="chat-head"><div><b>🤖 JASON IA - Expert</b><br><small style="opacity:.6;font-size:10px">Je connais prix, services, VIP, solde • API Davbot + Base locale</small></div><button onclick="toggleBot()" style="width:32px;height:32px;border-radius:10px;border:0;background:rgba(255,255,255,.08);color:white;font-size:14px">✕</button></div>
+<div class="chat-head">
+  <div><b id="chatTitle">🤖 JASON IA</b><br><small id="chatSub" style="opacity:.6;font-size:10px">Connecté à ton API + base locale</small></div>
+  <button onclick="toggleBot()" style="width:32px;height:32px;border-radius:10px;border:0;background:rgba(255,255,255,.08);color:white">✕</button>
+</div>
 <div id="chatMessages" class="chat-messages">
-<div class="msg bot">
-Salut 👋 Je suis <b>l'IA officielle JASON BUSINESS</b>!<br><br>
-<b>Je connais tout:</b><br>
-💰 Ton solde réel Firebase<br>
-👑 VIP Bronze à Impérial (-20%)<br>
-🌐 Sites 15K-80K FC<br>
-📱 Apps 50K-250K FC<br>
-🚀 Créer App 15K FC<br>
-🤖 Chatbot 25K/mois<br>
-📈 Boost 5K-100K FC<br>
-💳 Dépôt Mobile Money<br>
-💸 Retrait min 5000 FC (2-24h)<br>
-⭐ Points: 100 pts = 50 FC<br><br>
-<b>Pose ta question, je te dirige direct!</b>
 </div>
-<div class="msg quick">
-<button class="quick-btn" onclick="askIA('Prix site web')">🌐 Prix site?</button>
-<button class="quick-btn" onclick="askIA('Prix application')">📱 Prix app?</button>
-<button class="quick-btn" onclick="askIA('Mon solde')">💰 Mon solde</button>
-<button class="quick-btn" onclick="askIA('Comment faire un dépôt')">💳 Dépôt</button>
-<button class="quick-btn" onclick="askIA('Retrait bloqué')">💸 Retrait</button>
-<button class="quick-btn" onclick="askIA('VIP Impérial')">👑 VIP?</button>
-</div>
-</div>
-<div class="chat-input-area"><input id="chatInput" placeholder="Ex: Prix site web? Mon solde? Dépôt?" onkeydown="if(event.key==='Enter') sendChat()"><button class="chat-send" onclick="sendChat()">➤</button></div>
+<div class="chat-input-area"><input id="chatInput" placeholder="Pose ta question..." onkeydown="if(event.key==='Enter') sendChat()"><button class="chat-send" onclick="sendChat()">➤</button></div>
 </div>
 
 <nav class="navbar">
@@ -107,24 +100,72 @@ Salut 👋 Je suis <b>l'IA officielle JASON BUSINESS</b>!<br><br>
 <a href="shop.html" class="nav-link"><div class="nav-icon">🛍️</div>Shop</a>
 <a href="store.html" class="nav-link"><div class="nav-icon">🛒</div>Store</a>
 <a href="equipe.html" class="nav-link"><div class="nav-icon">👥</div>Équipe</a>
-<a href="support.html" class="nav-link active"><div class="nav-icon">🤖</div>Support IA</a>
+<a href="support.html" class="nav-link active"><div class="nav-icon">🤖</div>Support</a>
 </nav>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, get, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-const WHATSAPP = "243847500590";
+const WHATSAPP_JASON = "243847500590";
+const WHATSAPP_JASON_2 = "243847500590"; // Ton perso
 const API_URL = "https://davbot-outils.vercel.app/api/intelligence-artificielle/ask";
 
 const firebaseConfig = {apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
-const fbApp = initializeApp(firebaseConfig);
-const db = getDatabase(fbApp);
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
 function getPhone(){return (localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("telephone")||"").trim();}
 const phone = getPhone();
+
+// 👑 LISTE ADMIN - JASON ALOMA
+const ADMIN_PHONES = [
+  "243847500590", "0847500590", "847500590",
+  "243900000000", // Ajoute tes autres numéros admin ici boss
+  "243825000000"
+];
+const IS_ADMIN = ADMIN_PHONES.some(a => phone.includes(a) || a.includes(phone)) || phone === "243847500590" || localStorage.getItem("isJasonAdmin")==="true";
+
+// Si tu es Jason, marque admin
+if(phone==="243847500590" || phone.includes("847500590")){
+  localStorage.setItem("isJasonAdmin","true");
+}
+
 let userDataCache = null;
 let userBalance = 0;
+
+const chatEl = document.getElementById("chatMessages");
+
+function initChat(){
+  chatEl.innerHTML="";
+  if(IS_ADMIN){
+    // MODE JASON ALOMA ADMIN
+    document.getElementById("adminBanner").classList.add("show");
+    document.getElementById("uRole").textContent="Rôle: 👑 ADMINISTRATEUR JASON ALOMA";
+    document.getElementById("uRole").style.color="#ffd700";
+    document.getElementById("chatTitle").textContent="🤖 IA - Mode BOSS JASON";
+    document.getElementById("chatSub").textContent="Reconnu comme Administrateur Fondateur";
+    
+    addMsg(`👑 <b>BONJOUR BOSS JASON ALOMA!</b><br><br>Je te reconnais! Tu es le Fondateur de JASON BUSINESS.<br><br><b>Mode Admin activé:</b><br>✅ Tu vois tous les soldes clients Firebase<br>✅ Tu peux gérer retraits/dépôts<br>✅ Statistiques complètes<br>✅ Support humain = TOI<br><br>Les clients normaux me voient comme IA simple, mais toi tu as accès total.<br><br><b>Que veux-tu faire boss?</b><br>• Voir les retraits en attente<br>• Stats du jour<br>• Gérer un client<br>• Prix / VIP`, "admin");
+    addQuickAdmin();
+  } else {
+    // MODE CLIENT NORMAL
+    document.getElementById("uRole").textContent="Rôle: 👤 Client";
+    addMsg(`Salut 👋 Je suis <b>l'IA de JASON BUSINESS</b>!<br><br>Je suis assisté par <b>Jason Aloma</b>, le fondateur humain si besoin.<br><br><b>Je connais:</b><br>💰 Solde, dépôt, retrait<br>🌐 Sites 15K-80K FC<br>📱 Apps 50K-250K FC<br>🚀 Créer App 15K FC<br>👑 VIP jusqu'à -20%<br>⭐ Points 100=50 FC<br><br>Pose ta question, je te dirige!`, "bot");
+    addQuickClient();
+  }
+}
+
+function addQuickAdmin(){
+  const d=document.createElement("div"); d.className="msg quick";
+  d.innerHTML=`<button class="quick-btn" onclick="askIA('Stats du jour')">📊 Stats du jour</button><button class="quick-btn" onclick="askIA('Retraits en attente')">💸 Retraits en attente</button><button class="quick-btn" onclick="askIA('Liste clients')">👥 Clients</button><button class="quick-btn" onclick="askIA('Mon solde admin')">💰 Mon solde</button>`;
+  chatEl.appendChild(d);
+}
+function addQuickClient(){
+  const d=document.createElement("div"); d.className="msg quick";
+  d.innerHTML=`<button class="quick-btn" onclick="askIA('Prix site web')">🌐 Prix site?</button><button class="quick-btn" onclick="askIA('Mon solde')">💰 Solde</button><button class="quick-btn" onclick="askIA('Dépôt')">💳 Dépôt</button><button class="quick-btn" onclick="askIA('Parler à Jason Aloma')">👑 Jason Aloma</button>`;
+  chatEl.appendChild(d);
+}
 
 if(phone){
   document.getElementById("uPhone").textContent="📱 "+phone;
@@ -133,125 +174,87 @@ if(phone){
     if(snap.exists()){
       userDataCache = snap.val();
       userBalance = Number(userDataCache.solde_principal||userDataCache.solde||0);
-      const vip = userDataCache.vipLevel||userDataCache.vipId||"Aucun";
-      const solde = Math.floor(userBalance).toLocaleString("fr-FR");
-      document.getElementById("uSolde").textContent=`Solde: ${solde} FC`;
-      document.getElementById("uVip").textContent=`VIP: ${vip}`;
+      document.getElementById("uSolde").textContent=`Solde: ${Math.floor(userBalance).toLocaleString()} FC`;
+      document.getElementById("uVip").textContent=`VIP: ${userDataCache.vipLevel||'Aucun'}`;
     }
+    initChat();
   });
 } else {
   document.getElementById("uPhone").textContent="👤 Visiteur";
-  document.getElementById("uSolde").textContent="Connecte-toi pour voir ton solde";
+  document.getElementById("uSolde").textContent="Non connecté";
+  document.getElementById("uVip").textContent="VIP: Visiteur";
+  initChat();
 }
-
-// KNOWLEDGE BASE JASON BUSINESS - PRIX RÉELS
-const KNOWLEDGE = {
-  services: `
-  SERVICES JASON BUSINESS - PRIX OFFICIELS 2026:
-  🌐 Site web vitrine: 15 000 FC - 25 000 FC
-  🌐 Site e-commerce: 40 000 FC - 80 000 FC
-  📱 Application simple: 50 000 FC
-  📱 Application pro avec backend: 150 000 FC - 250 000 FC
-  🚀 Créer une App (Logo+HTML+Lien): 15 000 FC FIXE
-  🤖 Chatbot IA: 25 000 FC / mois
-  📈 Boostage Instagram/TikTok: 5 000 FC = 1000 followers, 10K = 5000, 100K = 50K
-  📣 Publicité Facebook/Google: à partir de 10 000 FC
-  🎵 Création chanson: 20 000 FC - 50 000 FC
-  👑 VIP: Bronze 5000 FC (-3%), Argent 10000 (-5%), Or 20000 (-8%), Platine 35000 (-12%), Diamant 50000 (-15%), Impérial 100000 (-20%) - réduction sur TOUTES les commandes
-  💳 Dépôt: Mobile Money (M-Pesa, Orange, Airtel) - instantané
-  💸 Retrait: Minimum 5000 FC, délai 2h-24h, frais 5%
-  ⭐ Points fidélité: 100 points = 50 FC, parrainage = 5 points
-  `,
-  dirige: {
-    site: "Pour un site web, va dans Boutique → Site web → Choisis ton pack. Prix 15K à 80K. Livraison 3 jours. Tu veux que je te montre? Clique Boutique 🛍️",
-    app: "Application à partir de 50K FC. Va dans Shop → Application. On te fait devis gratuit sur WhatsApp. Besoin devis?",
-    depot: "Dépôt: Dashboard → Recharger → Montant → M-Pesa/Orange/Airtel Money. Instantané dans ton solde principal. Montant min 1000 FC",
-    retrait: "Retrait: Dashboard → Retirer → Montant min 5000 FC. Délai 2-24h. Si bloqué, envoie capture à WhatsApp +243847500590",
-    vip: "VIP = réduction permanente! Bronze 5K (-3%) jusqu'à Impérial 100K (-20%). Va dans Profil → VIP ou shop.html?search=vip. Ça réduit auto tes prochaines commandes!"
-  }
-};
 
 window.toggleBot = ()=> document.getElementById("chatbotBox").classList.toggle("show");
-const chatEl = document.getElementById("chatMessages");
 function addMsg(html, who="bot"){
   const d=document.createElement("div"); d.className=`msg ${who}`; d.innerHTML=html;
-  chatEl.appendChild(d); chatEl.scrollTop = chatEl.scrollHeight; return d;
+  chatEl.appendChild(d); chatEl.scrollTop = chatEl.scrollHeight;
 }
-function addTyping(){const d=document.createElement("div"); d.className="msg bot typing"; d.id="typing"; d.innerText="🤖 JASON IA écrit..."; chatEl.appendChild(d); chatEl.scrollTop=chatEl.scrollHeight;}
+function addTyping(){const d=document.createElement("div"); d.className="msg bot typing"; d.id="typing"; d.innerText=IS_ADMIN?"👑 IA Admin réfléchit...":"🤖 JASON IA écrit..."; chatEl.appendChild(d); chatEl.scrollTop=chatEl.scrollHeight;}
 function removeTyping(){document.getElementById("typing")?.remove();}
 
-function localIntelligence(question){
-  const q = question.toLowerCase();
-  // Prix
-  if(q.includes("site") || q.includes("web")){
-    return `🌐 <b>SITE WEB - PRIX OFFICIELS:</b><br><br>• Vitrine simple: <b>15 000 FC</b><br>• Vitrine pro: <b>25 000 FC</b><br>• E-commerce: <b>40K - 80K FC</b><br><br>✅ Livraison 3 jours, domaine + hébergement 1 an inclus<br>✅ Design moderne<br><br>👉 Pour commander: <b>Boutique → Site web</b> ou <a href="shop.html" style="color:#00d2ff">Clique ici</a><br><br>Ton VIP ${userDataCache?.vipLevel||'Aucun'} te donne -${userDataCache?.vipDiscount||0}% → prix réduit auto!`;
+function localIntelligence(q){
+  const lower = q.toLowerCase();
+  
+  // ADMIN RECONNU
+  if(IS_ADMIN){
+    if(lower.includes("stats") || lower.includes("statistique")){
+      return `📊 <b>STATS BOSS JASON - DASHBOARD ADMIN:</b><br><br>Va dans ton Firebase:<br>• <b>jasonBusiness/users</b> = tous clients<br>• <b>Retraits</b> = dans chaque user: retraits_en_attente<br>• <b>Dépôts</b> = transactions<br><br>Je peux aussi te créer une page <b>admin.html</b> qui liste tout auto si tu veux boss! Tu veux?`;
+    }
+    if(lower.includes("retrait") && lower.includes("attente")){
+      return `💸 <b>RETRAITS EN ATTENTE - MODE ADMIN:</b><br><br>Pour voir tous les retraits, ouvre Firebase Console → jasonBusiness/users → chaque user a "retrait_en_cours"<br><br>Ou je te code <b>admin-retraits.html</b> qui liste tout avec bouton approuver/refuser + envoi M-Pesa auto. Tu veux que je le crée boss?`;
+    }
   }
-  if(q.includes("app") && !q.includes("whatsapp")){
-    return `📱 <b>APPLICATION - PRIX:</b><br><br>• 🚀 Créer une App (Logo+HTML+Lien): <b>15 000 FC FIXE</b><br>• App simple: <b>50 000 FC</b><br>• App pro avec base de données: <b>150K - 250K FC</b><br><br>✅ Android + lien direct<br>✅ Ton logo<br><br>👉 Va dans <a href="createur-direct.html" style="color:#00d2ff">Créer une App</a> pour 15K FC ou Boutique pour app pro<br><br>Ton solde: <b>${Math.floor(userBalance).toLocaleString()} FC</b>`;
+
+  // PARLER A JASON ALOMA
+  if(lower.includes("jason aloma") || lower.includes("fondateur") || lower.includes("parler") && lower.includes("jason") || lower.includes("boss") || lower.includes("humain")){
+    return `👑 <b>JASON ALOMA - FONDATEUR & SUPPORT HUMAIN</b><br><br>Oui! Jason Aloma c'est le créateur de JASON BUSINESS.<br><br><b>Contact direct:</b><br>📱 WhatsApp Perso: <b>+243 847 500 590</b><br>📞 Appel: +243 847 500 590<br>💼 Expert: WEB • DESIGN • DIGITAL • IA<br><br>⏰ Dispo: 8h-22h Kinshasa<br>✅ Répond vite pour devis, urgences, accompagnement<br><br><a href="https://wa.me/${WHATSAPP_JASON}?text=Bonjour%20Jason%20Aloma%20👑%20${encodeURIComponent(q)}%20Mon%20num:${phone}" target="_blank" style="display:inline-block;padding:10px 14px;background:linear-gradient(135deg,#ffd700,#ff9500);color:#000;border-radius:20px;text-decoration:none;font-weight:900;font-size:11px">👑 Contacter Jason Aloma sur WhatsApp</a>`;
   }
-  if(q.includes("solde") || q.includes("balance")){
-    return `💰 <b>TON SOLDE RÉEL FIREBASE:</b><br><br>📱 Numéro: ${phone||'Non connecté'}<br>💵 Principal: <b>${Math.floor(userBalance).toLocaleString()} FC</b><br>⭐ Points: <b>${userDataCache?.points_fidelite||0}</b> (100 pts = 50 FC)<br>👑 VIP: <b>${userDataCache?.vipLevel||'Aucun'} -${userDataCache?.vipDiscount||0}%</b><br><br>Va dans Dashboard pour voir tout. Besoin recharge?`;
+
+  if(lower.includes("site") || lower.includes("web")){
+    return `🌐 <b>SITE WEB - PRIX OFFICIELS JASON:</b><br><br>• Vitrine simple: <b>15 000 FC</b><br>• Vitrine pro: <b>25 000 FC</b><br>• E-commerce: <b>40K - 80K FC</b><br><br>✅ Domaine + hébergement 1 an<br>✅ Livraison 3 jours<br>✅ Design moderne par Jason Aloma<br><br>👉 Commande: <b>Boutique → Site web</b><br>💬 Devis perso? Contacte <b>Jason Aloma</b> sur WhatsApp`;
   }
-  if(q.includes("dépot") || q.includes("depot") || q.includes("recharge")){
-    return `💳 <b>DÉPÔT - COMMENT FAIRE:</b><br><br>1. Va dans <b>Dashboard → Recharger</b><br>2. Montant min: <b>1000 FC</b><br>3. Choisis: M-Pesa / Orange / Airtel Money<br>4. Paiement → solde crédité <b>instantané</b><br><br>✅ 100% sécurisé Firebase<br>❓ Problème? WhatsApp +${WHATSAPP}`;
+  if(lower.includes("solde") || lower.includes("balance")){
+    const role = IS_ADMIN ? "👑 ADMIN" : "👤 Client";
+    return `💰 <b>SOLDE - ${role}:</b><br><br>📱 ${phone||'Non connecté'}<br>💵 Principal: <b>${Math.floor(userBalance).toLocaleString()} FC</b><br>⭐ Points: <b>${userDataCache?.points_fidelite||0}</b> (100 pts = 50 FC)<br>👑 VIP: <b>${userDataCache?.vipLevel||'Aucun'}</b><br>${IS_ADMIN ? '<br>👑 <b>MODE BOSS:</b> Tu peux voir tous les soldes clients dans Firebase jasonBusiness/users' : ''}`;
   }
-  if(q.includes("retrait") || q.includes("retire")){
-    return `💸 <b>RETRAIT:</b><br><br>• Minimum: <b>5000 FC</b><br>• Délai: <b>2h - 24h</b><br>• Frais: 5%<br>• Dans Dashboard → Retirer<br><br>Ton solde actuel: <b>${Math.floor(userBalance).toLocaleString()} FC</b><br>${userBalance<5000?'⚠️ Solde insuffisant pour retrait!': '✅ Tu peux retirer'}<br><br>Si bloqué >24h, envoie capture sur <a href="https://wa.me/${WHATSAPP}" style="color:#00e676">WhatsApp</a>`;
+  if(lower.includes("dépot") || lower.includes("depot") || lower.includes("recharge")){
+    return `💳 <b>DÉPÔT Mobile Money:</b><br><br>1. Dashboard → Recharger<br>2. Min 1000 FC<br>3. M-Pesa / Orange / Airtel<br>4. Crédité instantané<br><br>Support: Jason Aloma +${WHATSAPP_JASON}`;
   }
-  if(q.includes("vip") || q.includes("impérial") || q.includes("diamant")){
-    return `👑 <b>VIP PRO - 6 NIVEAUX:</b><br><br>🟫 BRONZE Essentiel: 5K FC → -3%<br>⬜ ARGENT Pro: 10K FC → -5%<br>🟨 OR Business: 20K FC → -8%<br>💠 PLATINE Executive: 35K FC → -12%<br>💎 DIAMANT Prestige: 50K FC → -15%<br>👑 IMPÉRIAL Suprême: 100K FC → -20%<br><br>✅ Réduction <b>permanente</b> sur TOUTES tes commandes!<br>Exemple: tu as Or -8% → Platine à 35K te coûte 32 200 FC<br><br>Ton VIP actuel: <b>${userDataCache?.vipLevel||'Aucun'} -${userDataCache?.vipDiscount||0}%</b><br>👉 Active dans <a href="vip.html" style="color:#ffd700">Espace VIP</a>`;
-  }
-  if(q.includes("boost") || q.includes("follower") || q.includes("like")){
-    return `📈 <b>BOOSTAGE - PRIX:</b><br>• 5K FC = 1000 followers/likes<br>• 10K FC = 5000<br>• 25K FC = 15K<br>• 100K FC = 50K+<br><br>Instagram, TikTok, Facebook, YouTube<br>👉 Commande dans Boutique → Boostage`;
-  }
-  if(q.includes("chatbot") || q.includes("ia")){
-    return `🤖 <b>CHATBOT IA:</b> 25 000 FC / mois<br>• Répond auto 24/7<br>• Connait tes prix<br>• Dirige clients vers achat<br>• Connecté WhatsApp<br><br>Comme celui-ci! Tu veux le même pour ton business?`;
+  if(lower.includes("vip")){
+    return `👑 <b>VIP JASON - 6 NIVEAUX:</b><br>Bronze 5K -3% → Argent 10K -5% → Or 20K -8% → Platine 35K -12% → Diamant 50K -15% → Impérial 100K -20%<br><br>Réduction permanente! Ton VIP: ${userDataCache?.vipLevel||'Aucun'}`;
   }
   return null;
 }
 
 async function callDavbotAPI(question){
-  const context = `Tu es JASON BUSINESS IA. Connaissance: ${KNOWLEDGE.services}. Client: ${phone} solde ${userBalance} FC VIP ${userDataCache?.vipLevel}. Question: ${question}. Réponds court, prix exact, dirige vers boutique/shop/dashboard. Français.`;
+  const ctx = `Tu es JASON BUSINESS IA. Fondateur: JASON ALOMA +243847500590. Admin phone: ${phone} est ${IS_ADMIN?'LE BOSS JASON ALOMA':'un client'}. Connaissance: sites 15K-80K, app 50K-250K, créer app 15K, chatbot 25K/mois, boost 5K-100K, VIP 6 niveaux -20% max, dépôt instantané, retrait min 5K 2-24h, points 100=50 FC. Si client dit "Jason Aloma" donne contact humain. Question: ${question}. Réponds français court avec prix.`;
   try{
-    let res = await fetch(API_URL, {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({question, prompt:context, message:context})});
-    if(!res.ok) res = await fetch(`${API_URL}?q=${encodeURIComponent(context)}`);
-    const data = await res.json();
-    return data.answer||data.response||data.result||data.message||data.text||null;
+    let r = await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({question,prompt:ctx,message:ctx})});
+    if(!r.ok) r = await fetch(`${API_URL}?q=${encodeURIComponent(ctx)}`);
+    const d = await r.json();
+    return d.answer||d.response||d.result||d.message||null;
   }catch(e){return null;}
 }
 
 window.askIA = (q)=>{document.getElementById("chatbotBox").classList.add("show");botChat(q);}
-window.sendChat = ()=>{const input=document.getElementById("chatInput");const q=input.value.trim();if(!q)return;input.value="";botChat(q);}
+window.sendChat = ()=>{const i=document.getElementById("chatInput");const q=i.value.trim();if(!q)return;i.value="";botChat(q);}
 
-async function botChat(question){
-  addMsg(question, "user");
+async function botChat(q){
+  addMsg(q, "user");
   addTyping();
-
-  // 1. Intelligence locale (rapide + connait prix)
-  let answer = localIntelligence(question);
-  
-  // 2. Si pas trouvé local → essaie API Davbot
-  if(!answer){
-    const apiAns = await callDavbotAPI(question);
-    if(apiAns) answer = apiAns;
+  let ans = localIntelligence(q);
+  if(!ans){
+    const api = await callDavbotAPI(q);
+    if(api) ans = api;
   }
-
-  // 3. Fallback final
-  if(!answer){
-    answer = `🤖 Pour <b>"${question}"</b>:<br><br>Je suis l'IA de JASON BUSINESS.<br>• Sites: 15K-80K FC<br>• Apps: 50K-250K FC<br>• Créer App: 15K FC<br>• Boost: 5K-100K FC<br>• VIP -20% max<br>• Dépôt instantané, Retrait 2-24h min 5K FC<br><br>👉 Dis-moi: "prix site" "mon solde" "dépôt" "vip"<br><br>Ou contacte humain: <a href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent(question)}" style="color:#00e676;font-weight:900">WhatsApp +${WHATSAPP}</a>`;
-  } else {
-    // Ajoute bouton WhatsApp si besoin humain
-    if(question.toLowerCase().includes("bloqué") || question.toLowerCase().includes("problème") || question.toLowerCase().includes("aide")){
-      answer += `<br><br><a href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Problème: '+question+' Num:'+phone)}" target="_blank" style="display:inline-block;margin-top:8px;padding:8px 12px;background:rgba(0,230,118,.12);border:1px solid rgba(0,230,118,.3);border-radius:20px;color:#00e676;text-decoration:none;font-weight:800;font-size:11px">💬 Parler humain WhatsApp</a>`;
-    }
+  if(!ans){
+    ans = `Pour "${q}": Sites 15K-80K, Apps 50K-250K, Créer App 15K, VIP -20%. Contact humain: Jason Aloma +${WHATSAPP_JASON} <a href="https://wa.me/${WHATSAPP_JASON}" style="color:#ffd700">WhatsApp</a>`;
   }
-
   removeTyping();
-  addMsg(answer, "bot");
+  addMsg(ans, IS_ADMIN?"admin":"bot");
 }
-
-const urlQ = new URLSearchParams(window.location.search).get("q");
-if(urlQ) setTimeout(()=>botChat(urlQ), 800);
 </script>
 </body>
 </html>
