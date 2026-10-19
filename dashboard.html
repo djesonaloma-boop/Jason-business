@@ -58,31 +58,11 @@ body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:whi
 .jb-invest-date{margin-top:8px;font-size:9px;opacity:.52}
 .jb-invest-status{margin-top:7px;font-size:9px;color:var(--green)}
 .jb-empty{padding:26px 15px;text-align:center;border-radius:17px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.055);font-size:11px;opacity:.65}
-
-/* BOUTON CHAT FLOTTANT BAS DROITE */
-.jb-fab-chat{
-position:fixed;
-right:16px;
-bottom:86px;
-z-index:9999;
-width:58px;
-height:58px;
-border-radius:18px;
-display:grid;
-place-items:center;
-font-size:26px;
-background:linear-gradient(135deg,#00d2ff,#0077ff);
-color:white;
-border:1px solid rgba(255,255,255,.25);
-box-shadow:0 10px 30px rgba(0,210,255,.40),0 0 0 8px rgba(0,210,255,.08);
-cursor:pointer;
-animation:jbFabFloat 3s ease-in-out infinite;
-}
+.jb-fab-chat{position:fixed;right:16px;bottom:86px;z-index:9999;width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:26px;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;border:1px solid rgba(255,255,255,.25);box-shadow:0 10px 30px rgba(0,210,255,.40),0 0 0 8px rgba(0,210,255,.08);cursor:pointer;animation:jbFabFloat 3s ease-in-out infinite}
 .jb-fab-chat:active{transform:scale(.92)}
 @keyframes jbFabFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 .jb-fab-badge{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 6px;border-radius:20px;background:#ff4757;color:white;font-size:10px;font-weight:900;display:grid;place-items:center;box-shadow:0 2px 8px rgba(255,71,87,.6);animation:badgePulse 1.5s infinite}
 @keyframes badgePulse{0%{box-shadow:0 0 0 0 rgba(255,71,87,.6)}70%{box-shadow:0 0 0 10px rgba(255,71,87,0)}100%{box-shadow:0 0 0 0 rgba(255,71,87,0)}}
-
 .jb-navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:11px 0 calc(11px + env(safe-area-inset-bottom));background:rgba(5,10,20,.96);border-top:1px solid rgba(0,210,255,.25);backdrop-filter:blur(22px)}
 .jb-nav-link{flex:1;color:white;opacity:.48;text-decoration:none;text-align:center;font-size:10px;border:0;background:none;cursor:pointer}
 .jb-nav-link.active{color:var(--blue);opacity:1;font-weight:bold}
@@ -101,7 +81,19 @@ animation:jbFabFloat 3s ease-in-out infinite;
 <section class="jb-balance-card"><div class="jb-balance-title">Solde principal</div><div class="jb-balance"><span id="jbMainBalance">0</span><span class="jb-currency"> FC</span></div><div class="jb-balance-grid"><div class="jb-money-box"><div class="jb-icon">💰</div><small>Commissions</small><b id="jbCommissionBalance">0 FC</b></div><div class="jb-money-box"><div class="jb-icon">📈</div><small>Gains</small><b id="jbGainBalance">0 FC</b></div><div class="jb-money-box"><div class="jb-icon">💎</div><small>Total</small><b id="jbTotalBalance">0 FC</b></div></div></section>
 <div class="jb-actions"><a href="recharge.html" class="jb-action jb-recharge">📥 RECHARGER</a><a href="retrait.html" class="jb-action jb-withdraw">📤 RETIRER</a></div>
 <section class="jb-points-card"><div class="jb-points-top"><div><div class="jb-points-title">⭐ POINTS DE FIDÉLITÉ</div><div style="font-size:10px;opacity:.65">100 points = <b style="color:var(--gold)">50 FC</b></div></div><div id="jbLoyaltyPoints" class="jb-points-number">0</div></div><button id="jbConvertPoints" disabled>💱 CONVERTIR MES POINTS</button></section>
+
 <section class="jb-section"><div class="jb-section-title"><h3>🛍️ Nos services</h3><a href="shop.html">VOIR TOUT →</a></div>
+
+<!-- ✅✅✅ BOUTON CRÉATEUR D'APP - NOUVEAU - MÊME APPARENCE ✅✅✅ -->
+<div class="jb-service-card" onclick="goPage('createur.html')" style="background:linear-gradient(115deg,rgba(0,210,255,.18),rgba(0,119,255,.10));border:1px solid rgba(0,210,255,.42);box-shadow:0 0 22px rgba(0,210,255,.18)">
+  <div class="jb-service-icon" style="background:linear-gradient(145deg,#00d2ff,#0077ff);color:white;border-color:rgba(0,210,255,.45)">🚀</div>
+  <div class="jb-service-info">
+    <div class="jb-service-name">Créer une App <span style="font-size:8px;background:rgba(0,230,118,.14);border:1px solid rgba(0,230,118,.32);color:#00e676;padding:3px 7px;border-radius:20px;margin-left:6px;letter-spacing:.5px">GRATUIT</span></div>
+    <div class="jb-service-desc">Génère ton application sans pub aigle</div>
+  </div>
+  <div class="jb-service-arrow">›</div>
+</div>
+
 <div class="jb-service-card" onclick="openService('boost')"><div class="jb-service-icon">📈</div><div class="jb-service-info"><div class="jb-service-name">Boostage</div><div class="jb-service-desc">Followers, likes, vues</div></div><div class="jb-service-arrow">›</div></div>
 <div class="jb-service-card" onclick="openService('app')"><div class="jb-service-icon">📱</div><div class="jb-service-info"><div class="jb-service-name">Application</div><div class="jb-service-desc">Création d'application mobile</div></div><div class="jb-service-arrow">›</div></div>
 <div class="jb-service-card" onclick="openService('site')"><div class="jb-service-icon">🌐</div><div class="jb-service-info"><div class="jb-service-name">Site web</div><div class="jb-service-desc">Site moderne et professionnel</div></div><div class="jb-service-arrow">›</div></div>
@@ -110,10 +102,10 @@ animation:jbFabFloat 3s ease-in-out infinite;
 <div class="jb-service-card" onclick="openService('ads')"><div class="jb-service-icon">📣</div><div class="jb-service-info"><div class="jb-service-name">Publicité</div><div class="jb-service-desc">Promotion sur réseaux</div></div><div class="jb-service-arrow">›</div></div>
 <div class="jb-service-card" onclick="openService('logo')"><div class="jb-service-icon">🎨</div><div class="jb-service-info"><div class="jb-service-name">Logo</div><div class="jb-service-desc">Création de votre identité visuelle</div></div><div class="jb-service-arrow">›</div></div>
 </section>
+
 <section class="jb-section"><div class="jb-section-title"><h3>⚡ Mes activités</h3><a href="shop.html">COMMANDER →</a></div><div id="jbInvestments"><div class="jb-empty">Chargement...</div></div></section>
 </div>
 
-<!-- BOUTON CHAT FLOTTANT EN BAS À DROITE -->
 <button class="jb-fab-chat" id="jbFabChat" onclick="goPage('chat.html')" aria-label="Chat">
   💬
   <span class="jb-fab-badge" id="jbChatBadge">1</span>
@@ -170,8 +162,6 @@ const points=Number(user.points_fidelite??0);
 document.getElementById("jbLoyaltyPoints").textContent=jbFormatFC(points);
 document.getElementById("jbConvertPoints").disabled=points<100;
 jbRenderInvestments(user.mes_investissements);
-// Badge chat si messages non lus
-const chats=user.chats||{};
 const unread=Number(user.chat_unread||0);
 const badge=document.getElementById("jbChatBadge");
 if(unread>0){badge.textContent=unread>9?"9+":unread;badge.style.display="grid";}else{badge.style.display="none";}
