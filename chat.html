@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#050a14">
-<title>JASON BUSINESS - Photo Petite + Zoom</title>
+<title>JASON BUSINESS Messenger</title>
 <style>
 :root{--blue:#00d2ff;--border:rgba(0,210,255,.18)}
 *{box-sizing:border-box}
@@ -61,6 +62,7 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
 .input textarea{flex:1;min-width:0;min-height:40px;max-height:100px;padding:10px 14px;border-radius:20px;border:1px solid #293850;background:#0c192b;color:white;outline:none;resize:none;font-size:13px}
 .tbtn{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:1px solid #293850;background:#0c192b;color:white;display:grid;place-items:center;font-size:18px;cursor:pointer}
 .send{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:0;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;font-size:18px;cursor:pointer}
+button:disabled{opacity:.45;cursor:not-allowed}
 #photoPreview{display:none;background:#0b1425;border:1px solid #00d2ff55;border-radius:16px;padding:10px;margin-bottom:8px;max-height:60vh;overflow-y:auto}
 #photoPreview.show{display:block}
 .preview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-height:200px;overflow-y:auto;padding:4px}
@@ -72,7 +74,6 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
 #photoCaption{margin-top:8px;width:100%;min-height:40px;padding:8px 12px;border-radius:12px;border:1px solid #293850;background:#0c192b;color:white;font-size:12px;resize:none;outline:none}
 .scroll-down{position:absolute;bottom:80px;right:16px;width:40px;height:40px;border-radius:50%;background:#00d2ff;color:#000;display:none;place-items:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.5);z-index:10;font-weight:900;font-size:18px}
 .scroll-down.show{display:grid}
-/* VIEWER PHOTO GROS + ZOOM */
 #imgViewer{position:fixed;inset:0;background:rgba(0,0,0,.97);z-index:9999;display:none;flex-direction:column;touch-action:none}
 #imgViewer.show{display:flex}
 .viewer-top{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#0b1425;border-bottom:1px solid #1a2a44}
@@ -82,11 +83,16 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
 .viewer-actions{display:flex;gap:8px;padding:12px;background:#0b1425;border-top:1px solid #1a2a44;justify-content:center;align-items:center}
 .zoom-btn{width:44px;height:44px;border-radius:50%;border:1px solid #293850;background:#0c192b;color:white;font-size:20px;display:grid;place-items:center;cursor:pointer}
 .zoom-info{font-size:12px;opacity:.7;min-width:50px;text-align:center}
+#hint{overflow-wrap:anywhere}
 @media(max-width:800px){.left{position:absolute;inset:54px 0 0;width:100%;z-index:20}.left.hide{display:none}.right{width:100%}.msg{max-width:88%}.msg-actions{display:flex;opacity:.9}.msg.me .photo-wrap{width:120px;height:120px}.msg.other .photo-wrap{width:100px;height:100px}.preview-grid{grid-template-columns:repeat(4,1fr)}}
 </style>
 </head>
 <body>
-<header><div class="brand">jason business — <span id="myPhoneShow" style="font-size:11px;opacity:.7"></span></div><a href="dashboard.html" class="btn">Dash</a></header>
+<header>
+ <div class="brand">jason business — <span id="myPhoneShow" style="font-size:11px;opacity:.7"></span></div>
+ <a href="dashboard.html" class="btn">Dash</a>
+</header>
+
 <div class="wrap">
 <aside class="left" id="leftPanel">
  <div class="tabs">
@@ -94,351 +100,630 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
   <div class="tab" data-tab="users">👥 Utilisateurs</div>
   <div class="tab" data-tab="requests">🔔 Demandes <span id="reqCount" style="background:#ff4757;color:white;padding:1px 5px;border-radius:10px;font-size:9px;display:none">0</span></div>
  </div>
- <div class="add-box" style="padding:8px 10px;display:flex;gap:6px;border-bottom:1px solid var(--border)"><input id="manualPhone" placeholder="+243..."><button class="btn" id="btnAddManual">+</button></div>
+ <div class="add-box" style="padding:8px 10px;display:flex;gap:6px;border-bottom:1px solid var(--border)">
+  <input id="manualPhone" placeholder="+243..."><button class="btn" id="btnAddManual">+</button>
+ </div>
  <div class="search"><input id="search" placeholder="🔍 Rechercher..."></div>
  <div class="list" id="list"></div>
  <div class="bottom-nav"><a href="index.html" class="btn btn-full">🏠 Accueil</a><a href="publications.html" class="btn btn-full">📢 Publications</a></div>
 </aside>
+
 <section class="right">
- <div class="top" id="topBar"><div style="display:flex;align-items:center;gap:10px;min-width:0"><div class="av" id="chatAvatar">JB</div><div style="min-width:0"><h3 id="chatName" style="margin:0;font-size:14px">Sélectionne un chat</h3><small id="chatPhone" style="font-size:11px;opacity:.6">Clique ici pour revenir</small></div></div></div>
- <div class="msgs" id="msgs"></div>
+ <div class="top" id="topBar">
+  <div style="display:flex;align-items:center;gap:10px;min-width:0">
+   <div class="av" id="chatAvatar">JB</div>
+   <div style="min-width:0"><h3 id="chatName" style="margin:0;font-size:14px">Sélectionne un chat</h3><small id="chatPhone" style="font-size:11px;opacity:.6">Clique ici pour revenir</small></div>
+  </div>
+ </div>
+ <div class="msgs" id="msgs"><div style="margin:auto;opacity:.6;text-align:center">💬<br>Sélectionne une conversation</div></div>
  <div id="scrollDown" class="scroll-down">↓</div>
  <div class="input-area">
   <div id="photoPreview">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><b id="previewCount" style="color:#00d2ff">0 photos</b><span style="font-size:11px;opacity:.6">1000 max</span></div>
-    <div id="previewGrid" class="preview-grid"></div>
-    <textarea id="photoCaption" placeholder="Légende pour toutes les photos..."></textarea>
-    <div class="preview-actions"><button class="btnCancel" id="cancelPhoto">✕ Annuler</button><button class="btnSend" id="confirmPhoto">➤ Envoyer 0 photos</button></div>
-    <div id="uploadProgress" style="display:none;margin-top:8px;text-align:center;font-size:12px;color:#00d2ff"></div>
+   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><b id="previewCount" style="color:#00d2ff">0 photos</b><span style="font-size:11px;opacity:.6">Photos</span></div>
+   <div id="previewGrid" class="preview-grid"></div>
+   <textarea id="photoCaption" placeholder="Légende pour les photos..."></textarea>
+   <div class="preview-actions"><button class="btnCancel" id="cancelPhoto">✕ Annuler</button><button class="btnSend" id="confirmPhoto">➤ Envoyer 0 photos</button></div>
+   <div id="uploadProgress" style="display:none;margin-top:8px;text-align:center;font-size:12px;color:#00d2ff"></div>
   </div>
-  <div id="recBar" class="rec-bar"><div style="display:flex;align-items:center;gap:8px"><div style="width:10px;height:10px;background:#ff4757;border-radius:50%"></div><div id="recTime" style="font-weight:800;color:#ff6b7a">00:00</div><div style="font-size:11px">🔴 Enregistrement</div></div><div style="display:flex;gap:6px"><button id="recCancel" style="padding:6px 9px;border-radius:10px;border:1px solid #ff4757;background:#ff475722;color:#ff6b7a;font-size:11px">Annuler</button><button id="recSend" style="padding:6px 10px;border-radius:10px;border:0;background:#00d2ff;font-weight:800;font-size:11px">Envoyer</button></div></div>
-  <div class="input"><label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*" multiple hidden></label><button type="button" id="recordBtn" class="tbtn" disabled>🎙️</button><textarea id="msgInput" placeholder="Écris un message..." disabled rows="1"></textarea><button type="button" class="send" id="sendBtn" disabled>➤</button></div>
-  <div id="hint" style="text-align:center;font-size:9px;opacity:.6;margin-top:4px">Photo petite • Clique pour zoom • 1000 max</div>
+  <div id="recBar" class="rec-bar">
+   <div style="display:flex;align-items:center;gap:8px"><div style="width:10px;height:10px;background:#ff4757;border-radius:50%"></div><div id="recTime" style="font-weight:800;color:#ff6b7a">00:00</div><div style="font-size:11px">🔴 Enregistrement</div></div>
+   <div style="display:flex;gap:6px"><button id="recCancel" style="padding:6px 9px;border-radius:10px;border:1px solid #ff4757;background:#ff475722;color:#ff6b7a;font-size:11px">Annuler</button><button id="recSend" style="padding:6px 10px;border-radius:10px;border:0;background:#00d2ff;font-weight:800;font-size:11px">Envoyer</button></div>
+  </div>
+  <div class="input">
+   <label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*" multiple hidden></label>
+   <button type="button" id="recordBtn" class="tbtn" disabled>🎙️</button>
+   <textarea id="msgInput" placeholder="Écris un message..." disabled rows="1"></textarea>
+   <button type="button" class="send" id="sendBtn" disabled>➤</button>
+  </div>
+  <div id="hint" style="text-align:center;font-size:9px;opacity:.6;margin-top:4px">Photo petite • Clique pour zoom • Entrée pour envoyer</div>
  </div>
 </section>
 </div>
 
-<!-- VIEWER PHOTO GROS + ZOOM -->
 <div id="imgViewer">
-  <div class="viewer-top">
-    <div style="display:flex;align-items:center;gap:10px"><button onclick="closeViewer()" style="background:transparent;border:0;color:white;font-size:22px;cursor:pointer">✕</button><span id="viewerTitle" style="font-size:13px">Photo</span></div>
-    <div style="display:flex;gap:8px"><button class="zoom-btn" onclick="downloadImage()">⬇️</button><button class="zoom-btn" onclick="closeViewer()">✕</button></div>
-  </div>
-  <div class="viewer-content" id="viewerContent">
-    <img id="viewerImg" src="" alt="">
-  </div>
-  <div class="viewer-actions">
-    <button class="zoom-btn" onclick="zoomOut()">−</button>
-    <div class="zoom-info" id="zoomInfo">100%</div>
-    <button class="zoom-btn" onclick="zoomIn()">+</button>
-    <button class="zoom-btn" onclick="resetZoom()" style="margin-left:10px">↺</button>
-  </div>
+ <div class="viewer-top">
+  <div style="display:flex;align-items:center;gap:10px"><button id="closeViewerBtn" style="background:transparent;border:0;color:white;font-size:22px">✕</button><span id="viewerTitle" style="font-size:13px">Photo</span></div>
+  <button class="zoom-btn" id="downloadImageBtn">⬇️</button>
+ </div>
+ <div class="viewer-content" id="viewerContent"><img id="viewerImg" src="" alt="Photo"></div>
+ <div class="viewer-actions">
+  <button class="zoom-btn" id="zoomOutBtn">−</button><div class="zoom-info" id="zoomInfo">100%</div>
+  <button class="zoom-btn" id="zoomInBtn">+</button><button class="zoom-btn" id="resetZoomBtn">↺</button>
+ </div>
 </div>
 
 <script type="module">
 import {initializeApp,getApps,getApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {getDatabase,ref,onValue,push,set,get,remove,update,onDisconnect} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
+
+const firebaseConfig={
+ apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
+ authDomain:"starlink-investit.firebaseapp.com",
+ databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
+ projectId:"starlink-investit",
+ storageBucket:"starlink-investit.firebasestorage.app",
+ messagingSenderId:"807081599583",
+ appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
+};
 const app=getApps().length?getApp():initializeApp(firebaseConfig);
 const db=getDatabase(app);
 const $=id=>document.getElementById(id);
-const myPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("phone");
-if(!myPhone){location.replace("login.html");throw new Error("Non connecté");}
-$("myPhoneShow").textContent=myPhone;
-let tab="chats",activeChat=null,allUsers={},myRequests={},myChats={},presenceCache={},manualUsers=[],messageUnsubscribe=null,recording=false,cancelled=false,mediaRecorder=null,audioChunks=[],recordStream=null,timerInt=null,recSec=0,busySending=false;
-let allMessages=[], displayLimit=40, firstOpen=true;
-let pendingPhotos=[], currentViewerSrc=null;
-// ZOOM VARS
-let scale=1, lastScale=1, posX=0, posY=0, lastPosX=0, lastPosY=0, isDragging=false, startX=0, startY=0, initialDist=0;
 
-try{manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]");}catch{manualUsers=[];}
-function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function timeStr(ts){return ts?new Date(ts).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}):"";}
-function getChatId(a,b){return [a,b].sort().join("_");}
-function isOnline(ph){const p=presenceCache[ph];return !!(p&&p.online&&Date.now()-(p.lastSeen||0)<90000);}
-function getUserPhoto(ph){const u=allUsers[ph]||{};return u.photo||u.photoProfil||u.avatar||"";}
-function setHint(s){$("hint").textContent=s;}
-function stopTracks(){if(recordStream){recordStream.getTracks().forEach(t=>{try{t.stop()}catch{}});recordStream=null;}}
+const myPhone=localStorage.getItem("jasonBusinessUserPhone")||
+ localStorage.getItem("userPhone")||
+ localStorage.getItem("phone")||
+ localStorage.getItem("telephone")||"";
+
+if(!myPhone){
+ alert("Connecte-toi d'abord à JASON BUSINESS.");
+ location.replace("login.html");
+ throw new Error("Utilisateur non connecté");
+}
+
+$("myPhoneShow").textContent=myPhone;
+
+let tab="chats",activeChat=null,activeChatId=null;
+let allUsers={},myRequests={},myChats={},presenceCache={};
+let manualUsers=[],messageStops=[],messageSets={};
+let allMessages=[],displayLimit=40,firstOpen=true;
+let pendingPhotos=[],busySending=false;
+let mediaRecorder=null,audioChunks=[],recordStream=null;
+let recording=false,cancelled=false,timerInt=null,recSec=0;
+let scale=1,posX=0,posY=0,startX=0,startY=0,isDragging=false;
+let currentViewerSrc=null;
+
+try{manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]")}catch{manualUsers=[]}
+
+function esc(s){
+ return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function normalizePhone(value){
+ let p=String(value||"").trim().replace(/[^\d+]/g,"");
+ if(p.startsWith("+"))p=p.slice(1);
+ if(p.startsWith("243"))p="0"+p.slice(3);
+ if(p.length===9&&!p.startsWith("0"))p="0"+p;
+ return p;
+}
+function samePhone(a,b){return normalizePhone(a)===normalizePhone(b)}
+function getChatId(a,b){return [String(a),String(b)].sort().join("_")}
+function timeStr(ts){
+ const n=Number(ts||0);
+ return n>0?new Date(n).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}):"";
+}
+function isOnline(ph){
+ const p=presenceCache[ph]||presenceCache[normalizePhone(ph)];
+ return !!(p&&p.online&&Date.now()-(p.lastSeen||0)<90000);
+}
+function getUserPhoto(ph){
+ const u=allUsers[ph]||allUsers[normalizePhone(ph)]||{};
+ return u.photo||u.photoProfil||u.avatar||"";
+}
+function setHint(s){$("hint").textContent=s}
+function stopTracks(){
+ if(recordStream){recordStream.getTracks().forEach(t=>{try{t.stop()}catch{}});recordStream=null}
+}
+function setError(message){setHint("⚠️ "+message);console.error(message)}
+function getCombinedUsers(){
+ const result={...allUsers};
+ manualUsers.forEach(p=>{if(!result[p])result[p]={telephone:p}});
+ return result;
+}
+function getChatIdFor(other){
+ // Priorité à l'identifiant déjà présent dans l'historique de l'utilisateur.
+ for(const [id,c] of Object.entries(myChats)){
+  if(c&&c.with&&samePhone(c.with,other))return id;
+  const parts=id.split("_");
+  if(parts.length===2&&parts.some(p=>samePhone(p,myPhone))&&parts.some(p=>samePhone(p,other)))return id;
+ }
+ return getChatId(myPhone,other);
+}
+function chatIdCandidates(other){
+ const ids=new Set([getChatIdFor(other),getChatId(myPhone,other),
+  getChatId(normalizePhone(myPhone),normalizePhone(other))]);
+ for(const id of Object.keys(myChats)){
+  const c=myChats[id]||{};
+  if(c.with&&samePhone(c.with,other))ids.add(id);
+  const parts=id.split("_");
+  if(parts.length===2&&parts.some(p=>samePhone(p,myPhone))&&parts.some(p=>samePhone(p,other)))ids.add(id);
+ }
+ return [...ids];
+}
+
 const presenceRef=ref(db,`jasonBusiness/presence/${myPhone}`);
-set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:null}).catch(()=>{});
+set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:null}).catch(e=>setError("Présence : "+e.message));
 onDisconnect(presenceRef).set({online:false,lastSeen:Date.now(),activeChat:null}).catch(()=>{});
 setInterval(()=>set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:activeChat}).catch(()=>{}),30000);
-onValue(ref(db,"jasonBusiness/presence"),s=>{presenceCache=s.val()||{};render();if(activeChat)$("chatPhone").textContent=isOnline(activeChat)?activeChat+" • En ligne 🟢":"Hors ligne";});
-onValue(ref(db,"jasonBusiness/users"),s=>{allUsers=s.val()||{};render();});
-onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),s=>{myRequests=s.val()||{};const n=Object.values(myRequests).filter(r=>r.type==="incoming"&&r.status==="pending").length;$("reqCount").textContent=n;$("reqCount").style.display=n?"inline-block":"none";render();});
-onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),s=>{
-  myChats=s.val()||{};
-  const totalUnread=Object.values(myChats).reduce((sum,c)=>sum+(Number(c.unread)||0),0);
-  $("totalUnread").textContent=totalUnread>99?'99+':totalUnread;
-  $("totalUnread").style.display=totalUnread>0?"inline-block":"none";
-  render();
-});
-document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");tab=t.dataset.tab;render();});
-$("search").oninput=render;
-$("topBar").onclick=()=>{if(innerWidth<=800)$("leftPanel").classList.remove("hide");};
-$("btnAddManual").onclick=()=>{const p=$("manualPhone").value.trim();if(!p||p.length<8)return alert("Numéro invalide");if(p===myPhone)return alert("Pas ton propre numéro");if(!manualUsers.includes(p))manualUsers.push(p);localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));$("manualPhone").value="";render();};
-function getCombinedUsers(){const c={...allUsers};manualUsers.forEach(p=>{if(!c[p])c[p]={telephone:p};});return c;}
-function render(){
- const q=($("search").value||"").toLowerCase(),cont=$("list");cont.innerHTML="";
- const users=getCombinedUsers();
- if(tab==="users"){
-  Object.entries(users).forEach(([phone,u])=>{
-   if(phone===myPhone)return;
-   if(q&&!phone.toLowerCase().includes(q)&&!String(u.nom||"").toLowerCase().includes(q))return;
-   const id=getChatId(myPhone,phone),friend=myChats[id]?.status==="accepted",sent=myRequests[phone]?.type==="outgoing"&&myRequests[phone]?.status==="pending",photo=getUserPhoto(phone);
-   const div=document.createElement("div");div.className="item";div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(u.nom||phone)}</div><div class="prev">${esc(phone)}</div></div><div>${friend?"💬":sent?"⏳":"+"}</div>`;div.onclick=()=>friend?openChat(phone):!sent&&sendRequest(phone);cont.appendChild(div);
-  });
-  if(!cont.children.length)cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucun utilisateur</div>';
- }else if(tab==="requests"){
-  const reqs=Object.entries(myRequests).filter(([_,r])=>r.type==="incoming"&&r.status==="pending");
-  if(!reqs.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucune demande</div>';return;}
-  reqs.forEach(([phone])=>{const div=document.createElement("div");div.className="item";div.innerHTML=`<div class="av">${esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[phone]?.nom||phone)}</div><div class="prev">Veut discuter</div></div>`;const b=document.createElement("button");b.className="btn";b.textContent="Accepter";b.onclick=()=>acceptRequest(phone);div.appendChild(b);cont.appendChild(div);});
- }else{
-  const list=Object.entries(myChats).filter(([_,c])=>c.status==="accepted").sort((a,b)=>(b[1].lastTime||0)-(a[1].lastTime||0));
-  if(!list.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucun chat. Va dans Utilisateurs.</div>';return;}
-  list.forEach(([id,chat])=>{
-    const other=id.split("_").find(p=>p!==myPhone);if(!other)return;
-    const photo=getUserPhoto(other);
-    const unread=Number(chat.unread)||0;
-    const div=document.createElement("div");
-    div.className="item"+(activeChat===other?" active":"")+(unread>0?" has-unread":"");
-    div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(other.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[other]?.nom||other)}</div><div class="prev" style="${unread>0?'font-weight:700;color:white':''}">${esc((chat.lastMsg||"").slice(0,50))}</div></div><div class="right-info"><div class="time">${timeStr(chat.lastTime)}</div>${unread>0?`<div class="unread-badge">${unread>99?'99+':unread}</div>`:""}</div>`;
-    div.onclick=()=>openChat(other);cont.appendChild(div);
-  });
- }
-}
-async function sendRequest(to){try{await Promise.all([set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${to}`),{phone:to,type:"outgoing",status:"pending",createdAt:Date.now()}),set(ref(db,`jasonBusiness/chat_requests/${to}/${myPhone}`),{phone:myPhone,type:"incoming",status:"pending",createdAt:Date.now()})]);alert("Demande envoyée !");}catch(e){alert(e.message);}}
-async function acceptRequest(from){try{const id=getChatId(myPhone,from);await Promise.all([set(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{with:from,status:"accepted",lastMsg:"Discussion acceptée",lastTime:Date.now(),unread:0}),set(ref(db,`jasonBusiness/user_chats/${from}/${id}`),{with:myPhone,status:"accepted",lastMsg:"Discussion acceptée",lastTime:Date.now(),unread:1}),remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${from}`)),remove(ref(db,`jasonBusiness/chat_requests/${from}/${myPhone}`))]);document.querySelector('[data-tab="chats"]').click();openChat(from);}catch(e){alert(e.message);}}
 
+onValue(ref(db,"jasonBusiness/presence"),s=>{
+ presenceCache=s.val()||{};
+ render();
+ if(activeChat)$("chatPhone").textContent=isOnline(activeChat)?activeChat+" • En ligne 🟢":activeChat+" • Hors ligne";
+},e=>setError("Présence Firebase : "+e.message));
+
+onValue(ref(db,"jasonBusiness/users"),s=>{
+ allUsers=s.val()||{};
+ render();
+},e=>setError("Lecture utilisateurs : "+e.message));
+
+onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),s=>{
+ myRequests=s.val()||{};
+ const count=Object.values(myRequests).filter(r=>r&&r.type==="incoming"&&r.status==="pending").length;
+ $("reqCount").textContent=count;
+ $("reqCount").style.display=count?"inline-block":"none";
+ render();
+},e=>setError("Demandes Firebase : "+e.message));
+
+onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),s=>{
+ myChats=s.val()||{};
+ const total=Object.values(myChats).reduce((sum,c)=>sum+(Number(c?.unread)||0),0);
+ $("totalUnread").textContent=total>99?"99+":total;
+ $("totalUnread").style.display=total>0?"inline-block":"none";
+ render();
+},e=>setError("Conversations Firebase : "+e.message));
+
+document.querySelectorAll(".tabs .tab").forEach(t=>{
+ t.addEventListener("click",()=>{
+  document.querySelectorAll(".tabs .tab").forEach(x=>x.classList.remove("active"));
+  t.classList.add("active");tab=t.dataset.tab;render();
+ });
+});
+$("search").addEventListener("input",render);
+$("topBar").addEventListener("click",()=>{if(innerWidth<=800)$("leftPanel").classList.remove("hide")});
+
+$("btnAddManual").addEventListener("click",()=>{
+ const p=$("manualPhone").value.trim();
+ if(!p||normalizePhone(p).length<8)return alert("Numéro invalide");
+ if(samePhone(p,myPhone))return alert("Tu ne peux pas ajouter ton propre numéro.");
+ if(!manualUsers.some(x=>samePhone(x,p)))manualUsers.push(p);
+ localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));
+ $("manualPhone").value="";render();
+});
+
+function render(){
+ const q=($("search").value||"").toLowerCase(),cont=$("list");
+ cont.innerHTML="";
+ const users=getCombinedUsers();
+
+ if(tab==="users"){
+  let count=0;
+  Object.entries(users).forEach(([phone,u])=>{
+   if(samePhone(phone,myPhone))return;
+   const name=u.nom||u.name||u.username||phone;
+   if(q&&!phone.toLowerCase().includes(q)&&!String(name).toLowerCase().includes(q))return;
+   count++;
+   const id=getChatIdFor(phone),friend=Object.values(myChats).some(c=>c&&c.status==="accepted"&&c.with&&samePhone(c.with,phone))||myChats[id]?.status==="accepted";
+   const sent=Object.values(myRequests).some(r=>r&&r.type==="outgoing"&&r.status==="pending"&&samePhone(r.phone,phone));
+   const photo=getUserPhoto(phone);
+   const div=document.createElement("div");div.className="item";
+   const av=document.createElement("div");av.className="av";
+   if(photo){const img=document.createElement("img");img.src=photo;av.appendChild(img)}else av.textContent=phone.slice(-2);
+   const info=document.createElement("div");info.className="info";
+   const nm=document.createElement("div");nm.className="name";nm.textContent=name;
+   const prev=document.createElement("div");prev.className="prev";prev.textContent=phone;
+   info.append(nm,prev);const action=document.createElement("div");action.textContent=friend?"💬":sent?"⏳":"+";
+   div.append(av,info,action);
+   div.addEventListener("click",()=>friend?openChat(phone):!sent&&sendRequest(phone));
+   cont.appendChild(div);
+  });
+  if(!count)cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucun utilisateur</div>';
+  return;
+ }
+
+ if(tab==="requests"){
+  const reqs=Object.entries(myRequests).filter(([_,r])=>r&&r.type==="incoming"&&r.status==="pending");
+  if(!reqs.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucune demande</div>';return}
+  reqs.forEach(([phone,r])=>{
+   const div=document.createElement("div");div.className="item";
+   const av=document.createElement("div");av.className="av";av.textContent=phone.slice(-2);
+   const info=document.createElement("div");info.className="info";
+   const name=document.createElement("div");name.className="name";name.textContent=allUsers[phone]?.nom||phone;
+   const prev=document.createElement("div");prev.className="prev";prev.textContent="Veut discuter";
+   const b=document.createElement("button");b.className="btn";b.textContent="Accepter";
+   b.addEventListener("click",e=>{e.stopPropagation();acceptRequest(phone)});
+   info.append(name,prev);div.append(av,info,b);cont.appendChild(div);
+  });
+  return;
+ }
+
+ const list=Object.entries(myChats)
+  .filter(([_,c])=>c&&c.status==="accepted")
+  .sort((a,b)=>(Number(b[1].lastTime)||0)-(Number(a[1].lastTime)||0));
+ if(!list.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucun chat. Va dans Utilisateurs.</div>';return}
+ let shown=0;
+ list.forEach(([id,chat])=>{
+  let other=chat.with||id.split("_").find(p=>!samePhone(p,myPhone));
+  if(!other||samePhone(other,myPhone))return;
+  const u=allUsers[other]||allUsers[normalizePhone(other)]||{};
+  const name=u.nom||u.name||other;
+  if(q&&!String(name).toLowerCase().includes(q)&&!String(other).toLowerCase().includes(q))return;
+  shown++;
+  const photo=getUserPhoto(other),unread=Number(chat.unread)||0;
+  const div=document.createElement("div");
+  div.className="item"+(samePhone(activeChat,other)?" active":"")+(unread>0?" has-unread":"");
+  const av=document.createElement("div");av.className="av";
+  if(photo){const img=document.createElement("img");img.src=photo;av.appendChild(img)}else av.textContent=String(other).slice(-2);
+  const info=document.createElement("div");info.className="info";
+  const nm=document.createElement("div");nm.className="name";nm.textContent=name;
+  const prev=document.createElement("div");prev.className="prev";prev.style.fontWeight=unread?"700":"400";prev.textContent=chat.lastMsg||"Conversation";
+  info.append(nm,prev);
+  const right=document.createElement("div");right.className="right-info";
+  const time=document.createElement("div");time.className="time";time.textContent=timeStr(chat.lastTime);right.appendChild(time);
+  if(unread){const badge=document.createElement("div");badge.className="unread-badge";badge.textContent=unread>99?"99+":unread;right.appendChild(badge)}
+  div.append(av,info,right);div.addEventListener("click",()=>openChat(other));
+  cont.appendChild(div);
+ });
+ if(!shown)cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucun chat trouvé</div>';
+}
+
+async function sendRequest(to){
+ try{
+  await Promise.all([
+   set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${to}`),{phone:to,type:"outgoing",status:"pending",createdAt:Date.now()}),
+   set(ref(db,`jasonBusiness/chat_requests/${to}/${myPhone}`),{phone:myPhone,type:"incoming",status:"pending",createdAt:Date.now()})
+  ]);
+  alert("Demande envoyée !");
+ }catch(e){alert("Erreur Firebase : "+e.message)}
+}
+async function acceptRequest(from){
+ try{
+  const id=getChatId(myPhone,from),now=Date.now();
+  await Promise.all([
+   set(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{with:from,status:"accepted",lastMsg:"Discussion acceptée",lastTime:now,unread:0}),
+   set(ref(db,`jasonBusiness/user_chats/${from}/${id}`),{with:myPhone,status:"accepted",lastMsg:"Discussion acceptée",lastTime:now,unread:0}),
+   remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${from}`)),
+   remove(ref(db,`jasonBusiness/chat_requests/${from}/${myPhone}`))
+  ]);
+  document.querySelector('[data-tab="chats"]').click();openChat(from);
+ }catch(e){alert("Erreur : "+e.message)}
+}
+
+function clearMessageListeners(){
+ messageStops.forEach(stop=>{try{stop()}catch{}});
+ messageStops=[];messageSets={};
+}
 function openChat(other){
- activeChat=other; allMessages=[]; displayLimit=40; firstOpen=true;
- if(messageUnsubscribe){messageUnsubscribe();messageUnsubscribe=null;}
- const photo=getUserPhoto(other);$("chatName").textContent=allUsers[other]?.nom||other;$("chatPhone").textContent=isOnline(other)?other+" • En ligne 🟢":"Hors ligne";$("chatAvatar").innerHTML=photo?`<img src="${esc(photo)}">`:esc(other.slice(-2));
+ activeChat=other;activeChatId=getChatIdFor(other);
+ allMessages=[];displayLimit=40;firstOpen=true;
+ clearMessageListeners();
+ const u=allUsers[other]||allUsers[normalizePhone(other)]||{};
+ $("chatName").textContent=u.nom||u.name||other;
+ $("chatPhone").textContent=isOnline(other)?other+" • En ligne 🟢":other+" • Hors ligne";
+ const photo=getUserPhoto(other);$("chatAvatar").innerHTML="";
+ if(photo){const img=document.createElement("img");img.src=photo;$("chatAvatar").appendChild(img)}else $("chatAvatar").textContent=String(other).slice(-2);
  $("msgInput").disabled=false;$("sendBtn").disabled=false;$("recordBtn").disabled=false;
  if(innerWidth<=800)$("leftPanel").classList.add("hide");
  set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:other}).catch(()=>{});
- const id=getChatId(myPhone,other),messagesRef=ref(db,`jasonBusiness/messages/${id}`);
- const unsub=onValue(messagesRef,s=>{
-   if(activeChat!==other)return;
-   allMessages=Object.entries(s.val()||{}).map(([key,v])=>({...v,_key:key})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
-   renderMessages(false);
-   markAsRead(id,allMessages).catch(()=>{});
-   markAsDelivered(id,allMessages).catch(()=>{});
+ $("msgs").innerHTML='<div style="margin:auto;opacity:.6;padding:20px;text-align:center">Chargement des messages…</div>';
+ const ids=chatIdCandidates(other);
+ ids.forEach(id=>{
+  const messageRef=ref(db,`jasonBusiness/messages/${id}`);
+  const stop=onValue(messageRef,s=>{
+   if(!samePhone(activeChat,other))return;
+   messageSets[id]=s.val()||{};
+   rebuildMessages();
+   markAsRead(id,Object.entries(messageSets[id]).map(([key,m])=>({...m,_key:key}))).catch(()=>{});
    update(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{unread:0}).catch(()=>{});
+  },err=>setHint("⚠️ Lecture messages : "+err.message));
+  messageStops.push(stop);
  });
- messageUnsubscribe=unsub;render();$("msgInput").focus();
+ render();
+ $("msgInput").focus();
+}
+function rebuildMessages(){
+ const map=new Map();
+ for(const [chatId,records] of Object.entries(messageSets)){
+  for(const [key,m] of Object.entries(records||{})){
+   if(!m)continue;
+   const sender=m.from||m.sender||"";
+   const timestamp=Number(m.createdAt||m.timestamp||m.time||0);
+   const signature=String(sender)+"|"+timestamp+"|"+String(m.text||"")+"|"+String(m.type||"");
+   const unique=m.id||key;
+   if(!map.has(unique))map.set(unique,{...m,_key:key,_chatId:chatId,_signature:signature});
+  }
+ }
+ allMessages=[...map.values()].sort((a,b)=>
+  Number(a.createdAt||a.timestamp||0)-Number(b.createdAt||b.timestamp||0)
+ );
+ renderMessages();
 }
 async function markAsRead(id,arr){
-  const changes={};
-  arr.forEach(m=>{ if(m.to===myPhone && m.from!==myPhone && m.from===activeChat && m.status!=="read"){ changes[`jasonBusiness/messages/${id}/${m._key}/status`]="read"; changes[`jasonBusiness/messages/${id}/${m._key}/readAt`]=Date.now(); } });
-  if(Object.keys(changes).length) await update(ref(db),changes);
-}
-async function markAsDelivered(id,arr){
-  const changes={};
-  arr.forEach(m=>{ if(m.to===myPhone && m.from!==myPhone && m.status==="sent"){ changes[`jasonBusiness/messages/${id}/${m._key}/status`]="delivered"; } });
-  if(Object.keys(changes).length) await update(ref(db),changes);
+ const changes={};
+ arr.forEach(m=>{
+  const sender=m.from||m.sender;
+  if(m.to&&samePhone(m.to,myPhone)&&!samePhone(sender,myPhone)&&m.status!=="read"){
+   changes[`jasonBusiness/messages/${id}/${m._key}/status`]="read";
+   changes[`jasonBusiness/messages/${id}/${m._key}/readAt`]=Date.now();
+  }
+ });
+ if(Object.keys(changes).length)await update(ref(db),changes);
 }
 function renderMessages(keepPosition=false){
-  const container=$("msgs");
-  const prevScrollHeight=container.scrollHeight;
-  const prevScrollTop=container.scrollTop;
-  const wasAtBottom = prevScrollHeight - prevScrollTop - container.clientHeight < 120;
-  const total=allMessages.length;
-  const start=Math.max(0,total-displayLimit);
-  const toShow=allMessages.slice(start);
-  let html="";
-  if(start>0){ html+=`<button class="load-more show" onclick="loadMore()">⬆️ Voir ${start} anciens messages</button>`; }
-  if(total===0){ html+='<div style="margin:auto;opacity:.6;padding:20px;text-align:center">Début conversation</div>'; container.innerHTML=html; return; }
-  toShow.forEach(m=>{
-    const mine=m.from===myPhone;
-    let inner="";
-    if(mine) inner+=`<div class="msg-actions"><button class="del" onclick="deleteMessage('${m._key}')">🗑️ Retirer</button></div>`;
-    if(m.text && !m.deleted) inner+=`<div>${esc(m.text)}</div>`;
-    if(m.photo && !m.deleted) inner+=`<div class="photo-wrap" onclick="openImageViewer('${m.photo}')"><img src="${m.photo}" loading="lazy"></div>`;
-    if(m.audio && !m.deleted) inner+=`<audio controls src="${m.audio}"></audio>`;
-    if(m.deleted) inner+=`<div style="font-style:italic;opacity:.7">🚫 Message retiré</div>`;
-    let statusHtml=""; if(mine && !m.deleted){ if(m.status==="read") statusHtml=`<span class="status read">✓✓ Lu</span>`; else if(m.status==="delivered") statusHtml=`<span>✓✓</span>`; else statusHtml=`<span>✓</span>`; }
-    inner+=`<div class="meta"><span>${timeStr(m.createdAt)}</span>${statusHtml}</div>`;
-    html+=`<div class="msg ${mine?'me':'other'}" data-key="${m._key}">${inner}</div>`;
-  });
-  container.innerHTML=html;
-  if(keepPosition){ container.scrollTop = prevScrollTop + (container.scrollHeight - prevScrollHeight); }
-  else if(firstOpen){ container.scrollTop=container.scrollHeight; firstOpen=false; }
-  else if(wasAtBottom){ container.scrollTop=container.scrollHeight; }
-  checkScrollDown();
-}
-window.loadMore=()=>{ displayLimit+=30; renderMessages(true); };
-$("msgs").addEventListener("scroll",()=>{
-  const c=$("msgs");
-  if(c.scrollTop<80 && allMessages.length>displayLimit){ displayLimit+=20; renderMessages(true); }
-  checkScrollDown();
-});
-function checkScrollDown(){ const c=$("msgs"); const show=c.scrollHeight - c.scrollTop - c.clientHeight > 300; $("scrollDown").classList.toggle("show",show); }
-$("scrollDown").onclick=()=>{ $("msgs").scrollTop=$("msgs").scrollHeight; };
-async function deleteMessage(msgKey){
-  if(!activeChat || !msgKey) return;
-  if(!confirm("🗑️ Retirer ce message pour tout le monde ?")) return;
-  const id=getChatId(myPhone,activeChat);
-  try{await remove(ref(db,`jasonBusiness/messages/${id}/${msgKey}`));setHint("✅ Message retiré");}catch(e){alert("Erreur: "+e.message);}
-}
-async function publishMessage(other,fields,lastMsg){
- const id=getChatId(myPhone,other),now=Date.now();
- const newRef=push(ref(db,`jasonBusiness/messages/${id}`));
- await set(newRef,{...fields,from:myPhone,to:other,createdAt:now,status:"sent"});
- const a=ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),b=ref(db,`jasonBusiness/user_chats/${other}/${id}`);
- const [sa,sb]=await Promise.all([get(a),get(b)]);const da=sa.val()||{},dbb=sb.val()||{};
- await Promise.all([set(a,{...da,with:other,status:"accepted",lastMsg,lastTime:now,unread:0}),set(b,{...dbb,with:myPhone,status:"accepted",lastMsg,lastTime:now,unread:(Number(dbb.unread)||0)+1})]);
-}
-
-// MULTI PHOTOS 1000
-$("photoInput").addEventListener("change",async e=>{
- const files=Array.from(e.target.files||[]); if(!files.length) return;
- if(!activeChat){ alert("Ouvre un chat d'abord"); e.target.value=""; return; }
- if(files.length>1000){ alert("Max 1000 photos! Tu as "+files.length); e.target.value=""; return; }
- setHint("⏳ Chargement "+files.length+" photos...");
- pendingPhotos=[]; const grid=$("previewGrid"); grid.innerHTML=""; $("photoPreview").classList.add("show");
- let loaded=0;
- for(let i=0;i<files.length;i++){
-   const file=files[i]; if(file.size>4*1024*1024) continue;
-   const base64=await new Promise(res=>{ const r=new FileReader(); r.readAsDataURL(file); r.onloadend=()=>res(r.result); });
-   pendingPhotos.push(base64);
-   const img=document.createElement("img"); img.src=base64; grid.appendChild(img);
-   loaded++; $("previewCount").textContent=loaded+" photos"; $("confirmPhoto").textContent="➤ Envoyer "+loaded+" photos";
+ const container=$("msgs"),oldHeight=container.scrollHeight,oldTop=container.scrollTop;
+ const atBottom=oldHeight-oldTop-container.clientHeight<120;
+ const total=allMessages.length,start=Math.max(0,total-displayLimit);
+ container.innerHTML="";
+ if(start>0){
+  const more=document.createElement("button");more.className="load-more show";
+  more.textContent="⬆️ Voir "+start+" anciens messages";
+  more.addEventListener("click",()=>{displayLimit+=30;renderMessages(true)});
+  container.appendChild(more);
  }
- setHint("👁️ "+pendingPhotos.length+" photos prêtes - Petites dans chat");
- e.target.value="";
-});
-$("cancelPhoto").onclick=()=>{ pendingPhotos=[]; $("photoPreview").classList.remove("show"); $("previewGrid").innerHTML=""; $("photoCaption").value=""; $("uploadProgress").style.display="none"; setHint("Annulé"); };
-$("confirmPhoto").onclick=async()=>{
- if(!pendingPhotos.length || !activeChat) return;
- const other=activeChat; const caption=$("photoCaption").value.trim();
- $("confirmPhoto").disabled=true; $("uploadProgress").style.display="block"; const total=pendingPhotos.length;
- try{
-   for(let i=0;i<total;i++){
-     $("uploadProgress").textContent=`⏳ Envoi ${i+1}/${total}...`;
-     $("confirmPhoto").textContent=`⏳ ${i+1}/${total}`;
-     const textToSend=i===total-1?caption:"";
-     await publishMessage(other,{photo:pendingPhotos[i],type:"image",text:textToSend}, i===0 ? (caption||`📷 ${total} photos`) : `📷 Photo ${i+1}`);
-     await new Promise(r=>setTimeout(r,120));
+ if(!total){
+  const empty=document.createElement("div");empty.style.cssText="margin:auto;opacity:.6;padding:20px;text-align:center";
+  empty.textContent="Début de la conversation. Envoie un message !";container.appendChild(empty);return;
+ }
+ allMessages.slice(start).forEach(m=>{
+  const sender=m.from||m.sender||"";
+  const mine=samePhone(sender,myPhone);
+  const row=document.createElement("div");row.className="msg "+(mine?"me":"other");
+  if(mine){
+   const actions=document.createElement("div");actions.className="msg-actions";
+   const del=document.createElement("button");del.className="del";del.textContent="🗑️ Retirer";
+   del.addEventListener("click",()=>deleteMessage(m._chatId,m._key));actions.appendChild(del);row.appendChild(actions);
+  }
+  if(m.deleted){
+   const deleted=document.createElement("div");deleted.style.fontStyle="italic";deleted.textContent="🚫 Message retiré";row.appendChild(deleted);
+  }else{
+   if(m.text){
+    const text=document.createElement("div");text.textContent=m.text;row.appendChild(text);
    }
-   setHint(`✅ ${total} photos envoyées!`); $("photoPreview").classList.remove("show"); pendingPhotos=[]; $("previewGrid").innerHTML=""; $("photoCaption").value=""; $("uploadProgress").style.display="none"; $("msgs").scrollTop=$("msgs").scrollHeight;
- }catch(err){ alert("Erreur: "+err.message); } finally{ $("confirmPhoto").disabled=false; $("confirmPhoto").textContent="➤ Envoyer 0 photos"; }
-};
-
-// VIEWER PHOTO ZOOM
-window.openImageViewer=(src)=>{
-  currentViewerSrc=src;
-  const viewer=$("imgViewer");
-  const img=$("viewerImg");
-  img.src=src;
-  resetZoom();
-  viewer.classList.add("show");
-  $("viewerTitle").textContent="Photo • Pince pour zoomer";
-};
-window.closeViewer=()=>{
-  $("imgViewer").classList.remove("show");
-  resetZoom();
-};
-window.downloadImage=()=>{
-  if(!currentViewerSrc) return;
-  const a=document.createElement("a"); a.href=currentViewerSrc; a.download="photo_"+Date.now()+".jpg"; a.click();
-};
-window.zoomIn=()=>{ scale=Math.min(scale*1.3,5); updateTransform(); };
-window.zoomOut=()=>{ scale=Math.max(scale/1.3,0.5); updateTransform(); };
-window.resetZoom=()=>{ scale=1; posX=0; posY=0; lastPosX=0; lastPosY=0; updateTransform(); };
-function updateTransform(){
-  const img=$("viewerImg");
-  img.style.transform=`translate(${posX}px, ${posY}px) scale(${scale})`;
-  $("zoomInfo").textContent=Math.round(scale*100)+"%";
-  img.style.cursor=scale>1?"grab":"zoom-in";
+   if(m.photo||m.image){
+    const src=m.photo||m.image;
+    const wrap=document.createElement("div");wrap.className="photo-wrap";
+    const img=document.createElement("img");img.loading="lazy";img.alt="Photo";img.src=src;
+    img.addEventListener("click",()=>openImageViewer(src));wrap.appendChild(img);row.appendChild(wrap);
+   }
+   if(m.audio||m.voice||m.audioUrl){
+    const audio=document.createElement("audio");audio.controls=true;audio.preload="metadata";audio.src=m.audio||m.voice||m.audioUrl;row.appendChild(audio);
+   }
+  }
+  const meta=document.createElement("div");meta.className="meta";
+  const time=document.createElement("span");time.textContent=timeStr(m.createdAt||m.timestamp||m.time);meta.appendChild(time);
+  if(mine&&!m.deleted){
+   const status=document.createElement("span");
+   if(m.status==="read"){status.className="status read";status.textContent="✓✓ Lu"}
+   else if(m.status==="delivered")status.textContent="✓✓";
+   else status.textContent="✓";
+   meta.appendChild(status);
+  }
+  row.appendChild(meta);container.appendChild(row);
+ });
+ if(keepPosition)container.scrollTop=oldTop+(container.scrollHeight-oldHeight);
+ else if(firstOpen){container.scrollTop=container.scrollHeight;firstOpen=false}
+ else if(atBottom)container.scrollTop=container.scrollHeight;
+ checkScrollDown();
+}
+$("msgs").addEventListener("scroll",()=>{
+ const c=$("msgs");
+ if(c.scrollTop<80&&allMessages.length>displayLimit){displayLimit+=20;renderMessages(true)}
+ checkScrollDown();
+});
+function checkScrollDown(){
+ const c=$("msgs");$("scrollDown").classList.toggle("show",c.scrollHeight-c.scrollTop-c.clientHeight>300);
+}
+$("scrollDown").addEventListener("click",()=>{$("msgs").scrollTop=$("msgs").scrollHeight});
+async function deleteMessage(id,key){
+ if(!confirm("Retirer ce message pour tout le monde ?"))return;
+ try{await remove(ref(db,`jasonBusiness/messages/${id}/${key}`));setHint("✅ Message retiré")}
+ catch(e){alert("Erreur suppression : "+e.message)}
 }
 
-// TOUCH EVENTS ZOOM + PAN
-const viewerContent=$("viewerContent");
-viewerContent.addEventListener("touchstart",e=>{
-  if(e.touches.length===1){
-    isDragging=true; startX=e.touches[0].clientX - posX; startY=e.touches[0].clientY - posY;
-  }else if(e.touches.length===2){
-    isDragging=false;
-    const dx=e.touches[0].clientX - e.touches[1].clientX;
-    const dy=e.touches[0].clientY - e.touches[1].clientY;
-    initialDist=Math.sqrt(dx*dx+dy*dy);
-    lastScale=scale;
-  }
-});
-viewerContent.addEventListener("touchmove",e=>{
-  e.preventDefault();
-  if(e.touches.length===1 && isDragging && scale>1){
-    posX=e.touches[0].clientX - startX;
-    posY=e.touches[0].clientY - startY;
-    updateTransform();
-  }else if(e.touches.length===2){
-    const dx=e.touches[0].clientX - e.touches[1].clientX;
-    const dy=e.touches[0].clientY - e.touches[1].clientY;
-    const dist=Math.sqrt(dx*dx+dy*dy);
-    scale=Math.min(Math.max((dist/initialDist)*lastScale,0.5),5);
-    updateTransform();
-  }
-},{passive:false});
-viewerContent.addEventListener("touchend",e=>{
-  if(e.touches.length===0){
-    isDragging=false;
-    lastPosX=posX; lastPosY=posY;
-  }
-});
-// DOUBLE TAP ZOOM
-let lastTap=0;
-viewerContent.addEventListener("click",e=>{
-  const now=Date.now();
-  if(now-lastTap<300){
-    if(scale===1){ scale=2.5; } else { scale=1; posX=0; posY=0; }
-    updateTransform();
-  }
-  lastTap=now;
-});
-// MOUSE WHEEL ZOOM
-viewerContent.addEventListener("wheel",e=>{
-  e.preventDefault();
-  const delta=e.deltaY>0?-0.1:0.1;
-  scale=Math.min(Math.max(scale+delta,0.5),5);
-  updateTransform();
-},{passive:false});
-// DRAG WITH MOUSE
-let mouseDown=false;
-viewerContent.addEventListener("mousedown",e=>{ if(scale>1){ mouseDown=true; startX=e.clientX-posX; startY=e.clientY-posY; } });
-window.addEventListener("mousemove",e=>{ if(mouseDown && scale>1){ posX=e.clientX-startX; posY=e.clientY-startY; updateTransform(); } });
-window.addEventListener("mouseup",()=>{ mouseDown=false; });
-
-async function sendText(){if(busySending)return;const text=$("msgInput").value.trim();if(!text||!activeChat)return;const other=activeChat;busySending=true;$("sendBtn").disabled=true;try{$("msgInput").value="";await publishMessage(other,{text},text);setHint("✓ Envoyé");$("msgs").scrollTop=$("msgs").scrollHeight;}catch(e){$("msgInput").value=text;alert(e.message);}finally{busySending=false;$("sendBtn").disabled=!activeChat;$("msgInput").focus();}}
-$("sendBtn").onclick=sendText;
-$("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText();}});
-function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");}
-function clearRecordingUI(){clearInterval(timerInt);timerInt=null;$("recBar").classList.remove("show");$("recordBtn").classList.remove("hold");$("recordBtn").textContent="🎙️";$("recordBtn").disabled=!activeChat;}
-function stopRecorder(){if(mediaRecorder&&mediaRecorder.state!=="inactive"){try{mediaRecorder.stop();}catch{}}}
-async function toggleVocal(){
- if(recording){stopRecorder();return;}
- if(!activeChat){alert("Sélectionne un chat");return;}
- if(!navigator.mediaDevices?.getUserMedia){alert("Micro non supporté.");return;}
+async function publishMessage(other,fields,lastMsg){
+ const id=activeChatId||getChatIdFor(other),now=Date.now();
+ const messageRef=push(ref(db,`jasonBusiness/messages/${id}`));
+ const data={...fields,from:myPhone,to:other,createdAt:now,status:"sent"};
+ // Mise à jour de la liste des chats et du message.
+ await set(messageRef,data);
+ // Affichage immédiat, même avant le prochain événement Firebase.
+ if(!messageSets[id])messageSets[id]={};
+ messageSets[id][messageRef.key]=data;
+ rebuildMessages();
+ const senderChatRef=ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`);
+ const receiverChatRef=ref(db,`jasonBusiness/user_chats/${other}/${id}`);
+ const [sa,sb]=await Promise.all([get(senderChatRef),get(receiverChatRef)]);
+ const da=sa.val()||{},dbb=sb.val()||{};
+ await Promise.all([
+  set(senderChatRef,{...da,with:other,status:"accepted",lastMsg,lastTime:now,unread:0}),
+  set(receiverChatRef,{...dbb,with:myPhone,status:"accepted",lastMsg,lastTime:now,unread:(Number(dbb.unread)||0)+1})
+ ]);
+}
+async function sendText(){
+ if(busySending)return;
+ const text=$("msgInput").value.trim();
+ if(!text||!activeChat)return;
+ busySending=true;$("sendBtn").disabled=true;
  try{
-  setHint("🎙️ Micro...");recordStream=await navigator.mediaDevices.getUserMedia({audio:true});
-  audioChunks=[];recSec=0;cancelled=false;recording=true;mediaRecorder=new MediaRecorder(recordStream);
+  await publishMessage(activeChat,{text,type:"text"},text);
+  $("msgInput").value="";$("msgInput").style.height="40px";
+  setHint("✓ Message envoyé");$("msgs").scrollTop=$("msgs").scrollHeight;
+ }catch(e){setHint("⚠️ Envoi échoué : "+e.message)}
+ finally{busySending=false;$("sendBtn").disabled=!activeChat}
+}
+$("sendBtn").addEventListener("click",sendText);
+$("msgInput").addEventListener("keydown",e=>{
+ if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText()}
+});
+$("msgInput").addEventListener("input",e=>{
+ e.target.style.height="40px";e.target.style.height=Math.min(e.target.scrollHeight,100)+"px";
+});
+
+/* PHOTOS */
+$("photoInput").addEventListener("change",async e=>{
+ const files=Array.from(e.target.files||[]);e.target.value="";
+ if(!files.length)return;
+ if(!activeChat){alert("Ouvre un chat d'abord.");return}
+ if(files.length>20){alert("Sélectionne au maximum 20 photos à la fois.");return}
+ pendingPhotos=[];$("previewGrid").innerHTML="";$("photoPreview").classList.add("show");
+ for(const file of files){
+  if(!file.type.startsWith("image/"))continue;
+  if(file.size>900*1024){setHint("Photo ignorée : choisis une image de moins de 900 Ko.");continue}
+  try{
+   const data=await new Promise((resolve,reject)=>{
+    const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(new Error("Lecture photo impossible"));reader.readAsDataURL(file);
+   });
+   pendingPhotos.push(data);
+   const img=document.createElement("img");img.src=data;$("previewGrid").appendChild(img);
+  }catch(err){setHint(err.message)}
+ }
+ $("previewCount").textContent=pendingPhotos.length+" photos";
+ $("confirmPhoto").textContent="➤ Envoyer "+pendingPhotos.length+" photos";
+ $("uploadProgress").style.display="none";
+});
+$("cancelPhoto").addEventListener("click",()=>{
+ pendingPhotos=[];$("photoPreview").classList.remove("show");$("previewGrid").innerHTML="";
+ $("photoCaption").value="";$("uploadProgress").style.display="none";
+});
+$("confirmPhoto").addEventListener("click",async()=>{
+ if(!pendingPhotos.length||!activeChat)return;
+ const other=activeChat,photos=[...pendingPhotos],caption=$("photoCaption").value.trim();
+ $("confirmPhoto").disabled=true;$("uploadProgress").style.display="block";
+ try{
+  for(let i=0;i<photos.length;i++){
+   $("uploadProgress").textContent="Envoi "+(i+1)+"/"+photos.length+"…";
+   await publishMessage(other,{photo:photos[i],type:"image",text:i===photos.length-1?caption:""},
+    i===photos.length-1&&caption?caption:"📷 Photo");
+  }
+  pendingPhotos=[];$("previewGrid").innerHTML="";$("photoCaption").value="";
+  $("photoPreview").classList.remove("show");$("uploadProgress").style.display="none";
+  setHint("✅ Photos envoyées");$("msgs").scrollTop=$("msgs").scrollHeight;
+ }catch(e){setHint("⚠️ Erreur photo : "+e.message)}
+ finally{$("confirmPhoto").disabled=false;$("confirmPhoto").textContent="➤ Envoyer "+pendingPhotos.length+" photos"}
+});
+
+/* VOCAL */
+function fmt(seconds){return String(Math.floor(seconds/60)).padStart(2,"0")+":"+String(seconds%60).padStart(2,"0")}
+function stopTracks(){if(recordStream){recordStream.getTracks().forEach(t=>t.stop());recordStream=null}}
+function clearRecordingUI(){
+ clearInterval(timerInt);timerInt=null;$("recBar").classList.remove("show");
+ $("recordBtn").textContent="🎙️";$("recordBtn").disabled=!activeChat;
+}
+async function toggleVocal(){
+ if(recording){stopRecorder();return}
+ if(!activeChat){alert("Sélectionne un chat.");return}
+ if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder){
+  alert("Le microphone nécessite Chrome et une page HTTPS.");return;
+ }
+ try{
+  recordStream=await navigator.mediaDevices.getUserMedia({audio:true});
+  audioChunks=[];recSec=0;cancelled=false;recording=true;
   const other=activeChat;
-  mediaRecorder.ondataavailable=e=>{if(e.data&&e.data.size>0)audioChunks.push(e.data);};
+  const types=["audio/webm;codecs=opus","audio/webm","audio/mp4","audio/ogg;codecs=opus","audio/ogg"];
+  const mime=types.find(t=>MediaRecorder.isTypeSupported(t));
+  mediaRecorder=new MediaRecorder(recordStream,mime?{mimeType:mime}:{});
+  mediaRecorder.ondataavailable=e=>{if(e.data&&e.data.size)audioChunks.push(e.data)};
+  mediaRecorder.onerror=()=>setHint("⚠️ Erreur microphone");
   mediaRecorder.onstop=async()=>{
-    const wasCancelled=cancelled;const chunks=[...audioChunks];recording=false;clearInterval(timerInt);clearRecordingUI();stopTracks();audioChunks=[];
-    if(wasCancelled||!chunks.length){setHint("Annulé");return;}
-    const blob=new Blob(chunks,{type:"audio/webm"});if(blob.size<800){setHint("Trop court");return;}
-    setHint("⏳ Envoi vocal...");
-    const reader=new FileReader();reader.readAsDataURL(blob);
-    reader.onloadend=async()=>{try{await publishMessage(other,{audio:reader.result,type:"audio",text:"🎙️ Vocal"},"🎙️ Vocal");setHint("✅ Vocal envoyé!");$("msgs").scrollTop=$("msgs").scrollHeight;}catch(err){alert("Erreur: "+err.message);}};
+   const wasCancelled=cancelled,chunks=[...audioChunks],mimeType=mediaRecorder?.mimeType||"audio/webm";
+   recording=false;clearRecordingUI();stopTracks();audioChunks=[];
+   if(wasCancelled){setHint("Enregistrement annulé");return}
+   const blob=new Blob(chunks,{type:mimeType});
+   if(blob.size<800){setHint("Vocal trop court. Réessaie.");return}
+   if(blob.size>700*1024){setHint("Vocal trop volumineux. Enregistre un message plus court.");return}
+   setHint("⏳ Envoi du vocal…");
+   try{
+    const data=await new Promise((resolve,reject)=>{
+     const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(new Error("Lecture audio impossible"));reader.readAsDataURL(blob);
+    });
+    await publishMessage(other,{audio:data,type:"audio",audioType:mimeType,duration:recSec,text:"🎙️ Message vocal"},"🎙️ Message vocal");
+    setHint("✅ Vocal envoyé");$("msgs").scrollTop=$("msgs").scrollHeight;
+   }catch(err){setHint("⚠️ Vocal non envoyé : "+err.message)}
   };
-  mediaRecorder.start(200);
-  $("recBar").classList.add("show");$("recordBtn").classList.add("hold");$("recordBtn").textContent="⏹️";$("recTime").textContent="00:00";setHint("🔴 Enregistrement...");timerInt=setInterval(()=>{recSec++;$("recTime").textContent=fmt(recSec);if(recSec>=60)stopRecorder();},1000);
- }catch(err){recording=false;stopTracks();clearRecordingUI();if(err.name==="NotAllowedError")alert("🚫 Micro refusé!");else alert("Erreur: "+err.message);setHint("Micro bloqué");}
+  mediaRecorder.start(250);
+  $("recBar").classList.add("show");$("recordBtn").textContent="⏹️";
+  $("recTime").textContent="00:00";setHint("🔴 Enregistrement en cours…");
+  timerInt=setInterval(()=>{
+   recSec++;$("recTime").textContent=fmt(recSec);
+   if(recSec>=45)stopRecorder();
+  },1000);
+ }catch(e){
+  recording=false;stopTracks();clearRecordingUI();
+  alert("Impossible d'utiliser le microphone. Autorise-le dans Chrome et ouvre cette page en HTTPS.");
+  setHint("Microphone indisponible");
+ }
+}
+function stopRecorder(){
+ if(mediaRecorder&&mediaRecorder.state!=="inactive"){
+  try{mediaRecorder.stop()}catch(e){setHint("Erreur arrêt audio")}
+ }
 }
 $("recordBtn").addEventListener("click",toggleVocal);
-$("recSend").addEventListener("click",()=>{if(recording)stopRecorder();});
-$("recCancel").addEventListener("click",()=>{if(!recording)return;cancelled=true;audioChunks=[];stopRecorder();setHint("Annulé");});
+$("recSend").addEventListener("click",()=>{if(recording)stopRecorder()});
+$("recCancel").addEventListener("click",()=>{
+ if(!recording)return;
+ cancelled=true;audioChunks=[];stopRecorder();
+});
+
+/* PHOTO VIEWER + ZOOM */
+function updateTransform(){
+ $("viewerImg").style.transform=`translate(${posX}px,${posY}px) scale(${scale})`;
+ $("zoomInfo").textContent=Math.round(scale*100)+"%";
+}
+function resetZoom(){scale=1;posX=0;posY=0;updateTransform()}
+function openImageViewer(src){
+ currentViewerSrc=src;$("viewerImg").src=src;
+ $("imgViewer").classList.add("show");$("viewerTitle").textContent="Photo • Zoom";
+ resetZoom();
+}
+function closeViewer(){$("imgViewer").classList.remove("show");$("viewerImg").src="";resetZoom()}
+$("closeViewerBtn").addEventListener("click",closeViewer);
+$("zoomInBtn").addEventListener("click",()=>{scale=Math.min(5,scale*1.3);updateTransform()});
+$("zoomOutBtn").addEventListener("click",()=>{scale=Math.max(.5,scale/1.3);updateTransform()});
+$("resetZoomBtn").addEventListener("click",resetZoom);
+$("downloadImageBtn").addEventListener("click",()=>{
+ if(!currentViewerSrc)return;
+ const a=document.createElement("a");a.href=currentViewerSrc;a.download="jason-photo-"+Date.now()+".jpg";a.click();
+});
+$("viewerContent").addEventListener("wheel",e=>{
+ e.preventDefault();scale=Math.max(.5,Math.min(5,scale+(e.deltaY<0?.15:-.15)));updateTransform();
+},{passive:false});
+let lastTap=0;
+$("viewerContent").addEventListener("click",()=>{
+ const now=Date.now();
+ if(now-lastTap<300){scale=scale===1?2.5:1;if(scale===1){posX=0;posY=0}updateTransform()}
+ lastTap=now;
+});
+$("viewerContent").addEventListener("touchstart",e=>{
+ if(e.touches.length===1){startX=e.touches[0].clientX-posX;startY=e.touches[0].clientY-posY;isDragging=scale>1}
+},{passive:true});
+$("viewerContent").addEventListener("touchmove",e=>{
+ if(e.touches.length===1&&isDragging&&scale>1){
+  e.preventDefault();posX=e.touches[0].clientX-startX;posY=e.touches[0].clientY-startY;updateTransform();
+ }
+},{passive:false});
+$("viewerContent").addEventListener("touchend",()=>{isDragging=false});
+let mouseDown=false;
+$("viewerContent").addEventListener("mousedown",e=>{
+ if(scale>1){mouseDown=true;startX=e.clientX-posX;startY=e.clientY-posY}
+});
+window.addEventListener("mousemove",e=>{
+ if(mouseDown&&scale>1){posX=e.clientX-startX;posY=e.clientY-startY;updateTransform()}
+});
+window.addEventListener("mouseup",()=>mouseDown=false);
+window.addEventListener("keydown",e=>{if(e.key==="Escape")closeViewer()});
+
+window.addEventListener("beforeunload",()=>{
+ clearMessageListeners();clearInterval(timerInt);stopTracks();
+});
 </script>
 </body>
 </html>
