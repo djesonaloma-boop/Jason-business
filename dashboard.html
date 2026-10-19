@@ -71,9 +71,10 @@ body.light .jb-footer{background:rgba(0,0,0,.02);border-color:rgba(0,0,0,.05)}
 .jb-fab-badge{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 6px;border-radius:20px;background:#ff4757;color:white;font-size:10px;font-weight:900;display:grid;place-items:center}
 .jb-navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:11px 0 calc(11px + env(safe-area-inset-bottom));background:rgba(5,10,20,.96);border-top:1px solid rgba(0,210,255,.25);backdrop-filter:blur(22px)}
 body.light .jb-navbar{background:rgba(255,255,255,.94);border-top:1px solid rgba(0,0,0,.08)}
-.jb-nav-link{flex:1;color:white;opacity:.48;text-decoration:none;text-align:center;font-size:10px;border:0;background:none;cursor:pointer}
+.jb-nav-link{flex:1;color:white;opacity:.48;text-decoration:none;text-align:center;font-size:10px;border:0;background:none;cursor:pointer;position:relative}
 body.light .jb-nav-link{color:#0b1220}
 .jb-nav-link.active{color:var(--blue);opacity:1;font-weight:bold}
+.jb-nav-link.active::before{content:"";position:absolute;top:-11px;left:28%;width:44%;height:2px;border-radius:5px;background:var(--blue)}
 .jb-nav-icon{margin-bottom:4px;font-size:18px}
 .jb-loading{position:fixed;z-index:9999;inset:0;display:flex;align-items:center;justify-content:center;background:#050a14}
 .jb-loader{width:40px;height:40px;border-radius:50%;border:3px solid rgba(255,255,255,.09);border-top-color:var(--blue);animation:jbSpin .8s linear infinite}
@@ -150,7 +151,8 @@ Version 2.0 Pro — Connecté à Paramètres ⚙️
 <nav class="jb-navbar">
   <button onclick="goPage('dashboard.html')" class="jb-nav-link active"><div class="jb-nav-icon">📊</div><span data-i18n="dash">Dashboard</span></button>
   <button onclick="goPage('shop.html')" class="jb-nav-link"><div class="jb-nav-icon">🛍️</div><span data-i18n="shop">Boutique</span></button>
-  <button onclick="goPage('parametres.html')" class="jb-nav-link"><div class="jb-nav-icon">⚙️</div>Paramètres</button>
+  <button onclick="goPage('store.html')" class="jb-nav-link"><div class="jb-nav-icon">🛒</div>Store</button>
+  <button onclick="goPage('equipe.html')" class="jb-nav-link"><div class="jb-nav-icon">👥</div>Équipe</button>
   <button onclick="goPage('profil.html')" class="jb-nav-link"><div class="jb-nav-icon">👤</div>Profil</button>
 </nav>
 
@@ -158,17 +160,14 @@ Version 2.0 Pro — Connecté à Paramètres ⚙️
 function goPage(p){window.location.href=p}
 function openService(type){localStorage.setItem("jb_open_service",type);window.location.href="shop.html"}
 
-// ===== PARAMETRES CONNECTES =====
 const jbLang = localStorage.getItem("jb_lang")||"fr";
 const jbMoney = localStorage.getItem("jb_money")||"fc";
 const jbTheme = localStorage.getItem("jb_theme")||"dark";
 const USD_RATE = 2800;
-
 const i18nDict = {
  fr:{welcome:"BIENVENUE SUR VOTRE ESPACE",main_balance:"Solde principal",commissions:"Commissions",gains:"Gains",total:"Total",recharge:"📥 RECHARGER",withdraw:"📤 RETIRER",loyalty:"POINTS DE FIDÉLITÉ",points_desc:"100 points =",convert_points:"CONVERTIR MES POINTS",our_services:"🛍️ Nos services",see_all:"VOIR TOUT →",create_app_desc:"Logo + Code HTML + Lien direct",site_web:"Site web",site_desc:"Site moderne et professionnel",app:"Application",app_desc:"Création d'application mobile sur mesure",chatbot:"Chatbot",chatbot_desc:"Assistant et automatisation intelligente",boost:"Boostage",boost_desc:"Followers, likes, vues - Croissance rapide",ads:"Publicité",ads_desc:"Promotion sur réseaux sociaux",song:"Chanson",song_desc:"Création musicale personnalisée",my_activities:"⚡ Mes activités",order:"COMMANDER →",dash:"Dashboard",shop:"Boutique"},
  en:{welcome:"WELCOME TO YOUR SPACE",main_balance:"Main Balance",commissions:"Commissions",gains:"Earnings",total:"Total",recharge:"📥 RECHARGE",withdraw:"📤 WITHDRAW",loyalty:"LOYALTY POINTS",points_desc:"100 points =",convert_points:"CONVERT MY POINTS",our_services:"🛍️ Our services",see_all:"SEE ALL →",create_app_desc:"Logo + HTML Code + Direct Link",site_web:"Website",site_desc:"Modern and professional site",app:"Application",app_desc:"Custom mobile app creation",chatbot:"Chatbot",chatbot_desc:"Intelligent assistant and automation",boost:"Boost",boost_desc:"Followers, likes, views - Fast growth",ads:"Advertising",ads_desc:"Social media promotion",song:"Song",song_desc:"Custom music creation",my_activities:"⚡ My activities",order:"ORDER →",dash:"Dashboard",shop:"Shop"}
 };
-
 function applySettings(){
  if(jbTheme==="light") document.body.classList.add("light");
  const dict = i18nDict[jbLang]||i18nDict.fr;
@@ -180,7 +179,6 @@ function applySettings(){
  document.getElementById("footerSettings").textContent=`${jbLang.toUpperCase()} • ${jbMoney.toUpperCase()} • ${jbTheme==="light"?"Lumineux":"Sombre"}`;
 }
 applySettings();
-
 function formatMoneyFC(priceFC){
  if(jbMoney==="usd"){
   const usd=(priceFC/USD_RATE).toFixed(2);
@@ -199,14 +197,11 @@ const jbPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getIt
 if(!jbPhone){window.location.replace("login.html");throw new Error("Session");}
 localStorage.setItem("jasonBusinessUserPhone",jbPhone);
 const jbUserReference=ref(jbDatabase,"jasonBusiness/users/"+jbPhone);
-
 const jbMoney = localStorage.getItem("jb_money")||"fc";
 const USD_RATE = 2800;
 function jbFormatFC(v){
  const price = Math.floor(Number(v)||0);
- if(jbMoney==="usd"){
-  return (price/USD_RATE).toFixed(2)+" USD";
- }
+ if(jbMoney==="usd"){return (price/USD_RATE).toFixed(2)+" USD";}
  return price.toLocaleString("fr-FR");
 }
 function jbFormatDate(v){if(!v)return "";const d=new Date(v);if(isNaN(d.getTime()))return "";return d.toLocaleDateString("fr-FR");}
