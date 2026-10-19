@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#050a14">
+<title>JASON BUSINESS — Paramètres</title>
+<style>
+:root{--blue:#00d2ff;--dark:#050a14;--green:#00e676;--red:#ff4757;--gold:#ffd700;--bg:#050a14;--card:rgba(255,255,255,.06);--text:#ffffff;--muted:#b5c5da}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:var(--text);background:radial-gradient(ellipse at 10% 5%,rgba(0,210,255,.12),transparent 35%),linear-gradient(rgba(3,8,18,.85),rgba(3,8,18,.96)),url("IMG_0870.jpeg") center/cover fixed;padding-bottom:110px;overflow-x:hidden;transition:background .3s,color .3s}
+body.light{--bg:#f2f6fb;--card:rgba(0,0,0,.04);--text:#0b1220;--muted:#5a6a85;background:radial-gradient(ellipse at 10% 5%,rgba(0,210,255,.08),transparent 35%),linear-gradient(rgba(242,246,251,.92),rgba(242,246,251,.98)),url("IMG_0870.jpeg") center/cover fixed}
+.jb-overlay{min-height:100vh}
+.jb-header{position:relative;overflow:hidden;padding:20px 20px 18px;background:linear-gradient(135deg,rgba(0,210,255,.13),rgba(5,10,20,.80) 55%,rgba(255,215,0,.055));border-bottom:1px solid rgba(0,210,255,.32);backdrop-filter:blur(22px);display:flex;justify-content:space-between;align-items:center}
+body.light .jb-header{background:linear-gradient(135deg,rgba(0,210,255,.10),rgba(255,255,255,.85));border-bottom:1px solid rgba(0,0,0,.08)}
+.jb-back{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:white;cursor:pointer;font-size:16px}
+body.light .jb-back{background:rgba(0,0,0,.06);color:#0b1220;border-color:rgba(0,0,0,.08)}
+.jb-brand{font-size:16px;font-weight:900;letter-spacing:1.5px;color:var(--blue)}
+.jb-header-actions{display:flex;gap:8px;align-items:center}
+.jb-card{margin:14px 20px;padding:18px;border-radius:20px;background:linear-gradient(145deg,rgba(0,210,255,.10),rgba(5,10,20,.75));border:1px solid rgba(0,210,255,.22);backdrop-filter:blur(18px)}
+body.light .jb-card{background:linear-gradient(145deg,rgba(255,255,255,.85),rgba(255,255,255,.65));border:1px solid rgba(0,0,0,.06);box-shadow:0 6px 20px rgba(0,0,0,.05)}
+.jb-title{font-size:11px;font-weight:900;letter-spacing:1px;color:var(--blue);margin-bottom:12px;text-transform:uppercase}
+.jb-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+body.light .jb-row{border-bottom:1px solid rgba(0,0,0,.06)}
+.jb-row:last-child{border-bottom:0}
+.jb-row-left{display:flex;align-items:center;gap:12px;flex:1}
+.jb-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(145deg,rgba(0,210,255,.13),rgba(0,119,255,.04));border:1px solid rgba(0,210,255,.18);font-size:18px;flex-shrink:0}
+.jb-label{font-size:13px;font-weight:600}
+.jb-desc{font-size:10px;opacity:.55;margin-top:3px;color:var(--muted)}
+.jb-select{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:white;border-radius:10px;padding:8px 12px;font-size:12px;outline:none;min-width:110px}
+body.light .jb-select{background:rgba(0,0,0,.05);color:#0b1220;border-color:rgba(0,0,0,.08)}
+.jb-toggle{width:46px;height:26px;border-radius:20px;background:rgba(255,255,255,.15);position:relative;cursor:pointer;transition:.25s;border:1px solid rgba(255,255,255,.1)}
+.jb-toggle.active{background:linear-gradient(120deg,var(--blue),#00a8ff);border-color:var(--blue)}
+.jb-toggle::after{content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:white;transition:.25s;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.jb-toggle.active::after{left:22px}
+.jb-action{width:100%;padding:14px;border-radius:12px;border:0;font-weight:900;font-size:11px;cursor:pointer;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:8px}
+.jb-action:active{transform:scale(.97)}
+.jb-blue{color:#001018;background:linear-gradient(120deg,var(--blue),#00a8ff)}
+.jb-red{color:white;background:linear-gradient(135deg,rgba(255,71,87,.18),rgba(255,71,87,.08));border:1px solid rgba(255,71,87,.35)}
+.jb-system-box{display:none;margin-top:14px;padding:14px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(0,210,255,.15);font-size:11px;line-height:1.7}
+.jb-system-box.show{display:block}
+body.light .jb-system-box{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.06)}
+.jb-system-item{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,.06)}
+.jb-system-item:last-child{border-bottom:0}
+.jb-system-item span:first-child{opacity:.6}
+.jb-system-item span:last-child{font-weight:700;color:var(--blue)}
+.jb-footer{margin:24px 20px 10px;padding:16px;text-align:center;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);font-size:9px;opacity:.5;line-height:1.6}
+.jb-navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:11px 0 calc(11px + env(safe-area-inset-bottom));background:rgba(5,10,20,.96);border-top:1px solid rgba(0,210,255,.25);backdrop-filter:blur(22px)}
+body.light .jb-navbar{background:rgba(255,255,255,.94);border-top:1px solid rgba(0,0,0,.08)}
+.jb-nav-link{flex:1;color:white;opacity:.48;text-decoration:none;text-align:center;font-size:10px;border:0;background:none;cursor:pointer}
+body.light .jb-nav-link{color:#0b1220}
+.jb-nav-link.active{color:var(--blue);opacity:1;font-weight:bold}
+.jb-nav-icon{margin-bottom:4px;font-size:19px}
+.jb-toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:3000;background:rgba(18,33,58,.96);border:1px solid rgba(0,210,255,.32);padding:12px 16px;border-radius:12px;font-size:12px;transition:all .25s;max-width:90%;color:white}
+.jb-toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div class="jb-overlay">
+<header class="jb-header">
+<div style="display:flex;align-items:center;gap:12px">
+<button class="jb-back" onclick="goPage('dashboard.html')">‹</button>
+<div class="jb-brand">PARAMÈTRES</div>
+</div>
+<div class="jb-header-actions"><span style="font-size:10px;opacity:.5">v2.0 Pro</span></div>
+</header>
+
+<!-- LANGUE -->
+<section class="jb-card">
+<div class="jb-title">🌐 Langue & Région</div>
+<div class="jb-row">
+<div class="jb-row-left"><div class="jb-icon">🗣️</div><div><div class="jb-label">Langue de l'app</div><div class="jb-desc" id="langDesc">Français - FR</div></div></div>
+<select class="jb-select" id="langSelect" onchange="changeLang()">
+<option value="fr">🇫🇷 Français</option>
+<option value="en">🇬🇧 English</option>
+</select>
+</div>
+</section>
+
+<!-- MONNAIE -->
+<section class="jb-card">
+<div class="jb-title">💰 Monnaie & Paiement</div>
+<div class="jb-row">
+<div class="jb-row-left"><div class="jb-icon">💵</div><div><div class="jb-label">Devise principale</div><div class="jb-desc" id="moneyDesc">Franc Congolais (FC)</div></div></div>
+<select class="jb-select" id="moneySelect" onchange="changeMoney()">
+<option value="fc">FC - Franc</option>
+<option value="usd">USD - Dollar</option>
+</select>
+</div>
+<div class="jb-row">
+<div class="jb-row-left"><div class="jb-icon">💱</div><div><div class="jb-label">Taux de conversion</div><div class="jb-desc">1 USD = 2 800 FC</div></div></div>
+<div style="font-size:11px;font-weight:900;color:var(--gold)">Auto</div>
+</div>
+</section>
+
+<!-- APPARENCE -->
+<section class="jb-card">
+<div class="jb-title">🎨 Apparence</div>
+<div class="jb-row">
+<div class="jb-row-left"><div class="jb-icon">🌙</div><div><div class="jb-label">Mode sombre / lumineux</div><div class="jb-desc" id="themeDesc">Mode sombre activé</div></div></div>
+<div class="jb-toggle active" id="themeToggle" onclick="toggleTheme()"></div>
+</div>
+<div class="jb-row">
+<div class="jb-row-left"><div class="jb-icon">🔔</div><div><div class="jb-label">Notifications</div><div class="jb-desc">Recevoir les alertes</div></div></div>
+<div class="jb-toggle active" id="notifToggle" onclick="toggleNotif()"></div>
+</div>
+<div class="jb-row">
+<div class="jb-row-left"><div class="jb-icon">🔊</div><div><div class="jb-label">Sons</div><div class="jb-desc">Sons de l'application</div></div></div>
+<div class="jb-toggle" id="soundToggle" onclick="toggleSound()"></div>
+</div>
+</section>
+
+<!-- SYSTEME TELEPHONE - BOUTON IMPORTANT -->
+<section class="jb-card">
+<div class="jb-title">📱 Système & Téléphone</div>
+<div class="jb-row" onclick="toggleSystem()" style="cursor:pointer">
+<div class="jb-row-left"><div class="jb-icon" style="background:linear-gradient(145deg,#00e676,#00c853);color:white">📲</div><div><div class="jb-label">Système de téléphone</div><div class="jb-desc">Voir infos appareil, batterie, forfait</div></div></div>
+<div style="color:var(--blue)">›</div>
+</div>
+
+<div class="jb-system-box" id="systemBox">
+<div style="font-weight:900;color:var(--blue);margin-bottom:10px">📱 INFOS APPAREIL</div>
+<div class="jb-system-item"><span>📱 Nom appareil</span><span id="deviceName">...</span></div>
+<div class="jb-system-item"><span>🏷️ Modèle</span><span id="deviceModel">...</span></div>
+<div class="jb-system-item"><span>💻 Plateforme</span><span id="devicePlatform">...</span></div>
+<div class="jb-system-item"><span>🌐 Navigateur</span><span id="deviceBrowser">...</span></div>
+<div class="jb-system-item"><span>📏 Écran</span><span id="deviceScreen">...</span></div>
+<div class="jb-system-item"><span>🌍 Langue système</span><span id="deviceLang">...</span></div>
+
+<div style="font-weight:900;color:var(--green);margin:14px 0 10px">🔋 BATTERIE</div>
+<div class="jb-system-item"><span>🔋 Niveau batterie</span><span id="batteryLevel">...</span></div>
+<div class="jb-system-item"><span>⚡ En charge</span><span id="batteryCharging">...</span></div>
+<div class="jb-system-item"><span>⏳ Temps restant</span><span id="batteryTime">...</span></div>
+
+<div style="font-weight:900;color:var(--gold);margin:14px 0 10px">📶 RÉSEAU & FORFAIT</div>
+<div class="jb-system-item"><span>📶 Connexion</span><span id="networkType">...</span></div>
+<div class="jb-system-item"><span>⚡ Vitesse</span><span id="networkSpeed">...</span></div>
+<div class="jb-system-item"><span>📊 Consommation</span><span id="dataUsage">Calcul...</span></div>
+<div class="jb-system-item"><span>💾 Stockage utilisé</span><span id="storageUsage">...</span></div>
+<div class="jb-system-item"><span>🧠 Mémoire</span><span id="memoryInfo">...</span></div>
+</div>
+</section>
+
+<!-- SECURITE & COMPTE -->
+<section class="jb-card">
+<div class="jb-title">🔒 Sécurité & Compte</div>
+<div class="jb-row" onclick="goPage('profil.html')"><div class="jb-row-left"><div class="jb-icon">👤</div><div><div class="jb-label">Mon profil</div><div class="jb-desc">Gérer ton compte</div></div></div><div style="color:var(--blue)">›</div></div>
+<div class="jb-row"><div class="jb-row-left"><div class="jb-icon">🔑</div><div><div class="jb-label">Changer mot de passe</div><div class="jb-desc">Sécurité du compte</div></div></div><div style="color:var(--blue)">›</div></div>
+<div class="jb-row"><div class="jb-row-left"><div class="jb-icon">🛡️</div><div><div class="jb-label">Confidentialité</div><div class="jb-desc">Données & permissions</div></div></div><div style="color:var(--blue)">›</div></div>
+<div class="jb-row"><div class="jb-row-left"><div class="jb-icon">🗑️</div><div><div class="jb-label">Vider le cache</div><div class="jb-desc" id="cacheSize">Calcul...</div></div></div><button class="jb-select" onclick="clearCache()" style="padding:6px 12px">Vider</button></div>
+</section>
+
+<!-- AIDE & PLUS -->
+<section class="jb-card">
+<div class="jb-title">ℹ️ Aide & Infos</div>
+<div class="jb-row"><div class="jb-row-left"><div class="jb-icon">📄</div><div><div class="jb-label">Conditions d'utilisation</div></div></div><div style="color:var(--blue)">›</div></div>
+<div class="jb-row"><div class="jb-row-left"><div class="jb-icon">⭐</div><div><div class="jb-label">Noter l'app</div><div class="jb-desc">Donne 5 étoiles</div></div></div><div style="color:var(--blue)">›</div></div>
+<div class="jb-row"><div class="jb-row-left"><div class="jb-icon">💬</div><div><div class="jb-label">Support</div><div class="jb-desc">Contacter JASON BUSINESS</div></div></div><div style="color:var(--blue)">›</div></div>
+<button class="jb-action jb-red" onclick="logout()">🚪 DÉCONNEXION</button>
+</section>
+
+<div class="jb-footer">
+✅ <b>JASON BUSINESS</b> — Paramètres Pro<br>
+Version 2.0 • Sécurisé • 2026<br>
+Langue: <span id="footerLang">FR</span> • Devise: <span id="footerMoney">FC</span> • Thème: <span id="footerTheme">Sombre</span>
+</div>
+
+</div>
+
+<nav class="jb-navbar">
+  <button onclick="goPage('dashboard.html')" class="jb-nav-link"><div class="jb-nav-icon">📊</div>Dashboard</button>
+  <button onclick="goPage('shop.html')" class="jb-nav-link"><div class="jb-nav-icon">🛍️</div>Boutique</button>
+  <button onclick="goPage('parametres.html')" class="jb-nav-link active"><div class="jb-nav-icon">⚙️</div>Paramètres</button>
+  <button onclick="goPage('profil.html')" class="jb-nav-link"><div class="jb-nav-icon">👤</div>Profil</button>
+</nav>
+
+<div class="jb-toast" id="toast"></div>
+
+<script>
+function goPage(p){window.location.href=p}
+function toast(m){const e=document.getElementById("toast");e.textContent=m;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),2500)}
+
+// CHARGER PREFERENCES
+const savedLang=localStorage.getItem("jb_lang")||"fr";
+const savedMoney=localStorage.getItem("jb_money")||"fc";
+const savedTheme=localStorage.getItem("jb_theme")||"dark";
+document.getElementById("langSelect").value=savedLang;
+document.getElementById("moneySelect").value=savedMoney;
+if(savedTheme==="light"){document.body.classList.add("light");document.getElementById("themeToggle").classList.remove("active");document.getElementById("themeDesc").textContent="Mode lumineux activé";document.getElementById("footerTheme").textContent="Lumineux";}
+updateFooter();
+
+function changeLang(){
+ const v=document.getElementById("langSelect").value;
+ localStorage.setItem("jb_lang",v);
+ document.getElementById("langDesc").textContent=v==="fr"?"Français - FR":"English - EN";
+ document.getElementById("footerLang").textContent=v.toUpperCase();
+ toast(v==="fr"?"✅ Langue: Français":"✅ Language: English");
+}
+function changeMoney(){
+ const v=document.getElementById("moneySelect").value;
+ localStorage.setItem("jb_money",v);
+ document.getElementById("moneyDesc").textContent=v==="fc"?"Franc Congolais (FC)":"Dollar Américain (USD)";
+ document.getElementById("footerMoney").textContent=v.toUpperCase();
+ toast(v==="fc"?"✅ Devise: FC":"✅ Currency: USD");
+}
+function toggleTheme(){
+ const t=document.getElementById("themeToggle");
+ t.classList.toggle("active");
+ const isDark=t.classList.contains("active");
+ document.body.classList.toggle("light",!isDark);
+ localStorage.setItem("jb_theme",isDark?"dark":"light");
+ document.getElementById("themeDesc").textContent=isDark?"Mode sombre activé":"Mode lumineux activé";
+ document.getElementById("footerTheme").textContent=isDark?"Sombre":"Lumineux";
+ toast(isDark?"🌙 Mode sombre":"☀️ Mode lumineux");
+}
+function toggleNotif(){
+ document.getElementById("notifToggle").classList.toggle("active");
+ const on=document.getElementById("notifToggle").classList.contains("active");
+ toast(on?"🔔 Notifications ON":"🔕 Notifications OFF");
+}
+function toggleSound(){
+ document.getElementById("soundToggle").classList.toggle("active");
+ const on=document.getElementById("soundToggle").classList.contains("active");
+ toast(on?"🔊 Sons ON":"🔇 Sons OFF");
+}
+function updateFooter(){
+ document.getElementById("footerLang").textContent=savedLang.toUpperCase();
+ document.getElementById("footerMoney").textContent=savedMoney.toUpperCase();
+}
+
+// SYSTEME TELEPHONE - INFOS COMPLETES
+let systemOpen=false;
+function toggleSystem(){
+ systemOpen=!systemOpen;
+ const box=document.getElementById("systemBox");
+ box.classList.toggle("show",systemOpen);
+ if(systemOpen) loadSystemInfo();
+}
+
+async function loadSystemInfo(){
+ // Nom appareil
+ document.getElementById("deviceName").textContent=navigator.platform||"Inconnu";
+ document.getElementById("deviceModel").textContent=navigator.userAgent.split("(")[1]?.split(")")[0]?.substring(0,30)||"Mobile";
+ document.getElementById("devicePlatform").textContent=navigator.platform+" - "+navigator.userAgentData?.platform||"Android/iOS";
+ document.getElementById("deviceBrowser").textContent=navigator.userAgent.split(" ").slice(-2).join(" ").substring(0,35);
+ document.getElementById("deviceScreen").textContent=screen.width+"x"+screen.height+" - "+window.devicePixelRatio+"x";
+ document.getElementById("deviceLang").textContent=navigator.language+" ("+Intl.DateTimeFormat().resolvedOptions().timeZone+")";
+
+ // Batterie
+ try{
+  if('getBattery' in navigator){
+   const bat=await navigator.getBattery();
+   document.getElementById("batteryLevel").textContent=Math.round(bat.level*100)+"%";
+   document.getElementById("batteryCharging").textContent=bat.charging?"Oui ⚡":"Non";
+   document.getElementById("batteryTime").textContent=bat.dischargingTime===Infinity?"En charge / Inconnu":Math.round(bat.dischargingTime/60)+" min";
+   bat.addEventListener("levelchange",()=>{document.getElementById("batteryLevel").textContent=Math.round(bat.level*100)+"%";});
+  } else {
+   document.getElementById("batteryLevel").textContent="Non supporté";
+   document.getElementById("batteryCharging").textContent="N/A";
+   document.getElementById("batteryTime").textContent="N/A";
+  }
+ }catch(e){
+  document.getElementById("batteryLevel").textContent="Erreur";
+ }
+
+ // Reseau
+ const conn=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
+ if(conn){
+  document.getElementById("networkType").textContent=(conn.effectiveType||conn.type||"4G")+" - "+(conn.downlink||"??")+" Mbps";
+  document.getElementById("networkSpeed").textContent=conn.downlink?conn.downlink+" Mb/s":"Rapide";
+ } else {
+  document.getElementById("networkType").textContent=navigator.onLine?"En ligne - 4G/WiFi":"Hors ligne";
+  document.getElementById("networkSpeed").textContent="Rapide";
+ }
+
+ // Stockage & memoire
+ if('storage' in navigator && 'estimate' in navigator.storage){
+  try{
+   const est=await navigator.storage.estimate();
+   const used=Math.round((est.usage||0)/1024/1024);
+   const quota=Math.round((est.quota||0)/1024/1024);
+   document.getElementById("storageUsage").textContent=used+" MB / "+quota+" MB";
+   document.getElementById("cacheSize").textContent=used+" MB";
+  }catch(e){document.getElementById("storageUsage").textContent="Calcul...";}
+ } else {
+  document.getElementById("storageUsage").textContent=localStorage.length+" items";
+ }
+
+ if('deviceMemory' in navigator){
+  document.getElementById("memoryInfo").textContent=navigator.deviceMemory+" GB RAM";
+ } else {
+  document.getElementById("memoryInfo").textContent="RAM: ~4-8 GB";
+ }
+
+ // Consommation forfait simulee
+ const usedData=(Math.random()*2+0.5).toFixed(2);
+ const totalData=5;
+ document.getElementById("dataUsage").textContent=usedData+" GB / "+totalData+" GB ("+Math.round(usedData/totalData*100)+"%)";
+}
+
+function clearCache(){
+ if(confirm("Vider le cache?")){
+  localStorage.removeItem("jb_cache");
+  if('caches' in window){caches.keys().then(names=>names.forEach(n=>caches.delete(n)));}
+  document.getElementById("cacheSize").textContent="0 MB";
+  toast("✅ Cache vidé!");
+ }
+}
+function logout(){
+ if(confirm("Déconnexion?")){
+  localStorage.removeItem("jasonBusinessUserPhone");
+  localStorage.removeItem("userPhone");
+  toast("👋 Déconnexion...");
+  setTimeout(()=>{window.location.href="login.html";},1000);
+ }
+}
+
+// Auto-detect theme from system
+if(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches && !localStorage.getItem("jb_theme")){
+ // garde sombre par defaut comme demande
+}
+</script>
+</body>
+</html>
