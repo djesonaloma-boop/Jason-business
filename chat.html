@@ -4,292 +4,429 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#050a14">
-<title>JASON BUSINESS - Messages</title>
+<title>JASON BUSINESS — Messenger Pro</title>
 <style>
-:root{--blue:#00d2ff;--dark:#050a14;--gold:#ffd700;--green:#00e676;--card:#0f1b2f;--border:rgba(0,210,255,.15);--muted:#7a8aad}
+:root{--blue:#00d2ff;--fb-blue:#0084ff;--fb-bg:#f0f2f5;--fb-card:#ffffff;--border:rgba(0,0,0,.08);--text:#050505;--muted:#65676b;--green:#31a24c;--red:#ff3b30}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:radial-gradient(ellipse at top,#13294a 0%,#0a1426 40%,#050a14 100%);color:white;min-height:100vh;display:flex;flex-direction:column;overflow:hidden}
-body.light{--dark:#f2f6fb;--card:#ffffff;--border:rgba(0,0,0,.08);background:#f2f6fb;color:#0b1220}
-
-/* HEADER JASON */
-header{height:56px;padding:0 14px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,rgba(0,210,255,.12),rgba(5,10,20,.9));border-bottom:1px solid var(--border);backdrop-filter:blur(20px);flex-shrink:0;position:sticky;top:0;z-index:50}
-.logo{font-weight:900;color:var(--blue);letter-spacing:1.5px;font-size:16px;text-shadow:0 0 12px rgba(0,210,255,.5)}
-.h-actions{display:flex;gap:8px}
-.h-btn{width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:white;display:grid;place-items:center;font-size:18px;cursor:pointer}
-.h-btn:active{transform:scale(.93)}
-
-.wrap{display:flex;flex:1;min-height:0}
-
-/* LEFT - AMIS STYLE JASON */
-.left{width:360px;flex-shrink:0;background:rgba(8,15,28,.8);border-right:1px solid var(--border);display:flex;flex-direction:column;min-height:0;backdrop-filter:blur(20px)}
-.left-top{padding:14px;border-bottom:1px solid var(--border)}
-.left-top h2{font-size:18px;font-weight:900;display:flex;justify-content:space-between;align-items:center}
-.left-top h2 span{font-size:11px;color:var(--green);padding:6px 10px;border-radius:20px;background:rgba(0,230,118,.1);border:1px solid rgba(0,230,118,.25)}
-.search{margin-top:12px;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--border)}
-.search input{flex:1;border:0;background:transparent;color:white;outline:none;font-size:13px}
-body.light .search{background:#f0f2f5;border-color:rgba(0,0,0,.08)}
-body.light .search input{color:#0b1220}
-.tabs{display:flex;gap:8px;padding:10px 14px}
-.tab{padding:8px 14px;border-radius:20px;font-size:11px;font-weight:800;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--muted);cursor:pointer}
-.tab.active{background:linear-gradient(135deg,var(--blue),#0077ff);color:white;border-color:var(--blue);box-shadow:0 4px 15px rgba(0,210,255,.3)}
-
-.friends{flex:1;overflow-y:auto;padding:8px}
-.friend{padding:10px 12px;border-radius:14px;display:flex;gap:12px;align-items:center;cursor:pointer;transition:.15s;border:1px solid transparent}
-.friend:hover{background:rgba(0,210,255,.06);border-color:var(--border)}
-.friend.active{background:linear-gradient(135deg,rgba(0,210,255,.15),rgba(0,119,255,.08));border-color:var(--blue)}
-.av{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--blue),#0077ff);display:grid;place-items:center;font-weight:900;color:white;overflow:hidden;flex-shrink:0;position:relative;border:2px solid rgba(255,255,255,.1)}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Arial;color:var(--text);background:var(--fb-bg);display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
+body.dark{--fb-bg:#18191a;--fb-card:#242526;--text:#e4e6eb;--muted:#b0b3b8;--border:rgba(255,255,255,.1);background:#18191a}
+header{height:56px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:0 16px;background:var(--fb-card);border-bottom:1px solid var(--border);box-shadow:0 1px 2px rgba(0,0,0,.08);position:sticky;top:0;z-index:50}
+.brand{font-weight:900;color:var(--fb-blue);font-size:20px;letter-spacing:.3px}
+.header-actions{display:flex;gap:8px;align-items:center}
+.icon-btn{width:36px;height:36px;border-radius:50%;background:var(--fb-bg);border:0;display:grid;place-items:center;font-size:18px;cursor:pointer;color:var(--text);transition:.2s}
+.icon-btn:active{transform:scale(.92);background:rgba(0,0,0,.08)}
+body.dark .icon-btn{background:#3a3b3c}
+.wrap{display:flex;flex:1;min-height:0;overflow:hidden}
+.left{width:360px;flex-shrink:0;background:var(--fb-card);border-right:1px solid var(--border);display:flex;flex-direction:column;min-height:0}
+.left-header{padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.left-header h2{font-size:24px;font-weight:900}
+.left-actions{display:flex;gap:8px}
+.search-box{margin:8px 16px;padding:10px 12px;border-radius:20px;background:var(--fb-bg);display:flex;align-items:center;gap:8px}
+body.dark .search-box{background:#3a3b3c}
+.search-box input{flex:1;border:0;background:transparent;color:var(--text);outline:none;font-size:14px}
+.tabs{display:flex;gap:8px;padding:8px 16px;overflow-x:auto;scrollbar-width:none}
+.tab{padding:8px 12px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;background:var(--fb-bg);color:var(--muted);border:0;transition:.2s}
+body.dark .tab{background:#3a3b3c}
+.tab.active{background:rgba(0,132,255,.12);color:var(--fb-blue)}
+.stories{display:flex;gap:8px;padding:12px 16px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--border)}
+.story{width:56px;flex-shrink:0;text-align:center;cursor:pointer;position:relative}
+.story-av{width:56px;height:56px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#00d2ff,#0077ff,#ff00ff);display:grid;place-items:center}
+.story-av div{width:100%;height:100%;border-radius:50%;background:var(--fb-card);display:grid;place-items:center;font-weight:900;overflow:hidden;border:3px solid var(--fb-card)}
+.story-av img{width:100%;height:100%;object-fit:cover}
+.story span{font-size:11px;margin-top:4px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.story.create .story-av{background:#e4e6eb}
+.story.create .story-av div{background:var(--fb-card)}
+.story-badge{position:absolute;top:-2px;right:0;background:var(--red);color:white;font-size:9px;font-weight:800;min-width:16px;height:16px;border-radius:8px;display:grid;place-items:center;padding:0 4px;border:2px solid var(--fb-card)}
+.list{flex:1;min-height:0;overflow-y:auto;padding:8px}
+.item{padding:8px;border-radius:10px;display:flex;gap:10px;align-items:center;cursor:pointer;transition:.15s;position:relative}
+.item:hover{background:var(--fb-bg)}
+body.dark .item:hover{background:#3a3b3c}
+.item.active{background:rgba(0,132,255,.10)}
+.av{width:56px;height:56px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;color:white;overflow:hidden;position:relative}
 .av img{width:100%;height:100%;object-fit:cover}
-.online-dot{position:absolute;bottom:-2px;right:-2px;width:12px;height:12px;border-radius:50%;background:var(--green);border:2px solid var(--card)}
-.f-info{flex:1;min-width:0}
-.f-name{font-size:13px;font-weight:800;display:flex;align-items:center;gap:6px}
-.f-phone{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
-.f-last{font-size:11px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.f-last b{color:white}
-.unread{margin-left:auto;background:var(--blue);color:#001018;font-size:11px;font-weight:900;min-width:20px;height:20px;border-radius:10px;display:grid;place-items:center;padding:0 6px;box-shadow:0 2px 8px rgba(0,210,255,.4)}
-.typing{color:var(--blue)!important;font-style:italic;font-size:11px}
-
-/* RIGHT - CHAT STYLE JASON */
-.right{flex:1;min-width:0;display:flex;flex-direction:column;background:radial-gradient(ellipse at center,rgba(0,210,255,.05),transparent 70%),linear-gradient(rgba(5,10,20,.6),rgba(5,10,20,.9)),url('IMG_0870.jpeg') center/cover}
-.top-chat{height:56px;padding:0 14px;display:flex;justify-content:space-between;align-items:center;background:rgba(8,15,28,.85);border-bottom:1px solid var(--border);backdrop-filter:blur(20px);flex-shrink:0}
-.top-left{display:flex;align-items:center;gap:12px;min-width:0;cursor:pointer}
-.top-av{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--blue),#0077ff);display:grid;place-items:center;font-weight:900;overflow:hidden;position:relative}
+.online-dot{position:absolute;bottom:2px;right:2px;width:14px;height:14px;border-radius:50%;background:var(--green);border:2px solid var(--fb-card)}
+.info{flex:1;min-width:0}
+.name{font-size:15px;font-weight:600;display:flex;align-items:center;gap:6px}
+.prev{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;display:flex;align-items:center;gap:4px}
+.right-info{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.time{font-size:12px;color:var(--muted)}
+.unread-badge{background:var(--fb-blue);color:white;font-size:12px;font-weight:700;min-width:20px;height:20px;border-radius:10px;display:grid;place-items:center;padding:0 6px}
+.typing{color:var(--fb-blue)!important;font-style:italic}
+.right{flex:1;min-width:0;display:flex;flex-direction:column;background:var(--fb-card);overflow:hidden;position:relative}
+.top{flex-shrink:0;padding:8px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:var(--fb-card)}
+.top-left{display:flex;align-items:center;gap:10px;min-width:0;cursor:pointer}
+.top-av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;color:white;overflow:hidden;position:relative}
 .top-av img{width:100%;height:100%;object-fit:cover}
-.top-info h3{font-size:14px;font-weight:800}
-.top-info small{font-size:11px;color:var(--muted)}
+.top-info h3{font-size:15px;font-weight:600;margin:0}
+.top-info small{font-size:12px;color:var(--muted)}
 .top-actions{display:flex;gap:8px}
-
-.msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:6px}
-.date-sep{text-align:center;margin:16px 0 8px;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
-.msg-row{display:flex;gap:8px;align-items:flex-end;max-width:82%}
+.call-btn{width:36px;height:36px;border-radius:50%;background:transparent;border:0;display:grid;place-items:center;font-size:20px;cursor:pointer;color:var(--fb-blue)}
+.msgs{flex:1;min-height:0;overflow-y:auto;padding:16px 16px 8px;display:flex;flex-direction:column;gap:4px;background:var(--fb-card)}
+.date-sep{text-align:center;margin:16px 0 8px;font-size:12px;color:var(--muted);font-weight:500}
+.msg-row{display:flex;gap:8px;align-items:flex-end;max-width:85%;position:relative}
 .msg-row.me{align-self:flex-end;flex-direction:row-reverse}
 .msg-row.other{align-self:flex-start}
-.bubble{padding:10px 14px;border-radius:18px;font-size:13px;line-height:1.4;white-space:pre-wrap;word-break:break-word;position:relative;max-width:100%;box-shadow:0 2px 10px rgba(0,0,0,.15)}
-.msg-row.me .bubble{background:linear-gradient(135deg,var(--blue),#0077ff);color:#001018;font-weight:600;border-bottom-right-radius:6px}
-.msg-row.other .bubble{background:rgba(255,255,255,.08);border:1px solid var(--border);color:white;border-bottom-left-radius:6px;backdrop-filter:blur(10px)}
-body.light .msg-row.other .bubble{background:white;border-color:rgba(0,0,0,.08);color:#0b1220}
-.msg-meta{font-size:10px;color:var(--muted);margin-top:4px;display:flex;gap:4px;align-items:center}
-.msg-meta.me{justify-content:flex-end}
-.msg-photo{border-radius:14px;overflow:hidden;width:200px;height:200px;background:#000;border:1px solid var(--border);cursor:pointer;margin-top:6px}
+.msg-av{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;background:#e4e6eb;font-size:10px;font-weight:700;overflow:hidden}
+.msg-bubble{max-width:100%;padding:8px 12px;border-radius:18px;font-size:15px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.35}
+.msg-row.me .msg-bubble{background:var(--fb-blue);color:white;border-bottom-right-radius:4px}
+.msg-row.other .msg-bubble{background:#f0f2f5;color:var(--text);border-bottom-left-radius:4px}
+body.dark .msg-row.other .msg-bubble{background:#3a3b3c;color:#e4e6eb}
+.msg-photo{margin-top:6px;border-radius:12px;overflow:hidden;width:180px;height:180px;background:#000;cursor:pointer;border:1px solid var(--border)}
 .msg-photo img{width:100%;height:100%;object-fit:cover}
-.typing-indic{display:flex;gap:4px;padding:10px 14px;border-radius:18px;background:rgba(255,255,255,.08);border:1px solid var(--border);width:fit-content}
-.typing-indic span{width:6px;height:6px;background:var(--muted);border-radius:50%;animation:bounce 1.2s infinite}
-.typing-indic span:nth-child(2){animation-delay:.2s}
-.typing-indic span:nth-child(3){animation-delay:.4s}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-
-.input-area{padding:10px 12px;background:rgba(8,15,28,.92);border-top:1px solid var(--border);backdrop-filter:blur(20px);flex-shrink:0}
-.reply-bar{display:none;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(0,210,255,.08);border:1px solid var(--border);border-radius:12px;margin-bottom:8px}
-.reply-bar.show{display:flex}
+.msg-meta{display:flex;align-items:center;gap:4px;margin-top:4px;font-size:11px;color:var(--muted)}
+.msg-meta.me{justify-content:flex-end}
+.reaction-bar{position:absolute;bottom:-12px;right:8px;background:var(--fb-card);border-radius:20px;padding:2px 6px;box-shadow:0 2px 8px rgba(0,0,0,.15);display:flex;gap:2px;font-size:12px;border:1px solid var(--border)}
+.reactions-popup{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--fb-card);border-radius:30px;padding:6px 10px;box-shadow:0 4px 20px rgba(0,0,0,.2);display:flex;gap:6px;z-index:10;border:1px solid var(--border)}
+.reactions-popup span{font-size:22px;cursor:pointer;padding:2px}
+.load-more{padding:8px 14px;background:var(--fb-bg);border:1px solid var(--border);border-radius:20px;margin:0 auto 12px;font-size:12px;color:var(--fb-blue);cursor:pointer}
+.input-area{flex-shrink:0;padding:8px 12px;background:var(--fb-card);border-top:1px solid var(--border)}
 .input-row{display:flex;gap:8px;align-items:flex-end}
-.input-row textarea{flex:1;min-height:42px;max-height:120px;padding:12px 14px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:white;outline:none;resize:none;font-size:13px}
-body.light .input-row textarea{background:#f0f2f5;color:#0b1220}
-.send{width:42px;height:42px;border-radius:14px;border:0;background:linear-gradient(135deg,var(--blue),#0077ff);color:white;font-size:18px;display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 15px rgba(0,210,255,.35);flex-shrink:0}
-.send:disabled{opacity:.4}
-.icon{width:42px;height:42px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.04);display:grid;place-items:center;font-size:18px;cursor:pointer;color:var(--muted)}
-
-.scroll-down{position:absolute;bottom:80px;right:16px;width:40px;height:40px;border-radius:12px;background:var(--card);border:1px solid var(--border);display:none;place-items:center;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,.3);color:var(--blue);font-weight:900;z-index:10}
+.tbtn{width:36px;height:36px;flex-shrink:0;border-radius:50%;border:0;background:transparent;display:grid;place-items:center;font-size:20px;cursor:pointer;color:var(--fb-blue)}
+.input-row textarea{flex:1;min-height:36px;max-height:120px;padding:10px 14px;border-radius:20px;border:0;background:var(--fb-bg);color:var(--text);outline:none;resize:none;font-size:15px}
+body.dark .input-row textarea{background:#3a3b3c}
+.send-btn{width:36px;height:36px;flex-shrink:0;border-radius:50%;border:0;background:var(--fb-blue);color:white;font-size:18px;cursor:pointer;display:grid;place-items:center}
+#photoPreview{display:none;background:var(--fb-card);border:1px solid var(--border);border-radius:16px;padding:12px;margin-bottom:8px}
+#photoPreview.show{display:block}
+.preview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-height:160px;overflow-y:auto}
+.preview-grid img{width:100%;height:70px;object-fit:cover;border-radius:8px}
+.preview-actions{display:flex;gap:8px;margin-top:8px}
+.preview-actions button{flex:1;padding:10px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+.btnSend{background:var(--fb-blue);color:white}
+.btnCancel{background:var(--fb-bg);color:var(--text)}
+.scroll-down{position:absolute;bottom:80px;right:16px;width:40px;height:40px;border-radius:50%;background:var(--fb-card);color:var(--fb-blue);border:1px solid var(--border);display:none;place-items:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:10;font-weight:900}
 .scroll-down.show{display:grid}
-
-.navbar{position:fixed;bottom:0;left:0;right:0;height:60px;background:rgba(5,10,20,.96);border-top:1px solid var(--border);display:flex;backdrop-filter:blur(22px);z-index:100}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10px;color:var(--muted);cursor:pointer;position:relative}
-.nav-item.active{color:var(--blue)}
-.nav-item .i{font-size:20px}
-.nav-item .badge{position:absolute;top:6px;right:22px;min-width:16px;height:16px;font-size:10px;background:var(--blue);color:#001018}
-
-@media(max-width:800px){.left{position:absolute;inset:56px 0 60px;width:100%;z-index:30}.left.hide{display:none}.right{width:100%}.msg-row{max-width:90%}}
+#imgViewer{position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:9999;display:none;flex-direction:column}
+#imgViewer.show{display:flex}
+.viewer-top{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#242526}
+.viewer-content{flex:1;display:grid;place-items:center;overflow:hidden}
+.viewer-content img{max-width:100%;max-height:100%;object-fit:contain;transition:transform .15s}
+.viewer-actions{display:flex;gap:8px;padding:12px;background:#242526;justify-content:center;align-items:center}
+.zoom-btn{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:white;font-size:20px;display:grid;place-items:center;cursor:pointer}
+/* STORY MODALS */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:5000;display:none;place-items:center;padding:16px}
+.modal.show{display:grid}
+.m-card{width:100%;max-width:420px;background:var(--fb-card);border-radius:12px;overflow:hidden;max-height:90vh;display:flex;flex-direction:column}
+.m-head{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);font-weight:700}
+.m-body{padding:16px;overflow-y:auto}
+.m-body textarea{width:100%;min-height:60px;padding:10px;border-radius:10px;border:1px solid var(--border);background:var(--fb-bg);color:var(--text);outline:none;resize:none;font-size:13px}
+.m-foot{padding:12px;display:flex;gap:8px;border-top:1px solid var(--border)}
+.btn{flex:1;padding:10px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+.preview{margin-top:10px;border-radius:12px;overflow:hidden;max-height:300px;background:var(--fb-bg)}
+.preview img{width:100%;object-fit:cover}
+#storyViewer{position:fixed;inset:0;background:#000;z-index:6000;display:none;flex-direction:column}
+#storyViewer.show{display:flex}
+.sv-top{padding:12px;display:flex;justify-content:space-between;align-items:center;color:white;background:linear-gradient(rgba(0,0,0,.7),transparent)}
+.sv-progress{height:3px;background:rgba(255,255,255,.3);display:flex;gap:3px;padding:0 8px;margin-top:6px}
+.sv-progress div{flex:1;background:rgba(255,255,255,.35);border-radius:2px;overflow:hidden}
+.sv-progress div i{display:block;height:100%;background:white;width:0%;transition:width .1s}
+.sv-img{flex:1;display:grid;place-items:center;position:relative}
+.sv-img img{max-width:100%;max-height:100%;object-fit:contain}
+.sv-note{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.6);color:white;padding:10px 16px;border-radius:20px;font-weight:800;text-align:center}
+.sv-bottom{padding:16px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(transparent,rgba(0,0,0,.8));color:white}
+.sv-hearts{display:flex;gap:8px;align-items:center}
+.heart-btn{padding:8px 16px;border-radius:20px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.15);color:white;font-weight:700;cursor:pointer;display:flex;gap:6px;align-items:center}
+.heart-btn.liked{background:var(--red);border-color:var(--red)}
+@media(max-width:800px){.left{position:absolute;inset:56px 0 0;width:100%;z-index:20}.left.hide{display:none}.right{width:100%}}
 </style>
 </head>
 <body>
 <header>
-<div class="logo">JASON BUSINESS • <span id="myPhone" style="font-size:11px;opacity:.6;font-weight:400"></span></div>
-<div class="h-actions">
-<button class="h-btn" onclick="location.href='dashboard.html'">📊</button>
-<button class="h-btn" onclick="toggleTheme()">🌙</button>
-<button class="h-btn" onclick="location.href='parametres.html'">⚙️</button>
+<div class="brand">jason business • <span id="myPhoneShow" style="font-size:12px;opacity:.6;font-weight:400"></span></div>
+<div class="header-actions">
+<button class="icon-btn" onclick="goPage('dashboard.html')">📊</button>
+<button class="icon-btn">🔍</button>
+<button class="icon-btn">✏️</button>
 </div>
 </header>
 
 <div class="wrap">
 <aside class="left" id="leftPanel">
-<div class="left-top">
-<h2>Messages <span id="onlineCount">● 0 en ligne</span></h2>
-<div class="search">🔍<input id="search" placeholder="Rechercher un ami..."></div>
-<div class="tabs">
-<button class="tab active" data-tab="chats">💬 Chats</button>
-<button class="tab" data-tab="friends">👥 Mes amis</button>
-<button class="tab" data-tab="online">🟢 En ligne</button>
+<div class="left-header"><h2>Messenger</h2><div class="left-actions"><button class="icon-btn" onclick="openStoryModal()">📷</button><button class="icon-btn">⚙️</button></div></div>
+<div class="search-box">🔍<input id="search" placeholder="Rechercher sur Messenger"></div>
+<div class="tabs"><button class="tab active" data-tab="chats">Boîte de réception</button><button class="tab" data-tab="users">👥 Utilisateurs</button><button class="tab" data-tab="requests">🔔 Demandes <span id="reqCount" style="background:#ff3b30;color:white;padding:2px 6px;border-radius:10px;font-size:10px;display:none">0</span></button></div>
+
+<!-- STORIES QUI MARCHE -->
+<div class="stories" id="stories">
+<div class="story create" onclick="openStoryModal()"><div class="story-av"><div>➕</div></div><span>Créer story</span></div>
 </div>
-</div>
-<div class="friends" id="friendsList"></div>
-<div style="padding:10px;border-top:1px solid var(--border);display:flex;gap:8px"><input id="addPhone" placeholder="+243..." style="flex:1;padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.05);color:white;outline:none"><button class="h-btn" id="addBtn" style="background:var(--blue);color:#001018">+</button></div>
+
+<div style="padding:8px 16px;display:flex;gap:8px;border-bottom:1px solid var(--border)"><input id="manualPhone" placeholder="+243..." style="flex:1;padding:8px 12px;border-radius:20px;border:1px solid var(--border);background:var(--fb-bg);color:var(--text);outline:none"><button class="icon-btn" id="btnAddManual" style="background:var(--fb-blue);color:white">+</button></div>
+<div class="list" id="list"></div>
+<div style="padding:10px;display:flex;gap:8px;border-top:1px solid var(--border)"><button class="tab" style="flex:1" onclick="location.href='dashboard.html'">🏠 Dashboard</button><button class="tab" style="flex:1" onclick="location.href='parametres.html'">⚙️ Paramètres</button></div>
 </aside>
 
-<section class="right" id="rightPanel">
-<div class="top-chat" id="topChat">
-<div class="top-left" id="topLeft"><div class="top-av" id="topAv">JB</div><div class="top-info"><h3 id="topName">Choisis un ami</h3><small id="topPhone">Écris un message à tes amis - Style Jason</small></div></div>
-<div class="top-actions"><button class="h-btn">📞</button><button class="h-btn">📹</button></div>
+<section class="right">
+<div class="top" id="topBar">
+<div class="top-left" id="topLeft"><div class="top-av" id="chatAvatar">JB</div><div class="top-info"><h3 id="chatName">Sélectionne un chat</h3><small id="chatPhone">Messenger Pro • Story 24h</small></div></div>
+<div class="top-actions"><button class="call-btn">📞</button><button class="call-btn">📹</button><button class="call-btn">ℹ️</button></div>
 </div>
-
-<div class="msgs" id="msgs">
-<div style="margin:auto;text-align:center;opacity:.6;padding:40px">
-<div style="font-size:48px">💬</div>
-<div style="margin-top:12px;font-weight:800;font-size:16px;color:var(--blue)">JASON MESSENGER</div>
-<div style="font-size:12px;margin-top:6px;color:var(--muted)">Style Jason Business - Pas Facebook<br>Sélectionne un ami à gauche pour écrire</div>
-</div>
-</div>
-
-<div class="scroll-down" id="scrollDown">↓</div>
-
+<div class="msgs" id="msgs"><div style="margin:auto;text-align:center;opacity:.5;padding:40px"><div style="font-size:50px">💬</div><div style="margin-top:10px;font-weight:700">Vos messages</div><div style="font-size:12px;margin-top:4px">Story expire 24h • Coeur ❤️</div></div></div>
+<div id="scrollDown" class="scroll-down">↓</div>
 <div class="input-area">
-<div class="reply-bar" id="replyBar"><div><b id="replyName">Répondre à</b><div id="replyText" style="font-size:11px;opacity:.7;max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div></div><button onclick="cancelReply()" style="border:0;background:transparent;color:white;font-size:18px">✕</button></div>
-<div class="input-row">
-<label class="icon">🖼️<input type="file" id="photoInput" accept="image/*" hidden></label>
-<textarea id="msgInput" placeholder="Écris un message à ton ami..." disabled rows="1"></textarea>
-<button class="icon" id="emojiBtn">😊</button>
-<button class="send" id="sendBtn" disabled>➤</button>
-</div>
+<div id="photoPreview"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><b id="previewCount" style="color:var(--fb-blue)">0 photos</b><small>Max 1000</small></div><div id="previewGrid" class="preview-grid"></div><textarea id="photoCaption" placeholder="Légende..." style="margin-top:8px;width:100%;padding:8px 12px;border-radius:12px;border:1px solid var(--border);background:var(--fb-bg);color:var(--text);resize:none;min-height:36px"></textarea><div class="preview-actions"><button class="btnCancel" id="cancelPhoto">Annuler</button><button class="btnSend" id="confirmPhoto">Envoyer</button></div><div id="uploadProgress" style="display:none;margin-top:8px;text-align:center;font-size:12px;color:var(--fb-blue)"></div></div>
+<div class="input-row"><div style="display:flex;gap:4px"><label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*" multiple hidden></label></div><textarea id="msgInput" placeholder="Aa" disabled rows="1"></textarea><button class="tbtn" id="recordBtn" disabled>🎙️</button><button class="send-btn" id="sendBtn" disabled>➤</button></div>
+<div style="text-align:center;font-size:10px;opacity:.5;margin-top:4px">Story 24h • ❤️ Coeur • Comme Facebook mais style Jason</div>
 </div>
 </section>
 </div>
 
-<nav class="navbar">
-<button class="nav-item" onclick="location.href='dashboard.html'"><span class="i">📊</span>Dash</button>
-<button class="nav-item" onclick="location.href='shop.html'"><span class="i">🛍️</span>Boutique</button>
-<button class="nav-item active"><span class="i">💬</span>Messages<span class="badge" id="navBadge" style="display:none">0</span></button>
-<button class="nav-item" onclick="location.href='store.html'"><span class="i">🛒</span>Store</button>
-<button class="nav-item" onclick="location.href='profil.html'"><span class="i">👤</span>Profil</button>
-</nav>
+<!-- MODAL STORY -->
+<div class="modal" id="storyModal">
+<div class="m-card">
+<div class="m-head"><span>📸 Créer story (24h)</span><button onclick="closeModal('storyModal')" style="border:0;background:var(--fb-bg);width:32px;height:32px;border-radius:50%">✕</button></div>
+<div class="m-body">
+<textarea id="storyNote" placeholder="Ajoute une note (ex: Kinshasa 🔥) - optionnel"></textarea>
+<div class="preview" id="storyPreview" style="margin-top:12px"></div>
+<input type="file" id="storyFile" accept="image/*" hidden>
+<div style="display:flex;gap:8px;margin-top:12px"><button class="btn btnCancel" onclick="document.getElementById('storyFile').click()">🖼️ Choisir photo</button><button class="btn btnSend" onclick="publishStory()">Publier story</button></div>
+<small style="display:block;margin-top:12px;opacity:.6;font-size:11px;line-height:1.4">✅ Tes amis vont voir ta story<br>✅ Ils peuvent laisser ❤️<br>✅ Expire automatiquement après 24h<br>✅ Toi seul vois qui a vu (vues + coeurs)</small>
+</div>
+</div>
+</div>
+
+<!-- STORY VIEWER -->
+<div id="storyViewer">
+<div class="sv-progress" id="svProgress"></div>
+<div class="sv-top"><div style="display:flex;gap:10px;align-items:center"><div class="av" id="svAv" style="width:36px;height:36px;font-size:12px">JA</div><div><b id="svName" style="font-size:13px">Jason</b><br><small id="svTime" style="font-size:11px;opacity:.8"></small></div></div><button onclick="closeStory()" style="background:rgba(255,255,255,.2);border:0;color:white;width:36px;height:36px;border-radius:50%">✕</button></div>
+<div class="sv-img" id="svContent"></div>
+<div class="sv-bottom"><div id="svViewsInfo" style="font-size:12px">👁️ 0 vues • ❤️ 0 coeurs</div><div class="sv-hearts"><button class="heart-btn" id="heartBtn" onclick="heartStory()">❤️ <span id="heartCount">0</span></button></div></div>
+</div>
+
+<!-- VIEWER PHOTO -->
+<div id="imgViewer"><div class="viewer-top"><div style="display:flex;align-items:center;gap:10px"><button onclick="closeViewer()" style="background:transparent;border:0;color:white;font-size:22px;cursor:pointer">✕</button><span id="viewerTitle" style="font-size:13px;color:white">Photo</span></div><button class="zoom-btn" onclick="closeViewer()">✕</button></div><div class="viewer-content" id="viewerContent"><img id="viewerImg" src=""></div><div class="viewer-actions"><button class="zoom-btn" onclick="zoomOut()">−</button><div style="color:white;font-size:12px;min-width:50px;text-align:center" id="zoomInfo">100%</div><button class="zoom-btn" onclick="zoomIn()">+</button></div></div>
 
 <script type="module">
 import {initializeApp,getApps,getApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {getDatabase,ref,onValue,set,push,get,remove,update,onDisconnect} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import {getDatabase,ref,onValue,push,set,get,remove,update,onDisconnect} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
 const app=getApps().length?getApp():initializeApp(firebaseConfig);
 const db=getDatabase(app);
 const $=id=>document.getElementById(id);
 const myPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||"";
 if(!myPhone) location.replace("login.html");
-$("myPhone").textContent=myPhone;
+$("myPhoneShow").textContent=myPhone;
 
 let myName=localStorage.getItem("jb_display_name")||"Jason";
 let myPhoto=localStorage.getItem("jb_display_photo")||"";
-let tab="chats",activeFriend=null,allUsers={},myChats={},presence={},unsub=null,allMsgs=[],manual=[],replyTo=null;
+const jbTheme=localStorage.getItem("jb_theme")||"dark";
+if(jbTheme==="light") document.body.classList.remove("dark"); else document.body.classList.add("dark");
 
-if(localStorage.getItem("jb_theme")==="light") document.body.classList.remove("dark"); else document.body.classList.add("dark");
-window.toggleTheme=()=>{const d=document.body.classList.contains("dark");document.body.classList.toggle("dark",!d);localStorage.setItem("jb_theme",!d?"dark":"light");};
+let tab="chats",activeChat=null,allUsers={},myRequests={},myChats={},presenceCache={},manualUsers=[],unsub=null,allMessages=[],storiesCache=[],pendingPhotos=[],scale=1;
 
-try{manual=JSON.parse(localStorage.getItem("jb_manual_friends")||"[]");}catch{manual=[];}
-function esc(s){return String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+try{manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]");}catch{manualUsers=[];}
+window.goPage=p=>window.location.href=p;
+function esc(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function getChatId(a,b){return[a,b].sort().join("_");}
-function isOnline(ph){const p=presence[ph]; return !!(p&&p.online&&Date.now()-(p.lastSeen||0)<90000);}
-function getPhoto(ph){return allUsers[ph]?.photo||allUsers[ph]?.photoProfil||"";}
+function isOnline(ph){const p=presenceCache[ph];return !!(p&&p.online&&Date.now()-(p.lastSeen||0)<90000);}
+function getUserPhoto(ph){return allUsers[ph]?.photo||"";}
+window.openModal=id=>$(id).classList.add("show");
+window.closeModal=id=>$(id).classList.remove("show");
+window.openStoryModal=()=>openModal("storyModal");
 
 const presenceRef=ref(db,`jasonBusiness/presence/${myPhone}`);
-set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:null}).catch(()=>{});
+set(presenceRef,{online:true,lastSeen:Date.now()}).catch(()=>{});
 onDisconnect(presenceRef).set({online:false,lastSeen:Date.now()}).catch(()=>{});
-setInterval(()=>set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:activeFriend,typing:$("msgInput").value.length>0}).catch(()=>{}),20000);
+setInterval(()=>set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:activeChat}).catch(()=>{}),20000);
 
-onValue(ref(db,"jasonBusiness/presence"),s=>{presence=s.val()||{};renderFriends(); const count=Object.values(presence).filter(p=>p.online).length; $("onlineCount").textContent=`● ${count} en ligne`; if(activeFriend) $("topPhone").textContent=isOnline(activeFriend)?"🟢 En ligne • Tape...":"Hors ligne";});
-onValue(ref(db,"jasonBusiness/users"),s=>{allUsers=s.val()||{};renderFriends();});
-onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),s=>{myChats=s.val()||{};renderFriends(); let total=0; Object.values(myChats).forEach(c=>total+=Number(c.unread||0)); const b=$("navBadge"); b.style.display=total?"grid":"none"; b.textContent=total>9?"9+":total;});
+onValue(ref(db,"jasonBusiness/presence"),s=>{presenceCache=s.val()||{};render();});
+onValue(ref(db,"jasonBusiness/users"),s=>{allUsers=s.val()||{};render();});
+onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),s=>{myRequests=s.val()||{};const n=Object.values(myRequests).filter(r=>r.type==="incoming"&&r.status==="pending").length;$("reqCount").textContent=n;$("reqCount").style.display=n?"inline-block":"none";render();});
+onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),s=>{myChats=s.val()||{};render();});
 
-document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");tab=t.dataset.tab;renderFriends();});
-$("search").oninput=renderFriends;
-$("topLeft").onclick=()=>{if(innerWidth<=800) $("leftPanel").classList.remove("hide");};
-$("addBtn").onclick=()=>{const p=$("addPhone").value.trim(); if(!p||p.length<8) return; if(p===myPhone) return; if(!manual.includes(p)) manual.push(p); localStorage.setItem("jb_manual_friends",JSON.stringify(manual)); $("addPhone").value=""; renderFriends();};
+// STORIES 24H + COEUR - EXPIRE AUTO
+onValue(ref(db,"jasonBusiness/stories"),s=>{
+  const all=Object.entries(s.val()||{}).map(([k,v])=>({...v,id:k}));
+  const now=Date.now();
+  // Filtre expire 24h (86400000 ms)
+  storiesCache=all.filter(st=>{
+    if(!st.createdAt) return false;
+    const expired = (now - st.createdAt) > 86400000;
+    if(expired){
+      // Supprime auto après 24h
+      remove(ref(db,`jasonBusiness/stories/${st.id}`));
+      return false;
+    }
+    return true;
+  }).sort((a,b)=>b.createdAt-a.createdAt);
+  renderStories();
+});
 
-function getAllFriends(){const c={...allUsers}; manual.forEach(p=>{if(!c[p]) c[p]={telephone:p};}); return c;}
-
-function renderFriends(){
-  const q=($("search").value||"").toLowerCase(); const list=$("friendsList"); list.innerHTML="";
-  const friends=getAllFriends();
-  let entries=Object.entries(friends).filter(([ph])=>ph!==myPhone);
-  if(tab==="online") entries=entries.filter(([ph])=>isOnline(ph));
-  if(tab==="friends") {/* tous */}
-  if(tab==="chats") entries=entries.filter(([ph])=>myChats[getChatId(myPhone,ph)]?.status==="accepted"||manual.includes(ph));
-  if(q) entries=entries.filter(([ph,u])=>ph.toLowerCase().includes(q)||String(u.nom||u.name||"").toLowerCase().includes(q));
-  if(!entries.length){list.innerHTML='<div style="padding:20px;text-align:center;opacity:.5;font-size:12px">Aucun ami trouvé.<br>Ajoute +243... en bas</div>';return;}
-  entries.sort((a,b)=>{
-    const ca=myChats[getChatId(myPhone,a[0])]; const cb=myChats[getChatId(myPhone,b[0])];
-    return (cb?.lastTime||0)-(ca?.lastTime||0);
+function renderStories(){
+  const box=$("stories");
+  box.innerHTML=`<div class="story create" onclick="openStoryModal()"><div class="story-av"><div>➕</div></div><span>Créer story</span></div>`;
+  storiesCache.forEach(st=>{
+    const isMine=st.from===myPhone;
+    const viewsCount=Object.keys(st.views||{}).length;
+    const heartsCount=Object.keys(st.hearts||{}).length;
+    const hasViewed=st.views&&st.views[myPhone];
+    const div=document.createElement("div");
+    div.className="story";
+    if(!hasViewed && !isMine) div.style.opacity="1"; else if(hasViewed) div.style.opacity=".6";
+    div.innerHTML=`<div class="story-av" style="${!hasViewed&&!isMine?'background:linear-gradient(135deg,#00d2ff,#0077ff,#ff00ff)':''}"><div>${st.fromPhoto?`<img src="${st.fromPhoto}">`:esc((st.fromName||st.from).slice(-2))}</div></div><span>${esc(isMine?"Ta story":(st.fromName||st.from).slice(0,10))}</span>${isMine?`<div class="story-badge">${viewsCount}👁️ ${heartsCount}❤️</div>`:(heartsCount?`<div class="story-badge">❤️${heartsCount}</div>`:"")}`;
+    div.onclick=()=>viewStory(st);
+    box.appendChild(div);
   });
-  entries.forEach(([phone,u])=>{
-    const chat=myChats[getChatId(myPhone,phone)];
-    const unread=Number(chat?.unread||0); const online=isOnline(phone); const typing=presence[phone]?.typing;
-    const photo=getPhoto(phone);
-    const div=document.createElement("div"); div.className="friend"+(activeFriend===phone?" active":"");
-    div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc((u.nom||u.name||phone).slice(0,2).toUpperCase())}${online?'<div class="online-dot"></div>':''}</div><div class="f-info"><div class="f-name">${esc(u.nom||u.name||phone)} ${online?'🟢':''}</div><div class="f-phone">${esc(phone)}</div><div class="f-last ${typing?'typing':''}">${typing?'En train d\'écrire...':chat?.lastMsg?esc(chat.lastMsg.slice(0,28)):'👋 Écris un message'}</div></div>${unread?`<div class="unread">${unread>9?'9+':unread}</div>`:''}`;
-    div.onclick=()=>openChat(phone);
-    list.appendChild(div);
+}
+
+let storyFileBase64=null;
+$("storyFile").onchange=e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader(); r.onload=()=>{storyFileBase64=r.result; $("storyPreview").innerHTML=`<img src="${r.result}" style="width:100%;border-radius:12px">`;}; r.readAsDataURL(f);
+};
+window.publishStory=async()=>{
+  if(!storyFileBase64) return alert("Choisis une photo d'abord!");
+  const note=$("storyNote").value.trim();
+  const id=push(ref(db,"jasonBusiness/stories")).key;
+  await set(ref(db,`jasonBusiness/stories/${id}`),{
+    from:myPhone,fromName:myName,fromPhoto:myPhoto,
+    photo:storyFileBase64,note,createdAt:Date.now(),
+    expireAt:Date.now()+86400000,views:{},hearts:{}
   });
-}
-
-function openChat(phone){
-  activeFriend=phone; allMsgs=[]; replyTo=null; $("replyBar").classList.remove("show");
-  if(unsub){unsub();unsub=null;}
-  const u=allUsers[phone]||{}; const photo=getPhoto(phone);
-  $("topAv").innerHTML=photo?`<img src="${photo}">`:esc((u.nom||u.name||phone).slice(0,2).toUpperCase());
-  $("topName").textContent=u.nom||u.name||phone;
-  $("topPhone").textContent=isOnline(phone)?"🟢 En ligne - Écris un message":"Hors ligne - "+phone;
-  $("msgInput").disabled=false; $("sendBtn").disabled=false;
-  if(innerWidth<=800) $("leftPanel").classList.add("hide");
-  set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:phone,typing:false}).catch(()=>{});
-  const id=getChatId(myPhone,phone);
-  unsub=onValue(ref(db,`jasonBusiness/messages/${id}`),s=>{
-    if(activeFriend!==phone) return;
-    allMsgs=Object.entries(s.val()||{}).map(([k,v])=>({...v,_key:k})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
-    renderMsgs();
-    // Marque lu
-    const changes={}; allMsgs.forEach(m=>{if(m.to===myPhone&&m.status!=="read") changes[`jasonBusiness/messages/${id}/${m._key}/status`]="read";}); if(Object.keys(changes).length) update(ref(db),changes);
-    update(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{unread:0}).catch(()=>{});
-  });
-  renderFriends(); $("msgInput").focus();
-}
-
-function renderMsgs(){
-  const box=$("msgs");
-  if(!allMsgs.length){box.innerHTML=`<div style="margin:auto;text-align:center;opacity:.5;padding:30px"><div style="width:70px;height:70px;border-radius:20px;background:linear-gradient(135deg,#00d2ff,#0077ff);display:grid;place-items:center;margin:auto;color:white;font-size:28px;font-weight:900">${esc((allUsers[activeFriend]?.nom||activeFriend||"JB").slice(0,2).toUpperCase())}</div><div style="margin-top:12px;font-weight:800;color:var(--blue)">${esc(allUsers[activeFriend]?.nom||activeFriend)}</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Vous êtes amis sur JASON BUSINESS<br>Écris ton premier message - Style Jason 💎</div></div>`;return;}
-  let html=""; let lastDate="";
-  allMsgs.forEach(m=>{
-    const d=new Date(m.createdAt||0).toDateString(); if(d!==lastDate){lastDate=d; html+=`<div class="date-sep">${new Date(m.createdAt).toLocaleDateString("fr-FR")}</div>`;}
-    const mine=m.from===myPhone;
-    let content="";
-    if(m.replyTo) content+=`<div style="font-size:11px;opacity:.6;margin-bottom:4px;padding:4px 8px;border-left:3px solid var(--blue);background:rgba(0,0,0,.2);border-radius:6px">↩️ ${esc(m.replyTo.text||"Photo")}</div>`;
-    if(m.text) content+=esc(m.text);
-    if(m.photo) content+=`<div class="msg-photo"><img src="${m.photo}"></div>`;
-    html+=`<div class="msg-row ${mine?'me':'other'}"><div class="bubble">${content}</div></div><div class="msg-meta ${mine?'me':''}">${new Date(m.createdAt).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})} ${mine?(m.status==="read"?"✓✓ Vu":"✓ Envoyé"):""}</div>`;
-  });
-  if(presence[activeFriend]?.typing) html+=`<div class="msg-row other"><div class="typing-indic"><span></span><span></span><span></span></div></div>`;
-  box.innerHTML=html; box.scrollTop=box.scrollHeight;
-}
-
-async function publishMessage(other,fields,last){
-  const id=getChatId(myPhone,other); const now=Date.now();
-  const data={...fields,from:myPhone,to:other,createdAt:now,status:"sent"};
-  if(replyTo){data.replyTo={text:replyTo.text||""}; replyTo=null; $("replyBar").classList.remove("show");}
-  await set(push(ref(db,`jasonBusiness/messages/${id}`)),data);
-  const a=ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`), b=ref(db,`jasonBusiness/user_chats/${other}/${id}`);
-  const [sa,sb]=await Promise.all([get(a),get(b)]); const da=sa.val()||{}, dbb=sb.val()||{};
-  await Promise.all([set(a,{...da,with:other,status:"accepted",lastMsg:last,lastTime:now,unread:0}), set(b,{...dbb,with:myPhone,status:"accepted",lastMsg:last,lastTime:now,unread:(Number(dbb.unread)||0)+1})]);
-}
-
-async function sendText(){
-  const txt=$("msgInput").value.trim(); if(!txt||!activeFriend) return;
-  const other=activeFriend; $("msgInput").value=""; 
-  await publishMessage(other,{text:txt},txt);
-  $("msgs").scrollTop=$("msgs").scrollHeight;
-}
-$("sendBtn").onclick=sendText;
-$("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText();}});
-$("msgInput").addEventListener("input",()=>{if(activeFriend) set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:activeFriend,typing:$("msgInput").value.length>0}).catch(()=>{});});
-
-window.cancelReply=()=>{replyTo=null;$("replyBar").classList.remove("show");};
-$("photoInput").onchange=async e=>{
-  const f=e.target.files[0]; if(!f||!activeFriend) return;
-  const r=new FileReader(); r.onload=async()=>{await publishMessage(activeFriend,{photo:r.result}, "📷 Photo");}; r.readAsDataURL(f);
-  e.target.value="";
+  closeModal("storyModal"); $("storyPreview").innerHTML=""; $("storyNote").value=""; storyFileBase64=null;
+  alert("✅ Story publiée! Expire dans 24h. Tes amis peuvent laisser ❤️");
 };
 
+let currentStory=null, progressTimer=null;
+window.viewStory=async(st)=>{
+  currentStory=st;
+  $("storyViewer").classList.add("show");
+  $("svAv").innerHTML=st.fromPhoto?`<img src="${st.fromPhoto}">`:esc((st.fromName||"").slice(0,2));
+  $("svName").textContent=st.fromName||st.from;
+  $("svTime").textContent=new Date(st.createdAt).toLocaleTimeString()+" • expire dans "+Math.round((86400000-(Date.now()-st.createdAt))/3600000)+"h";
+  $("svContent").innerHTML=`<img src="${st.photo}" style="max-width:100%;max-height:100%">${st.note?`<div class="sv-note">${esc(st.note)}</div>`:""}`;
+  
+  const viewsCount=Object.keys(st.views||{}).length;
+  const heartsCount=Object.keys(st.hearts||{}).length;
+  const hasHearted=st.hearts&&st.hearts[myPhone];
+  
+  if(st.from===myPhone){
+    // Toi propriétaire vois tout
+    const viewers=Object.values(st.views||{}).map(v=>v.name).join(", ")||"Aucune vue";
+    const hearters=Object.values(st.hearts||{}).map(v=>v.name).join(", ")||"Aucun coeur";
+    $("svViewsInfo").innerHTML=`👁️ ${viewsCount} vues: ${esc(viewers)}<br>❤️ ${heartsCount} coeurs: ${esc(hearters)}<br><small>Seul toi vois ça</small>`;
+    $("heartBtn").style.display="none";
+  }else{
+    $("svViewsInfo").textContent=`👁️ ${viewsCount} vues • ❤️ ${heartsCount} coeurs`;
+    $("heartBtn").style.display="flex";
+    $("heartBtn").classList.toggle("liked",!!hasHearted);
+    $("heartCount").textContent=heartsCount;
+    // Marque vue
+    await set(ref(db,`jasonBusiness/stories/${st.id}/views/${myPhone}`),{name:myName,time:Date.now()});
+  }
+  
+  // Progress bar 5 sec auto close
+  const prog=$("svProgress"); prog.innerHTML='<div><i></i></div>'; const bar=prog.querySelector("i");
+  let w=0; clearInterval(progressTimer);
+  progressTimer=setInterval(()=>{w+=2; bar.style.width=w+"%"; if(w>=100){clearInterval(progressTimer); closeStory();}},100);
+};
+
+window.closeStory=()=>{clearInterval(progressTimer); $("storyViewer").classList.remove("show");};
+window.heartStory=async()=>{
+  if(!currentStory||currentStory.from===myPhone) return;
+  const refHeart=ref(db,`jasonBusiness/stories/${currentStory.id}/hearts/${myPhone}`);
+  const snap=await get(refHeart);
+  if(snap.exists()){
+    await remove(refHeart);
+    $("heartBtn").classList.remove("liked");
+  }else{
+    await set(refHeart,{name:myName,time:Date.now()});
+    $("heartBtn").classList.add("liked");
+    // Animation coeur
+    $("heartBtn").animate([{transform:"scale(1)"},{transform:"scale(1.4)"},{transform:"scale(1)"}],{duration:300});
+  }
+};
+
+// MESSENGER LOGIC (comme ton code)
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");tab=t.dataset.tab;render();});
+$("search").oninput=render;
+$("topLeft").onclick=()=>{if(innerWidth<=800)$("leftPanel").classList.remove("hide");};
+$("btnAddManual").onclick=()=>{const p=$("manualPhone").value.trim();if(!p||p.length<8)return;if(p===myPhone)return;if(!manualUsers.includes(p))manualUsers.push(p);localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));$("manualPhone").value="";render();};
+function getCombinedUsers(){const c={...allUsers};manualUsers.forEach(p=>{if(!c[p])c[p]={telephone:p};});return c;}
+function render(){
+ const q=($("search").value||"").toLowerCase(),cont=$("list");cont.innerHTML="";
+ const users=getCombinedUsers();
+ if(tab==="users"){
+  Object.entries(users).forEach(([phone,u])=>{
+   if(phone===myPhone)return;
+   if(q&&!phone.toLowerCase().includes(q)&&!String(u.nom||"").toLowerCase().includes(q))return;
+   const id=getChatId(myPhone,phone),friend=myChats[id]?.status==="accepted",sent=myRequests[phone]?.type==="outgoing"&&myRequests[phone]?.status==="pending",photo=getUserPhoto(phone),online=isOnline(phone);
+   const div=document.createElement("div");div.className="item";div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(phone.slice(-2))}${online?'<div class="online-dot"></div>':''}</div><div class="info"><div class="name">${esc(u.nom||phone)}</div><div class="prev">${esc(phone)} ${online?'• En ligne':''}</div></div><div>${friend?"💬":sent?"⏳":"+"}</div>`;div.onclick=()=>friend?openChat(phone):!sent&&sendRequest(phone);cont.appendChild(div);
+  });
+ }else if(tab==="requests"){
+  const reqs=Object.entries(myRequests).filter(([_,r])=>r.type==="incoming"&&r.status==="pending");
+  if(!reqs.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucune demande</div>';return;}
+  reqs.forEach(([phone])=>{const div=document.createElement("div");div.className="item";div.innerHTML=`<div class="av">${esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[phone]?.nom||phone)}</div><div class="prev">Veut vous contacter</div></div>`;const b=document.createElement("button");b.className="icon-btn";b.style.background="var(--fb-blue)";b.style.color="white";b.textContent="✓";b.onclick=()=>acceptRequest(phone);div.appendChild(b);cont.appendChild(div);});
+ }else{
+  const list=Object.entries(myChats).filter(([_,c])=>c.status==="accepted").sort((a,b)=>(b[1].lastTime||0)-(a[1].lastTime||0));
+  if(!list.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucun chat. Allez dans Utilisateurs.</div>';return;}
+  list.forEach(([id,chat])=>{
+    const other=id.split("_").find(p=>p!==myPhone);if(!other)return;
+    const photo=getUserPhoto(other);const unread=Number(chat.unread)||0;const online=isOnline(other);
+    const div=document.createElement("div");div.className="item"+(activeChat===other?" active":"");div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(other.slice(-2))}${online?'<div class="online-dot"></div>':''}</div><div class="info"><div class="name">${esc(allUsers[other]?.nom||other)}</div><div class="prev">${unread?`<b>${esc((chat.lastMsg||"").slice(0,30))}</b> • ${unread} nouveaux`:esc((chat.lastMsg||"").slice(0,35))}</div></div><div class="right-info"><div class="time">${new Date(chat.lastTime||0).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}</div>${unread?`<div class="unread-badge">${unread}</div>`:""}</div>`;div.onclick=()=>openChat(other);cont.appendChild(div);
+  });
+ }
+}
+async function sendRequest(to){await Promise.all([set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${to}`),{phone:to,type:"outgoing",status:"pending",createdAt:Date.now()}),set(ref(db,`jasonBusiness/chat_requests/${to}/${myPhone}`),{phone:myPhone,type:"incoming",status:"pending",createdAt:Date.now()})]);}
+async function acceptRequest(from){const id=getChatId(myPhone,from);await Promise.all([set(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{with:from,status:"accepted",lastMsg:"Vous êtes maintenant amis",lastTime:Date.now(),unread:0}),set(ref(db,`jasonBusiness/user_chats/${from}/${id}`),{with:myPhone,status:"accepted",lastMsg:"Vous êtes maintenant amis",lastTime:Date.now(),unread:1}),remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${from}`)),remove(ref(db,`jasonBusiness/chat_requests/${from}/${myPhone}`))]);document.querySelector('[data-tab="chats"]').click();openChat(from);}
+
+function openChat(other){
+ activeChat=other;
+ if(unsub){unsub();unsub=null;}
+ const photo=getUserPhoto(other);const online=isOnline(other);
+ $("chatName").textContent=allUsers[other]?.nom||other;
+ $("chatPhone").textContent=online?"En ligne":"Hors ligne";
+ $("chatAvatar").innerHTML=photo?`<img src="${esc(photo)}">`:esc(other.slice(-2));
+ $("msgInput").disabled=false;$("sendBtn").disabled=false;$("recordBtn").disabled=false;
+ if(innerWidth<=800)$("leftPanel").classList.add("hide");
+ const id=getChatId(myPhone,other);
+ unsub=onValue(ref(db,`jasonBusiness/messages/${id}`),s=>{
+   const arr=Object.entries(s.val()||{}).map(([k,v])=>({...v,_key:k})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+   allMessages=arr; renderMessages();
+   update(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{unread:0}).catch(()=>{});
+ });
+ render();$("msgInput").focus();
+}
+function renderMessages(){
+  const container=$("msgs");
+  if(!allMessages.length){container.innerHTML='<div style="margin:auto;text-align:center;opacity:.5;padding:30px">Sélectionne un chat</div>';return;}
+  let html=""; let lastDate="";
+  allMessages.forEach(m=>{
+    const d=new Date(m.createdAt||0).toDateString(); if(d!==lastDate){lastDate=d; html+=`<div class="date-sep">${new Date(m.createdAt).toLocaleDateString("fr-FR")}</div>`;}
+    const mine=m.from===myPhone;
+    let bubble=`${m.text?esc(m.text):""}${m.photo?`<div class="msg-photo"><img src="${m.photo}"></div>`:""}`;
+    html+=`<div class="msg-row ${mine?'me':'other'}"><div class="msg-bubble">${bubble}</div></div><div class="msg-meta ${mine?'me':''}">${new Date(m.createdAt).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})} ${mine?'✓':''}</div>`;
+  });
+  container.innerHTML=html; container.scrollTop=container.scrollHeight;
+}
+async function publishMessage(other,fields,lastMsg){
+ const id=getChatId(myPhone,other),now=Date.now();
+ const newRef=push(ref(db,`jasonBusiness/messages/${id}`));
+ await set(newRef,{...fields,from:myPhone,to:other,createdAt:now});
+ const a=ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),b=ref(db,`jasonBusiness/user_chats/${other}/${id}`);
+ const [sa,sb]=await Promise.all([get(a),get(b)]); const da=sa.val()||{},dbb=sb.val()||{};
+ await Promise.all([set(a,{...da,with:other,status:"accepted",lastMsg,lastTime:now,unread:0}),set(b,{...dbb,with:myPhone,status:"accepted",lastMsg,lastTime:now,unread:(Number(dbb.unread)||0)+1})]);
+}
+$("photoInput").addEventListener("change",async e=>{
+ const files=Array.from(e.target.files||[]); if(!files.length||!activeChat) return;
+ pendingPhotos=[]; const grid=$("previewGrid"); grid.innerHTML=""; $("photoPreview").classList.add("show");
+ for(let file of files){const b64=await new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(fr.result);fr.readAsDataURL(file);}); pendingPhotos.push(b64); const img=document.createElement("img"); img.src=b64; grid.appendChild(img);}
+ $("previewCount").textContent=pendingPhotos.length+" photos"; e.target.value="";
+});
+$("cancelPhoto").onclick=()=>{pendingPhotos=[]; $("photoPreview").classList.remove("show");};
+$("confirmPhoto").onclick=async()=>{
+ if(!pendingPhotos.length||!activeChat) return;
+ $("confirmPhoto").disabled=true;
+ for(let i=0;i<pendingPhotos.length;i++){await publishMessage(activeChat,{photo:pendingPhotos[i],type:"image"}, "📷 Photo");}
+ $("photoPreview").classList.remove("show"); pendingPhotos=[]; $("confirmPhoto").disabled=false; $("msgs").scrollTop=$("msgs").scrollHeight;
+};
+window.openImageViewer=s=>{$("viewerImg").src=s;$("imgViewer").classList.add("show");};
+window.closeViewer=()=>{$("imgViewer").classList.remove("show");};
+window.zoomIn=()=>{scale=Math.min(scale*1.4,5);$("viewerImg").style.transform=`scale(${scale})`;};
+window.zoomOut=()=>{scale=Math.max(scale/1.4,0.5);$("viewerImg").style.transform=`scale(${scale})`;};
+async function sendText(){const text=$("msgInput").value.trim();if(!text||!activeChat)return;const other=activeChat;$("msgInput").value="";await publishMessage(other,{text},text);$("msgs").scrollTop=$("msgs").scrollHeight;}
+$("sendBtn").onclick=sendText;
+$("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText();}});
 $("msgs").addEventListener("scroll",()=>{$("scrollDown").classList.toggle("show",$("msgs").scrollHeight-$("msgs").scrollTop-$("msgs").clientHeight>200);});
 $("scrollDown").onclick=()=>{$("msgs").scrollTop=$("msgs").scrollHeight;};
 </script>
