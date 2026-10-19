@@ -3,547 +3,282 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#050a14">
-<title>JASON BUSINESS — Messenger Pro</title>
+<meta name="theme-color" content="#0866ff">
+<title>JASON BUSINESS — Facebook Pro</title>
 <style>
-:root{--blue:#00d2ff;--fb-blue:#0084ff;--fb-bg:#f0f2f5;--fb-card:#ffffff;--border:rgba(0,0,0,.08);--text:#050505;--muted:#65676b;--green:#31a24c;--red:#ff3b30}
+:root{--fb-blue:#0866ff;--fb-bg:#f0f2f5;--fb-card:#fff;--text:#050505;--muted:#65676b;--border:#dddfe2;--green:#31a24c;--red:#e41e3f}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Arial;color:var(--text);background:var(--fb-bg);display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
-body.dark{--fb-bg:#18191a;--fb-card:#242526;--text:#e4e6eb;--muted:#b0b3b8;--border:rgba(255,255,255,.1);background:#18191a}
-
-/* HEADER FB */
-header{height:56px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:0 16px;background:var(--fb-card);border-bottom:1px solid var(--border);box-shadow:0 1px 2px rgba(0,0,0,.08);position:sticky;top:0;z-index:50}
-.brand{font-weight:900;color:var(--fb-blue);font-size:20px;letter-spacing:.3px}
-.header-actions{display:flex;gap:8px;align-items:center}
-.icon-btn{width:36px;height:36px;border-radius:50%;background:var(--fb-bg);border:0;display:grid;place-items:center;font-size:18px;cursor:pointer;color:var(--text);transition:.2s}
-.icon-btn:active{transform:scale(.92);background:rgba(0,0,0,.08)}
-body.dark .icon-btn{background:#3a3b3c}
-
-.wrap{display:flex;flex:1;min-height:0;overflow:hidden}
-
-/* LEFT = LISTE CHATS FB */
-.left{width:360px;flex-shrink:0;background:var(--fb-card);border-right:1px solid var(--border);display:flex;flex-direction:column;min-height:0}
-.left-header{padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
-.left-header h2{font-size:24px;font-weight:900}
-.left-actions{display:flex;gap:8px}
-.search-box{margin:8px 16px;padding:10px 12px;border-radius:20px;background:var(--fb-bg);display:flex;align-items:center;gap:8px}
-body.dark .search-box{background:#3a3b3c}
-.search-box input{flex:1;border:0;background:transparent;color:var(--text);outline:none;font-size:14px}
-.tabs{display:flex;gap:8px;padding:8px 16px;overflow-x:auto;scrollbar-width:none}
-.tab{padding:8px 12px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;background:var(--fb-bg);color:var(--muted);border:0;transition:.2s}
-body.dark .tab{background:#3a3b3c}
-.tab.active{background:rgba(0,132,255,.12);color:var(--fb-blue)}
-
-/* STORIES COMME FB */
-.stories{display:flex;gap:8px;padding:12px 16px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--border)}
-.story{width:56px;flex-shrink:0;text-align:center;cursor:pointer}
-.story-av{width:56px;height:56px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#00d2ff,#0077ff,#ff00ff);display:grid;place-items:center}
-.story-av div{width:100%;height:100%;border-radius:50%;background:var(--fb-card);display:grid;place-items:center;font-weight:900;overflow:hidden;border:3px solid var(--fb-card)}
-.story-av img{width:100%;height:100%;object-fit:cover}
-.story span{font-size:11px;margin-top:4px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-.list{flex:1;min-height:0;overflow-y:auto;padding:8px}
-.item{padding:8px;border-radius:10px;display:flex;gap:10px;align-items:center;cursor:pointer;transition:.15s;position:relative}
-.item:hover{background:var(--fb-bg)}
-body.dark .item:hover{background:#3a3b3c}
-.item.active{background:rgba(0,132,255,.10)}
-.av{width:56px;height:56px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;color:white;overflow:hidden;position:relative}
+body{margin:0;font-family:SF Pro Text,Segoe UI,Arial;color:var(--text);background:var(--fb-bg);padding-bottom:60px}
+body.dark{--fb-bg:#18191a;--fb-card:#242526;--text:#e4e6eb;--muted:#b0b3b8;--border:#3e4042;background:#18191a}
+header{position:sticky;top:0;z-index:200;height:56px;display:flex;justify-content:space-between;align-items:center;padding:0 10px;background:var(--fb-card);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.logo{font-weight:900;color:var(--fb-blue);font-size:24px}
+.h-actions{display:flex;gap:6px;align-items:center}
+.h-btn{width:40px;height:40px;border-radius:50%;background:var(--fb-bg);border:0;display:grid;place-items:center;font-size:20px;cursor:pointer;position:relative;color:var(--text)}
+body.dark .h-btn{background:#3a3b3c}
+.badge{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;padding:0 5px;border-radius:10px;background:var(--red);color:white;font-size:11px;font-weight:800;display:grid;place-items:center}
+.wrap{max-width:680px;margin:auto}
+.stories{display:flex;gap:8px;padding:10px;overflow-x:auto;background:var(--fb-card);margin:8px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);scrollbar-width:none}
+.s-card{width:112px;height:190px;flex-shrink:0;border-radius:10px;overflow:hidden;position:relative;cursor:pointer;background:#000;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.s-card.create{background:var(--fb-card)}
+.s-card.create .s-img{height:70%;background:var(--fb-bg);display:grid;place-items:center;font-size:36px}
+.s-card.create .s-plus{position:absolute;left:50%;top:70%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:50%;background:var(--fb-blue);color:white;display:grid;place-items:center;font-size:20px;border:4px solid var(--fb-card)}
+.s-card .s-img{width:100%;height:100%;object-fit:cover}
+.s-card .s-top{position:absolute;top:8px;left:8px;width:36px;height:36px;border-radius:50%;border:3px solid var(--fb-blue);overflow:hidden;background:var(--fb-card);display:grid;place-items:center;font-weight:800;font-size:12px}
+.s-card .s-top img{width:100%;height:100%;object-fit:cover}
+.s-card .s-name{position:absolute;bottom:0;left:0;right:0;padding:30px 6px 6px;background:linear-gradient(transparent,rgba(0,0,0,.8));color:white;font-size:11px;font-weight:600}
+.s-card .s-note{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.65);color:white;padding:6px 10px;border-radius:16px;font-size:11px;font-weight:700;text-align:center;max-width:90%}
+.create-post{margin:0 0 8px;background:var(--fb-card);padding:12px;display:flex;gap:8px;align-items:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#00d2ff,#0077ff);display:grid;place-items:center;color:white;font-weight:900;overflow:hidden;flex-shrink:0;font-size:14px}
 .av img{width:100%;height:100%;object-fit:cover}
-.online-dot{position:absolute;bottom:2px;right:2px;width:14px;height:14px;border-radius:50%;background:var(--green);border:2px solid var(--fb-card)}
-.info{flex:1;min-width:0}
-.name{font-size:15px;font-weight:600;display:flex;align-items:center;gap:6px}
-.prev{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;display:flex;align-items:center;gap:4px}
-.prev b{color:var(--text)}
-.right-info{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
-.time{font-size:12px;color:var(--muted)}
-.unread-badge{background:var(--fb-blue);color:white;font-size:12px;font-weight:700;min-width:20px;height:20px;border-radius:10px;display:grid;place-items:center;padding:0 6px}
-.typing{color:var(--fb-blue)!important;font-style:italic}
-
-/* RIGHT = MESSENGER FB */
-.right{flex:1;min-width:0;display:flex;flex-direction:column;background:var(--fb-card);overflow:hidden;position:relative}
-.top{flex-shrink:0;padding:8px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:var(--fb-card)}
-.top-left{display:flex;align-items:center;gap:10px;min-width:0;cursor:pointer}
-.top-av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;color:white;overflow:hidden;position:relative}
-.top-av img{width:100%;height:100%;object-fit:cover}
-.top-info h3{font-size:15px;font-weight:600;margin:0}
-.top-info small{font-size:12px;color:var(--muted)}
-.top-actions{display:flex;gap:8px}
-.call-btn{width:36px;height:36px;border-radius:50%;background:transparent;border:0;display:grid;place-items:center;font-size:20px;cursor:pointer;color:var(--fb-blue)}
-.call-btn:active{background:rgba(0,132,255,.1)}
-
-.msgs{flex:1;min-height:0;overflow-y:auto;padding:16px 16px 8px;display:flex;flex-direction:column;gap:4px;background:var(--fb-card);overscroll-behavior:contain}
-.date-sep{text-align:center;margin:16px 0 8px;font-size:12px;color:var(--muted);font-weight:500}
-.msg-row{display:flex;gap:8px;align-items:flex-end;max-width:85%;position:relative}
-.msg-row.me{align-self:flex-end;flex-direction:row-reverse}
-.msg-row.other{align-self:flex-start}
-.msg-av{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;background:#e4e6eb;font-size:10px;font-weight:700;overflow:hidden}
-.msg-av img{width:100%;height:100%;object-fit:cover}
-.msg-bubble{max-width:100%;padding:8px 12px;border-radius:18px;font-size:15px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.35;position:relative;cursor:pointer}
-.msg-row.me .msg-bubble{background:var(--fb-blue);color:white;border-bottom-right-radius:4px}
-.msg-row.other .msg-bubble{background:#f0f2f5;color:var(--text);border-bottom-left-radius:4px}
-body.dark .msg-row.other .msg-bubble{background:#3a3b3c;color:#e4e6eb}
-.msg-photo{margin-top:6px;border-radius:12px;overflow:hidden;width:180px;height:180px;background:#000;cursor:pointer;position:relative;border:1px solid var(--border)}
-.msg-photo img{width:100%;height:100%;object-fit:cover;display:block}
-.msg-row.me .msg-photo{width:200px;height:200px}
-.msg-row.other .msg-photo{width:160px;height:160px}
-.msg-audio{margin-top:6px}
-.msg-audio audio{width:200px}
-.reply-preview{font-size:12px;padding:6px 10px;border-radius:10px;background:rgba(0,0,0,.08);border-left:3px solid var(--fb-blue);margin-bottom:6px;opacity:.8}
-.msg-meta{display:flex;align-items:center;gap:4px;margin-top:4px;font-size:11px;color:var(--muted)}
-.msg-meta.me{justify-content:flex-end}
-.seen-avatars{display:flex;gap:2px;margin-top:2px;justify-content:flex-end}
-.seen-avatars img{width:14px;height:14px;border-radius:50%;border:1px solid var(--fb-card)}
-.reaction-bar{position:absolute;bottom:-12px;right:8px;background:var(--fb-card);border-radius:20px;padding:2px 6px;box-shadow:0 2px 8px rgba(0,0,0,.15);display:flex;gap:2px;font-size:12px;border:1px solid var(--border)}
-.reactions-popup{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--fb-card);border-radius:30px;padding:6px 10px;box-shadow:0 4px 20px rgba(0,0,0,.2);display:flex;gap:6px;z-index:10;border:1px solid var(--border)}
-.reactions-popup span{font-size:22px;cursor:pointer;transition:.2s;padding:2px}
-.reactions-popup span:hover{transform:scale(1.3)}
-.load-more{padding:8px 14px;background:var(--fb-bg);border:1px solid var(--border);border-radius:20px;margin:0 auto 12px;font-size:12px;color:var(--fb-blue);cursor:pointer;display:none}
-.load-more.show{display:block}
-
-.input-area{flex-shrink:0;padding:8px 12px;background:var(--fb-card);border-top:1px solid var(--border)}
-.reply-bar{display:none;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;background:var(--fb-bg);border-radius:10px;margin-bottom:8px}
-.reply-bar.show{display:flex}
-.reply-bar div{font-size:12px}
-.rec-bar{display:none;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;background:#ffebe9;border-radius:20px;margin-bottom:8px}
-body.dark .rec-bar{background:#4a1c1c}
-.rec-bar.show{display:flex}
-.input-row{display:flex;gap:8px;align-items:flex-end}
-.input-icons{display:flex;gap:4px;align-items:center}
-.tbtn{width:36px;height:36px;flex-shrink:0;border-radius:50%;border:0;background:transparent;display:grid;place-items:center;font-size:20px;cursor:pointer;color:var(--fb-blue)}
-.tbtn:active{background:rgba(0,132,255,.1)}
-.input-row textarea{flex:1;min-width:0;min-height:36px;max-height:120px;padding:10px 14px;border-radius:20px;border:0;background:var(--fb-bg);color:var(--text);outline:none;resize:none;font-size:15px}
-body.dark .input-row textarea{background:#3a3b3c}
-.send-btn{width:36px;height:36px;flex-shrink:0;border-radius:50%;border:0;background:var(--fb-blue);color:white;font-size:18px;cursor:pointer;display:grid;place-items:center}
-.send-btn:disabled{opacity:.4}
-
-#photoPreview{display:none;background:var(--fb-card);border:1px solid var(--border);border-radius:16px;padding:12px;margin-bottom:8px}
-#photoPreview.show{display:block}
-.preview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-height:160px;overflow-y:auto}
-.preview-grid img{width:100%;height:70px;object-fit:cover;border-radius:8px}
-.preview-actions{display:flex;gap:8px;margin-top:8px}
-.preview-actions button{flex:1;padding:10px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
-.btnSend{background:var(--fb-blue);color:white}
-.btnCancel{background:var(--fb-bg);color:var(--text)}
-
-.scroll-down{position:absolute;bottom:80px;right:16px;width:40px;height:40px;border-radius:50%;background:var(--fb-card);color:var(--fb-blue);border:1px solid var(--border);display:none;place-items:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:10;font-weight:900}
-.scroll-down.show{display:grid}
-
-/* VIEWER */
-#imgViewer{position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:9999;display:none;flex-direction:column}
-#imgViewer.show{display:flex}
-.viewer-top{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#242526}
-.viewer-content{flex:1;display:grid;place-items:center;overflow:hidden;touch-action:none;cursor:grab}
-.viewer-content img{max-width:100%;max-height:100%;object-fit:contain;transition:transform .15s;user-select:none}
-.viewer-actions{display:flex;gap:8px;padding:12px;background:#242526;justify-content:center;align-items:center}
-.zoom-btn{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:white;font-size:20px;display:grid;place-items:center;cursor:pointer}
-
-@media(max-width:800px){.left{position:absolute;inset:56px 0 0;width:100%;z-index:20}.left.hide{display:none}.right{width:100%}.msg-row{max-width:90%}.preview-grid{grid-template-columns:repeat(3,1fr)}}
+.create-post input{flex:1;padding:10px 14px;border-radius:20px;border:0;background:var(--fb-bg);color:var(--text);outline:none;font-size:14px}
+body.dark .create-post input{background:#3a3b3c}
+.post{margin:8px 0;background:var(--fb-card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.p-head{padding:12px;display:flex;justify-content:space-between;align-items:center}
+.p-user{display:flex;gap:10px;align-items:center}
+.p-info h4{font-size:14px;font-weight:600}
+.p-info small{font-size:11px;color:var(--muted)}
+.p-text{padding:0 12px 10px;font-size:14px;line-height:1.4;white-space:pre-wrap}
+.p-img{width:100%;max-height:600px;object-fit:cover;display:block;background:#000}
+.p-stats{display:flex;justify-content:space-between;padding:8px 12px;font-size:12px;color:var(--muted);border-bottom:1px solid var(--border)}
+.p-actions{display:flex}
+.p-act{flex:1;padding:8px;border:0;background:transparent;display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer}
+.p-act.active{color:var(--fb-blue)}
+.c-list{padding:0 12px 6px}
+.c-item{display:flex;gap:6px;margin-top:8px}
+.c-bubble{background:var(--fb-bg);padding:7px 10px;border-radius:16px;font-size:12px;max-width:85%}
+body.dark .c-bubble{background:#3a3b3c}
+.c-bubble b{font-size:12px;display:block}
+.comments{padding:8px 12px;background:var(--fb-bg);display:flex;gap:6px;align-items:center}
+body.dark .comments{background:#3a3b3c}
+.comments input{flex:1;padding:7px 10px;border-radius:20px;border:0;background:var(--fb-card);outline:none;font-size:12px;color:var(--text)}
+body.dark .comments input{background:#242526}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:5000;display:none;place-items:center;padding:14px}
+.modal.show{display:grid}
+.m-card{width:100%;max-width:500px;background:var(--fb-card);border-radius:10px;overflow:hidden;max-height:92vh;display:flex;flex-direction:column}
+.m-head{padding:14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);font-weight:700}
+.m-body{padding:14px;overflow-y:auto;flex:1}
+.m-body textarea{width:100%;min-height:70px;padding:10px;border:0;background:var(--fb-bg);border-radius:8px;outline:none;font-size:15px;resize:none;color:var(--text)}
+body.dark .m-body textarea{background:#3a3b3c}
+.m-foot{padding:10px;border-top:1px solid var(--border);display:flex;gap:8px}
+.btn{flex:1;padding:10px;border-radius:8px;border:0;font-weight:700;cursor:pointer}
+.btn-blue{background:var(--fb-blue);color:white}
+.btn-gray{background:var(--fb-bg);color:var(--text)}
+.preview{margin-top:10px;border-radius:8px;overflow:hidden;max-height:280px}
+.preview img{width:100%;object-fit:cover}
+#storyViewer{position:fixed;inset:0;background:#000;z-index:6000;display:none;flex-direction:column}
+#storyViewer.show{display:flex}
+.sv-top{padding:12px;display:flex;justify-content:space-between;align-items:center;color:white;background:linear-gradient(rgba(0,0,0,.6),transparent)}
+.sv-img{flex:1;display:grid;place-items:center;position:relative}
+.sv-img img{max-width:100%;max-height:100%;object-fit:contain}
+.sv-note{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.6);color:white;padding:10px 16px;border-radius:20px;font-weight:800;font-size:14px;text-align:center}
+.sv-views{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.85));color:white;padding:16px;font-size:12px}
+nav{position:fixed;bottom:0;left:0;right:0;height:56px;background:var(--fb-card);border-top:1px solid var(--border);display:flex;z-index:100}
+.nav-item{flex:1;display:grid;place-items:center;font-size:22px;cursor:pointer;position:relative;color:var(--muted)}
+.nav-item.active{color:var(--fb-blue)}
+.nav-item .badge{top:6px;right:18px}
+.profile-head{background:var(--fb-card);padding-bottom:10px}
+.cover{height:160px;background:linear-gradient(135deg,#00d2ff,#0077ff)}
+.p-av-big{width:90px;height:90px;border-radius:50%;border:4px solid var(--fb-card);margin:-40px 0 0 16px;background:var(--fb-blue);display:grid;place-items:center;font-size:30px;color:white;font-weight:900;overflow:hidden}
+.p-av-big img{width:100%;height:100%;object-fit:cover}
+.p-name-box{padding:10px 16px}
+.p-stats-row{display:flex;gap:14px;margin-top:6px;font-size:13px}
 </style>
 </head>
 <body>
 <header>
-<div class="brand">jason business • <span id="myPhoneShow" style="font-size:12px;opacity:.6;font-weight:400"></span></div>
-<div class="header-actions">
-<button class="icon-btn" onclick="goPage('dashboard.html')">📊</button>
-<button class="icon-btn">🔍</button>
-<button class="icon-btn">✏️</button>
+<div class="logo">jason business</div>
+<div class="h-actions">
+<button class="h-btn" onclick="showHome()">🏠</button>
+<button class="h-btn" onclick="location.href='messenger.html'" id="msgBtn">💬<span class="badge" id="msgBadge" style="display:none">0</span></button>
+<button class="h-btn" onclick="openNotif()" id="notifBtn">🔔<span class="badge" id="notifBadge" style="display:none">0</span></button>
+<button class="h-btn" onclick="openModal('menuModal')">☰</button>
 </div>
 </header>
 
-<div class="wrap">
-<aside class="left" id="leftPanel">
-<div class="left-header"><h2>Messenger</h2><div class="left-actions"><button class="icon-btn">⚙️</button><button class="icon-btn">📷</button></div></div>
-<div class="search-box">🔍<input id="search" placeholder="Rechercher sur Messenger"></div>
-<div class="tabs"><button class="tab active" data-tab="chats">Boîte de réception</button><button class="tab" data-tab="users">👥 Utilisateurs</button><button class="tab" data-tab="requests">🔔 Demandes <span id="reqCount" style="background:#ff3b30;color:white;padding:2px 6px;border-radius:10px;font-size:10px;display:none">0</span></button></div>
-
-<!-- STORIES COMME FACEBOOK -->
-<div class="stories" id="stories">
-<div class="story"><div class="story-av"><div>➕</div></div><span>Créer story</span></div>
+<div class="wrap" id="homePage">
+<div class="stories" id="stories"></div>
+<div class="create-post"><div class="av" id="myAv">JA</div><input placeholder="Quoi de neuf ?" readonly onclick="openModal('postModal')"><span>🖼️</span></div>
+<div id="feed"></div>
 </div>
 
-<div style="padding:8px 16px;display:flex;gap:8px;border-bottom:1px solid var(--border)"><input id="manualPhone" placeholder="+243..." style="flex:1;padding:8px 12px;border-radius:20px;border:1px solid var(--border);background:var(--fb-bg);color:var(--text);outline:none"><button class="icon-btn" id="btnAddManual" style="background:var(--fb-blue);color:white">+</button></div>
-
-<div class="list" id="list"></div>
-
-<div style="padding:10px;display:flex;gap:8px;border-top:1px solid var(--border)"><button class="tab" style="flex:1" onclick="location.href='dashboard.html'">🏠 Dashboard</button><button class="tab" style="flex:1" onclick="location.href='parametres.html'">⚙️ Paramètres</button></div>
-</aside>
-
-<section class="right">
-<div class="top" id="topBar">
-<div class="top-left" id="topLeft"><div class="top-av" id="chatAvatar">JB</div><div class="top-info"><h3 id="chatName">Sélectionne un chat</h3><small id="chatPhone">Messenger Pro • Comme Facebook</small></div></div>
-<div class="top-actions"><button class="call-btn">📞</button><button class="call-btn">📹</button><button class="call-btn">ℹ️</button></div>
+<div class="wrap" id="profilePage" style="display:none">
+<div class="profile-head"><div class="cover"></div><div class="p-av-big" id="pAvBig">JA</div><div class="p-name-box"><h2 id="pName">Jason</h2><small id="pPhone" style="color:var(--muted)"></small><div class="p-stats-row"><span><b id="pPosts">0</b> posts</span><span><b id="pFollowers">0</b> abonnés</span><span><b id="pFollowing">0</b> suivis</span></div><button class="btn btn-blue" style="margin-top:10px;width:100%" onclick="openModal('editProfileModal')">✏️ Modifier profil (nom/photo)</button></div></div>
+<div id="profileFeed"></div>
 </div>
 
-<div class="msgs" id="msgs">
-<div style="margin:auto;text-align:center;opacity:.5;padding:40px">
-<div style="font-size:50px">💬</div>
-<div style="margin-top:10px;font-weight:700">Vos messages</div>
-<div style="font-size:12px;margin-top:4px">Sélectionne un chat comme sur Facebook Messenger</div>
-</div>
-</div>
+<div class="modal" id="postModal"><div class="m-card"><div class="m-head"><span>Créer publication</span><button onclick="closeModal('postModal')" class="h-btn">✕</button></div><div class="m-body"><div style="display:flex;gap:10px;align-items:center;margin-bottom:10px"><div class="av" id="postAv">JA</div><div><b id="postName">Jason</b><br><small style="background:var(--fb-bg);padding:2px 6px;border-radius:4px;font-size:11px">🌍 Public</small></div></div><textarea id="postText" placeholder="Quoi de neuf, Jason ?"></textarea><div class="preview" id="postPreview"></div><input type="file" id="postFile" accept="image/*" hidden></div><div class="m-foot"><button class="btn btn-gray" onclick="document.getElementById('postFile').click()">🖼️ Photo</button><button class="btn btn-blue" id="publishBtn" onclick="publishPost()">Publier</button></div></div></div>
 
-<div id="scrollDown" class="scroll-down">↓</div>
+<div class="modal" id="storyModal"><div class="m-card"><div class="m-head"><span>Créer story + note</span><button onclick="closeModal('storyModal')" class="h-btn">✕</button></div><div class="m-body"><textarea id="storyNote" placeholder="Ajoute une note sur ta story (ex: Je suis à Kinshasa 🔥)..." style="min-height:50px;margin-bottom:10px"></textarea><div class="preview" id="storyPreview"></div><input type="file" id="storyFile" accept="image/*" hidden><div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-gray" onclick="document.getElementById('storyFile').click()">🖼️ Photo story</button><button class="btn btn-blue" onclick="publishStory()">Publier story</button></div><small style="display:block;margin-top:10px;opacity:.6;font-size:11px">👁️ Seul toi verras qui a vu ta story et les j'aime. Comme Facebook.</small></div></div></div>
 
-<div class="input-area">
-<div id="photoPreview">
-<div style="display:flex;justify-content:space-between;margin-bottom:8px"><b id="previewCount" style="color:var(--fb-blue)">0 photos</b><small>Max 1000</small></div>
-<div id="previewGrid" class="preview-grid"></div>
-<textarea id="photoCaption" placeholder="Légende..." style="margin-top:8px;width:100%;padding:8px 12px;border-radius:12px;border:1px solid var(--border);background:var(--fb-bg);color:var(--text);resize:none;min-height:36px"></textarea>
-<div class="preview-actions"><button class="btnCancel" id="cancelPhoto">Annuler</button><button class="btnSend" id="confirmPhoto">Envoyer</button></div>
-<div id="uploadProgress" style="display:none;margin-top:8px;text-align:center;font-size:12px;color:var(--fb-blue)"></div>
-</div>
+<div class="modal" id="menuModal"><div class="m-card"><div class="m-head"><span>Menu & Paramètres</span><button onclick="closeModal('menuModal')" class="h-btn">✕</button></div><div class="m-body" style="padding:0"><div style="padding:12px;display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--border)" onclick="showProfile()"><div class="av" id="menuAv">JA</div><div><b id="menuName">Jason</b><br><small style="color:var(--muted)">Voir ton profil</small></div></div><button class="p-act" style="justify-content:flex-start;padding:14px" onclick="toggleTheme()">🌙 Mode sombre / lumineux</button><button class="p-act" style="justify-content:flex-start;padding:14px" onclick="openModal('editProfileModal')">✏️ Changer nom du compte & photo</button><button class="p-act" style="justify-content:flex-start;padding:14px" onclick="location.href='dashboard.html'">📊 Dashboard Business</button><button class="p-act" style="justify-content:flex-start;padding:14px" onclick="location.href='parametres.html'">⚙️ Paramètres Business (langue, monnaie)</button><button class="p-act" style="justify-content:flex-start;padding:14px;color:var(--red)" onclick="logout()">🚪 Déconnexion</button></div></div></div>
 
-<div id="replyBar" class="reply-bar"><div><b id="replyName" style="font-size:13px">Répondre à</b><div id="replyText" style="font-size:12px;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px"></div></div><button onclick="cancelReply()" style="border:0;background:transparent;font-size:20px;cursor:pointer">✕</button></div>
+<div class="modal" id="editProfileModal"><div class="m-card"><div class="m-head"><span>Modifier profil</span><button onclick="closeModal('editProfileModal')" class="h-btn">✕</button></div><div class="m-body"><label style="font-size:12px">Nom du compte</label><input id="editName" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);margin:6px 0 12px;background:var(--fb-bg);color:var(--text)"><label style="font-size:12px">Photo de profil</label><input type="file" id="editPhotoFile" accept="image/*" style="margin:6px 0"><div class="preview" id="editPhotoPreview"></div></div><div class="m-foot"><button class="btn btn-gray" onclick="closeModal('editProfileModal')">Annuler</button><button class="btn btn-blue" onclick="saveProfile()">Enregistrer</button></div></div></div>
 
-<div id="recBar" class="rec-bar"><div style="display:flex;align-items:center;gap:8px"><div style="width:10px;height:10px;background:#ff3b30;border-radius:50%;animation:pulse 1s infinite"></div><div id="recTime" style="font-weight:800">00:00</div><small>Enregistrement...</small></div><div style="display:flex;gap:6px"><button id="recCancel" style="padding:6px 10px;border-radius:20px;border:1px solid #ff3b30;background:transparent;color:#ff3b30">Annuler</button><button id="recSend" style="padding:6px 12px;border-radius:20px;border:0;background:var(--fb-blue);color:white;font-weight:700">Envoyer</button></div></div>
+<div class="modal" id="notifModal"><div class="m-card"><div class="m-head"><span>🔔 Notifications</span><button onclick="closeModal('notifModal')" class="h-btn">✕</button></div><div class="m-body" id="notifList"></div></div></div>
 
-<div class="input-row">
-<div class="input-icons"><label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*" multiple hidden></label><button class="tbtn">😊</button><button class="tbtn">🎁</button></div>
-<textarea id="msgInput" placeholder="Aa" disabled rows="1"></textarea>
-<button class="tbtn" id="recordBtn" disabled>🎙️</button>
-<button class="send-btn" id="sendBtn" disabled>➤</button>
-</div>
-<div id="hint" style="text-align:center;font-size:10px;opacity:.5;margin-top:4px">Facebook Messenger Pro • Photo petite • Zoom pince • 1000 max • Réactions ❤️</div>
-</div>
-</section>
-</div>
+<div id="storyViewer"><div class="sv-top"><div style="display:flex;gap:10px;align-items:center"><div class="av" id="svAv">JA</div><div><b id="svName">Jason</b><br><small id="svTime"></small></div></div><button onclick="closeStory()" style="background:rgba(255,255,255,.2);border:0;color:white;width:36px;height:36px;border-radius:50%">✕</button></div><div class="sv-img" id="svContent"></div><div class="sv-views" id="svViews"></div></div>
 
-<!-- VIEWER -->
-<div id="imgViewer">
-<div class="viewer-top"><div style="display:flex;align-items:center;gap:10px"><button onclick="closeViewer()" style="background:transparent;border:0;color:white;font-size:22px;cursor:pointer">✕</button><span id="viewerTitle" style="font-size:13px;color:white">Photo Messenger</span></div><div style="display:flex;gap:8px"><button class="zoom-btn" onclick="downloadImage()">⬇️</button><button class="zoom-btn" onclick="closeViewer()">✕</button></div></div>
-<div class="viewer-content" id="viewerContent"><img id="viewerImg" src=""></div>
-<div class="viewer-actions"><button class="zoom-btn" onclick="zoomOut()">−</button><div style="color:white;font-size:12px;min-width:50px;text-align:center" id="zoomInfo">100%</div><button class="zoom-btn" onclick="zoomIn()">+</button><button class="zoom-btn" onclick="resetZoom()" style="margin-left:10px">↺</button></div>
-</div>
+<nav><div class="nav-item active" id="navHome" onclick="showHome()">🏠</div><div class="nav-item" onclick="location.href='messenger.html'">💬<span class="badge" id="navMsgBadge" style="display:none">0</span></div><div class="nav-item" onclick="showProfile()">👤</div><div class="nav-item" onclick="openNotif()">🔔<span class="badge" id="navNotifBadge" style="display:none">0</span></div><div class="nav-item" onclick="openModal('menuModal')">☰</div></nav>
 
 <script type="module">
 import {initializeApp,getApps,getApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {getDatabase,ref,onValue,push,set,get,remove,update,onDisconnect} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import {getDatabase,ref,onValue,set,push,get,update,remove} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
 const app=getApps().length?getApp():initializeApp(firebaseConfig);
 const db=getDatabase(app);
 const $=id=>document.getElementById(id);
-const myPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("phone");
-if(!myPhone){location.replace("login.html");throw new Error("Non connecté");}
-$("myPhoneShow").textContent=myPhone;
+const myPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||"";
+if(!myPhone) location.replace("login.html");
+let myName=localStorage.getItem("jb_display_name")||"Jason Aloma";
+let myPhoto=localStorage.getItem("jb_display_photo")||"";
+let postsCache=[],storiesCache=[],notifsCache=[];
 
-// THEME PARAMETRES CONNECTE
-const jbTheme=localStorage.getItem("jb_theme")||"dark";
-if(jbTheme==="light") document.body.classList.remove("dark"); else document.body.classList.add("dark");
-const jbLang=localStorage.getItem("jb_lang")||"fr";
+if(localStorage.getItem("jb_theme")==="light") document.body.classList.remove("dark"); else document.body.classList.add("dark");
+window.toggleTheme=()=>{const isDark=document.body.classList.contains("dark");document.body.classList.toggle("dark",!isDark);localStorage.setItem("jb_theme",!isDark?"dark":"light");};
+function esc(s){return String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+window.openModal=id=>$(id).classList.add("show");
+window.closeModal=id=>$(id).classList.remove("show");
+window.showHome=()=>{$("homePage").style.display="block";$("profilePage").style.display="none";document.querySelectorAll(".nav-item").forEach(n=>n.classList.remove("active"));$("navHome").classList.add("active");};
+window.showProfile=()=>{$("homePage").style.display="none";$("profilePage").style.display="block";closeModal("menuModal");renderProfile();};
+window.logout=()=>{localStorage.clear();location.href="login.html";};
+window.openNotif=()=>{openModal("notifModal"); markNotifRead();};
 
-let tab="chats",activeChat=null,allUsers={},myRequests={},myChats={},presenceCache={},manualUsers=[],messageUnsubscribe=null,recording=false,cancelled=false,mediaRecorder=null,audioChunks=[],recordStream=null,timerInt=null,recSec=0,busySending=false;
-let allMessages=[],displayLimit=50,firstOpen=true;
-let pendingPhotos=[],currentViewerSrc=null;
-let scale=1,posX=0,posY=0,isDragging=false,startX=0,startY=0,initialDist=0,lastScale=1;
-let replyTo=null;
+onValue(ref(db,`jasonBusiness/users/${myPhone}`),s=>{
+  if(s.exists()){
+    const u=s.val();
+    myName=u.nom||u.name||myName;
+    if(u.photo) myPhoto=u.photo;
+    localStorage.setItem("jb_display_name",myName);
+    if(myPhoto) localStorage.setItem("jb_display_photo",myPhoto);
+    $("pName").textContent=myName; $("postName").textContent=myName; $("menuName").textContent=myName; $("pPhone").textContent=myPhone;
+    updateAvatars();
+  }
+});
+function updateAvatars(){
+  const html=myPhoto?`<img src="${myPhoto}">`:myName.slice(0,2).toUpperCase();
+  ["myAv","postAv","menuAv","pAvBig"].forEach(id=>{if($(id)) $(id).innerHTML=html;});
+}
+updateAvatars();
 
-try{manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]");}catch{manualUsers=[];}
-function goPage(p){window.location.href=p}
-window.goPage=goPage;
-function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function timeStr(ts){if(!ts)return"";const d=new Date(ts);const now=new Date();if(d.toDateString()===now.toDateString()) return d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});return d.toLocaleDateString("fr-FR",{day:"2-digit",month:"short"})}
-function lastSeenStr(ts){if(!ts)return"Hors ligne";const diff=Date.now()-ts;if(diff<60000)return"Actif maintenant";if(diff<3600000)return`Actif il y a ${Math.floor(diff/60000)} min`;if(diff<86400000)return`Actif il y a ${Math.floor(diff/3600000)} h`;return`Actif il y a ${Math.floor(diff/86400000)} j`;}
-function getChatId(a,b){return[a,b].sort().join("_");}
-function isOnline(ph){const p=presenceCache[ph];return !!(p&&p.online&&Date.now()-(p.lastSeen||0)<90000);}
-function getUserPhoto(ph){const u=allUsers[ph]||{};return u.photo||u.photoProfil||u.avatar||"";}
-function setHint(s){$("hint").textContent=s;}
-
-const presenceRef=ref(db,`jasonBusiness/presence/${myPhone}`);
-set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:null}).catch(()=>{});
-onDisconnect(presenceRef).set({online:false,lastSeen:Date.now(),activeChat:null}).catch(()=>{});
-setInterval(()=>set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:activeChat,typing:$("msgInput").value.length>0}).catch(()=>{}),20000);
-
-onValue(ref(db,"jasonBusiness/presence"),s=>{presenceCache=s.val()||{};render();if(activeChat){const online=isOnline(activeChat);const last=presenceCache[activeChat]?.lastSeen;const typing=presenceCache[activeChat]?.typing;if(typing) $("chatPhone").textContent="En train d'écrire..."; else $("chatPhone").textContent=online?"En ligne • Actif maintenant":lastSeenStr(last);}renderTyping();});
-onValue(ref(db,"jasonBusiness/users"),s=>{allUsers=s.val()||{};render();renderStories();});
-onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),s=>{myRequests=s.val()||{};const n=Object.values(myRequests).filter(r=>r.type==="incoming"&&r.status==="pending").length;$("reqCount").textContent=n;$("reqCount").style.display=n?"inline-block":"none";render();});
-onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),s=>{myChats=s.val()||{};render();});
-
-document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");tab=t.dataset.tab;render();});
-$("search").oninput=render;
-$("topLeft").onclick=()=>{if(innerWidth<=800)$("leftPanel").classList.remove("hide");};
-$("btnAddManual").onclick=()=>{const p=$("manualPhone").value.trim();if(!p||p.length<8)return;if(p===myPhone)return;if(!manualUsers.includes(p))manualUsers.push(p);localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));$("manualPhone").value="";render();};
-
-function getCombinedUsers(){const c={...allUsers};manualUsers.forEach(p=>{if(!c[p])c[p]={telephone:p};});return c;}
-
+// STORIES - SEUL PROPRIO VOIT VUES
+onValue(ref(db,"jasonBusiness/stories"),s=>{
+  storiesCache=Object.entries(s.val()||{}).map(([k,v])=>({...v,id:k})).sort((a,b)=>b.createdAt-a.createdAt);
+  renderStories();
+});
 function renderStories(){
- const box=$("stories");
- // Garde le bouton créer story
- box.innerHTML='<div class="story"><div class="story-av"><div>➕</div></div><span>Créer story</span></div>';
- Object.entries(getCombinedUsers()).slice(0,8).forEach(([phone,u])=>{
-  if(phone===myPhone) return;
-  const photo=getUserPhoto(phone);
-  const div=document.createElement("div");
-  div.className="story";
-  div.innerHTML=`<div class="story-av"><div>${photo?`<img src="${esc(photo)}">`:esc(phone.slice(-2))}</div></div><span>${esc((u.nom||phone).slice(0,10))}</span>`;
-  div.onclick=()=>openChat(phone);
-  box.appendChild(div);
- });
-}
-
-function renderTyping(){
- // Montre qui écrit dans la liste
-}
-
-function render(){
- const q=($("search").value||"").toLowerCase(),cont=$("list");cont.innerHTML="";
- const users=getCombinedUsers();
- if(tab==="users"){
-  Object.entries(users).forEach(([phone,u])=>{
-   if(phone===myPhone)return;
-   if(q&&!phone.toLowerCase().includes(q)&&!String(u.nom||"").toLowerCase().includes(q))return;
-   const id=getChatId(myPhone,phone),friend=myChats[id]?.status==="accepted",sent=myRequests[phone]?.type==="outgoing"&&myRequests[phone]?.status==="pending",photo=getUserPhoto(phone),online=isOnline(phone);
-   const div=document.createElement("div");div.className="item";div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(phone.slice(-2))}${online?'<div class="online-dot"></div>':''}</div><div class="info"><div class="name">${esc(u.nom||phone)}</div><div class="prev">${esc(phone)} ${online?'• En ligne':''}</div></div><div>${friend?"💬":sent?"⏳":"+"}</div>`;div.onclick=()=>friend?openChat(phone):!sent&&sendRequest(phone);cont.appendChild(div);
+  const box=$("stories");
+  box.innerHTML=`<div class="s-card create" onclick="openModal('storyModal')"><div class="s-img">👤</div><div class="s-plus">+</div><div class="s-name">Créer story</div></div>`;
+  storiesCache.slice(0,20).forEach(st=>{
+    const isMine=st.from===myPhone;
+    const div=document.createElement("div"); div.className="s-card";
+    div.innerHTML=`<img class="s-img" src="${st.photo}"><div class="s-top">${st.fromPhoto?`<img src="${st.fromPhoto}">`:esc((st.fromName||st.from).slice(0,2))}</div><div class="s-name">${esc(isMine?"Ta story":st.fromName||st.from)}${st.note?`<br><small>📝 ${esc(st.note.slice(0,18))}</small>`:""}</div>${st.note?`<div class="s-note">${esc(st.note)}</div>`:""}`;
+    div.onclick=()=>viewStory(st);
+    box.appendChild(div);
   });
- }else if(tab==="requests"){
-  const reqs=Object.entries(myRequests).filter(([_,r])=>r.type==="incoming"&&r.status==="pending");
-  if(!reqs.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucune demande</div>';return;}
-  reqs.forEach(([phone])=>{const div=document.createElement("div");div.className="item";div.innerHTML=`<div class="av">${esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[phone]?.nom||phone)}</div><div class="prev">Veut vous contacter</div></div>`;const b=document.createElement("button");b.className="icon-btn";b.style.background="var(--fb-blue)";b.style.color="white";b.textContent="✓";b.onclick=()=>acceptRequest(phone);div.appendChild(b);cont.appendChild(div);});
- }else{
-  const list=Object.entries(myChats).filter(([_,c])=>c.status==="accepted").sort((a,b)=>(b[1].lastTime||0)-(a[1].lastTime||0));
-  if(!list.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucun chat. Allez dans Utilisateurs.</div>';return;}
-  list.forEach(([id,chat])=>{
-    const other=id.split("_").find(p=>p!==myPhone);if(!other)return;
-    const photo=getUserPhoto(other);
-    const unread=Number(chat.unread)||0;
-    const online=isOnline(other);
-    const typing=presenceCache[other]?.typing;
-    const div=document.createElement("div");
-    div.className="item"+(activeChat===other?" active":"");
-    div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(other.slice(-2))}${online?'<div class="online-dot"></div>':''}</div><div class="info"><div class="name">${esc(allUsers[other]?.nom||other)}</div><div class="prev ${typing?'typing':''} ${unread?'':''}">${typing?'En train d\'écrire...':unread?`<b>${esc((chat.lastMsg||"").slice(0,30))}</b> • ${unread} nouveaux` : esc((chat.lastMsg||"").slice(0,35))}</div></div><div class="right-info"><div class="time">${timeStr(chat.lastTime)}</div>${unread>0?`<div class="unread-badge">${unread>99?'99+':unread}</div>`:online?`<div style="width:10px;height:10px;background:var(--green);border-radius:50%"></div>`:""}</div>`;
-    div.onclick=()=>openChat(other);cont.appendChild(div);
-  });
- }
 }
-async function sendRequest(to){try{await Promise.all([set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${to}`),{phone:to,type:"outgoing",status:"pending",createdAt:Date.now()}),set(ref(db,`jasonBusiness/chat_requests/${to}/${myPhone}`),{phone:myPhone,type:"incoming",status:"pending",createdAt:Date.now()})]);}catch(e){}}
-async function acceptRequest(from){try{const id=getChatId(myPhone,from);await Promise.all([set(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{with:from,status:"accepted",lastMsg:"Vous êtes maintenant amis",lastTime:Date.now(),unread:0}),set(ref(db,`jasonBusiness/user_chats/${from}/${id}`),{with:myPhone,status:"accepted",lastMsg:"Vous êtes maintenant amis",lastTime:Date.now(),unread:1}),remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${from}`)),remove(ref(db,`jasonBusiness/chat_requests/${from}/${myPhone}`))]);document.querySelector('[data-tab="chats"]').click();openChat(from);}catch(e){}}
-
-function openChat(other){
- activeChat=other; allMessages=[]; displayLimit=50; firstOpen=true; replyTo=null; $("replyBar").classList.remove("show");
- if(messageUnsubscribe){messageUnsubscribe();messageUnsubscribe=null;}
- const photo=getUserPhoto(other);const online=isOnline(other);const last=presenceCache[other]?.lastSeen;
- $("chatName").textContent=allUsers[other]?.nom||other;
- $("chatPhone").textContent=online?"Actif maintenant":lastSeenStr(last);
- $("chatAvatar").innerHTML=photo?`<img src="${esc(photo)}">`:esc(other.slice(-2));
- $("msgInput").disabled=false;$("sendBtn").disabled=false;$("recordBtn").disabled=false;
- if(innerWidth<=800)$("leftPanel").classList.add("hide");
- set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:other}).catch(()=>{});
- const id=getChatId(myPhone,other),messagesRef=ref(db,`jasonBusiness/messages/${id}`);
- const unsub=onValue(messagesRef,s=>{
-   if(activeChat!==other)return;
-   allMessages=Object.entries(s.val()||{}).map(([key,v])=>({...v,_key:key})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
-   renderMessages(false);
-   markAsRead(id,allMessages).catch(()=>{});
-   markAsDelivered(id,allMessages).catch(()=>{});
-   update(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{unread:0}).catch(()=>{});
- });
- messageUnsubscribe=unsub;render();$("msgInput").focus();
-}
-async function markAsRead(id,arr){
-  const changes={};
-  arr.forEach(m=>{ if(m.to===myPhone && m.from!==myPhone && m.status!=="read"){ changes[`jasonBusiness/messages/${id}/${m._key}/status`]="read"; changes[`jasonBusiness/messages/${id}/${m._key}/readAt`]=Date.now(); } });
-  if(Object.keys(changes).length) await update(ref(db),changes);
-}
-async function markAsDelivered(id,arr){
-  const changes={};
-  arr.forEach(m=>{ if(m.to===myPhone && m.status==="sent"){ changes[`jasonBusiness/messages/${id}/${m._key}/status`]="delivered"; } });
-  if(Object.keys(changes).length) await update(ref(db),changes);
-}
-
-function renderMessages(keepPosition=false){
-  const container=$("msgs");
-  const prevHeight=container.scrollHeight;
-  const prevTop=container.scrollTop;
-  const wasBottom = prevHeight - prevTop - container.clientHeight < 150;
-  const total=allMessages.length;
-  const start=Math.max(0,total-displayLimit);
-  const toShow=allMessages.slice(start);
-  let html="";
-  if(start>0) html+=`<button class="load-more show" onclick="loadMore()">Voir ${start} messages précédents</button>`;
-  if(total===0){ html+=`<div style="margin:auto;text-align:center;opacity:.6;padding:30px"><div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#00d2ff,#0077ff);display:grid;place-items:center;margin:auto;color:white;font-size:30px">${esc(activeChat?.slice(-2)||"JB")}</div><div style="margin-top:12px;font-weight:700;font-size:18px">${esc(allUsers[activeChat]?.nom||activeChat)}</div><div style="font-size:13px;color:var(--muted);margin-top:4px">Vous êtes maintenant amis sur JASON BUSINESS<br>Comme sur Facebook Messenger</div></div>`; container.innerHTML=html; return;}
-  
-  let lastDate="";
-  toShow.forEach(m=>{
-    const d=new Date(m.createdAt||0).toDateString();
-    if(d!==lastDate){ lastDate=d; html+=`<div class="date-sep">${esc(new Date(m.createdAt).toLocaleDateString("fr-FR",{day:"numeric",month:"long"}))}</div>`; }
-    const mine=m.from===myPhone;
-    const photo=getUserPhoto(mine?myPhone:activeChat);
-    let bubbleContent="";
-    if(m.replyTo){ bubbleContent+=`<div class="reply-preview">↩️ ${esc(m.replyTo.text||"Photo")}</div>`; }
-    if(m.text && !m.deleted) bubbleContent+=`<div>${esc(m.text)}</div>`;
-    if(m.photo && !m.deleted) bubbleContent+=`<div class="msg-photo" onclick="openImageViewer('${m.photo}')"><img src="${m.photo}" loading="lazy"></div>`;
-    if(m.audio && !m.deleted) bubbleContent+=`<div class="msg-audio"><audio controls src="${m.audio}"></audio></div>`;
-    if(m.deleted) bubbleContent+=`<div style="font-style:italic;opacity:.6">Vous avez supprimé un message</div>`;
-    
-    let statusHtml=""; let seenAvatars="";
-    if(mine && !m.deleted){
-      if(m.status==="read") { statusHtml=`<span style="color:var(--fb-blue)">✓✓ Vu</span>`; seenAvatars=`<div class="seen-avatars"><div style="width:14px;height:14px;border-radius:50%;background:#e4e6eb;overflow:hidden">${photo?`<img src="${photo}">`:''}</div></div>`; }
-      else if(m.status==="delivered") statusHtml=`<span>✓✓ Délivré</span>`;
-      else statusHtml=`<span>✓ Envoyé</span>`;
-    }
-    const reactions = m.reactions ? Object.entries(m.reactions).map(([emoji,users])=>`${emoji}${users.length>1?users.length:''}`).join(' ') : '';
-    const reactionBar = reactions ? `<div class="reaction-bar">${reactions}</div>` : '';
-    
-    html+=`<div class="msg-row ${mine?'me':'other'}" data-key="${m._key}" oncontextmenu="showReactions(event,'${m._key}');return false" onclick="showReactions(event,'${m._key}')">
-      ${!mine?`<div class="msg-av">${photo?`<img src="${esc(photo)}">`:esc(activeChat?.slice(-2)||"")}</div>`:''}
-      <div style="display:flex;flex-direction:column;gap:2px;position:relative">
-        <div class="msg-bubble">${bubbleContent}${reactionBar}</div>
-        <div class="msg-meta ${mine?'me':''}"><span>${timeStr(m.createdAt)}</span> ${statusHtml}</div>
-        ${mine?seenAvatars:''}
-      </div>
-    </div>`;
-  });
-  
-  // Typing indicator comme FB
-  const otherTyping=presenceCache[activeChat]?.typing;
-  if(otherTyping){ html+=`<div class="msg-row other"><div class="msg-av">${esc(activeChat?.slice(-2)||"")}</div><div class="msg-bubble" style="background:#f0f2f5;padding:12px"><div style="display:flex;gap:4px"><div style="width:6px;height:6px;background:var(--muted);border-radius:50%;animation:bounce 1s infinite"></div><div style="width:6px;height:6px;background:var(--muted);border-radius:50%;animation:bounce 1s infinite .2s"></div><div style="width:6px;height:6px;background:var(--muted);border-radius:50%;animation:bounce 1s infinite .4s"></div></div></div></div>`; }
-  
-  container.innerHTML=html;
-  if(keepPosition) container.scrollTop = prevTop + (container.scrollHeight - prevHeight);
-  else if(firstOpen || wasBottom){ container.scrollTop=container.scrollHeight; firstOpen=false; }
-  checkScrollDown();
-}
-window.loadMore=()=>{ displayLimit+=30; renderMessages(true); };
-$("msgs").addEventListener("scroll",()=>{const c=$("msgs");if(c.scrollTop<100 && allMessages.length>displayLimit){displayLimit+=20;renderMessages(true);}checkScrollDown();});
-function checkScrollDown(){ const c=$("msgs"); const show=c.scrollHeight - c.scrollTop - c.clientHeight > 300; $("scrollDown").classList.toggle("show",show); }
-$("scrollDown").onclick=()=>{ $("msgs").scrollTop=$("msgs").scrollHeight; };
-
-// REACTIONS COMME FACEBOOK
-window.showReactions=(e,key)=>{
-  // Supprime anciennes popups
-  document.querySelectorAll(".reactions-popup").forEach(el=>el.remove());
-  const row=e.currentTarget;
-  const popup=document.createElement("div");
-  popup.className="reactions-popup";
-  ["❤️","😂","😮","😢","😡","👍"].forEach(emoji=>{
-    const span=document.createElement("span");
-    span.textContent=emoji;
-    span.onclick=()=>addReaction(key,emoji);
-    popup.appendChild(span);
-  });
-  row.style.position="relative";
-  row.appendChild(popup);
-  setTimeout(()=>{ document.addEventListener("click",function h(){ document.querySelectorAll(".reactions-popup").forEach(el=>el.remove()); document.removeEventListener("click",h); }, {once:true}); },100);
+let storyFileBase64=null;
+$("storyFile").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{storyFileBase64=r.result;$("storyPreview").innerHTML=`<img src="${r.result}">`;};r.readAsDataURL(f);};
+window.publishStory=async()=>{
+  if(!storyFileBase64) return alert("Ajoute photo story");
+  const note=$("storyNote").value.trim();
+  const id=push(ref(db,"jasonBusiness/stories")).key;
+  await set(ref(db,`jasonBusiness/stories/${id}`),{from:myPhone,fromName:myName,fromPhoto:myPhoto,photo:storyFileBase64,note,createdAt:Date.now(),views:{},likes:{}});
+  closeModal("storyModal"); $("storyPreview").innerHTML=""; $("storyNote").value=""; storyFileBase64=null;
 };
-async function addReaction(key,emoji){
-  if(!activeChat) return;
-  const id=getChatId(myPhone,activeChat);
-  const msgRef=ref(db,`jasonBusiness/messages/${id}/${key}/reactions/${emoji}`);
-  const snap=await get(msgRef);
-  let users=snap.val()||[];
-  if(!Array.isArray(users)) users=[];
-  if(users.includes(myPhone)) users=users.filter(u=>u!==myPhone);
-  else users.push(myPhone);
-  if(users.length===0) await remove(msgRef);
-  else await set(msgRef,users);
-  document.querySelectorAll(".reactions-popup").forEach(el=>el.remove());
-}
-window.deleteMessage=async function(key){
-  if(!activeChat) return;
-  if(!confirm("Supprimer ce message comme sur Facebook?")) return;
-  const id=getChatId(myPhone,activeChat);
-  await update(ref(db,`jasonBusiness/messages/${id}/${key}`),{deleted:true,text:"",photo:null,audio:null});
+let currentStory=null;
+window.viewStory=async(st)=>{
+  currentStory=st; $("storyViewer").classList.add("show");
+  $("svAv").innerHTML=st.fromPhoto?`<img src="${st.fromPhoto}">`:esc((st.fromName||"").slice(0,2));
+  $("svName").textContent=st.fromName||st.from; $("svTime").textContent=new Date(st.createdAt).toLocaleTimeString();
+  $("svContent").innerHTML=`<img src="${st.photo}">${st.note?`<div class="sv-note">${esc(st.note)}</div>`:""}`;
+  if(st.from!==myPhone){
+    await set(ref(db,`jasonBusiness/stories/${st.id}/views/${myPhone}`),{name:myName,time:Date.now()});
+    $("svViews").innerHTML=`<div style="text-align:center"><button onclick="likeStory()" style="padding:8px 16px;border-radius:20px;border:0;background:#0866ff;color:white;font-weight:700">❤️ J'aime</button></div>`;
+  }else{
+    const views=Object.keys(st.views||{}).length; const likes=Object.keys(st.likes||{}).length;
+    const list=Object.values(st.views||{}).map(v=>v.name||"").join(", ")||"Aucune vue";
+    $("svViews").innerHTML=`👁️ <b>${views} vues</b> • ❤️ <b>${likes} j'aime</b><br><small style="opacity:.8">${esc(list)}</small><br><small style="opacity:.6">Seul toi vois ça - comme Facebook</small>`;
+  }
 };
-window.cancelReply=()=>{ replyTo=null; $("replyBar").classList.remove("show"); };
-function setReply(msg){
-  replyTo=msg;
-  $("replyName").textContent=`Répondre à ${msg.from===myPhone?"vous-même":allUsers[msg.from]?.nom||msg.from}`;
-  $("replyText").textContent=msg.text||"Photo";
-  $("replyBar").classList.add("show");
-}
+window.closeStory=()=>{$("storyViewer").classList.remove("show");};
+window.likeStory=async()=>{if(!currentStory) return; await set(ref(db,`jasonBusiness/stories/${currentStory.id}/likes/${myPhone}`),{name:myName,time:Date.now()}); alert("❤️ Liké! Le proprio verra ton j'aime");};
 
-async function publishMessage(other,fields,lastMsg){
- const id=getChatId(myPhone,other),now=Date.now();
- const data={...fields,from:myPhone,to:other,createdAt:now,status:"sent"};
- if(replyTo){ data.replyTo={text:replyTo.text||"",from:replyTo.from}; replyTo=null; $("replyBar").classList.remove("show"); }
- const newRef=push(ref(db,`jasonBusiness/messages/${id}`));
- await set(newRef,data);
- const a=ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),b=ref(db,`jasonBusiness/user_chats/${other}/${id}`);
- const [sa,sb]=await Promise.all([get(a),get(b)]);const da=sa.val()||{},dbb=sb.val()||{};
- await Promise.all([set(a,{...da,with:other,status:"accepted",lastMsg,lastTime:now,unread:0}),set(b,{...dbb,with:myPhone,status:"accepted",lastMsg,lastTime:now,unread:(Number(dbb.unread)||0)+1})]);
-}
-
-// MULTI PHOTOS 1000 FB STYLE
-$("photoInput").addEventListener("change",async e=>{
- const files=Array.from(e.target.files||[]); if(!files.length) return;
- if(!activeChat){ alert("Ouvre un chat"); e.target.value=""; return; }
- if(files.length>1000){ alert("Max 1000"); e.target.value=""; return; }
- pendingPhotos=[]; const grid=$("previewGrid"); grid.innerHTML=""; $("photoPreview").classList.add("show");
- for(let file of files){ if(file.size>5*1024*1024) continue; const base64=await new Promise(res=>{ const r=new FileReader(); r.readAsDataURL(file); r.onloadend=()=>res(r.result); }); pendingPhotos.push(base64); const img=document.createElement("img"); img.src=base64; grid.appendChild(img); }
- $("previewCount").textContent=pendingPhotos.length+" photos"; $("confirmPhoto").textContent="Envoyer "+pendingPhotos.length+" photos"; e.target.value="";
+// POSTS FEED ACCUEIL
+onValue(ref(db,"jasonBusiness/posts"),s=>{
+  postsCache=Object.entries(s.val()||{}).map(([k,v])=>({...v,id:k})).sort((a,b)=>b.createdAt-a.createdAt);
+  renderFeed(); renderProfile();
 });
-$("cancelPhoto").onclick=()=>{ pendingPhotos=[]; $("photoPreview").classList.remove("show"); $("previewGrid").innerHTML=""; $("photoCaption").value=""; };
-$("confirmPhoto").onclick=async()=>{
- if(!pendingPhotos.length || !activeChat) return;
- const other=activeChat; const caption=$("photoCaption").value.trim();
- $("confirmPhoto").disabled=true; $("uploadProgress").style.display="block";
- try{
-   for(let i=0;i<pendingPhotos.length;i++){
-     $("uploadProgress").textContent=`Envoi ${i+1}/${pendingPhotos.length}...`;
-     await publishMessage(other,{photo:pendingPhotos[i],type:"image",text:i===pendingPhotos.length-1?caption:""}, i===0 ? (caption||`📷 ${pendingPhotos.length} photos`) : `📷 Photo`);
-     await new Promise(r=>setTimeout(r,100));
-   }
-   $("photoPreview").classList.remove("show"); pendingPhotos=[]; $("previewGrid").innerHTML=""; $("photoCaption").value=""; $("uploadProgress").style.display="none"; $("msgs").scrollTop=$("msgs").scrollHeight;
- }catch(err){} finally{ $("confirmPhoto").disabled=false; }
-};
-
-// VIEWER ZOOM FACEBOOK
-window.openImageViewer=(src)=>{
-  currentViewerSrc=src; $("viewerImg").src=src; resetZoom(); $("imgViewer").classList.add("show");
-};
-window.closeViewer=()=>{ $("imgViewer").classList.remove("show"); resetZoom(); };
-window.downloadImage=()=>{ if(!currentViewerSrc) return; const a=document.createElement("a"); a.href=currentViewerSrc; a.download="fb_photo_"+Date.now()+".jpg"; a.click(); };
-window.zoomIn=()=>{ scale=Math.min(scale*1.4,5); updateTransform(); };
-window.zoomOut=()=>{ scale=Math.max(scale/1.4,0.5); updateTransform(); };
-window.resetZoom=()=>{ scale=1; posX=0; posY=0; updateTransform(); };
-function updateTransform(){ $("viewerImg").style.transform=`translate(${posX}px,${posY}px) scale(${scale})`; $("zoomInfo").textContent=Math.round(scale*100)+"%"; }
-
-const viewerContent=$("viewerContent");
-viewerContent.addEventListener("touchstart",e=>{
-  if(e.touches.length===1){ isDragging=true; startX=e.touches[0].clientX-posX; startY=e.touches[0].clientY-posY; }
-  else if(e.touches.length===2){ const dx=e.touches[0].clientX-e.touches[1].clientX; const dy=e.touches[0].clientY-e.touches[1].clientY; initialDist=Math.sqrt(dx*dx+dy*dy); lastScale=scale; }
-});
-viewerContent.addEventListener("touchmove",e=>{
-  e.preventDefault();
-  if(e.touches.length===1 && isDragging && scale>1){ posX=e.touches[0].clientX-startX; posY=e.touches[0].clientY-startY; updateTransform(); }
-  else if(e.touches.length===2){ const dx=e.touches[0].clientX-e.touches[1].clientX; const dy=e.touches[0].clientY-e.touches[1].clientY; const dist=Math.sqrt(dx*dx+dy*dy); scale=Math.min(Math.max((dist/initialDist)*lastScale,0.5),5); updateTransform(); }
-},{passive:false});
-viewerContent.addEventListener("touchend",()=>{ isDragging=false; });
-let lastTap=0;
-viewerContent.addEventListener("click",()=>{ const now=Date.now(); if(now-lastTap<300){ scale=scale===1?2.5:1; posX=0; posY=0; updateTransform(); } lastTap=now; });
-viewerContent.addEventListener("wheel",e=>{ e.preventDefault(); scale=Math.min(Math.max(scale+(e.deltaY>0?-0.1:0.1),0.5),5); updateTransform(); },{passive:false});
-
-async function sendText(){if(busySending)return;const text=$("msgInput").value.trim();if(!text||!activeChat)return;const other=activeChat;busySending=true;$("sendBtn").disabled=true;try{$("msgInput").value="";await publishMessage(other,{text},text);$("msgs").scrollTop=$("msgs").scrollHeight;}catch(e){$("msgInput").value=text;}finally{busySending=false;$("sendBtn").disabled=!activeChat;$("msgInput").focus();}}
-$("sendBtn").onclick=sendText;
-$("msgInput").addEventListener("input",()=>{ if(activeChat) set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:activeChat,typing:$("msgInput").value.length>0}).catch(()=>{}); });
-$("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText();}});
-
-function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");}
-function clearRecordingUI(){clearInterval(timerInt);timerInt=null;$("recBar").classList.remove("show");$("recordBtn").textContent="🎙️";}
-function stopRecorder(){if(mediaRecorder&&mediaRecorder.state!=="inactive"){try{mediaRecorder.stop();}catch{}}}
-async function toggleVocal(){
- if(recording){stopRecorder();return;}
- if(!activeChat)return;
- if(!navigator.mediaDevices?.getUserMedia)return;
- try{
-  recordStream=await navigator.mediaDevices.getUserMedia({audio:true});
-  audioChunks=[];recSec=0;cancelled=false;recording=true;mediaRecorder=new MediaRecorder(recordStream);
-  const other=activeChat;
-  mediaRecorder.ondataavailable=e=>{if(e.data&&e.data.size>0)audioChunks.push(e.data);};
-  mediaRecorder.onstop=async()=>{
-    const wasCancelled=cancelled;const chunks=[...audioChunks];recording=false;clearInterval(timerInt);clearRecordingUI();if(recordStream)recordStream.getTracks().forEach(t=>t.stop());
-    if(wasCancelled||!chunks.length)return;
-    const blob=new Blob(chunks,{type:"audio/webm"});if(blob.size<800)return;
-    const reader=new FileReader();reader.readAsDataURL(blob);
-    reader.onloadend=async()=>{try{await publishMessage(other,{audio:reader.result,type:"audio",text:"🎙️ Vocal"},"🎙️ Vocal");}catch{}};
-  };
-  mediaRecorder.start(200);
-  $("recBar").classList.add("show");$("recordBtn").textContent="⏹️";$("recTime").textContent="00:00";timerInt=setInterval(()=>{recSec++;$("recTime").textContent=fmt(recSec);if(recSec>=60)stopRecorder();},1000);
- }catch(err){recording=false;clearRecordingUI();}
+function renderFeed(){
+  const feed=$("feed"); feed.innerHTML="";
+  postsCache.forEach(p=>{
+    const liked=p.likes&&p.likes[myPhone]; const likesCount=Object.keys(p.likes||{}).length; const cmCount=Object.keys(p.comments||{}).length;
+    const div=document.createElement("div"); div.className="post";
+    div.innerHTML=`<div class="p-head"><div class="p-user"><div class="av">${p.fromPhoto?`<img src="${p.fromPhoto}">`:esc((p.fromName||"").slice(0,2))}</div><div class="p-info"><h4>${esc(p.fromName||p.from)}</h4><small>${new Date(p.createdAt).toLocaleDateString()} • 🌍</small></div></div><div>⋯</div></div>${p.text?`<div class="p-text">${esc(p.text)}</div>`:""}${p.photo?`<img class="p-img" src="${p.photo}">`:""}<div class="p-stats"><span>👍❤️ ${likesCount} j'aime</span><span>${cmCount} commentaires • 0 partages</span></div><div class="p-actions"><button class="p-act ${liked?'active':''}" onclick="likePost('${p.id}')">👍 J'aime</button><button class="p-act" onclick="focusComment('${p.id}')">💬 Commenter</button><button class="p-act" onclick="sharePost('${p.id}')">↗️ Partager</button></div><div class="c-list">${Object.entries(p.comments||{}).map(([k,c])=>`<div class="c-item"><div class="av" style="width:32px;height:32px;font-size:10px">${c.fromPhoto?`<img src="${c.fromPhoto}">`:esc((c.fromName||"").slice(0,2))}</div><div class="c-bubble"><b>${esc(c.fromName||c.from)}</b>${esc(c.text)}</div></div>`).join("")}</div><div class="comments"><div class="av" style="width:32px;height:32px;font-size:10px">${myPhoto?`<img src="${myPhoto}">`:myName.slice(0,2)}</div><input placeholder="Écrire un commentaire..." id="inp-${p.id}" onkeydown="if(event.key==='Enter') commentPost('${p.id}')"></div>`;
+    feed.appendChild(div);
+  });
+  $("pPosts").textContent=postsCache.filter(p=>p.from===myPhone).length;
+  $("profileFeed").innerHTML=feed.innerHTML;
 }
-$("recordBtn").addEventListener("click",toggleVocal);
-$("recSend").addEventListener("click",()=>{if(recording)stopRecorder();});
-$("recCancel").addEventListener("click",()=>{if(!recording)return;cancelled=true;audioChunks=[];stopRecorder();});
+window.likePost=async(id)=>{const r=ref(db,`jasonBusiness/posts/${id}/likes/${myPhone}`);const snap=await get(r); if(snap.exists()) await remove(r); else await set(r,{name:myName,time:Date.now()});};
+window.focusComment=id=>{document.getElementById(`inp-${id}`)?.focus();};
+window.sharePost=id=>{navigator.clipboard.writeText(location.href); alert("Lien copié! 📋 Partagé comme Facebook");};
+window.commentPost=async(id)=>{
+  const inp=document.getElementById(`inp-${id}`); const txt=inp.value.trim(); if(!txt) return;
+  const post=postsCache.find(p=>p.id===id);
+  await set(push(ref(db,`jasonBusiness/posts/${id}/comments`)),{from:myPhone,fromName:myName,fromPhoto:myPhoto,text:txt,createdAt:Date.now()});
+  inp.value="";
+  if(post.from!==myPhone){
+    await set(push(ref(db,`jasonBusiness/notifications/${post.from}`)),{from:myPhone,fromName:myName,type:"comment",postId:id,text:`a commenté: "${txt.slice(0,25)}"`,createdAt:Date.now(),read:false});
+  }
+};
+let postFileBase64=null;
+$("postFile").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{postFileBase64=r.result;$("postPreview").innerHTML=`<img src="${r.result}">`;};r.readAsDataURL(f);};
+window.publishPost=async()=>{
+  const text=$("postText").value.trim(); if(!text&&!postFileBase64) return;
+  $("publishBtn").disabled=true;
+  const id=push(ref(db,"jasonBusiness/posts")).key;
+  await set(ref(db,`jasonBusiness/posts/${id}`),{from:myPhone,fromName:myName,fromPhoto:myPhoto,text,photo:postFileBase64||null,createdAt:Date.now(),likes:{},comments:{}});
+  closeModal("postModal"); $("postText").value=""; $("postPreview").innerHTML=""; postFileBase64=null; $("publishBtn").disabled=false;
+};
+
+// NOTIFICATIONS CLOCHE
+onValue(ref(db,`jasonBusiness/notifications/${myPhone}`),s=>{
+  notifsCache=Object.entries(s.val()||{}).map(([k,v])=>({...v,id:k})).sort((a,b)=>b.createdAt-a.createdAt);
+  const unread=notifsCache.filter(n=>!n.read).length;
+  ["notifBadge","navNotifBadge"].forEach(id=>{const el=$(id); if(!el) return; el.style.display=unread?"grid":"none"; el.textContent=unread>9?"9+":unread;});
+  renderNotifList();
+});
+function renderNotifList(){
+  const box=$("notifList");
+  if(!notifsCache.length) box.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucune notification</div>';
+  else box.innerHTML=notifsCache.map(n=>`<div style="padding:12px;border-bottom:1px solid var(--border);display:flex;gap:10px"><div class="av" style="width:36px;height:36px">🔔</div><div><b>${esc(n.fromName||n.from)}</b> ${esc(n.text)}<br><small style="color:var(--muted)">${new Date(n.createdAt).toLocaleString()}</small></div></div>`).join("");
+}
+function markNotifRead(){ notifsCache.forEach(n=>{if(!n.read) update(ref(db,`jasonBusiness/notifications/${myPhone}/${n.id}`),{read:true});}); }
+
+// MESSENGER BADGE - Même quand t'es à l'accueil tu vois 1,2,3
+onValue(ref(db,`jasonBusiness/user_chats/${myPhone}`),s=>{
+  const chats=s.val()||{}; let total=0; Object.values(chats).forEach(c=>{total+=Number(c.unread||0);});
+  ["msgBadge","navMsgBadge"].forEach(id=>{const el=$(id); if(!el) return; el.style.display=total?"grid":"none"; el.textContent=total>9?"9+":total;});
+});
+
+// PROFILE
+function renderProfile(){
+  onValue(ref(db,`jasonBusiness/users`),s=>{
+    const users=s.val()||{}; $("pFollowers").textContent=Object.keys(users).length; $("pFollowing").textContent=Object.keys(users).length;
+  });
+}
+
+// EDIT PROFILE
+let editPhotoBase64=null;
+$("editPhotoFile").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{editPhotoBase64=r.result;$("editPhotoPreview").innerHTML=`<img src="${r.result}">`;};r.readAsDataURL(f);};
+window.saveProfile=async()=>{
+  const name=$("editName").value.trim()||myName;
+  if(editPhotoBase64){ localStorage.setItem("jb_display_photo",editPhotoBase64); myPhoto=editPhotoBase64; await update(ref(db,`jasonBusiness/users/${myPhone}`),{photo:editPhotoBase64,nom:name});}
+  else await update(ref(db,`jasonBusiness/users/${myPhone}`),{nom:name});
+  localStorage.setItem("jb_display_name",name); myName=name; updateAvatars(); closeModal('editProfileModal'); alert("✅ Profil modifié!");
+  location.reload();
+};
+$("editName").value=myName;
 </script>
 </body>
 </html>
