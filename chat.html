@@ -19,7 +19,7 @@ button{cursor:pointer}
 .app{height:100dvh;display:flex;flex-direction:column;max-width:1100px;margin:auto;background:var(--bg)}
 header{height:66px;flex-shrink:0;display:flex;align-items:center;gap:12px;padding:0 15px;background:var(--panel);border-bottom:1px solid var(--border)}
 .logo{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0077ff,#00d4ff);font-weight:900;color:#031020;overflow:hidden}
-.logo img{width:100%;height:100%;object-fit:cover}
+.logo img{width:100%;height:100%;object-fit:cover;display:block}
 .brand{flex:1;min-width:0}
 .brand h1{font-size:16px;margin:0 0 4px;letter-spacing:.4px}
 .brand p{font-size:11px;margin:0;color:var(--muted)}
@@ -34,7 +34,7 @@ header{height:66px;flex-shrink:0;display:flex;align-items:center;gap:12px;paddin
 .list{flex:1;overflow-y:auto}
 .person{display:flex;align-items:center;gap:11px;padding:13px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.035)}
 .person:active,.person.selected{background:rgba(0,212,255,.08)}
-.avatar{width:43px;height:43px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;background:linear-gradient(135deg,#0077ff,#00d4ff);color:#001323;font-weight:bold;overflow:hidden;position:relative}
+.avatar{width:43px;height:43px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;background:linear-gradient(135deg,#0077ff,#00d4ff);color:#001323;font-weight:bold;overflow:hidden}
 .avatar img{width:100%;height:100%;object-fit:cover;display:block}
 .personinfo{min-width:0;flex:1}
 .personinfo strong{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -48,12 +48,8 @@ header{height:66px;flex-shrink:0;display:flex;align-items:center;gap:12px;paddin
 .messages{flex:1;overflow-y:auto;padding:16px 13px 22px;display:flex;flex-direction:column;gap:11px;scroll-behavior:smooth}
 .empty{margin:auto;text-align:center;color:var(--muted);font-size:13px;line-height:1.8;padding:25px}
 .empty .big{font-size:43px;margin-bottom:8px}
-.msgrow{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.msgrow{width:100%;display:flex;flex-direction:column;align-items:flex-start}
 .msgrow.mine{align-items:flex-end}
-.msgrow.other{flex-direction:row;align-items:flex-end;gap:8px}
-.msgrow.other .bubble{max-width:75%}
-.msg-av{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;background:var(--other);font-size:10px;font-weight:bold;overflow:hidden;border:1px solid var(--border)}
-.msg-av img{width:100%;height:100%;object-fit:cover}
 .bubble{max-width:min(82%,440px);min-width:35px;padding:10px 12px;border-radius:17px;background:var(--other);border:1px solid var(--border);font-size:14px;line-height:1.5;overflow-wrap:anywhere;white-space:pre-wrap}
 .mine .bubble{background:linear-gradient(135deg,#075fce,#0875dd);border-color:rgba(0,212,255,.16);border-bottom-right-radius:5px}
 .msgrow:not(.mine) .bubble{border-bottom-left-radius:5px}
@@ -136,12 +132,12 @@ footer{padding:9px;text-align:center;color:#52647c;font-size:10px;border-top:1px
 </div>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, get, set, push, update, onValue, off, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, get, set, push, update, onValue, off, serverTimestamp, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 const firebaseConfig={ apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U", authDomain:"starlink-investit.firebaseapp.com", databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com", projectId:"starlink-investit", storageBucket:"starlink-investit.firebasestorage.app", messagingSenderId:"807081599583", appId:"1:807081599583:web:e00ec3959bc4acdae031ea" };
 const $=id=>document.getElementById(id);
 const firebaseApp=initializeApp(firebaseConfig);
 const db=getDatabase(firebaseApp);
-let myPhone="",myRawPhone="",myName="Moi",myPhoto="";
+let myPhone="",myRawPhone="",myName="Moi";
 let currentTab="chats",activeChat=null,activeChatId=null;
 let users={},chatRecords={},requestRecords={};
 let messageUnsubs=[],messageCache={};
@@ -155,20 +151,11 @@ function getChatId(a,b){return[normalizePhone(a),normalizePhone(b)].sort().join(
 function setNotice(m,ok=false){const n=$("notice");n.textContent=m;n.style.color=ok?"#20c879":"#ff9eaa";n.classList.add("show");setTimeout(()=>n.classList.remove("show"),3000);}
 function timeText(v){let d=new Date(Number(v||0));if(!d.getTime())return"";return d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});}
 function initials(n){return String(n||"?").split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase();}
-
-// ✅ NOUVEAU: Récupère photo de profil
+function getDisplayName(phone){const n=normalizePhone(phone);const u=users[n]||users[phone]||{};return u.nom||u.name||n;}
+// ✅ SEULE FONCTION AJOUTÉE POUR PHOTO
 function getUserPhoto(phone){
- const n=normalizePhone(phone);
- const u=users[n]||users[phone]||{};
+ const u=users[normalizePhone(phone)]||users[phone]||{};
  return u.photo||u.photoProfil||u.avatar||u.image||u.profilePhoto||"";
-}
-function getDisplayName(phone){const n=normalizePhone(phone);const u=users[n]||users[phone]||{};return u.nom||u.name||u.username||n;}
-function avatarHTML(name,photo,size="43px"){
- if(photo){
-  return `<img src="${photo}" alt="${name}" loading="lazy" onerror="this.style.display='none'">`;
- }else{
-  return initials(name);
- }
 }
 
 async function init(){
@@ -180,9 +167,9 @@ async function init(){
   if(snap.exists()){
    const all=snap.val()||{};
    for(const [k,v] of Object.entries(all)){users[normalizePhone(k)]=v||{};users[k]=v||{};}
-   const mine=users[myPhone]||users[myRawPhone]||{};myName=mine.nom||mine.name||"Moi";myPhoto=getUserPhoto(myPhone)||getUserPhoto(myRawPhone)||"";
-   // Affiche MA photo en haut
-   if(myPhoto){$("myLogo").innerHTML=`<img src="${myPhoto}" alt="Moi">`; }
+   const mine=users[myPhone]||users[myRawPhone]||{};myName=mine.nom||mine.name||"Moi";
+   const myP=getUserPhoto(myPhone);
+   if(myP){$("myLogo").innerHTML=`<img src="${myP}">`;}
   }
  }catch(e){}
  listenChats();listenRequests();renderPeople();
@@ -236,7 +223,8 @@ function renderPeople(){
  for(const p of people){
   const row=document.createElement("div");row.className="person"+(activeChat===p.phone?" selected":"");
   const av=document.createElement("div");av.className="avatar";
-  if(p.photo){const img=document.createElement("img");img.src=p.photo;img.loading="lazy";img.onerror=()=>{av.textContent=initials(p.name);};av.appendChild(img);}else{av.textContent=initials(p.name);}
+  // ✅ PHOTO VISIBLE ICI
+  if(p.photo){const img=document.createElement("img");img.src=p.photo;img.loading="lazy";av.appendChild(img);}else{av.textContent=initials(p.name);}
   const info=document.createElement("div");info.className="personinfo";
   const nm=document.createElement("strong");nm.textContent=p.name;
   const sm=document.createElement("small");sm.textContent=p.record.lastMsg||p.phone;
@@ -250,10 +238,12 @@ function openChat(phone,name){
  activeChat=normalizePhone(phone);
  activeChatId=getChatId(myPhone,activeChat);
  const photo=getUserPhoto(phone);
+ // ✅ PHOTO VISIBLE EN HAUT
  $("chatTitle").textContent=name||getDisplayName(activeChat);
- $("chatAvatar").innerHTML=photo?`<img src="${photo}" alt="${name}">`:initials(name||getDisplayName(activeChat));
+ $("chatAvatar").innerHTML=photo?`<img src="${photo}">`:initials(name||getDisplayName(activeChat));
  $("chatSubtitle").textContent=activeChat;
  $("messageInput").disabled=false;$("sendBtn").disabled=false;
+ $("messageInput").focus();
  document.getElementById("app").classList.add("chat-open");
  clearListeners();
  $("messages").innerHTML='<div class="empty"><div class="big">⏳</div>Chargement des messages...</div>';
@@ -266,10 +256,21 @@ function openChat(phone,name){
   if(loadTimeout){clearTimeout(loadTimeout);loadTimeout=null;}
   renderMessages();
  },err=>{
+  setNotice("Erreur lecture: "+err.message);
   if(loadTimeout){clearTimeout(loadTimeout);loadTimeout=null;}
   renderMessages(true);
  });
  messageUnsubs.push(()=>off(messagesRef,"value",stop));
+ (async()=>{
+  const oldIds=[`${myRawPhone}_${phone}`,`${phone}_${myRawPhone}`,`${myPhone}_${phone}`,`${phone}_${myPhone}`];
+  for(const oldId of oldIds){
+   if(oldId===chatId) continue;
+   try{
+    const snap=await get(ref(db,`jasonBusiness/messages/${oldId}`));
+    if(snap.exists()){messageCache={...messageCache,...(snap.val()||{})};renderMessages();}
+   }catch(e){}
+  }
+ })();
  renderPeople();
 }
 function renderMessages(forceEmpty=false){
@@ -286,27 +287,14 @@ function renderMessages(forceEmpty=false){
  for(const m of msgs){
   const sender=normalizePhone(m.sender||m.from||"");
   const mine=sender===myPhone;
-  const row=document.createElement("div");row.className="msgrow"+(mine?" mine":" other");
-  const photoOther=!mine?getUserPhoto(sender):"";
-  if(!mine){
-   const av=document.createElement("div");av.className="msg-av";
-   if(photoOther){const img=document.createElement("img");img.src=photoOther;img.loading="lazy";av.appendChild(img);}else{av.textContent=initials(getDisplayName(sender));}
-   row.appendChild(av);
-  }
+  const row=document.createElement("div");row.className="msgrow"+(mine?" mine":"");
   const bubble=document.createElement("div");bubble.className="bubble";
   if(m.text){const d=document.createElement("div");d.textContent=m.text;bubble.appendChild(d);}
   if(m.photo){const img=document.createElement("img");img.src=m.photo;img.loading="lazy";img.onclick=()=>{const o=document.createElement("div");o.style.cssText="position:fixed;inset:0;z-index:999;background:#000e;display:flex;align-items:center;justify-content:center";const i=document.createElement("img");i.src=m.photo;i.style.cssText="max-width:100%;max-height:90dvh";o.appendChild(i);o.onclick=()=>o.remove();document.body.appendChild(o);};bubble.appendChild(img);}
   if(m.audio){const a=document.createElement("audio");a.controls=true;a.src=m.audio;bubble.appendChild(a);}
   if(!m.text&&!m.photo&&!m.audio){bubble.textContent="Message";}
   const meta=document.createElement("div");meta.className="msgmeta";meta.textContent=timeText(m.createdAt||m.timestamp)+(mine?" ✓✓":"");
-  if(mine){
-   row.append(bubble,meta);
-  }else{
-   const col=document.createElement("div");col.style.display="flex";col.style.flexDirection="column";
-   col.append(bubble,meta);
-   row.appendChild(col);
-  }
-  container.appendChild(row);
+  row.append(bubble,meta);container.appendChild(row);
  }
  container.scrollTop=container.scrollHeight;
 }
@@ -315,7 +303,7 @@ async function sendPayload(payload){
  const now=Date.now();
  const chatId=getChatId(myPhone,activeChat);
  const messageRef=push(ref(db,`jasonBusiness/messages/${chatId}`));
- const message={...payload,id:messageRef.key,sender:myPhone,from:myPhone,senderName:myName,senderPhoto:myPhoto,createdAt:now,timestamp:now,serverTime:serverTimestamp()};
+ const message={...payload,id:messageRef.key,sender:myPhone,from:myPhone,senderName:myName,createdAt:now,timestamp:now,serverTime:serverTimestamp()};
  await set(messageRef,message);
  if(!messageCache) messageCache={};
  messageCache[messageRef.key]=message;
