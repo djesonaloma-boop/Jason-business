@@ -45,7 +45,6 @@ body.light .jb-navbar{background:rgba(255,255,255,.94);border-top:1px solid rgba
 body.light .jb-nav-link{color:#0b1220}
 .jb-nav-link.active{color:var(--blue);opacity:1;font-weight:bold}
 .jb-nav-icon{margin-bottom:4px;font-size:19px}
-/* MODALS STYLE PARAMETRES */
 .overlay{display:none;position:fixed;inset:0;z-index:80;background:#000c;backdrop-filter:blur(9px);align-items:flex-end;justify-content:center;padding:0}.overlay.show{display:flex}
 .modal{width:min(100%,620px);max-height:92vh;overflow:auto;background:linear-gradient(145deg,rgba(5,10,20,.96),rgba(11,20,37,.98));border:1px solid rgba(0,210,255,.22);border-radius:22px 22px 0 0;padding:18px 18px 110px 18px;backdrop-filter:blur(20px)}
 body.light .modal{background:linear-gradient(145deg,#ffffff,#f8fbff);border-color:rgba(0,0,0,.06)}
@@ -85,7 +84,19 @@ body.light .field input,body.light .field textarea,body.light .field select{back
 </div>
 </section>
 
-<div style="padding:0 20px;display:flex;justify-content:space-between;align-items:center;margin:20px 0 10px">
+<!-- 🔌 BOUTON API - ICI DANS L'ENDROIT ENCERCLÉ + SERVICES DESCENDU -->
+<div style="margin:22px 20px 8px 20px;padding:16px;border-radius:18px;background:linear-gradient(135deg,rgba(0,210,255,.18),rgba(0,119,255,.12) 60%,rgba(255,215,0,.08));border:1px solid rgba(0,210,255,.35);display:flex;justify-content:space-between;align-items:center;gap:12px;box-shadow:0 0 25px rgba(0,210,255,.15)">
+  <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0">
+    <div style="width:48px;height:48px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;box-shadow:0 4px 15px rgba(0,210,255,.3)">🔌</div>
+    <div style="flex:1;min-width:0">
+      <div style="font-size:13px;font-weight:900;color:var(--blue);display:flex;align-items:center;gap:6px">API CENTER <span style="font-size:8px;background:rgba(0,230,118,.15);border:1px solid rgba(0,230,118,.3);color:#00e676;padding:2px 6px;border-radius:20px">5000 FC</span></div>
+      <div style="font-size:10px;color:var(--muted);margin-top:3px;line-height:1.4">12 API • Doc gratuite • URL payante</div>
+    </div>
+  </div>
+  <button onclick="goPage('api.html')" style="flex-shrink:0;padding:12px 18px;border-radius:12px;border:0;background:linear-gradient(120deg,#00d2ff,#0077ff);color:white;font-weight:900;font-size:11px;cursor:pointer;box-shadow:0 4px 12px rgba(0,210,255,.25)">🚀 API</button>
+</div>
+
+<div style="padding:0 20px;display:flex;justify-content:space-between;align-items:center;margin:28px 20px 14px 20px">
 <h3 style="margin:0;font-size:14px" data-i18n="our_services">🛍️ Nos services</h3>
 <span id="footerSettings" style="font-size:9px;opacity:.5">FR • FC • Sombre</span>
 </div>
@@ -109,7 +120,7 @@ Connecté à Paramètres ⚙️
 
 </div>
 
-<!-- MODALS IDENTIQUES MAIS STYLE PARAMETRES -->
+<!-- MODALS -->
 <div class="overlay" id="boostModal"><section class="modal"><div class="modal-head"><h2>📈 Boostage — Prix auto + VIP</h2><button class="close" data-close="boostModal">×</button></div><p style="font-size:11px;opacity:.6">Solde: <b id="soldeInBoost" style="color:var(--blue)">Chargement...</b></p><div class="platforms" id="platformGrid"></div><form id="boostForm"><div class="field"><label>Plateforme</label><input id="boostPlatform" name="platform" readonly required></div><div class="field"><label>Service</label><select id="boostType" name="type" required><option value="followers">Followers — 50 FC / unité</option><option value="likes">Likes — 35 FC / unité</option><option value="views">Vues — 20 FC / unité</option></select></div><div class="field"><label>Lien public *</label><input id="boostLink" name="link" type="url" required placeholder="https://..."></div><div class="field"><label>Quantité (min 10) *</label><input id="boostBudget" name="budget" type="number" min="10" value="10" required></div><div class="field"><label>Téléphone *</label><input id="boostPhone" name="phone" type="tel" required></div><div class="jb-price"><span>Quantité</span><strong id="boostQuantity">10 unités</strong></div><div class="jb-price"><span>Prix total</span><strong id="boostPrice" style="color:var(--blue);font-size:16px">500 FC</strong></div><button class="jb-btn jb-btn-gold" type="submit" style="width:100%">📤 Payer et envoyer</button><div class="status" id="boostStatus"></div></form></section></div>
 
 <div class="overlay" id="appModal"><section class="modal"><div class="modal-head"><h2>📱 Application — 10 000 FC</h2><button class="close" data-close="appModal">×</button></div><p style="font-size:11px;opacity:.6">Solde: <b id="soldeInApp" style="color:var(--blue)"></b></p><form id="appForm"><div class="field"><label>Nom *</label><input id="appName" name="appName" required maxlength="100"></div><div class="field"><label>Icône *</label><input id="appIcon" name="appIconFile" type="file" accept="image/*" required><img id="appIconPreview" class="preview"></div><div class="field"><label>Lien du site *</label><input id="appUrl" name="appUrl" type="url" required placeholder="https://..."></div><div class="field"><label>Description *</label><textarea id="appDescription" name="description" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="appWhatsapp" name="whatsapp" type="tel" required></div><div class="jb-price"><span>Prix Application</span><strong id="priceApp">10 000 FC</strong></div><button class="jb-btn jb-btn-gold" type="submit" id="appSubmitBtn" style="width:100%">📤 Commander — 10 000 FC</button><div class="status" id="appStatus"></div></form></section></div>
@@ -137,13 +148,10 @@ Connecté à Paramètres ⚙️
 <script type="module">
 import {initializeApp,getApps,getApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {getDatabase,ref,push,set,onValue,runTransaction} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-// ===== CONNECTE PARAMETRES =====
 const jbLang=localStorage.getItem("jb_lang")||"fr";
 const jbMoney=localStorage.getItem("jb_money")||"fc";
 const jbTheme=localStorage.getItem("jb_theme")||"dark";
 const USD_RATE=2800;
-
 function applySettings(){
  if(jbTheme==="light") document.body.classList.add("light");
  document.getElementById("footerLang").textContent=jbLang.toUpperCase();
@@ -161,7 +169,6 @@ function formatPriceFC(priceFC){
 }
 function goPage(p){window.location.href=p}
 window.goPage=goPage;
-
 const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
 const app=getApps().length?getApp():initializeApp(firebaseConfig);
 const db=getDatabase(app);
@@ -258,7 +265,6 @@ if(currentUserRef){
   renderBalance(Number(b)||0);
   updateAllPrices();
 }
-// EVENTS
 $("boostForm").addEventListener("submit",async e=>{
  e.preventDefault();const d=Object.fromEntries(new FormData(e.target).entries());const calc=calculateBoost();
  if(getBalance()<calc.total){setStatus("boostStatus","❌ Solde insuffisant: "+formatPriceFC(getBalance())+" — Il faut "+formatPriceFC(calc.total),"error");return;}
@@ -318,7 +324,6 @@ $("musicForm").addEventListener("submit",async e=>{
   setStatus("musicStatus","✅ Payé "+formatPriceFC(p.final)+" — Reste "+formatPriceFC(getBalance()),"ok");
  }catch(err){await setBalanceFirebase(getBalance()+p.final);setStatus("musicStatus","❌ Erreur: "+err.message,"error");}
 });
-// QR
 $("generateQrBtn").addEventListener("click",()=>{
  const txt=$("qrText").value.trim();
  if(!txt){$("qrStatus").textContent="❌ Entre un lien";return;}
