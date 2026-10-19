@@ -1,525 +1,1480 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#050a14">
-<title>JASON BUSINESS — Messenger FIX</title>
+<title>JASON BUSINESS — Messenger</title>
+
 <style>
-:root{--blue:#00d2ff;--fb-blue:#0084ff;--fb-bg:#f0f2f5;--fb-card:#fff;--border:rgba(0,0,0,.08);--text:#050505;--muted:#65676b;--green:#31a24c;--red:#ff3b30}
+:root{
+--blue:#0084ff;--cyan:#00d2ff;--bg:#f0f2f5;
+--card:#fff;--text:#050505;--muted:#65676b;
+--border:rgba(0,0,0,.09);--green:#31a24c;--red:#ff3b30
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{margin:0;font-family:Segoe UI,Arial;color:var(--text);background:var(--fb-bg);display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
-body.dark{--fb-bg:#18191a;--fb-card:#242526;--text:#e4e6eb;--muted:#b0b3b8;--border:rgba(255,255,255,.1);background:#18191a}
-header{height:56px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;background:var(--fb-card);border-bottom:1px solid var(--border)}
-.brand{font-weight:900;color:var(--fb-blue);font-size:20px}
-.icon-btn{width:36px;height:36px;border-radius:50%;background:var(--fb-bg);border:0;display:grid;place-items:center;font-size:18px;cursor:pointer}
-body.dark .icon-btn{background:#3a3b3c}
+body{
+font-family:Segoe UI,Arial,sans-serif;color:var(--text);
+background:var(--bg);display:flex;flex-direction:column;
+height:100vh;height:100dvh;overflow:hidden
+}
+body.dark{
+--bg:#18191a;--card:#242526;--text:#e4e6eb;
+--muted:#b0b3b8;--border:rgba(255,255,255,.1)
+}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+header{
+height:56px;flex-shrink:0;display:flex;align-items:center;
+justify-content:space-between;padding:0 14px;
+background:var(--card);border-bottom:1px solid var(--border)
+}
+.brand{font-size:19px;font-weight:900;color:var(--blue)}
+.header-actions{display:flex;gap:8px}
+.icon-btn{
+width:36px;height:36px;border-radius:50%;border:0;
+background:var(--bg);color:var(--text);
+display:grid;place-items:center;font-size:18px
+}
 .wrap{display:flex;flex:1;min-height:0;overflow:hidden}
-.left{width:360px;flex-shrink:0;background:var(--fb-card);border-right:1px solid var(--border);display:flex;flex-direction:column;min-height:0}
-.left-header{padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.left{
+width:360px;flex-shrink:0;background:var(--card);
+border-right:1px solid var(--border);display:flex;
+flex-direction:column;min-height:0
+}
+.left-header{
+padding:12px 16px;display:flex;
+justify-content:space-between;align-items:center
+}
 .left-header h2{font-size:24px;font-weight:900}
-.search-box{margin:8px 16px;padding:10px 12px;border-radius:20px;background:var(--fb-bg);display:flex;gap:8px}
-body.dark .search-box{background:#3a3b3c}
-.search-box input{flex:1;border:0;background:transparent;color:var(--text);outline:none;font-size:14px}
-.tabs{display:flex;gap:8px;padding:8px 16px;overflow-x:auto;scrollbar-width:none}
-.tab{padding:8px 12px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;background:var(--fb-bg);color:var(--muted);border:0}
-body.dark .tab{background:#3a3b3c}
-.tab.active{background:rgba(0,132,255,.12);color:var(--fb-blue)}
-.stories{display:flex;gap:8px;padding:12px 16px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--border)}
+.search-box{
+margin:8px 16px;padding:10px 12px;border-radius:22px;
+background:var(--bg);display:flex;gap:8px
+}
+.search-box input{
+flex:1;min-width:0;border:0;background:transparent;
+color:var(--text);outline:none;font-size:14px
+}
+.tabs{display:flex;gap:8px;padding:8px 12px;overflow-x:auto}
+.tab{
+padding:8px 12px;border-radius:20px;font-size:13px;
+font-weight:600;white-space:nowrap;border:0;
+background:var(--bg);color:var(--muted)
+}
+.tab.active{background:rgba(0,132,255,.13);color:var(--blue)}
+.stories{
+display:flex;gap:9px;padding:12px 14px;
+overflow-x:auto;border-bottom:1px solid var(--border)
+}
 .story{width:56px;flex-shrink:0;text-align:center;cursor:pointer}
-.story-av{width:56px;height:56px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#00d2ff,#0077ff,#ff00ff);display:grid;place-items:center}
-.story-av div{width:100%;height:100%;border-radius:50%;background:var(--fb-card);display:grid;place-items:center;font-weight:900;overflow:hidden;border:3px solid var(--fb-card)}
+.story-av{
+width:56px;height:56px;padding:3px;border-radius:50%;
+background:linear-gradient(135deg,#00d2ff,#0077ff,#ff00ff)
+}
+.story-av div{
+width:100%;height:100%;border-radius:50%;
+background:var(--card);display:grid;place-items:center;
+font-weight:900;overflow:hidden;border:3px solid var(--card)
+}
 .story-av img{width:100%;height:100%;object-fit:cover}
-.story span{font-size:11px;margin-top:4px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.list{flex:1;min-height:0;overflow-y:auto;padding:8px}
-.item{padding:8px;border-radius:10px;display:flex;gap:10px;align-items:center;cursor:pointer}
-.item:hover{background:var(--fb-bg)}
-body.dark .item:hover{background:#3a3b3c}
-.item.active{background:rgba(0,132,255,.10)}
-.av{width:56px;height:56px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;color:white;overflow:hidden;position:relative}
-.av img{width:100%;height:100%;object-fit:cover}
-.online-dot{position:absolute;bottom:2px;right:2px;width:14px;height:14px;border-radius:50%;background:var(--green);border:2px solid var(--fb-card)}
+.story span{
+display:block;font-size:11px;margin-top:4px;
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.list{flex:1;min-height:0;overflow-y:auto;padding:7px}
+.item{
+padding:8px;border-radius:10px;display:flex;gap:10px;
+align-items:center;cursor:pointer
+}
+.item:hover,.item.active{background:rgba(0,132,255,.1)}
+.av,.top-av{
+flex-shrink:0;border-radius:50%;
+display:grid;place-items:center;color:white;
+font-weight:900;overflow:hidden;
+background:linear-gradient(135deg,#00d2ff,#0077ff);
+position:relative
+}
+.av{width:54px;height:54px}
+.av img,.top-av img{width:100%;height:100%;object-fit:cover}
+.online-dot{
+position:absolute;bottom:1px;right:1px;width:13px;height:13px;
+border-radius:50%;background:var(--green);
+border:2px solid var(--card)
+}
 .info{flex:1;min-width:0}
-.name{font-size:15px;font-weight:600}
-.prev{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
-.unread-badge{background:var(--fb-blue);color:white;font-size:12px;font-weight:700;min-width:20px;height:20px;border-radius:10px;display:grid;place-items:center;padding:0 6px}
-.right{flex:1;min-width:0;display:flex;flex-direction:column;background:var(--fb-card);overflow:hidden;position:relative}
-.top{flex-shrink:0;padding:8px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
-.top-left{display:flex;align-items:center;gap:10px;min-width:0;cursor:pointer}
-.top-av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#00d2ff,#0077ff);font-weight:900;color:white;overflow:hidden}
-.top-av img{width:100%;height:100%;object-fit:cover}
-.top-info h3{font-size:15px;font-weight:600;margin:0}
+.name{font-size:15px;font-weight:650}
+.prev{
+font-size:12px;color:var(--muted);margin-top:3px;
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.unread-badge{
+background:var(--blue);color:white;padding:3px 7px;
+border-radius:12px;font-size:12px;font-weight:bold
+}
+.right{
+flex:1;min-width:0;display:flex;flex-direction:column;
+background:var(--card);overflow:hidden;position:relative
+}
+.top{
+flex-shrink:0;padding:8px 12px;display:flex;
+justify-content:space-between;align-items:center;
+border-bottom:1px solid var(--border);gap:8px
+}
+.top-left{display:flex;align-items:center;gap:9px;min-width:0}
+.top-av{width:40px;height:40px}
+.top-info{min-width:0}
+.top-info h3{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .top-info small{font-size:12px;color:var(--muted)}
-.msgs{flex:1;min-height:0;overflow-y:auto;padding:16px 16px 8px;display:flex;flex-direction:column;gap:6px;background:var(--fb-card)}
-.date-sep{text-align:center;margin:16px 0 8px;font-size:12px;color:var(--muted)}
-.msg-row{display:flex;gap:8px;align-items:flex-end;max-width:85%}
-.msg-row.me{align-self:flex-end;flex-direction:row-reverse}
-.msg-row.other{align-self:flex-start}
-.msg-bubble{max-width:100%;padding:8px 12px;border-radius:18px;font-size:15px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.35}
-.msg-row.me .msg-bubble{background:var(--fb-blue);color:white;border-bottom-right-radius:4px}
-.msg-row.other .msg-bubble{background:#f0f2f5;color:var(--text);border-bottom-left-radius:4px}
-body.dark .msg-row.other .msg-bubble{background:#3a3b3c;color:#e4e6eb}
-.msg-photo{margin-top:6px;border-radius:12px;overflow:hidden;width:200px;height:200px;background:#000;cursor:pointer;border:1px solid var(--border)}
-.msg-photo img{width:100%;height:100%;object-fit:cover}
-.msg-audio{margin-top:6px}
-.msg-audio audio{width:220px}
-.input-area{flex-shrink:0;padding:8px 12px;background:var(--fb-card);border-top:1px solid var(--border)}
-.input-row{display:flex;gap:8px;align-items:flex-end}
-.tbtn{width:36px;height:36px;flex-shrink:0;border-radius:50%;border:0;background:transparent;display:grid;place-items:center;font-size:20px;cursor:pointer;color:var(--fb-blue)}
-.input-row textarea{flex:1;min-height:36px;max-height:120px;padding:10px 14px;border-radius:20px;border:0;background:var(--fb-bg);color:var(--text);outline:none;resize:none;font-size:15px}
-body.dark .input-row textarea{background:#3a3b3c}
-.send-btn{width:36px;height:36px;flex-shrink:0;border-radius:50%;border:0;background:var(--fb-blue);color:white;font-size:18px;cursor:pointer;display:grid;place-items:center}
-.send-btn:disabled{opacity:.4}
-.rec-bar{display:none;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;background:#ffebe9;border-radius:20px;margin-bottom:8px}
-body.dark .rec-bar{background:#4a1c1c}
+.msgs{
+flex:1;min-height:0;overflow-y:auto;padding:16px;
+display:flex;flex-direction:column;gap:5px;
+overflow-wrap:anywhere
+}
+.date-sep{text-align:center;margin:12px;font-size:12px;color:var(--muted)}
+.msg-row{display:flex;max-width:88%;align-self:flex-start}
+.msg-row.me{align-self:flex-end}
+.msg-bubble{
+padding:9px 12px;border-radius:18px;background:#f0f2f5;
+color:#171717;font-size:15px;line-height:1.4;
+white-space:pre-wrap;overflow-wrap:anywhere;min-width:30px
+}
+body.dark .msg-bubble{background:#3a3b3c;color:#e4e6eb}
+.msg-row.me .msg-bubble{
+background:var(--blue);color:white;border-bottom-right-radius:4px
+}
+.msg-row.other .msg-bubble{border-bottom-left-radius:4px}
+.msg-photo{
+margin-top:5px;border-radius:12px;overflow:hidden;
+max-width:240px;background:#111;cursor:pointer
+}
+.msg-photo img{display:block;width:100%;max-height:320px;object-fit:contain}
+.msg-audio{margin-top:5px;max-width:100%}
+.msg-audio audio{display:block;width:min(250px,65vw);max-width:100%}
+.msg-meta{font-size:10px;color:var(--muted);margin:0 4px 5px}
+.msg-meta.me{text-align:right}
+.input-area{
+flex-shrink:0;padding:8px 10px;background:var(--card);
+border-top:1px solid var(--border)
+}
+.input-row{display:flex;gap:5px;align-items:flex-end}
+.tbtn{
+width:36px;height:36px;flex-shrink:0;border:0;
+background:transparent;color:var(--blue);font-size:21px;
+display:grid;place-items:center;border-radius:50%
+}
+.input-row textarea{
+flex:1;min-width:0;min-height:38px;max-height:110px;
+padding:10px 13px;border-radius:20px;border:0;
+background:var(--bg);color:var(--text);outline:none;
+resize:none;font-size:15px
+}
+.send-btn{
+width:38px;height:38px;flex-shrink:0;border:0;
+border-radius:50%;background:var(--blue);color:white;font-size:20px
+}
+button:disabled{opacity:.45;cursor:not-allowed}
+#status{text-align:center;font-size:11px;color:var(--blue);margin-top:5px}
+.rec-bar{
+display:none;align-items:center;justify-content:space-between;
+gap:8px;padding:10px;background:#ffebe9;color:#222;
+border-radius:18px;margin-bottom:8px
+}
+body.dark .rec-bar{background:#4a1c1c;color:white}
 .rec-bar.show{display:flex}
-#photoPreview{display:none;background:var(--fb-card);border:1px solid var(--border);border-radius:16px;padding:12px;margin-bottom:8px}
+#photoPreview{
+display:none;padding:10px;margin-bottom:8px;
+border:1px solid var(--border);border-radius:14px
+}
 #photoPreview.show{display:block}
-.preview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-height:160px;overflow-y:auto}
-.preview-grid img{width:100%;height:70px;object-fit:cover;border-radius:8px}
+.preview-grid{
+display:grid;grid-template-columns:repeat(4,1fr);
+gap:5px;max-height:160px;overflow-y:auto
+}
+.preview-grid img{width:100%;height:70px;object-fit:cover;border-radius:7px}
 .preview-actions{display:flex;gap:8px;margin-top:8px}
-.preview-actions button{flex:1;padding:10px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
-.btnSend{background:var(--fb-blue);color:white}
-.btnCancel{background:var(--fb-bg);color:var(--text)}
-.scroll-down{position:absolute;bottom:80px;right:16px;width:40px;height:40px;border-radius:50%;background:var(--fb-card);color:var(--fb-blue);border:1px solid var(--border);display:none;place-items:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:10;font-weight:900}
-.scroll-down.show{display:grid}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:5000;display:none;place-items:center;padding:16px}
+.preview-actions button,.action-btn{
+flex:1;padding:10px;border:0;border-radius:10px;font-weight:bold
+}
+.btnSend{background:var(--blue);color:white}
+.btnCancel{background:var(--bg);color:var(--text)}
+.modal{
+position:fixed;inset:0;background:rgba(0,0,0,.65);
+z-index:5000;display:none;place-items:center;padding:15px
+}
 .modal.show{display:grid}
-.m-card{width:100%;max-width:420px;background:var(--fb-card);border-radius:12px;overflow:hidden}
-.m-head{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);font-weight:700}
-.m-body{padding:16px}
-.m-body textarea{width:100%;min-height:60px;padding:10px;border-radius:10px;border:1px solid var(--border);background:var(--fb-bg);color:var(--text);outline:none;resize:none}
-.m-foot{padding:12px;display:flex;gap:8px;border-top:1px solid var(--border)}
-.btn{flex:1;padding:10px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
-.preview{margin-top:10px;border-radius:12px;overflow:hidden;max-height:300px;background:var(--fb-bg)}
-.preview img{width:100%;object-fit:cover}
-#storyViewer{position:fixed;inset:0;background:#000;z-index:6000;display:none;flex-direction:column}
-#storyViewer.show{display:flex}
-.sv-top{padding:12px;display:flex;justify-content:space-between;align-items:center;color:white}
-.sv-img{flex:1;display:grid;place-items:center;position:relative}
-.sv-img img{max-width:100%;max-height:100%;object-fit:contain}
-.sv-note{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.6);color:white;padding:10px 16px;border-radius:20px;font-weight:800;text-align:center}
-.sv-bottom{padding:16px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(transparent,rgba(0,0,0,.8));color:white}
-.heart-btn{padding:8px 16px;border-radius:20px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.15);color:white;font-weight:700;cursor:pointer}
-.heart-btn.liked{background:#ff3b30;border-color:#ff3b30}
-#imgViewer{position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:9999;display:none;flex-direction:column}
-#imgViewer.show{display:flex}
-.viewer-top{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#242526}
-.viewer-content{flex:1;display:grid;place-items:center;overflow:hidden}
-.viewer-content img{max-width:100%;max-height:100%;object-fit:contain}
-@media(max-width:800px){.left{position:absolute;inset:56px 0 0;width:100%;z-index:20}.left.hide{display:none}.right{width:100%}}
+.m-card{
+width:100%;max-width:420px;background:var(--card);
+color:var(--text);border-radius:14px;overflow:hidden
+}
+.m-head{
+padding:14px;display:flex;justify-content:space-between;
+align-items:center;border-bottom:1px solid var(--border)
+}
+.m-body{padding:15px}
+.m-body textarea{
+width:100%;min-height:70px;padding:10px;border-radius:10px;
+border:1px solid var(--border);background:var(--bg);color:var(--text)
+}
+.m-foot{padding:12px;display:flex;gap:8px}
+#storyViewer,#imgViewer{
+position:fixed;inset:0;background:#000;z-index:6000;
+display:none;flex-direction:column
+}
+#storyViewer.show,#imgViewer.show{display:flex}
+.sv-top,.viewer-top{
+padding:12px;display:flex;justify-content:space-between;
+align-items:center;color:white
+}
+.sv-img,.viewer-content{
+flex:1;min-height:0;display:grid;place-items:center;overflow:hidden
+}
+.sv-img img,.viewer-content img{
+max-width:100%;max-height:100%;object-fit:contain
+}
+.sv-bottom{padding:16px;color:white;display:flex;justify-content:space-between}
+.heart-btn{
+border:1px solid #777;border-radius:20px;padding:8px 15px;
+color:white;background:#333
+}
+#scrollDown{
+position:absolute;right:14px;bottom:100px;z-index:10;
+display:none;width:40px;height:40px;border-radius:50%;
+border:1px solid var(--border);background:var(--card);
+color:var(--blue);font-size:22px
+}
+#scrollDown.show{display:block}
+@media(max-width:800px){
+.left{position:absolute;inset:56px 0 0;width:100%;z-index:20}
+.left.hide{display:none}
+.right{width:100%}
+}
 </style>
 </head>
+
 <body>
 <header>
-<div class="brand">jason business • <span id="myPhoneShow" style="font-size:12px;opacity:.6;font-weight:400"></span></div>
-<div class="header-actions">
-<button class="icon-btn" onclick="location.href='dashboard.html'">📊</button>
-<button class="icon-btn" onclick="location.reload()">🔄</button>
-</div>
+  <div class="brand">
+    JASON BUSINESS <span id="myPhoneShow" style="font-size:11px;opacity:.65;font-weight:400"></span>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" onclick="location.href='dashboard.html'">📊</button>
+    <button class="icon-btn" onclick="toggleTheme()">🌙</button>
+    <button class="icon-btn" onclick="location.reload()">🔄</button>
+  </div>
 </header>
+
 <div class="wrap">
 <aside class="left" id="leftPanel">
-<div class="left-header"><h2>Messenger</h2><div style="display:flex;gap:8px"><button class="icon-btn" onclick="openModal('storyModal')">📷</button><button class="icon-btn">⚙️</button></div></div>
-<div class="search-box">🔍<input id="search" placeholder="Rechercher"></div>
-<div class="tabs"><button class="tab active" data-tab="chats">Boîte</button><button class="tab" data-tab="users">👥 Utilisateurs</button><button class="tab" data-tab="requests">🔔 Demandes <span id="reqCount" style="background:#ff3b30;color:white;padding:2px 6px;border-radius:10px;font-size:10px;display:none">0</span></button></div>
-<div class="stories" id="stories"><div class="story" onclick="openModal('storyModal')"><div class="story-av"><div>➕</div></div><span>Créer story</span></div></div>
-<div style="padding:8px 16px;display:flex;gap:8px;border-bottom:1px solid var(--border)"><input id="manualPhone" placeholder="+243..." style="flex:1;padding:8px 12px;border-radius:20px;border:1px solid var(--border);background:var(--fb-bg);color:var(--text);outline:none"><button class="icon-btn" id="btnAddManual" style="background:var(--fb-blue);color:white">+</button></div>
-<div class="list" id="list"></div>
-<div style="padding:10px;display:flex;gap:8px;border-top:1px solid var(--border)"><button class="tab" style="flex:1" onclick="location.href='dashboard.html'">🏠 Dash</button><button class="tab" style="flex:1" onclick="location.href='parametres.html'">⚙️ Param</button></div>
+  <div class="left-header">
+    <h2>Messenger</h2>
+    <button class="icon-btn" onclick="openModal('storyModal')">📷</button>
+  </div>
+
+  <div class="search-box">
+    🔍 <input id="search" placeholder="Rechercher un contact ou message">
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="chats">Boîte</button>
+    <button class="tab" data-tab="users">👥 Utilisateurs</button>
+    <button class="tab" data-tab="requests">🔔 Demandes <span id="reqCount"></span></button>
+  </div>
+
+  <div class="stories" id="stories">
+    <div class="story" onclick="openModal('storyModal')">
+      <div class="story-av"><div>➕</div></div>
+      <span>Créer story</span>
+    </div>
+  </div>
+
+  <div style="padding:8px 12px;display:flex;gap:6px;border-bottom:1px solid var(--border)">
+    <input id="manualPhone" placeholder="+243..." style="flex:1;min-width:0;padding:9px;border-radius:20px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
+    <button class="icon-btn" id="btnAddManual" style="background:var(--blue);color:white">+</button>
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <div style="padding:9px;display:flex;gap:8px;border-top:1px solid var(--border)">
+    <button class="tab" style="flex:1" onclick="location.href='dashboard.html'">🏠 Dash</button>
+    <button class="tab" style="flex:1" onclick="location.href='parametres.html'">⚙️ Param</button>
+  </div>
 </aside>
+
 <section class="right">
-<div class="top"><div class="top-left" id="topLeft"><div class="top-av" id="chatAvatar">JB</div><div class="top-info"><h3 id="chatName">Sélectionne un chat</h3><small id="chatPhone">Tape un message • Vocal • Photo</small></div></div><div style="display:flex;gap:8px"><button class="icon-btn">📞</button><button class="icon-btn">📹</button></div></div>
-<div class="msgs" id="msgs"><div style="margin:auto;text-align:center;opacity:.5;padding:40px"><div style="font-size:50px">💬</div><div style="margin-top:10px;font-weight:700">Vos messages</div><div style="font-size:12px;margin-top:4px">Anciens + Nouveaux messages visibles</div><div id="debug" style="margin-top:10px;font-size:10px;color:var(--fb-blue)"></div></div></div>
-<div id="scrollDown" class="scroll-down">↓</div>
-<div class="input-area">
-<div id="photoPreview"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><b id="previewCount" style="color:var(--fb-blue)">0 photos</b></div><div id="previewGrid" class="preview-grid"></div><textarea id="photoCaption" placeholder="Légende..." style="margin-top:8px;width:100%;padding:8px 12px;border-radius:12px;border:1px solid var(--border);background:var(--fb-bg);color:var(--text);resize:none;min-height:36px"></textarea><div class="preview-actions"><button class="btnCancel" id="cancelPhoto">Annuler</button><button class="btnSend" id="confirmPhoto">Envoyer</button></div><div id="uploadProgress" style="display:none;margin-top:8px;text-align:center;font-size:12px;color:var(--fb-blue)"></div></div>
-<div id="recBar" class="rec-bar"><div style="display:flex;align-items:center;gap:8px"><div style="width:10px;height:10px;background:#ff3b30;border-radius:50%;animation:pulse 1s infinite"></div><div id="recTime" style="font-weight:800">00:00</div><small>Enregistrement...</small></div><div style="display:flex;gap:6px"><button id="recCancel" style="padding:6px 10px;border-radius:20px;border:1px solid #ff3b30;background:transparent;color:#ff3b30">Annuler</button><button id="recSend" style="padding:6px 12px;border-radius:20px;border:0;background:var(--fb-blue);color:white;font-weight:700">Envoyer</button></div></div>
-<div class="input-row"><label class="tbtn">🖼️<input type="file" id="photoInput" accept="image/*" multiple hidden></label><textarea id="msgInput" placeholder="Aa" disabled rows="1"></textarea><button class="tbtn" id="recordBtn" disabled>🎙️</button><button class="send-btn" id="sendBtn" disabled>➤</button></div>
-<div id="status" style="text-align:center;font-size:11px;color:var(--fb-blue);margin-top:4px">Prêt</div>
-</div>
+  <div class="top">
+    <div class="top-left">
+      <div class="top-av" id="chatAvatar">JB</div>
+      <div class="top-info">
+        <h3 id="chatName">Sélectionne un chat</h3>
+        <small id="chatPhone">Messages • Photos • Vocaux</small>
+      </div>
+    </div>
+    <div style="display:flex;gap:5px">
+      <button class="icon-btn" onclick="alert('Les appels audio nécessitent une signalisation WebRTC.')">📞</button>
+      <button class="icon-btn" onclick="alert('Les appels vidéo nécessitent une signalisation WebRTC.')">📹</button>
+    </div>
+  </div>
+
+  <div class="msgs" id="msgs">
+    <div style="margin:auto;text-align:center;opacity:.6;padding:30px">
+      <div style="font-size:50px">💬</div>
+      <b>Vos messages</b>
+      <div style="font-size:12px;margin-top:5px">Choisis un contact pour commencer.</div>
+    </div>
+  </div>
+
+  <button id="scrollDown" onclick="scrollToBottom()">↓</button>
+
+  <div class="input-area">
+    <div id="photoPreview">
+      <b id="previewCount">0 photo</b>
+      <div class="preview-grid" id="previewGrid"></div>
+      <textarea id="photoCaption" placeholder="Ajouter une légende..." style="width:100%;margin-top:8px;padding:10px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text)"></textarea>
+      <div class="preview-actions">
+        <button class="btnCancel" id="cancelPhoto">Annuler</button>
+        <button class="btnSend" id="confirmPhoto">Envoyer</button>
+      </div>
+      <div id="uploadProgress" style="display:none;font-size:12px;text-align:center;margin-top:8px"></div>
+    </div>
+
+    <div class="rec-bar" id="recBar">
+      <div>
+        🔴 <b id="recTime">00:00</b>
+        <small>Enregistrement...</small>
+      </div>
+      <div style="display:flex;gap:5px">
+        <button id="recCancel" class="btnCancel">Annuler</button>
+        <button id="recSend" class="btnSend" style="border-radius:20px;padding:8px 12px">Envoyer</button>
+      </div>
+    </div>
+
+    <div class="input-row">
+      <label class="tbtn" title="Choisir des photos">
+        🖼️
+        <input type="file" id="photoInput" accept="image/*" multiple hidden>
+      </label>
+      <textarea id="msgInput" placeholder="Aa" rows="1" disabled></textarea>
+      <button class="tbtn" id="recordBtn" disabled title="Enregistrer un vocal">🎙️</button>
+      <button class="send-btn" id="sendBtn" disabled title="Envoyer">➤</button>
+    </div>
+    <div id="status">Connexion à Firebase...</div>
+  </div>
 </section>
 </div>
 
-<div class="modal" id="storyModal"><div class="m-card"><div class="m-head"><span>📸 Story 24h</span><button onclick="closeModal('storyModal')" style="border:0;background:var(--fb-bg);width:32px;height:32px;border-radius:50%">✕</button></div><div class="m-body"><textarea id="storyNote" placeholder="Note..."></textarea><div class="preview" id="storyPreview" style="margin-top:12px"></div><input type="file" id="storyFile" accept="image/*" hidden><div style="display:flex;gap:8px;margin-top:12px"><button class="btn btnCancel" onclick="document.getElementById('storyFile').click()">🖼️ Photo</button><button class="btn btnSend" onclick="publishStory()">Publier</button></div></div></div></div>
-<div id="storyViewer"><div class="sv-top"><div style="display:flex;gap:10px;align-items:center"><div class="av" id="svAv" style="width:36px;height:36px">JA</div><div><b id="svName">Jason</b><br><small id="svTime"></small></div></div><button onclick="closeStory()" style="background:rgba(255,255,255,.2);border:0;color:white;width:36px;height:36px;border-radius:50%">✕</button></div><div class="sv-img" id="svContent"></div><div class="sv-bottom"><div id="svViewsInfo">👁️ 0 vues • ❤️ 0</div><button class="heart-btn" id="heartBtn" onclick="heartStory()">❤️ <span id="heartCount">0</span></button></div></div>
-<div id="imgViewer"><div class="viewer-top"><button onclick="closeViewer()" style="background:transparent;border:0;color:white;font-size:22px">✕</button><span style="color:white">Photo</span><button onclick="closeViewer()" style="background:transparent;border:0;color:white;font-size:22px">✕</button></div><div class="viewer-content" id="viewerContent"><img id="viewerImg" src=""></div></div>
+<div class="modal" id="storyModal">
+  <div class="m-card">
+    <div class="m-head">
+      <b>📸 Créer une story (24h)</b>
+      <button class="icon-btn" onclick="closeModal('storyModal')">✕</button>
+    </div>
+    <div class="m-body">
+      <textarea id="storyNote" placeholder="Écris quelque chose..."></textarea>
+      <div id="storyPreview" style="margin-top:10px"></div>
+      <input type="file" id="storyFile" accept="image/*" hidden>
+      <div class="m-foot">
+        <button class="action-btn btnCancel" onclick="document.getElementById('storyFile').click()">🖼️ Photo</button>
+        <button class="action-btn btnSend" onclick="publishStory()">Publier</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="storyViewer">
+  <div class="sv-top">
+    <b id="svName">Story</b>
+    <button class="icon-btn" onclick="closeStory()">✕</button>
+  </div>
+  <div class="sv-img" id="svContent"></div>
+  <div class="sv-bottom">
+    <span id="svViewsInfo">Story</span>
+    <button class="heart-btn" id="heartBtn" onclick="heartStory()">❤️ <span id="heartCount">0</span></button>
+  </div>
+</div>
+
+<div id="imgViewer">
+  <div class="viewer-top">
+    <b>Photo</b>
+    <button class="icon-btn" onclick="closeViewer()">✕</button>
+  </div>
+  <div class="viewer-content"><img id="viewerImg" src="" alt="Photo reçue"></div>
+</div>
 
 <script type="module">
-import {initializeApp,getApps,getApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {getDatabase,ref,onValue,push,set,get,remove,update,onDisconnect} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-const firebaseConfig={apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",authDomain:"starlink-investit.firebaseapp.com",databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",projectId:"starlink-investit",storageBucket:"starlink-investit.firebasestorage.app",messagingSenderId:"807081599583",appId:"1:807081599583:web:e00ec3959bc4acdae031ea"};
-const app=getApps().length?getApp():initializeApp(firebaseConfig);
-const db=getDatabase(app);
-const $=id=>document.getElementById(id);
+import {initializeApp,getApps,getApp}
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
-// ✅ FIX NUMERO - TON CAS 0847500590
-const rawPhone=localStorage.getItem("jasonBusinessUserPhone")||localStorage.getItem("userPhone")||localStorage.getItem("phone")||"";
-if(!rawPhone) location.replace("login.html");
-$("myPhoneShow").textContent=rawPhone;
+import {
+ getDatabase,ref,onValue,push,set,get,remove,update,onDisconnect
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-// NORMALISE: 0847500590 et 243847500590 et +243847500590 => tous deviennent 0847500590
-function normalizePhone(p){
-  let s=String(p).replace(/[^0-9]/g,"");
-  if(s.startsWith("243") && s.length>=12) s="0"+s.slice(3); // 243847500590 => 0847500590
-  if(s.length===9) s="0"+s; // 847500590 => 0847500590
-  return s;
+const firebaseConfig = {
+ apiKey:"AIzaSyA24pBo8mBWiZssPtep--MMBdB7c8_Lu4U",
+ authDomain:"starlink-investit.firebaseapp.com",
+ databaseURL:"https://starlink-investit-default-rtdb.firebaseio.com",
+ projectId:"starlink-investit",
+ storageBucket:"starlink-investit.firebasestorage.app",
+ messagingSenderId:"807081599583",
+ appId:"1:807081599583:web:e00ec3959bc4acdae031ea"
+};
+
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const $ = id => document.getElementById(id);
+
+const rawPhone =
+ localStorage.getItem("jasonBusinessUserPhone") ||
+ localStorage.getItem("userPhone") ||
+ localStorage.getItem("phone") ||
+ localStorage.getItem("telephone") || "";
+
+if(!rawPhone){
+ location.replace("login.html");
+ throw new Error("Connexion requise");
 }
-const myPhone=normalizePhone(rawPhone);
-const myPhoneVariants=[rawPhone, myPhone, "243"+myPhone.slice(1), "+243"+myPhone.slice(1), myPhone.slice(1)].filter(Boolean);
-console.log("MY PHONE VARIANTS", myPhoneVariants);
 
-let myName=localStorage.getItem("jb_display_name")||"Jason";
-let myPhoto=localStorage.getItem("jb_display_photo")||"";
-const jbTheme=localStorage.getItem("jb_theme")||"dark";
-if(jbTheme==="light") document.body.classList.remove("dark"); else document.body.classList.add("dark");
+$("myPhoneShow").textContent = "• " + rawPhone;
 
-let tab="chats",activeChat=null,activeChatRaw=null,allUsers={},myRequests={},myChats={},presenceCache={},manualUsers=[],unsub=null,allMessages=[],storiesCache=[],pendingPhotos=[];
+function normalizePhone(phone){
+ let s = String(phone || "").replace(/\D/g,"");
+ if(s.startsWith("243") && s.length >= 12) s = "0" + s.slice(3);
+ if(s.length === 9) s = "0" + s;
+ return s;
+}
 
-try{manualUsers=JSON.parse(localStorage.getItem("jb_manual_users")||"[]").map(normalizePhone);}catch{manualUsers=[];}
-window.goPage=p=>window.location.href=p;
-function esc(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function getChatId(a,b){return[normalizePhone(a),normalizePhone(b)].sort().join("_");}
+const myPhone = normalizePhone(rawPhone);
+
+const myPhoneVariants = [
+ rawPhone,myPhone,"243"+myPhone.slice(1),
+ "+243"+myPhone.slice(1),myPhone.slice(1)
+].filter(Boolean);
+
+let myName = localStorage.getItem("jb_display_name") || "Jason";
+let myPhoto = localStorage.getItem("jb_display_photo") || "";
+
+let tab = "chats";
+let activeChat = null;
+let activeChatRaw = null;
+let allUsers = {};
+let myRequests = {};
+let myChats = {};
+let presenceCache = {};
+let manualUsers = [];
+let storiesCache = [];
+let currentStory = null;
+let storyFileBase64 = null;
+let pendingPhotos = [];
+let messageUnsubs = [];
+let chatToken = 0;
+let messageCache = {};
+let rec = null;
+let recStream = null;
+let chunks = [];
+let recTimer = null;
+let recSec = 0;
+let recCancelled = false;
+let recStarting = false;
+
+try{
+ manualUsers = JSON.parse(localStorage.getItem("jb_manual_users") || "[]")
+  .map(normalizePhone);
+}catch(e){manualUsers=[];}
+
+if(localStorage.getItem("jb_theme") !== "light"){
+ document.body.classList.add("dark");
+}
+
+window.toggleTheme = () => {
+ document.body.classList.toggle("dark");
+ localStorage.setItem(
+  "jb_theme",
+  document.body.classList.contains("dark") ? "dark" : "light"
+ );
+};
+
+window.openModal = id => $(id).classList.add("show");
+window.closeModal = id => $(id).classList.remove("show");
+window.closeStory = () => $("storyViewer").classList.remove("show");
+window.closeViewer = () => $("imgViewer").classList.remove("show");
+
+function setStatus(message){
+ $("status").textContent = message;
+ console.log("[JASON CHAT]",message);
+}
+
+function esc(value){
+ return String(value ?? "").replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
+}
+
+function getChatId(a,b){
+ return [normalizePhone(a),normalizePhone(b)].sort().join("_");
+}
+
 function getAllChatIds(a,b){
-  const na=normalizePhone(a), nb=normalizePhone(b);
-  const ra=String(a).replace(/[^0-9]/g,""), rb=String(b).replace(/[^0-9]/g,"");
-  return [
-    [na,nb].sort().join("_"),
-    [ra,rb].sort().join("_"),
-    `${na}_${nb}`,
-    `${nb}_${na}`,
-    `${ra}_${rb}`,
-    `${rb}_${ra}`,
-    `${a}_${b}`,
-    `${b}_${a}`
-  ].filter((v,i,arr)=>arr.indexOf(v)===i);
+ const na=normalizePhone(a), nb=normalizePhone(b);
+ const ra=String(a).replace(/\D/g,"");
+ const rb=String(b).replace(/\D/g,"");
+ return [...new Set([
+  [na,nb].sort().join("_"),
+  [ra,rb].sort().join("_"),
+  `${na}_${nb}`,`${nb}_${na}`,
+  `${ra}_${rb}`,`${rb}_${ra}`,
+  `${a}_${b}`,`${b}_${a}`
+ ])];
 }
-function isOnline(ph){const p=presenceCache[normalizePhone(ph)];return !!(p&&p.online&&Date.now()-(p.lastSeen||0)<90000);}
-function getUserPhoto(ph){const norm=normalizePhone(ph); return allUsers[norm]?.photo||allUsers[ph]?.photo||"";}
-window.openModal=id=>$(id).classList.add("show");
-window.closeModal=id=>$(id).classList.remove("show");
-window.openStoryModal=()=>openModal("storyModal");
-function setStatus(t){$("status").textContent=t; console.log(t);}
 
-const presenceRef=ref(db,`jasonBusiness/presence/${myPhone}`);
-set(presenceRef,{online:true,lastSeen:Date.now(),raw:rawPhone}).catch(()=>{});
-onDisconnect(presenceRef).set({online:false,lastSeen:Date.now()}).catch(()=>{});
-setInterval(()=>set(presenceRef,{online:true,lastSeen:Date.now(),activeChat:activeChat}).catch(()=>{}),20000);
+function isOnline(phone){
+ const p=presenceCache[normalizePhone(phone)];
+ return !!(p && p.online && Date.now()-(p.lastSeen||0)<90000);
+}
 
-onValue(ref(db,"jasonBusiness/presence"),s=>{
-  const val=s.val()||{}; const norm={};
-  Object.entries(val).forEach(([k,v])=>{norm[normalizePhone(k)]=v; norm[k]=v;});
-  presenceCache=norm; render();
+function getUserPhoto(phone){
+ const n=normalizePhone(phone);
+ return allUsers[n]?.photo || allUsers[phone]?.photo || "";
+}
+
+function getCombinedUsers(){
+ const combined={};
+ Object.entries(allUsers).forEach(([key,user])=>{
+  const n=normalizePhone(key);
+  if(n) combined[n]=user;
+ });
+ manualUsers.forEach(phone=>{
+  if(phone && !combined[phone]) combined[phone]={telephone:phone,nom:phone};
+ });
+ return combined;
+}
+
+// Présence
+const presenceRef = ref(db,`jasonBusiness/presence/${myPhone}`);
+
+set(presenceRef,{
+ online:true,lastSeen:Date.now(),raw:rawPhone
+}).catch(e=>setStatus("Présence : "+e.message));
+
+onDisconnect(presenceRef).set({
+ online:false,lastSeen:Date.now()
+}).catch(()=>{});
+
+setInterval(()=>{
+ set(presenceRef,{
+  online:true,lastSeen:Date.now(),activeChat:activeChat||""
+ }).catch(()=>{});
+},20000);
+
+onValue(ref(db,".info/connected"),snap=>{
+ if(snap.val()===true){
+  onDisconnect(presenceRef).set({
+   online:false,lastSeen:Date.now()
+  }).catch(()=>{});
+ }
 });
-onValue(ref(db,"jasonBusiness/users"),s=>{
-  const val=s.val()||{}; const norm={};
-  Object.entries(val).forEach(([k,v])=>{const n=normalizePhone(k); norm[n]= {...v, originalPhone:k}; norm[k]= {...v, originalPhone:k};});
-  allUsers=norm;
-  if(allUsers[myPhone]){myName=allUsers[myPhone].nom||myName; if(allUsers[myPhone].photo) myPhoto=allUsers[myPhone].photo;}
-  render();
+
+onValue(ref(db,"jasonBusiness/presence"),snap=>{
+ const values=snap.val()||{};
+ const normalized={};
+ Object.entries(values).forEach(([key,value])=>{
+  normalized[normalizePhone(key)]=value;
+  normalized[key]=value;
+ });
+ presenceCache=normalized;
+ render();
 });
 
-// ✅ FIX: LIRE user_chats SUR TOUS LES VARIANTS
+onValue(ref(db,"jasonBusiness/users"),snap=>{
+ const values=snap.val()||{};
+ const normalized={};
+ Object.entries(values).forEach(([key,value])=>{
+  const n=normalizePhone(key);
+  normalized[n]={...value,originalPhone:key};
+  normalized[key]={...value,originalPhone:key};
+ });
+ allUsers=normalized;
+
+ if(allUsers[myPhone]){
+  myName=allUsers[myPhone].nom||myName;
+  if(allUsers[myPhone].photo) myPhoto=allUsers[myPhone].photo;
+ }
+ render();
+});
+
+// Lire les conversations enregistrées sous plusieurs formats de numéro
 function listenChats(){
-  myPhoneVariants.forEach(variant=>{
-    onValue(ref(db,`jasonBusiness/user_chats/${variant}`),snap=>{
-      if(!snap.exists()) return;
-      const data=snap.val()||{};
-      Object.entries(data).forEach(([chatId,chatData])=>{
-        const normId=getChatId(myPhone, chatData.with||chatId.split("_").find(p=>normalizePhone(p)!==myPhone)||"");
-        // Fusionne
-        if(!myChats[normId] || (chatData.lastTime||0) > (myChats[normId].lastTime||0)){
-          myChats[normId]=chatData;
-        }
-      });
-      render();
-    });
+ myPhoneVariants.forEach(variant=>{
+  onValue(ref(db,`jasonBusiness/user_chats/${variant}`),snap=>{
+   const data=snap.val()||{};
+   Object.entries(data).forEach(([chatId,chatData])=>{
+    const other=chatData.with||chatData.withRaw||
+     chatId.split("_").find(p=>normalizePhone(p)!==myPhone);
+    if(!other) return;
+    const normId=getChatId(myPhone,other);
+    if(!myChats[normId] ||
+       (chatData.lastTime||0)>(myChats[normId].lastTime||0)){
+     myChats[normId]={...chatData,with:normalizePhone(other)};
+    }
+   });
+   render();
+  },error=>{
+   console.error("user_chats",error);
   });
+ });
 }
 listenChats();
 
-onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),s=>{myRequests=s.val()||{};const n=Object.values(myRequests).filter(r=>r.type==="incoming"&&r.status==="pending").length;$("reqCount").textContent=n;$("reqCount").style.display=n?"inline-block":"none";render();});
+// Demandes de contact
+onValue(ref(db,`jasonBusiness/chat_requests/${myPhone}`),snap=>{
+ myRequests=snap.val()||{};
+ const count=Object.values(myRequests).filter(
+  r=>r.type==="incoming"&&r.status==="pending"
+ ).length;
+ $("reqCount").textContent=count ? count : "";
+ render();
+});
 
-onValue(ref(db,"jasonBusiness/stories"),s=>{
-  const all=Object.entries(s.val()||{}).map(([k,v])=>({...v,id:k}));
-  const now=Date.now();
-  storiesCache=all.filter(st=>{
-    if(!st.createdAt) return true;
-    if((now-st.createdAt)>86400000){remove(ref(db,`jasonBusiness/stories/${st.id}`));return false;}
-    return true;
-  }).sort((a,b)=>b.createdAt-a.createdAt);
-  renderStories();
+// Stories
+onValue(ref(db,"jasonBusiness/stories"),snap=>{
+ const now=Date.now();
+ const all=Object.entries(snap.val()||{}).map(([id,value])=>({...value,id}));
+ storiesCache=all.filter(st=>{
+  if(st.createdAt && now-st.createdAt>86400000){
+   remove(ref(db,`jasonBusiness/stories/${st.id}`)).catch(()=>{});
+   return false;
+  }
+  return true;
+ }).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+ renderStories();
 });
 
 function renderStories(){
-  const box=$("stories");
-  box.innerHTML=`<div class="story" onclick="openModal('storyModal')"><div class="story-av"><div>➕</div></div><span>Créer story</span></div>`;
-  storiesCache.forEach(st=>{
-    const isMine=normalizePhone(st.from)===myPhone;
-    const div=document.createElement("div");div.className="story";
-    div.innerHTML=`<div class="story-av"><div>${st.fromPhoto?`<img src="${st.fromPhoto}">`:esc((st.fromName||st.from).slice(-2))}</div></div><span>${esc(isMine?"Ta story":(st.fromName||st.from).slice(0,10))}</span>`;
-    div.onclick=()=>viewStory(st);box.appendChild(div);
-  });
+ const box=$("stories");
+ box.innerHTML=`
+ <div class="story" onclick="openModal('storyModal')">
+ <div class="story-av"><div>➕</div></div><span>Créer story</span>
+ </div>`;
+
+ storiesCache.forEach(st=>{
+  const div=document.createElement("div");
+  div.className="story";
+  const name=normalizePhone(st.from)===myPhone
+   ?"Ta story":(st.fromName||st.from||"Contact").slice(0,10);
+  div.innerHTML=`
+   <div class="story-av"><div>${
+    st.fromPhoto?`<img src="${esc(st.fromPhoto)}">`:esc(name.slice(0,2))
+   }</div></div><span>${esc(name)}</span>`;
+  div.onclick=()=>viewStory(st);
+  box.appendChild(div);
+ });
 }
 
-let storyFileBase64=null;
-$("storyFile").onchange=e=>{
-  const f=e.target.files[0];if(!f)return;
-  const r=new FileReader();r.onload=()=>{storyFileBase64=r.result;$("storyPreview").innerHTML=`<img src="${r.result}" style="width:100%;border-radius:12px">`;};r.readAsDataURL(f);
-};
-window.publishStory=async()=>{
-  if(!storyFileBase64) return alert("Choisis photo!");
-  const note=$("storyNote").value.trim();
-  const id=push(ref(db,"jasonBusiness/stories")).key;
-  await set(ref(db,`jasonBusiness/stories/${id}`),{from:myPhone,fromRaw:rawPhone,fromName:myName,fromPhoto:myPhoto,photo:storyFileBase64,note,createdAt:Date.now(),expireAt:Date.now()+86400000,views:{},hearts:{}});
-  closeModal("storyModal");$("storyPreview").innerHTML="";$("storyNote").value="";storyFileBase64=null;
-};
-
-let currentStory=null;
-window.viewStory=async(st)=>{
-  currentStory=st;$("storyViewer").classList.add("show");
-  $("svAv").innerHTML=st.fromPhoto?`<img src="${st.fromPhoto}">`:esc((st.fromName||"").slice(0,2));
-  $("svName").textContent=st.fromName||st.from;$("svTime").textContent=new Date(st.createdAt).toLocaleTimeString();
-  $("svContent").innerHTML=`<div style="position:relative;width:100%;height:100%;display:grid;place-items:center"><img src="${st.photo}" style="max-width:100%;max-height:100%;object-fit:contain">${st.note?`<div class="sv-note">${esc(st.note)}</div>`:""}</div>`;
-  const viewsCount=Object.keys(st.views||{}).length,heartsCount=Object.keys(st.hearts||{}).length;
-  $("svViewsInfo").textContent=`👁️ ${viewsCount} vues • ❤️ ${heartsCount}`;
-  $("heartCount").textContent=heartsCount;
-  if(normalizePhone(st.from)!==myPhone) await set(ref(db,`jasonBusiness/stories/${st.id}/views/${myPhone}`),{name:myName,time:Date.now()});
-};
-window.closeStory=()=>{$("storyViewer").classList.remove("show");};
-window.heartStory=async()=>{
-  if(!currentStory||normalizePhone(currentStory.from)===myPhone) return;
-  const refHeart=ref(db,`jasonBusiness/stories/${currentStory.id}/hearts/${myPhone}`);
-  const snap=await get(refHeart);
-  if(snap.exists()) await remove(refHeart); else await set(refHeart,{name:myName,time:Date.now()});
-};
-
-document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");tab=t.dataset.tab;render();});
-$("search").oninput=render;
-$("topLeft").onclick=()=>{if(innerWidth<=800)$("leftPanel").classList.remove("hide");};
-$("btnAddManual").onclick=()=>{let p=$("manualPhone").value.trim();if(!p||p.length<8)return;p=normalizePhone(p);if(p===myPhone)return;if(!manualUsers.includes(p))manualUsers.push(p);localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));$("manualPhone").value="";render();};
-
-function getCombinedUsers(){
-  const c={};Object.entries(allUsers).forEach(([k,v])=>{c[normalizePhone(k)]=v;});
-  manualUsers.forEach(p=>{if(!c[p])c[p]={telephone:p,nom:p};});
-  return c;
-}
-
-function render(){
- const q=($("search").value||"").toLowerCase(),cont=$("list");cont.innerHTML="";
- const users=getCombinedUsers();
- if(tab==="users"){
-  Object.entries(users).forEach(([phone,u])=>{
-   if(phone===myPhone)return;
-   if(q&&!phone.includes(q)&&!String(u.nom||"").toLowerCase().includes(q))return;
-   const id=getChatId(myPhone,phone),friend=myChats[id]?.status==="accepted",sent=myRequests[phone]?.type==="outgoing"&&myRequests[phone]?.status==="pending",photo=getUserPhoto(phone),online=isOnline(phone);
-   const div=document.createElement("div");div.className="item";div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(phone.slice(-2))}${online?'<div class="online-dot"></div>':''}</div><div class="info"><div class="name">${esc(u.nom||phone)}</div><div class="prev">${esc(phone)} ${online?'• En ligne':''}</div></div><div>${friend?"💬":sent?"⏳":"+"}</div>`;div.onclick=()=>friend?openChat(phone):!sent&&sendRequest(phone);cont.appendChild(div);
-  });
- }else if(tab==="requests"){
-  const reqs=Object.entries(myRequests).filter(([_,r])=>r.type==="incoming"&&r.status==="pending");
-  if(!reqs.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucune demande</div>';return;}
-  reqs.forEach(([phone])=>{const div=document.createElement("div");div.className="item";div.innerHTML=`<div class="av">${esc(phone.slice(-2))}</div><div class="info"><div class="name">${esc(allUsers[phone]?.nom||phone)}</div><div class="prev">Veut vous contacter</div></div>`;const b=document.createElement("button");b.className="icon-btn";b.style.background="var(--fb-blue)";b.style.color="white";b.textContent="✓";b.onclick=()=>acceptRequest(phone);div.appendChild(b);cont.appendChild(div);});
- }else{
-  const list=Object.entries(myChats).filter(([_,c])=>c.status==="accepted").sort((a,b)=>(b[1].lastTime||0)-(a[1].lastTime||0));
-  if(!list.length){cont.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucun chat.<br>Va dans Utilisateurs pour ajouter.<br><br>Ton numéro: '+rawPhone+'<br>Normalisé: '+myPhone+'</div>';return;}
-  list.forEach(([id,chat])=>{
-    const other=id.split("_").find(p=>normalizePhone(p)!==myPhone)||chat.with||chat.withRaw; if(!other) return;
-    const normOther=normalizePhone(other); const photo=getUserPhoto(normOther); const unread=Number(chat.unread)||0; const online=isOnline(normOther);
-    const div=document.createElement("div");div.className="item"+(activeChat===normOther?" active":"");div.innerHTML=`<div class="av">${photo?`<img src="${esc(photo)}">`:esc(normOther.slice(-2))}${online?'<div class="online-dot"></div>':''}</div><div class="info"><div class="name">${esc(allUsers[normOther]?.nom||other)}</div><div class="prev">${esc((chat.lastMsg||"").slice(0,32))}</div></div><div style="text-align:right"><div style="font-size:11px;color:var(--muted)">${chat.lastTime?new Date(chat.lastTime).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}):""}</div>${unread?`<div class="unread-badge">${unread}</div>`:""}</div>`;div.onclick=()=>openChat(other);cont.appendChild(div);
-  });
+$("storyFile").onchange=event=>{
+ const file=event.target.files?.[0];
+ if(!file) return;
+ if(file.size>1024*1024){
+  alert("La photo de story doit faire moins de 1 Mo.");
+  event.target.value="";
+  return;
  }
+ const reader=new FileReader();
+ reader.onload=()=>{
+  storyFileBase64=reader.result;
+  $("storyPreview").innerHTML=
+   `<img src="${reader.result}" style="width:100%;border-radius:12px">`;
+ };
+ reader.readAsDataURL(file);
+};
+
+window.publishStory=async()=>{
+ if(!storyFileBase64){
+  alert("Choisis une photo pour ta story.");
+  return;
+ }
+ try{
+  const id=push(ref(db,"jasonBusiness/stories")).key;
+  await set(ref(db,`jasonBusiness/stories/${id}`),{
+   from:myPhone,fromRaw:rawPhone,fromName:myName,fromPhoto:myPhoto,
+   photo:storyFileBase64,note:$("storyNote").value.trim(),
+   createdAt:Date.now(),expireAt:Date.now()+86400000,
+   views:{},hearts:{}
+  });
+  closeModal("storyModal");
+  $("storyPreview").innerHTML="";
+  $("storyNote").value="";
+  $("storyFile").value="";
+  storyFileBase64=null;
+  setStatus("✅ Story publiée");
+ }catch(error){
+  alert("Publication impossible : "+error.message);
+ }
+};
+
+window.viewStory=async story=>{
+ currentStory=story;
+ $("storyViewer").classList.add("show");
+ $("svName").textContent=story.fromName||story.from||"Story";
+ $("svContent").innerHTML=`
+  <div style="width:100%;height:100%;display:grid;place-items:center;position:relative">
+   <img src="${esc(story.photo||"")}" alt="Story">
+   ${story.note?`<div style="position:absolute;bottom:25px;color:white;background:#0009;padding:10px;border-radius:10px">${esc(story.note)}</div>`:""}
+  </div>`;
+ const views=Object.keys(story.views||{}).length;
+ const hearts=Object.keys(story.hearts||{}).length;
+ $("svViewsInfo").textContent=`👁️ ${views} vues • ❤️ ${hearts}`;
+ $("heartCount").textContent=hearts;
+
+ if(normalizePhone(story.from)!==myPhone){
+  set(ref(db,`jasonBusiness/stories/${story.id}/views/${myPhone}`),{
+   name:myName,time:Date.now()
+  }).catch(()=>{});
+ }
+};
+
+window.heartStory=async()=>{
+ if(!currentStory || normalizePhone(currentStory.from)===myPhone) return;
+ const heartRef=ref(db,`jasonBusiness/stories/${currentStory.id}/hearts/${myPhone}`);
+ try{
+  const snap=await get(heartRef);
+  if(snap.exists()) await remove(heartRef);
+  else await set(heartRef,{name:myName,time:Date.now()});
+  const updated=await get(ref(db,`jasonBusiness/stories/${currentStory.id}`));
+  if(updated.exists()) viewStory({...updated.val(),id:currentStory.id});
+ }catch(e){setStatus("Erreur réaction : "+e.message);}
+};
+
+// Navigation entre les onglets
+document.querySelectorAll(".tabs .tab").forEach(button=>{
+ button.addEventListener("click",()=>{
+  document.querySelectorAll(".tabs .tab").forEach(b=>b.classList.remove("active"));
+  button.classList.add("active");
+  tab=button.dataset.tab;
+  render();
+ });
+});
+
+$("search").addEventListener("input",render);
+
+$("btnAddManual").onclick=()=>{
+ let phone=$("manualPhone").value.trim();
+ if(phone.replace(/\D/g,"").length<9){
+  alert("Entre un numéro de téléphone valide.");
+  return;
+ }
+ phone=normalizePhone(phone);
+ if(phone===myPhone){
+  alert("C'est ton propre numéro.");
+  return;
+ }
+ if(!manualUsers.includes(phone)) manualUsers.push(phone);
+ localStorage.setItem("jb_manual_users",JSON.stringify(manualUsers));
+ $("manualPhone").value="";
+ render();
+};
+
+// Liste des contacts, demandes et conversations
+function render(){
+ const query=$("search").value.trim().toLowerCase();
+ const list=$("list");
+ list.innerHTML="";
+ const users=getCombinedUsers();
+
+ if(tab==="users"){
+  Object.entries(users).forEach(([phone,user])=>{
+   if(phone===myPhone) return;
+   if(query && !phone.includes(query) &&
+      !String(user.nom||"").toLowerCase().includes(query)) return;
+
+   const id=getChatId(myPhone,phone);
+   const chat=myChats[id];
+   const friend=chat?.status==="accepted";
+   const sent=Object.values(myRequests).some(r=>
+    normalizePhone(r.phone)===phone &&
+    r.type==="outgoing"&&r.status==="pending"
+   );
+   const photo=getUserPhoto(phone);
+   const online=isOnline(phone);
+   const div=document.createElement("div");
+   div.className="item";
+   div.innerHTML=`
+    <div class="av">${photo?`<img src="${esc(photo)}">`:esc(phone.slice(-2))}
+     ${online?'<div class="online-dot"></div>':""}
+    </div>
+    <div class="info">
+     <div class="name">${esc(user.nom||phone)}</div>
+     <div class="prev">${esc(phone)} • ${online?"En ligne":"Hors ligne"}</div>
+    </div>
+    <b>${friend?"💬":sent?"⏳":"＋"}</b>`;
+   div.onclick=()=>friend?openChat(phone):!sent&&sendRequest(phone);
+   list.appendChild(div);
+  });
+  return;
+ }
+
+ if(tab==="requests"){
+  const requests=Object.entries(myRequests).filter(([_,r])=>
+   r.type==="incoming"&&r.status==="pending"
+  );
+  if(!requests.length){
+   list.innerHTML='<div style="padding:20px;text-align:center;opacity:.6">Aucune demande en attente</div>';
+   return;
+  }
+  requests.forEach(([phone,request])=>{
+   const p=normalizePhone(request.phone||phone);
+   const user=allUsers[p]||{};
+   const div=document.createElement("div");
+   div.className="item";
+   div.innerHTML=`
+    <div class="av">${esc(p.slice(-2))}</div>
+    <div class="info"><div class="name">${esc(user.nom||p)}</div>
+    <div class="prev">Demande de contact</div></div>`;
+   const button=document.createElement("button");
+   button.className="icon-btn";
+   button.style.background="var(--blue)";
+   button.style.color="white";
+   button.textContent="✓";
+   button.onclick=event=>{
+    event.stopPropagation();
+    acceptRequest(p);
+   };
+   div.appendChild(button);
+   list.appendChild(div);
+  });
+  return;
+ }
+
+ const chats=Object.entries(myChats)
+  .filter(([_,chat])=>chat.status==="accepted")
+  .sort((a,b)=>(b[1].lastTime||0)-(a[1].lastTime||0));
+
+ const filtered=chats.filter(([id,chat])=>{
+  const other=normalizePhone(chat.with||id.split("_").find(p=>normalizePhone(p)!==myPhone)||"");
+  const name=allUsers[other]?.nom||other;
+  return !query || name.toLowerCase().includes(query) ||
+   other.includes(query) || String(chat.lastMsg||"").toLowerCase().includes(query);
+ });
+
+ if(!filtered.length){
+  list.innerHTML='<div style="padding:20px;text-align:center;opacity:.65">Aucune conversation.<br><br>Ouvre Utilisateurs pour ajouter un contact.</div>';
+  return;
+ }
+
+ filtered.forEach(([id,chat])=>{
+  const other=normalizePhone(chat.with||id.split("_").find(p=>normalizePhone(p)!==myPhone)||"");
+  if(!other) return;
+  const photo=getUserPhoto(other);
+  const online=isOnline(other);
+  const div=document.createElement("div");
+  div.className="item"+(activeChat===other?" active":"");
+  div.innerHTML=`
+   <div class="av">${photo?`<img src="${esc(photo)}">`:esc(other.slice(-2))}
+    ${online?'<div class="online-dot"></div>':""}
+   </div>
+   <div class="info">
+    <div class="name">${esc(allUsers[other]?.nom||other)}</div>
+    <div class="prev">${esc(chat.lastMsg||"Conversation")}</div>
+   </div>
+   <div style="text-align:right">
+    <div style="font-size:10px;color:var(--muted)">${
+     chat.lastTime?new Date(chat.lastTime).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}):""
+    }</div>
+    ${Number(chat.unread)>0?`<div class="unread-badge">${Number(chat.unread)}</div>`:""}
+   </div>`;
+  div.onclick=()=>openChat(other);
+  list.appendChild(div);
+ });
 }
 
 async function sendRequest(to){
-  const toNorm=normalizePhone(to);
-  await Promise.all([set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${toNorm}`),{phone:toNorm,phoneRaw:to,type:"outgoing",status:"pending",createdAt:Date.now()}),set(ref(db,`jasonBusiness/chat_requests/${toNorm}/${myPhone}`),{phone:myPhone,phoneRaw:rawPhone,type:"incoming",status:"pending",createdAt:Date.now()})]);
-  setStatus("✅ Demande envoyée à "+toNorm);
+ const phone=normalizePhone(to);
+ try{
+  await Promise.all([
+   set(ref(db,`jasonBusiness/chat_requests/${myPhone}/${phone}`),{
+    phone,phoneRaw:to,type:"outgoing",status:"pending",createdAt:Date.now()
+   }),
+   set(ref(db,`jasonBusiness/chat_requests/${phone}/${myPhone}`),{
+    phone:myPhone,phoneRaw:rawPhone,type:"incoming",status:"pending",createdAt:Date.now()
+   })
+  ]);
+  setStatus("✅ Demande envoyée à "+phone);
+ }catch(e){
+  alert("Impossible d'envoyer la demande : "+e.message);
+ }
 }
+
 async function acceptRequest(from){
-  const fromNorm=normalizePhone(from);
-  const id=getChatId(myPhone,fromNorm);
-  await Promise.all([set(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{with:fromNorm,withRaw:from,status:"accepted",lastMsg:"Vous êtes maintenant amis",lastTime:Date.now(),unread:0}),set(ref(db,`jasonBusiness/user_chats/${fromNorm}/${id}`),{with:myPhone,withRaw:rawPhone,status:"accepted",lastMsg:"Vous êtes maintenant amis",lastTime:Date.now(),unread:1}),remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${fromNorm}`)),remove(ref(db,`jasonBusiness/chat_requests/${fromNorm}/${myPhone}`))]);
-  document.querySelector('[data-tab="chats"]').click();openChat(from);
+ const phone=normalizePhone(from);
+ const id=getChatId(myPhone,phone);
+ try{
+  await Promise.all([
+   set(ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),{
+    with:phone,status:"accepted",lastMsg:"Vous êtes maintenant amis",
+    lastTime:Date.now(),unread:0
+   }),
+   set(ref(db,`jasonBusiness/user_chats/${phone}/${id}`),{
+    with:myPhone,status:"accepted",lastMsg:"Vous êtes maintenant amis",
+    lastTime:Date.now(),unread:0
+   }),
+   remove(ref(db,`jasonBusiness/chat_requests/${myPhone}/${phone}`)),
+   remove(ref(db,`jasonBusiness/chat_requests/${phone}/${myPhone}`))
+  ]);
+  document.querySelector('[data-tab="chats"]').click();
+  openChat(phone);
+ }catch(e){
+  alert("Impossible d'accepter la demande : "+e.message);
+ }
+}
+
+// Nettoyer les écouteurs Firebase de l'ancien chat
+function clearMessageListeners(){
+ messageUnsubs.forEach(stop=>{
+  try{stop();}catch(e){}
+ });
+ messageUnsubs=[];
+ messageCache={};
 }
 
 function openChat(other){
-  const otherNorm=normalizePhone(other);
-  activeChat=otherNorm;activeChatRaw=other;
-  if(unsub){unsub();unsub=null;}
-  const photo=getUserPhoto(otherNorm);
-  $("chatName").textContent=allUsers[otherNorm]?.nom||other;
-  $("chatPhone").textContent=isOnline(otherNorm)?"En ligne • Actif":"Hors ligne • "+other;
-  $("chatAvatar").innerHTML=photo?`<img src="${esc(photo)}">`:esc(otherNorm.slice(-2));
-  $("msgInput").disabled=false;$("sendBtn").disabled=false;$("recordBtn").disabled=false;
-  if(innerWidth<=800)$("leftPanel").classList.add("hide");
-  
-  // ✅ FIX ULTRA: Cherche dans TOUS les IDs possibles
-  const ids=getAllChatIds(myPhone,otherNorm);
-  setStatus("🔍 Recherche messages dans "+ids.length+" salons...");
-  $("debug").textContent="IDs: "+ids.join(", ");
-  
-  let merged={};
-  let remaining=ids.length;
-  ids.forEach(chatId=>{
-    onValue(ref(db,`jasonBusiness/messages/${chatId}`),snap=>{
-      const data=snap.val()||{};
-      Object.entries(data).forEach(([k,v])=>{
-        merged[k]=v; // fusionne
-      });
-      remaining--;
-      if(remaining===0 || Object.keys(merged).length>0){
-        allMessages=Object.entries(merged).map(([k,v])=>({...v,_key:k})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
-        renderMessages();
-        if(allMessages.length>0) setStatus(`✅ ${allMessages.length} messages trouvés dans ${chatId}`);
-      }
-    });
+ const phone=normalizePhone(other);
+ activeChat=phone;
+ activeChatRaw=other;
+ const token=++chatToken;
+
+ clearMessageListeners();
+
+ $("msgInput").disabled=false;
+ $("sendBtn").disabled=false;
+ $("recordBtn").disabled=false;
+
+ const photo=getUserPhoto(phone);
+ $("chatName").textContent=allUsers[phone]?.nom||other;
+ $("chatPhone").textContent=isOnline(phone)?"En ligne":"Hors ligne • "+other;
+ $("chatAvatar").innerHTML=photo?`<img src="${esc(photo)}">`:esc(phone.slice(-2));
+
+ if(innerWidth<=800) $("leftPanel").classList.add("hide");
+
+ $("msgs").innerHTML='<div style="margin:auto;padding:20px;text-align:center">Recherche des messages...</div>';
+
+ const ids=new Set(getAllChatIds(myPhone,phone));
+ const myVariants=[...myPhoneVariants];
+ const otherVariants=[other,phone,"243"+phone.slice(1),"+243"+phone.slice(1),phone.slice(1)];
+
+ myVariants.forEach(a=>{
+  otherVariants.forEach(b=>{
+   if(a&&b){
+    ids.add(`${a}_${b}`);
+    ids.add(`${b}_${a}`);
+   }
   });
-  
-  // Listener principal sur ID normalisé
-  const mainId=getChatId(myPhone,otherNorm);
-  unsub=onValue(ref(db,`jasonBusiness/messages/${mainId}`),s=>{
-    // Si on a déjà des messages d'autres IDs, on merge
-    if(s.exists()){
-      const data=s.val()||{};
-      Object.entries(data).forEach(([k,v])=>{merged[k]=v;});
-      allMessages=Object.entries(merged).map(([k,v])=>({...v,_key:k})).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
-      renderMessages();
-    }
-    update(ref(db,`jasonBusiness/user_chats/${myPhone}/${mainId}`),{unread:0}).catch(()=>{});
+ });
+
+ let loaded=0;
+
+ function refresh(){
+  if(token!==chatToken) return;
+  const map=new Map();
+
+  Object.values(messageCache).forEach(messages=>{
+   Object.entries(messages||{}).forEach(([key,message])=>{
+    const signature=message.messageId
+     ?String(message.messageId)
+     :`${normalizePhone(message.from)}|${message.createdAt||0}|${message.text||""}|${message.photo||""}|${message.audio||""}`;
+
+    if(!map.has(signature)) map.set(signature,{...message,_key:key});
+   });
   });
-  
-  render();$("msgInput").focus();
+
+  allMessages=[...map.values()].sort((a,b)=>
+   (a.createdAt||0)-(b.createdAt||0)
+  );
+
+  renderMessages();
+
+  if(loaded===ids.size){
+   setStatus(allMessages.length
+    ?`✅ ${allMessages.length} messages chargés`
+    :"Aucun ancien message trouvé. Tu peux envoyer un message.");
+  }
+ }
+
+ ids.forEach(chatId=>{
+  const stop=onValue(ref(db,`jasonBusiness/messages/${chatId}`),snap=>{
+   if(token!==chatToken) return;
+   messageCache[chatId]=snap.val()||{};
+   loaded++;
+   refresh();
+  },error=>{
+   if(token===chatToken){
+    loaded++;
+    refresh();
+    console.error("Lecture salon",chatId,error);
+   }
+  });
+  messageUnsubs.push(stop);
+ });
+
+ const mainId=getChatId(myPhone,phone);
+ update(ref(db,`jasonBusiness/user_chats/${myPhone}/${mainId}`),{
+  unread:0
+ }).catch(()=>{});
+
+ render();
+ $("msgInput").focus();
 }
 
 function renderMessages(){
-  const container=$("msgs");
-  if(!allMessages.length){
-    container.innerHTML=`<div style="margin:auto;text-align:center;opacity:.6;padding:30px"><div style="font-size:50px">💬</div><div style="margin-top:10px;font-weight:700">Aucun ancien message trouvé</div><div style="font-size:12px;margin-top:6px">Mais tu peux envoyer un nouveau!<br>Ton salon: ${getChatId(myPhone,activeChat)}<br>Ancien salon peut-être: ${activeChatRaw}_${rawPhone}</div><div style="margin-top:10px"><button onclick="forceMigrate()" style="padding:8px 12px;border-radius:8px;border:1px solid var(--fb-blue);background:rgba(0,132,255,.1);color:var(--fb-blue)">🔄 Migrer anciens messages</button></div></div>`;
-    return;
+ const container=$("msgs");
+ if(!allMessages.length){
+  container.innerHTML=`
+   <div style="margin:auto;text-align:center;opacity:.65;padding:25px">
+    <div style="font-size:45px">💬</div>
+    <b>Aucun message dans ce salon</b>
+    <div style="font-size:12px;margin-top:8px">
+     Les anciens messages apparaîtront s'ils existent encore dans Firebase.
+    </div>
+   </div>`;
+  return;
+ }
+
+ let html="";
+ let lastDay="";
+ allMessages.forEach(message=>{
+  const time=message.createdAt||0;
+  const date=new Date(time);
+  const day=date.toDateString();
+
+  if(day!==lastDay){
+   lastDay=day;
+   html+=`<div class="date-sep">${esc(date.toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"}))}</div>`;
   }
-  let html="",lastDate="";
-  allMessages.forEach(m=>{
-    const d=new Date(m.createdAt||0).toDateString(); if(d!==lastDate){lastDate=d; html+=`<div class="date-sep">${new Date(m.createdAt).toLocaleDateString("fr-FR",{day:"numeric",month:"long"})}</div>`;}
-    const mine=normalizePhone(m.from)===myPhone;
-    let bubble="";
-    if(m.text) bubble+=`<div>${esc(m.text)}</div>`;
-    if(m.photo) bubble+=`<div class="msg-photo" onclick="openViewer('${m.photo}')"><img src="${m.photo}" loading="lazy"></div>`;
-    if(m.audio) bubble+=`<div class="msg-audio"><audio controls src="${m.audio}"></audio></div>`;
-    if(!bubble) bubble="<i style='opacity:.5'>Message vide</i>";
-    html+=`<div class="msg-row ${mine?'me':'other'}"><div class="msg-bubble">${bubble}</div></div><div style="font-size:11px;color:var(--muted);margin:2px 0 8px ${mine?'auto 0':'0 auto'};text-align:${mine?'right':'left'}">${new Date(m.createdAt||0).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})} ${mine?'✓':''}</div>`;
-  });
-  container.innerHTML=html; container.scrollTop=container.scrollHeight;
+
+  const mine=normalizePhone(message.from)===myPhone;
+  let content="";
+
+  if(message.text){
+   content+=`<div>${esc(message.text)}</div>`;
+  }
+
+  if(message.photo){
+   content+=`<div class="msg-photo">
+    <img src="${esc(message.photo)}" alt="Photo reçue"
+     data-photo="${esc(message.photo)}" loading="lazy">
+   </div>`;
+  }
+
+  if(message.audio){
+   content+=`<div class="msg-audio">
+    <audio controls preload="metadata" src="${esc(message.audio)}"></audio>
+   </div>`;
+  }
+
+  if(!content) content="<i>Message sans texte</i>";
+
+  html+=`
+   <div class="msg-row ${mine?"me":"other"}">
+    <div class="msg-bubble">${content}</div>
+   </div>
+   <div class="msg-meta ${mine?"me":""}">
+    ${esc(date.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}))}
+    ${mine?"✓":""}
+   </div>`;
+ });
+
+ container.innerHTML=html;
+
+ container.querySelectorAll("[data-photo]").forEach(img=>{
+  img.addEventListener("click",()=>openViewer(img.dataset.photo));
+ });
+
+ container.scrollTop=container.scrollHeight;
 }
-window.forceMigrate=async()=>{
-  if(!activeChat) return;
-  const oldIds=[`${activeChatRaw}_${rawPhone}`, `${rawPhone}_${activeChatRaw}`, `${activeChatRaw}_${myPhone}`, `${myPhone}_${activeChatRaw}`];
-  let count=0;
-  for(let oldId of oldIds){
-    const snap=await get(ref(db,`jasonBusiness/messages/${oldId}`));
-    if(snap.exists()){
-      const data=snap.val();
-      const newId=getChatId(myPhone,activeChat);
-      for(let [k,v] of Object.entries(data)){
-        await set(push(ref(db,`jasonBusiness/messages/${newId}`)),v);
-        count++;
-      }
-    }
-  }
-  setStatus(`✅ Migré ${count} anciens messages vers ${getChatId(myPhone,activeChat)}`);
-  alert(`Migré ${count} messages!`);
+
+window.openViewer=src=>{
+ $("viewerImg").src=src;
+ $("imgViewer").classList.add("show");
 };
 
-async function publishMessage(other,fields,lastMsg){
- const otherNorm=normalizePhone(other);
- const id=getChatId(myPhone,otherNorm),now=Date.now();
- const data={...fields,from:myPhone,fromRaw:rawPhone,to:otherNorm,toRaw:other,createdAt:now,status:"sent"};
- try{
-   const newRef=push(ref(db,`jasonBusiness/messages/${id}`));
-   await set(newRef,data);
-   setStatus("✅ Message envoyé dans "+id);
-   // Update chats
-   const a=ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`),b=ref(db,`jasonBusiness/user_chats/${otherNorm}/${id}`);
-   const [sa,sb]=await Promise.all([get(a),get(b)]);const da=sa.val()||{},dbb=sb.val()||{};
-   await Promise.all([set(a,{...da,with:otherNorm,withRaw:other,status:"accepted",lastMsg,lastTime:now,unread:0}),set(b,{...dbb,with:myPhone,withRaw:rawPhone,status:"accepted",lastMsg,lastTime:now,unread:(Number(dbb.unread)||0)+1})]);
- }catch(e){
-   setStatus("❌ Erreur: "+e.message);
-   alert("Erreur envoi: "+e.message+" \nVérifie connexion Firebase Rules");
-   throw e;
- }
-}
+window.scrollToBottom=()=>{
+ $("msgs").scrollTop=$("msgs").scrollHeight;
+};
 
-$("photoInput").addEventListener("change",async e=>{
- const files=Array.from(e.target.files||[]); if(!files.length) return;
- if(!activeChat) return alert("Ouvre un chat d'abord");
- if(files.length>20) return alert("Max 20 photos");
- pendingPhotos=[]; const grid=$("previewGrid"); grid.innerHTML=""; $("photoPreview").classList.add("show");
- for(let file of files){
-  if(file.size>2*1024*1024){alert(file.name+" trop grand (max 2MB)"); continue;}
-  const b64=await new Promise(r=>{const fr=new FileReader();fr.readAsDataURL(file);fr.onload=()=>r(fr.result);});
-  pendingPhotos.push(b64); const img=document.createElement("img"); img.src=b64; grid.appendChild(img);
- }
- $("previewCount").textContent=pendingPhotos.length+" photos"; $("confirmPhoto").textContent="Envoyer "+pendingPhotos.length;
+$("msgs").addEventListener("scroll",()=>{
+ const box=$("msgs");
+ $("scrollDown").classList.toggle(
+  "show",
+  box.scrollHeight-box.scrollTop-box.clientHeight>200
+ );
 });
-$("cancelPhoto").onclick=()=>{$("photoPreview").classList.remove("show");pendingPhotos=[];$("previewGrid").innerHTML="";};
-$("confirmPhoto").onclick=async()=>{
- if(!pendingPhotos.length||!activeChat) return;
- const other=activeChat; const caption=$("photoCaption").value.trim();
- $("confirmPhoto").disabled=true; $("uploadProgress").style.display="block";
+
+// Migration manuelle des anciens salons
+window.forceMigrate=async()=>{
+ if(!activeChat) return;
+ const newId=getChatId(myPhone,activeChat);
+ let count=0;
+
+ if(!confirm("Copier les anciens messages vers le salon actuel ?")) return;
+
  try{
-   for(let i=0;i<pendingPhotos.length;i++){
-     $("uploadProgress").textContent=`Envoi ${i+1}/${pendingPhotos.length}...`;
-     await publishMessage(other,{photo:pendingPhotos[i],type:"image",text:i===pendingPhotos.length-1?caption:""}, caption||`📷 Photo`);
+  for(const [chatId,messages] of Object.entries(messageCache)){
+   if(chatId===newId) continue;
+
+   for(const message of Object.values(messages||{})){
+    const from=normalizePhone(message.from);
+    const to=normalizePhone(message.to);
+    if(![myPhone,activeChat].includes(from)) continue;
+    if(to && ![myPhone,activeChat].includes(to)) continue;
+
+    const signature=`${from}|${message.createdAt||0}|${message.text||""}|${message.photo||""}|${message.audio||""}`;
+    const already=allMessages.some(m=>
+     `${normalizePhone(m.from)}|${m.createdAt||0}|${m.text||""}|${m.photo||""}|${m.audio||""}`===signature
+    );
+    if(already) continue;
+
+    await set(push(ref(db,`jasonBusiness/messages/${newId}`)),message);
+    count++;
    }
-   $("photoPreview").classList.remove("show"); pendingPhotos=[]; $("previewGrid").innerHTML=""; $("photoCaption").value=""; $("uploadProgress").style.display="none";
-   setStatus("✅ Photos envoyées!");
- }catch(err){setStatus("❌ Erreur photo: "+err.message); alert(err.message);} finally{$("confirmPhoto").disabled=false;}
+  }
+  alert(`${count} ancien(s) message(s) copié(s).`);
+ }catch(e){
+  alert("Migration impossible : "+e.message);
+ }
 };
 
-window.openViewer=src=>{$("viewerImg").src=src;$("imgViewer").classList.add("show");};
-window.closeViewer=()=>{$("imgViewer").classList.remove("show");};
+// Envoi commun des messages texte, photo et audio
+async function publishMessage(other,fields,lastMsg){
+ const recipient=normalizePhone(other);
+ const id=getChatId(myPhone,recipient);
+ const now=Date.now();
 
-async function sendText(){
-  const text=$("msgInput").value.trim(); if(!text||!activeChat) return;
-  const other=activeChat; $("msgInput").value="";
-  setStatus("⏳ Envoi en cours...");
-  try{await publishMessage(other,{text},text); setStatus("✅ Envoyé!");}catch(e){$("msgInput").value=text; setStatus("❌ Erreur");}
-  $("msgs").scrollTop=$("msgs").scrollHeight;
+ const data={
+  ...fields,
+  from:myPhone,
+  fromRaw:rawPhone,
+  to:recipient,
+  toRaw:other,
+  createdAt:now,
+  status:"sent"
+ };
+
+ try{
+  const messageRef=push(ref(db,`jasonBusiness/messages/${id}`));
+  data.messageId=messageRef.key;
+  await set(messageRef,data);
+
+  const a=ref(db,`jasonBusiness/user_chats/${myPhone}/${id}`);
+  const b=ref(db,`jasonBusiness/user_chats/${recipient}/${id}`);
+
+  const [sa,sb]=await Promise.all([get(a),get(b)]);
+  const da=sa.val()||{};
+  const dbb=sb.val()||{};
+
+  await Promise.all([
+   set(a,{
+    ...da,with:recipient,status:"accepted",
+    lastMsg,lastTime:now,unread:0
+   }),
+   set(b,{
+    ...dbb,with:myPhone,status:"accepted",
+    lastMsg,lastTime:now,unread:(Number(dbb.unread)||0)+1
+   })
+  ]);
+
+  setStatus("✅ Message envoyé");
+ }catch(error){
+  console.error("Envoi Firebase",error);
+  setStatus("❌ Échec de l'envoi : "+error.message);
+  throw error;
+ }
 }
+
+// Envoyer du texte
+async function sendText(){
+ const text=$("msgInput").value.trim();
+ if(!text||!activeChat) return;
+
+ const recipient=activeChat;
+ $("sendBtn").disabled=true;
+ $("msgInput").value="";
+ setStatus("⏳ Envoi du message...");
+
+ try{
+  await publishMessage(recipient,{text,type:"text"},text);
+ }catch(e){
+  $("msgInput").value=text;
+  alert("Le message n'a pas été envoyé : "+e.message);
+ }finally{
+  $("sendBtn").disabled=false;
+  $("msgInput").focus();
+ }
+}
+
 $("sendBtn").onclick=sendText;
-$("msgInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText();}});
 
-// VOCAL FIX
-let rec=null,chunks=[],recTimer=null,recSec=0;
-$("recordBtn").onclick=async()=>{
-  if(rec&&rec.state==="recording"){rec.stop();return;}
-  if(!activeChat) return alert("Ouvre un chat");
+$("msgInput").addEventListener("keydown",event=>{
+ if(event.key==="Enter"&&!event.shiftKey){
+  event.preventDefault();
+  sendText();
+ }
+});
+
+$("msgInput").addEventListener("input",()=>{
+ $("msgInput").style.height="38px";
+ $("msgInput").style.height=Math.min($("msgInput").scrollHeight,110)+"px";
+});
+
+// Sélection et aperçu des photos
+$("photoInput").addEventListener("change",async event=>{
+ const files=Array.from(event.target.files||[]);
+ event.target.value="";
+
+ if(!activeChat){
+  alert("Ouvre d'abord une conversation.");
+  return;
+ }
+ if(!files.length) return;
+ if(files.length>10){
+  alert("Choisis au maximum 10 photos à la fois.");
+  return;
+ }
+
+ pendingPhotos=[];
+ $("previewGrid").innerHTML="";
+ $("photoPreview").classList.add("show");
+
+ for(const file of files){
+  if(!file.type.startsWith("image/")){
+   alert(file.name+" n'est pas une image.");
+   continue;
+  }
+  if(file.size>1024*1024){
+   alert(file.name+" dépasse 1 Mo. Choisis une image plus légère.");
+   continue;
+  }
+
   try{
-    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-    chunks=[];recSec=0;rec=new MediaRecorder(stream,{mimeType:MediaRecorder.isTypeSupported('audio/webm')?'audio/webm':'audio/mp4'});
-    rec.ondataavailable=e=>{if(e.data.size>0) chunks.push(e.data);};
-    rec.onstop=async()=>{
-      const blob=new Blob(chunks,{type:rec.mimeType});
-      if(blob.size<800){setStatus("❌ Vocal trop court"); return;}
-      if(blob.size>1.5*1024*1024){setStatus("❌ Vocal trop long (max 30s)"); return;}
-      const b64=await new Promise(r=>{const fr=new FileReader();fr.readAsDataURL(blob);fr.onload=()=>r(fr.result);});
-      try{
-        await publishMessage(activeChat,{audio:b64,type:"audio"},"🎙️ Vocal");
-        setStatus("✅ Vocal envoyé!");
-      }catch(e){setStatus("❌ Erreur vocal: "+e.message);}
-      stream.getTracks().forEach(t=>t.stop());
-      $("recBar").classList.remove("show");$("recordBtn").textContent="🎙️";clearInterval(recTimer);
-    };
-    rec.start();
-    $("recBar").classList.add("show");$("recordBtn").textContent="⏹️";$("recTime").textContent="00:00";
-    recTimer=setInterval(()=>{recSec++;$("recTime").textContent=`00:${String(recSec).padStart(2,"0")}`;if(recSec>=30) rec.stop();},1000);
-    setStatus("🎙️ Enregistrement...");
-  }catch(e){setStatus("❌ Micro refusé: "+e.message); alert("Autorise le micro!");}
-};
-$("recSend").onclick=()=>{if(rec) rec.stop();};
-$("recCancel").onclick=()=>{if(rec){chunks=[];rec.stop();} $("recBar").classList.remove("show");clearInterval(recTimer);$("recordBtn").textContent="🎙️";setStatus("❌ Vocal annulé");};
+   const base64=await new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result);
+    reader.onerror=()=>reject(new Error("Lecture de photo impossible"));
+    reader.readAsDataURL(file);
+   });
 
-$("msgs").addEventListener("scroll",()=>{const c=$("msgs");$("scrollDown").classList.toggle("show",c.scrollHeight-c.scrollTop-c.clientHeight>200);});
-$("scrollDown").onclick=()=>{$("msgs").scrollTop=$("msgs").scrollHeight;};
+   pendingPhotos.push(base64);
+   const img=document.createElement("img");
+   img.src=base64;
+   $("previewGrid").appendChild(img);
+  }catch(e){
+   alert(e.message);
+  }
+ }
+
+ $("previewCount").textContent=pendingPhotos.length+" photo(s)";
+ $("confirmPhoto").textContent="Envoyer "+pendingPhotos.length;
+});
+
+$("cancelPhoto").onclick=()=>{
+ pendingPhotos=[];
+ $("previewGrid").innerHTML="";
+ $("photoInput").value="";
+ $("photoPreview").classList.remove("show");
+};
+
+$("confirmPhoto").onclick=async()=>{
+ if(!activeChat||!pendingPhotos.length) return;
+
+ const recipient=activeChat;
+ const photos=[...pendingPhotos];
+ const caption=$("photoCaption").value.trim();
+
+ $("confirmPhoto").disabled=true;
+ $("uploadProgress").style.display="block";
+
+ try{
+  for(let i=0;i<photos.length;i++){
+   $("uploadProgress").textContent=`Envoi ${i+1}/${photos.length}...`;
+   await publishMessage(
+    recipient,
+    {
+     photo:photos[i],
+     type:"image",
+     text:i===0?caption:""
+    },
+    caption||"📷 Photo"
+   );
+  }
+
+  pendingPhotos=[];
+  $("previewGrid").innerHTML="";
+  $("photoCaption").value="";
+  $("photoPreview").classList.remove("show");
+  setStatus("✅ Photos envoyées !");
+ }catch(e){
+  alert("Erreur d'envoi : "+e.message);
+ }finally{
+  $("confirmPhoto").disabled=false;
+  $("uploadProgress").style.display="none";
+ }
+};
+
+// Enregistrement vocal compatible avec les formats pris en charge
+function cleanupRecorder(){
+ clearInterval(recTimer);
+ recTimer=null;
+
+ if(recStream){
+  recStream.getTracks().forEach(track=>track.stop());
+  recStream=null;
+ }
+
+ $("recBar").classList.remove("show");
+ $("recordBtn").textContent="🎙️";
+ rec=null;
+ recStarting=false;
+}
+
+$("recordBtn").onclick=async()=>{
+ if(recStarting) return;
+
+ if(rec && rec.state==="recording"){
+  rec.stop();
+  return;
+ }
+
+ if(!activeChat){
+  alert("Ouvre d'abord une conversation.");
+  return;
+ }
+
+ if(!navigator.mediaDevices?.getUserMedia ||
+    typeof MediaRecorder==="undefined"){
+  alert("L'enregistrement vocal nécessite un navigateur compatible et une page HTTPS.");
+  return;
+ }
+
+ recStarting=true;
+ recCancelled=false;
+
+ try{
+  recStream=await navigator.mediaDevices.getUserMedia({audio:true});
+
+  const types=[
+   "audio/webm;codecs=opus",
+   "audio/webm",
+   "audio/mp4"
+  ];
+  const mime=types.find(t=>MediaRecorder.isTypeSupported(t));
+
+  rec=mime
+   ?new MediaRecorder(recStream,{mimeType:mime})
+   :new MediaRecorder(recStream);
+
+  chunks=[];
+  recSec=0;
+
+  const recorder=rec;
+  const recipient=activeChat;
+
+  recorder.ondataavailable=event=>{
+   if(event.data&&event.data.size>0) chunks.push(event.data);
+  };
+
+  recorder.onerror=event=>{
+   console.error("MediaRecorder",event.error);
+   setStatus("❌ Erreur d'enregistrement.");
+  };
+
+  recorder.onstop=async()=>{
+   const cancelled=recCancelled;
+   const blob=new Blob(chunks,{type:recorder.mimeType||"audio/webm"});
+   chunks=[];
+
+   if(cancelled){
+    cleanupRecorder();
+    setStatus("Enregistrement annulé.");
+    return;
+   }
+
+   if(blob.size<800){
+    cleanupRecorder();
+    setStatus("❌ Vocal trop court. Réessaie.");
+    return;
+   }
+
+   if(blob.size>1024*1024){
+    cleanupRecorder();
+    alert("Le vocal dépasse 1 Mo. Enregistre un message plus court.");
+    return;
+   }
+
+   try{
+    setStatus("⏳ Envoi du vocal...");
+
+    const audio=await new Promise((resolve,reject)=>{
+     const reader=new FileReader();
+     reader.onload=()=>resolve(reader.result);
+     reader.onerror=()=>reject(new Error("Lecture du vocal impossible"));
+     reader.readAsDataURL(blob);
+    });
+
+    await publishMessage(
+     recipient,
+     {audio,audioType:blob.type,type:"audio"},
+     "🎙️ Message vocal"
+    );
+
+    setStatus("✅ Vocal envoyé !");
+   }catch(error){
+    console.error(error);
+    alert("Échec de l'envoi du vocal : "+error.message);
+   }finally{
+    cleanupRecorder();
+   }
+  };
+
+  recorder.start(250);
+  $("recBar").classList.add("show");
+  $("recordBtn").textContent="⏹️";
+  $("recTime").textContent="00:00";
+  setStatus("🎙️ Enregistrement en cours...");
+
+  recTimer=setInterval(()=>{
+   recSec++;
+   $("recTime").textContent=
+    String(Math.floor(recSec/60)).padStart(2,"0")+":"+
+    String(recSec%60).padStart(2,"0");
+
+   if(recSec>=30 && rec && rec.state==="recording"){
+    rec.stop();
+   }
+  },1000);
+
+ }catch(error){
+  console.error(error);
+  cleanupRecorder();
+  alert("Impossible d'accéder au microphone. Autorise le micro dans ton navigateur et utilise HTTPS.\n"+error.message);
+ }
+};
+
+$("recSend").onclick=()=>{
+ if(rec && rec.state==="recording") rec.stop();
+};
+
+$("recCancel").onclick=()=>{
+ if(rec && rec.state==="recording"){
+  recCancelled=true;
+  chunks=[];
+  rec.stop();
+ }else{
+  cleanupRecorder();
+ }
+};
+
+// Retour à la liste sur mobile
+window.addEventListener("popstate",()=>{
+ $("leftPanel").classList.remove("hide");
+});
+
+setStatus("Connecté au service Messenger. Chargement des contacts...");
 </script>
 </body>
 </html>
