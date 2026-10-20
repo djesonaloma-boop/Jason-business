@@ -86,8 +86,11 @@ function getPhone(){ return (localStorage.getItem("jasonBusinessUserPhone")||loc
 window.goPage=function(p){ window.location.href=p; }
 function toastMsg(m){ const el=document.getElementById("toast"); el.textContent=m; el.classList.add("show"); setTimeout(()=>el.classList.remove("show"),3000); }
 
-const ICON="./jason.png"; const APK="./jason.apk";
-const apps=[{name:"Jason Business 1.0",version:"1.0.0",size:"28 MB",desc:"Découvre Jason Business : WEB, DESIGN, DIGITAL et IA.",icon:ICON}];
+// TES 2 APPLICATIONS ICI
+const apps=[
+  {name:"Jason Business 1.0",version:"1.0.0",size:"28 MB",desc:"Découvre Jason Business : WEB, DESIGN, DIGITAL et IA.",icon:"./jason.png",apk:"./jason.apk"},
+  {name:"Jason VPN Pro",version:"3.0.0",size:"18 MB",desc:"VPN Ultra Rapide, Sécurité Maximale, Vie Privée Protégée. Accès Monde Entier.",icon:"./vpn.png",apk:"./vpn.apk"}
+];
 
 function render(){
   const list=document.getElementById("list");
@@ -95,10 +98,10 @@ function render(){
   const f=apps.filter(a=>(a.name+a.desc).toLowerCase().includes(q));
   list.innerHTML=""; 
   f.forEach(a=>{
-    list.innerHTML+=`<div class="app-card"><div class="app-icon"><img src="${a.icon}" onerror="this.src='https://raw.githubusercontent.com/djesonaloma-boop/Jason-business/principal/jason.png'"></div><div class="app-info"><div class="app-name">${a.name} <span class="btn-free">GRATUIT</span></div><div class="app-meta">v${a.version} • ${a.size}</div><div class="app-desc">${a.desc}</div></div><button class="btn btn-install" onclick="downloadApp()">INSTALLER</button></div>`;
+    list.innerHTML+=`<div class="app-card"><div class="app-icon"><img src="${a.icon}" onerror="this.src='https://raw.githubusercontent.com/djesonaloma-boop/Jason-business/principal/jason.png'"></div><div class="app-info"><div class="app-name">${a.name} <span class="btn-free">GRATUIT</span></div><div class="app-meta">v${a.version} • ${a.size}</div><div class="app-desc">${a.desc}</div></div><button class="btn btn-install" onclick="downloadApp('${a.apk}')">INSTALLER</button></div>`;
   });
 }
-window.downloadApp=function(){ toastMsg("📥 Téléchargement..."); const a=document.createElement("a"); a.href=APK+"?t="+Date.now(); a.download="jason.apk"; document.body.appendChild(a); a.click(); a.remove(); }
+window.downloadApp=function(apk){ toastMsg("📥 Téléchargement..."); const a=document.createElement("a"); a.href=apk+"?t="+Date.now(); a.download=apk.replace('./',''); document.body.appendChild(a); a.click(); a.remove(); }
 document.getElementById("search").addEventListener("input",render); render();
 
 // 🔥 CONNEXION PARAMÈTRES FIREBASE
