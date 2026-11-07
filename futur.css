@@ -1,0 +1,198 @@
+/* ==========================================================
+   JASON BUSINESS — thème futuriste moderne
+   Couche de style chargée après le <style> de chaque page.
+   Ne touche à aucune logique JS ni aux identifiants.
+   ========================================================== */
+
+:root{
+  /* palette */
+  --fx-void:#060818;
+  --fx-deep:#0b1030;
+  --fx-surface:rgba(18,24,58,.62);
+  --fx-surface-solid:#0f1538;
+  --fx-line:rgba(125,160,255,.22);
+  --fx-cyan:#38e8ff;
+  --fx-cyan-2:#1aa8ff;
+  --fx-violet:#8a6bff;
+  --fx-text:#e9eeff;
+  --fx-muted:#8f9bc9;
+  --fx-grad:linear-gradient(135deg,#38e8ff 0%,#6a8dff 55%,#8a6bff 100%);
+  --fx-edge:linear-gradient(135deg,rgba(56,232,255,.85),rgba(138,107,255,.55) 55%,rgba(56,232,255,.18));
+
+  /* on remappe les variables existantes des pages */
+  --blue:#38e8ff;
+  --blue2:#1aa8ff;
+  --dark:#060818;
+  --bg:#060818;
+  --card:rgba(18,24,58,.72);
+  --panel:rgba(18,24,58,.62);
+  --glass:rgba(18,24,58,.55);
+  --text:#e9eeff;
+  --muted:#8f9bc9;
+  --border:rgba(125,160,255,.22);
+  --green:#2dffb0;
+  --red:#ff4d7a;
+  --gold:#ffc857;
+  --yellow:#ffc857;
+
+  --fx-display:"Unbounded","Segoe UI",system-ui,sans-serif;
+  --fx-body:"Manrope","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+
+html{color-scheme:dark;background:var(--fx-void)}
+
+body{
+  font-family:var(--fx-body)!important;
+  color:var(--fx-text)!important;
+  background:
+    radial-gradient(ellipse 70% 45% at 85% -5%,rgba(138,107,255,.28),transparent 70%),
+    radial-gradient(ellipse 60% 40% at 5% 8%,rgba(56,232,255,.18),transparent 70%),
+    linear-gradient(rgba(125,160,255,.055) 1px,transparent 1px) 0 0/44px 44px,
+    linear-gradient(90deg,rgba(125,160,255,.055) 1px,transparent 1px) 0 0/44px 44px,
+    var(--fx-void)!important;
+  background-attachment:fixed!important;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- typographie ---------- */
+h1,h2,h3,
+.logo,.brand,.jb-brand,.jb-title,.jb-section-title,
+.welcome-text,.jb-points-number,.app-name{
+  font-family:var(--fx-display)!important;
+  letter-spacing:.02em;
+}
+h1,.jb-title,.welcome-text{font-weight:700}
+h1{
+  background:var(--fx-grad);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent!important;
+  text-shadow:none!important;
+}
+.logo,.brand,.jb-brand{text-shadow:0 0 22px rgba(56,232,255,.45)!important}
+
+input,select,textarea,button{font-family:var(--fx-body)}
+
+/* ---------- surfaces en verre avec bord lumineux ---------- */
+.card,.jb-card,.hero,.panel,.param-card,.app-card,.game-card,.type-card,
+.jb-service-card,.jb-payment-card,.jb-points-card,.jb-money-box,.jb-user-box,
+.jb-method,.jb-system-item,.jb-notice,.info,.feat{
+  background:
+    linear-gradient(var(--fx-surface),var(--fx-surface)) padding-box,
+    var(--fx-edge) border-box!important;
+  border:1px solid transparent!important;
+  border-radius:18px!important;
+  backdrop-filter:blur(16px) saturate(1.2);
+  -webkit-backdrop-filter:blur(16px) saturate(1.2);
+  box-shadow:0 14px 40px rgba(2,4,20,.55),0 0 0 1px rgba(56,232,255,.03) inset!important;
+}
+.feat{border-radius:12px!important;box-shadow:none!important}
+
+/* le héros est la pièce maîtresse : halo plus marqué */
+.hero,.jb-points-card{
+  background:
+    radial-gradient(ellipse at 100% 0%,rgba(138,107,255,.30),transparent 60%),
+    radial-gradient(ellipse at 0% 100%,rgba(56,232,255,.18),transparent 60%),
+    linear-gradient(var(--fx-surface-solid),var(--fx-surface-solid)) padding-box,
+    var(--fx-edge) border-box!important;
+  box-shadow:0 18px 60px rgba(56,232,255,.12),0 14px 40px rgba(2,4,20,.6)!important;
+}
+
+.jb-service-card,.app-card,.game-card,.type-card{transition:transform .2s ease,box-shadow .2s ease}
+.jb-service-card:hover,.app-card:hover,.game-card:hover,.type-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 44px rgba(56,232,255,.16),0 14px 40px rgba(2,4,20,.6)!important;
+}
+
+/* ---------- boutons ---------- */
+.btn,.btn-install,.jb-action,.tbtn,button.primary,.jb-btn,.btn-primary{
+  background:var(--fx-grad)!important;
+  color:#04061a!important;
+  border:0!important;
+  border-radius:12px!important;
+  font-weight:800!important;
+  letter-spacing:.02em;
+  box-shadow:0 8px 26px rgba(56,232,255,.28)!important;
+  transition:transform .15s ease,box-shadow .2s ease,filter .2s ease;
+}
+.btn:hover,.btn-install:hover,.jb-action:hover,.tbtn:hover{
+  filter:brightness(1.08);
+  box-shadow:0 10px 34px rgba(138,107,255,.42)!important;
+}
+.btn:active,.btn-install:active,.jb-action:active,.tbtn:active{transform:scale(.97)}
+.btn:disabled,.btn[disabled]{filter:grayscale(.6) brightness(.8);box-shadow:none!important}
+
+/* ---------- champs ---------- */
+input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]),
+select,textarea,.search,.jb-input,.field input,.field select,.field textarea{
+  background:rgba(8,12,36,.72)!important;
+  color:var(--fx-text)!important;
+  border:1px solid var(--fx-line)!important;
+  border-radius:12px!important;
+  outline:none;
+  transition:border-color .2s ease,box-shadow .2s ease;
+}
+input::placeholder,textarea::placeholder{color:#6b77a8!important}
+input:focus,select:focus,textarea:focus,.search:focus{
+  border-color:var(--fx-cyan)!important;
+  box-shadow:0 0 0 3px rgba(56,232,255,.18),0 0 22px rgba(56,232,255,.18)!important;
+}
+
+/* ---------- navigation basse / barres ---------- */
+.bottom-nav,.jb-navbar,.navbar,.nav{
+  background:rgba(8,12,34,.78)!important;
+  backdrop-filter:blur(22px) saturate(1.3);
+  -webkit-backdrop-filter:blur(22px) saturate(1.3);
+  border-top:1px solid var(--fx-line)!important;
+}
+.bottom-nav button,.jb-nav-link,.nav-link{color:#7280b4!important;transition:color .2s ease}
+.bottom-nav button.active,.jb-nav-link.active,.nav-link.active,
+.bottom-nav button:hover,.jb-nav-link:hover,.nav-link:hover{
+  color:var(--fx-cyan)!important;
+  text-shadow:0 0 14px rgba(56,232,255,.55);
+}
+
+.header,.jb-header,.jb-top{border-bottom:1px solid var(--fx-line)}
+
+/* ---------- onglets, badges, toasts ---------- */
+.tab,.jb-tab{border-radius:999px!important;border:1px solid var(--fx-line)!important;background:rgba(18,24,58,.5)!important;color:var(--fx-muted)!important}
+.tab.active,.jb-tab.active{background:var(--fx-grad)!important;color:#04061a!important;border-color:transparent!important}
+.badge,.btn-free{border-radius:999px!important}
+.toast,.jb-toast{
+  background:rgba(12,18,48,.92)!important;
+  border:1px solid rgba(56,232,255,.45)!important;
+  border-radius:14px!important;
+  color:var(--fx-text)!important;
+  box-shadow:0 10px 40px rgba(56,232,255,.2)!important;
+  backdrop-filter:blur(14px);
+}
+
+/* ---------- textes secondaires ---------- */
+.subtitle,.desc,.app-meta,.jb-service-desc{color:var(--fx-muted)!important}
+
+/* ---------- tableaux ---------- */
+table{border-collapse:collapse}
+th{color:var(--fx-cyan);font-weight:700;border-bottom:1px solid var(--fx-line)}
+td{border-bottom:1px solid rgba(125,160,255,.1)}
+
+/* ---------- barre de défilement ---------- */
+*{scrollbar-width:thin;scrollbar-color:#2a3a7a transparent}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-thumb{background:#2a3a7a;border-radius:8px}
+::selection{background:rgba(56,232,255,.35)}
+
+/* ---------- accessibilité ---------- */
+:focus-visible{outline:2px solid var(--fx-cyan);outline-offset:2px}
+
+/* ---------- un seul moment animé : balayage lumineux sur le héros ---------- */
+.hero,.jb-points-card{position:relative;overflow:hidden}
+.hero::after,.jb-points-card::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 35%,rgba(56,232,255,.16) 50%,transparent 65%);
+  transform:translateX(-120%);
+  animation:fxSweep 1.6s .5s ease-out 1 forwards;
+}
+@keyframes fxSweep{to{transform:translateX(120%)}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
