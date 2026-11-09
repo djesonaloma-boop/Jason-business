@@ -77,8 +77,8 @@ button,input{font-family:inherit}button{-webkit-user-select:none;user-select:non
 .btn-card{width:100%;padding:12px;border-radius:12px;border:0;font-weight:900;font-size:11px;cursor:pointer;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:6px}.btn-card:active{transform:scale(.97)}
 .btn-blue-card{color:#001018;background:linear-gradient(120deg,var(--blue),#00a8ff)}.btn-gold-card{color:#151000;background:linear-gradient(120deg,#ffd700,#ffeb80)}.btn-green-card{color:#001a08;background:linear-gradient(120deg,#00e676,#00c853)}.btn-dark-card{background:rgba(255,255,255,.06);color:white;border:1px solid rgba(255,255,255,.1)}
 .actions-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:12px 0;background:rgba(5,10,20,.98);border-top:1px solid rgba(0,210,255,.28);backdrop-filter:blur(15px)}
-.nav-link{min-width:60px;text-align:center;text-decoration:none;color:white;opacity:.4;font-size:10px}.nav-link.active{color:var(--blue);opacity:1;font-weight:bold}.nav-icon{font-size:19px;margin-bottom:3px}
+.navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:12px 0 calc(12px + env(safe-area-inset-bottom));background:rgba(5,10,20,.98);border-top:1px solid rgba(0,210,255,.28);backdrop-filter:blur(15px)}
+.nav-link{min-width:60px;text-align:center;text-decoration:none;color:white;opacity:.4;font-size:10px;position:relative}.nav-link.active{color:var(--blue);opacity:1;font-weight:bold}.nav-link.active::before{content:"";position:absolute;top:-12px;left:28%;width:44%;height:2px;border-radius:5px;background:var(--blue)}.nav-icon{font-size:19px;margin-bottom:3px}
 @media(max-width:380px){.level-grid{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.code-display{font-size:22px}}
 </style>
 </head>
@@ -129,7 +129,7 @@ button,input{font-family:inherit}button{-webkit-user-select:none;user-select:non
 
 <div class="carte-section" id="carteSection">
 <div class="carte-title">🪪 CRÉER MA CARTE DE MEMBRE - TOUT EN MAJUSCULES</div>
-<div style="font-size:9px;opacity:.6;margin-bottom:12px;text-align:center">AUCUNE IDENTITÉ AFFICHÉE - CLIENT REMPLIT LUI-MÊME - CONNECTÉ À PARAMÈTRES</div>
+<div style="font-size:9px;opacity:.6;margin-bottom:12px;text-align:center">AUCUNE IDENTITÉ AFFICHÉE - CLIENT REMPLIT LUI-MÊME - CONNECTÉ À MON COMPTE</div>
 <div class="form-grid">
 <div class="form-field"><label>Photo *</label><input type="file" id="photoInput" accept="image/*" class="form-input" style="text-transform:none"></div>
 <div class="form-field"><label>Code parrainage (auto)</label><input id="codeInput" class="form-input" readonly></div>
@@ -207,14 +207,15 @@ button,input{font-family:inherit}button{-webkit-user-select:none;user-select:non
 <button class="btn-card btn-blue-card" id="downloadBothBtn">📦 LES DEUX (PDF)</button>
 </div>
 </div>
-
 <div id="jb_status"></div>
 </div>
 </div>
 
+<!-- ✅ BARRE DU BAS CORRIGÉE - 5 BOUTONS COMME DASHBOARD -->
 <nav class="navbar">
-<a href="dashboard.html" class="nav-link"><div class="nav-icon">📊</div>Dash</a>
-<a href="shop.html" class="nav-link"><div class="nav-icon">🛒</div>Shop</a>
+<a href="dashboard.html" class="nav-link"><div class="nav-icon">📊</div>Dashboard</a>
+<a href="shop.html" class="nav-link"><div class="nav-icon">🛍️</div>Boutique</a>
+<a href="store.html" class="nav-link"><div class="nav-icon">🛒</div>Store</a>
 <a href="equipe.html" class="nav-link active"><div class="nav-icon">👥</div>Équipe</a>
 <a href="profil.html" class="nav-link"><div class="nav-icon">👤</div>Profil</a>
 </nav>
@@ -264,7 +265,6 @@ renderHist(data.points_conversion||{});
 if(directMembers.length===0){try{const us=await get(usersRef);if(us.exists())directMembers=findDirect(us.val(),inviteCode,userPhone)}catch{}}
 renderMembers(directMembers);
 });
-// 🔥 CHARGE CARTE DEPUIS PARAMÈTRES / FIREBASE
 try{
 const carteRef=ref(db,`${ROOT}/users/${userPhone}/carteMembre`);
 onValue(carteRef,snap=>{
@@ -297,7 +297,7 @@ const numCarte=`JB-${new Date().getFullYear()}-${String(Math.floor(Math.random()
 const dateEmission=new Date().toISOString();
 const carteData={nom,postnom,prenom,sexe,lieuNaissance:lieu,dateNaissance:date,telephone:tel,adresse,nationalite:nat,province:prov,territoire:terr,capitaine:cap,poste,numeroCarte:numCarte,dateEmission:dateEmission,codeParrainage:inviteCode.toUpperCase(),photo:photoB64,updatedAt:dateEmission};
 localStorage.setItem("jasonCarteData",JSON.stringify(carteData));
-$("saveStatus").innerText="⏳ SAUVEGARDE DANS PARAMÈTRES...";
+$("saveStatus").innerText="⏳ SAUVEGARDE DANS MON COMPTE...";
 try{
 if(userPhone){
 const carteRef=ref(db,`${ROOT}/users/${userPhone}/carteMembre`);
@@ -305,7 +305,7 @@ const profilRef=ref(db,`${ROOT}/users/${userPhone}/profil`);
 await set(carteRef,carteData);
 await update(profilRef,{nomComplet:`${nom} ${postnom} ${prenom}`,telephone:tel,adresse:adresse,province:prov,carteNumero:numCarte,hasCarte:true,updatedAt:dateEmission});
 await update(ref(db,`${ROOT}/users/${userPhone}`),{telephonePrincipal:tel,hasCarteMembre:true});
-$("saveStatus").innerText="✅ CARTE SAUVEGARDÉE DANS PARAMÈTRES / FIREBASE!";
+$("saveStatus").innerText="✅ CARTE SAUVEGARDÉE DANS MON COMPTE / FIREBASE!";
 $("saveStatus").style.color="#00e676";
 }
 }catch(e){$("saveStatus").innerText="⚠️ SAUVEGARDÉ LOCALEMENT SEULEMENT"; console.log(e);}
