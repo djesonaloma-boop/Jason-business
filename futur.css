@@ -77,6 +77,7 @@ input,select,textarea,button{font-family:var(--fx-body)}
 .jb-service-card,.jb-payment-card,.jb-points-card,.jb-money-box,.jb-user-box,
 .jb-method,.jb-system-item,.jb-notice,.info,.feat{
   background:
+    radial-gradient(220px circle at var(--mx,50%) var(--my,-60%),rgba(56,232,255,.13),transparent 70%) padding-box,
     linear-gradient(var(--fx-surface),var(--fx-surface)) padding-box,
     var(--fx-edge) border-box!important;
   border:1px solid transparent!important;
@@ -93,9 +94,12 @@ input,select,textarea,button{font-family:var(--fx-body)}
     radial-gradient(ellipse at 100% 0%,rgba(138,107,255,.30),transparent 60%),
     radial-gradient(ellipse at 0% 100%,rgba(56,232,255,.18),transparent 60%),
     linear-gradient(var(--fx-surface-solid),var(--fx-surface-solid)) padding-box,
-    var(--fx-edge) border-box!important;
+    conic-gradient(from var(--ang),rgba(56,232,255,.95),rgba(138,107,255,.15) 28%,rgba(138,107,255,.9) 50%,rgba(56,232,255,.15) 78%,rgba(56,232,255,.95)) border-box!important;
   box-shadow:0 18px 60px rgba(56,232,255,.12),0 14px 40px rgba(2,4,20,.6)!important;
+  animation:fxSpinBorder 7s linear infinite;
 }
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+@keyframes fxSpinBorder{to{--ang:360deg}}
 
 .jb-service-card,.app-card,.game-card,.type-card{transition:transform .2s ease,box-shadow .2s ease}
 .jb-service-card:hover,.app-card:hover,.game-card:hover,.type-card:hover{
@@ -111,9 +115,13 @@ input,select,textarea,button{font-family:var(--fx-body)}
   border-radius:12px!important;
   font-weight:800!important;
   letter-spacing:.02em;
-  box-shadow:0 8px 26px rgba(56,232,255,.28)!important;
-  transition:transform .15s ease,box-shadow .2s ease,filter .2s ease;
+  background-size:200% 100%!important;
+  background-position:0 0;
+  position:relative;overflow:hidden;
+  box-shadow:0 8px 26px rgba(56,232,255,.28),inset 0 1px 0 rgba(255,255,255,.5),inset 0 -3px 8px rgba(30,40,150,.28)!important;
+  transition:transform .18s cubic-bezier(.2,.9,.3,1.2),box-shadow .25s ease,filter .2s ease,background-position .6s ease;
 }
+.btn:hover,.btn-install:hover,.jb-action:hover,.tbtn:hover{background-position:100% 0}
 .btn:hover,.btn-install:hover,.jb-action:hover,.tbtn:hover{
   filter:brightness(1.08);
   box-shadow:0 10px 34px rgba(138,107,255,.42)!important;
@@ -196,3 +204,109 @@ td{border-bottom:1px solid rgba(125,160,255,.1)}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
+
+
+/* ==========================================================
+   ICÔNES VECTORIELLES (remplacent les emojis)
+   ========================================================== */
+.ic{display:inline-block;position:relative;width:1.18em;height:1.18em;vertical-align:-.22em;line-height:1;flex-shrink:0;font-style:normal}
+.ic svg{width:100%;height:100%;display:block;overflow:visible}
+/* texte d'origine conservé mais invisible */
+.ic-t{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+h1 .ic{-webkit-text-fill-color:initial;color:var(--fx-cyan)}
+
+/* couleurs à sens : succès, erreur, alerte… */
+.ic[data-n="check-circle"]{color:var(--green)}
+.ic[data-n="x-circle"],.ic[data-n="ban"]{color:var(--red)}
+.ic[data-n="alert"]{color:var(--gold)}
+.ic[data-n="info"]{color:var(--fx-cyan)}
+.ic[data-n="crown"],.ic[data-n="star"]{color:var(--gold)}
+.ic[data-n="star"] svg,.ic[data-n="crown"] svg{fill:rgba(255,200,87,.22)}
+.ic[data-n="flame"]{color:#ff8a3d}
+.ic[data-n="flame"] svg{fill:rgba(255,138,61,.22)}
+.ic[data-n="gem"]{color:#7fd8ff}
+.ic[data-n="heart"][data-v="fill-red"]{color:#ff4d7a}
+.ic[data-n="heart"][data-v="fill-red"] svg{fill:currentColor}
+.ic[data-n="heart"][data-v="fill-blue"]{color:#38b6ff}
+.ic[data-n="heart"][data-v="fill-blue"] svg{fill:currentColor}
+.ic[data-n="dot"]{width:.8em;height:.8em;vertical-align:-.05em;filter:drop-shadow(0 0 5px currentColor)}
+/* sur les boutons en dégradé, on garde le contraste du texte */
+.btn .ic,.jb-action .ic,.tbtn .ic,.btn-install .ic,.tab.active .ic,.jb-tab.active .ic{color:inherit!important}
+.btn .ic svg,.jb-action .ic svg{fill:none!important}
+
+/* le sablier devient un loader qui tourne */
+.ic[data-n="loader"] svg,.ic[data-n="refresh"].spin svg{animation:fxSpin .9s linear infinite}
+@keyframes fxSpin{to{transform:rotate(360deg)}}
+
+/* icônes dans les grandes tuiles : plus grandes, centrées, avec halo */
+.jb-service-icon .ic,.app-icon .ic,.jb-nav-icon .ic,.s-circle .ic{width:1.05em;height:1.05em;vertical-align:middle}
+.jb-nav-icon{display:flex;align-items:center;justify-content:center}
+.bottom-nav button span.icon{display:inline-flex;align-items:center;justify-content:center}
+.bottom-nav button.active .ic svg,.jb-nav-link.active .ic svg{filter:drop-shadow(0 0 6px rgba(56,232,255,.7))}
+
+/* tuiles d'icônes : relief néo-morphique */
+.jb-service-icon,.app-icon{
+  background:linear-gradient(145deg,rgba(40,52,120,.85),rgba(14,20,56,.95))!important;
+  border:1px solid rgba(125,160,255,.25)!important;
+  box-shadow:6px 6px 14px rgba(2,4,20,.6),-3px -3px 10px rgba(120,150,255,.07),inset 0 1px 0 rgba(255,255,255,.12)!important;
+  color:var(--fx-cyan);
+}
+
+/* petits gestes au survol */
+.ic svg{transition:transform .25s cubic-bezier(.2,.9,.3,1.3)}
+.jb-service-card:hover .ic svg,.app-card:hover .ic svg,.game-card:hover .ic svg,
+.type-card:hover .ic svg,button:hover>.ic svg,a:hover>.ic svg{transform:scale(1.14) rotate(-4deg)}
+
+/* ==========================================================
+   ANIMATIONS PREMIUM
+   ========================================================== */
+/* halos d'ambiance (déplacés par transform : très léger pour le GPU) */
+.fx-ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.fx-ambient i{position:absolute;width:70vmax;height:70vmax;border-radius:50%;opacity:.5;will-change:transform}
+.fx-ambient i:first-child{left:-25vmax;top:-20vmax;background:radial-gradient(circle,rgba(56,232,255,.20),transparent 62%);animation:fxDriftA 22s ease-in-out infinite alternate}
+.fx-ambient i:last-child{right:-28vmax;bottom:-22vmax;background:radial-gradient(circle,rgba(138,107,255,.26),transparent 62%);animation:fxDriftB 26s ease-in-out infinite alternate}
+@keyframes fxDriftA{to{transform:translate3d(18vmax,14vmax,0) scale(1.15)}}
+@keyframes fxDriftB{to{transform:translate3d(-16vmax,-12vmax,0) scale(1.1)}}
+
+/* entrée en cascade (propriétés individuelles : ne gêne pas les effets au survol) */
+.fx-reveal{opacity:0;translate:0 18px;scale:.985}
+.fx-reveal.fx-in{
+  opacity:1;translate:0 0;scale:1;
+  transition:opacity .7s cubic-bezier(.22,1,.36,1) var(--d,0ms),
+             translate .7s cubic-bezier(.22,1,.36,1) var(--d,0ms),
+             scale .7s cubic-bezier(.22,1,.36,1) var(--d,0ms)!important;
+}
+
+/* ondulation au toucher */
+.fx-ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.45);transform:scale(0);opacity:.9;pointer-events:none;animation:fxRipple .6s ease-out forwards}
+@keyframes fxRipple{to{transform:scale(1);opacity:0}}
+.btn:active,.jb-action:active,.tbtn:active{transform:scale(.96)}
+
+/* fenêtres modales : apparition avec ressort */
+.overlay>*,.jb-overlay>*{animation:fxPop .42s cubic-bezier(.2,.9,.3,1.25) both}
+.overlay,.jb-overlay{animation:fxFade .25s ease both}
+@keyframes fxPop{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes fxFade{from{opacity:0}to{opacity:1}}
+
+/* notifications : entrée plus vive */
+.toast.show,.jb-toast.show{animation:fxToast .45s cubic-bezier(.2,.9,.3,1.3)}
+@keyframes fxToast{from{opacity:0;scale:.9}to{opacity:1;scale:1}}
+
+/* pastille « en ligne » qui respire */
+.badge,.status,.jb-status{position:relative}
+.ic[data-n="dot"]{animation:fxPulse 2.2s ease-in-out infinite}
+@keyframes fxPulse{50%{opacity:.45}}
+
+/* chargement : effet shimmer sur les textes d'attente */
+@keyframes fxShimmer{to{background-position:-200% 0}}
+
+/* transitions de page (navigateurs compatibles) */
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:fxOut .22s ease both}
+::view-transition-new(root){animation:fxIn .35s cubic-bezier(.22,1,.36,1) both}
+@keyframes fxOut{to{opacity:0;transform:scale(.985)}}
+@keyframes fxIn{from{opacity:0;transform:translateY(8px)}}
+
+/* la bille du Plinko : pastille agrandie dans les cartes de jeu */
+.game-card .ic[data-n="dot"]{width:1.18em;height:1.18em;vertical-align:middle}
+.game-card .ic[data-n="dot"] svg{transform:scale(1.9)}

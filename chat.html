@@ -76,6 +76,8 @@ header{height:54px;flex-shrink:0;display:flex;justify-content:space-between;alig
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Unbounded:wght@500;700&display=swap">
 <link rel="stylesheet" href="futur.css">
+<script src="icons.js"></script>
+<script src="motion.js" defer></script>
 </head>
 <body>
 <header><div class="brand">jason business — <span id="myPhoneShow" style="font-size:11px;opacity:.7"></span></div><a href="dashboard.html" class="btn">Dash</a></header>
@@ -238,7 +240,7 @@ function renderMessages(keepPosition=false){
     if(m.deletedFor && m.deletedFor[myPhone]) return;
     const mine=m.from===myPhone;
     let inner="";
-    if(m.text && !m.deleted) inner+=`<div>${esc(m.text)}</div>`;
+    if(m.text && !m.deleted) inner+=`<div data-no-ic>${esc(m.text)}</div>`;
     if(m.photo && !m.deleted) inner+=`<div class="photo-wrap"><img src="${m.photo}"></div>`;
     if(m.audio && !m.deleted) inner+=`<audio controls src="${m.audio}"></audio>`;
     if(m.deleted) inner+=`<div style="font-style:italic;opacity:.7">🚫 Message retiré</div>`;
