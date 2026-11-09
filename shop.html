@@ -41,9 +41,10 @@ body.light .jb-service-card{background:linear-gradient(115deg,rgba(255,255,255,.
 .jb-footer{margin:24px 20px 10px;padding:16px;text-align:center;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);font-size:9px;opacity:.5;line-height:1.6}
 .jb-navbar{position:fixed;z-index:1000;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;padding:11px 0 calc(11px + env(safe-area-inset-bottom));background:rgba(5,10,20,.96);border-top:1px solid rgba(0,210,255,.25);backdrop-filter:blur(22px)}
 body.light .jb-navbar{background:rgba(255,255,255,.94);border-top:1px solid rgba(0,0,0,.08)}
-.jb-nav-link{flex:1;color:white;opacity:.48;text-decoration:none;text-align:center;font-size:10px;border:0;background:none;cursor:pointer}
+.jb-nav-link{flex:1;color:white;opacity:.48;text-decoration:none;text-align:center;font-size:10px;border:0;background:none;cursor:pointer;position:relative}
 body.light .jb-nav-link{color:#0b1220}
 .jb-nav-link.active{color:var(--blue);opacity:1;font-weight:bold}
+.jb-nav-link.active::before{content:"";position:absolute;top:-11px;left:28%;width:44%;height:2px;border-radius:5px;background:var(--blue)}
 .jb-nav-icon{margin-bottom:4px;font-size:19px}
 .overlay{display:none;position:fixed;inset:0;z-index:80;background:#000c;backdrop-filter:blur(9px);align-items:flex-end;justify-content:center;padding:0}.overlay.show{display:flex}
 .modal{width:min(100%,620px);max-height:92vh;overflow:auto;background:linear-gradient(145deg,rgba(5,10,20,.96),rgba(11,20,37,.98));border:1px solid rgba(0,210,255,.22);border-radius:22px 22px 0 0;padding:18px 18px 110px 18px;backdrop-filter:blur(20px)}
@@ -84,7 +85,6 @@ body.light .field input,body.light .field textarea,body.light .field select{back
 </div>
 </section>
 
-<!-- 🔌 BOUTON API - ICI DANS L'ENDROIT ENCERCLÉ + SERVICES DESCENDU -->
 <div style="margin:22px 20px 8px 20px;padding:16px;border-radius:18px;background:linear-gradient(135deg,rgba(0,210,255,.18),rgba(0,119,255,.12) 60%,rgba(255,215,0,.08));border:1px solid rgba(0,210,255,.35);display:flex;justify-content:space-between;align-items:center;gap:12px;box-shadow:0 0 25px rgba(0,210,255,.15)">
   <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0">
     <div style="width:48px;height:48px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,#00d2ff,#0077ff);color:white;box-shadow:0 4px 15px rgba(0,210,255,.3)">🔌</div>
@@ -117,31 +117,24 @@ body.light .field input,body.light .field textarea,body.light .field select{back
 <span id="footerLang">FR</span> • <span id="footerMoney">FC</span> • <span id="footerTheme">Sombre</span> • Sécurisé 2026<br>
 Connecté à Paramètres ⚙️
 </div>
-
 </div>
 
-<!-- MODALS -->
 <div class="overlay" id="boostModal"><section class="modal"><div class="modal-head"><h2>📈 Boostage — Prix auto + VIP</h2><button class="close" data-close="boostModal">×</button></div><p style="font-size:11px;opacity:.6">Solde: <b id="soldeInBoost" style="color:var(--blue)">Chargement...</b></p><div class="platforms" id="platformGrid"></div><form id="boostForm"><div class="field"><label>Plateforme</label><input id="boostPlatform" name="platform" readonly required></div><div class="field"><label>Service</label><select id="boostType" name="type" required><option value="followers">Followers — 50 FC / unité</option><option value="likes">Likes — 35 FC / unité</option><option value="views">Vues — 20 FC / unité</option></select></div><div class="field"><label>Lien public *</label><input id="boostLink" name="link" type="url" required placeholder="https://..."></div><div class="field"><label>Quantité (min 10) *</label><input id="boostBudget" name="budget" type="number" min="10" value="10" required></div><div class="field"><label>Téléphone *</label><input id="boostPhone" name="phone" type="tel" required></div><div class="jb-price"><span>Quantité</span><strong id="boostQuantity">10 unités</strong></div><div class="jb-price"><span>Prix total</span><strong id="boostPrice" style="color:var(--blue);font-size:16px">500 FC</strong></div><button class="jb-btn jb-btn-gold" type="submit" style="width:100%">📤 Payer et envoyer</button><div class="status" id="boostStatus"></div></form></section></div>
-
 <div class="overlay" id="appModal"><section class="modal"><div class="modal-head"><h2>📱 Application — 10 000 FC</h2><button class="close" data-close="appModal">×</button></div><p style="font-size:11px;opacity:.6">Solde: <b id="soldeInApp" style="color:var(--blue)"></b></p><form id="appForm"><div class="field"><label>Nom *</label><input id="appName" name="appName" required maxlength="100"></div><div class="field"><label>Icône *</label><input id="appIcon" name="appIconFile" type="file" accept="image/*" required><img id="appIconPreview" class="preview"></div><div class="field"><label>Lien du site *</label><input id="appUrl" name="appUrl" type="url" required placeholder="https://..."></div><div class="field"><label>Description *</label><textarea id="appDescription" name="description" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="appWhatsapp" name="whatsapp" type="tel" required></div><div class="jb-price"><span>Prix Application</span><strong id="priceApp">10 000 FC</strong></div><button class="jb-btn jb-btn-gold" type="submit" id="appSubmitBtn" style="width:100%">📤 Commander — 10 000 FC</button><div class="status" id="appStatus"></div></form></section></div>
-
 <div class="overlay" id="siteModal"><section class="modal"><div class="modal-head"><h2>🌐 Commander mon site</h2><button class="close" data-close="siteModal">×</button></div><div class="field"><label>Catalogue (24 choix)</label><div id="siteCatalog" class="site-catalog"></div></div><form id="siteForm"><input type="hidden" id="siteType" name="siteType"><input type="hidden" id="sitePrice" name="price"><div class="field"><label>Nom du site *</label><input id="siteName" name="siteName" required></div><div class="field"><label>Description *</label><textarea id="siteDescription" name="description" required></textarea></div><div class="field"><label>Fonctionnalités *</label><textarea id="siteFeatures" name="features" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="siteWhatsapp" name="whatsapp" type="tel" required></div><div class="jb-price"><span>Site choisi</span><strong id="selectedSiteName">Aucun</strong></div><div class="jb-price"><span>Prix</span><strong id="selectedSitePrice">0 FC</strong></div><button class="jb-btn jb-btn-gold" id="siteSubmitBtn" type="submit" style="width:100%">📤 Commander le site</button><div class="status" id="siteStatus"></div></form></section></div>
-
 <div class="overlay" id="chatModal"><section class="modal"><div class="modal-head"><h2>🤖 Chatbot — 7 000 FC</h2><button class="close" data-close="chatModal">×</button></div><form id="chatForm"><div class="field"><label>Nom *</label><input id="chatName" name="chatName" required></div><div class="field"><label>Fonctionnalités *</label><textarea id="chatFeatures" name="features" required></textarea></div><div class="field"><label>Créateur *</label><input id="chatCreator" name="creator" required value="Jason Aloma"></div><div class="field"><label>Description *</label><textarea id="chatDescription" name="description" required></textarea></div><div class="field"><label>WhatsApp *</label><input id="chatWhatsapp" name="whatsapp" type="tel" required></div><div class="jb-price"><span>Prix</span><strong id="priceChat">7 000 FC</strong></div><button class="jb-btn jb-btn-gold" type="submit" style="width:100%">📤 Commander — 7 000 FC</button><div class="status" id="chatStatus"></div></form></section></div>
-
 <div class="overlay" id="musicModal"><section class="modal"><div class="modal-head"><h2>🎵 Chanson — 5 000 FC</h2><button class="close" data-close="musicModal">×</button></div><p style="font-size:11px;opacity:.6">Solde: <b id="soldeInMusic" style="color:var(--blue)"></b></p><form id="musicForm"><div class="field"><label>Titre *</label><input id="musicTitleInput" name="title" required></div><div class="field"><label>Paroles *</label><textarea id="musicLyrics" name="lyrics" required style="min-height:180px"></textarea></div><div class="field"><label>Style *</label><select id="musicStyle" name="style" required><option>Afrobeat</option><option>Afropop</option><option>Rumba congolaise</option><option>Ndombolo</option><option>Gospel</option><option>Hip-hop</option><option>Rap</option></select></div><div class="jb-price"><span>Prix</span><strong id="priceMusic">5 000 FC</strong></div><button class="jb-btn jb-btn-gold" id="generateSongBtn" type="submit" style="width:100%">🎶 Payer 5 000 FC et générer</button><div class="status" id="musicStatus"></div><div id="musicResult"></div></form></section></div>
-
 <div class="overlay" id="adsModal"><section class="modal"><div class="modal-head"><h2>📣 Pub gratuite</h2><button class="close" data-close="adsModal">×</button></div><form id="adsForm"><div class="field"><label>Titre *</label><input id="adsTitleInput" name="title" required></div><div class="field"><label>Texte *</label><textarea id="adsText" name="text" required></textarea></div><div class="field"><label>Lien *</label><input id="adsUrl" name="url" type="url" required></div><button class="jb-btn jb-btn-green" type="submit" style="width:100%">✨ Créer gratuitement</button><div class="status" id="adStatus"></div><div id="adsResult"></div></form></section></div>
-
 <div class="overlay" id="qrModal"><section class="modal"><div class="modal-head"><h2>▦ QR Code</h2><button class="close" data-close="qrModal">×</button></div><div class="field"><label>Lien *</label><textarea id="qrText" required></textarea></div><button class="jb-btn jb-btn-gold" id="generateQrBtn" type="button" style="width:100%">Générer</button><div id="qrStatus" class="status"></div><div id="qrResult"></div><button class="jb-btn jb-btn-green" id="downloadQrBtn" type="button" style="width:100%" disabled>Télécharger</button></section></div>
-
 <div class="overlay" id="historyModal"><section class="modal"><div class="modal-head"><h2>📋 Mes demandes</h2><button class="close" data-close="historyModal">×</button></div><div id="historyList"></div><button class="jb-btn jb-btn-blue" id="clearHistory" style="width:100%;margin-top:12px">Actualiser solde</button></section></div>
 
+<!-- ✅ BARRE DU BAS CORRIGÉE - 5 BOUTONS COMME DASHBOARD -->
 <nav class="jb-navbar" id="bottomNav">
-  <button onclick="goPage('dashboard.html')" class="jb-nav-link"><div class="jb-nav-icon">📊</div>Dashboard</button>
-  <button onclick="goPage('shop.html')" class="jb-nav-link active"><div class="jb-nav-icon">🛍️</div>Boutique</button>
-  <button onclick="goPage('parametres.html')" class="jb-nav-link"><div class="jb-nav-icon">⚙️</div>Paramètres</button>
-  <button onclick="goPage('profil.html')" class="jb-nav-link"><div class="jb-nav-icon">👤</div>Profil</button>
+  <button onclick="goPage('dashboard.html')" class="jb-nav-link"><div class="jb-nav-icon">📊</div><span>Dashboard</span></button>
+  <button onclick="goPage('shop.html')" class="jb-nav-link active"><div class="jb-nav-icon">🛍️</div><span>Boutique</span></button>
+  <button onclick="goPage('store.html')" class="jb-nav-link"><div class="jb-nav-icon">🛒</div><span>Store</span></button>
+  <button onclick="goPage('equipe.html')" class="jb-nav-link"><div class="jb-nav-icon">👥</div><span>Équipe</span></button>
+  <button onclick="goPage('profil.html')" class="jb-nav-link"><div class="jb-nav-icon">👤</div><span>Profil</span></button>
 </nav>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -161,10 +154,7 @@ function applySettings(){
 }
 applySettings();
 function formatPriceFC(priceFC){
- if(jbMoney==="usd"){
-  const usd=(priceFC/USD_RATE).toFixed(2);
-  return `${usd} USD`;
- }
+ if(jbMoney==="usd"){ const usd=(priceFC/USD_RATE).toFixed(2); return `${usd} USD`; }
  return `${Number(priceFC).toLocaleString("fr-FR")} FC`;
 }
 function goPage(p){window.location.href=p}
@@ -223,7 +213,7 @@ async function deductBalance(amount){
 }
 function cleanUrl(u){if(!u)return"";u=u.trim();u=u.replace(/^htmps:\/\//i,"https://").replace(/^htps:\/\//i,"https://");if(!u.startsWith("http"))u="https://"+u;return u;}
 function show(id){$(id).classList.add("show");document.body.style.overflow="hidden";$("bottomNav").style.display="none";}
-function hide(id){$(id).classList.remove("show");if(!document.querySelector(".overlay.show")){document.body.style.overflow="";$("bottomNav").style.display="grid";}}
+function hide(id){$(id).classList.remove("show");if(!document.querySelector(".overlay.show")){document.body.style.overflow="";$("bottomNav").style.display="flex";}}
 document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>show(b.dataset.open)));
 document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>hide(b.dataset.close)));
 document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)hide(o.id);}));
